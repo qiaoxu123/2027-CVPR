@@ -222,3 +222,7 @@ Seed2全量2470个Seen Episode：SR41.5789%、SPL39.2060%、OSR51.9838%、NE31.3
 ## P1 v3困难负样本公平对照完成（2026-10-10）
 
 完整Seen最佳R@1：Scratch40.8904%→P1v3 36.8508%；R@8：75.0618%→73.2894%；NE31.5274→32.6913m。Seen128有界导航SR41.4063%→36.7188%、SPL40.6522%→36.1198%。预训练67.42s+微调269.32s未带来增益，不提升为主干，保留全部负结果。独立报告`docs/P1_MATCHED_V3_HARD_20261010.md`及CSV/JSON已完成。phase21b全部结束，phase22公开高度Stop修复后的完整Seen确认已启动；新GraphNav Unseen尚未开始。
+
+## 公开高度Stop修复实际A3确认（2026-10-10）
+
+A3完整Seen2470评估完成：SR40.8502%、SPL39.6139%、NE31.4762m，显示精度下与修复前相同。旧四个非法结束高度Episode（763/776/810/821）全部通过有界额外运动恢复到合法高度，全量非法结束高度为0，各case成功与失败判定均保持。详见`reports/sbf_protocol/altitude_stop_guard_actual_a3_seen.json`。该修复解决动作/Stop合规问题，不声称定位提升；后续GAT/视觉/历史/Seed0确认继续，Unseen尚未开始。
