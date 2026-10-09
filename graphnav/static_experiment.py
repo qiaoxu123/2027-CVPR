@@ -88,11 +88,13 @@ def evaluate(model, enc, loader, device, use_amp, variants=("prior", "rules", "g
         v: dict(count=0, NE_sum_m=0., **{f"R@{k}/20m_count": 0 for k in (1, 4, 8)})
         for v in variants
     }
-    source = dict(samples=0, with_relation=0, with_edges=0)
+    source = dict(samples=0, with_relation=0, with_edges=0, with_roads=0, with_road_relation=0)
     for batch in loader:
         source["samples"] += len(batch["text"])
         source["with_relation"] += int((batch["relation_count"] > 0).sum())
         source["with_edges"] += int((batch["edge_count"] > 0).sum())
+        source["with_roads"] += int((batch["road_count"] > 0).sum())
+        source["with_road_relation"] += int((batch["road_relation_count"] > 0).sum())
         for variant in variants:
             logits, tensors = forward_batch(model, enc, batch, device, variant, use_amp)
             result = static_recall(
@@ -114,6 +116,8 @@ def evaluate(model, enc, loader, device, use_amp, variants=("prior", "rules", "g
         "coverage": {
             "samples": source["samples"],
             "grounded_relation_fraction": source["with_relation"] / max(1, source["samples"]),
+            "roads_available_fraction": source["with_roads"] / max(1, source["samples"]),
+            "grounded_road_relation_fraction": source["with_road_relation"] / max(1, source["samples"]),
         },
     }
 
@@ -178,9 +182,9 @@ def train(args):
             "epoch": epoch + 1,
             "train_goal_loss": float(np.mean(losses)),
             "train_seconds": train_seconds,
-            "samples_per_second": (sum(1 for _ in []) if not losses else
-                                   min(len(loaders["train_seen"].dataset),
-                                       len(losses) * args.batch_size) / max(train_seconds, 1e-6)),
+            "samples_per_second": min(
+                len(loaders["train_seen"].dataset), len(losses) * args.batch_size
+            ) / max(train_seconds, 1e-6),
             "gpu_peak_gib": peak_gib,
             "val_seen": seen,
         }
