@@ -58,7 +58,14 @@ JSONL 关键字段（坐标统一 [0,1]、x east/y north）：
 \`graphnav.memory.ObservedRGBMemory.observe()\` 只接受当前观测及其地理范围；
 如需训练 SigLIP2 残差，必须在模拟 rollout 中把真实已观测 RGB 投影到历史图上，然后获得候选图像与有效 Mask。
 
-当前 JSONL 转换只生成因果视野**二值 Mask**，不提前预加载全局 RGB，因此初始训练是 **geometry/language first**，视觉头在后续模拟数据生成后再训练。
+默认转换只生成因果视野**二值 Mask**，初始训练为 **geometry/language first**。
+
+可选提供 \`--rgbd-dir data/rgbd --observations-out data/observed_train\` 及 \`--ground-levels\`。转换器只为每个训练步骤保存到该时刻为止的各张俯视 RGB 图和对应 footprint，JSONL 追加 \`world_bounds\` 与 \`rgb_observations\`，不会将全域正射图传入模型。
+
+使用 \`python -m graphnav.train --data <file> --use-vision\` 后，训练阶段将：
+ObservedRGBMemory 累积过去观测 → 取当前网络 Top-K 的真正可见候选 → 冻结 SigLIP2 → 可见性门控的图候选评分残差。未知区域只产生零视觉增量，不作为负样本。
+
+这仍是**离线轨迹监督**；真实闭环需要进一步接入 CityNav simulator 的 reset/step/碰撞和动作反馈。
 
 ### 坐标与地图方向
 
