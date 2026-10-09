@@ -76,7 +76,7 @@ def forward_batch(model, enc, batch, device, variant, use_amp):
     # Never hand a target or any future-label tensor to model.forward().
     model_keys = (
         "nodes", "node_types", "node_valid", "edges", "adjacency",
-        "prior", "rules", "relation_fields", "grid_xy",
+        "prior", "prior_buildings", "rules", "relation_fields", "grid_xy",
     )
     model_inputs = {key: tensors[key] for key in model_keys}
     with torch.autocast("cuda", dtype=torch.bfloat16, enabled=use_amp):
@@ -87,7 +87,7 @@ def forward_batch(model, enc, batch, device, variant, use_amp):
 
 
 @torch.inference_mode()
-def evaluate(model, enc, loader, device, use_amp, variants=("prior", "rules", "gat")):
+def evaluate(model, enc, loader, device, use_amp, variants=("building_prior", "prior", "rules", "gat")):
     model.eval()
     stats = {
         v: dict(count=0, NE_sum_m=0., **{f"R@{k}/20m_count": 0 for k in (1, 4, 8)})
@@ -100,6 +100,10 @@ def evaluate(model, enc, loader, device, use_amp, variants=("prior", "rules", "g
         source["with_edges"] += int((batch["edge_count"] > 0).sum())
         source["with_roads"] += int((batch["road_count"] > 0).sum())
         source["with_road_relation"] += int((batch["road_relation_count"] > 0).sum())
+        source["with_surface"] += int((batch["surface_count"] > 0).sum())
+        source["with_nonbuilding_surface"] += int(
+            (batch["nonbuilding_surface_count"] > 0).sum()
+        )
         for variant in variants:
             logits, tensors = forward_batch(model, enc, batch, device, variant, use_amp)
             result = static_recall(
@@ -122,6 +126,8 @@ def evaluate(model, enc, loader, device, use_amp, variants=("prior", "rules", "g
             "samples": source["samples"],
             "grounded_relation_fraction": source["with_relation"] / max(1, source["samples"]),
             "roads_available_fraction": source["with_roads"] / max(1, source["samples"]),
+            "surface_anchor_fraction": source["with_surface"] / max(1, source["samples"]),
+            "nonbuilding_surface_fraction": source["with_nonbuilding_surface"] / max(1, source["samples"]),
             "grounded_road_relation_fraction": source["with_road_relation"] / max(1, source["samples"]),
         },
     }
