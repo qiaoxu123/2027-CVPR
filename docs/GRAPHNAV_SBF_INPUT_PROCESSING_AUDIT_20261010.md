@@ -11,6 +11,7 @@ SBF源码根：`../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_2026
 | 全局视觉定位 | 9通道状态包含已观测RGB/高度、FOV、已探索区域和轨迹；CNN空间特征逐位置与语言Token Cross-Attention | A3首先只用语言+地图构成784候选；P3增加实际地标ROI向量与几何/置信度残差 | RGB已接入P3，但原A3的语言特征由几何任务训练，目标颜色/外观的使用未证实 |
 | 视觉重排序 | 真实已观测累计RGB的候选区域crop，经SigLIP与指令/地标文字、候选相对几何交互 | SigLIP2 Large/384 Patch Tokens训练跨帧地标匹配；在线按公共位姿+轮廓关联节点，再修正全784目标分布 | Graph没有局限于Top20 ROI，但当前视觉监督主要是地标身份/类别，而非目标描述—候选外观 |
 | 几何 | 候选相对于agent/地标中心的显式位移、距离、方位 | 逐784候选对完整轮廓的相对/有符号边界几何，真实道路区域 | Graph路径更强的轮廓几何；没有证实真实道路中心线/拓扑，不能虚构 |
+| 位姿如何参与目标选择 | `models/selector.py`显式将候选相对agent XY的几何Token参与目标重排序 | A3 B0的`full_experiment._batch_inputs`没有agent/start pose/yaw字段；当前xyz+yaw输入Trajectory/Stop，但guarded执行保留belief Top1 | 不能说Graph完全没有位姿；缺口是公开起点/航向尚未显式参与静态目标消歧。其是否影响具体自我中心关系指令需Seen受控验证，不将left机械当west |
 | 历史 | 已观测RGB/区域/轨迹作为空间状态 | 可信地标向量均值/最大置信度、位姿和观察区状态；当前位置版也单独测试 | 位姿/覆盖记录存在，但当前轨迹Head不直接消费更新后GAT latent；不是完整时序Pose Attention |
 | 轨迹/Stop | 本地原模型有高度/进度预测、有界重规划；所选Checkpoint不输出policy Stop | 多模态学习路径/模式、25%收敛残差、学习Stop+预测目标到达+公开合法高度门控 | SBF的False-Stop为null，不能当作0错误；Graph Stop仍有高错误比例 |
 

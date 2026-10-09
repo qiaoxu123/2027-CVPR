@@ -1,0 +1,202 @@
+{
+  "baseline": "a3_basic",
+  "episode_manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+  "models": {
+    "a3_basic": {
+      "path": "runs/final_closedloop_unseen/a3_basic",
+      "metrics": {
+        "SR": 0.2332220986281053,
+        "OSR": 0.30700778642936594,
+        "SPL": 0.2273422260347496,
+        "NE": 48.726372858760534,
+        "nDTW": 0.25227514099512865,
+        "sDTW": 0.08614190074394634,
+        "steps": 9.697441601779754,
+        "path_length": 206.46800476413964,
+        "policy_stop": 0.0,
+        "inference_ms": 2.6998260142498607,
+        "episodes": 2697,
+        "False_Stop_Rate": null,
+        "false_stop_episode_fraction": 0.0,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "failures": {
+        "episodes": 2697,
+        "failed": 2068,
+        "visited_success_but_final_failed": 199.0,
+        "failed_policy_stops": 0,
+        "failed_horizon": 0,
+        "failed_stagnation": 2068,
+        "nonadjacent_revisit_episodes": 2697,
+        "note": "Failure counts can overlap. XY revisits use <2m separation and skip adjacent poses; altitude descent at a fixed XY can count as a revisit, so this is not automatically a control oscillation."
+      },
+      "seconds": 107.00025775888935,
+      "peak_allocated_gib": 0.45379066467285156,
+      "checkpoint_sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+      "head_checkpoint_sha256": null,
+      "dynamic_checkpoint_sha256": null,
+      "graphnav_commit": "9770f9b90bbc76b49876b671cf091c3b496550eb"
+    },
+    "a3_trajectory": {
+      "path": "runs/final_closedloop_unseen/a3_trajectory",
+      "metrics": {
+        "SR": 0.2332220986281053,
+        "OSR": 0.3236929922135706,
+        "SPL": 0.22672486906873127,
+        "NE": 48.717389108948936,
+        "nDTW": 0.2622604268758811,
+        "sDTW": 0.08836828901001634,
+        "steps": 7.787541713014461,
+        "path_length": 207.35548911105607,
+        "policy_stop": 0.9981460882461994,
+        "inference_ms": 7.0980538066516425,
+        "episodes": 2697,
+        "False_Stop_Rate": 0.7663447251114414,
+        "false_stop_episode_fraction": 0.7649239896180942,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "failures": {
+        "episodes": 2697,
+        "failed": 2068,
+        "visited_success_but_final_failed": 244.0,
+        "failed_policy_stops": 2063,
+        "failed_horizon": 4,
+        "failed_stagnation": 1,
+        "nonadjacent_revisit_episodes": 2553,
+        "note": "Failure counts can overlap. XY revisits use <2m separation and skip adjacent poses; altitude descent at a fixed XY can count as a revisit, so this is not automatically a control oscillation."
+      },
+      "seconds": 203.11601301818155,
+      "peak_allocated_gib": 0.45402050018310547,
+      "checkpoint_sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+      "head_checkpoint_sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+      "dynamic_checkpoint_sha256": null,
+      "graphnav_commit": "fdd9a3d17cf648f7a748c5b146ba84fe6498ff2b"
+    }
+  },
+  "paired": {
+    "a3_trajectory": {
+      "episodes": 2697,
+      "gained": [],
+      "lost": [],
+      "episode_weighted": {
+        "SR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "SPL": {
+          "delta": -0.000617356966018347,
+          "ci95": [
+            -0.0007148673324407116,
+            -0.0005222304925749721
+          ]
+        },
+        "OSR": {
+          "delta": 0.01668520578420467,
+          "ci95": [
+            0.007415647015202077,
+            0.025954764553207266
+          ]
+        },
+        "NE": {
+          "delta": -0.00898374981159872,
+          "ci95": [
+            -0.020292131794839435,
+            4.214857775300693e-07
+          ]
+        },
+        "nDTW": {
+          "delta": 0.009985285880752499,
+          "ci95": [
+            0.008881498877458859,
+            0.011071461685318687
+          ]
+        },
+        "sDTW": {
+          "delta": 0.0022263882660700026,
+          "ci95": [
+            0.0016649923516307292,
+            0.0027841573787827077
+          ]
+        },
+        "steps": {
+          "delta": -1.9098998887652947,
+          "ci95": [
+            -1.9588431590656286,
+            -1.8591027067111605
+          ]
+        },
+        "inference_ms": {
+          "delta": 4.398227792401782,
+          "ci95": [
+            4.287330619092704,
+            4.518716265184198
+          ]
+        }
+      },
+      "equal_map_weighted": {
+        "SR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "SPL": {
+          "delta": -0.0006730757593998932,
+          "ci95": [
+            -0.0009830240433756688,
+            -0.00037624998653212254
+          ]
+        },
+        "OSR": {
+          "delta": 0.017495500932389742,
+          "ci95": [
+            0.01145224925770805,
+            0.022655003197790836
+          ]
+        },
+        "NE": {
+          "delta": -0.009565373781017688,
+          "ci95": [
+            -0.023586745348284272,
+            2.1511201282214947e-05
+          ]
+        },
+        "nDTW": {
+          "delta": 0.010270267481270814,
+          "ci95": [
+            0.008472626557026944,
+            0.011740148059047766
+          ]
+        },
+        "sDTW": {
+          "delta": 0.0022457798910066884,
+          "ci95": [
+            0.0012308389282966099,
+            0.003260720853716767
+          ]
+        },
+        "steps": {
+          "delta": -1.9119691038360345,
+          "ci95": [
+            -2.055173860889006,
+            -1.7687643467830632
+          ]
+        },
+        "inference_ms": {
+          "delta": 4.42422058827387,
+          "ci95": [
+            4.289547796656836,
+            4.571827872263312
+          ]
+        }
+      },
+      "uncertainty": "Paired episode bootstrap and paired equal-map bootstrap; these estimate different weighting schemes. Single training seed, not training-seed uncertainty.",
+      "bootstrap_seed": 20261010,
+      "draws": 2000
+    }
+  }
+}

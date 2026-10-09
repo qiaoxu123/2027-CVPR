@@ -282,3 +282,9 @@ G0/v2/v3完整Seen SR41.3765/38.2591/36.6397%、SPL40.2144/37.1665/35.5842%；�
 A3+学习轨迹/Stop完成全部2697 Episode：SR23.3222%、SPL22.6725%、OSR32.3693%、NE48.7174m。与SBF的配对SR差+1.8168个百分点，Episode bootstrap CI[-0.0751,3.7449]含零；SPL差+6.7818点、CI[5.1225,8.4569]。OSR退步6.3775点、False-Stop76.6345%，不能只报优点。所有21003次运动与结束高度约束通过。独立报告`FINAL_A3_TRAJECTORY_UNSEEN_20261010.md`与原始JSON/逐Episode地图CSV已保存；这不是Seen预选主候选Full seed1，主候选仍运行，不能用该行替换最终验收模型。
 
 新增`GRAPHNAV_REQUIREMENT_AUDIT_20261010.md`逐项记录完成证据及未完成要求。保留轨迹Head不直接消费更新后GAT latent、observed-fraction训练输入为0、局部环境不支持swept3D物理安全等限制；指标达到某数值不自动等于全部目标完成。所有固定模型继续按原清单评估，不调整参数。
+
+## Unseen基础轨迹作用与可核验失败案例（2026-10-10）
+
+纯A3有界控制与A3+guarded轨迹/Stop在2697 Episode中的成功集合完全相同（无gained/lost），均SR23.3222%；后者SPL差-0.0617个百分点、OSR+1.6685点、nDTW+0.9985点、平均运动减少1.9099次。不能将对SBF的整体优势归因于轨迹Head带来的SR增益。配对CSV/JSON保留于`reports/final_a3_trajectory_vs_direct_unseen_20261010`。
+
+导出12组Unseen源正射图轨迹对照并视觉核查gained41与lost11，包含成功和错误Stop，全部来自首个地图的确定性抽样，不宣称随机代表性。SBF/A3的离线DEM点位代理分别463/23个Episode有后续点低于已知表面；这不是swept碰撞证明，未知仍未知。输入审计补充静态A3未显式输入起点/航向、Trajectory有当前位姿的事实及其研究假设，不把诊断添加为新验收门槛，不修改已冻结模型。完整主候选仍运行。

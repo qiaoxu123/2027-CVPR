@@ -21,5 +21,12 @@ Artifacts:
 - `reports/final_a3_trajectory_unseen_20261010`: comparison/map/episode CSV, paired bootstrap and failures; seed20261010, 2000 draws.
 - `reports/final_a3_trajectory_constraints_unseen_20261010`: public-action audit and per-episode CSV.
 - `reports/sbf_protocol/final_frozen_evaluation_plan.json`: fixed primary, all remaining candidates, exact commands and checkpoint hashes.
+- `reports/final_a3_unseen_cases_20261010`:12 deterministic success/failure trajectory pairs, original instructions, metrics and an inspection note. They are all from the first encountered map and do not estimate prevalence.
 
 Level1/2/3 final acceptance remains pending for the full primary, module comparisons, three seeds and all required audits. These point estimates are not a complete-goal claim. Static R@8 and cross-frame visual retrieval are not substituted for closed-loop SR/SPL.
+
+## What the trajectory/Stop change actually adds
+
+The frozen pure A3 bounded-control row also completes all2697 episodes: SR23.3222%, SPL22.7342%, OSR30.7008%, NE48.7264m, nDTW25.2275%,9.6974moves. Paired comparison finds zero gained and zero lost successes: both controllers succeed on exactly the same episodes. Adding the guarded learned trajectory/Stop changes SPL by-0.0617percentage points, OSR by+1.6685points, nDTW by+0.9985points and movements by-1.9099. This supports an execution/path-shape difference, not an SR gain from the head. The relative contribution of learned path and Stop remains coupled in this comparison. Exact CSV/JSON and paired intervals are in `reports/final_a3_trajectory_vs_direct_unseen_20261010`.
+
+Source-DEM post-rollout pointwise proxy finds23 A3 episodes/40 subsequent sampled positions below a known source surface, versus463 SBF episodes/2539 positions. Unknown sample counts are3292/5823 and remain unknown. These source-backed proxy counts do not establish swept collision freedom or physical UAV safety. Original source data, scoring and runtime inputs are unchanged; see `surface_clearance_proxy.json` in the constraint report.
