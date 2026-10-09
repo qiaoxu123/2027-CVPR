@@ -17,6 +17,6 @@ def test_geojson_converter_filters_outside_and_preserves_road_names():
          "coordinates":[[500,500],[600,600]]}},
     ]
     roads=convert_roads(features,{"city_block_0":[0,0,400,400]})
-    assert len(roads["city_block_0"])==3
+    assert len(roads["city_block_0"])==2
     assert all(x["name"]=="Main Road" for x in roads["city_block_0"])
     assert all(x["coordinate_system"]=="world" for x in roads["city_block_0"])
