@@ -132,6 +132,51 @@ class PairedROIs(Dataset):
         )
 
 
+class SameMapTypeBatchSampler:
+    """Prefer hard negatives: different source IDs, same map AND object type.
+
+    Works with a Subset whose indices point into PairedROIs.groups. No use
+    of goal labels, future data or visual similarity when building batches.
+    Falls back to same-type across maps if no sufficiently large map bucket.
+    """
+
+    def __init__(self, dataset, indices, batch_size=16, seed=0):
+        self.dataset, self.indices = dataset, list(indices)
+        self.batch_size, self.seed = int(batch_size), seed
+        if self.batch_size < 2:
+            raise ValueError("batch_size must contain >=2 unique source IDs")
+        self.epoch = 0
+
+    def __iter__(self):
+        rng = random.Random(self.seed + self.epoch)
+        self.epoch += 1
+        buckets = defaultdict(list)
+        for position, original_id in enumerate(self.indices):
+            key, rows = self.dataset.groups[original_id]
+            buckets[(key[0], rows[0]["object_type"])].append(position)
+        batches = []
+        covered = set()
+        for entries in buckets.values():
+            rng.shuffle(entries)
+            for start in range(0, len(entries), self.batch_size):
+                group = entries[start:start+self.batch_size]
+                if len(group) >= 2:
+                    batches.append(group)
+                    covered.update(group)
+        leftovers = [pos for pos in range(len(self.indices)) if pos not in covered]
+        rng.shuffle(leftovers)
+        for start in range(0, len(leftovers), self.batch_size):
+            group = leftovers[start:start+self.batch_size]
+            if len(group) >= 2:
+                batches.append(group)
+        rng.shuffle(batches)
+        yield from batches
+
+    def __len__(self):
+        # Conservative estimate; actual count depends on rare map/type buckets.
+        return max(1, len(self.indices) // self.batch_size)
+
+
 def roi_collate(items):
     return {
         "first":[x[0] for x in items],
