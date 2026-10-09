@@ -1,4 +1,6 @@
 # GraphNav — Graph-First Aerial Vision-and-Language Navigation
+
+> **NEW offline full-token + RGB A0–A5 experiment:** [FULL_TOKEN_GEOMETRY_RGB.md](docs/FULL_TOKEN_GEOMETRY_RGB.md) — tokenwise BERT cross-attention, per-candidate true polygon geometry, typed GAT and *causal observed-only* SigLIP2 evidence. Explicit Original/Revised CityNav protocol and audited fuzzy matching; RTX Pro 6000 96GB, batch 16. **Not yet a closed-loop navigation controller.**
 > **Extended CityRefer grounding experimental branch:** Train static goal localization with ALL typed named surface polygons (TrafficRoad/Footpath/Bridge/Parking/Ground), conservative aliases and a buildings-only control. See [FULL_SURFACE_GROUNDING.md](docs/FULL_SURFACE_GROUNDING.md). Rerun data conversion with `--refresh-raw`; historical metrics do not automatically carry over.
 
 > **Static-first research branch**: for Prior → Geometry Rules → Typed GAT localization ablations on a single RTX Pro 6000 96GB (batch 16), see [static-geometry protocol](docs/STATIC_GEOMETRY_ABLATIONS.md). RGB/Trajectory/Stop are deliberately excluded until static goal localization gains are established.
