@@ -62,7 +62,8 @@ def masks_at_prefix(path, step, bounds, ground_level, grid):
 def convert(objects, processed, trajectories, bounds, output,
             grid=28, stride=4, waypoints=8, max_landmarks=16,
             ground_levels=None, max_steps=20, renderer=None, static_only=False,
-            dataset_version="unspecified", match_mode="typed", rgb_observation_step=None):
+            dataset_version="unspecified", match_mode="typed", rgb_observation_step=None,
+            render_observed_only=False):
     count, skipped = 0, 0
     indexed_names = {area: build_name_index(entries) for area, entries in objects.items()}
     with Path(output).open("w", encoding="utf-8") as f:
@@ -144,7 +145,11 @@ def convert(objects, processed, trajectories, bounds, output,
                     if ground is None:
                         raise ValueError("RGB rendering needs ground level for this map")
                     episode_key = f"{obj_id}_{ann_id}_{count}"
-                    for t in range(last):
+                    indices = (range(0, last, stride) if render_observed_only
+                               else range(last))
+                    for t in indices:
+                        if float(poses[t][2]) <= float(ground):
+                            continue
                         observed_prefix.append(
                             renderer.render(map_name, episode_key, t, poses[t], ground)
                         )
@@ -164,7 +169,9 @@ def convert(objects, processed, trajectories, bounds, output,
                         "map_name": map_name,
                         "world_bounds": list(map(float, b)),
                         # These are ONLY images from poses <= current time.
-                        "rgb_observations": observed_prefix[:step + 1],
+                        "rgb_observations": [
+                            frame for frame in observed_prefix if frame["step"] <= step
+                        ],
                         "instruction": desc,
                         "landmarks": landmarks,
                         "uav_pose": [float(xy[0]), float(xy[1]), float(np.sin(yaw)), float(np.cos(yaw))],
@@ -190,6 +197,8 @@ def main():
                    help="CityNav png+tif directory, only used by OFFLINE view renderer")
     p.add_argument("--observations-out", default=None,
                    help="Directory for causal observed-view PNG frames")
+    p.add_argument("--render-observed-only", action="store_true",
+                   help="P2 only: render sparse causal keyframes every --stride steps")
     p.add_argument("--render-image-size", type=int, default=224,
                    help="actual native render resolution; use 384 for Large SigLIP2")
     p.add_argument("--grid", type=int, default=28)
@@ -228,6 +237,7 @@ def main():
         max_steps=args.max_steps, renderer=renderer, static_only=args.static_only,
         dataset_version=args.dataset_version, match_mode=args.match_mode,
         rgb_observation_step=args.rgb_observation_step,
+        render_observed_only=args.render_observed_only,
     )
     def sha256_file(filename):
         h = hashlib.sha256()
