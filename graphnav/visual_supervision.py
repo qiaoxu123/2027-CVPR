@@ -25,6 +25,7 @@ def visual_candidate_batch(
     crop_extent_m=100.0,
     memory_size=512,
     cache: CandidateVisionCache | None = None,
+    encoder_batch_size: int = 32,
 ):
     """Compute [B,K,V] visual embeddings and [B,K] validity coverage.
 
@@ -74,10 +75,16 @@ def visual_candidate_batch(
                 uncached.append(crop.image)
                 assignments.append((i, j, crop))
     if uncached:
-        vectors = vision_encoder.encode(uncached)
-        if vectors.shape != (len(uncached), vision_dim):
-            raise ValueError("SigLIP2 embedding width does not match config")
-        for (i, j, crop), vector in zip(assignments, vectors):
-            embeddings[i, j] = vector.to(device)
-            cache.put(crop.image, crop.valid, vector)
+        if encoder_batch_size < 1:
+            raise ValueError("encoder_batch_size must be positive")
+        # Bound frozen ViT inference memory even with 16xTop20 valid crops.
+        for start in range(0, len(uncached), encoder_batch_size):
+            images = uncached[start:start + encoder_batch_size]
+            matching = assignments[start:start + encoder_batch_size]
+            vectors = vision_encoder.encode(images)
+            if vectors.shape != (len(images), vision_dim):
+                raise ValueError("SigLIP2 embedding width does not match config")
+            for (i, j, crop), vector in zip(matching, vectors):
+                embeddings[i, j] = vector.to(device)
+                cache.put(crop.image, crop.valid, vector)
     return embeddings, confidence
