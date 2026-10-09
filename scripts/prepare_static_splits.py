@@ -7,14 +7,16 @@ from pathlib import Path
 import numpy as np
 
 
-def prepare(data_dir, output):
+def prepare(data_dir, output, *, refresh_raw=False):
     root = Path(data_dir)
     data = {}
     report = {}
     for split in ("train_seen", "val_seen", "val_unseen"):
         path = root / f"graphnav_{split}.jsonl"
         raw = path.with_suffix(".raw.jsonl")
-        if not raw.exists():
+        # Refresh explicitly after reconversion; otherwise an old building-only
+        # backup would silently replace the newly expanded surface dataset.
+        if refresh_raw or not raw.exists():
             raw.write_bytes(path.read_bytes())
         records = [json.loads(l) for l in raw.read_text().splitlines()]
         unique = {}
@@ -65,5 +67,7 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser()
     p.add_argument("--data-dir", required=True)
     p.add_argument("--output", required=True)
+    p.add_argument("--refresh-raw", action="store_true",
+                   help="Replace old .raw.jsonl backups after reconverting CityNav assets")
     a = p.parse_args()
-    prepare(a.data_dir, a.output)
+    prepare(a.data_dir, a.output, refresh_raw=a.refresh_raw)
