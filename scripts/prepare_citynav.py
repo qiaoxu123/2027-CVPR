@@ -190,6 +190,8 @@ def main():
                    help="CityNav png+tif directory, only used by OFFLINE view renderer")
     p.add_argument("--observations-out", default=None,
                    help="Directory for causal observed-view PNG frames")
+    p.add_argument("--render-image-size", type=int, default=224,
+                   help="actual native render resolution; use 384 for Large SigLIP2")
     p.add_argument("--grid", type=int, default=28)
     p.add_argument("--stride", type=int, default=4)
     p.add_argument("--waypoints", type=int, default=8)
@@ -214,7 +216,9 @@ def main():
         if not args.ground_levels:
             p.error("offline RGB rendering requires --ground-levels")
         from graphnav.renderer import CityNavObservedViewRenderer
-        renderer = CityNavObservedViewRenderer(args.rgbd_dir, args.observations_out)
+        renderer = CityNavObservedViewRenderer(
+            args.rgbd_dir, args.observations_out, image_size=args.render_image_size
+        )
     count, skipped = convert(
         load(args.objects), load(args.processed), load(args.trajectories),
         load(args.bounds), args.output,
