@@ -25,11 +25,11 @@ def normalized_name(s: str) -> str:
 
 
 def bind_reference_landmarks(reference_names, objects: dict, max_landmarks: int,
-                             allowed_types=None, index=None):
+                             allowed_types=None, index=None, match_mode="typed"):
     """Identity-safe exact/type-aware name binding; no GT or location oracle."""
     return resolve_references(
         reference_names, objects, max_landmarks=max_landmarks,
-        allowed_types=allowed_types, index=index,
+        allowed_types=allowed_types, index=index, match_mode=match_mode,
     )
 
 
