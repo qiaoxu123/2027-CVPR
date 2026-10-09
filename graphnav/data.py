@@ -103,6 +103,8 @@ class CityNavJSONL(Dataset):
             "teacher_future": torch.from_numpy(future),
             "physical_map_sizes": torch.tensor(record["physical_map_sizes"], dtype=torch.float32),
             "episode_id": record.get("episode_id", ""),
+            "rgb_observations": record.get("rgb_observations", []),
+            "world_bounds": record.get("world_bounds", None),
         }
 
 
@@ -110,7 +112,8 @@ def collate_episodes(items):
     """Keep text raw until the frozen BERT encoder runs once per minibatch."""
     return {
         key: (
-            [item[key] for item in items] if key in ("instruction_text", "landmark_text", "episode_id")
+            [item[key] for item in items] if key in ("instruction_text", "landmark_text", "episode_id",
+                                    "rgb_observations", "world_bounds")
             else torch.stack([item[key] for item in items], dim=0)
         )
         for key in items[0]
