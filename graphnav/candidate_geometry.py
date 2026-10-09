@@ -73,11 +73,22 @@ class FullCandidateDataset(StaticLocalizationDataset):
         output = super().__getitem__(idx)
         record = self.records[idx]
         source = record.get("rgb_observations", [])
-        if self.visual_required and not source:
-            raise ValueError(
-                "RGB variant requested but record has no observed prefix. "
-                "Prepare episode observations first; never use a full map."
-            )
+        if self.visual_required:
+            if not source:
+                raise ValueError(
+                    "RGB variant requested but record has no observed prefix. "
+                    "Prepare episode observations first; never use a full map."
+                )
+            cutoff = record.get("observation_cutoff_step")
+            if not isinstance(cutoff, int) or cutoff < 0:
+                raise ValueError("RGB records require explicit nonnegative observation_cutoff_step")
+            steps = [observation.get("step") for observation in source]
+            if any(not isinstance(step, int) for step in steps):
+                raise ValueError("RGB observations require explicit per-frame causal step")
+            if steps != sorted(steps) or any(step < 0 or step > cutoff for step in steps):
+                raise ValueError("RGB observation contains a future/out-of-order frame")
+            if source[-1]["step"] != cutoff:
+                raise ValueError("RGB prefix does not include its declared cutoff frame")
         output["pair_geometry"] = torch.from_numpy(self._pair_cache(idx)).float()
         count = len(self._prepared(idx)[0]["entities"])
         entity_mask = torch.zeros_like(output["node_valid"])
