@@ -13,6 +13,11 @@ from graphnav.token_language import FrozenBERTTokens
 from graphnav.checkpointing import atomic_save,file_sha256,provenance
 
 
+def dense_cache_values(field):
+    # Dense goal scores preserve FP32 ranking; FP16 can create artificial ties.
+    return dict(dense_context=field.dense_context.half().cpu(),belief_logits=field.belief_logits.float().cpu())
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--queries',required=True);p.add_argument('--checkpoint',required=True)
@@ -23,7 +28,8 @@ def main():
     if out.exists() and not args.resume:raise ValueError('refusing cache overwrite; use --resume')
     out.mkdir(parents=True,exist_ok=True)
     protocol=dict(query_sha256=file_sha256(args.queries),checkpoint_sha256=file_sha256(args.checkpoint),
-        dense_context=args.dense_context,precision='bf16' if args.device=='cuda' else 'fp32')
+        dense_context=args.dense_context,dense_logits_dtype='float32' if args.dense_context else None,
+        precision='bf16' if args.device=='cuda' else 'fp32')
     status=out/'manifest.json'
     manifest=json.loads(status.read_text()) if status.exists() else dict(protocol=protocol,chunks=[],completed_queries=0,provenance=provenance())
     if manifest['protocol']!=protocol:raise ValueError('cache source/model/protocol fingerprint mismatch')
@@ -67,7 +73,7 @@ def main():
                 belief_entropy=(-(probabilities*probabilities.clamp_min(1e-8).log()).sum(-1)/math.log(probabilities.shape[-1])).cpu(),
                 bounds=torch.tensor(batch['world_bounds'],dtype=torch.float32))
             if args.dense_context:
-                values.update(dense_context=field.dense_context.half().cpu(),belief_logits=field.belief_logits.half().cpu())
+                values.update(dense_cache_values(field))
             for key,value in values.items():pending.setdefault(key,[]).append(value)
             pending_count+=len(batch['text'])
             if pending_count>=args.chunk_queries:save_chunk()

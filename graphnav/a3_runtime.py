@@ -108,7 +108,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         import math
         from sbfnav.mapdata import GROUND_LEVEL
         field,_=self.frozen_field();probabilities=field.belief_logits.float().softmax(-1)
-        inputs=dict(candidate_xy=field.candidate_xy.float(),candidate_context=field.candidate_context.float(),
+        inputs=dict(candidate_xy=field.candidate_xy.float(),candidate_context=field.candidate_context.half().float(),
             candidate_logits=field.belief_logits.gather(1,field.candidate_ids).float(),
             pose_world=torch.as_tensor(state.pose,dtype=torch.float32,device=self.device)[None],
             bounds=torch.tensor(self.record['world_bounds'],device=self.device,dtype=torch.float32)[None],
