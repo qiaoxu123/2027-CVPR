@@ -50,7 +50,10 @@ class StaticLocalizationDataset(Dataset):
         seen_queries = set()
         for record in raw_records:
             episode_id = str(record.get("episode_id", ""))
-            query_id = episode_id.rsplit(":", 1)[0] if episode_id.count(":") >= 3 else ""
+            query_id = (
+                (episode_id.rsplit(":", 1)[0], record["instruction"])
+                if episode_id.count(":") >= 3 else ""
+            )
             if not query_id:
                 query_id = (
                     record.get("map_name", ""), record["instruction"],
