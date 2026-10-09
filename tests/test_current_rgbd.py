@@ -25,3 +25,8 @@ def test_rgbd_current_pose_exactly_matches_existing_native_rgb(tmp_path):
     np.testing.assert_allclose(observation['depth_m'][core],17,atol=1e-5)
     assert (observation['depth_m'][~valid]==0).all()
     np.testing.assert_allclose(observation['footprint_world'],old['footprint_world'])
+    cached_height=renderer._height;cached_valid=renderer._height_valid
+    repeated=renderer.current_rgbd('map',pose,0)
+    assert renderer._height is cached_height and renderer._height_valid is cached_valid
+    for key in ('bgr','depth_m','depth_valid','surface_height_m'):
+        assert np.array_equal(observation[key],repeated[key])

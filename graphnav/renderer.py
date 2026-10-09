@@ -23,6 +23,7 @@ class CityNavObservedViewRenderer:
         self._raster = None
         self._rgb = None
         self._height = None
+        self._height_valid = None
 
     def __del__(self):
         if self._raster is not None:
@@ -48,6 +49,7 @@ class CityNavObservedViewRenderer:
         self._raster = new_raster
         self._rgb = rgb  # BGR, because cv2.imwrite accepts BGR
         self._height = None
+        self._height_valid = None
 
     def current_rgbd(self, map_name, pose, ground_level):
         """Native current orthographic RGB and vertical-depth proxy, without disk I/O.
@@ -67,12 +69,15 @@ class CityNavObservedViewRenderer:
         destination = np.float32([[0,0],[n-1,0],[n-1,n-1],[0,n-1]])
         matrix = cv2.getPerspectiveTransform(source,destination)
         rgb = cv2.warpPerspective(self._rgb,matrix,(n,n),flags=cv2.INTER_LINEAR)
-        if self._height is None:self._height=self._raster.read(1).astype(np.float32)
-        source_valid=np.isfinite(self._height)&(self._height>=0)
-        support=cv2.warpPerspective(source_valid.astype(np.float32),matrix,(n,n),
+        if self._height is None:
+            raw=self._raster.read(1).astype(np.float32)
+            source_valid=np.isfinite(raw)&(raw>=0)
+            self._height_valid=source_valid.astype(np.float32)
+            self._height=np.where(source_valid,raw,0)
+        support=cv2.warpPerspective(self._height_valid,matrix,(n,n),
                                     flags=cv2.INTER_LINEAR)
         valid=support >= .999
-        height=cv2.warpPerspective(np.where(source_valid,self._height,0),matrix,(n,n),
+        height=cv2.warpPerspective(self._height,matrix,(n,n),
                                    flags=cv2.INTER_LINEAR)
         valid &= (rgb.max(-1)>0)&(height<pose[2])
         depth=np.where(valid,pose[2]-height,0).astype(np.float32)

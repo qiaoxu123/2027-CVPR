@@ -69,11 +69,18 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         from scripts.prepare_landmark_views import objects_by_map
         self.landmarks=objects_by_map({episode.map_name:catalog.objects[episode.map_name]})[episode.map_name]
         self.evidence={};self.geometry={};self.pose_history=[]
+        self.static_dynamic_field=None
         if self.encoder_visual:self.encoder_visual.start_episode()
 
     @torch.no_grad()
     def predict(self,state,instruction):
         base,inputs=self.frozen_field()
+        if not self.use_visual:
+            if self.static_dynamic_field is None:
+                with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
+                    self.static_dynamic_field=self.dynamic(inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
+                        base_field=base,use_graph=self.use_graph,use_visual=False)
+            return self.execute_field(state,self.static_dynamic_field,inputs,dict(observed_nodes=0,auxiliary_nodes=0,observed_regions=0))
         b,n=inputs['entity_valid'].shape;q=len(inputs['grid_xy'][0]);dim=256
         ref=torch.zeros(b,n,dim,device=self.device);rc=torch.zeros(b,n,device=self.device)
         aux=torch.zeros(b,32,dim,device=self.device);ac=torch.zeros(b,32,device=self.device)
@@ -105,11 +112,14 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
             field=self.dynamic(inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
                 base_field=base,use_graph=self.use_graph,use_visual=self.use_visual,
                 visual_vectors=ref,visual_confidence=rc,observed_vectors=aux,observed_confidence=ac,observed_geometry=ag)
+        return self.execute_field(state,field,inputs,dict(observed_nodes=int((rc>0).sum()),auxiliary_nodes=extra,observed_regions=len(groups)))
+
+    def execute_field(self,state,field,inputs,evidence_diagnostics):
+        bounds=np.asarray(self.record['world_bounds'])
         top=int(field.belief_logits[0].argmax());uv=inputs['grid_xy'][0,top].float().cpu().numpy()
         goal=bounds[:2]+uv*(bounds[2:]-bounds[:2]);self.pose_history.append(np.asarray(state.pose).tolist())
         diagnostics=dict(policy='A3 residual belief + bounded waypoint',graph=self.use_graph,visual=self.use_visual,
-                history=self.use_history,observed_nodes=int((rc>0).sum()),auxiliary_nodes=extra,
-                observed_regions=len(groups),goal_xy=goal.tolist(),candidate=top,
+                history=self.use_history,**evidence_diagnostics,goal_xy=goal.tolist(),candidate=top,
                 graph_gate=float(self.dynamic.graph_gate.tanh()),visual_gate=float(self.dynamic.visual_gate.tanh()))
         if getattr(self,'has_trajectory',False):
             from .a3_runtime import A3TrajectoryPolicy
