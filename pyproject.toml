@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graphnav-citynav"
+version = "0.1.0"
+description = "Graph-first language-conditioned aerial navigation for CityNav"
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.3",
+  "numpy>=1.24",
+  "opencv-python-headless>=4.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+foundation = ["transformers>=4.51", "pillow>=10", "safetensors>=0.4"]
+
+[project.scripts]
+graphnav-train = "graphnav.train:main"
+
+[tool.setuptools.packages.find]
+include = ["graphnav*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
