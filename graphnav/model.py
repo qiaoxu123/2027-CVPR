@@ -6,7 +6,7 @@ All positions (including polygon vertices) share normalized XY map coordinates.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -28,6 +28,7 @@ class GraphNavOutput:
     path_modes: torch.Tensor              # [B, K, modes, steps, 2]
     path_logits: torch.Tensor             # [B, K, modes]
     stop_logits: torch.Tensor             # [B, K]
+    candidate_hidden: torch.Tensor       # [B,K,H], permits vision-only cheap refinement
     selected_goal_xy: torch.Tensor        # [B, 2], inference-selected, no teacher goal
     next_waypoint_xy: torch.Tensor        # [B, 2], first waypoint of winning mode
 
@@ -240,15 +241,6 @@ class GraphNav(nn.Module):
             torch.tanh(self.graph_gate) * self.goal_refine(proposal_graph).squeeze(-1)
         )
 
-        # Incomplete/unobserved imagery can NEVER count as negative evidence.
-        if vision_features is not None:
-            visible = (vision_coverage >= c.min_visual_coverage).float()
-            visual = self.vision_proj(vision_features)
-            correction = self.vision_score(torch.cat((proposal_graph, visual), dim=-1))
-            candidate_logits = candidate_logits + (
-                torch.tanh(self.vision_gate) * correction.squeeze(-1) * visible
-            )
-
         context = torch.cat(
             (proposal_graph, uav_context[:, None].expand(-1, topk, -1),
              language[:, None].expand(-1, topk, -1)),
@@ -278,7 +270,7 @@ class GraphNav(nn.Module):
         best_cand = torch.div(flattened, c.trajectory_modes, rounding_mode="floor")
         best_mode = flattened % c.trajectory_modes
         index = torch.arange(b, device=instruction.device)
-        return GraphNavOutput(
+        result = GraphNavOutput(
             belief_logits=coarse_logits,
             belief_probs=coarse_probs,
             candidate_ids=candidate_ids,
@@ -287,8 +279,45 @@ class GraphNav(nn.Module):
             path_modes=path_modes,
             path_logits=path_logits,
             stop_logits=stop_logits,
+            candidate_hidden=proposal_graph,
             selected_goal_xy=candidate_xy[index, best_cand],
             next_waypoint_xy=path_modes[index, best_cand, best_mode, 0],
+        )
+        return (self.apply_visual_evidence(result, vision_features, vision_coverage)
+                if vision_features is not None else result)
+
+    def apply_visual_evidence(
+        self, original: GraphNavOutput, vision_features: torch.Tensor,
+        vision_coverage: torch.Tensor,
+    ) -> GraphNavOutput:
+        """Cheap second pass AFTER actual candidate RGB has been observed.
+
+        Does NOT rerun the 784-cell polygon attention or the static landmark
+        graph. A zero-coverage crop has exactly zero effect on candidate ranks.
+        """
+        b, k, h = original.candidate_hidden.shape
+        if vision_features.shape != (b, k, self.config.vision_dim):
+            raise ValueError("vision feature dimensions or proposal ordering mismatch")
+        if vision_coverage.shape != (b, k):
+            raise ValueError("vision coverage dimensions mismatch")
+        trusted = (vision_coverage >= self.config.min_visual_coverage).float()
+        visual = self.vision_proj(vision_features)
+        adjustment = self.vision_score(
+            torch.cat((original.candidate_hidden, visual), dim=-1)
+        ).squeeze(-1) * trusted * torch.tanh(self.vision_gate)
+        logits = original.candidate_logits + adjustment
+        total_scores = logits[:, :, None] + original.path_logits
+        flattened = total_scores.reshape(b, -1).argmax(-1)
+        candidate_id = torch.div(
+            flattened, self.config.trajectory_modes, rounding_mode="floor"
+        )
+        mode_id = flattened % self.config.trajectory_modes
+        batch = torch.arange(b, device=logits.device)
+        return replace(
+            original,
+            candidate_logits=logits,
+            selected_goal_xy=original.candidate_xy[batch, candidate_id],
+            next_waypoint_xy=original.path_modes[batch, candidate_id, mode_id, 0],
         )
 
 
