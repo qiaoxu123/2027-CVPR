@@ -18,7 +18,7 @@ from graphnav.trajectory_policy import CandidateTrajectoryStop,trajectory_losses
 
 
 def run_epoch(model,loader,device,optimizer=None):
-    model.train(optimizer is not None);total={};count=0;start=time.perf_counter()
+    model.train(optimizer is not None);total={};count=0;started_unix=time.time();start=time.perf_counter()
     if device.type=='cuda':torch.cuda.reset_peak_memory_stats()
     with torch.set_grad_enabled(optimizer is not None):
         for batch in loader:
@@ -50,7 +50,8 @@ def run_epoch(model,loader,device,optimizer=None):
     if device.type=='cuda':torch.cuda.synchronize()
     seconds=time.perf_counter()-start
     return dict(**{key:value/max(count,1) for key,value in total.items()},samples=count,seconds=seconds,
-        samples_per_second=count/max(seconds,1e-9),peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30 if device.type=='cuda' else 0.)
+        samples_per_second=count/max(seconds,1e-9),peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30 if device.type=='cuda' else 0.,
+        started_unix=started_unix,finished_unix=time.time())
 
 
 def main():
@@ -95,7 +96,8 @@ def main():
         (out/'history.json').write_text(json.dumps(history,indent=2));print(json.dumps(record),flush=True)
     rows=[dict(epoch=row['epoch'],split=split,**row[split]) for row in history for split in ('train','dev')]
     with (out/'training.csv').open('w') as stream:
-        writer=csv.DictWriter(stream,fieldnames=list(rows[0]),lineterminator='\n');writer.writeheader();writer.writerows(rows)
+        # Older resume checkpoints do not contain wall-clock timestamps.
+        writer=csv.DictWriter(stream,fieldnames=list(dict.fromkeys(key for row in rows for key in row)),lineterminator='\n');writer.writeheader();writer.writerows(rows)
     (out/'report.json').write_text(json.dumps(dict(args=vars(args),provenance=source,input_fingerprint=fingerprints,
         training_samples=len(train),development_samples=len(dev),history=history,best_development_loss=best,
         note='Geometry/pose head training metrics, not closed-loop SR. No RGB or trained Dynamic Belief yet.'),indent=2))

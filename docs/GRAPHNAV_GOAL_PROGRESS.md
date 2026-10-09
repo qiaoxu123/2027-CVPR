@@ -210,3 +210,7 @@ P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方
 ## Full seed1 闭环动作约束核验（2026-10-10）
 
 实际2470个Seen Episode、19825次运动均通过50m XY / 10m Z /20步检查；新增非法XY/高度状态、越界恶化和结束时非法高度均为0。原始1020个非法初始高度与1个非法XY起点保留，采用有界恢复。详见`reports/full_seed1_constraints_20261010/summary.json`与逐Episode CSV。False-Stop的实际NE中位数36.42m，790次在20–40m、523次在40–100m、72次超过100m；仍主要表现为错误目标信念，不能将动作合法性当成导航成功。第三组及冻结前对照继续运行，未开始新GraphNav Unseen评估。
+
+## 三种子训练计算预算汇总（2026-10-10）
+
+A3、Dynamic Belief、Trajectory/Stop的三组五轮训练均完成；统一逐轮CSV和配置/输入/权重SHA汇总保存于`reports/full_system_training_20261010`。该表仅统计实际epoch训练与验证耗时，缓存/视觉编码单独计入队列预算。已完成Trajectory/Stop旧记录无绝对起止时间，不能恢复逐轮GPU利用率；后续运行已补充wall-clock字段，并兼容旧Checkpoint恢复后的混合历史CSV。此改动只补记录，不改变Loss/梯度/模型配置。第三组完整Seen评估仍在运行，尚无新的GraphNav Unseen结果。
