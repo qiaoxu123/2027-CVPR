@@ -1,0 +1,5 @@
+{
+  "status": "failed_initial_diagnostic_attempt",
+  "reason": "New offline audit assumed step_diagnostics on original native SBF traces. Native SBF checkpoint has no learned Stop and does not log this field.",
+  "fix": "Optional diagnostics now explicitly marked unavailable, with null maximum Stop probability and zero head-frame count. Added regression test; policy/evaluation/metrics untouched. No output directory or model run overwritten."
+}
