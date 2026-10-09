@@ -24,3 +24,7 @@ Artifacts:
 - Source and checkpoint hashes are recorded in each original metrics JSON and immutable job source manifest under `runs/source_snapshots/97a6e1c96c44_altitude_guard_full_seen_*`.
 
 Reproduce the paired analysis with `scripts/summarize_closedloop.py`, passing `--run name=runs/closedloop_seen_altitude_guard/name` for the five rows in table order and a fresh `--output`. Reproduce constraints with `scripts/audit_rollout_constraints.py`, the same five runs, preserved SBF source, data root and a fresh output directory. Neither script runs model inference or changes success criteria.
+
+## Independent full seed0 confirmation completed
+
+The corrected independent full seed0 subsequently completed: SR41.7004%, SPL40.3309%, NE31.3305m, 7.7583moves, 601.05s with19new encodes. All2470episodes/19163movements pass action/height audits, with zero new illegal states or invalid final heights. This row has its own A3/dynamic/head weights and is not a sixth same-backbone module ablation. Its original JSON, combined six-row CSV and corrected three-seed CSV/summary are in `reports/altitude_guard_seen_20261010`; the separate audit is in `reports/full_seed0_corrected_constraints_20261010`. The opening status statement records the earlier five-row checkpoint; current phase22 is complete and P1 fair-head preparation has started.
