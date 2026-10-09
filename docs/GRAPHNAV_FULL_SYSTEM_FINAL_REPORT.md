@@ -53,3 +53,5 @@ Actual A3 altitude-Stop repair check: all4 previously invalid final-altitude epi
 
 
 Execution scheduling: following user authorization, final independent evaluations will use at most2GPU processes; training remains serialized. Unique atomic checkpoint/vector temporary files and call-private ROI PNG directories fix demonstrated concurrent-cache races. All144tests pass. The already-running phase22 queue remains untouched; the empty waiting phase22b scheduler was handed over with preserved status/PID evidence. Concurrent latency and device-wide GPU telemetry are labeled and are not isolated speedup evidence against historical SBF timing. See `PARALLEL_EVALUATION_20261010.md`.
+
+Actual on-policy Seen evidence coverage: Full seeds1/2 have trusted regions on70.02%/69.22% of decisions, referenced-node updates on35.78%/35.33%, and any trusted region in98.18%/98.14% of episodes. History raises retained-evidence coverage but not corresponding aggregate SR. These public telemetry statistics are distinct from human-prefix exposure and target visibility; see `ONPOLICY_VISUAL_EVIDENCE_SEEN_20261010.md`.

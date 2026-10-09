@@ -250,3 +250,7 @@ A3/GAT/Visual/Joint-current均完成相同2470个Seen Episode；原始JSON和前
 ## 修复后五组Seen确认及动作审计完成（2026-10-10）
 
 History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s，80408个当前ROI无新增Backbone编码。五组同A3/Trajectory模型的配对bootstrap、地图级统计与动作审计已保存；全部无新增越界/高度/步长违规，原始非法起点完整保留。GAT较A3增加SR1.2146个百分点但NE恶化0.744m，地图级CI仍含零；Visual降低SPL，History未提高当前证据模型的SR。独立报告`docs/P3_P4_ALTITUDE_GUARD_SEEN_20261010.md`。Full seed0修复后确认仍运行；后续P1公平轨迹对照等待其完成，新GraphNav Unseen仍未开始。
+
+## 实际闭环视觉证据覆盖核验（2026-10-10）
+
+新增纯离线公共诊断汇总，不读取目标/未来帧、不改变模型。Full seed1/2的实际22257/22332次已观测决策中，70.02%/69.22%有可信区域，35.78%/35.33%能更新指令引用地标；约98.2%的Episode至少一次有可信区域。累计网格FOV约32%，不等同目标可见或已搜索飞行空间。History增加累计证据保留，却没有提高对应Seen SR。独立报告`docs/ONPOLICY_VISUAL_EVIDENCE_SEEN_20261010.md`及CSV/JSON已保存；不能把human-prefix覆盖率当作实际策略覆盖率。后续冻结评估不因该诊断改变参数。

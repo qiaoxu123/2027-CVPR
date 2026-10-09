@@ -1,0 +1,98 @@
+{
+  "models": {
+    "full_seed1": {
+      "path": "runs/full_seed1_seen",
+      "episodes": 2470,
+      "decisions": 22257,
+      "visual_decisions": 22257,
+      "decision_region_coverage": 0.700184211708676,
+      "decision_referenced_node_coverage": 0.3578200116817181,
+      "decision_auxiliary_node_coverage": 0.5922181785505684,
+      "episode_any_region_coverage": 0.9817813765182186,
+      "mean_final_observed_grid_fraction": 0.3232189333223166,
+      "episode_manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "predictions_sha256": "d6dd42743fe6a93f4ef33a71b2abb7b985018746d2ca03c543fa97042793d257",
+      "observed_visual_cache": {
+        "observed_rois": 83696,
+        "memory_vector_hits": 97,
+        "disk_vector_hits": 17290,
+        "new_vector_encodes": 65809,
+        "observations": 22257,
+        "backbone_encoded_images": 65809,
+        "cache_protocol": "Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery",
+        "timing_note": "Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy."
+      }
+    },
+    "full_seed2": {
+      "path": "runs/full_seed2_seen",
+      "episodes": 2470,
+      "decisions": 22332,
+      "visual_decisions": 22332,
+      "decision_region_coverage": 0.6922353573347663,
+      "decision_referenced_node_coverage": 0.3533494536987283,
+      "decision_auxiliary_node_coverage": 0.5831989969550421,
+      "episode_any_region_coverage": 0.9813765182186235,
+      "mean_final_observed_grid_fraction": 0.3204040320581675,
+      "episode_manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "predictions_sha256": "937ddeedb4b65445690e284159363f7b6705de3318152831eabe937e15f1ae4f",
+      "observed_visual_cache": {
+        "observed_rois": 81091,
+        "memory_vector_hits": 98,
+        "disk_vector_hits": 17292,
+        "new_vector_encodes": 63228,
+        "observations": 22332,
+        "backbone_encoded_images": 63228,
+        "cache_protocol": "Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery",
+        "timing_note": "Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy."
+      }
+    },
+    "joint_current": {
+      "path": "runs/closedloop_seen_altitude_guard/joint_current",
+      "episodes": 2470,
+      "decisions": 22848,
+      "visual_decisions": 22848,
+      "decision_region_coverage": 0.6758578431372549,
+      "decision_referenced_node_coverage": 0.3400297619047619,
+      "decision_auxiliary_node_coverage": 0.5708158263305322,
+      "episode_any_region_coverage": 0.9825910931174089,
+      "mean_final_observed_grid_fraction": 0.3215318516070392,
+      "episode_manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "predictions_sha256": "07d056e3e0a103fa65d3227e01f6ec0d47c3df6a9f2552eb8a38bd9a5a9d7212",
+      "observed_visual_cache": {
+        "observed_rois": 80716,
+        "memory_vector_hits": 601,
+        "disk_vector_hits": 80112,
+        "new_vector_encodes": 2,
+        "observations": 22848,
+        "backbone_encoded_images": 2,
+        "cache_protocol": "Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery",
+        "timing_note": "Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy."
+      }
+    },
+    "joint_history": {
+      "path": "runs/closedloop_seen_altitude_guard/joint_history",
+      "episodes": 2470,
+      "decisions": 21848,
+      "visual_decisions": 21848,
+      "decision_region_coverage": 0.9525814719882827,
+      "decision_referenced_node_coverage": 0.48484987184181616,
+      "decision_auxiliary_node_coverage": 0.935966678872208,
+      "episode_any_region_coverage": 0.9825910931174089,
+      "mean_final_observed_grid_fraction": 0.32137538213665995,
+      "episode_manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "predictions_sha256": "36a2d595eff07cb16b0855fe90f0a60235f491f31adadaabd2c9e6d51abfb343",
+      "observed_visual_cache": {
+        "observed_rois": 80408,
+        "memory_vector_hits": 589,
+        "disk_vector_hits": 79819,
+        "new_vector_encodes": 0,
+        "observations": 21848,
+        "backbone_encoded_images": 0,
+        "cache_protocol": "Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery",
+        "timing_note": "Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy."
+      }
+    }
+  },
+  "script_sha256": "1db321096e9dd7129d24c97418d4a3a9f3f964df78456fd699b1ebe078317240",
+  "note": "Public policy telemetry only. No target coordinates, target IDs, expert paths or future frames are read. Current-only runs count current trusted projected regions; history runs count accumulated trusted regions and are not directly comparable as instantaneous coverage. Referenced-node coverage means an instruction-referenced public landmark has visual evidence, not that the goal is visible or recognized. Observed-grid coverage is cumulative geometric FOV, not semantic visibility, navigable-space coverage or accuracy. Unobserved endpoints after the final decision are never counted."
+}
