@@ -86,6 +86,30 @@ torchrun --standalone --nproc_per_node=2 -m graphnav.train \
   --output runs/graphnav/ddp.pt
 \`\`\`
 
+视觉分支需要**因果历史 RGB** 训练样本；不能直接将全域正射图传给模型：
+
+\`\`\`bash
+pip install -e '.[foundation]'
+pip install rasterio
+python scripts/prepare_citynav.py \
+  --objects data/cityrefer/objects.json \
+  --processed data/cityrefer/processed_descriptions.json \
+  --trajectories data/processed_citynav/citynav_train_seenall.json \
+  --bounds data/citynav_bounds.json --ground-levels data/ground_levels.json \
+  --rgbd-dir /path/to/data/rgbd --observations-out data/observed_train \
+  --output data/graphnav_train_rgb.jsonl
+
+python -m graphnav.train --data data/graphnav_train_rgb.jsonl \
+  --use-vision --epochs 10 --batch-size 16 --device cuda \
+  --output runs/graphnav/visual.pt
+
+python -m graphnav.evaluate --data data/graphnav_val_unseen.jsonl \
+  --checkpoint runs/graphnav/train.pt --device cuda
+\`\`\`
+
+转换器只会为每个训练时刻暴露它过去及现在实际观察的局部视角。
+评估脚本仅统计 Goal R@K/20m 和 Top1 NE，不能代替闭环 SR/SPL。
+
 这是初始**开放式监督训练**，而非已完成的在线 imitation rollout。
 对比实验应在真实 CityNav 闭环 evaluator 接入后报告 SR/SPL/OSR/NE；
 请参见 [DATA.md](docs/DATA.md) 和 [EXPERIMENTS.md](docs/EXPERIMENTS.md)。
