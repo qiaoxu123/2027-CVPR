@@ -8,6 +8,7 @@ matches outrank typed alias matches, and neither ever uses GT positions.
 from __future__ import annotations
 
 import re
+from difflib import SequenceMatcher
 
 
 def canonical_name(text: str) -> str:
@@ -56,7 +57,8 @@ def build_name_index(objects: dict) -> dict:
 
 def resolve_references(
     reference_names, objects: dict, *, max_landmarks=16,
-    allowed_types=None, index=None,
+    allowed_types=None, index=None, match_mode="typed",
+    fuzzy_threshold=0.88, fuzzy_margin=0.04,
 ):
     """Return every exact or typed-suffix matching polygon ID without GT lookup.
 
@@ -65,6 +67,10 @@ def resolve_references(
     """
     if max_landmarks < 1:
         raise ValueError("max_landmarks must be positive")
+    if match_mode not in ("exact", "typed", "fuzzy"):
+        raise ValueError("match_mode must be exact|typed|fuzzy")
+    if not 0 < fuzzy_threshold <= 1:
+        raise ValueError("invalid fuzzy_threshold")
     index = build_name_index(objects) if index is None else index
     selected, seen = [], {}
     for requested in reference_names:
@@ -73,10 +79,45 @@ def resolve_references(
             continue
         exact = [entry for entry in index["exact"].get(key, [])
                  if allowed_types is None or entry[2] in allowed_types]
-        matches = exact if exact else [
+        typed = [] if match_mode == "exact" else [
             entry for entry in index["typed"].get(key, [])
             if allowed_types is None or entry[2] in allowed_types
         ]
+        matches = exact if exact else typed
+        if not matches and match_mode == "fuzzy":
+            # Fuzzy matching is ONLY a fallback to typed exact binding.
+            # Match explicit suffix types conservatively: road != building.
+            allowed = None
+            for typ, suffixes in TYPE_SUFFIXES.items():
+                if any(key.endswith(" " + suffix) for suffix in suffixes):
+                    allowed = typ
+                    break
+            rankings = []
+            for candidate_name, entries in index["exact"].items():
+                for entry in entries:
+                    source_type = canonical_name(entry[2]).replace(" ", "")
+                    if allowed is not None and source_type != allowed:
+                        continue
+                    if allowed_types is not None and entry[2] not in allowed_types:
+                        continue
+                    ratio = SequenceMatcher(None, key, candidate_name).ratio()
+                    # 'Main Road' can match 'Main Rd' without changing type,
+                    # but it must NOT indiscriminately match an unrelated object.
+                    for suffix in TYPE_SUFFIXES.get(source_type, ()):
+                        ratio = max(
+                            ratio,
+                            SequenceMatcher(None, key, candidate_name + " " + suffix).ratio(),
+                        )
+                    rankings.append((ratio, candidate_name, entry))
+            if rankings:
+                rankings.sort(key=lambda x: (-x[0], x[1], x[2][0]))
+                best_score, best_name, _ = rankings[0]
+                competitor = max(
+                    (score for score, name, _ in rankings if name != best_name),
+                    default=0.0,
+                )
+                if best_score >= fuzzy_threshold and best_score - competitor >= fuzzy_margin:
+                    matches = [entry for _, name, entry in rankings if name == best_name]
         for object_id, name, source_type, contour in matches:
             if object_id in seen:
                 found = selected[seen[object_id]]
