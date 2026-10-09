@@ -151,6 +151,7 @@ class GraphNav(nn.Module):
         spatial_maps: torch.Tensor | None = None,
         vision_features: torch.Tensor | None = None,
         vision_coverage: torch.Tensor | None = None,
+        physical_map_sizes: torch.Tensor | None = None,
     ) -> GraphNavOutput:
         """No target coordinates are accepted. All arguments are inference-observable.
 
@@ -158,6 +159,7 @@ class GraphNav(nn.Module):
         uav [B,4] = normalized x,y,sin(yaw),cos(yaw),
         maps [B,2,G,G] = current view and past explored masks,
         vision [B,K,V] and coverage [B,K] aligned to selected proposal order.
+        physical_map_sizes [B,2] publicly known map widths/heights in meters.
         """
         c = self.config
         if instruction.ndim != 2 or instruction.shape[-1] != c.text_dim:
@@ -175,6 +177,8 @@ class GraphNav(nn.Module):
             spatial_maps = instruction.new_zeros((b, 2, c.grid_size, c.grid_size))
         if spatial_maps.shape != (b, 2, c.grid_size, c.grid_size):
             raise ValueError("spatial_maps mismatch")
+        if physical_map_sizes is not None and physical_map_sizes.shape != (b, 2):
+            raise ValueError("physical_map_sizes must be public [B,2] map dimensions")
         if vision_features is not None and vision_coverage is None:
             raise ValueError("visual evidence requires explicit coverage mask")
         if vision_coverage is not None and vision_features is None:
@@ -255,9 +259,26 @@ class GraphNav(nn.Module):
             1.0 / c.trajectory_waypoints, 1.0, c.trajectory_waypoints,
             device=instruction.device, dtype=instruction.dtype,
         )
+        if physical_map_sizes is not None:
+            # Replanning should make real metric progress: first waypoint is
+            # at most 50m away, not 1/8 of an arbitrarily distant target.
+            metric_delta = (
+                candidate_xy - uav_pose[:, None, :2]
+            ) * physical_map_sizes[:, None, :]
+            distance_m = metric_delta.norm(dim=-1).clamp_min(1e-6)
+            metric_fraction = (50.0 / distance_m).clamp(max=1.0)
+            progress = torch.arange(
+                1, c.trajectory_waypoints + 1,
+                device=instruction.device, dtype=instruction.dtype,
+            ).view(1, 1, 1, -1, 1)
+            steps = (progress * metric_fraction[:, :, None, None, None]).clamp(max=1.0)
+        else:
+            # Geometry-only CPU tests may not have physical scene metadata;
+            # production runtime always passes the public map dimensions.
+            steps = fractions.view(1, 1, 1, -1, 1)
         base_path = (
             uav_pose[:, None, None, None, :2]
-            + fractions.view(1, 1, 1, -1, 1)
+            + steps
             * (candidate_xy[:, :, None, None, :] - uav_pose[:, None, None, None, :2])
         )
         offsets = offsets.clone()
