@@ -169,5 +169,11 @@ def split_map_names(jsonl_path):
     with Path(jsonl_path).open(encoding="utf-8") as f:
         for line in f:
             if line.strip():
-                names.add(json.loads(line)["map_name"])
+                row=json.loads(line)
+                if row.get("dataset_version")!="revised":
+                    raise ValueError(
+                        "P1 expects the verified Revised CityNav split JSONL; "
+                        "do not mix Original or unspecified versions"
+                    )
+                names.add(row["map_name"])
     return names
