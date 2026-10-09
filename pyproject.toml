@@ -21,7 +21,7 @@ foundation = ["transformers>=4.51", "pillow>=10", "safetensors>=0.4"]
 graphnav-train = "graphnav.train:main"
 
 [tool.setuptools.packages.find]
-include = ["graphnav*"]
+include = ["graphnav*", "scripts*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
