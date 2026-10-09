@@ -1,0 +1,362 @@
+{
+  "args": {
+    "train_evidence": "data/dynamic_evidence_v2_train_seen",
+    "train_queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+    "train_fields": "runs/a3_dynamic_train_fp32",
+    "train_vectors": "runs/p3_landmark_vectors_train_seen",
+    "seen_evidence": "data/dynamic_evidence_v2_val_seen",
+    "seen_queries": "data/public_eval_seen_v2/public_queries.jsonl",
+    "seen_fields": "runs/a3_dynamic_seen_fp32",
+    "seen_vectors": "runs/p3_landmark_vectors_val_seen",
+    "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+    "output": "runs/dynamic_belief_v2_graph_seed0",
+    "variant": "graph",
+    "associate_observed_refs": true,
+    "epochs": 5,
+    "batch_size": 64,
+    "workers": 4,
+    "seed": 0,
+    "split_seed": 0,
+    "lr": 0.0002,
+    "gate_lr": 0.002,
+    "max_batches": null,
+    "resume": null,
+    "device": "cuda"
+  },
+  "provenance": {
+    "commit": "e3453518bfbee892ed9baab308001bbcddadc567",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "input_fingerprint": {
+    "train_queries": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+      "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+    },
+    "seen_queries": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/public_eval_seen_v2/public_queries.jsonl",
+      "sha256": "9224ab061f12ebd3a3ea4a83523c16cacb3d5357466a8e645c6710ba5233d04f"
+    },
+    "checkpoint": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+    },
+    "train_evidence": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_train_seen/manifest.json",
+      "sha256": "fbf6cc8418ffabdf41cc05e1c05d781ac80dd87b904688e4e2a75af3829d33bf"
+    },
+    "train_fields": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/manifest.json",
+      "sha256": "b3248c82548518d0c431267e344b6d62cae8ca7203002e5116f8462f59d1f288"
+    },
+    "train_vectors": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_train_seen/manifest.json",
+      "sha256": "6c4217656369de142214a2d6e6c112f2aeff36b9cc29743009375865e11f70e1"
+    },
+    "seen_evidence": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_val_seen/manifest.json",
+      "sha256": "932b88cf526e585c1ea1f7cf183cc53610eda33ab11aa696c40b873bb7415a13"
+    },
+    "seen_fields": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/manifest.json",
+      "sha256": "de7fa141c84972071d2022663de788f13c6b8a8311ae3f8c499b0c737756cad5"
+    },
+    "seen_vectors": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_val_seen/manifest.json",
+      "sha256": "27bc9d8a13572d326e1ceae35e3aee5123e11e485ac6d25edb58f5c09883ab66"
+    }
+  },
+  "best_epoch": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 4.573623202217156,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 28.999301947330206,
+          "R1": 0.5203679369250985,
+          "R4": 0.7159439334209374,
+          "R8": 0.7986202365308804,
+          "baseline_NE": 29.004938185724104,
+          "baseline_R1": 0.5197109067017083,
+          "baseline_R4": 0.716819973718791,
+          "baseline_R8": 0.7982917214191853
+        },
+        "seconds": 10.057013507001102,
+        "started_unix": 1791568276.4754262,
+        "finished_unix": 1791568286.5811756,
+        "samples_per_second": 238.93773219327713,
+        "peak_allocated_gib": 2.4904823303222656,
+        "graph_gate": -0.06903986632823944,
+        "visual_gate": 0.0,
+        "reference_observations": 2020,
+        "auxiliary_observations": 13683,
+        "reference_visible_state_fraction": 0.4548481065334998
+      },
+      "dev": {
+        "loss": 4.323087610047439,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 23.475352667322095,
+          "R1": 0.5838926174496645,
+          "R4": 0.8053691275167785,
+          "R8": 0.8590604026845637,
+          "baseline_NE": 23.608605854463256,
+          "baseline_R1": 0.5771812080536913,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8590604026845637
+        },
+        "seconds": 1.0041356589645147,
+        "started_unix": 1791568286.583075,
+        "finished_unix": 1791568287.5923097,
+        "samples_per_second": 231.0444788299254,
+        "peak_allocated_gib": 1.550248146057129,
+        "graph_gate": -0.06903986632823944,
+        "visual_gate": 0.0,
+        "reference_observations": 194,
+        "auxiliary_observations": 1576,
+        "reference_visible_state_fraction": 0.44396551724137934
+      }
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 4.565988062026349,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 28.95518239129937,
+          "R1": 0.5224047306176084,
+          "R4": 0.7179150240911081,
+          "R8": 0.8017958826106002,
+          "baseline_NE": 29.004938185724104,
+          "baseline_R1": 0.5197109067017083,
+          "baseline_R4": 0.716819973718791,
+          "baseline_R8": 0.7982917214191853
+        },
+        "seconds": 5.088353142142296,
+        "started_unix": 1791568287.6310954,
+        "finished_unix": 1791568292.7716084,
+        "samples_per_second": 472.25495811171044,
+        "peak_allocated_gib": 2.4903459548950195,
+        "graph_gate": -0.1836802065372467,
+        "visual_gate": 0.0,
+        "reference_observations": 2020,
+        "auxiliary_observations": 13683,
+        "reference_visible_state_fraction": 0.4548481065334998
+      },
+      "dev": {
+        "loss": 4.30901496985863,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 23.916751363133425,
+          "R1": 0.5704697986577181,
+          "R4": 0.7919463087248322,
+          "R8": 0.8590604026845637,
+          "baseline_NE": 23.608605854463256,
+          "baseline_R1": 0.5771812080536913,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8590604026845637
+        },
+        "seconds": 0.23248674999922514,
+        "started_unix": 1791568292.7736263,
+        "finished_unix": 1791568293.011783,
+        "samples_per_second": 997.9063322996826,
+        "peak_allocated_gib": 1.550248146057129,
+        "graph_gate": -0.1836802065372467,
+        "visual_gate": 0.0,
+        "reference_observations": 194,
+        "auxiliary_observations": 1576,
+        "reference_visible_state_fraction": 0.44396551724137934
+      }
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 4.539839860651823,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 28.959309365265835,
+          "R1": 0.5226675427069645,
+          "R4": 0.7262374069207185,
+          "R8": 0.8136771791502408,
+          "baseline_NE": 29.004938185724104,
+          "baseline_R1": 0.5197109067017083,
+          "baseline_R4": 0.716819973718791,
+          "baseline_R8": 0.7982917214191853
+        },
+        "seconds": 3.871797187021002,
+        "started_unix": 1791568293.0338862,
+        "finished_unix": 1791568296.9547362,
+        "samples_per_second": 620.6420129792209,
+        "peak_allocated_gib": 2.4903459548950195,
+        "graph_gate": -0.29211291670799255,
+        "visual_gate": 0.0,
+        "reference_observations": 2020,
+        "auxiliary_observations": 13683,
+        "reference_visible_state_fraction": 0.4548481065334998
+      },
+      "dev": {
+        "loss": 4.278372542611484,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 24.37779586587176,
+          "R1": 0.5704697986577181,
+          "R4": 0.7986577181208053,
+          "R8": 0.8523489932885906,
+          "baseline_NE": 23.608605854463256,
+          "baseline_R1": 0.5771812080536913,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8590604026845637
+        },
+        "seconds": 0.2024057919625193,
+        "started_unix": 1791568296.9564028,
+        "finished_unix": 1791568297.163741,
+        "samples_per_second": 1146.2122588021634,
+        "peak_allocated_gib": 1.550248146057129,
+        "graph_gate": -0.29211291670799255,
+        "visual_gate": 0.0,
+        "reference_observations": 194,
+        "auxiliary_observations": 1576,
+        "reference_visible_state_fraction": 0.44396551724137934
+      }
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 4.510330477606193,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 28.57877363752455,
+          "R1": 0.5254270696452037,
+          "R4": 0.730891371003066,
+          "R8": 0.8161957950065704,
+          "baseline_NE": 29.004938185724104,
+          "baseline_R1": 0.5197109067017083,
+          "baseline_R4": 0.716819973718791,
+          "baseline_R8": 0.7982917214191853
+        },
+        "seconds": 2.9667302060406655,
+        "started_unix": 1791568297.1812198,
+        "finished_unix": 1791568300.214032,
+        "samples_per_second": 809.9826519806775,
+        "peak_allocated_gib": 2.4903459548950195,
+        "graph_gate": -0.3685155212879181,
+        "visual_gate": 0.0,
+        "reference_observations": 2020,
+        "auxiliary_observations": 13683,
+        "reference_visible_state_fraction": 0.4548481065334998
+      },
+      "dev": {
+        "loss": 4.2590906044532515,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 23.08281307732499,
+          "R1": 0.5973154362416108,
+          "R4": 0.7919463087248322,
+          "R8": 0.8590604026845637,
+          "baseline_NE": 23.608605854463256,
+          "baseline_R1": 0.5771812080536913,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8590604026845637
+        },
+        "seconds": 0.22738014603964984,
+        "started_unix": 1791568300.217536,
+        "finished_unix": 1791568300.4508429,
+        "samples_per_second": 1020.3177543897987,
+        "peak_allocated_gib": 1.550248146057129,
+        "graph_gate": -0.3685155212879181,
+        "visual_gate": 0.0,
+        "reference_observations": 194,
+        "auxiliary_observations": 1576,
+        "reference_visible_state_fraction": 0.44396551724137934
+      }
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "loss": 4.496675294883242,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 28.737114991530923,
+          "R1": 0.5377682873412177,
+          "R4": 0.7295225580376696,
+          "R8": 0.8186596583442839,
+          "baseline_NE": 29.004938185724104,
+          "baseline_R1": 0.5197109067017083,
+          "baseline_R4": 0.716819973718791,
+          "baseline_R8": 0.7982917214191853
+        },
+        "seconds": 3.100989729864523,
+        "started_unix": 1791568300.5096037,
+        "finished_unix": 1791568303.660029,
+        "samples_per_second": 774.913885350076,
+        "peak_allocated_gib": 2.4903459548950195,
+        "graph_gate": -0.39797747135162354,
+        "visual_gate": 0.0,
+        "reference_observations": 2020,
+        "auxiliary_observations": 13683,
+        "reference_visible_state_fraction": 0.4548481065334998
+      },
+      "dev": {
+        "loss": 4.255240407483331,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 23.13499755987385,
+          "R1": 0.610738255033557,
+          "R4": 0.7785234899328859,
+          "R8": 0.8456375838926175,
+          "baseline_NE": 23.608605854463256,
+          "baseline_R1": 0.5771812080536913,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8590604026845637
+        },
+        "seconds": 0.20995679614134133,
+        "started_unix": 1791568303.6614735,
+        "finished_unix": 1791568303.876296,
+        "samples_per_second": 1104.9892371372412,
+        "peak_allocated_gib": 1.550248146057129,
+        "graph_gate": -0.39797747135162354,
+        "visual_gate": 0.0,
+        "reference_observations": 194,
+        "auxiliary_observations": 1576,
+        "reference_visible_state_fraction": 0.44396551724137934
+      }
+    }
+  ],
+  "seen_prefix": {
+    "loss": 4.599599730001914,
+    "state_queries": 925,
+    "unique_public_queries": 570,
+    "query_macro": {
+      "NE": 34.21933748920758,
+      "R1": 0.4105263157894737,
+      "R4": 0.5929824561403508,
+      "R8": 0.7192982456140351,
+      "baseline_NE": 32.46191993167526,
+      "baseline_R1": 0.39824561403508774,
+      "baseline_R4": 0.5877192982456141,
+      "baseline_R8": 0.7175438596491228
+    },
+    "seconds": 3.529620723100379,
+    "started_unix": 1791568303.9608495,
+    "finished_unix": 1791568307.5179067,
+    "samples_per_second": 262.0678176400467,
+    "peak_allocated_gib": 1.5565853118896484,
+    "graph_gate": -0.39797747135162354,
+    "visual_gate": 0.0,
+    "reference_observations": 888,
+    "auxiliary_observations": 5281,
+    "reference_visible_state_fraction": 0.4540540540540541
+  },
+  "note": "Seen actual-human-prefix subset query-macro localization diagnostic; not full navigation SR/SPL or initial-only observations. No Unseen evaluation."
+}

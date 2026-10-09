@@ -21,6 +21,16 @@ def calibrated_stop_probability(logits,positive_weight=1.):
     return torch.sigmoid(logits.float()-math.log(positive_weight))
 
 
+def convergent_first_waypoint(pose,goal,learned,*,blend=1.,step=50.):
+    """Taper the learned first-step deviation at its own predicted goal, no labels."""
+    if not 0<=blend<=1:raise ValueError('blend must be in [0,1]')
+    delta=goal-pose[:,:2];distance=delta.norm(dim=-1,keepdim=True)
+    direct=pose[:,:2]+delta*(step/distance.clamp_min(step))
+    taper=(distance/step).clamp(0,1)
+    xy=direct+blend*taper*(learned[:,:2]-direct)
+    return torch.cat((xy,learned[:,2:3]),-1),distance.squeeze(-1)
+
+
 def remaining_waypoints(trajectory, prefix_index, *, count=8, spacing_m=50.):
     """Interpolate actual remaining human path at bounded macro-action distances.
 

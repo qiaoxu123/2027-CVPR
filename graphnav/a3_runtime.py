@@ -62,6 +62,8 @@ class A3WaypointPolicy:
             with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
                 field=self.model(inputs,variant='geometry',tokens=tokens,token_mask=mask,node_emb=names)
             self.field_cache[key]=(field,inputs)
+            self.public_node_emb=names
+            self.public_entities=dataset._prepared(0)[0]['entities']
         return self.field_cache[key]
 
     @torch.no_grad()
@@ -96,7 +98,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             raise ValueError('geometry/pose runtime only accepts matching zero visual-history inputs')
         if not 0<stop_threshold<1:raise ValueError('Stop threshold must be in (0,1)')
         self.stop_threshold=stop_threshold
-        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal'):
+        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'):
             raise ValueError('unknown trajectory execution ablation')
         self.execution=execution
         self.stop_positive_weight=state['protocol']['stop_positive_weight']
@@ -123,10 +125,15 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             mode=output.mode_logits[:,0].argmax(-1)
             waypoint=output.paths_world[torch.arange(1,device=self.device),candidate,mode,0]
             stop=output.stop_logits[:,0]
-            if self.execution=='direct-goal':
+            if self.execution in ('direct-goal','guarded-direct','guarded-path','guarded-blend'):
                 goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,0]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
-                waypoint=torch.cat((goal,inputs['pose_world'][:,2:3]),-1)
+                if self.execution in ('direct-goal','guarded-direct'):waypoint=torch.cat((goal,inputs['pose_world'][:,2:3]),-1)
+                else:
+                    from .trajectory_policy import convergent_first_waypoint
+                    waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal,waypoint,blend=.25 if self.execution=='guarded-blend' else 1.)
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
-        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop'),
+        predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if self.execution.startswith('guarded-') else None
+        arrival_guard=predicted_goal_distance is None or predicted_goal_distance<=1e-3
+        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop' and arrival_guard),
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
-                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability))
+                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability,predicted_goal_distance=predicted_goal_distance))

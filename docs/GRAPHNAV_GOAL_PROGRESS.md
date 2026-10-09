@@ -112,3 +112,7 @@ v2 associates observations by public source name and full contour (never destina
 Online cache now persists only256D vectors keyed by exact current pixels,head SHA and actual backbone/precision protocol; large per-ROI patch tokens are not saved on every navigation visit. History is episode-local; cache reuse occurs only after observing the current pixels. Tests verify repeated pixels avoid encoding and only owned transient PNGs are removed.112 tests pass. The initial one-shot head/encoder results remain untouched; new real cache/node-state smoke must pass before v2 full training.
 
 Internal P3 dev is disjoint for the residual stage only:the preserved A3 had already trained on the original full Train Seen. Val Seen remains the independent architecture/acceptance selection set. No new Unseen model evaluation or tuning has occurred.
+
+## 2026-10-10：真实节点关联与闭环接口
+
+V2 三组五轮训练完成；所有实际视觉输入均按当前/历史 cutoff 构造，Seen 前缀约45%状态包含已观测引用地标。指标见 `reports/dynamic_v2_20261010/comparison.csv`，尚不代表闭环增益。实际四 Episode CUDA 在线接口已通过；加入当前384px RGB/Depth环境边界、公共名称+完整轮廓节点关联、全784候选残差与按像素哈希持久化视觉缓存。114单测通过。下一步：四组动态图 Seen128 与三个预测目标收敛/Stop门控对照，不依据 Unseen 选择。

@@ -32,10 +32,15 @@ def main():
     parser.add_argument('--split', choices=['val_seen', 'val_unseen'], required=True)
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic'], default='sbfnav')
+    parser.add_argument('--dynamic-checkpoint')
+    parser.add_argument('--visual-checkpoint')
+    parser.add_argument('--visual-history',action='store_true')
+    parser.add_argument('--disable-visual',action='store_true')
+    parser.add_argument('--observed-cache')
     parser.add_argument('--head-checkpoint')
     parser.add_argument('--stop-threshold',type=float,default=.5)
-    parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal'],default='joint')
+    parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
@@ -82,7 +87,12 @@ def main():
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
-        if args.model=='a3-trajectory':
+        if args.model=='dynamic':
+            if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')
+            from graphnav.dynamic_runtime import DynamicWaypointPolicy,NativeObservationBuilder
+            runtime=DynamicWaypointPolicy(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache)
+            builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
+        elif args.model=='a3-trajectory':
             if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')
             runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution)
         else:runtime=A3WaypointPolicy(args.checkpoint,output/'public_inputs')
@@ -111,12 +121,14 @@ def main():
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
     report = dict(model=('SBFNav local paper-based reproduction' if args.model=='sbfnav'
-                        else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
-                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop')),split=args.split,
+                        else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
+                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))),split=args.split,
         metrics=aggregate(rows),by_map={k:aggregate(v) for k,v in maps.items()},
         terminations=dict(terminations),protocol=asdict(protocol),config=config,
         checkpoint_sha256=sha(args.checkpoint),checkpoint_epoch=checkpoint.get('completed_epoch',checkpoint.get('epoch')),
         head_checkpoint_sha256=sha(args.head_checkpoint) if args.head_checkpoint else None,
+        dynamic_checkpoint_sha256=sha(args.dynamic_checkpoint) if args.dynamic_checkpoint else None,
+        visual_checkpoint_sha256=sha(args.visual_checkpoint) if args.visual_checkpoint else None,
         episode_manifest_sha256=sha(output/'episodes.json'),args=vars(args),seconds=time.perf_counter()-started,
         gpu_peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
         input_sha256={str(p):sha(p) for p in [dataset.annotation_path,Path(args.data_root)/'cityrefer/objects.json',
