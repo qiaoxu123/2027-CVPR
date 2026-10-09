@@ -38,3 +38,23 @@ To enable at runtime, instantiate graphnav.target_runtime.TargetEvidenceWaypoint
 ## Validation gates
 
 Run pytest on this branch first. Compare exact A3 fallback, relation-only, appearance-only, joint, real RGB, zero visual and shuffled visual under the SAME Seen Episode manifest. Report target rank shifts, map-wise bootstrap, 2470 Seen closed-loop SR/SPL/OSR/NE, false stops, and runtime. Freeze selection without inspecting GraphNav Unseen, then test 2697 Unseen raw episodes. Do not claim an improvement from frozen encoder retrieval accuracy alone.
+
+
+## New planned phase: multi-scale and active observation
+
+See [ACTIVE_MULTISCALE_PERCEPTION_PLAN.md](ACTIVE_MULTISCALE_PERCEPTION_PLAN.md) for
+the *pre-registered* evaluation ladder: raw-image/source-GSD audit; frozen
+SigLIP2 native-text target-appearance retrieval; source-faithful observed ROI
+scales; matched fixed descent/approach actions; uncertainty-conditioned active
+approach/descend/lateral controls; matched-budget full Seen/Unseen closed-loop.
+
+The current branch adds `observed_scales.py` (no fake information from image
+upsampling), `active_observation.py` (bounded goal-belief-only XY/Z candidate
+actions), `--model target-evidence --active-observation` evaluation flags, and
+related tests. Opt-in active actions use the *same* 20-step episode budget,
+maximum 50m XY and 10m Z controller bounds. All novel gains remain unmeasured.
+No native multiscale ROI *matching head* has yet been trained or connected.
+
+**Camera caveat:** current nadir orthophoto cannot support claims about genuine
+3D side views or additional scene occlusion cues from yaw/pitch. A separate
+perspective camera simulator is required for physical viewpoint comparison.
