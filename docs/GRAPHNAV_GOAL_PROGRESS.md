@@ -272,3 +272,7 @@ G0/v2/v3完整Seen SR41.3765/38.2591/36.6397%、SPL40.2144/37.1665/35.5842%；�
 ## 最终候选冻结（任何新GraphNav Unseen评估之前）
 
 主候选由完整Seen选择为`full_seed1`；权重SHA、逐模块与三个完整训练种子的最终评估方案见`reports/sbf_protocol/final_frozen_evaluation_plan.json`。该清单先Commit再开始Unseen，不根据新Unseen结果调整Checkpoint或配置。公开高度Stop修复已完成Seen确认；所有旧失败结果保留。
+
+## 最终Unseen实际启动（2026-10-10）
+
+冻结清单已在任何新GraphNav Unseen之前Commit并Push为`fdd9a3d17cf648f7a748c5b146ba84fe6498ff2b`；主候选Full seed1仅由Seen选择。修复后v3控制器实际启动两路全2697 Episode Unseen推理（Full seed1与A3学习轨迹），余下固定消融按清单继续。所有候选参数/权重SHA/动作与计分协议保持冻结。最终报告仍未完成，不能由部分Episode或静态Recall宣称Level2。P1v3报告OSR抄录核正为原JSON的46.4372%，原始结果未改。

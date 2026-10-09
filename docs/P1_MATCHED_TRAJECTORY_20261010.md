@@ -24,7 +24,7 @@ Training budget reproduction: `scripts/summarize_training_runs.py --run g0=runs/
 |---|---:|---:|---:|---:|---:|---:|
 | G0 Scratch | 41.3765 | 40.2144 | 49.1498 | 31.3057 | 7.5623 | 173.12 |
 | G1 P1 v2 | 38.2591 | 37.1665 | 47.0445 | 31.5842 | 7.9785 | 183.37 |
-| G1 P1 v3 hard negatives | 36.6397 | 35.5842 | 45.7085 | 32.6009 | 9.8283 | 198.34 |
+| G1 P1 v3 hard negatives | 36.6397 | 35.5842 | 46.4372 | 32.6009 | 9.8283 | 198.34 |
 
 Versus Scratch, v2 SR falls3.1174percentage points (paired episode-bootstrap95% CI[-4.7783,-1.4575]); SPL falls3.0480points (CI[-4.6987,-1.4219]). V3 SR falls4.7368points (CI[-6.5587,-2.9150]), SPL falls4.6303points (CI[-6.3651,-2.8808]), and NE worsens1.2951m (CI[0.3503,2.1807]). These are failed transfer experiments despite extra pretraining computation, not candidates for promotion. Relation-only pretraining appears poorly matched to real target localization; this is a diagnosis hypothesis, not a proven causal explanation.
 
