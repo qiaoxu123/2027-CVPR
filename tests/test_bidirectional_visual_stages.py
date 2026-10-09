@@ -101,7 +101,7 @@ def test_p1_pairs_reverse_identity_and_no_target_name_in_instruction(tmp_path):
         assert f["landmarks"][0]["contour"]!=data[2]["landmarks"][0]["contour"]
     file=tmp_path/"pairs.jsonl"
     file.write_text("".join(json.dumps(x)+"\n" for x in data))
-    dataset=PairedGeometryDataset(file,grid_size=4,max_relations=4)
+    dataset=PairedGeometryDataset(file,grid_size=4,max_relations=8)
     batch=paired_collate([dataset[0]])
     assert batch["target_xy"].shape==(2,2)
 
@@ -121,7 +121,7 @@ def test_p1_reverse_loss_has_gradients_and_finite_values(tmp_path):
     torch.manual_seed(1)
     torch.set_num_threads(2)
     model=FullTokenGeometryLocalizer(
-        hidden=32,heads=4,max_relations=4,relative_position=True,dropout=0
+        hidden=32,heads=4,max_relations=8,relative_position=True,dropout=0
     )
     loss,components,_=batch_loss(model,batch,FakeEncoder(),torch.device("cpu"))
     assert torch.isfinite(loss)
