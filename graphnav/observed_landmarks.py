@@ -93,7 +93,8 @@ class ObservedLandmarkEncoder:
     def observe(self,observation,landmarks,*,step):
         if step<=self.last_step:raise ValueError('actual observations must have strictly increasing steps')
         from .checkpointing import atomic_save
-        rois=current_landmark_rois(observation,landmarks);keys=[];paths=[];created=[]
+        import tempfile
+        rois=current_landmark_rois(observation,landmarks);keys=[];missing={}
         if not hasattr(self,'cache_metrics'):
             self.cache_metrics=dict(observed_rois=0,memory_vector_hits=0,disk_vector_hits=0,new_vector_encodes=0,observations=0)
         self.cache_metrics['observations']+=1;self.cache_metrics['observed_rois']+=len(rois)
@@ -107,22 +108,23 @@ class ObservedLandmarkEncoder:
                 self.cache_metrics['disk_vector_hits']+=1
             elif key in self.vectors:self.cache_metrics['memory_vector_hits']+=1
             if key in self.vectors:continue
-            path=self.directory/(key+'.png')
-            if not path.exists():
-                if not cv2.imwrite(str(path),roi.roi_image):raise IOError('current ROI save failed')
-                created.append(path)
-            if key not in self.vectors:paths.append((key,str(path)))
-        paths=list(dict.fromkeys(paths))
-        if paths:
-            self.cache_metrics['new_vector_encodes']+=len(paths)
-            patches,mask=self.backbone.encode([path for _,path in paths])
-            with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
-                vectors=self.head(patches,mask).float().cpu()
-            if not torch.isfinite(vectors).all():raise ValueError('nonfinite observed landmark vectors')
-            for (key,_),vector in zip(paths,vectors):
-                # Match frozen-training vectors and persistent hits exactly.
-                self.vectors[key]=vector.half().float();atomic_save(vector.half(),self.vector_directory/(key+'.pt'))
-        for path in created:path.unlink() # Only our transient ROI copies; native data is untouched.
+            missing.setdefault(key,roi.roi_image)
+        if missing:
+            # Every call owns its PNGs; concurrent evaluators share only atomic vectors.
+            with tempfile.TemporaryDirectory(prefix='observed-roi-',dir=self.directory) as temporary:
+                paths=[]
+                for key,pixels in missing.items():
+                    path=Path(temporary)/(key+'.png')
+                    if not cv2.imwrite(str(path),pixels):raise IOError('current ROI save failed')
+                    paths.append((key,str(path)))
+                self.cache_metrics['new_vector_encodes']+=len(paths)
+                patches,mask=self.backbone.encode([path for _,path in paths])
+                with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
+                    vectors=self.head(patches,mask).float().cpu()
+                if not torch.isfinite(vectors).all():raise ValueError('nonfinite observed landmark vectors')
+                for (key,_),vector in zip(paths,vectors):
+                    # Match frozen-training vectors and persistent hits exactly.
+                    self.vectors[key]=vector.half().float();atomic_save(vector.half(),self.vector_directory/(key+'.pt'))
         vectors=torch.stack([self.vectors[key] for key in keys]) if keys else torch.zeros(0,self.head.query.shape[-1])
         for key in keys:self.vectors.move_to_end(key)
         while len(self.vectors)>self.cache_size:self.vectors.popitem(last=False)

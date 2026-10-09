@@ -30,3 +30,19 @@ def test_optimizer_and_all_rng_resume_reproduce_training_and_reject_changed_data
     args.lr=.1
     with pytest.raises(ValueError,match='configuration'):
         restore_training(checkpoint,model,optimizer,args,fingerprint)
+def test_concurrent_atomic_writers_publish_valid_payloads(tmp_path,monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+    import threading
+    import torch
+    from graphnav.checkpointing import atomic_save
+    original=torch.save;barrier=threading.Barrier(2);temporary=[]
+    def synchronized_save(payload,path):
+        temporary.append(str(path));original(payload,path);barrier.wait(timeout=5)
+    monkeypatch.setattr(torch,'save',synchronized_save)
+    path=tmp_path/'shared.pt'
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        list(pool.map(lambda i:atomic_save({'value':torch.tensor(i)},path),range(2)))
+    assert len(set(temporary))==2
+    assert torch.load(path,weights_only=True)['value'].item() in (0,1)
+    assert not list(tmp_path.glob('*.tmp'))
+

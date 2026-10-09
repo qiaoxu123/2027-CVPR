@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import random
 import subprocess
+import tempfile
 import numpy as np
 import torch
 
@@ -41,8 +42,12 @@ def provenance():
 
 def atomic_save(payload,path):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
-    temporary=path.with_suffix(path.suffix+'.tmp')
-    torch.save(payload,temporary);os.replace(temporary,path)
+    with tempfile.NamedTemporaryFile(prefix=path.name+'.',suffix='.tmp',dir=path.parent,delete=False) as stream:
+        temporary=Path(stream.name)
+    try:
+        torch.save(payload,temporary);os.replace(temporary,path)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def restore_training(path,model,optimizer,args,fingerprint,*,ignored=('resume','epochs','device','workers')):

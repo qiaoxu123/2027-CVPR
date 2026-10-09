@@ -47,7 +47,7 @@ def main():
         writer=csv.DictWriter(stream,fieldnames=list(stages[0]));writer.writeheader();writer.writerows(stages)
     (output/'summary.json').write_text(json.dumps(dict(timeline_snapshot_sha256=hashlib.sha256(raw).hexdigest(),
         samples=len(records),first_unix=float(t[0]),last_unix=float(t[-1]),stages=len(stages),
-        note='nvidia-smi sampled approximately every2seconds; short epochs may have0samples. Sampled memory includes CUDA process reservations and differs from torch peak allocated. Job windows include preparation/validation. Earlier P0/P1 source training predates this monitor and cannot be reconstructed. Running/incomplete jobs excluded.'),indent=2))
+        note='nvidia-smi sampled approximately every2seconds; short epochs may have0samples. Sampled utilization/memory are device-wide, including both processes during concurrent evaluations, not per-model isolated measurements. Sampled memory includes CUDA process reservations and differs from torch peak allocated. Job windows include preparation/validation. Earlier P0/P1 source training predates this monitor and cannot be reconstructed. Running/incomplete jobs excluded.'),indent=2))
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt

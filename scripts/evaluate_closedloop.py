@@ -40,6 +40,8 @@ def main():
     parser.add_argument('--graph-control',choices=['full','self','zero-edge-features'],default='full')
     parser.add_argument('--visual-control',choices=['full','zero-vectors','same-type-shuffle'],default='full')
     parser.add_argument('--observed-cache')
+    parser.add_argument('--evaluation-concurrency',type=int,choices=(1,2),default=1,
+        help='Execution metadata only; maximum simultaneous evaluators, not an isolated latency claim')
     parser.add_argument('--head-checkpoint')
     parser.add_argument('--stop-threshold',type=float,default=.5)
     parser.add_argument('--explore-candidates',type=int,default=0)
