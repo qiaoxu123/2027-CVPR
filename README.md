@@ -1,5 +1,7 @@
 # GraphNav — Graph-First Aerial Vision-and-Language Navigation
 
+> **GraphNav P0–P2 research**: [Bidirectional geometry + causal landmark RGB pretraining](docs/BIDIRECTIONAL_VISUAL_P0_P2.md). Based on validated A3/A4/A5 results; retains A3 baseline, adds world-polygon→actual RGB ROI auditing, valid inverse relation pairs, SigLIP2 Large patch-token cross-view landmark contrastive pretraining. Does NOT claim closed-loop SR/SPL improvement.
+
 > **NEW offline full-token + RGB A0–A5 experiment:** [FULL_TOKEN_GEOMETRY_RGB.md](docs/FULL_TOKEN_GEOMETRY_RGB.md) — tokenwise BERT cross-attention, per-candidate true polygon geometry, typed GAT and *causal observed-only* SigLIP2 evidence. Explicit Original/Revised CityNav protocol and audited fuzzy matching; RTX Pro 6000 96GB, batch 16. **Not yet a closed-loop navigation controller.**
 > **Extended CityRefer grounding experimental branch:** Train static goal localization with ALL typed named surface polygons (TrafficRoad/Footpath/Bridge/Parking/Ground), conservative aliases and a buildings-only control. See [FULL_SURFACE_GROUNDING.md](docs/FULL_SURFACE_GROUNDING.md). Rerun data conversion with `--refresh-raw`; historical metrics do not automatically carry over.
 
