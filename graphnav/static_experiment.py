@@ -12,6 +12,7 @@ import argparse
 import csv
 import json
 import random
+import time
 from pathlib import Path
 from dataclasses import asdict, dataclass
 
@@ -67,8 +68,16 @@ def forward_batch(model, enc, batch, device, variant, use_amp):
     else:
         instr = None
         node_emb = None
+    # Never hand a target or any future-label tensor to model.forward().
+    model_keys = (
+        "nodes", "node_types", "node_valid", "edges", "adjacency",
+        "prior", "rules", "relation_fields", "grid_xy",
+    )
+    model_inputs = {key: tensors[key] for key in model_keys}
     with torch.autocast("cuda", dtype=torch.bfloat16, enabled=use_amp):
-        logits = model(tensors, variant=variant, instruction_emb=instr, node_emb=node_emb)
+        logits = model(
+            model_inputs, variant=variant, instruction_emb=instr, node_emb=node_emb
+        )
     return logits, tensors
 
 
@@ -143,6 +152,9 @@ def train(args):
     for epoch in range(args.epochs):
         model.train()
         losses = []
+        began = time.perf_counter()
+        if device.type == "cuda":
+            torch.cuda.reset_peak_memory_stats(device)
         for step, batch in enumerate(loaders["train_seen"]):
             opt.zero_grad(set_to_none=True)
             logits, tensor = forward_batch(model, encoder, batch, device, "gat", amp)
@@ -155,11 +167,21 @@ def train(args):
             losses.append(float(loss.detach().cpu()))
             if args.max_train_batches and step + 1 >= args.max_train_batches:
                 break
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        train_seconds = time.perf_counter() - began
+        peak_gib = (torch.cuda.max_memory_allocated(device) / (1024**3)
+                    if device.type == "cuda" else None)
         seen = evaluate(model, encoder, loaders["val_seen"], device, amp)
         performance = seen["variants"]["gat"]["R@8/20m"]
         record = {
             "epoch": epoch + 1,
             "train_goal_loss": float(np.mean(losses)),
+            "train_seconds": train_seconds,
+            "samples_per_second": (sum(1 for _ in []) if not losses else
+                                   min(len(loaders["train_seen"].dataset),
+                                       len(losses) * args.batch_size) / max(train_seconds, 1e-6)),
+            "gpu_peak_gib": peak_gib,
             "val_seen": seen,
         }
         records.append(record)
