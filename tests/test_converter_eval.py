@@ -75,5 +75,7 @@ def test_static_conversion_does_not_relabel_roads_as_buildings_or_need_trajector
     assert convert(obj, proc, episodes, {'city_block_0': [0, 0, 400, 400]},
                    filename, static_only=True) == (1, 0)
     record = json.loads(filename.read_text())
-    assert [r['id'] for r in record['landmarks']] == ['9']
+    assert [r['id'] for r in record['landmarks']] == ['8', '9']
+    assert [r['object_type'] for r in record['landmarks']] == ['TrafficRoad', 'Building']
+    assert all('contour' in r and 'polyline' not in r for r in record['landmarks'])
     assert not {'uav_pose', 'teacher_future', 'rgb_observations'} & record.keys()
