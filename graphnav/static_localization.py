@@ -84,9 +84,35 @@ class StaticLocalizationDataset(Dataset):
         if bounds is None:
             raise ValueError("CityNav record missing public world_bounds; re-run converter")
         refs = record.get("landmarks", [])[:self.max_landmarks]
-        roads = self.normalized_roads(
-            self.roads_by_map.get(record.get("map_name", ""), [])[:self.max_roads], bounds
-        )
+        # Select instruction-mentioned named roads FIRST. Unmentioned roads are
+        # sorted by proximity to referenced landmark centers, not target XY.
+        all_roads = self.roads_by_map.get(record.get("map_name", ""), [])
+        sentence = " " + canonical(record["instruction"]) + " "
+        ref_centers = [
+            np.asarray(lm["contour"], np.float32).mean(0)
+            for lm in refs if len(lm.get("contour", [])) >= 3
+        ]
+        def road_priority(road):
+            named = canonical(road.get("name", ""))
+            mentioned = bool(named and (" " + named + " ") in sentence)
+            poly = np.asarray(road.get("polyline", []), np.float32)
+            if poly.ndim != 2 or len(poly) < 2:
+                near = float("inf")
+            else:
+                bounds_lo = np.asarray(bounds[:2], np.float32)
+                bounds_extent = np.asarray(bounds[2:], np.float32) - bounds_lo
+                if road.get("coordinate_system") == "world":
+                    xy = (poly - bounds_lo) / bounds_extent
+                else:
+                    xy = poly
+                center = xy.mean(0)
+                near = min(
+                    (float(np.linalg.norm(center - c)) for c in ref_centers),
+                    default=0.,
+                )
+            return (0 if mentioned else 1, near, str(road.get("id", "")))
+        chosen_roads = sorted(all_roads, key=road_priority)[:self.max_roads]
+        roads = self.normalized_roads(chosen_roads, bounds)
         graph = prepare_semantic_graph(
             refs, roads, record["instruction"], bounds,
             max_landmarks=self.max_landmarks, max_roads=self.max_roads,
@@ -96,7 +122,7 @@ class StaticLocalizationDataset(Dataset):
         spans = np.asarray(bounds[2:], dtype=np.float32) - xymin
         world_grid = xymin[None] + self.grid_xy * spans[None]
         # Reference-landmark Prior DOES NOT use non-referenced map roads.
-        referenced_entities = graph["entities"][:len(refs)]
+        referenced_entities = [e for e in graph["entities"] if e["kind"] == "building"]
         prior, _, _ = prior_and_rule_fields(
             world_grid, referenced_entities, [],
             sigma_m=self.prior_sigma_m,
@@ -130,6 +156,8 @@ class StaticLocalizationDataset(Dataset):
             "target_xy": torch.tensor(rec["target_xy"], dtype=torch.float32),
             "map_sizes": torch.tensor(rec["physical_map_sizes"], dtype=torch.float32),
             "relation_count": len(graph["relations"]),
+            "road_relation_count": sum(int(any(graph["entities"][idx]["kind"] == "road" for group in r.anchors for idx in group)) for r in graph["relations"]),
+            "road_count": sum(int(e["kind"] == "road") for e in graph["entities"]),
             "edge_count": int(graph["adjacency"].sum()),
             "episode_id": rec.get("episode_id", ""),
         }
