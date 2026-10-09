@@ -1,0 +1,363 @@
+{
+  "baseline": "full",
+  "episode_manifest_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+  "models": {
+    "full": {
+      "path": "runs/gat_mechanism_seen128/full",
+      "metrics": {
+        "SR": 0.4140625,
+        "OSR": 0.484375,
+        "SPL": 0.40600696894830507,
+        "NE": 29.80823684439024,
+        "nDTW": 0.2931441401299825,
+        "sDTW": 0.1446418639821862,
+        "steps": 8.015625,
+        "path_length": 206.73691171112384,
+        "policy_stop": 0.984375,
+        "inference_ms": 7.380239443464442,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5873015873015873,
+        "false_stop_episode_fraction": 0.578125,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "failures": {
+        "episodes": 128,
+        "failed": 75,
+        "visited_success_but_final_failed": 9.0,
+        "failed_policy_stops": 74,
+        "failed_horizon": 1,
+        "failed_stagnation": 0,
+        "nonadjacent_revisit_episodes": 120,
+        "note": "Failure counts can overlap. XY revisits use <2m separation and skip adjacent poses; altitude descent at a fixed XY can count as a revisit, so this is not automatically a control oscillation."
+      },
+      "seconds": 17.596685491967946,
+      "peak_allocated_gib": 0.4546318054199219,
+      "checkpoint_sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+      "head_checkpoint_sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+      "dynamic_checkpoint_sha256": "e1eb44d49d287cdc24b570405cbd53cb91abf7233fc2b361f04283c46e8b4f18",
+      "graphnav_commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706"
+    },
+    "self": {
+      "path": "runs/gat_mechanism_seen128/self",
+      "metrics": {
+        "SR": 0.40625,
+        "OSR": 0.484375,
+        "SPL": 0.3983897293517644,
+        "NE": 29.799518438545356,
+        "nDTW": 0.2939063050701711,
+        "sDTW": 0.14439589214148585,
+        "steps": 8.015625,
+        "path_length": 207.1541459770539,
+        "policy_stop": 0.984375,
+        "inference_ms": 8.008578643585565,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5952380952380952,
+        "false_stop_episode_fraction": 0.5859375,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "failures": {
+        "episodes": 128,
+        "failed": 76,
+        "visited_success_but_final_failed": 10.0,
+        "failed_policy_stops": 75,
+        "failed_horizon": 1,
+        "failed_stagnation": 0,
+        "nonadjacent_revisit_episodes": 121,
+        "note": "Failure counts can overlap. XY revisits use <2m separation and skip adjacent poses; altitude descent at a fixed XY can count as a revisit, so this is not automatically a control oscillation."
+      },
+      "seconds": 18.249747310066596,
+      "peak_allocated_gib": 0.4546318054199219,
+      "checkpoint_sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+      "head_checkpoint_sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+      "dynamic_checkpoint_sha256": "e1eb44d49d287cdc24b570405cbd53cb91abf7233fc2b361f04283c46e8b4f18",
+      "graphnav_commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706"
+    },
+    "zero-edge-features": {
+      "path": "runs/gat_mechanism_seen128/zero-edge-features",
+      "metrics": {
+        "SR": 0.4140625,
+        "OSR": 0.484375,
+        "SPL": 0.40600846343736885,
+        "NE": 29.65121608263133,
+        "nDTW": 0.29394022162657907,
+        "sDTW": 0.1446458605287501,
+        "steps": 8.015625,
+        "path_length": 206.73474190116022,
+        "policy_stop": 0.984375,
+        "inference_ms": 7.425028828911607,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5873015873015873,
+        "false_stop_episode_fraction": 0.578125,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "failures": {
+        "episodes": 128,
+        "failed": 75,
+        "visited_success_but_final_failed": 9.0,
+        "failed_policy_stops": 74,
+        "failed_horizon": 1,
+        "failed_stagnation": 0,
+        "nonadjacent_revisit_episodes": 120,
+        "note": "Failure counts can overlap. XY revisits use <2m separation and skip adjacent poses; altitude descent at a fixed XY can count as a revisit, so this is not automatically a control oscillation."
+      },
+      "seconds": 17.19969146209769,
+      "peak_allocated_gib": 0.4546318054199219,
+      "checkpoint_sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+      "head_checkpoint_sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+      "dynamic_checkpoint_sha256": "e1eb44d49d287cdc24b570405cbd53cb91abf7233fc2b361f04283c46e8b4f18",
+      "graphnav_commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706"
+    }
+  },
+  "paired": {
+    "self": {
+      "episodes": 128,
+      "gained": [],
+      "lost": [
+        1127
+      ],
+      "episode_weighted": {
+        "SR": {
+          "delta": -0.0078125,
+          "ci95": [
+            -0.0234375,
+            0.0
+          ]
+        },
+        "SPL": {
+          "delta": -0.007617239596540667,
+          "ci95": [
+            -0.023353305941707488,
+            0.0003579586952372041
+          ]
+        },
+        "OSR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "NE": {
+          "delta": -0.008718405844886645,
+          "ci95": [
+            -0.4029776131843422,
+            0.5088106273100952
+          ]
+        },
+        "nDTW": {
+          "delta": 0.0007621649401886384,
+          "ci95": [
+            -6.370321574857513e-05,
+            0.002121047247892194
+          ]
+        },
+        "sDTW": {
+          "delta": -0.0002459718407003518,
+          "ci95": [
+            -0.0026504465507210277,
+            0.0017556952849127813
+          ]
+        },
+        "steps": {
+          "delta": 0.0,
+          "ci95": [
+            -0.03125,
+            0.03125
+          ]
+        },
+        "inference_ms": {
+          "delta": 0.6283392001211232,
+          "ci95": [
+            0.4583378653624567,
+            0.8323650990091828
+          ]
+        }
+      },
+      "equal_map_weighted": {
+        "SR": {
+          "delta": -0.00505050505050505,
+          "ci95": [
+            -0.01515151515151515,
+            0.0
+          ]
+        },
+        "SPL": {
+          "delta": -0.004892829091684564,
+          "ci95": [
+            -0.015096833736684093,
+            0.00027925942357525394
+          ]
+        },
+        "OSR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "NE": {
+          "delta": 0.06224401144872346,
+          "ci95": [
+            -0.15896025874985406,
+            0.3248662019211104
+          ]
+        },
+        "nDTW": {
+          "delta": 0.0008455617424955715,
+          "ci95": [
+            -5.127858265695661e-05,
+            0.0020700110649072637
+          ]
+        },
+        "sDTW": {
+          "delta": -7.934521922292626e-05,
+          "ci95": [
+            -0.0017508719368894273,
+            0.0013442109488757436
+          ]
+        },
+        "steps": {
+          "delta": -0.018813131313131313,
+          "ci95": [
+            -0.06994949494949494,
+            0.018055555555555554
+          ]
+        },
+        "inference_ms": {
+          "delta": 0.5481268848506713,
+          "ci95": [
+            0.3463123132503783,
+            0.7588926014817101
+          ]
+        }
+      },
+      "uncertainty": "Paired episode bootstrap and paired equal-map bootstrap; these estimate different weighting schemes. Single training seed, not training-seed uncertainty.",
+      "bootstrap_seed": 20261010,
+      "draws": 2000
+    },
+    "zero-edge-features": {
+      "episodes": 128,
+      "gained": [],
+      "lost": [],
+      "episode_weighted": {
+        "SR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "SPL": {
+          "delta": 1.4944890637602973e-06,
+          "ci95": [
+            -1.8693724137227358e-07,
+            3.9369443452478314e-06
+          ]
+        },
+        "OSR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "NE": {
+          "delta": -0.1570207617589155,
+          "ci95": [
+            -0.4710660211138904,
+            3.422915227373549e-06
+          ]
+        },
+        "nDTW": {
+          "delta": 0.0007960814965965706,
+          "ci95": [
+            -2.9321069441992468e-06,
+            0.00238539212111226
+          ]
+        },
+        "sDTW": {
+          "delta": 3.9965465638858595e-06,
+          "ci95": [
+            -2.576767880588146e-06,
+            1.160874264229878e-05
+          ]
+        },
+        "steps": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "inference_ms": {
+          "delta": 0.04478938544716579,
+          "ci95": [
+            -0.137866583179889,
+            0.23956033669271842
+          ]
+        }
+      },
+      "equal_map_weighted": {
+        "SR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "SPL": {
+          "delta": 1.6027017910707776e-06,
+          "ci95": [
+            -2.4126375519067876e-07,
+            4.593700447701253e-06
+          ]
+        },
+        "OSR": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "NE": {
+          "delta": -0.08305227409002064,
+          "ci95": [
+            -0.24915953504229382,
+            2.6518227147438103e-06
+          ]
+        },
+        "nDTW": {
+          "delta": 0.00042254730503928653,
+          "ci95": [
+            -4.209904030981347e-06,
+            0.001267193280712001
+          ]
+        },
+        "sDTW": {
+          "delta": 5.416144360023523e-06,
+          "ci95": [
+            -1.1384084175967018e-06,
+            1.4471585082285459e-05
+          ]
+        },
+        "steps": {
+          "delta": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "inference_ms": {
+          "delta": 0.13256227142034585,
+          "ci95": [
+            -0.15993100288077955,
+            0.453771565042233
+          ]
+        }
+      },
+      "uncertainty": "Paired episode bootstrap and paired equal-map bootstrap; these estimate different weighting schemes. Single training seed, not training-seed uncertainty.",
+      "bootstrap_seed": 20261010,
+      "draws": 2000
+    }
+  }
+}

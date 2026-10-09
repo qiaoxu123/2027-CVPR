@@ -67,6 +67,9 @@ class PairedGeometryDataset(Dataset):
                 encoded[row["relation_direction"]],dtype=torch.long
             )
             sample['anchor_center_label']=torch.tensor(row.get('anchor_center_xy',sample['nodes'][0,:2].tolist()),dtype=torch.float32)
+            negatives=row.get('hard_negative_xy',[])[:8]
+            sample['hard_negative_label']=torch.tensor(negatives+[[0.,0.]]*(8-len(negatives)),dtype=torch.float32)
+            sample['hard_negative_valid']=torch.arange(8)<len(negatives)
             result.append(sample)
         return tuple(result)
 
@@ -102,7 +105,15 @@ def _inputs(batch, encoder, device):
     return x, states.to(device).clone(), mask.to(device), node_emb.to(device).clone()
 
 
-def batch_loss(model,batch,encoder,device,*,inverse_weight=.1):
+def hard_negative_margin(scores, grid, positive, negatives, valid):
+    """Supervision-only margin against geometrically invalid landmark centers."""
+    positive_ids=(grid-positive[:,None]).square().sum(-1).argmin(-1)
+    negative_ids=(grid[:,None]-negatives[:,:,None]).square().sum(-1).argmin(-1)
+    margins=F.relu(1.+scores.gather(1,negative_ids)-scores.gather(1,positive_ids[:,None]))
+    return (margins*valid).sum()/valid.sum().clamp_min(1)
+
+
+def batch_loss(model,batch,encoder,device,*,inverse_weight=.1,hard_negative_weight=0.):
     x,tokens,mask,nodes=_inputs(batch,encoder,device)
     with torch.autocast("cuda",dtype=torch.bfloat16,enabled=(device.type=="cuda")):
         field=model(x,variant="geometry",tokens=tokens,token_mask=mask,node_emb=nodes)
@@ -116,8 +127,13 @@ def batch_loss(model,batch,encoder,device,*,inverse_weight=.1):
     scale=batch["map_sizes"].to(device)
     delta=(prediction-anchor)*scale / 100.
     inverse=F.smooth_l1_loss(delta[0::2]+delta[1::2],torch.zeros_like(delta[0::2]))
-    return target_loss+inverse_weight*inverse, dict(
+    hard_negative=scores.sum()*0
+    if hard_negative_weight:
+        hard_negative=hard_negative_margin(scores,x['grid_xy'],label,
+            batch['hard_negative_label'].to(device),batch['hard_negative_valid'].to(device))
+    return target_loss+inverse_weight*inverse+hard_negative_weight*hard_negative, dict(
         goal=float(target_loss.detach()), inverse=float(inverse.detach()),
+        hard_negative=float(hard_negative.detach()),
     ), field
 
 
@@ -213,7 +229,8 @@ def run(args):
             if getattr(args,'max_batches',None) and len(losses)>=args.max_batches:break
             optimizer.zero_grad(set_to_none=True)
             loss,parts,_=batch_loss(
-                model,batch,encoder,device,inverse_weight=args.inverse_weight
+                model,batch,encoder,device,inverse_weight=args.inverse_weight,
+                hard_negative_weight=getattr(args,'hard_negative_weight',0.)
             )
             if not torch.isfinite(loss):raise ValueError('nonfinite P1 Loss')
             loss.backward()
@@ -285,6 +302,7 @@ def main():
     p.add_argument('--max-batches',type=int,help='Limited smoke only; not an eligible pretrain model')
     p.add_argument("--lr",type=float,default=2e-4)
     p.add_argument("--inverse-weight",type=float,default=.1)
+    p.add_argument('--hard-negative-weight',type=float,default=0.,help='Private verified same-map/type negative margin; existing protocol defaults unchanged')
     p.add_argument("--seed",type=int,default=0)
     p.add_argument("--device",default="cuda" if torch.cuda.is_available() else "cpu")
     p.add_argument("--text-backbone",default="bert-base-uncased")

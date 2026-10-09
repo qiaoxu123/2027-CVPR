@@ -24,6 +24,32 @@ from .semantic_geometry import valid_surface_polygon
 INVERSE = {"east": "west", "west": "east", "north": "south", "south": "north"}
 
 
+def verified_hard_negatives(anchor, target, entries, direction, limit=8):
+    """Same-map/type, similar range/area, provably wrong directional side.
+
+    Alternative valid solutions are never negatives. IDs and locations returned
+    here are private loss labels, not public model inputs.
+    """
+    from shapely.geometry import Polygon
+    axis = 0 if direction in ('east', 'west') else 1
+    sign = 1 if direction in ('east', 'north') else -1
+    a, t = np.asarray(anchor['center_world']), np.asarray(target['center_world'])
+    distance = np.linalg.norm(t-a)
+    area = target['polygon_area'] if 'polygon_area' in target else Polygon(target['contour']).area
+    result = []
+    for item in entries:
+        if item['id'] in (anchor['id'], target['id']) or item['object_type'] != target['object_type']:
+            continue
+        p = np.asarray(item['center_world'])
+        d = np.linalg.norm(p-a)
+        item_area = item['polygon_area'] if 'polygon_area' in item else Polygon(item['contour']).area
+        ratio = item_area / max(area, 1e-12)
+        if (.6*distance <= d <= 1.4*distance and .5 <= ratio <= 2
+                and sign*(p-a)[axis] <= -5 and np.linalg.norm(p-t) > 40):
+            result.append((abs(d-distance), item['id'], item['center_norm']))
+    return [p for _, _, p in sorted(result)[:limit]]
+
+
 def _centroid(polygon):
     x = np.asarray(polygon, np.float64)
     if x.ndim != 2 or x.shape[1] != 2 or len(x) < 3 or not np.isfinite(x).all():
