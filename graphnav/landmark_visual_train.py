@@ -49,7 +49,10 @@ def run(args):
     torch.manual_seed(args.seed)
     device=torch.device(args.device)
     train=PairedROIs(args.train,min_visible=args.min_visible,seed=args.seed)
-    unseen=PairedROIs(args.unseen,min_visible=args.min_visible,seed=args.seed)
+    dev_base=PairedROIs(args.train,min_visible=args.min_visible,seed=args.seed,
+                        deterministic=True)
+    unseen=PairedROIs(args.unseen,min_visible=args.min_visible,seed=args.seed,
+                      deterministic=True)
     if train.maps & unseen.maps:
         raise ValueError("P2 train/unseen map split leakage")
     order=list(range(len(train)))
@@ -61,7 +64,7 @@ def run(args):
                      pin_memory=device.type=="cuda",collate_fn=roi_collate)
     train_loader=DataLoader(Subset(train,order[:cut]),shuffle=True,drop_last=True,
                             **loader_args)
-    dev_loader=DataLoader(Subset(train,order[cut:]),shuffle=False,**loader_args)
+    dev_loader=DataLoader(Subset(dev_base,order[cut:]),shuffle=False,**loader_args)
     unseen_loader=DataLoader(unseen,shuffle=False,**loader_args)
     backbone=FrozenSigLIP2Patches(
         name=args.image_backbone,device=args.device,
