@@ -55,7 +55,7 @@ class FullCandidateDataset(StaticLocalizationDataset):
     def __init__(self, *args, visual_required=False, **kwargs):
         super().__init__(*args, **kwargs)
         self.visual_required = visual_required
-        self._pair_cache = lru_cache(maxsize=256)(self._pair_features)
+        self._pair_cache = lru_cache(maxsize=8192)(self._pair_features)
 
     def _pair_features(self, idx):
         record = self.records[idx]
@@ -63,9 +63,11 @@ class FullCandidateDataset(StaticLocalizationDataset):
         bounds = np.asarray(record["world_bounds"], np.float32)
         span = bounds[2:] - bounds[:2]
         world_xy = bounds[:2] + self.grid_xy * span
+        # Save half precision on CPU: 784xN geometry/query could otherwise
+        # retain several GB across 5-epoch CityNav runs. Cast to fp32 in batch.
         return relative_entity_features(
             world_xy, graph["entities"], self.capacity,
-        )
+        ).astype(np.float16)
 
     def __getitem__(self, idx):
         output = super().__getitem__(idx)
@@ -76,7 +78,7 @@ class FullCandidateDataset(StaticLocalizationDataset):
                 "RGB variant requested but record has no observed prefix. "
                 "Prepare episode observations first; never use a full map."
             )
-        output["pair_geometry"] = torch.from_numpy(self._pair_cache(idx))
+        output["pair_geometry"] = torch.from_numpy(self._pair_cache(idx)).float()
         count = len(self._prepared(idx)[0]["entities"])
         entity_mask = torch.zeros_like(output["node_valid"])
         entity_mask[:count] = True
