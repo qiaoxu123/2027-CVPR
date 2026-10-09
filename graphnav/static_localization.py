@@ -95,6 +95,7 @@ class StaticLocalizationDataset(Dataset):
             result.append({
                 "id": road.get("id", ""), "name": road.get("name", ""),
                 "polyline": polyline.tolist(),
+                "osm_node_ids": road.get("osm_node_ids", []),
             })
         return result
 
