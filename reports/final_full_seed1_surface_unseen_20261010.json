@@ -1,0 +1,33 @@
+{
+  "models": {
+    "sbf": {
+      "episodes": 2697,
+      "valid_points": 41781,
+      "unknown_points": 5823,
+      "source_initial_below_surface": 0,
+      "later_below_surface_points": 2539,
+      "later_below_surface_episodes": 463,
+      "manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+      "run": "runs/closedloop_baseline/sbf_val_unseen_full",
+      "clearance_min_m": -19.956890106201172,
+      "clearance_p05_m": -0.8353233337402344
+    },
+    "full_seed1": {
+      "episodes": 2697,
+      "valid_points": 22247,
+      "unknown_points": 3257,
+      "source_initial_below_surface": 0,
+      "later_below_surface_points": 44,
+      "later_below_surface_episodes": 26,
+      "manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+      "run": "runs/final_closedloop_unseen/full_seed1",
+      "clearance_min_m": -11.777652740478516,
+      "clearance_p05_m": 16.108075714111326
+    }
+  },
+  "provenance": {
+    "commit": "c331c172a59460bcb4d8737bbccf0e551122f5e0",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "note": "Private post-rollout nearest source DEM sample with nonblack RGB support. Pointwise clearance proxy; source grid/annotation errors and unknown pixels are explicit. Not swept-path collision, semantic ground truth or proof of physical flight safety. Does not change policy, inputs, success, SR/SPL or source data."
+}
