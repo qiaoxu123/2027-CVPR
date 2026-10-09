@@ -25,7 +25,7 @@ def _physical_node_geometry(entity, bounds):
     dif = xy.max(axis=0) - xy.min(axis=0)
     diffs = np.diff(xy, axis=0)
     length = float(np.linalg.norm(diffs, axis=-1).sum())
-    if entity["kind"] == "building":
+    if entity["kind"] != "road":
         length += float(np.linalg.norm(xy[-1] - xy[0]))
         area = 0.5 * abs(float(
             (xy[:, 0] * np.roll(xy[:, 1], -1) - xy[:, 1] * np.roll(xy[:, 0], -1)).sum()
@@ -36,7 +36,7 @@ def _physical_node_geometry(entity, bounds):
     axis /= max(float(np.linalg.norm(axis)), 1e-6)
     return np.array([
         *((center-low)/span), *(dif/span), length/400.,
-        area/(400.**2), *axis, float(entity["kind"] == "building"),
+        area/(400.**2), *axis, float(entity["kind"] != "road"),
         min(len(xy), 100) / 100.,
     ], np.float32)
 
@@ -80,7 +80,7 @@ def prepare_semantic_graph(
         types[i] = NODE_TYPES[ent["kind"]]
         mask[i] = True
         center_m[i] = polygon_center(ent["geometry_m"])
-        names[i] = ent["name"]
+        names[i] = f"{ent.get('source_type', '')} {ent['name']}".strip()
     for r_idx, rel in enumerate(relations):
         idx = n_entity + r_idx
         types[idx] = NODE_TYPES["relation"]
@@ -148,10 +148,20 @@ def prepare_semantic_graph(
                 kind = ("roads_connected" if connected else
                         ("roads_crossing" if d <= road_connect_tolerance_m else None))
             elif is_road_x != is_road_y:
-                kind = "building_road" if d <= near_m else None
-            else:
+                # Verified road polyline and (possibly TrafficRoad/Footpath)
+                # surface polygons are different physical object types.
+                kind = (
+                    "building_road" if
+                    (x["kind"] == "building" or y["kind"] == "building")
+                    else "polyline_surface"
+                ) if d <= near_m else None
+            elif x["kind"] == "building" and y["kind"] == "building":
                 kind = ("buildings_overlap" if d <= 1e-5 else
                         ("buildings_near" if d <= near_m else None))
+            else:
+                # Surface polygons are *regions*, never navigable road links.
+                kind = ("surface_overlap" if d <= 1e-5 else
+                        ("surface_near" if d <= near_m else None))
             if kind:
                 connect(i, j, kind, d)
                 connect(j, i, kind, d)
