@@ -110,7 +110,7 @@ def run_model(model, batch, encoder, vision, image_cache, args, variant, device)
 @torch.inference_mode()
 def evaluate(model, loader, encoder, vision, cache, args, variant, device):
     model.eval()
-    total = {"samples": 0, "NE_sum_m": 0.,
+    total = {"count": 0, "NE_sum_m": 0.,
              **{f"R@{k}/20m_count": 0 for k in (1, 4, 8)}}
     observed, proposals, samples_with_visual, bound, relation = 0, 0, 0, 0, 0
     for batch in loader:
@@ -130,9 +130,9 @@ def evaluate(model, loader, encoder, vision, cache, args, variant, device):
             observed += int(mask.sum())
             samples_with_visual += int(mask.any(dim=1).sum())
             proposals += int(mask.numel())
-    n = max(1, total["samples"])
+    n = max(1, total["count"])
     result = {
-        "samples": total["samples"],
+        "samples": total["count"],
         "NE_m": total["NE_sum_m"] / n,
         **{f"R@{k}/20m": total[f"R@{k}/20m_count"] / n for k in (1, 4, 8)},
         "surface_anchor_fraction": bound / n,
