@@ -176,7 +176,14 @@ def train_one(variant, loaders, encoder, vision, cache, args, device, output):
     history = []
     n_epochs = args.rgb_epochs if variant == "rgb" else args.epochs
     for epoch in range(n_epochs):
-        model.train()
+        if variant == "rgb":
+            # Frozen A4 must remain deterministic (no GAT/attention dropout).
+            # Only the small visual adapter receives training-time behavior.
+            model.eval()
+            model.vision_proj.train()
+            model.visual_score.train()
+        else:
+            model.train()
         started = time.perf_counter()
         if device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(device)
