@@ -10,7 +10,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True)
     a=p.parse_args();out=Path(a.output)
     if out.exists():raise ValueError('refusing final plan overwrite')
-    for queue in ('phase20','phase21b','phase22'):
+    for queue in ('phase20','phase21b','phase22','phase22b'):
         if json.loads(Path('runs/'+queue+'_queue.status.json').read_text())['status']!='complete':
             raise ValueError('required training/Seen controls incomplete: '+queue)
     # Preserve Scratch unless the final P1 variant has a real independent Seen gain.
@@ -43,6 +43,15 @@ def main():
                 i=c.index(flag);del c[i:i+2]
         c[c.index('--model')+1]='a3';c[c.index('--checkpoint')+1]=ck
         rollout(name,c)
+    # Matched G0/G1 trajectory heads are trained with identical supervision and
+    # split/seed/epochs. Pretraining rows must not silently use another A3 head.
+    for name,ck,head in [('g0_trajectory','runs/a3_replicate_seed0/best.pt','runs/full_seed0_trajectory/best.pt'),('g1_p1_v2_trajectory','runs/a3_p1_v2_seed0/best.pt','runs/p1_v2_matched_trajectory/best.pt'),('g1_p1_v3_trajectory','runs/a3_p1_v3_hard_seed0/best.pt','runs/p1_v3_matched_trajectory/best.pt')]:
+        c=template[:]
+        c[c.index('--model')+1]='a3-trajectory'
+        for flag in ('--dynamic-checkpoint','--visual-checkpoint','--observed-cache','--visual-control'):
+            i=c.index(flag);del c[i:i+2]
+        c[c.index('--checkpoint')+1]=ck;c[c.index('--head-checkpoint')+1]=head
+        rollout(name,c,'runs/p1_matched_trajectory_seen/'+name)
     # Five exact legacy backbone/trajectory module ablations; same old head.
     base=template[:]
     for name,variant,history in [('a3_trajectory',None,False),('gat','graph',False),('visual','visual',False),('joint_current','graph_visual_history',False),('joint_history','graph_visual_history',True)]:

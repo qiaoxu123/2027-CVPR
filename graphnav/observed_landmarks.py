@@ -94,6 +94,9 @@ class ObservedLandmarkEncoder:
         if step<=self.last_step:raise ValueError('actual observations must have strictly increasing steps')
         from .checkpointing import atomic_save
         rois=current_landmark_rois(observation,landmarks);keys=[];paths=[];created=[]
+        if not hasattr(self,'cache_metrics'):
+            self.cache_metrics=dict(observed_rois=0,memory_vector_hits=0,disk_vector_hits=0,new_vector_encodes=0,observations=0)
+        self.cache_metrics['observations']+=1;self.cache_metrics['observed_rois']+=len(rois)
         for roi in rois:
             key=hashlib.sha256(roi.roi_image.tobytes()).hexdigest();keys.append(key)
             vector_path=self.vector_directory/(key+'.pt')
@@ -101,6 +104,8 @@ class ObservedLandmarkEncoder:
                 vector=torch.load(vector_path,map_location='cpu',weights_only=True)
                 if vector.shape!=(self.head.query.shape[-1],) or not torch.isfinite(vector).all():raise ValueError('invalid persistent observed vector')
                 self.vectors[key]=vector.float()
+                self.cache_metrics['disk_vector_hits']+=1
+            elif key in self.vectors:self.cache_metrics['memory_vector_hits']+=1
             if key in self.vectors:continue
             path=self.directory/(key+'.png')
             if not path.exists():
@@ -109,6 +114,7 @@ class ObservedLandmarkEncoder:
             if key not in self.vectors:paths.append((key,str(path)))
         paths=list(dict.fromkeys(paths))
         if paths:
+            self.cache_metrics['new_vector_encodes']+=len(paths)
             patches,mask=self.backbone.encode([path for _,path in paths])
             with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
                 vectors=self.head(patches,mask).float().cpu()

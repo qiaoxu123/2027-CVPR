@@ -11,14 +11,15 @@ import time
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--python',required=True);p.add_argument('--proxy',default='http://127.0.0.1:17890')
-    a=p.parse_args();status_path=Path('runs/frozen_final_stage.status.json')
+    p.add_argument('--status',default='runs/frozen_final_stage.status.json')
+    a=p.parse_args();status_path=Path(a.status)
     if status_path.exists():raise ValueError('refusing controller status overwrite')
     status=dict(status='waiting_seen',started=time.time())
     def save():status_path.write_text(json.dumps(status,indent=2))
     save()
     try:
         while True:
-            try:states={name:json.loads(Path('runs/'+name+'_queue.status.json').read_text())['status'] for name in ('phase20','phase21b','phase22')}
+            try:states={name:json.loads(Path('runs/'+name+'_queue.status.json').read_text())['status'] for name in ('phase20','phase21b','phase22','phase22b')}
             except json.JSONDecodeError:
                 time.sleep(1);continue # Concurrent status writer; no incomplete check can pass.
             if any(state.startswith('failed') for state in states.values()):raise ValueError('prerequisite failed: '+str(states))

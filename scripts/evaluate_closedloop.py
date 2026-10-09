@@ -144,6 +144,11 @@ def main():
         warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
                  if args.model=='sbfnav' else
                  'Shared macro-action benchmark with orthophoto/vertical-depth observations; no swept 3D collision or perspective-camera claim.'))
+    if getattr(runtime,'encoder_visual',None) is not None:
+        report['observed_visual_cache']=dict(getattr(runtime.encoder_visual,'cache_metrics',{}),
+            backbone_encoded_images=runtime.encoder_visual.backbone.encoded_images,
+            cache_protocol='Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery',
+            timing_note='Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy.')
     (output/'metrics.json').write_text(json.dumps(report,indent=2))
     print(json.dumps(report['metrics']),flush=True)
 

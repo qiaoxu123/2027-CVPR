@@ -190,3 +190,13 @@ P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方
 修复仅用公开当前高度和地图ground：Stop需ground+10..100m；不改XY20m成功判定、不修正GT路径、不改原始起点。增加真实Runtime回归，测试原本高置信且到预测目标时非法高度不Stop、合法边界可Stop；137单元测试通过。已在飞的seed0快照不被改动；seed1/2后续源快照包含修复，`phase22_plan.json`将另起所有旧模块与seed0的完整Seen，保证最终Seen/Unseen版本一致。旧指标/失败轨迹完整保留。
 
 `run_frozen_final_stage.py`已实现顺序门禁：必须phase20/21b/22全完成、P1公平控制结束，才依据Seen冻结最终清单并Commit，随后仅一次执行预声明Unseen模块/种子/静态对照。前置失败会显式阻断；Push错误只记录并保留本地Commit，不静默跳过实验或伪称已推送。最终性能尚未评估，目标继续active。
+
+## 2026-10-10：完整Seed0完成、补齐公平P1导航表与表面净空诊断
+
+新完整Seed0（独立Scratch A3+动态图残差+Trajectory/Stop，共享冻结视觉编码器）Seen2470：SR41.7004%、SPL40.3309%、NE31.3305m、7.7547步、False-Stop57.9984%。其源码快照在公开高度Stop修复之前冻结，另行phase22复核，不能与修复后Unseen直接混作同版本结果。Seed1正在实际全量Seen。当前仍无新GraphNav Unseen指标。
+
+补齐最终公平P1导航行：phase22b将分别为G1 v2/v3缓存本模型字段并训练相同五轮Trajectory/Stop；与G0 Seed0保持同结构/样本/划分/batch/seed/epochs，唯一A3初始化差异，并报告额外P1计算预算。不能偷用另一A3的Head或把静态Recall代替闭环增益。旧最终控制器尚处waiting_seen、未写最终清单或启动Unseen，已取消并记录`final_controller_v1_cancellation.json`；v2控制器增加phase22b完成门禁后重新等待。
+
+源DEM点位私有离线净空代理：原SBF Seen204 Episode有后续点低于表面，A3 6、Joint 8；对应1102/10/12点。原始起点没有已知表面以下情况，但源黑像素/无效高度明确计为未知。数据`seen_surface_clearance_proxy_audit.json`；复现脚本`audit_surface_clearance.py`。这是最近DEM像素代理，不是swept路径碰撞/语义或真实飞行安全真值，不进入policy/计分/成功判定。公开动作约束没有新增非法状态的结论仍保持；复杂真实可飞空间/遮挡需另有环境支持，不能伪称已具备。
+
+增加在线真实ROI向量缓存计数，分别记录当前观测数、内存命中、持久化命中、新向量请求及实际backbone编码数，解释冷/热缓存延迟差异。只改变日志，不改变输入或网络计算。`summarize_final_system.py`仅汇总冻结候选，核验权重SHA和相同Episode分母，给出逐Episode/地图配对Bootstrap及三种子均值/标准差/范围；数值Level2/3门槛与完整pipeline/Stop/安全验收分开，不能仅凭阈值自动宣布完成。137单元测试通过，日志已保存。
