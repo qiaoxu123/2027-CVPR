@@ -24,7 +24,7 @@ def test_building_is_one_node_and_road_is_one_polyline():
     road = [{"id":"r1","name":"Main Road",
              "polyline":[[.10,.40],[.5,.40],[.8,.40]], "osm_node_ids":["A","junction","B"]},
             {"id":"r2","name":"Cross Street",
-             "polyline":[[.50,.20],[.5,.40],[.5,.70]]}]
+             "polyline":[[.50,.20],[.5,.40],[.5,.70]], "osm_node_ids":["C","junction","D"]}]
     g = prepare_semantic_graph(_landmarks(),road,
         "east of St Mary's Church and along Main Road",
         [0,0,400,400], max_landmarks=3,max_roads=3,max_relations=3)
