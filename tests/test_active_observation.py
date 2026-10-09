@@ -29,7 +29,7 @@ def plan(pose, goals, scores, coverage=None, **extras):
         candidate_logits=scores,
         observed_confidence=np.zeros(len(goals)) if coverage is None else coverage,
         instruction="the white car near a brown house",
-        step=0, **extras,
+        **dict(step=0, **extras),
     )
 
 
