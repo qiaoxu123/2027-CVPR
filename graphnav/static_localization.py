@@ -242,7 +242,7 @@ class StaticGoalLocalizer(nn.Module):
         return prior + self.rule_weight * batch["rules"]
 
     def forward(self, batch, *, variant="gat", instruction_emb=None, node_emb=None):
-        if variant in ("prior", "rules"):
+        if variant in ("building_prior", "prior", "rules"):
             return self._baseline(batch, variant)
         if variant != "gat":
             raise ValueError(f"unsupported static variant: {variant}")
