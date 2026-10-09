@@ -1,0 +1,136 @@
+{
+  "provenance": {
+    "commit": "1bc68bdd5fa204fbd1c77df3ba65656bae7e4022",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "checkpoint_sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12",
+  "episode_manifest_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+  "rows": [
+    {
+      "step": 0,
+      "map_name": "birmingham_block_1",
+      "pose": [
+        39.0703119349,
+        639.232762631,
+        106.0152446001,
+        -0.23233105808770138
+      ],
+      "landmarks": 2,
+      "categories": [
+        "Rail"
+      ],
+      "confidence_mean": 0.6351844166556988,
+      "vector_shape": [
+        2,
+        256
+      ]
+    },
+    {
+      "step": 1,
+      "map_name": "birmingham_block_1",
+      "pose": [
+        49.0703119349,
+        639.232762631,
+        106.0152446001,
+        -0.23233105808770138
+      ],
+      "landmarks": 2,
+      "categories": [
+        "Rail"
+      ],
+      "confidence_mean": 0.6585560493792662,
+      "vector_shape": [
+        2,
+        256
+      ]
+    }
+  ],
+  "history": [
+    {
+      "step": 0,
+      "pose": [
+        39.0703119349,
+        639.232762631,
+        106.0152446001,
+        -0.23233105808770138
+      ],
+      "pixel_keys": [
+        "c92ac1261a02357f84701fd78dad59b53356fb23c81cfc5f21b5d64ec0b81bef",
+        "d283dad255a50f5074703dbcc62d67bce872277631a08c2e5acb9a16b3b1bb76"
+      ],
+      "landmarks": [
+        {
+          "name": "Soho South to Perry Barr South Junction Branch",
+          "object_type": "Rail",
+          "confidence": 0.5999103215731654,
+          "quality": {
+            "projected_visible_fraction": 0.9027248500138846,
+            "rgb_source_support": 0.9737382964147066,
+            "vertical_depth_support": 0.9381137245946564,
+            "two_pixel_stable_fraction": 0.7042703813656086,
+            "visible_pixels": 4379,
+            "semantic_agreement": "unverified geometric proposal"
+          }
+        },
+        {
+          "name": "Soho South to Perry Barr South Junction Branch",
+          "object_type": "Rail",
+          "confidence": 0.6704585117382321,
+          "quality": {
+            "projected_visible_fraction": 1.0,
+            "rgb_source_support": 0.9984767707539984,
+            "vertical_depth_support": 0.996953541507997,
+            "two_pixel_stable_fraction": 0.6725057121096725,
+            "visible_pixels": 2626,
+            "semantic_agreement": "unverified geometric proposal"
+          }
+        }
+      ]
+    },
+    {
+      "step": 1,
+      "pose": [
+        49.0703119349,
+        639.232762631,
+        106.0152446001,
+        -0.23233105808770138
+      ],
+      "pixel_keys": [
+        "9bb8fefae527df1930ac6173159bb0353994ede91943e1d991d5c5103bcced57",
+        "253a43d996a38baeabcb2c5b27474f1ad25edf5e7391bbd2129528a0f3a35dd1"
+      ],
+      "landmarks": [
+        {
+          "name": "Soho South to Perry Barr South Junction Branch",
+          "object_type": "Rail",
+          "confidence": 0.6525258434843985,
+          "quality": {
+            "projected_visible_fraction": 0.9773505050000766,
+            "rgb_source_support": 0.973001476481755,
+            "vertical_depth_support": 0.9352457287492091,
+            "two_pixel_stable_fraction": 0.7091330942839064,
+            "visible_pixels": 4741,
+            "semantic_agreement": "unverified geometric proposal"
+          }
+        },
+        {
+          "name": "Soho South to Perry Barr South Junction Branch",
+          "object_type": "Rail",
+          "confidence": 0.6645862552741337,
+          "quality": {
+            "projected_visible_fraction": 1.0,
+            "rgb_source_support": 0.9992190550566185,
+            "vertical_depth_support": 0.9980476376415462,
+            "two_pixel_stable_fraction": 0.6657555642327216,
+            "visible_pixels": 2561,
+            "semantic_agreement": "unverified geometric proposal"
+          }
+        }
+      ]
+    }
+  ],
+  "seconds": 1.0881507128942758,
+  "peak_allocated_gib": 3.338230609893799,
+  "input_contract": "Current384 RGB/vertical-depth proxy, public polygons and current pose only. No destination/target ID/expert future.",
+  "note": "Real interface smoke only; registration remains weak, no navigation gain."
+}

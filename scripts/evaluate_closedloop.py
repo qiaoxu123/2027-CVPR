@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory'], default='sbfnav')
     parser.add_argument('--head-checkpoint')
     parser.add_argument('--stop-threshold',type=float,default=.5)
+    parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal'],default='joint')
     args = parser.parse_args()
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
@@ -83,7 +84,7 @@ def main():
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
         if args.model=='a3-trajectory':
             if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')
-            runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold)
+            runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution)
         else:runtime=A3WaypointPolicy(args.checkpoint,output/'public_inputs')
         checkpoint=torch.load(args.checkpoint,map_location='cpu',weights_only=True)
     controller = BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,

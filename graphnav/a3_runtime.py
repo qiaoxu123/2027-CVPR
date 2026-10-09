@@ -81,7 +81,7 @@ class A3WaypointPolicy:
 
 class A3TrajectoryPolicy(A3WaypointPolicy):
     """Frozen A3 and a trained candidate-aligned head, using public observations."""
-    def __init__(self,checkpoint,head_checkpoint,scratch_directory,*,device='cuda',stop_threshold=.5):
+    def __init__(self,checkpoint,head_checkpoint,scratch_directory,*,device='cuda',stop_threshold=.5,execution='joint'):
         super().__init__(checkpoint,scratch_directory,device=device)
         from .trajectory_policy import CandidateTrajectoryStop
         from .checkpointing import file_sha256
@@ -96,6 +96,9 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             raise ValueError('geometry/pose runtime only accepts matching zero visual-history inputs')
         if not 0<stop_threshold<1:raise ValueError('Stop threshold must be in (0,1)')
         self.stop_threshold=stop_threshold
+        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal'):
+            raise ValueError('unknown trajectory execution ablation')
+        self.execution=execution
         self.stop_positive_weight=state['protocol']['stop_positive_weight']
         self.head=CandidateTrajectoryStop(hidden=state['hidden']).to(self.device).eval()
         self.head.load_state_dict(state['model'],strict=True)
@@ -115,7 +118,15 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):output=self.head(**inputs)
         from .trajectory_policy import calibrated_stop_probability
         candidate,mode,waypoint,stop=output.select()
+        if self.execution!='joint':
+            candidate=torch.zeros(1,dtype=torch.long,device=self.device)
+            mode=output.mode_logits[:,0].argmax(-1)
+            waypoint=output.paths_world[torch.arange(1,device=self.device),candidate,mode,0]
+            stop=output.stop_logits[:,0]
+            if self.execution=='direct-goal':
+                goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,0]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
+                waypoint=torch.cat((goal,inputs['pose_world'][:,2:3]),-1)
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
-        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=probability>=self.stop_threshold,
+        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop'),
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
-                candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability))
+                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability))
