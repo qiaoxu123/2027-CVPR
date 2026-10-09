@@ -268,3 +268,7 @@ G1 v2/v3本模型缓存和同配置五轮Head训练均完成，分别32.8413/33.
 G0/v2/v3完整Seen SR41.3765/38.2591/36.6397%、SPL40.2144/37.1665/35.5842%；两种P1预训练均退步，保留Scratch。配对CI、全部失败/地图/逐Episode CSV及动作审计已保存，三组均无新增约束违规。phase22b结束。
 
 最终v2控制器在生成清单前因子进程未设置仓库PYTHONPATH、误用共享venv的旧editable GraphNav安装而失败；没有最终清单或新Unseen推理。原状态/日志保留于`reports/sbf_protocol/final_controller_v2_import_failure.json`。已修复子进程源码路径，新增真实旧包/新包导入回归；全套145通过。以独立v3状态恢复同一候选方案，先Commit完整清单再启动Unseen，不改变权重或评估配置。
+
+## 最终候选冻结（任何新GraphNav Unseen评估之前）
+
+主候选由完整Seen选择为`full_seed1`；权重SHA、逐模块与三个完整训练种子的最终评估方案见`reports/sbf_protocol/final_frozen_evaluation_plan.json`。该清单先Commit再开始Unseen，不根据新Unseen结果调整Checkpoint或配置。公开高度Stop修复已完成Seen确认；所有旧失败结果保留。

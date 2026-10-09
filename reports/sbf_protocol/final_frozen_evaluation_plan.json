@@ -1,0 +1,905 @@
+{
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "requires": [],
+  "jobs": [
+    {
+      "name": "final_unseen_full_seed1",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_replicate_seed1/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/full_seed1_trajectory/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/full_seed1_dynamic/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/full_seed1",
+        "--visual-control",
+        "full",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/full_seed1.log",
+      "complete_artifact": "runs/final_closedloop_unseen/full_seed1/metrics.json"
+    },
+    {
+      "name": "final_unseen_a3_trajectory",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "a3-trajectory",
+        "--output",
+        "runs/final_closedloop_unseen/a3_trajectory",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/a3_trajectory.log",
+      "complete_artifact": "runs/final_closedloop_unseen/a3_trajectory/metrics.json"
+    },
+    {
+      "name": "final_unseen_a3_basic",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--model",
+        "a3",
+        "--output",
+        "runs/final_closedloop_unseen/a3_basic",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/a3_basic.log",
+      "complete_artifact": "runs/final_closedloop_unseen/a3_basic/metrics.json"
+    },
+    {
+      "name": "final_unseen_g0_seed0",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_replicate_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--model",
+        "a3",
+        "--output",
+        "runs/final_closedloop_unseen/g0_seed0",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/g0_seed0.log",
+      "complete_artifact": "runs/final_closedloop_unseen/g0_seed0/metrics.json"
+    },
+    {
+      "name": "final_unseen_g1_p1_v2",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_p1_v2_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--model",
+        "a3",
+        "--output",
+        "runs/final_closedloop_unseen/g1_p1_v2",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/g1_p1_v2.log",
+      "complete_artifact": "runs/final_closedloop_unseen/g1_p1_v2/metrics.json"
+    },
+    {
+      "name": "final_unseen_g1_p1_v3_hard",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_p1_v3_hard_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--model",
+        "a3",
+        "--output",
+        "runs/final_closedloop_unseen/g1_p1_v3_hard",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/g1_p1_v3_hard.log",
+      "complete_artifact": "runs/final_closedloop_unseen/g1_p1_v3_hard/metrics.json"
+    },
+    {
+      "name": "final_unseen_g0_trajectory",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_replicate_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/full_seed0_trajectory/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "a3-trajectory",
+        "--output",
+        "runs/final_closedloop_unseen/g0_trajectory",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/g0_trajectory.log",
+      "complete_artifact": "runs/final_closedloop_unseen/g0_trajectory/metrics.json"
+    },
+    {
+      "name": "final_unseen_g1_p1_v2_trajectory",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_p1_v2_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/p1_v2_matched_trajectory/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "a3-trajectory",
+        "--output",
+        "runs/final_closedloop_unseen/g1_p1_v2_trajectory",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/g1_p1_v2_trajectory.log",
+      "complete_artifact": "runs/final_closedloop_unseen/g1_p1_v2_trajectory/metrics.json"
+    },
+    {
+      "name": "final_unseen_g1_p1_v3_trajectory",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_p1_v3_hard_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/p1_v3_matched_trajectory/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "a3-trajectory",
+        "--output",
+        "runs/final_closedloop_unseen/g1_p1_v3_trajectory",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/g1_p1_v3_trajectory.log",
+      "complete_artifact": "runs/final_closedloop_unseen/g1_p1_v3_trajectory/metrics.json"
+    },
+    {
+      "name": "final_unseen_gat",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/gat",
+        "--visual-control",
+        "full",
+        "--disable-visual",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/gat.log",
+      "complete_artifact": "runs/final_closedloop_unseen/gat/metrics.json"
+    },
+    {
+      "name": "final_unseen_visual",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_visual_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/visual",
+        "--visual-control",
+        "full",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/visual.log",
+      "complete_artifact": "runs/final_closedloop_unseen/visual/metrics.json"
+    },
+    {
+      "name": "final_unseen_joint_current",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_visual_history_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/joint_current",
+        "--visual-control",
+        "full",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/joint_current.log",
+      "complete_artifact": "runs/final_closedloop_unseen/joint_current/metrics.json"
+    },
+    {
+      "name": "final_unseen_joint_history",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_visual_history_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/joint_history",
+        "--visual-control",
+        "full",
+        "--visual-history",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/joint_history.log",
+      "complete_artifact": "runs/final_closedloop_unseen/joint_history/metrics.json"
+    },
+    {
+      "name": "final_unseen_full_seed0",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_replicate_seed0/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/full_seed0_trajectory/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/full_seed0_dynamic/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/full_seed0",
+        "--visual-control",
+        "full",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/full_seed0.log",
+      "complete_artifact": "runs/final_closedloop_unseen/full_seed0/metrics.json"
+    },
+    {
+      "name": "final_unseen_full_seed2",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "runs/a3_replicate_seed2/best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--head-checkpoint",
+        "runs/full_seed2_trajectory/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/full_seed2_dynamic/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/final_closedloop_unseen/full_seed2",
+        "--visual-control",
+        "full",
+        "--evaluation-concurrency",
+        "2"
+      ],
+      "log": "runs/final_closedloop_unseen/full_seed2.log",
+      "complete_artifact": "runs/final_closedloop_unseen/full_seed2/metrics.json"
+    },
+    {
+      "name": "final_static_legacy",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_frozen_static.py",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--unseen",
+        "data/revised_static/graphnav_val_unseen.jsonl",
+        "--output",
+        "runs/final_static/legacy",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4"
+      ],
+      "log": "runs/final_static/legacy.log",
+      "complete_artifact": "runs/final_static/legacy/metrics.json"
+    },
+    {
+      "name": "final_static_scratch_seed0",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_frozen_static.py",
+        "--checkpoint",
+        "runs/a3_replicate_seed0/best.pt",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--unseen",
+        "data/revised_static/graphnav_val_unseen.jsonl",
+        "--output",
+        "runs/final_static/scratch_seed0",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4"
+      ],
+      "log": "runs/final_static/scratch_seed0.log",
+      "complete_artifact": "runs/final_static/scratch_seed0/metrics.json"
+    },
+    {
+      "name": "final_static_scratch_seed1",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_frozen_static.py",
+        "--checkpoint",
+        "runs/a3_replicate_seed1/best.pt",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--unseen",
+        "data/revised_static/graphnav_val_unseen.jsonl",
+        "--output",
+        "runs/final_static/scratch_seed1",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4"
+      ],
+      "log": "runs/final_static/scratch_seed1.log",
+      "complete_artifact": "runs/final_static/scratch_seed1/metrics.json"
+    },
+    {
+      "name": "final_static_scratch_seed2",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_frozen_static.py",
+        "--checkpoint",
+        "runs/a3_replicate_seed2/best.pt",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--unseen",
+        "data/revised_static/graphnav_val_unseen.jsonl",
+        "--output",
+        "runs/final_static/scratch_seed2",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4"
+      ],
+      "log": "runs/final_static/scratch_seed2.log",
+      "complete_artifact": "runs/final_static/scratch_seed2/metrics.json"
+    },
+    {
+      "name": "final_static_p1_v2",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_frozen_static.py",
+        "--checkpoint",
+        "runs/a3_p1_v2_seed0/best.pt",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--unseen",
+        "data/revised_static/graphnav_val_unseen.jsonl",
+        "--output",
+        "runs/final_static/p1_v2",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4"
+      ],
+      "log": "runs/final_static/p1_v2.log",
+      "complete_artifact": "runs/final_static/p1_v2/metrics.json"
+    },
+    {
+      "name": "final_static_p1_v3_hard",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_frozen_static.py",
+        "--checkpoint",
+        "runs/a3_p1_v3_hard_seed0/best.pt",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--unseen",
+        "data/revised_static/graphnav_val_unseen.jsonl",
+        "--output",
+        "runs/final_static/p1_v3_hard",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4"
+      ],
+      "log": "runs/final_static/p1_v3_hard.log",
+      "complete_artifact": "runs/final_static/p1_v3_hard/metrics.json"
+    }
+  ],
+  "evaluation_workers": 2,
+  "provenance": {
+    "commit": "0d170ddbc6403a666b47bea5bcdfea167c9cc518",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "primary_candidate": "full_seed1",
+  "primary_selection": "Among preserved legacy joint-current and three independently trained full-system seeds, maximize full Seen SR, then SPL, then minimize NE. No Unseen selection. Other module rows and negative P1 controls are reporting ablations, not post-Unseen candidate alternatives.",
+  "seen_selection_scores": {
+    "joint_current": {
+      "SR": 0.4242914979757085,
+      "SPL": 0.4045422751700821,
+      "NE": 31.590006271465395
+    },
+    "full_seed0": {
+      "SR": 0.41700404858299595,
+      "SPL": 0.4033092849433662,
+      "NE": 31.330532021060105
+    },
+    "full_seed1": {
+      "SR": 0.42672064777327934,
+      "SPL": 0.4089494459331418,
+      "NE": 30.727807637866277
+    },
+    "full_seed2": {
+      "SR": 0.41578947368421054,
+      "SPL": 0.39206040075503346,
+      "NE": 31.34396752945004
+    }
+  },
+  "candidates": {
+    "a3_basic": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        }
+      },
+      "seen_run": null
+    },
+    "g0_seed0": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_replicate_seed0/best.pt",
+          "sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e"
+        }
+      },
+      "seen_run": null
+    },
+    "g1_p1_v2": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_p1_v2_seed0/best.pt",
+          "sha256": "1609a79c8e690527a80391bbfccc29917ae0e8e9739faf6e1aa26216150d588e"
+        }
+      },
+      "seen_run": null
+    },
+    "g1_p1_v3_hard": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_p1_v3_hard_seed0/best.pt",
+          "sha256": "ea98831db3cbde601325065d92b16a2ba92de4e72a30f2c0c6af0c5fe831bf73"
+        }
+      },
+      "seen_run": null
+    },
+    "g0_trajectory": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_replicate_seed0/best.pt",
+          "sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e"
+        },
+        "--head-checkpoint": {
+          "path": "runs/full_seed0_trajectory/best.pt",
+          "sha256": "56bec006f3e4dc91b8875beae32497e73a87d8dda78945f0cb1e1cd78715765c"
+        }
+      },
+      "seen_run": "runs/p1_matched_trajectory_seen/g0_trajectory"
+    },
+    "g1_p1_v2_trajectory": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_p1_v2_seed0/best.pt",
+          "sha256": "1609a79c8e690527a80391bbfccc29917ae0e8e9739faf6e1aa26216150d588e"
+        },
+        "--head-checkpoint": {
+          "path": "runs/p1_v2_matched_trajectory/best.pt",
+          "sha256": "d538c0f7d27dab03de08995bf463f492122e91ced395ed0f878d4e23fb483149"
+        }
+      },
+      "seen_run": "runs/p1_matched_trajectory_seen/g1_p1_v2_trajectory"
+    },
+    "g1_p1_v3_trajectory": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_p1_v3_hard_seed0/best.pt",
+          "sha256": "ea98831db3cbde601325065d92b16a2ba92de4e72a30f2c0c6af0c5fe831bf73"
+        },
+        "--head-checkpoint": {
+          "path": "runs/p1_v3_matched_trajectory/best.pt",
+          "sha256": "75e8f035760e58cfcf98188446cc10fca273a46f0b6e57fd2168b9aa7bd57fd2"
+        }
+      },
+      "seen_run": "runs/p1_matched_trajectory_seen/g1_p1_v3_trajectory"
+    },
+    "a3_trajectory": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "--head-checkpoint": {
+          "path": "runs/a3_trajectory_stop_seed0/best.pt",
+          "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+        }
+      },
+      "seen_run": null
+    },
+    "gat": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "--head-checkpoint": {
+          "path": "runs/a3_trajectory_stop_seed0/best.pt",
+          "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/dynamic_belief_v2_graph_seed0/best.pt",
+          "sha256": "e1eb44d49d287cdc24b570405cbd53cb91abf7233fc2b361f04283c46e8b4f18"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": null
+    },
+    "visual": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "--head-checkpoint": {
+          "path": "runs/a3_trajectory_stop_seed0/best.pt",
+          "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/dynamic_belief_v2_visual_seed0/best.pt",
+          "sha256": "dac9759cc0624ffa05e90fb3c82ac598a7700553a9ef90570d0b445435ee6330"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": null
+    },
+    "joint_current": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "--head-checkpoint": {
+          "path": "runs/a3_trajectory_stop_seed0/best.pt",
+          "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/dynamic_belief_v2_graph_visual_history_seed0/best.pt",
+          "sha256": "8838b6727226a32144be1063389584ae5d2447d2695d9c73cd8bb85347ea77ad"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": "runs/closedloop_seen_altitude_guard/joint_current"
+    },
+    "joint_history": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "--head-checkpoint": {
+          "path": "runs/a3_trajectory_stop_seed0/best.pt",
+          "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/dynamic_belief_v2_graph_visual_history_seed0/best.pt",
+          "sha256": "8838b6727226a32144be1063389584ae5d2447d2695d9c73cd8bb85347ea77ad"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": null
+    },
+    "full_seed0": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_replicate_seed0/best.pt",
+          "sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e"
+        },
+        "--head-checkpoint": {
+          "path": "runs/full_seed0_trajectory/best.pt",
+          "sha256": "56bec006f3e4dc91b8875beae32497e73a87d8dda78945f0cb1e1cd78715765c"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/full_seed0_dynamic/best.pt",
+          "sha256": "29784cb0a49266c11d4a714ac8c2c638ef25ce60f78aa5e38f120f4ceefe4a93"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": "runs/closedloop_seen_altitude_guard/full_seed0"
+    },
+    "full_seed1": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_replicate_seed1/best.pt",
+          "sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be"
+        },
+        "--head-checkpoint": {
+          "path": "runs/full_seed1_trajectory/best.pt",
+          "sha256": "d1a48a452363dba0d39d8fc14903ec6f976ba2880cc073872c572484884217ea"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/full_seed1_dynamic/best.pt",
+          "sha256": "0475e3c187441dc9eb8ccb85aece6e3a592d33e05238c3993bd4dcfaac66415b"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": "runs/full_seed1_seen"
+    },
+    "full_seed2": {
+      "checkpoints": {
+        "--checkpoint": {
+          "path": "runs/a3_replicate_seed2/best.pt",
+          "sha256": "228586057f2dc9ee75be1f2415a901cc5f6b5e1d9621236669057094e984166d"
+        },
+        "--head-checkpoint": {
+          "path": "runs/full_seed2_trajectory/best.pt",
+          "sha256": "068087543521d1532b0d5b1ca51b7779361a2b2483cda64fb45964f1c69beada"
+        },
+        "--dynamic-checkpoint": {
+          "path": "runs/full_seed2_dynamic/best.pt",
+          "sha256": "80fb1adeb0ad23312e3e56f4c7e61a20753c55d4c916de7054ef393e91ab6e76"
+        },
+        "--visual-checkpoint": {
+          "path": "runs/p2_controlled_large384/visual_best.pt",
+          "sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12"
+        }
+      },
+      "seen_run": "runs/full_seed2_seen"
+    }
+  },
+  "protocol": "Complete unchanged Revised CityNav ValUnseen2697; same SBF public observations/action bounds/horizon20/success20m and all metric denominators. Current-only joint inference; full-history is a predeclared legacy ablation. Actual observed pixels only; no future RGB or hidden target inputs. All final candidates fixed before first new GraphNav Unseen rollout. Unseen results must not change checkpoints/configuration or be repeatedly tuned.",
+  "seed_uncertainty": "Three independently trained A3/residual/trajectory seeds, conditional on shared frozen BERT and P2 Large encoder/head. SBF has one available trained checkpoint; do not claim three SBF training seeds.",
+  "execution_note": "User authorized two independent evaluations in parallel. Concurrent latency is labeled and not compared as isolated GPU speed against the historical isolated SBF runs. No training parallelism or evaluation protocol/model change."
+}
