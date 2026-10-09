@@ -17,7 +17,7 @@ from .config import GraphNavConfig
 from .geometry import resample_contour
 
 
-from .landmark_alias import canonical_name, resolve_references
+from .landmark_alias import canonical_name, resolve_references, build_name_index
 
 
 def normalized_name(s: str) -> str:
@@ -25,11 +25,11 @@ def normalized_name(s: str) -> str:
 
 
 def bind_reference_landmarks(reference_names, objects: dict, max_landmarks: int,
-                             allowed_types=None):
+                             allowed_types=None, index=None):
     """Identity-safe exact/type-aware name binding; no GT or location oracle."""
     return resolve_references(
         reference_names, objects, max_landmarks=max_landmarks,
-        allowed_types=allowed_types,
+        allowed_types=allowed_types, index=index,
     )
 
 
