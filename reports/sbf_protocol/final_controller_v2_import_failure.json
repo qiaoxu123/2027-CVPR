@@ -1,0 +1,15 @@
+{
+  "status": {
+    "status": "failed",
+    "started": 1791579569.1473496,
+    "reason": "Command '['/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python', 'scripts/freeze_final_eval.py', '--output', 'reports/sbf_protocol/final_frozen_evaluation_plan.json']' returned non-zero exit status 1.",
+    "finished": 1791587550.8984115
+  },
+  "log": "Traceback (most recent call last):\n  File \"/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/scripts/freeze_final_eval.py\", line 6, in <module>\n    from graphnav.checkpointing import file_sha256,provenance\nModuleNotFoundError: No module named 'graphnav.checkpointing'\nTraceback (most recent call last):\n  File \"/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/scripts/run_frozen_final_stage.py\", line 50, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/scripts/run_frozen_final_stage.py\", line 31, in main\n    subprocess.run([a.python,'scripts/freeze_final_eval.py','--output',plan],check=True)\n  File \"/usr/lib/python3.12/subprocess.py\", line 571, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python', 'scripts/freeze_final_eval.py', '--output', 'reports/sbf_protocol/final_frozen_evaluation_plan.json']' returned non-zero exit status 1.\n",
+  "commit_at_failure": "594a20b",
+  "failure": "Child freeze script used old editable-install GraphNav because checkout root was absent from PYTHONPATH.",
+  "final_plan_existed": false,
+  "new_unseen_started": false,
+  "repair": "Controller sets child PYTHONPATH to current checkout; regression reproduces old package selection then verifies current imports. No candidate, checkpoint or evaluation setting changed.",
+  "recovery_status": "runs/frozen_final_stage_v3.status.json"
+}
