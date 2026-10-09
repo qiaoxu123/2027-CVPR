@@ -56,7 +56,17 @@ class PairedGeometryDataset(Dataset):
 
     def __getitem__(self,i):
         f,r=self.pairs[i]
-        return self.samples[f],self.samples[r]
+        encoded={"east":0,"west":1,"north":2,"south":3}
+        result=[]
+        for idx in (f,r):
+            row=self.samples.records[idx]
+            sample=self.samples[idx]
+            # Direction is a LOSS/EVAL label only, never passed to model.forward.
+            sample["direction_label"]=torch.tensor(
+                encoded[row["relation_direction"]],dtype=torch.long
+            )
+            result.append(sample)
+        return tuple(result)
 
 
 def paired_collate(items):
@@ -99,6 +109,7 @@ def evaluate(model,loader,encoder,device):
     model.eval()
     totals=dict(count=0,NE_sum_m=0.,**{f"R@{k}/20m_count":0 for k in (1,4,8)})
     inverse_sum, steps=0.,0
+    correct_side, directional_samples=0,0
     for batch in loader:
         _,values,field=batch_loss(model,batch,encoder,device)
         stats=static_recall(field.belief_logits.float(),
@@ -108,11 +119,21 @@ def evaluate(model,loader,encoder,device):
         for key in totals:
             totals[key]+=stats[key]
         inverse_sum+=values["inverse"]
+        scores=field.belief_logits.float()
+        expected=(scores.softmax(-1).unsqueeze(-1)
+                  *batch["grid_xy"].to(device)).sum(1)
+        delta=(expected-batch["nodes"][:,0,:2].to(device))
+        direction=batch["direction_label"].to(device)
+        wanted=torch.stack((delta[:,0],-delta[:,0],delta[:,1],-delta[:,1]),-1)
+        selected=wanted.gather(1,direction[:,None]).squeeze(1)
+        correct_side+=int((selected>0).sum())
+        directional_samples+=len(selected)
         steps+=1
     n=max(1,totals["count"])
     return dict(
         samples=totals["count"], NE_m=totals["NE_sum_m"]/n,
         inverse_error= inverse_sum/max(1,steps),
+        direction_sign_accuracy=correct_side/max(1,directional_samples),
         **{f"R@{k}/20m":totals[f"R@{k}/20m_count"]/n for k in (1,4,8)},
     )
 
