@@ -140,7 +140,8 @@ def main():
         graphnav_working_diff_sha256=hashlib.sha256(started_diff).hexdigest(),
         inference_target_access=False,
         warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
-                 if args.model=='sbfnav' else 'Geometric waypoint execution baseline, not full GraphNav.'))
+                 if args.model=='sbfnav' else
+                 'Shared macro-action benchmark with orthophoto/vertical-depth observations; no swept 3D collision or perspective-camera claim.'))
     (output/'metrics.json').write_text(json.dumps(report,indent=2))
     print(json.dumps(report['metrics']),flush=True)
 
