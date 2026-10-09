@@ -90,7 +90,7 @@ class FrozenSigLIP2Patches:
 class PairedROIs(Dataset):
     """Each sample contains two different observed views of the SAME map ID."""
 
-    def __init__(self,jsonl_path,*,min_visible=.80,seed=0):
+    def __init__(self,jsonl_path,*,min_visible=.80,seed=0,deterministic=False):
         groups=defaultdict(list)
         for line in Path(jsonl_path).open(encoding="utf-8"):
             if not line.strip():
@@ -108,6 +108,7 @@ class PairedROIs(Dataset):
         if not self.groups:
             raise ValueError("Need >=2 DIFFERENT observed frames per landmark ID; use along-trajectory data")
         self.seed=seed
+        self.deterministic=deterministic
         self.types=sorted({rows[0]["object_type"] for _,rows in self.groups})
         self.labels={v:i for i,v in enumerate(self.types)}
         self.maps={key[0] for key,_ in self.groups}
@@ -120,7 +121,8 @@ class PairedROIs(Dataset):
         # Index-stable but varied two-view pairs (no reliance on GT goal).
         # Train data loader shuffling changes pair order; frozen source frames
         # cannot be invented from reversed directions.
-        chosen=random.sample(rows,2)
+        chosen=([rows[0], rows[-1]] if self.deterministic
+                else random.sample(rows,2))
         if chosen[0]["observed_frame"]==chosen[1]["observed_frame"]:
             raise AssertionError("positive visual pair must use different views")
         return (
