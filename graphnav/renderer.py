@@ -74,4 +74,4 @@ class CityNavObservedViewRenderer:
         save_path.parent.mkdir(parents=True, exist_ok=True)
         if not cv2.imwrite(str(save_path), image):
             raise IOError(f"failed to save observation {save_path}")
-        return {"path": str(save_path.resolve()), "footprint_world": footprint.tolist()}
+        return {"path": str(save_path.resolve()), "footprint_world": footprint.tolist(), "step": int(step)}
