@@ -60,3 +60,34 @@ def test_precomputed_frozen_field_matches_uncached_residual(tmp_path):
     assert torch.equal(cached.belief_logits,uncached.belief_logits)
     a3.requires_grad_(True)
     with pytest.raises(ValueError,match='frozen'):net(batch,**kwargs,base_field=reference)
+
+
+def test_visual_geometry_binding_survives_pooling_and_supports_unreferenced_observations(tmp_path):
+    batch,a3,kwargs=inputs(tmp_path);net=DynamicGoalBelief(a3,vision_dim=6).eval()
+    with torch.no_grad():net.visual_gate.fill_(1)
+    vectors=torch.randn(1,2,6)*3;geometry=torch.randn(1,16,2,10)*2;confidence=torch.ones(1,2)
+    first=net(batch,**kwargs,use_visual=True,observed_vectors=vectors,observed_geometry=geometry,observed_confidence=confidence)
+    swapped=net(batch,**kwargs,use_visual=True,observed_vectors=vectors.flip(1),observed_geometry=geometry,observed_confidence=confidence)
+    assert not torch.allclose(first.belief_logits,swapped.belief_logits,atol=1e-6)
+    base=net(batch,**kwargs)
+    missing=net(batch,**kwargs,use_visual=True,observed_vectors=vectors,observed_geometry=geometry,observed_confidence=confidence*0)
+    assert torch.equal(missing.belief_logits,base.belief_logits)
+
+
+def test_history_weighted_mean_does_not_lose_mass_when_confidence_is_bounded():
+    history=LandmarkHistory.empty(1,1,2,'cpu')
+    for step,value in enumerate((1.,3.,5.)):
+        history.update(torch.full((1,1,2),value),torch.tensor([[.8]]),step=step)
+    assert torch.allclose(history.vectors,torch.full((1,1,2),3.))
+    assert torch.allclose(history.confidence,torch.tensor([[.8]]))
+    assert torch.allclose(history.total_weight,torch.tensor([[2.4]]))
+
+
+def test_low_registration_confidence_attenuates_visual_evidence(tmp_path):
+    batch,a3,kwargs=inputs(tmp_path);net=DynamicGoalBelief(a3,vision_dim=6).eval()
+    with torch.no_grad():net.visual_gate.fill_(1)
+    vectors=torch.randn(1,4,6);confidence=batch['entity_valid'].float()
+    base=net(batch,**kwargs).belief_logits
+    strong=net(batch,**kwargs,use_visual=True,visual_vectors=vectors,visual_confidence=confidence).belief_logits-base
+    weak=net(batch,**kwargs,use_visual=True,visual_vectors=vectors,visual_confidence=confidence*.1).belief_logits-base
+    assert torch.allclose(weak,strong*.1,atol=2e-6)

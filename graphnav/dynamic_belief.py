@@ -15,6 +15,7 @@ class LandmarkHistory:
     vectors: torch.Tensor
     confidence: torch.Tensor
     last_step: int = -1
+    total_weight: torch.Tensor | None = None
 
     @classmethod
     def empty(cls,batch,nodes,vision_dim,device):
@@ -31,10 +32,13 @@ class LandmarkHistory:
         if (confidence<0).any() or (confidence>1).any():
             raise ValueError('confidence must be in [0,1]')
         observed=confidence>0
-        total=self.confidence+confidence
-        mean=(self.vectors*self.confidence[...,None]+vectors*confidence[...,None])/total.clamp_min(1e-8)[...,None]
+        prior_weight=self.total_weight if self.total_weight is not None else self.confidence
+        total=prior_weight+confidence
+        mean=(self.vectors*prior_weight[...,None]+vectors*confidence[...,None])/total.clamp_min(1e-8)[...,None]
         self.vectors=torch.where(observed[...,None],mean,self.vectors)
-        self.confidence=torch.where(observed,total.clamp_max(1),self.confidence)
+        self.total_weight=total
+        # Registration quality is not repeated independent semantic evidence.
+        self.confidence=torch.maximum(self.confidence,confidence)
         self.last_step=step
 
 
@@ -58,7 +62,8 @@ class DynamicGoalBelief(nn.Module):
         return self
 
     def forward(self,batch,*,tokens,token_mask,node_emb,visual_vectors=None,
-                visual_confidence=None,use_graph=False,use_visual=False,base_field=None):
+                visual_confidence=None,use_graph=False,use_visual=False,base_field=None,
+                observed_vectors=None,observed_confidence=None,observed_geometry=None):
         if base_field is not None and any(p.requires_grad for p in self.a3.parameters()):
             raise ValueError('precomputed A3 field requires a frozen backbone')
         base=base_field if base_field is not None else self.a3(batch,variant='geometry',tokens=tokens,token_mask=token_mask,node_emb=node_emb)
@@ -72,9 +77,12 @@ class DynamicGoalBelief(nn.Module):
             graph_nodes=self.graph(batch['nodes'],node_emb,batch['node_types'],
                 batch['adjacency'],batch['edges'],batch['node_valid'])
             weights=valid.to(dense.dtype)
-            context=((graph_nodes[:,None]+geo)*weights[:,None,:,None]).sum(2)/weights.sum(1).clamp_min(1)[:,None,None]
+            context=(torch.tanh(graph_nodes[:,None]+geo)*weights[:,None,:,None]).sum(2)/weights.sum(1).clamp_min(1)[:,None,None]
             logits=logits+torch.tanh(self.graph_gate)*self.score(torch.cat((dense,context),-1)).squeeze(-1)
         if use_visual:
+            if visual_vectors is None and observed_vectors is not None:
+                visual_vectors=dense.new_zeros(b,valid.shape[1],self.visual[0].in_features)
+                visual_confidence=dense.new_zeros(b,valid.shape[1])
             if visual_vectors is None or visual_confidence is None:
                 raise ValueError('visual branch requires actual observed landmark evidence')
             if visual_confidence.shape!=valid.shape or visual_vectors.shape[:2]!=valid.shape:
@@ -89,8 +97,26 @@ class DynamicGoalBelief(nn.Module):
             if use_graph:
                 nodes=self.graph.layer1(nodes, batch['edges'],batch['adjacency'],batch['node_valid'])
                 nodes=self.graph.layer2(nodes,batch['edges'],batch['adjacency'],batch['node_valid'])
-            context=((nodes[:,None]+geo)*weights[:,None,:,None]).sum(2)/weights.sum(1).clamp_min(1e-8)[:,None,None]
-            present=(weights.sum(1)>0).to(dense.dtype)[:,None]
+            visual_geo=geo
+            if observed_vectors is not None:
+                # Public visible landmarks outside the static reference set may
+                # contribute evidence anywhere on the map, not only Top-K cells.
+                if observed_geometry is None or observed_confidence is None:
+                    raise ValueError('observed auxiliary landmarks require relative geometry and confidence')
+                m=observed_vectors.shape[1]
+                if observed_vectors.shape!=(b,m,self.visual[0].in_features) or observed_confidence.shape!=(b,m) or observed_geometry.shape!=(b,q,m,10):
+                    raise ValueError('auxiliary observed landmark dimensions mismatch')
+                if not all(torch.isfinite(x).all() for x in (observed_vectors,observed_confidence,observed_geometry)):
+                    raise ValueError('nonfinite auxiliary observed evidence')
+                if (observed_confidence<0).any() or (observed_confidence>1).any():
+                    raise ValueError('auxiliary confidence must be in [0,1]')
+                nodes=torch.cat((nodes,self.visual(observed_vectors.to(dense.dtype))),1)
+                weights=torch.cat((weights,observed_confidence.to(dense.dtype)),1)
+                visual_geo=torch.cat((geo,self.relative(observed_geometry.to(dense.dtype))),2)
+            # Fuse before pooling: averaging visual and geometry separately loses
+            # which landmark owns each visual vector, even with perfect registration.
+            context=(torch.tanh(nodes[:,None]+visual_geo)*weights[:,None,:,None]).sum(2)/weights.sum(1).clamp_min(1e-8)[:,None,None]
+            present=weights.amax(1).clamp(0,1)[:,None]
             delta=self.score(torch.cat((dense,context),-1)).squeeze(-1)*present
             logits=logits+torch.tanh(self.visual_gate)*delta
         ids=logits.topk(min(self.a3.top_k,q),dim=1).indices
