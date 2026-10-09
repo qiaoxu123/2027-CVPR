@@ -246,3 +246,7 @@ A3/GAT/Visual/Joint-current均完成相同2470个Seen Episode；原始JSON和前
 ## 冻结后评估优先顺序（2026-10-10）
 
 最终清单生成时，将仅由Seen确定的主候选与A3学习轨迹基线放在前两路，尽早报告实际Unseen验收结果；其它固定消融仍全部执行，稳定保留原顺序。没有减少或增加候选，没有读取新Unseen结果，仍需所有Seen前置确认完成、生成完整候选权重SHA清单并Commit后才能启动。当前纯评估剩26批次（含进行中的History）、另有2缓存/2轨迹训练准备，随后完成审计与报告。
+
+## 修复后五组Seen确认及动作审计完成（2026-10-10）
+
+History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s，80408个当前ROI无新增Backbone编码。五组同A3/Trajectory模型的配对bootstrap、地图级统计与动作审计已保存；全部无新增越界/高度/步长违规，原始非法起点完整保留。GAT较A3增加SR1.2146个百分点但NE恶化0.744m，地图级CI仍含零；Visual降低SPL，History未提高当前证据模型的SR。独立报告`docs/P3_P4_ALTITUDE_GUARD_SEEN_20261010.md`。Full seed0修复后确认仍运行；后续P1公平轨迹对照等待其完成，新GraphNav Unseen仍未开始。
