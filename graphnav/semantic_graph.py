@@ -107,10 +107,28 @@ def prepare_semantic_graph(
 
     for i in range(n_nodes):
         connect(i, i, "self")
+    # AABB lower bound prunes far pairs before expensive segment distance.
+    # This is exact screening (not a heuristic edge or an OSM topology guess).
+    bboxes = [
+        (ent["geometry_m"].min(axis=0), ent["geometry_m"].max(axis=0))
+        for ent in entities
+    ]
     for i in range(n_entity):
         for j in range(i + 1, n_entity):
             x, y = entities[i], entities[j]
             is_road_x, is_road_y = x["kind"] == "road", y["kind"] == "road"
+            lower = np.maximum(
+                0.0, np.maximum(
+                    bboxes[i][0] - bboxes[j][1],
+                    bboxes[j][0] - bboxes[i][1],
+                )
+            )
+            bbox_dist = float(np.linalg.norm(lower))
+            threshold = (
+                road_connect_tolerance_m if is_road_x and is_road_y else near_m
+            )
+            if bbox_dist > threshold:
+                continue
             d = geometry_pair_distance(
                 x["geometry_m"], y["geometry_m"], is_road_x, is_road_y
             )
