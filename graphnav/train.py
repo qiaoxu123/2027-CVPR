@@ -47,6 +47,7 @@ def synthetic_minibatch(config, batch_size, device, seed):
         landmark_contours=poly.to(device), landmark_valid=mask.to(device),
         uav_pose=uav.to(device),
         spatial_maps=torch.zeros(b, 2, config.grid_size, config.grid_size, device=device),
+        physical_map_sizes=torch.full((b, 2), 400.0, device=device),
     )
     labels = dict(
         target_xy=goal.to(device), teacher_future=path.to(device),
