@@ -49,6 +49,7 @@ def test_gat_checkpoint_to_rgb_visual_only_finetuning(tmp_path):
         "rgb_observations": [{
             "path": str(path),
             "footprint_world": [[0, 400], [400, 400], [400, 0], [0, 0]],
+            "step": 0,
         }],
         "observation_cutoff_step": 0,
     }
