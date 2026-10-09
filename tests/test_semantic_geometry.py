@@ -36,7 +36,7 @@ def test_building_is_one_node_and_road_is_one_polyline():
     assert g["edges"][2,3,8+4] == 1  # actual connected roads
     assert g["adjacency"][4,0] and g["adjacency"][0,4]
     assert not g["adjacency"][4,1]  # language east node only attached to church
-    assert g["edges"].shape[-1] == 15
+    assert g["edges"].shape[-1] == 16
 
 
 def test_road_connectivity_is_not_nearest_neighbor():
