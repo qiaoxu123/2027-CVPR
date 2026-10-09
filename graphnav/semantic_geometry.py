@@ -96,12 +96,13 @@ def geometry_distance(point, geometry, is_road=False):
 
 def _segments_intersect(a, b, c, d):
     def ccw(p, q, r):
-        return float(np.cross(q - p, r - p))  # scalar 2-D
+        v, w = q - p, r - p
+        return float(v[0] * w[1] - v[1] * w[0])
     c1, c2, c3, c4 = ccw(a, b, c), ccw(a, b, d), ccw(c, d, a), ccw(c, d, b)
     if (c1 * c2 < 0) and (c3 * c4 < 0):
         return True
     for p, s, t in ((a, c, d), (b, c, d), (c, a, b), (d, a, b)):
-        if abs(float(np.cross(t - s, p - s))) < 1e-5 and (
+        if abs(float((t[0]-s[0])*(p[1]-s[1])-(t[1]-s[1])*(p[0]-s[0]))) < 1e-5 and (
             min(s[0], t[0]) - 1e-5 <= p[0] <= max(s[0], t[0]) + 1e-5
         ) and (min(s[1], t[1]) - 1e-5 <= p[1] <= max(s[1], t[1]) + 1e-5):
             return True
@@ -230,7 +231,7 @@ def prior_and_rule_fields(
     points = np.asarray(world_xy, dtype=np.float32).reshape(-1, 2)
     if entities:
         d = np.stack([
-            geometry_distance(p, e["geometry_m"], e["kind"] == "road")
+            geometry_distance(points, e["geometry_m"], e["kind"] == "road")
             for e in entities
         ], axis=1)
         prior = -d.min(axis=1) / max(float(sigma_m), 1.)
