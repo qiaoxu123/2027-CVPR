@@ -110,3 +110,18 @@ def test_visibility_needs_both_real_coverage_and_identity_match():
     tracker.observe(view,{"church":.92},observation_id="verified")
     assert tracker.evidence_for("church").historical_match_confidence>.6
     assert tracker.edges["church"]=={"verified"}
+
+
+def test_planar_overpass_crossing_is_not_road_topology():
+    # Geometries cross in 2-D but OSM nodes do not overlap.
+    roads=[
+        {"id":"bridge","name":"Bridge Road",
+         "polyline":[[.1,.3],[.7,.3]],"osm_node_ids":["bridge_start","bridge_end"]},
+        {"id":"surface","name":"Surface Road",
+         "polyline":[[.4,.1],[.4,.6]],"osm_node_ids":["surface_start","surface_end"]},
+    ]
+    g=prepare_semantic_graph([],roads,"", [0,0,400,400],
+       max_landmarks=1,max_roads=2,max_relations=1)
+    assert g["adjacency"][0,1]
+    assert g["edges"][0,1,8+7]==1  # roads_crossing is NOT roads_connected
+    assert g["edges"][0,1,8+4]==0
