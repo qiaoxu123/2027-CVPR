@@ -58,7 +58,7 @@ def masks_at_prefix(path, step, bounds, ground_level, grid):
 
 def convert(objects, processed, trajectories, bounds, output,
             grid=28, stride=4, waypoints=8, max_landmarks=16,
-            ground_levels=None, max_steps=20):
+            ground_levels=None, max_steps=20, renderer=None):
     count, skipped = 0, 0
     with Path(output).open("w", encoding="utf-8") as f:
         for episode in trajectories:
@@ -88,6 +88,16 @@ def convert(objects, processed, trajectories, bounds, output,
                 last = min(len(poses), max_steps)
                 if last < 1:
                     raise ValueError("episode missing poses")
+                observed_prefix = []
+                if renderer is not None:
+                    ground = (ground_levels or {}).get(map_name)
+                    if ground is None:
+                        raise ValueError("RGB rendering needs ground level for this map")
+                    episode_key = f"{obj_id}_{ann_id}_{count}"
+                    for t in range(last):
+                        observed_prefix.append(
+                            renderer.render(map_name, episode_key, t, poses[t], ground)
+                        )
                 for step in range(0, last, stride):
                     pose = poses[step]
                     xy = normalize_xy(pose[:2], b)
@@ -100,6 +110,9 @@ def convert(objects, processed, trajectories, bounds, output,
                     record = {
                         "episode_id": f"{map_name}:{obj_id}:{ann_id}:{step}",
                         "map_name": map_name,
+                        "world_bounds": list(map(float, b)),
+                        # These are ONLY images from poses <= current time.
+                        "rgb_observations": observed_prefix[:step + 1],
                         "instruction": desc,
                         "landmarks": landmarks,
                         "uav_pose": [float(xy[0]), float(xy[1]), float(np.sin(yaw)), float(np.cos(yaw))],
@@ -121,6 +134,10 @@ def main():
     for name in ("objects", "processed", "trajectories", "bounds", "output"):
         p.add_argument(f"--{name}", required=True)
     p.add_argument("--ground-levels", default=None)
+    p.add_argument("--rgbd-dir", default=None,
+                   help="CityNav png+tif directory, only used by OFFLINE view renderer")
+    p.add_argument("--observations-out", default=None,
+                   help="Directory for causal observed-view PNG frames")
     p.add_argument("--grid", type=int, default=28)
     p.add_argument("--stride", type=int, default=4)
     p.add_argument("--waypoints", type=int, default=8)
@@ -130,13 +147,21 @@ def main():
     def load(path):
         with open(path, encoding="utf-8") as handle:
             return json.load(handle)
+    renderer = None
+    if bool(args.rgbd_dir) != bool(args.observations_out):
+        p.error("--rgbd-dir and --observations-out must both be supplied")
+    if args.rgbd_dir:
+        if not args.ground_levels:
+            p.error("offline RGB rendering requires --ground-levels")
+        from graphnav.renderer import CityNavObservedViewRenderer
+        renderer = CityNavObservedViewRenderer(args.rgbd_dir, args.observations_out)
     count, skipped = convert(
         load(args.objects), load(args.processed), load(args.trajectories),
         load(args.bounds), args.output,
         grid=args.grid, stride=args.stride, waypoints=args.waypoints,
         max_landmarks=args.max_landmarks,
         ground_levels=load(args.ground_levels) if args.ground_levels else None,
-        max_steps=args.max_steps,
+        max_steps=args.max_steps, renderer=renderer,
     )
     print(f"Prepared {count} causal training steps; skipped {skipped} malformed episodes")
 
