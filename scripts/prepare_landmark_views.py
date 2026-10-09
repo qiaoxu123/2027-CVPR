@@ -14,6 +14,7 @@ Example:
 from __future__ import annotations
 
 import argparse
+import hashlib
 from collections import Counter, defaultdict
 import csv
 import json
@@ -49,8 +50,11 @@ def objects_by_map(raw, *, types=None):
 
 def process(records, objects, output, *, save_rois=False,
             min_visible=.65, min_pixels=40, max_per_frame=32,
-            overlay_frames=32, output_size=224):
+            overlay_frames=32, output_size=224, frame_sample_ratio=1.,
+            sample_seed=0):
     """Return summary, write one ROI row per source ID and observed frame."""
+    if not 0 < frame_sample_ratio <= 1:
+        raise ValueError("frame_sample_ratio must be in (0,1]")
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     image_dir, overlay_dir = output/"rois", output/"overlays"
@@ -77,6 +81,15 @@ def process(records, objects, output, *, save_rois=False,
                 if str(frame_path) in visited_frames:
                     continue
                 visited_frames.add(str(frame_path))
+                # Hash-based frame sampling is independent of language, object
+                # ID and GT destination. Prevents multi-million ROI exports.
+                digest = hashlib.sha256(
+                    f"{sample_seed}:{map_name}:{frame_path}".encode("utf-8")
+                ).digest()
+                keep = int.from_bytes(digest[:8], "big") / 2**64
+                if keep >= frame_sample_ratio:
+                    counts["sampled_out_frames"] += 1
+                    continue
                 counts["frames"] += 1
                 bgr = cv2.imread(str(frame_path), cv2.IMREAD_COLOR)
                 if bgr is None:
@@ -134,6 +147,7 @@ def process(records, objects, output, *, save_rois=False,
         "frames_with_roi_fraction": counts["frames_with_roi"]/max(1, counts["frames"]),
         "objects_by_type": dict(types),
         "min_visible_fraction": min_visible,
+        "frame_sample_ratio": frame_sample_ratio, "sample_seed": sample_seed,
         "min_projected_pixels": min_pixels,
         "roi_quality": "geometric_proposal_only; manually audit semantic alignment",
         "future_RGB_used": False,
@@ -154,6 +168,9 @@ def main():
     p.add_argument("--max-per-frame", type=int, default=32)
     p.add_argument("--overlay-frames", type=int, default=32)
     p.add_argument("--roi-size", type=int, default=224)
+    p.add_argument("--frame-sample-ratio", type=float, default=1.,
+                   help="stable hash sample; use 0.1 for initial ROI audit")
+    p.add_argument("--sample-seed", type=int, default=0)
     args = p.parse_args()
     raw = json.loads(Path(args.objects).read_text(encoding="utf-8"))
     with Path(args.records).open(encoding="utf-8") as handle:
@@ -162,7 +179,8 @@ def main():
             records, objects_by_map(raw), args.out_dir, save_rois=args.save_rois,
             min_visible=args.min_visible, min_pixels=args.min_pixels,
             max_per_frame=args.max_per_frame, overlay_frames=args.overlay_frames,
-            output_size=args.roi_size,
+            output_size=args.roi_size, frame_sample_ratio=args.frame_sample_ratio,
+            sample_seed=args.sample_seed,
         )
     print(json.dumps(output, ensure_ascii=False, indent=2))
 
