@@ -276,3 +276,9 @@ G0/v2/v3完整Seen SR41.3765/38.2591/36.6397%、SPL40.2144/37.1665/35.5842%；�
 ## 最终Unseen实际启动（2026-10-10）
 
 冻结清单已在任何新GraphNav Unseen之前Commit并Push为`fdd9a3d17cf648f7a748c5b146ba84fe6498ff2b`；主候选Full seed1仅由Seen选择。修复后v3控制器实际启动两路全2697 Episode Unseen推理（Full seed1与A3学习轨迹），余下固定消融按清单继续。所有候选参数/权重SHA/动作与计分协议保持冻结。最终报告仍未完成，不能由部分Episode或静态Recall宣称Level2。P1v3报告OSR抄录核正为原JSON的46.4372%，原始结果未改。
+
+## 首个冻结全量Unseen对照与验收证据清单（2026-10-10）
+
+A3+学习轨迹/Stop完成全部2697 Episode：SR23.3222%、SPL22.6725%、OSR32.3693%、NE48.7174m。与SBF的配对SR差+1.8168个百分点，Episode bootstrap CI[-0.0751,3.7449]含零；SPL差+6.7818点、CI[5.1225,8.4569]。OSR退步6.3775点、False-Stop76.6345%，不能只报优点。所有21003次运动与结束高度约束通过。独立报告`FINAL_A3_TRAJECTORY_UNSEEN_20261010.md`与原始JSON/逐Episode地图CSV已保存；这不是Seen预选主候选Full seed1，主候选仍运行，不能用该行替换最终验收模型。
+
+新增`GRAPHNAV_REQUIREMENT_AUDIT_20261010.md`逐项记录完成证据及未完成要求。保留轨迹Head不直接消费更新后GAT latent、observed-fraction训练输入为0、局部环境不支持swept3D物理安全等限制；指标达到某数值不自动等于全部目标完成。所有固定模型继续按原清单评估，不调整参数。
