@@ -23,7 +23,7 @@ from torch.utils.data import DataLoader, Subset
 
 from .landmark_visual_pretrain import (
     FrozenSigLIP2Patches, PairedROIs, VisualLandmarkAligner,
-    roi_collate, match_loss, retrieval_metrics
+    roi_collate, match_loss, retrieval_metrics, SameMapTypeBatchSampler
 )
 from .token_language import FrozenBERTTokens
 
@@ -62,8 +62,17 @@ def run(args):
         raise ValueError("need >=20 paired landmarks to create train/dev contrastive splits")
     loader_args=dict(batch_size=args.batch_size,num_workers=args.workers,
                      pin_memory=device.type=="cuda",collate_fn=roi_collate)
-    train_loader=DataLoader(Subset(train,order[:cut]),shuffle=True,drop_last=True,
-                            **loader_args)
+    train_subset=Subset(train,order[:cut])
+    if args.random_negative_batches:
+        train_loader=DataLoader(train_subset,shuffle=True,drop_last=True,**loader_args)
+    else:
+        sampler=SameMapTypeBatchSampler(
+            train,order[:cut],batch_size=args.batch_size,seed=args.seed
+        )
+        train_loader=DataLoader(
+            train_subset,batch_sampler=sampler,num_workers=args.workers,
+            collate_fn=roi_collate,pin_memory=device.type=="cuda"
+        )
     dev_loader=DataLoader(Subset(dev_base,order[cut:]),shuffle=False,**loader_args)
     unseen_loader=DataLoader(unseen,shuffle=False,**loader_args)
     backbone=FrozenSigLIP2Patches(
@@ -156,6 +165,8 @@ def main():
     p.add_argument("--batch-size",type=int,default=16,
                    help="ROI identity pairs (2 x this many images)")
     p.add_argument("--workers",type=int,default=0)
+    p.add_argument("--random-negative-batches",action="store_true",
+                   help="disable default same-map/type hard visual negatives")
     p.add_argument("--epochs",type=int,default=5)
     p.add_argument("--hidden",type=int,default=256)
     p.add_argument("--heads",type=int,default=8)
