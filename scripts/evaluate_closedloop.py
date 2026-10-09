@@ -32,8 +32,11 @@ def main():
     parser.add_argument('--split', choices=['val_seen', 'val_unseen'], required=True)
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence'], default='sbfnav')
     parser.add_argument('--dynamic-checkpoint')
+    parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
+    parser.add_argument('--active-observation',action='store_true',help='Opt-in bounded XY/Z sensing actions')
+    parser.add_argument('--active-max-actions',type=int,default=2)
     parser.add_argument('--visual-checkpoint')
     parser.add_argument('--visual-history',action='store_true')
     parser.add_argument('--disable-visual',action='store_true')
@@ -47,6 +50,10 @@ def main():
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
+    if args.active_observation and args.model != 'target-evidence':
+        raise ValueError('active observation requires the target-evidence policy')
+    if args.active_max_actions < 0:
+        raise ValueError('active-max-actions must be nonnegative')
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
     evaluator_sha256=sha(__file__)
@@ -92,11 +99,28 @@ def main():
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
-        if args.model=='dynamic':
+        if args.model in ('dynamic','target-evidence'):
             if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')
             from graphnav.dynamic_runtime import DynamicWaypointPolicy,NativeObservationBuilder
-            runtime=DynamicWaypointPolicy(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache,head_checkpoint=args.head_checkpoint,stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates,graph_control=args.graph_control,visual_control=args.visual_control)
-            if runtime.use_visual:builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
+            policy_class=DynamicWaypointPolicy
+            options={}
+            if args.model=='target-evidence':
+                if not args.evidence_checkpoint:
+                    raise ValueError('target-evidence requires a trained evidence checkpoint')
+                from graphnav.target_runtime import TargetEvidenceWaypointPolicy
+                policy_class=TargetEvidenceWaypointPolicy
+                options=dict(evidence_checkpoint=args.evidence_checkpoint,
+                             active_observation=args.active_observation,
+                             active_max_actions=args.active_max_actions)
+            elif args.active_observation or args.evidence_checkpoint:
+                raise ValueError('active observation and target evidence require --model target-evidence')
+            runtime=policy_class(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),
+                history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache,
+                head_checkpoint=args.head_checkpoint,stop_threshold=args.stop_threshold,execution=args.head_execution,
+                explore_candidates=args.explore_candidates,graph_control=args.graph_control,visual_control=args.visual_control,
+                **options)
+            if args.model=='target-evidence' or runtime.use_visual:
+                builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='a3-trajectory':
             if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')
             runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates)
@@ -126,14 +150,15 @@ def main():
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
     report = dict(model=('SBFNav local paper-based reproduction' if args.model=='sbfnav'
-                        else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
-                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))),split=args.split,
+                        else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
+                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop')))),split=args.split,
         metrics=aggregate(rows),by_map={k:aggregate(v) for k,v in maps.items()},
         terminations=dict(terminations),protocol=asdict(protocol),config=config,
         checkpoint_sha256=sha(args.checkpoint),checkpoint_epoch=checkpoint.get('completed_epoch',checkpoint.get('epoch')),
         head_checkpoint_sha256=sha(args.head_checkpoint) if args.head_checkpoint else None,
         dynamic_checkpoint_sha256=sha(args.dynamic_checkpoint) if args.dynamic_checkpoint else None,
         visual_checkpoint_sha256=sha(args.visual_checkpoint) if args.visual_checkpoint else None,
+        evidence_checkpoint_sha256=sha(args.evidence_checkpoint) if args.evidence_checkpoint else None,
         episode_manifest_sha256=sha(output/'episodes.json'),args=vars(args),seconds=time.perf_counter()-started,
         gpu_peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
         input_sha256={str(p):sha(p) for p in [dataset.annotation_path,Path(args.data_root)/'cityrefer/objects.json',
