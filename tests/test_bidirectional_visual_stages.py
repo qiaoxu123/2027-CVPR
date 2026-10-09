@@ -161,3 +161,55 @@ def test_p2_needs_distinct_observations_and_uses_only_patches(tmp_path):
     assert torch.isfinite(loss)
     loss.backward()
     assert model.patch[0].weight.grad.abs().sum()>0
+
+
+
+def test_sparse_causal_frame_prefix_cannot_contain_future():
+    from scripts.prepare_citynav import convert
+    import tempfile
+    class FakeRenderer:
+        def __init__(self):
+            self.calls=[]
+        def render(self,map_name,episode_key,step,pose,ground):
+            self.calls.append(step)
+            return {"step":int(step),"path":f"dummy_{step}.png",
+                    "footprint_world":footprint()}
+    renderer=FakeRenderer()
+    objs={"test_block_0":{
+        "t":{"name":"Target","descriptions":["east of Church"],
+             "contour":[[200,200],[220,200],[210,210]]},
+        "a":{"name":"Church","object_type":"Building",
+             "contour":[[90,190],[110,190],[100,210]]}}}
+    processed={"test_block_0":{"t":[{"landmarks":["Church"]}]}}
+    track=[[10+i*10,10+i*10,80,0.,0.] for i in range(7)]
+    episodes=[dict(area="test",block=0,object_ids=["t"],ann_ids=[0],
+                   target_positions=[[210,210,80]],trajectory=track)]
+    with tempfile.TemporaryDirectory() as d:
+        out=Path(d)/"samples.jsonl"
+        count,skipped=convert(
+            objs,processed,episodes,bounds(),out,
+            stride=2,max_steps=7,ground_levels={"test_block_0":0},
+            renderer=renderer,render_observed_only=True
+        )
+        assert (count,skipped)==(4,0)
+        assert renderer.calls==[0,2,4,6]
+        rows=[json.loads(s) for s in out.read_text().splitlines()]
+        assert [[f["step"] for f in row["rgb_observations"]] for row in rows]==[
+            [0],[0,2],[0,2,4],[0,2,4,6]
+        ]
+
+
+def test_frozen_inference_patch_inputs_support_trainable_roi_head():
+    from graphnav.landmark_visual_train import encode_twoview
+    class FakeFrozen:
+        def encode(self,paths):
+            with torch.inference_mode():
+                return (torch.ones(len(paths),9,24),
+                        torch.ones(len(paths),9,dtype=torch.bool))
+    model=VisualLandmarkAligner(vision_dim=24,hidden=32,heads=4)
+    a,b=encode_twoview(
+        {"first":["a","b"],"second":["c","d"]},
+        FakeFrozen(),model,torch.device("cpu")
+    )
+    (a.square().sum()+b.square().sum()).backward()
+    assert model.patch[0].weight.grad is not None
