@@ -219,6 +219,7 @@ def new_model(args, device):
         hidden=args.hidden, text_dim=768, heads=args.heads,
         max_relations=args.max_relations, vision_dim=args.vision_dim,
         top_k=args.top_k, rule_weight=args.rule_weight,
+        relative_position=getattr(args, "relative_position", False),
     ).to(device)
 
 
@@ -226,6 +227,17 @@ def train_one(variant, loaders, encoder, vision, cache, args, device, output):
     torch.manual_seed(getattr(args, "seed", 0))
     signatures = {split: static_signature(loader.dataset) for split, loader in loaders.items()}
     model = new_model(args, device)
+    pretrained = getattr(args, "init_bidirectional", None)
+    if pretrained and variant == "geometry":
+        state = torch.load(pretrained, map_location=device, weights_only=True)
+        if state.get("training_stage") != "P1_bidirectional_geometry":
+            raise ValueError("Expected a verified P1 bidirectional pretrain checkpoint")
+        for name in ("hidden", "heads", "grid_size"):
+            if state.get(name) != getattr(args, name):
+                raise ValueError(f"Bidirectional pretrain {name} incompatible with A3")
+        if not getattr(args, "relative_position", False):
+            raise ValueError("P1 checkpoint requires --relative-position in A3 finetuning")
+        model.load_state_dict(state["model"], strict=True)
     if variant == "rgb":
         ckpt = output / "gat_best.pt"
         if not ckpt.exists():
@@ -401,6 +413,10 @@ def run(args):
             state = torch.load(output / f"{variant}_best.pt", map_location=device, weights_only=True)
             if state.get("static_signatures") != report["protocol"]["static_signatures"]:
                 raise ValueError("Evaluation inputs differ from checkpoint static protocol")
+            if bool(state.get("args", {}).get("relative_position", False)) != bool(
+                getattr(args, "relative_position", False)
+            ):
+                raise ValueError("Evaluate-only relative_position differs from checkpoint")
             model.load_state_dict(state["model"])
             text_name = state.get("args", {}).get("text_backbone", args.text_backbone)
             text_length = state.get("args", {}).get("max_text_length", 96)
@@ -460,6 +476,10 @@ def main():
     p.add_argument("--hardware", default="RTX Pro 6000 96GB")
     p.add_argument("--batch-size", type=int, default=16)
     p.add_argument("--epochs", type=int, default=5)
+    p.add_argument("--relative-position", action="store_true",
+                   help="Optional P1 relative-position geometry control")
+    p.add_argument("--init-bidirectional", default=None,
+                   help="Initialize A3 geometry from separately trained P1 checkpoint")
     p.add_argument("--rgb-epochs", type=int, default=3)
     p.add_argument("--lr", type=float, default=2e-4)
     p.add_argument("--rgb-lr", type=float, default=1e-4)
