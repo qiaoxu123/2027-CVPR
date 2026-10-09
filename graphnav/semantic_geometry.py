@@ -29,11 +29,22 @@ DIRECTIONS = {
     "southeast": (1.0, -1.0), "southwest": (-1.0, -1.0),
 }
 RELATIONS = tuple(DIRECTIONS) + ("near", "between", "along")
-NODE_TYPES = {"building": 0, "road": 1, "relation": 2}
+# A TrafficRoad *polygon* is not a verified road *polyline*.
+NODE_TYPES = {
+    "building": 0, "road": 1, "relation": 2,
+    "road_surface": 3, "footpath": 4, "bridge": 5,
+    "parking": 6, "ground": 7, "other": 8,
+}
+SOURCE_OBJECT_KIND = {
+    "building": "building", "trafficroad": "road_surface",
+    "footpath": "footpath", "bridge": "bridge",
+    "parking": "parking", "ground": "ground",
+}
 EDGE_TYPES = {
     "self": 0, "buildings_near": 1, "buildings_overlap": 2,
     "building_road": 3, "roads_connected": 4,
     "relation_anchor": 5, "anchor_relation": 6, "roads_crossing": 7,
+    "surface_near": 8, "surface_overlap": 9, "polyline_surface": 10,
 }
 
 
@@ -138,9 +149,10 @@ def geometry_pair_distance(a, b, a_road=False, b_road=False):
 def _reference_groups(entities):
     ids = {}
     for i, entity in enumerate(entities):
-        name = canonical(entity.get("name", ""))
-        if name:
-            ids.setdefault(name, []).append(i)
+        for candidate in [entity.get("name", ""), *entity.get("aliases", [])]:
+            name = canonical(candidate)
+            if name and i not in ids.setdefault(name, []):
+                ids[name].append(i)
     return ids
 
 
@@ -159,9 +171,12 @@ def parse_spatial_relations(instruction: str, entities: list[dict]) -> list[Spat
     result, used = [], set()
     for kind in DIRECTIONS:
         for name in names:
-            pattern = rf"\b{kind}\s+of\s+(?:the\s+)?{re.escape(name)}\b"
+            pattern = (
+                rf"\b(?:to\s+the\s+|on\s+the\s+)?{kind}"
+                rf"(?:\s+side)?\s+of\s+(?:the\s+)?{re.escape(name)}\b"
+            )
             if re.search(pattern, text):
-                key = (kind, name)
+                key = (kind, tuple(group[name]))
                 if key not in used:
                     result.append(SpatialRelation(kind, (tuple(group[name]),)))
                     used.add(key)
@@ -172,7 +187,7 @@ def parse_spatial_relations(instruction: str, entities: list[dict]) -> list[Spat
         for name in names:
             pattern = rf"\b{trigger}\s+(?:the\s+)?{re.escape(name)}\b"
             if re.search(pattern, text):
-                key = (kind, name)
+                key = (kind, tuple(group[name]))
                 if key not in used:
                     result.append(SpatialRelation(kind, (tuple(group[name]),)))
                     used.add(key)
@@ -273,20 +288,33 @@ def build_entities(
     if np.any(scale <= 0):
         raise ValueError("invalid bounds")
     entries = []
-    for kind, group in (("building", reference_landmarks), ("road", roads)):
-        for item in group:
-            key = "contour" if kind == "building" else "polyline"
-            geometry = np.asarray(item[key], np.float32)
-            if len(geometry) < (3 if kind == "building" else 2):
-                continue
-            if not np.isfinite(geometry).all():
-                continue
-            # Source JSONL uses map-normalized coords; road GeoJSON inputs must
-            # first be converted by static data loader, not silently guessed.
-            entries.append({
-                "kind": kind, "name": item.get("name", ""),
-                "id": str(item.get("id", "")),
-                "geometry_m": geometry * scale + xymin,
-                "osm_node_ids": tuple(str(n) for n in item.get("osm_node_ids", [])),
-            })
+    for item in reference_landmarks:
+        # Source CityRefer *area* contours remain closed polygons; do not
+        # reinterpret TrafficRoad/Footpath/Bridge polygon as road centerline.
+        source_type = str(item.get("object_type", "Building"))
+        kind = SOURCE_OBJECT_KIND.get(canonical(source_type).replace(" ", ""), "other")
+        geometry = np.asarray(item["contour"], np.float32)
+        if geometry.ndim != 2 or geometry.shape[-1] != 2 or len(geometry) < 3:
+            continue
+        if not np.isfinite(geometry).all():
+            continue
+        entries.append({
+            "kind": kind, "source_type": source_type,
+            "name": item.get("name", ""), "id": str(item.get("id", "")),
+            "aliases": tuple(item.get("aliases", [])),
+            "geometry_m": geometry * scale + xymin, "osm_node_ids": (),
+        })
+    for item in roads:
+        geometry = np.asarray(item["polyline"], np.float32)
+        if geometry.ndim != 2 or geometry.shape[-1] != 2 or len(geometry) < 2:
+            continue
+        if not np.isfinite(geometry).all():
+            continue
+        entries.append({
+            "kind": "road", "source_type": "verified_centerline",
+            "name": item.get("name", ""), "id": str(item.get("id", "")),
+            "aliases": tuple(item.get("aliases", [])),
+            "geometry_m": geometry * scale + xymin,
+            "osm_node_ids": tuple(str(n) for n in item.get("osm_node_ids", [])),
+        })
     return entries
