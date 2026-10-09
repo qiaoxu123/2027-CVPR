@@ -56,3 +56,11 @@ Training and evaluation interfaces now support a frozen-A3 candidate-aligned tra
 Two implementation issues were fixed before training: raw per-mode score offsets could override candidate ranking, so mode scores are now conditional log-probabilities; identical zero-residual hypotheses caused winner-take-all mode collapse, so observable straight/left/right initial paths provide distinct hypotheses and converge to the candidate. Regression tests cover both.95 tests pass, including a real CPU optimizer step and proof that changing GT/future labels cannot change forward inputs.
 
 The frozen phase3 plan queues full A3 Seen evaluation,5-epoch seed0 trajectory training and exactly three Seen128 Stop-threshold checks (0.5/0.3/0.7). Selection uses Seen only, ranked by SR then SPL then lower failed-stop episode fraction. No GraphNav Unseen run is queued. See `reports/sbf_protocol/phase3_plan.json`. No learned-head performance gain has been measured yet; dynamic observed RGB/Depth/graph/history integration is still incomplete.
+
+## Unified SBFNav baseline verified in full — 2026-10-10
+
+Full Unseen completed:2697 episodes,SR21.5054%,SPL15.8907%,OSR38.7468%,NE47.5653m,nDTW23.5093%,sDTW7.5936%,16.6507 mean movements,47.7632ms policy latency,36.96min evaluation. Every full Seen/Unseen pose array matches the historical trained-source/checkpoint replay exactly (0 coordinate discrepancy). No oracle target-setting call is made. CSV/JSON and acceptance thresholds are recorded in `reports/sbf_protocol/`.
+
+Level2 minimums are now measured:Unseen SR20.4301%,SPL14.3016%, plus required pipeline and Seen/Stop/safety checks. SBF has no explicit learned policy Stop here; its false-stop rate is null. This limitation is disclosed, not converted into perfect Stop performance.
+
+First A3 Seen128 bounded Top1 smoke:SR38.2813%,SPL37.6067%,OSR44.5313%,NE29.7557m,9.625 movements,3.2127ms policy latency;12.93s evaluation. On exactly the same128 episodes, SBF SR44.5313%,SPL36.8868%. A3 has−6.25pp SR and+0.7199pp SPL; direct paths are efficient but target selection misses some successes. This provides a real controlled Seen diagnostic, not an Unseen/closed-loop completion claim. Base/Large visual controls are now running; full A3 Seen and learned-head training remain queued after frozen features.

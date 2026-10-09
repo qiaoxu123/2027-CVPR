@@ -30,9 +30,20 @@ Mean steps count actual executed movements; a Stop decision adds no movement. Me
 
 Shared evaluator: `scripts/evaluate_closedloop.py`; GT-free interface/control: `graphnav/closedloop.py`. Tests cover label isolation, Stop before movement, XY boundary success, path inefficiency, OSR/SR distinction and no-Stop denominator. SBF Seen128 replay exactly matches all128 historical pose arrays and path lengths (maximum absolute discrepancy0).
 
-Fresh Seen128: SR44.53%, SPL36.89%, OSR61.72%, NE32.96m, nDTW27.55%, sDTW14.68%, mean15.94 movements and47.56ms policy inference. This is not a full-split baseline. Historical full Seen: SR43.52%, SPL36.12%; Unseen: SR21.51%, SPL15.89%. Fresh complete shared replay is running and will supersede the historical status once verified. If these historical Unseen values are reproduced, Level2 thresholds are SR20.43%, SPL14.30%; thresholds must be recalculated from the fresh unified baseline rather than treated as a target already achieved.
+Fresh full baseline completed and matched every historical trajectory exactly:2470 Seen and2697 Unseen. Metrics below use percentages except NE, steps and latency.
 
-Original checkpoints, source inputs and previous results remain unchanged. No GraphNav closed-loop SR/SPL or acceptance level is claimed yet. The initial baseline wrapper wrote the current Git commit at report finish; this provenance weakness was fixed to capture code/diff at startup for subsequent launches. The running first full Seen replay uses wrapper code from commit90b302f; its loaded behavior will additionally be checked against historical per-episode paths. Unseen and later launches capture their startup provenance directly.
+| Split | SR | SPL | OSR | NE(m) | nDTW | sDTW | Steps | Policy ms | Eval minutes |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Seen |43.52|36.12|60.40|31.52|28.28|14.74|15.77|47.97|32.27|
+| Unseen |21.51|15.89|38.75|47.57|23.51|7.59|16.65|47.76|36.96|
+
+GPU allocated peaks:1.028GiB Seen/1.023GiB Unseen. This checkpoint never emits a policy Stop, so False-Stop Rate is null; stagnation/horizon termination cannot be reported as learned Stop calibration. Episode-level results remain in `runs/closedloop_baseline/`; report copies and exact replay checks are in `reports/sbf_protocol/`.
+
+The fresh Level2 Unseen minimums are SR20.4301075% and SPL14.3016446%; Level3 requires SR21.5053763% and SPL15.8907162%. Level1 and Seen/Stop/safety checks are additional conditions; no GraphNav acceptance level is claimed. These targets derive from this local reproduction, not paper results. The legacy SBF checkpoint had historical Val Unseen proxy selection, explicitly disclosed; new GraphNav selection uses internal training dev/Seen.
+
+Seen128 A3 bounded Top1 smoke:SR38.28%,SPL37.61%,OSR44.53%,NE29.76m;128 identical public episodes, no trained trajectory/Stop or RGB/history. Versus SBF Seen128, SR−6.25pp,SPL+0.72pp; this is preliminary Seen evidence, not an Unseen gain or completed system.
+
+Original checkpoints, source inputs and previous results remain unchanged. The initial full Seen wrapper wrote current Git at report finish; its loaded wrapper90b302f SHA is recorded separately in `historical_replay_full_seen.json`. Subsequent launches record startup code/diff/hash. All full Seen and Unseen paths have maximum absolute historical discrepancy0.
 
 ## Reproduction
 
