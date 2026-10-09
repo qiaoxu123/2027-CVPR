@@ -116,3 +116,15 @@ Internal P3 dev is disjoint for the residual stage only:the preserved A3 had alr
 ## 2026-10-10：真实节点关联与闭环接口
 
 V2 三组五轮训练完成；所有实际视觉输入均按当前/历史 cutoff 构造，Seen 前缀约45%状态包含已观测引用地标。指标见 `reports/dynamic_v2_20261010/comparison.csv`，尚不代表闭环增益。实际四 Episode CUDA 在线接口已通过；加入当前384px RGB/Depth环境边界、公共名称+完整轮廓节点关联、全784候选残差与按像素哈希持久化视觉缓存。114单测通过。下一步：四组动态图 Seen128 与三个预测目标收敛/Stop门控对照，不依据 Unseen 选择。
+
+## 2026-10-10：Seen128模块消融、轨迹收敛及吞吐
+
+统一128 Episode（Manifest SHA完全一致）比较已完成。A3 SR38.28125%/SPL37.60669%；GAT SR41.40625%/SPL40.66671%；Visual SR41.40625%/SPL40.52153%；Joint-current SR41.40625%/SPL39.92132%；Joint-history SR41.40625%/SPL40.60267%。RGB/History尚无额外SR增益，结果见 `reports/closedloop_seen128_20261010/`。
+
+三种收敛控制保持同样49个成功：完整学习路径SPL36.13009%，25%学习残差SPL37.54340%，直接目标SPL37.60669%。25%路径残差仍真正使用学习的多模态路径/模式，平均步数7.875 vs基线9.625；预测目标到达门控不读取GT，只修复早停/到达后路径漂移。Stop仍有高错误率，不能声称已经解决目标确认。
+
+真实A3 BF16前后向（相同1024 Train Query、BERT96缓存、workers4）batch64：535.17 samples/s、3.72GiB；batch128：728.78 samples/s、7.01GiB。测的是热缓存小规模训练吞吐，不是模型准确性、完整epoch时间或视觉速度。原训练/Checkpoint均未覆盖。
+
+补充输入审计：Unseen没有96Token截断；17%–21% Query可被现有具名规则解析。约68%–69% Query包含left/right/front等词，83%–88%包含颜色/屋顶/形状词；这些词频不是人工标注的语义类别/解析准确率，不能机械将left/right变成east/west。沿途地标匹配不能替代目标外观与语言的条件匹配。
+
+下一步：同一25%学习轨迹+Stop接口的全量Seen五组确认，锁定候选后才开始新的Unseen全量评估。真实A3训练及动态视觉+轨迹+Stop CUDA smoke已通过，115单元测试通过。

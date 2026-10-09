@@ -100,7 +100,8 @@ class ObservedLandmarkEncoder:
                 vectors=self.head(patches,mask).float().cpu()
             if not torch.isfinite(vectors).all():raise ValueError('nonfinite observed landmark vectors')
             for (key,_),vector in zip(paths,vectors):
-                self.vectors[key]=vector;atomic_save(vector.half(),self.vector_directory/(key+'.pt'))
+                # Match frozen-training vectors and persistent hits exactly.
+                self.vectors[key]=vector.half().float();atomic_save(vector.half(),self.vector_directory/(key+'.pt'))
         for path in created:path.unlink() # Only our transient ROI copies; native data is untouched.
         vectors=torch.stack([self.vectors[key] for key in keys]) if keys else torch.zeros(0,self.head.query.shape[-1])
         for key in keys:self.vectors.move_to_end(key)

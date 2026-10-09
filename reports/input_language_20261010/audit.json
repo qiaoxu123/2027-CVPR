@@ -1,0 +1,454 @@
+{
+  "provenance": {
+    "commit": "d1fd6a9e953c7dcbf261a746e72fb5715a1be590",
+    "working_diff_sha256": "9ad514e698aeb828ad9bf32354156020736c0389dc3cde696547ff232358a2fa"
+  },
+  "note": "Parser coverage is detected grounded-rule coverage, not human-labeled parsing accuracy. Strong preserved A3 BERT limit96 verified without changing its protocol.",
+  "train_seen": {
+    "queries": 21166,
+    "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c",
+    "wordpiece_mean": 32.33870358121516,
+    "wordpiece_p95": 53.0,
+    "max": 125,
+    "truncated_at96": 11,
+    "truncated_fraction": 0.0005197014079183596,
+    "grounded_rule_queries": 3643,
+    "grounded_rule_fraction": 0.1721156571860531,
+    "relation_word_queries": 10294,
+    "grounded_references_fraction": 0.995700651989039,
+    "real_road_area_reference_fraction": 0.6698951148067656,
+    "parsed_types": {
+      "near": 1833,
+      "along": 862,
+      "between": 760,
+      "south": 174,
+      "north": 225,
+      "west": 6,
+      "southeast": 2,
+      "east": 1
+    },
+    "unparsed_word_examples": [
+      {
+        "instruction": "A big building with grey roof situated behind the St Teresa of the Child Jesus Catholic Church. A blue car and a grey car is parked close to the building. The railway track is behind the building.",
+        "reference_names": [
+          "St. Teresa of the Child Jesus Catholic Church"
+        ]
+      },
+      {
+        "instruction": "Two buildings, a one floor Brown building with a gray roof next to a taller brown and white building with a gray roof and a skylight on the corner of the map off Leslie Road",
+        "reference_names": [
+          "Leslie Road"
+        ]
+      },
+      {
+        "instruction": "two brown buildings of varying heights on the corner of the map next to a lot with three white and red painted dividers off Leslie Road",
+        "reference_names": [
+          "Leslie Road"
+        ]
+      },
+      {
+        "instruction": "The large building on Wellington Rd / Grosvenor Rd that has a parking lot beside it and a white box in the backyard in front of the Full Circle Events & Exhibition Ltd building.",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road",
+          "Grosvenor Road",
+          "Full Circle Events & Exhibitions Ltd",
+          "Wellington Rd / Grosvenor Rd",
+          "Wellington Rd / Grosvenor Rd"
+        ]
+      },
+      {
+        "instruction": "This is a building located on Wellington Rd/ Grosvenor Rd. Near it is a parking space with about a dozen cars in it.",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road",
+          "Grosvenor Road",
+          "Wellington Rd / Grosvenor Rd",
+          "Wellington Rd / Grosvenor Rd"
+        ]
+      },
+      {
+        "instruction": "A building with white roof along the road named Celine Grove",
+        "reference_names": [
+          "Celine Grove"
+        ]
+      },
+      {
+        "instruction": "The whole section of buildings beside the and including the bright orange buildings on Wellington street between Leslie and Willmore.",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road",
+          "Leslie Road",
+          "Willmore Road"
+        ]
+      },
+      {
+        "instruction": "The building at the end of Willmore Road that is next to the house with the green and black trampoline in the backyard.",
+        "reference_names": [
+          "Willmore Road"
+        ]
+      },
+      {
+        "instruction": "On Wellington Road, there is a gray-roofed small house next to the gray building which is directly adjacent to the Teresa of the Child Jesus Catholic Church",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road",
+          "St. Teresa of the Child Jesus Catholic Church"
+        ]
+      },
+      {
+        "instruction": "A white and blue building with a light gray roof, rectangular in shape, next to three cars that are parked on the side of it, two white and one silver, near the edge of the map facing the corner of willmore Road and Celine Grove",
+        "reference_names": [
+          "Celine Grove",
+          "Willmore Road"
+        ]
+      },
+      {
+        "instruction": "A multicolored brown and white building with a gray roof, fourth from the edge of the map off Willmore Road, that is across from the outline of a car, that is next to a white car",
+        "reference_names": [
+          "Willmore Road"
+        ]
+      },
+      {
+        "instruction": "The fouth house away from the St. Teresa of the Child Jesus Catholic church facing Wellington Street. It has a brown roof and a blue car next to the detached building in the backyard and a vehicle covered with a blue tarp in front of it,",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road",
+          "St. Teresa of the Child Jesus Catholic Church"
+        ]
+      }
+    ],
+    "relative_view_terms": {
+      "count": 14383,
+      "fraction": 0.6795332136445242,
+      "examples": [
+        "A beige and brown house with a dark gray roof cut off by the edge of the map with a white car in front of it off Grosvenor Road",
+        "A big building with grey roof situated behind the St Teresa of the Child Jesus Catholic Church. A blue car and a grey car is parked close to the building. The railway track is behind the building.",
+        "This is a building with a gray roof located behind St. Teresa of the Child Jesus Catholic Church. There are a couple of cars parked nearby this building. One is blue and one is white.",
+        "The large building with a gray roof that is on the short street behind the St Teresa of the Child Jesus Catholic Church that looks like a warehouse.",
+        "The building is L-shaped and directly across the train tracks and road from the gym.",
+        "The large gray rectangular building behind the St. Teresa of the Child Jesus Catholic Church.",
+        "The large gray rectangular building across from the One Stop building and the Gym.",
+        "The dark gray building on Leslie Road across from the row of gray houses."
+      ]
+    },
+    "appearance_terms": {
+      "count": 18732,
+      "fraction": 0.8850042521024284,
+      "examples": [
+        "The large blue and white building that goes around the huge parking lot with the The Gym, Nike Factory Store and The Food Warehouse.",
+        "A beige and brown house with a dark gray roof cut off by the edge of the map with a white car in front of it off Grosvenor Road",
+        "A big building with grey roof situated behind the St Teresa of the Child Jesus Catholic Church. A blue car and a grey car is parked close to the building. The railway track is behind the building.",
+        "This is a building with a gray roof located behind St. Teresa of the Child Jesus Catholic Church. There are a couple of cars parked nearby this building. One is blue and one is white.",
+        "The large building with a gray roof that is on the short street behind the St Teresa of the Child Jesus Catholic Church that looks like a warehouse.",
+        "The large gray rectangular building behind the St. Teresa of the Child Jesus Catholic Church.",
+        "The large gray rectangular building across from the One Stop building and the Gym.",
+        "The brick building at the end of Leslie Road that has a gray roof and a gray garage door."
+      ]
+    }
+  },
+  "val_seen": {
+    "queries": 2426,
+    "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2",
+    "wordpiece_mean": 32.39282769991756,
+    "wordpiece_p95": 52.0,
+    "max": 104,
+    "truncated_at96": 3,
+    "truncated_fraction": 0.001236603462489695,
+    "grounded_rule_queries": 434,
+    "grounded_rule_fraction": 0.17889530090684255,
+    "relation_word_queries": 1179,
+    "grounded_references_fraction": 1.0,
+    "real_road_area_reference_fraction": 0.713520197856554,
+    "parsed_types": {
+      "along": 106,
+      "between": 87,
+      "near": 227,
+      "south": 17,
+      "north": 25
+    },
+    "unparsed_word_examples": [
+      {
+        "instruction": "Between section of two houses, both colored white and brown with brown roofs, with the house on the right having a yellow rectangular object in the driveway off Wellington Road",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road"
+        ]
+      },
+      {
+        "instruction": "The second brown house from the trees along Wellington/Grosvenor road. It has a white and a blue car at the front.",
+        "reference_names": [
+          "Wellington Rd / Grosvenor Rd",
+          "Wellington Rd / Grosvenor Rd"
+        ]
+      },
+      {
+        "instruction": "Two cars red-lined, a partially visible red car and a partially visible black car next to each other, in between two black cars and a white car with a black top, in the parking lot that's on the side of the St Teresa of the Child Jesus Catholic church building off Wellington Road",
+        "reference_names": [
+          "St. Teresa of the Child Jesus Catholic Church",
+          "Wellington Road",
+          "Wellington Road"
+        ]
+      },
+      {
+        "instruction": "A red car and a black car in front of each other, that is in between a white car with a Blacktop and two black cars, and a parking lot behind the full circle events and exhibitions LTD building off Grosvenor Road",
+        "reference_names": [
+          "Grosvenor Road"
+        ]
+      },
+      {
+        "instruction": "A gray car in between a white car and an empty spot, in a parking lot, in front of a multi-building complex, the left side having six units with a gray roof, in the right side having four longer units with a multicolored white and gray roof off Wellington Road",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road"
+        ]
+      },
+      {
+        "instruction": "A dark blue car next to a white car, in front of a multi-unit building with gray roofs on it's left side and multicolored white and gray roofs on its right side off Wellington Road",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road"
+        ]
+      },
+      {
+        "instruction": "On Wellington Road, in the parking lot of the building with a gray and white roof, it is the leftmost blue car, near a white car.",
+        "reference_names": [
+          "Wellington Road",
+          "Wellington Road"
+        ]
+      },
+      {
+        "instruction": "The white car next to the black car that in the handicap parking at St Teresa's Court.",
+        "reference_names": [
+          "St Teresa's Court"
+        ]
+      },
+      {
+        "instruction": "The white car parked next to a black car. in front of St. Teresa's Court.",
+        "reference_names": [
+          "St Teresa's Court"
+        ]
+      },
+      {
+        "instruction": "The white car parked beside a blackish blue car below St Teresa's Court.",
+        "reference_names": [
+          "St Teresa's Court"
+        ]
+      },
+      {
+        "instruction": "The black car parked next in front of the long building at the end of Celine Grove. It has an empty spot next to it on one side and a median with bushes on the other.",
+        "reference_names": [
+          "Celine Grove"
+        ]
+      },
+      {
+        "instruction": "One black car, facing two white vehicles and one gray vehicle across from it Celine Grove near the edge of the map",
+        "reference_names": [
+          "Celine Grove"
+        ]
+      }
+    ],
+    "relative_view_terms": {
+      "count": 1685,
+      "fraction": 0.6945589447650453,
+      "examples": [
+        "The row of grayish brown houses on Leslie Road to the left of the gray house at the intersection with Wellington Road.",
+        "The long row of gray houses with cars parked in front of them along Leslie Road.",
+        "the row of brown houses along Leslie Road, across the street from a gray building.",
+        "A building with grey roof and white wall is situated at the right side of the road named Wellington road . A red car is parked in front of the building.",
+        "A building that is closed to Celine Grove and it has a red car parking in front of the building.",
+        "The second housing unit from the bottom on the right side of Celine Grove.",
+        "The building across from Willmore Road that has a red car in the driveway.",
+        "Left side of a white home with a multi-colored gray and brown roof and one chimney, that has one red car parked in his driveway, facing the corner of Wilmore Road and Wellington Road"
+      ]
+    },
+    "appearance_terms": {
+      "count": 2146,
+      "fraction": 0.8845836768342952,
+      "examples": [
+        "The row of grayish brown houses on Leslie Road to the left of the gray house at the intersection with Wellington Road.",
+        "The long row of gray houses with cars parked in front of them along Leslie Road.",
+        "the row of brown houses along Leslie Road, across the street from a gray building.",
+        "A building with grey roof and white wall is situated at the right side of the road named Wellington road . A red car is parked in front of the building.",
+        "A building that is closed to Celine Grove and it has a red car parking in front of the building.",
+        "The building across from Willmore Road that has a red car in the driveway.",
+        "Left side of a white home with a multi-colored gray and brown roof and one chimney, that has one red car parked in his driveway, facing the corner of Wilmore Road and Wellington Road",
+        "Left side of a white and gray house, with a multi-colored gray and brown roof that has a red car in its driveway facing the corner of Willmore Road and Wellington Road"
+      ]
+    }
+  },
+  "val_unseen": {
+    "queries": 2679,
+    "sha256": "7408c87314cd869e72b8dd0635e93585e745fe56fd83bfac5de62645f83909a6",
+    "wordpiece_mean": 30.13699141470698,
+    "wordpiece_p95": 49.09999999999991,
+    "max": 78,
+    "truncated_at96": 0,
+    "truncated_fraction": 0.0,
+    "grounded_rule_queries": 562,
+    "grounded_rule_fraction": 0.20977976857036207,
+    "relation_word_queries": 1327,
+    "grounded_references_fraction": 0.9985069055617768,
+    "real_road_area_reference_fraction": 0.6080627099664053,
+    "parsed_types": {
+      "near": 276,
+      "between": 108,
+      "along": 137,
+      "north": 38,
+      "south": 30,
+      "east": 2,
+      "southwest": 2,
+      "northwest": 1
+    },
+    "unparsed_word_examples": [
+      {
+        "instruction": "The building with about nine gray, narrow, parallel roofs on Walsall Road. The building is between the brown oval stadium track and the white-roofed NCF Distribution building.",
+        "reference_names": [
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "NCF Distribution"
+        ]
+      },
+      {
+        "instruction": "Brown building with gray roof connected to the Johnson's apparel Master building, across from the Perry Barr Greyhound Stadium near the edge of the map",
+        "reference_names": [
+          "Johnsons Apparel Master",
+          "Perry Barr Greyhound Stadium"
+        ]
+      },
+      {
+        "instruction": "This is a small building with a gray roof located behind Johnsons Apparel Master. Over the hedge near this building is a track field.",
+        "reference_names": [
+          "Johnsons Apparel Master"
+        ]
+      },
+      {
+        "instruction": "The grayish brown building in between the track and field and the Johnsons Apparel Master.",
+        "reference_names": [
+          "Johnsons Apparel Master"
+        ]
+      },
+      {
+        "instruction": "The building attached to the Johnsons Apparel Master building next to the track.",
+        "reference_names": [
+          "Johnsons Apparel Master"
+        ]
+      },
+      {
+        "instruction": "This is a small building with a white, grey, and green roof, it's positioned between the large dirt track, and Johnson's Master Apparel. If you're facing Johnson's Master Apparel from the dirt track it's off to the right.",
+        "reference_names": [
+          "Johnsons Apparel Master"
+        ]
+      },
+      {
+        "instruction": "This is one of the small buildings located behind Johnsons Apparel Master. There is a big tree next to it and a line of cars parked nearby.",
+        "reference_names": [
+          "Johnsons Apparel Master"
+        ]
+      },
+      {
+        "instruction": "This appears to be two buildings, they are near the race track, Johnsons Apparel Masters and the edge of the scene, one has a green roof and the other's is white on one side and grey on the other.",
+        "reference_names": [
+          "Johnsons Apparel Master"
+        ]
+      },
+      {
+        "instruction": "Front section of a brown building with green doors, with a brownish Red Roof, next to a smaller Green Building, that is in between the Johnsons apparel Master building and the track of the Perry Barr Greyhound Stadium",
+        "reference_names": [
+          "Johnsons Apparel Master",
+          "Perry Barr Greyhound Stadium"
+        ]
+      },
+      {
+        "instruction": "A building on the corner of Walsall Road and Cliveden Avenue. It is next to a McDonald's.",
+        "reference_names": [
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Cliveden Avenue"
+        ]
+      },
+      {
+        "instruction": "The brown building next to McDonalds's on Walsall Road and Cliveden Avenue.",
+        "reference_names": [
+          "McDonald's",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road",
+          "Walsall Road"
+        ]
+      },
+      {
+        "instruction": "The building on Teddington Grove that has a red car in front of it that is beside a blue car with a black roof.",
+        "reference_names": [
+          "Teddington Grove",
+          "Teddington Grove"
+        ]
+      }
+    ],
+    "relative_view_terms": {
+      "count": 1831,
+      "fraction": 0.6834639790966779,
+      "examples": [
+        "A multi-colored white and blue building with a gray roof on the corner of the map across from the national probation service building off Walsall Road",
+        "Large white and blue building, with a white roof on the corner of the map, across from the national probation service building off Walsall Road",
+        "The large light gray building across the street from the short side of the National Probation Service building.",
+        "The big white building and it is across the National Probation Service building.",
+        "The large white building across the street from the National Probation Service building.",
+        "The large square dark gray building to the left of the NCF Distribution building.",
+        "The building on the side of the Perry Barr Greyhound Stadium building. It has short and the front of it is yellow.",
+        "The triangular shaped building to the bottom left of the track and below the Perry Barr Greyhound Stadium building."
+      ]
+    },
+    "appearance_terms": {
+      "count": 2225,
+      "fraction": 0.8305337812616648,
+      "examples": [
+        "A multi-colored white and blue building with a gray roof on the corner of the map across from the national probation service building off Walsall Road",
+        "Large white and blue building, with a white roof on the corner of the map, across from the national probation service building off Walsall Road",
+        "The large light gray building across the street from the short side of the National Probation Service building.",
+        "The big white building and it is across the National Probation Service building.",
+        "The large white building across the street from the National Probation Service building.",
+        "it is a building with a black roof consisting of many wave-shaped units. This building is a warehouse-like structure. There are lots of blue/white trucks in the parking lot on one side of this building and lots of cars in the parking lot on the other side. this building is next to the NCF Distribution building.",
+        "The building with about nine gray, narrow, parallel roofs on Walsall Road. The building is between the brown oval stadium track and the white-roofed NCF Distribution building.",
+        "The large square dark gray building to the left of the NCF Distribution building."
+      ]
+    }
+  }
+}

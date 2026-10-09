@@ -1,0 +1,55 @@
+{
+  "requires": [
+    "runs/closedloop_guarded/guarded-direct_seen128/metrics.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "jobs": [
+    {
+      "name": "a3_real_backward_bs64",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/benchmark_a3_training.py",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data",
+        "data/revised_static/graphnav_train_seen.jsonl",
+        "--bert-cache",
+        "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4",
+        "--output",
+        "runs/a3_training_throughput_bs64"
+      ],
+      "log": "runs/a3_training_throughput_bs64.log",
+      "complete_artifact": "runs/a3_training_throughput_bs64/report.json"
+    },
+    {
+      "name": "a3_real_backward_bs128",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/benchmark_a3_training.py",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data",
+        "data/revised_static/graphnav_train_seen.jsonl",
+        "--bert-cache",
+        "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "--batch-size",
+        "128",
+        "--workers",
+        "4",
+        "--output",
+        "runs/a3_training_throughput_bs128"
+      ],
+      "log": "runs/a3_training_throughput_bs128.log",
+      "complete_artifact": "runs/a3_training_throughput_bs128/report.json"
+    }
+  ]
+}

@@ -85,6 +85,9 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
     """Frozen A3 and a trained candidate-aligned head, using public observations."""
     def __init__(self,checkpoint,head_checkpoint,scratch_directory,*,device='cuda',stop_threshold=.5,execution='joint'):
         super().__init__(checkpoint,scratch_directory,device=device)
+        self.load_trajectory_head(checkpoint,head_checkpoint,stop_threshold=stop_threshold,execution=execution)
+
+    def load_trajectory_head(self,checkpoint,head_checkpoint,*,stop_threshold=.5,execution='joint'):
         from .trajectory_policy import CandidateTrajectoryStop
         from .checkpointing import file_sha256
         state=torch.load(head_checkpoint,map_location='cpu',weights_only=True)
@@ -107,9 +110,14 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
 
     @torch.no_grad()
     def predict(self,state,instruction):
+        field,_=self.frozen_field()
+        return self.predict_field(state,field)
+
+    @torch.no_grad()
+    def predict_field(self,state,field):
         import math
         from sbfnav.mapdata import GROUND_LEVEL
-        field,_=self.frozen_field();probabilities=field.belief_logits.float().softmax(-1)
+        probabilities=field.belief_logits.float().softmax(-1)
         inputs=dict(candidate_xy=field.candidate_xy.float(),candidate_context=field.candidate_context.half().float(),
             candidate_logits=field.belief_logits.gather(1,field.candidate_ids).float(),
             pose_world=torch.as_tensor(state.pose,dtype=torch.float32,device=self.device)[None],
