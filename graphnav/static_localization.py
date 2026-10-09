@@ -139,8 +139,10 @@ class StaticLocalizationDataset(Dataset):
         xymin = np.asarray(bounds[:2], dtype=np.float32)
         spans = np.asarray(bounds[2:], dtype=np.float32) - xymin
         world_grid = xymin[None] + self.grid_xy * spans[None]
-        # Reference-landmark Prior DOES NOT use non-referenced map roads.
-        referenced_entities = [e for e in graph["entities"] if e["kind"] == "building"]
+        # ALL named CityRefer referenced *surfaces* contribute to the prior:
+        # building, road-surface, footpath, parking, bridge, ground, etc.
+        # Only unreferenced verified centerlines are excluded.
+        referenced_entities = [e for e in graph["entities"] if e["kind"] != "road"]
         prior, _, _ = prior_and_rule_fields(
             world_grid, referenced_entities, [],
             sigma_m=self.prior_sigma_m,
@@ -176,6 +178,10 @@ class StaticLocalizationDataset(Dataset):
             "relation_count": len(graph["relations"]),
             "road_relation_count": sum(int(any(graph["entities"][idx]["kind"] == "road" for group in r.anchors for idx in group)) for r in graph["relations"]),
             "road_count": sum(int(e["kind"] == "road") for e in graph["entities"]),
+            "surface_count": len(referenced_entities),
+            "nonbuilding_surface_count": sum(
+                int(e["kind"] not in ("road", "building")) for e in referenced_entities
+            ),
             "edge_count": int(graph["adjacency"].sum()),
             "episode_id": rec.get("episode_id", ""),
         }
