@@ -19,6 +19,7 @@ from .evidence_grounding import (
     SpatialEvidenceMemory, TargetEvidenceRefiner, appearance_query,
 )
 from .landmark_projection import frame_to_world
+from .active_observation import ActiveObservationConfig, plan_active_observation
 
 
 def native_patch_world_xy(observation, patches: int, bounds, *, device):
@@ -66,8 +67,12 @@ class TargetEvidenceWaypointPolicy(DynamicWaypointPolicy):
     frozen vision model. No additional private/evaluator state is accessed.
     """
 
-    def __init__(self, *args, evidence_checkpoint, **kwargs):
+    def __init__(self, *args, evidence_checkpoint, active_observation=False,
+                 active_max_actions=2, **kwargs):
         super().__init__(*args, **kwargs)
+        self.active_observation = bool(active_observation)
+        self.active_config = ActiveObservationConfig(max_actions=int(active_max_actions))
+        self.active_actions = 0
         from .landmark_visual_pretrain import FrozenSigLIP2Patches
         state = torch.load(evidence_checkpoint, map_location="cpu", weights_only=True)
         if state.get("protocol") != "graphnav-target-evidence-v1":
@@ -93,6 +98,7 @@ class TargetEvidenceWaypointPolicy(DynamicWaypointPolicy):
         super().set_episode(episode, transform, catalog)
         self.target_history = None
         self.target_text_cache = None
+        self.active_actions = 0
 
     @torch.no_grad()
     def execute_field(self, state, field, inputs, evidence_diagnostics):
@@ -143,4 +149,35 @@ class TargetEvidenceWaypointPolicy(DynamicWaypointPolicy):
             target_observed_patch_count=int(patch_valid.sum().item()),
             target_observed_cell_count=int((self.target_history.weights > 0).sum()),
         )
-        return super().execute_field(state, refined, inputs, diagnostics)
+        prediction = super().execute_field(state, refined, inputs, diagnostics)
+        # Explicit opt-in. A3, GAT, learned trajectory and Stop behavior
+        # remain unchanged when active_observation is disabled.
+        if self.active_observation and not prediction.should_stop:
+            from sbfnav.mapdata import GROUND_LEVEL
+            decision = plan_active_observation(
+                pose_xyzyaw=state.pose,
+                map_bounds=self.record["world_bounds"],
+                ground_level=GROUND_LEVEL[self.record["map_name"]],
+                candidate_xy=inputs["grid_xy"][0].float().cpu().numpy(),
+                candidate_logits=refined.belief_logits[0].float().cpu().numpy(),
+                observed_confidence=self.target_history.snapshot().coverage[0].cpu().numpy(),
+                instruction=self.record["instruction"],
+                step=state.step,
+                used_actions=self.active_actions,
+                config=self.active_config,
+            )
+            if decision is not None:
+                prediction.xyz = decision.xyz
+                self.active_actions += 1
+                prediction.diagnostics.update(
+                    active_action=decision.action,
+                    active_action_index=self.active_actions,
+                    active_candidate_id=decision.candidate_id,
+                    active_observed_confidence=decision.observed_confidence,
+                    active_ideal_object_pixels=decision.estimated_object_pixels,
+                    active_reason=decision.reason,
+                    active_note="nadir-only XY/Z; no 3D parallax or source-detail gain is claimed",
+                )
+            else:
+                prediction.diagnostics.update(active_action="none")
+        return prediction
