@@ -22,7 +22,7 @@ def _landmarks():
 
 def test_building_is_one_node_and_road_is_one_polyline():
     road = [{"id":"r1","name":"Main Road",
-             "polyline":[[.10,.40],[.5,.40],[.8,.40]]},
+             "polyline":[[.10,.40],[.5,.40],[.8,.40]], "osm_node_ids":["A","junction","B"]},
             {"id":"r2","name":"Cross Street",
              "polyline":[[.50,.20],[.5,.40],[.5,.70]]}]
     g = prepare_semantic_graph(_landmarks(),road,
