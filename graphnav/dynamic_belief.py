@@ -74,8 +74,14 @@ class DynamicGoalBelief(nn.Module):
         valid=batch['entity_valid'].bool()
         graph_nodes=None
         if use_graph:
-            graph_nodes=self.graph(batch['nodes'],node_emb,batch['node_types'],
-                batch['adjacency'],batch['edges'],batch['node_valid'])
+            graph_nodes=(self.graph.node_geometry(batch['nodes'])+self.graph.name_projection(node_emb)+self.graph.type_embedding(batch['node_types']))
+            if use_visual and visual_vectors is not None:
+                if visual_confidence is None or visual_confidence.shape!=valid.shape or visual_vectors.shape[:2]!=valid.shape:
+                    raise ValueError('visual node association dimensions mismatch')
+                graph_nodes=graph_nodes+self.visual(visual_vectors.to(dense.dtype))*visual_confidence[...,None]*valid[...,None]
+            graph_nodes=graph_nodes*batch['node_valid'][...,None]
+            graph_nodes=self.graph.layer1(graph_nodes,batch['edges'],batch['adjacency'],batch['node_valid'])
+            graph_nodes=self.graph.layer2(graph_nodes,batch['edges'],batch['adjacency'],batch['node_valid'])
             weights=valid.to(dense.dtype)
             context=(torch.tanh(graph_nodes[:,None]+geo)*weights[:,None,:,None]).sum(2)/weights.sum(1).clamp_min(1)[:,None,None]
             logits=logits+torch.tanh(self.graph_gate)*self.score(torch.cat((dense,context),-1)).squeeze(-1)

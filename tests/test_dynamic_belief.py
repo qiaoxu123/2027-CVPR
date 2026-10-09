@@ -91,3 +91,14 @@ def test_low_registration_confidence_attenuates_visual_evidence(tmp_path):
     strong=net(batch,**kwargs,use_visual=True,visual_vectors=vectors,visual_confidence=confidence).belief_logits-base
     weak=net(batch,**kwargs,use_visual=True,visual_vectors=vectors,visual_confidence=confidence*.1).belief_logits-base
     assert torch.allclose(weak,strong*.1,atol=2e-6)
+
+
+def test_gat_node_state_actually_updates_with_observed_visual_evidence(tmp_path):
+    batch,a3,kwargs=inputs(tmp_path);net=DynamicGoalBelief(a3,vision_dim=6).eval()
+    with torch.no_grad():net.graph_gate.fill_(1);net.visual_gate.zero_()
+    baseline=net(batch,**kwargs,use_graph=True)
+    vectors=torch.randn(1,4,6)*3;confidence=batch['entity_valid'].float()
+    observed=net(batch,**kwargs,use_graph=True,use_visual=True,visual_vectors=vectors,visual_confidence=confidence)
+    assert not torch.allclose(observed.belief_logits,baseline.belief_logits,atol=1e-6)
+    unknown=net(batch,**kwargs,use_graph=True,use_visual=True,visual_vectors=vectors,visual_confidence=confidence*0)
+    assert torch.equal(unknown.belief_logits,baseline.belief_logits)

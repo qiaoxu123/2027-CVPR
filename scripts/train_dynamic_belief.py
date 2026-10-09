@@ -23,6 +23,7 @@ def forward_cached(model,inputs,args):
     fields={key:value for key,value in inputs.items() if key in ('nodes','node_types','node_valid','entity_valid','adjacency','edges','pair_geometry','grid_xy')}
     return model(fields,tokens=None,token_mask=None,node_emb=inputs['node_emb'],base_field=base,
         use_graph=args.variant!='visual',use_visual=args.variant!='graph',
+        visual_vectors=inputs.get('visual_vectors'),visual_confidence=inputs.get('visual_confidence'),
         observed_vectors=inputs['observed_vectors'],observed_confidence=inputs['observed_confidence'],observed_geometry=inputs['observed_geometry'])
 
 
@@ -36,6 +37,7 @@ def state_metrics(logits,inputs,labels):
 
 def run_epoch(model,loader,args,device,optimizer=None,prediction_path=None):
     model.train(optimizer is not None);start=time.perf_counter();started_utc=time.time();count=0;total=0.;groups=defaultdict(list);predictions=[]
+    reference_observations,auxiliary_observations,reference_visible_states=0,0,0
     if device.type=='cuda':torch.cuda.reset_peak_memory_stats()
     with torch.set_grad_enabled(optimizer is not None):
         for batch_index,(inputs,labels) in enumerate(loader):
@@ -55,6 +57,10 @@ def run_epoch(model,loader,args,device,optimizer=None,prediction_path=None):
                 optimizer.zero_grad(set_to_none=True);loss.backward()
                 torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True);optimizer.step()
             size=len(logits);count+=size;total+=float(loss.detach())*size
+            if 'visual_confidence' in inputs:
+                reference_observations+=int((inputs['visual_confidence']>0).sum())
+                reference_visible_states+=int((inputs['visual_confidence']>0).any(-1).sum())
+            auxiliary_observations+=int((inputs['observed_confidence']>0).sum())
             with torch.no_grad():
                 values=state_metrics(logits,inputs,labels);baseline=state_metrics(base,inputs,labels)
                 qids=labels['query_index'].cpu().tolist();steps=labels['source_step'].cpu().tolist()
@@ -75,13 +81,16 @@ def run_epoch(model,loader,args,device,optimizer=None,prediction_path=None):
     return dict(loss=total/max(count,1),state_queries=count,unique_public_queries=len(groups),query_macro=macro,
         seconds=seconds,started_unix=started_utc,finished_unix=time.time(),samples_per_second=count/max(seconds,1e-9),
         peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30 if device.type=='cuda' else 0.,
-        graph_gate=float(torch.tanh(model.graph_gate).detach()),visual_gate=float(torch.tanh(model.visual_gate).detach()))
+        graph_gate=float(torch.tanh(model.graph_gate).detach()),visual_gate=float(torch.tanh(model.visual_gate).detach()),
+        reference_observations=reference_observations,auxiliary_observations=auxiliary_observations,
+        reference_visible_state_fraction=reference_visible_states/max(count,1))
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('train-evidence','train-queries','train-fields','train-vectors','seen-evidence','seen-queries','seen-fields','seen-vectors','checkpoint','output'):p.add_argument('--'+key,required=True)
     p.add_argument('--variant',choices=['graph','visual','graph_visual_history'],required=True)
+    p.add_argument('--associate-observed-refs',action='store_true',help='Bind observed public contours/names to GAT reference nodes before message passing')
     p.add_argument('--epochs',type=int,default=5);p.add_argument('--batch-size',type=int,default=64)
     p.add_argument('--workers',type=int,default=4);p.add_argument('--seed',type=int,default=0);p.add_argument('--split-seed',type=int,default=0)
     p.add_argument('--lr',type=float,default=2e-4);p.add_argument('--gate-lr',type=float,default=2e-3)
@@ -94,7 +103,7 @@ def main():
     model=DynamicGoalBelief(a3,vision_dim=256).to(device)
     def dataset(prefix,split):
         return DynamicEvidenceDataset(getattr(args,prefix+'_evidence'),getattr(args,prefix+'_queries'),getattr(args,prefix+'_fields'),getattr(args,prefix+'_vectors'),config,
-            history=args.variant=='graph_visual_history',split=split,split_seed=args.split_seed)
+            history=args.variant=='graph_visual_history',split=split,split_seed=args.split_seed,associate_references=args.associate_observed_refs)
     train=dataset('train','train');dev=dataset('train','dev');seen=dataset('seen','all')
     # The datasets are compact query-subset feature stores; frozen encoders are absent.
     fingerprint={key:dict(path=str(Path(value).resolve()),sha256=file_sha256(value)) for key,value in vars(args).items() if key.endswith('_queries') or key=='checkpoint'}

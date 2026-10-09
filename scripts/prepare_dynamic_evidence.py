@@ -49,7 +49,7 @@ def main():
         episodes[(row['map_name'],row['source_episode_index'])].append(i)
         frames[(row['map_name'],row['source_episode_index'],row['observed_step'])].append(i)
     axis=(np.arange(28,dtype=np.float32)+.5)/28;xx,yy=np.meshgrid(axis,axis);grid=np.stack((xx.ravel(),yy.ravel()),-1)
-    geometry={};map_bounds={};qualities=torch.tensor([roi_confidence(row) for row in rows],dtype=torch.float32)
+    geometry={};descriptors={};map_bounds={};qualities=torch.tensor([roi_confidence(row) for row in rows],dtype=torch.float32)
     records=[];skipped=0
     for (map_name,episode,step),current in sorted(frames.items()):
         if episode not in labels:skipped+=1;continue
@@ -67,10 +67,12 @@ def main():
                 # Every CityRefer entry is a region surface, never a fabricated road centerline.
                 feature=relative_entity_features(world,[dict(geometry_m=contour,kind='surface')],1)[:,0]
                 geometry[key]=torch.from_numpy(feature.astype(np.float16))
+                source=objects[map_name][rows[i]['object_id']]
+                descriptors[key]=dict(name=source['name'],object_type=source['object_type'],contour_world=torch.from_numpy(contour))
         records.append(dict(map_name=map_name,source_episode_index=episode,query_index=qid,step=step,
             current_roi_indices=current,history_roi_indices=history,
             labels=dict(target_world=labels[episode]['target_world'])))
-    atomic_save(dict(geometry=geometry,confidence=qualities),out/'geometry_quality.pt')
+    atomic_save(dict(geometry=geometry,confidence=qualities,entity_descriptors=descriptors),out/'geometry_quality.pt')
     (out/'samples.jsonl').write_text(''.join(json.dumps(row)+'\n' for row in records))
     result=dict(split=args.split,state_queries=len(records),episodes=len(set(row['source_episode_index'] for row in records)),
         public_queries=len(set(row['query_index'] for row in records)),named_regions=len(geometry),skipped_nonapproved_frames=skipped,

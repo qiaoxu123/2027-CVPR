@@ -1,7 +1,9 @@
 """Label-separated causal visual states with exact frozen A3 goal scores."""
 import json
+from collections import defaultdict
 from pathlib import Path
 import torch
+import numpy as np
 from torch.utils.data import Dataset
 from .candidate_geometry import FullCandidateDataset
 from .checkpointing import file_sha256
@@ -9,7 +11,7 @@ from .trajectory_data import query_is_dev
 
 
 class DynamicEvidenceDataset(Dataset):
-    def __init__(self,evidence,queries,fields,vectors,args,*,history=False,split='all',split_seed=0,max_observed=32):
+    def __init__(self,evidence,queries,fields,vectors,args,*,history=False,split='all',split_seed=0,max_observed=32,associate_references=False):
         self.root=Path(evidence);self.vector_root=Path(vectors);self.field_root=Path(fields)
         rows=[json.loads(line) for line in (self.root/'samples.jsonl').read_text().splitlines() if line]
         self.static=FullCandidateDataset(queries,grid_size=args.grid_size,max_landmarks=args.max_landmarks,
@@ -29,6 +31,12 @@ class DynamicEvidenceDataset(Dataset):
         if file_sha256(self.root/'geometry_quality.pt')!=evidence_manifest['geometry_sha256']:raise ValueError('changed geometric evidence')
         geometry=torch.load(self.root/'geometry_quality.pt',map_location='cpu',weights_only=True)
         self.geometry,self.confidence=geometry['geometry'],geometry['confidence']
+        self.descriptors=geometry.get('entity_descriptors',{});self.associate_references=associate_references
+        if associate_references and not self.descriptors:raise ValueError('public region descriptors required for visual node association')
+        self._reference_matches={}
+        self._descriptors_by_name=defaultdict(list)
+        for key,descriptor in self.descriptors.items():
+            self._descriptors_by_name[(key.rsplit(':',1)[0],descriptor['name'])].append((key,descriptor))
         manifest=json.loads((self.field_root/'manifest.json').read_text())
         if not manifest.get('complete') or manifest['protocol'].get('dense_logits_dtype')!='float32':
             raise ValueError('complete FP32 goal-score cache required; old rounded caches cannot be used')
@@ -71,12 +79,32 @@ class DynamicEvidenceDataset(Dataset):
             group=groups[key];group['vector']+=self.vectors[rid].float()*weight;group['mass']+=weight
             group['confidence']=max(group['confidence'],weight);group['pixels']=max(group['pixels'],roi['visible_pixels'])
         ordered=sorted(groups,key=lambda key:(-groups[key]['confidence']*groups[key]['pixels'],key))[:self.max_observed]
+        reference_vectors=torch.zeros(len(static['node_valid']),self.vectors.shape[-1]);reference_confidence=torch.zeros(len(static['node_valid']))
+        if self.associate_references:
+            if qid not in self._reference_matches:
+                entities=self.static._prepared(qid)[0]['entities'];matches={}
+                for node,entity in enumerate(entities):
+                    poly=np.asarray(entity['geometry_m'])
+                    if len(poly)>1 and np.linalg.norm(poly[-1]-poly[0])<1e-4:poly=poly[:-1]
+                    for key,descriptor in self._descriptors_by_name[(row['map_name'],entity['name'])]:
+                        source=descriptor['contour_world'].numpy()
+                        if len(source)>1 and np.linalg.norm(source[-1]-source[0])<1e-4:source=source[:-1]
+                        if source.shape==poly.shape and np.allclose(source,poly,atol=.02,rtol=0):matches[key]=node
+                self._reference_matches[qid]=matches
+            matches=self._reference_matches[qid];unreferenced=[]
+            for key in ordered:
+                group=groups[key]
+                if key in matches:
+                    node=matches[key];reference_vectors[node]=group['vector']/max(group['mass'],1e-8);reference_confidence[node]=group['confidence']
+                else:unreferenced.append(key)
+            ordered=unreferenced
         n=self.max_observed;q=len(static['grid_xy']);dim=self.vectors.shape[-1]
         vectors=torch.zeros(n,dim);confidence=torch.zeros(n);geometry=torch.zeros(q,n,10,dtype=torch.float16)
         for position,key in enumerate(ordered):
             group=groups[key];vectors[position]=group['vector']/max(group['mass'],1e-8)
             confidence[position]=group['confidence'];geometry[:,position]=self.geometry[key]
         observable.update(observed_vectors=vectors,observed_confidence=confidence,observed_geometry=geometry)
+        if self.associate_references:observable.update(visual_vectors=reference_vectors,visual_confidence=reference_confidence)
         bounds=torch.tensor(self.static.records[qid]['world_bounds'],dtype=torch.float32)
         target=torch.tensor(row['labels']['target_world'][:2],dtype=torch.float32)
         labels=dict(target_xy=(target-bounds[:2])/(bounds[2:]-bounds[:2]),map_sizes=bounds[2:]-bounds[:2],

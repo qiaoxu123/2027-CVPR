@@ -34,8 +34,12 @@ def main():
         rows.append(dict(step=step,map_name=map_name,pose=current.tolist(),landmarks=len(rois),
             categories=sorted(set(roi.object_type for roi in rois)),confidence_mean=float(np.mean([roi.confidence for roi in rois])),
             vector_shape=list(vectors.shape)))
+    before=encoder.backbone.encoded_images;encoder.vectors.clear()
+    repeated,reloaded=encoder.observe(observation,objects[map_name],step=2)
+    if encoder.backbone.encoded_images!=before or not torch.allclose(vectors,reloaded,atol=1e-4):
+        raise ValueError('current-pixel persistent vectors must avoid repeated expensive encoding')
     result=dict(provenance=source,checkpoint_sha256=file_sha256(args.checkpoint),episode_manifest_sha256=file_sha256(args.episodes),
-        rows=rows,history=encoder.history,seconds=time.perf_counter()-start,peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
+        rows=rows,history=encoder.history,persistent_vector_reuse=True,seconds=time.perf_counter()-start,peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
         input_contract='Current384 RGB/vertical-depth proxy, public polygons and current pose only. No destination/target ID/expert future.',
         note='Real interface smoke only; registration remains weak, no navigation gain.')
     (out/'report.json').write_text(json.dumps(result,indent=2));print(json.dumps(rows),flush=True)

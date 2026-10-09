@@ -19,7 +19,8 @@ def files(tmp_path):
     roi=dict(map_name='map',object_id='1',source_episode_index=1,visible_pixels=400)
     (vectors/'rows.jsonl').write_text(''.join(json.dumps(dict(**roi,observed_step=step))+'\n' for step in (0,8)))
     (vectors/'manifest.json').write_text(json.dumps(dict(vectors_sha256=file_sha256(vectors/'vectors.pt'))))
-    torch.save(dict(geometry={'map:1':torch.ones(16,10)},confidence=torch.tensor([.8,.8])),evidence/'geometry_quality.pt')
+    torch.save(dict(geometry={'map:1':torch.ones(16,10)},confidence=torch.tensor([.8,.8]),
+        entity_descriptors={'map:1':dict(name='hall',object_type='Building',contour_world=torch.tensor([[80.,80.],[120.,80.],[120.,120.],[80.,120.]]))}),evidence/'geometry_quality.pt')
     sample=dict(map_name='map',source_episode_index=1,query_index=0,step=0,current_roi_indices=[0],history_roi_indices=[0,1],labels=dict(target_world=[100,100,30]))
     (evidence/'samples.jsonl').write_text(json.dumps(sample)+'\n')
     manifest=dict(sha256=dict(queries=file_sha256(queries)),samples_sha256=file_sha256(evidence/'samples.jsonl'),
@@ -62,3 +63,10 @@ def test_real_cached_visual_residual_optimizer_step_keeps_a3_frozen(tmp_path):
     assert result['state_queries']==1 and result['unique_public_queries']==1
     assert model.visual_gate.grad is not None and torch.isfinite(model.visual_gate.grad)
     assert all(parameter.grad is None for parameter in a3.parameters())
+
+
+def test_observed_reference_binds_by_public_name_and_contour_not_target_id(tmp_path):
+    dataset=DynamicEvidenceDataset(*files(tmp_path),max_observed=2,associate_references=True)
+    inputs,_=dataset[0]
+    assert inputs['visual_confidence'][0]>0 and inputs['visual_vectors'][0].abs().sum()>0
+    assert inputs['observed_confidence'].sum()==0 # No duplicate reference in auxiliary evidence.
