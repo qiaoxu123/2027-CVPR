@@ -75,11 +75,12 @@ def convert(objects, processed, trajectories, bounds, output,
                 target_norm = normalize_xy(target_world, b).tolist()
                 references = bind_reference_landmarks(
                     relation.get("landmarks", []), objects[map_name], max_landmarks,
-                    allowed_types={"Building"} if static_only else None,
+                    allowed_types=None,  # retain named polygons of every CityRefer type
                 )
                 landmarks = [
                     {
                         "id": lm["id"], "name": lm["name"],
+                        "object_type": lm["object_type"], "aliases": lm.get("aliases", []),
                         "contour": normalize_xy(lm["contour"], b).tolist(),
                     }
                     for lm in references
