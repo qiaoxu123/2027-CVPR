@@ -117,6 +117,9 @@ def convert(objects, processed, trajectories, bounds, output,
                         "target_xy": target_norm,
                         "physical_map_sizes": [float(b[2]-b[0]), float(b[3]-b[1])],
                     }
+                    if renderer is None:
+                        record.pop("rgb_observations", None)
+                        record.pop("observation_cutoff_step", None)
                     f.write(json.dumps(record, ensure_ascii=False) + "\n")
                     count += 1
                     continue
