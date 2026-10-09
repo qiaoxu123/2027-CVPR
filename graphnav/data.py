@@ -17,36 +17,20 @@ from .config import GraphNavConfig
 from .geometry import resample_contour
 
 
+from .landmark_alias import canonical_name, resolve_references
+
+
 def normalized_name(s: str) -> str:
-    return " ".join(str(s).casefold().replace("-", " ").split())
+    return canonical_name(s)
 
 
 def bind_reference_landmarks(reference_names, objects: dict, max_landmarks: int,
                              allowed_types=None):
-    """Exact normalized textual match; return ALL ambiguous matches, never GT-nearest.
-
-    If a name corresponds to two polygons we preserve both distinct IDs. No
-    target information or human trajectory is consulted to break ties.
-    """
-    matches = []
-    seen = set()
-    searchable = sorted(objects.items(), key=lambda pair: str(pair[0]))
-    for wanted in reference_names:
-        norm = normalized_name(wanted)
-        for object_id, entry in searchable:
-            if allowed_types is not None and entry.get("object_type") not in allowed_types:
-                continue
-            name = str(entry.get("name", ""))
-            if not name or normalized_name(name) != norm:
-                continue
-            if len(entry.get("contour", [])) < 3:
-                continue
-            if object_id not in seen:
-                matches.append({"id": str(object_id), "name": name, "contour": entry["contour"]})
-                seen.add(object_id)
-            if len(matches) >= max_landmarks:
-                return matches
-    return matches
+    """Identity-safe exact/type-aware name binding; no GT or location oracle."""
+    return resolve_references(
+        reference_names, objects, max_landmarks=max_landmarks,
+        allowed_types=allowed_types,
+    )
 
 
 def resample_teacher_path(path_xy, future_start, steps):
