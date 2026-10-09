@@ -218,3 +218,7 @@ A3、Dynamic Belief、Trajectory/Stop的三组五轮训练均完成；统一逐�
 ## 三组Full系统Seen完成（2026-10-10）
 
 Seed2全量2470个Seen Episode：SR41.5789%、SPL39.2060%、OSR51.9838%、NE31.3440m、nDTW29.6769%、sDTW14.6229%、平均8.0636次运动、策略延迟68.5132ms、False-Stop58.3437%，实际评估1631.885s。Seed1当前SR42.6721%、SPL40.8949%较高；Seed0仍须用公开高度Stop修复后的Runtime重新确认，不能混合旧Runtime结果构造最终三种子表。三组原始配置/逐轮记录/全量Seen结果都保存在`reports/full_system_seed_progress_20261010`。phase20完整结束，phase21b困难负样本P1训练已启动；新GraphNav Unseen尚未开始。
+
+## P1 v3困难负样本公平对照完成（2026-10-10）
+
+完整Seen最佳R@1：Scratch40.8904%→P1v3 36.8508%；R@8：75.0618%→73.2894%；NE31.5274→32.6913m。Seen128有界导航SR41.4063%→36.7188%、SPL40.6522%→36.1198%。预训练67.42s+微调269.32s未带来增益，不提升为主干，保留全部负结果。独立报告`docs/P1_MATCHED_V3_HARD_20261010.md`及CSV/JSON已完成。phase21b全部结束，phase22公开高度Stop修复后的完整Seen确认已启动；新GraphNav Unseen尚未开始。
