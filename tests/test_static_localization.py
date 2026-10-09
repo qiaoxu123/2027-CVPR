@@ -96,3 +96,38 @@ def test_north_south_rule_changes_even_when_reference_prior_identical(tmp_path):
     southmost=4
     assert north["rules"][northmost]>north["rules"][southmost]
     assert south["rules"][northmost]<south["rules"][southmost]
+
+
+def test_static_query_deduplicates_human_trajectory_prefixes(tmp_path):
+    record=_make_record()
+    prefix=dict(record,episode_id="city_block_0:7:2:0")
+    later=dict(record,episode_id="city_block_0:7:2:4",
+               uav_pose=[.7,.8,1,0])
+    filename=tmp_path/"dupe.jsonl"
+    filename.write_text(
+        json.dumps(prefix)+"\n"+json.dumps(later)+"\n",encoding="utf-8"
+    )
+    dataset=StaticLocalizationDataset(filename,grid_size=4,
+                                      max_landmarks=2,max_roads=2,max_relations=2)
+    assert len(dataset)==1
+
+
+def test_forward_batch_strips_ground_truth_from_model_inputs(tmp_path):
+    from graphnav.static_experiment import forward_batch
+
+    record=_make_record()
+    filename=tmp_path/"one.jsonl"
+    filename.write_text(json.dumps(record)+"\n",encoding="utf-8")
+    ds=StaticLocalizationDataset(filename,grid_size=4,max_landmarks=2,
+                                 max_roads=2,max_relations=2)
+    batch=collate_static([ds[0]])
+    class Guard(torch.nn.Module):
+        def forward(self, kwargs, **other):
+            assert "target_xy" not in kwargs
+            assert "map_sizes" not in kwargs
+            return kwargs["prior"] + kwargs["rules"]
+    pred, labels=forward_batch(
+        Guard(),None,batch,torch.device("cpu"),"rules",False
+    )
+    assert pred.shape==(1,16)
+    assert "target_xy" in labels
