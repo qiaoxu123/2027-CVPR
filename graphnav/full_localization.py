@@ -137,8 +137,19 @@ class FullTokenGeometryLocalizer(nn.Module):
                 # The geometry control uses the SAME node projections and scoring
                 # layers as the GAT arm, but has NO message passing between nodes.
                 if variant == "geometry":
+                    node_features = batch["nodes"]
+                    if self.relative_position:
+                        # For P1, also eliminate absolute map XY from landmark
+                        # embeddings; otherwise the query is relative but the
+                        # anchor node still leaks its fixed training coordinates.
+                        valid_entities = batch["entity_valid"].to(node_features.dtype)
+                        reference_center = (
+                            node_features[..., :2] * valid_entities.unsqueeze(-1)
+                        ).sum(1) / valid_entities.sum(1, keepdim=True).clamp_min(1.)
+                        node_features = node_features.clone()
+                        node_features[..., :2] -= reference_center[:, None]
                     nodes = (
-                        self.gnn.node_geometry(batch["nodes"])
+                        self.gnn.node_geometry(node_features)
                         + self.gnn.name_projection(node_emb)
                         + self.gnn.type_embedding(batch["node_types"])
                     )
