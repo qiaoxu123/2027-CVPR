@@ -47,3 +47,18 @@ def test_rounded_legacy_goal_cache_is_rejected(tmp_path):
     paths=files(tmp_path);manifest=paths[2]/'manifest.json';state=json.loads(manifest.read_text())
     state['protocol'].pop('dense_logits_dtype');manifest.write_text(json.dumps(state))
     with pytest.raises(ValueError,match='FP32'):DynamicEvidenceDataset(*paths)
+
+
+def test_real_cached_visual_residual_optimizer_step_keeps_a3_frozen(tmp_path):
+    from graphnav.full_localization import FullTokenGeometryLocalizer
+    from graphnav.dynamic_belief import DynamicGoalBelief
+    from scripts.train_dynamic_belief import run_epoch
+    from torch.utils.data import DataLoader
+    dataset=DynamicEvidenceDataset(*files(tmp_path),max_observed=2)
+    a3=FullTokenGeometryLocalizer(hidden=16,text_dim=12,heads=4,max_relations=2,top_k=3,dropout=0)
+    model=DynamicGoalBelief(a3,vision_dim=6)
+    optimizer=torch.optim.AdamW([parameter for parameter in model.parameters() if parameter.requires_grad],lr=1e-3)
+    result=run_epoch(model,DataLoader(dataset,batch_size=1),SimpleNamespace(variant='visual'),torch.device('cpu'),optimizer)
+    assert result['state_queries']==1 and result['unique_public_queries']==1
+    assert model.visual_gate.grad is not None and torch.isfinite(model.visual_gate.grad)
+    assert all(parameter.grad is None for parameter in a3.parameters())
