@@ -6,10 +6,29 @@ import pytest
 import torch
 
 from graphnav.candidate_geometry import FullCandidateDataset, collate_full
+from graphnav.candidate_geometry import relative_entity_features
 from graphnav.full_localization import FullTokenGeometryLocalizer
 from graphnav.landmark_alias import resolve_references, build_name_index
 from graphnav.static_localization import cross_entropy_goal
 from graphnav.full_experiment import _batch_inputs
+
+
+def test_signed_boundary_depth_inside_closed_surface():
+    entity = {"kind": "building", "geometry_m": [[0, 0], [40, 0], [40, 40], [0, 40]]}
+    features = relative_entity_features([[20, 20], [40, 20], [60, 20]], [entity], 1)
+    np.testing.assert_allclose(features[:, 0, 5], [-.05, 0, .05])
+
+
+def test_explicit_unavailable_rgb_preserves_query(tmp_path):
+    sample(tmp_path)
+    filename = tmp_path / "one.jsonl"
+    rec = json.loads(filename.read_text())
+    rec.update(rgb_observations=[], observation_cutoff_step=0,
+               observation_unavailable_reason="nonpositive_camera_altitude")
+    filename.write_text(json.dumps(rec) + "\n")
+    ds = FullCandidateDataset(filename, grid_size=4, visual_required=True)
+    assert len(ds) == 1
+    assert ds[0]["rgb_observations"] == []
 
 
 def sample(tmp_path, *, with_landmark=True, with_rgb=False):

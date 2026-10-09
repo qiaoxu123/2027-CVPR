@@ -1,8 +1,46 @@
 from types import SimpleNamespace
+from collections import OrderedDict
 
+import numpy as np
+import pytest
 import torch
 
-from graphnav.foundations import FrozenBERT
+from graphnav.foundations import CandidateVisionCache, FrozenBERT, FrozenSigLIP2
+from graphnav.token_language import FrozenBERTTokens
+
+
+def test_frozen_feature_caches_roundtrip_and_reject_protocol_changes(tmp_path):
+    tokens = FrozenBERTTokens.__new__(FrozenBERTTokens)
+    tokens.name, tokens.revision, tokens.max_length = "bert-test", "revision", 512
+    vector, mask = torch.randn(2, 8), torch.ones(2).bool()
+    tokens.cache = OrderedDict(query=(vector, mask))
+    path = tmp_path / "tokens.pt"
+    tokens.save_cache(path)
+    tokens.cache.clear()
+    tokens.load_cache(path)
+    assert torch.equal(tokens.cache["query"][0], vector)
+    tokens.max_length = 96
+    with pytest.raises(ValueError, match="protocol"):
+        tokens.load_cache(path)
+    vision = CandidateVisionCache()
+    image = np.zeros((2, 2, 3), dtype=np.uint8)
+    valid = np.ones((2, 2), dtype=bool)
+    vision.put(image, valid, vector)
+    path = tmp_path / "vision.pt"
+    metadata = {"revision": "test", "precision": "bf16"}
+    vision.save(path, metadata)
+    restored = CandidateVisionCache()
+    restored.load(path, metadata)
+    assert torch.equal(restored.get(image, valid), vector)
+    with pytest.raises(ValueError, match="protocol"):
+        restored.load(path, {**metadata, "precision": "fp32"})
+
+
+def test_empty_siglip2_batch_uses_real_vision_config_width():
+    encoder = FrozenSigLIP2.__new__(FrozenSigLIP2)
+    encoder.device = torch.device("cpu")
+    encoder.model = SimpleNamespace(config=SimpleNamespace(vision_config=SimpleNamespace(hidden_size=768)))
+    assert encoder.encode([]).shape == (0, 768)
 
 
 def test_frozen_bert_cache_does_not_retain_all_token_states():

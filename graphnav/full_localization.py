@@ -130,7 +130,7 @@ class FullTokenGeometryLocalizer(nn.Module):
                         batch["nodes"], node_emb, batch["node_types"],
                         batch["adjacency"], batch["edges"], batch["node_valid"],
                     )
-                geo = self.geometry_proj(batch["pair_geometry"])
+                geo = self.geometry_proj(batch["pair_geometry"].to(features.dtype))
                 pair_context = nodes[:, None] + geo
                 relevance = self.pair_logits(torch.tanh(
                     self.pair_query(features)[:, :, None] +

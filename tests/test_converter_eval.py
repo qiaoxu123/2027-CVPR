@@ -70,11 +70,13 @@ def test_static_conversion_does_not_relabel_roads_as_buildings_or_need_trajector
               'contour': [[120, 120], [130, 120], [130, 130]]}}}
     proc = {'city_block_0': {'7': [{'landmarks': ['Main Road', 'Church']}]}}
     episodes = [{'area': 'city', 'block': 0, 'object_ids': [7], 'ann_ids': [0],
+                 'descriptions': ['Authoritative split instruction'],
                  'target_positions': [[200, 210, 60]]}]
     filename = tmp_path / 'static.jsonl'
     assert convert(obj, proc, episodes, {'city_block_0': [0, 0, 400, 400]},
                    filename, static_only=True) == (1, 0)
     record = json.loads(filename.read_text())
+    assert record['instruction'] == 'Authoritative split instruction'
     assert [r['id'] for r in record['landmarks']] == ['8', '9']
     assert [r['object_type'] for r in record['landmarks']] == ['TrafficRoad', 'Building']
     assert all('contour' in r and 'polyline' not in r for r in record['landmarks'])

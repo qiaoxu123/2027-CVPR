@@ -1,0 +1,54 @@
+{
+  "interpretation": "Post-hoc inference sensitivity; no retraining or model selection",
+  "checkpoint": "runs/a4_batch64_workers4/gat_best.pt",
+  "metrics": {
+    "val_seen": {
+      "full": {
+        "samples": 2426,
+        "NE_m": 33.79207473968732,
+        "R@1/20m": 0.3763396537510305,
+        "R@4/20m": 0.5993404781533388,
+        "R@8/20m": 0.7098103874690849,
+        "surface_anchor_fraction": 1.0,
+        "relation_grounded_fraction": 0.17889530090684255,
+        "nonbuilding_surface_fraction": 0.7221764220939819,
+        "road_surface_fraction": 0.6990931574608409
+      },
+      "self_only": {
+        "samples": 2426,
+        "NE_m": 34.95178239009445,
+        "R@1/20m": 0.36356141797197034,
+        "R@4/20m": 0.5861500412201154,
+        "R@8/20m": 0.6949711459192086,
+        "surface_anchor_fraction": 1.0,
+        "relation_grounded_fraction": 0.17889530090684255,
+        "nonbuilding_surface_fraction": 0.7221764220939819,
+        "road_surface_fraction": 0.6990931574608409
+      }
+    },
+    "val_unseen": {
+      "full": {
+        "samples": 2679,
+        "NE_m": 52.604517271377205,
+        "R@1/20m": 0.20119447555057857,
+        "R@4/20m": 0.3661814109742441,
+        "R@8/20m": 0.48002986188876445,
+        "surface_anchor_fraction": 0.9985069055617768,
+        "relation_grounded_fraction": 0.20977976857036207,
+        "nonbuilding_surface_fraction": 0.6554684583799926,
+        "road_surface_fraction": 0.5912653975363942
+      },
+      "self_only": {
+        "samples": 2679,
+        "NE_m": 55.0428095892678,
+        "R@1/20m": 0.18962299365434865,
+        "R@4/20m": 0.3583426651735722,
+        "R@8/20m": 0.48077640910787606,
+        "surface_anchor_fraction": 0.9985069055617768,
+        "relation_grounded_fraction": 0.20977976857036207,
+        "nonbuilding_surface_fraction": 0.6554684583799926,
+        "road_surface_fraction": 0.5912653975363942
+      }
+    }
+  }
+}

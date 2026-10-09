@@ -51,16 +51,15 @@ class FrozenSigLIP2:
         from transformers import AutoModel, AutoProcessor
 
         self.device = torch.device(device)
-        self.processor = AutoProcessor.from_pretrained(name)
+        self.processor = AutoProcessor.from_pretrained(name, use_fast=False)
         self.model = AutoModel.from_pretrained(name).to(self.device).eval()
         self.model.requires_grad_(False)
 
     @torch.inference_mode()
     def encode(self, crops: list[np.ndarray]) -> torch.Tensor:
-        from PIL import Image
-
         if not crops:
-            return torch.empty((0, self.model.config.projection_dim), device=self.device)
+            return torch.empty((0, self.model.config.vision_config.hidden_size), device=self.device)
+        from PIL import Image
         pil = [Image.fromarray(arr, mode="RGB") for arr in crops]
         batch = self.processor(images=pil, return_tensors="pt").to(self.device)
         features = self.model.get_image_features(**batch)
@@ -96,3 +95,12 @@ class CandidateVisionCache:
         self._data.move_to_end(key)
         while len(self._data) > self.limit:
             self._data.popitem(last=False)
+
+    def save(self, path, metadata):
+        torch.save({"metadata": metadata, "data": dict(self._data)}, path)
+
+    def load(self, path, metadata):
+        state = torch.load(path, map_location="cpu", weights_only=True)
+        if state["metadata"] != metadata:
+            raise ValueError("Frozen vision cache protocol differs")
+        self._data = OrderedDict(state["data"])

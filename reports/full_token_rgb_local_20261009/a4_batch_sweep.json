@@ -1,0 +1,40 @@
+{
+  "completed": [
+    {
+      "batch_size": 64,
+      "workers": 4,
+      "epochs": 5,
+      "best_epoch": 4,
+      "first_epoch_seconds": 68.60131903993897,
+      "last_epoch_seconds": 31.06168785202317,
+      "mean_epochs2to5_seconds": 39.681497787241824,
+      "total_train_seconds": 227.32731018890627,
+      "last_epoch_samples_s": 681.4182185087336,
+      "peak_allocated_gpu_gib": 3.8339667320251465,
+      "val_seen_R8": 0.7106347897774113,
+      "val_seen_NE_m": 33.81003791324776,
+      "val_unseen_R8": 0.48077640910787606,
+      "val_unseen_NE_m": 52.7281680504036
+    },
+    {
+      "batch_size": 128,
+      "workers": 4,
+      "epochs": 5,
+      "best_epoch": 5,
+      "first_epoch_seconds": 71.1189323279541,
+      "last_epoch_seconds": 27.95187738002278,
+      "mean_epochs2to5_seconds": 38.594468332710676,
+      "total_train_seconds": 225.4968056587968,
+      "last_epoch_samples_s": 757.2299961192357,
+      "peak_allocated_gpu_gib": 7.228340148925781,
+      "val_seen_R8": 0.6879637262984336,
+      "val_seen_NE_m": 34.6492066536673,
+      "val_unseen_R8": 0.49048152295632697,
+      "val_unseen_NE_m": 53.45887629333473
+    }
+  ],
+  "selected_batch_size": 64,
+  "selection": "Val Seen R8; Unseen not used to choose configuration",
+  "batch256": "Stopped on user request after 2 epochs; excluded from selection",
+  "A5_batch_sweep": "Cancelled on user request; train full A5 bs16 from selected A4"
+}

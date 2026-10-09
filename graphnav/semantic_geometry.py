@@ -96,6 +96,14 @@ def point_inside_polygon(point, polygon):
 def geometry_distance(point, geometry, is_road=False):
     """Distance to road polyline OR polygon exterior, zero when inside polygon."""
     p = np.asarray(point, np.float32)
+    try:
+        import shapely
+        from shapely.geometry import LineString, Polygon
+        region = LineString(geometry) if is_road else Polygon(geometry)
+        if region.is_valid and hasattr(shapely, "points"):
+            return np.asarray(shapely.distance(shapely.points(p), region), dtype=np.float32)
+    except ImportError:
+        pass
     segments = edges_of(geometry, closed=not is_road)
     if not segments:
         return np.full(p.shape[:-1], np.inf, np.float32)
@@ -122,6 +130,16 @@ def _segments_intersect(a, b, c, d):
 
 def geometry_pair_distance(a, b, a_road=False, b_road=False):
     """Segment-to-segment distance in meters, including overlaps/intersections."""
+    # Exact GEOS distance avoids Python O(Va*Vb) loops on detailed CityRefer
+    # road-area contours. Invalid polygons retain the original fallback.
+    try:
+        from shapely.geometry import LineString, Polygon
+        ga = LineString(a) if a_road else Polygon(a)
+        gb = LineString(b) if b_road else Polygon(b)
+        if ga.is_valid and gb.is_valid:
+            return float(ga.distance(gb))
+    except ImportError:
+        pass
     ea, eb = edges_of(a, closed=not a_road), edges_of(b, closed=not b_road)
     if not ea or not eb:
         return float("inf")

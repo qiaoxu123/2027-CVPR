@@ -1,6 +1,7 @@
 """Deduplicate observable queries and remove train/validation text overlap."""
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -55,9 +56,17 @@ def prepare(data_dir, output, *, refresh_raw=False):
         "Exact map+instruction; first source record retained, never target-based. Validation preserved; train overlaps removed by text only."
     )
     for split, records in data.items():
-        (root / f"graphnav_{split}.jsonl").write_text(
+        final_path = root / f"graphnav_{split}.jsonl"
+        final_path.write_text(
             "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records.values())
         )
+        provenance_path = Path(str(final_path) + ".provenance.json")
+        if provenance_path.exists():
+            provenance = json.loads(provenance_path.read_text())
+            provenance["output_sha256"] = hashlib.sha256(final_path.read_bytes()).hexdigest()
+            provenance["query_deduplication_policy"] = report["policy"]
+            provenance["final_records"] = len(records)
+            provenance_path.write_text(json.dumps(provenance, indent=2))
         report[split]["final_count"] = len(records)
     Path(output).write_text(json.dumps(report, indent=2, ensure_ascii=False))
     print({split: len(r) for split, r in data.items()}, "train overlaps removed", len(removed))

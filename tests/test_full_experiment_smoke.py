@@ -1,10 +1,12 @@
 """End-to-end CPU training smoke with fake pretrained encoders (no downloads)."""
 
 from argparse import Namespace
+from types import SimpleNamespace
 import json
 
 import cv2
 import numpy as np
+import pytest
 import torch
 from torch.utils.data import DataLoader
 
@@ -26,6 +28,27 @@ class FakeFrozenVision:
     def encode(self, images):
         assert all(img.dtype == np.uint8 and img.shape == (224, 224, 3) for img in images)
         return torch.ones(len(images), 6)
+
+
+def test_prediction_rows_match_aggregate_with_tied_logits(tmp_path, monkeypatch):
+    # All logits tie; torch.topk(k=20) need not share topk(k=8)'s ordering.
+    logits = torch.zeros(1, 784)
+    grid = torch.stack((torch.arange(784).float(), torch.zeros(784)), dim=-1)[None]
+    target = grid[:, logits.topk(8).indices[0, 0]]
+    batch = {"grid_xy": grid, "target_xy": target, "map_sizes": torch.ones(1, 2),
+             "episode_id": ["map:1"], "text": ["query"],
+             "relation_count": torch.zeros(1), "surface_count": torch.zeros(1),
+             "nonbuilding_surface_count": torch.zeros(1),
+             "node_types": torch.zeros(1, 1), "node_valid": torch.zeros(1, 1).bool()}
+    field = SimpleNamespace(belief_logits=logits, visual_coverage=None)
+    monkeypatch.setattr("graphnav.full_experiment.run_model", lambda *args: field)
+    path = tmp_path / "queries.jsonl"
+    metrics = evaluate(SimpleNamespace(eval=lambda: None), [batch], None, None, None,
+                       Namespace(), "rules", torch.device("cpu"), path)
+    row = json.loads(path.read_text())
+    assert row["NE_m"] == metrics["NE_m"]
+    for k in (1, 4, 8):
+        assert float(row["hits"][str(k)]) == metrics[f"R@{k}/20m"]
 
 
 def test_gat_checkpoint_to_rgb_visual_only_finetuning(tmp_path):
@@ -88,3 +111,10 @@ def test_gat_checkpoint_to_rgb_visual_only_finetuning(tmp_path):
     assert metrics["samples"] == 1
     assert metrics["visual_proposals_used"] > 0
     assert (tmp_path / "rgb_best.pt").exists()
+    for name, value in rgb.state_dict().items():
+        if not name.startswith(("vision_proj.", "visual_score.")):
+            assert torch.equal(value, model.state_dict()[name]), name
+    ds.records[0]["target_xy"] = [.9, .9]
+    with pytest.raises(ValueError, match="static queries"):
+        train_one("rgb", loaders, FakeFrozenBERT(), FakeFrozenVision(), cache,
+                  args, torch.device("cpu"), tmp_path)

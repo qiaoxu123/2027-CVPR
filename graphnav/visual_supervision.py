@@ -46,10 +46,9 @@ def visual_candidate_batch(
     for i in range(b):
         sequence = observation_sequences[i]
         if not sequence:
-            raise ValueError(
-                "visual training requires observed RGB prefixes; "
-                "rerun prepare_citynav with --rgbd-dir and --observations-out"
-            )
+            # Dataset validation requires an explicit unavailable-observation
+            # reason. Preserve this query and apply exactly zero RGB residual.
+            continue
         bounds = np.asarray(world_bounds[i], dtype=np.float32)
         memory = ObservedRGBMemory(bounds, size=memory_size)
         for observation in sequence:
@@ -61,8 +60,21 @@ def visual_candidate_batch(
                 image, np.asarray(observation["footprint_world"], dtype=np.float32)
             )
         norm_xy = outputs.candidate_xy[i].detach().cpu().numpy()
+        # Exact empty-center screening: the central crop covers at most
+        # extent/8 on either side. Outside the observed pixel bounding box
+        # (plus sampling tolerance), center coverage is necessarily zero.
+        rows, cols = np.nonzero(memory.seen)
+        if not len(rows):
+            continue
+        observed_lo = np.array([cols.min(), rows.min()])
+        observed_hi = np.array([cols.max(), rows.max()])
+        center_margin = crop_extent_m * (memory.size - 1) / (bounds[2:] - bounds[:2]) / 8 + 1
+        world_candidates = bounds[:2] + norm_xy * (bounds[2:] - bounds[:2])
+        pixels = memory.world_to_image(world_candidates)
         for j, xy in enumerate(norm_xy):
-            world_xy = bounds[:2] + xy * (bounds[2:] - bounds[:2])
+            if np.any(pixels[j] < observed_lo - center_margin) or np.any(pixels[j] > observed_hi + center_margin):
+                continue
+            world_xy = world_candidates[j]
             crop = memory.crop(world_xy, extent_m=crop_extent_m)
             coverage = min(crop.coverage, crop.center_coverage)
             if coverage < min_coverage:

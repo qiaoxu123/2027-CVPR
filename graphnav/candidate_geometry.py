@@ -31,7 +31,10 @@ def relative_entity_features(world_xy, entities, capacity, map_size_scale=400.):
         dist = np.linalg.norm(delta, axis=1)
         unit = delta / np.maximum(dist[:, None], 1e-5)
         line = e["kind"] == "road"
-        boundary = geometry_distance(xy, poly, is_road=line)
+        # geometry_distance deliberately returns zero inside a surface. That
+        # is appropriate for a region prior but loses signed boundary depth.
+        closed_line = poly if line else np.vstack((poly, poly[0]))
+        boundary = geometry_distance(xy, closed_line, is_road=True)
         inside = np.zeros(len(xy), np.float32) if line else point_inside_polygon(xy, poly).astype(np.float32)
         boundary = np.where(inside > 0, -boundary, boundary)
         width_height = poly.max(axis=0) - poly.min(axis=0)
@@ -55,7 +58,7 @@ class FullCandidateDataset(StaticLocalizationDataset):
     def __init__(self, *args, visual_required=False, **kwargs):
         super().__init__(*args, **kwargs)
         self.visual_required = visual_required
-        self._pair_cache = lru_cache(maxsize=8192)(self._pair_features)
+        self._pair_cache = lru_cache(maxsize=None)(self._pair_features)
 
     def _pair_features(self, idx):
         record = self.records[idx]
@@ -74,7 +77,8 @@ class FullCandidateDataset(StaticLocalizationDataset):
         record = self.records[idx]
         source = record.get("rgb_observations", [])
         if self.visual_required:
-            if not source:
+            unavailable = record.get("observation_unavailable_reason") == "nonpositive_camera_altitude"
+            if not source and not unavailable:
                 raise ValueError(
                     "RGB variant requested but record has no observed prefix. "
                     "Prepare episode observations first; never use a full map."
@@ -87,9 +91,9 @@ class FullCandidateDataset(StaticLocalizationDataset):
                 raise ValueError("RGB observations require explicit per-frame causal step")
             if steps != sorted(steps) or any(step < 0 or step > cutoff for step in steps):
                 raise ValueError("RGB observation contains a future/out-of-order frame")
-            if source[-1]["step"] != cutoff:
+            if source and source[-1]["step"] != cutoff:
                 raise ValueError("RGB prefix does not include its declared cutoff frame")
-        output["pair_geometry"] = torch.from_numpy(self._pair_cache(idx)).float()
+        output["pair_geometry"] = torch.from_numpy(self._pair_cache(idx))
         count = len(self._prepared(idx)[0]["entities"])
         entity_mask = torch.zeros_like(output["node_valid"])
         entity_mask[:count] = True

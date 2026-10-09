@@ -14,16 +14,29 @@ import torch
 class FrozenBERTTokens:
     def __init__(
         self, name="bert-base-uncased", device="cuda",
-        max_length=96, cache_limit=12000,
+        max_length=96, cache_limit=50000,
     ):
         from transformers import AutoModel, AutoTokenizer
+        self.name = name
         self.device = torch.device(device)
         self.max_length = max_length
         self.cache_limit = cache_limit
         self.tokenizer = AutoTokenizer.from_pretrained(name)
         self.model = AutoModel.from_pretrained(name).to(self.device).eval()
         self.model.requires_grad_(False)
+        self.revision = getattr(self.model.config, "_commit_hash", None)
         self.cache: OrderedDict[str, tuple[torch.Tensor, torch.Tensor]] = OrderedDict()
+
+    def save_cache(self, path):
+        torch.save({"name": self.name, "revision": self.revision,
+                    "max_length": self.max_length, "cache": dict(self.cache)}, path)
+
+    def load_cache(self, path):
+        state = torch.load(path, map_location="cpu", weights_only=True)
+        if (state["name"], state["revision"], state["max_length"]) != (
+                self.name, self.revision, self.max_length):
+            raise ValueError("Frozen BERT cache protocol differs")
+        self.cache = OrderedDict(state["cache"])
 
     @torch.inference_mode()
     def _load(self, texts):

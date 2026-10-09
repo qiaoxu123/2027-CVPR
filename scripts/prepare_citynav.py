@@ -73,7 +73,11 @@ def convert(objects, processed, trajectories, bounds, output,
                 obj_id = str(episode["object_ids"][0])
                 ann_id = int(episode["ann_ids"][0])
                 target_obj = objects[map_name][obj_id]
-                desc = target_obj["descriptions"][ann_id]
+                # The split is the authoritative instruction used by SBF.
+                # Objects may carry an older annotation revision.
+                desc = (episode.get("descriptions") or target_obj["descriptions"])[
+                    0 if episode.get("descriptions") else ann_id
+                ]
                 relation = processed[map_name][obj_id][ann_id]
                 target_world = np.asarray(episode["target_positions"][-1][:2], np.float32)
                 target_norm = normalize_xy(target_world, b).tolist()
@@ -91,6 +95,7 @@ def convert(objects, processed, trajectories, bounds, output,
                 ]
                 if static_only:
                     observed_prefix = []
+                    observation_unavailable_reason = None
                     if renderer is not None:
                         if rgb_observation_step is None:
                             raise ValueError("static RGB requires explicit --rgb-observation-step")
@@ -102,9 +107,11 @@ def convert(objects, processed, trajectories, bounds, output,
                             raise ValueError("rendered RGB requires map ground level")
                         episode_key = f"{obj_id}_{ann_id}_{count}"
                         for t in range(rgb_observation_step + 1):
-                            observed_prefix.append(renderer.render(
-                                map_name, episode_key, t, poses[t], ground
-                            ))
+                            if float(poses[t][2]) <= float(ground):
+                                observation_unavailable_reason = "nonpositive_camera_altitude"
+                                observed_prefix = []
+                                break
+                            observed_prefix.append(renderer.render(map_name, episode_key, t, poses[t], ground))
                     record = {
                         "dataset_version": dataset_version,
                         "match_mode": match_mode,
@@ -117,6 +124,8 @@ def convert(objects, processed, trajectories, bounds, output,
                         "target_xy": target_norm,
                         "physical_map_sizes": [float(b[2]-b[0]), float(b[3]-b[1])],
                     }
+                    if observation_unavailable_reason:
+                        record["observation_unavailable_reason"] = observation_unavailable_reason
                     if renderer is None:
                         record.pop("rgb_observations", None)
                         record.pop("observation_cutoff_step", None)
@@ -223,6 +232,7 @@ def main():
                 h.update(chunk)
         return h.hexdigest()
     provenance = {
+        "output_sha256": sha256_file(args.output),
         "dataset_version_declared": args.dataset_version,
         "match_mode": args.match_mode,
         "static_only": args.static_only,

@@ -1,0 +1,298 @@
+{
+  "paired_comparisons": {
+    "val_seen": {
+      "rules_to_tokens": {
+        "R8_difference_pp": 18.46661170651278,
+        "paired_query_bootstrap_95ci_pp": [
+          16.075845012366035,
+          20.733718054410552
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          6.045246974387842,
+          32.53242433997174
+        ],
+        "maps": 23,
+        "queries": 2426,
+        "R8_gained_queries": 692,
+        "R8_lost_queries": 244
+      },
+      "rules_to_geometry": {
+        "R8_difference_pp": 26.42209398186315,
+        "paired_query_bootstrap_95ci_pp": [
+          24.11376751854905,
+          28.525350370981034
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          15.933977313009569,
+          38.27990381839666
+        ],
+        "maps": 23,
+        "queries": 2426,
+        "R8_gained_queries": 807,
+        "R8_lost_queries": 166
+      },
+      "rules_to_gat": {
+        "R8_difference_pp": 23.907666941467436,
+        "paired_query_bootstrap_95ci_pp": [
+          21.639530090684257,
+          25.927452596867273
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          14.450556034895984,
+          34.25839237914507
+        ],
+        "maps": 23,
+        "queries": 2426,
+        "R8_gained_queries": 739,
+        "R8_lost_queries": 159
+      },
+      "geometry_to_gat": {
+        "R8_difference_pp": -2.514427040395713,
+        "paired_query_bootstrap_95ci_pp": [
+          -3.998351195383347,
+          -1.030502885408079
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          -5.001769575527092,
+          0.22943319118691985
+        ],
+        "maps": 23,
+        "queries": 2426,
+        "R8_gained_queries": 143,
+        "R8_lost_queries": 204
+      },
+      "gat_to_rgb": {
+        "R8_difference_pp": 0.3709810387469085,
+        "paired_query_bootstrap_95ci_pp": [
+          -0.08244023083264633,
+          0.8244023083264632
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          -0.13551826961755772,
+          0.8485445588893863
+        ],
+        "maps": 23,
+        "queries": 2426,
+        "R8_gained_queries": 20,
+        "R8_lost_queries": 11
+      }
+    },
+    "val_unseen": {
+      "rules_to_tokens": {
+        "R8_difference_pp": -7.540126913027249,
+        "paired_query_bootstrap_95ci_pp": [
+          -9.556737588652481,
+          -5.449794699514745
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          -15.424242424242424,
+          -0.5828476269775187
+        ],
+        "maps": 4,
+        "queries": 2679,
+        "R8_gained_queries": 317,
+        "R8_lost_queries": 519
+      },
+      "rules_to_geometry": {
+        "R8_difference_pp": 4.8152295632698765,
+        "paired_query_bootstrap_95ci_pp": [
+          2.9861888764464353,
+          6.79357969391564
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          2.497918401332223,
+          7.465543644716692
+        ],
+        "maps": 4,
+        "queries": 2679,
+        "R8_gained_queries": 417,
+        "R8_lost_queries": 288
+      },
+      "rules_to_gat": {
+        "R8_difference_pp": 1.941022769690183,
+        "paired_query_bootstrap_95ci_pp": [
+          0.22396416573348266,
+          3.807390817469205
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          -3.6605657237936775,
+          6.4996614759647935
+        ],
+        "maps": 4,
+        "queries": 2679,
+        "R8_gained_queries": 336,
+        "R8_lost_queries": 284
+      },
+      "geometry_to_gat": {
+        "R8_difference_pp": -2.874206793579694,
+        "paired_query_bootstrap_95ci_pp": [
+          -4.367301231802911,
+          -1.4184397163120568
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          -8.901830282861898,
+          3.8823172581134364
+        ],
+        "maps": 4,
+        "queries": 2679,
+        "R8_gained_queries": 167,
+        "R8_lost_queries": 244
+      },
+      "gat_to_rgb": {
+        "R8_difference_pp": 0.11198208286674133,
+        "paired_query_bootstrap_95ci_pp": [
+          -0.2612915266890631,
+          0.48525569242254574
+        ],
+        "map_cluster_bootstrap_95ci_pp": [
+          -0.19142419601837674,
+          0.3923766816143498
+        ],
+        "maps": 4,
+        "queries": 2679,
+        "R8_gained_queries": 15,
+        "R8_lost_queries": 12
+      }
+    }
+  },
+  "rgb_effect": {
+    "val_seen": {
+      "queries_with_no_valid_rgb": 1594,
+      "no_rgb_predictions_changed": 0,
+      "A4_R20": 0.8520197856553998,
+      "A5_R20": 0.8532563891178895
+    },
+    "val_unseen": {
+      "queries_with_no_valid_rgb": 1800,
+      "no_rgb_predictions_changed": 0,
+      "A4_R20": 0.6472564389697648,
+      "A5_R20": 0.6498693542366555
+    }
+  },
+  "failure_groups": {
+    "val_seen": {
+      "rules": {
+        "relation_parsed": {
+          "queries": 434,
+          "R8": 0.5645161290322581,
+          "NE_m": 50.17482013334327
+        },
+        "no_relation": {
+          "queries": 1992,
+          "R8": 0.4503012048192771,
+          "NE_m": 60.93329434898723
+        }
+      },
+      "tokens": {
+        "relation_parsed": {
+          "queries": 434,
+          "R8": 0.7119815668202765,
+          "NE_m": 35.006690824498776
+        },
+        "no_relation": {
+          "queries": 1992,
+          "R8": 0.6430722891566265,
+          "NE_m": 41.97215796857474
+        }
+      },
+      "geometry": {
+        "relation_parsed": {
+          "queries": 434,
+          "R8": 0.804147465437788,
+          "NE_m": 26.53028166280364
+        },
+        "no_relation": {
+          "queries": 1992,
+          "R8": 0.7198795180722891,
+          "NE_m": 32.5697384385998
+        }
+      },
+      "gat": {
+        "relation_parsed": {
+          "queries": 434,
+          "R8": 0.7926267281105991,
+          "NE_m": 28.36247037042121
+        },
+        "no_relation": {
+          "queries": 1992,
+          "R8": 0.6917670682730924,
+          "NE_m": 34.975030578044525
+        }
+      },
+      "rgb": {
+        "relation_parsed": {
+          "queries": 434,
+          "R8": 0.7972350230414746,
+          "NE_m": 28.645543789121962
+        },
+        "no_relation": {
+          "queries": 1992,
+          "R8": 0.695281124497992,
+          "NE_m": 34.90530729916201
+        }
+      }
+    },
+    "val_unseen": {
+      "rules": {
+        "relation_parsed": {
+          "queries": 562,
+          "R8": 0.5676156583629893,
+          "NE_m": 55.97731789893527
+        },
+        "no_relation": {
+          "queries": 2117,
+          "R8": 0.4322153991497402,
+          "NE_m": 70.75635139177473
+        }
+      },
+      "tokens": {
+        "relation_parsed": {
+          "queries": 562,
+          "R8": 0.4804270462633452,
+          "NE_m": 59.61253325710093
+        },
+        "no_relation": {
+          "queries": 2117,
+          "R8": 0.35994331601322627,
+          "NE_m": 75.1031973941967
+        }
+      },
+      "geometry": {
+        "relation_parsed": {
+          "queries": 562,
+          "R8": 0.6370106761565836,
+          "NE_m": 41.547677800324465
+        },
+        "no_relation": {
+          "queries": 2117,
+          "R8": 0.4747283892300425,
+          "NE_m": 50.24369793198387
+        }
+      },
+      "gat": {
+        "relation_parsed": {
+          "queries": 562,
+          "R8": 0.5907473309608541,
+          "NE_m": 44.22539233821991
+        },
+        "no_relation": {
+          "queries": 2117,
+          "R8": 0.45063769485120453,
+          "NE_m": 54.82892347350681
+        }
+      },
+      "rgb": {
+        "relation_parsed": {
+          "queries": 562,
+          "R8": 0.5889679715302492,
+          "NE_m": 44.14064588665538
+        },
+        "no_relation": {
+          "queries": 2117,
+          "R8": 0.45252716107699575,
+          "NE_m": 54.77511936355775
+        }
+      }
+    }
+  }
+}
