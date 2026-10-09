@@ -1,4 +1,6 @@
 # GraphNav — Graph-First Aerial Vision-and-Language Navigation
+> **Static-first research branch**: for Prior → Geometry Rules → Typed GAT localization ablations on a single RTX Pro 6000 96GB (batch 16), see [static-geometry protocol](docs/STATIC_GEOMETRY_ABLATIONS.md). RGB/Trajectory/Stop are deliberately excluded until static goal localization gains are established.
+
 
 **全新独立架构。** 针对 CityNav / CityRefer 的图驱动无人机语言导航研究工程。
 不使用 HETT 的 Transformer、Heatmap Head、Two-Stage Controller、预训练权重或其模型文件。
