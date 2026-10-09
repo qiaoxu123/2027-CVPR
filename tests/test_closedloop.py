@@ -48,3 +48,14 @@ def test_catalog_never_resolves_target_id_during_rollout():
 
 def test_metrics_reject_nonfinite_inputs():
     with pytest.raises(ValueError): score_trace([[0,np.nan]],[0,0],[[0,0]],'horizon')
+
+
+def test_a3_public_map_binding_keeps_homonymous_road_fragments_without_target():
+    from graphnav.a3_runtime import public_static_record
+    objects={1:dict(name='Main Road',object_type='TrafficRoad',contour=[[0,0],[10,0],[10,10],[0,10]]),
+             2:dict(name='Main Road',object_type='TrafficRoad',contour=[[20,0],[30,0],[30,10],[20,10]])}
+    episode=PublicEpisode('map','near Main Road',np.zeros(4),(),('Main Road',))
+    transform=SimpleNamespace(x_min=0,y_min=0,x_max=100,y_max=100)
+    record=public_static_record(episode,transform,SimpleNamespace(objects={'map':objects}))
+    assert len(record['landmarks'])==2 and record['target_xy']==[0.,0.]
+    assert all('id' not in landmark for landmark in record['landmarks'])

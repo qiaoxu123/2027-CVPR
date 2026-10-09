@@ -15,7 +15,7 @@ def main():
     if path.exists():raise ValueError('refusing to overwrite telemetry')
     path.parent.mkdir(parents=True,exist_ok=True)
     with path.open('w') as f:
-        w=csv.writer(f);w.writerow(['utc','unix','gpu_util_percent','memory_mib','power_w'])
+        w=csv.writer(f,lineterminator="\n");w.writerow(['utc','unix','gpu_util_percent','memory_mib','power_w'])
         while not Path(args.stop_file).exists():
             raw=subprocess.check_output(['nvidia-smi','--query-gpu=utilization.gpu,memory.used,power.draw','--format=csv,noheader,nounits'],text=True)
             w.writerow([datetime.now(timezone.utc).isoformat(),time.time(),*raw.strip().split(',')]);f.flush()

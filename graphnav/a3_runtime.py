@@ -8,15 +8,20 @@ import torch
 from .candidate_geometry import FullCandidateDataset, collate_full
 from .full_experiment import _batch_inputs, new_model
 from .token_language import FrozenBERTTokens
+from .landmark_alias import resolve_references
 
 
-def public_static_record(episode, transform, catalog):
+def public_static_record(episode, transform, catalog, *, max_landmarks=16):
     bounds=np.array([transform.x_min,transform.y_min,transform.x_max,transform.y_max])
     landmarks=[]
-    for landmark in episode.references:
-        source=catalog.objects[episode.map_name][landmark.object_id]
-        landmarks.append(dict(name=landmark.name,object_type=source.get('object_type','Building'),
-            contour=((landmark.contour-bounds[:2])/(bounds[2:]-bounds[:2])).tolist()))
+    reference_names=episode.reference_names or tuple(lm.name for lm in episode.references)
+    # Preserve all homonymous source fragments as in the verified A3 converter;
+    # collapsing them to SBF's largest polygon would silently change the model input.
+    resolved=resolve_references(reference_names,catalog.objects[episode.map_name],
+        max_landmarks=max_landmarks,match_mode='fuzzy')
+    for landmark in resolved:
+        landmarks.append(dict(name=landmark['name'],object_type=landmark['object_type'],aliases=landmark['aliases'],
+            contour=((np.asarray(landmark['contour'])-bounds[:2])/(bounds[2:]-bounds[:2])).tolist()))
     return dict(map_name=episode.map_name,instruction=episode.instruction,
         world_bounds=bounds.tolist(),physical_map_sizes=(bounds[2:]-bounds[:2]).tolist(),
         landmarks=landmarks,dataset_version='revised',
@@ -38,7 +43,7 @@ class A3WaypointPolicy:
         self.record=None
 
     def set_episode(self, episode, transform, catalog):
-        self.record=public_static_record(episode,transform,catalog)
+        self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
 
     @torch.no_grad()
     def predict(self,state,instruction):

@@ -10,6 +10,7 @@ class PublicEpisode:
     instruction: str
     start_pose: np.ndarray
     references: tuple
+    reference_names: tuple = ()
 
 
 @dataclass(frozen=True)

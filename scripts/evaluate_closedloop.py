@@ -91,7 +91,8 @@ def main():
             # IDs are used only to prepare supplied CityRefer language bindings and output labels.
             # Neither record, target, IDs, nor expert future enters the policy or rollout.
             public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
-                                   tuple(catalog.referenced_landmarks(record)))
+                                   tuple(catalog.referenced_landmarks(record)),
+                                   tuple(catalog.referenced_landmark_names(record)))
             if args.model=='a3': runtime.set_episode(public,builder.transform(public.map_name),catalog)
             poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
