@@ -58,6 +58,7 @@ def main():
     for key in ('samples','queries','cache','output'):parser.add_argument('--'+key,required=True)
     parser.add_argument('--epochs',type=int,default=5);parser.add_argument('--batch-size',type=int,default=256)
     parser.add_argument('--workers',type=int,default=4);parser.add_argument('--seed',type=int,default=0)
+    parser.add_argument('--split-seed',type=int,default=0,help='Fixed query-family split independent of training initialization/shuffle seed')
     parser.add_argument('--lr',type=float,default=2e-4);parser.add_argument('--device',default='cuda')
     parser.add_argument('--resume');args=parser.parse_args();out=Path(args.output)
     if out.exists() and not args.resume:raise ValueError('refusing trajectory experiment overwrite')
@@ -65,8 +66,8 @@ def main():
     device=torch.device(args.device)
     fingerprints=input_fingerprint(args,('samples','queries'))
     fingerprints['cache_manifest']=input_fingerprint(argparse.Namespace(manifest=str(Path(args.cache)/'manifest.json')),('manifest',))['manifest']
-    train=FrozenTrajectoryDataset(args.samples,args.queries,args.cache,split='train',seed=args.seed)
-    dev=FrozenTrajectoryDataset(args.samples,args.queries,args.cache,split='dev',seed=args.seed)
+    train=FrozenTrajectoryDataset(args.samples,args.queries,args.cache,split='train',seed=args.split_seed)
+    dev=FrozenTrajectoryDataset(args.samples,args.queries,args.cache,split='dev',seed=args.split_seed)
     # Share immutable features; DataLoader forks inherit only the compact CPU tensors.
     dev.features=train.features
     hidden=train.features['candidate_context'].shape[-1]

@@ -1,0 +1,20 @@
+{
+  "inspection": "Agent visual inspection of existing post-rollout plots; not an independent human segmentation audit.",
+  "cases": [
+    {
+      "image": "lost_1088.png",
+      "map": "cambridge_block_9",
+      "source_episode_index": 1088,
+      "observation": "Ordinal third building between roads with a tree behind. A3 ends 11.5m from target; joint-history ends 53.5m away in a different road/building region. Navigation paths are direct and stable in XY; wrong goal ranking dominates this case. Full-map background, GT and human future are post-rollout diagnostics only.",
+      "hypothesis": "Current named-landmark evidence does not explicitly identify or order the sequence of unnamed candidate buildings."
+    },
+    {
+      "image": "both_failed_116.png",
+      "map": "birmingham_block_1",
+      "source_episode_index": 116,
+      "observation": "Tiny white car in third parking lane between blue cars. Both models end at the same incorrect parking region, 37m from target. Named One Stop/Food Warehouse priors constrain the lot but do not resolve the individual car.",
+      "hypothesis": "Query-conditioned observed patch appearance and lane/object ordering, potentially lower-altitude observations, deserve a controlled Train/Seen test. No gain demonstrated."
+    }
+  ],
+  "limitations": "Diagnostic cases were deliberately selected as gain/loss/failure examples, not random estimates of prevalence; visibility of the target in a source orthophoto is not proof that the online model had an equivalent useful view."
+}

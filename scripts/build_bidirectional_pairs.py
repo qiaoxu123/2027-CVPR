@@ -23,6 +23,7 @@ def main():
     p.add_argument("--max-pairs-per-map", type=int, default=800)
     p.add_argument("--shift-augmentations", type=int, default=2)
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument('--min-boundary-m',type=float,default=5.)
     a = p.parse_args()
     sources = {
         "objects": Path(a.objects), "bounds": Path(a.bounds),
@@ -32,6 +33,7 @@ def main():
     bounds = json.loads(sources["bounds"].read_text(encoding="utf-8"))
     allowed_maps = split_map_names(sources["source_split"])
     out = Path(a.output)
+    if out.exists() or Path(str(out)+'.manifest.json').exists():raise ValueError('refusing pair data overwrite')
     out.parent.mkdir(parents=True, exist_ok=True)
     n, pairs = 0, set()
     statistics = {}
@@ -42,6 +44,7 @@ def main():
             max_pairs_per_map=a.max_pairs_per_map, seed=a.seed,
             augment_shift_count=a.shift_augmentations,
             statistics=statistics,
+            min_boundary_m=a.min_boundary_m,
         ):
             handle.write(json.dumps(rec, ensure_ascii=False) + "\n")
             n += 1
@@ -52,6 +55,8 @@ def main():
                     allowed_source_maps=sorted(allowed_maps),
                     source_sha256=hashes, seed=a.seed,
                     augmentation_count=a.shift_augmentations,
+                    minimum_signed_boundary_m=a.min_boundary_m,
+                    center_protocol='area centroid if inside; otherwise interior representative point; v2',
                     construction_by_map=statistics,
                     note="Reverse samples invert verified geometry, not CityFlight paths")
     Path(str(out)+".manifest.json").write_text(

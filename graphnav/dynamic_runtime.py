@@ -1,5 +1,7 @@
 """Causal current-pixel evidence and residual goal belief in the shared environment."""
 from types import SimpleNamespace
+from collections import OrderedDict
+import hashlib
 import numpy as np
 import torch
 from .a3_runtime import A3WaypointPolicy
@@ -17,11 +19,15 @@ class NativeObservationBuilder:
 
     def build_from_poses(self,episode,poses):
         from sbfnav.mapdata import GROUND_LEVEL
-        state=self.builder.build_from_poses(episode,poses)
+        poses=np.asarray(poses,dtype=np.float64)
+        if poses.ndim!=2 or poses.shape[1]!=4 or not len(poses) or not np.isfinite(poses).all():
+            raise ValueError('poses must be a finite nonempty Nx4 history')
         # Source raster stays environment-private; policy receives one visited crop.
+        # The dynamic interface never consumes SBF's 9-channel canvas: avoid
+        # rebuilding its entire explored footprint and semantic masks per step.
         observation=self.renderer.current_rgbd(episode.map_name,poses[-1],GROUND_LEVEL[episode.map_name])
         observation.pop('surface_height_m',None)
-        return SimpleNamespace(pose=state.pose,current_observation=observation,step=len(poses)-1)
+        return SimpleNamespace(pose=poses[-1].copy(),current_observation=observation,step=len(poses)-1)
 
 
 def contour_matches(first,second):
@@ -43,8 +49,31 @@ def observed_grid_cells(world,observation):
     return supported
 
 
+def graph_control_inputs(inputs, control):
+    """Inference-only mechanism ablation, preserving the original A3 inputs."""
+    if control == 'full':return inputs
+    if control == 'self':
+        valid=inputs['node_valid'].bool();n=valid.shape[1]
+        adjacency=torch.eye(n,device=valid.device,dtype=torch.bool)[None]&valid[:,:,None]&valid[:,None,:]
+        return dict(inputs,adjacency=adjacency)
+    if control == 'zero-edge-features':return dict(inputs,edges=torch.zeros_like(inputs['edges']))
+    raise ValueError('unknown graph mechanism control')
+
+
+def visual_control_vectors(rois,vectors,control):
+    if control=='full':return vectors
+    if control=='zero-vectors':return torch.zeros_like(vectors)
+    if control=='same-type-shuffle':
+        result=vectors.clone();groups={}
+        for i,roi in enumerate(rois):groups.setdefault(roi.object_type,[]).append(i)
+        for indices in groups.values():
+            if len(indices)>1:result[indices]=vectors[indices[-1:]+indices[:-1]]
+        return result
+    raise ValueError('unknown visual mechanism control')
+
+
 class DynamicWaypointPolicy(A3WaypointPolicy):
-    def __init__(self,checkpoint,dynamic_checkpoint,visual_checkpoint,directory,*,device='cuda',history=False,visual=True,observed_cache=None,head_checkpoint=None,stop_threshold=.3,execution='guarded-blend',explore_candidates=0):
+    def __init__(self,checkpoint,dynamic_checkpoint,visual_checkpoint,directory,*,device='cuda',history=False,visual=True,observed_cache=None,head_checkpoint=None,stop_threshold=.3,execution='guarded-blend',explore_candidates=0,graph_control='full',visual_control='full'):
         super().__init__(checkpoint,directory,device=device)
         from .dynamic_belief import DynamicGoalBelief
         from .checkpointing import file_sha256
@@ -66,6 +95,13 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         self.use_graph=state['args']['variant']!='visual'
         self.use_visual=visual and state['args']['variant']!='graph'
         self.use_history=history
+        if graph_control not in ('full','self','zero-edge-features'):raise ValueError('unknown graph mechanism control')
+        self.graph_control=graph_control
+        if visual_control not in ('full','zero-vectors','same-type-shuffle'):raise ValueError('unknown visual mechanism control')
+        if visual_control!='full' and not self.use_visual:raise ValueError('visual control requires observed visual branch')
+        self.visual_control=visual_control
+        # Pure public map geometry, independent of query, goal or observation history.
+        self.public_geometry_cache=OrderedDict()
         self.encoder_visual=None
         if self.use_visual:
             from .observed_landmarks import ObservedLandmarkEncoder
@@ -87,10 +123,11 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
     @torch.no_grad()
     def predict(self,state,instruction):
         base,inputs=self.frozen_field()
+        dynamic_inputs=graph_control_inputs(inputs,getattr(self,'graph_control','full'))
         if not self.use_visual:
             if self.static_dynamic_field is None:
                 with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
-                    self.static_dynamic_field=self.dynamic(inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
+                    self.static_dynamic_field=self.dynamic(dynamic_inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
                         base_field=base,use_graph=self.use_graph,use_visual=False)
             return self.execute_field(state,self.static_dynamic_field,inputs,dict(observed_nodes=0,auxiliary_nodes=0,observed_regions=0))
         b,n=inputs['entity_valid'].shape;q=len(inputs['grid_xy'][0]);dim=256
@@ -100,6 +137,7 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         current={}
         if self.use_visual:
             rois,vectors=self.encoder_visual.observe(state.current_observation,self.landmarks,step=state.step)
+            vectors=visual_control_vectors(rois,vectors,getattr(self,'visual_control','full'))
             for roi,vector in zip(rois,vectors):
                 key=roi.object_id
                 current[key]=dict(vector=vector.float()*roi.confidence,mass=roi.confidence,
@@ -120,10 +158,17 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
             if matches:
                 node=matches[-1];ref[0,node]=vector;rc[0,node]=item['confidence']
             else:
-                if key not in self.geometry:self.geometry[key]=torch.as_tensor(relative_entity_features(world,[dict(geometry_m=roi.contour_world,kind='surface')],1)[:,0],device=self.device)
+                if key not in self.geometry:
+                    if not hasattr(self,'public_geometry_cache'):self.public_geometry_cache=OrderedDict()
+                    public_key=hashlib.sha256(world.astype(np.float32).tobytes()+roi.contour_world.astype(np.float32).tobytes()).hexdigest()
+                    if public_key not in self.public_geometry_cache:
+                        self.public_geometry_cache[public_key]=relative_entity_features(world,[dict(geometry_m=roi.contour_world,kind='surface')],1)[:,0].astype(np.float16)
+                    self.public_geometry_cache.move_to_end(public_key)
+                    self.geometry[key]=torch.as_tensor(self.public_geometry_cache[public_key],device=self.device)
+                    if len(self.public_geometry_cache)>4096:self.public_geometry_cache.popitem(last=False)
                 aux[0,extra]=vector;ac[0,extra]=item['confidence'];ag[0,:,extra]=self.geometry[key].half().float();extra+=1
         with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
-            field=self.dynamic(inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
+            field=self.dynamic(dynamic_inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
                 base_field=base,use_graph=self.use_graph,use_visual=self.use_visual,
                 visual_vectors=ref,visual_confidence=rc,observed_vectors=aux,observed_confidence=ac,observed_geometry=ag)
         return self.execute_field(state,field,inputs,dict(observed_nodes=int((rc>0).sum()),auxiliary_nodes=extra,observed_regions=len(groups),
@@ -134,7 +179,7 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         top=int(field.belief_logits[0].argmax());uv=inputs['grid_xy'][0,top].float().cpu().numpy()
         goal=bounds[:2]+uv*(bounds[2:]-bounds[:2]);self.pose_history.append(np.asarray(state.pose).tolist())
         diagnostics=dict(policy='A3 residual belief + bounded waypoint',graph=self.use_graph,visual=self.use_visual,
-                history=self.use_history,**evidence_diagnostics,goal_xy=goal.tolist(),candidate=top,
+                history=self.use_history,graph_control=getattr(self,'graph_control','full'),visual_control=getattr(self,'visual_control','full'),**evidence_diagnostics,goal_xy=goal.tolist(),candidate=top,
                 graph_gate=float(self.dynamic.graph_gate.tanh()),visual_gate=float(self.dynamic.visual_gate.tanh()))
         if getattr(self,'has_trajectory',False):
             from .a3_runtime import A3TrajectoryPolicy

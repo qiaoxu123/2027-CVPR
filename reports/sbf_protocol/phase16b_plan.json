@@ -1,0 +1,71 @@
+{
+  "requires": [
+    "runs/p1_v2_closedloop_seen128/p1_v2/metrics.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "protocol": "Resolve failed full-vs-subset performance check by using IDENTICAL128 episode order for old immutable source and current optimized runtime. Original failed check retained. No hyperparameters or Unseen inputs changed.",
+  "jobs": [
+    {
+      "name": "old_immutable_joint_history_same_seen128",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "-c",
+        "import sys,runpy;sys.path.insert(0,sys.argv.pop(1));runpy.run_module(sys.argv.pop(1),run_name='__main__')",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/source_snapshots/dd03a0180737_dynamic_graph_visual_history_history_full_seen_optimized",
+        "scripts.evaluate_closedloop",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_seen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_visual_history_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/native_boundary_seen128_old_reference",
+        "--visual-history",
+        "--max-episodes",
+        "128"
+      ],
+      "log": "runs/native_boundary_seen128_old_reference.log",
+      "complete_artifact": "runs/native_boundary_seen128_old_reference/metrics.json"
+    },
+    {
+      "name": "same_order_native_boundary_equivalence",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "-m",
+        "scripts.check_rollout_subset",
+        "--full",
+        "runs/native_boundary_seen128_old_reference",
+        "--subset",
+        "runs/native_boundary_seen128_optimized",
+        "--output",
+        "reports/sbf_protocol/native_boundary_same128_exact_equivalence.json"
+      ],
+      "log": "runs/native_boundary_same128_exact_equivalence.log",
+      "complete_artifact": "reports/sbf_protocol/native_boundary_same128_exact_equivalence.json"
+    }
+  ]
+}

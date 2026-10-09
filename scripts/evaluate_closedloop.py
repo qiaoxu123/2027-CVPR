@@ -37,6 +37,8 @@ def main():
     parser.add_argument('--visual-checkpoint')
     parser.add_argument('--visual-history',action='store_true')
     parser.add_argument('--disable-visual',action='store_true')
+    parser.add_argument('--graph-control',choices=['full','self','zero-edge-features'],default='full')
+    parser.add_argument('--visual-control',choices=['full','zero-vectors','same-type-shuffle'],default='full')
     parser.add_argument('--observed-cache')
     parser.add_argument('--head-checkpoint')
     parser.add_argument('--stop-threshold',type=float,default=.5)
@@ -91,7 +93,7 @@ def main():
         if args.model=='dynamic':
             if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')
             from graphnav.dynamic_runtime import DynamicWaypointPolicy,NativeObservationBuilder
-            runtime=DynamicWaypointPolicy(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache,head_checkpoint=args.head_checkpoint,stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates)
+            runtime=DynamicWaypointPolicy(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache,head_checkpoint=args.head_checkpoint,stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates,graph_control=args.graph_control,visual_control=args.visual_control)
             if runtime.use_visual:builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='a3-trajectory':
             if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')

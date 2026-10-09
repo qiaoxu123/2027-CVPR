@@ -9,6 +9,14 @@ import time
 import shutil
 
 
+def validate_required_checks(manifest):
+    for check in manifest.get('required_checks',[]):
+        state=json.loads(Path(check['path']).read_text())
+        for key,expected in check['equals'].items():
+            if state.get(key)!=expected:
+                raise ValueError('required stage check failed: '+check['path']+' / '+key)
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--manifest',required=True);args=parser.parse_args()
@@ -22,6 +30,9 @@ def main():
         time.sleep(15)
         if path.read_bytes()!=raw:raise ValueError('queued manifest changed')
     env=dict(os.environ,**manifest.get('environment',{}))
+    try:validate_required_checks(manifest)
+    except Exception as error:
+        status.update(status='failed_prerequisite_check',reason=str(error));save();raise
     status['status']='running';save()
     for job in manifest['jobs']:
         if Path(job['complete_artifact']).exists():

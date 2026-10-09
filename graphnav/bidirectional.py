@@ -25,10 +25,23 @@ INVERSE = {"east": "west", "west": "east", "north": "south", "south": "north"}
 
 
 def _centroid(polygon):
-    x = np.asarray(polygon, np.float32)
+    x = np.asarray(polygon, np.float64)
     if x.ndim != 2 or x.shape[1] != 2 or len(x) < 3 or not np.isfinite(x).all():
         return None
-    return x.mean(0)
+    if not valid_surface_polygon(x):return None
+    from shapely.geometry import Polygon
+    shape=Polygon(x);point=shape.centroid
+    # Concave road/building centroids may lie outside the actual region.
+    # Supervised "find a road/building" locations must lie on that region.
+    if not shape.covers(point):point=shape.representative_point()
+    return np.asarray(point.coords[0],np.float64)
+
+
+def signed_boundary_distance(point,polygon):
+    from shapely.geometry import Polygon,Point
+    shape=Polygon(polygon);point=Point(point)
+    distance=float(point.distance(shape.boundary))
+    return -distance if shape.covers(point) else distance
 
 
 def cardinal_relation(a, b, *, min_m=30., max_m=220., transverse_ratio=.20):
@@ -66,7 +79,7 @@ def generate_pairs(
     objects, bounds, source_maps, *,
     max_objects_per_map=300, max_pairs_per_map=800,
     seed=0, augment_shift_count=0,
-    statistics=None,
+    statistics=None,min_boundary_m=5.,
 ):
     """Yield exactly TWO records per pair; source_maps is a verified split map set.
 
@@ -75,7 +88,7 @@ def generate_pairs(
     construct a training record for a withheld map.
     """
     rng = np.random.default_rng(seed)
-    if max_objects_per_map < 2 or max_pairs_per_map < 1:
+    if max_objects_per_map < 2 or max_pairs_per_map < 1 or min_boundary_m<0:
         raise ValueError("invalid limits")
     seen_text = set()
     for map_name in sorted(source_maps):
@@ -98,6 +111,7 @@ def generate_pairs(
         stat = {"valid_source_objects": valid_count,"sampled_objects":len(entries),
                 "possible_pairs":len(attempts),"attempted_pairs":0,
                 "cardinal_verified_pairs":0,"text_duplicate_pairs":0,
+                "boundary_rejected_pairs":0,
                 "emitted_base_pairs":0,"emitted_augmented_pairs":0}
         if statistics is not None:
             statistics[map_name] = stat
@@ -111,6 +125,13 @@ def generate_pairs(
             if rel is None:
                 continue
             direction, distance = rel
+            a_poly=np.asarray(a['contour'])*(bbox[2:]-bbox[:2])+bbox[:2]
+            b_poly=np.asarray(b['contour'])*(bbox[2:]-bbox[:2])+bbox[:2]
+            forward_boundary=signed_boundary_distance(b['center_world'],a_poly)
+            reverse_boundary=signed_boundary_distance(a['center_world'],b_poly)
+            if min(forward_boundary,reverse_boundary)<min_boundary_m:
+                stat['boundary_rejected_pairs']+=1
+                continue
             stat["cardinal_verified_pairs"] += 1
             rounded = 10 * round(distance/10)
             if rounded <= 0:
@@ -142,6 +163,9 @@ def generate_pairs(
                     pair_id=pair_id, pair_role=role,
                     source_anchor_id=anchor["id"], hidden_target_id=target["id"],
                     quantized_distance_m=rounded,
+                    signed_anchor_boundary_distance_m=forward_boundary if role=='forward' else reverse_boundary,
+                    anchor_center_xy=anchor['center_norm'],
+                    center_protocol='area centroid if inside; otherwise interior representative point; v2',
                 )
                 samples.append((key,sample))
             if len(samples) != 2:
@@ -168,6 +192,7 @@ def generate_pairs(
                     ref["contour"]=poly.tolist()
                     cloned["target_xy"]=target.tolist()
                     cloned["landmarks"]=[ref]
+                    cloned['anchor_center_xy']=(np.asarray(src['anchor_center_xy'])+shift).tolist()
                     cloned["map_name"]=f"{map_name}__aug{aug}_{pair_id}"
                     cloned["episode_id"]=src["episode_id"]+f":aug{aug}"
                     cloned["pair_id"]=pair_id+f":aug{aug}"

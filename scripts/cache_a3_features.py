@@ -24,12 +24,14 @@ def main():
     p.add_argument('--output',required=True);p.add_argument('--batch-size',type=int,default=64)
     p.add_argument('--workers',type=int,default=4);p.add_argument('--chunk-queries',type=int,default=512)
     p.add_argument('--dense-context',action='store_true');p.add_argument('--resume',action='store_true')
+    p.add_argument('--bert-cache',help='Reuse fingerprinted frozen tokens; no repeated text encoding across seeds')
     p.add_argument('--device',default='cuda');args=p.parse_args();out=Path(args.output)
     if out.exists() and not args.resume:raise ValueError('refusing cache overwrite; use --resume')
     out.mkdir(parents=True,exist_ok=True)
     protocol=dict(query_sha256=file_sha256(args.queries),checkpoint_sha256=file_sha256(args.checkpoint),
         dense_context=args.dense_context,dense_logits_dtype='float32' if args.dense_context else None,
         precision='bf16' if args.device=='cuda' else 'fp32')
+    if args.bert_cache:protocol['bert_cache_sha256']=file_sha256(args.bert_cache)
     status=out/'manifest.json'
     manifest=json.loads(status.read_text()) if status.exists() else dict(protocol=protocol,chunks=[],completed_queries=0,provenance=provenance())
     if manifest['protocol']!=protocol:raise ValueError('cache source/model/protocol fingerprint mismatch')
@@ -39,6 +41,7 @@ def main():
     device=torch.device(args.device);model=new_model(config,device).eval().requires_grad_(False)
     model.load_state_dict(state['model'],strict=True)
     encoder=FrozenBERTTokens(config.text_backbone,device=args.device,max_length=getattr(config,'max_text_length',96))
+    if args.bert_cache:encoder.load_cache(args.bert_cache)
     dataset=FullCandidateDataset(args.queries,grid_size=config.grid_size,max_landmarks=config.max_landmarks,
         max_roads=config.max_roads,max_relations=config.max_relations,prior_sigma_m=config.prior_sigma_m,
         rule_sigma_m=config.rule_sigma_m,deduplicate_queries=False)
