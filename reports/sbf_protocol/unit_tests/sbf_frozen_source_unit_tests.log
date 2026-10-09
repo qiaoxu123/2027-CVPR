@@ -1,0 +1,37 @@
+
+==================================== ERRORS ====================================
+____ ERROR collecting SBFNav-CityNav-Reproduction/tests/test_sbf_freeze.py _____
+ImportError while importing test module '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/tests/test_sbf_freeze.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../SBFNav-CityNav-Reproduction/tests/test_sbf_freeze.py:5: in <module>
+    from scripts.freeze_sbfnav_test import checked_validation
+E   ModuleNotFoundError: No module named 'scripts.freeze_sbfnav_test'
+___ ERROR collecting SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py ____
+ImportError while importing test module '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py:7: in <module>
+    from sbfnav.models.selector import (
+E   ImportError: cannot import name 'extract_candidate_state_crops' from 'sbfnav.models.selector' (/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/models/selector.py)
+__ ERROR collecting SBFNav-CityNav-Reproduction/tests/test_sbf_supervisor.py ___
+ImportError while importing test module '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/tests/test_sbf_supervisor.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../SBFNav-CityNav-Reproduction/tests/test_sbf_supervisor.py:7: in <module>
+    from scripts.supervise_experiment import newest_activity
+E   ModuleNotFoundError: No module named 'scripts.supervise_experiment'
+_ ERROR collecting SBFNav-CityNav-Reproduction/tests/test_sbf_visualization.py _
+ImportError while importing test module '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/tests/test_sbf_visualization.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../SBFNav-CityNav-Reproduction/tests/test_sbf_visualization.py:6: in <module>
+    from scripts.visualize_sbf_episodes import select_cases
+E   ModuleNotFoundError: No module named 'scripts.visualize_sbf_episodes'
+=========================== short test summary info ============================
+ERROR ../SBFNav-CityNav-Reproduction/tests/test_sbf_freeze.py
+ERROR ../SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py
+ERROR ../SBFNav-CityNav-Reproduction/tests/test_sbf_supervisor.py
+ERROR ../SBFNav-CityNav-Reproduction/tests/test_sbf_visualization.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 4 errors during collection !!!!!!!!!!!!!!!!!!!!
+4 errors in 3.27s

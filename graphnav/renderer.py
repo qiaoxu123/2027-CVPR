@@ -1,8 +1,9 @@
-"""Offline CityNav observed-view rendering. NOT accessible to model inference.
+"""CityNav environment observed-view rendering. Raw source stays environment-private.
 
 The offline dataset tool reads the source orthophoto to synthesize *only* the
 camera view from each visited UAV pose, using the same four-corner warp used
-in the CityNav crop client. GraphNav itself receives only these saved views.
+in the CityNav crop client. The policy receives only current crops, saved or
+in memory, and never the full source orthophoto/height raster.
 """
 
 from __future__ import annotations

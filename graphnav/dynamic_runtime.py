@@ -31,8 +31,20 @@ def contour_matches(first,second):
     return first.shape==second.shape and np.allclose(first,second,atol=.02,rtol=0)
 
 
+def observed_grid_cells(world,observation):
+    """Actual pixel support only; outside/black pixels stay unknown, not negative."""
+    from .landmark_projection import world_to_frame
+    bgr=observation['bgr'];h,w=bgr.shape[:2]
+    pixels=world_to_frame(world,observation['footprint_world'],bgr.shape)
+    inside=np.isfinite(pixels).all(-1)&(pixels[:,0]>=0)&(pixels[:,0]<=w-1)&(pixels[:,1]>=0)&(pixels[:,1]<=h-1)
+    supported=np.zeros(len(world),dtype=bool)
+    ij=np.rint(pixels[inside]).astype(int)
+    supported[inside]=(bgr[ij[:,1],ij[:,0]].max(-1)>0)
+    return supported
+
+
 class DynamicWaypointPolicy(A3WaypointPolicy):
-    def __init__(self,checkpoint,dynamic_checkpoint,visual_checkpoint,directory,*,device='cuda',history=False,visual=True,observed_cache=None,head_checkpoint=None,stop_threshold=.3,execution='guarded-blend'):
+    def __init__(self,checkpoint,dynamic_checkpoint,visual_checkpoint,directory,*,device='cuda',history=False,visual=True,observed_cache=None,head_checkpoint=None,stop_threshold=.3,execution='guarded-blend',explore_candidates=0):
         super().__init__(checkpoint,directory,device=device)
         from .dynamic_belief import DynamicGoalBelief
         from .checkpointing import file_sha256
@@ -61,14 +73,14 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         self.has_trajectory=head_checkpoint is not None
         if self.has_trajectory:
             from .a3_runtime import A3TrajectoryPolicy
-            A3TrajectoryPolicy.load_trajectory_head(self,checkpoint,head_checkpoint,stop_threshold=stop_threshold,execution=execution)
+            A3TrajectoryPolicy.load_trajectory_head(self,checkpoint,head_checkpoint,stop_threshold=stop_threshold,execution=execution,explore_candidates=explore_candidates)
 
     def set_episode(self,episode,transform,catalog):
         super().set_episode(episode,transform,catalog)
         self.landmarks=[]
         from scripts.prepare_landmark_views import objects_by_map
         self.landmarks=objects_by_map({episode.map_name:catalog.objects[episode.map_name]})[episode.map_name]
-        self.evidence={};self.geometry={};self.pose_history=[]
+        self.evidence={};self.geometry={};self.pose_history=[];self.observed_cells=None
         self.static_dynamic_field=None
         if self.encoder_visual:self.encoder_visual.start_episode()
 
@@ -98,6 +110,8 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
                 else:self.evidence[key]={**current[key],'vector':current[key]['vector'].clone()}
         groups=self.evidence if self.use_history else current
         bounds=np.asarray(self.record['world_bounds']);world=inputs['grid_xy'][0].float().cpu().numpy()*(bounds[2:]-bounds[:2])+bounds[:2]
+        if self.observed_cells is None:self.observed_cells=np.zeros(q,dtype=bool)
+        self.observed_cells|=observed_grid_cells(world,state.current_observation)
         selected=sorted(groups,key=lambda k:(-groups[k]['confidence']*groups[k]['pixels'],k))[:32]
         extra=0
         for key in selected:
@@ -112,7 +126,8 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
             field=self.dynamic(inputs,tokens=None,token_mask=None,node_emb=self.public_node_emb,
                 base_field=base,use_graph=self.use_graph,use_visual=self.use_visual,
                 visual_vectors=ref,visual_confidence=rc,observed_vectors=aux,observed_confidence=ac,observed_geometry=ag)
-        return self.execute_field(state,field,inputs,dict(observed_nodes=int((rc>0).sum()),auxiliary_nodes=extra,observed_regions=len(groups)))
+        return self.execute_field(state,field,inputs,dict(observed_nodes=int((rc>0).sum()),auxiliary_nodes=extra,observed_regions=len(groups),
+            observed_candidate_fraction=float(self.observed_cells.mean())))
 
     def execute_field(self,state,field,inputs,evidence_diagnostics):
         bounds=np.asarray(self.record['world_bounds'])
@@ -124,6 +139,7 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         if getattr(self,'has_trajectory',False):
             from .a3_runtime import A3TrajectoryPolicy
             prediction=A3TrajectoryPolicy.predict_field(self,state,field)
-            prediction.diagnostics.update(diagnostics,trajectory_execution=self.execution)
+            prediction.diagnostics.update({k:v for k,v in diagnostics.items() if k not in ('candidate','goal_xy')},
+                belief_argmax_cell=top,belief_goal_xy=goal.tolist(),trajectory_execution=self.execution)
             return prediction
         return SimpleNamespace(xyz=np.array([*goal,state.pose[2]]),should_stop=False,diagnostics=diagnostics)

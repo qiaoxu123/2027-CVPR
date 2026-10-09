@@ -45,6 +45,7 @@ class A3WaypointPolicy:
 
     def set_episode(self, episode, transform, catalog):
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
+        self.visited_goal_cells=set()
 
     @torch.no_grad()
     def frozen_field(self):
@@ -83,11 +84,11 @@ class A3WaypointPolicy:
 
 class A3TrajectoryPolicy(A3WaypointPolicy):
     """Frozen A3 and a trained candidate-aligned head, using public observations."""
-    def __init__(self,checkpoint,head_checkpoint,scratch_directory,*,device='cuda',stop_threshold=.5,execution='joint'):
+    def __init__(self,checkpoint,head_checkpoint,scratch_directory,*,device='cuda',stop_threshold=.5,execution='joint',explore_candidates=0):
         super().__init__(checkpoint,scratch_directory,device=device)
-        self.load_trajectory_head(checkpoint,head_checkpoint,stop_threshold=stop_threshold,execution=execution)
+        self.load_trajectory_head(checkpoint,head_checkpoint,stop_threshold=stop_threshold,execution=execution,explore_candidates=explore_candidates)
 
-    def load_trajectory_head(self,checkpoint,head_checkpoint,*,stop_threshold=.5,execution='joint'):
+    def load_trajectory_head(self,checkpoint,head_checkpoint,*,stop_threshold=.5,execution='joint',explore_candidates=0):
         from .trajectory_policy import CandidateTrajectoryStop
         from .checkpointing import file_sha256
         state=torch.load(head_checkpoint,map_location='cpu',weights_only=True)
@@ -104,6 +105,9 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'):
             raise ValueError('unknown trajectory execution ablation')
         self.execution=execution
+        if not 0<=explore_candidates<=8:raise ValueError('bounded exploration candidates must be between0 and8')
+        if explore_candidates and not execution.startswith('guarded-'):raise ValueError('exploration requires predicted-goal guard')
+        self.explore_candidates=explore_candidates
         self.stop_positive_weight=state['protocol']['stop_positive_weight']
         self.head=CandidateTrajectoryStop(hidden=state['hidden']).to(self.device).eval()
         self.head.load_state_dict(state['model'],strict=True)
@@ -129,19 +133,30 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         from .trajectory_policy import calibrated_stop_probability
         candidate,mode,waypoint,stop=output.select()
         if self.execution!='joint':
-            candidate=torch.zeros(1,dtype=torch.long,device=self.device)
-            mode=output.mode_logits[:,0].argmax(-1)
-            waypoint=output.paths_world[torch.arange(1,device=self.device),candidate,mode,0]
-            stop=output.stop_logits[:,0]
-            if self.execution in ('direct-goal','guarded-direct','guarded-path','guarded-blend'):
-                goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,0]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
-                if self.execution in ('direct-goal','guarded-direct'):waypoint=torch.cat((goal,inputs['pose_world'][:,2:3]),-1)
-                else:
-                    from .trajectory_policy import convergent_first_waypoint
-                    waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal,waypoint,blend=.25 if self.execution=='guarded-blend' else 1.)
+            limit=min(getattr(self,'explore_candidates',0),field.candidate_ids.shape[1])
+            available=[i for i in range(limit) if int(field.candidate_ids[0,i]) not in self.visited_goal_cells] if limit else [0]
+            available=available or [0]
+            for position,index in enumerate(available):
+                candidate=torch.tensor([index],dtype=torch.long,device=self.device)
+                mode=output.mode_logits[:,index].argmax(-1)
+                waypoint=output.paths_world[torch.arange(1,device=self.device),candidate,mode,0]
+                stop=output.stop_logits[:,index]
+                goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,index]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
+                if self.execution in ('direct-goal','guarded-direct','guarded-path','guarded-blend'):
+                    if self.execution in ('direct-goal','guarded-direct'):waypoint=torch.cat((goal,inputs['pose_world'][:,2:3]),-1)
+                    else:
+                        from .trajectory_policy import convergent_first_waypoint
+                        waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal,waypoint,blend=.25 if self.execution=='guarded-blend' else 1.)
+                distance=float((goal-inputs['pose_world'][:,:2]).norm())
+                if limit and distance<=1e-3 and float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])<self.stop_threshold:
+                    # Plan another hypothesis, without erasing any unobserved belief.
+                    self.visited_goal_cells.add(int(field.candidate_ids[0,index]))
+                    if position+1<len(available):continue
+                break
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
         predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if self.execution.startswith('guarded-') else None
         arrival_guard=predicted_goal_distance is None or predicted_goal_distance<=1e-3
         return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop' and arrival_guard),
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
-                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability,predicted_goal_distance=predicted_goal_distance))
+                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability,predicted_goal_distance=predicted_goal_distance,
+                explored_goal_cells=len(self.visited_goal_cells),selected_goal_xy=(inputs['bounds'][:,:2]+inputs['candidate_xy'][torch.arange(1,device=self.device),candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2]))[0].float().cpu().tolist()))

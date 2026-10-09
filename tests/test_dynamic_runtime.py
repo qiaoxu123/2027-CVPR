@@ -41,18 +41,27 @@ def test_online_history_uses_only_observed_vectors_and_zero_gate_preserves_a3(tm
     runtime.public_entities=dataset._prepared(0)[0]['entities'];runtime.frozen_field=lambda:(base,batch)
     runtime.dynamic=DynamicGoalBelief(a3,vision_dim=256).eval()
     runtime.use_graph=True;runtime.use_visual=True;runtime.use_history=True
-    runtime.evidence={};runtime.geometry={};runtime.pose_history=[];runtime.landmarks=[]
+    runtime.evidence={};runtime.geometry={};runtime.pose_history=[];runtime.landmarks=[];runtime.observed_cells=None
     roi=SimpleNamespace(object_id='public-region',name='hall',contour_world=np.array([[80,80],[120,80],[120,120],[80,120]]),
         confidence=.5,quality={'visible_pixels':300})
     class Encoder:
         def observe(self,observation,landmarks,*,step):
-            assert observation=={'actual_step':step}
+            assert observation['actual_step']==step
             return ([roi],torch.full((1,256),float(1+2*step))) if step<2 else ([],torch.zeros(0,256))
     runtime.encoder_visual=Encoder()
     for step in range(3):
-        result=runtime.predict(SimpleNamespace(pose=np.array([10.,10.,30.,0.]),step=step,current_observation={'actual_step':step}),record['instruction'])
+        observation=dict(actual_step=step,bgr=np.full((384,384,3),80,dtype=np.uint8),footprint_world=np.array([[0,400],[400,400],[400,0],[0,0]]))
+        result=runtime.predict(SimpleNamespace(pose=np.array([10.,10.,30.,0.]),step=step,current_observation=observation),record['instruction'])
         assert result.diagnostics['candidate']==int(base.belief_logits.argmax())
         assert result.diagnostics['observed_nodes']==1
     item=runtime.evidence['public-region']
     assert item['confidence']==.5 and item['mass']==1.
     assert torch.equal(item['vector']/item['mass'],torch.full((256,),2.))
+
+
+def test_observed_coverage_never_marks_outside_or_black_cells_as_known():
+    from graphnav.dynamic_runtime import observed_grid_cells
+    bgr=np.full((384,384,3),80,dtype=np.uint8);bgr[:200,:200]=0
+    observation=dict(bgr=bgr,footprint_world=np.array([[0,400],[400,400],[400,0],[0,0]]))
+    points=np.array([[50,350],[350,350],[500,500]])
+    assert observed_grid_cells(points,observation).tolist()==[False,True,False]

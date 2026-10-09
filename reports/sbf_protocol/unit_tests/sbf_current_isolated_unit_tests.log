@@ -1,0 +1,39 @@
+..........F............................................................. [ 79%]
+...................                                                      [100%]
+=================================== FAILURES ===================================
+________ test_all_ablation_configs_inherit_a_complete_valid_main_config ________
+
+    def test_all_ablation_configs_inherit_a_complete_valid_main_config():
+        paths = sorted((ROOT / "configs" / "sbfnav" / "ablations").glob("*.yaml"))
+        assert len(paths) >= 14
+        for path in paths:
+            config = load_config(path)
+>           validate_config(config)
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_config.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+config = {'seed': 0, 'splits': ['val_seen', 'val_unseen'], 'episodes_per_split': 256, 'variants': [{'name': 'selector_only_no_f...nk', 'overrides': ['evaluation.ablation.field_score_fusion=rank', 'evaluation.ablation.field_score_weight=1.0']}], ...}
+
+    def validate_config(config: Mapping[str, Any]) -> None:
+        required = ("data", "model", "loss", "proposal", "selector", "training", "navigation")
+        missing = [key for key in required if key not in config]
+        if missing:
+>           raise ValueError(f"missing configuration sections: {missing}")
+E           ValueError: missing configuration sections: ['data', 'model', 'loss', 'proposal', 'selector', 'training', 'navigation']
+
+../SBFNav-CityNav-Reproduction/sbfnav/config.py:74: ValueError
+=============================== warnings summary ===============================
+SBFNav-CityNav-Reproduction/tests/test_sbf_model.py::test_composed_sbfnav_all_trainable_heads_forward_and_backward
+SBFNav-CityNav-Reproduction/tests/test_sbf_model.py::test_composed_model_accepts_spatial_candidate_context
+SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py::test_selector_forward_padding_and_backward
+SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py::test_selector_has_no_sbf_score_input_or_parameter
+SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py::test_candidate_score_perturbation_cannot_change_selector_inputs_or_logits
+SBFNav-CityNav-Reproduction/tests/test_sbf_selector.py::test_spatial_context_is_gated_and_receives_gradient
+  /home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/.venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_config.py::test_all_ablation_configs_inherit_a_complete_valid_main_config
+1 failed, 90 passed, 6 warnings in 64.58s (0:01:04)

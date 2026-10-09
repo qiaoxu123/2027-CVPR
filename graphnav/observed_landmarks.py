@@ -107,6 +107,6 @@ class ObservedLandmarkEncoder:
         for key in keys:self.vectors.move_to_end(key)
         while len(self.vectors)>self.cache_size:self.vectors.popitem(last=False)
         self.last_step=step
-        self.history.append(dict(step=step,pose=np.asarray(observation['pose']).tolist(),pixel_keys=keys,
+        self.history.append(dict(step=step,pose=np.asarray(observation['pose']).tolist(),footprint_world=np.asarray(observation['footprint_world']).tolist(),pixel_keys=keys,
             landmarks=[dict(name=roi.name,object_type=roi.object_type,confidence=roi.confidence,quality=roi.quality) for roi in rois]))
         return rois,vectors

@@ -1,0 +1,64 @@
+{
+  "distance_bin": {
+    ">100m": {
+      "instances": 36,
+      "base224_R1": 0.6388888888888888,
+      "base224_R5": 0.8888888888888888,
+      "large384_R1": 0.6111111111111112,
+      "large384_R5": 0.9166666666666666
+    },
+    "50-100m": {
+      "instances": 54,
+      "base224_R1": 0.7407407407407407,
+      "base224_R5": 0.9259259259259259,
+      "large384_R1": 0.8148148148148148,
+      "large384_R5": 0.9444444444444444
+    },
+    "0-50m": {
+      "instances": 25,
+      "base224_R1": 0.8,
+      "base224_R5": 0.96,
+      "large384_R1": 0.72,
+      "large384_R5": 0.96
+    }
+  },
+  "object_type": {
+    "Building": {
+      "instances": 39,
+      "base224_R1": 0.7435897435897436,
+      "base224_R5": 0.8717948717948718,
+      "large384_R1": 0.8717948717948718,
+      "large384_R5": 0.9743589743589743
+    },
+    "TrafficRoad": {
+      "instances": 58,
+      "base224_R1": 0.7241379310344828,
+      "base224_R5": 0.9310344827586207,
+      "large384_R1": 0.6724137931034483,
+      "large384_R5": 0.9310344827586207
+    },
+    "Ground": {
+      "instances": 7,
+      "base224_R1": 0.7142857142857143,
+      "base224_R5": 1.0,
+      "large384_R1": 0.8571428571428571,
+      "large384_R5": 1.0
+    },
+    "Footpath": {
+      "instances": 10,
+      "base224_R1": 0.6,
+      "base224_R5": 1.0,
+      "large384_R1": 0.4,
+      "large384_R5": 0.8
+    },
+    "Water": {
+      "instances": 1,
+      "base224_R1": 1.0,
+      "base224_R5": 1.0,
+      "large384_R1": 1.0,
+      "large384_R5": 1.0
+    }
+  },
+  "note": "Offline cross-frame115 landmark retrieval only; camera-to-known-landmark polygon centroid XY distance from current footprint. Projection visible fraction is weak geometric coverage, not semantic visibility/occlusion ground truth; no target localization/SR inference.",
+  "source_rois_sha256": "429bad49c1e5ecc2dfa8e370c61a47f990ba5728d2e442de52e10da5da372101"
+}

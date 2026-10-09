@@ -40,6 +40,7 @@ def main():
     parser.add_argument('--observed-cache')
     parser.add_argument('--head-checkpoint')
     parser.add_argument('--stop-threshold',type=float,default=.5)
+    parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
@@ -90,11 +91,11 @@ def main():
         if args.model=='dynamic':
             if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')
             from graphnav.dynamic_runtime import DynamicWaypointPolicy,NativeObservationBuilder
-            runtime=DynamicWaypointPolicy(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache,head_checkpoint=args.head_checkpoint,stop_threshold=args.stop_threshold,execution=args.head_execution)
+            runtime=DynamicWaypointPolicy(args.checkpoint,args.dynamic_checkpoint,args.visual_checkpoint,str(output/'public_inputs'),history=args.visual_history,visual=not args.disable_visual,observed_cache=args.observed_cache,head_checkpoint=args.head_checkpoint,stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates)
             if runtime.use_visual:builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='a3-trajectory':
             if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')
-            runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution)
+            runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates)
         else:runtime=A3WaypointPolicy(args.checkpoint,output/'public_inputs')
         checkpoint=torch.load(args.checkpoint,map_location='cpu',weights_only=True)
     controller = BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,
