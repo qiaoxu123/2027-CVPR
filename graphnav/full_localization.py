@@ -32,9 +32,11 @@ class FullTokenGeometryLocalizer(nn.Module):
     def __init__(
         self, hidden=128, text_dim=768, heads=4, max_relations=8,
         vision_dim=768, top_k=20, dropout=0.1, rule_weight=1.0,
+        relative_position=False,
     ):
         super().__init__()
         self.hidden, self.top_k, self.rule_weight = hidden, top_k, float(rule_weight)
+        self.relative_position = bool(relative_position)
         self.gnn = TypedGeometryGAT(hidden=hidden, text_dim=text_dim, heads=heads, dropout=dropout)
         self.pos = nn.Sequential(
             nn.Linear(10, hidden), nn.GELU(), nn.Linear(hidden, hidden)
@@ -75,6 +77,22 @@ class FullTokenGeometryLocalizer(nn.Module):
         nn.init.zeros_(self.visual_score[-1].weight)
         nn.init.zeros_(self.visual_score[-1].bias)
 
+    def _candidate_positional_features(self, batch):
+        """Optional center-relative query coords prevent absolute-city shortcuts.
+
+        Anchor centroid derives ONLY from supplied referenced map polygons,
+        never the target position or a GT-selected reference.
+        """
+        xy = batch["grid_xy"]
+        if not self.relative_position:
+            return DenseGoalField.positional_features(xy)
+        valid = batch["entity_valid"].to(xy.dtype)
+        centers = batch["nodes"][..., :2].to(xy.dtype)
+        center = (centers * valid.unsqueeze(-1)).sum(1)
+        center = center / valid.sum(1,keepdim=True).clamp_min(1.)
+        centered_xy = xy - center[:, None] + .5
+        return DenseGoalField.positional_features(centered_xy)
+
     def forward(
         self, batch: dict, *, variant="gat",
         tokens: torch.Tensor | None = None,
@@ -101,7 +119,7 @@ class FullTokenGeometryLocalizer(nn.Module):
                 raise ValueError("every instruction needs at least one valid token")
             xy = batch["grid_xy"]
             b, q, _ = xy.shape
-            query = self.pos(DenseGoalField.positional_features(xy))
+            query = self.pos(self._candidate_positional_features(batch))
             query = query + self.rule_map(batch["relation_fields"])
             word_context, _ = self.token_attn(
                 query, self.lang(tokens), self.lang(tokens),
@@ -158,7 +176,7 @@ class FullTokenGeometryLocalizer(nn.Module):
                 features = features + attended
         if variant in ("prior", "rules", "building_prior"):
             # Proposal coordinates are deterministic from the global score.
-            context = self.pos(DenseGoalField.positional_features(batch["grid_xy"]))
+            context = self.pos(self._candidate_positional_features(batch))
         else:
             context = features
         k = min(self.top_k, q)
