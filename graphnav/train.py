@@ -86,6 +86,10 @@ def run(args):
     encoder = None
     loader = None
     sampler = None
+    if args.use_vision and args.smoke:
+        raise ValueError('SigLIP2 training requires real observed RGB frames')
+    vision_encoder = None
+    vision_cache = None
     if not args.smoke:
         if not args.data:
             raise ValueError("use --data prepared.jsonl or --smoke")
@@ -94,6 +98,10 @@ def run(args):
         encoder = FrozenBERT(name=args.text_backbone, device=str(device))
         if c.text_dim != 768:
             raise ValueError("BERT features are 768-dimensional")
+        if args.use_vision:
+            from .foundations import FrozenSigLIP2, CandidateVisionCache
+            vision_encoder = FrozenSigLIP2(device=str(device))
+            vision_cache = CandidateVisionCache()
         dataset = CityNavJSONL(args.data, c)
         sampler = DistributedSampler(dataset, shuffle=True) if distributed else None
         loader = DataLoader(
@@ -126,6 +134,15 @@ def run(args):
             optimizer.zero_grad(set_to_none=True)
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=use_amp):
                 out = model(**inputs)
+                if args.use_vision:
+                    from .visual_supervision import visual_candidate_batch
+                    features, visual_coverage = visual_candidate_batch(
+                        out, batch["rgb_observations"], batch["world_bounds"],
+                        vision_encoder, vision_dim=c.vision_dim,
+                        min_coverage=c.min_visual_coverage, cache=vision_cache,
+                    )
+                    base = model.module if distributed else model
+                    out = base.apply_visual_evidence(out, features, visual_coverage)
                 losses = navigation_losses(
                     out, target["target_xy"], inputs["uav_pose"], c,
                     teacher_future=target["teacher_future"],
@@ -163,6 +180,8 @@ def run(args):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--smoke", action="store_true")
+    p.add_argument("--use-vision", action="store_true",
+                   help="Train SigLIP2 visual residual from causal observed RGB prefixes")
     p.add_argument("--data", default=None)
     p.add_argument("--epochs", type=int, default=1)
     p.add_argument("--steps", type=int, default=2, help="steps in synthetic smoke mode")
