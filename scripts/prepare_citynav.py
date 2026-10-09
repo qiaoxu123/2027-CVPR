@@ -21,6 +21,7 @@ import cv2
 import numpy as np
 
 from graphnav.data import bind_reference_landmarks, resample_teacher_path
+from graphnav.landmark_alias import build_name_index
 from graphnav.geometry import normalize_xy
 from graphnav.memory import ObservedRGBMemory
 
@@ -61,6 +62,7 @@ def convert(objects, processed, trajectories, bounds, output,
             grid=28, stride=4, waypoints=8, max_landmarks=16,
             ground_levels=None, max_steps=20, renderer=None, static_only=False):
     count, skipped = 0, 0
+    indexed_names = {area: build_name_index(entries) for area, entries in objects.items()}
     with Path(output).open("w", encoding="utf-8") as f:
         for episode in trajectories:
             map_name = f"{episode['area']}_block_{episode['block']}"
@@ -75,7 +77,7 @@ def convert(objects, processed, trajectories, bounds, output,
                 target_norm = normalize_xy(target_world, b).tolist()
                 references = bind_reference_landmarks(
                     relation.get("landmarks", []), objects[map_name], max_landmarks,
-                    allowed_types=None,  # retain named polygons of every CityRefer type
+                    allowed_types=None, index=indexed_names[map_name],  # map-level O(1)
                 )
                 landmarks = [
                     {
