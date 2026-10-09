@@ -32,7 +32,7 @@ def _physical_node_geometry(entity, bounds):
         ))
     else:
         area = 0.
-    axis = xy[-1] - xy[0] if entity["kind"] == "road" else dif
+    axis = (xy[-1] - xy[0]) if entity["kind"] == "road" else dif.copy()
     axis /= max(float(np.linalg.norm(axis)), 1e-6)
     return np.array([
         *((center-low)/span), *(dif/span), length/400.,
