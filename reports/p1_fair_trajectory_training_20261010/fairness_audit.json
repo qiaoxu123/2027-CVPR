@@ -1,0 +1,229 @@
+{
+  "passed": true,
+  "matched_args": {
+    "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+    "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+    "epochs": 5,
+    "batch_size": 256,
+    "workers": 4,
+    "seed": 0,
+    "split_seed": 0,
+    "lr": 0.0002,
+    "device": "cuda",
+    "resume": null
+  },
+  "matched_input_sha256": {
+    "samples": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8",
+    "queries": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+  },
+  "consumed_feature_schema": {
+    "candidate_xy": {
+      "shape": [
+        20,
+        2
+      ],
+      "dtype": "torch.float32"
+    },
+    "candidate_context": {
+      "shape": [
+        20,
+        128
+      ],
+      "dtype": "torch.float16"
+    },
+    "candidate_logits": {
+      "shape": [
+        20
+      ],
+      "dtype": "torch.float32"
+    },
+    "belief_entropy": {
+      "shape": [],
+      "dtype": "torch.float32"
+    },
+    "bounds": {
+      "shape": [
+        4
+      ],
+      "dtype": "torch.float32"
+    }
+  },
+  "head_parameter_schema": {
+    "state.0.weight": {
+      "shape": [
+        128,
+        10
+      ],
+      "dtype": "torch.float32"
+    },
+    "state.0.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "state.2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "state.2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "fusion.0.weight": {
+      "shape": [
+        128,
+        256
+      ],
+      "dtype": "torch.float32"
+    },
+    "fusion.0.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "fusion.2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "fusion.2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "path.weight": {
+      "shape": [
+        72,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "path.bias": {
+      "shape": [
+        72
+      ],
+      "dtype": "torch.float32"
+    },
+    "mode.weight": {
+      "shape": [
+        3,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "mode.bias": {
+      "shape": [
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "rank.weight": {
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "rank.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "torch.float32"
+    },
+    "stop.0.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "stop.0.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "stop.2.weight": {
+      "shape": [
+        1,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "stop.2.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "torch.float32"
+    }
+  },
+  "models": {
+    "g0": {
+      "a3_checkpoint": "runs/a3_replicate_seed0/best.pt",
+      "a3_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+      "head_checkpoint": "runs/full_seed0_trajectory/best.pt",
+      "head_sha256": "56bec006f3e4dc91b8875beae32497e73a87d8dda78945f0cb1e1cd78715765c",
+      "cache_manifest": "runs/full_seed0_train_fields/manifest.json",
+      "cache_manifest_sha256": "14bb9d350741d1e5d9383bfd9bec80f13f42b791d305f8161b70dc679385d3c2",
+      "cache_queries": 21169,
+      "unused_dense_cache_fields_present": true,
+      "training_samples": 115559,
+      "development_samples": 12950,
+      "selected_head_epoch": 5,
+      "head_protocol": {
+        "observed_fraction": 0.0,
+        "stop_positive_weight": 20.0,
+        "stop_threshold": 0.5,
+        "selection": "Train Seen query-family-disjoint development total loss; no Unseen selection"
+      }
+    },
+    "g1_v2": {
+      "a3_checkpoint": "runs/a3_p1_v2_seed0/best.pt",
+      "a3_sha256": "1609a79c8e690527a80391bbfccc29917ae0e8e9739faf6e1aa26216150d588e",
+      "head_checkpoint": "runs/p1_v2_matched_trajectory/best.pt",
+      "head_sha256": "d538c0f7d27dab03de08995bf463f492122e91ced395ed0f878d4e23fb483149",
+      "cache_manifest": "runs/p1_v2_matched_train_fields/manifest.json",
+      "cache_manifest_sha256": "0a64a36eaf4557e12f44eed1dd8ee07ebff8d99b782f4c0faa982f458dedf384",
+      "cache_queries": 21169,
+      "unused_dense_cache_fields_present": false,
+      "training_samples": 115559,
+      "development_samples": 12950,
+      "selected_head_epoch": 5,
+      "head_protocol": {
+        "observed_fraction": 0.0,
+        "stop_positive_weight": 20.0,
+        "stop_threshold": 0.5,
+        "selection": "Train Seen query-family-disjoint development total loss; no Unseen selection"
+      }
+    },
+    "g1_v3": {
+      "a3_checkpoint": "runs/a3_p1_v3_hard_seed0/best.pt",
+      "a3_sha256": "ea98831db3cbde601325065d92b16a2ba92de4e72a30f2c0c6af0c5fe831bf73",
+      "head_checkpoint": "runs/p1_v3_matched_trajectory/best.pt",
+      "head_sha256": "75e8f035760e58cfcf98188446cc10fca273a46f0b6e57fd2168b9aa7bd57fd2",
+      "cache_manifest": "runs/p1_v3_matched_train_fields/manifest.json",
+      "cache_manifest_sha256": "216eea3772f1da07a2363d58ae774d9777e0e88756e548130a643a72919f50be",
+      "cache_queries": 21169,
+      "unused_dense_cache_fields_present": false,
+      "training_samples": 115559,
+      "development_samples": 12950,
+      "selected_head_epoch": 5,
+      "head_protocol": {
+        "observed_fraction": 0.0,
+        "stop_positive_weight": 20.0,
+        "stop_threshold": 0.5,
+        "selection": "Train Seen query-family-disjoint development total loss; no Unseen selection"
+      }
+    }
+  },
+  "audit_source_sha256": "17d3fa48d658da87ac2f006c60d9a05871be36c8f0e13a5a13d6ea68f1d414a9",
+  "note": "Same trajectory/Stop architecture, optimizer settings, seed, split seed, training samples and five epochs. Each A3 is paired with its own cache/head. The loader consumes only FEATURE_KEYS and discards additional dense fields: their presence in G0 does not change head inputs. Actual tensors vary because of A3 initialization/training; they are not expected equal. P1 pretraining is additional computation reported separately. Head epoch selection is identical internal Train-family development-loss logic, so selected epochs may differ. No new Unseen result is read or used."
+}

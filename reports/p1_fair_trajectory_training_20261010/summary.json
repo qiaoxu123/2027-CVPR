@@ -1,0 +1,159 @@
+{
+  "stages": {
+    "g0": {
+      "run": "runs/full_seed0_trajectory",
+      "report_sha256": "4876da48960dca55ac86e4e1fbf773aaf527a41078143ba19ce5c5a3eed9e15f",
+      "args": {
+        "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "cache": "runs/full_seed0_train_fields",
+        "output": "runs/full_seed0_trajectory",
+        "epochs": 5,
+        "batch_size": 256,
+        "workers": 4,
+        "seed": 0,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "device": "cuda",
+        "resume": null
+      },
+      "provenance": {
+        "commit": "e9fa714087b0b6ff6871375535fd17787d21a3f7",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "input_fingerprint": {
+        "samples": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+          "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+        },
+        "queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "cache_manifest": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed0_train_fields/manifest.json",
+          "sha256": "14bb9d350741d1e5d9383bfd9bec80f13f42b791d305f8161b70dc679385d3c2"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 36.337123822653666,
+      "evaluation_seconds": 2.819134675199166,
+      "epochs_with_wall_clock": 0,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed0_trajectory/best.pt",
+          "sha256": "56bec006f3e4dc91b8875beae32497e73a87d8dda78945f0cb1e1cd78715765c"
+        },
+        "last.pt": {
+          "path": "runs/full_seed0_trajectory/last.pt",
+          "sha256": "e7b3b702c71346252f4e01c70dd4d6351841b70a298c0f7d497ae322ecb8a57f"
+        }
+      }
+    },
+    "g1_v2": {
+      "run": "runs/p1_v2_matched_trajectory",
+      "report_sha256": "b5fb301fd77168f4f2d9702414987636b033b94139279a780e6b9a9e613880ff",
+      "args": {
+        "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "cache": "runs/p1_v2_matched_train_fields",
+        "output": "runs/p1_v2_matched_trajectory",
+        "epochs": 5,
+        "batch_size": 256,
+        "workers": 4,
+        "seed": 0,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "device": "cuda",
+        "resume": null
+      },
+      "provenance": {
+        "commit": "c5306afb0342cc897ca721e33b179ef01de5a68c",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "input_fingerprint": {
+        "samples": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+          "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+        },
+        "queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "cache_manifest": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p1_v2_matched_train_fields/manifest.json",
+          "sha256": "0a64a36eaf4557e12f44eed1dd8ee07ebff8d99b782f4c0faa982f458dedf384"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 32.841349293245,
+      "evaluation_seconds": 3.03130297572352,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/p1_v2_matched_trajectory/best.pt",
+          "sha256": "d538c0f7d27dab03de08995bf463f492122e91ced395ed0f878d4e23fb483149"
+        },
+        "last.pt": {
+          "path": "runs/p1_v2_matched_trajectory/last.pt",
+          "sha256": "08af97c8189e28d6d227d24a61a66a42276b5efddb6c90f63b017e0e4a5cc4c0"
+        }
+      }
+    },
+    "g1_v3": {
+      "run": "runs/p1_v3_matched_trajectory",
+      "report_sha256": "72b213184d44a52762e6d321001969103f1874d3462e73b1e40547f49b115613",
+      "args": {
+        "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "cache": "runs/p1_v3_matched_train_fields",
+        "output": "runs/p1_v3_matched_trajectory",
+        "epochs": 5,
+        "batch_size": 256,
+        "workers": 4,
+        "seed": 0,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "device": "cuda",
+        "resume": null
+      },
+      "provenance": {
+        "commit": "c5306afb0342cc897ca721e33b179ef01de5a68c",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "input_fingerprint": {
+        "samples": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+          "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+        },
+        "queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "cache_manifest": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p1_v3_matched_train_fields/manifest.json",
+          "sha256": "216eea3772f1da07a2363d58ae774d9777e0e88756e548130a643a72919f50be"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 33.59269773052074,
+      "evaluation_seconds": 3.2037761211395264,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/p1_v3_matched_trajectory/best.pt",
+          "sha256": "75e8f035760e58cfcf98188446cc10fca273a46f0b6e57fd2168b9aa7bd57fd2"
+        },
+        "last.pt": {
+          "path": "runs/p1_v3_matched_trajectory/last.pt",
+          "sha256": "728e23230b9ab3a5697e5843655385e94c0779af6709dd60b4d1750029118341"
+        }
+      }
+    }
+  },
+  "provenance": {
+    "commit": "c5306afb0342cc897ca721e33b179ef01de5a68c",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "note": "Measured epoch durations only; training totals exclude setup, rendering and feature-cache generation, which are recorded as separate queue jobs. Epochs without absolute timestamps cannot be matched to sampled GPU telemetry. Missing values remain empty/null. Nested per-query/class metrics remain in source reports; no synthetic reconstruction."
+}
