@@ -38,10 +38,28 @@ class StaticLocalizationDataset(Dataset):
         max_relations=8, roads_json=None, prior_sigma_m=25.,
         rule_sigma_m=25.,
     ):
-        self.records = [
-            json.loads(s) for s in Path(jsonl_path).read_text(encoding="utf-8").splitlines()
-            if s.strip()
+        raw_records = [
+            json.loads(line)
+            for line in Path(jsonl_path).read_text(encoding="utf-8").splitlines()
+            if line.strip()
         ]
+        # Static maps/instructions do not change across consecutive human
+        # trajectory poses. Keep ONE record per language query, otherwise
+        # longer CityFlight paths get artificially higher evaluation weight.
+        self.records = []
+        seen_queries = set()
+        for record in raw_records:
+            episode_id = str(record.get("episode_id", ""))
+            query_id = episode_id.rsplit(":", 1)[0] if episode_id.count(":") >= 3 else ""
+            if not query_id:
+                query_id = (
+                    record.get("map_name", ""), record["instruction"],
+                    tuple(record.get("target_xy", [])),
+                )
+            if query_id in seen_queries:
+                continue
+            seen_queries.add(query_id)
+            self.records.append(record)
         if not self.records:
             raise ValueError("empty CityNav JSONL")
         self.roads_by_map = (
