@@ -14,7 +14,7 @@ import torch
 from torch.utils.data import DataLoader
 from graphnav.checkpointing import atomic_save,input_fingerprint,provenance,rng_state,restore_training
 from graphnav.trajectory_data import FrozenTrajectoryDataset,move_batch
-from graphnav.trajectory_policy import CandidateTrajectoryStop,trajectory_losses
+from graphnav.trajectory_policy import CandidateTrajectoryStop,trajectory_losses,calibrated_stop_probability
 
 
 def run_epoch(model,loader,device,optimizer=None):
@@ -41,7 +41,7 @@ def run_epoch(model,loader,device,optimizer=None):
                 candidate,mode,waypoint,stop=output.select();ids=torch.arange(size,device=device)
                 ne=(world[ids,candidate]-labels['target_world'][:,:2]).norm(dim=-1)
                 arrived=(inputs['pose_world'][:,:2]-labels['target_world'][:,:2]).norm(dim=-1)<=20.
-                stopped=stop.sigmoid()>=.5
+                stopped=calibrated_stop_probability(stop,20.)>=.5
                 metrics=dict(candidate_r1=(ne<=20.).float().mean(),candidate_ne=ne.mean(),
                     stop_rate=stopped.float().mean(),failed_stop_rate=(stopped & ~arrived).float().mean(),
                     missed_arrival_rate=(arrived & ~stopped).float().mean(),

@@ -50,3 +50,13 @@ def test_history_preserves_unknown_and_rejects_noncausal_steps():
     assert torch.equal(history.vectors[:,1],v[:,1]*3)
     with pytest.raises(ValueError):history.update(v,torch.ones(1,2),step=1)
     with pytest.raises(ValueError):history.update(v,torch.full((1,2),2.),step=2)
+
+
+def test_precomputed_frozen_field_matches_uncached_residual(tmp_path):
+    batch,a3,kwargs=inputs(tmp_path);net=DynamicGoalBelief(a3,vision_dim=6).eval()
+    reference=a3(batch,variant='geometry',**kwargs)
+    cached=net(batch,**kwargs,base_field=reference,use_graph=True)
+    uncached=net(batch,**kwargs,use_graph=True)
+    assert torch.equal(cached.belief_logits,uncached.belief_logits)
+    a3.requires_grad_(True)
+    with pytest.raises(ValueError,match='frozen'):net(batch,**kwargs,base_field=reference)

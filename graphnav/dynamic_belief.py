@@ -58,8 +58,10 @@ class DynamicGoalBelief(nn.Module):
         return self
 
     def forward(self,batch,*,tokens,token_mask,node_emb,visual_vectors=None,
-                visual_confidence=None,use_graph=False,use_visual=False):
-        base=self.a3(batch,variant='geometry',tokens=tokens,token_mask=token_mask,node_emb=node_emb)
+                visual_confidence=None,use_graph=False,use_visual=False,base_field=None):
+        if base_field is not None and any(p.requires_grad for p in self.a3.parameters()):
+            raise ValueError('precomputed A3 field requires a frozen backbone')
+        base=base_field if base_field is not None else self.a3(batch,variant='geometry',tokens=tokens,token_mask=token_mask,node_emb=node_emb)
         b,q=base.belief_logits.shape
         dense=base.dense_context
         geo=self.relative(batch['pair_geometry'].to(dense.dtype))

@@ -8,6 +8,17 @@ import numpy as np
 import torch
 from torch import nn
 from torch.nn import functional as F
+import math
+
+
+def calibrated_stop_probability(logits,positive_weight=1.):
+    """Undo weighted-BCE odds shift before applying a posterior threshold.
+
+    This is an analytical correction, not evidence of empirical calibration;
+    closed-loop Stop error still requires Seen validation.
+    """
+    if positive_weight<=0:raise ValueError('positive weight must be positive')
+    return torch.sigmoid(logits.float()-math.log(positive_weight))
 
 
 def remaining_waypoints(trajectory, prefix_index, *, count=8, spacing_m=50.):

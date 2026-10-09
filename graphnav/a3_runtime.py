@@ -87,6 +87,8 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         from .checkpointing import file_sha256
         state=torch.load(head_checkpoint,map_location='cpu',weights_only=True)
         cache=Path(state['args']['cache'])/'manifest.json'
+        if file_sha256(cache)!=state['input_fingerprint']['cache_manifest']['sha256']:
+            raise ValueError('trajectory head source cache manifest changed')
         manifest=json.loads(cache.read_text())
         if manifest['protocol']['checkpoint_sha256']!=file_sha256(checkpoint):
             raise ValueError('trajectory head and static A3 checkpoint differ')
@@ -94,6 +96,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             raise ValueError('geometry/pose runtime only accepts matching zero visual-history inputs')
         if not 0<stop_threshold<1:raise ValueError('Stop threshold must be in (0,1)')
         self.stop_threshold=stop_threshold
+        self.stop_positive_weight=state['protocol']['stop_positive_weight']
         self.head=CandidateTrajectoryStop(hidden=state['hidden']).to(self.device).eval()
         self.head.load_state_dict(state['model'],strict=True)
 
@@ -110,7 +113,9 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             belief_entropy=(-(probabilities*probabilities.clamp_min(1e-8).log()).sum(-1)/math.log(probabilities.shape[-1])),
             observed_fraction=torch.zeros(1,device=self.device))
         with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):output=self.head(**inputs)
-        candidate,mode,waypoint,stop=output.select();probability=float(stop.float().sigmoid()[0])
+        from .trajectory_policy import calibrated_stop_probability
+        candidate,mode,waypoint,stop=output.select()
+        probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
         return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=probability>=self.stop_threshold,
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
                 candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability))

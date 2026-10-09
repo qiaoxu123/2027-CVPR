@@ -65,3 +65,10 @@ def test_initial_multimodal_paths_are_distinct_without_future_labels():
         belief_entropy=torch.ones(1),observed_fraction=torch.zeros(1))
     assert not torch.equal(out.paths_world[:,:,0],out.paths_world[:,:,1])
     assert not torch.equal(out.paths_world[:,:,1],out.paths_world[:,:,2])
+
+
+def test_weighted_stop_logits_need_odds_correction_before_thresholding():
+    from graphnav.trajectory_policy import calibrated_stop_probability
+    posterior=torch.tensor([.05,.3,.5,.8])
+    weighted_logits=torch.logit(posterior)+torch.log(torch.tensor(20.))
+    assert torch.allclose(calibrated_stop_probability(weighted_logits,20.),posterior,atol=1e-6)

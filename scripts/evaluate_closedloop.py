@@ -106,7 +106,7 @@ def main():
             rows.append(metrics); maps[record.map_name].append(metrics); terminations[termination]+=1
             stream.write(json.dumps(dict(index=record.index,episode_id=record.episode_id,
                 map_name=record.map_name,poses=poses.tolist(),termination=termination,
-                metrics=metrics,decision_seconds=timings))+'\n'); stream.flush()
+                metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
     report = dict(model=('SBFNav local paper-based reproduction' if args.model=='sbfnav'
