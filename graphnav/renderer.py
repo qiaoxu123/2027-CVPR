@@ -22,6 +22,7 @@ class CityNavObservedViewRenderer:
         self._scene_name = None
         self._raster = None
         self._rgb = None
+        self._height = None
 
     def __del__(self):
         if self._raster is not None:
@@ -46,6 +47,37 @@ class CityNavObservedViewRenderer:
         self._scene_name = scene_name
         self._raster = new_raster
         self._rgb = rgb  # BGR, because cv2.imwrite accepts BGR
+        self._height = None
+
+    def current_rgbd(self, map_name, pose, ground_level):
+        """Native current orthographic RGB and vertical-depth proxy, without disk I/O.
+
+        The benchmark supplies an orthophoto and surface-height raster. Depth is
+        camera z minus that surface, NOT perspective ray depth or an occlusion
+        renderer. Unknown/above-camera source pixels are invalid, not free space.
+        """
+        self._open(map_name)
+        pose = np.asarray(pose, dtype=np.float64)
+        if pose.shape != (4,) or not np.isfinite(pose).all():
+            raise ValueError('current pose must be finite xyzyaw')
+        footprint = ObservedRGBMemory.view_corners(pose[:2],pose[3],pose[2]-ground_level)
+        source = np.asarray([[self._raster.index(float(x),float(y))[1],
+                              self._raster.index(float(x),float(y))[0]] for x,y in footprint],np.float32)
+        n = self.image_size
+        destination = np.float32([[0,0],[n-1,0],[n-1,n-1],[0,n-1]])
+        matrix = cv2.getPerspectiveTransform(source,destination)
+        rgb = cv2.warpPerspective(self._rgb,matrix,(n,n),flags=cv2.INTER_LINEAR)
+        if self._height is None:self._height=self._raster.read(1).astype(np.float32)
+        source_valid=np.isfinite(self._height)&(self._height>=0)
+        support=cv2.warpPerspective(source_valid.astype(np.float32),matrix,(n,n),
+                                    flags=cv2.INTER_LINEAR)
+        valid=support >= .999
+        height=cv2.warpPerspective(np.where(source_valid,self._height,0),matrix,(n,n),
+                                   flags=cv2.INTER_LINEAR)
+        valid &= (rgb.max(-1)>0)&(height<pose[2])
+        depth=np.where(valid,pose[2]-height,0).astype(np.float32)
+        return {'bgr':rgb,'depth_m':depth,'depth_valid':valid,
+                'surface_height_m':height,'footprint_world':footprint,'pose':pose.copy()}
 
     def render(self, map_name, episode_key, step, pose, ground_level):
         """Create exactly one current 224x224 view and its world footprint."""

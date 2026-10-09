@@ -26,6 +26,7 @@ from .landmark_visual_pretrain import (
     roi_collate, match_loss, retrieval_metrics, SameMapTypeBatchSampler
 )
 from .token_language import FrozenBERTTokens
+from .checkpointing import atomic_save,input_fingerprint,provenance,rng_state,restore_training
 
 
 def encode_twoview(batch,backbone,net,device):
@@ -89,11 +90,25 @@ def run(args):
     ).to(device)
     optimizer=torch.optim.AdamW(model.parameters(),lr=args.lr,weight_decay=.01)
     out=Path(args.output)
+    resume=getattr(args,'resume',None)
+    if out.exists() and not resume:
+        raise ValueError('refusing to overwrite existing P2 experiment; use new output or --resume')
     out.mkdir(parents=True,exist_ok=True)
-    torch.save({"model":model.state_dict()}, out/"visual_initial.pt")
+    fingerprint=input_fingerprint(args,('train','unseen'))
+    origin=provenance()
     history=[]
     best=-1.
-    for epoch in range(args.epochs):
+    start_epoch=0
+    if resume:
+        saved=restore_training(resume,model,optimizer,args,fingerprint)
+        start_epoch=saved['epoch'];history=saved['history'];best=saved['best']
+        if not (out/'visual_best.pt').is_file() or not (out/'visual_initial.pt').is_file():
+            raise ValueError('resume requires preserved initial and best checkpoints in the same output')
+    else:
+        atomic_save({"model":model.state_dict()}, out/"visual_initial.pt")
+    for epoch in range(start_epoch,args.epochs):
+        train.set_epoch(epoch)
+        if not args.random_negative_batches:sampler.epoch=epoch
         model.train()
         if device.type=="cuda":
             torch.cuda.reset_peak_memory_stats(device)
@@ -119,6 +134,7 @@ def run(args):
         if count == 0:
             raise ValueError("No train batches with same-city/type hard negatives")
         peak = torch.cuda.max_memory_allocated(device)/2**30 if device.type=="cuda" else None
+        validation_start=time.perf_counter()
         dev=retrieval_metrics(
             model,dev_loader,backbone,device,max_groups=args.eval_max_groups
         )
@@ -127,12 +143,12 @@ def run(args):
                  images_per_second=2*count/elapsed,
                  train_instance_fraction=count/len(train_subset),
                  newly_encoded_images=backbone.encoded_images-encoded_start,
-                 dev=dev,peak_gpu_gib=peak)
+                 dev=dev,peak_gpu_gib=peak,validation_seconds=time.perf_counter()-validation_start)
         history.append(log)
         print(json.dumps(log),flush=True)
         if dev["R@1"]>best:
             best=dev["R@1"]
-            torch.save({
+            atomic_save({
                 "model":model.state_dict(), "epoch":epoch+1,
                 "image_backbone":args.image_backbone,
                 "vision_hidden":backbone.hidden_size,
@@ -142,9 +158,12 @@ def run(args):
                 "training_stage":"P2_visual_landmark_cross_view",
                 "pseudo_label_warning":True,
                 "args": vars(args),
+                "input_fingerprint":fingerprint,"provenance":origin,
             },out/"visual_best.pt")
-        torch.save({"model":model.state_dict(),"optimizer":optimizer.state_dict(),
-                    "epoch":epoch+1,"args":vars(args)},out/"visual_last.pt")
+        atomic_save({"model":model.state_dict(),"optimizer":optimizer.state_dict(),
+                    "epoch":epoch+1,"args":vars(args),"rng":rng_state(),
+                    "history":history,"best":best,"input_fingerprint":fingerprint,
+                    "provenance":origin},out/"visual_last.pt")
         (out/"history.json").write_text(json.dumps(history,indent=2))
     state=torch.load(out/"visual_best.pt",map_location=device,weights_only=True)
     model.load_state_dict(state["model"])
@@ -174,6 +193,7 @@ def run(args):
         args=vars(args),vision_revision=backbone.protocol[1],
         newly_encoded_images_total=backbone.encoded_images,disk_cache_hits=backbone.disk_hits,
         warning="Geometric projected pseudo instances, NOT verified semantic region masks",
+        provenance=origin,input_fingerprint=fingerprint,
     )
     (out/"visual_pretrain_report.json").write_text(
         json.dumps(report,indent=2),encoding="utf-8"
@@ -189,6 +209,7 @@ def main():
                    help="P0 val_unseen/landmark_rois.jsonl")
     p.add_argument("--acknowledge-geometry-pseudo-labels",action="store_true")
     p.add_argument("--output",default="runs/p2_visual_landmarks")
+    p.add_argument('--resume',default=None)
     p.add_argument("--image-backbone",default="google/siglip2-large-patch16-384")
     p.add_argument("--text-backbone",default="bert-base-uncased")
     p.add_argument("--image-microbatch",type=int,default=8)

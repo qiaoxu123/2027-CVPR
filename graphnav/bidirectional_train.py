@@ -24,6 +24,7 @@ from .candidate_geometry import FullCandidateDataset, collate_full
 from .full_localization import FullTokenGeometryLocalizer
 from .static_localization import cross_entropy_goal, static_recall
 from .token_language import FrozenBERTTokens
+from .checkpointing import atomic_save,input_fingerprint,provenance,rng_state,restore_training
 
 
 class PairedGeometryDataset(Dataset):
@@ -172,7 +173,8 @@ def run(args):
     kwargs=dict(batch_size=args.batch_size,num_workers=args.workers,
                 pin_memory=device.type=="cuda",collate_fn=paired_collate,
                 persistent_workers=args.workers > 0)
-    train_loader=DataLoader(Subset(train,train_ids),shuffle=True,**kwargs)
+    generator=torch.Generator().manual_seed(args.seed)
+    train_loader=DataLoader(Subset(train,train_ids),shuffle=True,generator=generator,**kwargs)
     dev_loader=DataLoader(Subset(train,dev_ids),**kwargs)
     unseen_loader=DataLoader(unseen,**kwargs)
     model=FullTokenGeometryLocalizer(
@@ -185,10 +187,21 @@ def run(args):
         lr=args.lr,weight_decay=.01,
     )
     dest=Path(args.output)
+    resume=getattr(args,'resume',None)
+    if dest.exists() and not resume:
+        raise ValueError('refusing to overwrite P1 experiment; choose new output or --resume')
     dest.mkdir(parents=True,exist_ok=True)
+    fingerprint=input_fingerprint(args,('train','unseen'));origin=provenance()
     history=[]
     best=-float("inf")
-    for epoch in range(args.epochs):
+    start_epoch=0
+    if resume:
+        saved=restore_training(resume,model,optimizer,args,fingerprint)
+        start_epoch=saved['epoch'];history=saved['history'];best=saved['best']
+        if not (dest/'pretrain_best.pt').is_file():
+            raise ValueError('resume requires preserved best checkpoint in same output')
+    for epoch in range(start_epoch,args.epochs):
+        generator.manual_seed(args.seed+epoch)
         model.train()
         t0=time.perf_counter()
         losses, sample_count = [], 0
@@ -209,24 +222,27 @@ def run(args):
             torch.cuda.synchronize()
         elapsed=time.perf_counter()-t0
         peak = torch.cuda.max_memory_allocated(device)/2**30 if device.type=="cuda" else None
+        validation_start=time.perf_counter()
         dev=evaluate(model,dev_loader,encoder,device)
         record=dict(epoch=epoch+1,train_loss=sum(v*n for v,n in losses)/sample_count,
                     train_seconds=elapsed,dev=dev,
                     train_samples=sample_count, samples_per_second=sample_count/elapsed,
-                    gpu_gib=peak)
+                    gpu_gib=peak,validation_seconds=time.perf_counter()-validation_start)
         history.append(record)
         print(json.dumps(record),flush=True)
         if dev["R@8/20m"]>best:
             best=dev["R@8/20m"]
-            torch.save(dict(
+            atomic_save(dict(
                 model=model.state_dict(), epoch=epoch+1,
                 hidden=args.hidden, heads=args.heads, grid_size=args.grid_size,
                 relative_position=True,training_stage="P1_bidirectional_geometry",
                 train_maps=sorted(train_maps),
                 args=vars(args),
+                input_fingerprint=fingerprint,provenance=origin,
             ),dest/"pretrain_best.pt")
-        torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(),
-                        epoch=epoch+1,args=vars(args)), dest/"pretrain_last.pt")
+        atomic_save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(),
+                        epoch=epoch+1,args=vars(args),rng=rng_state(),history=history,best=best,
+                        input_fingerprint=fingerprint,provenance=origin), dest/"pretrain_last.pt")
         (dest/"history.json").write_text(json.dumps(history,indent=2))
     state=torch.load(dest/"pretrain_best.pt",map_location=device,weights_only=True)
     model.load_state_dict(state["model"])
@@ -237,6 +253,7 @@ def run(args):
         checkpoint_epoch=state["epoch"],train_maps=sorted(train_maps),
         unseen_maps=sorted(unseen_maps),
         history=history,unseen=unseen_stats,
+        input_fingerprint=fingerprint,provenance=origin,
         claim="synthetic reversible geometry localization only; not CityNav SR/SPL",
     )
     (dest/"bidirectional_report.json").write_text(json.dumps(report,indent=2),encoding="utf-8")
@@ -248,6 +265,7 @@ def main():
     p.add_argument("--train",required=True)
     p.add_argument("--unseen",required=True)
     p.add_argument("--output",default="runs/p1_bidirectional")
+    p.add_argument('--resume',default=None)
     p.add_argument("--epochs",type=int,default=5)
     p.add_argument("--batch-size",type=int,default=32,
                    help="number of pairs, model runs 2x this many samples")

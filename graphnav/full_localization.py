@@ -24,6 +24,7 @@ class GoalField:
     candidate_xy: torch.Tensor         # [B,K,2]
     candidate_context: torch.Tensor    # [B,K,H]
     visual_coverage: torch.Tensor | None = None
+    dense_context: torch.Tensor | None = None
 
 
 class FullTokenGeometryLocalizer(nn.Module):
@@ -201,6 +202,7 @@ class FullTokenGeometryLocalizer(nn.Module):
             candidate_context=context.gather(
                 1, ids.unsqueeze(-1).expand(-1, -1, self.hidden)
             ),
+            dense_context=context,
         )
 
     def refine_rgb(self, field: GoalField, image_features, coverage, *, threshold=0.30):

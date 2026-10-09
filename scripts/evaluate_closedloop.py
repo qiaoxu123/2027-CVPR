@@ -32,7 +32,11 @@ def main():
     parser.add_argument('--split', choices=['val_seen', 'val_unseen'], required=True)
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
+    parser.add_argument('--model', choices=['sbfnav','a3'], default='sbfnav')
     args = parser.parse_args()
+    started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+    started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
+    evaluator_sha256=sha(__file__)
     output = Path(args.output)
     if output.exists(): raise ValueError('refusing to overwrite evaluation')
     output.mkdir(parents=True)
@@ -69,9 +73,14 @@ def main():
         canvas_size=config['model']['canvas_size'],field_size=config['model']['field_size'],
         max_height_above_ground_m=state['max_height_above_ground_m'],
         trajectory_radius_m=state['trajectory_radius_m'])
-    backbone = build_backbone(config).cuda(); model = build_model(config).cuda()
-    checkpoint = load_checkpoint(args.checkpoint,model=model,backbone=backbone,map_location='cuda')
-    runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
+    if args.model=='sbfnav':
+        backbone = build_backbone(config).cuda(); model = build_model(config).cuda()
+        checkpoint = load_checkpoint(args.checkpoint,model=model,backbone=backbone,map_location='cuda')
+        runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
+    else:
+        from graphnav.a3_runtime import A3WaypointPolicy
+        runtime=A3WaypointPolicy(args.checkpoint,output/'public_inputs')
+        checkpoint=torch.load(args.checkpoint,map_location='cpu',weights_only=True)
     controller = BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,
         vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,
         maximum_above_ground_m=protocol.max_altitude_m)
@@ -83,6 +92,7 @@ def main():
             # Neither record, target, IDs, nor expert future enters the policy or rollout.
             public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
                                    tuple(catalog.referenced_landmarks(record)))
+            if args.model=='a3': runtime.set_episode(public,builder.transform(public.map_name),catalog)
             poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
@@ -93,19 +103,22 @@ def main():
                 metrics=metrics,decision_seconds=timings))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
-    report = dict(model='SBFNav local paper-based reproduction',split=args.split,
+    report = dict(model=('SBFNav local paper-based reproduction' if args.model=='sbfnav'
+                        else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'),split=args.split,
         metrics=aggregate(rows),by_map={k:aggregate(v) for k,v in maps.items()},
         terminations=dict(terminations),protocol=asdict(protocol),config=config,
-        checkpoint_sha256=sha(args.checkpoint),checkpoint_epoch=checkpoint['completed_epoch'],
+        checkpoint_sha256=sha(args.checkpoint),checkpoint_epoch=checkpoint.get('completed_epoch',checkpoint.get('epoch')),
         episode_manifest_sha256=sha(output/'episodes.json'),args=vars(args),seconds=time.perf_counter()-started,
         gpu_peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
         input_sha256={str(p):sha(p) for p in [dataset.annotation_path,Path(args.data_root)/'cityrefer/objects.json',
             Path(args.data_root)/'cityrefer/processed_descriptions.json']},
         sbf_source_sha256={str(p.relative_to(args.sbf_source)):sha(p)
             for p in sorted(Path(args.sbf_source).glob('sbfnav/**/*.py'))},
-        graphnav_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+        graphnav_commit=started_commit,evaluator_sha256=evaluator_sha256,
+        graphnav_working_diff_sha256=hashlib.sha256(started_diff).hexdigest(),
         inference_target_access=False,
-        warning='Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.')
+        warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
+                 if args.model=='sbfnav' else 'Geometric waypoint execution baseline, not full GraphNav.'))
     (output/'metrics.json').write_text(json.dumps(report,indent=2))
     print(json.dumps(report['metrics']),flush=True)
 

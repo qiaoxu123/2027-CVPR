@@ -158,6 +158,9 @@ class PairedROIs(Dataset):
         if not self.groups:
             raise ValueError("Need >=2 DIFFERENT observed frames per landmark ID; use along-trajectory data")
         self.seed=seed
+        # Shared epoch survives persistent DataLoader workers. Pair selection is
+        # independent of worker scheduling, backbone size and model RNG usage.
+        self._epoch=torch.zeros((),dtype=torch.long).share_memory_()
         self.deterministic=deterministic
         self.types=sorted({rows[0]["object_type"] for _,rows in self.groups})
         self.labels={v:i for i,v in enumerate(self.types)}
@@ -166,13 +169,16 @@ class PairedROIs(Dataset):
     def __len__(self):
         return len(self.groups)
 
+    def set_epoch(self,epoch):
+        self._epoch.fill_(int(epoch))
+
     def __getitem__(self,index):
         key,rows=self.groups[index]
         # Index-stable but varied two-view pairs (no reliance on GT goal).
         # Train data loader shuffling changes pair order; frozen source frames
         # cannot be invented from reversed directions.
         chosen=([rows[0], rows[-1]] if self.deterministic
-                else random.sample(rows,2))
+                else random.Random(f'{self.seed}:{int(self._epoch)}:{index}').sample(rows,2))
         if chosen[0]["observed_frame"]==chosen[1]["observed_frame"]:
             raise AssertionError("positive visual pair must use different views")
         return (

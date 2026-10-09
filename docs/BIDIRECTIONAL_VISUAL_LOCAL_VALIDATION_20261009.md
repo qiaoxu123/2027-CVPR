@@ -10,7 +10,7 @@ Rendered actual CityFlight pose observations directly from the source rasters at
 
 54 independently inspected projection/ROI examples are committed under `reports/bidirectional_local_20261009/p0_cases/`. No systematic global mirror/rotation/translation was apparent. 38 cases showed no obvious registration error; 16 were flagged for clipping, occlusion, sparse source pixels, coarse boundaries or invalid polygons. This is qualitative registration review, not segmentation accuracy or pixel IoU. Polygon projections are weak geometric regions, never semantic masks.
 
-The quality filter requires valid simple polygons, visibility >=90%, projected area >=256 pixels, minimum bbox side 8 pixels and actual nonblack source-pixel support >=90%. Context is retained within rectangular letterboxed ROIs. Duplicate camera footprints are removed for cross-view pairing. Final retained ROIs: 17493 Train, 6170 Seen, 2619 Unseen. Paired landmark identities: 931 / 794 / 115. No road centerlines were invented: TrafficRoad/Footpath are genuine annotated surface polygons. See coverage JSON for map/category counts and rejection reasons. Native observations currently export RGB; aligned depth generation remains a closed-loop integration task.
+The quality filter requires valid simple polygons, visibility >=90%, projected area >=256 pixels, minimum bbox side 8 pixels and actual nonblack source-pixel support >=90%. Context is retained within rectangular letterboxed ROIs. Duplicate camera footprints are removed for cross-view pairing. Final retained ROIs: 17493 Train, 6170 Seen, 2619 Unseen. Paired landmark identities: 931 / 794 / 115. No road centerlines were invented: TrafficRoad/Footpath are genuine annotated surface polygons. See coverage JSON for map/category counts and rejection reasons. Native RGB-D diagnostics for all 54 QA cases were subsequently added in the expanded system branch; online depth integration remains pending.
 
 ## P1 and matched A3 controls
 
@@ -18,7 +18,7 @@ Invalid source polygons and source-family augmentation leakage were found and fi
 
 P1 trained 5 epochs, 32 pairs/batch (64 directional samples), hidden 256, 8 heads, relative positional inputs, BERT token limit 128, seed 0, BF16. Synthetic Unseen directional accuracy is 100%; R@1/4/8 = 89.38/99.51/100%, NE 12.15m. These are synthetic geometry metrics, NOT real CityNav navigation metrics. Peak allocated GPU memory 3.30 GiB. See JSON for each epoch loss/time/throughput. Inverse error in the saved training history is normalized SmoothL1; subsequent sample-weighting correction changes only reporting, not model weights.
 
-G0 and G1 both use hidden 256, heads 8, relative geometry, batch 64, workers 4, BERT max length 512, seed 0 and 5 epochs. Only initialization differs; G1 additionally pays P1 pretraining compute. Checkpoints were selected on Val Seen. Real static localization, percentages at 20m:
+G0 and G1 both use hidden 256, heads 8, relative geometry, batch 64, workers 4, BERT max length 512, seed 0 and 5 epochs. Only initialization differs; G1 additionally pays 70.02s P1 train-only pretraining compute. G0/G1 fine-tune train-only totals are 226.30/229.32s; G1 combined training is 299.35s. Checkpoints were selected on Val Seen. Real static localization, percentages at 20m:
 
 | Model | Split | Queries | R@1 | R@4 | R@8 | NE m |
 |---|---|---:|---:|---:|---:|---:|
