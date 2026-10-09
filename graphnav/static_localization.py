@@ -147,6 +147,14 @@ class StaticLocalizationDataset(Dataset):
             world_grid, referenced_entities, [],
             sigma_m=self.prior_sigma_m,
         )
+        # Preserve an explicit buildings-only control on the SAME queries,
+        # grid and ground truth, to quantify gains from newly restored types.
+        building_entities = [
+            e for e in referenced_entities if e["kind"] == "building"
+        ]
+        prior_buildings, _, _ = prior_and_rule_fields(
+            world_grid, building_entities, [], sigma_m=self.prior_sigma_m
+        )
         _, rules, relation_fields = prior_and_rule_fields(
             world_grid, graph["entities"], graph["relations"],
             sigma_m=self.rule_sigma_m,
@@ -156,11 +164,11 @@ class StaticLocalizationDataset(Dataset):
         rel_padded = np.zeros((len(world_grid), self.max_relations), np.float32)
         if relation_fields.shape[1]:
             rel_padded[:, :relation_fields.shape[1]] = relation_fields
-        return graph, prior, rules, rel_padded
+        return graph, prior, prior_buildings, rules, rel_padded
 
     def __getitem__(self, idx):
         rec = self.records[idx]
-        graph, prior, rules, rel_fields = self._prepared(idx)
+        graph, prior, prior_buildings, rules, rel_fields = self._prepared(idx)
         return {
             "text": rec["instruction"],
             "node_names": graph["node_names"],
@@ -170,6 +178,7 @@ class StaticLocalizationDataset(Dataset):
             "edges": torch.from_numpy(graph["edges"]),
             "adjacency": torch.from_numpy(graph["adjacency"]),
             "prior": torch.from_numpy(prior),
+            "prior_buildings": torch.from_numpy(prior_buildings),
             "rules": torch.from_numpy(rules),
             "relation_fields": torch.from_numpy(rel_fields),
             "grid_xy": torch.from_numpy(self.grid_xy),
@@ -228,6 +237,8 @@ class StaticGoalLocalizer(nn.Module):
         prior = batch["prior"]
         if variant == "prior":
             return prior
+        if variant == "building_prior":
+            return batch.get("prior_buildings", prior)
         return prior + self.rule_weight * batch["rules"]
 
     def forward(self, batch, *, variant="gat", instruction_emb=None, node_emb=None):
