@@ -1,0 +1,53 @@
+{
+  "safe_alias_policy": "Audit only: Building type; normalize punctuation; strip leading the and trailing building/buildings. Keep all matching polygons; no nearest/edit-distance fallback, no GT.",
+  "splits": {
+    "train_seen": {
+      "queries": 21289,
+      "current_building_queries": 6226,
+      "safe_alias_building_queries": 10260
+    },
+    "val_seen": {
+      "queries": 2454,
+      "current_building_queries": 711,
+      "safe_alias_building_queries": 1152
+    },
+    "val_unseen": {
+      "queries": 2808,
+      "current_building_queries": 782,
+      "safe_alias_building_queries": 1488
+    }
+  },
+  "centroid_errors_m": {
+    "n_named_buildings": 654,
+    "mean": 1.7984083699789244,
+    "median": 0.9165120284359323,
+    "max": 253.14896401508437,
+    "largest": [
+      [
+        253.14896401508437,
+        "cambridge_block_20",
+        "The Grafton"
+      ],
+      [
+        19.495171216946375,
+        "birmingham_block_4",
+        "One Stop"
+      ],
+      [
+        17.302585832257904,
+        "cambridge_block_14",
+        "David Attenborough Building"
+      ],
+      [
+        16.017483270144858,
+        "cambridge_block_26",
+        "The Grafton"
+      ],
+      [
+        13.028936003388804,
+        "cambridge_block_14",
+        "Lion Yard"
+      ]
+    ]
+  }
+}

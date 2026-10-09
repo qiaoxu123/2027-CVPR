@@ -1,0 +1,78 @@
+{
+  "same_current_queries_with_revised_reference_metadata": {
+    "train_seen": {
+      "queries": 21289,
+      "current_building": 6226,
+      "revised_refs_strict_building": 12083,
+      "revised_refs_strict_any_type": 21048
+    },
+    "val_seen": {
+      "queries": 2454,
+      "current_building": 711,
+      "revised_refs_strict_building": 1370,
+      "revised_refs_strict_any_type": 2426
+    },
+    "val_unseen": {
+      "queries": 2808,
+      "current_building": 782,
+      "revised_refs_strict_building": 1681,
+      "revised_refs_strict_any_type": 2721
+    }
+  },
+  "instruction_text_source_check": {
+    "train_seen": {
+      "verbatim_mismatch": 539,
+      "after_whitespace_normalization_mismatch": 29
+    },
+    "val_seen": {
+      "verbatim_mismatch": 68,
+      "after_whitespace_normalization_mismatch": 2
+    },
+    "val_unseen": {
+      "verbatim_mismatch": 69,
+      "after_whitespace_normalization_mismatch": 4
+    }
+  },
+  "source_polygon_quality": {
+    "counts": {
+      "named_buildings": 654,
+      "invalid": 5,
+      "zero_area": 0
+    },
+    "valid_mean_centroid_difference_m": 1.33287758804628,
+    "valid_median_centroid_difference_m": 0.907086788486425,
+    "valid_max_centroid_difference_m": 13.028936003388761,
+    "invalid_examples": [
+      [
+        "cambridge_block_14",
+        "14",
+        "David Attenborough Building",
+        65.15188144553258
+      ],
+      [
+        "cambridge_block_26",
+        "110",
+        "The Grafton",
+        8668.41725555933
+      ],
+      [
+        "cambridge_block_20",
+        "138",
+        "The Grafton",
+        10.271564019837001
+      ],
+      [
+        "cambridge_block_6",
+        "6",
+        "Fitzwilliam Museum",
+        1135.7333249964386
+      ],
+      [
+        "birmingham_block_4",
+        "1",
+        "One Stop",
+        5966.111334507933
+      ]
+    ]
+  }
+}

@@ -1,0 +1,796 @@
+{
+  "scope": "SBFNav paper and local independent reproduction; no model training, no navigation, no Test Unseen.",
+  "splits": {
+    "train_seen": {
+      "original_episodes": 22002,
+      "revised_episodes": 21878,
+      "common_episode_ids": 21878,
+      "removed_in_revised": 124,
+      "added_in_revised": 0,
+      "changed_instruction_text": 0,
+      "original_split_vs_cityrefer_instruction_mismatches": 539,
+      "current_input_coverage": {
+        "queries": 21289,
+        "queries_with_requested_name": 20861,
+        "current_building_queries": 6226,
+        "requested_names": 33388,
+        "strict_any_type_queries": 15452,
+        "sbf_resolved_any_type_queries": 20861,
+        "sbf_resolved_building_queries": 11606,
+        "sbf_resolved_road_surface_queries": 14130,
+        "sbf_edit_fallback_requests": 10526,
+        "fallback_normalized_distance_over_035": 5806
+      },
+      "alias_examples": [
+        {
+          "map": "birmingham_block_1",
+          "query": "gym",
+          "resolved_name": "The Gym",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One Stop building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Gym",
+          "resolved_name": "The Gym",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington Rd",
+          "resolved_name": "Wellington Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.14285714285714285
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Grosvenor Rd",
+          "resolved_name": "Grosvenor Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.15384615384615385
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Full Circle Events & Exhibition Ltd building",
+          "resolved_name": "Full Circle Events & Exhibitions Ltd",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.24324324324324326
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington Rd/ Grosvenor Road",
+          "resolved_name": "Wellington Rd / Grosvenor Rd",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.08
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Full Circle Events & Exhibitions Ltd building",
+          "resolved_name": "Full Circle Events & Exhibitions Ltd",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.21052631578947367
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington Rd",
+          "resolved_name": "Wellington Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.14285714285714285
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Grosvenor Rd",
+          "resolved_name": "Grosvenor Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.15384615384615385
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "St Teresa of the Child Jesus Catholic church building",
+          "resolved_name": "St. Teresa of the Child Jesus Catholic Church",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.17777777777777778
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington road/Grosvenor road",
+          "resolved_name": "Wellington Rd / Grosvenor Rd",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.14814814814814814
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington street",
+          "resolved_name": "Wellington Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.3125
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Leslie",
+          "resolved_name": "Leslie Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.4
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Willmore",
+          "resolved_name": "Willmore Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.3333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington drive",
+          "resolved_name": "Wellington Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.26666666666666666
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Teresa of the Child Jesus Catholic Church",
+          "resolved_name": "St. Teresa of the Child Jesus Catholic Church",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.05405405405405406
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "St Teresa’s court building",
+          "resolved_name": "St Teresa's Court",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.36363636363636365
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Celine Grove road",
+          "resolved_name": "Celine Grove",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.26666666666666666
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington Street",
+          "resolved_name": "Wellington Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.3125
+        }
+      ]
+    },
+    "val_seen": {
+      "original_episodes": 2498,
+      "revised_episodes": 2470,
+      "common_episode_ids": 2470,
+      "removed_in_revised": 28,
+      "added_in_revised": 0,
+      "changed_instruction_text": 0,
+      "original_split_vs_cityrefer_instruction_mismatches": 68,
+      "current_input_coverage": {
+        "queries": 2454,
+        "queries_with_requested_name": 2409,
+        "current_building_queries": 711,
+        "requested_names": 3874,
+        "strict_any_type_queries": 1834,
+        "sbf_resolved_any_type_queries": 2409,
+        "sbf_resolved_building_queries": 1326,
+        "sbf_resolved_road_surface_queries": 1698,
+        "sbf_edit_fallback_requests": 1157,
+        "fallback_normalized_distance_over_035": 652
+      },
+      "alias_examples": [
+        {
+          "map": "birmingham_block_1",
+          "query": "Wilmore Road",
+          "resolved_name": "Willmore Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.08333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Willington Road",
+          "resolved_name": "Wellington Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.07142857142857142
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "St Theresa’s court building",
+          "resolved_name": "St Teresa's Court",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.391304347826087
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Wellington/Grosvenor road",
+          "resolved_name": "Wellington Rd / Grosvenor Rd",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.17391304347826086
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "St Teresa of the Child Jesus Catholic church building",
+          "resolved_name": "St. Teresa of the Child Jesus Catholic Church",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.17777777777777778
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "full circle events and exhibitions LTD building",
+          "resolved_name": "Full Circle Events & Exhibitions Ltd",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.2682926829268293
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "parking lot for St. Teresa’s Court",
+          "resolved_name": "St Teresa's Court",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.48148148148148145
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "St Teresa's Court building",
+          "resolved_name": "St Teresa's Court",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.36363636363636365
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "St Teresa's court building",
+          "resolved_name": "St Teresa's Court",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.36363636363636365
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Celine Grove traffic Road",
+          "resolved_name": "Celine Grove",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.5
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "center of willmore Road",
+          "resolved_name": "Willmore Road",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.4
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "no entry",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.7142857142857143
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "multicolored white, Brown and red multi-housing unit complex",
+          "resolved_name": "Proof House Junction and Bushbury Junction Line",
+          "resolved_type": "Rail",
+          "edit_distance_ratio": 0.7058823529411765
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "Ruin building",
+          "resolved_name": "Celine Grove",
+          "resolved_type": "TrafficRoad",
+          "edit_distance_ratio": 0.9166666666666666
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One Stop building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One-Stop building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One Stop Building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One Stop building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One Stop Building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        },
+        {
+          "map": "birmingham_block_1",
+          "query": "One Stop Building",
+          "resolved_name": "One Stop",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5333333333333333
+        }
+      ]
+    },
+    "val_unseen": {
+      "original_episodes": 2826,
+      "revised_episodes": 2697,
+      "common_episode_ids": 2697,
+      "removed_in_revised": 129,
+      "added_in_revised": 0,
+      "changed_instruction_text": 0,
+      "original_split_vs_cityrefer_instruction_mismatches": 69,
+      "current_input_coverage": {
+        "queries": 2808,
+        "queries_with_requested_name": 2751,
+        "current_building_queries": 782,
+        "requested_names": 4377,
+        "sbf_edit_fallback_requests": 1489,
+        "fallback_normalized_distance_over_035": 964,
+        "strict_any_type_queries": 2007,
+        "sbf_resolved_any_type_queries": 2751,
+        "sbf_resolved_building_queries": 1699,
+        "sbf_resolved_road_surface_queries": 1693
+      },
+      "alias_examples": [
+        {
+          "map": "birmingham_block_5",
+          "query": "national probation service building",
+          "resolved_name": "National Probation Service",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.25
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "national probation service building",
+          "resolved_name": "National Probation Service",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.25
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "National Probation Service building",
+          "resolved_name": "National Probation Service",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.25
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "National Probation Service building",
+          "resolved_name": "National Probation Service",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.25
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "National Probation Service building",
+          "resolved_name": "National Probation Service",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.25
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "NCF Distribution building",
+          "resolved_name": "NCF Distribution",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.34782608695652173
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "white-roofed NCF Distribution building",
+          "resolved_name": "NCF Distribution",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.5588235294117647
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "stadium",
+          "resolved_name": "BMTR",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 1.0
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "NCF building",
+          "resolved_name": "McDonald's",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.7272727272727273
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "NCF Distribution building",
+          "resolved_name": "NCF Distribution",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.34782608695652173
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Perry Barr Greyhound Stadium building",
+          "resolved_name": "Perry Barr Greyhound Stadium",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.24242424242424243
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Perry Barr Greyhound Stadium building",
+          "resolved_name": "Perry Barr Greyhound Stadium",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.24242424242424243
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "track and field stadium",
+          "resolved_name": "Perry Barr Greyhound Stadium",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.56
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Johnson's apparel Master building",
+          "resolved_name": "Johnsons Apparel Master",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.27586206896551724
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Johnsons Apparel Master building",
+          "resolved_name": "Johnsons Apparel Master",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.27586206896551724
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Johnsons Apparel Master building",
+          "resolved_name": "Johnsons Apparel Master",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.27586206896551724
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Johnsons Apparel Master building",
+          "resolved_name": "Johnsons Apparel Master",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.27586206896551724
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "johnsons apparel master building",
+          "resolved_name": "Johnsons Apparel Master",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.27586206896551724
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "stadium",
+          "resolved_name": "BMTR",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 1.0
+        },
+        {
+          "map": "birmingham_block_5",
+          "query": "Johnson's apparel Master building",
+          "resolved_name": "Johnsons Apparel Master",
+          "resolved_type": "Building",
+          "edit_distance_ratio": 0.27586206896551724
+        }
+      ]
+    }
+  },
+  "map_aspect_ratios": [
+    {
+      "map": "birmingham_block_12",
+      "width_m": 73.29999999999995,
+      "height_m": 400.1,
+      "aspect": 5.458390177353346
+    },
+    {
+      "map": "birmingham_block_10",
+      "width_m": 400.10000000000014,
+      "height_m": 85.20000000000005,
+      "aspect": 4.69600938967136
+    },
+    {
+      "map": "cambridge_block_17",
+      "width_m": 400.10000000000014,
+      "height_m": 137.0,
+      "aspect": 2.9204379562043807
+    },
+    {
+      "map": "birmingham_block_11",
+      "width_m": 65.59999999999991,
+      "height_m": 179.60000000000002,
+      "aspect": 2.7378048780487845
+    },
+    {
+      "map": "cambridge_block_33",
+      "width_m": 152.99999999999977,
+      "height_m": 400.10000000000014,
+      "aspect": 2.615032679738567
+    },
+    {
+      "map": "cambridge_block_23",
+      "width_m": 256.4000000000001,
+      "height_m": 107.70000000000005,
+      "aspect": 2.3806870937790157
+    },
+    {
+      "map": "birmingham_block_7",
+      "width_m": 319.70000000000005,
+      "height_m": 173.4,
+      "aspect": 1.8437139561707039
+    },
+    {
+      "map": "cambridge_block_4",
+      "width_m": 286.7,
+      "height_m": 202.29999999999995,
+      "aspect": 1.4172021749876424
+    },
+    {
+      "map": "cambridge_block_25",
+      "width_m": 217.4000000000001,
+      "height_m": 287.6,
+      "aspect": 1.3229070837166508
+    },
+    {
+      "map": "cambridge_block_28",
+      "width_m": 400.10000000000014,
+      "height_m": 318.10000000000014,
+      "aspect": 1.2577805721471234
+    },
+    {
+      "map": "birmingham_block_13",
+      "width_m": 73.79999999999995,
+      "height_m": 61.799999999999955,
+      "aspect": 1.1941747572815535
+    },
+    {
+      "map": "cambridge_block_18",
+      "width_m": 290.10000000000014,
+      "height_m": 253.70000000000002,
+      "aspect": 1.1434765471028778
+    },
+    {
+      "map": "cambridge_block_12",
+      "width_m": 400.10000000000014,
+      "height_m": 377.70000000000005,
+      "aspect": 1.0593063277733654
+    },
+    {
+      "map": "birmingham_block_1",
+      "width_m": 384.8,
+      "height_m": 400.1,
+      "aspect": 1.0397609147609148
+    },
+    {
+      "map": "cambridge_block_10",
+      "width_m": 400.09999999999997,
+      "height_m": 413.60000000000014,
+      "aspect": 1.0337415646088481
+    },
+    {
+      "map": "cambridge_block_3",
+      "width_m": 389.1,
+      "height_m": 400.10000000000014,
+      "aspect": 1.028270367514778
+    },
+    {
+      "map": "cambridge_block_9",
+      "width_m": 400.09999999999997,
+      "height_m": 400.10000000000014,
+      "aspect": 1.0000000000000004
+    },
+    {
+      "map": "birmingham_block_9",
+      "width_m": 400.10000000000014,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "cambridge_block_6",
+      "width_m": 400.09999999999997,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "cambridge_block_7",
+      "width_m": 400.09999999999997,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "birmingham_block_3",
+      "width_m": 400.09999999999997,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "cambridge_block_19",
+      "width_m": 400.10000000000014,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "birmingham_block_5",
+      "width_m": 400.09999999999997,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "birmingham_block_4",
+      "width_m": 400.09999999999997,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "cambridge_block_20",
+      "width_m": 400.10000000000014,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "cambridge_block_13",
+      "width_m": 400.10000000000014,
+      "height_m": 400.1,
+      "aspect": 1.0000000000000002
+    },
+    {
+      "map": "cambridge_block_21",
+      "width_m": 400.10000000000014,
+      "height_m": 400.10000000000014,
+      "aspect": 1.0
+    },
+    {
+      "map": "cambridge_block_2",
+      "width_m": 400.1,
+      "height_m": 400.1,
+      "aspect": 1.0
+    }
+  ],
+  "warning": "SBF reproduction fallback has no rejection threshold and resolves every requested name, even implausible names. A resolved match is not verified correctness. It also keeps only the largest polygon per exact name, whereas current static experiment preserves ambiguous building IDs.",
+  "revised_source_crosscheck": {
+    "train_seen": {
+      "actual_sbf_input_counts": {
+        "queries": 21878,
+        "split_vs_revised_cityrefer_instruction_mismatch": 538,
+        "changed_reference_name_lists": 12327,
+        "cityrefer_text_changed_from_original_cityrefer": 0,
+        "queries_with_any_resolved_landmark": 21819,
+        "queries_with_resolved_building": 12261,
+        "queries_with_resolved_road_surface": 14366
+      },
+      "release_refined_count": 21878,
+      "release_refined_changed_text": 0,
+      "input_text_mismatch_examples": [
+        {
+          "map": "birmingham_block_1",
+          "object_id": "10",
+          "ann_id": 0,
+          "split_instruction": "Gray building that is second from the right on the row of buildings above Willmore Road, when viewed aerially with Wellington road to the right.",
+          "current_converter_instruction": "Gray building that is second from the right on the row of buildings above Willmore Road, when viewed aerially with  Wellington road to the right."
+        },
+        {
+          "map": "birmingham_block_1",
+          "object_id": "29",
+          "ann_id": 4,
+          "split_instruction": "A square white roofed house behind the right parking lot of the the three brown houses along wellington road.",
+          "current_converter_instruction": "A square white roofed house  behind the right parking lot  of the the three brown houses along wellington road."
+        },
+        {
+          "map": "birmingham_block_1",
+          "object_id": "31",
+          "ann_id": 3,
+          "split_instruction": "A dark gray roofed rectangular/square building with an addition on the back in the center. It is located on Wellington Road beside the parking lot of the building with the long white aluminum roofs.",
+          "current_converter_instruction": "A dark gray roofed rectangular/square building with an addition  on the back in the center. It is located on Wellington Road beside the parking lot of the building with the long white aluminum roofs."
+        },
+        {
+          "map": "birmingham_block_1",
+          "object_id": "37",
+          "ann_id": 0,
+          "split_instruction": "This is a building with a tall brown roof. It's on a road behind Wellington Road. There is a black and a silver car parked in front of it. To the right of the building is a building with a darker roof and on the left is a building that looks very similar to this one.",
+          "current_converter_instruction": "This is a building with a tall brown roof. It's on a road behind Wellington Road. There is a black and a silver car parked in front of it.  To the right of the building is a building with a darker roof and on the left is a building that looks very similar to this one."
+        }
+      ]
+    },
+    "val_seen": {
+      "actual_sbf_input_counts": {
+        "queries": 2470,
+        "split_vs_revised_cityrefer_instruction_mismatch": 66,
+        "changed_reference_name_lists": 1276,
+        "cityrefer_text_changed_from_original_cityrefer": 0,
+        "queries_with_any_resolved_landmark": 2470,
+        "queries_with_resolved_building": 1356,
+        "queries_with_resolved_road_surface": 1743
+      },
+      "release_refined_count": 2470,
+      "release_refined_changed_text": 0,
+      "input_text_mismatch_examples": [
+        {
+          "map": "birmingham_block_1",
+          "object_id": "144",
+          "ann_id": 0,
+          "split_instruction": "A black car parked between a white car and another black car on Willmore Road. It is parked in front of a two story brown house with a gray peaked roof and a chimney.",
+          "current_converter_instruction": "A black car parked between a white car and another black car on Willmore Road.  It is parked in front of a two story brown house with a gray peaked roof and a chimney."
+        },
+        {
+          "map": "birmingham_block_1",
+          "object_id": "149",
+          "ann_id": 4,
+          "split_instruction": "Black car in the parking lot on the left pavement along Leslie road. It has a red car behind it and black car in front.",
+          "current_converter_instruction": "Black car  in the parking lot on the left pavement along Leslie road. It has a red car behind it and black car in front."
+        },
+        {
+          "map": "birmingham_block_1",
+          "object_id": "226",
+          "ann_id": 1,
+          "split_instruction": "White car in a parking lot near the Nike Factory store building on the fourth lane from the food warehouse. It has a White car to the right and a free slot to the left. There is a white car behind it.",
+          "current_converter_instruction": "White car in a parking lot near the Nike Factory store  building on the fourth lane from the food warehouse. It has a   White car to the right and a free slot to the left. There is a white car behind it."
+        },
+        {
+          "map": "birmingham_block_1",
+          "object_id": "237",
+          "ann_id": 5,
+          "split_instruction": "A silver car parked at the third lane of parking area of One stop with no other car parked at its left ,right and front side",
+          "current_converter_instruction": "A silver car parked at the third lane of parking area of One stop with no other  car parked at its left ,right and front side"
+        }
+      ]
+    },
+    "val_unseen": {
+      "actual_sbf_input_counts": {
+        "queries": 2697,
+        "split_vs_revised_cityrefer_instruction_mismatch": 68,
+        "changed_reference_name_lists": 1464,
+        "cityrefer_text_changed_from_original_cityrefer": 0,
+        "queries_with_any_resolved_landmark": 2695,
+        "queries_with_resolved_building": 1681,
+        "queries_with_resolved_road_surface": 1595
+      },
+      "release_refined_count": 2697,
+      "release_refined_changed_text": 0,
+      "input_text_mismatch_examples": [
+        {
+          "map": "birmingham_block_5",
+          "object_id": "2",
+          "ann_id": 1,
+          "split_instruction": "The building with about nine gray, narrow, parallel roofs on Walsall Road. The building is between the brown oval stadium track and the white-roofed NCF Distribution building.",
+          "current_converter_instruction": "The building with about nine gray, narrow, parallel roofs on Walsall Road.  The building is between the brown oval stadium track and the white-roofed NCF Distribution building."
+        },
+        {
+          "map": "birmingham_block_5",
+          "object_id": "8",
+          "ann_id": 5,
+          "split_instruction": "Two buildings on Aldridge Road, in front of a large sports field. One of the buildings is reddish, with a pitched roof that is mostly tan, although there is a red section on one end. The other building is brown with a tan roof. It has a blue sign and a yellow sign on the front of it.",
+          "current_converter_instruction": "Two buildings on Aldridge Road, in front of a large sports field.  One of the buildings is reddish, with a pitched roof that is mostly tan, although there is a red section on one end.  The other building is brown with a tan roof.  It has a blue sign and a yellow sign on the front of it."
+        },
+        {
+          "map": "birmingham_block_5",
+          "object_id": "10",
+          "ann_id": 4,
+          "split_instruction": "A rectangular grey and white roofed building surrounded by cars along Walsall road.",
+          "current_converter_instruction": "A rectangular grey and white roofed building surrounded by cars along  Walsall road."
+        },
+        {
+          "map": "birmingham_block_5",
+          "object_id": "37",
+          "ann_id": 5,
+          "split_instruction": "The second building from the left on the Cliveden Avenue, coming from the Walsall Road",
+          "current_converter_instruction": "The second building from the left on the Cliveden Avenue,  coming from the Walsall Road"
+        }
+      ]
+    }
+  }
+}
