@@ -27,7 +27,7 @@ from .token_language import FrozenBERTTokens
 
 
 class PairedGeometryDataset(Dataset):
-    def __init__(self, path, grid_size=28, max_relations=4):
+    def __init__(self, path, grid_size=28, max_relations=8):
         self.samples = FullCandidateDataset(
             path, grid_size=grid_size, max_landmarks=1,
             max_roads=0, max_relations=max_relations,
@@ -140,7 +140,7 @@ def run(args):
     unseen_loader=DataLoader(unseen,**kwargs)
     model=FullTokenGeometryLocalizer(
         hidden=args.hidden,heads=args.heads,
-        max_relations=4, relative_position=True,
+        max_relations=8, relative_position=True,
     ).to(device)
     encoder=FrozenBERTTokens(name=args.text_backbone,device=args.device,max_length=128)
     optimizer=torch.optim.AdamW(
