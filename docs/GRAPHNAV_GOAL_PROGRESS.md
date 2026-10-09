@@ -206,3 +206,7 @@ P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方
 完整Seed1、公开高度Stop修复后的Seen2470：SR42.6721%、SPL40.8949%、NE30.7278m、nDTW29.8195%、sDTW15.2045%、8.0263步、False-Stop56.9490%。评估实际22,257次当前观测、83,696个ROI，65,809次新视觉编码、17,290持久化命中、97内存命中。真实实际视觉microbatch常远小于16，单Episode顺序因果执行限制GPU利用率；这不表示模型没运行，也不能通过虚构未来帧凑batch。Seed0/1完整阶段JSON临时独立保存在`reports/full_system_seed_progress_20261010/`，Seed0的旧高度Stop版本会另作一致性复核。
 
 两个完整种子Seen结果尚不构成三种子稳定性或最终性能验收。Seed2继续字段缓存/训练/Seen；之后P1最后方案、公开高度修复完整确认、公平P1轨迹对照、冻结清单Commit与统一Unseen顺序执行，无需新增调参或覆盖旧结果。主候选只依据修复后Seen；新Unseen尚未执行。最终报告保持work in progress。
+
+## Full seed1 闭环动作约束核验（2026-10-10）
+
+实际2470个Seen Episode、19825次运动均通过50m XY / 10m Z /20步检查；新增非法XY/高度状态、越界恶化和结束时非法高度均为0。原始1020个非法初始高度与1个非法XY起点保留，采用有界恢复。详见`reports/full_seed1_constraints_20261010/summary.json`与逐Episode CSV。False-Stop的实际NE中位数36.42m，790次在20–40m、523次在40–100m、72次超过100m；仍主要表现为错误目标信念，不能将动作合法性当成导航成功。第三组及冻结前对照继续运行，未开始新GraphNav Unseen评估。
