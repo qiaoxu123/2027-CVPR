@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
 from pathlib import Path
 
 import cv2
@@ -211,6 +212,34 @@ def main():
         max_steps=args.max_steps, renderer=renderer, static_only=args.static_only,
         dataset_version=args.dataset_version, match_mode=args.match_mode,
         rgb_observation_step=args.rgb_observation_step,
+    )
+    def sha256_file(filename):
+        h = hashlib.sha256()
+        with open(filename, "rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                h.update(chunk)
+        return h.hexdigest()
+    provenance = {
+        "dataset_version_declared": args.dataset_version,
+        "match_mode": args.match_mode,
+        "static_only": args.static_only,
+        "rgb_observation_step": args.rgb_observation_step,
+        "source_sha256": {
+            key: sha256_file(getattr(args, key))
+            for key in ("objects", "processed", "trajectories", "bounds")
+        },
+        "ground_levels_sha256": sha256_file(args.ground_levels)
+        if args.ground_levels else None,
+        "rgb_generated_from_observed_prefix_only": bool(renderer),
+        "note": (
+            "The version is declared, not inferred from file contents. "
+            "Compare these checksums to the same Revised CityNav files used by SBF."
+        ),
+        "records_generated": count,
+        "episodes_skipped": skipped,
+    }
+    Path(str(args.output) + ".provenance.json").write_text(
+        json.dumps(provenance, indent=2), encoding="utf-8"
     )
     print(f"Prepared {count} causal training steps; skipped {skipped} malformed episodes")
 
