@@ -32,7 +32,9 @@ def main():
     parser.add_argument('--split', choices=['val_seen', 'val_unseen'], required=True)
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory'], default='sbfnav')
+    parser.add_argument('--head-checkpoint')
+    parser.add_argument('--stop-threshold',type=float,default=.5)
     args = parser.parse_args()
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
@@ -78,8 +80,11 @@ def main():
         checkpoint = load_checkpoint(args.checkpoint,model=model,backbone=backbone,map_location='cuda')
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
-        from graphnav.a3_runtime import A3WaypointPolicy
-        runtime=A3WaypointPolicy(args.checkpoint,output/'public_inputs')
+        from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
+        if args.model=='a3-trajectory':
+            if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')
+            runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold)
+        else:runtime=A3WaypointPolicy(args.checkpoint,output/'public_inputs')
         checkpoint=torch.load(args.checkpoint,map_location='cpu',weights_only=True)
     controller = BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,
         vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,
@@ -93,7 +98,7 @@ def main():
             public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
                                    tuple(catalog.referenced_landmarks(record)),
                                    tuple(catalog.referenced_landmark_names(record)))
-            if args.model=='a3': runtime.set_episode(public,builder.transform(public.map_name),catalog)
+            if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
             poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
@@ -105,10 +110,12 @@ def main():
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
     report = dict(model=('SBFNav local paper-based reproduction' if args.model=='sbfnav'
-                        else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'),split=args.split,
+                        else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
+                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop')),split=args.split,
         metrics=aggregate(rows),by_map={k:aggregate(v) for k,v in maps.items()},
         terminations=dict(terminations),protocol=asdict(protocol),config=config,
         checkpoint_sha256=sha(args.checkpoint),checkpoint_epoch=checkpoint.get('completed_epoch',checkpoint.get('epoch')),
+        head_checkpoint_sha256=sha(args.head_checkpoint) if args.head_checkpoint else None,
         episode_manifest_sha256=sha(output/'episodes.json'),args=vars(args),seconds=time.perf_counter()-started,
         gpu_peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
         input_sha256={str(p):sha(p) for p in [dataset.annotation_path,Path(args.data_root)/'cityrefer/objects.json',

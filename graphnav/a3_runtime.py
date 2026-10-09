@@ -40,15 +40,17 @@ class A3WaypointPolicy:
         self.device=torch.device(device)
         self.scratch=Path(scratch_directory);self.scratch.mkdir(parents=True,exist_ok=True)
         self.cache={}
+        self.field_cache={}
         self.record=None
 
     def set_episode(self, episode, transform, catalog):
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
 
     @torch.no_grad()
-    def predict(self,state,instruction):
+    def frozen_field(self):
         key=json.dumps(self.record,sort_keys=True)
-        if key not in self.cache:
+        if key not in self.field_cache:
+            self.field_cache.clear() # One episode field; avoid retaining GPU tensors across the split.
             path=self.scratch/'current_public_query.jsonl'
             path.write_text(json.dumps(self.record)+'\n')
             dataset=FullCandidateDataset(path,grid_size=self.args.grid_size,
@@ -59,6 +61,14 @@ class A3WaypointPolicy:
             inputs,tokens,mask,names=_batch_inputs(batch,self.encoder,self.device,'geometry')
             with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
                 field=self.model(inputs,variant='geometry',tokens=tokens,token_mask=mask,node_emb=names)
+            self.field_cache[key]=(field,inputs)
+        return self.field_cache[key]
+
+    @torch.no_grad()
+    def predict(self,state,instruction):
+        key=json.dumps(self.record,sort_keys=True)
+        if key not in self.cache:
+            field,inputs=self.frozen_field()
             top=int(field.belief_logits[0].argmax())
             uv=inputs['grid_xy'][0,top].float().cpu().numpy()
             bounds=np.array(self.record['world_bounds'])
@@ -67,3 +77,40 @@ class A3WaypointPolicy:
         xy=self.cache[key]
         return SimpleNamespace(xyz=np.array([*xy,state.pose[2]]),should_stop=False,
             diagnostics={'policy':'A3 Top1 bounded waypoint; untrained Trajectory/Stop disabled'})
+
+
+class A3TrajectoryPolicy(A3WaypointPolicy):
+    """Frozen A3 and a trained candidate-aligned head, using public observations."""
+    def __init__(self,checkpoint,head_checkpoint,scratch_directory,*,device='cuda',stop_threshold=.5):
+        super().__init__(checkpoint,scratch_directory,device=device)
+        from .trajectory_policy import CandidateTrajectoryStop
+        from .checkpointing import file_sha256
+        state=torch.load(head_checkpoint,map_location='cpu',weights_only=True)
+        cache=Path(state['args']['cache'])/'manifest.json'
+        manifest=json.loads(cache.read_text())
+        if manifest['protocol']['checkpoint_sha256']!=file_sha256(checkpoint):
+            raise ValueError('trajectory head and static A3 checkpoint differ')
+        if state['protocol']['observed_fraction']!=0.:
+            raise ValueError('geometry/pose runtime only accepts matching zero visual-history inputs')
+        if not 0<stop_threshold<1:raise ValueError('Stop threshold must be in (0,1)')
+        self.stop_threshold=stop_threshold
+        self.head=CandidateTrajectoryStop(hidden=state['hidden']).to(self.device).eval()
+        self.head.load_state_dict(state['model'],strict=True)
+
+    @torch.no_grad()
+    def predict(self,state,instruction):
+        import math
+        from sbfnav.mapdata import GROUND_LEVEL
+        field,_=self.frozen_field();probabilities=field.belief_logits.float().softmax(-1)
+        inputs=dict(candidate_xy=field.candidate_xy.float(),candidate_context=field.candidate_context.float(),
+            candidate_logits=field.belief_logits.gather(1,field.candidate_ids).float(),
+            pose_world=torch.as_tensor(state.pose,dtype=torch.float32,device=self.device)[None],
+            bounds=torch.tensor(self.record['world_bounds'],device=self.device,dtype=torch.float32)[None],
+            ground_level=torch.tensor([GROUND_LEVEL[self.record['map_name']]],device=self.device),
+            belief_entropy=(-(probabilities*probabilities.clamp_min(1e-8).log()).sum(-1)/math.log(probabilities.shape[-1])),
+            observed_fraction=torch.zeros(1,device=self.device))
+        with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):output=self.head(**inputs)
+        candidate,mode,waypoint,stop=output.select();probability=float(stop.float().sigmoid()[0])
+        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=probability>=self.stop_threshold,
+            diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
+                candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability))

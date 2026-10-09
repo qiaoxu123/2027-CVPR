@@ -39,7 +39,8 @@ class TrajectoryOutput:
     stop_logits: torch.Tensor
 
     def select(self):
-        scores=self.candidate_logits[...,None]+self.mode_logits
+        # Mode scores are conditional on a candidate, not an arbitrary rank offset.
+        scores=self.candidate_logits[...,None]+self.mode_logits.log_softmax(-1)
         ids=scores.flatten(1).argmax(1)
         candidate=ids//scores.shape[-1];mode=ids%scores.shape[-1]
         batch=torch.arange(len(ids),device=ids.device)
@@ -83,7 +84,13 @@ class CandidateTrajectoryStop(nn.Module):
         direction=delta/dist.clamp_min(1e-6)
         distance=torch.minimum(dist[...,None],step[None,None,:,None]*self.max_step_m)
         prior_xy=pose_world[:,None,None,:2]+direction[...,None,:]*distance
-        xy=prior_xy[:,:,None]+residual[...,:2]*20.
+        # Straight / left / right initial hypotheses break winner-take-all symmetry.
+        # Lateral offsets vanish at the candidate, so no label-derived path is used.
+        offsets=torch.tensor([0.]+[(-1. if i%2 else 1.) for i in range(1,self.modes)],device=delta.device,dtype=delta.dtype)
+        perpendicular=torch.stack((-direction[...,1],direction[...,0]),-1)
+        progress=(distance.squeeze(-1)/dist.clamp_min(1e-6)).clamp(0,1)
+        lateral=perpendicular[:,:,None,None,:]*torch.sin(progress[:,:,None,:,None]*torch.pi)*offsets[None,None,:,None,None]*20.
+        xy=prior_xy[:,:,None]+lateral+residual[...,:2]*20.
         xy=torch.maximum(torch.minimum(xy,bounds[:,None,None,None,2:]),bounds[:,None,None,None,:2])
         # Ensure each predicted segment is executable under the shared movement limits.
         previous=pose_world[:,None,None,:2].expand(-1,k,self.modes,-1)
@@ -106,7 +113,7 @@ class CandidateTrajectoryStop(nn.Module):
                                 self.stop(hidden).squeeze(-1))
 
 
-def trajectory_losses(out,*,candidate_world_xy,pose_world,target_world,teacher_world,radius=20.,valid_teacher_z=None):
+def trajectory_losses(out,*,candidate_world_xy,pose_world,target_world,teacher_world,radius=20.,valid_teacher_z=None,stop_pos_weight=None):
     """Destination and teacher future are label-only arguments."""
     distances=(candidate_world_xy-target_world[:,None,:2]).norm(dim=-1)
     weights=torch.softmax(-distances.square()/(2*20.**2),dim=-1)
@@ -124,5 +131,5 @@ def trajectory_losses(out,*,candidate_world_xy,pose_world,target_world,teacher_w
     arrived=(pose_world[:,:2]-target_world[:,:2]).norm(dim=-1)<=radius
     # Close to a wrong candidate is a hard Stop negative even at an actual arrival pose.
     stop_labels=(arrived[:,None] & (distances<=radius)).to(out.stop_logits.dtype)
-    stop=F.binary_cross_entropy_with_logits(out.stop_logits,stop_labels)
+    stop=F.binary_cross_entropy_with_logits(out.stop_logits,stop_labels,pos_weight=stop_pos_weight)
     return dict(total=ranking+path+.1*mode+.2*stop,ranking=ranking,path=path,mode=mode,stop=stop)

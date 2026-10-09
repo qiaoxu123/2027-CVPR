@@ -1,0 +1,150 @@
+{
+  "requires": [
+    "runs/a3_trajectory_features/bert_tokens.pt"
+  ],
+  "environment": {
+    "PYTHONPATH": ".",
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "jobs": [
+    {
+      "name": "a3_full_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3",
+        "--split",
+        "val_seen",
+        "--output",
+        "runs/closedloop_baseline/a3_seen_full"
+      ],
+      "log": "runs/a3_seen_full.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_seen_full/metrics.json"
+    },
+    {
+      "name": "trajectory_stop_seed0",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/train_trajectory_stop.py",
+        "--samples",
+        "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "--queries",
+        "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "--cache",
+        "runs/a3_trajectory_features",
+        "--output",
+        "runs/a3_trajectory_stop_seed0",
+        "--epochs",
+        "5",
+        "--batch-size",
+        "256",
+        "--workers",
+        "4",
+        "--seed",
+        "0"
+      ],
+      "log": "runs/a3_trajectory_stop_seed0.log",
+      "complete_artifact": "runs/a3_trajectory_stop_seed0/report.json"
+    },
+    {
+      "name": "trajectory_seen128_t0p5",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--max-episodes",
+        "128",
+        "--output",
+        "runs/closedloop_baseline/a3_head_seen128_t0p5",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.5"
+      ],
+      "log": "runs/a3_head_seen128_t0p5.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_head_seen128_t0p5/metrics.json"
+    },
+    {
+      "name": "trajectory_seen128_t0p3",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--max-episodes",
+        "128",
+        "--output",
+        "runs/closedloop_baseline/a3_head_seen128_t0p3",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.3"
+      ],
+      "log": "runs/a3_head_seen128_t0p3.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_head_seen128_t0p3/metrics.json"
+    },
+    {
+      "name": "trajectory_seen128_t0p7",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--max-episodes",
+        "128",
+        "--output",
+        "runs/closedloop_baseline/a3_head_seen128_t0p7",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.7"
+      ],
+      "log": "runs/a3_head_seen128_t0p7.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_head_seen128_t0p7/metrics.json"
+    }
+  ],
+  "selection": "Head epoch selected by query-family-disjoint Train Seen development loss. Exactly three Stop thresholds predeclared:0.5/0.3/0.7, selected on Seen128 only by SR, then SPL, then lower false-stop episode fraction. No GraphNav Unseen selection or evaluation in this queue. Frozen historical A3 remains baseline; training seed0."
+}

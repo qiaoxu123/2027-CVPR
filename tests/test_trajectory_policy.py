@@ -48,3 +48,20 @@ def test_illegal_teacher_altitude_is_masked_without_fabricating_waypoints():
     teacher=torch.zeros(1,2,3);teacher[...,2]=1000
     second=trajectory_losses(out,teacher_world=teacher,**kwargs)
     assert torch.equal(first['path'],second['path'])
+
+
+def test_conditional_mode_score_cannot_arbitrarily_override_candidate_rank():
+    paths=torch.zeros(1,2,3,1,3)
+    output=TrajectoryOutput(paths,torch.tensor([[[0.,0.,0.],[100.,100.,100.]]]),
+        torch.tensor([[2.,1.]]),torch.zeros(1,2))
+    assert output.select()[0].item()==0
+
+
+def test_initial_multimodal_paths_are_distinct_without_future_labels():
+    model=CandidateTrajectoryStop(hidden=16)
+    out=model(candidate_xy=torch.tensor([[[.9,.9]]]),candidate_context=torch.zeros(1,1,16),
+        candidate_logits=torch.zeros(1,1),pose_world=torch.tensor([[10.,10.,30.,0.]]),
+        bounds=torch.tensor([[0.,0.,400.,400.]]),ground_level=torch.zeros(1),
+        belief_entropy=torch.ones(1),observed_fraction=torch.zeros(1))
+    assert not torch.equal(out.paths_world[:,:,0],out.paths_world[:,:,1])
+    assert not torch.equal(out.paths_world[:,:,1],out.paths_world[:,:,2])
