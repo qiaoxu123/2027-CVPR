@@ -10,7 +10,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',required=True)
     a=p.parse_args();out=Path(a.output)
     if out.exists():raise ValueError('refusing final plan overwrite')
-    for queue in ('phase20','phase21b'):
+    for queue in ('phase20','phase21b','phase22'):
         if json.loads(Path('runs/'+queue+'_queue.status.json').read_text())['status']!='complete':
             raise ValueError('required training/Seen controls incomplete: '+queue)
     # Preserve Scratch unless the final P1 variant has a real independent Seen gain.
@@ -56,14 +56,15 @@ def main():
             if variant=='graph':c+=['--disable-visual']
             if history:c+=['--visual-history']
         rollout(name,c)
-    legacy_seen='runs/closedloop_seen_confirm/dynamic_graph_visual_history_current_optimized'
+    legacy_seen='runs/closedloop_seen_altitude_guard/joint_current'
     legacy_metrics=json.loads(Path(legacy_seen,'metrics.json').read_text())['metrics']
     seen_scores={'joint_current':{k:legacy_metrics[k] for k in ('SR','SPL','NE')}}
     candidates['joint_current']['seen_run']=legacy_seen
     for seed in range(3):
         name=f'full_seed{seed}';c=base[:]
         for flag,value in [('--checkpoint',f'runs/a3_replicate_seed{seed}/best.pt'),('--head-checkpoint',f'runs/full_seed{seed}_trajectory/best.pt'),('--dynamic-checkpoint',f'runs/full_seed{seed}_dynamic/best.pt')]:c[c.index(flag)+1]=value
-        seen=f'runs/full_seed{seed}_seen';m=json.loads(Path(seen,'metrics.json').read_text())['metrics'];seen_scores[name]={k:m[k] for k in ('SR','SPL','NE')}
+        seen='runs/closedloop_seen_altitude_guard/full_seed0' if seed==0 else f'runs/full_seed{seed}_seen'
+        m=json.loads(Path(seen,'metrics.json').read_text())['metrics'];seen_scores[name]={k:m[k] for k in ('SR','SPL','NE')}
         rollout(name,c,seen)
     primary=max(seen_scores,key=lambda key:(seen_scores[key]['SR'],seen_scores[key]['SPL'],-seen_scores[key]['NE']))
     static_checkpoints=[('legacy',base[base.index('--checkpoint')+1]),*[(f'scratch_seed{i}',f'runs/a3_replicate_seed{i}/best.pt') for i in range(3)],('p1_v2','runs/a3_p1_v2_seed0/best.pt'),('p1_v3_hard','runs/a3_p1_v3_hard_seed0/best.pt')]

@@ -182,3 +182,11 @@ P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方
 `freeze_final_eval.py`将等待三种子Seen和最后P1控制完成，按Seen SR/SPL/NE预先选定主候选，并记录所有最终模块/种子/负P1候选及权重SHA；生成后必须先Commit，再运行新Unseen。若P1 v3出现真实Seen Top1改善，会拒绝直接冻结Scratch系统，先验证下游整合。`evaluate_frozen_static.py`统一去重的2426 Seen/2679 Unseen静态R@1/4/8和NE；明确区别于2470/2697完整闭环Episode分母。
 
 远程连接恢复：原代理规则将GitHub指定DIRECT，直连不可用；独立本任务代理端口17890经可用节点成功Push到`e9fa714`，原代理配置未修改。新代码/报告会继续提交并Push，不合并main。
+
+## 2026-10-10：真实Stop高度错误与统一最终Runtime修复
+
+独立全量Seen动作审计`reports/rollout_constraints_seen_20261010/`：SBF/A3/GAT/Joint无新增XY或Z非法状态、无50m/10m步长违反、无horizon超限。原源数据1020个起点高度非法、1个XY非法保持不变，只允许受限非恶化恢复。发现Graph三个Head控制均有4个Episode在恢复到合法高度前就Stop，SBF为0。具体索引763/776/810/821；不能静默忽略。
+
+修复仅用公开当前高度和地图ground：Stop需ground+10..100m；不改XY20m成功判定、不修正GT路径、不改原始起点。增加真实Runtime回归，测试原本高置信且到预测目标时非法高度不Stop、合法边界可Stop；137单元测试通过。已在飞的seed0快照不被改动；seed1/2后续源快照包含修复，`phase22_plan.json`将另起所有旧模块与seed0的完整Seen，保证最终Seen/Unseen版本一致。旧指标/失败轨迹完整保留。
+
+`run_frozen_final_stage.py`已实现顺序门禁：必须phase20/21b/22全完成、P1公平控制结束，才依据Seen冻结最终清单并Commit，随后仅一次执行预声明Unseen模块/种子/静态对照。前置失败会显式阻断；Push错误只记录并保留本地Commit，不静默跳过实验或伪称已推送。最终性能尚未评估，目标继续active。

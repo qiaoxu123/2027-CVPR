@@ -45,3 +45,21 @@ def test_low_stop_confidence_can_explore_without_erasing_unknown_belief(monkeypa
     assert prediction.diagnostics['candidate']==1 and policy.visited_goal_cells=={0}
     np.testing.assert_allclose(prediction.xyz,[320,320,30])
     assert not prediction.should_stop and torch.equal(before,field.belief_logits)
+
+
+def test_predicted_goal_arrival_cannot_stop_at_source_illegal_height(monkeypatch):
+    maps=ModuleType('sbfnav.mapdata');maps.GROUND_LEVEL={'map':200.}
+    monkeypatch.setitem(sys.modules,'sbfnav.mapdata',maps)
+    policy=A3TrajectoryPolicy.__new__(A3TrajectoryPolicy);policy.device=torch.device('cpu')
+    policy.record=dict(world_bounds=[0,0,400,400],map_name='map')
+    policy.stop_threshold=.3;policy.stop_positive_weight=1.;policy.execution='guarded-direct'
+    policy.visited_goal_cells=set();policy.explore_candidates=0
+    field=GoalField(torch.tensor([[2.,1.]]),torch.tensor([[0,1]]),torch.tensor([[[.2,.3],[.8,.8]]]),torch.zeros(1,2,16))
+    policy.frozen_field=lambda:(field,{})
+    policy.head=lambda **kwargs:TrajectoryOutput(torch.zeros(1,2,3,8,3),torch.zeros(1,2,3),field.belief_logits,torch.full((1,2),10.))
+    for z in (325.,205.):
+        prediction=policy.predict(SimpleNamespace(pose=np.array([80.,120.,z,0.])),'near hall')
+        assert not prediction.should_stop and not prediction.diagnostics['stop_altitude_guard']
+    for z in (210.,300.):
+        prediction=policy.predict(SimpleNamespace(pose=np.array([80.,120.,z,0.])),'near hall')
+        assert prediction.should_stop and prediction.diagnostics['stop_altitude_guard']
