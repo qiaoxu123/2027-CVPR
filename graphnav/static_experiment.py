@@ -13,8 +13,8 @@ import csv
 import json
 import random
 import time
-from pathlib import Path
 from dataclasses import asdict, dataclass
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -22,8 +22,11 @@ from torch.utils.data import DataLoader
 
 from .foundations import FrozenBERT
 from .static_localization import (
-    StaticGoalLocalizer, StaticLocalizationDataset,
-    collate_static, cross_entropy_goal, static_recall,
+    StaticGoalLocalizer,
+    StaticLocalizationDataset,
+    collate_static,
+    cross_entropy_goal,
+    static_recall,
 )
 
 
@@ -60,11 +63,13 @@ def forward_batch(model, enc, batch, device, variant, use_amp):
         for key, value in batch.items() if isinstance(value, torch.Tensor)
     }
     if variant == "gat":
-        instr = enc.encode(batch["text"]).to(device)
+        # Frozen encoders use inference_mode; clone outside it so trainable
+        # projections can save these inputs for backward without an error.
+        instr = enc.encode(batch["text"]).to(device).clone()
         b = len(batch["text"])
         max_nodes = len(batch["node_names"][0])
         all_names = [n for names in batch["node_names"] for n in names]
-        node_emb = enc.encode(all_names).reshape(b, max_nodes, -1).to(device)
+        node_emb = enc.encode(all_names).reshape(b, max_nodes, -1).to(device).clone()
     else:
         instr = None
         node_emb = None
@@ -88,7 +93,7 @@ def evaluate(model, enc, loader, device, use_amp, variants=("prior", "rules", "g
         v: dict(count=0, NE_sum_m=0., **{f"R@{k}/20m_count": 0 for k in (1, 4, 8)})
         for v in variants
     }
-    source = dict(samples=0, with_relation=0, with_edges=0, with_roads=0, with_road_relation=0)
+    source = {"samples": 0, "with_relation": 0, "with_edges": 0, "with_roads": 0, "with_road_relation": 0}
     for batch in loader:
         source["samples"] += len(batch["text"])
         source["with_relation"] += int((batch["relation_count"] > 0).sum())
@@ -153,9 +158,16 @@ def train(args):
     output.mkdir(parents=True, exist_ok=True)
     records = []
     best_seen = -1.
+    # Evaluate fixed controls before optimization; unseen remains held out.
+    baseline = evaluate(model, None, loaders["val_seen"], device, amp,
+                        variants=("prior", "rules"))
+    (output / "baseline_val_seen.json").write_text(json.dumps(baseline, indent=2))
+    print(json.dumps({"baseline_val_seen": baseline}), flush=True)
     for epoch in range(args.epochs):
         model.train()
         losses = []
+        samples = 0
+        loss_sum = 0.
         began = time.perf_counter()
         if device.type == "cuda":
             torch.cuda.reset_peak_memory_stats(device)
@@ -169,6 +181,12 @@ def train(args):
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.)
             opt.step()
             losses.append(float(loss.detach().cpu()))
+            samples += len(batch["text"])
+            loss_sum += losses[-1] * len(batch["text"])
+            if (step + 1) % 100 == 0:
+                print(json.dumps({"epoch": epoch+1, "step": step+1,
+                                  "samples": samples, "loss": loss_sum/samples,
+                                  "elapsed_seconds": time.perf_counter()-began}), flush=True)
             if args.max_train_batches and step + 1 >= args.max_train_batches:
                 break
         if device.type == "cuda":
@@ -176,19 +194,39 @@ def train(args):
         train_seconds = time.perf_counter() - began
         peak_gib = (torch.cuda.max_memory_allocated(device) / (1024**3)
                     if device.type == "cuda" else None)
+        val_began = time.perf_counter()
         seen = evaluate(model, encoder, loaders["val_seen"], device, amp)
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+        val_seconds = time.perf_counter() - val_began
         performance = seen["variants"]["gat"]["R@8/20m"]
         record = {
             "epoch": epoch + 1,
-            "train_goal_loss": float(np.mean(losses)),
+            "train_goal_loss": loss_sum / max(samples, 1),
             "train_seconds": train_seconds,
-            "samples_per_second": min(
-                len(loaders["train_seen"].dataset), len(losses) * args.batch_size
-            ) / max(train_seconds, 1e-6),
+            "samples_per_second": samples / max(train_seconds, 1e-6),
+            "train_samples": samples,
+            "val_seconds": val_seconds,
             "gpu_peak_gib": peak_gib,
+            "gpu_peak_reserved_gib": (torch.cuda.max_memory_reserved(device) / (1024**3)
+                                      if device.type == "cuda" else None),
             "val_seen": seen,
         }
         records.append(record)
+        (output / "history.json").write_text(json.dumps(records, indent=2))
+        with (output / "training_history.csv").open("w", newline="") as handle:
+            fields = [key for key in record if key != "val_seen"] + [
+                "R@1/20m", "R@4/20m", "R@8/20m", "NE_m"]
+            writer = csv.DictWriter(handle, fieldnames=fields)
+            writer.writeheader()
+            for item in records:
+                row = {key: value for key, value in item.items() if key != "val_seen"}
+                row.update({key: item["val_seen"]["variants"]["gat"][key]
+                            for key in ("R@1/20m", "R@4/20m", "R@8/20m", "NE_m")})
+                writer.writerow(row)
+        torch.save({"model": model.state_dict(), "optimizer": opt.state_dict(),
+                    "settings": asdict(settings), "epoch": epoch+1,
+                    "text_backbone": args.text_backbone}, output / "last.pt")
         if performance > best_seen:
             best_seen = performance
             torch.save({
@@ -197,8 +235,7 @@ def train(args):
                 "text_backbone": args.text_backbone,
             }, output / "best.pt")
         print(json.dumps({
-            "epoch": epoch + 1, "train_goal_loss": record["train_goal_loss"],
-            "val_seen": seen,
+            **record,
         }, ensure_ascii=False), flush=True)
     # Select ONLY on val_seen. Unseen is an independently held-out report.
     ckpt = torch.load(output / "best.pt", map_location=device, weights_only=False)
@@ -213,6 +250,10 @@ def train(args):
         "history": records,
         "note": "Offline static goal localization only. No RGB, UAV control, SR or SPL.",
     }
+    # Persist the exact frozen features used in validation. Re-tokenizing in
+    # different padded batches may move a near-tied BF16 grid score across top-k.
+    torch.save({text: feature.detach().cpu().clone()
+                for text, feature in encoder.cache.items()}, output / "frozen_text_features.pt")
     (output / "static_localization_metrics.json").write_text(
         json.dumps(final, indent=2, ensure_ascii=False), encoding="utf-8"
     )

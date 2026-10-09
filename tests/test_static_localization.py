@@ -131,3 +131,49 @@ def test_forward_batch_strips_ground_truth_from_model_inputs(tmp_path):
     )
     assert pred.shape==(1,16)
     assert "target_xy" in labels
+
+
+def test_inference_text_features_support_training_backward(tmp_path):
+    from graphnav.static_experiment import forward_batch
+    filename = tmp_path / 'one.jsonl'
+    filename.write_text(json.dumps(_make_record()) + '\n')
+    ds = StaticLocalizationDataset(filename, grid_size=4, max_landmarks=2,
+                                   max_roads=0, max_relations=2)
+    batch = collate_static([ds[0]])
+    class Frozen:
+        @torch.inference_mode()
+        def encode(self, texts):
+            return torch.ones(len(texts), 16)
+    model = StaticGoalLocalizer(hidden=16, text_dim=16, heads=4, relations=2)
+    logits, labels = forward_batch(model, Frozen(), batch, torch.device('cpu'), 'gat', False)
+    cross_entropy_goal(logits, labels['target_xy'], grid_size=4).backward()
+    assert model.instruction[0].weight.grad is not None
+
+
+def test_rule_weight_applies_to_both_rules_and_gat_baseline():
+    model = StaticGoalLocalizer(hidden=16, text_dim=16, heads=4, relations=2, rule_weight=2.)
+    batch = {'prior': torch.ones(1, 4), 'rules': torch.ones(1, 4)}
+    assert torch.equal(model(batch, variant='rules'), torch.full((1, 4), 3.))
+
+
+def test_query_deduplication_never_uses_target_or_annotation_id(tmp_path):
+    a = _make_record()
+    b = dict(a, episode_id='cambridge_block_3:99:2:0', target_xy=[.1, .2])
+    filename = tmp_path / 'duplicates.jsonl'
+    filename.write_text(json.dumps(a) + '\n' + json.dumps(b) + '\n')
+    ds = StaticLocalizationDataset(filename, grid_size=4, max_roads=0)
+    assert len(ds) == 1
+    assert ds.records[0]['target_xy'] == a['target_xy']
+
+
+def test_static_preparation_is_invariant_to_ground_truth_target(tmp_path):
+    a = _make_record()
+    filename = tmp_path / 'a.jsonl'
+    filename.write_text(json.dumps(a) + '\n')
+    x = StaticLocalizationDataset(filename, grid_size=4, max_roads=0)[0]
+    a['target_xy'] = [.01, .99]
+    filename.write_text(json.dumps(a) + '\n')
+    y = StaticLocalizationDataset(filename, grid_size=4, max_roads=0)[0]
+    for key in ('nodes', 'node_types', 'node_valid', 'edges', 'adjacency',
+                'prior', 'rules', 'relation_fields', 'grid_xy'):
+        assert torch.equal(x[key], y[key]), key

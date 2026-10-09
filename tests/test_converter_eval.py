@@ -59,3 +59,21 @@ def test_open_loop_recalls_have_consistent_denominators():
     assert stats["samples"] == 1
     assert stats["R@1/20m_hits"] == 1
     assert stats["R@5/20m_hits"] >= stats["R@1/20m_hits"]
+
+
+def test_static_conversion_does_not_relabel_roads_as_buildings_or_need_trajectory(tmp_path):
+    obj = {'city_block_0': {
+        '7': {'name': '', 'descriptions': ['near Church along Main Road']},
+        '8': {'name': 'Main Road', 'object_type': 'TrafficRoad',
+              'contour': [[0, 0], [100, 0], [100, 20]]},
+        '9': {'name': 'Church', 'object_type': 'Building',
+              'contour': [[120, 120], [130, 120], [130, 130]]}}}
+    proc = {'city_block_0': {'7': [{'landmarks': ['Main Road', 'Church']}]}}
+    episodes = [{'area': 'city', 'block': 0, 'object_ids': [7], 'ann_ids': [0],
+                 'target_positions': [[200, 210, 60]]}]
+    filename = tmp_path / 'static.jsonl'
+    assert convert(obj, proc, episodes, {'city_block_0': [0, 0, 400, 400]},
+                   filename, static_only=True) == (1, 0)
+    record = json.loads(filename.read_text())
+    assert [r['id'] for r in record['landmarks']] == ['9']
+    assert not {'uav_pose', 'teacher_future', 'rgb_observations'} & record.keys()

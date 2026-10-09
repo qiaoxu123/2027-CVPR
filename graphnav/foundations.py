@@ -7,8 +7,9 @@ navigation should use trained HF weights, not the test-only synthetic tensors.
 from __future__ import annotations
 
 from collections import OrderedDict
+from collections.abc import Iterable
 from hashlib import blake2b
-from typing import Iterable
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -35,7 +36,9 @@ class FrozenBERT:
                 return_tensors="pt",
             ).to(self.device)
             outputs = self.model(**batch)
-            vectors = outputs.last_hidden_state[:, 0].float()
+            # CLS is a view into [batch,tokens,hidden]. Copy it before caching
+            # so each entry does not retain all token states on the GPU.
+            vectors = outputs.last_hidden_state[:, 0].float().clone()
             for text, feature in zip(unknown, vectors):
                 self.cache[text] = feature.detach()
         return torch.stack([self.cache[s] for s in texts], dim=0)

@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+
 import cv2
 import numpy as np
 
@@ -58,7 +59,7 @@ def masks_at_prefix(path, step, bounds, ground_level, grid):
 
 def convert(objects, processed, trajectories, bounds, output,
             grid=28, stride=4, waypoints=8, max_landmarks=16,
-            ground_levels=None, max_steps=20, renderer=None):
+            ground_levels=None, max_steps=20, renderer=None, static_only=False):
     count, skipped = 0, 0
     with Path(output).open("w", encoding="utf-8") as f:
         for episode in trajectories:
@@ -72,10 +73,9 @@ def convert(objects, processed, trajectories, bounds, output,
                 relation = processed[map_name][obj_id][ann_id]
                 target_world = np.asarray(episode["target_positions"][-1][:2], np.float32)
                 target_norm = normalize_xy(target_world, b).tolist()
-                human = np.asarray([p[:2] for p in episode["trajectory"]], np.float32)
-                human_norm = normalize_xy(human, b)
                 references = bind_reference_landmarks(
-                    relation.get("landmarks", []), objects[map_name], max_landmarks
+                    relation.get("landmarks", []), objects[map_name], max_landmarks,
+                    allowed_types={"Building"} if static_only else None,
                 )
                 landmarks = [
                     {
@@ -84,6 +84,20 @@ def convert(objects, processed, trajectories, bounds, output,
                     }
                     for lm in references
                 ]
+                if static_only:
+                    record = {
+                        "episode_id": f"{map_name}:{obj_id}:{ann_id}:0",
+                        "map_name": map_name,
+                        "world_bounds": list(map(float, b)),
+                        "instruction": desc, "landmarks": landmarks,
+                        "target_xy": target_norm,
+                        "physical_map_sizes": [float(b[2]-b[0]), float(b[3]-b[1])],
+                    }
+                    f.write(json.dumps(record, ensure_ascii=False) + "\n")
+                    count += 1
+                    continue
+                human = np.asarray([p[:2] for p in episode["trajectory"]], np.float32)
+                human_norm = normalize_xy(human, b)
                 poses = episode["trajectory"]
                 last = min(len(poses), max_steps)
                 if last < 1:
@@ -143,6 +157,8 @@ def main():
     p.add_argument("--waypoints", type=int, default=8)
     p.add_argument("--max-landmarks", type=int, default=16)
     p.add_argument("--max-steps", type=int, default=20)
+    p.add_argument("--static-only", action="store_true",
+                   help="One query per record; bind only Building polygons; no pose/RGB/future")
     args = p.parse_args()
     def load(path):
         with open(path, encoding="utf-8") as handle:
@@ -161,7 +177,7 @@ def main():
         grid=args.grid, stride=args.stride, waypoints=args.waypoints,
         max_landmarks=args.max_landmarks,
         ground_levels=load(args.ground_levels) if args.ground_levels else None,
-        max_steps=args.max_steps, renderer=renderer,
+        max_steps=args.max_steps, renderer=renderer, static_only=args.static_only,
     )
     print(f"Prepared {count} causal training steps; skipped {skipped} malformed episodes")
 

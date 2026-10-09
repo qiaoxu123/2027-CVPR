@@ -8,19 +8,21 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+
 import numpy as np
 import torch
 from torch.utils.data import Dataset
 
 from .config import GraphNavConfig
-from .geometry import normalize_xy, resample_contour
+from .geometry import resample_contour
 
 
 def normalized_name(s: str) -> str:
     return " ".join(str(s).casefold().replace("-", " ").split())
 
 
-def bind_reference_landmarks(reference_names, objects: dict, max_landmarks: int):
+def bind_reference_landmarks(reference_names, objects: dict, max_landmarks: int,
+                             allowed_types=None):
     """Exact normalized textual match; return ALL ambiguous matches, never GT-nearest.
 
     If a name corresponds to two polygons we preserve both distinct IDs. No
@@ -32,6 +34,8 @@ def bind_reference_landmarks(reference_names, objects: dict, max_landmarks: int)
     for wanted in reference_names:
         norm = normalized_name(wanted)
         for object_id, entry in searchable:
+            if allowed_types is not None and entry.get("object_type") not in allowed_types:
+                continue
             name = str(entry.get("name", ""))
             if not name or normalized_name(name) != norm:
                 continue

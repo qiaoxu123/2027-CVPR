@@ -18,7 +18,7 @@ from torch.utils.data import Dataset
 
 from .geometry import grid_centers, normalize_xy
 from .model import DenseGoalField
-from .semantic_geometry import build_entities, canonical, prior_and_rule_fields
+from .semantic_geometry import canonical, prior_and_rule_fields
 from .semantic_graph import TypedGeometryGAT, prepare_semantic_graph
 
 
@@ -49,16 +49,10 @@ class StaticLocalizationDataset(Dataset):
         self.records = []
         seen_queries = set()
         for record in raw_records:
-            episode_id = str(record.get("episode_id", ""))
-            query_id = (
-                (episode_id.rsplit(":", 1)[0], record["instruction"])
-                if episode_id.count(":") >= 3 else ""
-            )
-            if not query_id:
-                query_id = (
-                    record.get("map_name", ""), record["instruction"],
-                    tuple(record.get("target_xy", [])),
-                )
+            # The observable static query is map + instruction. Neither GT
+            # coordinates nor annotation IDs may give repeated text extra weight.
+            # Preserve the first source record deterministically.
+            query_id = (record.get("map_name", ""), record["instruction"])
             if query_id in seen_queries:
                 continue
             seen_queries.add(query_id)
@@ -76,6 +70,9 @@ class StaticLocalizationDataset(Dataset):
         self.rule_sigma_m = rule_sigma_m
         self.grid_xy = grid_centers(grid_size).numpy()
         self.capacity = max_landmarks + max_roads + max_relations
+        # Cache belongs to this dataset, not a global decorator retaining every
+        # dataset instance. Graphs are invariant over epochs and target labels.
+        self._prepared = lru_cache(maxsize=None)(self._prepare)
 
     def __len__(self):
         return len(self.records)
@@ -99,8 +96,7 @@ class StaticLocalizationDataset(Dataset):
             })
         return result
 
-    @lru_cache(maxsize=4096)
-    def _prepared(self, idx):
+    def _prepare(self, idx):
         record = self.records[idx]
         bounds = record.get("world_bounds")
         if bounds is None:
@@ -222,12 +218,11 @@ class StaticGoalLocalizer(nn.Module):
         self.graph_scale = nn.Parameter(torch.tensor(0.10))
         self.rule_weight = float(rule_weight)
 
-    @staticmethod
-    def _baseline(batch, variant):
+    def _baseline(self, batch, variant):
         prior = batch["prior"]
         if variant == "prior":
             return prior
-        return prior + batch["rules"]
+        return prior + self.rule_weight * batch["rules"]
 
     def forward(self, batch, *, variant="gat", instruction_emb=None, node_emb=None):
         if variant in ("prior", "rules"):
@@ -236,7 +231,7 @@ class StaticGoalLocalizer(nn.Module):
             raise ValueError(f"unsupported static variant: {variant}")
         if instruction_emb is None or node_emb is None:
             raise ValueError("trained graph variant requires frozen text embeddings")
-        b, q, _ = batch["grid_xy"].shape
+        _b, q, _ = batch["grid_xy"].shape
         h = self.gnn(
             batch["nodes"], node_emb, batch["node_types"],
             batch["adjacency"], batch["edges"], batch["node_valid"],
@@ -275,7 +270,7 @@ def static_recall(logits, target_xy, map_sizes, grid_xy, radius_m=20., ranks=(1,
     xy = grid_xy.gather(1, top.unsqueeze(-1).expand(-1, -1, 2))
     distance_m = ((xy - target_xy[:, None]) * map_sizes[:, None]).norm(dim=-1)
     result = {
-        "count": int(len(logits)),
+        "count": len(logits),
         "NE_sum_m": distance_m[:, 0].sum().item(),
     }
     for k in ranks:
