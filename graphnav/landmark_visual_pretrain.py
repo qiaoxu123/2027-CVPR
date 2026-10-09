@@ -60,7 +60,10 @@ class FrozenSigLIP2Patches:
                     if key in allowed}
             if "pixel_values" not in kwargs:
                 raise ValueError("SigLIP2 processor must supply pixel_values")
-            output=self.model.vision_model(**kwargs)
+            with torch.autocast(
+                "cuda",dtype=torch.bfloat16,enabled=(self.device.type=="cuda")
+            ):
+                output=self.model.vision_model(**kwargs)
             tokens=output.last_hidden_state
             if tokens.ndim!=3:
                 raise RuntimeError("vision_model did not return [B,P,D] patch tokens")
