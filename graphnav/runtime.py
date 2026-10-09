@@ -87,6 +87,10 @@ class GraphNavRuntime:
             landmark_valid=self.valid,
             uav_pose=uav_pose,
             spatial_maps=observed,
+            physical_map_sizes=torch.as_tensor(
+                self.bounds[2:] - self.bounds[:2],
+                device=self.device, dtype=torch.float32
+            ).unsqueeze(0),
         )
 
         used = 0
