@@ -1,0 +1,27 @@
+{
+  "models": {
+    "full_seed1": {
+      "path": "runs/final_closedloop_unseen/full_seed1",
+      "episodes": 2697,
+      "manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+      "counts": {
+        "failed": 2099,
+        "observed_target_near_frames": 2966,
+        "observed_legal_arrival_frames": 2916,
+        "failed_after_observed_legal_arrival": 263,
+        "failed_after_only_illegal_observed_arrival": 19,
+        "failed_without_observed_arrival": 1817,
+        "failed_policy_stop": 2054,
+        "legal_arrival_head_frames": 2916,
+        "probability_rejection_frames": 1346,
+        "predicted_goal_gate_rejection_frames": 2069
+      }
+    }
+  },
+  "provenance": {
+    "commit": "e22b64acc782de52d905baddd13eb704345ac410",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_script_sha256": "0bfcff2f2a2dde6025ef0379cecddc6f9402c6c310c59a534c7cf83da0e31cd4",
+  "note": "Private post-rollout GT diagnostics only; no model selection/input or policy change. Observed poses are exactly the decision prefix, not an unobserved horizon endpoint. Public legal altitude is separate from unchanged XY success. A GT-near visit is an oracle diagnostic opportunity, not evidence the policy could identify the target. Head-frame rejection counts may overlap; absent head information is not Stop calibration evidence."
+}

@@ -1,0 +1,305 @@
+{
+  "model": "A3 + causal dynamic visual/graph residual belief",
+  "split": "val_unseen",
+  "metrics": {
+    "SR": 0.22172784575454207,
+    "OSR": 0.3262884686688914,
+    "SPL": 0.2123171020407453,
+    "NE": 51.50061571054405,
+    "nDTW": 0.25734516938583546,
+    "sDTW": 0.08263727164000909,
+    "steps": 8.456433073785687,
+    "path_length": 215.8395788477908,
+    "policy_stop": 0.978865406006674,
+    "inference_ms": 73.99001402304127,
+    "episodes": 2697,
+    "False_Stop_Rate": 0.7780303030303031,
+    "false_stop_episode_fraction": 0.7615869484612533,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "by_map": {
+    "birmingham_block_5": {
+      "SR": 0.11269146608315099,
+      "OSR": 0.2024070021881838,
+      "SPL": 0.10825702461052342,
+      "NE": 65.34061443798572,
+      "nDTW": 0.2093197204230834,
+      "sDTW": 0.0428374053131653,
+      "steps": 8.807439824945295,
+      "path_length": 207.89156798896363,
+      "policy_stop": 0.9835886214442013,
+      "inference_ms": 104.72102389043003,
+      "episodes": 914,
+      "False_Stop_Rate": 0.8865406006674083,
+      "false_stop_episode_fraction": 0.8719912472647703,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "cambridge_block_10": {
+      "SR": 0.29488574537540807,
+      "OSR": 0.40805223068552776,
+      "SPL": 0.28173320715663497,
+      "NE": 46.131483671255126,
+      "nDTW": 0.3023330934166472,
+      "sDTW": 0.11450199537796973,
+      "steps": 8.14689880304679,
+      "path_length": 212.44951033860568,
+      "policy_stop": 0.9825897714907508,
+      "inference_ms": 56.57726049343711,
+      "episodes": 919,
+      "False_Stop_Rate": 0.7054263565891473,
+      "false_stop_episode_fraction": 0.6931447225244831,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "cambridge_block_2": {
+      "SR": 0.15358361774744028,
+      "OSR": 0.25597269624573377,
+      "SPL": 0.1507732937180082,
+      "NE": 53.172741705407205,
+      "nDTW": 0.21529349085747276,
+      "sDTW": 0.053046741361645604,
+      "steps": 8.129692832764505,
+      "path_length": 215.8697429431012,
+      "policy_stop": 0.9658703071672355,
+      "inference_ms": 40.28982975933744,
+      "episodes": 293,
+      "False_Stop_Rate": 0.8409893992932862,
+      "false_stop_episode_fraction": 0.8122866894197952,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "cambridge_block_3": {
+      "SR": 0.3134851138353765,
+      "OSR": 0.4290718038528897,
+      "SPL": 0.298744152843341,
+      "NE": 37.13028399553518,
+      "nDTW": 0.28339157915194674,
+      "sDTW": 0.11024396529869536,
+      "steps": 8.560420315236428,
+      "path_length": 234.00265556404855,
+      "policy_stop": 0.9719789842381786,
+      "inference_ms": 70.1166890916545,
+      "episodes": 571,
+      "False_Stop_Rate": 0.6882882882882883,
+      "false_stop_episode_fraction": 0.6690017513134852,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    }
+  },
+  "terminations": {
+    "policy_stop": 2640,
+    "horizon": 57
+  },
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "config": {
+    "experiment": {
+      "name": "sbfnav_main_revised",
+      "paper_based_reimplementation": true,
+      "seed": 0
+    },
+    "data": {
+      "root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+      "version": "processed_citynav",
+      "train_split": "train_seen",
+      "validation_splits": [
+        "val_seen",
+        "val_unseen"
+      ],
+      "allow_test_unseen": false,
+      "samples_per_episode": 4
+    },
+    "model": {
+      "input_channels": 9,
+      "canvas_size": 224,
+      "field_size": 28,
+      "hidden_dim": 256,
+      "attention_heads": 8,
+      "dropout": 0.1,
+      "use_cross_attention": true,
+      "pooled_text_only": false,
+      "gate_init": 0.0,
+      "siglip_name": "google/siglip-base-patch16-224",
+      "freeze_siglip": true,
+      "local_files_only": true
+    },
+    "state": {
+      "max_height_above_ground_m": 100.0,
+      "trajectory_radius_m": 2.0
+    },
+    "proposal": {
+      "mode": "field",
+      "top_k": 16,
+      "nms_kernel": 3,
+      "dedup_radius_m": 2.0,
+      "add_landmark_candidates": true
+    },
+    "selector": {
+      "selection_mode": "selector",
+      "crop_extent_m": 100.0,
+      "crop_size": 224,
+      "hidden_dim": 256,
+      "layers": 2,
+      "attention_heads": 8,
+      "dropout": 0.1,
+      "use_geometry": true,
+      "use_landmark_text": true,
+      "use_field_score": false,
+      "max_landmarks": 8
+    },
+    "loss": {
+      "field_weight": 1.0,
+      "gaussian_sigma_m": 20.0,
+      "list_temperature_m": 20.0,
+      "good_radius_m": 20.0,
+      "bad_radius_m": 40.0,
+      "score_margin": 1.0,
+      "rank_weight": 1.0,
+      "margin_weight": 0.2,
+      "hard_weight": 0.5,
+      "altitude_weight": 0.1,
+      "progress_weight": 0.1
+    },
+    "altitude": {
+      "min_above_ground_m": 10.0,
+      "max_above_ground_m": 100.0
+    },
+    "training": {
+      "epochs": 20,
+      "batch_size": 16,
+      "gradient_accumulation": 1,
+      "effective_batch_size": 16,
+      "optimizer": "adamw",
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "warmup_fraction": 0.05,
+      "scheduler": "cosine",
+      "precision": "bf16",
+      "gradient_clip_norm": 1.0,
+      "workers": 0,
+      "save_last": true,
+      "validate_every": 1,
+      "validation_max_episodes": 128,
+      "vision_batch_size": 128,
+      "vision_cache_entries": 2000000,
+      "text_precompute_batch_size": 256,
+      "select_checkpoint_by": [
+        "val_unseen_sr",
+        "val_unseen_spl",
+        "val_unseen_ne"
+      ]
+    },
+    "navigation": {
+      "horizon": 20,
+      "success_distance_m": 20.0,
+      "horizontal_step_m": 50.0,
+      "vertical_step_m": 10.0,
+      "stagnation_steps": 5,
+      "use_progress_for_stopping": false
+    },
+    "evaluation": {
+      "official_metric": "benchmark_2d",
+      "benchmark_dimensions": 2,
+      "diagnostic_dimensions": 3,
+      "batch_size": 1,
+      "candidate_thresholds_m": [
+        10.0,
+        20.0,
+        40.0
+      ],
+      "candidate_ks": [
+        1,
+        5,
+        16
+      ],
+      "difficulties": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "_config_path": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml"
+  },
+  "checkpoint_sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be",
+  "checkpoint_epoch": 5,
+  "head_checkpoint_sha256": "d1a48a452363dba0d39d8fc14903ec6f976ba2880cc073872c572484884217ea",
+  "dynamic_checkpoint_sha256": "0475e3c187441dc9eb8ccb85aece6e3a592d33e05238c3993bd4dcfaac66415b",
+  "visual_checkpoint_sha256": "20a53c8b51cadd3e79f8d14f4a15e380174bb255861f280f57e47681282d9d12",
+  "episode_manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+  "args": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "config": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+    "checkpoint": "runs/a3_replicate_seed1/best.pt",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "split": "val_unseen",
+    "max_episodes": null,
+    "output": "runs/final_closedloop_unseen/full_seed1",
+    "model": "dynamic",
+    "dynamic_checkpoint": "runs/full_seed1_dynamic/best.pt",
+    "visual_checkpoint": "runs/p2_controlled_large384/visual_best.pt",
+    "visual_history": false,
+    "disable_visual": false,
+    "graph_control": "full",
+    "visual_control": "full",
+    "observed_cache": "runs/current_observed_vector_cache",
+    "evaluation_concurrency": 2,
+    "head_checkpoint": "runs/full_seed1_trajectory/best.pt",
+    "stop_threshold": 0.3,
+    "explore_candidates": 0,
+    "head_execution": "guarded-blend"
+  },
+  "seconds": 2019.6584542598575,
+  "gpu_peak_allocated_gib": 4.019975185394287,
+  "input_sha256": {
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/processed_citynav/citynav_val_unseen.json": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/processed_descriptions.json": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b"
+  },
+  "sbf_source_sha256": {
+    "sbfnav/__init__.py": "c1fbe3790814fe6d0d3f919e81198dfad344d925351aed902d87087cccc5a2e2",
+    "sbfnav/candidate_proposal.py": "b26289bd587f2db7e524271fc5d8a841f2b2441042b273036c748a8c3751c00c",
+    "sbfnav/checkpointing.py": "668f07bb242a97aae7512ca38b08e29944a1848dc5e1bef8aa3caaf1cf280599",
+    "sbfnav/config.py": "2d6855e7c0465d0c08ccc638c6d579e37c20d3c8c68a76f31b856d0a2c44a3bb",
+    "sbfnav/coordinates.py": "537319565f4d76664bd6fadf20efb58d6b271efc666f119be10d9b9a65a9131c",
+    "sbfnav/dataset.py": "928ccdab5b3c6405b710d2464a8ad2dbae6ebe05a32a2ece60f747cb8f8b235a",
+    "sbfnav/field_targets.py": "98597c69c1ab629b7329f0d1b30fcce049cce87a7f8c18ad2c08f6e4d9a521ff",
+    "sbfnav/losses.py": "8e98349fa30c3f45733b676a5ee5b571be1bb7c0e21fa9aa3db0d8aec2f6756f",
+    "sbfnav/mapdata.py": "54b7d8f4d8ca36131366a2c03a10a75d5676222f318b7927babacc35d7788d1e",
+    "sbfnav/metrics.py": "59cf13ec72a796046fb288951cdccce4840d12918d3373458bc97ea5d6d3611f",
+    "sbfnav/model_factory.py": "79b99f345003a1a59d344884c1e9e6d6646c525145b461c972e40d03a6e39b46",
+    "sbfnav/models/__init__.py": "ac25a7637acfd307dd304b3b28007c79b902dc2b6fa9616e205fcef864a39087",
+    "sbfnav/models/altitude_head.py": "c9ad1fe3aff185b8f47d4fcadfe56b95cc3c6846531ebbdaa947b18b054e4ee1",
+    "sbfnav/models/belief_field.py": "66b00a67ec1ad452fae4e97c2625bad2500909a28f90976e7a9445a511aea73e",
+    "sbfnav/models/language_encoder.py": "ffc6a5955c5a913f091f7bf9b6a5c4ba769f7816433e2aee0c5024a94469fc62",
+    "sbfnav/models/residual_cnn.py": "292c17511885a4d8fde93b571ac359efa2171b419eb306bbc7c352834e2a328b",
+    "sbfnav/models/sbfnav.py": "6d04770ad92b22b04a4c4961b6d1d04fae8d5bcbc62bfebfd4459afd007103e8",
+    "sbfnav/models/selector.py": "3bb84deebeb629ff30e1838a8849a7ed85e17d602d79b334c1a70bdc4e37fb40",
+    "sbfnav/navigation.py": "6b49036ec82e13aa4fd00e32a07febf13c7940b89eaaeda2dce5f185f2cce219",
+    "sbfnav/planning_state.py": "5cfd48a89bf0807efeffc4e7dfaa3bc10b5e9a4c9ee7b5adf4cdad1bf4402370",
+    "sbfnav/runtime.py": "b7069b41f79675b02cd31ce58d85521cfcc64c4dcee74dc8645b39e3f2fe16b0",
+    "sbfnav/training_data.py": "6c13879ac5047d274635a7ced4085d8ff0a7693a79a53a1c295aee1be0724f8e",
+    "sbfnav/validation.py": "cb90531ec8b53cbf858e3cc04ba1b80e35461af4936f7e8a956a777dfe53011f",
+    "sbfnav/visualization.py": "98147b5f44037b53ae773790bbbe3968616c0df901187928177910e7ada9eaa2"
+  },
+  "graphnav_commit": "fdd9a3d17cf648f7a748c5b146ba84fe6498ff2b",
+  "evaluator_sha256": "e864bffdc10e59f71e502d1b6f79948f0ab451a8168ed6dd348e4057160650cb",
+  "graphnav_working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "inference_target_access": false,
+  "warning": "Shared macro-action benchmark with orthophoto/vertical-depth observations; no swept 3D collision or perspective-camera claim.",
+  "observed_visual_cache": {
+    "observed_rois": 79389,
+    "memory_vector_hits": 19,
+    "disk_vector_hits": 0,
+    "new_vector_encodes": 79367,
+    "observations": 25447,
+    "backbone_encoded_images": 79367,
+    "cache_protocol": "Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery",
+    "timing_note": "Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy."
+  }
+}

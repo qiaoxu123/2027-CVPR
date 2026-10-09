@@ -1,0 +1,29 @@
+{
+  "models": {
+    "full_seed1": {
+      "path": "runs/final_closedloop_unseen/full_seed1",
+      "episodes": 2697,
+      "decisions": 25447,
+      "visual_decisions": 25447,
+      "decision_region_coverage": 0.7274727865760208,
+      "decision_referenced_node_coverage": 0.41745588870986755,
+      "decision_auxiliary_node_coverage": 0.6114276732031281,
+      "episode_any_region_coverage": 0.9625509825732295,
+      "mean_final_observed_grid_fraction": 0.2875786020748687,
+      "episode_manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+      "predictions_sha256": "7389fce59cea721bfa352d8829329dea0ab7fb6409ea9fd09e71b11adfd3d34d",
+      "observed_visual_cache": {
+        "observed_rois": 79389,
+        "memory_vector_hits": 19,
+        "disk_vector_hits": 0,
+        "new_vector_encodes": 79367,
+        "observations": 25447,
+        "backbone_encoded_images": 79367,
+        "cache_protocol": "Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery",
+        "timing_note": "Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy."
+      }
+    }
+  },
+  "script_sha256": "1db321096e9dd7129d24c97418d4a3a9f3f964df78456fd699b1ebe078317240",
+  "note": "Public policy telemetry only. No target coordinates, target IDs, expert paths or future frames are read. Current-only runs count current trusted projected regions; history runs count accumulated trusted regions and are not directly comparable as instantaneous coverage. Referenced-node coverage means an instruction-referenced public landmark has visual evidence, not that the goal is visible or recognized. Observed-grid coverage is cumulative geometric FOV, not semantic visibility, navigable-space coverage or accuracy. Unobserved endpoints after the final decision are never counted."
+}
