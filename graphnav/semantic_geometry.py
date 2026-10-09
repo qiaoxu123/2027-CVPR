@@ -197,7 +197,12 @@ def parse_spatial_relations(instruction: str, entities: list[dict]) -> list[Spat
             for left, right in ((first, second), (second, first)):
                 pattern = rf"\bbetween\s+(?:the\s+)?{re.escape(left)}\s+and\s+(?:the\s+)?{re.escape(right)}\b"
                 if re.search(pattern, text):
-                    key = ("between", tuple(sorted((first, second))))
+                    key = (
+                        "between",
+                        tuple(sorted((tuple(group[left]), tuple(group[right]))))
+                    )
+                    if set(group[left]) == set(group[right]):
+                        continue
                     if key not in used:
                         result.append(SpatialRelation(
                             "between", (tuple(group[left]), tuple(group[right]))
