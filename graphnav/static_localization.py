@@ -187,9 +187,12 @@ class StaticLocalizationDataset(Dataset):
             "relation_count": len(graph["relations"]),
             "road_relation_count": sum(int(any(graph["entities"][idx]["kind"] == "road" for group in r.anchors for idx in group)) for r in graph["relations"]),
             "road_count": sum(int(e["kind"] == "road") for e in graph["entities"]),
-            "surface_count": len(referenced_entities),
+            "surface_count": sum(
+                int(e["kind"] != "road") for e in graph["entities"]
+            ),
             "nonbuilding_surface_count": sum(
-                int(e["kind"] not in ("road", "building")) for e in referenced_entities
+                int(e["kind"] not in ("road", "building"))
+                for e in graph["entities"]
             ),
             "edge_count": int(graph["adjacency"].sum()),
             "episode_id": rec.get("episode_id", ""),
