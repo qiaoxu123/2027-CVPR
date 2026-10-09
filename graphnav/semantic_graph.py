@@ -115,7 +115,20 @@ def prepare_semantic_graph(
                 x["geometry_m"], y["geometry_m"], is_road_x, is_road_y
             )
             if is_road_x and is_road_y:
-                kind = "roads_connected" if d <= road_connect_tolerance_m else None
+                # Reliable OSM topology is shared node identity. Without
+                # node IDs, only actual shared endpoints may infer connection.
+                ids_x, ids_y = set(x["osm_node_ids"]), set(y["osm_node_ids"])
+                if ids_x and ids_y:
+                    connected = bool(ids_x & ids_y)
+                else:
+                    endpoints_x = [x["geometry_m"][0], x["geometry_m"][-1]]
+                    endpoints_y = [y["geometry_m"][0], y["geometry_m"][-1]]
+                    connected = min(
+                        float(np.linalg.norm(a - b))
+                        for a in endpoints_x for b in endpoints_y
+                    ) <= road_connect_tolerance_m
+                kind = ("roads_connected" if connected else
+                        ("roads_crossing" if d <= road_connect_tolerance_m else None))
             elif is_road_x != is_road_y:
                 kind = "building_road" if d <= near_m else None
             else:
