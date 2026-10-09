@@ -200,3 +200,9 @@ P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方
 源DEM点位私有离线净空代理：原SBF Seen204 Episode有后续点低于表面，A3 6、Joint 8；对应1102/10/12点。原始起点没有已知表面以下情况，但源黑像素/无效高度明确计为未知。数据`seen_surface_clearance_proxy_audit.json`；复现脚本`audit_surface_clearance.py`。这是最近DEM像素代理，不是swept路径碰撞/语义或真实飞行安全真值，不进入policy/计分/成功判定。公开动作约束没有新增非法状态的结论仍保持；复杂真实可飞空间/遮挡需另有环境支持，不能伪称已具备。
 
 增加在线真实ROI向量缓存计数，分别记录当前观测数、内存命中、持久化命中、新向量请求及实际backbone编码数，解释冷/热缓存延迟差异。只改变日志，不改变输入或网络计算。`summarize_final_system.py`仅汇总冻结候选，核验权重SHA和相同Episode分母，给出逐Episode/地图配对Bootstrap及三种子均值/标准差/范围；数值Level2/3门槛与完整pipeline/Stop/安全验收分开，不能仅凭阈值自动宣布完成。137单元测试通过，日志已保存。
+
+## 2026-10-10：第二完整种子完成（Unseen仍冻结未开）
+
+完整Seed1、公开高度Stop修复后的Seen2470：SR42.6721%、SPL40.8949%、NE30.7278m、nDTW29.8195%、sDTW15.2045%、8.0263步、False-Stop56.9490%。评估实际22,257次当前观测、83,696个ROI，65,809次新视觉编码、17,290持久化命中、97内存命中。真实实际视觉microbatch常远小于16，单Episode顺序因果执行限制GPU利用率；这不表示模型没运行，也不能通过虚构未来帧凑batch。Seed0/1完整阶段JSON临时独立保存在`reports/full_system_seed_progress_20261010/`，Seed0的旧高度Stop版本会另作一致性复核。
+
+两个完整种子Seen结果尚不构成三种子稳定性或最终性能验收。Seed2继续字段缓存/训练/Seen；之后P1最后方案、公开高度修复完整确认、公平P1轨迹对照、冻结清单Commit与统一Unseen顺序执行，无需新增调参或覆盖旧结果。主候选只依据修复后Seen；新Unseen尚未执行。最终报告保持work in progress。
