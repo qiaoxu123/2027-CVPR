@@ -1,9 +1,8 @@
-"""Conservative, source-type-aware CityRefer landmark name binding.
+"""Conservative, efficient CityRefer named polygon binding.
 
-No fuzzy semantic matching, no target coordinates, and no GT-selected object.
-A type suffix is removed ONLY when that suffix is compatible with the mapped
-object_type (e.g., 'BMTR building' -> Building named 'BMTR').
-Preserve all name collisions as separate source object IDs.
+A type suffix is removed only for a compatible source object_type.
+Whole polygons stay distinct by their unique map object ID. Exact name
+matches outrank typed alias matches, and neither ever uses GT positions.
 """
 
 from __future__ import annotations
@@ -26,62 +25,72 @@ TYPE_SUFFIXES = {
 
 
 def type_aware_alias_match(requested: str, mapped_name: str, object_type: str) -> bool:
-    requested = canonical_name(requested)
-    mapped = canonical_name(mapped_name)
-    if not mapped or not requested:
+    req, name = canonical_name(requested), canonical_name(mapped_name)
+    if not req or not name:
         return False
-    if requested == mapped:
+    if req == name:
         return True
-    typ = canonical_name(object_type).replace(" ", "")
-    for suffix in TYPE_SUFFIXES.get(typ, ()):
-        if requested == mapped + " " + suffix:
-            return True
-    return False
+    type_key = canonical_name(object_type).replace(" ", "")
+    return any(req == name + " " + suffix
+               for suffix in TYPE_SUFFIXES.get(type_key, ()))
 
 
-def resolve_references(reference_names, objects: dict, *, max_landmarks=16, allowed_types=None):
-    """Return identity-preserving reference polygons, prioritizing exact names.
+def build_name_index(objects: dict) -> dict:
+    """Build once per map; O(1) lookup per referenced name, no fuzzy matching."""
+    exact, typed = {}, {}
+    for object_id, obj in sorted(objects.items(), key=lambda pair: str(pair[0])):
+        name = str(obj.get("name", ""))
+        contour = obj.get("contour", [])
+        if not name or len(contour) < 3:
+            continue
+        key = canonical_name(name)
+        if not key:
+            continue
+        item = (str(object_id), name, str(obj.get("object_type", "Unknown")), contour)
+        exact.setdefault(key, []).append(item)
+        source_type = canonical_name(item[2]).replace(" ", "")
+        for suffix in TYPE_SUFFIXES.get(source_type, ()):
+            typed.setdefault(key + " " + suffix, []).append(item)
+    return {"exact": exact, "typed": typed}
 
-    If any exact match exists for a reference, do NOT broaden via aliases.
-    Alias fallback is deterministic and checked against source object_type.
+
+def resolve_references(
+    reference_names, objects: dict, *, max_landmarks=16,
+    allowed_types=None, index=None,
+):
+    """Return every exact or typed-suffix matching polygon ID without GT lookup.
+
+    If an exact match exists, typed suffix fallback is disabled for that query.
+    Homonymous IDs survive independently up to the transparent max_landmarks cap.
     """
     if max_landmarks < 1:
         raise ValueError("max_landmarks must be positive")
-    selected, seen = [], set()
-    sorted_objects = sorted(objects.items(), key=lambda pair: str(pair[0]))
+    index = build_name_index(objects) if index is None else index
+    selected, seen = [], {}
     for requested in reference_names:
         key = canonical_name(requested)
         if not key:
             continue
-        acceptable = []
-        for object_id, obj in sorted_objects:
-            typ = str(obj.get("object_type", ""))
-            if allowed_types is not None and typ not in allowed_types:
-                continue
-            name = str(obj.get("name", ""))
-            contour = obj.get("contour", [])
-            if not name or len(contour) < 3:
-                continue
-            if type_aware_alias_match(requested, name, typ):
-                acceptable.append((str(object_id), name, typ, contour))
-        exact = [m for m in acceptable if canonical_name(m[1]) == key]
-        candidates = exact if exact else acceptable
-        for object_id, name, typ, contour in candidates:
+        exact = [entry for entry in index["exact"].get(key, [])
+                 if allowed_types is None or entry[2] in allowed_types]
+        matches = exact if exact else [
+            entry for entry in index["typed"].get(key, [])
+            if allowed_types is None or entry[2] in allowed_types
+        ]
+        for object_id, name, source_type, contour in matches:
             if object_id in seen:
-                # Keep all phrases previously matched to the same source ID.
-                for item in selected:
-                    if item["id"] == object_id and requested not in item["aliases"]:
-                        item["aliases"].append(str(requested))
-                        break
+                found = selected[seen[object_id]]
+                if key != canonical_name(name) and requested not in found["aliases"]:
+                    found["aliases"].append(str(requested))
                 continue
             selected.append({
                 "id": object_id,
                 "name": name,
-                "object_type": typ or "Unknown",
-                "aliases": [str(requested)] if canonical_name(name) != key else [],
+                "object_type": source_type,
+                "aliases": [str(requested)] if key != canonical_name(name) else [],
                 "contour": contour,
             })
-            seen.add(object_id)
+            seen[object_id] = len(selected) - 1
             if len(selected) >= max_landmarks:
                 return selected
     return selected
