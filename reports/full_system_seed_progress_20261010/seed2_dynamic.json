@@ -1,0 +1,362 @@
+{
+  "args": {
+    "train_evidence": "data/dynamic_evidence_v2_train_seen",
+    "train_queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+    "train_fields": "runs/full_seed2_train_fields",
+    "train_vectors": "runs/p3_landmark_vectors_train_seen",
+    "seen_evidence": "data/dynamic_evidence_v2_val_seen",
+    "seen_queries": "data/public_eval_seen_v2/public_queries.jsonl",
+    "seen_fields": "runs/full_seed2_seen_fields",
+    "seen_vectors": "runs/p3_landmark_vectors_val_seen",
+    "checkpoint": "runs/a3_replicate_seed2/best.pt",
+    "output": "runs/full_seed2_dynamic",
+    "variant": "graph_visual_history",
+    "associate_observed_refs": true,
+    "epochs": 5,
+    "batch_size": 64,
+    "workers": 4,
+    "seed": 2,
+    "split_seed": 0,
+    "lr": 0.0002,
+    "gate_lr": 0.002,
+    "max_batches": null,
+    "resume": null,
+    "device": "cuda"
+  },
+  "provenance": {
+    "commit": "94478bc1aec02a796bc750c7acfd9f17a37d148e",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "input_fingerprint": {
+    "train_queries": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+      "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+    },
+    "seen_queries": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/public_eval_seen_v2/public_queries.jsonl",
+      "sha256": "9224ab061f12ebd3a3ea4a83523c16cacb3d5357466a8e645c6710ba5233d04f"
+    },
+    "checkpoint": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed2/best.pt",
+      "sha256": "228586057f2dc9ee75be1f2415a901cc5f6b5e1d9621236669057094e984166d"
+    },
+    "train_evidence": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_train_seen/manifest.json",
+      "sha256": "fbf6cc8418ffabdf41cc05e1c05d781ac80dd87b904688e4e2a75af3829d33bf"
+    },
+    "train_fields": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed2_train_fields/manifest.json",
+      "sha256": "755ffb5d108f5f775bff81f467c5213058e9e40cb0300c2ea5e83005dcc4aa62"
+    },
+    "train_vectors": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_train_seen/manifest.json",
+      "sha256": "6c4217656369de142214a2d6e6c112f2aeff36b9cc29743009375865e11f70e1"
+    },
+    "seen_evidence": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_val_seen/manifest.json",
+      "sha256": "932b88cf526e585c1ea1f7cf183cc53610eda33ab11aa696c40b873bb7415a13"
+    },
+    "seen_fields": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed2_seen_fields/manifest.json",
+      "sha256": "f64f7feccc2327c902e96de975b308d5b4d7eded2b79dcb917e7be40b4fbc6cd"
+    },
+    "seen_vectors": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_val_seen/manifest.json",
+      "sha256": "27bc9d8a13572d326e1ceae35e3aee5123e11e485ac6d25edb58f5c09883ab66"
+    }
+  },
+  "best_epoch": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 4.551299647792796,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 27.92649948687027,
+          "R1": 0.5644984669294787,
+          "R4": 0.7539421813403416,
+          "R8": 0.8339903635567235,
+          "baseline_NE": 27.949324766807894,
+          "baseline_R1": 0.5624178712220762,
+          "baseline_R4": 0.7509855453350854,
+          "baseline_R8": 0.8337713534822602
+        },
+        "seconds": 10.09445542911999,
+        "started_unix": 1791581805.4179747,
+        "finished_unix": 1791581815.5623956,
+        "samples_per_second": 238.05147458157512,
+        "peak_allocated_gib": 6.277353763580322,
+        "graph_gate": -0.077315554022789,
+        "visual_gate": -0.07632806897163391,
+        "reference_observations": 2276,
+        "auxiliary_observations": 17813,
+        "reference_visible_state_fraction": 0.47149396587598835
+      },
+      "dev": {
+        "loss": 4.302951615432213,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 23.92666792869568,
+          "R1": 0.6308724832214765,
+          "R4": 0.8120805369127517,
+          "R8": 0.8993288590604027,
+          "baseline_NE": 24.489556837401935,
+          "baseline_R1": 0.6174496644295302,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8926174496644296
+        },
+        "seconds": 1.063583028037101,
+        "started_unix": 1791581815.5643792,
+        "finished_unix": 1791581816.633296,
+        "samples_per_second": 218.13059618689886,
+        "peak_allocated_gib": 3.7782297134399414,
+        "graph_gate": -0.077315554022789,
+        "visual_gate": -0.07632806897163391,
+        "reference_observations": 218,
+        "auxiliary_observations": 1990,
+        "reference_visible_state_fraction": 0.45689655172413796
+      }
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 4.5304280444576595,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 27.60321198208678,
+          "R1": 0.5736968900569426,
+          "R4": 0.7585413929040736,
+          "R8": 0.8369469995619798,
+          "baseline_NE": 27.949324766807894,
+          "baseline_R1": 0.5624178712220762,
+          "baseline_R4": 0.7509855453350854,
+          "baseline_R8": 0.8337713534822602
+        },
+        "seconds": 5.314568052068353,
+        "started_unix": 1791581816.6698213,
+        "finished_unix": 1791581822.0386095,
+        "samples_per_second": 452.1533973141594,
+        "peak_allocated_gib": 6.277217388153076,
+        "graph_gate": -0.18645675480365753,
+        "visual_gate": -0.186510369181633,
+        "reference_observations": 2276,
+        "auxiliary_observations": 17813,
+        "reference_visible_state_fraction": 0.47149396587598835
+      },
+      "dev": {
+        "loss": 4.274658416879588,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 23.055946502109503,
+          "R1": 0.6208053691275168,
+          "R4": 0.8322147651006712,
+          "R8": 0.9060402684563759,
+          "baseline_NE": 24.489556837401935,
+          "baseline_R1": 0.6174496644295302,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8926174496644296
+        },
+        "seconds": 0.2546445007901639,
+        "started_unix": 1791581822.0413454,
+        "finished_unix": 1791581822.3011093,
+        "samples_per_second": 911.0740631747483,
+        "peak_allocated_gib": 3.7782297134399414,
+        "graph_gate": -0.18645675480365753,
+        "visual_gate": -0.186510369181633,
+        "reference_observations": 218,
+        "auxiliary_observations": 1990,
+        "reference_visible_state_fraction": 0.45689655172413796
+      }
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 4.489808617955786,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 27.43437343983602,
+          "R1": 0.5727222952255804,
+          "R4": 0.7662614980289093,
+          "R8": 0.8381515549715287,
+          "baseline_NE": 27.949324766807894,
+          "baseline_R1": 0.5624178712220762,
+          "baseline_R4": 0.7509855453350854,
+          "baseline_R8": 0.8337713534822602
+        },
+        "seconds": 3.7928478631656617,
+        "started_unix": 1791581822.3269632,
+        "finished_unix": 1791581826.1718364,
+        "samples_per_second": 633.5608721184932,
+        "peak_allocated_gib": 6.277217388153076,
+        "graph_gate": -0.26628607511520386,
+        "visual_gate": -0.26632121205329895,
+        "reference_observations": 2276,
+        "auxiliary_observations": 17813,
+        "reference_visible_state_fraction": 0.47149396587598835
+      },
+      "dev": {
+        "loss": 4.254638466341742,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 21.219997274795634,
+          "R1": 0.6409395973154363,
+          "R4": 0.825503355704698,
+          "R8": 0.912751677852349,
+          "baseline_NE": 24.489556837401935,
+          "baseline_R1": 0.6174496644295302,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8926174496644296
+        },
+        "seconds": 0.26170916901901364,
+        "started_unix": 1791581826.1732605,
+        "finished_unix": 1791581826.4398582,
+        "samples_per_second": 886.4802133972798,
+        "peak_allocated_gib": 3.7782297134399414,
+        "graph_gate": -0.26628607511520386,
+        "visual_gate": -0.26632121205329895,
+        "reference_observations": 218,
+        "auxiliary_observations": 1990,
+        "reference_visible_state_fraction": 0.45689655172413796
+      }
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 4.468839409050721,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 27.300597055998484,
+          "R1": 0.5680573806395094,
+          "R4": 0.7629763469119579,
+          "R8": 0.8450394218134035,
+          "baseline_NE": 27.949324766807894,
+          "baseline_R1": 0.5624178712220762,
+          "baseline_R4": 0.7509855453350854,
+          "baseline_R8": 0.8337713534822602
+        },
+        "seconds": 3.766478114994243,
+        "started_unix": 1791581826.478393,
+        "finished_unix": 1791581830.2949734,
+        "samples_per_second": 637.9965385790309,
+        "peak_allocated_gib": 6.277217388153076,
+        "graph_gate": -0.3032035231590271,
+        "visual_gate": -0.29835692048072815,
+        "reference_observations": 2276,
+        "auxiliary_observations": 17813,
+        "reference_visible_state_fraction": 0.47149396587598835
+      },
+      "dev": {
+        "loss": 4.244227943749263,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 22.76952371661295,
+          "R1": 0.6375838926174496,
+          "R4": 0.8187919463087249,
+          "R8": 0.9060402684563759,
+          "baseline_NE": 24.489556837401935,
+          "baseline_R1": 0.6174496644295302,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8926174496644296
+        },
+        "seconds": 0.26667502988129854,
+        "started_unix": 1791581830.2971554,
+        "finished_unix": 1791581830.5687375,
+        "samples_per_second": 869.97271586795,
+        "peak_allocated_gib": 3.7782297134399414,
+        "graph_gate": -0.3032035231590271,
+        "visual_gate": -0.29835692048072815,
+        "reference_observations": 218,
+        "auxiliary_observations": 1990,
+        "reference_visible_state_fraction": 0.45689655172413796
+      }
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "loss": 4.456061696787948,
+        "state_queries": 2403,
+        "unique_public_queries": 1522,
+        "query_macro": {
+          "NE": 26.750627520512033,
+          "R1": 0.5676960140166447,
+          "R4": 0.7703679369250985,
+          "R8": 0.8497152869031975,
+          "baseline_NE": 27.949324766807894,
+          "baseline_R1": 0.5624178712220762,
+          "baseline_R4": 0.7509855453350854,
+          "baseline_R8": 0.8337713534822602
+        },
+        "seconds": 2.804455498000607,
+        "started_unix": 1791581830.5904977,
+        "finished_unix": 1791581833.4473548,
+        "samples_per_second": 856.8508224549049,
+        "peak_allocated_gib": 6.277217388153076,
+        "graph_gate": -0.3360676169395447,
+        "visual_gate": -0.323929101228714,
+        "reference_observations": 2276,
+        "auxiliary_observations": 17813,
+        "reference_visible_state_fraction": 0.47149396587598835
+      },
+      "dev": {
+        "loss": 4.241805989166786,
+        "state_queries": 232,
+        "unique_public_queries": 149,
+        "query_macro": {
+          "NE": 22.328664812465643,
+          "R1": 0.6543624161073825,
+          "R4": 0.8120805369127517,
+          "R8": 0.9060402684563759,
+          "baseline_NE": 24.489556837401935,
+          "baseline_R1": 0.6174496644295302,
+          "baseline_R4": 0.8053691275167785,
+          "baseline_R8": 0.8926174496644296
+        },
+        "seconds": 0.239966002991423,
+        "started_unix": 1791581833.4496105,
+        "finished_unix": 1791581833.6948326,
+        "samples_per_second": 966.8036184621213,
+        "peak_allocated_gib": 3.7782297134399414,
+        "graph_gate": -0.3360676169395447,
+        "visual_gate": -0.323929101228714,
+        "reference_observations": 218,
+        "auxiliary_observations": 1990,
+        "reference_visible_state_fraction": 0.45689655172413796
+      }
+    }
+  ],
+  "seen_prefix": {
+    "loss": 4.561179253088461,
+    "state_queries": 925,
+    "unique_public_queries": 570,
+    "query_macro": {
+      "NE": 34.206947216757555,
+      "R1": 0.39956140350877195,
+      "R4": 0.6026315789473684,
+      "R8": 0.7157894736842105,
+      "baseline_NE": 31.277150592573904,
+      "baseline_R1": 0.41578947368421054,
+      "baseline_R4": 0.6105263157894737,
+      "baseline_R8": 0.7210526315789474
+    },
+    "seconds": 2.633312836056575,
+    "started_unix": 1791581833.777071,
+    "finished_unix": 1791581836.4352129,
+    "samples_per_second": 351.26855698056795,
+    "peak_allocated_gib": 3.7848172187805176,
+    "graph_gate": -0.3360676169395447,
+    "visual_gate": -0.323929101228714,
+    "reference_observations": 997,
+    "auxiliary_observations": 6981,
+    "reference_visible_state_fraction": 0.4702702702702703
+  },
+  "note": "Seen actual-human-prefix subset query-macro localization diagnostic; not full navigation SR/SPL or initial-only observations. No Unseen evaluation."
+}

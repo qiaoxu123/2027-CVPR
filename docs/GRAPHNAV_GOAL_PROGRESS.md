@@ -214,3 +214,7 @@ P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方
 ## 三种子训练计算预算汇总（2026-10-10）
 
 A3、Dynamic Belief、Trajectory/Stop的三组五轮训练均完成；统一逐轮CSV和配置/输入/权重SHA汇总保存于`reports/full_system_training_20261010`。该表仅统计实际epoch训练与验证耗时，缓存/视觉编码单独计入队列预算。已完成Trajectory/Stop旧记录无绝对起止时间，不能恢复逐轮GPU利用率；后续运行已补充wall-clock字段，并兼容旧Checkpoint恢复后的混合历史CSV。此改动只补记录，不改变Loss/梯度/模型配置。第三组完整Seen评估仍在运行，尚无新的GraphNav Unseen结果。
+
+## 三组Full系统Seen完成（2026-10-10）
+
+Seed2全量2470个Seen Episode：SR41.5789%、SPL39.2060%、OSR51.9838%、NE31.3440m、nDTW29.6769%、sDTW14.6229%、平均8.0636次运动、策略延迟68.5132ms、False-Stop58.3437%，实际评估1631.885s。Seed1当前SR42.6721%、SPL40.8949%较高；Seed0仍须用公开高度Stop修复后的Runtime重新确认，不能混合旧Runtime结果构造最终三种子表。三组原始配置/逐轮记录/全量Seen结果都保存在`reports/full_system_seed_progress_20261010`。phase20完整结束，phase21b困难负样本P1训练已启动；新GraphNav Unseen尚未开始。
