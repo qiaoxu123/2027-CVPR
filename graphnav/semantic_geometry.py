@@ -33,7 +33,7 @@ NODE_TYPES = {"building": 0, "road": 1, "relation": 2}
 EDGE_TYPES = {
     "self": 0, "buildings_near": 1, "buildings_overlap": 2,
     "building_road": 3, "roads_connected": 4,
-    "relation_anchor": 5, "anchor_relation": 6,
+    "relation_anchor": 5, "anchor_relation": 6, "roads_crossing": 7,
 }
 
 
@@ -287,5 +287,6 @@ def build_entities(
                 "kind": kind, "name": item.get("name", ""),
                 "id": str(item.get("id", "")),
                 "geometry_m": geometry * scale + xymin,
+                "osm_node_ids": tuple(str(n) for n in item.get("osm_node_ids", [])),
             })
     return entries
