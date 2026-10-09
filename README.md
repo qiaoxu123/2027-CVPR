@@ -1,4 +1,6 @@
 # GraphNav — Graph-First Aerial Vision-and-Language Navigation
+> **Extended CityRefer grounding experimental branch:** Train static goal localization with ALL typed named surface polygons (TrafficRoad/Footpath/Bridge/Parking/Ground), conservative aliases and a buildings-only control. See [FULL_SURFACE_GROUNDING.md](docs/FULL_SURFACE_GROUNDING.md). Rerun data conversion with `--refresh-raw`; historical metrics do not automatically carry over.
+
 > **Static-first research branch**: for Prior → Geometry Rules → Typed GAT localization ablations on a single RTX Pro 6000 96GB (batch 16), see [static-geometry protocol](docs/STATIC_GEOMETRY_ABLATIONS.md). RGB/Trajectory/Stop are deliberately excluded until static goal localization gains are established.
 
 
