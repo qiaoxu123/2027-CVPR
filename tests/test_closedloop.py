@@ -59,3 +59,15 @@ def test_a3_public_map_binding_keeps_homonymous_road_fragments_without_target():
     record=public_static_record(episode,transform,SimpleNamespace(objects={'map':objects}))
     assert len(record['landmarks'])==2 and record['target_xy']==[0.,0.]
     assert all('id' not in landmark for landmark in record['landmarks'])
+
+
+def test_temporal_cache_can_preserve_distinct_observable_priors_for_same_text(tmp_path):
+    import json
+    from graphnav.candidate_geometry import FullCandidateDataset
+    row=dict(map_name='m',instruction='same query',world_bounds=[0,0,100,100],
+             physical_map_sizes=[100,100],landmarks=[],target_xy=[0,0])
+    second=dict(row,landmarks=[dict(name='road',object_type='TrafficRoad',contour=[[.1,.1],[.2,.1],[.2,.2],[.1,.2]])])
+    path=tmp_path/'queries.jsonl';path.write_text(json.dumps(row)+'\n'+json.dumps(second)+'\n')
+    assert len(FullCandidateDataset(path))==1
+    temporal=FullCandidateDataset(path,deduplicate_queries=False)
+    assert len(temporal)==2 and temporal[0]['entity_valid'].sum()==0 and temporal[1]['entity_valid'].sum()==1

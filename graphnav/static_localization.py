@@ -37,6 +37,7 @@ class StaticLocalizationDataset(Dataset):
         self, jsonl_path, *, grid_size=28, max_landmarks=16, max_roads=12,
         max_relations=8, roads_json=None, prior_sigma_m=25.,
         rule_sigma_m=25.,
+        deduplicate_queries=True,
     ):
         raw_records = [
             json.loads(line)
@@ -53,7 +54,7 @@ class StaticLocalizationDataset(Dataset):
             # coordinates nor annotation IDs may give repeated text extra weight.
             # Preserve the first source record deterministically.
             query_id = (record.get("map_name", ""), record["instruction"])
-            if query_id in seen_queries:
+            if deduplicate_queries and query_id in seen_queries:
                 continue
             seen_queries.add(query_id)
             self.records.append(record)

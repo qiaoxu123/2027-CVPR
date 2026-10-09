@@ -39,14 +39,21 @@ def main():
         original=frame_to_world(corners,row['footprint_world'],(384,384))
         shifted=frame_to_world(corners+np.array([2.,0.],np.float32),row['footprint_world'],(384,384))
         uncertainty=float(np.linalg.norm(shifted-original,axis=1).mean())
-        depth=cv2.applyColorMap(np.clip(obs['depth_m']/100*255,0,255).astype(np.uint8),cv2.COLORMAP_TURBO)
+        values=obs['depth_m'][obs['depth_valid']]
+        lo,hi=np.percentile(values,[2,98]) if len(values) else (0.,1.)
+        hi=max(hi,lo+1.)
+        depth=cv2.applyColorMap(np.clip((obs['depth_m']-lo)/(hi-lo)*255,0,255).astype(np.uint8),cv2.COLORMAP_TURBO)
         depth[~obs['depth_valid']]=0;rgb=obs['bgr'].copy()
         cv2.polylines(rgb,[points],True,(0,255,0),1);cv2.polylines(depth,[points],True,(0,255,0),1)
-        image=output/f"case_{case['case_id']:02d}.jpg";cv2.imwrite(str(image),np.concatenate([rgb,depth],axis=1))
+        panel=cv2.copyMakeBorder(np.concatenate([rgb,depth],axis=1),0,24,0,0,cv2.BORDER_CONSTANT)
+        cv2.putText(panel,f'RGB | vertical depth proxy, display {lo:.1f}..{hi:.1f}m; invalid=black',
+                    (8,401),cv2.FONT_HERSHEY_SIMPLEX,.45,(255,255,255),1)
+        image=output/f"case_{case['case_id']:02d}.jpg";cv2.imwrite(str(image),panel)
         results.append(dict(case_id=case['case_id'],split=case['split'],map_name=row['map_name'],
             object_type=row['object_type'],native_rgb_exact_match=True,
             projected_region_valid_depth_fraction=valid_fraction,boundary_2px_world_uncertainty_m=uncertainty,
             depth_array=str((arrays/f"case_{case['case_id']:02d}.npz").resolve()),visualization=str(image)))
+        results[-1]['depth_display_interval_m']=[float(lo),float(hi)]
     by_type=defaultdict(list)
     for r in results:by_type[r['object_type']].append(r)
     report=dict(cases=results,by_type={k:dict(cases=len(v),mean_valid_depth_fraction=float(np.mean([r['projected_region_valid_depth_fraction'] for r in v])),

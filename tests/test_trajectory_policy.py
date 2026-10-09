@@ -37,3 +37,14 @@ def test_head_executes_bounded_first_step_and_label_only_losses_backward():
         teacher_world=torch.tensor([[[60.,60.,30.],[70.,80.,30.],[80.,100.,30.],[80.,120.,30.]]]))
     assert torch.isfinite(losses['total'])
     losses['total'].backward();assert net.path.weight.grad.abs().sum()>0
+
+
+def test_illegal_teacher_altitude_is_masked_without_fabricating_waypoints():
+    paths=torch.zeros(1,1,1,2,3,requires_grad=True)
+    out=TrajectoryOutput(paths,torch.zeros(1,1,1),torch.zeros(1,1),torch.zeros(1,1))
+    kwargs=dict(candidate_world_xy=torch.zeros(1,1,2),pose_world=torch.zeros(1,4),
+        target_world=torch.zeros(1,3),valid_teacher_z=torch.zeros(1,2,dtype=torch.bool))
+    first=trajectory_losses(out,teacher_world=torch.zeros(1,2,3),**kwargs)
+    teacher=torch.zeros(1,2,3);teacher[...,2]=1000
+    second=trajectory_losses(out,teacher_world=teacher,**kwargs)
+    assert torch.equal(first['path'],second['path'])

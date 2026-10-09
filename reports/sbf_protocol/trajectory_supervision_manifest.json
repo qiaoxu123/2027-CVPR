@@ -1,0 +1,32 @@
+{
+  "counts": {
+    "samples": 128509,
+    "recovery_samples": 21864,
+    "positive_stop_samples": 30796,
+    "near_false_stop_samples_20_40m": 32659,
+    "out_of_controller_altitude_samples": 50300,
+    "episodes": 21864,
+    "excluded_nontraining_query": 14
+  },
+  "queries": 21169,
+  "args": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "allowed_train_queries": "data/revised_static/graphnav_train_seen.jsonl",
+    "output": "data/trajectory_supervision_v2_seen",
+    "seed": 0,
+    "max_episodes": null
+  },
+  "seed": 0,
+  "input_sha256": {
+    "source_train": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+    "objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "processed": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b",
+    "allowed_query_file": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+  },
+  "output_sha256": {
+    "samples.jsonl": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8",
+    "public_queries.jsonl": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+  },
+  "protocol": "Source annotation labels stored separately; true target/expert future never used as inference inputs. Recovery connector is explicit augmentation; future rows are real human poses. No synthetic RGB. Invalid-altitude teacher z has a separate loss mask rather than a fabricated clipped label."
+}

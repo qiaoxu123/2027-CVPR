@@ -106,14 +106,18 @@ class CandidateTrajectoryStop(nn.Module):
                                 self.stop(hidden).squeeze(-1))
 
 
-def trajectory_losses(out,*,candidate_world_xy,pose_world,target_world,teacher_world,radius=20.):
+def trajectory_losses(out,*,candidate_world_xy,pose_world,target_world,teacher_world,radius=20.,valid_teacher_z=None):
     """Destination and teacher future are label-only arguments."""
     distances=(candidate_world_xy-target_world[:,None,:2]).norm(dim=-1)
     weights=torch.softmax(-distances.square()/(2*20.**2),dim=-1)
     ranking=-(weights*F.log_softmax(out.candidate_logits,-1)).sum(-1).mean()
     nearest=distances.argmin(-1);batch=torch.arange(len(nearest),device=nearest.device)
     paths=out.paths_world[batch,nearest]
-    per_mode=F.smooth_l1_loss(paths/50.,teacher_world[:,None].expand_as(paths)/50.,reduction='none').mean((-1,-2))
+    errors=F.smooth_l1_loss(paths/50.,teacher_world[:,None].expand_as(paths)/50.,reduction='none')
+    weights_xyz=torch.ones_like(teacher_world)
+    if valid_teacher_z is not None:
+        weights_xyz[...,2]=valid_teacher_z.to(errors.dtype)
+    per_mode=(errors*weights_xyz[:,None]).sum((-1,-2))/weights_xyz.sum((-1,-2)).clamp_min(1)[:,None]
     best=per_mode.detach().argmin(-1)
     path=per_mode[batch,best].mean()
     mode=F.cross_entropy(out.mode_logits[batch,nearest],best)
