@@ -172,3 +172,13 @@ GAT固定权重Seen128：完整边53成功、自环52、清零边特征53；小�
 P1 v2公平h128/BERT96/非relative、同batch16/seed0/5轮：Scratch Seen R@1=40.8904%、R@8=75.0618%、NE31.5274m；初始化组39.1179%、74.4435%、31.4696m。Seen128闭环SR41.4063%→38.2813%。P1方向交换响应改善但真实任务无收益，不采用其初始化。保存`reports/p1_v2_matched_20261010/`，未读取新Unseen。补充第三且最后P1主要方案：同地图/类别、相似距离/面积、严格错误方向的实际地标作为仅Loss困难负样本，不将其他合法解误作负样本。后续须真GPU验证与公平Seen对照，不能只凭新损失宣布有效。
 
 三组Scratch A3已完成，Seen R@1 Seed0/1/2分别40.8904/42.5392/40.9728%，随机性幅度与当前GAT增益同量级。`phase20_plan.json`预注册三个完整下游系统：各自A3、动态图残差、Trajectory/Stop独立训练，固定query split seed0、相同5轮/配置；BERT及已验证P2 Large编码器/Head共同冻结，因此随机种子结论条件于这个共享视觉编码器。沿用先前Seen选择的当前帧联合推理、25%轨迹残差、Stop .3、无探索；先完成Seen，再冻结最终候选进行Unseen。最新单元测试133通过，1个既有rasterio弃用提示。
+
+## 2026-10-10：最后P1困难负样本、冻结最终评估准备
+
+P1 v3只给v2的相同18244行添加私有Loss标签：9262行有严格错误方向的同地图/同类别真实地标，合计25260负标签；距离比0.6–1.4、面积比0.5–2、正负中心距>40m。其他满足方向关系的多解绝不作为负样本；坐标增强同步平移并过滤越界负标签。仅增加0.1权重margin，不改变模型forward输入、原始关系家族划分与匹配A3精调配置。计划`phase21b_plan.json`等待三种子Seen完成，先真实CUDA smoke再完整5轮。最初依赖状态文件仍为running而被严格验收拒绝的排队尝试保留`phase21_prerequisite_failure.json`；新队列改为等待最终完成产物，无GPU竞争。
+
+公开Polygon边界框索引减少每步无关地标扫描；16个实际native384帧的ROI顺序、像素、轮廓、置信度与质量逐项完全一致，`spatial_index_actual_native_equivalence.json`。这是公开地图广阶段筛选，不缓存任何未观测证据，不声称改变准确率。
+
+`freeze_final_eval.py`将等待三种子Seen和最后P1控制完成，按Seen SR/SPL/NE预先选定主候选，并记录所有最终模块/种子/负P1候选及权重SHA；生成后必须先Commit，再运行新Unseen。若P1 v3出现真实Seen Top1改善，会拒绝直接冻结Scratch系统，先验证下游整合。`evaluate_frozen_static.py`统一去重的2426 Seen/2679 Unseen静态R@1/4/8和NE；明确区别于2470/2697完整闭环Episode分母。
+
+远程连接恢复：原代理规则将GitHub指定DIRECT，直连不可用；独立本任务代理端口17890经可用节点成功Push到`e9fa714`，原代理配置未修改。新代码/报告会继续提交并Push，不合并main。

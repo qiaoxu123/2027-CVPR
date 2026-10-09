@@ -24,16 +24,30 @@ class ObservedLandmark:
     quality: dict
 
 
+class LandmarkSpatialIndex(list):
+    """Public map-only bounding boxes; exact broad-phase, no evidence cache."""
+    def __init__(self,landmarks):
+        super().__init__(landmarks)
+        self.low=np.asarray([item['low'] for item in landmarks],dtype=np.float32).reshape(-1,2)
+        self.high=np.asarray([item['high'] for item in landmarks],dtype=np.float32).reshape(-1,2)
+
+    def candidates(self,view_lo,view_hi):
+        indices=np.flatnonzero((self.high>=view_lo).all(-1)&(self.low<=view_hi).all(-1))
+        return [self[int(index)] for index in indices]
+
+
 def current_landmark_rois(observation,landmarks,*,max_rois=32):
     bgr=np.asarray(observation['bgr']);depth_valid=np.asarray(observation['depth_valid'],dtype=bool)
     if bgr.shape[:2]!=(384,384):raise ValueError('native 384px current observation required')
     if depth_valid.shape!=bgr.shape[:2]:raise ValueError('depth/RGB observation dimensions disagree')
     support=bgr.max(-1)>0;results=[]
     footprint=np.asarray(observation['footprint_world']);view_lo,view_hi=footprint.min(0),footprint.max(0)
+    if isinstance(landmarks,LandmarkSpatialIndex):landmarks=landmarks.candidates(view_lo,view_hi)
     for landmark in landmarks:
         contour=np.asarray(landmark['contour'])
         if contour.ndim!=2 or contour.shape[1]!=2 or len(contour)<3 or not np.isfinite(contour).all():continue
-        lo=landmark.get('low',contour.min(0));hi=landmark.get('high',contour.max(0))
+        lo=landmark['low'] if 'low' in landmark else contour.min(0)
+        hi=landmark['high'] if 'high' in landmark else contour.max(0)
         if np.any(hi<view_lo) or np.any(lo>view_hi):continue
         roi=project_landmark(landmark,observation['footprint_world'],bgr.shape,min_visible=.9,min_pixels=256)
         if roi is None:continue

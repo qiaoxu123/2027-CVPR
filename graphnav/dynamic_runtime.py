@@ -115,7 +115,8 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         super().set_episode(episode,transform,catalog)
         self.landmarks=[]
         from scripts.prepare_landmark_views import objects_by_map
-        self.landmarks=objects_by_map({episode.map_name:catalog.objects[episode.map_name]})[episode.map_name]
+        from .observed_landmarks import LandmarkSpatialIndex
+        self.landmarks=LandmarkSpatialIndex(objects_by_map({episode.map_name:catalog.objects[episode.map_name]})[episode.map_name])
         self.evidence={};self.geometry={};self.pose_history=[];self.observed_cells=None
         self.static_dynamic_field=None
         if self.encoder_visual:self.encoder_visual.start_episode()

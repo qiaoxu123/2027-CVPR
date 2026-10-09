@@ -223,6 +223,7 @@ def run(args):
         started_unix=time.time()
         t0=time.perf_counter()
         losses, sample_count = [], 0
+        component_sums={key:0. for key in ('goal','inverse','hard_negative')}
         if device.type=="cuda":
             torch.cuda.reset_peak_memory_stats(device)
         for batch in train_loader:
@@ -238,6 +239,7 @@ def run(args):
             optimizer.step()
             n = len(batch["text"])
             losses.append((float(loss.detach()), n))
+            for key in component_sums:component_sums[key]+=parts[key]*n
             sample_count += n
         if device.type=="cuda":
             torch.cuda.synchronize()
@@ -247,6 +249,7 @@ def run(args):
         validation_start=time.perf_counter()
         dev=evaluate(model,dev_loader,encoder,device)
         record=dict(epoch=epoch+1,train_loss=sum(v*n for v,n in losses)/sample_count,
+                    loss_components={key:value/sample_count for key,value in component_sums.items()},
                     train_seconds=elapsed,dev=dev,
                     train_samples=sample_count, samples_per_second=sample_count/elapsed,
                     gpu_gib=peak,validation_seconds=time.perf_counter()-validation_start)
@@ -271,6 +274,7 @@ def run(args):
     model.load_state_dict(state["model"])
     unseen_stats=evaluate(model,unseen_loader,encoder,device) if unseen_loader is not None else None
     report=dict(
+        args=vars(args),
         train_pairs=len(train),dev_pairs=len(dev_loader.dataset),
         unseen_pairs=len(unseen) if unseen is not None else 0,
         checkpoint_epoch=state["epoch"],train_maps=sorted(train_maps),
