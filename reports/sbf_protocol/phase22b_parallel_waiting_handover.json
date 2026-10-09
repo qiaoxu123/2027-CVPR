@@ -1,0 +1,21 @@
+{
+  "reason": "User authorized parallel independent evaluations. Empty waiting queue only; no model process or training interrupted.",
+  "old_pid": 751669,
+  "old_status": {
+    "manifest_sha256": "dae352f7b480545f1e2f3a867ae6ec2320fab2375dfbb5cd37fe435736f53956",
+    "status": "waiting",
+    "jobs": []
+  },
+  "old_status_sha256": "97780c2d8e4641d902adc8e4d312d9973e38b011a94d2b641f4764e500d30223",
+  "manifest_sha256": "dae352f7b480545f1e2f3a867ae6ec2320fab2375dfbb5cd37fe435736f53956",
+  "time_unix": 1791585500.1128595,
+  "new_command": [
+    "python3",
+    "scripts/run_experiment_queue.py",
+    "--manifest",
+    "runs/phase22b_queue.json",
+    "--resume-waiting",
+    "--evaluation-workers",
+    "2"
+  ]
+}

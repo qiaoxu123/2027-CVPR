@@ -234,3 +234,7 @@ Full seed1的1416次失败中1193次从未在已观测位置到目标20m内、20
 ## 两路独立测试准备（2026-10-10）
 
 用户授权并行测试。完成共享ROI与固定tmp并发风险修复、两路评估/训练屏障调度及并发时延标注。全部144项回归测试通过。当前运行phase22不重启，仅接管尚未启动phase22b；模型参数、候选选择及Unseen冻结协议不变。说明见`docs/PARALLEL_EVALUATION_20261010.md`。
+
+## 并行调度等待队列交接完成（2026-10-10）
+
+仅终止没有任何子进程或已启动job的phase22b旧waiting调度器（PID751669）；原状态/SHA/Manifest SHA保留于`reports/sbf_protocol/phase22b_parallel_waiting_handover.json`，未中断模型推理或训练。新调度器已实际启动、保持waiting且evaluation_workers=2；仍等待phase22全量确认完成。当前phase22已有模型进程不重启。最终冻结清单也将使用两路独立评估，并标注并发时延。
