@@ -134,6 +134,7 @@ def encode_batch_text(collated, frozen_bert, device):
         "landmark_valid": collated["landmark_valid"].to(device),
         "uav_pose": collated["uav_pose"].to(device),
         "spatial_maps": collated["spatial_maps"].to(device),
+        "physical_map_sizes": collated["physical_map_sizes"].to(device),
     }
     labels = {
         key: collated[key].to(device)
