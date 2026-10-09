@@ -64,6 +64,12 @@ def convert_roads(features, map_bounds, single_map=None):
                     "name": str(props.get("name") or ""),
                     "polyline": clipped,
                     "coordinate_system": "world",
+                    "osm_node_ids": (
+                        [str(props["osm_node_ids"][k]), str(props["osm_node_ids"][k + 1])]
+                        if isinstance(props.get("osm_node_ids"), list)
+                        and k + 1 < len(props["osm_node_ids"])
+                        else []
+                    ),
                 })
     return result
 
