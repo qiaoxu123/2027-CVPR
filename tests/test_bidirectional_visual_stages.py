@@ -14,11 +14,140 @@ from graphnav.landmark_projection import (
 from scripts.prepare_landmark_views import objects_by_map, process
 from graphnav.bidirectional import generate_pairs, cardinal_relation, INVERSE
 from graphnav.bidirectional_train import (
-    PairedGeometryDataset, paired_collate, batch_loss
+    PairedGeometryDataset, paired_collate, batch_loss, family_split
 )
 from graphnav.landmark_visual_pretrain import (
-    PairedROIs, VisualLandmarkAligner, roi_collate, match_loss
+    PairedROIs, VisualLandmarkAligner, roi_collate, match_loss, SameMapTypeBatchSampler
 )
+
+
+def test_p1_family_split_never_leaks_shifted_pair_to_dev():
+    from types import SimpleNamespace
+    records = [{"pair_id": f"map:a{i}:b{i}{suffix}"}
+               for i in range(20) for suffix in ("", ":aug0", ":aug1")]
+    dataset = SimpleNamespace(samples=SimpleNamespace(records=records),
+                              pairs=[(i, i) for i in range(len(records))])
+    train, dev = family_split(dataset)
+    families = lambda ids: {records[i]["pair_id"].split(":aug")[0] for i in ids}
+    assert not families(train) & families(dev)
+    assert sorted(train+dev) == list(range(len(records)))
+
+
+def test_p1_inverse_metric_uses_pair_denominator_and_reports_meters(monkeypatch):
+    from types import SimpleNamespace
+    from graphnav.bidirectional_train import evaluate
+    batches=[]
+    for n in (2,4):
+        batches.append({'text':['query']*n,'grid_xy':torch.full((n,1,2),.5),
+            'target_xy':torch.zeros(n,2),'map_sizes':torch.full((n,2),400.),
+            'nodes':torch.zeros(n,1,2),'direction_label':torch.zeros(n,dtype=torch.long)})
+    def fake_loss(model,batch,encoder,device):
+        n=len(batch['text'])
+        return None,{'inverse':1. if n==2 else 3.},SimpleNamespace(belief_logits=torch.zeros(n,1))
+    monkeypatch.setattr('graphnav.bidirectional_train.batch_loss',fake_loss)
+    metric=evaluate(SimpleNamespace(eval=lambda:None),batches,None,torch.device('cpu'))
+    assert metric['samples']==6 and metric['inverse_error']==pytest.approx(7/3)
+    assert metric['inverse_displacement_error_m']==pytest.approx(400*2**.5)
+
+
+def test_p2_hard_batches_do_not_mix_city_or_category():
+    from types import SimpleNamespace
+    groups = [((f"city{city}_block_{i}", str(i)), [{"object_type": typ}])
+              for city in (0, 1) for typ in ("Building", "Road") for i in range(5)]
+    dataset = SimpleNamespace(groups=groups)
+    batches = list(SameMapTypeBatchSampler(dataset, range(len(groups)), batch_size=4))
+    for batch in batches:
+        labels = {(groups[i][0][0].split("_block_")[0], groups[i][1][0]["object_type"])
+                  for i in batch}
+        assert len(labels) == 1
+
+
+def test_p2_rejects_future_roi_metadata(tmp_path):
+    path = tmp_path / "bad.jsonl"
+    path.write_text(json.dumps({"observed_step": 8, "observation_cutoff_step": 0}) + "\n")
+    with pytest.raises(ValueError, match="future"):
+        PairedROIs(path)
+
+
+def test_p0_quality_filter_measures_rgb_holes_not_semantic_iou():
+    from scripts.curate_p0_rois import pixel_support
+    image = np.full((32,32,3),120,np.uint8)
+    poly = [[0,0],[31,0],[31,31],[0,31]]
+    assert pixel_support(image,poly) == 1
+    image[:16] = 0
+    assert pixel_support(image,poly) == .5
+
+
+def test_invalid_surface_excluded_from_p0_and_p1():
+    from graphnav.semantic_geometry import valid_surface_polygon
+    from graphnav.bidirectional import source_landmark
+    contour=[[0,0],[40,20],[0,20],[40,0],[50,50]]
+    assert not valid_surface_polygon(contour)
+    bad={"id":"bad","name":"bad","object_type":"Building","contour":contour}
+    assert project_landmark(bad,footprint(),(384,384,3)) is None
+    assert source_landmark('bad',bad,np.asarray([0,0,400,400])) is None
+
+
+def test_p2_identical_pose_with_different_paths_is_not_cross_view(tmp_path):
+    row = dict(map_name="map",object_id="1",object_type="Building",roi_path="roi.png",
+               visible_fraction=1,footprint_world=footprint(),
+               annotation_kind="geometry_projected_roi_not_verified_segmentation")
+    path=tmp_path/"rows.jsonl"
+    path.write_text("".join(json.dumps({**row,"observed_frame":f"episode{i}.png"})+"\n"
+                            for i in range(2)))
+    with pytest.raises(ValueError,match="DIFFERENT"):
+        PairedROIs(path)
+
+
+def test_patch_disk_cache_and_small_lru_keep_all_requested_inputs(tmp_path):
+    from collections import OrderedDict
+    from types import SimpleNamespace
+    from graphnav.landmark_visual_pretrain import FrozenSigLIP2Patches
+    class Vision:
+        def forward(self,pixel_values):
+            return SimpleNamespace(last_hidden_state=torch.ones(len(pixel_values),9,4))
+        __call__=forward
+    def fake():
+        obj=FrozenSigLIP2Patches.__new__(FrozenSigLIP2Patches)
+        obj.model=SimpleNamespace(vision_model=Vision())
+        obj.processor=lambda images,return_tensors: {'pixel_values':torch.ones(len(images),3,32,32)}
+        obj.device=torch.device('cpu')
+        obj.cache=OrderedDict();obj.cache_limit=1;obj.microbatch=2;obj.hidden_size=4
+        obj.cache_directory=tmp_path;obj.protocol=('test','revision','fp32')
+        obj.encoded_images=0;obj.disk_hits=0
+        return obj
+    paths=[]
+    for i in range(2):
+        path=tmp_path/f'image{i}.png';cv2.imwrite(str(path),np.full((32,32,3),127,np.uint8))
+        paths.append(str(path))
+    first=fake();tokens,valid=first.encode(paths)
+    assert tokens.shape==(2,9,4) and valid.all() and len(first.cache)==1
+    second=fake();again,_=second.encode(paths)
+    assert torch.equal(tokens,again) and second.disk_hits==2 and second.encoded_images==0
+
+
+def test_patch_validity_excludes_letterbox_without_polygon_mask():
+    from graphnav.landmark_visual_pretrain import observed_patch_mask
+    image=np.full((32,32,3),127,np.uint8)
+    image[:,16:] = 0
+    assert observed_patch_mask([image],(32,32),16).tolist()==[[True,False,True,False]]
+
+
+def test_retrieval_handles_pin_memory_list_ids_and_reports_categories():
+    from types import SimpleNamespace
+    from graphnav.landmark_visual_pretrain import retrieval_metrics
+    class Model(torch.nn.Module):
+        def forward(self,patches,valid):return patches[:,0]
+    class Encoder:
+        def encode(self,paths):return torch.eye(2)[:,None],torch.ones(2,1,dtype=torch.bool)
+    class Loader(list):pass
+    loader=Loader([{'first':['a','b'],'second':['aa','bb'],
+                    'source_ids':[['city_block_0','1'],['city_block_1','2']]}])
+    loader.dataset=SimpleNamespace(groups=[(('city_block_0','1'),[{'object_type':'Building'}]),
+                                          (('city_block_1','2'),[{'object_type':'Building'}])])
+    result=retrieval_metrics(Model(),loader,Encoder(),torch.device('cpu'))
+    assert result['R@1']==1 and result['by_type']['Building']['queries']==2
+    assert result['same_city_type_hard']['queries']==2
 
 
 def bounds():

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from collections import OrderedDict, defaultdict
 import inspect
+import hashlib
 import json
 import random
 from pathlib import Path
@@ -24,11 +25,19 @@ from torch.nn import functional as F
 from torch.utils.data import Dataset
 
 
+def observed_patch_mask(images, image_shape, patch_size):
+    """Mask wholly black source holes/letterboxing, never polygon segmentation."""
+    height,width = image_shape
+    values = np.stack([cv2.resize((x.max(-1)>0).astype(np.float32),(width,height),
+                                  interpolation=cv2.INTER_NEAREST) for x in images])
+    return F.avg_pool2d(torch.from_numpy(values)[:,None],patch_size,patch_size).flatten(1) > 0
+
+
 class FrozenSigLIP2Patches:
     """Frozen SigLIP2 vision tower patch tokens, NOT pooled get_image_features."""
 
     def __init__(self, name="google/siglip2-large-patch16-384",
-                 device="cuda", cache_limit=2048, microbatch=8):
+                 device="cuda", cache_limit=2048, microbatch=8, cache_directory=None):
         from transformers import AutoModel, AutoProcessor
         self.device=torch.device(device)
         self.processor=AutoProcessor.from_pretrained(name,use_fast=False)
@@ -42,10 +51,30 @@ class FrozenSigLIP2Patches:
         if self.microbatch<1:
             raise ValueError("invalid vision encoder microbatch")
         self.hidden_size=int(self.model.config.vision_config.hidden_size)
+        self.cache_directory = Path(cache_directory) if cache_directory else None
+        if self.cache_directory:
+            self.cache_directory.mkdir(parents=True, exist_ok=True)
+        self.protocol = (name, getattr(self.model.config, "_commit_hash", None),
+                         "bf16" if self.device.type == "cuda" else "fp32",
+                         "observed-nonblack-patches-v1")
+        self.encoded_images = 0
+        self.disk_hits = 0
+
+    def disk_path(self, path):
+        source = Path(path)
+        key = repr((self.protocol, str(source.resolve()), source.stat().st_size,
+                    source.stat().st_mtime_ns)).encode()
+        return self.cache_directory / (hashlib.sha256(key).hexdigest() + ".pt")
 
     @torch.inference_mode()
     def encode(self,paths):
         missing=list(dict.fromkeys(p for p in paths if p not in self.cache))
+        for path in list(missing):
+            if self.cache_directory and self.disk_path(path).exists():
+                state = torch.load(self.disk_path(path), map_location="cpu", weights_only=True)
+                self.cache[path] = (state["tokens"], state["mask"])
+                self.disk_hits += 1
+                missing.remove(path)
         allowed=inspect.signature(self.model.vision_model.forward).parameters
         for start in range(0,len(missing),self.microbatch):
             chunk=missing[start:start+self.microbatch]
@@ -68,6 +97,11 @@ class FrozenSigLIP2Patches:
             if tokens.ndim!=3:
                 raise RuntimeError("vision_model did not return [B,P,D] patch tokens")
             mask=batch.get("pixel_attention_mask")
+            if mask is None:
+                patch_size = getattr(getattr(getattr(self.model,"config",None),"vision_config",None),"patch_size",16)
+                support = observed_patch_mask(rgb,kwargs["pixel_values"].shape[-2:],patch_size)
+                if support.shape[1] == tokens.shape[1]:
+                    mask = support
             for i,path in enumerate(chunk):
                 item=(
                     tokens[i].detach().to("cpu",dtype=torch.float16).clone(),
@@ -76,9 +110,10 @@ class FrozenSigLIP2Patches:
                      else torch.ones(tokens.shape[1],dtype=torch.bool))
                 )
                 self.cache[path]=item
+                self.encoded_images += 1
+                if self.cache_directory:
+                    torch.save({"tokens": item[0], "mask": item[1]}, self.disk_path(path))
                 self.cache.move_to_end(path)
-            while len(self.cache)>self.cache_limit:
-                self.cache.popitem(last=False)
         output=[self.cache[p] for p in paths]
         length=max(x.shape[0] for x,_ in output)
         patches=torch.zeros(len(output),length,self.hidden_size,dtype=torch.float32)
@@ -87,6 +122,10 @@ class FrozenSigLIP2Patches:
             patches[i,:len(tensor)]=tensor.float()
             valid[i,:len(mask)]=mask
             self.cache.move_to_end(paths[i])
+        # Evict only AFTER assembling outputs: a microbatch can exceed the LRU
+        # size, and evicting during extraction would remove requested inputs.
+        while len(self.cache)>self.cache_limit:
+            self.cache.popitem(last=False)
         return patches.to(self.device),valid.to(self.device)
 
 
@@ -99,13 +138,21 @@ class PairedROIs(Dataset):
             if not line.strip():
                 continue
             row=json.loads(line)
+            if ("observation_cutoff_step" in row and
+                    row["observed_step"] > row["observation_cutoff_step"]):
+                raise ValueError("future ROI observation rejected")
             if (row.get("roi_path")
                 and row.get("visible_fraction",0)>=min_visible
                 and row.get("annotation_kind")=="geometry_projected_roi_not_verified_segmentation"):
                 groups[(row["map_name"],str(row["object_id"]))].append(row)
         self.groups=[]
         for key,rows in sorted(groups.items()):
-            unique={r["observed_frame"]:r for r in rows}
+            # Two episode paths can replay the identical camera footprint.
+            # They are not distinct visual views, even if filenames differ.
+            unique={
+                tuple(np.round(np.asarray(r["footprint_world"]).reshape(-1), 3))
+                if "footprint_world" in r else r["observed_frame"]: r for r in rows
+            }
             if len(unique)>=2:
                 self.groups.append((key,list(unique.values())))
         if not self.groups:
@@ -156,7 +203,8 @@ class SameMapTypeBatchSampler:
         buckets = defaultdict(list)
         for position, original_id in enumerate(self.indices):
             key, rows = self.dataset.groups[original_id]
-            buckets[(key[0], rows[0]["object_type"])].append(position)
+            # Hard negatives from the same CITY and category, different IDs.
+            buckets[(key[0].split("_block_")[0], rows[0]["object_type"])].append(position)
         batches = []
         covered = set()
         for entries in buckets.values():
@@ -166,12 +214,8 @@ class SameMapTypeBatchSampler:
                 if len(group) >= 2:
                     batches.append(group)
                     covered.update(group)
-        leftovers = [pos for pos in range(len(self.indices)) if pos not in covered]
-        rng.shuffle(leftovers)
-        for start in range(0, len(leftovers), self.batch_size):
-            group = leftovers[start:start+self.batch_size]
-            if len(group) >= 2:
-                batches.append(group)
+        # A singleton city/type bucket has no valid hard negative. Drop it and
+        # report coverage; do not silently mix categories/cities as negatives.
         rng.shuffle(batches)
         yield from batches
 
@@ -233,7 +277,7 @@ def match_loss(model,first,second,types,all_type_features,*,type_weight=.25):
 
 
 @torch.no_grad()
-def retrieval_metrics(model,loader,encoder,device,max_groups=1500):
+def retrieval_metrics(model,loader,encoder,device,max_groups=1500, prediction_path=None):
     """One view/gallery pair per instance; gallery across ALL chosen unseen IDs."""
     model.eval()
     queries,gallery,keys=[],[],[]
@@ -253,7 +297,41 @@ def retrieval_metrics(model,loader,encoder,device,max_groups=1500):
     n=len(x)
     ranks=(x@y.T).argsort(dim=-1,descending=True)
     true=torch.arange(n)
+    # DataLoader pin_memory recursively converts tuple metadata into lists.
+    keys = [tuple(key) for key in keys[:n]]
+    dataset = loader.dataset.dataset if hasattr(loader.dataset, "dataset") else loader.dataset
+    key_types = {key: rows[0]["object_type"] for key, rows in dataset.groups}
+    categories = [key_types[key] for key in keys]
+    hits1 = ranks[:,0] == true
+    hits5 = (ranks[:,:min(5,n)] == true[:,None]).any(-1)
+    by_type = {}
+    for typ in sorted(set(categories)):
+        indices = torch.tensor([i for i, t in enumerate(categories) if t == typ])
+        by_type[typ] = {"queries": len(indices), "R@1": float(hits1[indices].float().mean()),
+                        "R@5": float(hits5[indices].float().mean())}
+    hard_hits1, hard_hits5, hard_rows = [], [], []
+    for i, key in enumerate(keys):
+        indices = torch.tensor([j for j, other in enumerate(keys)
+            if other[0].split("_block_")[0] == key[0].split("_block_")[0]
+            and categories[j] == categories[i]])
+        if len(indices) < 2:
+            continue
+        order = indices[(x[i] @ y[indices].T).argsort(descending=True)]
+        hard_hits1.append(int(order[0]) == i)
+        hard_hits5.append(bool((order[:5] == i).any()))
+        hard_rows.append(len(indices))
+    if prediction_path:
+        Path(prediction_path).write_text("".join(json.dumps({
+            "map_name": key[0], "object_id": key[1], "object_type": categories[i],
+            "R1_hit": bool(hits1[i]), "R5_hit": bool(hits5[i]),
+            "top5_ids": [keys[j] for j in ranks[i,:5].tolist()]
+        }) + "\n" for i, key in enumerate(keys)))
     return {"gallery_objects":n,
             "R@1":float((ranks[:,0]==true).float().mean()),
             "R@5":float((ranks[:,:min(5,n)]==true[:,None]).any(-1).float().mean()),
+            "by_type": by_type,
+            "same_city_type_hard": {"queries": len(hard_rows),
+                "R@1": float(np.mean(hard_hits1)) if hard_rows else None,
+                "R@5": float(np.mean(hard_hits5)) if hard_rows else None,
+                "mean_gallery": float(np.mean(hard_rows)) if hard_rows else 0},
             "protocol":"different-frame instance-ID retrieval, no GT target images"}

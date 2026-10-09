@@ -1,0 +1,134 @@
+{
+  "train_pairs": 9076,
+  "dev_pairs": 908,
+  "unseen_pairs": 306,
+  "checkpoint_epoch": 5,
+  "train_maps": [
+    "birmingham_block_1",
+    "birmingham_block_10",
+    "birmingham_block_11",
+    "birmingham_block_12",
+    "birmingham_block_3",
+    "birmingham_block_4",
+    "birmingham_block_7",
+    "birmingham_block_9",
+    "cambridge_block_12",
+    "cambridge_block_13",
+    "cambridge_block_17",
+    "cambridge_block_18",
+    "cambridge_block_19",
+    "cambridge_block_20",
+    "cambridge_block_21",
+    "cambridge_block_23",
+    "cambridge_block_25",
+    "cambridge_block_28",
+    "cambridge_block_33",
+    "cambridge_block_4",
+    "cambridge_block_6",
+    "cambridge_block_7",
+    "cambridge_block_9"
+  ],
+  "unseen_maps": [
+    "birmingham_block_5",
+    "cambridge_block_10",
+    "cambridge_block_2",
+    "cambridge_block_3"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 3.9571657949049723,
+      "train_seconds": 20.424970380030572,
+      "dev": {
+        "samples": 1816,
+        "NE_m": 14.575671863976028,
+        "inverse_error": 0.001019463264222803,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.7852422907488987,
+        "R@4/20m": 0.9653083700440529,
+        "R@8/20m": 0.9774229074889867
+      },
+      "train_samples": 16336,
+      "samples_per_second": 799.8053214300695,
+      "gpu_gib": 3.304147720336914
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.1427006023287425,
+      "train_seconds": 15.941177374916151,
+      "dev": {
+        "samples": 1816,
+        "NE_m": 12.016939121195923,
+        "inverse_error": 0.0009227670179198271,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.8694933920704846,
+        "R@4/20m": 0.9801762114537445,
+        "R@8/20m": 0.9889867841409692
+      },
+      "train_samples": 16336,
+      "samples_per_second": 1024.767469541184,
+      "gpu_gib": 3.304147720336914
+    },
+    {
+      "epoch": 3,
+      "train_loss": 3.0787662679838506,
+      "train_seconds": 11.996299281017855,
+      "dev": {
+        "samples": 1816,
+        "NE_m": 12.14902408952755,
+        "inverse_error": 0.0009682630038226087,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.8667400881057269,
+        "R@4/20m": 0.9779735682819384,
+        "R@8/20m": 0.9900881057268722
+      },
+      "train_samples": 16336,
+      "samples_per_second": 1361.753288853755,
+      "gpu_gib": 3.304147720336914
+    },
+    {
+      "epoch": 4,
+      "train_loss": 3.0304921142735046,
+      "train_seconds": 10.9690798278898,
+      "dev": {
+        "samples": 1816,
+        "NE_m": 11.90875012233919,
+        "inverse_error": 0.0008874695330601314,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.8772026431718062,
+        "R@4/20m": 0.9933920704845814,
+        "R@8/20m": 0.9966960352422908
+      },
+      "train_samples": 16336,
+      "samples_per_second": 1489.277155086825,
+      "gpu_gib": 3.304636001586914
+    },
+    {
+      "epoch": 5,
+      "train_loss": 3.0045551541503097,
+      "train_seconds": 10.693424857920036,
+      "dev": {
+        "samples": 1816,
+        "NE_m": 11.439654883834233,
+        "inverse_error": 0.0006984944128158406,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.8915198237885462,
+        "R@4/20m": 0.9955947136563876,
+        "R@8/20m": 0.998898678414097
+      },
+      "train_samples": 16336,
+      "samples_per_second": 1527.667722647419,
+      "gpu_gib": 3.304636001586914
+    }
+  ],
+  "unseen": {
+    "samples": 612,
+    "NE_m": 12.147042068780637,
+    "inverse_error": 0.002251202551997267,
+    "direction_sign_accuracy": 1.0,
+    "R@1/20m": 0.8937908496732027,
+    "R@4/20m": 0.9950980392156863,
+    "R@8/20m": 1.0
+  },
+  "claim": "synthetic reversible geometry localization only; not CityNav SR/SPL"
+}

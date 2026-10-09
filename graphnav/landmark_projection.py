@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import cv2
 import numpy as np
+from .semantic_geometry import valid_surface_polygon
 
 
 @dataclass(frozen=True)
@@ -63,7 +64,7 @@ def project_landmark(
     projected polygon area, not visual agreement with a semantic mask.
     """
     xy = np.asarray(landmark["contour"], np.float32)
-    if xy.ndim != 2 or xy.shape[0] < 3 or xy.shape[1] != 2:
+    if not valid_surface_polygon(xy):
         return None
     try:
         px = world_to_frame(xy, footprint_world, image_shape)

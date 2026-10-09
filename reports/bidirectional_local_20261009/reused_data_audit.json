@@ -1,0 +1,680 @@
+{
+  "splits": {
+    "train_seen": {
+      "queries": 21166,
+      "split_text_matches_sbf": true,
+      "static_signature": "1c0d224f6094b270ebbc56a67d9a2d7253db39ce9b83a7283132174cbedc034e",
+      "provenance": {
+        "dataset_version_declared": "revised",
+        "match_mode": "fuzzy",
+        "static_only": true,
+        "rgb_observation_step": 0,
+        "source_sha256": {
+          "objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+          "processed": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b",
+          "trajectories": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+          "bounds": "aac705fab87678791baa8a3ebcbe83b9cc346e0a646ae3a06594bf28281b0885"
+        },
+        "ground_levels_sha256": "ad39fbb91cc9426ff0ca9310c5eedaa5fb661342a9451f7e8adb6e3c7dbda064",
+        "rgb_generated_from_observed_prefix_only": true,
+        "note": "The version is declared, not inferred from file contents. Compare these checksums to the same Revised CityNav files used by SBF.",
+        "records_generated": 21878,
+        "episodes_skipped": 0,
+        "output_sha256": "6959b04f449aca53a889de29292e5087ea4059e99d08bc1b227bc22922203022",
+        "query_deduplication_policy": "Exact map+instruction; first source record retained, never target-based. Validation preserved; train overlaps removed by text only.",
+        "final_records": 21166
+      },
+      "targets_outside_bounds": 0,
+      "queries_without_valid_initial_camera": 1,
+      "invalid_rgb_footprints": 0
+    },
+    "val_seen": {
+      "queries": 2426,
+      "split_text_matches_sbf": true,
+      "static_signature": "2ce7a5bfcd31a333c3a702e5a6123356b7206fb04f5dfbfc026497f7c6216f01",
+      "provenance": {
+        "dataset_version_declared": "revised",
+        "match_mode": "fuzzy",
+        "static_only": true,
+        "rgb_observation_step": 0,
+        "source_sha256": {
+          "objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+          "processed": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b",
+          "trajectories": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+          "bounds": "aac705fab87678791baa8a3ebcbe83b9cc346e0a646ae3a06594bf28281b0885"
+        },
+        "ground_levels_sha256": "ad39fbb91cc9426ff0ca9310c5eedaa5fb661342a9451f7e8adb6e3c7dbda064",
+        "rgb_generated_from_observed_prefix_only": true,
+        "note": "The version is declared, not inferred from file contents. Compare these checksums to the same Revised CityNav files used by SBF.",
+        "records_generated": 2470,
+        "episodes_skipped": 0,
+        "output_sha256": "55c47a56b935d1b03a61967bad557717f7531286f1b34ce22afb3f56f3b223c9",
+        "query_deduplication_policy": "Exact map+instruction; first source record retained, never target-based. Validation preserved; train overlaps removed by text only.",
+        "final_records": 2426
+      },
+      "targets_outside_bounds": 0,
+      "queries_without_valid_initial_camera": 0,
+      "invalid_rgb_footprints": 0
+    },
+    "val_unseen": {
+      "queries": 2679,
+      "split_text_matches_sbf": true,
+      "static_signature": "fc85ef81b2651d2273856513462d61ee6dbd16157f64d79c04b0a0d6d7da39bf",
+      "provenance": {
+        "dataset_version_declared": "revised",
+        "match_mode": "fuzzy",
+        "static_only": true,
+        "rgb_observation_step": 0,
+        "source_sha256": {
+          "objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+          "processed": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b",
+          "trajectories": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "bounds": "aac705fab87678791baa8a3ebcbe83b9cc346e0a646ae3a06594bf28281b0885"
+        },
+        "ground_levels_sha256": "ad39fbb91cc9426ff0ca9310c5eedaa5fb661342a9451f7e8adb6e3c7dbda064",
+        "rgb_generated_from_observed_prefix_only": true,
+        "note": "The version is declared, not inferred from file contents. Compare these checksums to the same Revised CityNav files used by SBF.",
+        "records_generated": 2697,
+        "episodes_skipped": 0,
+        "output_sha256": "87c03fdfaafa6e5aa08b29bcdc21ec82d9e7fecb8f7b3a9174e2d4c27925dd7e",
+        "query_deduplication_policy": "Exact map+instruction; first source record retained, never target-based. Validation preserved; train overlaps removed by text only.",
+        "final_records": 2679
+      },
+      "targets_outside_bounds": 0,
+      "queries_without_valid_initial_camera": 0,
+      "invalid_rgb_footprints": 0
+    }
+  },
+  "maps": {
+    "birmingham_block_1": {
+      "public_bounds": [
+        15.2,
+        399.91874999999993,
+        400.0,
+        800.01875
+      ],
+      "tif_bounds": [
+        15.25,
+        400.0,
+        400.05,
+        800.0
+      ],
+      "max_bound_difference_m": 0.08125000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        384.8,
+        400.1
+      ]
+    },
+    "birmingham_block_3": {
+      "public_bounds": [
+        399.95,
+        -0.08125000000001137,
+        800.05,
+        400.01875
+      ],
+      "tif_bounds": [
+        400.0,
+        0.0,
+        800.0,
+        400.0
+      ],
+      "max_bound_difference_m": 0.08125000000001137,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        400.1
+      ]
+    },
+    "birmingham_block_4": {
+      "public_bounds": [
+        399.95,
+        399.91874999999993,
+        800.05,
+        800.01875
+      ],
+      "tif_bounds": [
+        400.0,
+        400.0,
+        800.0,
+        800.0
+      ],
+      "max_bound_difference_m": 0.08125000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        400.1
+      ]
+    },
+    "birmingham_block_7": {
+      "public_bounds": [
+        799.95,
+        226.61875,
+        1119.65,
+        400.01875
+      ],
+      "tif_bounds": [
+        800.0,
+        226.62499999999997,
+        1119.6,
+        400.025
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        319.70000000000005,
+        173.4
+      ]
+    },
+    "birmingham_block_9": {
+      "public_bounds": [
+        799.95,
+        799.9187499999999,
+        1200.0500000000002,
+        1200.01875
+      ],
+      "tif_bounds": [
+        800.0,
+        800.0,
+        1200.0,
+        1200.0
+      ],
+      "max_bound_difference_m": 0.08125000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        400.1
+      ]
+    },
+    "birmingham_block_10": {
+      "public_bounds": [
+        799.95,
+        1199.9125,
+        1200.0500000000002,
+        1285.1125
+      ],
+      "tif_bounds": [
+        800.0,
+        1200.0,
+        1200.0,
+        1285.1
+      ],
+      "max_bound_difference_m": 0.08750000000009095,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        85.20000000000005
+      ]
+    },
+    "birmingham_block_11": {
+      "public_bounds": [
+        1199.95,
+        620.4187499999999,
+        1265.55,
+        800.01875
+      ],
+      "tif_bounds": [
+        1200.0,
+        620.4375,
+        1265.5,
+        800.0375
+      ],
+      "max_bound_difference_m": 0.049999999999954525,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        65.59999999999991,
+        179.60000000000002
+      ]
+    },
+    "birmingham_block_12": {
+      "public_bounds": [
+        1199.95,
+        799.9187499999999,
+        1273.25,
+        1200.01875
+      ],
+      "tif_bounds": [
+        1200.0,
+        800.0,
+        1273.2,
+        1200.0
+      ],
+      "max_bound_difference_m": 0.08125000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        73.29999999999995,
+        400.1
+      ]
+    },
+    "birmingham_block_13": {
+      "public_bounds": [
+        1199.95,
+        1199.90625,
+        1273.75,
+        1261.70625
+      ],
+      "tif_bounds": [
+        1200.0,
+        1200.0,
+        1273.7,
+        1261.7
+      ],
+      "max_bound_difference_m": 0.09375,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        73.79999999999995,
+        61.799999999999955
+      ]
+    },
+    "cambridge_block_4": {
+      "public_bounds": [
+        113.3875,
+        1599.96875,
+        400.0875,
+        1802.26875
+      ],
+      "tif_bounds": [
+        113.4375,
+        1600.0,
+        400.0375,
+        1802.3
+      ],
+      "max_bound_difference_m": 0.04999999999999716,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        286.7,
+        202.29999999999995
+      ]
+    },
+    "cambridge_block_6": {
+      "public_bounds": [
+        399.95,
+        -0.05000000000001137,
+        800.05,
+        400.05
+      ],
+      "tif_bounds": [
+        400.0,
+        0.0,
+        800.1,
+        400.1
+      ],
+      "max_bound_difference_m": 0.05000000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        400.1
+      ]
+    },
+    "cambridge_block_7": {
+      "public_bounds": [
+        399.95,
+        399.94999999999993,
+        800.05,
+        800.05
+      ],
+      "tif_bounds": [
+        400.0,
+        400.0,
+        800.1,
+        800.1
+      ],
+      "max_bound_difference_m": 0.05000000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        400.1
+      ]
+    },
+    "cambridge_block_9": {
+      "public_bounds": [
+        399.95,
+        1199.9499999999998,
+        800.05,
+        1600.05
+      ],
+      "tif_bounds": [
+        400.0,
+        1200.0,
+        800.1,
+        1600.1
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        400.10000000000014
+      ]
+    },
+    "cambridge_block_12": {
+      "public_bounds": [
+        799.95,
+        22.349999999999966,
+        1200.0500000000002,
+        400.05
+      ],
+      "tif_bounds": [
+        800.0,
+        22.40625,
+        1200.1,
+        400.00625
+      ],
+      "max_bound_difference_m": 0.056250000000034106,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        377.70000000000005
+      ]
+    },
+    "cambridge_block_13": {
+      "public_bounds": [
+        799.95,
+        399.94999999999993,
+        1200.0500000000002,
+        800.05
+      ],
+      "tif_bounds": [
+        800.0,
+        400.0,
+        1200.1,
+        800.1
+      ],
+      "max_bound_difference_m": 0.05000000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        400.1
+      ]
+    },
+    "cambridge_block_17": {
+      "public_bounds": [
+        799.95,
+        1999.9562500000002,
+        1200.0500000000002,
+        2136.95625
+      ],
+      "tif_bounds": [
+        800.0,
+        2000.0,
+        1200.1,
+        2137.0
+      ],
+      "max_bound_difference_m": 0.049999999999954525,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        137.0
+      ]
+    },
+    "cambridge_block_18": {
+      "public_bounds": [
+        1199.95,
+        146.35,
+        1490.0500000000002,
+        400.05
+      ],
+      "tif_bounds": [
+        1200.0,
+        146.4375,
+        1490.1,
+        400.0375
+      ],
+      "max_bound_difference_m": 0.08750000000000568,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        290.10000000000014,
+        253.70000000000002
+      ]
+    },
+    "cambridge_block_19": {
+      "public_bounds": [
+        1199.95,
+        399.94999999999993,
+        1600.0500000000002,
+        800.05
+      ],
+      "tif_bounds": [
+        1200.0,
+        400.0,
+        1600.1,
+        800.1
+      ],
+      "max_bound_difference_m": 0.05000000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        400.1
+      ]
+    },
+    "cambridge_block_20": {
+      "public_bounds": [
+        1199.95,
+        799.9499999999999,
+        1600.0500000000002,
+        1200.05
+      ],
+      "tif_bounds": [
+        1200.0,
+        799.9999999999999,
+        1600.1,
+        1200.1
+      ],
+      "max_bound_difference_m": 0.049999999999954525,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        400.1
+      ]
+    },
+    "cambridge_block_21": {
+      "public_bounds": [
+        1199.95,
+        1199.9499999999998,
+        1600.0500000000002,
+        1600.05
+      ],
+      "tif_bounds": [
+        1200.0,
+        1200.0,
+        1600.1,
+        1600.1
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        400.10000000000014
+      ]
+    },
+    "cambridge_block_23": {
+      "public_bounds": [
+        1199.95,
+        1999.9906250000001,
+        1456.3500000000001,
+        2107.690625
+      ],
+      "tif_bounds": [
+        1200.0,
+        1999.9999999999998,
+        1456.4,
+        2107.7
+      ],
+      "max_bound_difference_m": 0.049999999999954525,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        256.4000000000001,
+        107.70000000000005
+      ]
+    },
+    "cambridge_block_25": {
+      "public_bounds": [
+        1599.95,
+        512.4499999999999,
+        1817.3500000000001,
+        800.05
+      ],
+      "tif_bounds": [
+        1600.0,
+        512.453125,
+        1817.3,
+        800.053125
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        217.4000000000001,
+        287.6
+      ]
+    },
+    "cambridge_block_28": {
+      "public_bounds": [
+        1599.95,
+        1599.9499999999998,
+        2000.0500000000002,
+        1918.05
+      ],
+      "tif_bounds": [
+        1600.0,
+        1600.0,
+        2000.1,
+        1918.1
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.10000000000014,
+        318.10000000000014
+      ]
+    },
+    "cambridge_block_33": {
+      "public_bounds": [
+        1999.95,
+        1199.9499999999998,
+        2152.95,
+        1600.05
+      ],
+      "tif_bounds": [
+        2000.0,
+        1200.0,
+        2153.0,
+        1600.1
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        152.99999999999977,
+        400.10000000000014
+      ]
+    },
+    "birmingham_block_5": {
+      "public_bounds": [
+        399.95,
+        799.9187499999999,
+        800.05,
+        1200.01875
+      ],
+      "tif_bounds": [
+        400.0,
+        800.0,
+        800.0,
+        1200.0
+      ],
+      "max_bound_difference_m": 0.08125000000006821,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        400.1
+      ]
+    },
+    "cambridge_block_10": {
+      "public_bounds": [
+        399.95,
+        1599.9499999999998,
+        800.05,
+        2013.55
+      ],
+      "tif_bounds": [
+        400.0,
+        1600.0,
+        800.1,
+        2013.6
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.09999999999997,
+        413.60000000000014
+      ]
+    },
+    "cambridge_block_2": {
+      "public_bounds": [
+        -0.05,
+        799.9499999999999,
+        400.05,
+        1200.05
+      ],
+      "tif_bounds": [
+        0.0,
+        799.9999999999999,
+        400.1,
+        1200.1
+      ],
+      "max_bound_difference_m": 0.05000000000001137,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        400.1,
+        400.1
+      ]
+    },
+    "cambridge_block_3": {
+      "public_bounds": [
+        10.95,
+        1199.9499999999998,
+        400.05,
+        1600.05
+      ],
+      "tif_bounds": [
+        11.0,
+        1200.0,
+        400.1,
+        1600.1
+      ],
+      "max_bound_difference_m": 0.0500000000001819,
+      "rgb_tif_same_dimensions": true,
+      "crs": "None",
+      "span_m": [
+        389.1,
+        400.10000000000014
+      ]
+    }
+  },
+  "train_validation_query_overlap": 0,
+  "seen_unseen_query_overlap": 0
+}

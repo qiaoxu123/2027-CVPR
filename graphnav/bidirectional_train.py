@@ -74,6 +74,21 @@ def paired_collate(items):
     return collate_full([x for pair in items for x in pair])
 
 
+def family_split(dataset, seed=0):
+    """Keep a source pair and ALL its translations in the same train/dev split."""
+    families = {}
+    for i, (forward, _) in enumerate(dataset.pairs):
+        key = dataset.samples.records[forward]["pair_id"].split(":aug")[0]
+        families.setdefault(key, []).append(i)
+    keys = sorted(families)
+    random.Random(seed).shuffle(keys)
+    pivot = max(1, int(len(keys) * .9))
+    if pivot == len(keys):
+        raise ValueError("too few source pair families for dev split")
+    return ([i for key in keys[:pivot] for i in families[key]],
+            [i for key in keys[pivot:] for i in families[key]])
+
+
 def _inputs(batch, encoder, device):
     fields=("nodes","node_types","node_valid","entity_valid","adjacency",
             "edges","prior","prior_buildings","rules","relation_fields",
@@ -108,7 +123,7 @@ def batch_loss(model,batch,encoder,device,*,inverse_weight=.1):
 def evaluate(model,loader,encoder,device):
     model.eval()
     totals=dict(count=0,NE_sum_m=0.,**{f"R@{k}/20m_count":0 for k in (1,4,8)})
-    inverse_sum, steps=0.,0
+    inverse_sum, steps, inverse_m_sum=0.,0,0.
     correct_side, directional_samples=0,0
     for batch in loader:
         _,values,field=batch_loss(model,batch,encoder,device)
@@ -118,21 +133,25 @@ def evaluate(model,loader,encoder,device):
                             batch["grid_xy"].to(device))
         for key in totals:
             totals[key]+=stats[key]
-        inverse_sum+=values["inverse"]
+        pairs = len(batch["text"]) // 2
+        inverse_sum+=values["inverse"] * pairs
         scores=field.belief_logits.float()
         expected=(scores.softmax(-1).unsqueeze(-1)
                   *batch["grid_xy"].to(device)).sum(1)
         delta=(expected-batch["nodes"][:,0,:2].to(device))
+        delta_m = delta * batch["map_sizes"].to(device)
+        inverse_m_sum += float((delta_m[0::2]+delta_m[1::2]).norm(dim=-1).sum())
         direction=batch["direction_label"].to(device)
         wanted=torch.stack((delta[:,0],-delta[:,0],delta[:,1],-delta[:,1]),-1)
         selected=wanted.gather(1,direction[:,None]).squeeze(1)
         correct_side+=int((selected>0).sum())
         directional_samples+=len(selected)
-        steps+=1
+        steps+=pairs
     n=max(1,totals["count"])
     return dict(
         samples=totals["count"], NE_m=totals["NE_sum_m"]/n,
         inverse_error= inverse_sum/max(1,steps),
+        inverse_displacement_error_m=inverse_m_sum/max(1,steps),
         direction_sign_accuracy=correct_side/max(1,directional_samples),
         **{f"R@{k}/20m":totals[f"R@{k}/20m_count"]/n for k in (1,4,8)},
     )
@@ -149,15 +168,12 @@ def run(args):
     unseen_maps={r["source_map_name"] for r in unseen.samples.records}
     if train_maps & unseen_maps:
         raise ValueError("Train and unseen synthetic examples share source maps")
-    order=list(range(len(train)))
-    random.Random(args.seed).shuffle(order)
-    pivot=max(1,int(len(order)*.9))
-    if pivot == len(order):
-        raise ValueError("too few training pairs to construct dev set")
+    train_ids, dev_ids = family_split(train, args.seed)
     kwargs=dict(batch_size=args.batch_size,num_workers=args.workers,
-                pin_memory=device.type=="cuda",collate_fn=paired_collate)
-    train_loader=DataLoader(Subset(train,order[:pivot]),shuffle=True,**kwargs)
-    dev_loader=DataLoader(Subset(train,order[pivot:]),**kwargs)
+                pin_memory=device.type=="cuda",collate_fn=paired_collate,
+                persistent_workers=args.workers > 0)
+    train_loader=DataLoader(Subset(train,train_ids),shuffle=True,**kwargs)
+    dev_loader=DataLoader(Subset(train,dev_ids),**kwargs)
     unseen_loader=DataLoader(unseen,**kwargs)
     model=FullTokenGeometryLocalizer(
         hidden=args.hidden,heads=args.heads,
@@ -175,7 +191,7 @@ def run(args):
     for epoch in range(args.epochs):
         model.train()
         t0=time.perf_counter()
-        losses=[]
+        losses, sample_count = [], 0
         if device.type=="cuda":
             torch.cuda.reset_peak_memory_stats(device)
         for batch in train_loader:
@@ -186,15 +202,18 @@ def run(args):
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(),1.)
             optimizer.step()
-            losses.append(float(loss.detach()))
+            n = len(batch["text"])
+            losses.append((float(loss.detach()), n))
+            sample_count += n
         if device.type=="cuda":
             torch.cuda.synchronize()
         elapsed=time.perf_counter()-t0
+        peak = torch.cuda.max_memory_allocated(device)/2**30 if device.type=="cuda" else None
         dev=evaluate(model,dev_loader,encoder,device)
-        record=dict(epoch=epoch+1,train_loss=float(np.mean(losses)),
+        record=dict(epoch=epoch+1,train_loss=sum(v*n for v,n in losses)/sample_count,
                     train_seconds=elapsed,dev=dev,
-                    gpu_gib=torch.cuda.max_memory_allocated(device)/2**30
-                    if device.type=="cuda" else None)
+                    train_samples=sample_count, samples_per_second=sample_count/elapsed,
+                    gpu_gib=peak)
         history.append(record)
         print(json.dumps(record),flush=True)
         if dev["R@8/20m"]>best:
@@ -204,7 +223,11 @@ def run(args):
                 hidden=args.hidden, heads=args.heads, grid_size=args.grid_size,
                 relative_position=True,training_stage="P1_bidirectional_geometry",
                 train_maps=sorted(train_maps),
+                args=vars(args),
             ),dest/"pretrain_best.pt")
+        torch.save(dict(model=model.state_dict(), optimizer=optimizer.state_dict(),
+                        epoch=epoch+1,args=vars(args)), dest/"pretrain_last.pt")
+        (dest/"history.json").write_text(json.dumps(history,indent=2))
     state=torch.load(dest/"pretrain_best.pt",map_location=device,weights_only=True)
     model.load_state_dict(state["model"])
     unseen_stats=evaluate(model,unseen_loader,encoder,device)

@@ -1,0 +1,462 @@
+{
+  "stage": "P2_patch_contrastive",
+  "trained_instances": 837,
+  "unseen_instances": 115,
+  "train_maps": [
+    "birmingham_block_1",
+    "birmingham_block_10",
+    "birmingham_block_11",
+    "birmingham_block_12",
+    "birmingham_block_13",
+    "birmingham_block_3",
+    "birmingham_block_4",
+    "birmingham_block_7",
+    "birmingham_block_9",
+    "cambridge_block_12",
+    "cambridge_block_13",
+    "cambridge_block_17",
+    "cambridge_block_18",
+    "cambridge_block_19",
+    "cambridge_block_20",
+    "cambridge_block_21",
+    "cambridge_block_23",
+    "cambridge_block_25",
+    "cambridge_block_28",
+    "cambridge_block_33",
+    "cambridge_block_4",
+    "cambridge_block_6",
+    "cambridge_block_7",
+    "cambridge_block_9"
+  ],
+  "unseen_maps": [
+    "birmingham_block_5",
+    "cambridge_block_10",
+    "cambridge_block_2",
+    "cambridge_block_3"
+  ],
+  "best_epoch": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 1.7443895277224089,
+      "seconds": 5.433019835036248,
+      "train_pairs": 836,
+      "pairs_per_second": 153.87390905677088,
+      "images_per_second": 307.74781811354177,
+      "train_instance_fraction": 0.998805256869773,
+      "newly_encoded_images": 0,
+      "dev": {
+        "gallery_objects": 94,
+        "R@1": 0.7234042286872864,
+        "R@5": 0.8936170339584351,
+        "by_type": {
+          "Building": {
+            "queries": 35,
+            "R@1": 0.7714285850524902,
+            "R@5": 0.9142857193946838
+          },
+          "Footpath": {
+            "queries": 21,
+            "R@1": 0.7142857313156128,
+            "R@5": 0.9047619104385376
+          },
+          "Ground": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "HighVegetation": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 0.0
+          },
+          "Rail": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "TrafficRoad": {
+            "queries": 35,
+            "R@1": 0.7428571581840515,
+            "R@5": 0.8857142925262451
+          }
+        },
+        "same_city_type_hard": {
+          "queries": 90,
+          "R@1": 0.8222222222222222,
+          "R@5": 0.9888888888888889,
+          "mean_gallery": 25.0
+        },
+        "protocol": "different-frame instance-ID retrieval, no GT target images"
+      },
+      "peak_gpu_gib": 4.054701328277588
+    },
+    {
+      "epoch": 2,
+      "loss": 1.0709078921513124,
+      "seconds": 17.343982707010582,
+      "train_pairs": 836,
+      "pairs_per_second": 48.201155070460366,
+      "images_per_second": 96.40231014092073,
+      "train_instance_fraction": 0.998805256869773,
+      "newly_encoded_images": 1323,
+      "dev": {
+        "gallery_objects": 94,
+        "R@1": 0.7978723645210266,
+        "R@5": 0.936170220375061,
+        "by_type": {
+          "Building": {
+            "queries": 35,
+            "R@1": 0.800000011920929,
+            "R@5": 0.9714285731315613
+          },
+          "Footpath": {
+            "queries": 21,
+            "R@1": 0.8571428656578064,
+            "R@5": 0.9047619104385376
+          },
+          "Ground": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "HighVegetation": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "Rail": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "TrafficRoad": {
+            "queries": 35,
+            "R@1": 0.8285714387893677,
+            "R@5": 0.9142857193946838
+          }
+        },
+        "same_city_type_hard": {
+          "queries": 90,
+          "R@1": 0.9,
+          "R@5": 0.9777777777777777,
+          "mean_gallery": 25.0
+        },
+        "protocol": "different-frame instance-ID retrieval, no GT target images"
+      },
+      "peak_gpu_gib": 4.096327781677246
+    },
+    {
+      "epoch": 3,
+      "loss": 0.9289805520521967,
+      "seconds": 15.78517460403964,
+      "train_pairs": 836,
+      "pairs_per_second": 52.9610866506384,
+      "images_per_second": 105.9221733012768,
+      "train_instance_fraction": 0.998805256869773,
+      "newly_encoded_images": 1108,
+      "dev": {
+        "gallery_objects": 94,
+        "R@1": 0.8191489577293396,
+        "R@5": 0.9468085169792175,
+        "by_type": {
+          "Building": {
+            "queries": 35,
+            "R@1": 0.8857142925262451,
+            "R@5": 0.9428571462631226
+          },
+          "Footpath": {
+            "queries": 21,
+            "R@1": 0.761904776096344,
+            "R@5": 0.9523809552192688
+          },
+          "Ground": {
+            "queries": 1,
+            "R@1": 1.0,
+            "R@5": 1.0
+          },
+          "HighVegetation": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "Rail": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "TrafficRoad": {
+            "queries": 35,
+            "R@1": 0.8285714387893677,
+            "R@5": 0.9428571462631226
+          }
+        },
+        "same_city_type_hard": {
+          "queries": 90,
+          "R@1": 0.9,
+          "R@5": 0.9777777777777777,
+          "mean_gallery": 25.0
+        },
+        "protocol": "different-frame instance-ID retrieval, no GT target images"
+      },
+      "peak_gpu_gib": 4.096327781677246
+    },
+    {
+      "epoch": 4,
+      "loss": 0.8313084237954833,
+      "seconds": 14.645172842079774,
+      "train_pairs": 836,
+      "pairs_per_second": 57.08365541429001,
+      "images_per_second": 114.16731082858001,
+      "train_instance_fraction": 0.998805256869773,
+      "newly_encoded_images": 984,
+      "dev": {
+        "gallery_objects": 94,
+        "R@1": 0.8404255509376526,
+        "R@5": 0.978723406791687,
+        "by_type": {
+          "Building": {
+            "queries": 35,
+            "R@1": 0.9142857193946838,
+            "R@5": 0.9714285731315613
+          },
+          "Footpath": {
+            "queries": 21,
+            "R@1": 0.8095238208770752,
+            "R@5": 0.9523809552192688
+          },
+          "Ground": {
+            "queries": 1,
+            "R@1": 1.0,
+            "R@5": 1.0
+          },
+          "HighVegetation": {
+            "queries": 1,
+            "R@1": 1.0,
+            "R@5": 1.0
+          },
+          "Rail": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "TrafficRoad": {
+            "queries": 35,
+            "R@1": 0.800000011920929,
+            "R@5": 1.0
+          }
+        },
+        "same_city_type_hard": {
+          "queries": 90,
+          "R@1": 0.9222222222222223,
+          "R@5": 0.9888888888888889,
+          "mean_gallery": 25.0
+        },
+        "protocol": "different-frame instance-ID retrieval, no GT target images"
+      },
+      "peak_gpu_gib": 4.096327781677246
+    },
+    {
+      "epoch": 5,
+      "loss": 0.7831991915925268,
+      "seconds": 12.40832076407969,
+      "train_pairs": 836,
+      "pairs_per_second": 67.37414480935246,
+      "images_per_second": 134.74828961870492,
+      "train_instance_fraction": 0.998805256869773,
+      "newly_encoded_images": 861,
+      "dev": {
+        "gallery_objects": 94,
+        "R@1": 0.8617021441459656,
+        "R@5": 0.9680851101875305,
+        "by_type": {
+          "Building": {
+            "queries": 35,
+            "R@1": 0.9142857193946838,
+            "R@5": 0.9714285731315613
+          },
+          "Footpath": {
+            "queries": 21,
+            "R@1": 0.8571428656578064,
+            "R@5": 0.9523809552192688
+          },
+          "Ground": {
+            "queries": 1,
+            "R@1": 1.0,
+            "R@5": 1.0
+          },
+          "HighVegetation": {
+            "queries": 1,
+            "R@1": 1.0,
+            "R@5": 1.0
+          },
+          "Rail": {
+            "queries": 1,
+            "R@1": 0.0,
+            "R@5": 1.0
+          },
+          "TrafficRoad": {
+            "queries": 35,
+            "R@1": 0.8285714387893677,
+            "R@5": 0.9714285731315613
+          }
+        },
+        "same_city_type_hard": {
+          "queries": 90,
+          "R@1": 0.9222222222222223,
+          "R@5": 0.9888888888888889,
+          "mean_gallery": 25.0
+        },
+        "protocol": "different-frame instance-ID retrieval, no GT target images"
+      },
+      "peak_gpu_gib": 4.096327781677246
+    }
+  ],
+  "unseen": {
+    "gallery_objects": 115,
+    "R@1": 0.695652186870575,
+    "R@5": 0.939130425453186,
+    "by_type": {
+      "Building": {
+        "queries": 39,
+        "R@1": 0.8461538553237915,
+        "R@5": 0.9743589758872986
+      },
+      "Footpath": {
+        "queries": 10,
+        "R@1": 0.4000000059604645,
+        "R@5": 0.800000011920929
+      },
+      "Ground": {
+        "queries": 7,
+        "R@1": 0.8571428656578064,
+        "R@5": 1.0
+      },
+      "TrafficRoad": {
+        "queries": 58,
+        "R@1": 0.6206896305084229,
+        "R@5": 0.931034505367279
+      },
+      "Water": {
+        "queries": 1,
+        "R@1": 1.0,
+        "R@5": 1.0
+      }
+    },
+    "same_city_type_hard": {
+      "queries": 114,
+      "R@1": 0.7368421052631579,
+      "R@5": 0.9736842105263158,
+      "mean_gallery": 25.473684210526315
+    },
+    "protocol": "different-frame instance-ID retrieval, no GT target images"
+  },
+  "unseen_initial_head": {
+    "gallery_objects": 115,
+    "R@1": 0.626086950302124,
+    "R@5": 0.8260869383811951,
+    "by_type": {
+      "Building": {
+        "queries": 39,
+        "R@1": 0.7948718070983887,
+        "R@5": 0.8717948794364929
+      },
+      "Footpath": {
+        "queries": 10,
+        "R@1": 0.5,
+        "R@5": 0.699999988079071
+      },
+      "Ground": {
+        "queries": 7,
+        "R@1": 0.8571428656578064,
+        "R@5": 0.8571428656578064
+      },
+      "TrafficRoad": {
+        "queries": 58,
+        "R@1": 0.5,
+        "R@5": 0.8103448152542114
+      },
+      "Water": {
+        "queries": 1,
+        "R@1": 1.0,
+        "R@5": 1.0
+      }
+    },
+    "same_city_type_hard": {
+      "queries": 114,
+      "R@1": 0.6491228070175439,
+      "R@5": 0.9035087719298246,
+      "mean_gallery": 25.473684210526315
+    },
+    "protocol": "different-frame instance-ID retrieval, no GT target images"
+  },
+  "unseen_frozen_mean_patch": {
+    "gallery_objects": 115,
+    "R@1": 0.6695652008056641,
+    "R@5": 0.8173912763595581,
+    "by_type": {
+      "Building": {
+        "queries": 39,
+        "R@1": 0.7692307829856873,
+        "R@5": 0.8717948794364929
+      },
+      "Footpath": {
+        "queries": 10,
+        "R@1": 0.6000000238418579,
+        "R@5": 0.800000011920929
+      },
+      "Ground": {
+        "queries": 7,
+        "R@1": 0.8571428656578064,
+        "R@5": 1.0
+      },
+      "TrafficRoad": {
+        "queries": 58,
+        "R@1": 0.5862069129943848,
+        "R@5": 0.7586206793785095
+      },
+      "Water": {
+        "queries": 1,
+        "R@1": 1.0,
+        "R@5": 1.0
+      }
+    },
+    "same_city_type_hard": {
+      "queries": 114,
+      "R@1": 0.7017543859649122,
+      "R@5": 0.8596491228070176,
+      "mean_gallery": 25.473684210526315
+    },
+    "protocol": "different-frame instance-ID retrieval, no GT target images"
+  },
+  "args": {
+    "train": "runs/p0_alignment/train_seen/trusted_rois.jsonl",
+    "unseen": "runs/p0_alignment/val_unseen/trusted_rois.jsonl",
+    "acknowledge_geometry_pseudo_labels": true,
+    "output": "runs/p2_visual_landmarks",
+    "image_backbone": "google/siglip2-large-patch16-384",
+    "text_backbone": "bert-base-uncased",
+    "image_microbatch": 16,
+    "cache_size": 8192,
+    "patch_cache_directory": "runs/p2_patch_cache",
+    "batch_size": 32,
+    "workers": 4,
+    "random_negative_batches": false,
+    "epochs": 5,
+    "hidden": 256,
+    "heads": 8,
+    "lr": 0.0001,
+    "type_weight": 0.25,
+    "min_visible": 0.8,
+    "eval_max_groups": 100000,
+    "seed": 0,
+    "device": "cuda"
+  },
+  "vision_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "newly_encoded_images_total": 4506,
+  "disk_cache_hits": 1864,
+  "warning": "Geometric projected pseudo instances, NOT verified semantic region masks",
+  "eligible_train_instances": 931,
+  "dev_instances": 94,
+  "train_pairs_per_epoch": 836
+}

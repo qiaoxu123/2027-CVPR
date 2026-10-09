@@ -18,6 +18,7 @@ import json
 from pathlib import Path
 
 import numpy as np
+from .semantic_geometry import valid_surface_polygon
 
 
 INVERSE = {"east": "west", "west": "east", "north": "south", "south": "north"}
@@ -49,7 +50,7 @@ def source_landmark(obj_id, entry, bounds):
     name = str(entry.get("name", "")).strip()
     poly = np.asarray(entry.get("contour", []), np.float32)
     center = _centroid(poly)
-    if not name or center is None:
+    if not name or center is None or not valid_surface_polygon(poly):
         return None
     low, span = bounds[:2], bounds[2:] - bounds[:2]
     if np.any(span <= 0):
@@ -65,6 +66,7 @@ def generate_pairs(
     objects, bounds, source_maps, *,
     max_objects_per_map=300, max_pairs_per_map=800,
     seed=0, augment_shift_count=0,
+    statistics=None,
 ):
     """Yield exactly TWO records per pair; source_maps is a verified split map set.
 
@@ -86,21 +88,30 @@ def generate_pairs(
                                            key=lambda x:str(x[0]))
         ]
         entries = [x for x in entries if x is not None]
+        valid_count = len(entries)
         if len(entries) > max_objects_per_map:
             selected = rng.choice(len(entries), max_objects_per_map, replace=False)
             entries = [entries[int(i)] for i in sorted(selected)]
         attempts = [(i,j) for i in range(len(entries))
                     for j in range(i+1, len(entries))]
         rng.shuffle(attempts)
+        stat = {"valid_source_objects": valid_count,"sampled_objects":len(entries),
+                "possible_pairs":len(attempts),"attempted_pairs":0,
+                "cardinal_verified_pairs":0,"text_duplicate_pairs":0,
+                "emitted_base_pairs":0,"emitted_augmented_pairs":0}
+        if statistics is not None:
+            statistics[map_name] = stat
         emitted = 0
         for i,j in attempts:
             if emitted >= max_pairs_per_map:
                 break
             a,b = entries[i],entries[j]
+            stat["attempted_pairs"] += 1
             rel = cardinal_relation(a["center_world"],b["center_world"])
             if rel is None:
                 continue
             direction, distance = rel
+            stat["cardinal_verified_pairs"] += 1
             rounded = 10 * round(distance/10)
             if rounded <= 0:
                 continue
@@ -134,11 +145,13 @@ def generate_pairs(
                 )
                 samples.append((key,sample))
             if len(samples) != 2:
+                stat["text_duplicate_pairs"] += 1
                 continue
             for key,sample in samples:
                 seen_text.add(key)
                 yield sample
             emitted += 1
+            stat["emitted_base_pairs"] += 1
             # Paired shift augmentation retains compass direction and distances.
             # No artificial yaw or impossible return trajectory is invented.
             for aug in range(augment_shift_count):
@@ -160,6 +173,7 @@ def generate_pairs(
                     cloned["pair_id"]=pair_id+f":aug{aug}"
                     new_records.append(cloned)
                 if len(new_records)==2:
+                    stat["emitted_augmented_pairs"] += 1
                     yield from new_records
 
 

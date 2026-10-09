@@ -128,6 +128,34 @@ def _segments_intersect(a, b, c, d):
     return False
 
 
+def valid_surface_polygon(points):
+    """Reject self intersections/degenerate rings; optional GEOS fast path."""
+    xy = np.asarray(points, np.float64)
+    if xy.ndim != 2 or xy.shape[1] != 2 or len(xy) < 3 or not np.isfinite(xy).all():
+        return False
+    if np.array_equal(xy[0], xy[-1]):
+        xy = xy[:-1]
+    if len(xy) < 3:
+        return False
+    try:
+        from shapely.geometry import Polygon
+        polygon = Polygon(xy)
+        return polygon.is_valid and polygon.area > 1e-10
+    except ImportError:
+        pass
+    area = abs(np.sum(xy[:,0]*np.roll(xy[:,1],-1)-xy[:,1]*np.roll(xy[:,0],-1)))/2
+    if area <= 1e-10 or len(xy) < 3:
+        return False
+    n = len(xy)
+    for i in range(n):
+        for j in range(i+1,n):
+            if j == i+1 or (i == 0 and j == n-1):
+                continue
+            if _segments_intersect(xy[i],xy[(i+1)%n],xy[j],xy[(j+1)%n]):
+                return False
+    return True
+
+
 def geometry_pair_distance(a, b, a_road=False, b_road=False):
     """Segment-to-segment distance in meters, including overlaps/intersections."""
     # Exact GEOS distance avoids Python O(Va*Vb) loops on detailed CityRefer

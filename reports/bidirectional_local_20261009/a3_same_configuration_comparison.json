@@ -1,0 +1,415 @@
+{
+  "configuration": "hidden=256 heads=8 relative_position=True batch=64 workers=4 seed=0 epochs=5; initialization differs only",
+  "metrics": {
+    "scratch": {
+      "val_seen": {
+        "samples": 2426,
+        "NE_m": 33.47599683039855,
+        "R@1/20m": 0.38046166529266284,
+        "R@4/20m": 0.6084089035449299,
+        "R@8/20m": 0.7234130255564716,
+        "surface_anchor_fraction": 1.0,
+        "relation_grounded_fraction": 0.17889530090684255,
+        "nonbuilding_surface_fraction": 0.7221764220939819,
+        "road_surface_fraction": 0.6990931574608409
+      },
+      "val_unseen": {
+        "samples": 2679,
+        "NE_m": 54.680903099774866,
+        "R@1/20m": 0.2038073908174692,
+        "R@4/20m": 0.3628219484882419,
+        "R@8/20m": 0.47144456886898095,
+        "surface_anchor_fraction": 0.9985069055617768,
+        "relation_grounded_fraction": 0.20977976857036207,
+        "nonbuilding_surface_fraction": 0.6554684583799926,
+        "road_surface_fraction": 0.5912653975363942
+      }
+    },
+    "initialized": {
+      "val_seen": {
+        "samples": 2426,
+        "NE_m": 32.93415433753156,
+        "R@1/20m": 0.38582028029678483,
+        "R@4/20m": 0.6046990931574608,
+        "R@8/20m": 0.7122835943940643,
+        "surface_anchor_fraction": 1.0,
+        "relation_grounded_fraction": 0.17889530090684255,
+        "nonbuilding_surface_fraction": 0.7221764220939819,
+        "road_surface_fraction": 0.6990931574608409
+      },
+      "val_unseen": {
+        "samples": 2679,
+        "NE_m": 56.30808865503394,
+        "R@1/20m": 0.1799178798058977,
+        "R@4/20m": 0.3456513624486749,
+        "R@8/20m": 0.46397909667786486,
+        "surface_anchor_fraction": 0.9985069055617768,
+        "relation_grounded_fraction": 0.20977976857036207,
+        "nonbuilding_surface_fraction": 0.6554684583799926,
+        "road_surface_fraction": 0.5912653975363942
+      }
+    }
+  },
+  "paired": {
+    "val_seen": {
+      "R8_difference_pp": -1.1129431162407255,
+      "paired_query_bootstrap_95ci_pp": [
+        -2.6793075020610058,
+        0.49464138499587795
+      ],
+      "map_cluster_bootstrap_95ci_pp": [
+        -3.525129244519278,
+        1.2209252263015684
+      ],
+      "maps": 23,
+      "queries": 2426,
+      "R8_gained_queries": 176,
+      "R8_lost_queries": 203
+    },
+    "val_unseen": {
+      "R8_difference_pp": -0.7465472191116088,
+      "paired_query_bootstrap_95ci_pp": [
+        -2.3142963792459876,
+        0.8585293019783502
+      ],
+      "map_cluster_bootstrap_95ci_pp": [
+        -2.2590361445783134,
+        0.9151414309484194
+      ],
+      "maps": 4,
+      "queries": 2679,
+      "R8_gained_queries": 221,
+      "R8_lost_queries": 241
+    }
+  },
+  "map_wise": {
+    "val_seen": {
+      "birmingham_block_1": {
+        "scratch": {
+          "queries": 302,
+          "R8": 0.7847682119205298,
+          "NE_m": 29.408605779243622
+        },
+        "initialized": {
+          "queries": 302,
+          "R8": 0.8509933774834437,
+          "NE_m": 26.96289741085065
+        }
+      },
+      "birmingham_block_3": {
+        "scratch": {
+          "queries": 160,
+          "R8": 0.54375,
+          "NE_m": 60.858012825250626
+        },
+        "initialized": {
+          "queries": 160,
+          "R8": 0.51875,
+          "NE_m": 52.42668241262436
+        }
+      },
+      "birmingham_block_4": {
+        "scratch": {
+          "queries": 96,
+          "R8": 0.6875,
+          "NE_m": 40.80258537456393
+        },
+        "initialized": {
+          "queries": 96,
+          "R8": 0.6666666666666666,
+          "NE_m": 41.22018123666445
+        }
+      },
+      "birmingham_block_7": {
+        "scratch": {
+          "queries": 38,
+          "R8": 0.5526315789473685,
+          "NE_m": 45.31450653076172
+        },
+        "initialized": {
+          "queries": 38,
+          "R8": 0.5526315789473685,
+          "NE_m": 38.524172933478106
+        }
+      },
+      "birmingham_block_9": {
+        "scratch": {
+          "queries": 103,
+          "R8": 0.6504854368932039,
+          "NE_m": 44.49440229980691
+        },
+        "initialized": {
+          "queries": 103,
+          "R8": 0.6019417475728155,
+          "NE_m": 52.35624936251964
+        }
+      },
+      "birmingham_block_10": {
+        "scratch": {
+          "queries": 37,
+          "R8": 0.3783783783783784,
+          "NE_m": 41.06311290328567
+        },
+        "initialized": {
+          "queries": 37,
+          "R8": 0.5405405405405406,
+          "NE_m": 43.25303827105342
+        }
+      },
+      "birmingham_block_11": {
+        "scratch": {
+          "queries": 2,
+          "R8": 0.0,
+          "NE_m": 67.96267700195312
+        },
+        "initialized": {
+          "queries": 2,
+          "R8": 0.0,
+          "NE_m": 68.22574996948242
+        }
+      },
+      "birmingham_block_12": {
+        "scratch": {
+          "queries": 74,
+          "R8": 0.6351351351351351,
+          "NE_m": 30.45088789269731
+        },
+        "initialized": {
+          "queries": 74,
+          "R8": 0.581081081081081,
+          "NE_m": 30.835468116644268
+        }
+      },
+      "cambridge_block_4": {
+        "scratch": {
+          "queries": 31,
+          "R8": 0.41935483870967744,
+          "NE_m": 40.2439542739622
+        },
+        "initialized": {
+          "queries": 31,
+          "R8": 0.4838709677419355,
+          "NE_m": 42.69940462420064
+        }
+      },
+      "cambridge_block_6": {
+        "scratch": {
+          "queries": 33,
+          "R8": 0.696969696969697,
+          "NE_m": 44.63609300960194
+        },
+        "initialized": {
+          "queries": 33,
+          "R8": 0.6363636363636364,
+          "NE_m": 32.134413401285805
+        }
+      },
+      "cambridge_block_7": {
+        "scratch": {
+          "queries": 160,
+          "R8": 0.80625,
+          "NE_m": 28.93319588303566
+        },
+        "initialized": {
+          "queries": 160,
+          "R8": 0.775,
+          "NE_m": 29.429121845960616
+        }
+      },
+      "cambridge_block_9": {
+        "scratch": {
+          "queries": 177,
+          "R8": 0.8135593220338984,
+          "NE_m": 29.97347050669503
+        },
+        "initialized": {
+          "queries": 177,
+          "R8": 0.7457627118644068,
+          "NE_m": 32.26292586124549
+        }
+      },
+      "cambridge_block_12": {
+        "scratch": {
+          "queries": 157,
+          "R8": 0.6751592356687898,
+          "NE_m": 32.766231617350485
+        },
+        "initialized": {
+          "queries": 157,
+          "R8": 0.6496815286624203,
+          "NE_m": 32.90225637946159
+        }
+      },
+      "cambridge_block_13": {
+        "scratch": {
+          "queries": 190,
+          "R8": 0.8421052631578947,
+          "NE_m": 25.312466771351662
+        },
+        "initialized": {
+          "queries": 190,
+          "R8": 0.8368421052631579,
+          "NE_m": 26.276262792160637
+        }
+      },
+      "cambridge_block_17": {
+        "scratch": {
+          "queries": 44,
+          "R8": 0.5,
+          "NE_m": 38.566187398000196
+        },
+        "initialized": {
+          "queries": 44,
+          "R8": 0.4772727272727273,
+          "NE_m": 37.8855021758513
+        }
+      },
+      "cambridge_block_18": {
+        "scratch": {
+          "queries": 60,
+          "R8": 0.7833333333333333,
+          "NE_m": 23.6522190173467
+        },
+        "initialized": {
+          "queries": 60,
+          "R8": 0.7,
+          "NE_m": 28.39356735150019
+        }
+      },
+      "cambridge_block_19": {
+        "scratch": {
+          "queries": 45,
+          "R8": 0.6888888888888889,
+          "NE_m": 44.302103424072264
+        },
+        "initialized": {
+          "queries": 45,
+          "R8": 0.6666666666666666,
+          "NE_m": 31.786905097961426
+        }
+      },
+      "cambridge_block_20": {
+        "scratch": {
+          "queries": 207,
+          "R8": 0.7536231884057971,
+          "NE_m": 32.31790532409281
+        },
+        "initialized": {
+          "queries": 207,
+          "R8": 0.748792270531401,
+          "NE_m": 32.58118333908671
+        }
+      },
+      "cambridge_block_21": {
+        "scratch": {
+          "queries": 187,
+          "R8": 0.7540106951871658,
+          "NE_m": 28.590653952430277
+        },
+        "initialized": {
+          "queries": 187,
+          "R8": 0.7700534759358288,
+          "NE_m": 28.181044477829957
+        }
+      },
+      "cambridge_block_23": {
+        "scratch": {
+          "queries": 32,
+          "R8": 0.84375,
+          "NE_m": 19.404842652380466
+        },
+        "initialized": {
+          "queries": 32,
+          "R8": 0.71875,
+          "NE_m": 25.538777515292168
+        }
+      },
+      "cambridge_block_25": {
+        "scratch": {
+          "queries": 23,
+          "R8": 0.4782608695652174,
+          "NE_m": 42.94255604951278
+        },
+        "initialized": {
+          "queries": 23,
+          "R8": 0.7391304347826086,
+          "NE_m": 32.684409556181535
+        }
+      },
+      "cambridge_block_28": {
+        "scratch": {
+          "queries": 169,
+          "R8": 0.8165680473372781,
+          "NE_m": 26.02057534703136
+        },
+        "initialized": {
+          "queries": 169,
+          "R8": 0.8047337278106509,
+          "NE_m": 25.190690221165763
+        }
+      },
+      "cambridge_block_33": {
+        "scratch": {
+          "queries": 99,
+          "R8": 0.6868686868686869,
+          "NE_m": 27.29992097315162
+        },
+        "initialized": {
+          "queries": 99,
+          "R8": 0.5757575757575758,
+          "NE_m": 29.616074778816916
+        }
+      }
+    },
+    "val_unseen": {
+      "birmingham_block_5": {
+        "scratch": {
+          "queries": 910,
+          "R8": 0.2725274725274725,
+          "NE_m": 72.17933676832325
+        },
+        "initialized": {
+          "queries": 910,
+          "R8": 0.25384615384615383,
+          "NE_m": 75.64368700116545
+        }
+      },
+      "cambridge_block_10": {
+        "scratch": {
+          "queries": 911,
+          "R8": 0.5729967069154775,
+          "NE_m": 45.54920358977124
+        },
+        "initialized": {
+          "queries": 911,
+          "R8": 0.5883644346871569,
+          "NE_m": 46.39896207897383
+        }
+      },
+      "cambridge_block_2": {
+        "scratch": {
+          "queries": 291,
+          "R8": 0.3436426116838488,
+          "NE_m": 62.33924125068376
+        },
+        "initialized": {
+          "queries": 291,
+          "R8": 0.3333333333333333,
+          "NE_m": 58.80813103770882
+        }
+      },
+      "cambridge_block_3": {
+        "scratch": {
+          "queries": 567,
+          "R8": 0.6931216931216931,
+          "NE_m": 37.33844326412867
+        },
+        "initialized": {
+          "queries": 567,
+          "R8": 0.6684303350970018,
+          "NE_m": 39.913569102632096
+        }
+      }
+    }
+  }
+}
