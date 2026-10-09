@@ -29,8 +29,11 @@ from .token_language import FrozenBERTTokens
 
 
 def encode_twoview(batch,backbone,net,device):
+    # Frozen vision runs under inference_mode. Clone outside that context:
+    # trainable patch projections must be able to save their input for backward.
     a,va=backbone.encode(batch["first"])
     b,vb=backbone.encode(batch["second"])
+    a,b=a.clone(),b.clone()
     with torch.autocast("cuda",dtype=torch.bfloat16,enabled=(device.type=="cuda")):
         return net(a,va).float(),net(b,vb).float()
 
