@@ -77,7 +77,10 @@ class FullCandidateDataset(StaticLocalizationDataset):
                 "Prepare episode observations first; never use a full map."
             )
         output["pair_geometry"] = torch.from_numpy(self._pair_cache(idx))
-        output["entity_valid"] = output["node_valid"] & (output["node_types"] != 2)
+        count = len(self._prepared(idx)[0]["entities"])
+        entity_mask = torch.zeros_like(output["node_valid"])
+        entity_mask[:count] = True
+        output["entity_valid"] = entity_mask
         output["rgb_observations"] = source
         output["world_bounds"] = record["world_bounds"]
         output["dataset_version"] = record.get("dataset_version", "unspecified")
@@ -85,8 +88,7 @@ class FullCandidateDataset(StaticLocalizationDataset):
 
 
 def collate_full(items):
-    from .static_localization import collate_static
-    return collate_static(items) if False else {
+    return {
         key: (
             [item[key] for item in items]
             if key in ("text", "node_names", "episode_id",
