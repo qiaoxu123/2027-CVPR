@@ -306,6 +306,11 @@ class GraphNav(nn.Module):
             torch.cat((original.candidate_hidden, visual), dim=-1)
         ).squeeze(-1) * trusted * torch.tanh(self.vision_gate)
         logits = original.candidate_logits + adjustment
+        # Keep a coherent UPDATED global belief. Unseen cells are unchanged;
+        # only proposals with new trusted observations receive a residual.
+        updated_field = original.belief_logits.scatter_add(
+            1, original.candidate_ids, adjustment
+        )
         total_scores = logits[:, :, None] + original.path_logits
         flattened = total_scores.reshape(b, -1).argmax(-1)
         candidate_id = torch.div(
@@ -315,6 +320,8 @@ class GraphNav(nn.Module):
         batch = torch.arange(b, device=logits.device)
         return replace(
             original,
+            belief_logits=updated_field,
+            belief_probs=torch.softmax(updated_field, dim=-1),
             candidate_logits=logits,
             selected_goal_xy=original.candidate_xy[batch, candidate_id],
             next_waypoint_xy=original.path_modes[batch, candidate_id, mode_id, 0],
