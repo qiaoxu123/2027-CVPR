@@ -60,7 +60,8 @@ def masks_at_prefix(path, step, bounds, ground_level, grid):
 
 def convert(objects, processed, trajectories, bounds, output,
             grid=28, stride=4, waypoints=8, max_landmarks=16,
-            ground_levels=None, max_steps=20, renderer=None, static_only=False):
+            ground_levels=None, max_steps=20, renderer=None, static_only=False,
+            dataset_version="unspecified", match_mode="typed", rgb_observation_step=None):
     count, skipped = 0, 0
     indexed_names = {area: build_name_index(entries) for area, entries in objects.items()}
     with Path(output).open("w", encoding="utf-8") as f:
@@ -77,7 +78,7 @@ def convert(objects, processed, trajectories, bounds, output,
                 target_norm = normalize_xy(target_world, b).tolist()
                 references = bind_reference_landmarks(
                     relation.get("landmarks", []), objects[map_name], max_landmarks,
-                    allowed_types=None, index=indexed_names[map_name],  # map-level O(1)
+                    allowed_types=None, index=indexed_names[map_name], match_mode=match_mode,
                 )
                 landmarks = [
                     {
@@ -88,7 +89,26 @@ def convert(objects, processed, trajectories, bounds, output,
                     for lm in references
                 ]
                 if static_only:
+                    observed_prefix = []
+                    if renderer is not None:
+                        if rgb_observation_step is None:
+                            raise ValueError("static RGB requires explicit --rgb-observation-step")
+                        poses = episode.get("trajectory", [])
+                        if not poses or rgb_observation_step < 0 or rgb_observation_step >= len(poses):
+                            raise ValueError("no valid CityFlight observed prefix at requested step")
+                        ground = (ground_levels or {}).get(map_name)
+                        if ground is None:
+                            raise ValueError("rendered RGB requires map ground level")
+                        episode_key = f"{obj_id}_{ann_id}_{count}"
+                        for t in range(rgb_observation_step + 1):
+                            observed_prefix.append(renderer.render(
+                                map_name, episode_key, t, poses[t], ground
+                            ))
                     record = {
+                        "dataset_version": dataset_version,
+                        "match_mode": match_mode,
+                        "rgb_observations": observed_prefix,
+                        "observation_cutoff_step": rgb_observation_step if renderer is not None else None,
                         "episode_id": f"{map_name}:{obj_id}:{ann_id}:0",
                         "map_name": map_name,
                         "world_bounds": list(map(float, b)),
@@ -125,6 +145,8 @@ def convert(objects, processed, trajectories, bounds, output,
                         (ground_levels or {}).get(map_name), grid,
                     )
                     record = {
+                        "dataset_version": dataset_version, "match_mode": match_mode,
+                        "observation_cutoff_step": step,
                         "episode_id": f"{map_name}:{obj_id}:{ann_id}:{step}",
                         "map_name": map_name,
                         "world_bounds": list(map(float, b)),
@@ -160,8 +182,14 @@ def main():
     p.add_argument("--waypoints", type=int, default=8)
     p.add_argument("--max-landmarks", type=int, default=16)
     p.add_argument("--max-steps", type=int, default=20)
+    p.add_argument("--dataset-version", choices=("original", "revised"), required=True,
+                   help="Declare exact CityNav version of ALL supplied source assets")
+    p.add_argument("--match-mode", choices=("exact", "typed", "fuzzy"),
+                   default="typed")
+    p.add_argument("--rgb-observation-step", type=int, default=None,
+                   help="For --static-only + RGB, observed CityFlight prefix 0..t inclusive")
     p.add_argument("--static-only", action="store_true",
-                   help="One query per record; bind only Building polygons; no pose/RGB/future")
+                   help="One query per record; static inputs exclude pose/trajectory; RGB requires causal prefix")
     args = p.parse_args()
     def load(path):
         with open(path, encoding="utf-8") as handle:
@@ -181,6 +209,8 @@ def main():
         max_landmarks=args.max_landmarks,
         ground_levels=load(args.ground_levels) if args.ground_levels else None,
         max_steps=args.max_steps, renderer=renderer, static_only=args.static_only,
+        dataset_version=args.dataset_version, match_mode=args.match_mode,
+        rgb_observation_step=args.rgb_observation_step,
     )
     print(f"Prepared {count} causal training steps; skipped {skipped} malformed episodes")
 
