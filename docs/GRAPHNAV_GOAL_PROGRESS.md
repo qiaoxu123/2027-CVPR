@@ -238,3 +238,7 @@ Full seed1的1416次失败中1193次从未在已观测位置到目标20m内、20
 ## 并行调度等待队列交接完成（2026-10-10）
 
 仅终止没有任何子进程或已启动job的phase22b旧waiting调度器（PID751669）；原状态/SHA/Manifest SHA保留于`reports/sbf_protocol/phase22b_parallel_waiting_handover.json`，未中断模型推理或训练。新调度器已实际启动、保持waiting且evaluation_workers=2；仍等待phase22全量确认完成。当前phase22已有模型进程不重启。最终冻结清单也将使用两路独立评估，并标注并发时延。
+
+## 四组修复后Seen确认与缓存实测（2026-10-10）
+
+A3/GAT/Visual/Joint-current均完成相同2470个Seen Episode；原始JSON和前四组CSV保存于`reports/altitude_guard_seen_20261010`。Joint-current SR42.4291%、SPL40.4542%、NE31.5900m，单进程实测642.306s（10.7min）、策略22.0814ms；80716个实际当前ROI中磁盘命中80112、内存命中601、实际仅新增Backbone编码2张。不能把这次热缓存时间与首次/大量未命中Full种子27–28min当成同条件算法加速。尚待History及Full seed0确认；phase22b已配置两路独立评估、训练串行。Unseen尚未开始。
