@@ -1,0 +1,21 @@
+{
+  "python": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-assets/remoteclip/.venv/bin/python",
+  "prefix": "-m experiments.visual_goal_association.",
+  "env": {
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "HF_HUB_OFFLINE": "1"
+  },
+  "actual_main_stage_commands": [
+    "evaluate prepare --cache runs/rgb_language_grounding/cache_internal_dev --features runs/rgb_language_grounding/features_city_dev_public --controls runs/rgb_language_grounding/controls_city_dev --checkpoint runs/rgb_language_grounding/heads/aerial_city_adapt/best_dev.pt --output runs/visual_goal_association/prepared_dev",
+    "evaluate calibrate --prepared runs/visual_goal_association/prepared_dev --output runs/visual_goal_association/calibration_dev_verified",
+    "evaluate evaluate --prepared runs/visual_goal_association/prepared_dev --config runs/visual_goal_association/calibration_dev_verified/frozen_config.json --output runs/visual_goal_association/evaluation_dev",
+    "coverage --cache runs/rgb_language_grounding/cache_internal_dev --output runs/visual_goal_association/coverage_dev",
+    "evaluate prepare --cache /home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-main/runs/bidirectional_core_test/cache_fp16/val_seen --features runs/rgb_language_grounding/features_city_seen_public --controls runs/rgb_language_grounding/controls_city_seen --checkpoint runs/rgb_language_grounding/heads/aerial_city_adapt/best_dev.pt --output runs/visual_goal_association/prepared_seen",
+    "evaluate evaluate --prepared runs/visual_goal_association/prepared_seen --config runs/visual_goal_association/calibration_dev_verified/frozen_config.json --output runs/visual_goal_association/evaluation_seen",
+    "coverage --cache /home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-main/runs/bidirectional_core_test/cache_fp16/val_seen --output runs/visual_goal_association/coverage_seen"
+  ],
+  "all_diagnostic_commands": "README; local named stage logs; audits/cases/oracle/package/report use the same bound prepared/evaluation outputs",
+  "failure": "calibration_dev attempted before prepare finished; no model/data modification; verified output uses calibration_dev_verified",
+  "new_training_commands": []
+}

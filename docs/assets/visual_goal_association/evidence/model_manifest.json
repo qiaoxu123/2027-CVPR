@@ -1,0 +1,84 @@
+{
+  "base_commit": "350f99d3a55d305969f934e31fea6faf08d05fe8",
+  "branch": "research/visual-goal-association-20261011",
+  "seed": 20261011,
+  "new_training": 0,
+  "new_backbone_encoding": 0,
+  "new_unseen_or_navigation": 0,
+  "head_sha256": "702cf740bed8fbb583ef8cb4ca0af2871d781e0320ccf38bf8e7b6d80396a18e",
+  "frozen_config_sha256": "e41ae9e5664a0cd91c4fbe2225ffba7b68e194db38b75e93243dd46ca25e1d80",
+  "protocol_sha256": "ce59f3b46847afd638f3a5adc1e454374384d9c973a9168782af2e9a87762ae8",
+  "completed_at": "2026-10-10T22:54:06.333101+00:00",
+  "code_files": {
+    "experiments/visual_goal_association/association.py": "5ca7a64ee0dc5f37e7df0003c416507dc653be07096f02b46f3bce1bb2a1bcdd",
+    "experiments/visual_goal_association/evaluate.py": "8d0d3a72f6dbdff5b0f632ec2bf246621e2e2ccfb8a58b398433098f7373d5de",
+    "experiments/visual_goal_association/coverage.py": "bbfb1f1b54510032ed9e12b1db4e568358b4cf68af57b108176ba50436e8d254",
+    "experiments/visual_goal_association/audit.py": "3009f2e68a51696bc003e06169b6bf3553de499b1395c02afff3ff78897ab3d6",
+    "experiments/visual_goal_association/coverage_oracle.py": "f17fa2840835281da0e8a4d102f3b8754568472964227a2611c9b2bd234c0af7",
+    "experiments/visual_goal_association/package_results.py": "078c2f02c22c8ef4cbb3520706d8af7d672cd5b24de1bb251de9b673c6174a50",
+    "experiments/visual_goal_association/cases.py": "f5c9b568410f547e01c0e431c8644d9c7c5d01877563321de5abd09293d82bf3",
+    "experiments/visual_goal_association/report.py": "c2713f8be4e2c056a29d636eabe98ae3ecc114ec1efd9e2c3dc2a32791e470a3"
+  },
+  "source_cache_manifests": {
+    "dev": {
+      "complete": true,
+      "states": 640,
+      "feature_states": 269,
+      "cached_states": 1280,
+      "checkpoint_sha256": "702cf740bed8fbb583ef8cb4ca0af2871d781e0320ccf38bf8e7b6d80396a18e",
+      "inputs": {
+        "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/rgb_language_grounding/cache_internal_dev": "e2a48c198299d27e29ddcf370ba4e5785ad41ce818df35665cd29d89f94f62bd",
+        "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/rgb_language_grounding/features_city_dev_public": "bd79e3617e59dc9f8997e7f7bd75e23a31dfbcb7e391d6c492a92e9f03ad4be6",
+        "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/rgb_language_grounding/controls_city_dev": "5db53b9059e8de88b139d8b48159f74184ae096a83947b361826c176d2d4eb52"
+      },
+      "episodes_sha256": "5c689a290ffafee80d1361272adb525cb2a3ba0f4c11d90c31659055a4233a76",
+      "objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+      "prepared_sha256": "09f000f31a6a61a39d7f44ba87e71faed43d8f28c7c78a99de39f87a02a3ffca",
+      "seconds": 151.86089875502512,
+      "seed": 20261011,
+      "no_backbone_encoding": true
+    },
+    "seen": {
+      "complete": true,
+      "states": 640,
+      "feature_states": 242,
+      "cached_states": 1280,
+      "checkpoint_sha256": "702cf740bed8fbb583ef8cb4ca0af2871d781e0320ccf38bf8e7b6d80396a18e",
+      "inputs": {
+        "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-main/runs/bidirectional_core_test/cache_fp16/val_seen": "cfae497a1b9650df695844dd31f94848270a319583186f782ca2822ffcf11288",
+        "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/rgb_language_grounding/features_city_seen_public": "0ef528ee38310771a9885ef024cdf3980cc75f45dd637aefc41772494a19e671",
+        "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/rgb_language_grounding/controls_city_seen": "cf07439a11868d8a109b82c135f5cef6d063c86d22383fd27aea3c4d1ff24314"
+      },
+      "episodes_sha256": "11a08046e064798783daddebfda100f1c178efb977b8de35dcc1991ab9d72781",
+      "objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+      "prepared_sha256": "9140df25a627546ed1d5b040fc5735d3dc02563e712e7ed5d58def07792a0d59",
+      "seconds": 165.68077545100823,
+      "seed": 20261011,
+      "no_backbone_encoding": true
+    }
+  },
+  "acceptance": {
+    "synthetic_tests": 20,
+    "regression_passed": 295,
+    "geometry_protocol_parity": true,
+    "P0_oracle_passed": true,
+    "P0_real_and_localization_failed": true,
+    "P1_coverage_positive": true,
+    "independent_error_credible_families_best_seen": 37,
+    "frozen_experimental_semantics_unchanged": true
+  },
+  "resource_note": "CPU-only frozen head scoring and environment/projection; no new GPU backbone calls; timings in actual stage metrics; CPU peak RSS not instrumented",
+  "geometry_checkpoint": {
+    "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/static_final_analysis_20261010/E1_seed1/best.pt": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7"
+  },
+  "vision": "google/siglip2-large-patch16-384@1b426889ea62b5a72bf9839009a1b184bfc9c178; original cached pixel controls",
+  "prior_report": "docs/RGB_LANGUAGE_GROUNDING_REPORT_20261010.md",
+  "post_evaluation_whitespace_cleanup": {
+    "file": "experiments/visual_goal_association/coverage.py",
+    "frozen_executed_sha256": "92ae7cc6749c1a4aa806b5a7b1e810826b0f2ac2435a5f77cb3c94a13b777752",
+    "committed_sha256": "bbfb1f1b54510032ed9e12b1db4e568358b4cf68af57b108176ba50436e8d254",
+    "change": "remove whitespace from one otherwise blank line after all experiments",
+    "ast_identical": true,
+    "post_evaluation_only": true
+  }
+}
