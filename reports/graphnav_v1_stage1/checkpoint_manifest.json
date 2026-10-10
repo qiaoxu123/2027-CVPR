@@ -1,0 +1,157 @@
+{
+  "provenance": {
+    "commit": "62abf74c269ff273b35ac4f6afcef7788cca2705",
+    "working_diff_sha256": "4b4a1ff8f7172a452542ebda520ccee39a3fe863f7a8475dfcd06e678d310baf"
+  },
+  "frozen_selection": {
+    "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/graphnav_v1_stage1/best.pt",
+    "selected_stage": "C",
+    "all_stages_complete": true,
+    "completed_epochs": {
+      "A": 3,
+      "B": 3,
+      "C": 5
+    },
+    "visual_control": "real",
+    "history_control": "checkpoint",
+    "stop_threshold": 0.3,
+    "active_observation": false,
+    "selection": "Best complete B/C checkpoint by Seen128 SR, SPL, Train Dev Recall. No Unseen consulted",
+    "frozen": 1791621180.0963433,
+    "provenance": {
+      "commit": "62abf74c269ff273b35ac4f6afcef7788cca2705",
+      "working_diff_sha256": "9fa9a896a8154f5741b728cabca5fd34ac87d77fcbdd679fa8c1f900a237a539"
+    }
+  },
+  "sources": {
+    "a3": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+      "sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7"
+    },
+    "head": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt",
+      "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+    },
+    "reference": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+    }
+  },
+  "checkpoints": {
+    "best.pt": {
+      "sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "bytes": 10778317
+    },
+    "last.pt": {
+      "sha256": "c150ac94c760e42ad964f82629340c2acea9b0d884d86083ff840c02c9279819",
+      "bytes": 10790797
+    },
+    "initial_complete.pt": {
+      "sha256": "b044909700e1912a49d69551abe95b6fad22b3d0c0e8fd162d230ee6272c4f45",
+      "bytes": 4257997
+    },
+    "stages/A/best.pt": {
+      "sha256": "a456e8e225b8d9081a02de3dd58227a6b088c02d3e7f063ff4da643a230456da",
+      "bytes": 6605583
+    },
+    "stages/A/last.pt": {
+      "sha256": "0996c9ad9d88a4f1c36ffd13e095c43238411a452d9e1d84e1b241e913f621c8",
+      "bytes": 6605583
+    },
+    "stages/B/best.pt": {
+      "sha256": "9c563223224c36c660a1916334d0e865f15c0d5124698399362e47ead412c325",
+      "bytes": 6601401
+    },
+    "stages/B/last.pt": {
+      "sha256": "3ab14fb4ef098d2df1357872f324a3f615dfd61658037c19fc6f2d9037eafcad",
+      "bytes": 6608441
+    },
+    "stages/C/best.pt": {
+      "sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "bytes": 10778317
+    },
+    "stages/C/last.pt": {
+      "sha256": "c150ac94c760e42ad964f82629340c2acea9b0d884d86083ff840c02c9279819",
+      "bytes": 10790797
+    }
+  },
+  "inputs": {
+    "cache_manifest": "f93ac38816b579951297e86e8ace0c920ff2497aa3d4cf90c2dd32b160f35bf5",
+    "sources": {
+      "a3": {
+        "path": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+        "sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7"
+      },
+      "head": {
+        "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt",
+        "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+      },
+      "reference": {
+        "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+      }
+    },
+    "sbf_config": "600434ea7e451111f226b4cf23d204df7e56969d58c8e1d945558d34b98eea17",
+    "init": "9c563223224c36c660a1916334d0e865f15c0d5124698399362e47ead412c325"
+  },
+  "protocol": {
+    "name": "graphnav-v1-stage1",
+    "backbone": "google/siglip2-large-patch16-384",
+    "backbone_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+    "stage": "C",
+    "use_history": true,
+    "active_observation": false,
+    "new_gat": false,
+    "relation_loss": false,
+    "residual_bound": 0.5,
+    "stop_threshold": 0.3,
+    "stop_positive_weight": 20.0,
+    "execution": "guarded-blend",
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "freeze_bert": true,
+    "freeze_siglip": true,
+    "observed_fraction_to_legacy_controller": 0.0,
+    "initialization": "Verified A3 Seed1 Epoch14 and original pretrained Trajectory/Stop; all later stages initialize from prior selected complete checkpoint",
+    "selection": "Seen128 SR then SPL, then internal Train Dev belief Recall; Unseen never used"
+  },
+  "parameters": {
+    "a3": 727696,
+    "visual": 264325,
+    "history": 7,
+    "trajectory_stop": 61261,
+    "frozen_bert": 109482240,
+    "frozen_siglip2": 881854466,
+    "trainable_at_selected_training_stage": 779111,
+    "inference_trainable": 0,
+    "complete_system": 992389996
+  },
+  "seed": 0,
+  "all_stages_completed_epochs": {
+    "A": 3,
+    "B": 3,
+    "C": 5
+  },
+  "output_sha256": {
+    "baseline_seen128/metrics.json": "af7afab7b251fe524066c7255613f41a23a87c15f8efb2cbade2e41631d42923",
+    "initial_seen128/metrics.json": "47a627fae2d8b68b9185ec153cff3aea385681c5302283d2155e93501d7731aa",
+    "selected_seen128/metrics.json": "c2e407cc552b92b2e2c085d09b2ae683c8f048ab750e41b9abbc7de9d413fa4b",
+    "zero_rgb_seen128/metrics.json": "be16dc86ab5910272c7e3763db71a97bb42bb5647b3df69bc381f037f98c0dba",
+    "shuffle_rgb_seen128/metrics.json": "13f071461bb4209cf3037a6ce35f49d0de61d2d2bae0e14be6b8c815f901607b",
+    "no_belief_seen128/metrics.json": "7288fb876413009de36c254edcaa87a76404572eb4e9569f6a8a4bb040a7ae73",
+    "current_only_seen128/metrics.json": "52112745544101fe16e1be170eb0453b74683c8fb8f10c140fb3dbe1c1f9fe06",
+    "stage_A_real_seen128/metrics.json": "e8de50871cfb61e849a766aa3a5fc0cecc266deaf5ffa9dabe8cea9ec0acaff9",
+    "stage_A_zero_seen128/metrics.json": "e5e89ff95eb8c328d3360d15823a3334f3e7591b62492b7e78a1088cf9662e03",
+    "stage_A_shuffle_seen128/metrics.json": "ec221ae23410ba38c9819d267c6a8734b04742ab52c63702ff6a39544eda8fac",
+    "stage_A_no-belief_seen128/metrics.json": "c8ddfb268bc0d13cee4fcc79f593fbc477dc050fd05f26beb1a4c71262bcfe88",
+    "stage_B_current_seen128/metrics.json": "df09173f5a9396ecfe1865a97558b0472ed60e681b1175ccce13bfac1c16cfbd",
+    "stage_B_history_seen128/metrics.json": "02ad72d61db56f6259e4cb7236d5bdfd2b1d9fd21b63be11a3a633910e375908",
+    "baseline_full_seen/metrics.json": "c4ca499f7ccb335e0f6ea2c05bbcf5e36dd63eebde3adab0404ae2aacbe822e9",
+    "full_seen/metrics.json": "994db5bd5051ed3faa7bdcfe14cd3c16509c08d2bf75e75f0058870b8a819d98",
+    "baseline_full_unseen/metrics.json": "f1b7d663925cd37f6bcb8b861d928d7a06c15ce1526d76b0ddc8d41acde68024",
+    "full_unseen/metrics.json": "116e23be488912849456a9a85d503cc1acda82fd6cd854656a5bf5db70127666"
+  },
+  "note": "Best is selected complete B/C by Seen128 SR then SPL then Train Dev Recall; Last is final C epoch with optimizer/RNG. All stage checkpoints retained. Frozen backbones are externally resolved by model name and immutable revision."
+}

@@ -1,0 +1,17 @@
+{
+  "samples": 2679,
+  "metrics": {
+    "NE_m": 51.968598398578486,
+    "R@1/20m": 0.2209779768570362,
+    "R@4/20m": 0.3896976483762598,
+    "R@8/20m": 0.5009331840238895,
+    "R@16/20m": 0.6364315042926465
+  },
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "input_sha256": "7408c87314cd869e72b8dd0635e93585e745fe56fd83bfac5de62645f83909a6",
+  "provenance": {
+    "commit": "62abf74c269ff273b35ac4f6afcef7788cca2705",
+    "working_diff_sha256": "9fa9a896a8154f5741b728cabca5fd34ac87d77fcbdd679fa8c1f900a237a539"
+  },
+  "definition": "Initial static goal field, deduplicated map+instruction. FP32 legacy topk(8) preserved and extended to16. Ground-truth read after forward; not dynamic observed belief or closed-loop SR."
+}
