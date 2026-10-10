@@ -1,0 +1,20 @@
+{
+  "threshold": 0.3,
+  "models": [
+    {
+      "model": "Full_seed1",
+      "failed_after_observed_legal_arrival": 208,
+      "episodes_with_any_stop_probability_at_least_threshold": 26,
+      "probability_rejection_frames": 277,
+      "predicted_goal_gate_rejection_frames": 305
+    },
+    {
+      "model": "Full_seed2",
+      "failed_after_observed_legal_arrival": 240,
+      "episodes_with_any_stop_probability_at_least_threshold": 46,
+      "probability_rejection_frames": 307,
+      "predicted_goal_gate_rejection_frames": 385
+    }
+  ],
+  "note": "Only failed Episodes with observed GT-near poses at legal public height. Rejection frame counts overlap. An oracle-near visit does not imply the policy could identify the target; GT used only post-rollout."
+}

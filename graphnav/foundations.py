@@ -7,8 +7,9 @@ navigation should use trained HF weights, not the test-only synthetic tensors.
 from __future__ import annotations
 
 from collections import OrderedDict
+from collections.abc import Iterable
 from hashlib import blake2b
-from typing import Iterable
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -35,7 +36,9 @@ class FrozenBERT:
                 return_tensors="pt",
             ).to(self.device)
             outputs = self.model(**batch)
-            vectors = outputs.last_hidden_state[:, 0].float()
+            # CLS is a view into [batch,tokens,hidden]. Copy it before caching
+            # so each entry does not retain all token states on the GPU.
+            vectors = outputs.last_hidden_state[:, 0].float().clone()
             for text, feature in zip(unknown, vectors):
                 self.cache[text] = feature.detach()
         return torch.stack([self.cache[s] for s in texts], dim=0)
@@ -48,16 +51,15 @@ class FrozenSigLIP2:
         from transformers import AutoModel, AutoProcessor
 
         self.device = torch.device(device)
-        self.processor = AutoProcessor.from_pretrained(name)
+        self.processor = AutoProcessor.from_pretrained(name, use_fast=False)
         self.model = AutoModel.from_pretrained(name).to(self.device).eval()
         self.model.requires_grad_(False)
 
     @torch.inference_mode()
     def encode(self, crops: list[np.ndarray]) -> torch.Tensor:
-        from PIL import Image
-
         if not crops:
-            return torch.empty((0, self.model.config.projection_dim), device=self.device)
+            return torch.empty((0, self.model.config.vision_config.hidden_size), device=self.device)
+        from PIL import Image
         pil = [Image.fromarray(arr, mode="RGB") for arr in crops]
         batch = self.processor(images=pil, return_tensors="pt").to(self.device)
         features = self.model.get_image_features(**batch)
@@ -93,3 +95,12 @@ class CandidateVisionCache:
         self._data.move_to_end(key)
         while len(self._data) > self.limit:
             self._data.popitem(last=False)
+
+    def save(self, path, metadata):
+        torch.save({"metadata": metadata, "data": dict(self._data)}, path)
+
+    def load(self, path, metadata):
+        state = torch.load(path, map_location="cpu", weights_only=True)
+        if state["metadata"] != metadata:
+            raise ValueError("Frozen vision cache protocol differs")
+        self._data = OrderedDict(state["data"])

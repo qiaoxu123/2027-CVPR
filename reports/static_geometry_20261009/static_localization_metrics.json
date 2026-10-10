@@ -1,0 +1,287 @@
+{
+  "settings": {
+    "grid_size": 28,
+    "max_landmarks": 16,
+    "max_roads": 0,
+    "max_relations": 8,
+    "hidden": 128,
+    "text_dim": 768,
+    "heads": 4,
+    "prior_sigma_m": 25.0,
+    "rule_sigma_m": 25.0,
+    "rule_weight": 1.0
+  },
+  "hardware": "RTX Pro 6000 96GB",
+  "batch_size": 16,
+  "selected_epoch": 5,
+  "val_seen": {
+    "variants": {
+      "prior": {
+        "samples": 2454,
+        "NE_m": 183.97046822421223,
+        "R@1/20m": 0.06723716381418093,
+        "R@4/20m": 0.13732681336593316,
+        "R@8/20m": 0.1756316218418908
+      },
+      "rules": {
+        "samples": 2454,
+        "NE_m": 183.9893940472467,
+        "R@1/20m": 0.06560717196414018,
+        "R@4/20m": 0.14058679706601468,
+        "R@8/20m": 0.17726161369193155
+      },
+      "gat": {
+        "samples": 2454,
+        "NE_m": 103.70816796138797,
+        "R@1/20m": 0.12306438467807661,
+        "R@4/20m": 0.23553382233088835,
+        "R@8/20m": 0.31907090464547677
+      }
+    },
+    "coverage": {
+      "samples": 2454,
+      "grounded_relation_fraction": 0.06723716381418093,
+      "roads_available_fraction": 0.0,
+      "grounded_road_relation_fraction": 0.0
+    }
+  },
+  "val_unseen": {
+    "variants": {
+      "prior": {
+        "samples": 2808,
+        "NE_m": 205.11584422663066,
+        "R@1/20m": 0.054843304843304845,
+        "R@4/20m": 0.11075498575498575,
+        "R@8/20m": 0.15598290598290598
+      },
+      "rules": {
+        "samples": 2808,
+        "NE_m": 205.18506561453185,
+        "R@1/20m": 0.057692307692307696,
+        "R@4/20m": 0.11253561253561253,
+        "R@8/20m": 0.15491452991452992
+      },
+      "gat": {
+        "samples": 2808,
+        "NE_m": 157.15051808588186,
+        "R@1/20m": 0.05698005698005698,
+        "R@4/20m": 0.1225071225071225,
+        "R@8/20m": 0.16168091168091167
+      }
+    },
+    "coverage": {
+      "samples": 2808,
+      "grounded_relation_fraction": 0.06125356125356125,
+      "roads_available_fraction": 0.0,
+      "grounded_road_relation_fraction": 0.0
+    }
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_goal_loss": 5.91482662972056,
+      "train_seconds": 74.18975290190428,
+      "samples_per_second": 286.9533751938613,
+      "train_samples": 21289,
+      "val_seconds": 2.7119643569458276,
+      "gpu_peak_gib": 0.5939359664916992,
+      "gpu_peak_reserved_gib": 0.671875,
+      "val_seen": {
+        "variants": {
+          "prior": {
+            "samples": 2454,
+            "NE_m": 183.97046822421223,
+            "R@1/20m": 0.06723716381418093,
+            "R@4/20m": 0.13732681336593316,
+            "R@8/20m": 0.1756316218418908
+          },
+          "rules": {
+            "samples": 2454,
+            "NE_m": 183.9893940472467,
+            "R@1/20m": 0.06560717196414018,
+            "R@4/20m": 0.14058679706601468,
+            "R@8/20m": 0.17726161369193155
+          },
+          "gat": {
+            "samples": 2454,
+            "NE_m": 114.36210111262066,
+            "R@1/20m": 0.10024449877750612,
+            "R@4/20m": 0.19396903015484923,
+            "R@8/20m": 0.25876120619396903
+          }
+        },
+        "coverage": {
+          "samples": 2454,
+          "grounded_relation_fraction": 0.06723716381418093,
+          "roads_available_fraction": 0.0,
+          "grounded_road_relation_fraction": 0.0
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "train_goal_loss": 5.726801605601796,
+      "train_seconds": 15.477226288989186,
+      "samples_per_second": 1375.5048613035676,
+      "train_samples": 21289,
+      "val_seconds": 1.078006842872128,
+      "gpu_peak_gib": 0.6009855270385742,
+      "gpu_peak_reserved_gib": 0.673828125,
+      "val_seen": {
+        "variants": {
+          "prior": {
+            "samples": 2454,
+            "NE_m": 183.97046822421223,
+            "R@1/20m": 0.06723716381418093,
+            "R@4/20m": 0.13732681336593316,
+            "R@8/20m": 0.1756316218418908
+          },
+          "rules": {
+            "samples": 2454,
+            "NE_m": 183.9893940472467,
+            "R@1/20m": 0.06560717196414018,
+            "R@4/20m": 0.14058679706601468,
+            "R@8/20m": 0.17726161369193155
+          },
+          "gat": {
+            "samples": 2454,
+            "NE_m": 123.3458408520488,
+            "R@1/20m": 0.10757946210268948,
+            "R@4/20m": 0.21271393643031786,
+            "R@8/20m": 0.2734311328443358
+          }
+        },
+        "coverage": {
+          "samples": 2454,
+          "grounded_relation_fraction": 0.06723716381418093,
+          "roads_available_fraction": 0.0,
+          "grounded_road_relation_fraction": 0.0
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "train_goal_loss": 5.602150723576809,
+      "train_seconds": 15.563243362819776,
+      "samples_per_second": 1367.9025318629228,
+      "train_samples": 21289,
+      "val_seconds": 0.7053184909746051,
+      "gpu_peak_gib": 0.6009855270385742,
+      "gpu_peak_reserved_gib": 0.673828125,
+      "val_seen": {
+        "variants": {
+          "prior": {
+            "samples": 2454,
+            "NE_m": 183.97046822421223,
+            "R@1/20m": 0.06723716381418093,
+            "R@4/20m": 0.13732681336593316,
+            "R@8/20m": 0.1756316218418908
+          },
+          "rules": {
+            "samples": 2454,
+            "NE_m": 183.9893940472467,
+            "R@1/20m": 0.06560717196414018,
+            "R@4/20m": 0.14058679706601468,
+            "R@8/20m": 0.17726161369193155
+          },
+          "gat": {
+            "samples": 2454,
+            "NE_m": 104.25676708019353,
+            "R@1/20m": 0.12184189079054605,
+            "R@4/20m": 0.22493887530562348,
+            "R@8/20m": 0.3015484922575387
+          }
+        },
+        "coverage": {
+          "samples": 2454,
+          "grounded_relation_fraction": 0.06723716381418093,
+          "roads_available_fraction": 0.0,
+          "grounded_road_relation_fraction": 0.0
+        }
+      }
+    },
+    {
+      "epoch": 4,
+      "train_goal_loss": 5.51501638506638,
+      "train_seconds": 15.614925911882892,
+      "samples_per_second": 1363.3750246486384,
+      "train_samples": 21289,
+      "val_seconds": 0.7283861481118947,
+      "gpu_peak_gib": 0.6009855270385742,
+      "gpu_peak_reserved_gib": 0.673828125,
+      "val_seen": {
+        "variants": {
+          "prior": {
+            "samples": 2454,
+            "NE_m": 183.97046822421223,
+            "R@1/20m": 0.06723716381418093,
+            "R@4/20m": 0.13732681336593316,
+            "R@8/20m": 0.1756316218418908
+          },
+          "rules": {
+            "samples": 2454,
+            "NE_m": 183.9893940472467,
+            "R@1/20m": 0.06560717196414018,
+            "R@4/20m": 0.14058679706601468,
+            "R@8/20m": 0.17726161369193155
+          },
+          "gat": {
+            "samples": 2454,
+            "NE_m": 103.94153811976301,
+            "R@1/20m": 0.12265688671556642,
+            "R@4/20m": 0.23634881825590873,
+            "R@8/20m": 0.31010594947025266
+          }
+        },
+        "coverage": {
+          "samples": 2454,
+          "grounded_relation_fraction": 0.06723716381418093,
+          "roads_available_fraction": 0.0,
+          "grounded_road_relation_fraction": 0.0
+        }
+      }
+    },
+    {
+      "epoch": 5,
+      "train_goal_loss": 5.452679440349045,
+      "train_seconds": 15.819986754097044,
+      "samples_per_second": 1345.7027702306132,
+      "train_samples": 21289,
+      "val_seconds": 0.7306774698663503,
+      "gpu_peak_gib": 0.6009855270385742,
+      "gpu_peak_reserved_gib": 0.673828125,
+      "val_seen": {
+        "variants": {
+          "prior": {
+            "samples": 2454,
+            "NE_m": 183.97046822421223,
+            "R@1/20m": 0.06723716381418093,
+            "R@4/20m": 0.13732681336593316,
+            "R@8/20m": 0.1756316218418908
+          },
+          "rules": {
+            "samples": 2454,
+            "NE_m": 183.9893940472467,
+            "R@1/20m": 0.06560717196414018,
+            "R@4/20m": 0.14058679706601468,
+            "R@8/20m": 0.17726161369193155
+          },
+          "gat": {
+            "samples": 2454,
+            "NE_m": 103.70816796138797,
+            "R@1/20m": 0.12306438467807661,
+            "R@4/20m": 0.23553382233088835,
+            "R@8/20m": 0.31907090464547677
+          }
+        },
+        "coverage": {
+          "samples": 2454,
+          "grounded_relation_fraction": 0.06723716381418093,
+          "roads_available_fraction": 0.0,
+          "grounded_road_relation_fraction": 0.0
+        }
+      }
+    }
+  ],
+  "note": "Offline static goal localization only. No RGB, UAV control, SR or SPL."
+}

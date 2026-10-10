@@ -1,0 +1,198 @@
+{
+  "args": {
+    "train": "data/p1_pairs_v3_hard/train.jsonl",
+    "unseen": null,
+    "output": "runs/p1_v3_hard_h128_seed0",
+    "resume": null,
+    "epochs": 5,
+    "batch_size": 32,
+    "workers": 4,
+    "grid_size": 28,
+    "hidden": 128,
+    "heads": 4,
+    "relative_position": false,
+    "max_text_length": 96,
+    "max_batches": null,
+    "lr": 0.0002,
+    "inverse_weight": 0.1,
+    "hard_negative_weight": 0.1,
+    "seed": 0,
+    "device": "cuda",
+    "text_backbone": "bert-base-uncased"
+  },
+  "train_pairs": 9122,
+  "dev_pairs": 911,
+  "unseen_pairs": 0,
+  "checkpoint_epoch": 5,
+  "train_maps": [
+    "birmingham_block_1",
+    "birmingham_block_10",
+    "birmingham_block_11",
+    "birmingham_block_12",
+    "birmingham_block_3",
+    "birmingham_block_4",
+    "birmingham_block_7",
+    "birmingham_block_9",
+    "cambridge_block_12",
+    "cambridge_block_13",
+    "cambridge_block_17",
+    "cambridge_block_18",
+    "cambridge_block_19",
+    "cambridge_block_20",
+    "cambridge_block_21",
+    "cambridge_block_23",
+    "cambridge_block_25",
+    "cambridge_block_28",
+    "cambridge_block_33",
+    "cambridge_block_4",
+    "cambridge_block_6",
+    "cambridge_block_7",
+    "cambridge_block_9"
+  ],
+  "unseen_maps": [],
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 5.284840238731681,
+      "loss_components": {
+        "goal": 5.278944977830118,
+        "inverse": 0.02459267771996457,
+        "hard_negative": 0.034359740686783574
+      },
+      "train_seconds": 19.679727983195335,
+      "dev": {
+        "samples": 1822,
+        "NE_m": 32.739603991042635,
+        "inverse_error": 0.02668056427577815,
+        "inverse_displacement_error_m": 25.8308801410227,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.4110867178924259,
+        "R@4/20m": 0.5823271130625686,
+        "R@8/20m": 0.6899012074643249
+      },
+      "train_samples": 16422,
+      "samples_per_second": 834.4627534497869,
+      "gpu_gib": 1.8842668533325195,
+      "validation_seconds": 2.5097571960650384,
+      "train_started_unix": 1791583554.7034647,
+      "train_finished_unix": 1791583574.3831947
+    },
+    {
+      "epoch": 2,
+      "train_loss": 4.167537917929377,
+      "loss_components": {
+        "goal": 4.164068262958306,
+        "inverse": 0.03469650640438563,
+        "hard_negative": 0.0
+      },
+      "train_seconds": 14.549579881830141,
+      "dev": {
+        "samples": 1822,
+        "NE_m": 27.24379344148772,
+        "inverse_error": 0.034684130612200555,
+        "inverse_displacement_error_m": 28.362684180786268,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.5329308452250274,
+        "R@4/20m": 0.7535675082327113,
+        "R@8/20m": 0.8402854006586169
+      },
+      "train_samples": 16422,
+      "samples_per_second": 1128.6923837923446,
+      "gpu_gib": 1.8842668533325195,
+      "validation_seconds": 0.8411046538967639,
+      "train_started_unix": 1791583576.915111,
+      "train_finished_unix": 1791583591.464693
+    },
+    {
+      "epoch": 3,
+      "train_loss": 3.8998676670438233,
+      "loss_components": {
+        "goal": 3.8962358290175545,
+        "inverse": 0.036318374429981974,
+        "hard_negative": 0.0
+      },
+      "train_seconds": 12.34680954203941,
+      "dev": {
+        "samples": 1822,
+        "NE_m": 28.621258230031387,
+        "inverse_error": 0.028134776268084867,
+        "inverse_displacement_error_m": 24.274935742241098,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.5334796926454446,
+        "R@4/20m": 0.7557628979143798,
+        "R@8/20m": 0.8523600439077936
+      },
+      "train_samples": 16422,
+      "samples_per_second": 1330.0602025231744,
+      "gpu_gib": 1.8842668533325195,
+      "validation_seconds": 0.7023264800664037,
+      "train_started_unix": 1791583592.3309321,
+      "train_finished_unix": 1791583604.677744
+    },
+    {
+      "epoch": 4,
+      "train_loss": 3.773014381732971,
+      "loss_components": {
+        "goal": 3.7696609097237914,
+        "inverse": 0.03353484217932709,
+        "hard_negative": 0.0
+      },
+      "train_seconds": 10.50688497396186,
+      "dev": {
+        "samples": 1822,
+        "NE_m": 25.69654928263927,
+        "inverse_error": 0.0277992094775946,
+        "inverse_displacement_error_m": 25.666790121604006,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.5389681668496158,
+        "R@4/20m": 0.7574094401756312,
+        "R@8/20m": 0.8737650933040615
+      },
+      "train_samples": 16422,
+      "samples_per_second": 1562.9751387492074,
+      "gpu_gib": 1.8842668533325195,
+      "validation_seconds": 0.6910563220735639,
+      "train_started_unix": 1791583605.4013488,
+      "train_finished_unix": 1791583615.9082358
+    },
+    {
+      "epoch": 5,
+      "train_loss": 3.712337801479971,
+      "loss_components": {
+        "goal": 3.709182119357892,
+        "inverse": 0.031556821777471135,
+        "hard_negative": 0.0
+      },
+      "train_seconds": 10.332908290904015,
+      "dev": {
+        "samples": 1822,
+        "NE_m": 25.369314082760187,
+        "inverse_error": 0.02315815197688279,
+        "inverse_displacement_error_m": 23.073286004176385,
+        "direction_sign_accuracy": 1.0,
+        "R@1/20m": 0.5883644346871569,
+        "R@4/20m": 0.7991218441273326,
+        "R@8/20m": 0.8869374313940724
+      },
+      "train_samples": 16422,
+      "samples_per_second": 1589.2911789855107,
+      "gpu_gib": 1.8842668533325195,
+      "validation_seconds": 0.7118321268353611,
+      "train_started_unix": 1791583616.6198626,
+      "train_finished_unix": 1791583626.9527724
+    }
+  ],
+  "unseen": null,
+  "input_fingerprint": {
+    "train": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/p1_pairs_v3_hard/train.jsonl",
+      "sha256": "d8564c80ba514d70f1f44b38120d3e86d8a20956600177a360d7bbff45e00283"
+    }
+  },
+  "provenance": {
+    "commit": "73dab2149b93497114f816727062c2f0f40e1db7",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "claim": "synthetic reversible geometry localization only; not CityNav SR/SPL",
+  "smoke_only": false
+}

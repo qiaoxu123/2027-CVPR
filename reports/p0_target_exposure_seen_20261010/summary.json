@@ -1,0 +1,39 @@
+{
+  "split": "val_seen",
+  "source_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "observations_sha256": "ff9363c929c0e885439b177bc0f09670d42442e67f209f5698c86025c2da2a87",
+  "coverage": {
+    "frames": 6242,
+    "geometric_fov_fraction": 0.4424863825696892,
+    "nonzero_target_pixel_fraction": 0.42678628644665173
+  },
+  "source_episodes_total": 2470,
+  "observed_episodes": 960,
+  "episode_fractions": {
+    "any_fov": 0.79375,
+    "any_support": 0.7677083333333333,
+    "first_fov": 0.23854166666666668,
+    "first_support": 0.22395833333333334
+  },
+  "by_distance": {
+    "50-100m": {
+      "frames": 1215,
+      "geometric_fov_fraction": 0.5843621399176955,
+      "nonzero_target_pixel_fraction": 0.5547325102880658
+    },
+    "<=50m": {
+      "frames": 2055,
+      "geometric_fov_fraction": 0.7927007299270074,
+      "nonzero_target_pixel_fraction": 0.7664233576642335
+    },
+    ">100m": {
+      "frames": 2972,
+      "geometric_fov_fraction": 0.14232839838492597,
+      "nonzero_target_pixel_fraction": 0.13963660834454913
+    }
+  },
+  "resolutions": {
+    "384x384": 6242
+  },
+  "warning": "OFFLINE LABEL-BASED DIAGNOSTIC ONLY. Geometric FOV plus nonblack source pixel is not semantic visibility or occlusion ground truth. Human trajectory frames are subsampled/capped by existing P0 manifest and are not GraphNav on-policy exposure. No GT field enters inference or visual training."
+}

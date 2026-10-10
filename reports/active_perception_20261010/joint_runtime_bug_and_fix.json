@@ -1,0 +1,7 @@
+{
+  "observed_failure": "AttributeError: A3 checkpoint args omitted max_text_length in JointActivePolicy constructor",
+  "fix": "Use verified96 token default, matching original A3 runtime",
+  "regression_test": "test_legacy_a3_missing_text_length_uses_verified_96",
+  "failed_run_preserved": "runs/joint_active_closedloop_smoke",
+  "fixed_run": "runs/joint_active_closedloop_smoke_fixed"
+}

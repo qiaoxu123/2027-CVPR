@@ -1,0 +1,124 @@
+{
+  "requires": [
+    "runs/a3_trajectory_stop_seed0/report.json",
+    "runs/closedloop_baseline/a3_head_seen128_t0p7/metrics.json"
+  ],
+  "environment": {
+    "PYTHONPATH": ".",
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "jobs": [
+    {
+      "name": "trajectory_seen128_t0p5-calibrated",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--max-episodes",
+        "128",
+        "--output",
+        "runs/closedloop_baseline/a3_head_seen128_t0p5_calibrated",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.5"
+      ],
+      "log": "runs/a3_head_seen128_t0p5_calibrated.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_head_seen128_t0p5_calibrated/metrics.json"
+    },
+    {
+      "name": "trajectory_seen128_t0p3-calibrated",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--max-episodes",
+        "128",
+        "--output",
+        "runs/closedloop_baseline/a3_head_seen128_t0p3_calibrated",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.3"
+      ],
+      "log": "runs/a3_head_seen128_t0p3_calibrated.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_head_seen128_t0p3_calibrated/metrics.json"
+    },
+    {
+      "name": "trajectory_seen128_t0p7-calibrated",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--max-episodes",
+        "128",
+        "--output",
+        "runs/closedloop_baseline/a3_head_seen128_t0p7_calibrated",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.7"
+      ],
+      "log": "runs/a3_head_seen128_t0p7_calibrated.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_head_seen128_t0p7_calibrated/metrics.json"
+    },
+    {
+      "name": "real_current_landmark_encoder_smoke",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/smoke_observed_landmarks.py",
+        "--checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--episodes",
+        "runs/closedloop_baseline/a3_seen128/episodes.json",
+        "--objects",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json",
+        "--rgbd",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/rgbd",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--output",
+        "runs/current_landmark_encoder_smoke"
+      ],
+      "log": "runs/current_landmark_encoder_smoke.log",
+      "complete_artifact": "runs/current_landmark_encoder_smoke/report.json"
+    }
+  ],
+  "selection": "Fix weighted-BCE odds calibration, retaining all uncalibrated failures. Same trained head and same three Seen-only thresholds; no retraining or Unseen selection. Current-image encoder smoke does not use targets/future/gallery."
+}

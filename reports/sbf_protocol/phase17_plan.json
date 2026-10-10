@@ -1,0 +1,88 @@
+{
+  "requires": [
+    "reports/sbf_protocol/native_boundary128_exact_equivalence.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "selection": "Stop stage Seen confirmation only: fixed GAT/A3/trajectory state; recovery Stop only, versus recovery Stop + Top4 bounded exploration. Prior old Stop fullSeen result retained. No Unseen input.",
+  "jobs": [
+    {
+      "name": "recovery_stop_explore0_full_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_seen",
+        "--head-checkpoint",
+        "runs/stop_candidate_recovery_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/stop_recovery_full_seen/explore0",
+        "--explore-candidates",
+        "0"
+      ],
+      "log": "runs/stop_recovery_full_seen/explore0.log",
+      "complete_artifact": "runs/stop_recovery_full_seen/explore0/metrics.json"
+    },
+    {
+      "name": "recovery_stop_explore4_full_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_seen",
+        "--head-checkpoint",
+        "runs/stop_candidate_recovery_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/stop_recovery_full_seen/explore4",
+        "--explore-candidates",
+        "4"
+      ],
+      "log": "runs/stop_recovery_full_seen/explore4.log",
+      "complete_artifact": "runs/stop_recovery_full_seen/explore4/metrics.json"
+    }
+  ]
+}

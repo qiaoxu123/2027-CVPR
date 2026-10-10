@@ -1,0 +1,282 @@
+[
+  {
+    "epoch": 1,
+    "loss": 1.852324915844858,
+    "seconds": 14.068419448798522,
+    "train_pairs": 836,
+    "pairs_per_second": 59.42387508721859,
+    "images_per_second": 118.84775017443718,
+    "train_instance_fraction": 0.998805256869773,
+    "newly_encoded_images": 1860,
+    "dev": {
+      "gallery_objects": 94,
+      "R@1": 0.7340425252914429,
+      "R@5": 0.914893627166748,
+      "by_type": {
+        "Building": {
+          "queries": 35,
+          "R@1": 0.7714285850524902,
+          "R@5": 0.9142857193946838
+        },
+        "Footpath": {
+          "queries": 21,
+          "R@1": 0.6666666865348816,
+          "R@5": 0.8095238208770752
+        },
+        "Ground": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "HighVegetation": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "Rail": {
+          "queries": 1,
+          "R@1": 0.0,
+          "R@5": 1.0
+        },
+        "TrafficRoad": {
+          "queries": 35,
+          "R@1": 0.7428571581840515,
+          "R@5": 0.9714285731315613
+        }
+      },
+      "same_city_type_hard": {
+        "queries": 90,
+        "R@1": 0.8111111111111111,
+        "R@5": 0.9444444444444444,
+        "mean_gallery": 25.0
+      },
+      "protocol": "different-frame instance-ID retrieval, no GT target images"
+    },
+    "peak_gpu_gib": 1.938349723815918,
+    "validation_seconds": 1.6675518220290542
+  },
+  {
+    "epoch": 2,
+    "loss": 1.282527124197289,
+    "seconds": 10.89752578199841,
+    "train_pairs": 836,
+    "pairs_per_second": 76.71466135744187,
+    "images_per_second": 153.42932271488374,
+    "train_instance_fraction": 0.998805256869773,
+    "newly_encoded_images": 1317,
+    "dev": {
+      "gallery_objects": 94,
+      "R@1": 0.7446808218955994,
+      "R@5": 0.936170220375061,
+      "by_type": {
+        "Building": {
+          "queries": 35,
+          "R@1": 0.800000011920929,
+          "R@5": 0.9714285731315613
+        },
+        "Footpath": {
+          "queries": 21,
+          "R@1": 0.7142857313156128,
+          "R@5": 0.8571428656578064
+        },
+        "Ground": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "HighVegetation": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "Rail": {
+          "queries": 1,
+          "R@1": 0.0,
+          "R@5": 1.0
+        },
+        "TrafficRoad": {
+          "queries": 35,
+          "R@1": 0.7142857313156128,
+          "R@5": 0.9428571462631226
+        }
+      },
+      "same_city_type_hard": {
+        "queries": 90,
+        "R@1": 0.8555555555555555,
+        "R@5": 0.9777777777777777,
+        "mean_gallery": 25.0
+      },
+      "protocol": "different-frame instance-ID retrieval, no GT target images"
+    },
+    "peak_gpu_gib": 1.938349723815918,
+    "validation_seconds": 0.04797177202999592
+  },
+  {
+    "epoch": 3,
+    "loss": 1.0361102495752452,
+    "seconds": 9.536153024993837,
+    "train_pairs": 836,
+    "pairs_per_second": 87.66637844515297,
+    "images_per_second": 175.33275689030594,
+    "train_instance_fraction": 0.998805256869773,
+    "newly_encoded_images": 1128,
+    "dev": {
+      "gallery_objects": 94,
+      "R@1": 0.7765957713127136,
+      "R@5": 0.9255319237709045,
+      "by_type": {
+        "Building": {
+          "queries": 35,
+          "R@1": 0.7428571581840515,
+          "R@5": 0.9142857193946838
+        },
+        "Footpath": {
+          "queries": 21,
+          "R@1": 0.7142857313156128,
+          "R@5": 0.8571428656578064
+        },
+        "Ground": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "HighVegetation": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "Rail": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "TrafficRoad": {
+          "queries": 35,
+          "R@1": 0.8285714387893677,
+          "R@5": 0.9714285731315613
+        }
+      },
+      "same_city_type_hard": {
+        "queries": 90,
+        "R@1": 0.8555555555555555,
+        "R@5": 0.9555555555555556,
+        "mean_gallery": 25.0
+      },
+      "protocol": "different-frame instance-ID retrieval, no GT target images"
+    },
+    "peak_gpu_gib": 1.9293546676635742,
+    "validation_seconds": 0.051717417081817985
+  },
+  {
+    "epoch": 4,
+    "loss": 0.9314308501601789,
+    "seconds": 8.326374332187697,
+    "train_pairs": 836,
+    "pairs_per_second": 100.40384525690028,
+    "images_per_second": 200.80769051380057,
+    "train_instance_fraction": 0.998805256869773,
+    "newly_encoded_images": 971,
+    "dev": {
+      "gallery_objects": 94,
+      "R@1": 0.7978723645210266,
+      "R@5": 0.957446813583374,
+      "by_type": {
+        "Building": {
+          "queries": 35,
+          "R@1": 0.800000011920929,
+          "R@5": 1.0
+        },
+        "Footpath": {
+          "queries": 21,
+          "R@1": 0.7142857313156128,
+          "R@5": 0.8571428656578064
+        },
+        "Ground": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "HighVegetation": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "Rail": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "TrafficRoad": {
+          "queries": 35,
+          "R@1": 0.8285714387893677,
+          "R@5": 0.9714285731315613
+        }
+      },
+      "same_city_type_hard": {
+        "queries": 90,
+        "R@1": 0.8777777777777778,
+        "R@5": 0.9777777777777777,
+        "mean_gallery": 25.0
+      },
+      "protocol": "different-frame instance-ID retrieval, no GT target images"
+    },
+    "peak_gpu_gib": 1.9293546676635742,
+    "validation_seconds": 0.03793692099861801
+  },
+  {
+    "epoch": 5,
+    "loss": 0.880164062149787,
+    "seconds": 7.671491632936522,
+    "train_pairs": 836,
+    "pairs_per_second": 108.9748956266531,
+    "images_per_second": 217.9497912533062,
+    "train_instance_fraction": 0.998805256869773,
+    "newly_encoded_images": 857,
+    "dev": {
+      "gallery_objects": 94,
+      "R@1": 0.8297872543334961,
+      "R@5": 0.9468085169792175,
+      "by_type": {
+        "Building": {
+          "queries": 35,
+          "R@1": 0.9142857193946838,
+          "R@5": 1.0
+        },
+        "Footpath": {
+          "queries": 21,
+          "R@1": 0.7142857313156128,
+          "R@5": 0.8571428656578064
+        },
+        "Ground": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "HighVegetation": {
+          "queries": 1,
+          "R@1": 1.0,
+          "R@5": 1.0
+        },
+        "Rail": {
+          "queries": 1,
+          "R@1": 0.0,
+          "R@5": 1.0
+        },
+        "TrafficRoad": {
+          "queries": 35,
+          "R@1": 0.8285714387893677,
+          "R@5": 0.9428571462631226
+        }
+      },
+      "same_city_type_hard": {
+        "queries": 90,
+        "R@1": 0.9222222222222223,
+        "R@5": 0.9666666666666667,
+        "mean_gallery": 25.0
+      },
+      "protocol": "different-frame instance-ID retrieval, no GT target images"
+    },
+    "peak_gpu_gib": 1.9293546676635742,
+    "validation_seconds": 0.04693946219049394
+  }
+]

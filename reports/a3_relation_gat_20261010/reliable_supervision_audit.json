@@ -1,0 +1,72 @@
+{
+  "definition": "Private-label supervision audit only. No labels or target-dependent masks enter inference.",
+  "train_seen": {
+    "source_sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c",
+    "counts": {
+      "queries": 21166,
+      "eligible_queries": 1622,
+      "multiple_constraints_queries": 30
+    },
+    "eligible_relation_counts": {
+      "near": 1203,
+      "between": 440,
+      "north": 7,
+      "south": 1,
+      "southeast": 1
+    },
+    "controlled_direction_counts": {
+      "north": 5
+    },
+    "controlled_examples": [
+      {
+        "instruction": "On Wellington Road north of Willmore Road and to the left of St Teresa's Court, it is a black car next to a red car.",
+        "kind": "north",
+        "anchors": [
+          "Willmore Road"
+        ]
+      },
+      {
+        "instruction": "The building north of Gisborne Court Ground. this building has lots of skylights, to the left of the building is the Old Court Ground.",
+        "kind": "north",
+        "anchors": [
+          "Gisborne Court"
+        ]
+      },
+      {
+        "instruction": "Directly north of Catholic Church of Our Lady and the English Martyrs, this red car is fourth from the right.",
+        "kind": "north",
+        "anchors": [
+          "Catholic Church"
+        ]
+      },
+      {
+        "instruction": "On Lensfield Road, to the north of Catholic Church of Our Lady and the English Martyrs, this red car is parked in the bottom row of the parking lot, fourth car from the right.",
+        "kind": "north",
+        "anchors": [
+          "Catholic Church"
+        ]
+      },
+      {
+        "instruction": "On the road Parkside, this building with a gray roof is north of York House and two other houses and to the left of Parkside Gym.",
+        "kind": "north",
+        "anchors": [
+          "York House"
+        ]
+      }
+    ]
+  },
+  "val_seen": {
+    "source_sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2",
+    "counts": {
+      "queries": 2426,
+      "eligible_queries": 190,
+      "multiple_constraints_queries": 3
+    },
+    "eligible_relation_counts": {
+      "near": 146,
+      "between": 47
+    },
+    "controlled_direction_counts": {},
+    "controlled_examples": []
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "requires": [
+    "runs/stop_recovery_seen128/explore4/metrics.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "selection": "Three independent scratch seeds; exact legacy A3 structure, BF16 batch16, lr2e-4, five epochs, same approved Train and unique Seen. Best epoch selected by Seen R1 then NE. No Unseen read. These are A3 backbone replications, not whole-system seed replications.",
+  "jobs": [
+    {
+      "name": "a3_scratch_replication_seed0",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/train_a3_replicate.py",
+        "--template",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--train",
+        "data/revised_static/graphnav_train_seen.jsonl",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--train-bert-cache",
+        "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "--seen-bert-cache",
+        "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "--seed",
+        "0",
+        "--batch-size",
+        "16",
+        "--workers",
+        "4",
+        "--epochs",
+        "5",
+        "--output",
+        "runs/a3_replicate_seed0"
+      ],
+      "log": "runs/a3_replicate_seed0.log",
+      "complete_artifact": "runs/a3_replicate_seed0/report.json"
+    },
+    {
+      "name": "a3_scratch_replication_seed1",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/train_a3_replicate.py",
+        "--template",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--train",
+        "data/revised_static/graphnav_train_seen.jsonl",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--train-bert-cache",
+        "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "--seen-bert-cache",
+        "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "--seed",
+        "1",
+        "--batch-size",
+        "16",
+        "--workers",
+        "4",
+        "--epochs",
+        "5",
+        "--output",
+        "runs/a3_replicate_seed1"
+      ],
+      "log": "runs/a3_replicate_seed1.log",
+      "complete_artifact": "runs/a3_replicate_seed1/report.json"
+    },
+    {
+      "name": "a3_scratch_replication_seed2",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/train_a3_replicate.py",
+        "--template",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--train",
+        "data/revised_static/graphnav_train_seen.jsonl",
+        "--seen",
+        "data/revised_static/graphnav_val_seen.jsonl",
+        "--train-bert-cache",
+        "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "--seen-bert-cache",
+        "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "--seed",
+        "2",
+        "--batch-size",
+        "16",
+        "--workers",
+        "4",
+        "--epochs",
+        "5",
+        "--output",
+        "runs/a3_replicate_seed2"
+      ],
+      "log": "runs/a3_replicate_seed2.log",
+      "complete_artifact": "runs/a3_replicate_seed2/report.json"
+    }
+  ]
+}

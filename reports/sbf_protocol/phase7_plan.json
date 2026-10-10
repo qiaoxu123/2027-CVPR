@@ -1,0 +1,55 @@
+{
+  "requires": [
+    "runs/closedloop_baseline/a3_direct_stop_seen_full/metrics.json"
+  ],
+  "environment": {
+    "PYTHONPATH": ".",
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "jobs": [
+    {
+      "name": "cache_a3_fp32_train",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/cache_a3_features.py",
+        "--queries",
+        "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--output",
+        "runs/a3_dynamic_train_fp32",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4",
+        "--dense-context"
+      ],
+      "log": "runs/a3_dynamic_train_fp32.log",
+      "complete_artifact": "runs/a3_dynamic_train_fp32/bert_tokens.pt"
+    },
+    {
+      "name": "cache_a3_fp32_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/cache_a3_features.py",
+        "--queries",
+        "data/public_eval_seen_v2/public_queries.jsonl",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--output",
+        "runs/a3_dynamic_seen_fp32",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4",
+        "--dense-context"
+      ],
+      "log": "runs/a3_dynamic_seen_fp32.log",
+      "complete_artifact": "runs/a3_dynamic_seen_fp32/bert_tokens.pt"
+    }
+  ],
+  "selection": "Correct dense goal logits to FP32 to preserve original static rankings; create separate caches, never change historical frozen head inputs/results. No model/hyperparameter or Unseen selection."
+}

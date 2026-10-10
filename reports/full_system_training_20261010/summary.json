@@ -1,0 +1,675 @@
+{
+  "stages": {
+    "A3_seed0": {
+      "run": "runs/a3_replicate_seed0",
+      "report_sha256": "e52aa9eee000c0e95ef2705168d5bed0d867717b72d57962314c2e24710752af",
+      "args": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "runs/a3_replicate_seed0",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "provenance": {
+        "commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706",
+        "working_diff_sha256": "dd9cbb9181a74141cd982c126a969e5f0d559638de706defac1bd975b75de403"
+      },
+      "input_fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 265.9938297010958,
+      "evaluation_seconds": 18.830407130997628,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/a3_replicate_seed0/best.pt",
+          "sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e"
+        },
+        "last.pt": {
+          "path": "runs/a3_replicate_seed0/last.pt",
+          "sha256": "6781ff9d52860acd819cd046a67acd21ab073cbe0051398dbb19758844d3bbab"
+        }
+      }
+    },
+    "A3_seed1": {
+      "run": "runs/a3_replicate_seed1",
+      "report_sha256": "4cf4af8e711173e4e951eb0b71be75663c6ca767c138b6bfb7e03a6f780f8dd0",
+      "args": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 1,
+        "output": "runs/a3_replicate_seed1",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "provenance": {
+        "commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706",
+        "working_diff_sha256": "dd9cbb9181a74141cd982c126a969e5f0d559638de706defac1bd975b75de403"
+      },
+      "input_fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 278.4424699039664,
+      "evaluation_seconds": 19.42699649487622,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/a3_replicate_seed1/best.pt",
+          "sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be"
+        },
+        "last.pt": {
+          "path": "runs/a3_replicate_seed1/last.pt",
+          "sha256": "52612472c4360ce28c5bceb2f987168ba4450e53f4da5026b7c27e6ad710f24f"
+        }
+      }
+    },
+    "A3_seed2": {
+      "run": "runs/a3_replicate_seed2",
+      "report_sha256": "c5c6f5e2a3e326f911c165ac9d012a26937f5a84e1cfe9981e74a69b3054b7ae",
+      "args": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 2,
+        "output": "runs/a3_replicate_seed2",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "provenance": {
+        "commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706",
+        "working_diff_sha256": "409c83b7af6da1300fb862f1c1744c1273b3dda0e4cb4638c842c8152ef27bb8"
+      },
+      "input_fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 268.7048624539748,
+      "evaluation_seconds": 19.31493949983269,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/a3_replicate_seed2/best.pt",
+          "sha256": "228586057f2dc9ee75be1f2415a901cc5f6b5e1d9621236669057094e984166d"
+        },
+        "last.pt": {
+          "path": "runs/a3_replicate_seed2/last.pt",
+          "sha256": "33ec6c226d3fedabd8c8baa17e479f5fcb2d671bfddffde63d89dd2fdee52c78"
+        }
+      }
+    },
+    "Dynamic_seed0": {
+      "run": "runs/full_seed0_dynamic",
+      "report_sha256": "64ee4a129bb2c2c7d4425640a432561d51b27b86282e60f356a712f05907bb67",
+      "args": {
+        "train_evidence": "data/dynamic_evidence_v2_train_seen",
+        "train_queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "train_fields": "runs/full_seed0_train_fields",
+        "train_vectors": "runs/p3_landmark_vectors_train_seen",
+        "seen_evidence": "data/dynamic_evidence_v2_val_seen",
+        "seen_queries": "data/public_eval_seen_v2/public_queries.jsonl",
+        "seen_fields": "runs/full_seed0_seen_fields",
+        "seen_vectors": "runs/p3_landmark_vectors_val_seen",
+        "checkpoint": "runs/a3_replicate_seed0/best.pt",
+        "output": "runs/full_seed0_dynamic",
+        "variant": "graph_visual_history",
+        "associate_observed_refs": true,
+        "epochs": 5,
+        "batch_size": 64,
+        "workers": 4,
+        "seed": 0,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "gate_lr": 0.002,
+        "max_batches": null,
+        "resume": null,
+        "device": "cuda"
+      },
+      "provenance": {
+        "commit": "029de757daf01eef25fe5da7e2747967aa0b24d9",
+        "working_diff_sha256": "37422bb16c869e788dcb4085e4cc38a7beca5911194069c02e8cd0bcb8de5d99"
+      },
+      "input_fingerprint": {
+        "train_queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "seen_queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/public_eval_seen_v2/public_queries.jsonl",
+          "sha256": "9224ab061f12ebd3a3ea4a83523c16cacb3d5357466a8e645c6710ba5233d04f"
+        },
+        "checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed0/best.pt",
+          "sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e"
+        },
+        "train_evidence": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_train_seen/manifest.json",
+          "sha256": "fbf6cc8418ffabdf41cc05e1c05d781ac80dd87b904688e4e2a75af3829d33bf"
+        },
+        "train_fields": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed0_train_fields/manifest.json",
+          "sha256": "14bb9d350741d1e5d9383bfd9bec80f13f42b791d305f8161b70dc679385d3c2"
+        },
+        "train_vectors": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_train_seen/manifest.json",
+          "sha256": "6c4217656369de142214a2d6e6c112f2aeff36b9cc29743009375865e11f70e1"
+        },
+        "seen_evidence": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_val_seen/manifest.json",
+          "sha256": "932b88cf526e585c1ea1f7cf183cc53610eda33ab11aa696c40b873bb7415a13"
+        },
+        "seen_fields": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed0_seen_fields/manifest.json",
+          "sha256": "e5ab546e9bcdb9093ff160edafbfd3dea57d43f6fac0c5f8b3c4cf63417c4ade"
+        },
+        "seen_vectors": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_val_seen/manifest.json",
+          "sha256": "27bc9d8a13572d326e1ceae35e3aee5123e11e485ac6d25edb58f5c09883ab66"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 25.942314474610612,
+      "evaluation_seconds": 2.1675319967325777,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed0_dynamic/best.pt",
+          "sha256": "29784cb0a49266c11d4a714ac8c2c638ef25ce60f78aa5e38f120f4ceefe4a93"
+        },
+        "last.pt": {
+          "path": "runs/full_seed0_dynamic/last.pt",
+          "sha256": "bde143ec98720fb6bdffeef792ed60f3efc21799e72ece0bb44bc16bcf86801c"
+        }
+      }
+    },
+    "Dynamic_seed1": {
+      "run": "runs/full_seed1_dynamic",
+      "report_sha256": "f03fcae037c19fcf5b0b29d9b8edfd9d9b8e490e2a1551b6c37e2a3ea6647cd9",
+      "args": {
+        "train_evidence": "data/dynamic_evidence_v2_train_seen",
+        "train_queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "train_fields": "runs/full_seed1_train_fields",
+        "train_vectors": "runs/p3_landmark_vectors_train_seen",
+        "seen_evidence": "data/dynamic_evidence_v2_val_seen",
+        "seen_queries": "data/public_eval_seen_v2/public_queries.jsonl",
+        "seen_fields": "runs/full_seed1_seen_fields",
+        "seen_vectors": "runs/p3_landmark_vectors_val_seen",
+        "checkpoint": "runs/a3_replicate_seed1/best.pt",
+        "output": "runs/full_seed1_dynamic",
+        "variant": "graph_visual_history",
+        "associate_observed_refs": true,
+        "epochs": 5,
+        "batch_size": 64,
+        "workers": 4,
+        "seed": 1,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "gate_lr": 0.002,
+        "max_batches": null,
+        "resume": null,
+        "device": "cuda"
+      },
+      "provenance": {
+        "commit": "d973a7291faac0e821690b41bce02f22f71f17b5",
+        "working_diff_sha256": "d638e62f0990d7d32653653088ca83450ed34321672fdc4d92917a8a805b59ab"
+      },
+      "input_fingerprint": {
+        "train_queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "seen_queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/public_eval_seen_v2/public_queries.jsonl",
+          "sha256": "9224ab061f12ebd3a3ea4a83523c16cacb3d5357466a8e645c6710ba5233d04f"
+        },
+        "checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed1/best.pt",
+          "sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be"
+        },
+        "train_evidence": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_train_seen/manifest.json",
+          "sha256": "fbf6cc8418ffabdf41cc05e1c05d781ac80dd87b904688e4e2a75af3829d33bf"
+        },
+        "train_fields": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed1_train_fields/manifest.json",
+          "sha256": "054bd2c1a9595a8bbaecffade9e6ef485cf3257dc1ec6c2e9f25631793aa1e38"
+        },
+        "train_vectors": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_train_seen/manifest.json",
+          "sha256": "6c4217656369de142214a2d6e6c112f2aeff36b9cc29743009375865e11f70e1"
+        },
+        "seen_evidence": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_val_seen/manifest.json",
+          "sha256": "932b88cf526e585c1ea1f7cf183cc53610eda33ab11aa696c40b873bb7415a13"
+        },
+        "seen_fields": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed1_seen_fields/manifest.json",
+          "sha256": "c41e3fd56a3e90c86c11786c61593486bf900fc418d7a8002ab9c8a613ad3b65"
+        },
+        "seen_vectors": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_val_seen/manifest.json",
+          "sha256": "27bc9d8a13572d326e1ceae35e3aee5123e11e485ac6d25edb58f5c09883ab66"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 25.53029886703007,
+      "evaluation_seconds": 2.093155519803986,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed1_dynamic/best.pt",
+          "sha256": "0475e3c187441dc9eb8ccb85aece6e3a592d33e05238c3993bd4dcfaac66415b"
+        },
+        "last.pt": {
+          "path": "runs/full_seed1_dynamic/last.pt",
+          "sha256": "532ff4b2145e61e6a1563d924b2305503e58f24c0015d9679823e2b560f3ffd1"
+        }
+      }
+    },
+    "Dynamic_seed2": {
+      "run": "runs/full_seed2_dynamic",
+      "report_sha256": "3ac352315a844089b1a299cbea05ff2a69e79bc6220093113d441020fbb021cb",
+      "args": {
+        "train_evidence": "data/dynamic_evidence_v2_train_seen",
+        "train_queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "train_fields": "runs/full_seed2_train_fields",
+        "train_vectors": "runs/p3_landmark_vectors_train_seen",
+        "seen_evidence": "data/dynamic_evidence_v2_val_seen",
+        "seen_queries": "data/public_eval_seen_v2/public_queries.jsonl",
+        "seen_fields": "runs/full_seed2_seen_fields",
+        "seen_vectors": "runs/p3_landmark_vectors_val_seen",
+        "checkpoint": "runs/a3_replicate_seed2/best.pt",
+        "output": "runs/full_seed2_dynamic",
+        "variant": "graph_visual_history",
+        "associate_observed_refs": true,
+        "epochs": 5,
+        "batch_size": 64,
+        "workers": 4,
+        "seed": 2,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "gate_lr": 0.002,
+        "max_batches": null,
+        "resume": null,
+        "device": "cuda"
+      },
+      "provenance": {
+        "commit": "94478bc1aec02a796bc750c7acfd9f17a37d148e",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "input_fingerprint": {
+        "train_queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "seen_queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/public_eval_seen_v2/public_queries.jsonl",
+          "sha256": "9224ab061f12ebd3a3ea4a83523c16cacb3d5357466a8e645c6710ba5233d04f"
+        },
+        "checkpoint": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed2/best.pt",
+          "sha256": "228586057f2dc9ee75be1f2415a901cc5f6b5e1d9621236669057094e984166d"
+        },
+        "train_evidence": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_train_seen/manifest.json",
+          "sha256": "fbf6cc8418ffabdf41cc05e1c05d781ac80dd87b904688e4e2a75af3829d33bf"
+        },
+        "train_fields": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed2_train_fields/manifest.json",
+          "sha256": "755ffb5d108f5f775bff81f467c5213058e9e40cb0300c2ea5e83005dcc4aa62"
+        },
+        "train_vectors": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_train_seen/manifest.json",
+          "sha256": "6c4217656369de142214a2d6e6c112f2aeff36b9cc29743009375865e11f70e1"
+        },
+        "seen_evidence": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/dynamic_evidence_v2_val_seen/manifest.json",
+          "sha256": "932b88cf526e585c1ea1f7cf183cc53610eda33ab11aa696c40b873bb7415a13"
+        },
+        "seen_fields": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed2_seen_fields/manifest.json",
+          "sha256": "f64f7feccc2327c902e96de975b308d5b4d7eded2b79dcb917e7be40b4fbc6cd"
+        },
+        "seen_vectors": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/p3_landmark_vectors_val_seen/manifest.json",
+          "sha256": "27bc9d8a13572d326e1ceae35e3aee5123e11e485ac6d25edb58f5c09883ab66"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 25.772804957348853,
+      "evaluation_seconds": 2.086577730719,
+      "epochs_with_wall_clock": 10,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed2_dynamic/best.pt",
+          "sha256": "80fb1adeb0ad23312e3e56f4c7e61a20753c55d4c916de7054ef393e91ab6e76"
+        },
+        "last.pt": {
+          "path": "runs/full_seed2_dynamic/last.pt",
+          "sha256": "7781bf8706b485335ac987d8662c8b3af8ab2c506fdb9b34761bc6c966589420"
+        }
+      }
+    },
+    "Trajectory_Stop_seed0": {
+      "run": "runs/full_seed0_trajectory",
+      "report_sha256": "4876da48960dca55ac86e4e1fbf773aaf527a41078143ba19ce5c5a3eed9e15f",
+      "args": {
+        "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "cache": "runs/full_seed0_train_fields",
+        "output": "runs/full_seed0_trajectory",
+        "epochs": 5,
+        "batch_size": 256,
+        "workers": 4,
+        "seed": 0,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "device": "cuda",
+        "resume": null
+      },
+      "provenance": {
+        "commit": "e9fa714087b0b6ff6871375535fd17787d21a3f7",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "input_fingerprint": {
+        "samples": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+          "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+        },
+        "queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "cache_manifest": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed0_train_fields/manifest.json",
+          "sha256": "14bb9d350741d1e5d9383bfd9bec80f13f42b791d305f8161b70dc679385d3c2"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 36.337123822653666,
+      "evaluation_seconds": 2.819134675199166,
+      "epochs_with_wall_clock": 0,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed0_trajectory/best.pt",
+          "sha256": "56bec006f3e4dc91b8875beae32497e73a87d8dda78945f0cb1e1cd78715765c"
+        },
+        "last.pt": {
+          "path": "runs/full_seed0_trajectory/last.pt",
+          "sha256": "e7b3b702c71346252f4e01c70dd4d6351841b70a298c0f7d497ae322ecb8a57f"
+        }
+      }
+    },
+    "Trajectory_Stop_seed1": {
+      "run": "runs/full_seed1_trajectory",
+      "report_sha256": "6c8aa06b6416625fc36afe8bfe4a8fc026ef98a0a99f582958a783c0e2f4a9dd",
+      "args": {
+        "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "cache": "runs/full_seed1_train_fields",
+        "output": "runs/full_seed1_trajectory",
+        "epochs": 5,
+        "batch_size": 256,
+        "workers": 4,
+        "seed": 1,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "device": "cuda",
+        "resume": null
+      },
+      "provenance": {
+        "commit": "d973a7291faac0e821690b41bce02f22f71f17b5",
+        "working_diff_sha256": "d638e62f0990d7d32653653088ca83450ed34321672fdc4d92917a8a805b59ab"
+      },
+      "input_fingerprint": {
+        "samples": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+          "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+        },
+        "queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "cache_manifest": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed1_train_fields/manifest.json",
+          "sha256": "054bd2c1a9595a8bbaecffade9e6ef485cf3257dc1ec6c2e9f25631793aa1e38"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 40.857040180591866,
+      "evaluation_seconds": 3.4951367266476154,
+      "epochs_with_wall_clock": 0,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed1_trajectory/best.pt",
+          "sha256": "d1a48a452363dba0d39d8fc14903ec6f976ba2880cc073872c572484884217ea"
+        },
+        "last.pt": {
+          "path": "runs/full_seed1_trajectory/last.pt",
+          "sha256": "af8bcb7e9920776d77dac2be70ea3bd283df89369d704a531046065215d8e6e9"
+        }
+      }
+    },
+    "Trajectory_Stop_seed2": {
+      "run": "runs/full_seed2_trajectory",
+      "report_sha256": "cacdd4177c66cfc297bc01adbdfbead5c9febb003270fdae3b8cc48832f415a0",
+      "args": {
+        "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+        "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "cache": "runs/full_seed2_train_fields",
+        "output": "runs/full_seed2_trajectory",
+        "epochs": 5,
+        "batch_size": 256,
+        "workers": 4,
+        "seed": 2,
+        "split_seed": 0,
+        "lr": 0.0002,
+        "device": "cuda",
+        "resume": null
+      },
+      "provenance": {
+        "commit": "94478bc1aec02a796bc750c7acfd9f17a37d148e",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "input_fingerprint": {
+        "samples": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+          "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+        },
+        "queries": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+          "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+        },
+        "cache_manifest": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed2_train_fields/manifest.json",
+          "sha256": "755ffb5d108f5f775bff81f467c5213058e9e40cb0300c2ea5e83005dcc4aa62"
+        }
+      },
+      "epochs": 5,
+      "train_seconds": 32.66882316302508,
+      "evaluation_seconds": 2.603777884040028,
+      "epochs_with_wall_clock": 0,
+      "checkpoints": {
+        "best.pt": {
+          "path": "runs/full_seed2_trajectory/best.pt",
+          "sha256": "068087543521d1532b0d5b1ca51b7779361a2b2483cda64fb45964f1c69beada"
+        },
+        "last.pt": {
+          "path": "runs/full_seed2_trajectory/last.pt",
+          "sha256": "f37ef2ef969314171496effeab26cafa132f59547110a7df7b21b8590b79a825"
+        }
+      }
+    }
+  },
+  "provenance": {
+    "commit": "d587a4964a2bb3c46f7a6c6aee10c9576f0373ed",
+    "working_diff_sha256": "c6d98dd0c22cda2a04115fc04ec6ff7eb0263b5d533a20bd193efbe105e1d833"
+  },
+  "note": "Measured epoch durations only; training totals exclude setup, rendering and feature-cache generation, which are recorded as separate queue jobs. Epochs without absolute timestamps cannot be matched to sampled GPU telemetry. Missing values remain empty/null. Nested per-query/class metrics remain in source reports; no synthetic reconstruction."
+}

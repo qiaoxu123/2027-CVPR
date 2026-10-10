@@ -1,0 +1,495 @@
+..........F...................F.FFFF.................F...FFFFFF.....F.F. [ 96%]
+...                                                                      [100%]
+=================================== FAILURES ===================================
+________ test_all_ablation_configs_inherit_a_complete_valid_main_config ________
+
+    def test_all_ablation_configs_inherit_a_complete_valid_main_config():
+        paths = sorted((ROOT / "configs" / "sbfnav" / "ablations").glob("*.yaml"))
+        assert len(paths) >= 14
+        for path in paths:
+            config = load_config(path)
+>           validate_config(config)
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_config.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+config = {'seed': 0, 'splits': ['val_seen', 'val_unseen'], 'episodes_per_split': 256, 'variants': [{'name': 'selector_only_no_f...nk', 'overrides': ['evaluation.ablation.field_score_fusion=rank', 'evaluation.ablation.field_score_weight=1.0']}], ...}
+
+    def validate_config(config: Mapping[str, Any]) -> None:
+        required = ("data", "model", "loss", "proposal", "selector", "training", "navigation")
+        missing = [key for key in required if key not in config]
+        if missing:
+>           raise ValueError(f"missing configuration sections: {missing}")
+E           ValueError: missing configuration sections: ['data', 'model', 'loss', 'proposal', 'selector', 'training', 'navigation']
+
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/config.py:74: ValueError
+_______________ test_expected_revised_counts_and_split_isolation _______________
+
+    def test_expected_revised_counts_and_split_isolation():
+>       train = CityNavDataset(DATA_ROOT, "train_seen")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py:20: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <sbfnav.dataset.CityNavDataset object at 0x7f89bf886710>
+data_root = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data')
+split = 'train_seen', version = 'processed_citynav', difficulty = None
+allow_test_unseen = False, max_records = None
+
+    def __init__(
+        self,
+        data_root: str | Path,
+        split: str,
+        *,
+        version: str = "processed_citynav",
+        difficulty: str | None = None,
+        allow_test_unseen: bool = False,
+        max_records: int | None = None,
+    ):
+        if split not in VALID_SPLITS:
+            raise ValueError(f"unknown split {split!r}; expected one of {VALID_SPLITS}")
+        if difficulty not in VALID_DIFFICULTIES:
+            raise ValueError(f"unknown difficulty {difficulty!r}")
+        if split == "train_seen" and difficulty is not None:
+            raise ValueError("training annotations have no difficulty subsets")
+        if split == "test_unseen" and not allow_test_unseen:
+            raise PermissionError(
+                "test_unseen is sealed during development; pass allow_test_unseen=True "
+                "only from the frozen final-evaluation workflow"
+            )
+        self.data_root = Path(data_root)
+        self.version = version
+        self.split = split
+        self.difficulty = difficulty
+        suffix = "" if difficulty is None else f"_{difficulty}"
+        self.annotation_path = self.data_root / version / f"citynav_{split}{suffix}.json"
+        if not self.annotation_path.is_file():
+>           raise FileNotFoundError(self.annotation_path)
+E           FileNotFoundError: /home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/processed_citynav/citynav_train_seen.json
+
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:221: FileNotFoundError
+___________________ test_cityrefer_alignment_on_real_samples ___________________
+
+    def test_cityrefer_alignment_on_real_samples():
+>       catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_______________________ test_difficulty_file_is_explicit _______________________
+
+    def test_difficulty_file_is_explicit():
+>       easy = CityNavDataset(DATA_ROOT, "val_unseen", difficulty="easy", max_records=5)
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <sbfnav.dataset.CityNavDataset object at 0x7f89bf88e5f0>
+data_root = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data')
+split = 'val_unseen', version = 'processed_citynav', difficulty = 'easy'
+allow_test_unseen = False, max_records = 5
+
+    def __init__(
+        self,
+        data_root: str | Path,
+        split: str,
+        *,
+        version: str = "processed_citynav",
+        difficulty: str | None = None,
+        allow_test_unseen: bool = False,
+        max_records: int | None = None,
+    ):
+        if split not in VALID_SPLITS:
+            raise ValueError(f"unknown split {split!r}; expected one of {VALID_SPLITS}")
+        if difficulty not in VALID_DIFFICULTIES:
+            raise ValueError(f"unknown difficulty {difficulty!r}")
+        if split == "train_seen" and difficulty is not None:
+            raise ValueError("training annotations have no difficulty subsets")
+        if split == "test_unseen" and not allow_test_unseen:
+            raise PermissionError(
+                "test_unseen is sealed during development; pass allow_test_unseen=True "
+                "only from the frozen final-evaluation workflow"
+            )
+        self.data_root = Path(data_root)
+        self.version = version
+        self.split = split
+        self.difficulty = difficulty
+        suffix = "" if difficulty is None else f"_{difficulty}"
+        self.annotation_path = self.data_root / version / f"citynav_{split}{suffix}.json"
+        if not self.annotation_path.is_file():
+>           raise FileNotFoundError(self.annotation_path)
+E           FileNotFoundError: /home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/processed_citynav/citynav_val_unseen_easy.json
+
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:221: FileNotFoundError
+________ test_difficulty_files_exactly_partition_full_validation_split _________
+
+    def test_difficulty_files_exactly_partition_full_validation_split():
+>       full = CityNavDataset(DATA_ROOT, "val_unseen")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <sbfnav.dataset.CityNavDataset object at 0x7f89bf8ffaf0>
+data_root = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data')
+split = 'val_unseen', version = 'processed_citynav', difficulty = None
+allow_test_unseen = False, max_records = None
+
+    def __init__(
+        self,
+        data_root: str | Path,
+        split: str,
+        *,
+        version: str = "processed_citynav",
+        difficulty: str | None = None,
+        allow_test_unseen: bool = False,
+        max_records: int | None = None,
+    ):
+        if split not in VALID_SPLITS:
+            raise ValueError(f"unknown split {split!r}; expected one of {VALID_SPLITS}")
+        if difficulty not in VALID_DIFFICULTIES:
+            raise ValueError(f"unknown difficulty {difficulty!r}")
+        if split == "train_seen" and difficulty is not None:
+            raise ValueError("training annotations have no difficulty subsets")
+        if split == "test_unseen" and not allow_test_unseen:
+            raise PermissionError(
+                "test_unseen is sealed during development; pass allow_test_unseen=True "
+                "only from the frozen final-evaluation workflow"
+            )
+        self.data_root = Path(data_root)
+        self.version = version
+        self.split = split
+        self.difficulty = difficulty
+        suffix = "" if difficulty is None else f"_{difficulty}"
+        self.annotation_path = self.data_root / version / f"citynav_{split}{suffix}.json"
+        if not self.annotation_path.is_file():
+>           raise FileNotFoundError(self.annotation_path)
+E           FileNotFoundError: /home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/processed_citynav/citynav_val_unseen.json
+
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:221: FileNotFoundError
+________ test_landmark_aliases_have_deterministic_text_only_resolution _________
+
+    def test_landmark_aliases_have_deterministic_text_only_resolution():
+>       catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py:58: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+____________ test_composed_model_accepts_spatial_candidate_context _____________
+
+    def test_composed_model_accepts_spatial_candidate_context():
+        torch.manual_seed(7)
+>       model = SBFNav(
+            hidden_dim=64,
+            attention_heads=4,
+            selector_layers=1,
+            dropout=0,
+            use_spatial_context=True,
+        )
+E       TypeError: SBFNav.__init__() got an unexpected keyword argument 'use_spatial_context'
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_model.py:93: TypeError
+___________ test_receding_horizon_rebuilds_state_without_goal_signal ___________
+
+    def test_receding_horizon_rebuilds_state_without_goal_signal():
+>       catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_navigation.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+__________________ test_policy_stop_terminates_without_moving __________________
+
+    def test_policy_stop_terminates_without_moving():
+>       catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_navigation.py:88: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_________________ test_nine_channels_and_visibility_invariants _________________
+
+    def test_nine_channels_and_visibility_invariants():
+>       catalog, record = _sample_with_landmark()
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:16: in _sample_with_landmark
+    catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+____________ test_history_accumulates_without_rotating_world_frame _____________
+
+    def test_history_accumulates_without_rotating_world_frame():
+>       catalog, record = _sample_with_landmark()
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:16: in _sample_with_landmark
+    catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_________________ test_target_is_not_encoded_in_planning_state _________________
+
+    def test_target_is_not_encoded_in_planning_state():
+>       catalog, record = _sample_with_landmark()
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:16: in _sample_with_landmark
+    catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_________ test_real_tif_coordinate_round_trip_within_half_source_pixel _________
+
+    def test_real_tif_coordinate_round_trip_within_half_source_pixel():
+>       catalog, record = _sample_with_landmark()
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py:16: in _sample_with_landmark
+    catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+_________ test_training_example_real_data_is_finite_and_deterministic __________
+
+    def test_training_example_real_data_is_finite_and_deterministic():
+>       catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_training.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+____________ test_endpoint_supervision_includes_final_teacher_state ____________
+
+    def test_endpoint_supervision_includes_final_teacher_state():
+>       catalog = CityReferCatalog(DATA_ROOT / "cityrefer")
+
+../SBFNav-CityNav-Reproduction/tests/test_sbf_training.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/dataset.py:91: in __init__
+    for map_name, objects in json.loads((root / "objects.json").read_text()).items()
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1134: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return self._accessor.open(self, mode, buffering, encoding, errors,
+                                   newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/data/cityrefer/objects.json'
+
+/home/20260922_1/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1119: FileNotFoundError
+=============================== warnings summary ===============================
+SBFNav-CityNav-Reproduction/tests/test_sbf_model.py::test_composed_sbfnav_all_trainable_heads_forward_and_backward
+  /home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/.venv/lib/python3.10/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_config.py::test_all_ablation_configs_inherit_a_complete_valid_main_config
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py::test_expected_revised_counts_and_split_isolation
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py::test_cityrefer_alignment_on_real_samples
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py::test_difficulty_file_is_explicit
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py::test_difficulty_files_exactly_partition_full_validation_split
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_dataset.py::test_landmark_aliases_have_deterministic_text_only_resolution
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_model.py::test_composed_model_accepts_spatial_candidate_context
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_navigation.py::test_receding_horizon_rebuilds_state_without_goal_signal
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_navigation.py::test_policy_stop_terminates_without_moving
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py::test_nine_channels_and_visibility_invariants
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py::test_history_accumulates_without_rotating_world_frame
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py::test_target_is_not_encoded_in_planning_state
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_planning_state.py::test_real_tif_coordinate_round_trip_within_half_source_pixel
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_training.py::test_training_example_real_data_is_finite_and_deterministic
+FAILED ../SBFNav-CityNav-Reproduction/tests/test_sbf_training.py::test_endpoint_supervision_includes_final_teacher_state
+15 failed, 60 passed, 1 warning in 6.22s

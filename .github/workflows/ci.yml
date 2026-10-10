@@ -1,27 +1,33 @@
-name: GraphNav CPU Validation
+name: GraphNav CPU CI
 
 on:
   push:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   cpu-unit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-          cache: "pip"
+          cache: pip
+          cache-dependency-path: pyproject.toml
       - name: Install CPU PyTorch
-        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
-      - name: Install GraphNav
-        run: pip install -e '.[dev]'
-      - name: Unit tests
+        run: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Install offline test dependencies
+        run: python -m pip install -e '.[dev,data]' pyyaml
+      - name: Syntax check
+        run: python -m compileall -q graphnav scripts tests
+      - name: Unit and integration tests (no dataset download)
         run: pytest -q
-      - name: Smoke training
+      - name: Synthetic CPU smoke (not CityNav navigation)
         run: |
           python -m graphnav.train --smoke --epochs 1 --steps 2 --device cpu \
             --grid-size 4 --max-landmarks 3 --top-k 3 --hidden 32 \

@@ -1,0 +1,45 @@
+{
+  "base_commit": "4d6c81c2395505fb4473a08383d0476576acd776",
+  "branch": "2027-CVPR/semantic-geometry-localization",
+  "python": "3.10.22",
+  "pytorch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "transformers": "4.57.6",
+  "numpy": "1.26.4",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+  "bf16_supported": true,
+  "bert_revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+  "bert_frozen": true,
+  "roads_input": null,
+  "command": "HF_HUB_OFFLINE=1 OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python -m graphnav.static_experiment --train data/graphnav_train_seen.jsonl --val-seen data/graphnav_val_seen.jsonl --val-unseen data/graphnav_val_unseen.jsonl --device cuda --batch-size 16 --epochs 5 --max-roads 0 --output runs/static_graph_bs16",
+  "excluded": [
+    "RGB",
+    "Depth",
+    "UAV pose",
+    "Trajectory",
+    "Stop",
+    "closed-loop navigation"
+  ],
+  "source_root": "/home/20260922_1/Workspace/DATA/citynav/extracted/data",
+  "competing_gpu_process": {
+    "pid": 366555,
+    "description": "pre-existing joint goal/trajectory experiment, left untouched"
+  },
+  "source_sha256": {
+    "/home/20260922_1/Workspace/DATA/citynav/extracted/data/citynav/citynav_train_seen.json": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245",
+    "/home/20260922_1/Workspace/DATA/citynav/extracted/data/citynav/citynav_val_seen.json": "2e883c53f97ac60ffcdfb3db4a88ad02717088592efff37475faf27c465dc894",
+    "/home/20260922_1/Workspace/DATA/citynav/extracted/data/citynav/citynav_val_unseen.json": "721ddd3fbeb28cd741ddbce5f925addbaf8dd43b48fe439ccee77bb3fae004ad",
+    "/home/20260922_1/Workspace/DATA/citynav/extracted/data/cityrefer/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/20260922_1/Workspace/DATA/citynav/extracted/data/cityrefer/processed_descriptions.json": "2e9387bc22d89ac9a7d3b757474e7da9bef032e493d879949c7c0ab1350bff46"
+  },
+  "artifacts_sha256": {
+    "best.pt": "bf46b463dcdfdf36ce150db21d3e3305992d7c04b9d4ab246bc76f57cef940af",
+    "last.pt": "23c5add9fea4b6049194bcff30aeb2f39c180ae2d198c7a1488db7b77910398d",
+    "frozen_text_features.pt": "e447a6930de48cc3c7dc9cc4e88dbb12596d2775c2590b4729766269908fd8ae",
+    "static_localization_metrics.csv": "a98cae2f27cfcf5e4ed8a0babf263e27861dec264d99303f0bdfecd363f031bb",
+    "static_localization_metrics.json": "1123338af63363acbfc300aa900a4870242fe5d41ddfaba1df1d591542939019"
+  },
+  "train_seconds_total": 136.66513521969318,
+  "training_seed": 0,
+  "learning_rate": 0.0002
+}

@@ -1,0 +1,24 @@
+{
+  "status": "pass",
+  "manifest_snapshot_sha256": "6ce5ff12be9cf5f82bcf81197386b851d175770cd878b66238b94d22f7bafd7f",
+  "sampled_chunks": [
+    "features_000000.pt",
+    "features_003408.pt",
+    "features_006816.pt",
+    "features_010224.pt",
+    "features_013632.pt"
+  ],
+  "sampled_rows": 320,
+  "rows_with_observed_regions": 320,
+  "rows_without_observed_regions": 0,
+  "checks": [
+    "chunk SHA256",
+    "4 states per episode",
+    "history steps never exceed cutoff",
+    "unique in-range candidate IDs",
+    "finite feature/quality/text/pose tensors",
+    "shape consistency",
+    "unknown regions have zero features"
+  ],
+  "scope": "Five deterministic completed chunks; not a full-cache audit or independent proof of rendering provenance"
+}

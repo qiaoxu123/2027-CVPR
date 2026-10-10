@@ -1,0 +1,69 @@
+{
+  "recorded_unix": 1791592522.2766666,
+  "launcher": {
+    "pid": 895677,
+    "command": [
+      "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+      "scripts/run_joint_active_20e.py",
+      "--first-epoch-only",
+      "--output",
+      "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/joint_active_first_epoch_20261010",
+      "--cache",
+      "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/data/joint_active_train_full_20261010",
+      "--sbf-source",
+      "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+      "--sbf-config",
+      "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+      "--data-root",
+      "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+      "--a3-checkpoint",
+      "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt"
+    ],
+    "commit": "7804acebabed5ff61bcc0f82e21268dc82b7b655",
+    "initial_execution_full_epochs": 1,
+    "planned_epochs": 20
+  },
+  "workflow_status": {
+    "args": {
+      "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/joint_active_first_epoch_20261010",
+      "cache": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/data/joint_active_train_full_20261010",
+      "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+      "sbf_config": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+      "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+      "a3_checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "first_epoch_only": true
+    },
+    "provenance": {
+      "commit": "7804acebabed5ff61bcc0f82e21268dc82b7b655",
+      "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "started_unix": 1791592428.4699051,
+    "status": "running",
+    "policy": "One joint model,planned20 epochs,seed0,batch16,BF16,workers4; Seen-selected Best. No SBF/HETT reruns.",
+    "stage": "prepare_frozen_features",
+    "command": [
+      "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+      "scripts/prepare_joint_active_data.py",
+      "--sbf-source",
+      "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+      "--data-root",
+      "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+      "--a3-checkpoint",
+      "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "--output",
+      "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/data/joint_active_train_full_20261010",
+      "--microbatch",
+      "8"
+    ],
+    "stage_started_unix": 1791592428.4699442,
+    "child_pid": 895722
+  },
+  "cache_progress": {
+    "complete": false,
+    "episodes": 480,
+    "training_states": 1920,
+    "total_episodes": 21878,
+    "verified_rgb_height_maps": 24
+  },
+  "note": "Running snapshot; authoritative live status stays under runs. Full training epoch1 has not started until cache completes. Workflow stops after full epoch1+Seen128, no baseline reruns or Unseen evaluations."
+}

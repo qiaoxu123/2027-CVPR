@@ -1,0 +1,556 @@
+{
+  "splits": {
+    "train_seen": {
+      "records": 21289,
+      "unique_query_ids": 21289,
+      "unique_map_instruction": 21289,
+      "maps": [
+        "birmingham_block_1",
+        "birmingham_block_10",
+        "birmingham_block_11",
+        "birmingham_block_12",
+        "birmingham_block_13",
+        "birmingham_block_3",
+        "birmingham_block_4",
+        "birmingham_block_7",
+        "birmingham_block_9",
+        "cambridge_block_12",
+        "cambridge_block_13",
+        "cambridge_block_17",
+        "cambridge_block_18",
+        "cambridge_block_19",
+        "cambridge_block_20",
+        "cambridge_block_21",
+        "cambridge_block_23",
+        "cambridge_block_25",
+        "cambridge_block_28",
+        "cambridge_block_33",
+        "cambridge_block_4",
+        "cambridge_block_6",
+        "cambridge_block_7",
+        "cambridge_block_9"
+      ],
+      "counts": {
+        "targets_outside_map": 0,
+        "queries_with_building": 6226,
+        "requested_names": 33388,
+        "requests_matched_any_type": 22377,
+        "requests_matched_building": 7451,
+        "requests_nonbuilding_only": 14926,
+        "bound_polygons": 7691,
+        "queries_with_grounded_relation": 1481,
+        "queries_mentioning_road_words": 13400,
+        "queries_with_relation_trigger": 10338
+      },
+      "grounded_relation_kinds": {
+        "near": 981,
+        "between": 408,
+        "north": 65,
+        "along": 15,
+        "west": 3,
+        "south": 51,
+        "southeast": 2
+      },
+      "unmatched_names_top30": [
+        [
+          "One Stop Building",
+          583
+        ],
+        [
+          "One Stop building",
+          373
+        ],
+        [
+          "Grafton West building",
+          290
+        ],
+        [
+          "Food Warehouse",
+          157
+        ],
+        [
+          "One Stop parking lot",
+          153
+        ],
+        [
+          "One-Stop building",
+          152
+        ],
+        [
+          "Broadway Road",
+          98
+        ],
+        [
+          "Grafton West parking lot",
+          75
+        ],
+        [
+          "one stop building",
+          61
+        ],
+        [
+          "Manchester => Bournemouth (all stations) footpath",
+          60
+        ],
+        [
+          "West Midlands Police Custody Suite parking lot",
+          55
+        ],
+        [
+          "Butterfield Cafe",
+          53
+        ],
+        [
+          "Fen Causeway",
+          44
+        ],
+        [
+          "one-stop building",
+          42
+        ],
+        [
+          "Perry Barr footpath",
+          41
+        ],
+        [
+          "Brookside Road",
+          39
+        ],
+        [
+          "food warehouse",
+          36
+        ],
+        [
+          "Perry Barr Carpets building",
+          35
+        ],
+        [
+          "Station Bridge Road",
+          34
+        ],
+        [
+          "Masters Lodge",
+          34
+        ],
+        [
+          "Hall building",
+          34
+        ],
+        [
+          "YMCA building",
+          34
+        ],
+        [
+          "West Midlands Police Custody Suite building",
+          33
+        ],
+        [
+          "New Court building",
+          33
+        ],
+        [
+          "Broadway",
+          32
+        ],
+        [
+          "Broadmeadows building",
+          30
+        ],
+        [
+          "Company building",
+          29
+        ],
+        [
+          "Master's Lodge building",
+          27
+        ],
+        [
+          "Grafton building",
+          27
+        ],
+        [
+          "University Chemical Laboratory building",
+          26
+        ]
+      ],
+      "max_polygon_roundtrip_error_m": 0.00017163655911645037,
+      "sha256": "529137fea6641d9995be60aabc33efbdfd867b0486b41c17f5d1e3a17e73a83a"
+    },
+    "val_seen": {
+      "records": 2454,
+      "unique_query_ids": 2454,
+      "unique_map_instruction": 2454,
+      "maps": [
+        "birmingham_block_1",
+        "birmingham_block_10",
+        "birmingham_block_11",
+        "birmingham_block_12",
+        "birmingham_block_13",
+        "birmingham_block_3",
+        "birmingham_block_4",
+        "birmingham_block_7",
+        "birmingham_block_9",
+        "cambridge_block_12",
+        "cambridge_block_13",
+        "cambridge_block_17",
+        "cambridge_block_18",
+        "cambridge_block_19",
+        "cambridge_block_20",
+        "cambridge_block_21",
+        "cambridge_block_23",
+        "cambridge_block_25",
+        "cambridge_block_28",
+        "cambridge_block_33",
+        "cambridge_block_4",
+        "cambridge_block_6",
+        "cambridge_block_7",
+        "cambridge_block_9"
+      ],
+      "counts": {
+        "targets_outside_map": 0,
+        "queries_with_building": 711,
+        "requested_names": 3874,
+        "requests_matched_any_type": 2658,
+        "requests_matched_building": 829,
+        "requests_nonbuilding_only": 1829,
+        "queries_with_grounded_relation": 165,
+        "queries_mentioning_road_words": 1623,
+        "queries_with_relation_trigger": 1189,
+        "bound_polygons": 845
+      },
+      "grounded_relation_kinds": {
+        "near": 118,
+        "north": 6,
+        "south": 4,
+        "between": 40
+      },
+      "unmatched_names_top30": [
+        [
+          "One Stop Building",
+          67
+        ],
+        [
+          "One Stop building",
+          44
+        ],
+        [
+          "Grafton West building",
+          25
+        ],
+        [
+          "One Stop parking lot",
+          24
+        ],
+        [
+          "One-Stop building",
+          19
+        ],
+        [
+          "Food Warehouse",
+          17
+        ],
+        [
+          "Grafton West parking lot",
+          15
+        ],
+        [
+          "Broadway Road",
+          12
+        ],
+        [
+          "Angel & Blume building",
+          12
+        ],
+        [
+          "Grafton building",
+          12
+        ],
+        [
+          "Perry Barr footpath",
+          10
+        ],
+        [
+          "Manchester => Bournemouth (all stations) footpath",
+          8
+        ],
+        [
+          "food warehouse",
+          7
+        ],
+        [
+          "Perry Barr Carpets building",
+          7
+        ],
+        [
+          "Fisher Building",
+          7
+        ],
+        [
+          "Starbucks building",
+          7
+        ],
+        [
+          "West Midlands Police Custody Suite building",
+          6
+        ],
+        [
+          "Alridge Road",
+          6
+        ],
+        [
+          "Cosin Court building",
+          6
+        ],
+        [
+          "one stop building",
+          5
+        ],
+        [
+          "Broadway",
+          5
+        ],
+        [
+          "Jobcentre Plus building",
+          5
+        ],
+        [
+          "School House building",
+          5
+        ],
+        [
+          "St. John's Street",
+          5
+        ],
+        [
+          "Leys school building",
+          5
+        ],
+        [
+          "Butterfield Cafe",
+          5
+        ],
+        [
+          "YMCA building",
+          5
+        ],
+        [
+          "Cambridge and Peterborough probation trust building",
+          5
+        ],
+        [
+          "The Broadway road",
+          4
+        ],
+        [
+          "Ashton Lane",
+          4
+        ]
+      ],
+      "max_polygon_roundtrip_error_m": 0.00017113136800617212,
+      "sha256": "59fcd55303a929b62509faf8e4994579d3b4ba82749ffdb78c87cb2563663fc6"
+    },
+    "val_unseen": {
+      "records": 2808,
+      "unique_query_ids": 2808,
+      "unique_map_instruction": 2808,
+      "maps": [
+        "birmingham_block_5",
+        "cambridge_block_10",
+        "cambridge_block_2",
+        "cambridge_block_3"
+      ],
+      "counts": {
+        "targets_outside_map": 0,
+        "queries_with_building": 782,
+        "requested_names": 4377,
+        "requests_matched_any_type": 2758,
+        "requests_matched_building": 876,
+        "requests_nonbuilding_only": 1882,
+        "queries_with_grounded_relation": 172,
+        "queries_mentioning_road_words": 1608,
+        "queries_with_relation_trigger": 1409,
+        "bound_polygons": 876
+      },
+      "grounded_relation_kinds": {
+        "near": 114,
+        "between": 35,
+        "north": 12,
+        "south": 12,
+        "southwest": 2,
+        "east": 1
+      },
+      "unmatched_names_top30": [
+        [
+          "BMTR building",
+          125
+        ],
+        [
+          "Queens Road",
+          50
+        ],
+        [
+          "One Stop building",
+          47
+        ],
+        [
+          "bmtr building",
+          39
+        ],
+        [
+          "National Probation Service building",
+          33
+        ],
+        [
+          "Mallory Court",
+          28
+        ],
+        [
+          "La Mimosa building",
+          26
+        ],
+        [
+          "squash court building",
+          20
+        ],
+        [
+          "national probation service building",
+          17
+        ],
+        [
+          "Forbes Mellon Library building",
+          17
+        ],
+        [
+          "Teddington Grove Road",
+          16
+        ],
+        [
+          "Saint Giles building",
+          16
+        ],
+        [
+          "Johnsons Apparel Master building",
+          15
+        ],
+        [
+          "Squash Court building",
+          15
+        ],
+        [
+          "Westminster College building",
+          15
+        ],
+        [
+          "Fisher Building",
+          14
+        ],
+        [
+          "Teddington Grove road",
+          13
+        ],
+        [
+          "McDonald's building",
+          13
+        ],
+        [
+          "Ethelreda building",
+          13
+        ],
+        [
+          "Edward's Court building",
+          13
+        ],
+        [
+          "Castle End building",
+          13
+        ],
+        [
+          "North Paddock",
+          13
+        ],
+        [
+          "New Court building",
+          13
+        ],
+        [
+          "Hertford street road",
+          12
+        ],
+        [
+          "Edwards court building",
+          12
+        ],
+        [
+          "Scholar's Lawn",
+          12
+        ],
+        [
+          "Omobono building",
+          12
+        ],
+        [
+          "Grassfield",
+          11
+        ],
+        [
+          "Buckingham Room building",
+          11
+        ],
+        [
+          "Art Room building",
+          11
+        ]
+      ],
+      "max_polygon_roundtrip_error_m": 0.00010228597284367424,
+      "sha256": "e1d233d7aae5560ec85f246c908a106a6c40002632b4dda239630e04cb9267c3"
+    }
+  },
+  "overlaps": {
+    "train_seen__val_seen": {
+      "query_id": 0,
+      "map_instruction": 0,
+      "maps": [
+        "birmingham_block_1",
+        "birmingham_block_10",
+        "birmingham_block_11",
+        "birmingham_block_12",
+        "birmingham_block_13",
+        "birmingham_block_3",
+        "birmingham_block_4",
+        "birmingham_block_7",
+        "birmingham_block_9",
+        "cambridge_block_12",
+        "cambridge_block_13",
+        "cambridge_block_17",
+        "cambridge_block_18",
+        "cambridge_block_19",
+        "cambridge_block_20",
+        "cambridge_block_21",
+        "cambridge_block_23",
+        "cambridge_block_25",
+        "cambridge_block_28",
+        "cambridge_block_33",
+        "cambridge_block_4",
+        "cambridge_block_6",
+        "cambridge_block_7",
+        "cambridge_block_9"
+      ]
+    },
+    "train_seen__val_unseen": {
+      "query_id": 0,
+      "map_instruction": 0,
+      "maps": []
+    },
+    "val_seen__val_unseen": {
+      "query_id": 0,
+      "map_instruction": 0,
+      "maps": []
+    }
+  },
+  "roads": {
+    "usable_aligned_polylines": false,
+    "reason": "CityRefer TrafficRoad/Footpath are surface polygons, not verified centerline/topology. No aligned road polyline file found.",
+    "coverage": null
+  },
+  "coordinates": "Public HETT MAP_BOUNDS: world XY meters, x east/y north. Normalize without image-row flip."
+}

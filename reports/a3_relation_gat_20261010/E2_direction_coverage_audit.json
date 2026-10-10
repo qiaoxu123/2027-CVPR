@@ -1,0 +1,46 @@
+{
+  "counts": {
+    "parsed_cardinal_relations": 406,
+    "target_not_in_conservative_direction_region": 209,
+    "uncontrolled_or_multiple_direction_phrases": 3,
+    "ambiguous_binding": 189,
+    "usable_controlled_relation": 5
+  },
+  "parsed_kind_counts": {
+    "south": 174,
+    "north": 225,
+    "west": 6,
+    "east": 1
+  },
+  "examples": {
+    "target_not_in_conservative_direction_region": {
+      "instruction": "On Wellington Road south of Willmore Road near Celine Grove, this building with a gray roof is far to the left of Full Circle Events & Exhibitions Ltd and has a red car to its left.",
+      "kind": "south",
+      "anchor_group_sizes": [
+        1
+      ]
+    },
+    "uncontrolled_or_multiple_direction_phrases": {
+      "instruction": "On Wellington Road north of Willmore Road and to the left of St Teresa's Court, it is a gray car, third car south of a red car.",
+      "kind": "north",
+      "anchor_group_sizes": [
+        1
+      ]
+    },
+    "ambiguous_binding": {
+      "instruction": "On the north side of Wellington Road, this gray car is second from the left on the south row of the parking lot with the building with a white and gray roof.",
+      "kind": "north",
+      "anchor_group_sizes": [
+        2
+      ]
+    },
+    "usable_controlled_relation": {
+      "instruction": "On Wellington Road north of Willmore Road and to the left of St Teresa's Court, it is a black car next to a red car.",
+      "kind": "north",
+      "anchor_group_sizes": [
+        1
+      ]
+    }
+  },
+  "note": "Training-label audit only; no GT input used for inference. Ambiguous named fragments are skipped rather than GT-resolved. Count relations, not unique eligible queries; dataset intersects other reliable constraints."
+}

@@ -1,0 +1,60 @@
+{
+  "models": {
+    "SBFNav": {
+      "path": "runs/closedloop_baseline/sbf_val_seen_full",
+      "episodes": 2470,
+      "manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "counts": {
+        "failed": 1395,
+        "observed_target_near_frames": 12388,
+        "observed_legal_arrival_frames": 12292,
+        "failed_after_observed_legal_arrival": 408,
+        "failed_after_only_illegal_observed_arrival": 9,
+        "failed_without_observed_arrival": 978,
+        "failed_policy_stop": 0,
+        "legal_arrival_head_frames": 0,
+        "probability_rejection_frames": 0,
+        "predicted_goal_gate_rejection_frames": 0
+      }
+    },
+    "Full_seed1": {
+      "path": "runs/full_seed1_seen",
+      "episodes": 2470,
+      "manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "counts": {
+        "failed": 1416,
+        "observed_target_near_frames": 4828,
+        "observed_legal_arrival_frames": 4739,
+        "failed_after_observed_legal_arrival": 208,
+        "failed_after_only_illegal_observed_arrival": 15,
+        "failed_without_observed_arrival": 1193,
+        "failed_policy_stop": 1385,
+        "legal_arrival_head_frames": 4739,
+        "probability_rejection_frames": 1799,
+        "predicted_goal_gate_rejection_frames": 3255
+      }
+    },
+    "Full_seed2": {
+      "path": "runs/full_seed2_seen",
+      "episodes": 2470,
+      "manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+      "counts": {
+        "failed": 1443,
+        "observed_target_near_frames": 4811,
+        "observed_legal_arrival_frames": 4733,
+        "failed_after_observed_legal_arrival": 240,
+        "failed_after_only_illegal_observed_arrival": 17,
+        "failed_without_observed_arrival": 1186,
+        "failed_policy_stop": 1409,
+        "legal_arrival_head_frames": 4733,
+        "probability_rejection_frames": 1383,
+        "predicted_goal_gate_rejection_frames": 3580
+      }
+    }
+  },
+  "provenance": {
+    "commit": "bc3bb779cb1e156cf0733ed4fa14c696e567cbb5",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "note": "Private post-rollout GT diagnostics only; no model selection/input or policy change. Observed poses are exactly the decision prefix, not an unobserved horizon endpoint. Public legal altitude is separate from unchanged XY success. A GT-near visit is an oracle diagnostic opportunity, not evidence the policy could identify the target. Head-frame rejection counts may overlap; absent head information is not Stop calibration evidence."
+}

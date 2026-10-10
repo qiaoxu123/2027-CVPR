@@ -1,0 +1,1236 @@
+{
+  "source": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+  "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c",
+  "counts": {
+    "queries": 21166,
+    "parsed_queries": 3643,
+    "no_bound_entities": 91,
+    "along_road_trigger_queries": 12568,
+    "along_road_unparsed_queries": 10281,
+    "egocentric_trigger_queries": 12822,
+    "egocentric_unparsed_queries": 10901,
+    "distance_trigger_queries": 5890,
+    "distance_unparsed_queries": 3792,
+    "sequence_trigger_queries": 2105,
+    "sequence_unparsed_queries": 1673,
+    "between_trigger_queries": 4088,
+    "between_unparsed_queries": 2999,
+    "cardinal_trigger_queries": 1797,
+    "cardinal_unparsed_queries": 1264
+  },
+  "parsed_kind_counts": {
+    "near": 1833,
+    "along": 862,
+    "between": 760,
+    "south": 174,
+    "north": 225,
+    "west": 6,
+    "southeast": 2,
+    "east": 1
+  },
+  "parsed_query_fraction": 0.1721156571860531,
+  "unparsed_examples": [
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A beige and brown house with a dark gray roof cut off by the edge of the map with a white car in front of it off Grosvenor Road",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A big building with grey roof situated behind the St Teresa of the Child Jesus Catholic Church. A blue car and a grey car is parked close to the building. The railway track is behind the building.",
+      "triggers": [
+        "distance",
+        "egocentric"
+      ],
+      "bound_names": [
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a building with a gray roof located behind St. Teresa of the Child Jesus Catholic Church. There are a couple of cars parked nearby this building. One is blue and one is white.",
+      "triggers": [
+        "distance",
+        "egocentric"
+      ],
+      "bound_names": [
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The large building with a gray roof that is on the short street behind the St Teresa of the Child Jesus Catholic Church that looks like a warehouse.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building is L-shaped and directly across the train tracks and road from the gym.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "The Gym"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The large gray rectangular building behind the St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "egocentric"
+      ],
+      "bound_names": [
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The brick building at the end of Leslie Road that has a gray roof and a gray garage door.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The dark gray building on Leslie Road across from the row of gray houses.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Two buildings, a one floor Brown building with a gray roof next to a taller brown and white building with a gray roof and a skylight on the corner of the map off Leslie Road",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "two brown buildings of varying heights on the corner of the map next to a lot with three white and red painted dividers off Leslie Road",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building that is on the Leslie Road by itself. It looks like a ruin. There are a black and blue car parked closed to it.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "If you take a right onto Leslie Road coming from Celine Grove this is the first building off to your left.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Leslie Road",
+        "Celine Grove"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The white building on Leslie Road with a driveway that has yellow crisscross painted on it.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building on Leslie Road across the street from the only red car on Leslie Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building on Leslie Road that is not adjacent to any other buildings.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The corner of a white building on Leslie Road on a corner with a road that has yellow paint on it.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The large building on Wellington Rd / Grosvenor Rd that has a parking lot beside it and a white box in the backyard in front of the Full Circle Events & Exhibition Ltd building.",
+      "triggers": [
+        "distance",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Grosvenor Road",
+        "Full Circle Events & Exhibitions Ltd",
+        "Wellington Rd / Grosvenor Rd",
+        "Wellington Rd / Grosvenor Rd"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a large building with multiple sections. It's on Wellington Rd/ Grosvenor Road and behind it is the Full Circle Events & Exhibitions Ltd building.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Rd / Grosvenor Rd",
+        "Wellington Rd / Grosvenor Rd",
+        "Full Circle Events & Exhibitions Ltd",
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a building located on Wellington Rd/ Grosvenor Rd. Near it is a parking space with about a dozen cars in it.",
+      "triggers": [
+        "distance"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Grosvenor Road",
+        "Wellington Rd / Grosvenor Rd",
+        "Wellington Rd / Grosvenor Rd"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The large gray and reddish gray building at the intersection of Wellington Road and Grosvenor Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Perpendicular to Wellington Road and at the end of a string of houses with red roofs, this smaller, square buildinghas a gray roof and is adjacent to St Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Wellington Road to the right of the St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A building with white roof along the road named Celine Grove",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Celine Grove"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The whole section of buildings beside the and including the bright orange buildings on Wellington street between Leslie and Willmore.",
+      "triggers": [
+        "distance",
+        "between",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Leslie Road",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The row of gray houses on Wellington Road, bordered by Leslie Road and Willmore Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Leslie Road",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building across the street from Celine Grove on Wellington Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Celine Grove",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The fourth brown building from Celine Grove and Wellington Road intersection. The building with the blue circle in the backyard.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Celine Grove",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The fourth housing unit from the bottom of the stip of housing units on the right side of Celine Grove.",
+      "triggers": [
+        "egocentric"
+      ],
+      "bound_names": [
+        "Celine Grove"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Gray building that is second from the right on the row of buildings above Willmore Road, when viewed aerially with Wellington road to the right.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Willmore Road that is 2 houses to the left of the gray house at the intersection with Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a a house found on Willmore Road. It has a lawn in the backyard. In front of the house there are a black car and a white car passing. This is the fourth house on Willmore Road from Wellington Road",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A brown and white house with a gray roof that is third from the edge of the map off willmore Road, that has one white car and one black car in front of it",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Willmore Road that is 6 houses to the left of the gray/brown building at the intersection with Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The Fourth building from Wellington road towards Willmore road. It has a white and a black car at the front.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "On the right side of Willmore Road, this building has a gray roof and is third one from the top.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a house with a gray roof on Wellington Road. There is no car found on the street or in the front yard. The backyard is mostly empty except for the green lawn and a tree. This is the third house on the street from Celine Grove.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Celine Grove"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Wellington Road that is 12 houses to the right of the St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Left side of a White House with a gray roof and two cement driveways, next door to another White House with a multicolored gray and brown roof that has a red car in his driveway in front of a street marking that says slow off Wellington Road",
+      "triggers": [
+        "distance",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The last building on Willmore Road that has a small gray porch on the back and the next building has a green and black trampoline.",
+      "triggers": [
+        "distance",
+        "along_road",
+        "sequence"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Willmore Road that is 11 houses to the left of the brownish gray house at the intersection with Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building at the end of Willmore Road that is next to the house with the green and black trampoline in the backyard.",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Willmore Road that is 10 houses to the left of the gray house at the intersection with Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Two-story brown house with a gray roof that is second from the edge of the map of Wilmore Road, that has one white car and one black car in front of it and a green pool in the backyard",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The brick building with grey roof on the Willmore Road, has one white car at the front, white shed in the back yard.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Willmore Road that is 8 houses to the left of the gray house at the intersection with Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Willmore Road that is 8 houses to the left of the gray house at the intersection with Leslie Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Leslie Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Two gray houses on Willmore Road that are 8 houses to the left of the gray house at the intersection with Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A white and brown house with a gray roof that has one gray car and one white van in front of it on the corner of Wellington Road and willmore Road",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The first building at the start of Willmore road. It has a grey and a white car parked in front of it.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building on the corner of Willmore Road and Wellington Road with a gray car and white car in front of it.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Multicolored white and brown house with a gray roof on the corner of Willmore Road and Wellington Road",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building on the corner of Willmore Road and Wellington Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a duplex house with a brown roof located on Wellington Road. It has a lawn in the backyard. It is the second closest house from St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road",
+        "sequence"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The second house away from St Teresa of the child Jesus Catholic church facing Wellington drive. It has a darker brown roof and a long green bin by the back door.",
+      "triggers": [
+        "distance",
+        "sequence"
+      ],
+      "bound_names": [
+        "St. Teresa of the Child Jesus Catholic Church",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "On Wellington Road, there is a gray-roofed small house next to the gray building which is directly adjacent to the Teresa of the Child Jesus Catholic Church",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The brown house on Wellington Road that is 2 houses to the right of the St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Multi-unit and multi-colored Brown, White, gray and red housing complex that extends from the edge of the map and encompasses most of Wilmore Road",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A white and blue building with a light gray roof, rectangular in shape, next to three cars that are parked on the side of it, two white and one silver, near the edge of the map facing the corner of willmore Road and Celine Grove",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Celine Grove",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "If you turn left off of Leslie Road onto Celine Grove, this is a building to your right. It's the second building to your right, a large white building.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Leslie Road",
+        "Celine Grove"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A multicolored blue and white long rectangular building with a light gray roof, that is facing the corner of Celine Grove and willmore Road",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Celine Grove",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The long white building with a small parking lot on the corner of Celine Grove road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Celine Grove"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A brick building with two residents each with a blue and gray trash bin back to back with each other in the front yard area. The building is facing Willmore Road and is the third building from the corner when looking down Willmore from Wellington Road.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A multicolored brown and white building with a gray roof, fourth from the edge of the map off Willmore Road, that is across from the outline of a car, that is next to a white car",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This building is on Willmore Road, in the middle of a row of grey and brown houses. Outside the house is a car of undistinguishable color and a white car.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The third building with grey roof and brown wall situated at the right side of the road named Willmore road.",
+      "triggers": [
+        "along_road",
+        "sequence",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "On the right side of Willmore Road, this building with a gray roof is fourth from the top.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a house building located on Wellington Road. It is right at the junction of Wellington Road and Willmore Road. There is no car parked in the front yard.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray house on Wellington Road that is 17 houses to the right of the St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Two buildings red-lined, the right side of a multi-colored Brown, brick red and white building, with a multi-colored Brown and gray roof that has a silver van parked on his left side, in a multicolored brown and blue rectangular building with a white roof, facing the corner of Celine Grove and Willmore Road",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Celine Grove",
+        "Willmore Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The fouth house away from the St. Teresa of the Child Jesus Catholic church facing Wellington Street. It has a brown roof and a blue car next to the detached building in the backyard and a vehicle covered with a blue tarp in front of it,",
+      "triggers": [
+        "distance",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The brown house on Wellington Road that is 4 houses to the right of the St. Teresa of the Child Jesus Catholic Church.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "St. Teresa of the Child Jesus Catholic Church"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The fifth building from left side with brown roof and white wall along the road named Wellington road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Right side of a multi-colored white and brown home with a brown roof and one chimney that has a grass yard in front and a dirt yard next to it across the street from a red car with a black top off Wellington Road",
+      "triggers": [
+        "distance",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "this is a tall building with a gray roof, to the right of the One Stop building and the railroad.",
+      "triggers": [
+        "egocentric"
+      ],
+      "bound_names": [
+        "One Stop"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Back section of a multi-colored 4 story white and brown building with a gray roof next to the railroad across from the blue and white stripes One-Stop building",
+      "triggers": [
+        "distance"
+      ],
+      "bound_names": [
+        "One Stop"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The long curved brown building with a brown roof at the end of Wellington Road past Grosvenor Road.",
+      "triggers": [
+        "along_road",
+        "sequence"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a small one-story building with a white gabled roof. There are blue, green and white tents in the green area behind this building. On the other side of this building are 3 buildings with red pyramid roofs, these buildings are on the side of wellington road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The small gray building in the back corner of the store lot on Wellington Road that is between trees next to a red roof house and a gray roof building.",
+      "triggers": [
+        "distance",
+        "between",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The tiny gray square building behind the parking lot behind the dark gray house in the middle of Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Three tier white and brown building with a gray roof, that has one blue car, one white car and one black car parked in front of it, off Grosvenor Road beside the edge of the map",
+      "triggers": [
+        "distance",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A building that is on Grosvenor Road. It is on the edge of the land and surrounded by trees.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The light gray square building at the intersection of Wellington Road and Grosvenor Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray building on Grosvenor Road near the intersection with Wellington Road.",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Grosvenor Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The gray building at the intersection of Grosvernor Road and Wellington Road.",
+      "triggers": [
+        "along_road"
+      ],
+      "bound_names": [
+        "Grosvenor Road",
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "This is a building with a gray roof on Wellington Road. It is located next to a warehouse with a large parking space. On the other side there is a path leading to four buildings with a large parking lot.",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road",
+        "The Food Warehouse"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "this building is on Wellington Road and on the north side of the road. There is a parking area to the left of the building and lots of trees and parking spaces to the right.",
+      "triggers": [
+        "cardinal",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The building has a dark grey roof and is to the right of a small body of water. The building is on Wellington Road and is to the left of a tall white building.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A dark gray roofed rectangular/square building with an addition on the back in the center. It is located on Wellington Road beside the parking lot of the building with the long white aluminum roofs.",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A multi-colored Brown and Gray House with a gray roof, next to a parking lot that has a multi-building complex with gray and white roofs, off Wellington Road",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The white building beside the building with the grey roof below the cars parked across the four house cluster on Wellington Road.",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The white and gray building behind a dark gray building on Wellington Road, to the left of a thick row of trees.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The small white building behind the gray building across from the red buildings on Wellington Road.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A square building with a gray flat roof that has a blue circle on it and the white rectangular building with a white roof beside it. They are located back off of Wellington Road and there is a large pile of black cement barriers on one side of the square building.",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The brown roofed building that's almost square shaped ,which is above the Grosvenor Road when viewing the road is on the right side of the buildings. There's a red car to the right of the building.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A square building with a brown roof off of Wellington Drive next to the side road of Grosvernor Road. There is a white car parked behind this building.",
+      "triggers": [
+        "distance",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "On Grosvenor Road, it is a building with trees and a red car in front of it and a white car behind it.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A multi-colored Brown House with a dark brown roof that is missing its front wall, across from a red car off Grosvenor Road, near the edge of the map",
+      "triggers": [
+        "distance",
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Grosvenor Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "Brown building with two gray roofs that is in front of eight equal sized rectangular green areas, that is a cross from a multi-unit building that has four white and gray roofs off Wellington Road",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "A rectangular Brown Gray Building, with two gray roofs, connected to a smaller gray building with a white roof, and next to four rectangular equal sized areas with vegetation on them off Wellington Road",
+      "triggers": [
+        "distance",
+        "along_road"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    },
+    {
+      "map_name": "birmingham_block_1",
+      "instruction": "The white building with the gray roof that is to the right of the large white and gray building on Wellington Road. There are several gardens on the left side of the building.",
+      "triggers": [
+        "along_road",
+        "egocentric"
+      ],
+      "bound_names": [
+        "Wellington Road",
+        "Wellington Road"
+      ]
+    }
+  ],
+  "limitations": "Keyword triggers include object names and attributes; they are not annotated relation truth. No targets read. Egocentric phrases cannot become world XY directions. No invented roads."
+}

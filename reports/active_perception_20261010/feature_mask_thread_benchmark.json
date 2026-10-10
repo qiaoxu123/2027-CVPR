@@ -1,0 +1,31 @@
+{
+  "results": {
+    "1": {
+      "seconds": 0.414109448203817,
+      "observations": 32,
+      "exact_equal": true
+    },
+    "2": {
+      "seconds": 0.5211076580453664,
+      "observations": 32,
+      "exact_equal": true
+    },
+    "4": {
+      "seconds": 0.9579633730463684,
+      "observations": 32,
+      "exact_equal": true
+    }
+  },
+  "commit": "7eceaa47f3f81781fa1b6620b62c96569026114b",
+  "method": "ThreadPoolExecutor over observed_region_masks; 1, 2, 4 workers; cv2 threads=1; OMP/MKL threads=1",
+  "sample": "First 8 Train Seen raw episodes, trajectory fractions 0/.2/.4/.6, positive height only; native 384 RGB/depth and canonical 784 candidate grid; 32 frames",
+  "scope": "CPU region-mask computation only, actual renders prepared before timing; no GPU encoding measured",
+  "equality": "Each mask and quality array exactly equal to single-thread reference",
+  "limitations": [
+    "One timing per configuration, not a statistically stable benchmark",
+    "Concurrent with main frozen-feature preparation",
+    "Does not test process sharding, rendering overlap, larger GPU batches, or total pipeline speed",
+    "First 8 episodes do not represent all maps or visibility patterns"
+  ],
+  "decision": "Do not replace active preparation with this slower thread-only approach; leave existing cache and training configuration unchanged"
+}

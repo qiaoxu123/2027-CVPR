@@ -1,0 +1,71 @@
+{
+  "sources": {
+    "pretrain": "runs/p1_v3_hard_h128_seed0/bidirectional_report.json",
+    "scratch": "runs/a3_replicate_seed0/report.json",
+    "initialized": "runs/a3_p1_v3_hard_seed0/report.json",
+    "counterfactual": "runs/a3_p1_v3_hard_counterfactual_seen/counterfactual_report.json"
+  },
+  "source_sha256": {
+    "pretrain": "90c88851342bdc15f617faa45b81c3e88a715321529240a1c9deedf9ec36e9ab",
+    "scratch": "e52aa9eee000c0e95ef2705168d5bed0d867717b72d57962314c2e24710752af",
+    "initialized": "f603348d2f87cd9dd757c0dc182412bee6d0b703ccb7eabfa2db30a91bf46357",
+    "counterfactual": "f1f0e62cf0ac9183645606b1b9c6c677e2f6377c66a8ed2f3d559cbddf8724b4"
+  },
+  "static": [
+    {
+      "model": "scratch",
+      "best_epoch": 5,
+      "R@1/20m": 0.4089035449299258,
+      "R@4/20m": 0.6380873866446826,
+      "R@8/20m": 0.7506183017312449,
+      "NE_m": 31.527400111916236,
+      "samples": 2426,
+      "train_seconds": 265.9938297010958,
+      "validation_seconds": 18.830407130997628
+    },
+    {
+      "model": "initialized",
+      "best_epoch": 4,
+      "R@1/20m": 0.3685078318219291,
+      "R@4/20m": 0.6108821104699094,
+      "R@8/20m": 0.7328936521022259,
+      "NE_m": 32.6913259935497,
+      "samples": 2426,
+      "train_seconds": 269.318888715934,
+      "validation_seconds": 19.6351664068643
+    }
+  ],
+  "closedloop_seen128": [
+    {
+      "model": "scratch",
+      "episodes": 128,
+      "SR": 0.4140625,
+      "SPL": 0.4065224103390012,
+      "OSR": 0.4609375,
+      "NE": 30.11453785088819,
+      "nDTW": 0.2825896550028808,
+      "sDTW": 0.1283965921839872,
+      "steps": 9.6484375,
+      "False_Stop_Rate": null
+    },
+    {
+      "model": "initialized",
+      "episodes": 128,
+      "SR": 0.3671875,
+      "SPL": 0.3611977250670881,
+      "OSR": 0.453125,
+      "NE": 32.6470029044976,
+      "nDTW": 0.2760862351430922,
+      "sDTW": 0.11085062068178839,
+      "steps": 9.671875,
+      "False_Stop_Rate": null
+    }
+  ],
+  "pretrain_train_seconds": 67.41591067193076,
+  "pretrain_validation_seconds": 5.456076778937131,
+  "delta_R1": -0.04039571310799672,
+  "delta_R8": -0.017724649629018985,
+  "delta_NE": 1.1639258816334603,
+  "decision": "Do not promote P1 v3. Worse independent full Seen static localization and Seen128 closed-loop control. Full matched trajectory comparison remains queued; no new Graph Unseen used.",
+  "note": "Identical A3 architecture/batch16/BF16/workers4/seed0/5epochs/TrainSeen21166/ValSeen2426; initialization only differs. Best epoch selected by Seen R1 with NE tie-break. Pretraining plus finetuning compute is reported separately from cache generation. Hard negative private labels never enter inference. Seen128 bounded navigation has no learned Stop; False-Stop rate null is not zero error."
+}

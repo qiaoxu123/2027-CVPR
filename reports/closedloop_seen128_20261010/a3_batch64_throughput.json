@@ -1,0 +1,21 @@
+{
+  "args": {
+    "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+    "data": "data/revised_static/graphnav_train_seen.jsonl",
+    "bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+    "output": "runs/a3_training_throughput_bs64",
+    "batch_size": 64,
+    "workers": 4
+  },
+  "provenance": {
+    "commit": "d1fd6a9e953c7dcbf261a746e72fb5715a1be590",
+    "working_diff_sha256": "ce9e875e16b9fb0f5a88b935faff073be096938d61ddab751f190dcc83242d77"
+  },
+  "checkpoint_sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+  "data_sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c",
+  "samples": 1024,
+  "seconds": 1.9134192550554872,
+  "samples_per_second": 535.1676049535234,
+  "peak_allocated_gib": 3.7223410606384277,
+  "protocol": "BF16 real Revised Train Seen labels; frozen cached BERT96; 2 warmup updates then same1024 queries; workers4. Private benchmark weight copy discarded; not accuracy evidence."
+}

@@ -3,6 +3,7 @@ import numpy as np
 import torch
 
 from graphnav.foundations import CandidateVisionCache
+from graphnav.memory import ObservedRGBMemory
 from graphnav.visual_supervision import visual_candidate_batch
 
 
@@ -36,3 +37,24 @@ def test_visual_supervision_never_crops_unseen_future_area(tmp_path):
     assert coverage[0, 1] == 0
     assert visual[0, 0, 0] > 0
     assert visual[0, 1].abs().sum() == 0
+
+
+def test_empty_center_screen_preserves_exact_coverage_on_rotated_view(tmp_path):
+    bounds = [0, 0, 80, 400]
+    image = np.full((64, 64, 3), 240, np.uint8)
+    path = tmp_path / "rotated.png"
+    cv2.imwrite(str(path), image)
+    corners = ObservedRGBMemory.view_corners([40, 200], .6, 35)
+    memory = ObservedRGBMemory(bounds, size=128)
+    memory.observe(image, corners)
+    points = np.random.default_rng(7).uniform(0, 1, (100, 2)).astype(np.float32)
+    output = type("Output", (), {"candidate_xy": torch.from_numpy(points[None])})()
+    _, coverage = visual_candidate_batch(output,
+        [[{"path": str(path), "footprint_world": corners.tolist()}]], [bounds],
+        DummyEncoder(), vision_dim=2, min_coverage=.1, crop_extent_m=40, memory_size=128)
+    expected = []
+    for point in points:
+        crop = memory.crop(np.asarray(bounds[:2]) + point * (np.asarray(bounds[2:]) - bounds[:2]), 40)
+        value = min(crop.coverage, crop.center_coverage)
+        expected.append(value if value >= .1 else 0)
+    np.testing.assert_allclose(coverage.numpy()[0], expected, atol=1e-7)

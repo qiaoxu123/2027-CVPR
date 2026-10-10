@@ -1,0 +1,37 @@
+{
+  "requires": [
+    "runs/closedloop_baseline/a3_seen128/metrics.json",
+    "runs/p2_controlled_base224/visual_pretrain_report.json",
+    "runs/p2_controlled_large384/visual_pretrain_report.json"
+  ],
+  "environment": {
+    "PYTHONPATH": ".",
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "jobs": [
+    {
+      "name": "frozen_a3_trajectory_features",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/cache_a3_features.py",
+        "--queries",
+        "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--output",
+        "runs/a3_trajectory_features",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4",
+        "--dense-context"
+      ],
+      "log": "runs/cache_a3_trajectory.log",
+      "complete_artifact": "runs/a3_trajectory_features/bert_tokens.pt"
+    }
+  ],
+  "selection": "Training-only public-query features; no new model selection and no Unseen labels. Dense cache supports later controlled residual/trajectory experiments."
+}

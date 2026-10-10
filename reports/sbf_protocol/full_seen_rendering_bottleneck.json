@@ -1,0 +1,7 @@
+{
+  "status": "performance_interrupted",
+  "completed_episodes": 318,
+  "reason": "GAT-only unnecessarily rendered native384 RGB/Depth every step and recomputed whole source valid-height arrays. Fix uses static map buffers and skips unused visual rendering; preserve partial predictions/source snapshot and validate exact trajectories before separate rerun.",
+  "interrupted_unix": 1791570245.177388,
+  "old_source_snapshot": "runs/source_snapshots/b2001efa4c10_dynamic_graph_current_full_seen"
+}

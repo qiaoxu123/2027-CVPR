@@ -1,0 +1,102 @@
+{
+  "requires": [
+    "data/public_eval_seen_v2/manifest.json"
+  ],
+  "environment": {
+    "PYTHONPATH": ".",
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "jobs": [
+    {
+      "name": "cache_landmark_vectors_train_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/cache_landmark_vectors.py",
+        "--rois",
+        "runs/p0_alignment/train_seen/trusted_rois.jsonl",
+        "--checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--output",
+        "runs/p3_landmark_vectors_train_seen",
+        "--patch-cache",
+        "runs/p3_frozen_patch_cache",
+        "--batch-size",
+        "32"
+      ],
+      "log": "runs/p3_landmark_vectors_train_seen.log",
+      "complete_artifact": "runs/p3_landmark_vectors_train_seen/manifest.json"
+    },
+    {
+      "name": "cache_landmark_vectors_val_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/cache_landmark_vectors.py",
+        "--rois",
+        "runs/p0_alignment/val_seen/trusted_rois.jsonl",
+        "--checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--output",
+        "runs/p3_landmark_vectors_val_seen",
+        "--patch-cache",
+        "runs/p3_frozen_patch_cache",
+        "--batch-size",
+        "32"
+      ],
+      "log": "runs/p3_landmark_vectors_val_seen.log",
+      "complete_artifact": "runs/p3_landmark_vectors_val_seen/manifest.json"
+    },
+    {
+      "name": "cache_public_seen_a3",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/cache_a3_features.py",
+        "--queries",
+        "data/public_eval_seen_v2/public_queries.jsonl",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--output",
+        "runs/a3_seen_dynamic_features",
+        "--batch-size",
+        "64",
+        "--workers",
+        "4",
+        "--dense-context"
+      ],
+      "log": "runs/cache_a3_seen_dynamic.log",
+      "complete_artifact": "runs/a3_seen_dynamic_features/bert_tokens.pt"
+    },
+    {
+      "name": "direct_goal_stop_full_seen",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--model",
+        "a3-trajectory",
+        "--split",
+        "val_seen",
+        "--output",
+        "runs/closedloop_baseline/a3_direct_stop_seen_full",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--stop-threshold",
+        "0.3",
+        "--head-execution",
+        "direct-goal"
+      ],
+      "log": "runs/a3_direct_stop_seen_full.log",
+      "complete_artifact": "runs/closedloop_baseline/a3_direct_stop_seen_full/metrics.json"
+    }
+  ],
+  "selection": "Frozen selected Large P2 vectors from audited actual Train Seen/Val Seen frames; labels and causal prefix histories are assembled separately. No Unseen data/cache/gallery. Seen static A3 cache covers all2470 benchmark episodes without deduplication. Best planning diagnostic direct-goal+learnedStop now evaluated full Seen only. Patch cache shares immutable existing files via hardlinks; existing hits are never overwritten."
+}

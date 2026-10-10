@@ -1,0 +1,225 @@
+{
+  "args": {
+    "samples": "data/trajectory_supervision_v2_seen/samples.jsonl",
+    "queries": "data/trajectory_supervision_v2_seen/public_queries.jsonl",
+    "cache": "runs/full_seed0_train_fields",
+    "output": "runs/full_seed0_trajectory",
+    "epochs": 5,
+    "batch_size": 256,
+    "workers": 4,
+    "seed": 0,
+    "split_seed": 0,
+    "lr": 0.0002,
+    "device": "cuda",
+    "resume": null
+  },
+  "provenance": {
+    "commit": "e9fa714087b0b6ff6871375535fd17787d21a3f7",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "input_fingerprint": {
+    "samples": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/samples.jsonl",
+      "sha256": "f8e490ba4fdbdd77e9225b24cd63f95b09db4d74ce0f0789e745431681e6d8d8"
+    },
+    "queries": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/data/trajectory_supervision_v2_seen/public_queries.jsonl",
+      "sha256": "c4adbad12ec79d88ba108cb57728d2f3387620567b3ad944177841440a78eda1"
+    },
+    "cache_manifest": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/full_seed0_train_fields/manifest.json",
+      "sha256": "14bb9d350741d1e5d9383bfd9bec80f13f42b791d305f8161b70dc679385d3c2"
+    }
+  },
+  "training_samples": 115559,
+  "development_samples": 12950,
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "total": 3.2767152610513532,
+        "ranking": 2.9251915094089256,
+        "path": 0.12616017453788916,
+        "mode": 1.0700825673017678,
+        "stop": 0.5917765658341159,
+        "candidate_r1": 0.5934111579180699,
+        "candidate_ne": 22.865337457967904,
+        "stop_rate": 0.1496724616846908,
+        "failed_stop_rate": 0.029577964505044338,
+        "missed_arrival_rate": 0.11969643212622562,
+        "selected_path_ade": 29.832887858659674,
+        "samples": 115559,
+        "seconds": 8.359800168080255,
+        "samples_per_second": 13823.177310054885,
+        "peak_allocated_gib": 0.05410623550415039
+      },
+      "dev": {
+        "total": 3.2232802445179707,
+        "ranking": 2.8895081416244213,
+        "path": 0.12616737503687847,
+        "mode": 1.0360674804334014,
+        "stop": 0.5199899346579916,
+        "candidate_r1": 0.6089575288654755,
+        "candidate_ne": 22.49380009831609,
+        "stop_rate": 0.1951351351213271,
+        "failed_stop_rate": 0.04131274134035737,
+        "missed_arrival_rate": 0.08447876448336715,
+        "selected_path_ade": 29.04443843502796,
+        "samples": 12950,
+        "seconds": 0.6361298488918692,
+        "samples_per_second": 20357.47893697922,
+        "peak_allocated_gib": 0.034146785736083984
+      }
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "total": 3.2105124278647015,
+        "ranking": 2.883817757169105,
+        "path": 0.12044940671932258,
+        "mode": 1.0375606200057907,
+        "stop": 0.5124460142867743,
+        "candidate_r1": 0.5961283846279835,
+        "candidate_ne": 22.636115228607085,
+        "stop_rate": 0.17824660996365285,
+        "failed_stop_rate": 0.03228653761172509,
+        "missed_arrival_rate": 0.09383085696548521,
+        "selected_path_ade": 28.603964982846367,
+        "samples": 115559,
+        "seconds": 7.435802168911323,
+        "samples_per_second": 15540.89220973976,
+        "peak_allocated_gib": 0.05410623550415039
+      },
+      "dev": {
+        "total": 3.2109128151529083,
+        "ranking": 2.8815083775465093,
+        "path": 0.1242043370066002,
+        "mode": 1.042547778217949,
+        "stop": 0.5047265704442175,
+        "candidate_r1": 0.6025482627783963,
+        "candidate_ne": 22.795680174072736,
+        "stop_rate": 0.19606177604796804,
+        "failed_stop_rate": 0.03814671818699156,
+        "missed_arrival_rate": 0.08038610040336042,
+        "selected_path_ade": 28.82205177307129,
+        "samples": 12950,
+        "seconds": 0.4233133301604539,
+        "samples_per_second": 30591.996701571847,
+        "peak_allocated_gib": 0.034146785736083984
+      }
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "total": 3.2003267950471064,
+        "ranking": 2.877767728357701,
+        "path": 0.1189941666242568,
+        "mode": 1.035823766821205,
+        "stop": 0.4999126309903236,
+        "candidate_r1": 0.5987936898302983,
+        "candidate_ne": 22.69091372517617,
+        "stop_rate": 0.18445988629726676,
+        "failed_stop_rate": 0.032104812260887336,
+        "missed_arrival_rate": 0.08743585528151712,
+        "selected_path_ade": 28.44957109636039,
+        "samples": 115559,
+        "seconds": 6.941650458844379,
+        "samples_per_second": 16647.19373081742,
+        "peak_allocated_gib": 0.05410623550415039
+      },
+      "dev": {
+        "total": 3.205017835808537,
+        "ranking": 2.8789132157255786,
+        "path": 0.1232036362962373,
+        "mode": 1.0411902403187108,
+        "stop": 0.4939099460771185,
+        "candidate_r1": 0.6026254828556163,
+        "candidate_ne": 22.970648594565372,
+        "stop_rate": 0.19513513526861273,
+        "failed_stop_rate": 0.036833976874250246,
+        "missed_arrival_rate": 0.08000000004257475,
+        "selected_path_ade": 28.69928488064917,
+        "samples": 12950,
+        "seconds": 0.4340982979629189,
+        "samples_per_second": 29831.95294883695,
+        "peak_allocated_gib": 0.034146785736083984
+      }
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "total": 3.193935059871005,
+        "ranking": 2.8740034091138287,
+        "path": 0.11840100055101332,
+        "mode": 1.0238488990704564,
+        "stop": 0.4957287874553478,
+        "candidate_r1": 0.5996677021941539,
+        "candidate_ne": 22.71309957833638,
+        "stop_rate": 0.1790340864858948,
+        "failed_stop_rate": 0.02958661809143329,
+        "missed_arrival_rate": 0.0903434609167136,
+        "selected_path_ade": 28.299787999458,
+        "samples": 115559,
+        "seconds": 6.8043949159327894,
+        "samples_per_second": 16982.994289383987,
+        "peak_allocated_gib": 0.05410623550415039
+      },
+      "dev": {
+        "total": 3.1997130099410716,
+        "ranking": 2.876172466241255,
+        "path": 0.12290273606316923,
+        "mode": 1.0261480560818235,
+        "stop": 0.4901150227789713,
+        "candidate_r1": 0.5957528955871995,
+        "candidate_ne": 23.192727567164596,
+        "stop_rate": 0.17559845568130375,
+        "failed_stop_rate": 0.028339768354727034,
+        "missed_arrival_rate": 0.09104247102406034,
+        "selected_path_ade": 28.485436555427935,
+        "samples": 12950,
+        "seconds": 0.4042153761256486,
+        "samples_per_second": 32037.3760249401,
+        "peak_allocated_gib": 0.034146785736083984
+      }
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "total": 3.1887489959678437,
+        "ranking": 2.870741039876887,
+        "path": 0.11809136903024009,
+        "mode": 1.0132764909376752,
+        "stop": 0.49294469043351874,
+        "candidate_r1": 0.5991398333174488,
+        "candidate_ne": 22.7796583994245,
+        "stop_rate": 0.17549476890231627,
+        "failed_stop_rate": 0.02845299803579666,
+        "missed_arrival_rate": 0.09274915844060971,
+        "selected_path_ade": 28.105541271188294,
+        "samples": 115559,
+        "seconds": 6.79547611088492,
+        "samples_per_second": 17005.283826235347,
+        "peak_allocated_gib": 0.05410623550415039
+      },
+      "dev": {
+        "total": 3.1971586974155026,
+        "ranking": 2.874746876941224,
+        "path": 0.12268499084996441,
+        "mode": 1.0191789324863536,
+        "stop": 0.4890445736200193,
+        "candidate_r1": 0.5976833978122726,
+        "candidate_ne": 23.320684567013302,
+        "stop_rate": 0.1835521235613289,
+        "failed_stop_rate": 0.03281853284614887,
+        "missed_arrival_rate": 0.08756756754915687,
+        "selected_path_ade": 28.49421753459916,
+        "samples": 12950,
+        "seconds": 0.9213778220582753,
+        "samples_per_second": 14055.03767289608,
+        "peak_allocated_gib": 0.034146785736083984
+      }
+    }
+  ],
+  "best_development_loss": 3.1971586974155026,
+  "note": "Geometry/pose head training metrics, not closed-loop SR. No RGB or trained Dynamic Belief yet."
+}

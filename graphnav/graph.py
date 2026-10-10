@@ -1,6 +1,9 @@
 """Small dense edge-conditioned GATv2; no torch-geometric dependency.
 
-Graph size is 1 UAV + at most 16 landmarks + at most 20 proposals.
+Legacy navigation graph: 1 UAV + at most 16 landmarks + at most 20 proposals.
+
+IMPORTANT: the static-first experiment uses semantic_graph.py, not this
+legacy UAV-to-all/k-NN adjacency. This remains for backward compatibility.
 Quadratic attention is limited to this small graph, NOT all map cells.
 """
 

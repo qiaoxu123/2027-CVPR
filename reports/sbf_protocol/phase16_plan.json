@@ -1,0 +1,68 @@
+{
+  "requires": [
+    "runs/gat_mechanism_seen128/zero-edge-features/metrics.json"
+  ],
+  "environment": {
+    "HF_HUB_OFFLINE": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "protocol": "Performance-only unused SBF canvas bypass. Same P3 joint/history, preserved A3 and trajectory head; all128 output pose arrays, termination and navigation metrics must match subset of completed historical fullSeen before later evaluations.",
+  "jobs": [
+    {
+      "name": "native_boundary_optimized_joint_history_seen128",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "scripts/evaluate_closedloop.py",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_seen",
+        "--head-checkpoint",
+        "runs/a3_trajectory_stop_seed0/best.pt",
+        "--head-execution",
+        "guarded-blend",
+        "--stop-threshold",
+        ".3",
+        "--model",
+        "dynamic",
+        "--dynamic-checkpoint",
+        "runs/dynamic_belief_v2_graph_visual_history_seed0/best.pt",
+        "--visual-checkpoint",
+        "runs/p2_controlled_large384/visual_best.pt",
+        "--observed-cache",
+        "runs/current_observed_vector_cache",
+        "--output",
+        "runs/native_boundary_seen128_optimized",
+        "--visual-history",
+        "--max-episodes",
+        "128"
+      ],
+      "log": "runs/native_boundary_seen128_optimized.log",
+      "complete_artifact": "runs/native_boundary_seen128_optimized/metrics.json"
+    },
+    {
+      "name": "native_boundary_exact_subset_check",
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR-static-geometry/.venv/bin/python",
+        "-m",
+        "scripts.check_rollout_subset",
+        "--full",
+        "runs/closedloop_seen_confirm/dynamic_graph_visual_history_history_optimized",
+        "--subset",
+        "runs/native_boundary_seen128_optimized",
+        "--output",
+        "reports/sbf_protocol/native_boundary128_exact_equivalence.json"
+      ],
+      "log": "runs/native_boundary128_exact_equivalence.log",
+      "complete_artifact": "reports/sbf_protocol/native_boundary128_exact_equivalence.json"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "args": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "output": "reports/active_perception_20261010/image_quality_seen",
+    "split": "val_seen",
+    "episodes_per_map": 2,
+    "steps": [
+      0,
+      8,
+      16
+    ],
+    "seed": 20261010,
+    "visualizations": 36
+  },
+  "provenance": {
+    "commit": "c782316eb1c76bae8c6ed0ffa07ce68647b3162b",
+    "working_diff_sha256": "8754b6f5253a2b134bef9a92d2b3fdcfd6a5b0d0740a6d838b0461aa6481818a"
+  },
+  "source_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "selected_episode_indices": {
+    "birmingham_block_1": [
+      179,
+      119
+    ],
+    "birmingham_block_10": [
+      727,
+      741
+    ],
+    "birmingham_block_11": [
+      763,
+      762
+    ],
+    "birmingham_block_12": [
+      805,
+      809
+    ],
+    "birmingham_block_3": [
+      384,
+      480
+    ],
+    "birmingham_block_4": [
+      503,
+      502
+    ],
+    "birmingham_block_7": [
+      606,
+      610
+    ],
+    "birmingham_block_9": [
+      620,
+      720
+    ],
+    "cambridge_block_12": [
+      1395,
+      1382
+    ],
+    "cambridge_block_13": [
+      1483,
+      1491
+    ],
+    "cambridge_block_17": [
+      1626,
+      1636
+    ],
+    "cambridge_block_18": [
+      1692,
+      1652
+    ],
+    "cambridge_block_19": [
+      1714,
+      1724
+    ],
+    "cambridge_block_20": [
+      1823,
+      1825
+    ],
+    "cambridge_block_21": [
+      1983,
+      1979
+    ],
+    "cambridge_block_23": [
+      2149,
+      2151
+    ],
+    "cambridge_block_25": [
+      2186,
+      2188
+    ],
+    "cambridge_block_28": [
+      2301,
+      2276
+    ],
+    "cambridge_block_33": [
+      2457,
+      2378
+    ],
+    "cambridge_block_4": [
+      859,
+      857
+    ],
+    "cambridge_block_6": [
+      884,
+      901
+    ],
+    "cambridge_block_7": [
+      1052,
+      1048
+    ],
+    "cambridge_block_9": [
+      1081,
+      1210
+    ]
+  },
+  "records": 672,
+  "visualizations": 36,
+  "available_rois": 26,
+  "annotation_status": "Human/blinded attribute correctness is UNANNOTATED, not an accuracy measurement.",
+  "constraints": "Independent actual human observations; fixed-step selection without target. Descend is public-pose one-step intervention, not a completed navigation rollout. GT object contour/target coordinate only define offline diagnostic ROI/labels, never a policy input. ROI output upsampling/Laplacian variance is not evidence of additional physical detail or semantic recognition. Nadir orthophoto, no new 3D side view."
+}

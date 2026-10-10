@@ -1,0 +1,98 @@
+{
+  "samples": 237,
+  "provenance": {
+    "commit": "5d6c8b1703d322968ce7eff133f3172e995cc9c7",
+    "working_diff_sha256": "5fe61a098bc48fdce0b86a4de110c839df6fc04f8b7bd8167664a4ed1f26b0d4"
+  },
+  "input_sha256": {
+    "original": "2a45ddea7268c3bfd93c1c68cd087086e2fbd5cf0ecdde9b5952a6f175b28088",
+    "swapped": "e2d7ffda4d3e979034f4bbc3bfb736328bac0ab00ba9af172bf069bc7241ee61"
+  },
+  "models": {
+    "A3_seed0": {
+      "checkpoint_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.6118143200874329,
+      "full_swap": {
+        "flipped_fraction": 0.3544303774833679,
+        "inverse_direction_accuracy": 0.7172995209693909,
+        "both_directions_correct": 0.3417721390724182
+      },
+      "word_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.39662444591522217,
+        "both_directions_correct": 0.012658227235078812
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.38818562030792236,
+        "both_directions_correct": 0.0
+      }
+    },
+    "E1_seed0": {
+      "checkpoint_sha256": "5e93e839c4cb933d933ed05e1b0dddbbfe2f14a9fea7f59f45649fdf3fb5db70",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.5274261236190796,
+      "full_swap": {
+        "flipped_fraction": 0.18565399944782257,
+        "inverse_direction_accuracy": 0.5654008388519287,
+        "both_directions_correct": 0.13924050331115723
+      },
+      "word_only": {
+        "flipped_fraction": 0.05485231801867485,
+        "inverse_direction_accuracy": 0.502109706401825,
+        "both_directions_correct": 0.04219409078359604
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.47257381677627563,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_full": {
+      "checkpoint_sha256": "aabff8db54435dc00d23cc743755d4d641af3ee79b262917820f62df5a5b8816",
+      "variant": "gat",
+      "control": "full",
+      "original_direction_accuracy": 0.6877636909484863,
+      "full_swap": {
+        "flipped_fraction": 0.455696165561676,
+        "inverse_direction_accuracy": 0.7679324746131897,
+        "both_directions_correct": 0.455696165561676
+      },
+      "word_only": {
+        "flipped_fraction": 0.008438818156719208,
+        "inverse_direction_accuracy": 0.3206750750541687,
+        "both_directions_correct": 0.008438818156719208
+      },
+      "graph_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.2953586280345917,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_self": {
+      "checkpoint_sha256": "103953e13ad933676906daa5d5222066ff37f5d90ab9bfeca42e9f06c322eea0",
+      "variant": "gat",
+      "control": "self",
+      "original_direction_accuracy": 0.5991560816764832,
+      "full_swap": {
+        "flipped_fraction": 0.25738394260406494,
+        "inverse_direction_accuracy": 0.6497889757156372,
+        "both_directions_correct": 0.25316452980041504
+      },
+      "word_only": {
+        "flipped_fraction": 0.05063290894031525,
+        "inverse_direction_accuracy": 0.40084385871887207,
+        "both_directions_correct": 0.025316454470157623
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.40084385871887207,
+        "both_directions_correct": 0.0
+      }
+    }
+  },
+  "note": "Controlled synthetic cardinal labels. Expected-probability position side, not real target Recall or SR. Word-only fixes original geometry/rules/names; graph-only fixes original BERT tokens and explicit rule features, changes parsed graph/name embeddings. Full swap changes entire public pipeline."
+}
