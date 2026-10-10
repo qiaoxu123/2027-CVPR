@@ -1,0 +1,67 @@
+{
+  "status": "prospective_input_protocol_verified",
+  "episodes": 128,
+  "dataset_episodes": 2470,
+  "episode_manifest_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "baselines": {
+    "sbf": {
+      "manifest_equal": true,
+      "manifest_hash_equal": true,
+      "protocol_equal": true,
+      "metrics": {
+        "SR": 0.4453125,
+        "OSR": 0.6171875,
+        "SPL": 0.3688677014637224,
+        "NE": 32.95612412446736,
+        "nDTW": 0.2754922717391801,
+        "sDTW": 0.14676838311624735,
+        "steps": 15.9375,
+        "path_length": 266.88444111966714,
+        "policy_stop": 0.0,
+        "inference_ms": 47.55877582433271,
+        "episodes": 128,
+        "False_Stop_Rate": null,
+        "false_stop_episode_fraction": 0.0,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      }
+    },
+    "a3": {
+      "manifest_equal": true,
+      "manifest_hash_equal": true,
+      "protocol_equal": true,
+      "metrics": {
+        "SR": 0.3828125,
+        "OSR": 0.4453125,
+        "SPL": 0.37606694035869126,
+        "NE": 29.755665569208993,
+        "nDTW": 0.28392776625534566,
+        "sDTW": 0.12583340724151312,
+        "steps": 9.625,
+        "path_length": 205.20214000570365,
+        "policy_stop": 0.0,
+        "inference_ms": 3.2126690781686564,
+        "episodes": 128,
+        "False_Stop_Rate": null,
+        "false_stop_episode_fraction": 0.0,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      }
+    }
+  },
+  "limitations": [
+    "No baseline rerun. Current epoch1 predictions do not yet exist.",
+    "Same input episodes and declared protocol do not establish identical historical controller implementations.",
+    "SBF checkpoint historically selected on Val Unseen; current candidate selected on Seen.",
+    "Metric comparison must verify completed epoch1 output manifest and protocol again."
+  ]
+}

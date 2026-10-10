@@ -272,3 +272,6 @@ History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s
 
 
 并行Seen32 RGB诊断已完成：193.78秒，164观测中18合格、6去重Query。单尺度/裁剪多尺度/原生Patch多尺度条件R@1为50.00%/44.44%/8.33%；7组相同候选下降配对未显示稳定增益。报告`docs/RGB_PARALLEL_DIAGNOSTIC_20261010.md`，完整CSV/JSON及两组代表图已归档，18组图保留本地SHA清单。主任务PID895722仍在准备冻结特征，尚未产生Epoch1指标；保持第一轮后审阅、不自动进入后续19轮和Unseen。
+
+
+第一轮评估输入预核验：从当前Revised Seen原始数据与当前配置重新生成固定128 Episode清单，与历史SBF/A3清单逐项一致（Episode ID、索引、起点），SHA256为`ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695`。20步、水平50m、垂直10m、高度10–100m、20m成功半径及二维距离声明协议一致。证据：`reports/active_perception_20261010/epoch1_seen128_protocol_preflight.json`。未重跑基线；历史控制器版本与SBF曾按Unseen选择权重的差异仍需披露，不能仅由清单相同宣称所有实现完全一致。第一轮输出产生后还须核验实际输出清单及协议。

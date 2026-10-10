@@ -68,3 +68,6 @@ PYTHONPATH=. HF_HUB_OFFLINE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 TOKENIZERS_PAR
 Seen128：`training/seen128_epoch01/metrics.json`及逐Episode轨迹。第1轮完成标记：`training/review_hold.json`。
 
 大数据、冻结特征和权重只保留本地，不提交。待第1轮完整训练及验证完成后，用实测耗时更新预计完成时间；32样本冷启动外推不作为完成时间承诺。
+
+
+第一轮评估输入预核验：从当前Revised Seen原始数据与当前配置重新生成固定128 Episode清单，与历史SBF/A3清单逐项一致（Episode ID、索引、起点），SHA256为`ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695`。20步、水平50m、垂直10m、高度10–100m、20m成功半径及二维距离声明协议一致。证据：`reports/active_perception_20261010/epoch1_seen128_protocol_preflight.json`。未重跑基线；历史控制器版本与SBF曾按Unseen选择权重的差异仍需披露，不能仅由清单相同宣称所有实现完全一致。第一轮输出产生后还须核验实际输出清单及协议。
