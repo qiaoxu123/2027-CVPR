@@ -75,7 +75,7 @@ class RelationDataset(FullCandidateDataset):
         sample['counter_node_names']=cg['node_names']
         for key,value in [('nodes',cg['nodes']),('node_types',cg['node_types']),('node_valid',cg['node_mask']),('adjacency',cg['adjacency']),('edges',cg['edges']),('rules',rules),('relation_fields',padded)]:sample['counter_'+key]=torch.from_numpy(value)
         sample['counter_allowed']=torch.from_numpy(counter_allowed if counter_allowed is not None else np.ones(len(grid),bool))
-        sample['counter_eligible']=torch.tensor(counter_valid)
+        sample['counter_eligible']=torch.tensor(bool(counter_valid))
         return sample
 
 

@@ -33,7 +33,7 @@ def main():
     parser.add_argument('--frozen-final-candidate',help='Seen-selected candidate after20 completed epochs, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer'], default='sbfnav')
     parser.add_argument('--disable-joint-active',action='store_true')
     parser.add_argument('--joint-execution',choices=['checkpoint','guarded-blend'],default='checkpoint')
     parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
@@ -139,6 +139,10 @@ def main():
                 **options)
             if args.model=='target-evidence' or runtime.use_visual:
                 builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
+        elif args.model=='static-transfer':
+            if not args.head_checkpoint or not args.reference_a3_checkpoint:raise ValueError('original head and reference A3 required for explicit transfer')
+            from graphnav.static_transfer_runtime import StaticTransferTrajectoryPolicy
+            runtime=StaticTransferTrajectoryPolicy(args.checkpoint,args.head_checkpoint,args.reference_a3_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution)
         elif args.model=='a3-trajectory':
             if not args.head_checkpoint:raise ValueError('trained trajectory head checkpoint required')
             runtime=A3TrajectoryPolicy(args.checkpoint,args.head_checkpoint,output/'public_inputs',stop_threshold=args.stop_threshold,execution=args.head_execution,explore_candidates=args.explore_candidates)
@@ -201,6 +205,11 @@ def main():
         warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
                  if args.model=='sbfnav' else
                  'Shared macro-action benchmark with orthophoto/vertical-depth observations; no swept 3D collision or perspective-camera claim.'))
+    if args.model=='static-transfer':
+        report['model']='Compatible static A3/GAT + transferred unchanged original Trajectory/Stop; guarded-blend'
+        report['reference_a3_checkpoint_sha256']=sha(args.reference_a3_checkpoint)
+        report['static_variant']=runtime.static_variant;report['static_graph_control']=runtime.static_control
+        report['controller_transfer_note']='Original head provenance verified against original A3; compatible new static features are an explicitly evaluated distribution shift, not controller retraining.'
     if getattr(runtime,'encoder_visual',None) is not None:
         report['observed_visual_cache']=dict(getattr(runtime.encoder_visual,'cache_metrics',{}),
             backbone_encoded_images=runtime.encoder_visual.backbone.encoded_images,
