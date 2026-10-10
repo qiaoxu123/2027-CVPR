@@ -1,0 +1,11 @@
+{
+  "status": "E1 smoke passed; E2/E3 implementation and validation pending",
+  "branch": "2027-CVPR/graphnav-relational-visual-belief",
+  "selection": "Val Seen R@1, then lower NE; no Unseen tuning",
+  "E1": {"seed": 0, "source": "preserved a3_replicate_seed0/best.pt epoch5", "optimizer": "restore AdamW moments and RNG; explicitly change LR from 2e-4 to 5e-5", "batch":16, "workers":4, "precision":"BF16", "epochs_to":15, "milestones":[8,10,15], "classification":"explicit reduced-LR continuation, not unchanged-training resume"},
+  "E2": {"status":"pending", "weights":[0,0.01,0.05], "constraints":"loss-only masks, reliable grounded relations; preserve all legal alternatives; never map egocentric left/right/front/behind to world directions"},
+  "E3": {"status":"pending", "seed":0, "batch":16, "epochs":5, "lr":0.0002, "variants":["A3","A4 full","A4 self","A4 zero physical edge geometry retaining types","A4 language relation links only plus self"]},
+  "closed_loop": {"status":"pending static Seen selection", "controller":"original trained Trajectory/Stop; guarded-blend, threshold .3; strict compatibility/provenance required", "episodes":"same fixed Seen128"},
+  "paused_previous": "SIGSTOP supervisor983745 and evaluation986336; partial outputs preserved; previous uncommitted work saved in git stash",
+  "forbidden": ["new visual/history/active changes", "overwriting source checkpoints", "Unseen hyperparameter selection", "using labels in inference"]
+}
