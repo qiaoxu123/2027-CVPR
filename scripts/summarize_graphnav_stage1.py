@@ -4,6 +4,7 @@ import csv
 import json
 from pathlib import Path
 import shutil
+import sys
 import time
 import numpy as np
 import torch
@@ -40,7 +41,15 @@ def main():
         if any(row['train']['samples'] != 83140 or row['dev']['samples'] != 4372 for row in history):
             raise ValueError('partial epoch cannot satisfy Stage1 delivery')
     state = torch.load(root/'best.pt', map_location='cpu', weights_only=True)
-    (root/'config.yaml').write_bytes((root/f"stages/{freeze['selected_stage']}/config.yaml").read_bytes())
+    import yaml
+    configuration = yaml.safe_load((root/f"stages/{freeze['selected_stage']}/config.yaml").read_text())
+    configuration['complete_architecture'] = dict(grid_size=28, candidate_context_hidden=state['a3_args']['hidden'],
+        top_k=state['a3_args']['top_k'], vision_feature_dimension=1024, appearance_adapter_hidden=64,
+        observed_roi_extents_m=[32,64,128], history_gate='Linear(6,1); quality-weighted causal candidate memory',
+        trajectory_modes=3, trajectory_waypoints=8, residual_bound=.5, active_observation=False)
+    configuration['stage_epochs'] = expected
+    configuration['stage_C_learning_rates'] = dict(a3=1e-5,visual=1e-4,history=1e-4,trajectory_stop=2e-5)
+    (root/'config.yaml').write_text(yaml.safe_dump(configuration,allow_unicode=True,sort_keys=False))
     rows = []
     for stage, history in histories.items():
         for record in history:
@@ -74,6 +83,17 @@ def main():
         if baseline[2] != selected[2] or baseline[0]['protocol'] != selected[0]['protocol']:
             raise ValueError('full baseline/selected protocol differs: '+split)
         paired['full_'+split] = paired_stats(baseline[1], selected[1])
+    causal_pairs = {
+        'A_real_minus_zero': ('stage_A_zero_seen128', 'stage_A_real_seen128'),
+        'A_real_minus_shuffle': ('stage_A_shuffle_seen128', 'stage_A_real_seen128'),
+        'A_real_minus_no_belief': ('stage_A_no-belief_seen128', 'stage_A_real_seen128'),
+        'B_history_minus_current': ('stage_B_current_seen128', 'stage_B_history_seen128'),
+        'selected_real_minus_zero': ('zero_rgb_seen128', 'selected_seen128'),
+        'selected_real_minus_shuffle': ('shuffle_rgb_seen128', 'selected_seen128'),
+        'selected_real_minus_no_belief': ('no_belief_seen128', 'selected_seen128'),
+        'selected_history_minus_current': ('current_only_seen128', 'selected_seen128'),
+    }
+    causal = {name: paired_stats(runs[base][1], runs[candidate][1]) for name,(base,candidate) in causal_pairs.items()}
     epoch_comparisons = [row for row in full_rows if 'seen128' in row['name']]
     for stage, history in histories.items():
         for record in history:
@@ -84,15 +104,34 @@ def main():
     table(root/'history_ablation.csv', history_rows)
     table(root/'goal_retrieval.csv', [dict(name=name, **report['goal_retrieval']) for name,(report,_,_) in runs.items() if 'goal_retrieval' in report])
     # Read saved outputs only: action and history audits never enter inference.
+    sys.path.insert(0, runs['full_seen'][0]['args']['sbf_source'])
+    from sbfnav.mapdata import GROUND_LEVEL
+    map_bounds = {}
+    for split in ('seen','unseen'):
+        for line in Path(f'../2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_{split}.jsonl').read_text().splitlines():
+            record = json.loads(line)
+            map_bounds[record['map_name']] = np.asarray(record['world_bounds'])
     action_audits = {}
     for name in ('full_seen','full_unseen'):
         predictions = runs[name][1]
         steps = np.concatenate([np.diff(np.asarray(row['poses']),axis=0) for row in predictions.values()])
         diagnostics = [d for row in predictions.values() for d in row['step_diagnostics']]
+        invalid_starts = 0; altitude_violations = 0; boundary_violations = 0; illegal_ends = 0
+        for row in predictions.values():
+            poses = np.asarray(row['poses']); height = poses[:,2]-GROUND_LEVEL[row['map_name']]
+            invalid_starts += int(height[0]<10.-.001 or height[0]>100.+.001)
+            # Preserve source starts; inherited violations may only approach the legal range.
+            altitude_violations += int(((height[1:]<np.minimum(10.,height[:-1])-.001)|
+                                       (height[1:]>np.maximum(100.,height[:-1])+.001)).sum())
+            bounds = map_bounds[row['map_name']]
+            boundary_violations += int(((poses[1:,:2]<bounds[:2]-.001)|(poses[1:,:2]>bounds[2:]+.001)).any(-1).sum())
+            illegal_ends += int(height[-1]<10.-.001 or height[-1]>100.+.001)
         action_audits[name] = dict(episodes=len(predictions), executed_movements=len(steps),
             horizontal_over_50m=int((np.linalg.norm(steps[:,:2],axis=-1)>50.001).sum()),
             vertical_over_10m=int((np.abs(steps[:,2])>10.001).sum()),
             horizon_over_20=int(sum(len(row['poses'])-1>20 for row in predictions.values())),
+            inherited_invalid_altitude_starts=invalid_starts,new_or_worsened_altitude_violations=altitude_violations,
+            executed_xy_boundary_violations=boundary_violations,illegal_final_altitudes=illegal_ends,
             residual_max_abs=max(d['residual_max_abs'] for d in diagnostics),
             active_observation_actions=sum(d.get('active_observation', False) for d in diagnostics),
             history_note='Past observations only; memory updates after prediction. Expert prefixes are the training distribution; no on-policy augmentation was used.')
@@ -108,7 +147,7 @@ def main():
         all_stages_completed_epochs=expected, output_sha256={name+'/metrics.json':file_sha256(root/name/'metrics.json') for name in names},
         note='Best is selected complete B/C by Seen128 SR then SPL then Train Dev Recall; Last is final C epoch with optimizer/RNG. All stage checkpoints retained. Frozen backbones are externally resolved by model name and immutable revision.')
     atomic_json(manifest,root/'checkpoint_manifest.json')
-    summary = dict(provenance=provenance(), parameters=parameters, paired_vs_B0=paired, action_audits=action_audits,
+    summary = dict(provenance=provenance(), parameters=parameters, paired_vs_B0=paired, paired_causal_controls=causal, action_audits=action_audits,
         initial_parity=json.loads((root/'initial_seen128_parity.json').read_text()), historical_baseline_audit=json.loads((root/'historical_baseline_audit.json').read_text()), selected_stage=freeze['selected_stage'], selected_epoch=state['epoch'],
         performance_improved_on_full_seen=runs['full_seen'][0]['metrics']['SR']>runs['baseline_full_seen'][0]['metrics']['SR'],
         training_seconds=sum(record['train']['seconds'] for history in histories.values() for record in history),
@@ -152,15 +191,36 @@ def main():
         '阶段 A 的 Real/Zero/Shuffle/No-Belief、阶段 B 的 Current/History、最终候选同类消融均使用固定 Seen128。visual_ablation.csv、history_ablation.csv、analysis.json 保留指标及配对 Episode/地图 Bootstrap。消融在模型固定后执行，没有根据结果再调参。Loss或梯度非零不构成视觉收益证据。',
         '训练使用实际 Train Seen 专家前缀的87512状态，内部查询组隔离83140训练/4372开发；不是87512个独立Episode。当前帧严格位于cutoff，历史严格早于当前帧；目标和专家轨迹只用于损失。无on-policy补充，训练与闭环状态分布差异仍存在。',
         'History按可见比例和有效支持质量加权，并通过小型质量门融合当前/历史；位置关联为28×28网格，重复视角通过相邻已接收位姿2m阈值去重。它不是完整长期回访去重模型。',
-        '视觉使用实际384px观测的冻结SigLIP2上下文Patch池化32/64/128m区域；Depth用于可信区域/支持掩码，没有另行训练深度Backbone。所有区域共享当前帧Transformer上下文，不是独立重编码高分辨率ROI。',
+        '视觉使用实际384px观测的冻结SigLIP2上下文Patch池化32/64/128m区域；Depth用于可信区域/支持掩码，没有另行训练深度Backbone。所有区域共享当前帧Transformer上下文，不是独立重编码高分辨率ROI。困难负样本通过最高匹配分数选择，并排除可能覆盖GT的模糊区域；没有额外的逐物体颜色/类别真值，不能据此宣称完成同色同类物体识别基准。',
         '视觉残差绝对值上限0.5，未观测候选残差为0，无有效证据回退原静态场。没有主动观察、新GAT或关系辅助损失。', '',
-        '## 训练、参数和效率','',f"完成轮次训练时间合计 {summary['training_seconds']:.2f}s（只计成功保存完整轮次；中断部分另计）。各轮吞吐、峰值显存、模块Loss和排名提升诊断见training.csv/history.json。",'',
+        '## 训练、参数和效率','',f"完成轮次训练时间合计 {summary['training_seconds']:.2f}s（只计成功保存完整轮次；中断部分另计）。各轮吞吐、峰值显存、模块Loss和排名提升诊断见training.csv/history.json。单步延迟按冻结评测器的policy预测计时，包含原生视觉编码及模型推理，不包含prediction之前的观测构建/渲染；全量总时间另列。",'',
         '|模块|参数量|','|---|---:|']
     lines += [f'|{key}|{value}|' for key,value in parameters.items()]
     lines += ['', 'A/B冻结A3和控制器；C学习率A3=1e-5、Visual/History=1e-4、Trajectory/Stop=2e-5，5%Warmup、余弦衰减、梯度裁剪1。BERT/SigLIP2全程冻结；原A3几何模式不使用的视觉/GNN分支也保持冻结。参数组和损失权重见config.yaml。', '',
         '|评估|时间s|单步ms|峰值分配GiB|','|---|---:|---:|---:|']
     for name in ('baseline_full_seen','full_seen','baseline_full_unseen','full_unseen'):
         report=runs[name][0];lines.append(f"|{name}|{report['seconds']:.2f}|{report['metrics']['inference_ms']:.3f}|{report['gpu_peak_allocated_gib']:.3f}|")
+    localization_lines = ['', '|静态模型/分割|唯一查询数|R@1%|R@4%|R@8%|R@16%|NE m|',
+        '|---|---:|---:|---:|---:|---:|---:|']
+    for split in ('seen','unseen'):
+        for model in ('B0','selected'):
+            static = json.loads((root/f'static_{model}_{split}.json').read_text())
+            values = static['metrics']
+            localization_lines.append(f"|{model}/{split}|{static['samples']}|"+
+                '|'.join(f"{100*values[f'R@{k}/20m']:.4f}" for k in (1,4,8,16))+f"|{values['NE_m']:.4f}|")
+    localization_lines += ['', '|实际闭环观测时刻/分割|唯一查询数|R@1%|R@4%|R@8%|R@16%|NE m|',
+        '|---|---:|---:|---:|---:|---:|---:|']
+    for split in ('seen','unseen'):
+        values = runs['full_'+split][0]['goal_retrieval']
+        for moment in ('initial_static','dynamic_first','dynamic_final'):
+            localization_lines.append(f"|{moment}/{split}|{values['unique_queries']}|"+
+                '|'.join(f"{100*values[f'{moment}_R@{k}/20m']:.4f}" for k in (1,4,8,16))+f"|{values[moment+'_NE_m']:.4f}|")
+    localization_lines += ['', '|固定Seen128因果对照|SR变化百分点|Episode配对95%区间|', '|---|---:|---|']
+    for name, statistics in causal.items():
+        effect = statistics['episode_weighted']['SR']
+        localization_lines.append(f"|{name}|{100*effect['delta']:.4f}|{[round(100*x,4) for x in effect['ci95']]}|")
+    insertion = lines.index('## 训练、参数和效率')
+    lines[insertion:insertion] = localization_lines+['']
     lines += ['',summary['measurement_note'],'', '## 结果解释和发布候选','',
         '完整系统是否优于强基线以全量同协议对照和配对不确定性为准，所有失败或下降结果保留。'+('完整Seen SR提升；仍需结合SPL、Unseen和配对区间判断。' if summary['performance_improved_on_full_seen'] else '完整Seen SR未超过B0；不宣称视觉或History已带来稳定收益，B0作为独立发布候选保留。'),
         'best.pt是Seen选出的完整模型；last.pt是C最终轮，包含优化器、调度器及RNG，可继续显式恢复；stages/A/B/C各有独立Best/Last。Backbone通过明确模型名和不可变revision解析，本地离线缓存必须存在；不能将小型完整训练状态文件称为包含所有Backbone张量的单文件离线包。',
@@ -172,7 +232,7 @@ def main():
     report='\n'.join(lines)+'\n'
     (root/'GRAPHNAV_V1_STAGE1_REPORT.md').write_text(report)
     archive=Path('reports/graphnav_v1_stage1');archive.mkdir(parents=True,exist_ok=True)
-    for name in ('training.csv','seen128_comparison.csv','full_comparison.csv','visual_ablation.csv','history_ablation.csv','goal_retrieval.csv','analysis.json','checkpoint_manifest.json','initial_seen128_parity.json','historical_baseline_audit.json','training_curves.png','GRAPHNAV_V1_STAGE1_REPORT.md','frozen_final_candidate.json'):
+    for name in ('training.csv','seen128_comparison.csv','full_comparison.csv','visual_ablation.csv','history_ablation.csv','goal_retrieval.csv','analysis.json','checkpoint_manifest.json','initial_seen128_parity.json','historical_baseline_audit.json','training_curves.png','GRAPHNAV_V1_STAGE1_REPORT.md','frozen_final_candidate.json','static_B0_seen.json','static_B0_unseen.json','static_selected_seen.json','static_selected_unseen.json'):
         shutil.copy2(root/name,archive/name)
     print(json.dumps(dict(output=str(root),selected_stage=freeze['selected_stage'],selected_epoch=state['epoch'],complete=True)),flush=True)
 
