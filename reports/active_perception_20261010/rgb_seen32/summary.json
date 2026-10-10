@@ -1,0 +1,214 @@
+{
+  "status": "complete",
+  "args": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/rgb_matching_parallel_seen32_20261010",
+    "main_workflow_status": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/joint_active_first_epoch_20261010/workflow_status.json",
+    "episodes": 32,
+    "microbatch": 16
+  },
+  "provenance": {
+    "commit": "ebb7c1bc6b361b34a1598eab5b2d4d204d1c7ea0",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "diagnostic_script_sha256": "1b139684ed8cadad58c0cd3b8ae7dd0d171b5f49cb3dbc0191fdd08f5a8a95e6",
+  "source_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "backbone_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "selected_indices": [
+    0,
+    79,
+    159,
+    238,
+    318,
+    398,
+    477,
+    557,
+    637,
+    716,
+    796,
+    876,
+    955,
+    1035,
+    1115,
+    1194,
+    1274,
+    1353,
+    1433,
+    1513,
+    1592,
+    1672,
+    1752,
+    1831,
+    1911,
+    1991,
+    2070,
+    2150,
+    2230,
+    2309,
+    2389,
+    2469
+  ],
+  "attempted_observations": 164,
+  "eligible_observations": 18,
+  "eligible_fraction": 0.10975609756097561,
+  "all_eligible": {
+    "cases": 18,
+    "native_single32": {
+      "r1": 0.5,
+      "margin": -0.006561836020814048
+    },
+    "native_crop_multiscale": {
+      "r1": 0.4444444444444444,
+      "margin": -0.005924114336570104
+    },
+    "native_patch_multiscale": {
+      "r1": 0.08333333333333333,
+      "margin": -0.017356755418909922
+    }
+  },
+  "by_category": {
+    "Building": {
+      "cases": 6,
+      "native_single32": {
+        "r1": 0.6666666666666666,
+        "margin": 0.00011053805549939473
+      },
+      "native_crop_multiscale": {
+        "r1": 0.6666666666666666,
+        "margin": 0.000417006512482961
+      },
+      "native_patch_multiscale": {
+        "r1": 0.25,
+        "margin": -0.00992202696700891
+      }
+    },
+    "Car": {
+      "cases": 12,
+      "native_single32": {
+        "r1": 0.4166666666666667,
+        "margin": -0.00989802305897077
+      },
+      "native_crop_multiscale": {
+        "r1": 0.3333333333333333,
+        "margin": -0.009094674761096636
+      },
+      "native_patch_multiscale": {
+        "r1": 0.0,
+        "margin": -0.021074119644860428
+      }
+    }
+  },
+  "by_description": {
+    "color_words": {
+      "cases": 18,
+      "native_single32": {
+        "r1": 0.5,
+        "margin": -0.006561836020814048
+      },
+      "native_crop_multiscale": {
+        "r1": 0.4444444444444444,
+        "margin": -0.005924114336570104
+      },
+      "native_patch_multiscale": {
+        "r1": 0.08333333333333333,
+        "margin": -0.017356755418909922
+      }
+    },
+    "shape": {
+      "cases": 0,
+      "native_single32": {
+        "r1": null,
+        "margin": null
+      },
+      "native_crop_multiscale": {
+        "r1": null,
+        "margin": null
+      },
+      "native_patch_multiscale": {
+        "r1": null,
+        "margin": null
+      }
+    },
+    "vehicle": {
+      "cases": 12,
+      "native_single32": {
+        "r1": 0.4166666666666667,
+        "margin": -0.00989802305897077
+      },
+      "native_crop_multiscale": {
+        "r1": 0.3333333333333333,
+        "margin": -0.009094674761096636
+      },
+      "native_patch_multiscale": {
+        "r1": 0.0,
+        "margin": -0.021074119644860428
+      }
+    }
+  },
+  "by_view": {
+    "before": {
+      "cases": 11,
+      "native_single32": {
+        "r1": 0.36363636363636365,
+        "margin": -0.011752027002247896
+      },
+      "native_crop_multiscale": {
+        "r1": 0.2727272727272727,
+        "margin": -0.010856972499327227
+      },
+      "native_patch_multiscale": {
+        "r1": 0.09090909090909091,
+        "margin": -0.020421392538330772
+      }
+    },
+    "descend10": {
+      "cases": 7,
+      "native_single32": {
+        "r1": 0.7142857142857143,
+        "margin": 0.0015941783785820007
+      },
+      "native_crop_multiscale": {
+        "r1": 0.7142857142857143,
+        "margin": 0.001827519919191088
+      },
+      "native_patch_multiscale": {
+        "r1": 0.07142857142857142,
+        "margin": -0.01254089708839144
+      }
+    }
+  },
+  "paired_descent": {
+    "native_single32": {
+      "before": 0.8571428571428571,
+      "descend10": 0.7142857142857143
+    },
+    "native_crop_multiscale": {
+      "before": 0.7142857142857143,
+      "descend10": 0.7142857142857143
+    },
+    "native_patch_multiscale": {
+      "before": 0.2857142857142857,
+      "descend10": 0.07142857142857142
+    }
+  },
+  "query_macro_r1": {
+    "native_single32": 0.4861111111111111,
+    "native_crop_multiscale": 0.40277777777777773,
+    "native_patch_multiscale": 0.041666666666666664
+  },
+  "wrong_language_single32_r1": 0.3888888888888889,
+  "paired_same_gallery_cases": 7,
+  "seconds": 193.77509392797947,
+  "peak_allocated_gib": 3.605733871459961,
+  "encoded_images": 11365,
+  "caveats": [
+    "Offline conditional target-instance retrieval within same-category actual observed candidates; no SR/SPL claim.",
+    "Projected polygons are imperfect geometric proposals, not verified segmentation.",
+    "Cameras follow fixed fractions; descent uses public pose only. No future human frame or GT camera selection.",
+    "ROI resizing is digital resampling; patch method includes current-frame contextual attention.",
+    "Description groups are language mentions, not human-verified color/shape classification labels.",
+    "Existing P2 head was trained for cross-frame instance/type alignment; no verified full-language matching head used.",
+    "Concurrent with training-feature preparation; measured speed is shared-resource diagnostic timing."
+  ]
+}
