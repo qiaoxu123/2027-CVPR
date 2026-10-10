@@ -40,8 +40,9 @@ class StaticTransferTrajectoryPolicy(A3TrajectoryPolicy):
             self.field_cache.clear()
             path=self.scratch/'current_public_query.jsonl';path.write_text(key+'\n')
             dataset=FullCandidateDataset(path,grid_size=self.args.grid_size,max_landmarks=self.args.max_landmarks,max_roads=self.args.max_roads,max_relations=self.args.max_relations,prior_sigma_m=self.args.prior_sigma_m,rule_sigma_m=self.args.rule_sigma_m)
-            inputs,tokens,mask,names=_batch_inputs(collate_full([dataset[0]]),self.encoder,self.device,self.static_variant)
-            inputs=graph_control(inputs,self.static_control)
+            batch=collate_full([dataset[0]])
+            inputs,tokens,mask,names=_batch_inputs(batch,self.encoder,self.device,self.static_variant)
+            inputs=graph_control(inputs,self.static_control,batch['node_names'])
             with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):
                 field=self.model(inputs,variant=self.static_variant,tokens=tokens,token_mask=mask,node_emb=names)
             self.field_cache[key]=(field,inputs)

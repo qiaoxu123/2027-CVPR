@@ -24,7 +24,7 @@ def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="g
             if max_batches and iteration>=max_batches:break
             auxiliary='relation_allowed' in batch
             inputs,tokens,mask,names=_batch_inputs(batch,encoder,device,'geometry')
-            inputs=graph_control(inputs,control)
+            inputs=graph_control(inputs,control,batch['node_names'])
             with torch.autocast('cuda',dtype=torch.bfloat16):field=model(inputs,variant=variant,tokens=tokens,token_mask=mask,node_emb=names)
             target=batch['target_xy'].to(device);loss=cross_entropy_goal(field.belief_logits,target,grid_size=model.grid_size if hasattr(model,'grid_size') else int(len(inputs['grid_xy'][0])**.5))
             goal_loss=loss
@@ -40,7 +40,7 @@ def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="g
                 for key in ('text','node_names','nodes','node_types','node_valid','adjacency','edges','rules','relation_fields'):
                     counter[key]=counter['counter_'+key]
                 ci,ct,cm,cn=_batch_inputs(counter,encoder,device,'geometry')
-                ci=graph_control(ci,control)
+                ci=graph_control(ci,control,counter['node_names'])
                 with torch.autocast('cuda',dtype=torch.bfloat16):cf=model(ci,variant=variant,tokens=ct,token_mask=cm,node_emb=cn)
                 counter_loss=allowed_region_loss(cf.belief_logits,counter['counter_allowed'].to(device),counter['counter_eligible'].to(device))
                 relation_loss=(relation_loss+counter_loss)*.5
@@ -68,7 +68,7 @@ def main():
     p.add_argument('--relation-weight',type=float,default=0.)
     p.add_argument('--continue-from');p.add_argument('--lr',type=float,default=5e-5)
     p.add_argument('--variant',choices=['geometry','gat'],default='geometry')
-    p.add_argument('--graph-control',choices=['full','self','zero-geometry','relation'],default='full')
+    p.add_argument('--graph-control',choices=['full','self','zero-geometry','relation','reliable-relation'],default='full')
     p.add_argument('--seed',type=int,required=True);p.add_argument('--batch-size',type=int,default=16)
     p.add_argument('--workers',type=int,default=4);p.add_argument('--epochs',type=int,default=5);p.add_argument('--resume')
     p.add_argument('--max-batches',type=int,help='Smoke only; limited runs are ineligible final candidates')
@@ -145,7 +145,7 @@ def main():
         (out/'history.json').write_text(json.dumps(history,indent=2));print(json.dumps(row),flush=True)
     rows=[dict(epoch=r['epoch'],split=s,**r[s]) for r in history for s in ('train','seen')]
     with (out/'training.csv').open('w') as f:
-        writer=csv.DictWriter(f,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+        writer=csv.DictWriter(f,fieldnames=list(dict.fromkeys(key for row in rows for key in row)));writer.writeheader();writer.writerows(rows)
     (out/'report.json').write_text(json.dumps(dict(args=vars(cfg),provenance=source,input_fingerprint=fingerprint,history=history,
         smoke_only=bool(args.max_batches),note='Explicit E1 continuation retains optimizer moments, changes LR, preserves source; E3 fresh seeded training. Best by Seen R1 then NE. No Unseen. Limited smoke ineligible.'),indent=2))
 

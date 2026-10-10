@@ -26,3 +26,24 @@ def test_no_eligible_relations_returns_differentiable_zero():
     loss=allowed_region_loss(x,torch.ones_like(x,dtype=torch.bool),torch.ones(2,dtype=torch.bool))
     loss.backward()
     assert loss==0 and not x.grad.any()
+
+
+def test_reliable_links_skip_ambiguous_anchors_and_surface_along():
+    import numpy as np
+    from graphnav.semantic_graph import prepare_semantic_graph
+    landmarks=[{'name':'Tower','contour':[[.2,.2],[.3,.2],[.3,.3],[.2,.3]]},
+               {'name':'Tower','contour':[[.6,.6],[.7,.6],[.7,.7],[.6,.7]]}]
+    graph=prepare_semantic_graph(landmarks, [], 'Find the target east of Tower',
+                                 [0,0,100,100], max_roads=0)
+    inputs={key:torch.from_numpy(graph[source])[None] for key,source in
+            [('adjacency','adjacency'),('edges','edges'),('nodes','nodes'),('node_types','node_types')]}
+    original=inputs['adjacency'].clone()
+    result=graph_control(inputs,'reliable-relation',[graph['node_names']])
+    assert torch.equal(result['adjacency'],torch.diag_embed(original.diagonal(dim1=-2,dim2=-1)))
+    assert torch.equal(inputs['adjacency'],original)
+    graph=prepare_semantic_graph(landmarks[:1], [], 'Find the target east of Tower',
+                                 [0,0,100,100], max_roads=0)
+    inputs={key:torch.from_numpy(graph[source])[None] for key,source in
+            [('adjacency','adjacency'),('edges','edges'),('nodes','nodes'),('node_types','node_types')]}
+    result=graph_control(inputs,'reliable-relation',[graph['node_names']])
+    assert result['adjacency'][0,0,1] and result['adjacency'][0,1,0]
