@@ -71,3 +71,6 @@ Seen128：`training/seen128_epoch01/metrics.json`及逐Episode轨迹。第1轮�
 
 
 第一轮评估输入预核验：从当前Revised Seen原始数据与当前配置重新生成固定128 Episode清单，与历史SBF/A3清单逐项一致（Episode ID、索引、起点），SHA256为`ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695`。20步、水平50m、垂直10m、高度10–100m、20m成功半径及二维距离声明协议一致。证据：`reports/active_perception_20261010/epoch1_seen128_protocol_preflight.json`。未重跑基线；历史控制器版本与SBF曾按Unseen选择权重的差异仍需披露，不能仅由清单相同宣称所有实现完全一致。第一轮输出产生后还须核验实际输出清单及协议。
+
+
+CPU掩码并行小测（并行于当前准备任务）：前8个Train Seen Episode各4个固定比例位姿，共32个384px实际观测；只计observed_region_masks，不含渲染或GPU编码。1/2/4线程耗时0.414/0.521/0.958秒，mask与quality逐元素完全一致。每种配置仅一次测量且共享CPU，不能推断全数据表现或分片/GPU大批次收益。此次线程方案没有速度收益，未应用到主任务。记录：`reports/active_perception_20261010/feature_mask_thread_benchmark.json`。
