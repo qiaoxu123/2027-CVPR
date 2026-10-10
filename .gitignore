@@ -2,8 +2,11 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
 .venv/
 .env
+.env.*
+!.env.example
 *.egg-info/
 build/
 dist/
@@ -12,7 +15,10 @@ outputs/
 data/
 weights/
 checkpoints/
+*.pt
 *.pth
 *.ckpt
 *.safetensors
+*.onnx
+*.log
 .DS_Store

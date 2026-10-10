@@ -1,149 +1,162 @@
-# GraphNav — Graph-First Aerial Vision-and-Language Navigation
+# GraphNav
 
-> **GraphNav P0–P2 research**: [Bidirectional geometry + causal landmark RGB pretraining](docs/BIDIRECTIONAL_VISUAL_P0_P2.md). Based on validated A3/A4/A5 results; retains A3 baseline, adds world-polygon→actual RGB ROI auditing, valid inverse relation pairs, SigLIP2 Large patch-token cross-view landmark contrastive pretraining. Does NOT claim closed-loop SR/SPL improvement.
+**Language-Grounded Goal Belief for Aerial Vision-and-Language Navigation**
 
-> **NEW offline full-token + RGB A0–A5 experiment:** [FULL_TOKEN_GEOMETRY_RGB.md](docs/FULL_TOKEN_GEOMETRY_RGB.md) — tokenwise BERT cross-attention, per-candidate true polygon geometry, typed GAT and *causal observed-only* SigLIP2 evidence. Explicit Original/Revised CityNav protocol and audited fuzzy matching; RTX Pro 6000 96GB, batch 16. **Not yet a closed-loop navigation controller.**
-> **Extended CityRefer grounding experimental branch:** Train static goal localization with ALL typed named surface polygons (TrafficRoad/Footpath/Bridge/Parking/Ground), conservative aliases and a buildings-only control. See [FULL_SURFACE_GROUNDING.md](docs/FULL_SURFACE_GROUNDING.md). Rerun data conversion with `--refresh-raw`; historical metrics do not automatically carry over.
+**CityNav / CityRefer · Research implementation · 中文文档**
 
-> **Static-first research branch**: for Prior → Geometry Rules → Typed GAT localization ablations on a single RTX Pro 6000 96GB (batch 16), see [static-geometry protocol](docs/STATIC_GEOMETRY_ABLATIONS.md). RGB/Trajectory/Stop are deliberately excluded until static goal localization gains are established.
+GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程：利用**具名地标及其轮廓几何**，从语言指令推断全局目标位置，再通过有界控制器执行导航。项目包含在真实可见范围内提取 RGB/Depth 证据、累积历史记忆和更新目标信念的实验实现。
 
+> **研究状态（2026-10-10）**：最强已验证的静态定位骨干是 **A3 Geometry**，不是 GAT。A3 Epoch14 的 Val Seen 静态 R@1/20m 为 **48.47%**；固定 Seen128 闭环 SR 为 **48.44%**。这**不是全量 Seen 或 Unseen 的最终性能**。完整视觉/History 联合方案仍处研究与训练阶段，不能作为已完成的性能提升宣称。本仓库并非已接收的 CVPR 论文官方实现。
 
-**全新独立架构。** 针对 CityNav / CityRefer 的图驱动无人机语言导航研究工程。
-不使用 HETT 的 Transformer、Heatmap Head、Two-Stage Controller、预训练权重或其模型文件。
+[快速开始](#快速开始) · [已验证结果](#已验证结果) · [评估与复现](docs/REPRODUCIBILITY.md) · [代码导航](docs/CODE_MAP.md) · [研究报告索引](#研究报告与局限)
 
-> **当前状态（研究基线）**：包含图网络、稠密目标概率场、可见性约束 RGB 记忆、冻结 BERT/SigLIP2 接口、候选图排序、多模态路径头、CityNav 数据转换、CPU 测试及训练入口。尚未完成 CityNav 在线仿真器的动作/环境适配，因此 **尚无真实闭环 SR/SPL 数值**，不应将开放式训练损失当作导航性能。
+## 方法概览
 
-## 设计
+```text
+语言指令 + 公共地图（具名地标、真实 Polygon）
+                   |
+       冻结 BERT Token / 名称特征
+                   |
+        A3 Geometry（静态定位）
+       地标轮廓 + 候选相对几何
+                   |
+        28 × 28 Goal Belief B0
+                   |
+       Top-K 位置及 128-D Context
+                   |
+       +-----------+-----------+
+       |                       |
+ 已验证：原 Trajectory/Stop   实验性：观察到的 RGB/Depth
+ + Guarded / Bounded 控制     SigLIP2 + History 信念残差
+       |                       |
+       +-----------+-----------+
+                   |
+          当前 Pose → 下一 Waypoint
+                   |
+          执行一步、重新观测、重规划
+```
 
-\`\`\`text
-                          Static at episode reset
- CityNav landmarks (name, ID, ordered contour)  Instruction
-                      |                         |
-                  deterministic             frozen BERT
-                 name binding                   |
-                      v                         v
-               Contour Encoder -----------> Named Landmark Nodes
-                      |                         |
-          UAV pose -->|------------> Edge-Conditioned GATv2 (2 layers)
-                      |                         |
-                      +--------> Dense Goal Field over 28x28 XY grid
-                                        |
-                              Top-20 goal hypotheses
-                                        |
-                            Goal / Landmark / UAV GATv2
-                                        |
- Observed-only RGB memory -- SigLIP2 ----+-- Visibility-gated evidence
-                                        |
-                        joint goal + trajectory mode ranking
-                                        |
-                      3 candidate paths x 8 waypoints / goal
-                                        |
-                     Execute FIRST bounded waypoint, re-observe
-\`\`\`
+**区别与边界**
 
-**重点**：稠密目标场保留多峰的不确定性；已观测视觉只更新被实际看见的候选，
-“看不见”不代表“目标不存在”。静态名称—轮廓绑定不需要监督训练；
-空间关系的图注意力、目标概率与轨迹头联合学习。地图坐标统一用
-(东向 x, 北向 y) 的公有地图范围归一化位置。
+- **A3（主线）**：逐候选对名称、地标几何和语言 Token 进行注意力匹配；没有地标间的 GAT 消息传递。
+- **A4（消融）**：A3 的兼容结构上增加两层 Edge-GATv2；已有实验**未证明**图关系节点提供稳定的额外语义推理收益。
+- **视觉 / History（实验性）**：只接受当前及历史已经真实观察到的图像区域。未见区域保持“未知”，不等于负样本；视觉特征的额外导航增益尚待严格消融验证。
+- **控制与指标**：逐步重规划、限制单步位移与高度；CityNav benchmark 的 SR 采用二维目标距离，不能宣称三维避障或真实第一视角相机能力。
 
-模型设计与输入输出、损失、因果约束详见
-[ARCHITECTURE.md](docs/ARCHITECTURE.md)。
+## 已验证结果
 
-## 安装
+**离线静态定位**：Val Seen 2,426 条去重 Query，阈值 20m；**闭环**：固定 Val Seen 128 Episodes，使用已有 Trajectory/Stop、Guarded-Blend、有界动作，20 步上限。
 
-建议 Python 3.11、PyTorch 2.3+。实际 GPU 训练推荐先在本地 5090 检查 CUDA/PyTorch 支持。
+| 模型 / 协议 | R@1/20m | R@4/20m | R@8/20m | SR | SPL |
+|:--|--:|--:|--:|--:|--:|
+| A3 Seed1 Epoch5 · 静态 + Seen128 | 42.54% | 64.43% | 75.47% | 40.63% | 40.09% |
+| **A3 Seed1 Epoch14 · 静态 + Seen128** | **48.47%** | **68.63%** | **78.03%** | **48.44%** | **47.41%** |
+| A4 Full GAT Epoch5 · 静态 + Seen128 | 41.92% | 63.48% | 75.02% | 43.75% | 42.93% |
 
-\`\`\`bash
-pip install -e '.[dev]'
-# 可选：实际 BERT/SigLIP2 需要 Hugging Face Transformers 及本地预训练模型
-pip install -e '.[foundation]'
+其他不可混用的协议：
+
+| 已归档系统 | 数据集 | SR | SPL |
+|:--|:--|--:|--:|
+| 旧 A3 + 有界目标移动 | Val Seen **全量 2,470 Episodes** | 40.89% | 39.77% |
+| 本地论文方法复现 SBFNav Epoch14 | Val Seen **全量 2,470 Episodes** | 43.52% | 36.12% |
+| 同一 SBFNav 复现 | Val Unseen **全量 2,697 Episodes** | 21.51% | 15.89% |
+
+> **不可直接跨行排序**：新 A3 Epoch14 仅完成 Seen128 闭环，不可与 SBFNav 全量 SR 作严格比较。原 A3/A4、关系辅助监督、GAT 反事实及置信区间见 [受控实验报告](docs/A3_RELATION_GAT_CONTROLLED_20261010.md)。本地 SBFNav 是论文方法的**独立复现**，非论文作者官方权重。完整视觉/History 模型尚未通过全量 Seen/Unseen 验证。
+
+## 快速开始
+
+### 1. 环境
+
+推荐 Linux、Python 3.10/3.11、匹配本机 CUDA 的 PyTorch；实际 GPU 训练使用过 BF16。CPU CI **只测试单元逻辑及合成 Smoke**，不下载 CityNav 原始数据、BERT/SigLIP2 或研究 Checkpoint。
+
+```bash
+git clone https://github.com/qiaoxu123/2027-CVPR-Dev.git
+cd 2027-CVPR-Dev
+
+# 请先按本机 CUDA/驱动安装兼容的 PyTorch；再安装项目依赖
+python -m pip install -e '.[dev,data,foundation]'
+python -m pip install pyyaml
 
 pytest -q
 python -m graphnav.train --smoke --epochs 1 --steps 2 --device cpu \
-  --grid-size 8 --max-landmarks 4 --top-k 4 --hidden 32 --text-dim 32 \
-  --waypoints 4 --output runs/smoke/checkpoint.pt
-\`\`\`
+  --grid-size 4 --max-landmarks 3 --top-k 3 --hidden 32 \
+  --text-dim 16 --waypoints 3 --batch-size 2 \
+  --output runs/smoke/checkpoint.pt
+```
 
-Smoke 使用**合成张量**（仅测试张量、反向传播、checkpoint），不等于实际训练。
+**Smoke ≠ CityNav 训练或闭环导航。** 所有正式命令都需要本地授权取得的数据、预训练模型与匹配的 Checkpoint。
 
-## CityNav 数据训练
+### 2. 数据与权重
 
-先将现有 HETT 工程中仅作为数据元信息的地图 bounds 导出（新网络运行时不依赖 HETT）：
+项目基于 [CityNav 官方数据/环境](https://github.com/water-cookie/citynav)。数据及第三方预训练权重**不随本仓库分发**；使用前请遵守各自许可和数据集划分。
 
-\`\`\`bash
-python scripts/export_bounds.py \
-  --mapdata /path/to/HETT/multiagent/mapdata.py \
-  --bounds-out data/citynav_bounds.json \
-  --ground-out data/ground_levels.json
+准备本地路径：
 
-python scripts/prepare_citynav.py \
-  --objects /path/to/data/cityrefer/objects.json \
-  --processed /path/to/data/cityrefer/processed_descriptions.json \
-  --trajectories /path/to/data/processed_citynav/citynav_train_seenall.json \
-  --bounds data/citynav_bounds.json --ground-levels data/ground_levels.json \
-  --output data/graphnav_train_seen.jsonl
+- `SBF_SOURCE`：经验证的本地 CityNav/SBF 复现源码目录（提供 `sbfnav` 导航环境依赖）。
+- `SBF_CONFIG`：与该数据版本对应的 SBF 配置。
+- `CITYNAV_DATA`：经验证的 CityNav 数据根目录。
+- `A3_BEST`：A3 Seed1 Epoch14 的 `best.pt`。
+- `REFERENCE_A3`、`HEAD_BEST`：原已训练控制器对应的静态骨干和 Trajectory/Stop 权重。
 
-python -m graphnav.train --data data/graphnav_train_seen.jsonl \
-  --epochs 10 --batch-size 16 --device cuda --output runs/graphnav/train.pt
-\`\`\`
+权重不会从 README 中的服务器绝对路径自动下载。SHA、来源和完整参数见 [评估与复现](docs/REPRODUCIBILITY.md)。
 
-双卡（DDP）：
-\`\`\`bash
-torchrun --standalone --nproc_per_node=2 -m graphnav.train \
-  --data data/graphnav_train_seen.jsonl --batch-size 16 --epochs 10 \
-  --output runs/graphnav/ddp.pt
-\`\`\`
+### 3. 复现强基线（闭环）
 
-视觉分支需要**因果历史 RGB** 训练样本；不能直接将全域正射图传给模型：
+```bash
+python scripts/evaluate_closedloop.py \
+  --model static-transfer \
+  --sbf-source "$SBF_SOURCE" \
+  --config "$SBF_CONFIG" \
+  --checkpoint "$A3_BEST" \
+  --reference-a3-checkpoint "$REFERENCE_A3" \
+  --head-checkpoint "$HEAD_BEST" \
+  --head-execution guarded-blend \
+  --stop-threshold 0.3 \
+  --data-root "$CITYNAV_DATA" \
+  --split val_seen --max-episodes 128 \
+  --output runs/eval_a3_e14_seen128
+```
 
-\`\`\`bash
-pip install -e '.[foundation]'
-pip install rasterio
-python scripts/prepare_citynav.py \
-  --objects data/cityrefer/objects.json \
-  --processed data/cityrefer/processed_descriptions.json \
-  --trajectories data/processed_citynav/citynav_train_seenall.json \
-  --bounds data/citynav_bounds.json --ground-levels data/ground_levels.json \
-  --rgbd-dir /path/to/data/rgbd --observations-out data/observed_train \
-  --output data/graphnav_train_rgb.jsonl
+要跑全量 Seen，请使用全新输出目录并移除 `--max-episodes 128`。**首次复现请先确认 Checkpoint SHA、128 个 Episode 清单及单步控制一致性。** 任何 Unseen 评估都不能反向用于选择模型或调阈值。
 
-python -m graphnav.train --data data/graphnav_train_rgb.jsonl \
-  --use-vision --epochs 10 --batch-size 16 --device cuda \
-  --output runs/graphnav/visual.pt
+训练、评估、不同运行协议和临时数据的完整说明见 [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md)。
 
-python -m graphnav.evaluate --data data/graphnav_val_unseen.jsonl \
-  --checkpoint runs/graphnav/train.pt --device cuda
-\`\`\`
+## 代码结构
 
-转换器只会为每个训练时刻暴露它过去及现在实际观察的局部视角。
-评估脚本仅统计 Goal R@K/20m 和 Top1 NE，不能代替闭环 SR/SPL。
+```text
+graphnav/          核心模型、地图几何、静态热图、视觉/History、轨迹与 Runtime
+scripts/           数据准备、训练、评估、诊断 CLI（详见 scripts/README.md）
+tests/             单元测试及防泄漏 / 兼容性回归
+docs/              使用文档、协议和历次研究结论
+reports/           实验指标、消融及审计记录（历史证据，非代码入口）
+configs/           已归档实验环境约束
+.github/workflows/ CPU CI
+```
 
-这是初始**开放式监督训练**，而非已完成的在线 imitation rollout。
-对比实验应在真实 CityNav 闭环 evaluator 接入后报告 SR/SPL/OSR/NE；
-请参见 [DATA.md](docs/DATA.md) 和 [EXPERIMENTS.md](docs/EXPERIMENTS.md)。
+快速定位关键文件：
 
-## 代码
+| 需求 | 推荐入口 |
+|:--|:--|
+| 静态目标场 A3 / A4 | `graphnav/full_localization.py` |
+| 地标关系图 / GAT | `graphnav/semantic_graph.py` |
+| 强基线权重迁移 | `graphnav/static_transfer_runtime.py` |
+| RGB 历史与残差信念 | `graphnav/dynamic_belief.py`、`graphnav/joint_active.py` |
+| 轨迹 / Stop | `graphnav/trajectory_policy.py` |
+| 统一闭环评估 | `scripts/evaluate_closedloop.py` |
+| 已有联合训练实验 | `scripts/train_joint_active.py`（见下方警告） |
 
-| 位置 | 作用 |
-|---|---|
-| graphnav/geometry.py | 世界坐标、轮廓采样、到多边形真实边界的有符号距离 |
-| graphnav/graph.py | 纯 PyTorch Edge-GATv2、地标/UAV 稀疏图 |
-| graphnav/model.py | Dense Goal Field + Top-K Proposal Graph + 多模态 Waypoints |
-| graphnav/memory.py | 只累积真实 RGB 的世界坐标图像记忆 |
-| graphnav/foundations.py | 冻结 BERT、SigLIP2、RGB Patch 缓存 |
-| graphnav/runtime.py | 模型在线推理接口（外部仿真器提供观测，不提供 GT） |
-| graphnav/data.py | CityNav JSONL 数据集、真实人类轨迹监督 |
-| graphnav/losses.py | Gaussian 目标分布监督、候选排序、路径与 Stop 损失 |
-| graphnav/train.py | 独立训练 CLI；BF16、DDP、Smoke |
-| scripts/prepare_citynav.py | 从 CityNav 原始 JSON 转换为独立训练数据 |
-| tests/ | 几何方向、视觉信息泄漏、数据绑定、梯度与张量测试 |
+详见 [代码入口导航](docs/CODE_MAP.md)。
 
-## 研究原则
+## 研究报告与局限
 
-- **零未来图像泄漏**：不从 CityNav 全域正射图裁剪尚未观察过的目标。
-- **零目标标签泄漏**：GT goal / human future 仅进入训练 Loss，绝不进入模型 Forward 或在线 Runtime。
-- **地图名称不由像素猜测**：确定性 name-ID-contour 绑定；模糊同名不强行选最近 GT。
-- **多峰目标置信度保留**：不能只评估已入 Top-K 的候选；独立监督全部 28×28 单元。
-- **Stop 不可直接部署**：需另做独立精度校准；在线接口默认只输出 stop_probability。
+- [A3 延长训练 / 关系监督 / GAT 受控消融](docs/A3_RELATION_GAT_CONTROLLED_20261010.md)：当前静态强基线与权重 SHA。
+- [共享闭环评估协议](docs/SHARED_CLOSEDLOOP_PROTOCOL_20261009.md)：Episode、评价维度、动作约束。
+- [已观测 RGB 与 SBF 输入差异](docs/GRAPHNAV_SBF_INPUT_PROCESSING_AUDIT_20261010.md)：视觉对齐、冻结模型和负对照。
+- [联合训练 Epoch1 问题及 Stop 修正](docs/JOINT_EPOCH1_CONTROL_FIX_AND_ABLATIONS.md)：**旧联合训练会重新初始化控制器，不可用来替代强基线**。
+- [复现及结果索引](docs/REPRODUCIBILITY.md)：如何区分正式指标与开发性诊断。
 
-MIT-style research baseline: 无法替代 CityNav 原数据或第三方 pretrained 权重的许可证。
+**当前未解决：** 新 A3 的完整 Val Seen/Unseen 闭环结果、真实 RGB 对候选重排的因果增益、可信历史纠错、真实透视相机/遮挡和三维安全避障。未经训练或评估的模块不以结果形式展示。
+
+## 引用与许可
+
+若使用 CityNav 数据，请引用 [CityNav 项目提供的论文及许可信息](https://github.com/water-cookie/citynav)。本仓库尚无正式 GraphNav 论文 BibTeX 或已核实的再分发许可；请不要把研究代码名称冒充已发表论文。第三方数据、模型与复现工程的权利归各自所有。
