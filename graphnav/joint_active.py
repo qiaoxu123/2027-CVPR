@@ -34,7 +34,8 @@ class JointActiveGraphNav(nn.Module):
 
     def forward(self, *, static_inputs, tokens, token_mask, node_emb,
                 native_text, roi_features, roi_valid, roi_quality, pose_world,
-                bounds, ground_level, history_scores=None, history_observed=None):
+                bounds, ground_level, history_scores=None, history_observed=None,
+                visual_control='full'):
         static = self.a3(static_inputs, variant='geometry', tokens=tokens,
                          token_mask=token_mask, node_emb=node_emb)
         scores, known, _ = self.matcher(native_text, roi_features, roi_valid, roi_quality)
@@ -53,7 +54,12 @@ class JointActiveGraphNav(nn.Module):
         # Centering only on supported cells prevents the native shared-space bias
         # from promoting every visible cell equally. Initial gain=0 preserves A3.
         centered = scores - (scores * known).sum(-1, keepdim=True) / known.sum(-1, keepdim=True).clamp_min(1)
-        delta = torch.tanh(self.visual_gain) * centered * known
+        if visual_control not in ('full', 'no-belief'):
+            raise ValueError('unknown visual-belief ablation')
+        # No-belief keeps the same observation coverage and trajectory inputs,
+        # isolating the causal effect of RGB appearance on goal belief.
+        delta = (torch.tanh(self.visual_gain) * centered * known
+                 if visual_control == 'full' else torch.zeros_like(centered))
         logits = static.belief_logits.float() + delta
         ids = logits.topk(min(self.a3.top_k, logits.shape[-1]), -1).indices
         grid = static_inputs['grid_xy']
