@@ -99,7 +99,7 @@ class JointActivePolicy:
             threshold=self.stop_threshold, guard_radius_m=self.stop_guard_m,
         )
         diagnostic=dict(policy='Joint trainable A3 + observed multiscale/history + trained trajectory/Stop',
-            stop_probability=stop_probability,observed_cells=int(output.observed.sum()),
+            observed_cells=int(output.observed.sum()),
             visual_gain=float(self.model.visual_gain.tanh()),active_actions_used=self.active_actions,
             active_observation_enabled=self.active_observation,visual_control=self.visual_control,
             selected_predicted_goal_xy=selected_goal.float().cpu().tolist(),**stop_diag,
