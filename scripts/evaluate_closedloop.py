@@ -34,6 +34,9 @@ def main():
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
     parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active'], default='sbfnav')
+    parser.add_argument('--disable-joint-active',action='store_true')
+    parser.add_argument('--joint-execution',choices=['checkpoint','guarded-blend'],default='checkpoint')
+    parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
     parser.add_argument('--dynamic-checkpoint')
     parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
     parser.add_argument('--active-observation',action='store_true',help='Opt-in bounded XY/Z sensing actions')
@@ -109,7 +112,10 @@ def main():
         if args.model=='joint-active':
             from graphnav.joint_active_runtime import JointActivePolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
-            runtime=JointActivePolicy(args.checkpoint,output/'public_inputs')
+            runtime=JointActivePolicy(args.checkpoint,output/'public_inputs',
+                active_observation=not args.disable_joint_active,execution=args.joint_execution,
+                stop_threshold=args.stop_threshold,head_checkpoint=args.head_checkpoint,
+                reference_a3_checkpoint=args.reference_a3_checkpoint)
             builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model in ('dynamic','target-evidence'):
             if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')

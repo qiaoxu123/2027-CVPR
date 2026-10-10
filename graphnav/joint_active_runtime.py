@@ -18,7 +18,8 @@ from .trajectory_policy import calibrated_stop_probability
 
 
 class JointActivePolicy:
-    def __init__(self,checkpoint,directory,*,device='cuda'):
+    def __init__(self,checkpoint,directory,*,device='cuda',active_observation=True,
+                 execution='checkpoint',stop_threshold=.3,head_checkpoint=None,reference_a3_checkpoint=None):
         state=torch.load(checkpoint,map_location='cpu',weights_only=True)
         protocol=state['protocol']
         if protocol['name']!='joint-active-v1' or not protocol['trainable_a3']:
@@ -33,10 +34,24 @@ class JointActivePolicy:
             raise ValueError('frozen visual backbone revision mismatch')
         self.visual=ObservedPatchScaleEncoder(self.native)
         self.active_config=ActiveObservationConfig(max_actions=protocol['active_max_actions'])
+        self.active_observation=active_observation
+        if execution not in ('checkpoint','guarded-blend'):raise ValueError('unsupported joint execution')
+        self.execution=execution
+        if execution=='guarded-blend':
+            self.explore_candidates=0;self.stop_threshold=stop_threshold
+            self.stop_positive_weight=protocol['stop_positive_weight'];self.head=self.model.trajectory
+            if head_checkpoint:
+                if not reference_a3_checkpoint:raise ValueError('legacy head requires its original A3 checkpoint')
+                from .a3_runtime import A3TrajectoryPolicy
+                A3TrajectoryPolicy.load_trajectory_head(self,reference_a3_checkpoint,head_checkpoint,
+                    stop_threshold=stop_threshold,execution=execution,explore_candidates=0)
+                if self.head.fusion[0].in_features!=2*self.model.a3.hidden:
+                    raise ValueError('legacy head context dimension mismatch')
+        elif head_checkpoint:raise ValueError('legacy head requires guarded execution')
 
     def set_episode(self,episode,transform,catalog):
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
-        self.active_actions=0;self.inputs=None;self.previous_pose=None
+        self.active_actions=0;self.inputs=None;self.previous_pose=None;self.visited_goal_cells=set()
         self.feature_sum=self.feature_count=self.quality_sum=None
 
     @torch.no_grad()
@@ -87,8 +102,15 @@ class JointActivePolicy:
         nearest_appearance=output.appearance_scores.masked_fill(~output.observed,-1e4).argmax(-1)
         diagnostic['appearance_top1_world_xy']=(world[0,nearest_appearance[0]].cpu().tolist()
             if output.observed.any() else None)
+        if self.execution=='guarded-blend':
+            from .a3_runtime import A3TrajectoryPolicy
+            prediction=A3TrajectoryPolicy.predict_field(self,state,output.belief)
+            diagnostic['checkpoint_stop_probability']=diagnostic.pop('stop_probability')
+            prediction.diagnostics.update(diagnostic,execution='guarded-blend',
+                active_observation=False,selected_goal_xy=prediction.diagnostics['selected_goal_xy'])
+            return prediction
         confidence=output.appearance_scores.masked_fill(~output.observed,-1e4).softmax(-1)*output.observed
-        if not should_stop:
+        if self.active_observation and not should_stop:
             decision=plan_active_observation(pose_xyzyaw=state.pose,map_bounds=self.record['world_bounds'],
                 ground_level=ground,candidate_xy=grid[0].cpu().numpy(),
                 candidate_logits=output.belief.belief_logits[0].float().cpu().numpy(),

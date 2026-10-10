@@ -90,9 +90,9 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
 
     def load_trajectory_head(self,checkpoint,head_checkpoint,*,stop_threshold=.5,execution='joint',explore_candidates=0):
         from .trajectory_policy import CandidateTrajectoryStop
-        from .checkpointing import file_sha256
+        from .checkpointing import file_sha256,resolve_checkpoint_resource
         state=torch.load(head_checkpoint,map_location='cpu',weights_only=True)
-        cache=Path(state['args']['cache'])/'manifest.json'
+        cache=resolve_checkpoint_resource(state['args']['cache'],head_checkpoint)/'manifest.json'
         if file_sha256(cache)!=state['input_fingerprint']['cache_manifest']['sha256']:
             raise ValueError('trajectory head source cache manifest changed')
         manifest=json.loads(cache.read_text())

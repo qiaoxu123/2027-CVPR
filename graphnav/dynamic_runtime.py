@@ -76,7 +76,7 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
     def __init__(self,checkpoint,dynamic_checkpoint,visual_checkpoint,directory,*,device='cuda',history=False,visual=True,observed_cache=None,head_checkpoint=None,stop_threshold=.3,execution='guarded-blend',explore_candidates=0,graph_control='full',visual_control='full'):
         super().__init__(checkpoint,directory,device=device)
         from .dynamic_belief import DynamicGoalBelief
-        from .checkpointing import file_sha256
+        from .checkpointing import file_sha256,resolve_checkpoint_resource
         state=torch.load(dynamic_checkpoint,map_location='cpu',weights_only=True)
         if state['input_fingerprint']['checkpoint']['sha256']!=file_sha256(checkpoint):
             raise ValueError('dynamic and A3 checkpoints differ')
@@ -84,7 +84,7 @@ class DynamicWaypointPolicy(A3WaypointPolicy):
         vector_root=state['args']['train_vectors']
         import json
         from pathlib import Path
-        manifest_path=Path(vector_root)/'manifest.json'
+        manifest_path=resolve_checkpoint_resource(vector_root,dynamic_checkpoint)/'manifest.json'
         if file_sha256(manifest_path)!=state['input_fingerprint']['train_vectors']['sha256']:
             raise ValueError('dynamic training visual vector manifest changed')
         manifest=json.loads(manifest_path.read_text())
