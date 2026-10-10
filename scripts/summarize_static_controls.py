@@ -76,6 +76,13 @@ def main():
         base='A3_relation000' if name.startswith('A3_relation') else 'A3_seed1' if name=='E1_seed1' else 'A3_seed0'
         summary['paired_closedloop'][name]=paired(ROOT/summary['models'][base]['raw_closedloop_predictions'],
             ROOT/model['raw_closedloop_predictions'],'metrics.SR','map_name')
+    summary['direct_gat_comparisons']={}
+    for base,name in (('A4_self','A4_full'),('A4_full','A4_zero_geometry'),('A4_full','A4_reliable_relation')):
+        summary['direct_gat_comparisons'][name+'_vs_'+base]=dict(
+            static=paired(source/'static_seen'/(base+'_predictions.jsonl'),
+                          source/'static_seen'/(name+'_predictions.jsonl'),'R@1','map_name'),
+            closedloop=paired(summary['models'][base]['raw_closedloop_predictions'],
+                              summary['models'][name]['raw_closedloop_predictions'],'metrics.SR','map_name'))
     (destination/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2))
     with (destination/'ablation.csv').open('w') as stream:
         writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
@@ -86,8 +93,8 @@ def main():
     for name in ('E1_seed0','E1_seed1','A3_relation000','A3_relation001','A3_relation005','A4_full','A4_self','A4_zero_geometry','A4_reliable_relation'):
         history=json.loads((destination/(name+'_training.json')).read_text())
         epochs=[row['epoch'] for row in history]
-        for ax,(split,key) in zip(axes.flat,(('train','loss'),('seen','loss'),('seen','R@1/20m'),('seen','NE_m'))):
-            ax.plot(epochs,[row[split][key] for row in history],label=name)
+        for ax,(split,key) in zip(axes.flat,(('train','goal_loss'),('seen','goal_loss'),('seen','R@1/20m'),('seen','NE_m'))):
+            ax.plot(epochs,[row[split].get(key,row[split]['loss']) for row in history],label=name)
             ax.set_title(split+' '+key);ax.set_xlabel('Epoch');ax.grid(alpha=.25)
     axes[0,0].legend(fontsize=7)
     fig.tight_layout();fig.savefig(destination/'training_curves.png',dpi=160);plt.close(fig)

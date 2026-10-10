@@ -24,11 +24,23 @@ def main():
     output = Path(args.output)
     output.mkdir(exist_ok=False, parents=True)
     encoder = FrozenBERTTokens('bert-base-uncased', device='cuda', max_length=96)
+    first = torch.load(args.checkpoints[0].split('=', 1)[1], map_location='cpu', weights_only=True)
+    training_cache = first['input_fingerprint']['train_bert_cache']
+    if file_sha256(training_cache['path']) != training_cache['sha256']:
+        raise ValueError('training BERT cache SHA mismatch')
+    encoder.load_cache(training_cache['path'])
+    train_embeddings = encoder.cache.copy()
     encoder.load_cache(args.bert_cache)
-    report = dict(models={}, provenance=provenance(), input_sha256=file_sha256(args.records))
+    # Restore the same shared-name precedence used during training/validation.
+    encoder.cache.update(train_embeddings)
+    del train_embeddings, first
+    report = dict(models={}, provenance=provenance(), input_sha256=file_sha256(args.records),
+                  train_bert_cache=training_cache, seen_bert_cache_sha256=file_sha256(args.bert_cache))
     for entry in args.checkpoints:
         name, path = entry.split('=', 1)
         state = torch.load(path, map_location='cpu', weights_only=True)
+        if state['input_fingerprint']['train_bert_cache']['sha256'] != training_cache['sha256']:
+            raise ValueError('controlled models require the same frozen training BERT cache')
         cfg = SimpleNamespace(**state['args'])
         model = new_model(cfg, torch.device('cuda')).eval()
         model.load_state_dict(state['model'], strict=True)
@@ -36,7 +48,7 @@ def main():
             max_landmarks=cfg.max_landmarks, max_roads=cfg.max_roads,
             max_relations=cfg.max_relations, prior_sigma_m=cfg.prior_sigma_m,
             rule_sigma_m=cfg.rule_sigma_m)
-        loader = DataLoader(dataset, batch_size=32, num_workers=4, collate_fn=collate_full)
+        loader = DataLoader(dataset, batch_size=16, num_workers=4, collate_fn=collate_full)
         losses, distances = [], []
         offset = 0
         with torch.inference_mode(), (output / (name + '_predictions.jsonl')).open('w') as stream:
@@ -48,7 +60,9 @@ def main():
                 # Private labels are accessed only after the public forward.
                 target = batch['target_xy'].to('cuda')
                 loss = cross_entropy_goal(field.belief_logits, target, grid_size=cfg.grid_size)
-                top = field.belief_logits.topk(8, dim=-1).indices
+                # Match training/static_recall: float32 topk also fixes the
+                # backend-dependent ordering of tied BF16 candidate scores.
+                top = field.belief_logits.float().topk(8, dim=-1).indices
                 xy = inputs['grid_xy'].gather(1, top[..., None].expand(-1, -1, 2))
                 distance = ((xy - target[:, None]) * batch['map_sizes'].to('cuda')[:, None]).norm(dim=-1).cpu()
                 distances.append(distance)

@@ -23,9 +23,13 @@ def main():
     state=torch.load(a.checkpoint,map_location='cpu',weights_only=True)
     cfg=SimpleNamespace(**state['args'])
     model=new_model(cfg,torch.device('cuda')).eval();model.load_state_dict(state['model'],strict=True)
-    encoder=FrozenBERTTokens(cfg.text_backbone,device='cuda',max_length=96);encoder.load_cache(a.bert_cache)
+    encoder=FrozenBERTTokens(cfg.text_backbone,device='cuda',max_length=96)
+    training_cache=state['input_fingerprint']['train_bert_cache']
+    if file_sha256(training_cache['path'])!=training_cache['sha256']:raise ValueError('training BERT cache SHA mismatch')
+    encoder.load_cache(training_cache['path']);train_embeddings=encoder.cache.copy()
+    encoder.load_cache(a.bert_cache);encoder.cache.update(train_embeddings);del train_embeddings
     dataset=FullCandidateDataset(a.records,max_roads=0)
-    loader=DataLoader(dataset,batch_size=32,num_workers=0,collate_fn=collate_full)
+    loader=DataLoader(dataset,batch_size=16,num_workers=0,collate_fn=collate_full)
     arms=('full','self','zero-edge-geometry','no-relation-links','no-physical-links',
           'no-relation-nodes','zero-node-geometry','zero-node-names','reverse-edge-direction')
     totals={arm:{'count':0,'NE_sum_m':0.,**{f'R@{k}/20m_count':0 for k in (1,4,8)}} for arm in arms}
