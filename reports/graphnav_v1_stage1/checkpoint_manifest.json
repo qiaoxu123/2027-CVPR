@@ -151,7 +151,22 @@
     "baseline_full_seen/metrics.json": "c4ca499f7ccb335e0f6ea2c05bbcf5e36dd63eebde3adab0404ae2aacbe822e9",
     "full_seen/metrics.json": "994db5bd5051ed3faa7bdcfe14cd3c16509c08d2bf75e75f0058870b8a819d98",
     "baseline_full_unseen/metrics.json": "f1b7d663925cd37f6bcb8b861d928d7a06c15ce1526d76b0ddc8d41acde68024",
-    "full_unseen/metrics.json": "116e23be488912849456a9a85d503cc1acda82fd6cd854656a5bf5db70127666"
+    "full_unseen/metrics.json": "116e23be488912849456a9a85d503cc1acda82fd6cd854656a5bf5db70127666",
+    "full_test_unseen/metrics.json": "e6b2821f77b8da411bd4167d64c6a462144d35fa9d71f7b0d371030a5f2d6249"
   },
-  "note": "Best is selected complete B/C by Seen128 SR then SPL then Train Dev Recall; Last is final C epoch with optimizer/RNG. All stage checkpoints retained. Frozen backbones are externally resolved by model name and immutable revision."
+  "note": "Best is selected complete B/C by Seen128 SR then SPL then Train Dev Recall; Last is final C epoch with optimizer/RNG. All stage checkpoints retained. Frozen backbones are externally resolved by model name and immutable revision.",
+  "test_unseen": {
+    "episodes": 5281,
+    "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "evaluated_after_freeze": true,
+    "test_used_for_selection": false,
+    "action_audit": {
+      "episodes": 5281,
+      "horizontal_over_50m": 0,
+      "vertical_over_10m": 0,
+      "horizon_over_20": 0,
+      "active_observation_actions": 0,
+      "residual_max_abs": 0.18705804646015167
+    }
+  }
 }

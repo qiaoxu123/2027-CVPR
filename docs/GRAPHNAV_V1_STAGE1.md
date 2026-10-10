@@ -1,5 +1,14 @@
 # GraphNav-V1 Stage1
 
+Current reporting convention: GraphNav-V1 is the sole main experiment. Historical
+initialization checks and module controls remain archived; do not present A3 as a
+separate main comparison model. The frozen complete-system Test-Unseen evaluation
+uses `scripts.evaluate_closedloop --model graphnav-v1 --split test_unseen`, the
+existing Seen-selected frozen manifest, and all 5281 refined test episodes.
+It cannot subsample episodes, alter visual/history controls, or change weights.
+`scripts.summarize_graphnav_v1_results` verifies all three full splits and writes
+the GraphNav-V1-only `GRAPHNAV_V1_RESULTS.md` and JSON/CSV metrics after completion.
+
 Stage1 reuses verified A3 Seed1 Epoch14, the original pretrained Trajectory/Stop,
 and its original A3 controller reference. Required SHA256 values are enforced by
 `graphnav/stage1_checkpoint.py`. Historical JointActive Epoch1 weights are not

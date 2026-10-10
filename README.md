@@ -1,5 +1,7 @@
 # GraphNav — Graph-First Aerial Vision-and-Language Navigation
 
+> **当前主实验：GraphNav-V1，第一阶段训练与正式评估已完成。** 冻结的 C Epoch1：Val-Seen 2470，SR47.61% / SPL46.00%；Val-Unseen 2697，SR22.54% / SPL21.82%；Test-Unseen 5281，SR37.15% / SPL35.81%。主结果只列 GraphNav-V1；历史架构说明与对照保留归档。完整指标、执行协议和限制见 [GraphNav-V1 正式结果](reports/graphnav_v1_stage1/GRAPHNAV_V1_RESULTS.md)。本页下方早期“尚无闭环成绩”等描述属于历史研发状态。
+
 > **GraphNav P0–P2 research**: [Bidirectional geometry + causal landmark RGB pretraining](docs/BIDIRECTIONAL_VISUAL_P0_P2.md). Based on validated A3/A4/A5 results; retains A3 baseline, adds world-polygon→actual RGB ROI auditing, valid inverse relation pairs, SigLIP2 Large patch-token cross-view landmark contrastive pretraining. Does NOT claim closed-loop SR/SPL improvement.
 
 > **NEW offline full-token + RGB A0–A5 experiment:** [FULL_TOKEN_GEOMETRY_RGB.md](docs/FULL_TOKEN_GEOMETRY_RGB.md) — tokenwise BERT cross-attention, per-candidate true polygon geometry, typed GAT and *causal observed-only* SigLIP2 evidence. Explicit Original/Revised CityNav protocol and audited fuzzy matching; RTX Pro 6000 96GB, batch 16. **Not yet a closed-loop navigation controller.**
