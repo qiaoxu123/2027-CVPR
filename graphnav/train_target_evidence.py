@@ -52,6 +52,7 @@ def evidence_loss(refiner, row):
         text_tokens=row["text_tokens"], text_mask=row["text_mask"],
         patch_features=row["patch_features"],
         patch_xy=row["patch_xy"], patch_valid=row["patch_valid"],
+        observed_grid_valid=row.get("observed_grid_valid"),
     )
     goal_ce = -(label * F.log_softmax(result.belief_logits.float(), dim=-1)).sum(-1).mean()
     # A3 preservation regularizer guards against ungrounded arbitrary shifts.

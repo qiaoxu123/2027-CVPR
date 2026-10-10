@@ -18,7 +18,7 @@ from .dynamic_runtime import DynamicWaypointPolicy
 from .evidence_grounding import (
     SpatialEvidenceMemory, TargetEvidenceRefiner, appearance_query,
 )
-from .landmark_projection import frame_to_world
+from .landmark_projection import frame_to_world, world_to_frame
 from .active_observation import ActiveObservationConfig, plan_active_observation
 
 
@@ -123,9 +123,12 @@ class TargetEvidenceWaypointPolicy(DynamicWaypointPolicy):
         )
         patch_valid = patch_mask.bool() & pixel_valid
         public_pose = torch.as_tensor(
-            [state.pose[0], state.pose[1], state.pose[3]],
+            np.asarray(state.pose).copy(),
             dtype=torch.float32, device=self.device,
         )[None]
+        observed_grid_valid = current_grid_support(
+            observation, inputs["grid_xy"], self.record["world_bounds"]
+        )
         with torch.autocast(
             "cuda", dtype=torch.bfloat16, enabled=self.device.type == "cuda"
         ):
@@ -141,6 +144,7 @@ class TargetEvidenceWaypointPolicy(DynamicWaypointPolicy):
                 memory=self.target_history,
                 step=state.step,
                 pose_xyyaw=public_pose,
+                observed_grid_valid=observed_grid_valid,
             )
         diagnostics = dict(
             evidence_diagnostics,
@@ -181,3 +185,26 @@ class TargetEvidenceWaypointPolicy(DynamicWaypointPolicy):
             else:
                 prediction.diagnostics.update(active_action="none")
         return prediction
+
+
+def current_grid_support(observation, grid_xy, bounds):
+    """Exact current RGB/Depth support; Gaussian kernels cannot invent FOV."""
+    if grid_xy.ndim != 3 or grid_xy.shape[0] != 1 or grid_xy.shape[-1] != 2:
+        raise ValueError("current observation supports a single [1,Q,2] grid")
+    bounds = np.asarray(bounds, dtype=np.float64)
+    world = (grid_xy[0].detach().float().cpu().numpy()
+             * (bounds[2:] - bounds[:2]) + bounds[:2])
+    bgr = np.asarray(observation["bgr"])
+    depth = np.asarray(observation["depth_valid"], dtype=bool)
+    if bgr.ndim != 3 or bgr.shape[2] != 3 or depth.shape != bgr.shape[:2]:
+        raise ValueError("observed RGB/Depth dimension mismatch")
+    pixels = world_to_frame(world, observation["footprint_world"], bgr.shape)
+    h, w = bgr.shape[:2]
+    inside = (np.isfinite(pixels).all(-1) & (pixels[:, 0] >= 0)
+              & (pixels[:, 0] <= w - 1) & (pixels[:, 1] >= 0)
+              & (pixels[:, 1] <= h - 1))
+    supported = np.zeros(len(world), dtype=bool)
+    ij = np.rint(pixels[inside]).astype(int)
+    supported[inside] = ((bgr[ij[:, 1], ij[:, 0]].max(-1) > 0)
+                         & depth[ij[:, 1], ij[:, 0]])
+    return torch.as_tensor(supported, dtype=torch.bool, device=grid_xy.device)[None]

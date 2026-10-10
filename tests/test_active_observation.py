@@ -86,6 +86,22 @@ def test_invalid_observation_confidence_is_rejected():
         plan([100, 100, 80, 0], [[100, 100]], [1], coverage=[2])
 
 
+def test_out_of_map_start_is_not_teleported_by_active_planner():
+    assert plan([-100, 100, 80, 0], [[100, 100]], [1]) is None
+
+
+def test_current_grid_support_excludes_holes_and_outside_fov():
+    import torch
+    from graphnav.target_runtime import current_grid_support
+    obs = observation()
+    obs["depth_valid"][190:195, 190:195] = False
+    grid = torch.tensor([[[.25, .25], [.1, .1], [.9, .9]]])
+    mask = current_grid_support(obs, grid, [0, 0, 200, 200])
+    assert mask.tolist() == [[False, True, False]]
+    obs["depth_valid"][:] = True
+    assert current_grid_support(obs, grid, [0, 0, 200, 200]).tolist() == [[True, True, False]]
+
+
 def test_crop_is_current_frame_only_not_superresolution():
     current = observation()
     crop = extract_observed_scale(current, [50., 50.], extent_m=40.)

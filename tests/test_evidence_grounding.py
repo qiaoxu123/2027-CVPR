@@ -96,6 +96,36 @@ def test_history_deduplicates_same_view_and_rejects_noncausal():
         memory.update(a, step=2, pose_xyyaw=pose)
 
 
+def test_real_descent_updates_memory_but_yaw_only_does_not():
+    memory = SpatialEvidenceMemory(1, 2, "cpu")
+    first = RasterizedEvidence(torch.ones(1, 2), torch.ones(1, 2))
+    sharper = RasterizedEvidence(torch.full((1, 2), 3.), torch.ones(1, 2))
+    memory.update(first, step=0, pose_xyyaw=torch.tensor([[5., 10., 80., 0.]]))
+    memory.update(sharper, step=1, pose_xyyaw=torch.tensor([[5., 10., 80., 1.]]))
+    assert torch.equal(memory.snapshot().scores, torch.ones(1, 2))
+    memory.update(sharper, step=2, pose_xyyaw=torch.tensor([[5., 10., 70., 1.]]))
+    assert torch.equal(memory.snapshot().scores, torch.full((1, 2), 2.))
+
+
+def test_kernel_cannot_update_grid_outside_actual_observation():
+    base, grid = field()
+    adapter = TargetEvidenceRefiner(hidden=8, text_dim=12, vision_dim=6,
+                                    relation_dim=5, sigma=1.)
+    with torch.no_grad():
+        adapter.visual_gate.fill_(1.)
+    support = torch.zeros(1, 16, dtype=torch.bool)
+    support[:, 0] = True
+    memory = SpatialEvidenceMemory(1, 16, "cpu")
+    out = adapter(base, grid_xy=grid, text_tokens=torch.randn(1, 3, 12),
+                  text_mask=torch.ones(1, 3, dtype=torch.bool),
+                  patch_features=torch.randn(1, 1, 6), patch_xy=grid[:, :1],
+                  patch_valid=torch.ones(1, 1, dtype=torch.bool),
+                  observed_grid_valid=support, memory=memory, step=0,
+                  pose_xyyaw=torch.tensor([[5., 10., 80., 0.]]))
+    assert torch.equal(out.belief_logits[:, 1:], base.belief_logits[:, 1:])
+    assert torch.count_nonzero(memory.weights[:, 1:]) == 0
+
+
 def test_relation_gate_and_dense_fullmap_update():
     base, grid = field()
     adapter = TargetEvidenceRefiner(hidden=8, text_dim=12, vision_dim=6, relation_dim=5)

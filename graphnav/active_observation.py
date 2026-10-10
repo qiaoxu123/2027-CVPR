@@ -120,6 +120,10 @@ def plan_active_observation(
     # bounded controller recover them; never impose a new active move there.
     if not config.min_height_m <= height <= config.max_height_m:
         return None
+    if np.any(pose[:2] < bounds[:2]) or np.any(pose[:2] > bounds[2:]):
+        # Clipping an invalid start to the map can exceed the single-step cap.
+        # Preserve it and let the original bounded controller recover instead.
+        return None
 
     # Compare only the strongest few modes and prefer those without evidence.
     top = np.argsort(-scores, kind="stable")[: min(8, len(scores))]

@@ -102,8 +102,9 @@ class SpatialEvidenceMemory:
     def update(self, evidence: RasterizedEvidence, *, step: int, pose_xyyaw: torch.Tensor):
         if step <= self.last_step:
             raise ValueError("visual memory steps must advance strictly")
-        if pose_xyyaw.shape != (self.sums.shape[0], 3) or not torch.isfinite(pose_xyyaw).all():
-            raise ValueError("pose must be a finite [B,3] metric x/y/yaw")
+        if (pose_xyyaw.ndim != 2 or pose_xyyaw.shape[0] != self.sums.shape[0]
+                or pose_xyyaw.shape[1] not in (3, 4) or not torch.isfinite(pose_xyyaw).all()):
+            raise ValueError("pose must be finite [B,3] x/y/yaw or [B,4] x/y/z/yaw")
         if evidence.scores.shape != self.sums.shape or evidence.coverage.shape != self.sums.shape:
             raise ValueError("evidence grid changed within episode")
         if not all(torch.isfinite(t).all() for t in (evidence.scores, evidence.coverage)):
@@ -113,12 +114,15 @@ class SpatialEvidenceMemory:
         accepts = torch.ones(self.sums.shape[0], device=self.sums.device, dtype=torch.bool)
         pose = pose_xyyaw.detach().float().to(self.sums.device)
         if self.last_pose is not None:
-            distance = torch.linalg.vector_norm(pose[:, :2] - self.last_pose[:, :2], dim=-1)
-            dyaw = torch.atan2(
-                torch.sin(pose[:, 2] - self.last_pose[:, 2]),
-                torch.cos(pose[:, 2] - self.last_pose[:, 2]),
-            ).abs()
-            accepts = (distance >= self.min_move_m) | (dyaw >= self.min_turn_rad)
+            if pose.shape != self.last_pose.shape:
+                raise ValueError("pose schema changed within episode")
+            # A genuine height change changes sampling, even at fixed XY.
+            # Nadir yaw-only rotation does not add an independent physical view.
+            dimensions = 3 if pose.shape[1] == 4 else 2
+            distance = torch.linalg.vector_norm(
+                pose[:, :dimensions] - self.last_pose[:, :dimensions], dim=-1
+            )
+            accepts = distance >= self.min_move_m
         w = evidence.coverage.detach().float().to(self.sums.device) * accepts[:, None]
         self.sums += evidence.scores.detach().float().to(self.sums.device) * w
         self.weights += w
@@ -186,7 +190,8 @@ class TargetEvidenceRefiner(nn.Module):
 
     def forward(self, field: GoalField, *, grid_xy, relation_fields=None,
                 text_tokens=None, text_mask=None, patch_features=None,
-                patch_xy=None, patch_valid=None, memory=None, step=None, pose_xyyaw=None):
+                patch_xy=None, patch_valid=None, memory=None, step=None, pose_xyyaw=None,
+                observed_grid_valid=None):
         if field.dense_context is None:
             raise ValueError("refiner needs original A3 dense candidate features")
         logits = field.belief_logits
@@ -209,6 +214,14 @@ class TargetEvidenceRefiner(nn.Module):
             image_evidence = rasterize_observed_patches(
                 raw_scores, patch_xy, patch_valid, grid_xy, sigma=self.sigma
             )
+            if observed_grid_valid is not None:
+                if (observed_grid_valid.shape != logits.shape
+                        or observed_grid_valid.dtype != torch.bool):
+                    raise ValueError("observed grid support must be aligned boolean [B,Q]")
+                image_evidence = RasterizedEvidence(
+                    image_evidence.scores * observed_grid_valid,
+                    image_evidence.coverage * observed_grid_valid,
+                )
             if memory is not None:
                 if step is None or pose_xyyaw is None:
                     raise ValueError("causal memory needs step and public metric pose")
