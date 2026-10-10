@@ -1,0 +1,117 @@
+{
+  "status": "complete",
+  "args": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "output": "runs/rgb_matching_parallel_smoke_20261010",
+    "main_workflow_status": "runs/joint_active_first_epoch_20261010/workflow_status.json",
+    "episodes": 2,
+    "microbatch": 8
+  },
+  "provenance": {
+    "commit": "435aded65256888b25a31c641ab96f82c613e34b",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "backbone_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "selected_indices": [
+    0,
+    2469
+  ],
+  "attempted_observations": 9,
+  "eligible_observations": 2,
+  "eligible_fraction": 0.2222222222222222,
+  "all_eligible": {
+    "cases": 2,
+    "native_single32": {
+      "r1": 0.5,
+      "margin": -0.0037738531827926636
+    },
+    "native_crop_multiscale": {
+      "r1": 0.0,
+      "margin": -0.01284954696893692
+    },
+    "native_patch_multiscale": {
+      "r1": 0.0,
+      "margin": -0.024383438751101494
+    }
+  },
+  "by_category": {
+    "Car": {
+      "cases": 2,
+      "native_single32": {
+        "r1": 0.5,
+        "margin": -0.0037738531827926636
+      },
+      "native_crop_multiscale": {
+        "r1": 0.0,
+        "margin": -0.01284954696893692
+      },
+      "native_patch_multiscale": {
+        "r1": 0.0,
+        "margin": -0.024383438751101494
+      }
+    }
+  },
+  "by_description": {
+    "roof_color": {
+      "cases": 2,
+      "native_single32": {
+        "r1": 0.5,
+        "margin": -0.0037738531827926636
+      },
+      "native_crop_multiscale": {
+        "r1": 0.0,
+        "margin": -0.01284954696893692
+      },
+      "native_patch_multiscale": {
+        "r1": 0.0,
+        "margin": -0.024383438751101494
+      }
+    },
+    "shape": {
+      "cases": 0,
+      "native_single32": {
+        "r1": null,
+        "margin": null
+      },
+      "native_crop_multiscale": {
+        "r1": null,
+        "margin": null
+      },
+      "native_patch_multiscale": {
+        "r1": null,
+        "margin": null
+      }
+    },
+    "vehicle": {
+      "cases": 2,
+      "native_single32": {
+        "r1": 0.5,
+        "margin": -0.0037738531827926636
+      },
+      "native_crop_multiscale": {
+        "r1": 0.0,
+        "margin": -0.01284954696893692
+      },
+      "native_patch_multiscale": {
+        "r1": 0.0,
+        "margin": -0.024383438751101494
+      }
+    }
+  },
+  "paired_same_gallery_cases": 1,
+  "seconds": 16.720959215890616,
+  "peak_allocated_gib": 3.4482975006103516,
+  "encoded_images": 495,
+  "caveats": [
+    "Offline conditional target-instance retrieval within same-category actual observed candidates; no SR/SPL claim.",
+    "Projected polygons are imperfect geometric proposals, not verified segmentation.",
+    "Cameras follow fixed fractions; descent uses public pose only. No future human frame or GT camera selection.",
+    "ROI resizing is digital resampling; patch method includes current-frame contextual attention.",
+    "Description groups are language mentions, not human-verified color/shape classification labels.",
+    "Existing P2 head was trained for cross-frame instance/type alignment; no verified full-language matching head used.",
+    "Concurrent with training-feature preparation; measured speed is shared-resource diagnostic timing."
+  ],
+  "diagnostic_script_sha256_recorded_before_next_edit": "e68062b17e5ed5045d427d9301c37ec306814367ad40e62deb2f09faf4a9d521"
+}
