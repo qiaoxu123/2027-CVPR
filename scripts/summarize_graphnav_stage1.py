@@ -232,7 +232,7 @@ def main():
     report='\n'.join(lines)+'\n'
     (root/'GRAPHNAV_V1_STAGE1_REPORT.md').write_text(report)
     archive=Path('reports/graphnav_v1_stage1');archive.mkdir(parents=True,exist_ok=True)
-    for name in ('training.csv','seen128_comparison.csv','full_comparison.csv','visual_ablation.csv','history_ablation.csv','goal_retrieval.csv','analysis.json','checkpoint_manifest.json','initial_seen128_parity.json','historical_baseline_audit.json','training_curves.png','GRAPHNAV_V1_STAGE1_REPORT.md','frozen_final_candidate.json','static_B0_seen.json','static_B0_unseen.json','static_selected_seen.json','static_selected_unseen.json'):
+    for name in ('training.csv','seen128_comparison.csv','full_comparison.csv','visual_ablation.csv','history_ablation.csv','goal_retrieval.csv','analysis.json','checkpoint_manifest.json','initial_seen128_parity.json','historical_baseline_audit.json','verification_preflight.json','training_curves.png','GRAPHNAV_V1_STAGE1_REPORT.md','frozen_final_candidate.json','static_B0_seen.json','static_B0_unseen.json','static_selected_seen.json','static_selected_unseen.json'):
         shutil.copy2(root/name,archive/name)
     print(json.dumps(dict(output=str(root),selected_stage=freeze['selected_stage'],selected_epoch=state['epoch'],complete=True)),flush=True)
 

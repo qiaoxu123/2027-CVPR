@@ -19,6 +19,13 @@ def main():
     workflow=root/'workflow_status.json'
     if workflow.exists() and not a.resume:raise ValueError('explicit workflow resume required')
     status=json.loads(workflow.read_text())if workflow.exists()else dict(jobs={},started=time.time(),provenance=provenance())
+    child=status.get('child_pid')
+    if child:
+        process=Path('/proc')/str(child)/'cmdline'
+        try:command=process.read_bytes().replace(b'\0',b' ').decode()
+        except FileNotFoundError:command=''
+        if any(name in command for name in ('scripts.train_graphnav_stage1','scripts.evaluate_closedloop','scripts.summarize_graphnav_stage1')):
+            raise ValueError(f'existing workflow child PID {child} is still active; refuse duplicate resume')
     env=dict(os.environ,HF_HUB_OFFLINE='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',TOKENIZERS_PARALLELISM='false',PYTHONPATH=str(Path.cwd()))
     sources=root/'initial_sources.json';base=json.loads((root/'baseline_seen128/metrics.json').read_text())['args']
     # Make the additional Seen controls part of the durable workflow on resume.
