@@ -278,3 +278,6 @@ History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s
 
 
 用户授权继续并行测试后，完整CPU测试177项通过（5.54秒，1项warning，详见保存日志）。在正在生成缓存的已提交分片中固定抽取首部、四分位、中部、四分之三及尾部5片共320训练状态，SHA、每Episode四状态、历史步不超过cutoff、候选索引唯一合法、特征有限值/维度、无观测区域零特征全部通过。该抽样不等于全缓存验证，也不单独证明渲染来源或无所有形式泄漏。结果`reports/active_perception_20261010/parallel_cache_audit/`。主准备进程未中断，未运行Unseen或重跑基线。
+
+
+用户重新授权运行1轮：完整87512状态Epoch1及Seen128已完成。训练524.28秒、166.92状态/秒、峰值分配显存1.73GiB；验证89.00秒。SR28.9063%、SPL22.9716%、OSR67.9688%、NE38.3867m；最终动态定位R@1/4/8=34.375/60.1563/68.75%。False-Stop Rate68.4685%，错误Stop占全部Episode59.375%；当前低于已有Seen128基线，无提升声明。Checkpoint、CSV/JSON保存，未执行Epoch2或Unseen。报告docs/JOINT_ACTIVE_EPOCH1_RESULTS_20261010.md。

@@ -1,0 +1,67 @@
+[
+  {
+    "epoch": 1,
+    "train": {
+      "total": 8.0898871943593,
+      "static": 4.3445869405784645,
+      "belief": 4.344195675137209,
+      "visual": 4.116665349428174,
+      "trajectory_ranking": 2.9610282021299423,
+      "trajectory_path": 0.1268674317155306,
+      "trajectory_mode": 1.0815324076395256,
+      "trajectory_stop": 0.6889023668740522,
+      "NE_m": 30.330944282980894,
+      "R@1/20m_hits": 0.4584399853734345,
+      "R@4/20m_hits": 0.7124051558643386,
+      "R@8/20m_hits": 0.8128256696224517,
+      "observed_fraction": 0.1715388764131515,
+      "stop_positive_states": 0.21985556266569156,
+      "appearance_identity_accuracy": 0.07580074246740913,
+      "appearance_eligible_states": 23166.0,
+      "samples": 87512,
+      "seconds": 524.2808573560324,
+      "samples_per_second": 166.91816756638082,
+      "first_batch_gradients": {
+        "a3": 26.088497944176197,
+        "matcher": 0.06870852841529995,
+        "trajectory_stop": 2.4559835139662027,
+        "visual_gain": -0.009939377196133137
+      },
+      "visual_matching_gradient_observed": true,
+      "sampled_gpu_utilization_mean_percent": 21.381818181818183,
+      "gpu_utilization_samples": 55,
+      "peak_allocated_gib": 1.7295985221862793
+    },
+    "seen128": {
+      "SR": 0.2890625,
+      "OSR": 0.6796875,
+      "SPL": 0.2297157689761516,
+      "NE": 38.3867015108725,
+      "nDTW": 0.27336356594456207,
+      "sDTW": 0.0924546459195903,
+      "steps": 12.5078125,
+      "path_length": 281.03946792177624,
+      "policy_stop": 0.8671875,
+      "inference_ms": 37.69209552789691,
+      "episodes": 128,
+      "False_Stop_Rate": 0.6846846846846847,
+      "false_stop_episode_fraction": 0.59375,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "seen128_goal_retrieval": {
+      "unique_queries": 128,
+      "NE_m": 34.195054584249,
+      "R@1/20m": 0.34375,
+      "R@4/20m": 0.6015625,
+      "R@8/20m": 0.6875,
+      "appearance_spatial_r1_at20m": 0.25,
+      "note": "Final observed/history belief. Deduplicate map+instruction, first source target. Different from initial static recall and closed-loop SR. Appearance spatial retrieval is not roof-color/shape classification accuracy."
+    },
+    "seen128_active_action_counts": {
+      "approach": 194,
+      "descend": 40,
+      "lateral": 22
+    },
+    "validation_seconds": 89.00251107709482
+  }
+]
