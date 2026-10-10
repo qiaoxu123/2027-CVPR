@@ -18,7 +18,7 @@ jobs:
       - name: Install CPU PyTorch
         run: pip install torch --index-url https://download.pytorch.org/whl/cpu
       - name: Install GraphNav
-        run: pip install -e '.[dev]'
+        run: pip install -e '.[dev,data]' pyyaml
       - name: Unit tests
         run: pytest -q
       - name: Smoke training
