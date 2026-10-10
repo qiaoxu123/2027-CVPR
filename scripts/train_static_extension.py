@@ -22,18 +22,19 @@ def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="g
     with torch.set_grad_enabled(optimizer is not None):
         for iteration,batch in enumerate(loader):
             if max_batches and iteration>=max_batches:break
+            auxiliary='relation_allowed' in batch
             inputs,tokens,mask,names=_batch_inputs(batch,encoder,device,'geometry')
             inputs=graph_control(inputs,control)
             with torch.autocast('cuda',dtype=torch.bfloat16):field=model(inputs,variant=variant,tokens=tokens,token_mask=mask,node_emb=names)
             target=batch['target_xy'].to(device);loss=cross_entropy_goal(field.belief_logits,target,grid_size=model.grid_size if hasattr(model,'grid_size') else int(len(inputs['grid_xy'][0])**.5))
             goal_loss=loss
-            if relation_weight:
+            if auxiliary:
                 eligible=batch['relation_eligible'].to(device)
                 aux_count+=int(eligible.sum());counter_count+=int(batch['counter_eligible'].sum())
                 winner=field.belief_logits.argmax(-1)
                 aux_top1+=int((batch['relation_allowed'].to(device).gather(1,winner[:,None]).squeeze(1)&eligible).sum())
-            relation_loss=allowed_region_loss(field.belief_logits,batch['relation_allowed'].to(device),batch['relation_eligible'].to(device)) if relation_weight else loss*0
-            if relation_weight and optimizer is not None and batch['counter_eligible'].any():
+            relation_loss=allowed_region_loss(field.belief_logits,batch['relation_allowed'].to(device),batch['relation_eligible'].to(device)) if auxiliary else loss*0
+            if auxiliary and optimizer is not None and batch['counter_eligible'].any():
                 indices=batch['counter_eligible'].nonzero().flatten().tolist()
                 counter={k:(v[indices] if isinstance(v,torch.Tensor) else [v[i] for i in indices]) for k,v in batch.items()}
                 for key in ('text','node_names','nodes','node_types','node_valid','adjacency','edges','rules','relation_fields'):
@@ -63,6 +64,7 @@ def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="g
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('template','train','seen','train-bert-cache','seen-bert-cache','output'):p.add_argument('--'+key,required=True)
+    p.add_argument('--relation-auxiliary',action='store_true',help='Compute identical relation/counterfactual forwards even at weight0 for fair E2 control')
     p.add_argument('--relation-weight',type=float,default=0.)
     p.add_argument('--continue-from');p.add_argument('--lr',type=float,default=5e-5)
     p.add_argument('--variant',choices=['geometry','gat'],default='geometry')
@@ -86,7 +88,7 @@ def main():
     cfg.init_bidirectional=args.init_bidirectional
     device=torch.device('cuda');encoder=FrozenBERTTokens(cfg.text_backbone,device='cuda',max_length=96)
     encoder.load_cache(args.train_bert_cache);training_cache=encoder.cache.copy();encoder.load_cache(args.seen_bert_cache);encoder.cache.update(training_cache);del training_cache
-    def dataset(path):return (RelationDataset if args.relation_weight else FullCandidateDataset)(path,grid_size=cfg.grid_size,max_landmarks=cfg.max_landmarks,
+    def dataset(path):return (RelationDataset if (args.relation_weight or args.relation_auxiliary) else FullCandidateDataset)(path,grid_size=cfg.grid_size,max_landmarks=cfg.max_landmarks,
         max_roads=cfg.max_roads,max_relations=cfg.max_relations,prior_sigma_m=cfg.prior_sigma_m,rule_sigma_m=cfg.rule_sigma_m)
     train=dataset(args.train);seen=dataset(args.seen)
     if {(r['map_name'],r['instruction']) for r in train.records}&{(r['map_name'],r['instruction']) for r in seen.records}:raise ValueError('train/Seen query leakage')
@@ -115,7 +117,7 @@ def main():
         restore_rng(continuation['rng'])
 
     generator=torch.Generator();options=dict(batch_size=cfg.batch_size,num_workers=cfg.workers,
-        persistent_workers=cfg.workers>0,pin_memory=True,collate_fn=collate_relation if args.relation_weight else collate_full)
+        persistent_workers=cfg.workers>0,pin_memory=True,collate_fn=collate_relation if (args.relation_weight or args.relation_auxiliary) else collate_full)
     train_loader=DataLoader(train,shuffle=True,generator=generator,**options);seen_loader=DataLoader(seen,shuffle=False,**options)
     source=provenance();history=[];best=(-1.,float('-inf'));start=1
     if continuation:
@@ -125,6 +127,7 @@ def main():
     cfg.variant=args.variant;cfg.graph_control=args.graph_control
     cfg.continue_from=args.continue_from
     cfg.relation_weight=args.relation_weight
+    cfg.relation_auxiliary=args.relation_auxiliary
     if args.resume:
         state=restore_training(args.resume,model,optimizer,cfg,fingerprint);history=state['history'];best=tuple(state['best_key']);start=state['epoch']+1;source=state['provenance']
     for e in range(start,args.epochs+1):
