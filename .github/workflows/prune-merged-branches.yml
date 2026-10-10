@@ -1,0 +1,59 @@
+name: Prune merged research branches (one-time guarded cleanup)
+
+# This one-time maintenance task runs only when its own workflow file is changed.
+# NEVER delete branches that contain commits not yet reachable from main.
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/prune-merged-branches.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  guarded-prune:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Delete only merged, inactive, explicitly whitelisted branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*'
+          # IMPORTANT: parity and validation/static-geometry branches have
+          # unique results/commits and are deliberately NOT whitelisted.
+          branches=(
+            '2027-CVPR/bidirectional-landmark-visual-pretrain'
+            '2027-CVPR/full-landmark-geometry-grounding'
+            '2027-CVPR/full-token-geometry-observed-rgb'
+            '2027-CVPR/semantic-geometry-localization'
+            'validation/full-token-rgb-local-20261009'
+            '2027-CVPR/graphnav-relational-visual-belief'
+          )
+          # Abort if GitHub refuses to enumerate open PRs.
+          open_pr_heads="$(gh api "repos/$GITHUB_REPOSITORY/pulls?state=open&per_page=100" --jq '.[].head.ref')"
+          for branch in "${branches[@]}"; do
+            if ! git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+              echo "SKIP missing: $branch"
+              continue
+            fi
+            if ! git merge-base --is-ancestor "refs/remotes/origin/$branch" "refs/remotes/origin/main"; then
+              echo "KEEP unmerged history: $branch"
+              continue
+            fi
+            if grep -Fxq "$branch" <<< "$open_pr_heads"; then
+              echo "KEEP open PR: $branch"
+              continue
+            fi
+            echo "DELETE safely merged branch: $branch"
+            gh api --method DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$branch"
+          done
