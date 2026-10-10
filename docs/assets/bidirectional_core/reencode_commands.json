@@ -1,0 +1,34 @@
+[
+  {
+    "split": "val_seen",
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.bidirectional_core.reencode",
+      "--source",
+      "runs/bidirectional_core_test/cache/val_seen",
+      "--output",
+      "runs/bidirectional_core_test/cache_fp16/val_seen",
+      "--batch-size",
+      "32"
+    ],
+    "seconds": 52.89085340499878,
+    "exit_code": 0
+  },
+  {
+    "split": "train_seen",
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.bidirectional_core.reencode",
+      "--source",
+      "runs/bidirectional_core_test/cache/train_seen",
+      "--output",
+      "runs/bidirectional_core_test/cache_fp16/train_seen",
+      "--batch-size",
+      "32"
+    ],
+    "seconds": 419.35315346717834,
+    "exit_code": 0
+  }
+]

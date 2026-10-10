@@ -1,0 +1,124 @@
+{
+  "definition": "All actually valid judged positives are Building; cached same_class_hard_r1 ranks only Building positives and known negatives. Unknowns excluded; shared frozen eligibility, no model rerun.",
+  "models": {
+    "E0": {
+      "n": 12,
+      "mean": 0.6666666666666666,
+      "independent_families": 10,
+      "maps": 7,
+      "iid_95ci": [
+        0.4166666666666667,
+        0.9166666666666666
+      ],
+      "family_cluster_95ci": [
+        0.45454545454545453,
+        0.9
+      ],
+      "map_cluster_95ci": [
+        0.45454545454545453,
+        0.875
+      ],
+      "cluster_warning": null,
+      "positive_objects": 17
+    },
+    "E1": {
+      "n": 12,
+      "mean": 0.5,
+      "independent_families": 10,
+      "maps": 7,
+      "iid_95ci": [
+        0.25,
+        0.75
+      ],
+      "family_cluster_95ci": [
+        0.16666666666666666,
+        0.8333333333333334
+      ],
+      "map_cluster_95ci": [
+        0.2222222222222222,
+        0.7272727272727273
+      ],
+      "cluster_warning": null,
+      "positive_objects": 17
+    },
+    "E2": {
+      "n": 12,
+      "mean": 0.6666666666666666,
+      "independent_families": 10,
+      "maps": 7,
+      "iid_95ci": [
+        0.4166666666666667,
+        0.9166666666666666
+      ],
+      "family_cluster_95ci": [
+        0.4,
+        0.9166666666666666
+      ],
+      "map_cluster_95ci": [
+        0.375,
+        0.8571428571428571
+      ],
+      "cluster_warning": null,
+      "positive_objects": 17
+    }
+  },
+  "paired_differences": {
+    "E0_to_E1": {
+      "n": 12,
+      "mean": -0.16666666666666666,
+      "independent_families": 10,
+      "maps": 7,
+      "iid_95ci": [
+        -0.5,
+        0.16666666666666666
+      ],
+      "family_cluster_95ci": [
+        -0.5,
+        0.14285714285714285
+      ],
+      "map_cluster_95ci": [
+        -0.5,
+        0.14285714285714285
+      ],
+      "cluster_warning": null
+    },
+    "E1_to_E2": {
+      "n": 12,
+      "mean": 0.16666666666666666,
+      "independent_families": 10,
+      "maps": 7,
+      "iid_95ci": [
+        0.0,
+        0.4166666666666667
+      ],
+      "family_cluster_95ci": [
+        0.0,
+        0.36363636363636365
+      ],
+      "map_cluster_95ci": [
+        0.0,
+        0.375
+      ],
+      "cluster_warning": null
+    },
+    "E0_to_E2": {
+      "n": 12,
+      "mean": 0.0,
+      "independent_families": 10,
+      "maps": 7,
+      "iid_95ci": [
+        -0.25,
+        0.25
+      ],
+      "family_cluster_95ci": [
+        -0.2727272727272727,
+        0.21428571428571427
+      ],
+      "map_cluster_95ci": [
+        -0.28607142857142853,
+        0.21428571428571427
+      ],
+      "cluster_warning": null
+    }
+  }
+}

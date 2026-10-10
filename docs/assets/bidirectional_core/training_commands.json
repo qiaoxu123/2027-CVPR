@@ -1,0 +1,62 @@
+[
+  {
+    "condition": "E0",
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.bidirectional_core.train",
+      "--cache",
+      "runs/bidirectional_core_test/cache_fp16/train_seen",
+      "--condition",
+      "E0",
+      "--output",
+      "runs/bidirectional_core_test/E0",
+      "--epochs",
+      "3",
+      "--batch-size",
+      "32"
+    ],
+    "seconds": 133.02685165405273,
+    "exit_code": 0
+  },
+  {
+    "condition": "E1",
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.bidirectional_core.train",
+      "--cache",
+      "runs/bidirectional_core_test/cache_fp16/train_seen",
+      "--condition",
+      "E1",
+      "--output",
+      "runs/bidirectional_core_test/E1",
+      "--epochs",
+      "3",
+      "--batch-size",
+      "32"
+    ],
+    "seconds": 136.71738171577454,
+    "exit_code": 0
+  },
+  {
+    "condition": "E2",
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.bidirectional_core.train",
+      "--cache",
+      "runs/bidirectional_core_test/cache_fp16/train_seen",
+      "--condition",
+      "E2",
+      "--output",
+      "runs/bidirectional_core_test/E2",
+      "--epochs",
+      "3",
+      "--batch-size",
+      "32"
+    ],
+    "seconds": 137.91171193122864,
+    "exit_code": 0
+  }
+]

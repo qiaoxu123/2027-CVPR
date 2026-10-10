@@ -1,0 +1,72 @@
+{
+  "complete": true,
+  "source_sha256": {
+    "objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "train_seen": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+    "val_seen": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06"
+  },
+  "stats": {
+    "train_seen": {
+      "source_episodes": 21878,
+      "start_unique_geometry": 6479,
+      "start_ambiguous": 198,
+      "reverse_static_language_eligible": 20601,
+      "reverse_object_language_eligible": 6273,
+      "episodes_forward": 21878,
+      "prefixes_forward": 109296,
+      "stop_positive_forward": 34591,
+      "historical_observations_forward": 195854,
+      "episodes_reverse": 21878,
+      "prefixes_reverse": 109296,
+      "stop_positive_reverse": 25423,
+      "historical_observations_reverse": 165537,
+      "independent_target_objects": 3941,
+      "maps": 24,
+      "partition": {
+        "components": 24,
+        "largest_component_families": 2818,
+        "families": {
+          "train": 19567,
+          "internal_dev": 2311
+        },
+        "node_overlap": 0,
+        "family_object_region_disjoint": true,
+        "region_m": 200
+      }
+    },
+    "val_seen": {
+      "source_episodes": 2470,
+      "start_unique_geometry": 765,
+      "start_ambiguous": 23,
+      "reverse_static_language_eligible": 2332,
+      "reverse_object_language_eligible": 745,
+      "episodes_forward": 2470,
+      "prefixes_forward": 12337,
+      "stop_positive_forward": 3842,
+      "historical_observations_forward": 22125,
+      "episodes_reverse": 2470,
+      "prefixes_reverse": 12337,
+      "stop_positive_reverse": 2890,
+      "historical_observations_reverse": 18695,
+      "independent_target_objects": 449,
+      "maps": 23,
+      "partition": {
+        "original_split_retained": true
+      }
+    }
+  },
+  "seconds": 129.4607357920613,
+  "protocol": {
+    "original_map_splits": true,
+    "reversed_xyz_exact": true,
+    "reverse_heading": "next_nonstationary_travel_tangent_then_last_incoming_at_endpoint",
+    "stop": "distance_xy_to_direction_goal<=20m_recomputed",
+    "prefixes": "fixed 0,.25,.5,.75,1 without target-driven selection",
+    "return_language": "named-anchor cardinal geometry for reliable start surface or launch point; absent named-anchor relationship is trajectory-only",
+    "reverse_rgb": "original source camera frames explicitly indexed by reverse time; not asserted identical to recomputed-yaw current images",
+    "new_siglip_encoding": false,
+    "attribute_supervision": "no invented attributes; prior labels language-weak only",
+    "sampling": "matched E0 forward repetitions vs E1 forward/reverse, equal per-family fixedprefix budgets",
+    "unseen_selection": false
+  }
+}
