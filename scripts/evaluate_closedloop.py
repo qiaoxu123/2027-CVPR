@@ -38,6 +38,14 @@ def main():
     parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
     parser.add_argument('--active-observation',action='store_true',help='Opt-in bounded XY/Z sensing actions')
     parser.add_argument('--active-max-actions',type=int,default=2)
+    parser.add_argument('--joint-active-observation',action='store_true',
+        help='Explicitly enable active sensing for joint-active; OFF by default')
+    parser.add_argument('--joint-stop-guard-m',type=float,default=20.,
+        help='Maximum XY distance to selected predicted goal for joint Stop; 0 disables only this guard')
+    parser.add_argument('--joint-stop-threshold',type=float,default=None,
+        help='Override checkpoint joint Stop probability threshold for paired diagnostics')
+    parser.add_argument('--joint-visual-control',choices=('full','no-belief','zero-vectors','shuffle-vectors'),
+        default='full',help='Causal image-appearance ablation under matched observed support')
     parser.add_argument('--visual-checkpoint')
     parser.add_argument('--visual-history',action='store_true')
     parser.add_argument('--disable-visual',action='store_true')
@@ -59,6 +67,15 @@ def main():
             raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
     if args.active_observation and args.model != 'target-evidence':
         raise ValueError('active observation requires the target-evidence policy')
+    if args.joint_active_observation and args.model!='joint-active':
+        raise ValueError('--joint-active-observation requires --model joint-active')
+    if (args.joint_visual_control!='full' or args.joint_stop_guard_m!=20.
+            or args.joint_stop_threshold is not None) and args.model!='joint-active':
+        raise ValueError('joint controls require --model joint-active')
+    if args.joint_stop_guard_m<0 or not np.isfinite(args.joint_stop_guard_m):
+        raise ValueError('joint Stop guard must be finite and nonnegative')
+    if args.joint_stop_threshold is not None and not 0<=args.joint_stop_threshold<=1:
+        raise ValueError('joint Stop threshold must be in [0,1]')
     if args.active_max_actions < 0:
         raise ValueError('active-max-actions must be nonnegative')
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
@@ -109,7 +126,13 @@ def main():
         if args.model=='joint-active':
             from graphnav.joint_active_runtime import JointActivePolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
-            runtime=JointActivePolicy(args.checkpoint,output/'public_inputs')
+            runtime=JointActivePolicy(
+                args.checkpoint, output/'public_inputs',
+                active_observation=args.joint_active_observation,
+                stop_guard_m=args.joint_stop_guard_m,
+                stop_threshold=args.joint_stop_threshold,
+                visual_control=args.joint_visual_control,
+            )
             builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model in ('dynamic','target-evidence'):
             if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')
@@ -142,7 +165,7 @@ def main():
         vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,
         maximum_above_ground_m=protocol.max_altitude_m)
     rows, maps, terminations = [], defaultdict(list), Counter()
-    retrieval_queries=set();retrieval_rows=[];active_counts=Counter()
+    retrieval_queries=set();retrieval_rows=[];active_counts=Counter();stop_gate_counts=Counter()
     started = time.perf_counter()
     with (output/'predictions.jsonl').open('w') as stream:
         for position,record in enumerate(episodes):
@@ -158,6 +181,8 @@ def main():
                 radius=protocol.success_radius_m,decision_seconds=timings)
             if args.model=='joint-active':
                 active_counts.update(d['active_action'] for d in diagnostics if 'active_action' in d)
+                stop_gate_counts.update(d['stop_reject_reason'] for d in diagnostics
+                                        if 'stop_reject_reason' in d)
                 query=(record.map_name,record.instruction)
                 if query not in retrieval_queries:
                     retrieval_queries.add(query)
@@ -173,7 +198,7 @@ def main():
                 metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
-    report = dict(model=('Joint A3 + multiscale observed appearance/history + trained trajectory/Stop + active sensing' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
+    report = dict(model=('Joint A3 + observed appearance/history + trained trajectory/Stop; active sensing opt-in' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
                         else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
                               else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))))),split=args.split,
         metrics=aggregate(rows),by_map={k:aggregate(v) for k,v in maps.items()},
@@ -205,6 +230,14 @@ def main():
             **{key:float(np.mean([r[key] for r in retrieval_rows])) for key in retrieval_rows[0]},
             note='Final observed/history belief. Deduplicate map+instruction, first source target. Different from initial static recall and closed-loop SR. Appearance spatial retrieval is not roof-color/shape classification accuracy.')
         report['active_action_counts']=dict(active_counts)
+        report['stop_guard_diagnostics']=dict(stop_gate_counts)
+        report['joint_inference_controls']=dict(
+            active_observation=args.joint_active_observation,
+            stop_guard_m=args.joint_stop_guard_m,
+            stop_threshold=(runtime.stop_threshold),
+            visual_control=args.joint_visual_control,
+            note='GT-free candidate proximity; intervention metrics require new paired rollouts',
+        )
         report['frozen_final_candidate_sha256']=sha(args.frozen_final_candidate) if args.frozen_final_candidate else None
     (output/'metrics.json').write_text(json.dumps(report,indent=2))
     print(json.dumps(report['metrics']),flush=True)
