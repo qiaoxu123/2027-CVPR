@@ -128,6 +128,7 @@ def main():
     cfg.continue_from=args.continue_from
     cfg.relation_weight=args.relation_weight
     cfg.relation_auxiliary=args.relation_auxiliary
+    cfg.relation_supervision_version="grounded-cardinal-of-v2" if (args.relation_auxiliary or args.relation_weight) else None
     if args.resume:
         state=restore_training(args.resume,model,optimizer,cfg,fingerprint);history=state['history'];best=tuple(state['best_key']);start=state['epoch']+1;source=state['provenance']
     for e in range(start,args.epochs+1):

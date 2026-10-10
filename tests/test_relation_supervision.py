@@ -42,3 +42,21 @@ def test_real_direction_counter_does_not_change_goal_label(tmp_path):
     assert torch.equal(x['target_xy'],torch.tensor([.8,.5]))
     assert not (x['counter_allowed'] & x['relation_allowed']).any()
     batch=collate_relation([x]);assert batch['counter_text']==[x['counter_text']]
+
+
+def test_short_world_direction_phrase_is_swapped_without_rewriting_names(tmp_path):
+    import json
+    from graphnav.relation_supervision import RelationDataset
+    row={'map_name':'test','instruction':'Find the building east of West Tower',
+         'world_bounds':[0,0,100,100],'physical_map_sizes':[100,100],'target_xy':[.8,.5],
+         'landmarks':[{'name':'West Tower','contour':[[.4,.4],[.6,.4],[.6,.6],[.4,.6]]}]}
+    p=tmp_path/'train.jsonl';p.write_text(json.dumps(row)+'\n')
+    data=RelationDataset(p,max_roads=0)
+    assert data[0]['counter_eligible']
+    assert data[0]['counter_text']=='Find the building west of West Tower'
+    assert data[0] is data[0]
+
+
+def test_direction_region_excludes_contour_interior_and_uncertain_edge():
+    mask=legal_region(np.array([[1,0],[4,0],[10,0]]),[entity()],SpatialRelation('east',((0,),)))
+    assert mask.tolist()==[False,False,True]
