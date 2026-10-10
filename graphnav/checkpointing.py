@@ -70,3 +70,17 @@ def restore_training(path,model,optimizer,args,fingerprint,*,ignored=('resume','
     model.load_state_dict(state['model'],strict=True);optimizer.load_state_dict(state['optimizer'])
     restore_rng(state['rng'])
     return state
+
+
+def resolve_checkpoint_resource(recorded, checkpoint):
+    """Locate preserved relative resources without rewriting checkpoint payloads.
+
+    A checkpoint under repo/runs/name/file.pt resolves repo-relative paths via
+    its ancestors. The caller still validates the recorded SHA256.
+    """
+    path=Path(recorded)
+    if path.is_absolute():return path
+    for ancestor in Path(checkpoint).resolve().parents:
+        candidate=ancestor/path
+        if candidate.exists():return candidate
+    return path

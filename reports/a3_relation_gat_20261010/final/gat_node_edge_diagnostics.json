@@ -1,0 +1,74 @@
+{
+  "checkpoint_sha256": "aabff8db54435dc00d23cc743755d4d641af3ee79b262917820f62df5a5b8816",
+  "input_sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2",
+  "provenance": {
+    "commit": "ce2df8c66a9ed1c2900cb70928c042636034e758",
+    "working_diff_sha256": "a701d4b52b07aa8a6964e37b4c2dad519ab414372209b7a1f9de778abd8cf4ba"
+  },
+  "definition": "Post-hoc frozen-weight reliance on public graph inputs; rules, candidate pair geometry and full BERT words held fixed. Not independently retrained variants or proof of causal training gains.",
+  "arms": {
+    "full": {
+      "samples": 2426,
+      "NE_m": 31.452566374851866,
+      "R@1/20m": 0.4192085737840066,
+      "R@4/20m": 0.6347897774113768,
+      "R@8/20m": 0.7502061005770816
+    },
+    "self": {
+      "samples": 2426,
+      "NE_m": 32.10877512706181,
+      "R@1/20m": 0.4047815333882935,
+      "R@4/20m": 0.6207749381698269,
+      "R@8/20m": 0.7403132728771641
+    },
+    "zero-edge-geometry": {
+      "samples": 2426,
+      "NE_m": 31.779209416854115,
+      "R@1/20m": 0.4171475680131904,
+      "R@4/20m": 0.6343775762572135,
+      "R@8/20m": 0.7378400659521847
+    },
+    "no-relation-links": {
+      "samples": 2426,
+      "NE_m": 31.35281763289059,
+      "R@1/20m": 0.4208573784006595,
+      "R@4/20m": 0.6343775762572135,
+      "R@8/20m": 0.7493816982687551
+    },
+    "no-physical-links": {
+      "samples": 2426,
+      "NE_m": 32.07949722176824,
+      "R@1/20m": 0.4023083264633141,
+      "R@4/20m": 0.6224237427864798,
+      "R@8/20m": 0.7407254740313273
+    },
+    "no-relation-nodes": {
+      "samples": 2426,
+      "NE_m": 31.35281763289059,
+      "R@1/20m": 0.4208573784006595,
+      "R@4/20m": 0.6343775762572135,
+      "R@8/20m": 0.7493816982687551
+    },
+    "zero-node-geometry": {
+      "samples": 2426,
+      "NE_m": 32.675631511339155,
+      "R@1/20m": 0.4023083264633141,
+      "R@4/20m": 0.6203627370156637,
+      "R@8/20m": 0.7333058532563891
+    },
+    "zero-node-names": {
+      "samples": 2426,
+      "NE_m": 37.10320149269953,
+      "R@1/20m": 0.3314097279472383,
+      "R@4/20m": 0.52679307502061,
+      "R@8/20m": 0.6578730420445177
+    },
+    "reverse-edge-direction": {
+      "samples": 2426,
+      "NE_m": 32.29364214313001,
+      "R@1/20m": 0.4097279472382523,
+      "R@4/20m": 0.6265457543281121,
+      "R@8/20m": 0.738252267106348
+    }
+  }
+}

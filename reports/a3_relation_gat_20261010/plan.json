@@ -1,0 +1,65 @@
+{
+  "status": "completed",
+  "branch": "2027-CVPR/graphnav-relational-visual-belief",
+  "selection": "Val Seen R@1, then lower NE; no Unseen tuning",
+  "E1": {
+    "seed": 0,
+    "source": "preserved a3_replicate_seed0/best.pt epoch5",
+    "optimizer": "restore AdamW moments and RNG; explicitly change LR from 2e-4 to 5e-5",
+    "batch": 16,
+    "workers": 4,
+    "precision": "BF16",
+    "epochs_to": 15,
+    "milestones": [
+      8,
+      10,
+      15
+    ],
+    "classification": "explicit reduced-LR continuation, not unchanged-training resume",
+    "seeds": [
+      0,
+      1
+    ]
+  },
+  "E2": {
+    "status": "completed",
+    "weights": [
+      0,
+      0.01,
+      0.05
+    ],
+    "constraints": "loss-only masks, reliable grounded relations; preserve all legal alternatives; never map egocentric left/right/front/behind to world directions",
+    "matched_zero_weight": "Extra relation/counterfactual forward also performed at lambda0 to match dropout RNG"
+  },
+  "E3": {
+    "status": "completed",
+    "seed": 0,
+    "batch": 16,
+    "epochs": 5,
+    "lr": 0.0002,
+    "variants": [
+      "A3",
+      "A4 full",
+      "A4 self",
+      "A4 zero physical edge geometry retaining types",
+      "A4 language relation links only plus self",
+      "A4 self plus unambiguous reliable language relation links"
+    ]
+  },
+  "closed_loop": {
+    "status": "all 12 candidates completed",
+    "controller": "original trained Trajectory/Stop; guarded-blend, threshold .3; strict compatibility/provenance required",
+    "episodes": "same fixed Seen128"
+  },
+  "forbidden": [
+    "new visual/history/active changes",
+    "overwriting source checkpoints",
+    "Unseen hyperparameter selection",
+    "using labels in inference"
+  ],
+  "historical_interrupt_note": "SIGSTOP supervisor983745 and evaluation986336; partial outputs preserved; previous uncommitted work saved in git stash",
+  "authoritative_run_status": "runs/static_final_analysis_20261010/status.json",
+  "final_report": "docs/A3_RELATION_GAT_CONTROLLED_20261010.md",
+  "final_metrics": "reports/a3_relation_gat_20261010/final/summary.json",
+  "recommended": "A3 E1 Seed1 Epoch14, original baseline frozen; do not integrate relation loss/GAT yet"
+}

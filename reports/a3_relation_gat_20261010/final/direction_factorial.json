@@ -1,0 +1,266 @@
+{
+  "samples": 237,
+  "provenance": {
+    "commit": "ce2df8c66a9ed1c2900cb70928c042636034e758",
+    "working_diff_sha256": "9d4c12429dc67dea3587b39ca1b6f6cdcb298ee20759feef7c05166fd3fd05f1"
+  },
+  "input_sha256": {
+    "original": "2a45ddea7268c3bfd93c1c68cd087086e2fbd5cf0ecdde9b5952a6f175b28088",
+    "swapped": "e2d7ffda4d3e979034f4bbc3bfb736328bac0ab00ba9af172bf069bc7241ee61"
+  },
+  "models": {
+    "A3_seed0": {
+      "checkpoint_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.6118143200874329,
+      "full_swap": {
+        "flipped_fraction": 0.3544303774833679,
+        "inverse_direction_accuracy": 0.7172995209693909,
+        "both_directions_correct": 0.3417721390724182
+      },
+      "word_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.39662444591522217,
+        "both_directions_correct": 0.012658227235078812
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.38818562030792236,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A3_seed1": {
+      "checkpoint_sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.7215189337730408,
+      "full_swap": {
+        "flipped_fraction": 0.4092826843261719,
+        "inverse_direction_accuracy": 0.6202531456947327,
+        "both_directions_correct": 0.37552741169929504
+      },
+      "word_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.28691983222961426,
+        "both_directions_correct": 0.012658227235078812
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.27848100662231445,
+        "both_directions_correct": 0.0
+      }
+    },
+    "E1_seed0": {
+      "checkpoint_sha256": "5e93e839c4cb933d933ed05e1b0dddbbfe2f14a9fea7f59f45649fdf3fb5db70",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.5274261236190796,
+      "full_swap": {
+        "flipped_fraction": 0.18565399944782257,
+        "inverse_direction_accuracy": 0.5654008388519287,
+        "both_directions_correct": 0.13924050331115723
+      },
+      "word_only": {
+        "flipped_fraction": 0.05485231801867485,
+        "inverse_direction_accuracy": 0.502109706401825,
+        "both_directions_correct": 0.04219409078359604
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.47257381677627563,
+        "both_directions_correct": 0.0
+      }
+    },
+    "E1_seed1": {
+      "checkpoint_sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.6751054525375366,
+      "full_swap": {
+        "flipped_fraction": 0.4514767825603485,
+        "inverse_direction_accuracy": 0.6497889757156372,
+        "both_directions_correct": 0.38818562030792236
+      },
+      "word_only": {
+        "flipped_fraction": 0.03375527262687683,
+        "inverse_direction_accuracy": 0.3164556920528412,
+        "both_directions_correct": 0.012658227235078812
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.3248944878578186,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_full": {
+      "checkpoint_sha256": "aabff8db54435dc00d23cc743755d4d641af3ee79b262917820f62df5a5b8816",
+      "variant": "gat",
+      "control": "full",
+      "original_direction_accuracy": 0.6877636909484863,
+      "full_swap": {
+        "flipped_fraction": 0.455696165561676,
+        "inverse_direction_accuracy": 0.7679324746131897,
+        "both_directions_correct": 0.455696165561676
+      },
+      "word_only": {
+        "flipped_fraction": 0.008438818156719208,
+        "inverse_direction_accuracy": 0.3206750750541687,
+        "both_directions_correct": 0.008438818156719208
+      },
+      "graph_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.2953586280345917,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_self": {
+      "checkpoint_sha256": "103953e13ad933676906daa5d5222066ff37f5d90ab9bfeca42e9f06c322eea0",
+      "variant": "gat",
+      "control": "self",
+      "original_direction_accuracy": 0.5991560816764832,
+      "full_swap": {
+        "flipped_fraction": 0.25738394260406494,
+        "inverse_direction_accuracy": 0.6497889757156372,
+        "both_directions_correct": 0.25316452980041504
+      },
+      "word_only": {
+        "flipped_fraction": 0.05063290894031525,
+        "inverse_direction_accuracy": 0.40084385871887207,
+        "both_directions_correct": 0.025316454470157623
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.40084385871887207,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_zero_geometry": {
+      "checkpoint_sha256": "a998e7012b6826468d07086e8c9f082e5e5281caa1975d989d1de0c7914df278",
+      "variant": "gat",
+      "control": "zero-geometry",
+      "original_direction_accuracy": 0.658227801322937,
+      "full_swap": {
+        "flipped_fraction": 0.430379718542099,
+        "inverse_direction_accuracy": 0.7383965849876404,
+        "both_directions_correct": 0.4135020971298218
+      },
+      "word_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.3417721390724182,
+        "both_directions_correct": 0.008438818156719208
+      },
+      "graph_only": {
+        "flipped_fraction": 0.02109704539179802,
+        "inverse_direction_accuracy": 0.3206750750541687,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_relation": {
+      "checkpoint_sha256": "d51f2496a7024f886add25f601483cc35132110f232d96bbb929864729611ece",
+      "variant": "gat",
+      "control": "relation",
+      "original_direction_accuracy": 0.7848100662231445,
+      "full_swap": {
+        "flipped_fraction": 0.5864978432655334,
+        "inverse_direction_accuracy": 0.8016877174377441,
+        "both_directions_correct": 0.5864978432655334
+      },
+      "word_only": {
+        "flipped_fraction": 0.02109704539179802,
+        "inverse_direction_accuracy": 0.2194092720746994,
+        "both_directions_correct": 0.012658227235078812
+      },
+      "graph_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.19831222295761108,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A3_relation000": {
+      "checkpoint_sha256": "dc3fa17d09f7aa7314373b8e25292de44c95a707b483afca0ebdabf06f6ae1a9",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.6202531456947327,
+      "full_swap": {
+        "flipped_fraction": 0.3164556920528412,
+        "inverse_direction_accuracy": 0.6708860397338867,
+        "both_directions_correct": 0.3037974536418915
+      },
+      "word_only": {
+        "flipped_fraction": 0.05063290894031525,
+        "inverse_direction_accuracy": 0.37130799889564514,
+        "both_directions_correct": 0.02109704539179802
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.37974682450294495,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A3_relation001": {
+      "checkpoint_sha256": "35d4399cf20710cef6cae3245ccb54079c30ec9840b176555c1c31d4affb064f",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.6497889757156372,
+      "full_swap": {
+        "flipped_fraction": 0.37974682450294495,
+        "inverse_direction_accuracy": 0.7046413421630859,
+        "both_directions_correct": 0.36708858609199524
+      },
+      "word_only": {
+        "flipped_fraction": 0.037974681705236435,
+        "inverse_direction_accuracy": 0.3544303774833679,
+        "both_directions_correct": 0.02109704539179802
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.350210964679718,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A3_relation005": {
+      "checkpoint_sha256": "7ece3f6bb2000d91b9d993f1197f9b534dd66fe0b14fb541f9da2d2f7c241a7e",
+      "variant": "geometry",
+      "control": "full",
+      "original_direction_accuracy": 0.7257383465766907,
+      "full_swap": {
+        "flipped_fraction": 0.49367085099220276,
+        "inverse_direction_accuracy": 0.7594936490058899,
+        "both_directions_correct": 0.48945146799087524
+      },
+      "word_only": {
+        "flipped_fraction": 0.029535863548517227,
+        "inverse_direction_accuracy": 0.27848100662231445,
+        "both_directions_correct": 0.016877636313438416
+      },
+      "graph_only": {
+        "flipped_fraction": 0.0,
+        "inverse_direction_accuracy": 0.27426159381866455,
+        "both_directions_correct": 0.0
+      }
+    },
+    "A4_reliable_relation": {
+      "checkpoint_sha256": "78c1cdd885d16ddc3c9bcd594b433c2952aa7a6723e18d911c39012f4b0e1f27",
+      "variant": "gat",
+      "control": "reliable-relation",
+      "original_direction_accuracy": 0.7341771721839905,
+      "full_swap": {
+        "flipped_fraction": 0.46413499116897583,
+        "inverse_direction_accuracy": 0.7299577593803406,
+        "both_directions_correct": 0.46413499116897583
+      },
+      "word_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.27426159381866455,
+        "both_directions_correct": 0.012658227235078812
+      },
+      "graph_only": {
+        "flipped_fraction": 0.016877636313438416,
+        "inverse_direction_accuracy": 0.25738394260406494,
+        "both_directions_correct": 0.004219409078359604
+      }
+    }
+  },
+  "note": "Controlled synthetic cardinal labels. Expected-probability position side, not real target Recall or SR. Word-only fixes original geometry/rules/names; graph-only fixes original BERT tokens and explicit rule features, changes parsed graph/name embeddings. Full swap changes entire public pipeline."
+}

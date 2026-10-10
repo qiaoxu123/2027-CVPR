@@ -18,6 +18,7 @@ from graphnav.full_localization import FullTokenGeometryLocalizer
 from graphnav.static_localization import static_recall
 from graphnav.token_language import FrozenBERTTokens
 from graphnav.checkpointing import file_sha256, provenance
+from graphnav.static_controls import graph_control
 
 
 def checkpoint_model(state, device):
@@ -25,6 +26,7 @@ def checkpoint_model(state, device):
     if 'args' not in state:raise ValueError('counterfactual checkpoint architecture is missing')
     model=new_model(SimpleNamespace(**state['args']),device).eval()
     model.load_state_dict(state['model'],strict=True)
+    model.static_graph_control=state['args'].get('graph_control','full')
     return model
 
 
@@ -39,7 +41,7 @@ def write_rows(path, rows):
     path.write_text("".join(json.dumps(r)+"\n" for r in rows))
 
 
-def predict(model, rows, path, encoder, variant="geometry", capacity=16):
+def predict(model, rows, path, encoder, variant="geometry", capacity=16, control="full"):
     write_rows(path, rows)
     dataset = FullCandidateDataset(path, grid_size=28,max_landmarks=capacity,max_roads=0,max_relations=8)
     loader = DataLoader(dataset,batch_size=32,num_workers=4,collate_fn=collate_full)
@@ -48,6 +50,7 @@ def predict(model, rows, path, encoder, variant="geometry", capacity=16):
     with torch.no_grad():
         for batch in loader:
             x,t,m,n = _batch_inputs(batch,encoder,torch.device("cuda"),variant)
+            x=graph_control(x,getattr(model,'static_graph_control',control) if variant=='gat' else 'full')
             with torch.autocast("cuda",dtype=torch.bfloat16):
                 field = model(x,variant=variant,tokens=t,token_mask=m,node_emb=n)
             logits=field.belief_logits.float()
@@ -113,7 +116,7 @@ def main():
         state=torch.load(path,map_location='cpu',weights_only=True)
         model=checkpoint_model(state,torch.device('cuda'))
         encoder=FrozenBERTTokens(name=state['args']['text_backbone'],device='cuda',max_length=state['args'].get('max_text_length',96))
-        for name,variant in [(label,'geometry')]+([('rules','rules')] if label==args.checkpoints[0].split('=')[0] else []):
+        for name,variant in [(label,state.get('variant','geometry'))]+([('rules','rules')] if label==args.checkpoints[0].split('=')[0] else []):
             old,xy,anchor,om=predict(model,original,out/'synthetic_original.jsonl',encoder,variant,1)
             new,newxy,_,nm=predict(model,swapped,out/'synthetic_swapped.jsonl',encoder,variant,1)
             a,_,_,am=predict(model,eligible,out/'real_original.jsonl',encoder,variant)

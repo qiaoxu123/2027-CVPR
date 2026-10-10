@@ -1,0 +1,1854 @@
+{
+  "models": {
+    "A3_seed0": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed0/best.pt",
+        "checkpoint_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.026119065107832,
+        "NE_m": 31.52739906311035,
+        "R@1/20m": 0.4089035391807556,
+        "R@4/20m": 0.6380873918533325,
+        "R@8/20m": 0.7506182789802551
+      },
+      "config": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "runs/a3_replicate_seed0",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "provenance": {
+        "commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706",
+        "working_diff_sha256": "dd9cbb9181a74141cd982c126a969e5f0d559638de706defac1bd975b75de403"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4140625,
+        "OSR": 0.46875,
+        "SPL": 0.40513508443525836,
+        "NE": 30.114536767179708,
+        "nDTW": 0.2921857174918986,
+        "sDTW": 0.1312990302028333,
+        "steps": 8.4765625,
+        "path_length": 206.5603614953107,
+        "policy_stop": 0.9765625,
+        "inference_ms": 9.132817581810556,
+        "episodes": 128,
+        "False_Stop_Rate": 0.584,
+        "false_stop_episode_fraction": 0.5703125,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.6118143200874329,
+        "full_swap": {
+          "flipped_fraction": 0.3544303774833679,
+          "inverse_direction_accuracy": 0.7172995209693909,
+          "both_directions_correct": 0.3417721390724182
+        },
+        "word_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.39662444591522217,
+          "both_directions_correct": 0.012658227235078812
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.38818562030792236,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A3_seed0_predictions.jsonl",
+      "raw_closedloop_predictions": "runs/static_selected_seen128_20261010/seed0_epoch5/predictions.jsonl"
+    },
+    "A3_seed1": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed1/best.pt",
+        "checkpoint_sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.037106357127895,
+        "NE_m": 30.8984317779541,
+        "R@1/20m": 0.4253915846347809,
+        "R@4/20m": 0.6442704200744629,
+        "R@8/20m": 0.754740297794342
+      },
+      "config": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 1,
+        "output": "runs/a3_replicate_seed1",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "provenance": {
+        "commit": "c8beace025e45a98bdd0376a3bd06f05b9e93706",
+        "working_diff_sha256": "dd9cbb9181a74141cd982c126a969e5f0d559638de706defac1bd975b75de403"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.40625,
+        "OSR": 0.5,
+        "SPL": 0.4009064432132242,
+        "NE": 29.647140891239566,
+        "nDTW": 0.2823738055097226,
+        "sDTW": 0.13475349859266716,
+        "steps": 8.75,
+        "path_length": 210.5549315692054,
+        "policy_stop": 0.9609375,
+        "inference_ms": 6.9596308552802455,
+        "episodes": 128,
+        "False_Stop_Rate": 0.6016260162601627,
+        "false_stop_episode_fraction": 0.578125,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.7215189337730408,
+        "full_swap": {
+          "flipped_fraction": 0.4092826843261719,
+          "inverse_direction_accuracy": 0.6202531456947327,
+          "both_directions_correct": 0.37552741169929504
+        },
+        "word_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.28691983222961426,
+          "both_directions_correct": 0.012658227235078812
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.27848100662231445,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A3_seed1_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A3_seed1/predictions.jsonl"
+    },
+    "E1_seed0": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E1_seed0_lr5e5_20261010/best.pt",
+        "checkpoint_sha256": "5e93e839c4cb933d933ed05e1b0dddbbfe2f14a9fea7f59f45649fdf3fb5db70",
+        "epoch": 14,
+        "samples": 2426,
+        "loss": 3.974314048087803,
+        "NE_m": 29.725706100463867,
+        "R@1/20m": 0.46619951725006104,
+        "R@4/20m": 0.6747732758522034,
+        "R@8/20m": 0.780296802520752
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 15,
+        "rgb_epochs": 3,
+        "lr": 5e-05,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "runs/static_E1_seed0_lr5e5_20261010",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "geometry",
+        "graph_control": "full",
+        "continue_from": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed0/best.pt"
+      },
+      "provenance": {
+        "commit": "5b4c64d057483ec2439f018bbe155e9231b839ec",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4375,
+        "OSR": 0.484375,
+        "SPL": 0.43063025487050843,
+        "NE": 30.31225495722355,
+        "nDTW": 0.2989399488916564,
+        "sDTW": 0.1457987467962115,
+        "steps": 7.84375,
+        "path_length": 206.68946812373804,
+        "policy_stop": 1.0,
+        "inference_ms": 9.4050181619804,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5625,
+        "false_stop_episode_fraction": 0.5625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "5e93e839c4cb933d933ed05e1b0dddbbfe2f14a9fea7f59f45649fdf3fb5db70",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.5274261236190796,
+        "full_swap": {
+          "flipped_fraction": 0.18565399944782257,
+          "inverse_direction_accuracy": 0.5654008388519287,
+          "both_directions_correct": 0.13924050331115723
+        },
+        "word_only": {
+          "flipped_fraction": 0.05485231801867485,
+          "inverse_direction_accuracy": 0.502109706401825,
+          "both_directions_correct": 0.04219409078359604
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.47257381677627563,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/E1_seed0_predictions.jsonl",
+      "raw_closedloop_predictions": "runs/static_selected_seen128_20261010/E1_best/predictions.jsonl"
+    },
+    "E1_seed1": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+        "checkpoint_sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+        "epoch": 14,
+        "samples": 2426,
+        "loss": 3.9374962619583367,
+        "NE_m": 29.217445373535156,
+        "R@1/20m": 0.48474857211112976,
+        "R@4/20m": 0.6863149404525757,
+        "R@8/20m": 0.780296802520752
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 15,
+        "rgb_epochs": 3,
+        "lr": 5e-05,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 1,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/E1_seed1",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "geometry",
+        "graph_control": "full",
+        "continue_from": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed1/best.pt",
+        "relation_weight": 0.0,
+        "relation_auxiliary": false,
+        "relation_supervision_version": null
+      },
+      "provenance": {
+        "commit": "ce2df8c66a9ed1c2900cb70928c042636034e758",
+        "working_diff_sha256": "bd53698e88757db5274c428cac5ac38801ece8c80a5c4ee8881be338f79e0048"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        },
+        "continue_from": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed1/best.pt",
+          "sha256": "96082404f5a1899c438528bfc6f5c140199f9d30118913c49fbeeee5ed5d94be"
+        }
+      },
+      "closedloop": {
+        "SR": 0.484375,
+        "OSR": 0.5625,
+        "SPL": 0.47412989304098,
+        "NE": 28.68837120364637,
+        "nDTW": 0.2961169029727222,
+        "sDTW": 0.16148116429642653,
+        "steps": 9.28125,
+        "path_length": 210.3412934269466,
+        "policy_stop": 0.921875,
+        "inference_ms": 7.093602436273176,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5084745762711864,
+        "false_stop_episode_fraction": 0.46875,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.6751054525375366,
+        "full_swap": {
+          "flipped_fraction": 0.4514767825603485,
+          "inverse_direction_accuracy": 0.6497889757156372,
+          "both_directions_correct": 0.38818562030792236
+        },
+        "word_only": {
+          "flipped_fraction": 0.03375527262687683,
+          "inverse_direction_accuracy": 0.3164556920528412,
+          "both_directions_correct": 0.012658227235078812
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.3248944878578186,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/E1_seed1_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/E1_seed1/predictions.jsonl"
+    },
+    "A4_full": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_full/best.pt",
+        "checkpoint_sha256": "aabff8db54435dc00d23cc743755d4d641af3ee79b262917820f62df5a5b8816",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.01620144344811,
+        "NE_m": 31.45256805419922,
+        "R@1/20m": 0.4192085862159729,
+        "R@4/20m": 0.634789764881134,
+        "R@8/20m": 0.7502061128616333
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_full",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "gat",
+        "graph_control": "full",
+        "continue_from": null,
+        "relation_weight": 0.0
+      },
+      "provenance": {
+        "commit": "9cd9ea626ce5ff6936a06cd4161bcb98bbd286d8",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4375,
+        "OSR": 0.4765625,
+        "SPL": 0.429326194087247,
+        "NE": 29.980779969286274,
+        "nDTW": 0.29661528702520146,
+        "sDTW": 0.15305901253246934,
+        "steps": 8.3671875,
+        "path_length": 207.8113378474316,
+        "policy_stop": 1.0,
+        "inference_ms": 7.559374735046498,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5625,
+        "false_stop_episode_fraction": 0.5625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "aabff8db54435dc00d23cc743755d4d641af3ee79b262917820f62df5a5b8816",
+        "variant": "gat",
+        "control": "full",
+        "original_direction_accuracy": 0.6877636909484863,
+        "full_swap": {
+          "flipped_fraction": 0.455696165561676,
+          "inverse_direction_accuracy": 0.7679324746131897,
+          "both_directions_correct": 0.455696165561676
+        },
+        "word_only": {
+          "flipped_fraction": 0.008438818156719208,
+          "inverse_direction_accuracy": 0.3206750750541687,
+          "both_directions_correct": 0.008438818156719208
+        },
+        "graph_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.2953586280345917,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A4_full_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A4_full/predictions.jsonl"
+    },
+    "A4_self": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_self/best.pt",
+        "checkpoint_sha256": "103953e13ad933676906daa5d5222066ff37f5d90ab9bfeca42e9f06c322eea0",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.028365866369388,
+        "NE_m": 30.90215301513672,
+        "R@1/20m": 0.4266282021999359,
+        "R@4/20m": 0.6323165893554688,
+        "R@8/20m": 0.7423743009567261
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_self",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "gat",
+        "graph_control": "self",
+        "continue_from": null,
+        "relation_weight": 0.0
+      },
+      "provenance": {
+        "commit": "f89e8d6eca53235f0a4b2ca37f91e00448072771",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4140625,
+        "OSR": 0.453125,
+        "SPL": 0.404544344296677,
+        "NE": 31.001942398466937,
+        "nDTW": 0.2956394975028453,
+        "sDTW": 0.13672394915882885,
+        "steps": 7.859375,
+        "path_length": 205.86824727542503,
+        "policy_stop": 1.0,
+        "inference_ms": 7.30538570678264,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5859375,
+        "false_stop_episode_fraction": 0.5859375,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "103953e13ad933676906daa5d5222066ff37f5d90ab9bfeca42e9f06c322eea0",
+        "variant": "gat",
+        "control": "self",
+        "original_direction_accuracy": 0.5991560816764832,
+        "full_swap": {
+          "flipped_fraction": 0.25738394260406494,
+          "inverse_direction_accuracy": 0.6497889757156372,
+          "both_directions_correct": 0.25316452980041504
+        },
+        "word_only": {
+          "flipped_fraction": 0.05063290894031525,
+          "inverse_direction_accuracy": 0.40084385871887207,
+          "both_directions_correct": 0.025316454470157623
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.40084385871887207,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A4_self_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A4_self/predictions.jsonl"
+    },
+    "A4_zero_geometry": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_zero_geometry/best.pt",
+        "checkpoint_sha256": "a998e7012b6826468d07086e8c9f082e5e5281caa1975d989d1de0c7914df278",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.023054464533618,
+        "NE_m": 31.09817123413086,
+        "R@1/20m": 0.42085736989974976,
+        "R@4/20m": 0.6360263824462891,
+        "R@8/20m": 0.7506182789802551
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_zero_geometry",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "gat",
+        "graph_control": "zero-geometry",
+        "continue_from": null,
+        "relation_weight": 0.0,
+        "relation_auxiliary": false
+      },
+      "provenance": {
+        "commit": "e3389079caae4f804d89dff3377c4eb1a039046a",
+        "working_diff_sha256": "19572065b426ebe531cd2eb78e0d4fd1f4fd58f41be007b182517a4135cef4b0"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.421875,
+        "OSR": 0.4765625,
+        "SPL": 0.41161079577401116,
+        "NE": 30.35774724895556,
+        "nDTW": 0.2977012308738678,
+        "sDTW": 0.1535822852922885,
+        "steps": 8.28125,
+        "path_length": 205.9852094998362,
+        "policy_stop": 0.984375,
+        "inference_ms": 7.324502117088189,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5714285714285714,
+        "false_stop_episode_fraction": 0.5625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "a998e7012b6826468d07086e8c9f082e5e5281caa1975d989d1de0c7914df278",
+        "variant": "gat",
+        "control": "zero-geometry",
+        "original_direction_accuracy": 0.658227801322937,
+        "full_swap": {
+          "flipped_fraction": 0.430379718542099,
+          "inverse_direction_accuracy": 0.7383965849876404,
+          "both_directions_correct": 0.4135020971298218
+        },
+        "word_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.3417721390724182,
+          "both_directions_correct": 0.008438818156719208
+        },
+        "graph_only": {
+          "flipped_fraction": 0.02109704539179802,
+          "inverse_direction_accuracy": 0.3206750750541687,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A4_zero_geometry_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A4_zero_geometry/predictions.jsonl"
+    },
+    "A4_relation": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_relation/best.pt",
+        "checkpoint_sha256": "d51f2496a7024f886add25f601483cc35132110f232d96bbb929864729611ece",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.014877147155661,
+        "NE_m": 30.948625564575195,
+        "R@1/20m": 0.4187963604927063,
+        "R@4/20m": 0.6364386081695557,
+        "R@8/20m": 0.7485572695732117
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_relation",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_E2_E3_20261010/A4_relation/last.pt",
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "gat",
+        "graph_control": "relation",
+        "continue_from": null,
+        "relation_weight": 0.0,
+        "relation_auxiliary": false,
+        "relation_supervision_version": null
+      },
+      "provenance": {
+        "commit": "5d6c8b1703d322968ce7eff133f3172e995cc9c7",
+        "working_diff_sha256": "5fe61a098bc48fdce0b86a4de110c839df6fc04f8b7bd8167664a4ed1f26b0d4"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4375,
+        "OSR": 0.4765625,
+        "SPL": 0.42683523315216915,
+        "NE": 30.90386862122402,
+        "nDTW": 0.3006363474002986,
+        "sDTW": 0.1516243241431381,
+        "steps": 8.109375,
+        "path_length": 207.19287823971501,
+        "policy_stop": 0.984375,
+        "inference_ms": 7.638562708213764,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5555555555555556,
+        "false_stop_episode_fraction": 0.546875,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "d51f2496a7024f886add25f601483cc35132110f232d96bbb929864729611ece",
+        "variant": "gat",
+        "control": "relation",
+        "original_direction_accuracy": 0.7848100662231445,
+        "full_swap": {
+          "flipped_fraction": 0.5864978432655334,
+          "inverse_direction_accuracy": 0.8016877174377441,
+          "both_directions_correct": 0.5864978432655334
+        },
+        "word_only": {
+          "flipped_fraction": 0.02109704539179802,
+          "inverse_direction_accuracy": 0.2194092720746994,
+          "both_directions_correct": 0.012658227235078812
+        },
+        "graph_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.19831222295761108,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A4_relation_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A4_relation/predictions.jsonl"
+    },
+    "A3_relation000": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_completed_20261010/A3_relation000/best.pt",
+        "checkpoint_sha256": "dc3fa17d09f7aa7314373b8e25292de44c95a707b483afca0ebdabf06f6ae1a9",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.008462395239545,
+        "NE_m": 31.063846588134766,
+        "R@1/20m": 0.4295136034488678,
+        "R@4/20m": 0.6405605673789978,
+        "R@8/20m": 0.7559769153594971
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_completed_20261010/A3_relation000",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "geometry",
+        "graph_control": "full",
+        "continue_from": null,
+        "relation_weight": 0.0,
+        "relation_auxiliary": true,
+        "relation_supervision_version": "grounded-cardinal-of-v2"
+      },
+      "provenance": {
+        "commit": "5d6c8b1703d322968ce7eff133f3172e995cc9c7",
+        "working_diff_sha256": "dbc31cfe674ca6729bb79ce33fc3e86f80b5dccac9ad55bf4cfdea1641b0041c"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4375,
+        "OSR": 0.46875,
+        "SPL": 0.42807785686137867,
+        "NE": 29.513548038262265,
+        "nDTW": 0.293812373791133,
+        "sDTW": 0.1367576631357471,
+        "steps": 8.015625,
+        "path_length": 207.44322249639623,
+        "policy_stop": 0.9921875,
+        "inference_ms": 7.305271352875358,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5590551181102362,
+        "false_stop_episode_fraction": 0.5546875,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "dc3fa17d09f7aa7314373b8e25292de44c95a707b483afca0ebdabf06f6ae1a9",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.6202531456947327,
+        "full_swap": {
+          "flipped_fraction": 0.3164556920528412,
+          "inverse_direction_accuracy": 0.6708860397338867,
+          "both_directions_correct": 0.3037974536418915
+        },
+        "word_only": {
+          "flipped_fraction": 0.05063290894031525,
+          "inverse_direction_accuracy": 0.37130799889564514,
+          "both_directions_correct": 0.02109704539179802
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.37974682450294495,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A3_relation000_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A3_relation000/predictions.jsonl"
+    },
+    "A3_relation001": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_completed_20261010/A3_relation001/best.pt",
+        "checkpoint_sha256": "35d4399cf20710cef6cae3245ccb54079c30ec9840b176555c1c31d4affb064f",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.010327786133492,
+        "NE_m": 31.10460662841797,
+        "R@1/20m": 0.42497938871383667,
+        "R@4/20m": 0.638911783695221,
+        "R@8/20m": 0.7539159059524536
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_completed_20261010/A3_relation001",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "geometry",
+        "graph_control": "full",
+        "continue_from": null,
+        "relation_weight": 0.01,
+        "relation_auxiliary": true,
+        "relation_supervision_version": "grounded-cardinal-of-v2"
+      },
+      "provenance": {
+        "commit": "cf55a074a25ef88ece1ec2401c4bbde96a41a4c5",
+        "working_diff_sha256": "3e03964caab4e21f9748985cc0e6694ef694fcf94749d4fa2ad192065c211aa3"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4296875,
+        "OSR": 0.453125,
+        "SPL": 0.4208736826461831,
+        "NE": 30.339303357161405,
+        "nDTW": 0.29180858797616877,
+        "sDTW": 0.13391957250962744,
+        "steps": 7.984375,
+        "path_length": 206.96109353530386,
+        "policy_stop": 0.9921875,
+        "inference_ms": 7.179689233377323,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5669291338582677,
+        "false_stop_episode_fraction": 0.5625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "35d4399cf20710cef6cae3245ccb54079c30ec9840b176555c1c31d4affb064f",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.6497889757156372,
+        "full_swap": {
+          "flipped_fraction": 0.37974682450294495,
+          "inverse_direction_accuracy": 0.7046413421630859,
+          "both_directions_correct": 0.36708858609199524
+        },
+        "word_only": {
+          "flipped_fraction": 0.037974681705236435,
+          "inverse_direction_accuracy": 0.3544303774833679,
+          "both_directions_correct": 0.02109704539179802
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.350210964679718,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A3_relation001_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A3_relation001/predictions.jsonl"
+    },
+    "A3_relation005": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_completed_20261010/A3_relation005/best.pt",
+        "checkpoint_sha256": "7ece3f6bb2000d91b9d993f1197f9b534dd66fe0b14fb541f9da2d2f7c241a7e",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.02741816372097,
+        "NE_m": 31.430641174316406,
+        "R@1/20m": 0.4192085862159729,
+        "R@4/20m": 0.6384996175765991,
+        "R@8/20m": 0.7514427304267883
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_completed_20261010/A3_relation005",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "geometry",
+        "graph_control": "full",
+        "continue_from": null,
+        "relation_weight": 0.05,
+        "relation_auxiliary": true,
+        "relation_supervision_version": "grounded-cardinal-of-v2"
+      },
+      "provenance": {
+        "commit": "cf55a074a25ef88ece1ec2401c4bbde96a41a4c5",
+        "working_diff_sha256": "3e03964caab4e21f9748985cc0e6694ef694fcf94749d4fa2ad192065c211aa3"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.40625,
+        "OSR": 0.453125,
+        "SPL": 0.3980316769567942,
+        "NE": 30.44921851720151,
+        "nDTW": 0.2906336252070182,
+        "sDTW": 0.12782719078211008,
+        "steps": 7.8046875,
+        "path_length": 206.05626117023445,
+        "policy_stop": 1.0,
+        "inference_ms": 7.363578301442084,
+        "episodes": 128,
+        "False_Stop_Rate": 0.59375,
+        "false_stop_episode_fraction": 0.59375,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "7ece3f6bb2000d91b9d993f1197f9b534dd66fe0b14fb541f9da2d2f7c241a7e",
+        "variant": "geometry",
+        "control": "full",
+        "original_direction_accuracy": 0.7257383465766907,
+        "full_swap": {
+          "flipped_fraction": 0.49367085099220276,
+          "inverse_direction_accuracy": 0.7594936490058899,
+          "both_directions_correct": 0.48945146799087524
+        },
+        "word_only": {
+          "flipped_fraction": 0.029535863548517227,
+          "inverse_direction_accuracy": 0.27848100662231445,
+          "both_directions_correct": 0.016877636313438416
+        },
+        "graph_only": {
+          "flipped_fraction": 0.0,
+          "inverse_direction_accuracy": 0.27426159381866455,
+          "both_directions_correct": 0.0
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A3_relation005_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A3_relation005/predictions.jsonl"
+    },
+    "A4_reliable_relation": {
+      "static": {
+        "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/A4_reliable_relation/best.pt",
+        "checkpoint_sha256": "78c1cdd885d16ddc3c9bcd594b433c2952aa7a6723e18d911c39012f4b0e1f27",
+        "epoch": 5,
+        "samples": 2426,
+        "loss": 4.017258595358903,
+        "NE_m": 31.122652053833008,
+        "R@1/20m": 0.4233305752277374,
+        "R@4/20m": 0.6331409811973572,
+        "R@8/20m": 0.7436108589172363
+      },
+      "config": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/A4_reliable_relation",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "gat",
+        "graph_control": "reliable-relation",
+        "continue_from": null,
+        "relation_weight": 0.0,
+        "relation_auxiliary": false,
+        "relation_supervision_version": null
+      },
+      "provenance": {
+        "commit": "ce2df8c66a9ed1c2900cb70928c042636034e758",
+        "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fingerprint": {
+        "template": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+          "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+        },
+        "train": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+          "sha256": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c"
+        },
+        "seen": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+          "sha256": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+        },
+        "train_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+          "sha256": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa"
+        },
+        "seen_bert_cache": {
+          "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+          "sha256": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+        }
+      },
+      "closedloop": {
+        "SR": 0.4375,
+        "OSR": 0.4765625,
+        "SPL": 0.4285874268913364,
+        "NE": 31.19817611754224,
+        "nDTW": 0.29675336936549107,
+        "sDTW": 0.14841395312874364,
+        "steps": 7.8828125,
+        "path_length": 205.906445699708,
+        "policy_stop": 1.0,
+        "inference_ms": 7.655656908801184,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5625,
+        "false_stop_episode_fraction": 0.5625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+      "direction": {
+        "checkpoint_sha256": "78c1cdd885d16ddc3c9bcd594b433c2952aa7a6723e18d911c39012f4b0e1f27",
+        "variant": "gat",
+        "control": "reliable-relation",
+        "original_direction_accuracy": 0.7341771721839905,
+        "full_swap": {
+          "flipped_fraction": 0.46413499116897583,
+          "inverse_direction_accuracy": 0.7299577593803406,
+          "both_directions_correct": 0.46413499116897583
+        },
+        "word_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.27426159381866455,
+          "both_directions_correct": 0.012658227235078812
+        },
+        "graph_only": {
+          "flipped_fraction": 0.016877636313438416,
+          "inverse_direction_accuracy": 0.25738394260406494,
+          "both_directions_correct": 0.004219409078359604
+        }
+      },
+      "raw_static_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/static_seen/A4_reliable_relation_predictions.jsonl",
+      "raw_closedloop_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/seen128/A4_reliable_relation/predictions.jsonl"
+    }
+  },
+  "paired_static": {
+    "A3_seed0": {
+      "n": 2426,
+      "delta": 0.0,
+      "improved": 0,
+      "regressed": 0,
+      "map_bootstrap_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "A3_seed1": {
+      "n": 2426,
+      "delta": 0.016488046166529265,
+      "improved": 288,
+      "regressed": 248,
+      "map_bootstrap_95ci": [
+        -0.009711468277253795,
+        0.04136500245706134
+      ]
+    },
+    "E1_seed0": {
+      "n": 2426,
+      "delta": 0.0572959604286892,
+      "improved": 313,
+      "regressed": 174,
+      "map_bootstrap_95ci": [
+        0.03713862446168121,
+        0.07919724846378065
+      ]
+    },
+    "E1_seed1": {
+      "n": 2426,
+      "delta": 0.05935696619950536,
+      "improved": 303,
+      "regressed": 159,
+      "map_bootstrap_95ci": [
+        0.03299343777892713,
+        0.08516697274308911
+      ]
+    },
+    "A4_full": {
+      "n": 2426,
+      "delta": 0.010305028854080791,
+      "improved": 181,
+      "regressed": 156,
+      "map_bootstrap_95ci": [
+        -0.0023202125436515885,
+        0.02273209600246949
+      ]
+    },
+    "A4_self": {
+      "n": 2426,
+      "delta": 0.01772464962901896,
+      "improved": 200,
+      "regressed": 157,
+      "map_bootstrap_95ci": [
+        -0.002277758440654368,
+        0.03905394679741446
+      ]
+    },
+    "A4_zero_geometry": {
+      "n": 2426,
+      "delta": 0.011953833470733718,
+      "improved": 194,
+      "regressed": 165,
+      "map_bootstrap_95ci": [
+        -0.004384757748813512,
+        0.03005629073671735
+      ]
+    },
+    "A4_relation": {
+      "n": 2426,
+      "delta": 0.00989282769991756,
+      "improved": 191,
+      "regressed": 167,
+      "map_bootstrap_95ci": [
+        -0.00854952252268913,
+        0.02786055506244037
+      ]
+    },
+    "A3_relation000": {
+      "n": 2426,
+      "delta": 0.0,
+      "improved": 0,
+      "regressed": 0,
+      "map_bootstrap_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "A3_relation001": {
+      "n": 2426,
+      "delta": -0.004534212695795548,
+      "improved": 42,
+      "regressed": 53,
+      "map_bootstrap_95ci": [
+        -0.01042649638568793,
+        0.0013582194740524294
+      ]
+    },
+    "A3_relation005": {
+      "n": 2426,
+      "delta": -0.010305028854080791,
+      "improved": 98,
+      "regressed": 123,
+      "map_bootstrap_95ci": [
+        -0.025731461539202662,
+        0.00581896109229031
+      ]
+    },
+    "A4_reliable_relation": {
+      "n": 2426,
+      "delta": 0.014427040395713108,
+      "improved": 185,
+      "regressed": 150,
+      "map_bootstrap_95ci": [
+        -0.0029076376145224336,
+        0.03311174799064298
+      ]
+    }
+  },
+  "paired_closedloop": {
+    "A3_seed0": {
+      "n": 128,
+      "delta": 0.0,
+      "improved": 0,
+      "regressed": 0,
+      "map_bootstrap_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "A3_seed1": {
+      "n": 128,
+      "delta": -0.0078125,
+      "improved": 12,
+      "regressed": 13,
+      "map_bootstrap_95ci": [
+        -0.08276675731882897,
+        0.05737704918032787
+      ]
+    },
+    "E1_seed0": {
+      "n": 128,
+      "delta": 0.0234375,
+      "improved": 14,
+      "regressed": 11,
+      "map_bootstrap_95ci": [
+        -0.07768467707893625,
+        0.11009535505309541
+      ]
+    },
+    "E1_seed1": {
+      "n": 128,
+      "delta": 0.078125,
+      "improved": 18,
+      "regressed": 8,
+      "map_bootstrap_95ci": [
+        0.02468757100658941,
+        0.15127363445378142
+      ]
+    },
+    "A4_full": {
+      "n": 128,
+      "delta": 0.0234375,
+      "improved": 8,
+      "regressed": 5,
+      "map_bootstrap_95ci": [
+        -0.02631578947368421,
+        0.07936958874458871
+      ]
+    },
+    "A4_self": {
+      "n": 128,
+      "delta": 0.0,
+      "improved": 9,
+      "regressed": 9,
+      "map_bootstrap_95ci": [
+        -0.08035714285714286,
+        0.07534966041211001
+      ]
+    },
+    "A4_zero_geometry": {
+      "n": 128,
+      "delta": 0.0078125,
+      "improved": 8,
+      "regressed": 7,
+      "map_bootstrap_95ci": [
+        -0.043478260869565216,
+        0.06731672932330822
+      ]
+    },
+    "A4_relation": {
+      "n": 128,
+      "delta": 0.0234375,
+      "improved": 9,
+      "regressed": 6,
+      "map_bootstrap_95ci": [
+        -0.040020408163265304,
+        0.07609317955526052
+      ]
+    },
+    "A3_relation000": {
+      "n": 128,
+      "delta": 0.0,
+      "improved": 0,
+      "regressed": 0,
+      "map_bootstrap_95ci": [
+        0.0,
+        0.0
+      ]
+    },
+    "A3_relation001": {
+      "n": 128,
+      "delta": -0.0078125,
+      "improved": 0,
+      "regressed": 1,
+      "map_bootstrap_95ci": [
+        -0.029133352370074243,
+        0.0
+      ]
+    },
+    "A3_relation005": {
+      "n": 128,
+      "delta": -0.03125,
+      "improved": 1,
+      "regressed": 5,
+      "map_bootstrap_95ci": [
+        -0.06474820143884892,
+        0.00926142263759085
+      ]
+    },
+    "A4_reliable_relation": {
+      "n": 128,
+      "delta": 0.0234375,
+      "improved": 9,
+      "regressed": 6,
+      "map_bootstrap_95ci": [
+        -0.04764216366158113,
+        0.07858082706766913
+      ]
+    }
+  },
+  "notes": [
+    "Static uses deduplicated 2426 Seen queries; closed-loop uses same 128 episode SHA.",
+    "Selected checkpoints use Seen R1 then NE. One Seed per E2/E3: descriptive evidence, no general superiority claim.",
+    "Direction test uses 237 synthetic controlled pairs. Predicate diagnostics are post-forward geometry tests, not a trained classifier.",
+    "Raw static/closedloop predictions and checkpoints stay in local runs; all paths and SHA are recorded."
+  ],
+  "direct_gat_comparisons": {
+    "A4_full_vs_A4_self": {
+      "static": {
+        "n": 2426,
+        "delta": -0.00741962077493817,
+        "improved": 157,
+        "regressed": 175,
+        "map_bootstrap_95ci": [
+          -0.02158416774553023,
+          0.008384662356762017
+        ]
+      },
+      "closedloop": {
+        "n": 128,
+        "delta": 0.0234375,
+        "improved": 13,
+        "regressed": 10,
+        "map_bootstrap_95ci": [
+          -0.05674772036474164,
+          0.10317460317460317
+        ]
+      }
+    },
+    "A4_zero_geometry_vs_A4_full": {
+      "static": {
+        "n": 2426,
+        "delta": 0.0016488046166529267,
+        "improved": 135,
+        "regressed": 131,
+        "map_bootstrap_95ci": [
+          -0.013308398265890373,
+          0.01865918035528248
+        ]
+      },
+      "closedloop": {
+        "n": 128,
+        "delta": -0.015625,
+        "improved": 4,
+        "regressed": 6,
+        "map_bootstrap_95ci": [
+          -0.07299715150436176,
+          0.042381935390409915
+        ]
+      }
+    },
+    "A4_reliable_relation_vs_A4_full": {
+      "static": {
+        "n": 2426,
+        "delta": 0.004122011541632316,
+        "improved": 152,
+        "regressed": 142,
+        "map_bootstrap_95ci": [
+          -0.011444620028577105,
+          0.019898968918778782
+        ]
+      },
+      "closedloop": {
+        "n": 128,
+        "delta": 0.0,
+        "improved": 9,
+        "regressed": 9,
+        "map_bootstrap_95ci": [
+          -0.06522247054043072,
+          0.05660913379073754
+        ]
+      }
+    }
+  }
+}

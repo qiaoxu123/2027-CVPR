@@ -1,0 +1,282 @@
+{
+  "direction_rows": 237,
+  "translated_real_queries": 747,
+  "real_records": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+  "input_sha256": {
+    "synthetic": "96cad10454a75b7a7d8eb7a93c4618fe46064195e14f497bd1df34f28959733b",
+    "real_records": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2"
+  },
+  "provenance": {
+    "commit": "9cd9ea626ce5ff6936a06cd4161bcb98bbd286d8",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "word_swap_labels": "controlled synthetic cardinal word swap; mirrored point is an artificial counterfactual label, not a real source landmark or revised navigation GT; used only in diagnostics",
+  "within_map_translation": "all supplied polygons and target +1/28 in normalized x/y; fixed grid",
+  "world_origin_translation": "world bounds +1000m,+2000m; normalized polygons unchanged",
+  "models": {
+    "seed0_epoch5": {
+      "original_direction_accuracy": 0.6118143200874329,
+      "checkpoint_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+      "architecture": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "runs/a3_replicate_seed0",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "swapped_direction_accuracy": 0.7172995805740356,
+      "prediction_direction_flipped_fraction": 0.3544303774833679,
+      "synthetic_original": {
+        "samples": 237,
+        "NE_m": 92.93628805297337,
+        "R@1/20m": 0.012658227848101266,
+        "R@4/20m": 0.03375527426160337,
+        "R@8/20m": 0.05485232067510549
+      },
+      "synthetic_word_swapped": {
+        "samples": 237,
+        "NE_m": 89.5896526610298,
+        "R@1/20m": 0.012658227848101266,
+        "R@4/20m": 0.029535864978902954,
+        "R@8/20m": 0.05907172995780591
+      },
+      "real_original": {
+        "samples": 747,
+        "NE_m": 29.022184992411052,
+        "R@1/20m": 0.4431057563587684,
+        "R@4/20m": 0.6921017402945113,
+        "R@8/20m": 0.7791164658634538
+      },
+      "real_within_map_shift": {
+        "samples": 747,
+        "NE_m": 29.191255337103623,
+        "R@1/20m": 0.45113788487282463,
+        "R@4/20m": 0.6706827309236948,
+        "R@8/20m": 0.7871485943775101
+      },
+      "real_world_origin_shift": {
+        "samples": 747,
+        "NE_m": 29.022184992411052,
+        "R@1/20m": 0.4431057563587684,
+        "R@4/20m": 0.6921017402945113,
+        "R@8/20m": 0.7791164658634538
+      },
+      "aligned_interior_centered_logit_MAE": 0.27753275632858276,
+      "world_origin_logit_MAE": 4.2173054680461064e-05
+    },
+    "rules": {
+      "original_direction_accuracy": 1.0,
+      "checkpoint_sha256": "92db6d5b279b1f0f780dc48790773de72e87e1b61b17b9d015115792e787846e",
+      "architecture": {
+        "train": "data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 5,
+        "rgb_epochs": 3,
+        "lr": 0.0002,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "runs/a3_replicate_seed0",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null
+      },
+      "swapped_direction_accuracy": 1.0,
+      "prediction_direction_flipped_fraction": 1.0,
+      "synthetic_original": {
+        "samples": 237,
+        "NE_m": 73.16663318746704,
+        "R@1/20m": 0.046413502109704644,
+        "R@4/20m": 0.09282700421940929,
+        "R@8/20m": 0.16877637130801687
+      },
+      "synthetic_word_swapped": {
+        "samples": 237,
+        "NE_m": 72.30200143806039,
+        "R@1/20m": 0.04219409282700422,
+        "R@4/20m": 0.0759493670886076,
+        "R@8/20m": 0.14767932489451477
+      },
+      "real_original": {
+        "samples": 747,
+        "NE_m": 47.08718230670076,
+        "R@1/20m": 0.17269076305220885,
+        "R@4/20m": 0.464524765729585,
+        "R@8/20m": 0.5943775100401606
+      },
+      "real_within_map_shift": {
+        "samples": 747,
+        "NE_m": 47.0871790384193,
+        "R@1/20m": 0.17269076305220885,
+        "R@4/20m": 0.464524765729585,
+        "R@8/20m": 0.5943775100401606
+      },
+      "real_world_origin_shift": {
+        "samples": 747,
+        "NE_m": 47.08718230670076,
+        "R@1/20m": 0.17269076305220885,
+        "R@4/20m": 0.464524765729585,
+        "R@8/20m": 0.5943775100401606
+      },
+      "aligned_interior_centered_logit_MAE": 1.7468855730840005e-06,
+      "world_origin_logit_MAE": 3.747520167962648e-06
+    },
+    "E1_best": {
+      "original_direction_accuracy": 0.5274261832237244,
+      "checkpoint_sha256": "5e93e839c4cb933d933ed05e1b0dddbbfe2f14a9fea7f59f45649fdf3fb5db70",
+      "architecture": {
+        "train": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+        "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+        "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+        "dataset_version": "revised",
+        "match_mode": "fuzzy",
+        "variants": [
+          "tokens",
+          "geometry",
+          "gat"
+        ],
+        "roads_json": null,
+        "device": "cuda",
+        "hardware": "RTX Pro 6000 96GB",
+        "batch_size": 16,
+        "epochs": 15,
+        "rgb_epochs": 3,
+        "lr": 5e-05,
+        "rgb_lr": 0.0001,
+        "workers": 4,
+        "max_train_batches": 0,
+        "seed": 0,
+        "output": "runs/static_E1_seed0_lr5e5_20261010",
+        "text_backbone": "bert-base-uncased",
+        "grid_size": 28,
+        "max_landmarks": 16,
+        "max_roads": 0,
+        "max_relations": 8,
+        "hidden": 128,
+        "heads": 4,
+        "vision_dim": 768,
+        "top_k": 20,
+        "min_visual_coverage": 0.3,
+        "crop_extent_m": 100.0,
+        "visual_cache_size": 4096,
+        "prior_sigma_m": 25.0,
+        "rule_sigma_m": 25.0,
+        "rule_weight": 1.0,
+        "max_text_length": 96,
+        "resume": null,
+        "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+        "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+        "init_bidirectional": null,
+        "variant": "geometry",
+        "graph_control": "full",
+        "continue_from": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed0/best.pt"
+      },
+      "swapped_direction_accuracy": 0.5654008388519287,
+      "prediction_direction_flipped_fraction": 0.18565401434898376,
+      "synthetic_original": {
+        "samples": 237,
+        "NE_m": 101.11954237539557,
+        "R@1/20m": 0.012658227848101266,
+        "R@4/20m": 0.02531645569620253,
+        "R@8/20m": 0.05485232067510549
+      },
+      "synthetic_word_swapped": {
+        "samples": 237,
+        "NE_m": 95.29989945938819,
+        "R@1/20m": 0.008438818565400843,
+        "R@4/20m": 0.02531645569620253,
+        "R@8/20m": 0.05485232067510549
+      },
+      "real_original": {
+        "samples": 747,
+        "NE_m": 26.682519588444926,
+        "R@1/20m": 0.5020080321285141,
+        "R@4/20m": 0.7108433734939759,
+        "R@8/20m": 0.8085676037483266
+      },
+      "real_within_map_shift": {
+        "samples": 747,
+        "NE_m": 28.372506914049428,
+        "R@1/20m": 0.43775100401606426,
+        "R@4/20m": 0.6760374832663989,
+        "R@8/20m": 0.7938420348058902
+      },
+      "real_world_origin_shift": {
+        "samples": 747,
+        "NE_m": 26.715215312748388,
+        "R@1/20m": 0.500669344042838,
+        "R@4/20m": 0.7108433734939759,
+        "R@8/20m": 0.8085676037483266
+      },
+      "aligned_interior_centered_logit_MAE": 0.4021646976470947,
+      "world_origin_logit_MAE": 5.3460018534678966e-05
+    }
+  }
+}
