@@ -1,0 +1,88 @@
+{
+  "status": "complete_input_invariance_audit",
+  "definition": "Only the supplied instruction CityRefer landmark bindings; retain legitimate aliases and same-name polygons; no forced two-landmark count or GT proximity filter",
+  "source_commit": "1678eb0692fe4154137a22c49bce698e4186a900",
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "splits": {
+    "val_seen": {
+      "episodes": 2470,
+      "unchanged": 2470,
+      "original_polygons": {
+        "1": 726,
+        "2": 519,
+        "3": 279,
+        "4": 219,
+        "5": 156,
+        "6": 144,
+        "7": 126,
+        "8": 59,
+        "9": 53,
+        "10": 90,
+        "11": 34,
+        "12": 21,
+        "13": 6,
+        "14": 7,
+        "15": 1,
+        "16": 30
+      },
+      "retained_polygons": {
+        "1": 726,
+        "2": 519,
+        "3": 279,
+        "4": 219,
+        "5": 156,
+        "6": 144,
+        "7": 126,
+        "8": 59,
+        "9": 53,
+        "10": 90,
+        "11": 34,
+        "12": 21,
+        "13": 6,
+        "14": 7,
+        "15": 1,
+        "16": 30
+      }
+    },
+    "val_unseen": {
+      "episodes": 2697,
+      "unchanged": 2697,
+      "original_polygons": {
+        "0": 4,
+        "1": 965,
+        "2": 675,
+        "3": 257,
+        "4": 314,
+        "5": 108,
+        "6": 42,
+        "7": 18,
+        "8": 8,
+        "15": 78,
+        "16": 228
+      },
+      "retained_polygons": {
+        "0": 4,
+        "1": 965,
+        "2": 675,
+        "3": 257,
+        "4": 314,
+        "5": 108,
+        "6": 42,
+        "7": 18,
+        "8": 8,
+        "15": 78,
+        "16": 228
+      }
+    }
+  },
+  "max_landmarks": 16,
+  "max_roads": 0,
+  "gt_selection": false,
+  "new_navigation_rollouts": 0,
+  "tests_passed": 204,
+  "audit_sha256": {
+    "val_seen_input_audit.json": "39d87df4f7aa575fe710c85f1f57a97a3e92ff24cf289ac63a069669d3af0978",
+    "val_unseen_input_audit.json": "b0623b5d4f5d8b55ae5c62fc5c1bf48c4800cfe70df1b08e81d525fc50c05f7a"
+  },
+  "rejected_literal_match": "Archived in rejected_literal_name_matching; it removed genuine abbreviations and paraphrases, and was never evaluated in navigation."
+}
