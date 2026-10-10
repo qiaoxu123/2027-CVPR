@@ -37,6 +37,13 @@ def retrieval(scores,positive):
         margin=float(scores[positive]-np.delete(scores,positive).max()))
 
 
+def record_invalid_height(rows, stream, *, index, step, map_name, height):
+    row=dict(index=int(index),step=step,map_name=map_name,view='before',
+        height_m=float(height),eligible=False,reason='nonpositive_height')
+    rows.append(row)
+    stream.write(json.dumps(row)+'\n')
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('sbf-source','data-root','output','main-workflow-status'):p.add_argument('--'+key,required=True)
@@ -89,7 +96,9 @@ def main():
                     stopped=True;break
                 pose=record.trajectory[step].copy();height=pose[2]-ground
                 if height<=0:
-                    attempted+=1;rows.append(dict(index=int(raw_index),step=step,view='before',eligible=False,reason='nonpositive_height'));continue
+                    attempted+=1
+                    record_invalid_height(rows,stream,index=raw_index,step=step,map_name=name,height=height)
+                    continue
                 poses=[('before',pose)]
                 if 10.<height<=100.:
                     descended=pose.copy();descended[2]-=min(10.,height-10.);poses.append(('descend10',descended))
