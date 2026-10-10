@@ -82,6 +82,9 @@ def main():
     p.add_argument('--workers',type=int,default=4);p.add_argument('--lr',type=float,default=1e-4)
     p.add_argument('--seed',type=int,default=0);p.add_argument('--resume');p.add_argument('--max-batches',type=int)
     p.add_argument('--smoke',action='store_true')
+    p.add_argument('--review-rebaseline-metrics',
+        help='Required to resume epoch1 active-sensing selection under the new passive joint protocol; '
+             'must be a fresh paired Seen128 metrics.json from the EXACT --resume checkpoint')
     p.add_argument('--stop-after-epoch',type=int,help='Run full epochs with planned scheduler, then hold for review')
     a=p.parse_args();out=Path(a.output)
     if a.max_batches and not a.smoke:raise ValueError('partial epochs require explicit --smoke')
@@ -106,8 +109,40 @@ def main():
     history=[];start=1;best=(-1.,-1.);source=provenance();pending=None
     if a.resume:
         state=restore_training(a.resume,model,optimizer,a,fingerprint,
-            ignored=('resume','epochs','device','workers','stop_after_epoch'))
+            ignored=('resume','epochs','device','workers','stop_after_epoch',
+                     'review_rebaseline_metrics'))
         scheduler.load_state_dict(state['scheduler']);history=state['history'];start=state['epoch']+1;best=tuple(state['best_seen']);source=state['provenance']
+        # Old epoch1 was selected WITH 256 active observation actions. Do not
+        # compare that SR to any new passive/guarded epoch or silently promote
+        # a different model. Re-score the exact same checkpoint externally.
+        if any(sum(int(n) for n in h.get('seen128_active_action_counts',{}).values())>0
+               for h in history):
+            if len(history)!=1 or not a.review_rebaseline_metrics:
+                raise ValueError(
+                    'Old Seen128 active selection is incomparable: run joint passive '
+                    'Seen128 for the --resume checkpoint, then specify '
+                    '--review-rebaseline-metrics. Existing checkpoints are untouched.')
+            revised=json.loads(Path(a.review_rebaseline_metrics).read_text())
+            controls=revised.get('joint_inference_controls',{})
+            if (revised.get('checkpoint_sha256')!=file_sha256(a.resume)
+                    or revised.get('split')!='val_seen'
+                    or revised.get('args',{}).get('model')!='joint-active'
+                    or revised.get('metrics',{}).get('episodes')!=128
+                    or controls.get('active_observation') is not False
+                    or controls.get('visual_control')!='full'
+                    or controls.get('stop_guard_m')!=20.):
+                raise ValueError(
+                    'rebaseline must evaluate EXACT resume weight, passive mode, '
+                    '20m predicted-goal Stop guard and 128 Val Seen episodes')
+            h=history[0]
+            h['seen128_original_active']=h['seen128']
+            h['seen128_original_active_action_counts']=h['seen128_active_action_counts']
+            h['seen128']=revised['metrics']
+            h['seen128_goal_retrieval']=revised['goal_retrieval']
+            h['seen128_active_action_counts']={}
+            h['seen128_joint_controls']=controls
+            h['seen128_rebaseline_checkpoint_sha256']=revised['checkpoint_sha256']
+            best=(h['seen128']['SR'],h['seen128']['SPL'])
         if not state.get('epoch_validation_complete',True):
             pending=history[-1];history=history[:-1];start=state['epoch']
     bert=FrozenBERTTokens(name=a3_args['text_backbone'],max_length=a3_args.get('max_text_length',96))
@@ -124,6 +159,7 @@ def main():
         protocol=dict(name='joint-active-v1',backbone='google/siglip2-large-patch16-384',
             backbone_revision=data.manifest['backbone_revision'],trainable_a3=True,freeze_bert=True,freeze_siglip=True,
             selected_by='Best Val Seen fixed128 SR then SPL among20 epochs; no Unseen selection',
+            active_sensing_enabled=False,stop_guard_radius_m=20.,
             stop_positive_weight=20.,stop_threshold=.5,active_max_actions=2,horizon=20,
             horizontal_step_m=50.,vertical_step_m=10.,initialization='A3 historical 5-epoch checkpoint; extra warmstart compute disclosed',
             original_a3_sha256=file_sha256(a.a3_checkpoint))
@@ -143,6 +179,7 @@ def main():
             evaluation=json.loads((destination/'metrics.json').read_text())
             record['seen128']=evaluation['metrics'];record['seen128_goal_retrieval']=evaluation['goal_retrieval']
             record['seen128_active_action_counts']=evaluation['active_action_counts']
+            record['seen128_joint_controls']=evaluation['joint_inference_controls']
             record['validation_seconds']=time.perf_counter()-started
             key=(record['seen128']['SR'],record['seen128']['SPL'])
         else:key=(-record['train']['total'],0.)
