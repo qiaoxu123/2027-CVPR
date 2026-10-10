@@ -1,0 +1,13 @@
+{
+  "status": "stopped_before_training",
+  "verified_train_attribute_samples": 0,
+  "adapter_epochs_run": 0,
+  "lora_epochs_run": 0,
+  "trainable_parameters_trained": 0,
+  "training_time_seconds": 0,
+  "zero_shot_adapter_lora_comparison": null,
+  "reason": "No independently image-verified Train attribute labels. Conservative CityRefer target binding supplies language weak supervision only; unknown negatives and mixed-instance ROIs cannot be made reliable by training. The predeclared gate requires identity/region-disjoint Train/Dev with >=2 distinct observed instances per attribute class.",
+  "data_source": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-main/runs/visual_grounding_benchmark/data_audit/full/train_seen",
+  "protocol_sha256": "1edb6dc6402625482c1066a18cc264672a634dd113e9b9df977ebbb1520c43bd",
+  "recommendation": "Retain native SigLIP2; annotate pure visible roof/vehicle instances and negatives before a supervised semantic adapter pilot. Existing P2 identity head is evaluated separately, not a new semantic pilot."
+}

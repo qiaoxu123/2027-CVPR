@@ -1,0 +1,194 @@
+[
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "remoteclip_l14",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_seen",
+      "--output",
+      "runs/visual_grounding_benchmark/remoteclip_vitl14/seen",
+      "--checkpoint",
+      "../visual-grounding-assets/remoteclip/weights/RemoteCLIP-ViT-L-14.pt"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/remoteclip_vitl14/seen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "remoteclip_b32",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_seen",
+      "--output",
+      "runs/visual_grounding_benchmark/remoteclip_vitb32/seen",
+      "--checkpoint",
+      "../visual-grounding-assets/remoteclip/weights/RemoteCLIP-ViT-B-32.pt"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/remoteclip_vitb32/seen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "siglip2",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_seen",
+      "--output",
+      "runs/visual_grounding_benchmark/siglip2_large384/seen"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/siglip2_large384/seen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/regionclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "regionclip",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_seen",
+      "--output",
+      "runs/visual_grounding_benchmark/regionclip_rn50/seen",
+      "--checkpoint",
+      "../visual-grounding-assets/regionclip/regionclip_pretrained-cc_rn50.pth",
+      "--official-repo",
+      "../visual-grounding-assets/regionclip/microsoft-RegionCLIP-4b8513b"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/regionclip_rn50/seen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "remoteclip_l14",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_unseen",
+      "--output",
+      "runs/visual_grounding_benchmark/remoteclip_vitl14/unseen",
+      "--checkpoint",
+      "../visual-grounding-assets/remoteclip/weights/RemoteCLIP-ViT-L-14.pt",
+      "--split",
+      "unseen"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/remoteclip_vitl14/unseen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "remoteclip_b32",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_unseen",
+      "--output",
+      "runs/visual_grounding_benchmark/remoteclip_vitb32/unseen",
+      "--checkpoint",
+      "../visual-grounding-assets/remoteclip/weights/RemoteCLIP-ViT-B-32.pt",
+      "--split",
+      "unseen"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/remoteclip_vitb32/unseen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "siglip2",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_unseen",
+      "--output",
+      "runs/visual_grounding_benchmark/siglip2_large384/unseen",
+      "--split",
+      "unseen"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/siglip2_large384/unseen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  },
+  {
+    "command": [
+      "../visual-grounding-assets/remoteclip/.venv/bin/python",
+      "-m",
+      "experiments.visual_grounding.evaluate_zero_shot",
+      "--model",
+      "regionclip",
+      "--data",
+      "runs/visual_grounding_benchmark/data_audit/frozen_unseen",
+      "--output",
+      "runs/visual_grounding_benchmark/regionclip_rn50/unseen",
+      "--checkpoint",
+      "../visual-grounding-assets/regionclip/regionclip_pretrained-cc_rn50.pth",
+      "--official-repo",
+      "../visual-grounding-assets/regionclip/microsoft-RegionCLIP-4b8513b",
+      "--split",
+      "unseen"
+    ],
+    "environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "log": "runs/visual_grounding_benchmark/regionclip_rn50/unseen.log",
+    "stage": "actual zero-shot evaluation",
+    "note": "recorded command, not a future plan; completion in metric file"
+  }
+]

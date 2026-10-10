@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "seed": 20261010,
+  "base_sha": "96bc2288c274cae3a4f5fc68f985510a66b8cb4b",
+  "gpu_policy": "one RTX PRO 6000 Blackwell 96GB; independent caches; cap encoders at 16 images/batch; preserve existing processes",
+  "image_source": "existing native 384 CityFlight pose observations; simulator nadir RGB, not perspective camera photographs",
+  "geometry_filter": {"visibility": 0.9, "area_px": 256, "min_side_px": 8, "rgb_support": 0.9},
+  "attribute_min_side_px": 24,
+  "labels": "CityRefer target-only attributes are linguistic weak labels. Human or explicit image-review labels required for verified semantic accuracy; ambiguous negatives excluded; multiple positives allowed.",
+  "templates": {"full": "original instruction", "phrase": "a {bound target attribute phrase}"},
+  "scores": "normalized image-text cosine; no prompt tuning",
+  "unseen": "one evaluation after manifest, candidates and configurations freeze; no selection or tuning",
+  "confidence_intervals": "2000 paired bootstrap draws seed20261010, query and map-cluster; unique object aggregation additionally reported",
+  "cross_view": "same map+object label with different camera footprints; same-map same-class gallery; descriptive semantics not inferred from identity retrieval",
+  "finetune_gate": "stop if verified Train supervision cannot form disjoint region/object train and dev with at least two independently observed instances per attribute class",
+  "a3": {"checkpoint": "historical geometry_best.pt epoch14", "static_success_radius_m": 20, "unknown": "unchanged static scores", "rerank": "only permute static scores within slots supported by comparable observed same-class regions; unobserved slots unchanged", "selection": "dev only; no Unseen tuning"}
+}
