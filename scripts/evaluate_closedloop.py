@@ -23,6 +23,27 @@ def sha(path):
     return h.hexdigest()
 
 
+def validate_stage1_frozen_evaluation(args):
+    """Require completed Seen selection and unchanged controls for held-out splits."""
+    if args.split not in ('val_unseen', 'test_unseen'):
+        return
+    if not args.frozen_final_candidate:
+        raise ValueError('Stage1 held-out evaluation requires a Seen-selected frozen manifest')
+    frozen = json.loads(Path(args.frozen_final_candidate).read_text())
+    if frozen.get('checkpoint_sha256') != sha(args.checkpoint) or not frozen.get('all_stages_complete'):
+        raise ValueError('Held-out checkpoint differs from completed, frozen Stage1 selection')
+    epochs = frozen.get('completed_epochs', {})
+    if any(epochs.get(stage, 0) < minimum for stage, minimum in [('A', 3), ('B', 3), ('C', 5)]):
+        raise ValueError('Full Stage1 A/B/C training required before held-out evaluation')
+    if (frozen.get('visual_control') != args.stage1_visual_control
+            or frozen.get('history_control') != args.stage1_history_control
+            or frozen.get('stop_threshold') != args.stop_threshold
+            or frozen.get('active_observation') is not False):
+        raise ValueError('Held-out inference parameters differ from frozen Seen candidate')
+    if args.split == 'test_unseen' and args.max_episodes is not None:
+        raise ValueError('Test Unseen requires full evaluation, without episode subsampling')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sbf-source', required=True)
@@ -30,7 +51,7 @@ def main():
     parser.add_argument('--checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--split', choices=['val_seen', 'val_unseen','test_unseen'], required=True)
-    parser.add_argument('--frozen-final-candidate',help='Seen-selected candidate after20 completed epochs, required for Test Unseen')
+    parser.add_argument('--frozen-final-candidate',help='Completed Seen-selected frozen candidate, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
     parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1'], default='sbfnav')
@@ -66,14 +87,8 @@ def main():
     args = parser.parse_args()
     if args.model=='graphnav-v1':
         args.stop_threshold=.3;args.head_execution='guarded-blend';args.explore_candidates=0
-        if args.split=='val_unseen':
-            if not args.frozen_final_candidate:raise ValueError('Stage1 Unseen requires a Seen-selected frozen final manifest')
-            frozen=json.loads(Path(args.frozen_final_candidate).read_text())
-            if frozen.get('checkpoint_sha256')!=sha(args.checkpoint) or not frozen.get('all_stages_complete'):
-                raise ValueError('Unseen candidate differs from completed, frozen Stage1 selection')
-            if frozen['visual_control']!=args.stage1_visual_control or frozen['history_control']!=args.stage1_history_control:
-                raise ValueError('Unseen inference hyperparameters differ from frozen Seen candidate')
-    if args.split=='test_unseen':
+        validate_stage1_frozen_evaluation(args)
+    if args.split=='test_unseen' and args.model!='graphnav-v1':
         if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
             raise ValueError('Test Unseen requires full evaluation of explicitly frozen joint Seen Best after20 epochs')
         frozen=json.loads(Path(args.frozen_final_candidate).read_text())
@@ -119,7 +134,8 @@ def main():
         vertical_step_m=nav['vertical_step_m'],min_altitude_m=altitude['min_above_ground_m'],
         max_altitude_m=altitude['max_above_ground_m'],stagnation_steps=nav['stagnation_steps'],
         success_radius_m=nav['success_distance_m'])
-    dataset = CityNavDataset(args.data_root,args.split,version=config['data']['version'])
+    dataset = CityNavDataset(args.data_root,args.split,version=config['data']['version'],
+                             allow_test_unseen=args.split=='test_unseen')
     catalog = CityReferCatalog(Path(args.data_root)/'cityrefer')
     indices = evenly_spaced_indices(len(dataset), args.max_episodes)
     episodes = [dataset[i] for i in indices]
