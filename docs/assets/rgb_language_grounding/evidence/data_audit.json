@@ -1,0 +1,218 @@
+{
+  "city_train": {
+    "all": {
+      "states": 597,
+      "families": 386,
+      "maps": 20,
+      "unique_positive_objects": 623,
+      "candidate_rois": 15634,
+      "human_verified_attribute_labels": 0
+    },
+    "forward": {
+      "states": 409,
+      "families": 266,
+      "maps": 20,
+      "unique_positive_objects": 502,
+      "candidate_rois": 9928,
+      "human_verified_attribute_labels": 0
+    },
+    "reverse": {
+      "states": 188,
+      "families": 134,
+      "maps": 20,
+      "unique_positive_objects": 144,
+      "candidate_rois": 5706,
+      "human_verified_attribute_labels": 0
+    }
+  },
+  "city_dev": {
+    "all": {
+      "states": 43,
+      "families": 28,
+      "maps": 3,
+      "unique_positive_objects": 39,
+      "candidate_rois": 968,
+      "human_verified_attribute_labels": 0
+    },
+    "forward": {
+      "states": 27,
+      "families": 20,
+      "maps": 3,
+      "unique_positive_objects": 30,
+      "candidate_rois": 474,
+      "human_verified_attribute_labels": 0
+    },
+    "reverse": {
+      "states": 16,
+      "families": 9,
+      "maps": 2,
+      "unique_positive_objects": 10,
+      "candidate_rois": 494,
+      "human_verified_attribute_labels": 0
+    }
+  },
+  "city_seen": {
+    "all": {
+      "states": 14,
+      "families": 10,
+      "maps": 9,
+      "unique_positive_objects": 23,
+      "candidate_rois": 340,
+      "human_verified_attribute_labels": 0
+    },
+    "forward": {
+      "states": 14,
+      "families": 10,
+      "maps": 9,
+      "unique_positive_objects": 23,
+      "candidate_rois": 340,
+      "human_verified_attribute_labels": 0
+    },
+    "reverse": {
+      "states": 0,
+      "families": 0,
+      "maps": 0,
+      "unique_positive_objects": 0,
+      "candidate_rois": 0,
+      "human_verified_attribute_labels": 0
+    }
+  },
+  "aerial_split": {
+    "official_train_expressions": 37788,
+    "official_val_expressions": 4723,
+    "official_train_unique_images": 4876,
+    "official_val_unique_images": 2946,
+    "official_train_val_image_overlap": 2936,
+    "official_val_unique_images_not_in_train": 10,
+    "pilot": {
+      "train": {
+        "images": 384,
+        "expressions": 1452,
+        "source_video_groups": 104
+      },
+      "internal_dev": {
+        "images": 96,
+        "expressions": 358,
+        "source_video_groups": 24
+      }
+    },
+    "pilot_image_overlap": 0,
+    "pilot_source_video_overlap": 0,
+    "selection": "source-video SHA modulo5 heldout within official Train; fixed image/description hashes, not label/outcome selection",
+    "official_val_use": "split audit only; not an image-independent development metric",
+    "full_caption_target_policy": "all mentioned annotated regions are multipositive; relation-anchor boxes are not falsely forced into one primary target",
+    "phrase_policy": "region phrase supervised with all same-normalized-phrase boxes in observed image; unannotated region relevance unknown",
+    "geographic_source": "VisDrone-derived Chinese drone scenes; source-video grouping is conservative filename grouping, not supplied GPS proof"
+  },
+  "dior": {
+    "actual_annotation_xml_files": 17402,
+    "actual_images": 17402,
+    "actual_object_expression_records": 38320,
+    "unique_descriptions": 10942,
+    "object_classes": {
+      "golffield": 1032,
+      "trainstation": 891,
+      "chimney": 1243,
+      "storagetank": 1255,
+      "vehicle": 7098,
+      "ship": 1960,
+      "dam": 1037,
+      "airplane": 1688,
+      "basketballcourt": 1287,
+      "Expressway-Service-area": 1417,
+      "groundtrackfield": 2455,
+      "stadium": 1138,
+      "airport": 1241,
+      "tenniscourt": 1519,
+      "bridge": 2486,
+      "Expressway-toll-station": 1102,
+      "windmill": 2996,
+      "baseballfield": 3658,
+      "overpass": 2234,
+      "harbor": 583
+    },
+    "image_sizes": {
+      "800x800": 17385,
+      "800x802": 1,
+      "800x787": 5,
+      "800x801": 2,
+      "800x784": 1,
+      "800x799": 1,
+      "800x788": 6,
+      "800x813": 1
+    },
+    "failures": {},
+    "split_counts": {
+      "train": 26991,
+      "val": 3829,
+      "test": 7500
+    },
+    "split_index_union_count": 38320,
+    "maximum_split_index": 38319,
+    "split_pairwise_index_overlap": {
+      "train_val": 0,
+      "train_test": 0,
+      "val_test": 0
+    },
+    "archive_sha256": {
+      "Annotations.zip": "cecbf38add026dcfef9e5505c6594090cb11912c4801e6aa98514aa469024e4c",
+      "JPEGImages.zip": "1c0a52b10c9471cb02c801590d87ab23035fb82fe776ed825682a0e3270e690e"
+    },
+    "source": "official RSVG repo -> third-party HF mirror; original official archive hash unavailable, mirror equivalence not certified",
+    "geographic_overlap": "worldwide DIOR without per-sample GPS, unresolved for UK CityNav; not used for pretraining",
+    "training": false,
+    "metrics": false,
+    "split_semantics": "index files appear to enumerate object/expression records, not image filenames; exact official reader ordering must be bound before training"
+  },
+  "leakage": {
+    "aerial_train_dev": {
+      "decoded_pixel_matches": [],
+      "phash_hamming_le4": [],
+      "near_match_is_not_geographic_proof": true
+    },
+    "refseg_official_train_val": {
+      "decoded_pixel_matches": [],
+      "phash_hamming_le4": [],
+      "near_match_is_not_geographic_proof": true
+    },
+    "aerial_vs_city_train_dev_observed": {
+      "decoded_pixel_matches": [],
+      "phash_hamming_le4": [],
+      "near_match_is_not_geographic_proof": true
+    },
+    "refseg_vs_city_train_dev_observed": {
+      "decoded_pixel_matches": [],
+      "phash_hamming_le4": [],
+      "near_match_is_not_geographic_proof": true
+    },
+    "counts": {
+      "aerial_train": 384,
+      "aerial_dev": 96,
+      "refseg_train": 2172,
+      "refseg_val": 431,
+      "city_train_dev_observed": 640
+    },
+    "seconds": 29.652239322662354,
+    "city_seen_or_unseen_read": false,
+    "scope": "decoded images and global pHash in this actual pilot; crop/reprojection/nonidentical overlap can evade this check",
+    "geographic_policy": "AerialVG official VisDrone source is Chinese cities, CityNav maps UK; RefSegRS SkyScapes selected tiles lack GPS/country mapping, so geographic overlap with UK unresolved and RefSegRS is evaluation-only, not pretraining. DIOR worldwide without GPS is not trained. Foundation pretraining footprint unknown."
+  },
+  "city_internal_dev_split": {
+    "families": 128,
+    "maps": [
+      "birmingham_block_11",
+      "birmingham_block_13",
+      "birmingham_block_9",
+      "cambridge_block_7"
+    ],
+    "counts": {
+      "pilot_episodes.jsonl": 256,
+      "pilot_prefixes.jsonl": 1280,
+      "pilot_matched_e0_e1.jsonl": 1280
+    },
+    "train_family_overlap": 0,
+    "train_map_overlap": 0,
+    "selection": "SHA family and map round robin, only original internal_dev",
+    "full_partition_manifest_sha256": "45ade77210abdf4e20fe757dd5a8ec7c2e3557d4f86ce590739474b20db939f7"
+  }
+}

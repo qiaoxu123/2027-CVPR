@@ -1,0 +1,21 @@
+{
+  "version": "rgb-language-grounding-v1",
+  "seed": 0,
+  "source_main_sha": "0c2584421f812821791091f734371380b759c24d",
+  "gpu_budget_hours": 6,
+  "external_download_budget_gb": 40,
+  "external_training_datasets_max": 2,
+  "lightweight_training_configurations_max": 4,
+  "epochs_per_initial_configuration": 3,
+  "feature_backbones_frozen": true,
+  "checkpoint_selection": "Train internal Dev only; fix before Seen",
+  "city_train_partition": "existing bidirectional full-family object/all-visited-200m-region disjoint split",
+  "city_seen_protocol": "fixed previous 128-family pilot, 1280-prefix offline; original split unmodified",
+  "weak_label_policy": "explicit weak, multipositive; unknown never negative",
+  "unseen_gate": "Goal R@1 real RGB minus geometry-only positive paired map-cluster 95% CI lower bound AND positive Net Recovery AND real RGB better than shuffled RGB; no Unseen otherwise",
+  "closedloop_gate": "same Seen Goal Localization gate before any new Trajectory/Stop training",
+  "zero_evidence_policy": "all unobserved cells Unknown, logits bitwise unchanged",
+  "geographic_audit": "avoid overlap with CityNav maps; unknown geolocation explicitly unresolved; image SHA and perceptual duplicate checks; no strong disjointness claim without metadata",
+  "history": "observations cutoff<=current step; no future images or private target selection",
+  "stopping": "no clear corrected Goal Localization after selected frozen representations and at most four lightweight head configurations: retain negative results and stop heavier network/nav training"
+}
