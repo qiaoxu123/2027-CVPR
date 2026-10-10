@@ -275,3 +275,6 @@ History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s
 
 
 第一轮评估输入预核验：从当前Revised Seen原始数据与当前配置重新生成固定128 Episode清单，与历史SBF/A3清单逐项一致（Episode ID、索引、起点），SHA256为`ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695`。20步、水平50m、垂直10m、高度10–100m、20m成功半径及二维距离声明协议一致。证据：`reports/active_perception_20261010/epoch1_seen128_protocol_preflight.json`。未重跑基线；历史控制器版本与SBF曾按Unseen选择权重的差异仍需披露，不能仅由清单相同宣称所有实现完全一致。第一轮输出产生后还须核验实际输出清单及协议。
+
+
+用户授权继续并行测试后，完整CPU测试177项通过（5.54秒，1项warning，详见保存日志）。在正在生成缓存的已提交分片中固定抽取首部、四分位、中部、四分之三及尾部5片共320训练状态，SHA、每Episode四状态、历史步不超过cutoff、候选索引唯一合法、特征有限值/维度、无观测区域零特征全部通过。该抽样不等于全缓存验证，也不单独证明渲染来源或无所有形式泄漏。结果`reports/active_perception_20261010/parallel_cache_audit/`。主准备进程未中断，未运行Unseen或重跑基线。
