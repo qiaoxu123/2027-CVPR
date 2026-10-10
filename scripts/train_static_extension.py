@@ -17,6 +17,7 @@ from graphnav.relation_supervision import RelationDataset,collate_relation
 
 def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="geometry",control="full",relation_weight=0.):
     model.train(optimizer is not None);started=time.perf_counter();unix=time.time();torch.cuda.reset_peak_memory_stats()
+    aux_count=0;aux_top1=0;counter_count=0
     total={'loss':0.,'goal_loss':0.,'relation_loss':0.,'NE_sum_m':0.,'R@1/20m_count':0.,'R@4/20m_count':0.,'R@8/20m_count':0.};count=0
     with torch.set_grad_enabled(optimizer is not None):
         for iteration,batch in enumerate(loader):
@@ -26,6 +27,11 @@ def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="g
             with torch.autocast('cuda',dtype=torch.bfloat16):field=model(inputs,variant=variant,tokens=tokens,token_mask=mask,node_emb=names)
             target=batch['target_xy'].to(device);loss=cross_entropy_goal(field.belief_logits,target,grid_size=model.grid_size if hasattr(model,'grid_size') else int(len(inputs['grid_xy'][0])**.5))
             goal_loss=loss
+            if relation_weight:
+                eligible=batch['relation_eligible'].to(device)
+                aux_count+=int(eligible.sum());counter_count+=int(batch['counter_eligible'].sum())
+                winner=field.belief_logits.argmax(-1)
+                aux_top1+=int((batch['relation_allowed'].to(device).gather(1,winner[:,None]).squeeze(1)&eligible).sum())
             relation_loss=allowed_region_loss(field.belief_logits,batch['relation_allowed'].to(device),batch['relation_eligible'].to(device)) if relation_weight else loss*0
             if relation_weight and optimizer is not None and batch['counter_eligible'].any():
                 indices=batch['counter_eligible'].nonzero().flatten().tolist()
@@ -51,7 +57,7 @@ def epoch(model,loader,encoder,device,optimizer=None,max_batches=None,variant="g
     return dict(loss=total['loss']/count,goal_loss=total['goal_loss']/count,relation_loss=total['relation_loss']/count,NE_m=total['NE_sum_m']/count,
         **{f'R@{k}/20m':total[f'R@{k}/20m_count']/count for k in (1,4,8)},samples=count,
         seconds=seconds,samples_per_second=count/seconds,peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
-        started_unix=unix,finished_unix=time.time())
+        started_unix=unix,finished_unix=time.time(),aux_eligible_queries=aux_count,counter_eligible_queries=counter_count,aux_top1_in_legal_region=aux_top1/aux_count if aux_count else None)
 
 
 def main():
@@ -73,7 +79,10 @@ def main():
         epochs=args.epochs,lr=args.lr,train=args.train,val_seen=args.seen,output=args.output,max_text_length=96))
     cfg.resume=args.resume;cfg.train_bert_cache=args.train_bert_cache;cfg.seen_bert_cache=args.seen_bert_cache
     cfg.max_train_batches=args.max_batches or 0
-    fingerprint=input_fingerprint(args,('template','train','seen','train_bert_cache','seen_bert_cache','init_bidirectional') if args.init_bidirectional else ('template','train','seen','train_bert_cache','seen_bert_cache'))
+    fingerprint_keys=['template','train','seen','train_bert_cache','seen_bert_cache']
+    if args.init_bidirectional:fingerprint_keys.append('init_bidirectional')
+    if args.continue_from:fingerprint_keys.append('continue_from')
+    fingerprint=input_fingerprint(args,fingerprint_keys)
     cfg.init_bidirectional=args.init_bidirectional
     device=torch.device('cuda');encoder=FrozenBERTTokens(cfg.text_backbone,device='cuda',max_length=96)
     encoder.load_cache(args.train_bert_cache);training_cache=encoder.cache.copy();encoder.load_cache(args.seen_bert_cache);encoder.cache.update(training_cache);del training_cache
