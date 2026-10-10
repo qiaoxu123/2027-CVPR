@@ -28,7 +28,7 @@ class JointActivePolicy:
         self.args=SimpleNamespace(**state['a3_args']);self.protocol=protocol
         self.active_observation=bool(active_observation)
         self.stop_guard_m=float(stop_guard_m)
-        self.stop_threshold=float(protocol['stop_threshold'] if stop_threshold is None else stop_threshold)
+        self.stop_threshold=float(protocol.get('stop_threshold', .5) if stop_threshold is None else stop_threshold)
         if visual_control not in ('full','no-belief','zero-vectors','shuffle-vectors'):
             raise ValueError('invalid visual control mode')
         self.visual_control=visual_control
