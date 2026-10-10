@@ -16,8 +16,7 @@ def main():
                OMP_NUM_THREADS='1', MKL_NUM_THREADS='1', TOKENIZERS_PARALLELISM='false')
     recipes = [('A3_relation000', ['--relation-auxiliary', '--relation-weight', '0']),
                ('A3_relation001', ['--relation-auxiliary', '--relation-weight', '0.01']),
-               ('A3_relation005', ['--relation-auxiliary', '--relation-weight', '0.05']),
-               ('A4_reliable_relation', ['--variant', 'gat', '--graph-control', 'reliable-relation'])]
+               ('A3_relation005', ['--relation-auxiliary', '--relation-weight', '0.05'])]
     status = {'jobs': {}, 'selection': 'Seen R@1 then lower NE; Unseen untouched'}
 
     def run(name, command):
