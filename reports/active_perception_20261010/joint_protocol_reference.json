@@ -1,0 +1,81 @@
+{
+  "baseline_reruns": false,
+  "reason": "Latest user instruction: do not rerun SBFNav or HETT",
+  "sbf_existing_unseen_metrics": {
+    "SR": 0.21505376344086022,
+    "OSR": 0.3874675565443085,
+    "SPL": 0.1589071618388963,
+    "NE": 47.56528537850332,
+    "nDTW": 0.23509343952132014,
+    "sDTW": 0.0759363633287408,
+    "steps": 16.650723025583982,
+    "path_length": 302.22176020967214,
+    "policy_stop": 0.0,
+    "inference_ms": 47.76320605211492,
+    "episodes": 2697,
+    "False_Stop_Rate": null,
+    "false_stop_episode_fraction": 0.0,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "hett_existing_metrics": {
+    "val_seen": {
+      "sr": 29.4331983805668,
+      "spl": 23.330562740670867,
+      "maximum_NE_difference": 0.0,
+      "success_mismatches": 0,
+      "episode_id_sets_equal": true
+    },
+    "val_unseen": {
+      "sr": 25.213199851687058,
+      "spl": 20.20241392295586,
+      "maximum_NE_difference": 0.0,
+      "success_mismatches": 0,
+      "episode_id_sets_equal": true
+    }
+  },
+  "hett_data": {
+    "load_seconds": 160.7616126537323,
+    "train_count": 21877,
+    "validation_counts": {
+      "val_seen": 2470,
+      "val_unseen": 2697
+    },
+    "annotation_sha256": {
+      "train_seen": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+      "val_seen": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+      "val_unseen": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac"
+    }
+  },
+  "hett_checkpoint": "/home/rental/20260922_1/Workspace/hett-compact-goal-path-soft/artifacts/compact_runs/b16_lr2e-4_9d88f2a/checkpoints/epoch01.pt",
+  "protocol_differences": [
+    "HETT fixed50m altitude vs SBF/Graph source start altitude with10..100m bounded recovery",
+    "HETT Train loader21877 vs SBF/Graph21878 from same annotation SHA; one-record discrepancy remains documented",
+    "Historical SBF/HETT checkpoints may use Unseen selection; new Graph selects only Seen128",
+    "Graph warm-start A3 adds historical5-epoch compute; new joint20 is not equal-total-budget scratch comparison",
+    "New Graph sample order uses seeded shard+within-shard shuffle for frozen-cache efficiency",
+    "HETT student rollout training differs from SBF/Graph fixed-prefix supervised samples; architecture-specific loss/optimizer histories are not identical"
+  ],
+  "graph_fixed_protocol": {
+    "planned_epochs": 20,
+    "initial_run_full_epochs": 1,
+    "seed": 0,
+    "batch_size": 16,
+    "precision": "bf16",
+    "workers": 4,
+    "learning_rate": 0.0001,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "warmup_fraction": 0.05,
+    "scheduler": "cosine",
+    "samples_per_episode": 4,
+    "source_episodes": 21878,
+    "states_per_full_epoch": 87512,
+    "horizon": 20,
+    "horizontal_cap_m": 50,
+    "vertical_cap_m": 10,
+    "success_xy_radius_m": 20,
+    "selection": "Seen128 SR then SPL; retain Best/Last; first full epoch then hold for review",
+    "baseline_a3_unchanged": true
+  },
+  "warning": "Existing HETT native numbers are reference results, not freshly unified evaluation. No performance gain or fairness equivalence claimed."
+}

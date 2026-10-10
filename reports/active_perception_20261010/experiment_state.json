@@ -5,10 +5,10 @@
   "old_completed": 10,
   "old_interrupted": 2,
   "old_cancelled_unstarted": 9,
-  "stage": "code_repairs_and_image_diagnostics_complete",
+  "stage": "joint_full_epoch1_workflow_ready",
   "tests_passed": 169,
   "unseen": "not_started_requires_post_seen_freeze",
-  "new_training": "not_started",
+  "new_training": "full_epoch1_pending_feature_preparation",
   "navigation_metrics": "not_measured_for_new_models",
   "pending": [
     "audited Train target-appearance hard-negative data",
@@ -16,5 +16,9 @@
     "bounded active and matched action controls",
     "Seen smoke and full paired evaluation",
     "source/weights/config freeze before new Unseen"
-  ]
+  ],
+  "planned_epochs": 20,
+  "initial_execution_epochs": 1,
+  "checkpoint_selection": "Best Seen128 SR then SPL; no Unseen selection",
+  "baseline_reruns": false
 }

@@ -258,3 +258,10 @@ History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s
 ## 六组Seen确认完成，P1公平轨迹队列实际启动（2026-10-10）
 
 修复后Full seed0 SR41.7004%、SPL40.3309%、NE31.3305m，热缓存601.05s；全2470 Episode/19163次运动无步长、高度、边界、horizon违规或非法结束高度。六组修复后CSV与三种子均值/样本标准差已保存于`reports/altitude_guard_seen_20261010`；三种子SR41.9838±0.5991个百分点、SPL40.1440±0.8598个百分点（共享冻结P2，非置信区间）。所有历史结果保留。phase22结束，phase22b已实际运行P1v2本模型字段缓存，之后同配置五轮Head训练及最多两路Seen评估。预选主候选仍为Seen较优的Full seed1；完整冻结清单须待P1公平对照完成才Commit并启动新Unseen。
+
+
+## 2026-10-10：完整联合方案第一轮（最新用户要求）
+
+原有测试队列保持取消。SBFNav/HETT均不重跑。先完成可训练A3、多尺度观测视觉匹配、历史信念、轨迹及Stop联合训练的**第1轮全量Train Seen + Seen128闭环验证**，再返回指标与实测耗时，后续轮次等待用户审阅。20轮调度已配置，最终Checkpoint使用20轮中Seen SR最好、同SR比较SPL的Best，之后才冻结评估Unseen。
+
+174项测试及真实模型/闭环Smoke已通过；完整第1轮指标尚未产生，没有性能提升声明。详见`docs/JOINT_ACTIVE_FIRST_EPOCH_20261010.md`及`reports/active_perception_20261010/joint_protocol_reference.json`。原A3检查点和已有验证结果保持不变。

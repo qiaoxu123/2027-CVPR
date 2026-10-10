@@ -1,5 +1,6 @@
 """Atomic experiment checkpoints with input fingerprints and complete RNG state."""
 import hashlib
+import json
 import os
 from pathlib import Path
 import random
@@ -48,6 +49,13 @@ def atomic_save(payload,path):
         torch.save(payload,temporary);os.replace(temporary,path)
     finally:
         temporary.unlink(missing_ok=True)
+
+
+def atomic_json(payload,path):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    temporary=path.with_name(path.name+'.tmp')
+    temporary.write_text(json.dumps(payload,indent=2))
+    os.replace(temporary,path)
 
 
 def restore_training(path,model,optimizer,args,fingerprint,*,ignored=('resume','epochs','device','workers')):

@@ -52,3 +52,8 @@ ROI要求完整落在当前视野，原生跨度至少24px，RGB/Depth支持至�
 下一步先构造Train实际当前观测的目标-同城市同类别困难负样本，并用Train内部开发集选择轻量Head；在Seen比较原生SigLIP2、旧Head、新Head和单/多尺度。然后用相同冻结感知器、相同Episode/seed/20步总预算比较动作策略，同时做零视觉/交换视觉控制。识别任务指标与定位Recall、闭环SR/SPL分开报告。先Seen Smoke再全量Seen；方案/源码/权重/配置冻结提交后才开始新方案Unseen，不复用部分旧测试作新模型结果。
 
 本次新增方案尚未使用Unseen选择参数；同一数据的历史Unseen结果此前已存在，因此未来报告也不能把这一开发历程称为完全从未看过该数据的独立测试。
+
+
+## 最新执行范围：先完整联合训练一轮
+
+用户最新要求优先执行全量第1轮并返回Seen指标及实际耗时，再决定后续。联合训练A3可训练层、轻量多尺度视觉匹配、历史信念、Trajectory/Stop，冻结BERT/SigLIP2，保留原A3。20轮中按Seen SR/SPL选择Best；Test Unseen与Val Unseen是独立数据集，均只能在最终冻结后评估。SBF/HETT不重跑。执行文档为`docs/JOINT_ACTIVE_FIRST_EPOCH_20261010.md`。

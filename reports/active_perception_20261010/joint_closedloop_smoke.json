@@ -1,0 +1,313 @@
+{
+  "model": "Joint A3 + multiscale observed appearance/history + trained trajectory/Stop + active sensing",
+  "split": "val_seen",
+  "metrics": {
+    "SR": 0.25,
+    "OSR": 0.25,
+    "SPL": 0.2391145771232833,
+    "NE": 27.91097782748523,
+    "nDTW": 0.27301206770014486,
+    "sDTW": 0.10155050170128806,
+    "steps": 20.0,
+    "path_length": 252.0686818749007,
+    "policy_stop": 0.0,
+    "inference_ms": 60.049833622178994,
+    "episodes": 4,
+    "False_Stop_Rate": null,
+    "false_stop_episode_fraction": 0.0,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "by_map": {
+    "birmingham_block_1": {
+      "SR": 0.0,
+      "OSR": 0.0,
+      "SPL": 0.0,
+      "NE": 53.27801779379637,
+      "nDTW": 0.03760896516859576,
+      "sDTW": 0.0,
+      "steps": 20.0,
+      "path_length": 354.495112358797,
+      "policy_stop": 0.0,
+      "inference_ms": 90.82610805053264,
+      "episodes": 1,
+      "False_Stop_Rate": null,
+      "false_stop_episode_fraction": 0.0,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "birmingham_block_12": {
+      "SR": 1.0,
+      "OSR": 1.0,
+      "SPL": 0.9564583084931332,
+      "NE": 7.691195772312469,
+      "nDTW": 0.4062020068051522,
+      "sDTW": 0.4062020068051522,
+      "steps": 20.0,
+      "path_length": 234.32832231484113,
+      "policy_stop": 0.0,
+      "inference_ms": 59.22980757895857,
+      "episodes": 1,
+      "False_Stop_Rate": null,
+      "false_stop_episode_fraction": 0.0,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "cambridge_block_18": {
+      "SR": 0.0,
+      "OSR": 0.0,
+      "SPL": 0.0,
+      "NE": 22.46149378353055,
+      "nDTW": 0.2694508502047531,
+      "sDTW": 0.0,
+      "steps": 20.0,
+      "path_length": 177.87687095582842,
+      "policy_stop": 0.0,
+      "inference_ms": 49.78469859343022,
+      "episodes": 1,
+      "False_Stop_Rate": null,
+      "false_stop_episode_fraction": 0.0,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "cambridge_block_33": {
+      "SR": 0.0,
+      "OSR": 0.0,
+      "SPL": 0.0,
+      "NE": 28.21320396030153,
+      "nDTW": 0.37878644862207844,
+      "sDTW": 0.0,
+      "steps": 20.0,
+      "path_length": 241.57442187013638,
+      "policy_stop": 0.0,
+      "inference_ms": 40.358720265794545,
+      "episodes": 1,
+      "False_Stop_Rate": null,
+      "false_stop_episode_fraction": 0.0,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    }
+  },
+  "terminations": {
+    "horizon": 4
+  },
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "config": {
+    "experiment": {
+      "name": "sbfnav_main_revised",
+      "paper_based_reimplementation": true,
+      "seed": 0
+    },
+    "data": {
+      "root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+      "version": "processed_citynav",
+      "train_split": "train_seen",
+      "validation_splits": [
+        "val_seen",
+        "val_unseen"
+      ],
+      "allow_test_unseen": false,
+      "samples_per_episode": 4
+    },
+    "model": {
+      "input_channels": 9,
+      "canvas_size": 224,
+      "field_size": 28,
+      "hidden_dim": 256,
+      "attention_heads": 8,
+      "dropout": 0.1,
+      "use_cross_attention": true,
+      "pooled_text_only": false,
+      "gate_init": 0.0,
+      "siglip_name": "google/siglip-base-patch16-224",
+      "freeze_siglip": true,
+      "local_files_only": true
+    },
+    "state": {
+      "max_height_above_ground_m": 100.0,
+      "trajectory_radius_m": 2.0
+    },
+    "proposal": {
+      "mode": "field",
+      "top_k": 16,
+      "nms_kernel": 3,
+      "dedup_radius_m": 2.0,
+      "add_landmark_candidates": true
+    },
+    "selector": {
+      "selection_mode": "selector",
+      "crop_extent_m": 100.0,
+      "crop_size": 224,
+      "hidden_dim": 256,
+      "layers": 2,
+      "attention_heads": 8,
+      "dropout": 0.1,
+      "use_geometry": true,
+      "use_landmark_text": true,
+      "use_field_score": false,
+      "max_landmarks": 8
+    },
+    "loss": {
+      "field_weight": 1.0,
+      "gaussian_sigma_m": 20.0,
+      "list_temperature_m": 20.0,
+      "good_radius_m": 20.0,
+      "bad_radius_m": 40.0,
+      "score_margin": 1.0,
+      "rank_weight": 1.0,
+      "margin_weight": 0.2,
+      "hard_weight": 0.5,
+      "altitude_weight": 0.1,
+      "progress_weight": 0.1
+    },
+    "altitude": {
+      "min_above_ground_m": 10.0,
+      "max_above_ground_m": 100.0
+    },
+    "training": {
+      "epochs": 20,
+      "batch_size": 16,
+      "gradient_accumulation": 1,
+      "effective_batch_size": 16,
+      "optimizer": "adamw",
+      "learning_rate": 0.0001,
+      "weight_decay": 0.01,
+      "warmup_fraction": 0.05,
+      "scheduler": "cosine",
+      "precision": "bf16",
+      "gradient_clip_norm": 1.0,
+      "workers": 0,
+      "save_last": true,
+      "validate_every": 1,
+      "validation_max_episodes": 128,
+      "vision_batch_size": 128,
+      "vision_cache_entries": 2000000,
+      "text_precompute_batch_size": 256,
+      "select_checkpoint_by": [
+        "val_unseen_sr",
+        "val_unseen_spl",
+        "val_unseen_ne"
+      ]
+    },
+    "navigation": {
+      "horizon": 20,
+      "success_distance_m": 20.0,
+      "horizontal_step_m": 50.0,
+      "vertical_step_m": 10.0,
+      "stagnation_steps": 5,
+      "use_progress_for_stopping": false
+    },
+    "evaluation": {
+      "official_metric": "benchmark_2d",
+      "benchmark_dimensions": 2,
+      "diagnostic_dimensions": 3,
+      "batch_size": 1,
+      "candidate_thresholds_m": [
+        10.0,
+        20.0,
+        40.0
+      ],
+      "candidate_ks": [
+        1,
+        5,
+        16
+      ],
+      "difficulties": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "_config_path": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml"
+  },
+  "checkpoint_sha256": "0acfa340a4c77c397cf0f7e622a0eef7eac3c2f752904714723ec414bc88ceef",
+  "checkpoint_epoch": 1,
+  "head_checkpoint_sha256": null,
+  "dynamic_checkpoint_sha256": null,
+  "visual_checkpoint_sha256": null,
+  "evidence_checkpoint_sha256": null,
+  "episode_manifest_sha256": "2a616f5c8f0ee2199ebcbdc4ccdd3052a17c44f32c63e7fa4fc30c22326a2126",
+  "args": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "config": "/home/rental/20260922_1/Workspace/SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+    "checkpoint": "runs/joint_active_smoke_final/last.pt",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "split": "val_seen",
+    "frozen_final_candidate": null,
+    "max_episodes": 4,
+    "output": "runs/joint_active_closedloop_final_interfaces",
+    "model": "joint-active",
+    "dynamic_checkpoint": null,
+    "evidence_checkpoint": null,
+    "active_observation": false,
+    "active_max_actions": 2,
+    "visual_checkpoint": null,
+    "visual_history": false,
+    "disable_visual": false,
+    "graph_control": "full",
+    "visual_control": "full",
+    "observed_cache": null,
+    "evaluation_concurrency": 1,
+    "head_checkpoint": null,
+    "stop_threshold": 0.5,
+    "explore_candidates": 0,
+    "head_execution": "joint"
+  },
+  "seconds": 6.180581331020221,
+  "gpu_peak_allocated_gib": 3.7678627967834473,
+  "input_sha256": {
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/processed_citynav/citynav_val_seen.json": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/processed_descriptions.json": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b"
+  },
+  "sbf_source_sha256": {
+    "sbfnav/__init__.py": "c1fbe3790814fe6d0d3f919e81198dfad344d925351aed902d87087cccc5a2e2",
+    "sbfnav/candidate_proposal.py": "b26289bd587f2db7e524271fc5d8a841f2b2441042b273036c748a8c3751c00c",
+    "sbfnav/checkpointing.py": "668f07bb242a97aae7512ca38b08e29944a1848dc5e1bef8aa3caaf1cf280599",
+    "sbfnav/config.py": "2d6855e7c0465d0c08ccc638c6d579e37c20d3c8c68a76f31b856d0a2c44a3bb",
+    "sbfnav/coordinates.py": "537319565f4d76664bd6fadf20efb58d6b271efc666f119be10d9b9a65a9131c",
+    "sbfnav/dataset.py": "928ccdab5b3c6405b710d2464a8ad2dbae6ebe05a32a2ece60f747cb8f8b235a",
+    "sbfnav/field_targets.py": "98597c69c1ab629b7329f0d1b30fcce049cce87a7f8c18ad2c08f6e4d9a521ff",
+    "sbfnav/losses.py": "8e98349fa30c3f45733b676a5ee5b571be1bb7c0e21fa9aa3db0d8aec2f6756f",
+    "sbfnav/mapdata.py": "54b7d8f4d8ca36131366a2c03a10a75d5676222f318b7927babacc35d7788d1e",
+    "sbfnav/metrics.py": "59cf13ec72a796046fb288951cdccce4840d12918d3373458bc97ea5d6d3611f",
+    "sbfnav/model_factory.py": "79b99f345003a1a59d344884c1e9e6d6646c525145b461c972e40d03a6e39b46",
+    "sbfnav/models/__init__.py": "ac25a7637acfd307dd304b3b28007c79b902dc2b6fa9616e205fcef864a39087",
+    "sbfnav/models/altitude_head.py": "c9ad1fe3aff185b8f47d4fcadfe56b95cc3c6846531ebbdaa947b18b054e4ee1",
+    "sbfnav/models/belief_field.py": "66b00a67ec1ad452fae4e97c2625bad2500909a28f90976e7a9445a511aea73e",
+    "sbfnav/models/language_encoder.py": "ffc6a5955c5a913f091f7bf9b6a5c4ba769f7816433e2aee0c5024a94469fc62",
+    "sbfnav/models/residual_cnn.py": "292c17511885a4d8fde93b571ac359efa2171b419eb306bbc7c352834e2a328b",
+    "sbfnav/models/sbfnav.py": "6d04770ad92b22b04a4c4961b6d1d04fae8d5bcbc62bfebfd4459afd007103e8",
+    "sbfnav/models/selector.py": "3bb84deebeb629ff30e1838a8849a7ed85e17d602d79b334c1a70bdc4e37fb40",
+    "sbfnav/navigation.py": "6b49036ec82e13aa4fd00e32a07febf13c7940b89eaaeda2dce5f185f2cce219",
+    "sbfnav/planning_state.py": "5cfd48a89bf0807efeffc4e7dfaa3bc10b5e9a4c9ee7b5adf4cdad1bf4402370",
+    "sbfnav/runtime.py": "b7069b41f79675b02cd31ce58d85521cfcc64c4dcee74dc8645b39e3f2fe16b0",
+    "sbfnav/training_data.py": "6c13879ac5047d274635a7ced4085d8ff0a7693a79a53a1c295aee1be0724f8e",
+    "sbfnav/validation.py": "cb90531ec8b53cbf858e3cc04ba1b80e35461af4936f7e8a956a777dfe53011f",
+    "sbfnav/visualization.py": "98147b5f44037b53ae773790bbbe3968616c0df901187928177910e7ada9eaa2"
+  },
+  "graphnav_commit": "917d4fc950f4b06c66c97b71b8433ffb189c1765",
+  "evaluator_sha256": "e5de8b31b5d8f30850fd97258ba08d19a35099edb3e13e07d328b5585307915f",
+  "graphnav_working_diff_sha256": "c0615fabff53c5192bd22ff67b1b4e4734fdbe25f159bd73693f413a394d65e8",
+  "inference_target_access": false,
+  "warning": "Shared macro-action benchmark with orthophoto/vertical-depth observations; no swept 3D collision or perspective-camera claim.",
+  "goal_retrieval": {
+    "unique_queries": 4,
+    "NE_m": 27.892901826964568,
+    "R@1/20m": 0.25,
+    "R@4/20m": 0.5,
+    "R@8/20m": 0.75,
+    "appearance_spatial_r1_at20m": 0.0,
+    "note": "Final observed/history belief. Deduplicate map+instruction, first source target. Different from initial static recall and closed-loop SR. Appearance spatial retrieval is not roof-color/shape classification accuracy."
+  },
+  "active_action_counts": {
+    "approach": 7,
+    "lateral": 1
+  },
+  "frozen_final_candidate_sha256": null
+}

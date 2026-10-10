@@ -38,7 +38,12 @@ class MultiScaleAppearanceMatcher(nn.Module):
         if not all(torch.isfinite(t).all() for t in (text, images, quality)):
             raise ValueError('nonfinite matching input')
         language = F.normalize(text.float() + .1*self.text_residual(text.float()), dim=-1)
-        visual = F.normalize(images.float() + .1*self.image_residual(images.float()), dim=-1)
+        # Process supported scales only: most global grid cells are unknown.
+        # Invalid vectors are never substituted for a negative observation.
+        visual = torch.zeros_like(images, dtype=torch.float32)
+        if valid.any():
+            present = images[valid].float()
+            visual[valid] = F.normalize(present + .1*self.image_residual(present), dim=-1)
         per_scale = (visual * language[:, None, None]).sum(-1)
         weights = self.scale_quality(quality.float()).squeeze(-1).masked_fill(~valid, -1e4)
         weights = weights.softmax(-1) * valid

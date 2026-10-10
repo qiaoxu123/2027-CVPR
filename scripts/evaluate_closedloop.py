@@ -29,10 +29,11 @@ def main():
     parser.add_argument('--config', required=True)
     parser.add_argument('--checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
-    parser.add_argument('--split', choices=['val_seen', 'val_unseen'], required=True)
+    parser.add_argument('--split', choices=['val_seen', 'val_unseen','test_unseen'], required=True)
+    parser.add_argument('--frozen-final-candidate',help='Seen-selected candidate after20 completed epochs, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active'], default='sbfnav')
     parser.add_argument('--dynamic-checkpoint')
     parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
     parser.add_argument('--active-observation',action='store_true',help='Opt-in bounded XY/Z sensing actions')
@@ -50,6 +51,12 @@ def main():
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
+    if args.split=='test_unseen':
+        if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
+            raise ValueError('Test Unseen requires full evaluation of explicitly frozen joint Seen Best after20 epochs')
+        frozen=json.loads(Path(args.frozen_final_candidate).read_text())
+        if frozen.get('completed_training_epochs')!=20 or not 1<=frozen.get('epoch',0)<=20 or frozen.get('checkpoint_sha256')!=sha(args.checkpoint):
+            raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
     if args.active_observation and args.model != 'target-evidence':
         raise ValueError('active observation requires the target-evidence policy')
     if args.active_max_actions < 0:
@@ -99,7 +106,12 @@ def main():
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
-        if args.model in ('dynamic','target-evidence'):
+        if args.model=='joint-active':
+            from graphnav.joint_active_runtime import JointActivePolicy
+            from graphnav.dynamic_runtime import NativeObservationBuilder
+            runtime=JointActivePolicy(args.checkpoint,output/'public_inputs')
+            builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
+        elif args.model in ('dynamic','target-evidence'):
             if not args.dynamic_checkpoint or not args.visual_checkpoint:raise ValueError('dynamic and visual checkpoints required')
             from graphnav.dynamic_runtime import DynamicWaypointPolicy,NativeObservationBuilder
             policy_class=DynamicWaypointPolicy
@@ -130,6 +142,7 @@ def main():
         vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,
         maximum_above_ground_m=protocol.max_altitude_m)
     rows, maps, terminations = [], defaultdict(list), Counter()
+    retrieval_queries=set();retrieval_rows=[];active_counts=Counter()
     started = time.perf_counter()
     with (output/'predictions.jsonl').open('w') as stream:
         for position,record in enumerate(episodes):
@@ -143,15 +156,26 @@ def main():
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
+            if args.model=='joint-active':
+                active_counts.update(d['active_action'] for d in diagnostics if 'active_action' in d)
+                query=(record.map_name,record.instruction)
+                if query not in retrieval_queries:
+                    retrieval_queries.add(query)
+                    # Private destination is accessed only after the entire rollout.
+                    distances=np.linalg.norm(np.asarray(diagnostics[-1]['belief_top8_world_xy'])-record.target_position[:2],axis=-1)
+                    row=dict(NE_m=float(distances[0]),**{f'R@{k}/20m':float(distances[:k].min()<=20) for k in (1,4,8)})
+                    visual=diagnostics[-1]['appearance_top1_world_xy']
+                    row['appearance_spatial_r1_at20m']=float(np.linalg.norm(np.asarray(visual)-record.target_position[:2])<=20) if visual is not None else 0.
+                    retrieval_rows.append(row)
             rows.append(metrics); maps[record.map_name].append(metrics); terminations[termination]+=1
             stream.write(json.dumps(dict(index=record.index,episode_id=record.episode_id,
                 map_name=record.map_name,poses=poses.tolist(),termination=termination,
                 metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
-    report = dict(model=('SBFNav local paper-based reproduction' if args.model=='sbfnav'
+    report = dict(model=('Joint A3 + multiscale observed appearance/history + trained trajectory/Stop + active sensing' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
                         else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
-                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop')))),split=args.split,
+                              else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))))),split=args.split,
         metrics=aggregate(rows),by_map={k:aggregate(v) for k,v in maps.items()},
         terminations=dict(terminations),protocol=asdict(protocol),config=config,
         checkpoint_sha256=sha(args.checkpoint),checkpoint_epoch=checkpoint.get('completed_epoch',checkpoint.get('epoch')),
@@ -176,6 +200,12 @@ def main():
             backbone_encoded_images=runtime.encoder_visual.backbone.encoded_images,
             cache_protocol='Exact currently observed ROI pixels + actual frozen model/head/precision SHA; no future gallery',
             timing_note='Cross-model warm cache affects latency. New vector requests and actual backbone encodes may differ through patch-memory reuse; not target visibility or accuracy.')
+    if args.model=='joint-active':
+        report['goal_retrieval']=dict(unique_queries=len(retrieval_rows),
+            **{key:float(np.mean([r[key] for r in retrieval_rows])) for key in retrieval_rows[0]},
+            note='Final observed/history belief. Deduplicate map+instruction, first source target. Different from initial static recall and closed-loop SR. Appearance spatial retrieval is not roof-color/shape classification accuracy.')
+        report['active_action_counts']=dict(active_counts)
+        report['frozen_final_candidate_sha256']=sha(args.frozen_final_candidate) if args.frozen_final_candidate else None
     (output/'metrics.json').write_text(json.dumps(report,indent=2))
     print(json.dumps(report['metrics']),flush=True)
 
