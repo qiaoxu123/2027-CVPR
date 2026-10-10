@@ -267,3 +267,5 @@ History完整Seen2470：SR41.9433%、SPL40.5579%、NE32.0475m，热缓存644.74s
 174项测试及真实模型/闭环Smoke已通过；完整第1轮指标尚未产生，没有性能提升声明。详见`docs/JOINT_ACTIVE_FIRST_EPOCH_20261010.md`及`reports/active_perception_20261010/joint_protocol_reference.json`。原A3检查点和已有验证结果保持不变。
 
 第一轮工作流已实际启动：源代码Commit `7804ace`，工作流PID895677。已核验24张训练地图RGB/Height SHA与历史SBF输入一致；正在准备冻结特征，完整Epoch1尚未开始。实时状态以`runs/joint_active_first_epoch_20261010/workflow_status.json`为准；任务使用`--first-epoch-only`，完成第1轮与Seen128后停止，不启动后续19轮或Unseen。
+
+用户随后授权硬件支持时并行RGB测试。已启动独立Seen32诊断PID903027，对比原生SigLIP2单尺度、多尺度裁剪及多尺度Patch池化，包含真实位姿下降的配对观测和同类别困难负样本。两个实际进程同时运行时总显存峰值8.70GiB、采样GPU平均36.5%，无显存不足。诊断在主工作流进入训练阶段时退出；主模型训练参数不改，第一轮仍完整训练后审阅。结果目录`runs/rgb_matching_parallel_seen32_20261010`，这属于纯视觉条件检索，不是导航SR/SPL。
