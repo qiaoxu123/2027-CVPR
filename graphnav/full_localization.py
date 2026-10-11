@@ -11,7 +11,6 @@ from dataclasses import dataclass, replace
 
 import torch
 from torch import nn
-from torch.nn import functional as F
 
 from .model import DenseGoalField
 from .semantic_graph import TypedGeometryGAT
