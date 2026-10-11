@@ -6,7 +6,7 @@
 
 GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程：利用**具名地标及其轮廓几何**，从语言指令推断全局目标位置，再通过有界控制器执行导航。项目包含在真实可见范围内提取 RGB/Depth 证据、累积历史记忆和更新目标信念的实验实现。
 
-> **远端 main 状态（2026-10-11）**：已确认最强静态主干为 **A3 Geometry**（不是 A4 GAT），并保留视觉/History、双向回程的受控研究结果。**完整 GraphNav-V1 已在本地完成 Seen/Unseen 评估，但其报告、Commit `9e458d7` 和最终权重尚未归档到当前远端 `main`**。因此远端默认复现入口仍为带独立来源检查的 A3 Geometry + 既有 Trajectory/Stop，不得将研究性 RGB/History 模块自动视为最优。详见 [main 核查与清理记录](docs/MAIN_BRANCH_AUDIT_20261011.md)。本仓库并非已接收的 CVPR 论文官方实现。
+> **当前正式主模型：GraphNav-V1 C Epoch1。** 已完成全量 Val-Seen / Val-Unseen 和冻结 Test-Unseen 评估。验证集 Seen SR/SPL **47.61% / 46.00%**；Val-Unseen **22.54% / 21.82%**；Test-Unseen **37.15% / 35.81%**。强 A3 Geometry 单独保留作为静态几何基线（Seen 48.50%/47.02%；Unseen 21.25%/20.64%）。V1 的 RGB/History 消融尚未证明稳定的独立净增益，不宣称此点。代码与结果已发布，权重 **不包含在 Git 仓库中**，必须核验 SHA-256 `00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a`。详见 [V1 最终报告](reports/graphnav_v1_stage1/GRAPHNAV_V1_STAGE1_REPORT.md) 与 [Test-Unseen 结果](reports/graphnav_v1_stage1/GRAPHNAV_V1_RESULTS.md)。
 
 [快速开始](#快速开始) · [已验证结果](#已验证结果) · [评估与复现](docs/REPRODUCIBILITY.md) · [代码导航](docs/CODE_MAP.md) · [研究报告索引](#研究报告与局限)
 
@@ -45,6 +45,18 @@ GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程�
 
 ## 已验证结果
 
+### 正式全量闭环结果（GraphNav-V1 C Epoch1）
+
+| Split | Episodes | SR | SPL |
+|:--|--:|--:|--:|
+| Val-Seen | 2,470 | **47.61%** | **46.00%** |
+| Val-Unseen | 2,697 | **22.54%** | **21.82%** |
+| Test-Unseen | 5,281 | **37.15%** | **35.81%** |
+
+配置固定：`--model graphnav-v1`，`--frozen-final-candidate` 按已冻结 Seen 选择清单验证，`--stop-threshold 0.3`、`guarded-blend`，没有主动观察、新 GAT、关系辅助损失。**本地已有评估是权重对应源版本上的实测，不等于此集成提交重新进行了 GPU 全量重放。**
+
+### 历史静态与控制基线（独立保留）
+
 **离线静态定位**：Val Seen 2,426 条去重 Query，阈值 20m；**闭环**：固定 Val Seen 128 Episodes，使用已有 Trajectory/Stop、Guarded-Blend、有界动作，20 步上限。
 
 | 模型 / 协议 | R@1/20m | R@4/20m | R@8/20m | SR | SPL |
@@ -61,7 +73,7 @@ GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程�
 | 本地论文方法复现 SBFNav Epoch14 | Val Seen **全量 2,470 Episodes** | 43.52% | 36.12% |
 | 同一 SBFNav 复现 | Val Unseen **全量 2,697 Episodes** | 21.51% | 15.89% |
 
-> **不可直接跨行排序**：新 A3 Epoch14 仅完成 Seen128 闭环，不可与 SBFNav 全量 SR 作严格比较。原 A3/A4、关系辅助监督、GAT 反事实及置信区间见 [受控实验报告](docs/A3_RELATION_GAT_CONTROLLED_20261010.md)。本地 SBFNav 是论文方法的**独立复现**，非论文作者官方权重。完整视觉/History 模型尚未通过全量 Seen/Unseen 验证。
+> **协议区分：** 上表 Seen128 仅用于历史诊断，不与正式全量指标混排。A3 B0 的正式全量 Seen/Unseen 及 V1 的指标参见 [V1 阶段报告](reports/graphnav_v1_stage1/GRAPHNAV_V1_STAGE1_REPORT.md)。SBFNav 是本地论文方法独立复现，非作者官方权重；视觉/History 尚无稳定因果净收益证据。
 
 ## 快速开始
 
@@ -155,7 +167,7 @@ configs/           已归档实验环境约束
 - [联合训练 Epoch1 问题及 Stop 修正](docs/JOINT_EPOCH1_CONTROL_FIX_AND_ABLATIONS.md)：**旧联合训练会重新初始化控制器，不可用来替代强基线**。
 - [复现及结果索引](docs/REPRODUCIBILITY.md)：如何区分正式指标与开发性诊断。
 
-**当前限制：** 最新本地 GraphNav-V1 全量评估尚未随权重/来源审计同步进入远端 main；已有视觉与 History 消融尚未证明稳定净收益。真实透视相机/遮挡、三维安全避障仍不属于已验证能力。独立的视觉基准和双向回程 Pilot 已完成，但不能据此替代正式导航配置。
+**当前限制：** GraphNav-V1 的来源报告及对应代码已并入 main，但完整 Backbone 与最终 `.pt` 权重需要从用户本地资源取得，且本次集成未重新执行全量 GPU 回放。视觉/History 消融尚未证明稳定净收益；真实透视相机、遮挡与三维避障不属于已验证能力。
 
 ## 引用与许可
 
