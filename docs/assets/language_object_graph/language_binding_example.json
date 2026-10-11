@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "sample_id": "train_seen:birmingham_block_12:52:4:7026:forward:55",
+    "family_id": "train_seen:birmingham_block_12:52:4:7026",
+    "episode_id": "train_seen:birmingham_block_12:52:4:7026:forward",
+    "map_name": "birmingham_block_12",
+    "cutoff_step": 55,
+    "instruction": "The gray car that is parked on the side of the West Midlands Police Custody Suite between two other gray cars.",
+    "direction": "forward"
+  },
+  "language_graph": {
+    "instruction": "The gray car that is parked on the side of the West Midlands Police Custody Suite between two other gray cars.",
+    "entities": [
+      {
+        "phrase": "The gray car that is parked on the side of the",
+        "role": "target",
+        "object_type": "Car",
+        "colors": [
+          "gray"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": []
+      },
+      {
+        "phrase": "Midlands Police Custody Suite",
+        "role": "reference",
+        "object_type": null,
+        "colors": [],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": []
+      }
+    ],
+    "factors": [
+      {
+        "kind": "west",
+        "anchors": [
+          1
+        ],
+        "status": "weak parsed factor; no identity truth",
+        "frame_hypotheses": [
+          "world"
+        ]
+      },
+      {
+        "kind": "between",
+        "anchors": [],
+        "status": "Unknown: two anchors not parsed",
+        "frame_hypotheses": []
+      }
+    ],
+    "source": "raw instruction and public names only",
+    "reference_instance_truth": null
+  },
+  "relation_hypotheses": [],
+  "node_index_to_public_id": {},
+  "offline_gt_not_model_input": [
+    1208.515625,
+    1132.1875
+  ]
+}

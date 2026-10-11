@@ -1,0 +1,24 @@
+{
+  "commands": [
+    "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 <existing_remoteclip_venv>/bin/python -m experiments.language_object_graph.run",
+    "<same python> -m experiments.language_object_graph.diagnostics",
+    "<same python> -m experiments.language_object_graph.analyze",
+    "<same python> -m experiments.language_object_graph.visualize",
+    "<same python> -m pytest tests -q"
+  ],
+  "benchmark_seconds": 88.41710066795349,
+  "rgb_qa_seconds": 21.048902433831245,
+  "regression": "376 passed, 1 existing rasterio PendingDeprecationWarning, 7.86 seconds",
+  "training_runs": 0,
+  "new_image_embedding_runs": 0,
+  "fixes": [
+    "Synthetic GAT backward test exposed an in-place attention normalization; changed to non-in-place division before any permitted training.",
+    "Analysis script syntax typo repaired before producing results."
+  ],
+  "preserved_failures": [
+    "All A1/A2 Train/Dev mixture variants, including degradations.",
+    "Initial 8-family same-map RGB QA archived under rgb_qa_initial_single_map; replaced illustrative gallery with public-map-stratified Train QA, no evaluation selection."
+  ],
+  "source_commit": "4c5449bae8084acb9d956dc62e95ba0b78aea01c",
+  "branch": "research/language-object-graph-20261011"
+}

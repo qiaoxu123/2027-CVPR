@@ -1,0 +1,36 @@
+{
+  "geometry": {
+    "path": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+    "sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+    "frozen": true,
+    "used_cached_predictions": true
+  },
+  "objects": {
+    "path": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json",
+    "sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "public_keys": [
+      "id",
+      "map_name",
+      "name",
+      "object_type",
+      "contour",
+      "position",
+      "dimension"
+    ]
+  },
+  "gat": {
+    "parameters": 8513,
+    "trained": false,
+    "smoke_seed": 20261011
+  },
+  "siglip2": {
+    "model": "google/siglip2-large-patch16-384",
+    "inference_run": false,
+    "training_run": false
+  },
+  "remoteclip": {
+    "inference_run": false,
+    "training_run": false
+  },
+  "notes": "Existing A3/GraphNav-V1 and P0-P4 checkpoints unchanged; RGB neural encoders not invoked because Dev gate failed"
+}

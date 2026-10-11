@@ -1,0 +1,17 @@
+{
+  "base_commit": "4c5449bae8084acb9d956dc62e95ba0b78aea01c",
+  "seed": 20261011,
+  "input_protocol": "P5 explicitly permits all26274 objects' geometry/type/name. Whitelist id,map_name,name,object_type,contour,position,dimension; descriptions and all target keys forbidden. IDs for association only, no learned ID/map embeddings. Distinct from old named-landmark A0 protocol.",
+  "population": "Existing P2 Train256/InternalDev128/Seen128 independent families, one maximum causal cutoff selected by public timestamps. Original 28x28 grid and20m XY radius. Train/Dev disjoint maps and objects. Raw full instruction only: processed reference-name labels prohibited for new inference.",
+  "graph": {"near_radius_m":25,"max_neighbors":16,"local_objects":192,"anchor_candidates":12,"joint_hypotheses":144,"road_connectivity":"touching road surfaces at same approximate level only; unverified vehicle routing"},
+  "language": "Conservative entity/relation parser. Between is a joint ternary factor, distinct anchors, marginalize hypotheses. Relative left/right/front/behind retain frame ambiguity. Unknown colors never inferred from private object descriptions.",
+  "heatmap": "Object polygon/boundary kernel marginal plus continuous relation field; mixture with original A0 probabilities. All original784 candidate cells retained. This is a new posterior interface, not an increase of old Residual Gain.",
+  "development": {"mixture_weights":[0,0.25,0.5],"methods":["A1_unary","A2_relations"],"selection":"Internal Dev Goal R1, then lower damage, then smaller mixture; no Seen search","gate":"best A2 vs A0 >=1pp, paired map95CI lower>0 and Recovery>Damage before GAT training"},
+  "gat": {"layers":1,"hidden":32,"heads":2,"epochs":3,"learning_rate":0.0003,"batch_size":8,"max_runs":2,"control":"matched trained no-message head, same language/node features/subgraph/train steps; retain all outside-subgraph object posterior mass","backbones":"frozen","train_loss":"multi-positive <=20m Goal NLL; target ID/coordinates only sealed supervision"},
+  "rgb": "Implement causal polygon ROI, eroded foreground, HSV/Lab and cached frozen visual vector/phrase interfaces. No encoding or training before geometry stages support continuation. Observed-only updates; unknown has zero evidence. Black/Shuffled preserve polygons,candidates,quality and timestamps. No unobserved negatives.",
+  "gates": {"goal_delta_pp":1,"map_ci_lower":">0","recovery_gt_damage":true,"gat_gt_non_gnn":true,"rgb_gt_geometry":true,"real_black_shuffled_map_ci_lower":">0"},
+  "seen": "One frozen final configuration run; includes A0/A1/A2 and only stages legitimately reached. No Seen model/hyperparameter selection.",
+  "oracle": "Offline GT identity selects a public object's geometry for upper-bound diagnosis only. GT coordinate grid coverage diagnostic separate. No GT normal forward path. Reference relation truth unavailable remains null, no target-nearest anchor labels.",
+  "budget": {"cpu_minutes":45,"gpu_head_minutes":15,"new_backbone_training":0,"new_image_encoding_minutes":10,"closedloop":"only Seen localization/safety passes; existing controller/protocol preserved"},
+  "stop": "No stage benefit => stop corresponding training, preserve complete code and negative results. Failed localization gate => no navigation/Unseen. No GAT depth or ResidualGain search."
+}

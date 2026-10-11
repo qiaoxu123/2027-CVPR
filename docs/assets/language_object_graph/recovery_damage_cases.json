@@ -1,0 +1,2149 @@
+[
+  {
+    "sample_id": "val_seen:birmingham_block_12:95:4:814:forward:29",
+    "family_id": "val_seen:birmingham_block_12:95:4:814",
+    "map_name": "birmingham_block_12",
+    "instruction": "The dark red car in the middle row of the West Midlands Police Custody Suite parking lot. It is between a red car and a gray car.",
+    "metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 13.25063138417454,
+      "recovery": 1.0,
+      "damage": 0.0,
+      "net_recovery": 1.0,
+      "object_r1": 0.0,
+      "object_r4": 0.0,
+      "object_r8": 0.0
+    },
+    "goal_target_rank": 1,
+    "language_graph": {
+      "instruction": "The dark red car in the middle row of the West Midlands Police Custody Suite parking lot. It is between a red car and a gray car.",
+      "entities": [
+        {
+          "phrase": "The dark red car in the middle row of the",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [
+            "red"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "Midlands Police Custody Suite parking lot. It is",
+          "role": "reference",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "a red car ",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "red"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": " a gray car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "gray"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "west",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "between",
+          "anchors": [
+            2,
+            3
+          ],
+          "status": "weak parsed joint factor",
+          "frame_hypotheses": [
+            "world"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "west",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              160
+            ],
+            "weight": 0.7217971287337981
+          },
+          {
+            "object_indices": [
+              161
+            ],
+            "weight": 0.02568007639998361
+          },
+          {
+            "object_indices": [
+              162
+            ],
+            "weight": 0.2525227948662184
+          }
+        ]
+      },
+      {
+        "factor": {
+          "kind": "between",
+          "anchors": [
+            2,
+            3
+          ],
+          "status": "weak parsed joint factor",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              91,
+              99
+            ],
+            "weight": 0.007603657746499387
+          },
+          {
+            "object_indices": [
+              99,
+              91
+            ],
+            "weight": 0.007603657746499387
+          },
+          {
+            "object_indices": [
+              91,
+              103
+            ],
+            "weight": 0.007491838944170912
+          },
+          {
+            "object_indices": [
+              103,
+              91
+            ],
+            "weight": 0.007491838944170912
+          },
+          {
+            "object_indices": [
+              91,
+              70
+            ],
+            "weight": 0.007440780704470989
+          },
+          {
+            "object_indices": [
+              70,
+              91
+            ],
+            "weight": 0.007440780704470989
+          },
+          {
+            "object_indices": [
+              91,
+              69
+            ],
+            "weight": 0.00741407132926451
+          },
+          {
+            "object_indices": [
+              69,
+              91
+            ],
+            "weight": 0.00741407132926451
+          },
+          {
+            "object_indices": [
+              91,
+              102
+            ],
+            "weight": 0.007402487588811157
+          },
+          {
+            "object_indices": [
+              102,
+              91
+            ],
+            "weight": 0.007402487588811157
+          },
+          {
+            "object_indices": [
+              99,
+              103
+            ],
+            "weight": 0.007399366930908977
+          },
+          {
+            "object_indices": [
+              103,
+              99
+            ],
+            "weight": 0.007399366930908977
+          },
+          {
+            "object_indices": [
+              99,
+              70
+            ],
+            "weight": 0.0073489389047325755
+          },
+          {
+            "object_indices": [
+              70,
+              99
+            ],
+            "weight": 0.0073489389047325755
+          },
+          {
+            "object_indices": [
+              99,
+              69
+            ],
+            "weight": 0.007322559204218347
+          },
+          {
+            "object_indices": [
+              69,
+              99
+            ],
+            "weight": 0.007322559204218347
+          },
+          {
+            "object_indices": [
+              99,
+              102
+            ],
+            "weight": 0.0073111184422524934
+          },
+          {
+            "object_indices": [
+              102,
+              99
+            ],
+            "weight": 0.0073111184422524934
+          },
+          {
+            "object_indices": [
+              91,
+              61
+            ],
+            "weight": 0.007263129177834627
+          },
+          {
+            "object_indices": [
+              61,
+              91
+            ],
+            "weight": 0.007263129177834627
+          },
+          {
+            "object_indices": [
+              103,
+              70
+            ],
+            "weight": 0.0072408659779769425
+          },
+          {
+            "object_indices": [
+              70,
+              103
+            ],
+            "weight": 0.0072408659779769425
+          },
+          {
+            "object_indices": [
+              91,
+              86
+            ],
+            "weight": 0.00721906332440487
+          },
+          {
+            "object_indices": [
+              86,
+              91
+            ],
+            "weight": 0.00721906332440487
+          },
+          {
+            "object_indices": [
+              103,
+              69
+            ],
+            "weight": 0.0072148742152967965
+          },
+          {
+            "object_indices": [
+              69,
+              103
+            ],
+            "weight": 0.0072148742152967965
+          },
+          {
+            "object_indices": [
+              103,
+              102
+            ],
+            "weight": 0.0072036017002909455
+          },
+          {
+            "object_indices": [
+              102,
+              103
+            ],
+            "weight": 0.0072036017002909455
+          },
+          {
+            "object_indices": [
+              91,
+              72
+            ],
+            "weight": 0.007181750896649405
+          },
+          {
+            "object_indices": [
+              72,
+              91
+            ],
+            "weight": 0.007181750896649405
+          },
+          {
+            "object_indices": [
+              99,
+              61
+            ],
+            "weight": 0.007173480136703218
+          },
+          {
+            "object_indices": [
+              61,
+              99
+            ],
+            "weight": 0.007173480136703218
+          },
+          {
+            "object_indices": [
+              70,
+              69
+            ],
+            "weight": 0.007165703540401811
+          },
+          {
+            "object_indices": [
+              69,
+              70
+            ],
+            "weight": 0.007165703540401811
+          },
+          {
+            "object_indices": [
+              70,
+              102
+            ],
+            "weight": 0.007154507849627964
+          },
+          {
+            "object_indices": [
+              102,
+              70
+            ],
+            "weight": 0.007154507849627964
+          },
+          {
+            "object_indices": [
+              99,
+              86
+            ],
+            "weight": 0.00712995818954442
+          },
+          {
+            "object_indices": [
+              86,
+              99
+            ],
+            "weight": 0.00712995818954442
+          },
+          {
+            "object_indices": [
+              69,
+              102
+            ],
+            "weight": 0.007128826077490991
+          },
+          {
+            "object_indices": [
+              102,
+              69
+            ],
+            "weight": 0.007128826077490991
+          },
+          {
+            "object_indices": [
+              91,
+              87
+            ],
+            "weight": 0.007098674561205477
+          },
+          {
+            "object_indices": [
+              87,
+              91
+            ],
+            "weight": 0.007098674561205477
+          },
+          {
+            "object_indices": [
+              99,
+              72
+            ],
+            "weight": 0.007093106310305808
+          },
+          {
+            "object_indices": [
+              72,
+              99
+            ],
+            "weight": 0.007093106310305808
+          },
+          {
+            "object_indices": [
+              91,
+              76
+            ],
+            "weight": 0.007089615331486474
+          },
+          {
+            "object_indices": [
+              76,
+              91
+            ],
+            "weight": 0.007089615331486474
+          },
+          {
+            "object_indices": [
+              103,
+              61
+            ],
+            "weight": 0.007067987493010444
+          },
+          {
+            "object_indices": [
+              61,
+              103
+            ],
+            "weight": 0.007067987493010444
+          },
+          {
+            "object_indices": [
+              103,
+              86
+            ],
+            "weight": 0.007025105576238145
+          },
+          {
+            "object_indices": [
+              86,
+              103
+            ],
+            "weight": 0.007025105576238145
+          },
+          {
+            "object_indices": [
+              70,
+              61
+            ],
+            "weight": 0.007019817877739286
+          },
+          {
+            "object_indices": [
+              61,
+              70
+            ],
+            "weight": 0.007019817877739286
+          },
+          {
+            "object_indices": [
+              99,
+              87
+            ],
+            "weight": 0.007011055388788978
+          },
+          {
+            "object_indices": [
+              87,
+              99
+            ],
+            "weight": 0.007011055388788978
+          },
+          {
+            "object_indices": [
+              99,
+              76
+            ],
+            "weight": 0.007002107977438865
+          },
+          {
+            "object_indices": [
+              76,
+              99
+            ],
+            "weight": 0.007002107977438865
+          },
+          {
+            "object_indices": [
+              69,
+              61
+            ],
+            "weight": 0.006994619587798416
+          },
+          {
+            "object_indices": [
+              61,
+              69
+            ],
+            "weight": 0.006994619587798416
+          },
+          {
+            "object_indices": [
+              103,
+              72
+            ],
+            "weight": 0.0069887956378834335
+          },
+          {
+            "object_indices": [
+              72,
+              103
+            ],
+            "weight": 0.0069887956378834335
+          },
+          {
+            "object_indices": [
+              102,
+              61
+            ],
+            "weight": 0.006983691198486166
+          },
+          {
+            "object_indices": [
+              61,
+              102
+            ],
+            "weight": 0.006983691198486166
+          },
+          {
+            "object_indices": [
+              70,
+              86
+            ],
+            "weight": 0.006977228208998702
+          },
+          {
+            "object_indices": [
+              86,
+              70
+            ],
+            "weight": 0.006977228208998702
+          },
+          {
+            "object_indices": [
+              69,
+              86
+            ],
+            "weight": 0.006952182798639625
+          },
+          {
+            "object_indices": [
+              86,
+              69
+            ],
+            "weight": 0.006952182798639625
+          },
+          {
+            "object_indices": [
+              102,
+              86
+            ],
+            "weight": 0.006941320712540475
+          },
+          {
+            "object_indices": [
+              86,
+              102
+            ],
+            "weight": 0.006941320712540475
+          },
+          {
+            "object_indices": [
+              70,
+              72
+            ],
+            "weight": 0.0069411657294521445
+          },
+          {
+            "object_indices": [
+              72,
+              70
+            ],
+            "weight": 0.0069411657294521445
+          },
+          {
+            "object_indices": [
+              69,
+              72
+            ],
+            "weight": 0.006916249768721452
+          },
+          {
+            "object_indices": [
+              72,
+              69
+            ],
+            "weight": 0.006916249768721452
+          },
+          {
+            "object_indices": [
+              103,
+              87
+            ],
+            "weight": 0.00690795135086803
+          },
+          {
+            "object_indices": [
+              87,
+              103
+            ],
+            "weight": 0.00690795135086803
+          },
+          {
+            "object_indices": [
+              102,
+              72
+            ],
+            "weight": 0.006905443824365994
+          },
+          {
+            "object_indices": [
+              72,
+              102
+            ],
+            "weight": 0.006905443824365994
+          },
+          {
+            "object_indices": [
+              103,
+              76
+            ],
+            "weight": 0.006899135519456738
+          },
+          {
+            "object_indices": [
+              76,
+              103
+            ],
+            "weight": 0.006899135519456738
+          },
+          {
+            "object_indices": [
+              70,
+              87
+            ],
+            "weight": 0.006860872410899299
+          },
+          {
+            "object_indices": [
+              87,
+              70
+            ],
+            "weight": 0.006860872410899299
+          },
+          {
+            "object_indices": [
+              70,
+              76
+            ],
+            "weight": 0.006852116660976237
+          },
+          {
+            "object_indices": [
+              76,
+              70
+            ],
+            "weight": 0.006852116660976237
+          },
+          {
+            "object_indices": [
+              91,
+              66
+            ],
+            "weight": 0.006838385895995635
+          },
+          {
+            "object_indices": [
+              66,
+              91
+            ],
+            "weight": 0.006838385895995635
+          },
+          {
+            "object_indices": [
+              69,
+              87
+            ],
+            "weight": 0.006836244670512274
+          },
+          {
+            "object_indices": [
+              87,
+              69
+            ],
+            "weight": 0.006836244670512274
+          },
+          {
+            "object_indices": [
+              69,
+              76
+            ],
+            "weight": 0.006827520350168877
+          },
+          {
+            "object_indices": [
+              76,
+              69
+            ],
+            "weight": 0.006827520350168877
+          },
+          {
+            "object_indices": [
+              102,
+              87
+            ],
+            "weight": 0.006825563726072711
+          },
+          {
+            "object_indices": [
+              87,
+              102
+            ],
+            "weight": 0.006825563726072711
+          },
+          {
+            "object_indices": [
+              102,
+              76
+            ],
+            "weight": 0.006816853036602015
+          },
+          {
+            "object_indices": [
+              76,
+              102
+            ],
+            "weight": 0.006816853036602015
+          },
+          {
+            "object_indices": [
+              61,
+              86
+            ],
+            "weight": 0.006810644178068438
+          },
+          {
+            "object_indices": [
+              86,
+              61
+            ],
+            "weight": 0.006810644178068438
+          },
+          {
+            "object_indices": [
+              61,
+              72
+            ],
+            "weight": 0.006775442704214722
+          },
+          {
+            "object_indices": [
+              72,
+              61
+            ],
+            "weight": 0.006775442704214722
+          },
+          {
+            "object_indices": [
+              99,
+              66
+            ],
+            "weight": 0.006753979475091893
+          },
+          {
+            "object_indices": [
+              66,
+              99
+            ],
+            "weight": 0.006753979475091893
+          },
+          {
+            "object_indices": [
+              86,
+              72
+            ],
+            "weight": 0.00673433567474913
+          },
+          {
+            "object_indices": [
+              72,
+              86
+            ],
+            "weight": 0.00673433567474913
+          },
+          {
+            "object_indices": [
+              61,
+              87
+            ],
+            "weight": 0.006697066419799308
+          },
+          {
+            "object_indices": [
+              87,
+              61
+            ],
+            "weight": 0.006697066419799308
+          },
+          {
+            "object_indices": [
+              61,
+              76
+            ],
+            "weight": 0.006688519716803237
+          },
+          {
+            "object_indices": [
+              76,
+              61
+            ],
+            "weight": 0.006688519716803237
+          },
+          {
+            "object_indices": [
+              86,
+              87
+            ],
+            "weight": 0.006656434904093262
+          },
+          {
+            "object_indices": [
+              87,
+              86
+            ],
+            "weight": 0.006656434904093262
+          },
+          {
+            "object_indices": [
+              103,
+              66
+            ],
+            "weight": 0.006654655975661165
+          },
+          {
+            "object_indices": [
+              66,
+              103
+            ],
+            "weight": 0.006654655975661165
+          },
+          {
+            "object_indices": [
+              86,
+              76
+            ],
+            "weight": 0.006647940054472274
+          },
+          {
+            "object_indices": [
+              76,
+              86
+            ],
+            "weight": 0.006647940054472274
+          },
+          {
+            "object_indices": [
+              72,
+              87
+            ],
+            "weight": 0.006622030475802919
+          },
+          {
+            "object_indices": [
+              87,
+              72
+            ],
+            "weight": 0.006622030475802919
+          },
+          {
+            "object_indices": [
+              72,
+              76
+            ],
+            "weight": 0.006613579532634684
+          },
+          {
+            "object_indices": [
+              76,
+              72
+            ],
+            "weight": 0.006613579532634684
+          },
+          {
+            "object_indices": [
+              70,
+              66
+            ],
+            "weight": 0.006609303289563956
+          },
+          {
+            "object_indices": [
+              66,
+              70
+            ],
+            "weight": 0.006609303289563956
+          },
+          {
+            "object_indices": [
+              69,
+              66
+            ],
+            "weight": 0.0065855785799634825
+          },
+          {
+            "object_indices": [
+              66,
+              69
+            ],
+            "weight": 0.0065855785799634825
+          },
+          {
+            "object_indices": [
+              102,
+              66
+            ],
+            "weight": 0.006575289276068557
+          },
+          {
+            "object_indices": [
+              66,
+              102
+            ],
+            "weight": 0.006575289276068557
+          },
+          {
+            "object_indices": [
+              87,
+              76
+            ],
+            "weight": 0.006537075632729915
+          },
+          {
+            "object_indices": [
+              76,
+              87
+            ],
+            "weight": 0.006537075632729915
+          },
+          {
+            "object_indices": [
+              61,
+              66
+            ],
+            "weight": 0.0064515036088546125
+          },
+          {
+            "object_indices": [
+              66,
+              61
+            ],
+            "weight": 0.0064515036088546125
+          },
+          {
+            "object_indices": [
+              86,
+              66
+            ],
+            "weight": 0.006412361937893158
+          },
+          {
+            "object_indices": [
+              66,
+              86
+            ],
+            "weight": 0.006412361937893158
+          },
+          {
+            "object_indices": [
+              72,
+              66
+            ],
+            "weight": 0.006379219024360223
+          },
+          {
+            "object_indices": [
+              66,
+              72
+            ],
+            "weight": 0.006379219024360223
+          },
+          {
+            "object_indices": [
+              87,
+              66
+            ],
+            "weight": 0.0063054261363633315
+          },
+          {
+            "object_indices": [
+              66,
+              87
+            ],
+            "weight": 0.0063054261363633315
+          },
+          {
+            "object_indices": [
+              76,
+              66
+            ],
+            "weight": 0.006297379239248523
+          },
+          {
+            "object_indices": [
+              66,
+              76
+            ],
+            "weight": 0.006297379239248523
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sample_id": "val_seen:cambridge_block_12:202:2:1329:forward:31",
+    "family_id": "val_seen:cambridge_block_12:202:2:1329",
+    "map_name": "cambridge_block_12",
+    "instruction": "A white van next to two white cars parked on the side of the leys School, near the edge of the map, next to the headmaster's house, off leys School Road",
+    "metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 12.294523472272497,
+      "recovery": 1.0,
+      "damage": 0.0,
+      "net_recovery": 1.0,
+      "object_r1": 0.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "goal_target_rank": 1,
+    "language_graph": {
+      "instruction": "A white van next to two white cars parked on the side of the leys School, near the edge of the map, next to the headmaster's house, off leys School Road",
+      "entities": [
+        {
+          "phrase": "A white van",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [
+            "white"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "two white cars parked on the side of the leys School",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            39
+          ],
+          "named_names": [
+            "The Leys School"
+          ],
+          "unknown": [
+            "color scope ambiguous"
+          ]
+        },
+        {
+          "phrase": "the edge of the map",
+          "role": "reference",
+          "object_type": null,
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "the headmaster's house, off leys School Road",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            42
+          ],
+          "named_names": [
+            "Headmaster's House"
+          ],
+          "unknown": [
+            "color scope ambiguous"
+          ]
+        }
+      ],
+      "factors": [
+        {
+          "kind": "near",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "near",
+          "anchors": [
+            2
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "near",
+          "anchors": [
+            3
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "near",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              39
+            ],
+            "weight": 1.0
+          }
+        ]
+      },
+      {
+        "factor": {
+          "kind": "near",
+          "anchors": [
+            3
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              42
+            ],
+            "weight": 1.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sample_id": "val_seen:cambridge_block_13:114:4:1464:forward:111",
+    "family_id": "val_seen:cambridge_block_13:114:4:1464",
+    "map_name": "cambridge_block_13",
+    "instruction": "The brown house on Saint Andrew's Street to the left of the Janus House.",
+    "metrics": {
+      "goal_r1": 0.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 30.295764962846448,
+      "recovery": 0.0,
+      "damage": 1.0,
+      "net_recovery": -1.0,
+      "object_r1": 0.0,
+      "object_r4": 0.0,
+      "object_r8": 1.0
+    },
+    "goal_target_rank": 2,
+    "language_graph": {
+      "instruction": "The brown house on Saint Andrew's Street to the left of the Janus House.",
+      "entities": [
+        {
+          "phrase": "The brown house on Saint Andrew's Street",
+          "role": "target",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            430,
+            442,
+            444,
+            1005,
+            1010,
+            1011
+          ],
+          "named_names": [
+            "Saint Andrew's Street"
+          ],
+          "unknown": [
+            "color scope ambiguous"
+          ]
+        },
+        {
+          "phrase": "the Janus House",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            127
+          ],
+          "named_names": [
+            "Janus House"
+          ],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "left",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "left",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              127
+            ],
+            "weight": 1.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sample_id": "val_seen:cambridge_block_19:78:1:1729:forward:68",
+    "family_id": "val_seen:cambridge_block_19:78:1:1729",
+    "map_name": "cambridge_block_19",
+    "instruction": "This is a blue colored car. this is the first car at the corner of East Road and Mill Road.",
+    "metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 15.464653242825237,
+      "recovery": 1.0,
+      "damage": 0.0,
+      "net_recovery": 1.0,
+      "object_r1": 0.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "goal_target_rank": 1,
+    "language_graph": {
+      "instruction": "This is a blue colored car. this is the first car at the corner of East Road and Mill Road.",
+      "entities": [
+        {
+          "phrase": "This is a blue colored car. this is the first car at the corner of",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [
+            "blue"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "Road and Mill Road",
+          "role": "reference",
+          "object_type": "TrafficRoad",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            130,
+            546
+          ],
+          "named_names": [
+            "Mill Road"
+          ],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "east",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "east",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              130
+            ],
+            "weight": 0.00619295116956343
+          },
+          {
+            "object_indices": [
+              546
+            ],
+            "weight": 0.9938070488304365
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sample_id": "val_seen:cambridge_block_20:5:0:1937:forward:114",
+    "family_id": "val_seen:cambridge_block_20:5:0:1937",
+    "map_name": "cambridge_block_20",
+    "instruction": "A building along Parker Street, located between The Hostel (to its right) and a row of town houses (to its left).",
+    "metrics": {
+      "goal_r1": 0.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 24.29510589872523,
+      "recovery": 0.0,
+      "damage": 1.0,
+      "net_recovery": -1.0,
+      "object_r1": 0.0,
+      "object_r4": 0.0,
+      "object_r8": 1.0
+    },
+    "goal_target_rank": 2,
+    "language_graph": {
+      "instruction": "A building along Parker Street, located between The Hostel (to its right) and a row of town houses (to its left).",
+      "entities": [
+        {
+          "phrase": "A building",
+          "role": "target",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "Parker Street, located",
+          "role": "reference",
+          "object_type": "TrafficRoad",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            434,
+            1129
+          ],
+          "named_names": [
+            "Parker Street"
+          ],
+          "unknown": []
+        },
+        {
+          "phrase": ") and a row of town houses (to its",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": ")",
+          "role": "reference",
+          "object_type": null,
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "along",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "between",
+          "anchors": [],
+          "status": "Unknown: two anchors not parsed",
+          "frame_hypotheses": []
+        },
+        {
+          "kind": "right",
+          "anchors": [
+            2
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        },
+        {
+          "kind": "left",
+          "anchors": [
+            3
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "along",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              434
+            ],
+            "weight": 0.0068939471152500405
+          },
+          {
+            "object_indices": [
+              1129
+            ],
+            "weight": 0.9931060528847501
+          }
+        ]
+      },
+      {
+        "factor": {
+          "kind": "right",
+          "anchors": [
+            2
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              3
+            ],
+            "weight": 0.17515126477587742
+          },
+          {
+            "object_indices": [
+              10
+            ],
+            "weight": 0.13169240561445553
+          },
+          {
+            "object_indices": [
+              18
+            ],
+            "weight": 0.11959097440046705
+          },
+          {
+            "object_indices": [
+              11
+            ],
+            "weight": 0.1093895660958195
+          },
+          {
+            "object_indices": [
+              20
+            ],
+            "weight": 0.1066196904072842
+          },
+          {
+            "object_indices": [
+              21
+            ],
+            "weight": 0.09004629579960076
+          },
+          {
+            "object_indices": [
+              6
+            ],
+            "weight": 0.08617866285631329
+          },
+          {
+            "object_indices": [
+              27
+            ],
+            "weight": 0.07096919086218266
+          },
+          {
+            "object_indices": [
+              23
+            ],
+            "weight": 0.05860412701043185
+          },
+          {
+            "object_indices": [
+              32
+            ],
+            "weight": 0.023153440634770577
+          },
+          {
+            "object_indices": [
+              29
+            ],
+            "weight": 0.019849847880294633
+          },
+          {
+            "object_indices": [
+              9
+            ],
+            "weight": 0.008754533662502622
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sample_id": "val_seen:cambridge_block_21:285:3:2077:forward:26",
+    "family_id": "val_seen:cambridge_block_21:285:3:2077",
+    "map_name": "cambridge_block_21",
+    "instruction": "The white car between an empty parking spot and a blue car in the middle of the middle row of cars in the Grafton West parking lot.",
+    "metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 8.517057716110036,
+      "recovery": 1.0,
+      "damage": 0.0,
+      "net_recovery": 1.0,
+      "object_r1": 0.0,
+      "object_r4": 0.0,
+      "object_r8": 0.0
+    },
+    "goal_target_rank": 1,
+    "language_graph": {
+      "instruction": "The white car between an empty parking spot and a blue car in the middle of the middle row of cars in the Grafton West parking lot.",
+      "entities": [
+        {
+          "phrase": "The white car",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [
+            "white"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "an empty parking spot ",
+          "role": "reference",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": " a blue car in the middle of the middle row of cars in the Grafton",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "blue"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            103
+          ],
+          "named_names": [
+            "The Grafton"
+          ],
+          "unknown": []
+        },
+        {
+          "phrase": "parking lot",
+          "role": "reference",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "between",
+          "anchors": [
+            1,
+            2
+          ],
+          "status": "weak parsed joint factor",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "west",
+          "anchors": [
+            3
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "between",
+          "anchors": [
+            1,
+            2
+          ],
+          "status": "weak parsed joint factor",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              469,
+              103
+            ],
+            "weight": 0.16692835961105618
+          },
+          {
+            "object_indices": [
+              466,
+              103
+            ],
+            "weight": 0.1657128809840927
+          },
+          {
+            "object_indices": [
+              467,
+              103
+            ],
+            "weight": 0.1629512401777916
+          },
+          {
+            "object_indices": [
+              465,
+              103
+            ],
+            "weight": 0.12844062453935284
+          },
+          {
+            "object_indices": [
+              470,
+              103
+            ],
+            "weight": 0.12154249067415042
+          },
+          {
+            "object_indices": [
+              472,
+              103
+            ],
+            "weight": 0.10545067048441044
+          },
+          {
+            "object_indices": [
+              471,
+              103
+            ],
+            "weight": 0.07704995840462288
+          },
+          {
+            "object_indices": [
+              468,
+              103
+            ],
+            "weight": 0.044729991010131614
+          },
+          {
+            "object_indices": [
+              464,
+              103
+            ],
+            "weight": 0.02714063672460678
+          },
+          {
+            "object_indices": [
+              461,
+              103
+            ],
+            "weight": 2.5364064799075712e-05
+          },
+          {
+            "object_indices": [
+              462,
+              103
+            ],
+            "weight": 1.5064501801663744e-05
+          },
+          {
+            "object_indices": [
+              463,
+              103
+            ],
+            "weight": 1.2718823183688392e-05
+          }
+        ]
+      },
+      {
+        "factor": {
+          "kind": "west",
+          "anchors": [
+            3
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              469
+            ],
+            "weight": 0.16692835961105618
+          },
+          {
+            "object_indices": [
+              466
+            ],
+            "weight": 0.1657128809840927
+          },
+          {
+            "object_indices": [
+              467
+            ],
+            "weight": 0.1629512401777916
+          },
+          {
+            "object_indices": [
+              465
+            ],
+            "weight": 0.12844062453935284
+          },
+          {
+            "object_indices": [
+              470
+            ],
+            "weight": 0.12154249067415042
+          },
+          {
+            "object_indices": [
+              472
+            ],
+            "weight": 0.10545067048441044
+          },
+          {
+            "object_indices": [
+              471
+            ],
+            "weight": 0.07704995840462288
+          },
+          {
+            "object_indices": [
+              468
+            ],
+            "weight": 0.044729991010131614
+          },
+          {
+            "object_indices": [
+              464
+            ],
+            "weight": 0.02714063672460678
+          },
+          {
+            "object_indices": [
+              461
+            ],
+            "weight": 2.5364064799075712e-05
+          },
+          {
+            "object_indices": [
+              462
+            ],
+            "weight": 1.5064501801663744e-05
+          },
+          {
+            "object_indices": [
+              463
+            ],
+            "weight": 1.2718823183688392e-05
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "sample_id": "val_seen:cambridge_block_23:54:0:2177:forward:43",
+    "family_id": "val_seen:cambridge_block_23:54:0:2177",
+    "map_name": "cambridge_block_23",
+    "instruction": "The grey car on the end of Ferry Path road, near the Ferry Path footpath side. It is at the very right end before the intersection with Chesterton and Hamilton Road.",
+    "metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 12.776839135270324,
+      "recovery": 1.0,
+      "damage": 0.0,
+      "net_recovery": 1.0,
+      "object_r1": 0.0,
+      "object_r4": 0.0,
+      "object_r8": 1.0
+    },
+    "goal_target_rank": 1,
+    "language_graph": {
+      "instruction": "The grey car on the end of Ferry Path road, near the Ferry Path footpath side. It is at the very right end before the intersection with Chesterton and Hamilton Road.",
+      "entities": [
+        {
+          "phrase": "The grey car on the end of Ferry Path road",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            75,
+            76,
+            147,
+            148
+          ],
+          "named_names": [
+            "Ferry Path"
+          ],
+          "unknown": [
+            "color scope ambiguous"
+          ]
+        },
+        {
+          "phrase": "the Ferry Path footpath side. It is at the very",
+          "role": "reference",
+          "object_type": "Footpath",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            75,
+            76,
+            147,
+            148
+          ],
+          "named_names": [
+            "Ferry Path"
+          ],
+          "unknown": []
+        },
+        {
+          "phrase": "end before the intersection with Chesterton and Hamilton Road",
+          "role": "reference",
+          "object_type": "TrafficRoad",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            78,
+            83,
+            143,
+            146,
+            154,
+            157
+          ],
+          "named_names": [
+            "Hamilton Road"
+          ],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "near",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "right",
+          "anchors": [
+            2
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "relation_hypotheses": [
+      {
+        "factor": {
+          "kind": "near",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              75
+            ],
+            "weight": 0.1356398779890297
+          },
+          {
+            "object_indices": [
+              76
+            ],
+            "weight": 0.8576380992916608
+          },
+          {
+            "object_indices": [
+              147
+            ],
+            "weight": 0.005824874795201656
+          },
+          {
+            "object_indices": [
+              148
+            ],
+            "weight": 0.0008971479241076743
+          }
+        ]
+      },
+      {
+        "factor": {
+          "kind": "right",
+          "anchors": [
+            2
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        },
+        "hypotheses": [
+          {
+            "object_indices": [
+              78
+            ],
+            "weight": 0.0002451600266848597
+          },
+          {
+            "object_indices": [
+              83
+            ],
+            "weight": 0.0001871673327251039
+          },
+          {
+            "object_indices": [
+              143
+            ],
+            "weight": 0.6192090457318151
+          },
+          {
+            "object_indices": [
+              146
+            ],
+            "weight": 0.34561317755357374
+          },
+          {
+            "object_indices": [
+              154
+            ],
+            "weight": 0.0313678605503342
+          },
+          {
+            "object_indices": [
+              157
+            ],
+            "weight": 0.00337758880486696
+          }
+        ]
+      }
+    ]
+  }
+]
