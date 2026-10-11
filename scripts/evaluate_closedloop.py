@@ -23,6 +23,27 @@ def sha(path):
     return h.hexdigest()
 
 
+def validate_stage1_frozen_evaluation(args):
+    """Require completed Seen selection and unchanged controls for held-out splits."""
+    if args.split not in ('val_unseen', 'test_unseen'):
+        return
+    if not args.frozen_final_candidate:
+        raise ValueError('Stage1 held-out evaluation requires a Seen-selected frozen manifest')
+    frozen = json.loads(Path(args.frozen_final_candidate).read_text())
+    if frozen.get('checkpoint_sha256') != sha(args.checkpoint) or not frozen.get('all_stages_complete'):
+        raise ValueError('Held-out checkpoint differs from completed, frozen Stage1 selection')
+    epochs = frozen.get('completed_epochs', {})
+    if any(epochs.get(stage, 0) < minimum for stage, minimum in [('A', 3), ('B', 3), ('C', 5)]):
+        raise ValueError('Full Stage1 A/B/C training required before held-out evaluation')
+    if (frozen.get('visual_control') != args.stage1_visual_control
+            or frozen.get('history_control') != args.stage1_history_control
+            or frozen.get('stop_threshold') != args.stop_threshold
+            or frozen.get('active_observation') is not False):
+        raise ValueError('Held-out inference parameters differ from frozen Seen candidate')
+    if args.split == 'test_unseen' and args.max_episodes is not None:
+        raise ValueError('Test Unseen requires full evaluation, without episode subsampling')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sbf-source', required=True)
@@ -30,10 +51,12 @@ def main():
     parser.add_argument('--checkpoint', required=True)
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--split', choices=['val_seen', 'val_unseen','test_unseen'], required=True)
-    parser.add_argument('--frozen-final-candidate',help='Seen-selected candidate after20 completed epochs, required for Test Unseen')
+    parser.add_argument('--frozen-final-candidate',help='Completed Seen-selected frozen candidate, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1'], default='sbfnav')
+    parser.add_argument('--stage1-visual-control',choices=['real','zero','shuffle','no-belief'],default='real')
+    parser.add_argument('--stage1-history-control',choices=['checkpoint','current','history'],default='checkpoint')
     parser.add_argument('--disable-joint-active',action='store_true')
     parser.add_argument('--joint-execution',choices=['checkpoint','guarded-blend'],default='checkpoint')
     parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
@@ -62,7 +85,10 @@ def main():
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
-    if args.split=='test_unseen':
+    if args.model=='graphnav-v1':
+        args.stop_threshold=.3;args.head_execution='guarded-blend';args.explore_candidates=0
+        validate_stage1_frozen_evaluation(args)
+    if args.split=='test_unseen' and args.model!='graphnav-v1':
         if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
             raise ValueError('Test Unseen requires full evaluation of explicitly frozen joint Seen Best after20 epochs')
         frozen=json.loads(Path(args.frozen_final_candidate).read_text())
@@ -108,7 +134,8 @@ def main():
         vertical_step_m=nav['vertical_step_m'],min_altitude_m=altitude['min_above_ground_m'],
         max_altitude_m=altitude['max_above_ground_m'],stagnation_steps=nav['stagnation_steps'],
         success_radius_m=nav['success_distance_m'])
-    dataset = CityNavDataset(args.data_root,args.split,version=config['data']['version'])
+    dataset = CityNavDataset(args.data_root,args.split,version=config['data']['version'],
+                             allow_test_unseen=args.split=='test_unseen')
     catalog = CityReferCatalog(Path(args.data_root)/'cityrefer')
     indices = evenly_spaced_indices(len(dataset), args.max_episodes)
     episodes = [dataset[i] for i in indices]
@@ -126,7 +153,13 @@ def main():
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
-        if args.model=='joint-active':
+        if args.model=='graphnav-v1':
+            from graphnav.stage1_runtime import GraphNavStage1Policy
+            from graphnav.dynamic_runtime import NativeObservationBuilder
+            runtime=GraphNavStage1Policy(args.checkpoint,output/'public_inputs',
+                visual_control=args.stage1_visual_control,history_control=args.stage1_history_control)
+            builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
+        elif args.model=='joint-active':
             from graphnav.joint_active_runtime import JointActivePolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             runtime=JointActivePolicy(
@@ -186,6 +219,24 @@ def main():
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
+            if args.model=='graphnav-v1':
+                query=(record.map_name,record.instruction)
+                if query not in retrieval_queries:
+                    retrieval_queries.add(query)
+                    row={}
+                    for label,points in [('initial_static',diagnostics[0]['static_top16_world_xy']),
+                                         ('dynamic_first',diagnostics[0]['belief_top16_world_xy']),
+                                         ('dynamic_final',diagnostics[-1]['belief_top16_world_xy'])]:
+                        distance=np.linalg.norm(np.asarray(points)-record.target_position[:2],axis=-1)
+                        row[label+'_NE_m']=float(distance[0])
+                        for k in (1,4,8,16):row[label+f'_R@{k}/20m']=float(distance[:k].min()<=20)
+                    row['dynamic_first_step']=diagnostics[0]['observation_step']
+                    row['dynamic_final_step']=diagnostics[-1]['observation_step']
+                    row['history_unique_views']=diagnostics[-1]['history_unique_views']
+                    row['history_duplicates']=diagnostics[-1]['history_duplicates']
+                    visual=diagnostics[-1]['appearance_top1_world_xy']
+                    row['appearance_spatial_r1_at20m']=float(np.linalg.norm(np.asarray(visual)-record.target_position[:2])<=20) if visual is not None else 0.
+                    retrieval_rows.append(row)
             if args.model=='joint-active':
                 active_counts.update(d['active_action'] for d in diagnostics if 'active_action' in d)
                 stop_gate_counts.update(d['stop_reject_reason'] for d in diagnostics
@@ -232,6 +283,14 @@ def main():
         report['reference_a3_checkpoint_sha256']=sha(args.reference_a3_checkpoint)
         report['static_variant']=runtime.static_variant;report['static_graph_control']=runtime.static_control
         report['controller_transfer_note']='Original head provenance verified against original A3; compatible new static features are an explicitly evaluated distribution shift, not controller retraining.'
+    if args.model=='graphnav-v1':
+        report['model']='GraphNav-V1 Stage1; initialized from verified A3 Epoch14 and pretrained controller; bounded visual residual + causal quality history; original Guarded-Blend, no active sensing'
+        report['goal_retrieval']=dict(unique_queries=len(retrieval_rows),
+            **{key:float(np.mean([r[key]for r in retrieval_rows]))for key in retrieval_rows[0]},
+            note='Private targets accessed only after rollout. Initial static, first observed belief, and final observed belief are separate. R@1/4/8 preserve legacy FP32 topk(8) tie ordering; R@16 extends that ordering. Final observation time differs per episode.')
+        report['stage1_protocol']=runtime.protocol
+        report['visual_backbone_parameters']=sum(p.numel()for p in runtime.native.model.parameters())
+        report['bert_backbone_parameters']=sum(p.numel()for p in runtime.bert.model.parameters())
     if getattr(runtime,'encoder_visual',None) is not None:
         report['observed_visual_cache']=dict(getattr(runtime.encoder_visual,'cache_metrics',{}),
             backbone_encoded_images=runtime.encoder_visual.backbone.encoded_images,

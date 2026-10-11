@@ -1,5 +1,7 @@
 # main 分支配置核查与保守精简（2026-10-11）
 
+> **2026-10-11 GraphNav-V1 集成更新：**此前本报告所述“V1 代码和报告尚未推送”是当时的历史状态，**不再适用于最新 main 集成**。当前加入的 `graphnav/stage1*.py`、`scripts/*graphnav_stage1*`、`scripts/evaluate_closedloop.py --model graphnav-v1` 及 `reports/graphnav_v1_stage1/` 包含 C Epoch1 的 Seen、Unseen、Test-Unseen 完整结果和 SHA 清单。权重本体未纳入 Git，故本次集成只有 CI/源码验证，没有对该 `.pt` 进行新的 GPU 全量重放。A3 强基线、历史脚本与旧 CI 修复均保留。后文保留首次审计现场记录。
+
 ## 范围
 
 检查远端 `qiaoxu123/2027-CVPR-Dev`，基线 `main@0c2584421f812821791091f734371380b759c24d`。本次属于**工程审计和不改变数学计算的维护**，不是重新训练，也不声称已经重新验证全量 GPU 指标。
