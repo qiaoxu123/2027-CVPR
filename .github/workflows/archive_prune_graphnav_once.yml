@@ -75,6 +75,29 @@ jobs:
           validation/full-token-rgb-local-20261009 8a75d9ed5396933f89492624360a3c2a9e8b530f
           validation/static-geometry-20261009 e6344eac1c6d03307af43b187a0cf927f01bdf7e
           BRANCHES
+          # The one-time cleanup PR itself is also temporary. Only retire it
+          # if GitHub confirms PR #10 is merged and its head is unchanged.
+          cleanup_branch="maintenance/archive-redundant-branches-20261011"
+          pr_merged="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/10" --jq '.merged')"
+          pr_head="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/10" --jq '.head.sha')"
+          current="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/$cleanup_branch" --jq '.object.sha' 2>/dev/null || true)"
+          if [[ "$pr_merged" == "true" && -n "$current" && "$current" == "$pr_head" ]]; then
+            archive="archive/graphnav-20261011/maintenance--archive-redundant-branches-20261011"
+            found="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$archive" --jq '.object.sha' 2>/dev/null || true)"
+            if [[ -z "$found" ]]; then
+              gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs" -f "ref=refs/tags/$archive" -f "sha=$current" >/dev/null
+              found="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$archive" --jq '.object.sha')"
+            fi
+            if [[ "$found" == "$current" ]]; then
+              gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/$cleanup_branch" >/dev/null
+              echo "$cleanup_branch,$current,$archive,ARCHIVED_AND_DELETED" >> branch_archive_results.csv
+            else
+              echo "Cleanup self-archive SHA mismatch" >&2
+              exit 1
+            fi
+          else
+            echo "$cleanup_branch,$pr_head,,SKIPPED_CHANGED_OR_NOT_MERGED" >> branch_archive_results.csv
+          fi
           cat branch_archive_results.csv
       - name: Save archival manifest
         if: always()
