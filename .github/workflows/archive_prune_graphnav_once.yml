@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
       - name: Verify frozen V1 has already entered main
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -43,10 +47,14 @@ jobs:
             fi
             slug="${b//\//--}"
             tag="archive/graphnav-20261011/$slug"
-            existing="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$tag" --jq .object.sha 2>/dev/null || true)"
+            existing="$(git ls-remote --refs origin "refs/tags/$tag" | awk '{print $1}')"
             if [[ -z "$existing" ]]; then
               gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs" -f "ref=refs/tags/$tag" -f "sha=$expected" >/dev/null
-              existing="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$tag" --jq .object.sha)"
+              for retry in 1 2 3 4 5; do
+                existing="$(git ls-remote --refs origin "refs/tags/$tag" | awk '{print $1}')"
+                [[ -n "$existing" ]] && break
+                sleep 1
+              done
             fi
             if [[ "$existing" != "$expected" ]]; then
               echo "Tag mismatch for $b, refusing deletion" >&2
@@ -83,10 +91,14 @@ jobs:
           current="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/$cleanup_branch" --jq '.object.sha' 2>/dev/null || true)"
           if [[ "$pr_merged" == "true" && -n "$current" && "$current" == "$pr_head" ]]; then
             archive="archive/graphnav-20261011/maintenance--archive-redundant-branches-20261011"
-            found="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$archive" --jq '.object.sha' 2>/dev/null || true)"
+            found="$(git ls-remote --refs origin "refs/tags/$archive" | awk '{print $1}')"
             if [[ -z "$found" ]]; then
               gh api --method POST "repos/${GITHUB_REPOSITORY}/git/refs" -f "ref=refs/tags/$archive" -f "sha=$current" >/dev/null
-              found="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/$archive" --jq '.object.sha')"
+              for retry in 1 2 3 4 5; do
+                found="$(git ls-remote --refs origin "refs/tags/$archive" | awk '{print $1}')"
+                [[ -n "$found" ]] && break
+                sleep 1
+              done
             fi
             if [[ "$found" == "$current" ]]; then
               gh api --method DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/$cleanup_branch" >/dev/null
