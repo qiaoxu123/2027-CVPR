@@ -24,9 +24,9 @@ jobs:
       - name: Install offline test dependencies
         run: python -m pip install -e '.[dev,data]' pyyaml
       - name: Syntax check
-        run: python -m compileall -q graphnav scripts tests
+        run: python -m compileall -q graphnav scripts experiments tests
       - name: Unit and integration tests (no dataset download)
-        run: pytest -q
+        run: python -m pytest -q
       - name: Synthetic CPU smoke (not CityNav navigation)
         run: |
           python -m graphnav.train --smoke --epochs 1 --steps 2 --device cpu \
