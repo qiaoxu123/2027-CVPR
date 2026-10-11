@@ -1,0 +1,68 @@
+{
+  "base_commit": "06ebf5398d051ecfc105298821ce3b12eced0131",
+  "seed": 20261011,
+  "stage": "P2.5 offline diagnosis only",
+  "models": [
+    "native",
+    "city_only",
+    "external_aerial",
+    "aerial_city",
+    "previous_aerial_projection"
+  ],
+  "principal_model": "city_only",
+  "populations": "Original P2 Train/Dev/Seen; no new selection. All-visible and credible-visible-static-error reported separately. Prefixes clustered by family/map/object.",
+  "language": [
+    "full",
+    "attribute",
+    "attribute_spatial"
+  ],
+  "controls": [
+    "real",
+    "zero",
+    "shuffled"
+  ],
+  "modality": "RGB-only disables learned relative-coordinate bias; geometry-only uses existing frozen full-instruction A3 logits sampled through the identical observed centroid support; RGB+Geometry averages tie-aware percentile ranks, fixed equal weights. Spatial mode adds only target-blind named-observed-anchor relation scores to attribute rank, using fixed equal rank weights. No new localization policy.",
+  "relation_rules": "Existing parser; named actually observed anchors only; directions +/-10m, near <=25m/far>=50m; ambiguity OR over same-named anchors; unsupported relation Unknown. No GT target identity validates inference constraints.",
+  "language_swap": "One fixed color replacement in conservatively bound target attribute phrase. Multi-positive language-derived labels, exact attribute-field changes, unsupported/no opposite observed labels excluded. Never a unique identity claim.",
+  "confidence": "Only internal Dev. Existing P2 temperature fixed. Raw tri-class logits, Match-vs-Mismatch AUC, multiclass and binary Brier/ECE, fixed 10 bins. Top-candidate risk includes target-absent queries, without training negative labels. Preserve original threshold1.01. Alternate confidence proxies diagnostic only, never deployed.",
+  "confidence_thresholds": [
+    0,
+    0.001,
+    0.005,
+    0.01,
+    0.025,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    0.8,
+    0.9,
+    0.95,
+    0.99,
+    1.01
+  ],
+  "safety": "Dev diagnostic interval qualifies only with >=10 distinct accepted families and family-any-error Wilson95 lower correct>=0.9, same P2 check; no Seen threshold exploration.",
+  "offline_amplitudes": [
+    0,
+    0.025,
+    0.05,
+    0.1,
+    0.25,
+    0.5,
+    1,
+    2,
+    8,
+    "strong"
+  ],
+  "residual": "Offline only. RGB no-confidence upper assumption: top RGB-only full query region, depth>=0.9, gain=amplitude with confidence=1; no GT visibility gating. Identity Oracle: actually observed GT instance support, same geometry and observed candidate pool. Additional credible-target Oracle population explicit. Original operational gain stays0.025/config unchanged.",
+  "budget": {
+    "training_runs": 0,
+    "image_encodings": 0,
+    "gpu_minutes": 10,
+    "cpu_minutes": 20,
+    "text_only_max_unique": 512
+  },
+  "stop": "No training/closed-loop/Unseen in this stage. Suggest exactly one minimal future change only if independent RGB identity gain, nonzero supported safe Dev coverage, and useful fusion ceiling all demonstrated; otherwise auxiliary visual validation recommendation. No selection using Seen sensitivity curves.",
+  "tie_handling": "Identity/attribute metrics use uniform expected accuracy among exactly tied top candidates and expected tied target rank, avoiding arbitrary index wins for Black or same-cell instances. Theory residual retains fixed torch argmax selection and records it."
+}

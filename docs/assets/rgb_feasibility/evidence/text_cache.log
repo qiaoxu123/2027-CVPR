@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/rental/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 187, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/home/rental/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 157, in _get_module_details
+    code = loader.get_code(mod_name)
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/experiments/rgb_feasibility/run.py", line 57
+    assert encoder.encoded_images==0 and all(not p.requires_grad for p in encoder.model.parameters());torch.save(dict(texts=base,specs=specs),out/'text_features.pt');write(out/'manifest.json',dict(new_text_queries=len(needed),cached_texts=len(base),image_encodings=0,training_steps=0,seconds=time.time()-started,peak_gpu_bytes=torch.cuda.max_memory_allocated(),feature_sha256=file_sha256(out/'text_features.pt'),source_manifest_sha256=source,siglip_revision=encoder.model.config._commit_hash,protocol_sha256=file_sha256(Path(__file__).with_name('protocol.json')))
+                                                                                                                                                                           ^
+SyntaxError: '(' was never closed

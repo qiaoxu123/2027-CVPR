@@ -1,0 +1,33 @@
+{
+  "independent_rgb_identity_signal": true,
+  "dev_supported_safe_nonzero_coverage": false,
+  "offline_identity_mapping_ceiling_space": true,
+  "all_three_conditions": false,
+  "credible_error_families": 36,
+  "stable_50_family_requirement_met": false,
+  "training_recommendation": "no training in P2.5",
+  "next_stage": "RGB auxiliary visual verification only; stop RGB network training and navigation fusion",
+  "dev_safe_intervals": {
+    "city_only": {
+      "match": [],
+      "match_vs_mismatch": [],
+      "rank_softmax": [],
+      "score_gap_sigmoid": []
+    },
+    "aerial_city": {
+      "match": [],
+      "match_vs_mismatch": [],
+      "rank_softmax": [],
+      "score_gap_sigmoid": []
+    },
+    "external_aerial": {
+      "match": [],
+      "match_vs_mismatch": [],
+      "rank_softmax": [],
+      "score_gap_sigmoid": []
+    }
+  },
+  "formal_gain_unchanged": 0.025,
+  "formal_threshold_unchanged": 1.01,
+  "seen_threshold_optimization": false
+}

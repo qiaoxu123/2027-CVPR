@@ -1,0 +1,29 @@
+
+==================================== ERRORS ====================================
+________________ ERROR collecting tests/test_rgb_feasibility.py ________________
+../2027-CVPR-static-geometry/.venv/lib/python3.10/site-packages/_pytest/python.py:508: in importtestmodule
+    mod = import_path(
+../2027-CVPR-static-geometry/.venv/lib/python3.10/site-packages/_pytest/pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+../../../../miniconda3/envs/geonav/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+<frozen importlib._bootstrap>:1050: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1027: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1006: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:688: in _load_unlocked
+    ???
+../2027-CVPR-static-geometry/.venv/lib/python3.10/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests/test_rgb_feasibility.py:4: in <module>
+    from experiments.rgb_feasibility.run import query_spec
+E     File "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/experiments/rgb_feasibility/run.py", line 57
+E       assert encoder.encoded_images==0 and all(not p.requires_grad for p in encoder.model.parameters());torch.save(dict(texts=base,specs=specs),out/'text_features.pt');write(out/'manifest.json',dict(new_text_queries=len(needed),cached_texts=len(base),image_encodings=0,training_steps=0,seconds=time.time()-started,peak_gpu_bytes=torch.cuda.max_memory_allocated(),feature_sha256=file_sha256(out/'text_features.pt'),source_manifest_sha256=source,siglip_revision=encoder.model.config._commit_hash,protocol_sha256=file_sha256(Path(__file__).with_name('protocol.json')))
+E                                                                                                                                                                              ^
+E   SyntaxError: '(' was never closed
+=========================== short test summary info ============================
+ERROR tests/test_rgb_feasibility.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.21s

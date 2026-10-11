@@ -1,0 +1,111 @@
+{
+  "environment_versions": {
+    "python": "3.10.22",
+    "torch": "2.8.0+cu128",
+    "transformers": "4.57.6",
+    "numpy": "1.26.4",
+    "cuda": "12.8",
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition"
+  },
+  "base_commit": "06ebf5398d051ecfc105298821ce3b12eced0131",
+  "branch": "research/rgb-feasibility-20261011",
+  "seed": 20261011,
+  "python": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-assets/remoteclip/.venv/bin/python",
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "HF_HUB_OFFLINE": "1"
+  },
+  "commands": [
+    {
+      "module": "experiments.rgb_feasibility.run text",
+      "args": {
+        "p2": "runs/instance_grounding",
+        "output": "runs/rgb_feasibility/text_cache"
+      },
+      "seconds": 22.972622871398926
+    },
+    {
+      "module": "experiments.rgb_feasibility.run diagnose",
+      "args": {
+        "p2": "runs/instance_grounding",
+        "text": "runs/rgb_feasibility/text_cache",
+        "split": "dev",
+        "output": "runs/rgb_feasibility/dev_complete"
+      },
+      "seconds": 135.6527440547943
+    },
+    {
+      "module": "experiments.rgb_feasibility.run diagnose",
+      "args": {
+        "p2": "runs/instance_grounding",
+        "text": "runs/rgb_feasibility/text_cache",
+        "split": "seen",
+        "lock": "runs/rgb_feasibility/dev_complete/seen_lock.json",
+        "output": "runs/rgb_feasibility/seen"
+      },
+      "seconds": 147.75092768669128
+    },
+    {
+      "module": "experiments.rgb_feasibility.audit",
+      "args": {
+        "runs": "runs/rgb_feasibility",
+        "p2": "runs/instance_grounding"
+      },
+      "seconds": 33.2836537361145
+    },
+    {
+      "module": "experiments.instance_grounding.cases",
+      "args": {
+        "features": "runs/instance_grounding/features_seen",
+        "predictions": "runs/rgb_feasibility/case_input_predictions.jsonl",
+        "output": "runs/rgb_feasibility/cases"
+      },
+      "note": "Six independent families, three original identity successes and three failures, offline illustration only"
+    },
+    {
+      "module": "experiments.rgb_feasibility.analyze",
+      "args": {
+        "runs": "runs/rgb_feasibility",
+        "assets": "docs/assets/rgb_feasibility",
+        "report": "docs/P2_5_RGB_FEASIBILITY_REPORT.md"
+      }
+    },
+    {
+      "module": "pytest",
+      "args": [
+        "-q"
+      ],
+      "log": "runs/rgb_feasibility/regression_tests.log"
+    }
+  ],
+  "no_training": true,
+  "no_image_encoding": true,
+  "no_navigation": true,
+  "no_unseen": true,
+  "protocol_sha256": "453e0ef50ec0a0ac0bef18149d5c085c7024bf83e51ad0f4d54fce5f9af3ae5d",
+  "source_sha256": {
+    "__init__.py": "ccf2e82359b62c16c2cabb6f78b2be20cdf041517b0d83398c22e257f3516337",
+    "core.py": "351c3c4d204095f0a1784f1f7fa9a579820b2f595e9eccc91fc556abc819b514",
+    "run.py": "53f6be4f409a31710dd97d9604dc0c89525d17bcfabfe4ecb530eaa986f86a83",
+    "analyze.py": "48e88c551e8795a7d8a5af8f995ea324fe78eb80ce27451115c82eb1254744f3",
+    "audit.py": "32fc02bf918952f8f130dbe6074adf8e9023b9bacd206896a606292bd483656e"
+  },
+  "checkpoint_sha256": {
+    "native": null,
+    "city_only": "80ba553c11a8513226a1c1e97748f3dde8e677f8f9473fe77de725de903d24c6",
+    "external_aerial": "8dfef677ee174213231779f71dcb38a48891a40339b47b9a516499a8f872e373",
+    "aerial_city": "6905434f801827e88c6dcd83536561ca0717b6cc4f012bc0b2c4483e4de26a09",
+    "previous_aerial_projection": "91d078490f7c85ed798e319954fe1c021fa0adf9d422977d86801cf9d0b309ad"
+  },
+  "source_feature_sha256": {
+    "train": "8ad5450a79fe1e2f063e726e9144c239e26b4f62591fde7a802432f1a42fadcb",
+    "dev": "e4f71f15bc84c2362260663d1742447555f68d05cb04971f152898434542cb53",
+    "seen": "9212e5363c1101ebe9f2b8b5a042514b9151ffa5827a153ec7801857c02db799"
+  },
+  "exceptions": [
+    "Initial source syntax error caught by synthetic collection before any encoding; logs preserved.",
+    "First Dev incomplete run failed JSON numpy bool serialization; fixed before Seen, failed directory/log preserved.",
+    "Supported phrase and relation population fields added during pre-Seen Dev development; no model/config tuned."
+  ]
+}
