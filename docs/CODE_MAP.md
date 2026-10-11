@@ -6,6 +6,7 @@
 
 | 功能 | 核心源码 | 入口 |
 |:--|:--|:--|
+| 正式 GraphNav-V1 C1 | `graphnav/stage1.py`, `graphnav/stage1_runtime.py`, `graphnav/stage1_checkpoint.py` | `scripts/evaluate_closedloop.py --model graphnav-v1`（冻结清单校验） |
 | 语言–地标静态定位 A3 | `graphnav/full_localization.py`, `graphnav/candidate_geometry.py` | `scripts/train_a3_replicate.py`, `scripts/train_static_extension.py` |
 | A4 GAT 与地标关系图 | `graphnav/semantic_graph.py`, `graphnav/graph.py` | `scripts/train_static_extension.py` |
 | 已训练控制器权重迁移 | `graphnav/static_transfer_runtime.py`, `graphnav/a3_runtime.py` | `scripts/evaluate_closedloop.py --model static-transfer` |
@@ -36,5 +37,5 @@
 ## main 分支维护状态
 
 - 当前可复现主线是 A3 Geometry + 经来源核验的 Trajectory/Stop，A4 GAT/视觉/History 不自动作为默认。
-- 本地 GraphNav-V1 结果尚未连同权重与来源报告同步到远端 main，详见 [维护核查](MAIN_BRANCH_AUDIT_20261011.md)。
+- GraphNav-V1 正式代码、权重来源清单、Seen/Unseen/Test-Unseen 指标现已归档于 main 的 `reports/graphnav_v1_stage1/`；`.pt` 权重仍需本地核验，不随 Git 分发。
 - CI、历史报告路径和配置兼容均是删除旧文件前的检查项。
