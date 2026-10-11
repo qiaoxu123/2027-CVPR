@@ -6,7 +6,7 @@
 
 GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程：利用**具名地标及其轮廓几何**，从语言指令推断全局目标位置，再通过有界控制器执行导航。项目包含在真实可见范围内提取 RGB/Depth 证据、累积历史记忆和更新目标信念的实验实现。
 
-> **研究状态（2026-10-10）**：最强已验证的静态定位骨干是 **A3 Geometry**，不是 GAT。A3 Epoch14 的 Val Seen 静态 R@1/20m 为 **48.47%**；固定 Seen128 闭环 SR 为 **48.44%**。这**不是全量 Seen 或 Unseen 的最终性能**。完整视觉/History 联合方案仍处研究与训练阶段，不能作为已完成的性能提升宣称。本仓库并非已接收的 CVPR 论文官方实现。
+> **远端 main 状态（2026-10-11）**：已确认最强静态主干为 **A3 Geometry**（不是 A4 GAT），并保留视觉/History、双向回程的受控研究结果。**完整 GraphNav-V1 已在本地完成 Seen/Unseen 评估，但其报告、Commit `9e458d7` 和最终权重尚未归档到当前远端 `main`**。因此远端默认复现入口仍为带独立来源检查的 A3 Geometry + 既有 Trajectory/Stop，不得将研究性 RGB/History 模块自动视为最优。详见 [main 核查与清理记录](docs/MAIN_BRANCH_AUDIT_20261011.md)。本仓库并非已接收的 CVPR 论文官方实现。
 
 [快速开始](#快速开始) · [已验证结果](#已验证结果) · [评估与复现](docs/REPRODUCIBILITY.md) · [代码导航](docs/CODE_MAP.md) · [研究报告索引](#研究报告与局限)
 
@@ -77,7 +77,7 @@ cd 2027-CVPR-Dev
 python -m pip install -e '.[dev,data,foundation]'
 python -m pip install pyyaml
 
-pytest -q
+python -m pytest -q
 python -m graphnav.train --smoke --epochs 1 --steps 2 --device cpu \
   --grid-size 4 --max-landmarks 3 --top-k 3 --hidden 32 \
   --text-dim 16 --waypoints 3 --batch-size 2 \
@@ -155,7 +155,7 @@ configs/           已归档实验环境约束
 - [联合训练 Epoch1 问题及 Stop 修正](docs/JOINT_EPOCH1_CONTROL_FIX_AND_ABLATIONS.md)：**旧联合训练会重新初始化控制器，不可用来替代强基线**。
 - [复现及结果索引](docs/REPRODUCIBILITY.md)：如何区分正式指标与开发性诊断。
 
-**当前未解决：** 新 A3 的完整 Val Seen/Unseen 闭环结果、真实 RGB 对候选重排的因果增益、可信历史纠错、真实透视相机/遮挡和三维安全避障。未经训练或评估的模块不以结果形式展示。
+**当前限制：** 最新本地 GraphNav-V1 全量评估尚未随权重/来源审计同步进入远端 main；已有视觉与 History 消融尚未证明稳定净收益。真实透视相机/遮挡、三维安全避障仍不属于已验证能力。独立的视觉基准和双向回程 Pilot 已完成，但不能据此替代正式导航配置。
 
 ## 引用与许可
 

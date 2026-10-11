@@ -13,14 +13,15 @@ from torch import nn
 
 from .graph import EdgeGATv2
 from .semantic_geometry import (
-    EDGE_TYPES, NODE_TYPES, RELATIONS, build_entities,
+    EDGE_TYPES, NODE_TYPES, build_entities,
     geometry_pair_distance, parse_spatial_relations, polygon_center,
 )
 
 
 def _physical_node_geometry(entity, bounds):
     xy = np.asarray(entity["geometry_m"], np.float32)
-    low, span = np.asarray(bounds[:2], np.float32), np.asarray(bounds[2:], np.float32) - np.asarray(bounds[:2], np.float32)
+    low = np.asarray(bounds[:2], np.float32)
+    span = np.asarray(bounds[2:], np.float32) - low
     center = xy.mean(axis=0)
     dif = xy.max(axis=0) - xy.min(axis=0)
     diffs = np.diff(xy, axis=0)
