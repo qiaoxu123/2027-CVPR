@@ -1,0 +1,62 @@
+{
+  "stage": "P3.5-A; B conditional",
+  "seed": 20261011,
+  "parent_commit": "043d3897a97af8f35ee60889fa3640f59393c4ad",
+  "cohort": "original middle cached prefix per family, legal public bounds/AGL/obstacles; deterministic map-stratified hash; no target/error selection",
+  "train_families": 4,
+  "internal_dev_families": 6,
+  "seen": false,
+  "unseen": false,
+  "training": false,
+  "max_extra_observations": 2,
+  "xy_step_max_m": 50,
+  "z_step_max_m": 10,
+  "agl_min_m": 10,
+  "agl_max_m": 100,
+  "navigation_reserved_actions": 4,
+  "camera_tilts": [
+    0,
+    20,
+    40,
+    60
+  ],
+  "goal_top_k": 8,
+  "merge_radius_m": 25,
+  "max_modes": 2,
+  "lateral_m": 12,
+  "public_obstacle_clearance_m": 2,
+  "utility_cost_lambda": 0.05,
+  "library": "hold, approach, left, right, descend, ascend toward each retained merged mode; each at nadir or 20/40/60 aimed at that mode; add recorded-yaw obliques",
+  "history": "causal original cached ROI evidence plus reached credible rendered regions; no future frame selection",
+  "oracle": "offline exact best legal two-exposure trace in evaluated catalogue: repeated first-step public library views plus six reached policy traces; upper bound only for this catalogue, NOT global physical optimum",
+  "strategies": [
+    "fixed_nadir",
+    "camera_only",
+    "move_nadir",
+    "active_view",
+    "random_legal",
+    "existing_belief_active",
+    "view_oracle"
+  ],
+  "frame_quality": "unchanged P3-A gates; z-buffer measured points; radius1; 512 square/HFOV90",
+  "cost_reporting": "movement m, vertical m, cloud/actual render seconds, gimbal rotation degrees, exposure count; no invented flight-time model",
+  "coverage_acceptance": {
+    "active_minus_fixed_pp_min": 8,
+    "map_ci_lower_gt_zero": true,
+    "active_gt_random_same_budget": true,
+    "oracle_requires_actual_credible_rgb": true
+  },
+  "identity_acceptance": {
+    "independent_visible_error_families_min": 50,
+    "dual_gain_pp_min": 5,
+    "paired_ci_lower_gt_zero": true,
+    "real_minus_black_shuffle_map_ci_lower_gt_zero": true
+  },
+  "budget": {
+    "render_minutes_max": 35,
+    "frozen_inference_minutes_max": 10,
+    "training_minutes": 0
+  },
+  "stop": "Stage A fails => no frozen inference; fewer than50 visible-error families => identity acceptance unavailable; no fusion or closedloop",
+  "history_quality_prior": "0.5 + 0.5 * last reached frame valid fraction; positive prior avoids zero utility from initial empty view"
+}
