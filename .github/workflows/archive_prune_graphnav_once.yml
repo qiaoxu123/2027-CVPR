@@ -86,10 +86,14 @@ jobs:
           # The one-time cleanup PR itself is also temporary. Only retire it
           # if GitHub confirms PR #10 is merged and its head is unchanged.
           cleanup_branch="maintenance/archive-redundant-branches-20261011"
-          pr_merged="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/10" --jq '.merged')"
-          pr_head="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/10" --jq '.head.sha')"
+          expected_self="c6d2d6c4b3a9ab6cce468e7f336f0c54c53b887a"
           current="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/$cleanup_branch" --jq '.object.sha' 2>/dev/null || true)"
-          if [[ "$pr_merged" == "true" && -n "$current" && "$current" == "$pr_head" ]]; then
+          if [[ "$current" == "$expected_self" ]]; then
+            ancestry="$(gh api "repos/${GITHUB_REPOSITORY}/compare/$current...main" --jq '.status')"
+            if [[ "$ancestry" != "ahead" && "$ancestry" != "identical" ]]; then
+              echo "Cleanup branch not merged into main, refusing deletion" >&2
+              exit 1
+            fi
             archive="archive/graphnav-20261011/maintenance--archive-redundant-branches-20261011"
             found="$(git ls-remote --refs origin "refs/tags/$archive" | awk '{print $1}')"
             if [[ -z "$found" ]]; then
@@ -108,7 +112,7 @@ jobs:
               exit 1
             fi
           else
-            echo "$cleanup_branch,$pr_head,,SKIPPED_CHANGED_OR_NOT_MERGED" >> branch_archive_results.csv
+            echo "$cleanup_branch,$expected_self,,SKIPPED_CHANGED_OR_MISSING" >> branch_archive_results.csv
           fi
           cat branch_archive_results.csv
       - name: Save archival manifest
