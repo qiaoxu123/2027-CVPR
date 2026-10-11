@@ -1,0 +1,95 @@
+{
+  "cases": [
+    {
+      "split": "seen",
+      "group": "success",
+      "index": 320,
+      "map_name": "birmingham_block_3",
+      "image": "seen_success_320.png",
+      "arrays": "seen_success_320.npz",
+      "metrics": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 1.0,
+        "NE": 18.55254806203025,
+        "nDTW": 0.6071381614483319,
+        "sDTW": 0.6071381614483319,
+        "steps": 10,
+        "path_length": 325.78035494410443,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 50.40873242118819
+      },
+      "replay_matches_saved_diagnostics": true
+    },
+    {
+      "split": "seen",
+      "group": "failure",
+      "index": 0,
+      "map_name": "birmingham_block_1",
+      "image": "seen_failure_0.png",
+      "arrays": "seen_failure_0.npz",
+      "metrics": {
+        "SR": 0.0,
+        "OSR": 0.0,
+        "SPL": 0.0,
+        "NE": 34.28479100203718,
+        "nDTW": 0.1190815949683824,
+        "sDTW": 0.0,
+        "steps": 11,
+        "path_length": 374.38712666443985,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 125.24804117856547
+      },
+      "replay_matches_saved_diagnostics": true
+    },
+    {
+      "split": "unseen",
+      "group": "success",
+      "index": 483,
+      "map_name": "cambridge_block_10",
+      "image": "unseen_success_483.png",
+      "arrays": "unseen_success_483.npz",
+      "metrics": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.9886378049248147,
+        "NE": 2.6489705812383835,
+        "nDTW": 0.5995328587343915,
+        "sDTW": 0.5995328587343915,
+        "steps": 9,
+        "path_length": 314.9431342643301,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 41.17120217997581
+      },
+      "replay_matches_saved_diagnostics": true
+    },
+    {
+      "split": "unseen",
+      "group": "failure",
+      "index": 0,
+      "map_name": "birmingham_block_5",
+      "image": "unseen_failure_0.png",
+      "arrays": "unseen_failure_0.npz",
+      "metrics": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 110.04353251312295,
+        "nDTW": 0.0981387019967272,
+        "sDTW": 0.0,
+        "steps": 6,
+        "path_length": 127.22915096965164,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 188.38117284966367
+      },
+      "replay_matches_saved_diagnostics": true
+    }
+  ],
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "selection": "First failure and first success on a different map, in source episode order.",
+  "note": "Actual 28x28 network fields replayed from saved causal observations. GT used only after replay for plotting. Shared probability scale within each figure; residual is a logit correction, not probability."
+}

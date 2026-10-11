@@ -1,0 +1,76 @@
+{
+  "episodes": 128,
+  "episode_manifest_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695",
+  "poses_stop_candidates_exact": true,
+  "differing_episode_indices": [],
+  "max_pose_difference": 0.0,
+  "sources": {
+    "a3": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-relational-visual-belief/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+      "sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7"
+    },
+    "head": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt",
+      "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+    },
+    "reference": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+    }
+  },
+  "baseline_protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "complete_protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "baseline_metrics": {
+    "SR": 0.484375,
+    "OSR": 0.5625,
+    "SPL": 0.47412989304098,
+    "NE": 28.68837120364637,
+    "nDTW": 0.2961169029727222,
+    "sDTW": 0.16148116429642653,
+    "steps": 9.28125,
+    "path_length": 210.3412934269466,
+    "policy_stop": 0.921875,
+    "inference_ms": 6.684949239173776,
+    "episodes": 128,
+    "False_Stop_Rate": 0.5084745762711864,
+    "false_stop_episode_fraction": 0.46875,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "complete_metrics": {
+    "SR": 0.484375,
+    "OSR": 0.5625,
+    "SPL": 0.47412989304098,
+    "NE": 28.68837120364637,
+    "nDTW": 0.2961169029727222,
+    "sDTW": 0.16148116429642653,
+    "steps": 9.28125,
+    "path_length": 210.3412934269466,
+    "policy_stop": 0.921875,
+    "inference_ms": 47.888817949274866,
+    "episodes": 128,
+    "False_Stop_Rate": 0.5084745762711864,
+    "false_stop_episode_fraction": 0.46875,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "timing_note": "Supplementary Seen controls overlap training; timing is measured under concurrency=2 and cannot establish isolated speedup."
+}
