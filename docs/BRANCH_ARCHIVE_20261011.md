@@ -1,3 +1,17 @@
+# GraphNav 分支归档与清理结果（2026-10-11）
+
+> **实际完成**：在 GitHub Actions [38111070896](https://github.com/qiaoxu123/2027-CVPR-Dev/actions/runs/38111070896) 中，通过先创建并核验远端轻量 Tag、再按固定 SHA 校验删除分支的流程，**12条旧/临时 GraphNav 分支成功归档并删除，12个 `refs/tags/archive/graphnav-20261011/*` 标签可恢复原始提交**。早期两次因标签核验与 PR 权限限制安全中止，不构成历史丢失；最终已修正完成。
+
+> **最终保留5个分支**：
+> - `main`：GraphNav-V1 C Epoch1 正式代码、全量 Seen/Unseen/Test-Unseen 报告，保留 A3 强基线和后续研究代码。
+> - `2027-CVPR/graphnav-relational-visual-belief`：原 V1 完整提交链（含 `9e458d7`）。
+> - `research/multiview-rgb-grounding-20261011`：多视角 RGB 研究头。
+> - `research/active-view-selection-20261011`：推送后新更新，SHA 不再匹配原计划，因此自动跳过并保留。
+> - `backup/20261011/detached/instruction-landmarks-only-60a4efe7`：detached HEAD 历史备份。
+
+> **证据边界**：本报告只验证 `qiaoxu123/2027-CVPR-Dev` 的远端引用状态。用户提到的95/96本地分支、25个 detached HEAD 以及 HETT 丢失17对象的问题需以不可访问的 `.workspace/git_push_audit_20261011/PUSH_REPORT.md` 和各仓库原始资料单独核验；本次未接触其它仓库。权重文件 `.pt` 未入 Git，正式性能由已冻结 Checkpoint SHA 及原实验报告支持，不等于本次重新训练或 GPU 重评。
+
+---
 # GraphNav 分支归档计划（2026-10-11）
 
 本次**只涉及** `qiaoxu123/2027-CVPR-Dev` 仓库，不涉及 HETT、SBFNav 或本地工作区中其它仓库的95/96分支，也不删除任何 detached HEAD 备份。
