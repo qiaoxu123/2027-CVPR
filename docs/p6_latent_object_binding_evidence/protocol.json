@@ -1,0 +1,20 @@
+{
+  "seed": 20261011,
+  "baseline": "strict-weight-verified public A3, unchanged 20m radius/784 cells",
+  "splits": "full original Train Seen, pre-existing held-out Internal Dev maps; no Seen/Unseen/closed-loop",
+  "target_candidates": "all map objects, never GT-dependent TopK filtering",
+  "reference_support": 8,
+  "assignment_beam": 16,
+  "max_variables": 8,
+  "unknown": "preserve omitted support mass; no observation means exactly zero RGB evidence",
+  "geometry": "polygon boundary distance; symmetric polygon-hull Between with anchor interiors excluded; 15m corridor scale; nested factors retained",
+  "inference": "sum-product target marginal over reference assignments; separate hard-MAP control",
+  "goal": "public position kernel sigma10m plus continuous spatial field; A3 fallback for Unknown",
+  "baseline_blend": 0.25,
+  "pixel_budget_frames_per_split": 128,
+  "roi_quality": "side>=10px, depth support>=0.9; geometric proxy, no human semantic truth",
+  "training": "full Train geometry calibration, 3 epochs; matched geometry-only and RGB parameter budget; RGB available only for cached Train families; all backbones frozen",
+  "optimizer": "AdamW lr0.001, effective batch32; no Seen selection",
+  "bootstrap": "2000 paired family/map resamples, seed20261011",
+  "stopping": "at most 3 epochs per small head, at most 15min preprocessing per stage; retain negative results; no GAT/RL/navigation training"
+}

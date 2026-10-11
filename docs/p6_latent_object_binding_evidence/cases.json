@@ -1,0 +1,1072 @@
+[
+  {
+    "sample_id": "train_seen:cambridge_block_7:141:1:9451:forward:145",
+    "map_name": "cambridge_block_7",
+    "instruction": "A short gray building at the end of Kings Lane that has a black car parked at it next to the Dokett Building.",
+    "variables": [
+      {
+        "phrase": "A short gray building",
+        "role": "target",
+        "object_type": "Building",
+        "colors": [
+          "gray"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          0,
+          21
+        ],
+        "head_span": [
+          13,
+          21
+        ],
+        "head_text": "building",
+        "variable": "Z",
+        "coreference": null,
+        "observable_phrase": "a gray building",
+        "observable_supported": true
+      },
+      {
+        "phrase": "Kings Lane",
+        "role": "reference",
+        "object_type": "Footpath",
+        "colors": [],
+        "shape": null,
+        "size": null,
+        "named_ids": [
+          272,
+          273,
+          841,
+          864
+        ],
+        "named_names": [
+          "Kings Lane"
+        ],
+        "unknown": [],
+        "span": [
+          36,
+          46
+        ],
+        "head_span": [
+          36,
+          46
+        ],
+        "head_text": "Kings Lane",
+        "variable": "X1",
+        "coreference": null,
+        "observable_phrase": "a kings lane",
+        "observable_supported": true
+      },
+      {
+        "phrase": "a black car",
+        "role": "reference",
+        "object_type": "Car",
+        "colors": [
+          "black"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          56,
+          67
+        ],
+        "head_span": [
+          64,
+          67
+        ],
+        "head_text": "car",
+        "variable": "X2",
+        "coreference": null,
+        "observable_phrase": "a black car",
+        "observable_supported": true
+      },
+      {
+        "phrase": "Dokett Building",
+        "role": "reference",
+        "object_type": "Building",
+        "colors": [],
+        "shape": null,
+        "size": null,
+        "named_ids": [
+          34
+        ],
+        "named_names": [
+          "Dokett Building"
+        ],
+        "unknown": [],
+        "span": [
+          93,
+          108
+        ],
+        "head_span": [
+          93,
+          108
+        ],
+        "head_text": "Dokett Building",
+        "variable": "X3",
+        "coreference": null,
+        "observable_phrase": "a dokett building",
+        "observable_supported": true
+      }
+    ],
+    "factors": [
+      {
+        "kind": "near",
+        "subject": 0,
+        "subject_hypotheses": [
+          {
+            "subject": 0,
+            "probability": 1.0
+          }
+        ],
+        "anchors": [
+          1
+        ],
+        "trigger": "at",
+        "trigger_span": [
+          22,
+          24
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.8,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": false
+      },
+      {
+        "kind": "near",
+        "subject": 2,
+        "subject_hypotheses": [
+          {
+            "subject": 2,
+            "probability": 0.65
+          },
+          {
+            "subject": 0,
+            "probability": 0.35
+          }
+        ],
+        "anchors": [
+          3
+        ],
+        "trigger": "at",
+        "trigger_span": [
+          75,
+          77
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.55,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": false
+      },
+      {
+        "kind": "near",
+        "subject": 2,
+        "subject_hypotheses": [
+          {
+            "subject": 2,
+            "probability": 0.65
+          },
+          {
+            "subject": 0,
+            "probability": 0.35
+          }
+        ],
+        "anchors": [
+          3
+        ],
+        "trigger": "next to",
+        "trigger_span": [
+          81,
+          88
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.55,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": false
+      }
+    ],
+    "reference_proposals": {
+      "1": {
+        "indices": [
+          272,
+          273,
+          841,
+          864
+        ],
+        "probabilities": [
+          0.4966535745378575,
+          0.4966535745378575,
+          0.0033464254621424273,
+          0.0033464254621424273
+        ],
+        "omitted_mass": 0.0
+      }
+    },
+    "reference_assignments": [
+      {
+        "1": 272
+      },
+      {
+        "1": 273
+      },
+      {
+        "1": 841
+      },
+      {
+        "1": 864
+      }
+    ],
+    "target_top8": [
+      "142",
+      "125",
+      "138",
+      "141",
+      "68",
+      "124",
+      "121",
+      "134"
+    ],
+    "target_top8_probability": [
+      0.18609000742435455,
+      0.12780138850212097,
+      0.10124283283948898,
+      0.0961935892701149,
+      0.08216658979654312,
+      0.0782746896147728,
+      0.0752890482544899,
+      0.0646166056394577
+    ],
+    "metrics": {
+      "ne": 22.73037642242372,
+      "goal_r1": 0.0,
+      "object_r1": 0.0,
+      "goal_r4": 1.0,
+      "object_r4": 1.0,
+      "goal_r8": 1.0,
+      "object_r8": 1.0,
+      "recovery": 0.0,
+      "damage": 1.0,
+      "net_recovery": -1.0
+    },
+    "baseline": {
+      "ne": 8.68546921755279,
+      "goal_r1": 1.0,
+      "object_r1": 0.0,
+      "goal_r4": 1.0,
+      "object_r4": 0.0,
+      "goal_r8": 1.0,
+      "object_r8": 1.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "rgb_source": {
+      "source_step": 139,
+      "episode_id": "train_seen:cambridge_block_7:141:1:9451:forward",
+      "actual_camera_pose": [
+        522.7104800056,
+        783.4897936074,
+        64.6948838778,
+        2.4706712149503356
+      ],
+      "view_key": "79f4a330748c93a8a4c1107d"
+    },
+    "figure": "case_00.png",
+    "offline_only": "GT used to select and illustrate cases only, never model input"
+  },
+  {
+    "sample_id": "train_seen:birmingham_block_11:18:3:6799:forward:41",
+    "map_name": "birmingham_block_11",
+    "instruction": "The gray parking lot that is on the Manchester Bournemouth footpath in front of a large building.",
+    "variables": [
+      {
+        "phrase": "The gray parking lot",
+        "role": "target",
+        "object_type": "Parking",
+        "colors": [
+          "gray"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          0,
+          20
+        ],
+        "head_span": [
+          9,
+          20
+        ],
+        "head_text": "parking lot",
+        "variable": "Z",
+        "coreference": null,
+        "observable_phrase": "a gray parking lot",
+        "observable_supported": true
+      },
+      {
+        "phrase": "footpath",
+        "role": "reference",
+        "object_type": "Footpath",
+        "colors": [],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          59,
+          67
+        ],
+        "head_span": [
+          59,
+          67
+        ],
+        "head_text": "footpath",
+        "variable": "X1",
+        "coreference": null,
+        "observable_phrase": "a footpath",
+        "observable_supported": true
+      },
+      {
+        "phrase": "a large building",
+        "role": "reference",
+        "object_type": "Building",
+        "colors": [],
+        "shape": null,
+        "size": "large",
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          80,
+          96
+        ],
+        "head_span": [
+          88,
+          96
+        ],
+        "head_text": "building",
+        "variable": "X2",
+        "coreference": null,
+        "observable_phrase": "a building",
+        "observable_supported": true
+      }
+    ],
+    "factors": [
+      {
+        "kind": "along",
+        "subject": 0,
+        "subject_hypotheses": [
+          {
+            "subject": 0,
+            "probability": 1.0
+          }
+        ],
+        "anchors": [
+          1
+        ],
+        "trigger": "on",
+        "trigger_span": [
+          29,
+          31
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.8,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": false
+      },
+      {
+        "kind": "front",
+        "subject": 1,
+        "subject_hypotheses": [
+          {
+            "subject": 1,
+            "probability": 0.65
+          },
+          {
+            "subject": 0,
+            "probability": 0.35
+          }
+        ],
+        "anchors": [
+          2
+        ],
+        "trigger": "in front of",
+        "trigger_span": [
+          68,
+          79
+        ],
+        "frame_hypotheses": [
+          "world-north-up",
+          "current-uav",
+          "opposite-current-uav"
+        ],
+        "confidence": 0.55,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": true
+      }
+    ],
+    "reference_proposals": {
+      "1": {
+        "indices": [
+          4,
+          5,
+          2,
+          3
+        ],
+        "probabilities": [
+          0.2524813930293532,
+          0.2524813930293532,
+          0.24948943700533563,
+          0.24554777693595803
+        ],
+        "omitted_mass": 0.0
+      }
+    },
+    "reference_assignments": [
+      {
+        "1": 4
+      },
+      {
+        "1": 5
+      },
+      {
+        "1": 2
+      },
+      {
+        "1": 3
+      }
+    ],
+    "target_top8": [
+      "18",
+      "19",
+      "4",
+      "5",
+      "16",
+      "15",
+      "17",
+      "20"
+    ],
+    "target_top8_probability": [
+      0.7836926579475403,
+      0.18924418091773987,
+      0.0030135465785861015,
+      0.0030135465785861015,
+      0.002746445359662175,
+      0.0025359175633639097,
+      0.002369220368564129,
+      0.0013726342003792524
+    ],
+    "metrics": {
+      "ne": 24.1991827454945,
+      "goal_r1": 0.0,
+      "object_r1": 1.0,
+      "goal_r4": 0.0,
+      "object_r4": 1.0,
+      "goal_r8": 0.0,
+      "object_r8": 1.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "baseline": {
+      "ne": 81.42142553509582,
+      "goal_r1": 0.0,
+      "object_r1": 1.0,
+      "goal_r4": 0.0,
+      "object_r4": 1.0,
+      "goal_r8": 0.0,
+      "object_r8": 1.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "rgb_source": {
+      "source_step": 31,
+      "episode_id": "train_seen:birmingham_block_11:18:3:6799:forward",
+      "actual_camera_pose": [
+        1208.7984798211,
+        724.2060045631,
+        32.1937522963,
+        -0.03271007012202646
+      ],
+      "view_key": "a1b5029a9ec10de3841eaf35"
+    },
+    "figure": "case_01.png",
+    "offline_only": "GT used to select and illustrate cases only, never model input"
+  },
+  {
+    "sample_id": "train_seen:birmingham_block_11:18:0:6797:forward:33",
+    "map_name": "birmingham_block_11",
+    "instruction": "The large parking lot in front of the large white and gray building on the Cross Country Manchester to Bournemouth footpath.",
+    "variables": [
+      {
+        "phrase": "The large parking lot",
+        "role": "target",
+        "object_type": "Parking",
+        "colors": [],
+        "shape": null,
+        "size": "large",
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          0,
+          21
+        ],
+        "head_span": [
+          10,
+          21
+        ],
+        "head_text": "parking lot",
+        "variable": "Z",
+        "coreference": null,
+        "observable_phrase": "a parking lot",
+        "observable_supported": true
+      },
+      {
+        "phrase": "gray building",
+        "role": "reference",
+        "object_type": "Building",
+        "colors": [
+          "gray"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          54,
+          67
+        ],
+        "head_span": [
+          59,
+          67
+        ],
+        "head_text": "building",
+        "variable": "X1",
+        "coreference": null,
+        "observable_phrase": "a gray building",
+        "observable_supported": true
+      },
+      {
+        "phrase": "footpath",
+        "role": "reference",
+        "object_type": "Footpath",
+        "colors": [],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          115,
+          123
+        ],
+        "head_span": [
+          115,
+          123
+        ],
+        "head_text": "footpath",
+        "variable": "X2",
+        "coreference": null,
+        "observable_phrase": "a footpath",
+        "observable_supported": true
+      }
+    ],
+    "factors": [
+      {
+        "kind": "front",
+        "subject": 0,
+        "subject_hypotheses": [
+          {
+            "subject": 0,
+            "probability": 1.0
+          }
+        ],
+        "anchors": [
+          1
+        ],
+        "trigger": "in front of",
+        "trigger_span": [
+          22,
+          33
+        ],
+        "frame_hypotheses": [
+          "world-north-up",
+          "current-uav",
+          "opposite-current-uav"
+        ],
+        "confidence": 0.8,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": true
+      },
+      {
+        "kind": "along",
+        "subject": 1,
+        "subject_hypotheses": [
+          {
+            "subject": 1,
+            "probability": 0.65
+          },
+          {
+            "subject": 0,
+            "probability": 0.35
+          }
+        ],
+        "anchors": [
+          2
+        ],
+        "trigger": "on",
+        "trigger_span": [
+          68,
+          70
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.55,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": false
+      }
+    ],
+    "reference_proposals": {},
+    "reference_assignments": [
+      {}
+    ],
+    "target_top8": [
+      "19",
+      "18",
+      "0",
+      "9",
+      "8",
+      "4",
+      "5",
+      "3"
+    ],
+    "target_top8_probability": [
+      0.7076884508132935,
+      0.2811582088470459,
+      0.0016112920129671693,
+      0.0012448553461581469,
+      0.0007524005486629903,
+      0.0007337452843785286,
+      0.0007337452843785286,
+      0.0006295763305388391
+    ],
+    "metrics": {
+      "ne": 24.45423257585463,
+      "goal_r1": 0.0,
+      "object_r1": 0.0,
+      "goal_r4": 0.0,
+      "object_r4": 1.0,
+      "goal_r8": 0.0,
+      "object_r8": 1.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "baseline": {
+      "ne": 24.45423257585463,
+      "goal_r1": 0.0,
+      "object_r1": 0.0,
+      "goal_r4": 0.0,
+      "object_r4": 1.0,
+      "goal_r8": 0.0,
+      "object_r8": 1.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "rgb_source": {
+      "source_step": 26,
+      "episode_id": "train_seen:birmingham_block_11:18:0:6797:forward",
+      "actual_camera_pose": [
+        1215.124601426,
+        721.9718422207,
+        25.4571184152,
+        -1.617001191458848
+      ],
+      "view_key": "dd79263accf4719f61b19d86"
+    },
+    "figure": "case_02.png",
+    "offline_only": "GT used to select and illustrate cases only, never model input"
+  },
+  {
+    "sample_id": "train_seen:birmingham_block_9:124:5:6041:forward:54",
+    "map_name": "birmingham_block_9",
+    "instruction": "a white car parked in between the Perry Barr bus depot and brown building. It is next to a black car.",
+    "variables": [
+      {
+        "phrase": "a white car",
+        "role": "target",
+        "object_type": "Car",
+        "colors": [
+          "white"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          0,
+          11
+        ],
+        "head_span": [
+          8,
+          11
+        ],
+        "head_text": "car",
+        "variable": "Z",
+        "coreference": null,
+        "observable_phrase": "a white car",
+        "observable_supported": true
+      },
+      {
+        "phrase": "Perry Barr bus depot",
+        "role": "reference",
+        "object_type": "Building",
+        "colors": [],
+        "shape": null,
+        "size": null,
+        "named_ids": [
+          21
+        ],
+        "named_names": [
+          "Perry Barr Bus Depot"
+        ],
+        "unknown": [],
+        "span": [
+          34,
+          54
+        ],
+        "head_span": [
+          34,
+          54
+        ],
+        "head_text": "Perry Barr bus depot",
+        "variable": "X1",
+        "coreference": null,
+        "observable_phrase": "a perry barr bus depot",
+        "observable_supported": true
+      },
+      {
+        "phrase": "brown building",
+        "role": "reference",
+        "object_type": "Building",
+        "colors": [
+          "brown"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          59,
+          73
+        ],
+        "head_span": [
+          65,
+          73
+        ],
+        "head_text": "building",
+        "variable": "X2",
+        "coreference": null,
+        "observable_phrase": "a brown building",
+        "observable_supported": true
+      },
+      {
+        "phrase": "a black car",
+        "role": "reference",
+        "object_type": "Car",
+        "colors": [
+          "black"
+        ],
+        "shape": null,
+        "size": null,
+        "named_ids": [],
+        "named_names": [],
+        "unknown": [],
+        "span": [
+          89,
+          100
+        ],
+        "head_span": [
+          97,
+          100
+        ],
+        "head_text": "car",
+        "variable": "X3",
+        "coreference": null,
+        "observable_phrase": "a black car",
+        "observable_supported": true
+      }
+    ],
+    "factors": [
+      {
+        "kind": "between",
+        "subject": 0,
+        "subject_hypotheses": [
+          {
+            "subject": 0,
+            "probability": 1.0
+          }
+        ],
+        "anchors": [
+          1,
+          2
+        ],
+        "trigger": "in between",
+        "trigger_span": [
+          19,
+          29
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.8,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": true,
+        "frame_unknown": false
+      },
+      {
+        "kind": "near",
+        "subject": 2,
+        "subject_hypotheses": [
+          {
+            "subject": 2,
+            "probability": 1.0
+          }
+        ],
+        "anchors": [
+          3
+        ],
+        "trigger": "next to",
+        "trigger_span": [
+          81,
+          88
+        ],
+        "frame_hypotheses": [
+          "world"
+        ],
+        "confidence": 0.8,
+        "status": "text-only scope, not reference identity truth",
+        "symmetric_anchors": false,
+        "frame_unknown": false
+      }
+    ],
+    "reference_proposals": {
+      "1": {
+        "indices": [
+          21
+        ],
+        "probabilities": [
+          1.0
+        ],
+        "omitted_mass": 0.0
+      },
+      "2": {
+        "indices": [
+          20,
+          21,
+          24,
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "probabilities": [
+          0.03920786030134017,
+          0.03889879996260224,
+          0.03882755728881456,
+          0.03839416445422796,
+          0.03839416445422796,
+          0.03839416445422796,
+          0.03839416445422796,
+          0.03839416445422796
+        ],
+        "omitted_mass": 0.6910949601761032
+      },
+      "3": {
+        "indices": [
+          168,
+          167,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "probabilities": [
+          0.0054859951822239,
+          0.00546142788224298,
+          0.005406187718227787,
+          0.005406187718227787,
+          0.005406187718227787,
+          0.005406187718227787,
+          0.005406187718227787,
+          0.005406187718227787
+        ],
+        "omitted_mass": 0.9566154506261664
+      }
+    },
+    "reference_assignments": [
+      {
+        "1": 21,
+        "2": 20,
+        "3": 168
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 167
+      },
+      {
+        "1": 21,
+        "2": 24,
+        "3": 168
+      },
+      {
+        "1": 21,
+        "2": 24,
+        "3": 167
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 26
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 27
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 28
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 29
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 30
+      },
+      {
+        "1": 21,
+        "2": 20,
+        "3": 31
+      },
+      {
+        "1": 21,
+        "2": 0,
+        "3": 168
+      },
+      {
+        "1": 21,
+        "2": 1,
+        "3": 168
+      },
+      {
+        "1": 21,
+        "2": 2,
+        "3": 168
+      },
+      {
+        "1": 21,
+        "2": 3,
+        "3": 168
+      }
+    ],
+    "target_top8": [
+      "104",
+      "120",
+      "92",
+      "118",
+      "112",
+      "98",
+      "122",
+      "101"
+    ],
+    "target_top8_probability": [
+      0.057210635393857956,
+      0.05698883906006813,
+      0.05587373301386833,
+      0.05338377505540848,
+      0.05032442882657051,
+      0.050293099135160446,
+      0.04985576495528221,
+      0.047688260674476624
+    ],
+    "metrics": {
+      "ne": 120.17891237032111,
+      "goal_r1": 0.0,
+      "object_r1": 0.0,
+      "goal_r4": 0.0,
+      "object_r4": 0.0,
+      "goal_r8": 0.0,
+      "object_r8": 0.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "baseline": {
+      "ne": 120.17891237032111,
+      "goal_r1": 0.0,
+      "object_r1": 0.0,
+      "goal_r4": 0.0,
+      "object_r4": 0.0,
+      "goal_r8": 0.0,
+      "object_r8": 0.0,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0
+    },
+    "rgb_source": {
+      "source_step": 39,
+      "episode_id": "train_seen:birmingham_block_9:124:5:6041:forward",
+      "actual_camera_pose": [
+        1066.7070547707,
+        854.7603334596,
+        14.9024632707,
+        -1.6742707019290481
+      ],
+      "view_key": "2bbbed260a973b878dee6b9f"
+    },
+    "figure": "case_03.png",
+    "offline_only": "GT used to select and illustrate cases only, never model input"
+  }
+]

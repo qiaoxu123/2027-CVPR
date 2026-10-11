@@ -1,0 +1,70 @@
+{
+  "prepared_cpu_inference": {
+    "independent": {
+      "families": 128,
+      "repetitions": 5,
+      "cpu_threads": 1,
+      "mean_ms": 0.25379714716109447,
+      "p50_ms": 0.2693209098652005,
+      "p95_ms": 0.4112633178010581,
+      "objects_range": [
+        21,
+        1104
+      ],
+      "assignments_range": [
+        1,
+        16
+      ]
+    },
+    "joint": {
+      "families": 128,
+      "repetitions": 5,
+      "cpu_threads": 1,
+      "mean_ms": 0.3140202017675619,
+      "p50_ms": 0.33014710061252117,
+      "p95_ms": 0.42750944849103684,
+      "objects_range": [
+        21,
+        1104
+      ],
+      "assignments_range": [
+        1,
+        16
+      ]
+    },
+    "hard": {
+      "families": 128,
+      "repetitions": 5,
+      "cpu_threads": 1,
+      "mean_ms": 0.3139515269140247,
+      "p50_ms": 0.3281993791460991,
+      "p95_ms": 0.4101008083671331,
+      "objects_range": [
+        21,
+        1104
+      ],
+      "assignments_range": [
+        1,
+        16
+      ]
+    },
+    "hsv_siglip": {
+      "families": 128,
+      "repetitions": 5,
+      "cpu_threads": 1,
+      "mean_ms": 0.30696184185217135,
+      "p50_ms": 0.30233298894017935,
+      "p95_ms": 0.4407540545798838,
+      "objects_range": [
+        21,
+        1104
+      ],
+      "assignments_range": [
+        1,
+        16
+      ]
+    }
+  },
+  "excludes": "graph construction, raster I/O, encoder inference and cold start; see separate stage manifests for these",
+  "gpu_training": "separate completed history files"
+}
