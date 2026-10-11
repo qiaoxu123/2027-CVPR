@@ -1,0 +1,511 @@
+{
+  "checks": {
+    "3dg_data": {
+      "url": "https://huggingface.co/api/datasets/fanfuxue/UAV-VLN-FOV",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": "f296bbdcf3a3cb4203d973abe5c05714de5c2247",
+      "gated": false,
+      "card_license": "apache-2.0",
+      "files": [
+        ".gitattributes",
+        "README.md",
+        "UAV-VLN-FOV/meta/instructions.json",
+        "UAV-VLN-FOV/meta/map_spawnarea_info.json",
+        "UAV-VLN-FOV/meta/object_attribute.txt",
+        "UAV-VLN-FOV/meta/object_description.json",
+        "UAV-VLN-FOV/meta/train_scene_trajectory_instruction_direction.json",
+        "UAV-VLN-FOV/test.rar",
+        "UAV-VLN-FOV/train.rar",
+        "UAV-VLN-FOV/unobject.rar",
+        "UAV-VLN-FOV/unscene.rar"
+      ]
+    },
+    "3dg_weights": {
+      "url": "https://huggingface.co/api/models/fanfuxue/3DG-VLN",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": "02e161fffd70fe8899a3b065dd41e45707221fcf",
+      "gated": false,
+      "card_license": "apache-2.0",
+      "files": [
+        ".gitattributes",
+        "Modelfile",
+        "README.md",
+        "added_tokens.json",
+        "chat_template.jinja",
+        "config.json",
+        "generation_config.json",
+        "merges.txt",
+        "model-00001-of-00004.safetensors",
+        "model-00002-of-00004.safetensors",
+        "model-00003-of-00004.safetensors",
+        "model-00004-of-00004.safetensors",
+        "model.safetensors.index.json",
+        "preprocessor_config.json",
+        "special_tokens_map.json",
+        "tokenizer.json",
+        "tokenizer_config.json",
+        "video_preprocessor_config.json",
+        "vocab.json"
+      ]
+    },
+    "travel_envs": {
+      "url": "https://huggingface.co/api/datasets/wangxiangyu0814/TravelUAV_env",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": "44de5739a95a2f6a88767446421cddada9606642",
+      "gated": false,
+      "card_license": null,
+      "files": [
+        ".gitattributes",
+        "BattlefieldKitDesert.z01",
+        "BattlefieldKitDesert.zip",
+        "BrushifyCountryRoads.zip",
+        "BrushifyForestPack.zip",
+        "BrushifyUrban.zip",
+        "Japanese_Street.zip",
+        "London_Street.zip",
+        "NordicHarbour.zip",
+        "WesterTown.zip",
+        "carla_town_envs.z01",
+        "carla_town_envs.z02",
+        "carla_town_envs.z03",
+        "carla_town_envs.z04",
+        "carla_town_envs.z05",
+        "carla_town_envs.z06",
+        "carla_town_envs.z07",
+        "carla_town_envs.z08",
+        "carla_town_envs.z09",
+        "carla_town_envs.z10",
+        "carla_town_envs.z11",
+        "carla_town_envs.zip",
+        "closeloop_envs.z01",
+        "closeloop_envs.z02",
+        "closeloop_envs.z03",
+        "closeloop_envs.z04",
+        "closeloop_envs.zip"
+      ]
+    },
+    "travel_data": {
+      "url": "https://huggingface.co/api/datasets/wangxiangyu0814/TravelUAV",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": "faa8f2514156455ea7423464cc1295e6f92575cb",
+      "gated": false,
+      "card_license": null,
+      "files": [
+        ".gitattributes",
+        "BattlefieldKitDesert.z01",
+        "BattlefieldKitDesert.z02",
+        "BattlefieldKitDesert.z03",
+        "BattlefieldKitDesert.zip",
+        "BrushifyCountryRoads.z01",
+        "BrushifyCountryRoads.z02",
+        "BrushifyCountryRoads.zip",
+        "BrushifyForestPack.z01",
+        "BrushifyForestPack.z02",
+        "BrushifyForestPack.z03",
+        "BrushifyForestPack.z04",
+        "BrushifyForestPack.zip",
+        "BrushifyUrban.z01",
+        "BrushifyUrban.z02",
+        "BrushifyUrban.zip",
+        "Carla_Town01.z01",
+        "Carla_Town01.z02",
+        "Carla_Town01.z03",
+        "Carla_Town01.z04",
+        "Carla_Town01.z05",
+        "Carla_Town01.zip",
+        "Carla_Town02.z01",
+        "Carla_Town02.z02",
+        "Carla_Town02.zip",
+        "Carla_Town03.z01",
+        "Carla_Town03.z02",
+        "Carla_Town03.z03",
+        "Carla_Town03.zip",
+        "Carla_Town04.z01",
+        "Carla_Town04.z02",
+        "Carla_Town04.z03",
+        "Carla_Town04.z04",
+        "Carla_Town04.zip",
+        "Carla_Town05.z01",
+        "Carla_Town05.z02",
+        "Carla_Town05.z03",
+        "Carla_Town05.zip",
+        "Carla_Town06.z01",
+        "Carla_Town06.z02",
+        "Carla_Town06.zip",
+        "Carla_Town07.z01",
+        "Carla_Town07.z02",
+        "Carla_Town07.zip",
+        "Carla_Town10HD.z01",
+        "Carla_Town10HD.z02",
+        "Carla_Town10HD.z03",
+        "Carla_Town10HD.z04",
+        "Carla_Town10HD.z05",
+        "Carla_Town10HD.z06",
+        "Carla_Town10HD.z07",
+        "Carla_Town10HD.zip",
+        "Carla_Town15.z01",
+        "Carla_Town15.z02",
+        "Carla_Town15.z03",
+        "Carla_Town15.z04",
+        "Carla_Town15.z05",
+        "Carla_Town15.z06",
+        "Carla_Town15.zip",
+        "Japanese_Street.z01",
+        "Japanese_Street.zip",
+        "London_Street.zip",
+        "ModernCityMap.z01",
+        "ModernCityMap.z02",
+        "ModernCityMap.zip",
+        "ModularPark.z01",
+        "ModularPark.z02",
+        "ModularPark.z03",
+        "ModularPark.z04",
+        "ModularPark.z05",
+        "ModularPark.z06",
+        "ModularPark.z07",
+        "ModularPark.zip",
+        "NYCEnvironmentMegapa.z01",
+        "NYCEnvironmentMegapa.z02",
+        "NYCEnvironmentMegapa.z03",
+        "NYCEnvironmentMegapa.z04",
+        "NYCEnvironmentMegapa.z05",
+        "NYCEnvironmentMegapa.z06",
+        "NYCEnvironmentMegapa.z07",
+        "NYCEnvironmentMegapa.z08",
+        "NYCEnvironmentMegapa.z09",
+        "NYCEnvironmentMegapa.z10",
+        "NYCEnvironmentMegapa.z11",
+        "NYCEnvironmentMegapa.z12",
+        "NYCEnvironmentMegapa.z13",
+        "NYCEnvironmentMegapa.z14",
+        "NYCEnvironmentMegapa.z15",
+        "NYCEnvironmentMegapa.z16",
+        "NYCEnvironmentMegapa.z17",
+        "NYCEnvironmentMegapa.z18",
+        "NYCEnvironmentMegapa.z19",
+        "NYCEnvironmentMegapa.z20",
+        "NYCEnvironmentMegapa.z21",
+        "NYCEnvironmentMegapa.z22",
+        "NYCEnvironmentMegapa.zip",
+        "NewYorkCity.z01",
+        "NewYorkCity.z02",
+        "NewYorkCity.z03",
+        "NewYorkCity.z04",
+        "NewYorkCity.z05",
+        "NewYorkCity.z06",
+        "NewYorkCity.z07",
+        "NewYorkCity.z08",
+        "NewYorkCity.z09",
+        "NewYorkCity.z10",
+        "NewYorkCity.z11",
+        "NewYorkCity.z12",
+        "NewYorkCity.z13",
+        "NewYorkCity.z14",
+        "NewYorkCity.zip",
+        "NordicHarbour.z01",
+        "NordicHarbour.z02",
+        "NordicHarbour.z03",
+        "NordicHarbour.zip",
+        "TropicalIsland.z01",
+        "TropicalIsland.z02",
+        "TropicalIsland.z03",
+        "TropicalIsland.z04",
+        "TropicalIsland.z05",
+        "TropicalIsland.z06",
+        "TropicalIsland.z07",
+        "TropicalIsland.z08",
+        "TropicalIsland.z09",
+        "TropicalIsland.z10",
+        "TropicalIsland.z11",
+        "TropicalIsland.z12",
+        "TropicalIsland.z13",
+        "TropicalIsland.zip",
+        "WesterTown.z01",
+        "WesterTown.z02",
+        "WesterTown.z03",
+        "WesterTown.zip"
+      ]
+    },
+    "3dg_instructions": {
+      "url": "https://huggingface.co/datasets/fanfuxue/UAV-VLN-FOV/resolve/f296bbdcf3a3cb4203d973abe5c05714de5c2247/UAV-VLN-FOV/meta/instructions.json",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": null,
+      "gated": null,
+      "card_license": null,
+      "files": [],
+      "records": 489,
+      "top_level_keys": [
+        "bde88880-53d5-4173-bf24-8055599379cb",
+        "fb1cc1f8-7fc9-4996-80f7-48490899e32b",
+        "ebf32427-3c98-43d9-867e-6b094fa1253a",
+        "21656026-dfca-4d0a-971b-01b7a6fad4f8",
+        "1e06c96d-a2f5-47e0-acc4-a167780d63bf",
+        "e43112b6-a47d-4936-b7f6-35ca84bc101a",
+        "5d593ca8-6166-4374-b788-cde3629be2c6",
+        "8e707346-d8f2-4043-b039-2df1d03fc698",
+        "15b5d136-6e5f-4528-a9ef-3b68a2538ae4",
+        "24545388-7e5b-4996-8a73-90c0e7e5b935"
+      ]
+    },
+    "3dg_train_meta": {
+      "url": "https://huggingface.co/datasets/fanfuxue/UAV-VLN-FOV/resolve/f296bbdcf3a3cb4203d973abe5c05714de5c2247/UAV-VLN-FOV/meta/train_scene_trajectory_instruction_direction.json",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": null,
+      "gated": null,
+      "card_license": null,
+      "files": [],
+      "records": 13,
+      "top_level_keys": [
+        "Carla_Town01",
+        "Carla_Town02",
+        "Carla_Town03",
+        "Carla_Town05",
+        "Carla_Town06",
+        "Carla_Town07",
+        "Carla_Town10HD",
+        "Carla_Town15",
+        "ModernCityMap",
+        "ModularPark"
+      ]
+    },
+    "3dg_weight_index": {
+      "url": "https://huggingface.co/fanfuxue/3DG-VLN/resolve/02e161fffd70fe8899a3b065dd41e45707221fcf/model.safetensors.index.json",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": null,
+      "gated": null,
+      "card_license": null,
+      "files": [],
+      "weight_bytes": 16584333312,
+      "weight_shards": [
+        "model-00001-of-00004.safetensors",
+        "model-00002-of-00004.safetensors",
+        "model-00003-of-00004.safetensors",
+        "model-00004-of-00004.safetensors"
+      ]
+    },
+    "qwen_weight_index": {
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct/resolve/ebb281ec70b05090aa6165b016eac8ec08e71b17/model.safetensors.index.json",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": null,
+      "gated": null,
+      "card_license": null,
+      "files": [],
+      "weight_bytes": 8875631616,
+      "weight_shards": [
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors"
+      ]
+    },
+    "anyvisloc_portal": {
+      "url": "https://1drv.ms/f/c/fef40436afe2e5bb/IgC0Zat90dsgTY-2lNlDliGXAfuTZOYEeKcllr7VPD_F3eY?e=LJ5fAD",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "response_type": "HTML portal, not proof of downloadable dataset"
+    },
+    "aerialvln_data": {
+      "url": "https://www.kaggle.com/api/v1/datasets/list?search=shuboliu%2Faerialvln",
+      "trials": [
+        {
+          "direct": true,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "records": 4,
+      "sample_schema": [
+        "subtitleNullable",
+        "creatorNameNullable",
+        "creatorUrlNullable",
+        "totalBytesNullable",
+        "urlNullable",
+        "licenseNameNullable",
+        "ownerNameNullable",
+        "ownerRefNullable",
+        "titleNullable",
+        "currentVersionNumberNullable",
+        "usabilityRatingNullable",
+        "thumbnailImageUrlNullable",
+        "id",
+        "ref",
+        "subtitle",
+        "hasSubtitle",
+        "creatorName",
+        "hasCreatorName",
+        "creatorUrl",
+        "hasCreatorUrl",
+        "totalBytes",
+        "hasTotalBytes",
+        "url",
+        "hasUrl",
+        "lastUpdated",
+        "downloadCount",
+        "isPrivate",
+        "isFeatured",
+        "licenseName",
+        "hasLicenseName",
+        "description",
+        "hasDescription",
+        "ownerName",
+        "hasOwnerName",
+        "ownerRef",
+        "hasOwnerRef",
+        "kernelCount",
+        "title",
+        "hasTitle",
+        "topicCount",
+        "viewCount",
+        "voteCount",
+        "currentVersionNumber",
+        "hasCurrentVersionNumber",
+        "usabilityRating",
+        "hasUsabilityRating",
+        "tags",
+        "files",
+        "versions",
+        "thumbnailImageUrl",
+        "hasThumbnailImageUrl"
+      ]
+    },
+    "qwen_config": {
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct/resolve/ebb281ec70b05090aa6165b016eac8ec08e71b17/config.json",
+      "trials": [
+        {
+          "direct": true,
+          "error": "ConnectTimeout"
+        },
+        {
+          "direct": false,
+          "status": 200
+        }
+      ],
+      "available": true,
+      "revision": null,
+      "gated": null,
+      "card_license": null,
+      "files": []
+    },
+    "sam2_checkpoint": {
+      "url": "https://dl.fbaipublicfiles.com/segment_anything_2/092824/sam2.1_hiera_tiny.pt",
+      "available": true,
+      "trials": [
+        {
+          "direct": true,
+          "status": 200
+        }
+      ],
+      "check": "HEAD only, checkpoint not downloaded"
+    },
+    "anyvisloc_license": {
+      "available": true,
+      "url": "https://github.com/UAV-AVL/Benchmark/blob/main/docs/LICENSE_DATASET.md"
+    }
+  },
+  "skyfind_sample_audit": {
+    "rows": 100,
+    "objects": 733,
+    "first_actual_image_shape": [
+      1080,
+      1920,
+      3
+    ],
+    "first_image_decoded": true,
+    "annotation_keys": [
+      "bbox",
+      "expressions"
+    ],
+    "positive_area_bbox_fraction": 1.0,
+    "expressions": 733,
+    "geographic_leakage_verified": false,
+    "use": "inspection only; no training or redistribution of image"
+  },
+  "seconds": 67.06669545173645
+}

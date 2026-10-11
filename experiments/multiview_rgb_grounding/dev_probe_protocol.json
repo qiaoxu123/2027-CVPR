@@ -1,0 +1,26 @@
+{
+  "purpose": "P3-B bounded internal Dev static-error probe, not Seen or acceptance experiment",
+  "registered_before_probe_render_and_model_scores": true,
+  "seed": 20261011,
+  "max_families": 8,
+  "cohort": "original Dev static error, initial query noun building/house/road/parking; deterministic family hash",
+  "pose": "fixed middle of five original cached prefixes; actual XYZ/Yaw; never aim camera at target",
+  "GT_usage": "error subset and offline labels only, no target-conditioned pose/angle/candidate selection",
+  "views": [
+    0,
+    20,
+    40,
+    60
+  ],
+  "splat_radius": 1,
+  "quality_gates": "unchanged P3-A protocol",
+  "models": [
+    "SigLIP2-Large384",
+    "RemoteCLIP-ViT-L14"
+  ],
+  "candidate_sets": "same within scope: credible common instances then Geometry Top20",
+  "configuration_selection": false,
+  "maximum_additional_render_minutes": 10,
+  "maximum_inference_minutes": 5,
+  "no_training_no_seen_no_unseen_no_fusion": true
+}

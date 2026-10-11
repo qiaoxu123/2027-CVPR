@@ -1,0 +1,61 @@
+{
+  "url": "https://www.kaggle.com/api/v1/datasets/download/shuboliu/aerialvln",
+  "trials": [
+    {
+      "direct": true,
+      "status": 200,
+      "content_type": "application/zip"
+    }
+  ],
+  "actual_zip_downloaded": true,
+  "seconds": 6.761826753616333,
+  "files": [
+    {
+      "path": "test.json",
+      "bytes": 3548819
+    },
+    {
+      "path": "train.json",
+      "bytes": 303722815
+    },
+    {
+      "path": "train_vocab.txt",
+      "bytes": 89101
+    },
+    {
+      "path": "val_seen.json",
+      "bytes": 37588493
+    },
+    {
+      "path": "val_unseen.json",
+      "bytes": 48982587
+    }
+  ],
+  "archive_bytes": 66720431,
+  "sample_path": "test.json",
+  "sample_schema": [
+    "episodes"
+  ],
+  "sample_episode_count": 4830,
+  "episode_schema": [
+    "episode_id",
+    "trajectory_id",
+    "scene_id",
+    "start_position",
+    "start_rotation",
+    "instruction"
+  ],
+  "actual_train_first_episode_schema": [
+    "episode_id",
+    "trajectory_id",
+    "scene_id",
+    "start_position",
+    "start_rotation",
+    "instruction",
+    "goals",
+    "reference_path",
+    "actions"
+  ],
+  "train_first_episode_has_instance_bbox": false,
+  "train_annotation_inspection_bytes": 1048576
+}

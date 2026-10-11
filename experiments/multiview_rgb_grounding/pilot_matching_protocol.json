@@ -1,0 +1,51 @@
+{
+  "purpose": "Train-only P3-B exploratory encoder/identity probe; not formal Seen benchmark or evidence of stage acceptance",
+  "registered_before_any_multiview_model_scores": true,
+  "reason": "Exploratory Train-only check on supported ROIs; original global quality gate stays unchanged. Four-view scope is run only for poses where all four frames and common crops meet the original gates; pair20 scope separately reported.",
+  "states": "all six preselected earliest-prefix P2 Train pilot families, no target-conditioned camera/state selection",
+  "views": {
+    "pair20": [
+      0,
+      20
+    ],
+    "four_view": [
+      0,
+      20,
+      40,
+      60
+    ]
+  },
+  "minimum_frame_valid_fraction": 0.6,
+  "minimum_roi_bbox_valid_fraction": 0.7,
+  "minimum_native_side_pixels": 16,
+  "minimum_roi_measured_pixels": 64,
+  "candidate_sets": "per scope intersection of credible instances in every required view, followed by public Geometry Top-20; full intersection and Top-K containment reported; identical candidates for all models/controls/views within scope",
+  "geometry_top20": "nearest original frozen A3 grid cell to public object centroid; stable ordering by static score then instance ID; no target identity",
+  "models": [
+    "SigLIP2-Large384",
+    "RemoteCLIP-ViT-L14"
+  ],
+  "weight_training": 0,
+  "languages": [
+    "full",
+    "conservative_attribute",
+    "full_with_context"
+  ],
+  "aggregation": "normalize mean of normalized embeddings for single, dual and four views; no tuning",
+  "controls": [
+    "real",
+    "encoded_black",
+    "same_class_cyclic_shuffle"
+  ],
+  "ties": "uniform expected R@1 and expected target rank; no index wins",
+  "exposure_budget": "all methods have the same recorded four-render pilot exposures; single-view ablation ignores others; no active navigation comparison",
+  "statistics": "paired family and map bootstrap; n<=6, descriptive only, no 50-family claim",
+  "unknown": "absent target never becomes supervised mismatch; no training; coverage reported separately",
+  "stop": "No Goal fusion, no closed-loop, no Unseen regardless of small-pilot result; original quality and independent-family gates remain unmet",
+  "seed": 20261011,
+  "max_inference_minutes": 5,
+  "modalities": [
+    "rgb_only",
+    "equal_percentile_rgb_geometry"
+  ]
+}

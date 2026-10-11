@@ -1,0 +1,86 @@
+{
+  "stage": "P3-A/B",
+  "seed": 20261011,
+  "base_commit": "62044c124c2a188e15358cd8c412115c04209590",
+  "train": "existing P2 internal Train families; no training",
+  "development": "existing P2 internal Dev; independent latest prefix per family",
+  "seen": "existing P2 Seen families, only after rendering gate; no parameter selection",
+  "unseen": "not run",
+  "renderer": {
+    "type": "measured XYZ/RGB pinhole projection, z-buffer; no image warp or inpainting",
+    "width": 512,
+    "height": 512,
+    "horizontal_fov_degrees": 90,
+    "tilt_from_nadir_degrees": [
+      0,
+      20,
+      40,
+      60
+    ],
+    "yaw": "recorded UAV yaw, never aim at ground-truth target",
+    "near_m": 0.5,
+    "far_m": 400,
+    "splat_radius_pixels": [
+      0,
+      1
+    ],
+    "inference_splat_radius_pixels": 1,
+    "background_rgb": [
+      0,
+      0,
+      0
+    ]
+  },
+  "quality_gates": {
+    "frame_valid_fraction_min": 0.6,
+    "instance_bbox_valid_fraction_min": 0.7,
+    "instance_min_native_side_pixels": 16,
+    "instance_visible_measured_pixels_min": 64,
+    "reprojection_error_max_pixels": 2.13,
+    "pilot_oblique_frames_passing_fraction_min": 0.8,
+    "pilot_requirement": "projection/occlusion unit tests pass; actual RGB quality visually inspected; measurable facade evidence retained",
+    "reprojection_explanation": "Euclidean error for radius-one splat is at most sqrt(2)*1.5 pixels; raw projection at most sqrt(2)*0.5"
+  },
+  "matching": {
+    "frozen_models": [
+      "SigLIP2-Large384",
+      "RemoteCLIP-ViT-L14"
+    ],
+    "qwen3_vl": "availability audit; bounded optional inference only if rendering gate and existing accessible weights allow",
+    "query_modes": [
+      "full",
+      "conservative_attribute",
+      "full_with_context"
+    ],
+    "views": [
+      "nadir",
+      "oblique40",
+      "dual_nadir40",
+      "multi_0_20_40_60"
+    ],
+    "aggregation": "mean normalized view embeddings; fixed before Dev",
+    "paired_candidates": "intersection of credible visible instances in all four views, at least two; no GT-conditioned crop selection",
+    "control": [
+      "real",
+      "encoded_black",
+      "same_class_cyclic_shuffle"
+    ],
+    "budget": "four real view exposures for every condition; single/dual use subsets, matched exposure subset controls reported",
+    "threshold_selection": "none; no Goal updates unless identity and coverage gates pass"
+  },
+  "acceptance": {
+    "independent_credible_visible_static_error_families_min": 50,
+    "dual_identity_gain_pp_min": 5,
+    "paired_95_ci_lower_gt_zero": true,
+    "real_minus_black_and_shuffle_map_ci_lower_gt_zero": true,
+    "goal_gain_pp_min": 1,
+    "recovery_gt_damage": true
+  },
+  "time_budget_minutes": {
+    "external_audit": 20,
+    "render_audit": 30,
+    "frozen_matching": 30,
+    "training": 0
+  },
+  "stop": "failed rendering gate or no clear visual identity gain => report P3-A/B evidence, no P3-C/D/E"
+}
