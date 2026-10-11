@@ -62,19 +62,19 @@ jobs:
             echo "$b,$expected,$tag,ARCHIVED_AND_DELETED" >> branch_archive_results.csv
             echo "Archived and deleted: $b"
           done <<'BRANCHES'
-2027-CVPR/graphnav-closedloop-sbf-parity 64294e3ad9764f7ba1a9a18d8c1dad7cf276c8ea
-2027-CVPR/semantic-geometry-localization 4d6c81c2395505fb4473a08383d0476576acd776
-integration/graphnav-v1-main-20261011 b3018e7b9e9f0766243b16a9e86637408f8fcea7
-maintenance/main-release-audit-20261011 141c940d4f9e4fe770e5326507ee3c62963e18e3
-research/active-view-selection-20261011 043d3897a97af8f35ee60889fa3640f59393c4ad
-research/instance-rgb-grounding-20261011 06ebf5398d051ecfc105298821ce3b12eced0131
-research/rgb-feasibility-20261011 62044c124c2a188e15358cd8c412115c04209590
-research/rgb-language-grounding-20261010 350f99d3a55d305969f934e31fea6faf08d05fe8
-research/visual-goal-association-20261011 4a69bdf73fabaa931ee92354b52eb6672430ccd3
-validation/bidirectional-p0-p2-local-20261009 11e0409b322f08db4459888c6d38ba08547da730
-validation/full-token-rgb-local-20261009 8a75d9ed5396933f89492624360a3c2a9e8b530f
-validation/static-geometry-20261009 e6344eac1c6d03307af43b187a0cf927f01bdf7e
-BRANCHES
+          2027-CVPR/graphnav-closedloop-sbf-parity 64294e3ad9764f7ba1a9a18d8c1dad7cf276c8ea
+          2027-CVPR/semantic-geometry-localization 4d6c81c2395505fb4473a08383d0476576acd776
+          integration/graphnav-v1-main-20261011 b3018e7b9e9f0766243b16a9e86637408f8fcea7
+          maintenance/main-release-audit-20261011 141c940d4f9e4fe770e5326507ee3c62963e18e3
+          research/active-view-selection-20261011 043d3897a97af8f35ee60889fa3640f59393c4ad
+          research/instance-rgb-grounding-20261011 06ebf5398d051ecfc105298821ce3b12eced0131
+          research/rgb-feasibility-20261011 62044c124c2a188e15358cd8c412115c04209590
+          research/rgb-language-grounding-20261010 350f99d3a55d305969f934e31fea6faf08d05fe8
+          research/visual-goal-association-20261011 4a69bdf73fabaa931ee92354b52eb6672430ccd3
+          validation/bidirectional-p0-p2-local-20261009 11e0409b322f08db4459888c6d38ba08547da730
+          validation/full-token-rgb-local-20261009 8a75d9ed5396933f89492624360a3c2a9e8b530f
+          validation/static-geometry-20261009 e6344eac1c6d03307af43b187a0cf927f01bdf7e
+          BRANCHES
           cat branch_archive_results.csv
       - name: Save archival manifest
         if: always()
