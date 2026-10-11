@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/rental/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/rental/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/experiments/instance_grounding/provenance.py", line 33, in <module>
+    if __name__=='__main__':main()
+  File "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/experiments/instance_grounding/provenance.py", line 32, in main
+    p=argparse.ArgumentParser();p.add_argument('--runs',required=True);run(p.parse_args())
+  File "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/experiments/instance_grounding/provenance.py", line 29, in run
+    write(root/'model_manifest.json',dict(base_commit='4a69bdf73fabaa931ee92354b52eb6672430ccd3',branch='research/instance-rgb-grounding-20261011',seed=20261011,torch=torch.__version__,transformers=transformers.__version__,numpy=numpy.__version__,opencv=cv2.__version__,cuda=torch.version.cuda,python=platform.python_version(),gpu=torch.cuda.get_device_name(),siglip_model='google/siglip2-large-patch16-384',siglip_license='Apache-2.0',siglip_source='https://huggingface.co/google/siglip2-large-patch16-384',siglip_revision='1b426889ea62b5a72bf9839009a1b184bfc9c178',a3_sha256=a3sha,a3_frozen=True,backbone_training=0,head_runs=heads,source_sha256=source,protocol_sha256=file_sha256(Path(__file__).with_name('protocol.json')),frozen_experimental_sources_unchanged=frozen,seen_score_passes=1,unseen_passes=0,navigation_rollouts=0,all_gates_pass=m['all_pass'],stop_reason=None if m['all_pass'] else 'reliable independent identity and safe Goal gates not all met; no further gain/GAT/epoch increase',cuda_smoke={s:json.loads((root/('features_'+s)/'cuda_smoke.json').read_text()) for s in ['train','dev','seen']},budgets=dict(cpu_plan_seconds=sum(json.loads((root/('plan_'+s)/'manifest.json').read_text())['seconds'] for s in ['train','dev','seen']),gpu_encoding_and_head_process_seconds=sum(json.loads((root/('features_'+s)/'manifest.json').read_text())['seconds'] for s in ['train','dev','seen'])+sum(v['seconds'] for v in heads.values()))))
+AttributeError: 'str' object has no attribute 'values'

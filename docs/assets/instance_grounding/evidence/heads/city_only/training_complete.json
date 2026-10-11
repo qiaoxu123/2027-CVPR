@@ -1,0 +1,51 @@
+{
+  "complete": true,
+  "epochs": 3,
+  "steps": 96,
+  "training_units": 256,
+  "dev_rows": 640,
+  "trainable_parameters": 532498,
+  "parameters_with_gradient": 532241,
+  "seconds": 49.292508125305176,
+  "peak_gpu_bytes": 500226048,
+  "backbones_frozen": true,
+  "class_balanced_judgment": true,
+  "relative_attention": true,
+  "history": [
+    {
+      "epoch": 1,
+      "steps": 32,
+      "loss": 1.9102621031925082,
+      "dev_family_r1": 0.27390572390572393,
+      "dev_eligible_families": 99,
+      "seconds": 42.43934082984924
+    },
+    {
+      "epoch": 2,
+      "steps": 64,
+      "loss": 1.5120659400708973,
+      "dev_family_r1": 0.18804713804713805,
+      "dev_eligible_families": 99,
+      "seconds": 45.907442569732666
+    },
+    {
+      "epoch": 3,
+      "steps": 96,
+      "loss": 1.2825436810962856,
+      "dev_family_r1": 0.18653198653198655,
+      "dev_eligible_families": 99,
+      "seconds": 49.288565158843994
+    }
+  ],
+  "checkpoint_sha256": "80ba553c11a8513226a1c1e97748f3dde8e677f8f9473fe77de725de903d24c6",
+  "args": {
+    "train": "runs/instance_grounding/features_train",
+    "dev": "runs/instance_grounding/features_dev",
+    "output": "runs/instance_grounding/heads/city_only",
+    "initialize": null,
+    "city": true
+  },
+  "selection": "family-balanced Train internal Dev original identity",
+  "unknown_policy": "absent target Unknown; ambiguous candidates Unknown; corrupted evidence Unknown",
+  "unknown_training_control": "actual encoded black pixels"
+}

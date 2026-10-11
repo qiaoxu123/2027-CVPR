@@ -1,0 +1,29 @@
+{
+  "aerialvg": {
+    "official_commit": "db33e1dc733911853c5e132394d2e00b024334db",
+    "hf_revision": "3e158594d1788279264c8126ef3b7f25259eab69",
+    "primary_contract_url": "https://github.com/Ideal-ljl/AerialVG/blob/db33e1dc733911853c5e132394d2e00b024334db/eval.py#L149",
+    "full_caption_source": "targets.anno",
+    "primary_identity": "targets.boxes[0], verified official reader, no guessed role",
+    "files": {
+      "aerial_official_odvg.py": "c1e1b99d471cacc165d03590050be6afc90d57a6334e311242b7b839c0b51f15",
+      "aerial_official_eval.py": "7107dc8c308c08f9eaaf4dd5e24fafd07751145e33a71b6a073092ba8b65d6b8",
+      "aerial_official_main_eval.py": "9437684a1cec3644517a1b726cfa7b6b0280cdc4d29e57bce894aaeb2cd5ece5"
+    },
+    "geography": "VisDrone Chinese cities; original source-video Train/Dev disjoint reused",
+    "license": "HF gated non-commercial conditions; no annotation/image redistribution"
+  },
+  "refsegrs": {
+    "paper": "https://arxiv.org/html/2306.08625",
+    "original_source_geography": "https://arxiv.org/html/2007.06102#S2",
+    "evidence": "Original SkyScapes section2 specifies greater Munich Germany, 16 nadir RGB sources; RefSegRS derived from SkyScapes. Current DLR landing page broader Europe wording recorded; per-tile GPS unavailable.",
+    "task": "derived semantic mask multi-positive tile grounding; not unique instance identity",
+    "license": "RefSegRS published mirror CC BY4.0 metadata; original SkyScapes DLR CC BY-NC-ND3.0 rights distinguished; local non-commercial experiments, no images redistributed"
+  },
+  "dior": {
+    "official": "https://github.com/ZhanYang-nwpu/RSVG-pytorch",
+    "reader": "https://github.com/ZhanYang-nwpu/RSVG-pytorch/blob/main/data_loader.py#L43",
+    "license": "official CC BY-NC4.0",
+    "geography": "worldwide with no per-image GPS; frozen quarantined proposal-conditioned diagnostic, not CityNav pretraining"
+  }
+}

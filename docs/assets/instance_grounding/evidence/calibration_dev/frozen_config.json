@@ -1,0 +1,508 @@
+{
+  "complete": true,
+  "heads": {
+    "native": "native",
+    "previous_aerial_projection": "runs/rgb_language_grounding/heads/aerial_projection/best_dev.pt",
+    "previous_aerial_city": "runs/rgb_language_grounding/heads/aerial_city_adapt/best_dev.pt",
+    "external_aerial": "runs/instance_grounding/heads/aerial_primary/best_dev.pt",
+    "external_aerial_attribute": "runs/instance_grounding/heads/aerial_instance/best_dev.pt",
+    "external_refseg": "runs/instance_grounding/heads/refseg_instance/best_dev.pt",
+    "city_only": "runs/instance_grounding/heads/city_only/best_dev.pt",
+    "aerial_city": "runs/instance_grounding/heads/aerial_city/best_dev.pt",
+    "refseg_city": "runs/instance_grounding/heads/refseg_city/best_dev.pt"
+  },
+  "configs": {
+    "native": {
+      "temperature": 4,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 19.07258534282446
+        },
+        {
+          "t": 1,
+          "nll": 9.594771858304739
+        },
+        {
+          "t": 2,
+          "nll": 4.958085510134697
+        },
+        {
+          "t": 4,
+          "nll": 2.7960927315056323
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "previous_aerial_projection": {
+      "temperature": 4,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 19.070298348367213
+        },
+        {
+          "t": 1,
+          "nll": 9.591078193485737
+        },
+        {
+          "t": 2,
+          "nll": 4.947411845251918
+        },
+        {
+          "t": 4,
+          "nll": 2.7837583806365727
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "previous_aerial_city": {
+      "temperature": 4,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 19.082993015646935
+        },
+        {
+          "t": 1,
+          "nll": 9.595064122229815
+        },
+        {
+          "t": 2,
+          "nll": 4.939430040493607
+        },
+        {
+          "t": 4,
+          "nll": 2.7707713676616548
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "external_aerial": {
+      "temperature": 4,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 13.800049863755703
+        },
+        {
+          "t": 1,
+          "nll": 7.080618043243885
+        },
+        {
+          "t": 2,
+          "nll": 3.830530449002981
+        },
+        {
+          "t": 4,
+          "nll": 2.3236910650506615
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "external_aerial_attribute": {
+      "temperature": 0.5,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 0.30407055458053944
+        },
+        {
+          "t": 1,
+          "nll": 0.5463790995068848
+        },
+        {
+          "t": 2,
+          "nll": 0.7732399372383952
+        },
+        {
+          "t": 4,
+          "nll": 0.9226254841312767
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "external_refseg": {
+      "temperature": 4,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 5.122471788525582
+        },
+        {
+          "t": 1,
+          "nll": 2.9135702557861807
+        },
+        {
+          "t": 2,
+          "nll": 1.9172386100515724
+        },
+        {
+          "t": 4,
+          "nll": 1.478129568323493
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "city_only": {
+      "temperature": 0.5,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 0.48482500778045506
+        },
+        {
+          "t": 1,
+          "nll": 0.7209267342463136
+        },
+        {
+          "t": 2,
+          "nll": 0.8909067847765982
+        },
+        {
+          "t": 4,
+          "nll": 0.9901147272437811
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "aerial_city": {
+      "temperature": 0.5,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 0.7666825258704193
+        },
+        {
+          "t": 1,
+          "nll": 0.7775129487155936
+        },
+        {
+          "t": 2,
+          "nll": 0.8693921802099794
+        },
+        {
+          "t": 4,
+          "nll": 0.9612010598182679
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    },
+    "refseg_city": {
+      "temperature": 1,
+      "threshold": 1.01,
+      "gain": 0.025,
+      "max_abs_residual": 0.025,
+      "calibration_audit": [
+        {
+          "threshold": 0.8,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.9,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 0.95,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        },
+        {
+          "threshold": 1.01,
+          "independent_families": 0,
+          "all_accepted_prefixes_correct_families": 0,
+          "wilson_95_lower": 0
+        }
+      ],
+      "temperature_nll": [
+        {
+          "t": 0.5,
+          "nll": 1.1095808560028673
+        },
+        {
+          "t": 1,
+          "nll": 1.0907439176924527
+        },
+        {
+          "t": 2,
+          "nll": 1.0910831103101373
+        },
+        {
+          "t": 4,
+          "nll": 1.0939208220690488
+        }
+      ],
+      "confidence_note": "weak original identity correctness; not human calibrated semantic truth"
+    }
+  },
+  "selected": "city_only",
+  "selection": "internal Dev family-balanced original identity R1; no Seen results read",
+  "checkpoint_sha256": {
+    "previous_aerial_projection": "91d078490f7c85ed798e319954fe1c021fa0adf9d422977d86801cf9d0b309ad",
+    "previous_aerial_city": "702cf740bed8fbb583ef8cb4ca0af2871d781e0320ccf38bf8e7b6d80396a18e",
+    "external_aerial": "8dfef677ee174213231779f71dcb38a48891a40339b47b9a516499a8f872e373",
+    "external_aerial_attribute": "5c929957fe6db78898b1366a6071bcf7165655e50025467f23a7e964fbccb3d1",
+    "external_refseg": "c6834fe3376f50fd9011b791e10facac53682c51b3f062cf9a61cb9bec225404",
+    "city_only": "80ba553c11a8513226a1c1e97748f3dde8e677f8f9473fe77de725de903d24c6",
+    "aerial_city": "6905434f801827e88c6dcd83536561ca0717b6cc4f012bc0b2c4483e4de26a09",
+    "refseg_city": "9017ea32f8f444f68780144198b6efaf362772e996221356b0af3647d7ea4781"
+  },
+  "protocol_sha256": "2fcec8a8776df10687e1cd6fb00daf7cc5317bcc67e690f2aa64e7c55ac02d36",
+  "source_sha256": {
+    "data.py": "4647523e894cf056d46b7110e0315d1a981f9d1c9e44da548448ee188902ff45",
+    "model.py": "30132884baa24260408a5ea2fe0d82cc5d070bdf938f725eee844c4feff42abf",
+    "dataset.py": "2a73e8bfa1c13ba8391f4bb97beb75a1334de1f5a7922373409bda614354ae53",
+    "train.py": "f3ae9543a443b4ffd55aca262ed04b1e1c978c00629b480ff641b1fdef26c343",
+    "external.py": "16b02b2e7665cf1571002f6088096823ab5124f0ee1cd55d4eca2c8d3241cf62",
+    "evaluate.py": "020f74a41d954a01e9177b1ddef6899d636eae9aa7bf7758f1b7c9e0aa25b14b",
+    "external_eval.py": "64e42e0a0ac9119fe5bae634bc3d3c3fcbac1a9f412441a4d058448e3605fd0d",
+    "relations.py": "1af755733bd7c6285fd1509679d0a8cf18c3a23c31e66a8d6d71576b2b2b9049",
+    "audit.py": "929780aa9ff108896519eb2772201fe260edd59e136d09bd83bd34cbc1a18bb3",
+    "cases.py": "c912554b5d1a1a9e7aea6d8e0479d5fec130f7a6b7fc0d13b538cf9f3af573b7",
+    "package.py": "828bf28d43014f4ef7f594d4551d0bb468cbff89cfaad4fef19bd20a5b7b2921",
+    "aerial_identity.py": "e9ad03484cd3aee708d6657a7220af9132c1338f83017a412ca192a891fa3b6a",
+    "report.py": "f29e9f9185cd832ff7636ab9620b031249a57f723030947cdfd561e0ae1b627e",
+    "runtime.py": "ce11cdbc0ccee1ac5a23e14e59ae3648a935c6243926f8b3b6835d106f5a8354",
+    "association.py": "52541c3b1f9613ec9ee6200a1d058c5feb1a428e85a5c8150a46176feac0a2a9",
+    "provenance.py": "4e54002d239f66af9ccb6d7b6cda2019e037a7dc74d40e298294adf213e50782",
+    "diagnostics.py": "ebfa8520728d3fd3af1db7d4691c4a59bd123dcfd50a8339ce2f3723524026fd"
+  },
+  "dev_feature_sha256": "dfb4fad282406c265fbe8106b67b47fed8653bc7cf9636988b06ec4d6c5e98d1"
+}

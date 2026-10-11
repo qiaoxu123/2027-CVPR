@@ -1,0 +1,47 @@
+{
+  "complete": true,
+  "epochs": 3,
+  "steps": 72,
+  "training_units": 191,
+  "dev_rows": 64,
+  "trainable_parameters": 520198,
+  "seconds": 6.943339824676514,
+  "peak_gpu_bytes": 260512256,
+  "backbones_frozen": true,
+  "history": [
+    {
+      "epoch": 1,
+      "steps": 24,
+      "loss": 1.7185734659433365,
+      "dev_family_r1": 0.8853333333333333,
+      "dev_eligible_families": 25,
+      "seconds": 4.637311220169067
+    },
+    {
+      "epoch": 2,
+      "steps": 48,
+      "loss": 1.2442997644344966,
+      "dev_family_r1": 0.8919999999999999,
+      "dev_eligible_families": 25,
+      "seconds": 5.804647445678711
+    },
+    {
+      "epoch": 3,
+      "steps": 72,
+      "loss": 0.9162874693671862,
+      "dev_family_r1": 0.8386666666666666,
+      "dev_eligible_families": 25,
+      "seconds": 6.940617084503174
+    }
+  ],
+  "checkpoint_sha256": "c6834fe3376f50fd9011b791e10facac53682c51b3f062cf9a61cb9bec225404",
+  "args": {
+    "train": "runs/rgb_language_grounding/features_refseg_train",
+    "dev": "runs/rgb_language_grounding/features_refseg_dev",
+    "output": "runs/instance_grounding/heads/refseg_instance",
+    "initialize": null,
+    "city": false
+  },
+  "selection": "external multi-positive judged-region matching, not CityNav identity",
+  "unknown_policy": "absent target Unknown; ambiguous candidates Unknown; corrupted-zero evidence Unknown"
+}

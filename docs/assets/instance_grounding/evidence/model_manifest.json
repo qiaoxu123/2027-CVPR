@@ -1,0 +1,118 @@
+{
+  "base_commit": "4a69bdf73fabaa931ee92354b52eb6672430ccd3",
+  "branch": "research/instance-rgb-grounding-20261011",
+  "seed": 20261011,
+  "torch": "2.8.0+cu128",
+  "transformers": "4.57.6",
+  "numpy": "1.26.4",
+  "opencv": "4.10.0",
+  "cuda": "12.8",
+  "python": "3.10.22",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+  "siglip_model": "google/siglip2-large-patch16-384",
+  "siglip_license": "Apache-2.0",
+  "siglip_source": "https://huggingface.co/google/siglip2-large-patch16-384",
+  "siglip_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "a3_sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+  "a3_frozen": true,
+  "backbone_training": 0,
+  "head_runs": {
+    "aerial_city": {
+      "checkpoint_sha256": "6905434f801827e88c6dcd83536561ca0717b6cc4f012bc0b2c4483e4de26a09",
+      "trainable_parameters": 532498,
+      "peak_allocated_bytes": 500226048,
+      "seconds": 51.15315818786621
+    },
+    "aerial_instance": {
+      "checkpoint_sha256": "5c929957fe6db78898b1366a6071bcf7165655e50025467f23a7e964fbccb3d1",
+      "trainable_parameters": 520198,
+      "peak_allocated_bytes": 74171392,
+      "seconds": 15.666481018066406
+    },
+    "aerial_primary": {
+      "checkpoint_sha256": "8dfef677ee174213231779f71dcb38a48891a40339b47b9a516499a8f872e373",
+      "trainable_parameters": 520198,
+      "peak_allocated_bytes": 74040320,
+      "seconds": 25.08104944229126
+    },
+    "city_only": {
+      "checkpoint_sha256": "80ba553c11a8513226a1c1e97748f3dde8e677f8f9473fe77de725de903d24c6",
+      "trainable_parameters": 532498,
+      "peak_allocated_bytes": 500226048,
+      "seconds": 49.292508125305176
+    },
+    "refseg_city": {
+      "checkpoint_sha256": "9017ea32f8f444f68780144198b6efaf362772e996221356b0af3647d7ea4781",
+      "trainable_parameters": 532498,
+      "peak_allocated_bytes": 500226048,
+      "seconds": 49.50657367706299
+    },
+    "refseg_instance": {
+      "checkpoint_sha256": "c6834fe3376f50fd9011b791e10facac53682c51b3f062cf9a61cb9bec225404",
+      "trainable_parameters": 520198,
+      "peak_allocated_bytes": 260512256,
+      "seconds": 6.943339824676514
+    }
+  },
+  "source_sha256": {
+    "data.py": "4647523e894cf056d46b7110e0315d1a981f9d1c9e44da548448ee188902ff45",
+    "model.py": "30132884baa24260408a5ea2fe0d82cc5d070bdf938f725eee844c4feff42abf",
+    "dataset.py": "2a73e8bfa1c13ba8391f4bb97beb75a1334de1f5a7922373409bda614354ae53",
+    "train.py": "f3ae9543a443b4ffd55aca262ed04b1e1c978c00629b480ff641b1fdef26c343",
+    "external.py": "16b02b2e7665cf1571002f6088096823ab5124f0ee1cd55d4eca2c8d3241cf62",
+    "evaluate.py": "020f74a41d954a01e9177b1ddef6899d636eae9aa7bf7758f1b7c9e0aa25b14b",
+    "external_eval.py": "64e42e0a0ac9119fe5bae634bc3d3c3fcbac1a9f412441a4d058448e3605fd0d",
+    "relations.py": "1af755733bd7c6285fd1509679d0a8cf18c3a23c31e66a8d6d71576b2b2b9049",
+    "audit.py": "929780aa9ff108896519eb2772201fe260edd59e136d09bd83bd34cbc1a18bb3",
+    "cases.py": "c912554b5d1a1a9e7aea6d8e0479d5fec130f7a6b7fc0d13b538cf9f3af573b7",
+    "package.py": "60a5493e3c76a828f18950a74f15b1fe709d2b382b986e2800094279f56c01bb",
+    "aerial_identity.py": "e9ad03484cd3aee708d6657a7220af9132c1338f83017a412ca192a891fa3b6a",
+    "report.py": "7c58c526f7c59b65509b620400a7e8029831f8869e9eea3bfd16a489f90bb9a2",
+    "runtime.py": "ce11cdbc0ccee1ac5a23e14e59ae3648a935c6243926f8b3b6835d106f5a8354",
+    "association.py": "52541c3b1f9613ec9ee6200a1d058c5feb1a428e85a5c8150a46176feac0a2a9",
+    "provenance.py": "0eafd81808a201868f177abf6b0ba112b562199200d16992958062d2f510293f",
+    "diagnostics.py": "ebfa8520728d3fd3af1db7d4691c4a59bd123dcfd50a8339ce2f3723524026fd"
+  },
+  "protocol_sha256": "2fcec8a8776df10687e1cd6fb00daf7cc5317bcc67e690f2aa64e7c55ac02d36",
+  "frozen_experimental_sources_unchanged": {
+    "data.py": true,
+    "model.py": true,
+    "dataset.py": true,
+    "train.py": true,
+    "evaluate.py": true,
+    "relations.py": true,
+    "association.py": true
+  },
+  "seen_score_passes": 1,
+  "unseen_passes": 0,
+  "navigation_rollouts": 0,
+  "all_gates_pass": false,
+  "stop_reason": "reliable independent identity and safe Goal gates not all met; no further gain/GAT/epoch increase",
+  "cuda_smoke": {
+    "train": {
+      "dimension": 1024,
+      "finite": true,
+      "fp16_vs_fp32_cosine": 0.9999984502792358,
+      "zero_rgb_is_actual_encoded_black": true,
+      "backbone_all_frozen": true
+    },
+    "dev": {
+      "dimension": 1024,
+      "finite": true,
+      "fp16_vs_fp32_cosine": 0.9999983906745911,
+      "zero_rgb_is_actual_encoded_black": true,
+      "backbone_all_frozen": true
+    },
+    "seen": {
+      "dimension": 1024,
+      "finite": true,
+      "fp16_vs_fp32_cosine": 0.9999964833259583,
+      "zero_rgb_is_actual_encoded_black": true,
+      "backbone_all_frozen": true
+    }
+  },
+  "budgets": {
+    "cpu_plan_seconds": 2688.7516856193542,
+    "gpu_encoding_and_head_process_seconds": 2656.2519133090973
+  }
+}

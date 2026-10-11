@@ -1,0 +1,83 @@
+{
+  "models": {
+    "native": {
+      "n": 64,
+      "mean": 0.765625,
+      "independent_families": 25,
+      "maps": 1,
+      "iid_95ci": [
+        0.65625,
+        0.859375
+      ],
+      "family_cluster_95ci": [
+        0.6811594202898551,
+        0.859375
+      ],
+      "map_cluster_95ci": [
+        0.765625,
+        0.765625
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    },
+    "mask_ven": {
+      "n": 64,
+      "mean": 0.859375,
+      "independent_families": 25,
+      "maps": 1,
+      "iid_95ci": [
+        0.765625,
+        0.9375
+      ],
+      "family_cluster_95ci": [
+        0.7868852459016393,
+        0.9333606557377048
+      ],
+      "map_cluster_95ci": [
+        0.859375,
+        0.859375
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    }
+  },
+  "paired_vs_native": {
+    "native": {
+      "n": 64,
+      "mean": 0.0,
+      "independent_families": 25,
+      "maps": 1,
+      "iid_95ci": [
+        0.0,
+        0.0
+      ],
+      "family_cluster_95ci": [
+        0.0,
+        0.0
+      ],
+      "map_cluster_95ci": [
+        0.0,
+        0.0
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    },
+    "mask_ven": {
+      "n": 64,
+      "mean": 0.09375,
+      "independent_families": 25,
+      "maps": 1,
+      "iid_95ci": [
+        -0.03125,
+        0.21875
+      ],
+      "family_cluster_95ci": [
+        -0.015879416282642087,
+        0.208955223880597
+      ],
+      "map_cluster_95ci": [
+        0.09375,
+        0.09375
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    }
+  },
+  "scope": "external internal Dev used for epoch selection; region/tile multi-positive accuracy, not unique CityNav identity and not independent external Test"
+}

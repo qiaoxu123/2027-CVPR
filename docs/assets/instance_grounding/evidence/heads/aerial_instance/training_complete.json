@@ -1,0 +1,47 @@
+{
+  "complete": true,
+  "epochs": 3,
+  "steps": 471,
+  "training_units": 1255,
+  "dev_rows": 318,
+  "trainable_parameters": 520198,
+  "seconds": 15.666481018066406,
+  "peak_gpu_bytes": 74171392,
+  "backbones_frozen": true,
+  "history": [
+    {
+      "epoch": 1,
+      "steps": 157,
+      "loss": 0.5195552197990904,
+      "dev_family_r1": 0.8847431077694233,
+      "dev_eligible_families": 76,
+      "seconds": 7.439698219299316
+    },
+    {
+      "epoch": 2,
+      "steps": 314,
+      "loss": 0.42330586758388833,
+      "dev_family_r1": 0.8786184210526314,
+      "dev_eligible_families": 76,
+      "seconds": 11.661847829818726
+    },
+    {
+      "epoch": 3,
+      "steps": 471,
+      "loss": 0.3550714477422131,
+      "dev_family_r1": 0.8835526315789475,
+      "dev_eligible_families": 76,
+      "seconds": 15.663667917251587
+    }
+  ],
+  "checkpoint_sha256": "5c929957fe6db78898b1366a6071bcf7165655e50025467f23a7e964fbccb3d1",
+  "args": {
+    "train": "runs/rgb_language_grounding/features_aerial_train",
+    "dev": "runs/rgb_language_grounding/features_aerial_dev",
+    "output": "runs/instance_grounding/heads/aerial_instance",
+    "initialize": "runs/rgb_language_grounding/heads/aerial_projection/best_dev.pt",
+    "city": false
+  },
+  "selection": "external multi-positive judged-region matching, not CityNav identity",
+  "unknown_policy": "absent target Unknown; ambiguous candidates Unknown; corrupted-zero evidence Unknown"
+}

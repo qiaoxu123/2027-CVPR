@@ -1,0 +1,319 @@
+{
+  "python": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-assets/remoteclip/.venv/bin/python",
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "HF_HUB_OFFLINE": "1"
+  },
+  "commands": [
+    {
+      "module": "experiments.instance_grounding.data plan",
+      "split": "train",
+      "arguments": {
+        "cache": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-main/runs/bidirectional_core_test/cache_fp16/train_seen",
+        "output": "runs/instance_grounding/plan_train",
+        "limit": 256,
+        "exclude_maps": "runs/instance_grounding/dev_maps.json"
+      },
+      "seconds": 1476.5484387874603,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.data encode",
+      "split": "train",
+      "arguments": {
+        "plan": "runs/instance_grounding/plan_train",
+        "reuse": "runs/rgb_language_grounding/features_city_train",
+        "output": "runs/instance_grounding/features_train"
+      },
+      "seconds": 1355.4788346290588,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.data plan",
+      "split": "dev",
+      "arguments": {
+        "cache": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/rgb_language_grounding/cache_internal_dev",
+        "output": "runs/instance_grounding/plan_dev",
+        "limit": null,
+        "exclude_maps": null
+      },
+      "seconds": 642.2270288467407,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.data encode",
+      "split": "dev",
+      "arguments": {
+        "plan": "runs/instance_grounding/plan_dev",
+        "reuse": "runs/rgb_language_grounding/features_city_dev_public",
+        "output": "runs/instance_grounding/features_dev"
+      },
+      "seconds": 458.33993577957153,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.data plan",
+      "split": "seen",
+      "arguments": {
+        "cache": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/visual-grounding-main/runs/bidirectional_core_test/cache_fp16/val_seen",
+        "output": "runs/instance_grounding/plan_seen",
+        "limit": null,
+        "exclude_maps": null
+      },
+      "seconds": 569.9762179851532,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.data encode",
+      "split": "seen",
+      "arguments": {
+        "plan": "runs/instance_grounding/plan_seen",
+        "reuse": "runs/rgb_language_grounding/features_city_seen_public",
+        "output": "runs/instance_grounding/features_seen"
+      },
+      "seconds": 644.7900326251984,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.train",
+      "arguments": {
+        "train": "runs/instance_grounding/features_train",
+        "dev": "runs/instance_grounding/features_dev",
+        "output": "runs/instance_grounding/heads/aerial_city",
+        "initialize": "runs/instance_grounding/heads/aerial_primary/best_dev.pt",
+        "city": true
+      },
+      "seconds": 51.15315818786621,
+      "epochs": 3,
+      "steps": 96,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.train",
+      "arguments": {
+        "train": "runs/rgb_language_grounding/features_aerial_train",
+        "dev": "runs/rgb_language_grounding/features_aerial_dev",
+        "output": "runs/instance_grounding/heads/aerial_instance",
+        "initialize": "runs/rgb_language_grounding/heads/aerial_projection/best_dev.pt",
+        "city": false
+      },
+      "seconds": 15.666481018066406,
+      "epochs": 3,
+      "steps": 471,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.train",
+      "arguments": {
+        "train": "runs/instance_grounding/features_aerial_primary_train",
+        "dev": "runs/instance_grounding/features_aerial_primary_dev",
+        "output": "runs/instance_grounding/heads/aerial_primary",
+        "initialize": "runs/rgb_language_grounding/heads/aerial_projection/best_dev.pt",
+        "city": false
+      },
+      "seconds": 25.08104944229126,
+      "epochs": 3,
+      "steps": 546,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.train",
+      "arguments": {
+        "train": "runs/instance_grounding/features_train",
+        "dev": "runs/instance_grounding/features_dev",
+        "output": "runs/instance_grounding/heads/city_only",
+        "initialize": null,
+        "city": true
+      },
+      "seconds": 49.292508125305176,
+      "epochs": 3,
+      "steps": 96,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.train",
+      "arguments": {
+        "train": "runs/instance_grounding/features_train",
+        "dev": "runs/instance_grounding/features_dev",
+        "output": "runs/instance_grounding/heads/refseg_city",
+        "initialize": "runs/instance_grounding/heads/refseg_instance/best_dev.pt",
+        "city": true
+      },
+      "seconds": 49.50657367706299,
+      "epochs": 3,
+      "steps": 96,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.train",
+      "arguments": {
+        "train": "runs/rgb_language_grounding/features_refseg_train",
+        "dev": "runs/rgb_language_grounding/features_refseg_dev",
+        "output": "runs/instance_grounding/heads/refseg_instance",
+        "initialize": null,
+        "city": false
+      },
+      "seconds": 6.943339824676514,
+      "epochs": 3,
+      "steps": 72,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.aerial_identity",
+      "arguments": {
+        "annotations": "runs/rgb_language_grounding/aerial_pilot/train.jsonl",
+        "images": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-grounding-assets/aerialvg/images",
+        "reuse": "runs/rgb_language_grounding/features_aerial_train",
+        "official_eval": "runs/instance_grounding/aerial_official_main_eval.py",
+        "output": "runs/instance_grounding/features_aerial_primary_train"
+      },
+      "seconds": 85.6968240737915,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.aerial_identity",
+      "arguments": {
+        "annotations": "runs/rgb_language_grounding/aerial_pilot/internal_dev.jsonl",
+        "images": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-grounding-assets/aerialvg/images",
+        "reuse": "runs/rgb_language_grounding/features_aerial_dev",
+        "official_eval": "runs/instance_grounding/aerial_official_main_eval.py",
+        "output": "runs/instance_grounding/features_aerial_primary_dev"
+      },
+      "seconds": 24.98903250694275,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.evaluate calibrate",
+      "arguments": {
+        "features": "runs/instance_grounding/features_dev",
+        "heads": "runs/instance_grounding/heads.json",
+        "output": "runs/instance_grounding/calibration_dev"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.evaluate evaluate",
+      "arguments": {
+        "features": "runs/instance_grounding/features_seen",
+        "config": "runs/instance_grounding/calibration_dev/frozen_config.json",
+        "output": "runs/instance_grounding/evaluation_seen"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.audit",
+      "arguments": {
+        "train": "runs/instance_grounding/features_train",
+        "dev": "runs/instance_grounding/features_dev",
+        "seen": "runs/instance_grounding/features_seen",
+        "output": "runs/instance_grounding/audit_final"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.runtime",
+      "arguments": {
+        "features": "runs/instance_grounding/features_seen",
+        "config": "runs/instance_grounding/calibration_dev/frozen_config.json",
+        "output": "runs/instance_grounding/runtime"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.cases",
+      "arguments": {
+        "features": "runs/instance_grounding/features_seen",
+        "predictions": "runs/instance_grounding/evaluation_seen/city_only_real_predictions.jsonl",
+        "output": "runs/instance_grounding/cases"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.external_eval",
+      "arguments": {
+        "features": "runs/rgb_language_grounding/features_aerial_dev",
+        "heads": "runs/instance_grounding/aerial_heads.json",
+        "controls": false,
+        "black": null,
+        "output": "runs/instance_grounding/evaluation_aerial"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.external_eval",
+      "arguments": {
+        "features": "runs/rgb_language_grounding/features_refseg_dev",
+        "heads": "runs/instance_grounding/refseg_heads.json",
+        "controls": false,
+        "black": null,
+        "output": "runs/instance_grounding/evaluation_refseg"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.external_eval",
+      "arguments": {
+        "features": "runs/instance_grounding/features_aerial_primary_dev",
+        "heads": "runs/instance_grounding/aerial_primary_heads.json",
+        "controls": true,
+        "black": "runs/instance_grounding/pixel_black.pt",
+        "output": "runs/instance_grounding/evaluation_aerial_primary"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.external",
+      "arguments": {
+        "assets": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-grounding-assets/dior_mirror",
+        "limit": 96,
+        "output": "runs/instance_grounding/dior_frozen"
+      },
+      "seconds": 11.31198263168335,
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.diagnostics",
+      "arguments": {
+        "features": "runs/instance_grounding/features_seen",
+        "metrics": "runs/instance_grounding/evaluation_seen/metrics.json",
+        "output": "runs/instance_grounding/diagnostics"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "pytest",
+      "arguments": [
+        "-q"
+      ],
+      "log": "runs/instance_grounding/regression_tests_p2_final.log",
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.report",
+      "arguments": {
+        "runs": "runs/instance_grounding",
+        "output": "docs/RELIABLE_INSTANCE_GROUNDING_REPORT_20261011.md"
+      },
+      "status": "complete"
+    },
+    {
+      "module": "experiments.instance_grounding.package",
+      "arguments": {
+        "runs": "runs/instance_grounding",
+        "assets": "docs/assets/instance_grounding"
+      },
+      "status": "complete"
+    }
+  ],
+  "notes": [
+    "Direct-first source downloads were already completed; official Aerial source contract verified via authenticated GitHub API without exposing credentials.",
+    "Data launcher initially lacked PYTHONPATH; corrected before any data result.",
+    "Waiting orchestration processes were restarted to use official primary identity initialization and parallel available encoders; no training or completed data overwritten.",
+    "P0 prediction ordering differs from new manifest; matched stable sample_id rather than row position for original baseline verification.",
+    "Initial integrity NE exact1e-10 comparison failed due original float32 vs JSON restored float64; identical per-state static Top1/R1/4/8 verified, NE sub-mm difference documented, no experiment code changed.",
+    "Post-run provenance variable shadowing fixed; failed provenance.log preserved, experiment inputs and predictions unchanged.",
+    "Initial relation test found wrong named-entity dictionary key; fixed before City labels/training/Seen, failure log preserved.",
+    "Report prediction gzip rounds scores to6 decimal and keeps tri argmax; full precision/probability predictions remain local."
+  ]
+}

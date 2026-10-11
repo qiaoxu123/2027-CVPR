@@ -1,0 +1,18 @@
+..........F                                                              [100%]
+=================================== FAILURES ===================================
+_______ test_same_color_identity_requires_actual_relation_contradiction ________
+
+    def test_same_color_identity_requires_actual_relation_contradiction():
+        from experiments.instance_grounding.relations import relation_mismatches
+        a=dict(object_id='a',name='',center_world=[20,0]);b=dict(object_id='b',name='',center_world=[-20,0]);anchor=dict(object_id='c',name='Depot',center_world=[0,0])
+>       assert relation_mismatches('building east of Depot',[a,b,anchor],'a')=={'b'}
+E       AssertionError: assert set() == {'b'}
+E
+E         Extra items in the right set:
+E         'b'
+E         Use -v to get more diff
+
+tests/test_instance_grounding.py:62: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_instance_grounding.py::test_same_color_identity_requires_actual_relation_contradiction
+1 failed, 10 passed in 1.88s

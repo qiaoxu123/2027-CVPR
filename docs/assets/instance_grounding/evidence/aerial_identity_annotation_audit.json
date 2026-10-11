@@ -1,0 +1,35 @@
+{
+  "train": {
+    "expressions": 1452,
+    "region_count": {
+      "2": 1221,
+      "3": 222,
+      "1": 8,
+      "4": 1
+    },
+    "single_region_expressions": 8,
+    "single_region_images": 8,
+    "schema_keys": [
+      "bbox",
+      "phrase",
+      "realation"
+    ],
+    "note": "Full captions can contain primary target plus reference regions. Need official evaluation reader to bind primary identity; do not designate region0 without verification."
+  },
+  "internal_dev": {
+    "expressions": 358,
+    "region_count": {
+      "2": 290,
+      "3": 66,
+      "1": 2
+    },
+    "single_region_expressions": 2,
+    "single_region_images": 2,
+    "schema_keys": [
+      "bbox",
+      "phrase",
+      "realation"
+    ],
+    "note": "Full captions can contain primary target plus reference regions. Need official evaluation reader to bind primary identity; do not designate region0 without verification."
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "real": {
+    "confusion_true_rows_pred_columns": [
+      [
+        0,
+        0,
+        161
+      ],
+      [
+        0,
+        0,
+        784
+      ],
+      [
+        1,
+        0,
+        41991
+      ]
+    ],
+    "classes": [
+      "Match",
+      "Mismatch",
+      "Unknown"
+    ],
+    "f1": [
+      0.0,
+      0.0,
+      0.988861152976639
+    ],
+    "macro_f1": 0.32962038432554636,
+    "identity_object_cluster_95ci": [
+      0.12344299606869438,
+      0.303321661833015
+    ],
+    "independent_objects": 69,
+    "annotation_status": "weak original identity and conservative relation/attribute judgments; not human calibrated semantic truth"
+  },
+  "zero": {
+    "confusion_true_rows_pred_columns": [
+      [
+        0,
+        0,
+        161
+      ],
+      [
+        0,
+        0,
+        784
+      ],
+      [
+        0,
+        0,
+        41992
+      ]
+    ],
+    "classes": [
+      "Match",
+      "Mismatch",
+      "Unknown"
+    ],
+    "f1": [
+      0.0,
+      0.0,
+      0.9888730586725383
+    ],
+    "macro_f1": 0.3296243528908461,
+    "identity_object_cluster_95ci": [
+      0.005127551020408163,
+      0.07142857142857142
+    ],
+    "independent_objects": 69,
+    "annotation_status": "weak original identity and conservative relation/attribute judgments; not human calibrated semantic truth"
+  },
+  "shuffled": {
+    "confusion_true_rows_pred_columns": [
+      [
+        0,
+        0,
+        161
+      ],
+      [
+        0,
+        0,
+        784
+      ],
+      [
+        1,
+        0,
+        41991
+      ]
+    ],
+    "classes": [
+      "Match",
+      "Mismatch",
+      "Unknown"
+    ],
+    "f1": [
+      0.0,
+      0.0,
+      0.988861152976639
+    ],
+    "macro_f1": 0.32962038432554636,
+    "identity_object_cluster_95ci": [
+      0.027468774395003902,
+      0.17802948316710043
+    ],
+    "independent_objects": 69,
+    "annotation_status": "weak original identity and conservative relation/attribute judgments; not human calibrated semantic truth"
+  },
+  "chain": {
+    "visible_static_error_states": 110,
+    "visible_static_error_families": 42,
+    "identity_correct_states": 25,
+    "identity_correct_families": 15,
+    "identity_correct_but_abstained_states": 25,
+    "margin_below_fixed_bound_states": 2,
+    "note": "Post-hoc diagnostic. Same .025 bound identity oracle uses GT only to select an actually seen instance; not normal inference, not threshold retuning."
+  },
+  "bounded_identity_oracle": {
+    "goal_r1": {
+      "n": 640,
+      "mean": 0.4484375,
+      "independent_families": 128,
+      "maps": 23,
+      "iid_95ci": [
+        0.4109375,
+        0.4875
+      ],
+      "family_cluster_95ci": [
+        0.365625,
+        0.5375
+      ],
+      "map_cluster_95ci": [
+        0.3682273065476191,
+        0.5261538461538462
+      ],
+      "cluster_warning": null
+    },
+    "recovery": {
+      "n": 640,
+      "mean": 0.003125,
+      "independent_families": 128,
+      "maps": 23,
+      "iid_95ci": [
+        0.0,
+        0.0078125
+      ],
+      "family_cluster_95ci": [
+        0.0,
+        0.009375
+      ],
+      "map_cluster_95ci": [
+        0.0,
+        0.00975609756097561
+      ],
+      "cluster_warning": null
+    },
+    "damage": {
+      "n": 640,
+      "mean": 0.0,
+      "independent_families": 128,
+      "maps": 23,
+      "iid_95ci": [
+        0.0,
+        0.0
+      ],
+      "family_cluster_95ci": [
+        0.0,
+        0.0
+      ],
+      "map_cluster_95ci": [
+        0.0,
+        0.0
+      ],
+      "cluster_warning": null
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "stage": "P2 reliable instance RGB-language grounding",
+  "base": "4a69bdf73fabaa931ee92354b52eb6672430ccd3",
+  "seed": 20261011,
+  "frozen": [
+    "SigLIP2",
+    "A3",
+    "28x28 candidates",
+    "20m localization radius",
+    "original splits"
+  ],
+  "budget": {
+    "train_families": 256,
+    "epochs": 3,
+    "max_head_runs": 6,
+    "gpu_minutes": 60,
+    "cpu_minutes": 60
+  },
+  "history": "All actually visited source poses through each cutoff; best geometric quality view per instance, identity-blind selection. Maximum 128 instances per state; current selected ROIs retained first. No future RGB.",
+  "supervision": "CityRefer identity is weak referring-expression supervision, not a human visual truth. Target absent => all candidates Unknown. Attribute labels separate. Same-color same-class negatives require an explicitly named observed anchor, target constraint support and candidate geometric contradiction with 10m direction or near<=25m/far>=50m buffers. A relation word alone is insufficient; unresolved stays Unknown.",
+  "external": "AerialVG geographic-disjoint primary pretraining. RefSegRS source SkyScapes original paper identifies Munich Germany; separate mask-grounding training and transfer comparison. DIOR geographic unresolved => quarantine frozen external-only diagnostics, never transfer weights to official CityNav comparison. No indiscriminate dataset mixing.",
+  "selection": "Train internal Dev instance R1, family weighted; first best epoch. Thresholds calibrated Dev only; Seen exactly once after freeze.",
+  "confidence": "Class-balanced Match/Mismatch/Unknown classifier with abstention (City training; original external heads retained unbalanced CE); zero features corrupted Unknown in training; ambiguous observed labels Unknown; unobserved excluded.",
+  "fusion": {
+    "mapping": "centroid with actual visited footprint support",
+    "gain": 0.025,
+    "maximum_absolute_residual": 0.025,
+    "unknown_residual": 0,
+    "threshold_candidates": [
+      0.8,
+      0.9,
+      0.95,
+      1.01
+    ],
+    "dev_minimum_accepted_families": 10
+  },
+  "gates": {
+    "independent_credible_error_families": 50,
+    "instance_r1_delta": 0.1,
+    "paired_instance_lower_gt": 0,
+    "real_zero_map_lower_gt": 0,
+    "real_shuffled_map_lower_gt": 0,
+    "recovery_gt_damage": true,
+    "goal_r1_delta": 0.01,
+    "goal_map_lower_gt": 0
+  },
+  "stop": "Any failed gate: no complete Seen navigation and no Unseen; no residual gain increase, GAT increase, Backbone training or longer unsuccessful training. Geometric credible cases and human audited semantic cases reported separately.",
+  "instance_architecture": "Full+phrase projections, Word-Patch Attention, causal context reference attention. City heads add zero-initialized full-language-conditioned bias on PUBLIC relative observed-region offsets (no absolute coordinates or target coordinates); all three City arms identical. RGB controls preserve this geometry. No GAT.",
+  "confidence_training": "External cached heads: feature-zero Unknown sentinel. City heads and all primary evaluations: actual encoded all-black RGB."
+}

@@ -1,0 +1,79 @@
+{
+  "models": {
+    "attribute_phrase_r1": {
+      "n": 246,
+      "mean": 0.4268292682926829,
+      "independent_families": 96,
+      "maps": 1,
+      "iid_95ci": [
+        0.36585365853658536,
+        0.4878048780487805
+      ],
+      "family_cluster_95ci": [
+        0.388,
+        0.4655939547664341
+      ],
+      "map_cluster_95ci": [
+        0.4268292682926829,
+        0.4268292682926829
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    },
+    "identity_r1": {
+      "n": 246,
+      "mean": 0.4268292682926829,
+      "independent_families": 96,
+      "maps": 1,
+      "iid_95ci": [
+        0.36585365853658536,
+        0.4878048780487805
+      ],
+      "family_cluster_95ci": [
+        0.388,
+        0.4655939547664341
+      ],
+      "map_cluster_95ci": [
+        0.4268292682926829,
+        0.4268292682926829
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    },
+    "same_class_r1": {
+      "n": 184,
+      "mean": 0.42391304347826086,
+      "independent_families": 79,
+      "maps": 1,
+      "iid_95ci": [
+        0.3532608695652174,
+        0.4891304347826087
+      ],
+      "family_cluster_95ci": [
+        0.3850063326766113,
+        0.4632768361581921
+      ],
+      "map_cluster_95ci": [
+        0.42391304347826086,
+        0.42391304347826086
+      ],
+      "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+    }
+  },
+  "images": 96,
+  "queries": 246,
+  "seconds": 11.31198263168335,
+  "official_reader": "sorted XML paths, member order, zero-based expression counter, official data_loader.py lines43-55",
+  "official_expression_count": 38320,
+  "official_image_split_overlap": {
+    "train_val": 2449,
+    "train_test": 4206,
+    "val_test": 1115
+  },
+  "source_hashes": {
+    "Annotations.zip": "cecbf38add026dcfef9e5505c6594090cb11912c4801e6aa98514aa469024e4c",
+    "JPEGImages.zip": "1c0a52b10c9471cb02c801590d87ab23035fb82fe776ed825682a0e3270e690e"
+  },
+  "mode": "frozen SigLIP2 conditional on annotated oracle bbox proposals; not end-to-end bbox grounding, no CityNav transfer and no official DIOR test claim",
+  "geographic_overlap": "unresolved worldwide source; quarantine",
+  "license": "official RSVG CC BY-NC4.0, mirror not original hash-certified",
+  "peak_gpu_bytes": 3663742976
+}
