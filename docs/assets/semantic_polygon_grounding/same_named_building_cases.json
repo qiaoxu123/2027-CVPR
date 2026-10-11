@@ -1,0 +1,210 @@
+{
+  "train": [
+    {
+      "sample_id": "train_seen:cambridge_block_4:37:3:7909:forward:69",
+      "family_id": "train_seen:cambridge_block_4:37:3:7909",
+      "map_name": "cambridge_block_4",
+      "instruction": "The grey building next to the Kettles yard gallery on the left side along Castle street road.",
+      "static_error": false,
+      "opportunities": [
+        {
+          "phrase": "Kettle's Yard Gallery",
+          "candidate_building_ids": [
+            "30",
+            "33"
+          ],
+          "credible_building_ids": [
+            "30",
+            "33"
+          ],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    },
+    {
+      "sample_id": "train_seen:cambridge_block_4:6:4:7656:forward:51",
+      "family_id": "train_seen:cambridge_block_4:6:4:7656",
+      "map_name": "cambridge_block_4",
+      "instruction": "The building found between mostly trees, just right of the Kettle's Yard Gallery with a brown roof building.",
+      "static_error": true,
+      "opportunities": [
+        {
+          "phrase": "Kettle's Yard Gallery",
+          "candidate_building_ids": [
+            "30",
+            "33"
+          ],
+          "credible_building_ids": [
+            "30",
+            "33"
+          ],
+          "attribute_trigger": true
+        }
+      ],
+      "reference_instance_truth": null
+    },
+    {
+      "sample_id": "train_seen:cambridge_block_6:360:5:8175:forward:70",
+      "family_id": "train_seen:cambridge_block_6:360:5:8175",
+      "map_name": "cambridge_block_6",
+      "instruction": "Small parking area cut off by the edge of the map in between two different Causewayside buildings off the fen Causeway",
+      "static_error": false,
+      "opportunities": [
+        {
+          "phrase": "Causewayside",
+          "candidate_building_ids": [
+            "8",
+            "9"
+          ],
+          "credible_building_ids": [],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    },
+    {
+      "sample_id": "train_seen:cambridge_block_6:9:4:7933:forward:42",
+      "family_id": "train_seen:cambridge_block_6:9:4:7933",
+      "map_name": "cambridge_block_6",
+      "instruction": "The grey building to the left of the building called Causewayside",
+      "static_error": false,
+      "opportunities": [
+        {
+          "phrase": "Causewayside",
+          "candidate_building_ids": [
+            "8",
+            "9"
+          ],
+          "credible_building_ids": [],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    },
+    {
+      "sample_id": "train_seen:cambridge_block_9:186:4:10299:forward:159",
+      "family_id": "train_seen:cambridge_block_9:186:4:10299",
+      "map_name": "cambridge_block_9",
+      "instruction": "Two buildings red-lined, a brick red house with a brown roof, next to a multi-colored gray and white building with a brown roof, with the warehouse building behind it, in the Masters Lodge in front of it, off Bridge Street",
+      "static_error": false,
+      "opportunities": [
+        {
+          "phrase": "Master's Lodge",
+          "candidate_building_ids": [
+            "109",
+            "201",
+            "84"
+          ],
+          "credible_building_ids": [],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    },
+    {
+      "sample_id": "train_seen:cambridge_block_9:370:1:10549:forward:113",
+      "family_id": "train_seen:cambridge_block_9:370:1:10549",
+      "map_name": "cambridge_block_9",
+      "instruction": "This is a lawn located right near Bin Brook. Next to it is Ramsay Hall. Behind it there is another lawn on which Hall is located.",
+      "static_error": true,
+      "opportunities": [
+        {
+          "phrase": "Hall",
+          "candidate_building_ids": [
+            "65",
+            "90"
+          ],
+          "credible_building_ids": [
+            "90"
+          ],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    }
+  ],
+  "dev": [
+    {
+      "sample_id": "train_seen:cambridge_block_7:127:0:8631:forward:83",
+      "family_id": "train_seen:cambridge_block_7:127:0:8631",
+      "map_name": "cambridge_block_7",
+      "instruction": "A big building with grey roof and yellow wall situated at the intersection point of two road named Trumpington street and Silver street. A big square shaped lawn is at the back side of the building and the building 17 Mill lane situated at the opposite side of it along the silver street road.",
+      "static_error": false,
+      "opportunities": [
+        {
+          "phrase": "17 Mill lane",
+          "candidate_building_ids": [
+            "151",
+            "34",
+            "35",
+            "36",
+            "37",
+            "53"
+          ],
+          "credible_building_ids": [
+            "151",
+            "34",
+            "35",
+            "36",
+            "37",
+            "53"
+          ],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    },
+    {
+      "sample_id": "train_seen:cambridge_block_7:202:5:8918:forward:23",
+      "family_id": "train_seen:cambridge_block_7:202:5:8918",
+      "map_name": "cambridge_block_7",
+      "instruction": "The silver car in the parking lot for the 17 Mill Lane building.",
+      "static_error": true,
+      "opportunities": [
+        {
+          "phrase": "17 Mill lane",
+          "candidate_building_ids": [
+            "151",
+            "34",
+            "35",
+            "36",
+            "37",
+            "53"
+          ],
+          "credible_building_ids": [
+            "34",
+            "37",
+            "53"
+          ],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    }
+  ],
+  "seen": [
+    {
+      "sample_id": "val_seen:cambridge_block_4:32:2:845:forward:110",
+      "family_id": "val_seen:cambridge_block_4:32:2:845",
+      "map_name": "cambridge_block_4",
+      "instruction": "On the north side of Castle Street, this brown roofed building is directly to the left of the Kettle's Yard gallery building.",
+      "static_error": true,
+      "opportunities": [
+        {
+          "phrase": "Kettle's Yard gallery",
+          "candidate_building_ids": [
+            "30",
+            "33"
+          ],
+          "credible_building_ids": [
+            "30",
+            "33"
+          ],
+          "attribute_trigger": false
+        }
+      ],
+      "reference_instance_truth": null
+    }
+  ]
+}

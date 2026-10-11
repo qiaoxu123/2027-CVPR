@@ -1,0 +1,25 @@
+{
+  "stage": "P4 audit and identifiable Anchor Binding Oracle only",
+  "base_commit": "1b85adb90debb911869ab64a08a0ebd2c9fe2a41",
+  "seed": 20261011,
+  "population": "All existing P2 forward Train/Internal Dev/Seen plan states, unchanged. Primary: one maximum-cutoff state per family, selected from public timestamps. All-prefix diagnostics separate. No Unseen trajectories or labels opened.",
+  "maps": "All CityRefer public map objects audited; original Train/Seen split unchanged; source P2 Train/Internal Dev isolation retained.",
+  "name_matching": "Existing exact, typed and frozen fuzzy .88/.04 alias resolver, no GT-nearest fallback. All homonymous Polygon IDs retained, including road fragments. Invalid polygons and capped runtime references explicitly audited.",
+  "supervision": "Processed landmark names are weak language annotations; no invented per-reference instance identity. Anonymous reference mentions and attribute-bearing named references conservatively flagged for audit, never used as semantic truth.",
+  "oracle": "Correct annotation-provided name-set oracle preserves existing public mapping. Exact unique valid named binding is independently identifiable at the annotation-name level. Homonymous-instance and anonymous-instance Oracle require absent reference-instance labels; retain Unknown. No GT target coordinate chooses an anchor.",
+  "upper_bound": "Offline eligibility-only ceiling: if every static error with a nonunique/unresolved named binding were corrected, without damage. Additional anonymous-reference ceiling separately. This is not an evaluated anchor-instance Oracle or an attainable algorithm.",
+  "goal": "Original 28x28 cached Geometry grid, Euclidean XY success radius20m, top1/4/8 and NE. No candidate changes, residual or gain changes. Existing logits/rankings reused, no Backbone rerun.",
+  "statistics": "Paired 2000-bootstrap map and family95CI, seed20261011, independent family primary. Repeated prefixes never counted as independent anchor labels.",
+  "continue": {
+    "independently_evaluable_ambiguous_anchor_families_min": 50,
+    "oracle_goal_space_required": true,
+    "rgb_binding_delta_pp_min": 5,
+    "rgb_vs_black_and_shuffled_map_ci_lower": ">0",
+    "goal_delta_pp_min": 1,
+    "goal_map_ci_lower": ">0",
+    "recovery_gt_damage": true
+  },
+  "stop": "If independently evaluable reference-instance labels or Oracle space cannot be established, stop after audit/known-name Oracle. Do not invent labels from target position, silently collapse homonyms, train or call skipped A2-A5 metrics0.",
+  "budget": {"cpu_minutes": 20, "gpu_minutes": 0, "training_runs": 0, "image_encodings": 0},
+  "seen": "Single fixed diagnostic run after protocol is written; no Seen tuning. Broad raw Train/Seen schema/name counts are exploratory audit only."
+}
