@@ -7,7 +7,7 @@ permissions:
 jobs:
   archive-prune:
     # Never run during an ordinary push or a later release.
-    if: startsWith(github.event.head_commit.message, 'chore(branches): archive redundant GraphNav heads')
+    if: "${{ startsWith(github.event.head_commit.message, 'chore(branches): archive redundant GraphNav heads') }}"
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
