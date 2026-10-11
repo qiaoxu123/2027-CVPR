@@ -1,0 +1,51 @@
+{
+  "python": "3.10.22",
+  "torch": "2.8.0+cu128",
+  "numpy": "1.26.4",
+  "platform": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+  "device": "CPU; no GPU inference/training",
+  "seed": 20261011,
+  "geometry_checkpoint_sha": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+  "base_commit": "2cf62d2ac1f4cb8fe607af99ba781b3e4fde35e5",
+  "nlp": {
+    "spacy": "3.8.7",
+    "model": "en_core_web_sm",
+    "model_version": "3.8.0",
+    "model_license": "MIT",
+    "wheel_sha": "1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85",
+    "download": "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl",
+    "isolated_environment": "/home/rental/20260922_1/Workspace/Ablations/GraphNav/rgb-language-grounding/runs/role_aware_object_graph/nlp_env"
+  },
+  "runtime_seconds": {
+    "train_dev": 201.5557246208191,
+    "seen": 20.75729775428772
+  },
+  "regression": {
+    "passed": 388,
+    "warning": "rasterio NotGeoreferencedWarning on existing affine fixture",
+    "seconds": 7.91
+  },
+  "dependency_exports": {
+    "train": {
+      "model": "en_core_web_sm",
+      "model_version": "3.8.0",
+      "spacy_version": "3.8.7",
+      "seconds": 0.5884452341124415,
+      "documents": 256
+    },
+    "dev": {
+      "model": "en_core_web_sm",
+      "model_version": "3.8.0",
+      "spacy_version": "3.8.7",
+      "seconds": 0.26253720303066075,
+      "documents": 128
+    },
+    "seen": {
+      "model": "en_core_web_sm",
+      "model_version": "3.8.0",
+      "spacy_version": "3.8.7",
+      "seconds": 0.23441414907574654,
+      "documents": 128
+    }
+  }
+}

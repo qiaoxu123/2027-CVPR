@@ -1,0 +1,618 @@
+[
+  {
+    "sample_id": "train_seen:birmingham_block_11:18:3:6799:forward:41",
+    "role_correct": true,
+    "unknown": false,
+    "multiple_hypotheses": false,
+    "cases": [
+      {
+        "truth": {
+          "kind": "front",
+          "subject_span": [
+            9,
+            20
+          ],
+          "anchor_spans": [
+            [
+              88,
+              96
+            ]
+          ],
+          "status": "raw text clause label"
+        },
+        "primary_scope_correct": false
+      }
+    ],
+    "language": {
+      "instruction": "The gray parking lot that is on the Manchester Bournemouth footpath in front of a large building.",
+      "entities": [
+        {
+          "phrase": "The gray parking lot",
+          "role": "target",
+          "object_type": "Parking",
+          "colors": [
+            "gray"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            0,
+            20
+          ],
+          "head_span": [
+            9,
+            20
+          ],
+          "head_text": "parking lot"
+        },
+        {
+          "phrase": "footpath",
+          "role": "reference",
+          "object_type": "Footpath",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            59,
+            67
+          ],
+          "head_span": [
+            59,
+            67
+          ],
+          "head_text": "footpath"
+        },
+        {
+          "phrase": "a large building",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": "large",
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            80,
+            96
+          ],
+          "head_span": [
+            88,
+            96
+          ],
+          "head_text": "building"
+        }
+      ],
+      "factors": [
+        {
+          "kind": "along",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "on",
+          "trigger_span": [
+            29,
+            31
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "front",
+          "subject": 1,
+          "subject_hypotheses": [
+            {
+              "subject": 1,
+              "probability": 0.65
+            },
+            {
+              "subject": 0,
+              "probability": 0.35
+            }
+          ],
+          "anchors": [
+            2
+          ],
+          "trigger": "in front of",
+          "trigger_span": [
+            68,
+            79
+          ],
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ],
+          "confidence": 0.55,
+          "status": "text-only scope, not reference identity truth"
+        }
+      ],
+      "hypotheses": [
+        {
+          "target": 0,
+          "probability": 1.0,
+          "status": "nominal head interpretation"
+        }
+      ],
+      "unknown": [],
+      "confidence": 0.8,
+      "backend": "rule",
+      "source": "raw nominal spans and public names; no labels",
+      "reference_instance_truth": null
+    }
+  },
+  {
+    "sample_id": "train_seen:birmingham_block_13:19:0:7612:forward:38",
+    "role_correct": false,
+    "unknown": false,
+    "multiple_hypotheses": false,
+    "cases": [
+      {
+        "truth": {
+          "kind": "behind",
+          "subject_span": [
+            10,
+            22
+          ],
+          "anchor_spans": [
+            [
+              59,
+              64
+            ]
+          ],
+          "status": "raw text clause label"
+        },
+        "primary_scope_correct": true
+      }
+    ],
+    "language": {
+      "instruction": "The small parking area with white painted lines behind the trees. There is a green car, a blue car, a black car, a red car and a white car in the parking lot.",
+      "entities": [
+        {
+          "phrase": "The small parking area",
+          "role": "target",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": "small",
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            0,
+            22
+          ],
+          "head_span": [
+            10,
+            22
+          ],
+          "head_text": "parking area"
+        },
+        {
+          "phrase": "the trees",
+          "role": "reference",
+          "object_type": "HighVegetation",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            55,
+            64
+          ],
+          "head_span": [
+            59,
+            64
+          ],
+          "head_text": "trees"
+        },
+        {
+          "phrase": "a green car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "green"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            75,
+            86
+          ],
+          "head_span": [
+            83,
+            86
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "a blue car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "blue"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            88,
+            98
+          ],
+          "head_span": [
+            95,
+            98
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "a black car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "black"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            100,
+            111
+          ],
+          "head_span": [
+            108,
+            111
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "a red car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "red"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            113,
+            122
+          ],
+          "head_span": [
+            119,
+            122
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "a white car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "white"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            127,
+            138
+          ],
+          "head_span": [
+            135,
+            138
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "the parking lot",
+          "role": "reference",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            142,
+            157
+          ],
+          "head_span": [
+            146,
+            157
+          ],
+          "head_text": "parking lot"
+        }
+      ],
+      "factors": [
+        {
+          "kind": "behind",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "behind",
+          "trigger_span": [
+            48,
+            54
+          ],
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "near",
+          "subject": 6,
+          "subject_hypotheses": [
+            {
+              "subject": 6,
+              "probability": 0.65
+            },
+            {
+              "subject": 0,
+              "probability": 0.35
+            }
+          ],
+          "anchors": [
+            7
+          ],
+          "trigger": "in",
+          "trigger_span": [
+            139,
+            141
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.55,
+          "status": "text-only scope, not reference identity truth"
+        }
+      ],
+      "hypotheses": [
+        {
+          "target": 0,
+          "probability": 1.0,
+          "status": "nominal head interpretation"
+        }
+      ],
+      "unknown": [],
+      "confidence": 0.8,
+      "backend": "rule",
+      "source": "raw nominal spans and public names; no labels",
+      "reference_instance_truth": null
+    }
+  },
+  {
+    "sample_id": "train_seen:cambridge_block_7:157:0:8745:forward:106",
+    "role_correct": true,
+    "unknown": false,
+    "multiple_hypotheses": false,
+    "cases": [
+      {
+        "truth": {
+          "kind": "between",
+          "subject_span": [
+            8,
+            16
+          ],
+          "anchor_spans": [
+            [
+              101,
+              125
+            ],
+            [
+              134,
+              150
+            ]
+          ],
+          "status": "raw text clause label"
+        },
+        "primary_scope_correct": false
+      }
+    ],
+    "language": {
+      "instruction": "A white building on Free School Lane with white framed windows and a gray roof, situated between the Old Cavendish Laboratory and the Pheonix Building.",
+      "entities": [
+        {
+          "phrase": "A white building",
+          "role": "target",
+          "object_type": "Building",
+          "colors": [
+            "white"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            0,
+            16
+          ],
+          "head_span": [
+            8,
+            16
+          ],
+          "head_text": "building"
+        },
+        {
+          "phrase": "Free School Lane",
+          "role": "reference",
+          "object_type": "Footpath",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            301,
+            320,
+            897,
+            904
+          ],
+          "named_names": [
+            "Free School Lane"
+          ],
+          "unknown": [],
+          "span": [
+            20,
+            36
+          ],
+          "head_span": [
+            20,
+            36
+          ],
+          "head_text": "Free School Lane"
+        },
+        {
+          "phrase": "Old Cavendish Laboratory",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            129
+          ],
+          "named_names": [
+            "Old Cavendish Laboratory"
+          ],
+          "unknown": [],
+          "span": [
+            101,
+            125
+          ],
+          "head_span": [
+            101,
+            125
+          ],
+          "head_text": "Old Cavendish Laboratory"
+        },
+        {
+          "phrase": "Building",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            142,
+            150
+          ],
+          "head_span": [
+            142,
+            150
+          ],
+          "head_text": "Building"
+        }
+      ],
+      "factors": [
+        {
+          "kind": "along",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "on",
+          "trigger_span": [
+            17,
+            19
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "between",
+          "subject": 1,
+          "subject_hypotheses": [
+            {
+              "subject": 1,
+              "probability": 0.65
+            },
+            {
+              "subject": 0,
+              "probability": 0.35
+            }
+          ],
+          "anchors": [
+            2,
+            3
+          ],
+          "trigger": "between",
+          "trigger_span": [
+            89,
+            96
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.55,
+          "status": "text-only scope, not reference identity truth"
+        }
+      ],
+      "hypotheses": [
+        {
+          "target": 0,
+          "probability": 1.0,
+          "status": "nominal head interpretation"
+        }
+      ],
+      "unknown": [],
+      "confidence": 0.8,
+      "backend": "rule",
+      "source": "raw nominal spans and public names; no labels",
+      "reference_instance_truth": null
+    }
+  }
+]

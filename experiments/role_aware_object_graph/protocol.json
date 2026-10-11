@@ -1,0 +1,26 @@
+{
+  "base_commit": "2cf62d2ac1f4cb8fe607af99ba781b3e4fde35e5",
+  "seed": 20261011,
+  "population": "Same cached Train256/Dev128/Seen128 primary max cutoff families; fixed784 cells/20m; full cached public objects graph. No Backbone/GAT/RGB/controller training.",
+  "methods": [
+    "A0 original frozen Geometry",
+    "A1 frozen P5 A2 weight0.5",
+    "A2 role repair, target-centered relations",
+    "A3 scoped factors, single syntactic scope",
+    "A4 scoped factors plus parse/coreference hypotheses"
+  ],
+  "design": "Develop only Train and Dev. Compare span grammar and frozen en_core_web_sm dependency-assisted parsing. Target is a nominal entity, not truncated instruction; names outside target nominal span cannot bind target. Role/scope uncertainty kept as hypotheses. No private labels normal forward.",
+  "selection": "Dev choose parser backend using weak role score then Goal R1, ties rule backend. Mixture weights fixed candidate {0,.25,.5}; R1 then lowerdamage then smallerweight. No Seen tuning.",
+  "scope": "Between joint>=2 entities; nested reference-reference relation updates anchor belief rather than treating every edge as target relation. Relative frames remain multiple hypotheses.",
+  "no_evidence": "unknown target or no supported factor => unchanged A0 heatmap. Unknown factor contributes no penalty.",
+  "annotation": "Offline processed_descriptions only weak target/landmark supervision, accessed using sealed sample label key. Separate raw-text-only analyst audit created before parser predictions; not independently human verified. Ambiguous annotations count Unknown and are not forced correct. Synthetic controlled sentences separate.",
+  "stage1_gate": "role>=90%, scope>=85% on independently verifiable audit; report full denominator/unknown. No external human annotation verification means certification is limited, never silently call weak labels manual truth.",
+  "goal_gate": "vs frozen P5 A2 >=1pp, map95CI lower>0; Recovery>Damage, Net>0; no systematic Train/Dev regression",
+  "bootstrap": 2000,
+  "seen": "one final fixed confirmation after Dev freeze; disclose prior exploratory Seen exposure. No Unseen/closedloop if either gate fails.",
+  "budgets": {
+    "nlp_setup_minutes": 12,
+    "cpu_experiment_minutes": 30,
+    "gpu_training": 0
+  }
+}

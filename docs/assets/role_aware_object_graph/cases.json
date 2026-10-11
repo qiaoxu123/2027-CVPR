@@ -1,0 +1,794 @@
+[
+  {
+    "sample_id": "train_seen:birmingham_block_11:18:0:6797:forward:33",
+    "instruction": "The large parking lot in front of the large white and gray building on the Cross Country Manchester to Bournemouth footpath.",
+    "P5": {
+      "instruction": "The large parking lot in front of the large white and gray building on the Cross Country Manchester to Bournemouth footpath.",
+      "entities": [
+        {
+          "phrase": "The large parking lot",
+          "role": "target",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": "large",
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "the large white and gray building on the Cross Country Manchester to Bournemouth footpath",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": "large",
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [
+            "color scope ambiguous"
+          ]
+        }
+      ],
+      "factors": [
+        {
+          "kind": "front",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "role_aware": {
+      "instruction": "The large parking lot in front of the large white and gray building on the Cross Country Manchester to Bournemouth footpath.",
+      "entities": [
+        {
+          "phrase": "The large parking lot",
+          "role": "target",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": "large",
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            0,
+            21
+          ],
+          "head_span": [
+            10,
+            21
+          ],
+          "head_text": "parking lot"
+        },
+        {
+          "phrase": "gray building",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [
+            "gray"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            54,
+            67
+          ],
+          "head_span": [
+            59,
+            67
+          ],
+          "head_text": "building"
+        },
+        {
+          "phrase": "footpath",
+          "role": "reference",
+          "object_type": "Footpath",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            115,
+            123
+          ],
+          "head_span": [
+            115,
+            123
+          ],
+          "head_text": "footpath"
+        }
+      ],
+      "factors": [
+        {
+          "kind": "front",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "in front of",
+          "trigger_span": [
+            22,
+            33
+          ],
+          "frame_hypotheses": [
+            "world-north-up",
+            "current-uav",
+            "opposite-current-uav"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "along",
+          "subject": 1,
+          "subject_hypotheses": [
+            {
+              "subject": 1,
+              "probability": 0.65
+            },
+            {
+              "subject": 0,
+              "probability": 0.35
+            }
+          ],
+          "anchors": [
+            2
+          ],
+          "trigger": "on",
+          "trigger_span": [
+            68,
+            70
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.55,
+          "status": "text-only scope, not reference identity truth"
+        }
+      ],
+      "hypotheses": [
+        {
+          "target": 0,
+          "probability": 1.0,
+          "status": "nominal head interpretation"
+        }
+      ],
+      "unknown": [],
+      "confidence": 0.8,
+      "backend": "rule",
+      "source": "raw nominal spans and public names; no labels",
+      "reference_instance_truth": null
+    },
+    "old_metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 4.639635491575447,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0,
+      "object_r1": 1.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "new_metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 4.639635491575447,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0,
+      "object_r1": 1.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "figure": "case_0.png",
+    "label_status": "Goal GT only offline visualization; no verified reference identity"
+  },
+  {
+    "sample_id": "train_seen:birmingham_block_9:154:5:6102:forward:245",
+    "instruction": "A gray car in between a white van, and one blue and one purple car in the front parking lot of the West Midlands police custody Suite Drive off Holford Drive",
+    "P5": {
+      "instruction": "A gray car in between a white van, and one blue and one purple car in the front parking lot of the West Midlands police custody Suite Drive off Holford Drive",
+      "entities": [
+        {
+          "phrase": "A gray car in",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [
+            "gray"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "a white van, ",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "white"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": " one blue ",
+          "role": "reference",
+          "object_type": null,
+          "colors": [
+            "blue"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": " one purple car in the front parking lot of the",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [
+            "color scope ambiguous"
+          ]
+        },
+        {
+          "phrase": "Midlands police custody Suite Drive off Holford Drive",
+          "role": "reference",
+          "object_type": null,
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            753
+          ],
+          "named_names": [
+            "Holford Drive"
+          ],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "between",
+          "anchors": [
+            1,
+            2,
+            3
+          ],
+          "status": "weak parsed joint factor",
+          "frame_hypotheses": [
+            "world"
+          ]
+        },
+        {
+          "kind": "west",
+          "anchors": [
+            4
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "role_aware": {
+      "instruction": "A gray car in between a white van, and one blue and one purple car in the front parking lot of the West Midlands police custody Suite Drive off Holford Drive",
+      "entities": [
+        {
+          "phrase": "A gray car",
+          "role": "target",
+          "object_type": "Car",
+          "colors": [
+            "gray"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            0,
+            10
+          ],
+          "head_span": [
+            7,
+            10
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "a white van",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [
+            "white"
+          ],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            22,
+            33
+          ],
+          "head_span": [
+            30,
+            33
+          ],
+          "head_text": "van"
+        },
+        {
+          "phrase": "purple car",
+          "role": "reference",
+          "object_type": "Car",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            56,
+            66
+          ],
+          "head_span": [
+            63,
+            66
+          ],
+          "head_text": "car"
+        },
+        {
+          "phrase": "parking lot",
+          "role": "reference",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            80,
+            91
+          ],
+          "head_span": [
+            80,
+            91
+          ],
+          "head_text": "parking lot"
+        },
+        {
+          "phrase": "West Midlands police custody Suite",
+          "role": "reference",
+          "object_type": "Building",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            25
+          ],
+          "named_names": [
+            "West Midlands Police Custody Suite"
+          ],
+          "unknown": [],
+          "span": [
+            99,
+            133
+          ],
+          "head_span": [
+            99,
+            133
+          ],
+          "head_text": "West Midlands police custody Suite"
+        },
+        {
+          "phrase": "Drive",
+          "role": "reference",
+          "object_type": "TrafficRoad",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            134,
+            139
+          ],
+          "head_span": [
+            134,
+            139
+          ],
+          "head_text": "Drive"
+        },
+        {
+          "phrase": "Holford Drive",
+          "role": "reference",
+          "object_type": "TrafficRoad",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            753
+          ],
+          "named_names": [
+            "Holford Drive"
+          ],
+          "unknown": [],
+          "span": [
+            144,
+            157
+          ],
+          "head_span": [
+            144,
+            157
+          ],
+          "head_text": "Holford Drive"
+        }
+      ],
+      "factors": [
+        {
+          "kind": "between",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1,
+            2
+          ],
+          "trigger": "in between",
+          "trigger_span": [
+            11,
+            21
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "near",
+          "subject": 2,
+          "subject_hypotheses": [
+            {
+              "subject": 2,
+              "probability": 0.65
+            },
+            {
+              "subject": 0,
+              "probability": 0.35
+            }
+          ],
+          "anchors": [
+            3
+          ],
+          "trigger": "in",
+          "trigger_span": [
+            67,
+            69
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.55,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "near",
+          "subject": 5,
+          "subject_hypotheses": [
+            {
+              "subject": 5,
+              "probability": 0.65
+            },
+            {
+              "subject": 0,
+              "probability": 0.35
+            }
+          ],
+          "anchors": [
+            6
+          ],
+          "trigger": "off",
+          "trigger_span": [
+            140,
+            143
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.55,
+          "status": "text-only scope, not reference identity truth"
+        }
+      ],
+      "hypotheses": [
+        {
+          "target": 0,
+          "probability": 1.0,
+          "status": "nominal head interpretation"
+        }
+      ],
+      "unknown": [],
+      "confidence": 0.8,
+      "backend": "rule",
+      "source": "raw nominal spans and public names; no labels",
+      "reference_instance_truth": null
+    },
+    "old_metrics": {
+      "goal_r1": 0.0,
+      "goal_r4": 0.0,
+      "goal_r8": 0.0,
+      "ne": 84.83363360891191,
+      "recovery": 0.0,
+      "damage": 1.0,
+      "net_recovery": -1.0,
+      "object_r1": 0.0,
+      "object_r4": 0.0,
+      "object_r8": 0.0
+    },
+    "new_metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 12.968243873640342,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0,
+      "object_r1": 0.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "figure": "case_1.png",
+    "label_status": "Goal GT only offline visualization; no verified reference identity"
+  },
+  {
+    "sample_id": "train_seen:birmingham_block_11:19:0:6801:forward:22",
+    "instruction": "A triangular shaped parking lot with five rows that's been cut off at the edge of the map next to Nobel way",
+    "P5": {
+      "instruction": "A triangular shaped parking lot with five rows that's been cut off at the edge of the map next to Nobel way",
+      "entities": [
+        {
+          "phrase": "A triangular shaped parking lot",
+          "role": "target",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": []
+        },
+        {
+          "phrase": "Nobel way",
+          "role": "reference",
+          "object_type": null,
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            18
+          ],
+          "named_names": [
+            "Nobel Way"
+          ],
+          "unknown": []
+        }
+      ],
+      "factors": [
+        {
+          "kind": "near",
+          "anchors": [
+            1
+          ],
+          "status": "weak parsed factor; no identity truth",
+          "frame_hypotheses": [
+            "world"
+          ]
+        }
+      ],
+      "source": "raw instruction and public names only",
+      "reference_instance_truth": null
+    },
+    "role_aware": {
+      "instruction": "A triangular shaped parking lot with five rows that's been cut off at the edge of the map next to Nobel way",
+      "entities": [
+        {
+          "phrase": "A triangular shaped parking lot",
+          "role": "target",
+          "object_type": "Parking",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [],
+          "named_names": [],
+          "unknown": [],
+          "span": [
+            0,
+            31
+          ],
+          "head_span": [
+            20,
+            31
+          ],
+          "head_text": "parking lot"
+        },
+        {
+          "phrase": "Nobel way",
+          "role": "reference",
+          "object_type": "TrafficRoad",
+          "colors": [],
+          "shape": null,
+          "size": null,
+          "named_ids": [
+            18
+          ],
+          "named_names": [
+            "Nobel Way"
+          ],
+          "unknown": [],
+          "span": [
+            98,
+            107
+          ],
+          "head_span": [
+            98,
+            107
+          ],
+          "head_text": "Nobel way"
+        }
+      ],
+      "factors": [
+        {
+          "kind": "near",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "off",
+          "trigger_span": [
+            63,
+            66
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "near",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "at",
+          "trigger_span": [
+            67,
+            69
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        },
+        {
+          "kind": "near",
+          "subject": 0,
+          "subject_hypotheses": [
+            {
+              "subject": 0,
+              "probability": 1.0
+            }
+          ],
+          "anchors": [
+            1
+          ],
+          "trigger": "next to",
+          "trigger_span": [
+            90,
+            97
+          ],
+          "frame_hypotheses": [
+            "world"
+          ],
+          "confidence": 0.8,
+          "status": "text-only scope, not reference identity truth"
+        }
+      ],
+      "hypotheses": [
+        {
+          "target": 0,
+          "probability": 1.0,
+          "status": "nominal head interpretation"
+        }
+      ],
+      "unknown": [],
+      "confidence": 0.8,
+      "backend": "rule",
+      "source": "raw nominal spans and public names; no labels",
+      "reference_instance_truth": null
+    },
+    "old_metrics": {
+      "goal_r1": 1.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 8.194946940970231,
+      "recovery": 0.0,
+      "damage": 0.0,
+      "net_recovery": 0.0,
+      "object_r1": 1.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "new_metrics": {
+      "goal_r1": 0.0,
+      "goal_r4": 1.0,
+      "goal_r8": 1.0,
+      "ne": 28.51145920688733,
+      "recovery": 0.0,
+      "damage": 1.0,
+      "net_recovery": -1.0,
+      "object_r1": 1.0,
+      "object_r4": 1.0,
+      "object_r8": 1.0
+    },
+    "figure": "case_2.png",
+    "label_status": "Goal GT only offline visualization; no verified reference identity"
+  }
+]

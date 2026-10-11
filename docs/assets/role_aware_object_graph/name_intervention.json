@@ -1,0 +1,1187 @@
+{
+  "train": {
+    "counts": {
+      "named_target": 93,
+      "wrong_target_named": 92,
+      "wrong_name_and_old_goal_error": 36,
+      "changed_names": 93,
+      "recoveries_in_wrong_names": 7,
+      "damage_in_wrong_names": 2
+    },
+    "metrics": {
+      "goal_r1": {
+        "n": 256,
+        "mean": 0.69140625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.63671875,
+          0.75
+        ],
+        "family_cluster_95ci": [
+          0.63671875,
+          0.75
+        ],
+        "map_cluster_95ci": [
+          0.624561403508772,
+          0.7564461883408069
+        ],
+        "cluster_warning": null
+      },
+      "goal_r4": {
+        "n": 256,
+        "mean": 0.82421875,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.7734375,
+          0.87109375
+        ],
+        "family_cluster_95ci": [
+          0.7734375,
+          0.87109375
+        ],
+        "map_cluster_95ci": [
+          0.7750978915662651,
+          0.8699196106310838
+        ],
+        "cluster_warning": null
+      },
+      "goal_r8": {
+        "n": 256,
+        "mean": 0.90234375,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.86328125,
+          0.9375
+        ],
+        "family_cluster_95ci": [
+          0.86328125,
+          0.9375
+        ],
+        "map_cluster_95ci": [
+          0.8690885271933307,
+          0.9333333333333333
+        ],
+        "cluster_warning": null
+      },
+      "ne": {
+        "n": 256,
+        "mean": 18.846819035619642,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          16.877036423624034,
+          20.950383334374425
+        ],
+        "family_cluster_95ci": [
+          16.877036423624034,
+          20.950383334374425
+        ],
+        "map_cluster_95ci": [
+          16.84418077490216,
+          21.04953648254814
+        ],
+        "cluster_warning": null
+      },
+      "recovery": {
+        "n": 256,
+        "mean": 0.01953125,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.00390625,
+          0.0390625
+        ],
+        "family_cluster_95ci": [
+          0.00390625,
+          0.0390625
+        ],
+        "map_cluster_95ci": [
+          0.003952569169960474,
+          0.04044229280781138
+        ],
+        "cluster_warning": null
+      },
+      "damage": {
+        "n": 256,
+        "mean": 0.02734375,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.011621093750000006,
+          0.046875
+        ],
+        "family_cluster_95ci": [
+          0.011621093750000006,
+          0.046875
+        ],
+        "map_cluster_95ci": [
+          0.01162567084078712,
+          0.04484442207376223
+        ],
+        "cluster_warning": null
+      },
+      "net_recovery": {
+        "n": 256,
+        "mean": -0.0078125,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -0.03515625,
+          0.01953125
+        ],
+        "family_cluster_95ci": [
+          -0.03515625,
+          0.01953125
+        ],
+        "map_cluster_95ci": [
+          -0.031677807486631016,
+          0.017167750689497514
+        ],
+        "cluster_warning": null
+      },
+      "object_r1": {
+        "n": 256,
+        "mean": 0.30078125,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.24609375,
+          0.35546875
+        ],
+        "family_cluster_95ci": [
+          0.24609375,
+          0.35546875
+        ],
+        "map_cluster_95ci": [
+          0.22806842105263156,
+          0.3730769230769231
+        ],
+        "cluster_warning": null
+      },
+      "object_r4": {
+        "n": 256,
+        "mean": 0.62109375,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.5625,
+          0.6796875
+        ],
+        "family_cluster_95ci": [
+          0.5625,
+          0.6796875
+        ],
+        "map_cluster_95ci": [
+          0.5413441390361149,
+          0.7016867323852617
+        ],
+        "cluster_warning": null
+      },
+      "object_r8": {
+        "n": 256,
+        "mean": 0.74609375,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.69140625,
+          0.7969726562499995
+        ],
+        "family_cluster_95ci": [
+          0.69140625,
+          0.7969726562499995
+        ],
+        "map_cluster_95ci": [
+          0.665244644975957,
+          0.822433675007537
+        ],
+        "cluster_warning": null
+      }
+    },
+    "vs_P5": {
+      "goal_r1": {
+        "n": 256,
+        "mean": 0.01953125,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -0.00390625,
+          0.04296875
+        ],
+        "family_cluster_95ci": [
+          -0.00390625,
+          0.04296875
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.04211646136618135
+        ],
+        "cluster_warning": null
+      },
+      "goal_r4": {
+        "n": 256,
+        "mean": -0.00390625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -0.01953125,
+          0.0078125
+        ],
+        "family_cluster_95ci": [
+          -0.01953125,
+          0.0078125
+        ],
+        "map_cluster_95ci": [
+          -0.01736376455604076,
+          0.008403361344537815
+        ],
+        "cluster_warning": null
+      },
+      "goal_r8": {
+        "n": 256,
+        "mean": -0.0078125,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -0.01953125,
+          0.0
+        ],
+        "family_cluster_95ci": [
+          -0.01953125,
+          0.0
+        ],
+        "map_cluster_95ci": [
+          -0.017607189070820685,
+          0.0
+        ],
+        "cluster_warning": null
+      },
+      "ne": {
+        "n": 256,
+        "mean": -0.5734206142022289,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -1.438189685517688,
+          0.12330323783800717
+        ],
+        "family_cluster_95ci": [
+          -1.438189685517688,
+          0.12330323783800717
+        ],
+        "map_cluster_95ci": [
+          -1.3936120381379136,
+          0.11414660163202991
+        ],
+        "cluster_warning": null
+      },
+      "recovery": {
+        "n": 256,
+        "mean": 0.00390625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.0,
+          0.01171875
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.01171875
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.012246152559384401
+        ],
+        "cluster_warning": null
+      },
+      "damage": {
+        "n": 256,
+        "mean": -0.015625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -0.0390625,
+          0.00390625
+        ],
+        "family_cluster_95ci": [
+          -0.0390625,
+          0.00390625
+        ],
+        "map_cluster_95ci": [
+          -0.04032666187802011,
+          0.00738213911989865
+        ],
+        "cluster_warning": null
+      },
+      "net_recovery": {
+        "n": 256,
+        "mean": 0.01953125,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          -0.00390625,
+          0.04296875
+        ],
+        "family_cluster_95ci": [
+          -0.00390625,
+          0.04296875
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.04211646136618135
+        ],
+        "cluster_warning": null
+      },
+      "object_r1": {
+        "n": 256,
+        "mean": 0.12890625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.0859375,
+          0.171875
+        ],
+        "family_cluster_95ci": [
+          0.0859375,
+          0.171875
+        ],
+        "map_cluster_95ci": [
+          0.08195506982392228,
+          0.1743782587105851
+        ],
+        "cluster_warning": null
+      },
+      "object_r4": {
+        "n": 256,
+        "mean": 0.09765625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.0625,
+          0.13671875
+        ],
+        "family_cluster_95ci": [
+          0.0625,
+          0.13671875
+        ],
+        "map_cluster_95ci": [
+          0.04597437519772224,
+          0.15809355836929362
+        ],
+        "cluster_warning": null
+      },
+      "object_r8": {
+        "n": 256,
+        "mean": 0.0390625,
+        "independent_families": 256,
+        "maps": 20,
+        "iid_95ci": [
+          0.015625,
+          0.06640625
+        ],
+        "family_cluster_95ci": [
+          0.015625,
+          0.06640625
+        ],
+        "map_cluster_95ci": [
+          0.011673151750972763,
+          0.0708955223880597
+        ],
+        "cluster_warning": null
+      }
+    },
+    "status": "Fixed raw-language-only intervention; no GT chooses edits. Counts are direct attribution of name scope, not all role/scope changes."
+  },
+  "dev": {
+    "counts": {
+      "named_target": 30,
+      "wrong_target_named": 30,
+      "wrong_name_and_old_goal_error": 17,
+      "changed_names": 30,
+      "recoveries_in_wrong_names": 1,
+      "damage_in_wrong_names": 0
+    },
+    "metrics": {
+      "goal_r1": {
+        "n": 128,
+        "mean": 0.6953125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.6171875,
+          0.7734375
+        ],
+        "family_cluster_95ci": [
+          0.6171875,
+          0.7734375
+        ],
+        "map_cluster_95ci": [
+          0.6296296296296297,
+          0.8085106382978723
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "goal_r4": {
+        "n": 128,
+        "mean": 0.796875,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.7265625,
+          0.8671875
+        ],
+        "family_cluster_95ci": [
+          0.7265625,
+          0.8671875
+        ],
+        "map_cluster_95ci": [
+          0.7058823529411765,
+          0.88
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "goal_r8": {
+        "n": 128,
+        "mean": 0.859375,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.796875,
+          0.9140625
+        ],
+        "family_cluster_95ci": [
+          0.796875,
+          0.9140625
+        ],
+        "map_cluster_95ci": [
+          0.8085106382978723,
+          0.92
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "ne": {
+        "n": 128,
+        "mean": 19.725208693368344,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          15.596299220809454,
+          24.06409338925121
+        ],
+        "family_cluster_95ci": [
+          15.596299220809454,
+          24.06409338925121
+        ],
+        "map_cluster_95ci": [
+          11.680124427641175,
+          26.089215656015824
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "recovery": {
+        "n": 128,
+        "mean": 0.046875,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.015625,
+          0.0859375
+        ],
+        "family_cluster_95ci": [
+          0.015625,
+          0.0859375
+        ],
+        "map_cluster_95ci": [
+          0.012345679012345678,
+          0.08496732026143791
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "damage": {
+        "n": 128,
+        "mean": 0.0234375,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0546875
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0546875
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.043478260869565216
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "net_recovery": {
+        "n": 128,
+        "mean": 0.0234375,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          -0.015625,
+          0.0703125
+        ],
+        "family_cluster_95ci": [
+          -0.015625,
+          0.0703125
+        ],
+        "map_cluster_95ci": [
+          -0.017543859649122806,
+          0.06428571428571428
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "object_r1": {
+        "n": 128,
+        "mean": 0.40625,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.3203125,
+          0.4921875
+        ],
+        "family_cluster_95ci": [
+          0.3203125,
+          0.4921875
+        ],
+        "map_cluster_95ci": [
+          0.18571428571428572,
+          0.6813186813186813
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "object_r4": {
+        "n": 128,
+        "mean": 0.7421875,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.6640625,
+          0.8125
+        ],
+        "family_cluster_95ci": [
+          0.6640625,
+          0.8125
+        ],
+        "map_cluster_95ci": [
+          0.5214723926380368,
+          0.9787234042553191
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "object_r8": {
+        "n": 128,
+        "mean": 0.7890625,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.7109375,
+          0.8515625
+        ],
+        "family_cluster_95ci": [
+          0.7109375,
+          0.8515625
+        ],
+        "map_cluster_95ci": [
+          0.6196319018404908,
+          0.9787234042553191
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      }
+    },
+    "vs_P5": {
+      "goal_r1": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.02
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "goal_r4": {
+        "n": 128,
+        "mean": 0.0,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.0
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "goal_r8": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.02
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "ne": {
+        "n": 128,
+        "mean": 0.008634613913685613,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          -0.340261651906953,
+          0.426421548909662
+        ],
+        "family_cluster_95ci": [
+          -0.340261651906953,
+          0.426421548909662
+        ],
+        "map_cluster_95ci": [
+          -0.1115964439459106,
+          0.1458803218719479
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "recovery": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.02
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "damage": {
+        "n": 128,
+        "mean": 0.0,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.0
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "net_recovery": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.02
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "object_r1": {
+        "n": 128,
+        "mean": 0.109375,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0625,
+          0.171875
+        ],
+        "family_cluster_95ci": [
+          0.0625,
+          0.171875
+        ],
+        "map_cluster_95ci": [
+          0.056338028169014086,
+          0.20987654320987653
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "object_r4": {
+        "n": 128,
+        "mean": 0.03125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0078125,
+          0.0625
+        ],
+        "family_cluster_95ci": [
+          0.0078125,
+          0.0625
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.06134969325153374
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      },
+      "object_r8": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 4,
+        "iid_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.0196078431372549
+        ],
+        "cluster_warning": "fewer than 5 maps; map uncertainty unstable"
+      }
+    },
+    "status": "Fixed raw-language-only intervention; no GT chooses edits. Counts are direct attribution of name scope, not all role/scope changes."
+  },
+  "seen": {
+    "counts": {
+      "named_target": 45,
+      "wrong_target_named": 45,
+      "wrong_name_and_old_goal_error": 26,
+      "changed_names": 44,
+      "recoveries_in_wrong_names": 2,
+      "damage_in_wrong_names": 1
+    },
+    "metrics": {
+      "goal_r1": {
+        "n": 128,
+        "mean": 0.4765625,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.390625,
+          0.5703125
+        ],
+        "family_cluster_95ci": [
+          0.390625,
+          0.5703125
+        ],
+        "map_cluster_95ci": [
+          0.40799230769230765,
+          0.544
+        ],
+        "cluster_warning": null
+      },
+      "goal_r4": {
+        "n": 128,
+        "mean": 0.640625,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.5546875,
+          0.71875
+        ],
+        "family_cluster_95ci": [
+          0.5546875,
+          0.71875
+        ],
+        "map_cluster_95ci": [
+          0.5599830508474577,
+          0.7142857142857143
+        ],
+        "cluster_warning": null
+      },
+      "goal_r8": {
+        "n": 128,
+        "mean": 0.7578125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.6796875,
+          0.828125
+        ],
+        "family_cluster_95ci": [
+          0.6796875,
+          0.828125
+        ],
+        "map_cluster_95ci": [
+          0.6859504132231405,
+          0.8257575757575758
+        ],
+        "cluster_warning": null
+      },
+      "ne": {
+        "n": 128,
+        "mean": 32.82112260829403,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          27.066758004833353,
+          38.99685100552814
+        ],
+        "family_cluster_95ci": [
+          27.066758004833353,
+          38.99685100552814
+        ],
+        "map_cluster_95ci": [
+          27.854636108817456,
+          38.00472967272331
+        ],
+        "cluster_warning": null
+      },
+      "recovery": {
+        "n": 128,
+        "mean": 0.0390625,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.0078125,
+          0.078125
+        ],
+        "family_cluster_95ci": [
+          0.0078125,
+          0.078125
+        ],
+        "map_cluster_95ci": [
+          0.007751937984496124,
+          0.078125
+        ],
+        "cluster_warning": null
+      },
+      "damage": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.024198465774980304
+        ],
+        "cluster_warning": null
+      },
+      "net_recovery": {
+        "n": 128,
+        "mean": 0.03125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.0,
+          0.0703125
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0703125
+        ],
+        "map_cluster_95ci": [
+          -0.007692307692307693,
+          0.07518796992481203
+        ],
+        "cluster_warning": null
+      },
+      "object_r1": {
+        "n": 128,
+        "mean": 0.1796875,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.1171875,
+          0.25
+        ],
+        "family_cluster_95ci": [
+          0.1171875,
+          0.25
+        ],
+        "map_cluster_95ci": [
+          0.11450381679389313,
+          0.24793388429752067
+        ],
+        "cluster_warning": null
+      },
+      "object_r4": {
+        "n": 128,
+        "mean": 0.515625,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.4296875,
+          0.6015625
+        ],
+        "family_cluster_95ci": [
+          0.4296875,
+          0.6015625
+        ],
+        "map_cluster_95ci": [
+          0.417910447761194,
+          0.6160863095238095
+        ],
+        "cluster_warning": null
+      },
+      "object_r8": {
+        "n": 128,
+        "mean": 0.640625,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.5546875,
+          0.71875
+        ],
+        "family_cluster_95ci": [
+          0.5546875,
+          0.71875
+        ],
+        "map_cluster_95ci": [
+          0.5461538461538461,
+          0.7328371501272264
+        ],
+        "cluster_warning": null
+      }
+    },
+    "vs_P5": {
+      "goal_r1": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          -0.015625,
+          0.0390625
+        ],
+        "family_cluster_95ci": [
+          -0.015625,
+          0.0390625
+        ],
+        "map_cluster_95ci": [
+          -0.016,
+          0.032
+        ],
+        "cluster_warning": null
+      },
+      "goal_r4": {
+        "n": 128,
+        "mean": 0.0,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          -0.03125,
+          0.03125
+        ],
+        "family_cluster_95ci": [
+          -0.03125,
+          0.03125
+        ],
+        "map_cluster_95ci": [
+          -0.030303030303030304,
+          0.031007751937984496
+        ],
+        "cluster_warning": null
+      },
+      "goal_r8": {
+        "n": 128,
+        "mean": 0.0,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.0,
+          0.0
+        ],
+        "family_cluster_95ci": [
+          0.0,
+          0.0
+        ],
+        "map_cluster_95ci": [
+          0.0,
+          0.0
+        ],
+        "cluster_warning": null
+      },
+      "ne": {
+        "n": 128,
+        "mean": 0.4781472008289096,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          -0.5805036590683488,
+          1.7805663080396537
+        ],
+        "family_cluster_95ci": [
+          -0.5805036590683488,
+          1.7805663080396537
+        ],
+        "map_cluster_95ci": [
+          -0.5739185064382243,
+          1.9648956463120293
+        ],
+        "cluster_warning": null
+      },
+      "recovery": {
+        "n": 128,
+        "mean": 0.0,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          -0.0234375,
+          0.0234375
+        ],
+        "family_cluster_95ci": [
+          -0.0234375,
+          0.0234375
+        ],
+        "map_cluster_95ci": [
+          -0.022900763358778626,
+          0.022727272727272728
+        ],
+        "cluster_warning": null
+      },
+      "damage": {
+        "n": 128,
+        "mean": -0.0078125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          -0.0234375,
+          0.0
+        ],
+        "family_cluster_95ci": [
+          -0.0234375,
+          0.0
+        ],
+        "map_cluster_95ci": [
+          -0.023809523809523808,
+          0.0
+        ],
+        "cluster_warning": null
+      },
+      "net_recovery": {
+        "n": 128,
+        "mean": 0.0078125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          -0.015625,
+          0.0390625
+        ],
+        "family_cluster_95ci": [
+          -0.015625,
+          0.0390625
+        ],
+        "map_cluster_95ci": [
+          -0.016,
+          0.032
+        ],
+        "cluster_warning": null
+      },
+      "object_r1": {
+        "n": 128,
+        "mean": 0.0703125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.03125,
+          0.1171875
+        ],
+        "family_cluster_95ci": [
+          0.03125,
+          0.1171875
+        ],
+        "map_cluster_95ci": [
+          0.03676470588235294,
+          0.10924698004201679
+        ],
+        "cluster_warning": null
+      },
+      "object_r4": {
+        "n": 128,
+        "mean": 0.0703125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.03125,
+          0.1171875
+        ],
+        "family_cluster_95ci": [
+          0.03125,
+          0.1171875
+        ],
+        "map_cluster_95ci": [
+          0.0234375,
+          0.12310077519379832
+        ],
+        "cluster_warning": null
+      },
+      "object_r8": {
+        "n": 128,
+        "mean": 0.03125,
+        "independent_families": 128,
+        "maps": 23,
+        "iid_95ci": [
+          0.0078125,
+          0.0625
+        ],
+        "family_cluster_95ci": [
+          0.0078125,
+          0.0625
+        ],
+        "map_cluster_95ci": [
+          0.007633587786259542,
+          0.06060606060606061
+        ],
+        "cluster_warning": null
+      }
+    },
+    "status": "Fixed raw-language-only intervention; no GT chooses edits. Counts are direct attribution of name scope, not all role/scope changes."
+  }
+}

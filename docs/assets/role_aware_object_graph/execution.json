@@ -1,0 +1,21 @@
+{
+  "source_branch": "research/language-object-graph-20261011",
+  "source_sha": "2cf62d2ac1f4cb8fe607af99ba781b3e4fde35e5",
+  "commands": [
+    "python -m experiments.role_aware_object_graph.prepare",
+    "isolated nlp_env: pip install spacy==3.8.7; official wheel installed --no-deps; pip install click==8.1.8 to fix import",
+    "isolated nlp_env: python -m experiments.role_aware_object_graph.dependency_export --input runs/role_aware_object_graph/{split}_public_texts.json --output runs/role_aware_object_graph/{split}_dependencies.json",
+    "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m experiments.role_aware_object_graph.evaluate --phase dev",
+    "after frozen_config: python -m experiments.role_aware_object_graph.evaluate --phase seen",
+    "python -m experiments.role_aware_object_graph.controls --split train / dev / seen",
+    "python -m experiments.role_aware_object_graph.name_intervention",
+    "python -m experiments.role_aware_object_graph.analyze",
+    "python -m experiments.role_aware_object_graph.visualize",
+    "python -m pytest -q",
+    "python -m compileall -q experiments/role_aware_object_graph tests/test_role_aware_object_graph.py"
+  ],
+  "log_location": "runs/role_aware_object_graph/logs",
+  "reruns": "Visualization initially raced summary dependency; re-rendered after analysis finished. Summary extended with baseline-specific bootstrap. No main Seen re-evaluation or selection.",
+  "selection_frozen_sha": "94a7ddcec1855eba86c8cf3b1ca43a73fbd8ae21d99f0bcae966b1d3e0326a8f",
+  "tests": "388 passed, 1 existing warning"
+}
