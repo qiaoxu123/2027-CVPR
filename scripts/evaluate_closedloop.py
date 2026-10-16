@@ -44,6 +44,18 @@ def validate_stage1_frozen_evaluation(args):
         raise ValueError('Test Unseen requires full evaluation, without episode subsampling')
 
 
+def configure_stage1_controls(args):
+    """Keep formal defaults; allow explicit Val-Seen-only interventions."""
+    if args.stage1_diagnostic:
+        if args.split!='val_seen': raise ValueError('Stage1 interventions are Val-Seen-only')
+        if not np.isfinite(args.stop_threshold) or not 0<args.stop_threshold<1: raise ValueError('Stop threshold must be in (0,1)')
+        if args.stage1_grid_size is not None and not 2<=args.stage1_grid_size<=384: raise ValueError('grid size must be in [2,384]')
+    else:
+        if args.stage1_grid_size is not None: raise ValueError('grid override requires --stage1-diagnostic')
+        args.stop_threshold=.3
+    args.head_execution='guarded-blend';args.explore_candidates=0
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--sbf-source', required=True)
@@ -55,6 +67,9 @@ def main():
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
     parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1'], default='sbfnav')
+    parser.add_argument('--profile', action='store_true', help='Synchronized per-decision component timings')
+    parser.add_argument('--stage1-diagnostic', action='store_true', help='Val-Seen-only grid/Stop interventions')
+    parser.add_argument('--stage1-grid-size', type=int, help='Actual candidate field resolution for diagnostics')
     parser.add_argument('--stage1-visual-control',choices=['real','zero','shuffle','no-belief'],default='real')
     parser.add_argument('--stage1-history-control',choices=['checkpoint','current','history'],default='checkpoint')
     parser.add_argument('--disable-joint-active',action='store_true')
@@ -86,8 +101,11 @@ def main():
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
     if args.model=='graphnav-v1':
-        args.stop_threshold=.3;args.head_execution='guarded-blend';args.explore_candidates=0
+        configure_stage1_controls(args)
         validate_stage1_frozen_evaluation(args)
+    if (args.profile or args.stage1_diagnostic or args.stage1_grid_size is not None) and args.model!='graphnav-v1':
+        raise ValueError('Stage1 diagnostic controls require --model graphnav-v1')
+    if args.profile and args.split=='test_unseen': raise ValueError('Profiling must use validation data')
     if args.split=='test_unseen' and args.model!='graphnav-v1':
         if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
             raise ValueError('Test Unseen requires full evaluation of explicitly frozen joint Seen Best after20 epochs')
@@ -110,6 +128,8 @@ def main():
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
     evaluator_sha256=sha(__file__)
+    source_root=Path(__file__).resolve().parents[1]
+    implementation_sha256={str(p.relative_to(source_root)):sha(p) for p in sorted((source_root/'graphnav').glob('*.py'))}
     output = Path(args.output)
     if output.exists(): raise ValueError('refusing to overwrite evaluation')
     output.mkdir(parents=True)
@@ -204,6 +224,17 @@ def main():
     controller = BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,
         vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,
         maximum_above_ground_m=protocol.max_altitude_m)
+    profiler=None
+    if args.model=='graphnav-v1':
+        runtime.stop_threshold=args.stop_threshold
+        if args.stage1_grid_size is not None: runtime.args.grid_size=args.stage1_grid_size
+        if args.profile:
+            from graphnav.profiling import DecisionProfiler
+            profiler=DecisionProfiler(torch.cuda.synchronize)
+            profiler.instrument(runtime,builder)
+    if args.stage1_grid_size is not None:
+        from graphnav.diagnostic_fields import install_field_capture
+        install_field_capture(runtime,output/'fields')
     rows, maps, terminations = [], defaultdict(list), Counter()
     retrieval_queries=set();retrieval_rows=[];active_counts=Counter();stop_gate_counts=Counter()
     started = time.perf_counter()
@@ -214,9 +245,12 @@ def main():
             public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
                                    tuple(catalog.referenced_landmarks(record)),
                                    tuple(catalog.referenced_landmark_names(record)))
+            if profiler is not None: profiler.start_episode(record.episode_id)
             if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
+            if profiler is not None: profiler.episode_id=list(record.episode_id)
             poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
-                GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
+                GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize,profiler=profiler)
+            if profiler is not None: profiler.finish_episode()
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
             if args.model=='graphnav-v1':
@@ -256,6 +290,7 @@ def main():
                 metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
+    if profiler is not None: profiler.save(output)
     report = dict(model=('Joint A3 + observed appearance/history + trained trajectory/Stop; active sensing opt-in' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
                         else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
                               else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))))),split=args.split,
@@ -274,6 +309,7 @@ def main():
             for p in sorted(Path(args.sbf_source).glob('sbfnav/**/*.py'))},
         graphnav_commit=started_commit,evaluator_sha256=evaluator_sha256,
         graphnav_working_diff_sha256=hashlib.sha256(started_diff).hexdigest(),
+        implementation_sha256=implementation_sha256,
         inference_target_access=False,
         warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
                  if args.model=='sbfnav' else
@@ -289,6 +325,7 @@ def main():
             **{key:float(np.mean([r[key]for r in retrieval_rows]))for key in retrieval_rows[0]},
             note='Private targets accessed only after rollout. Initial static, first observed belief, and final observed belief are separate. R@1/4/8 preserve legacy FP32 topk(8) tie ordering; R@16 extends that ordering. Final observation time differs per episode.')
         report['stage1_protocol']=runtime.protocol
+        report['stage1_inference_controls']=dict(diagnostic=args.stage1_diagnostic,stop_threshold=runtime.stop_threshold,grid_size=runtime.args.grid_size,profile=args.profile)
         report['visual_backbone_parameters']=sum(p.numel()for p in runtime.native.model.parameters())
         report['bert_backbone_parameters']=sum(p.numel()for p in runtime.bert.model.parameters())
     if getattr(runtime,'encoder_visual',None) is not None:

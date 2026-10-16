@@ -1,0 +1,135 @@
+{
+  "resumed_at": "2026-10-14T22:25:52.208659+08:00",
+  "progress_at_resume": {
+    "val_seen": 1893,
+    "val_unseen": 1932,
+    "test_unseen": 2060
+  },
+  "previous_queue": [
+    {
+      "split": "val_seen",
+      "pid": 2765029,
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python",
+        "-m",
+        "scripts.evaluate_closedloop",
+        "--model",
+        "graphnav-v1",
+        "--stage1-resolution-eval",
+        "--stage1-grid-size",
+        "384",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_seen",
+        "--output",
+        "full_resolution_384/val_seen",
+        "--frozen-final-candidate",
+        "full_resolution_384/frozen_resolution.json",
+        "--resume"
+      ],
+      "status": "paused",
+      "started": 1791892049.4028003,
+      "paused_at": 1791974991.804097,
+      "reason": "User requested pause"
+    },
+    {
+      "split": "val_unseen",
+      "pid": 2765030,
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python",
+        "-m",
+        "scripts.evaluate_closedloop",
+        "--model",
+        "graphnav-v1",
+        "--stage1-resolution-eval",
+        "--stage1-grid-size",
+        "384",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "val_unseen",
+        "--output",
+        "full_resolution_384/val_unseen",
+        "--frozen-final-candidate",
+        "full_resolution_384/frozen_resolution.json"
+      ],
+      "status": "paused",
+      "started": 1791892049.415095,
+      "paused_at": 1791974991.8040984,
+      "reason": "User requested pause"
+    },
+    {
+      "split": "test_unseen",
+      "pid": 2765031,
+      "command": [
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python",
+        "-m",
+        "scripts.evaluate_closedloop",
+        "--model",
+        "graphnav-v1",
+        "--stage1-resolution-eval",
+        "--stage1-grid-size",
+        "384",
+        "--checkpoint",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+        "--sbf-source",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+        "--config",
+        "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+        "--data-root",
+        "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+        "--split",
+        "test_unseen",
+        "--output",
+        "full_resolution_384/test_unseen",
+        "--frozen-final-candidate",
+        "full_resolution_384/frozen_resolution.json"
+      ],
+      "status": "paused",
+      "started": 1791892049.4289956,
+      "paused_at": 1791974991.8040988,
+      "reason": "User requested pause"
+    }
+  ],
+  "jobs": [
+    {
+      "module": "scripts.run_full_resolution_parallel",
+      "pid": 26286,
+      "log": "full_resolution_parallel.log"
+    },
+    {
+      "module": "scripts.visual_residual_workflow",
+      "pid": 26287,
+      "log": "visual_residual_workflow_offline.log"
+    }
+  ],
+  "comparison_watcher": {
+    "pid": 27037,
+    "module": "scripts.summarize_resolution_when_complete"
+  },
+  "verified_at": "2026-10-14T22:27:40.936491+08:00",
+  "verified_progress": {
+    "val_seen": 1897,
+    "val_unseen": 1937,
+    "test_unseen": 2064
+  },
+  "verification": {
+    "checkpoint_sha256_matches": true,
+    "episode_manifests_equal_formal_28": true,
+    "three_evaluators_use_resume": true,
+    "completed_visual_training_and_controls_skipped": true
+  }
+}

@@ -81,8 +81,9 @@ class PublicCatalog:
         return episode.references
 
 
-def rollout(episode, builder, controller, policy, ground, protocol, *, synchronize=lambda: None):
+def rollout(episode, builder, controller, policy, ground, protocol, *, synchronize=lambda: None, profiler=None):
     import time
+    from contextlib import nullcontext
     poses = [episode.start_pose.copy()]
     timings, diagnostics = [], []
     stagnant = 0
@@ -90,18 +91,19 @@ def rollout(episode, builder, controller, policy, ground, protocol, *, synchroni
     transform = builder.transform(episode.map_name)
     bounds = (transform.x_min, transform.y_min, transform.x_max, transform.y_max)
     for step in range(protocol.horizon):
-        state = builder.build_from_poses(episode, np.stack(poses))
-        synchronize(); started = time.perf_counter()
-        prediction = policy(state, episode.instruction)
-        synchronize(); timings.append(time.perf_counter()-started)
-        diagnostics.append(prediction.diagnostics)
-        if getattr(prediction, 'should_stop', False):
-            termination = 'policy_stop'; break
-        next_pose = controller.step(poses[-1], prediction.xyz,
-                                    ground_level=ground, xy_bounds=bounds)
-        displacement = np.linalg.norm(next_pose[:3]-poses[-1][:3])
-        poses.append(next_pose)
-        stagnant = stagnant+1 if displacement <= protocol.stagnation_tolerance_m else 0
-        if stagnant >= protocol.stagnation_steps:
-            termination = 'stagnation'; break
+        with profiler.sample(episode.map_name, step) if profiler else nullcontext():
+            state = builder.build_from_poses(episode, np.stack(poses))
+            synchronize(); started = time.perf_counter()
+            prediction = policy(state, episode.instruction)
+            synchronize(); timings.append(time.perf_counter()-started)
+            diagnostics.append(prediction.diagnostics)
+            if getattr(prediction, 'should_stop', False):
+                termination = 'policy_stop'; break
+            next_pose = controller.step(poses[-1], prediction.xyz,
+                                        ground_level=ground, xy_bounds=bounds)
+            displacement = np.linalg.norm(next_pose[:3]-poses[-1][:3])
+            poses.append(next_pose)
+            stagnant = stagnant+1 if displacement <= protocol.stagnation_tolerance_m else 0
+            if stagnant >= protocol.stagnation_steps:
+                termination = 'stagnation'; break
     return np.stack(poses), termination, timings, diagnostics

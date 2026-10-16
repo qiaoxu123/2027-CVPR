@@ -3,6 +3,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+from graphnav.workspace_paths import PROJECT, current_paths
 import subprocess
 import sys
 import time
@@ -16,7 +17,7 @@ def main():
     parser.add_argument('--output', default='runs/graphnav_v1_stage1')
     args = parser.parse_args()
     root = Path(args.output).resolve()
-    base = json.loads((root/'baseline_seen128/metrics.json').read_text())['args']
+    base = current_paths(json.loads((root/'baseline_seen128/metrics.json').read_text())['args'])
     status = {'status': 'running', 'jobs': {}, 'pid': os.getpid()}
     env = dict(os.environ, HF_HUB_OFFLINE='1', OMP_NUM_THREADS='1', MKL_NUM_THREADS='1', TOKENIZERS_PARALLELISM='false')
     jobs = [('initial_seen128', root/'initial_complete.pt', 'real', 'current')]

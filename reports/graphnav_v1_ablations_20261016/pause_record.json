@@ -1,0 +1,94 @@
+{
+  "request": "User requested progress record and stop; resume only on user request",
+  "recorded_at": "2026-10-14T10:48:32.110921+00:00",
+  "progress_before_stop": {
+    "full_resolution": {
+      "val_seen": {
+        "completed": 1892,
+        "total": 2470,
+        "status": "running"
+      },
+      "val_unseen": {
+        "completed": 1931,
+        "total": 2697,
+        "status": "running"
+      },
+      "test_unseen": {
+        "completed": 2059,
+        "total": 5281,
+        "status": "running"
+      }
+    },
+    "visual": {
+      "calibrated_residual": {
+        "episodes": 2470,
+        "sr_gain_pp": 1.3360324315726757,
+        "bootstrap_95ci_pp": [
+          0.16194331692531705,
+          2.510121464729309
+        ],
+        "helped": 120,
+        "hurt": 87,
+        "statistically_positive_gain_beyond_static": true
+      },
+      "absolute_residual": {
+        "episodes": 2470,
+        "sr_gain_pp": 0.48582996241748333,
+        "bootstrap_95ci_pp": [
+          -0.5263158120214939,
+          1.5384615398943424
+        ],
+        "helped": 88,
+        "hurt": 76,
+        "statistically_positive_gain_beyond_static": false
+      }
+    },
+    "updated": 1791974885.4285388
+  },
+  "processes": [
+    {
+      "pid": 2798936,
+      "command": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python -m scripts.visual_residual_workflow "
+    },
+    {
+      "pid": 2764931,
+      "command": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python -m scripts.run_full_resolution_parallel "
+    },
+    {
+      "pid": 2765029,
+      "command": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python -m scripts.evaluate_closedloop --model graphnav-v1 --stage1-resolution-eval --stage1-grid-size 384 --checkpoint /home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt --sbf-source /home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source --config /home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml --data-root /home/rental/20260922_1/Workspace/DATA/sbfnav-data --split val_seen --output full_resolution_384/val_seen --frozen-final-candidate full_resolution_384/frozen_resolution.json --resume "
+    },
+    {
+      "pid": 2765030,
+      "command": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python -m scripts.evaluate_closedloop --model graphnav-v1 --stage1-resolution-eval --stage1-grid-size 384 --checkpoint /home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt --sbf-source /home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source --config /home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml --data-root /home/rental/20260922_1/Workspace/DATA/sbfnav-data --split val_unseen --output full_resolution_384/val_unseen --frozen-final-candidate full_resolution_384/frozen_resolution.json "
+    },
+    {
+      "pid": 2765031,
+      "command": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python -m scripts.evaluate_closedloop --model graphnav-v1 --stage1-resolution-eval --stage1-grid-size 384 --checkpoint /home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt --sbf-source /home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source --config /home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml --data-root /home/rental/20260922_1/Workspace/DATA/sbfnav-data --split test_unseen --output full_resolution_384/test_unseen --frozen-final-candidate full_resolution_384/frozen_resolution.json "
+    }
+  ],
+  "stopped_at": "2026-10-14T10:49:51.801553+00:00",
+  "final_progress": {
+    "val_seen": {
+      "completed": 1893,
+      "total": 2470,
+      "status": "paused",
+      "last_episode_index": 1892,
+      "trace_bytes": 2379844724
+    },
+    "val_unseen": {
+      "completed": 1932,
+      "total": 2697,
+      "status": "paused",
+      "last_episode_index": 1931,
+      "trace_bytes": 2222533924
+    },
+    "test_unseen": {
+      "completed": 2060,
+      "total": 5281,
+      "status": "paused",
+      "last_episode_index": 2059,
+      "trace_bytes": 1985499449
+    }
+  }
+}

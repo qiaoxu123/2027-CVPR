@@ -5,6 +5,7 @@ import csv
 import json
 import math
 from pathlib import Path
+from graphnav.workspace_paths import PROJECT, current_paths
 import random
 import subprocess
 import sys
@@ -91,7 +92,7 @@ def main():
     if a.max_batches and not a.smoke:raise ValueError('partial epoch must be explicitly smoke')
     if out.exists() and not a.resume:raise ValueError('refusing stage overwrite')
     out.mkdir(parents=True,exist_ok=True);random.seed(a.seed);np.random.seed(a.seed);torch.manual_seed(a.seed)
-    source=json.loads(Path(a.sources).read_text());paths={k:v['path']for k,v in source.items()};device=torch.device('cuda')
+    source=current_paths(json.loads(Path(a.sources).read_text()));paths={k:v['path']for k,v in source.items()};device=torch.device('cuda')
     model,a3_args=initialize_model(paths,device,a.init);model.configure_stage(a.stage)
     data=Stage1Dataset(a.cache)
     if data.manifest['smoke_only'] and not a.smoke:raise ValueError('limited features cannot be full training')

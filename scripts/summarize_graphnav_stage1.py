@@ -3,6 +3,7 @@ import argparse
 import csv
 import json
 from pathlib import Path
+from graphnav.workspace_paths import PROJECT
 import shutil
 import sys
 import time
@@ -108,7 +109,7 @@ def main():
     from sbfnav.mapdata import GROUND_LEVEL
     map_bounds = {}
     for split in ('seen','unseen'):
-        for line in Path(f'../2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_{split}.jsonl').read_text().splitlines():
+        for line in (PROJECT/f'Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_{split}.jsonl').read_text().splitlines():
             record = json.loads(line)
             map_bounds[record['map_name']] = np.asarray(record['world_bounds'])
     action_audits = {}
@@ -172,7 +173,7 @@ def main():
     for ax in axes.flat:
         ax.grid(alpha=.2);ax.set_xlabel('Stage A1-3, B1-3, C1-5')
     fig.tight_layout();fig.savefig(root/'training_curves.png',dpi=160);plt.close(fig)
-    sbf_root=Path('../2027-CVPR-closedloop-sbf-parity/runs/closedloop_baseline')
+    sbf_root=(PROJECT/'Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/closedloop_baseline')
     sbf={split:json.loads((sbf_root/f'sbf_val_{split}_full/metrics.json').read_text()) for split in ('seen','unseen')}
     def navigation_row(name,report):
         m=report['metrics']
@@ -227,8 +228,8 @@ def main():
         'best.pt是Seen选出的完整模型；last.pt是C最终轮，包含优化器、调度器及RNG，可继续显式恢复；stages/A/B/C各有独立Best/Last。Backbone通过明确模型名和不可变revision解析，本地离线缓存必须存在；不能将小型完整训练状态文件称为包含所有Backbone张量的单文件离线包。',
         '基准使用正射RGB和表面高度导出的垂直Depth代理，不代表真实透视相机或三维遮挡；不宣称真实飞行安全或扫掠体碰撞验证。历史SBF权重曾由Unseen proxy选出，该历史差异保留。', '',
         '## 可复现运行','', '```bash',
-        '../2027-CVPR-static-geometry/.venv/bin/python -m scripts.run_graphnav_stage1 --resume',
-        '../2027-CVPR-static-geometry/.venv/bin/python -m scripts.audit_graphnav_stage1',
+        '../Ablations/GraphNav/2027-CVPR-static-geometry/.venv/bin/python -m scripts.run_graphnav_stage1 --resume',
+        '../Ablations/GraphNav/2027-CVPR-static-geometry/.venv/bin/python -m scripts.audit_graphnav_stage1',
         '```', '', '所有评估均为已有scripts.evaluate_closedloop.py，具体命令保存在workflow_status.json及audit_status.json。检查点和输入SHA在checkpoint_manifest.json；大文件不提交Git。']
     report='\n'.join(lines)+'\n'
     (root/'GRAPHNAV_V1_STAGE1_REPORT.md').write_text(report)

@@ -13,7 +13,7 @@
 **全新独立架构。** 针对 CityNav / CityRefer 的图驱动无人机语言导航研究工程。
 不使用 HETT 的 Transformer、Heatmap Head、Two-Stage Controller、预训练权重或其模型文件。
 
-> **当前状态（研究基线）**：包含图网络、稠密目标概率场、可见性约束 RGB 记忆、冻结 BERT/SigLIP2 接口、候选图排序、多模态路径头、CityNav 数据转换、CPU 测试及训练入口。尚未完成 CityNav 在线仿真器的动作/环境适配，因此 **尚无真实闭环 SR/SPL 数值**，不应将开放式训练损失当作导航性能。
+> **工程名称统一为 GraphNav，主模型为 GraphNav-V1。** 当前正式目录为 `2027-CVPR/GraphNav`，Python 包为 `graphnav`，安装包为 `graphnav-citynav`。早期 graph-dav / graphdav 仅作为迁移历史。闭环评估已完成；下文为早期架构与研究流程。名称、profiling、照片粒度 heatmap 与 Stop 阈值测试见 [诊断 TODO](docs/GRAPHNAV_DIAGNOSTICS_TODO.md)。
 
 ## 设计
 
@@ -149,3 +149,5 @@ python -m graphnav.evaluate --data data/graphnav_val_unseen.jsonl \
 - **Stop 不可直接部署**：需另做独立精度校准；在线接口默认只输出 stop_probability。
 
 MIT-style research baseline: 无法替代 CityNav 原数据或第三方 pretrained 权重的许可证。
+
+2026-10-16 补充消融汇总：384×384 三 split 全量结果、视觉残差全 Seen 对照和 Stop 阈值诊断见 [消融资产索引](reports/graphnav_v1_ablations_20261016/remote_assets.json)；原 GraphNav-V1 正式结果保持冻结。
