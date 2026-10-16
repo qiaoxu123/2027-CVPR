@@ -3,6 +3,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+from graphnav.workspace_paths import PROJECT, current_paths
 import shutil
 import subprocess
 import sys
@@ -27,7 +28,7 @@ def main():
         if any(name in command for name in ('scripts.train_graphnav_stage1','scripts.evaluate_closedloop','scripts.summarize_graphnav_stage1')):
             raise ValueError(f'existing workflow child PID {child} is still active; refuse duplicate resume')
     env=dict(os.environ,HF_HUB_OFFLINE='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',TOKENIZERS_PARALLELISM='false',PYTHONPATH=str(Path.cwd()))
-    sources=root/'initial_sources.json';base=json.loads((root/'baseline_seen128/metrics.json').read_text())['args']
+    sources=root/'initial_sources.json';base=current_paths(json.loads((root/'baseline_seen128/metrics.json').read_text())['args'])
     # Make the additional Seen controls part of the durable workflow on resume.
     audit=root/'audit_status.json'
     audit_state=json.loads(audit.read_text())if audit.exists()else{}
@@ -94,10 +95,10 @@ def main():
         baseline_unseen=root/'baseline_full_unseen'
         if not (baseline_unseen/'metrics.json').exists():
             if baseline_unseen.exists():baseline_unseen.rename(root/('baseline_full_unseen_failed_'+str(int(time.time()))))
-            src=json.loads(sources.read_text());cmd=[sys.executable,'-m','scripts.evaluate_closedloop','--model','static-transfer','--sbf-source',base['sbf_source'],'--config',base['config'],'--data-root',base['data_root'],'--checkpoint',src['a3']['path'],'--head-checkpoint',src['head']['path'],'--reference-a3-checkpoint',src['reference']['path'],'--split','val_unseen','--output',str(baseline_unseen),'--stop-threshold','.3','--head-execution','guarded-blend']
+            src=current_paths(json.loads(sources.read_text()));cmd=[sys.executable,'-m','scripts.evaluate_closedloop','--model','static-transfer','--sbf-source',base['sbf_source'],'--config',base['config'],'--data-root',base['data_root'],'--checkpoint',src['a3']['path'],'--head-checkpoint',src['head']['path'],'--reference-a3-checkpoint',src['reference']['path'],'--split','val_unseen','--output',str(baseline_unseen),'--stop-threshold','.3','--head-execution','guarded-blend']
             run('baseline_full_unseen',cmd)
-        full=Path('../2027-CVPR-full-token-rgb/data/revised_static')
-        src=json.loads(sources.read_text())
+        full=PROJECT/'Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static'
+        src=current_paths(json.loads(sources.read_text()))
         for split in ('seen','unseen'):
             for name,path in [('B0',src['a3']['path']),('selected',str(checkpoint))]:
                 destination=root/f'static_{name}_{split}.json'

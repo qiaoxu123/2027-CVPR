@@ -24,6 +24,9 @@ class CandidateMemory:
         if self.last_pose is not None and np.linalg.norm(pose[:3]-self.last_pose[:3])<2.:
             self.duplicates+=1;return
         self.last_pose=pose.copy();self.accepted+=1
+        if len(frame['roi_ids'])>8192:
+            supported=frame['roi_valid'].any(-1)
+            frame={**frame,**{key:frame[key][supported] for key in ('roi_ids','roi_valid','roi_quality','roi_features')}}
         ids=frame['roi_ids'].to(self.sum.device);valid=frame['roi_valid'].to(self.sum.device)
         quality=frame['roi_quality'].to(self.sum.device).float();images=frame['roi_features'].to(self.sum.device).float()
         w=(quality[...,0].clamp(0,1)*quality[...,1].clamp(0,1)).clamp_min(.01)*valid

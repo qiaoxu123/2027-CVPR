@@ -40,8 +40,26 @@ def validate_stage1_frozen_evaluation(args):
             or frozen.get('stop_threshold') != args.stop_threshold
             or frozen.get('active_observation') is not False):
         raise ValueError('Held-out inference parameters differ from frozen Seen candidate')
+    if getattr(args,'stage1_resolution_eval',False) and frozen.get('grid_size')!=args.stage1_grid_size:
+        raise ValueError('Resolution differs from its separately frozen manifest')
     if args.split == 'test_unseen' and args.max_episodes is not None:
         raise ValueError('Test Unseen requires full evaluation, without episode subsampling')
+
+
+def configure_stage1_controls(args):
+    """Keep formal defaults; allow explicit Val-Seen-only interventions."""
+    if getattr(args,'stage1_resolution_eval',False):
+        if args.stage1_grid_size!=384:raise ValueError('Full resolution intervention must be the fixed 384 grid')
+        if args.stage1_visual_control!='real' or args.stage1_history_control!='checkpoint':raise ValueError('Resolution evaluation requires unchanged visual/history controls')
+        args.stop_threshold=.3
+    elif args.stage1_diagnostic:
+        if args.split!='val_seen': raise ValueError('Stage1 interventions are Val-Seen-only')
+        if not np.isfinite(args.stop_threshold) or not 0<args.stop_threshold<1: raise ValueError('Stop threshold must be in (0,1)')
+        if args.stage1_grid_size is not None and not 2<=args.stage1_grid_size<=384: raise ValueError('grid size must be in [2,384]')
+    else:
+        if args.stage1_grid_size is not None: raise ValueError('grid override requires --stage1-diagnostic')
+        args.stop_threshold=.3
+    args.head_execution='guarded-blend';args.explore_candidates=0
 
 
 def main():
@@ -54,7 +72,14 @@ def main():
     parser.add_argument('--frozen-final-candidate',help='Completed Seen-selected frozen candidate, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
+    parser.add_argument('--resume',action='store_true',help='Resume exactly the same evaluation from flushed episode traces')
     parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1'], default='sbfnav')
+    parser.add_argument('--stage1-residual-checkpoint',help='Opt-in separately trained residual; Seen validation only')
+    parser.add_argument('--stage1-resolution-eval',action='store_true',help='Fixed 384-resolution intervention; original weights and controls, separate frozen manifest')
+    parser.add_argument('--stage1-save-fields',action='store_true',help='Save initial public fields for inspection')
+    parser.add_argument('--profile', action='store_true', help='Synchronized per-decision component timings')
+    parser.add_argument('--stage1-diagnostic', action='store_true', help='Val-Seen-only grid/Stop interventions')
+    parser.add_argument('--stage1-grid-size', type=int, help='Actual candidate field resolution for diagnostics')
     parser.add_argument('--stage1-visual-control',choices=['real','zero','shuffle','no-belief'],default='real')
     parser.add_argument('--stage1-history-control',choices=['checkpoint','current','history'],default='checkpoint')
     parser.add_argument('--disable-joint-active',action='store_true')
@@ -85,9 +110,18 @@ def main():
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
+    if args.stage1_resolution_eval:
+        torch.set_num_threads(1)
+        import cv2
+        cv2.setNumThreads(1)
     if args.model=='graphnav-v1':
-        args.stop_threshold=.3;args.head_execution='guarded-blend';args.explore_candidates=0
+        configure_stage1_controls(args)
         validate_stage1_frozen_evaluation(args)
+    if (args.profile or args.stage1_diagnostic or args.stage1_resolution_eval or args.stage1_grid_size is not None) and args.model!='graphnav-v1':
+        raise ValueError('Stage1 diagnostic controls require --model graphnav-v1')
+    if args.stage1_residual_checkpoint and (args.model!='graphnav-v1' or args.split!='val_seen'):
+        raise ValueError('Calibrated residual selection requires Seen validation')
+    if args.profile and args.split=='test_unseen': raise ValueError('Profiling must use validation data')
     if args.split=='test_unseen' and args.model!='graphnav-v1':
         if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
             raise ValueError('Test Unseen requires full evaluation of explicitly frozen joint Seen Best after20 epochs')
@@ -110,9 +144,17 @@ def main():
     started_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
     evaluator_sha256=sha(__file__)
+    source_root=Path(__file__).resolve().parents[1]
+    implementation_sha256={str(p.relative_to(source_root)):sha(p) for p in sorted((source_root/'graphnav').glob('*.py'))}
     output = Path(args.output)
-    if output.exists(): raise ValueError('refusing to overwrite evaluation')
-    output.mkdir(parents=True)
+    if output.exists() and not args.resume: raise ValueError('refusing to overwrite evaluation')
+    output.mkdir(parents=True,exist_ok=args.resume)
+    signature=dict(args={k:v for k,v in vars(args).items() if k!='resume' and v is not None},checkpoint_sha256=sha(args.checkpoint))
+    if args.resume:
+        previous_signature=json.loads((output/'eval_started.json').read_text())
+        previous_signature['args']={k:v for k,v in previous_signature['args'].items() if v is not None}
+        if previous_signature!=signature:raise ValueError('Resume checkpoint or evaluation controls differ')
+    else:(output/'eval_started.json').write_text(json.dumps(signature,indent=2))
     sys.path.insert(0, str(Path(args.sbf_source).resolve()))
     from sbfnav.config import load_config, apply_overrides, validate_config
     from sbfnav.dataset import CityNavDataset, CityReferCatalog
@@ -141,6 +183,7 @@ def main():
     episodes = [dataset[i] for i in indices]
     manifest = [{'index':int(i),'episode_id':list(record.episode_id),
                  'start_pose':record.start_pose.tolist()} for i,record in zip(indices,episodes)]
+    if args.resume and json.loads((output/'episodes.json').read_text())!=manifest:raise ValueError('Resume episode manifest differs')
     (output/'episodes.json').write_text(json.dumps(manifest,indent=2))
     state = config['state']
     builder = PlanningStateBuilder(args.data_root, PublicCatalog(catalog),
@@ -204,19 +247,44 @@ def main():
     controller = BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,
         vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,
         maximum_above_ground_m=protocol.max_altitude_m)
+    if args.stage1_residual_checkpoint:
+        from graphnav.calibrated_residual_runtime import install_calibrated_residual
+        install_calibrated_residual(runtime,args.stage1_residual_checkpoint,args.checkpoint)
+    profiler=None
+    if args.model=='graphnav-v1':
+        runtime.stop_threshold=args.stop_threshold
+        if args.stage1_grid_size is not None: runtime.args.grid_size=args.stage1_grid_size
+        if args.profile:
+            from graphnav.profiling import DecisionProfiler
+            profiler=DecisionProfiler(torch.cuda.synchronize)
+            profiler.instrument(runtime,builder)
+    if args.stage1_save_fields:
+        from graphnav.diagnostic_fields import install_field_capture
+        install_field_capture(runtime,output/'fields')
     rows, maps, terminations = [], defaultdict(list), Counter()
     retrieval_queries=set();retrieval_rows=[];active_counts=Counter();stop_gate_counts=Counter()
     started = time.perf_counter()
-    with (output/'predictions.jsonl').open('w') as stream:
+    completed=[]
+    if args.resume:
+        completed=[json.loads(line) for line in (output/'predictions.jsonl').read_text().splitlines()]
+        if [r['index'] for r in completed]!=[r.index for r in episodes[:len(completed)]]:raise ValueError('Resume trace order differs')
+    with (output/'predictions.jsonl').open('a' if args.resume else 'w') as stream:
         for position,record in enumerate(episodes):
             # IDs are used only to prepare supplied CityRefer language bindings and output labels.
             # Neither record, target, IDs, nor expert future enters the policy or rollout.
             public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
                                    tuple(catalog.referenced_landmarks(record)),
                                    tuple(catalog.referenced_landmark_names(record)))
-            if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
-            poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
-                GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
+            if position<len(completed):
+                saved=completed[position]
+                poses=np.asarray(saved['poses']);termination=saved['termination'];timings=saved['decision_seconds'];diagnostics=saved['step_diagnostics']
+            else:
+                if profiler is not None: profiler.start_episode(record.episode_id)
+                if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
+                if profiler is not None: profiler.episode_id=list(record.episode_id)
+                poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
+                    GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize,profiler=profiler)
+                if profiler is not None: profiler.finish_episode()
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
             if args.model=='graphnav-v1':
@@ -251,11 +319,13 @@ def main():
                     row['appearance_spatial_r1_at20m']=float(np.linalg.norm(np.asarray(visual)-record.target_position[:2])<=20) if visual is not None else 0.
                     retrieval_rows.append(row)
             rows.append(metrics); maps[record.map_name].append(metrics); terminations[termination]+=1
-            stream.write(json.dumps(dict(index=record.index,episode_id=record.episode_id,
-                map_name=record.map_name,poses=poses.tolist(),termination=termination,
-                metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
+            if position>=len(completed):
+                stream.write(json.dumps(dict(index=record.index,episode_id=record.episode_id,
+                    map_name=record.map_name,poses=poses.tolist(),termination=termination,
+                    metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
+    if profiler is not None: profiler.save(output)
     report = dict(model=('Joint A3 + observed appearance/history + trained trajectory/Stop; active sensing opt-in' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
                         else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
                               else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))))),split=args.split,
@@ -274,6 +344,7 @@ def main():
             for p in sorted(Path(args.sbf_source).glob('sbfnav/**/*.py'))},
         graphnav_commit=started_commit,evaluator_sha256=evaluator_sha256,
         graphnav_working_diff_sha256=hashlib.sha256(started_diff).hexdigest(),
+        implementation_sha256=implementation_sha256,
         inference_target_access=False,
         warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
                  if args.model=='sbfnav' else
@@ -288,7 +359,11 @@ def main():
         report['goal_retrieval']=dict(unique_queries=len(retrieval_rows),
             **{key:float(np.mean([r[key]for r in retrieval_rows]))for key in retrieval_rows[0]},
             note='Private targets accessed only after rollout. Initial static, first observed belief, and final observed belief are separate. R@1/4/8 preserve legacy FP32 topk(8) tie ordering; R@16 extends that ordering. Final observation time differs per episode.')
+        if args.stage1_residual_checkpoint:
+            report['model']='Frozen GraphNav-V1 + calibrated visual residual research intervention'
+            report['calibrated_residual_sha256']=sha(args.stage1_residual_checkpoint)
         report['stage1_protocol']=runtime.protocol
+        report['stage1_inference_controls']=dict(diagnostic=args.stage1_diagnostic,stop_threshold=runtime.stop_threshold,grid_size=runtime.args.grid_size,profile=args.profile)
         report['visual_backbone_parameters']=sum(p.numel()for p in runtime.native.model.parameters())
         report['bert_backbone_parameters']=sum(p.numel()for p in runtime.bert.model.parameters())
     if getattr(runtime,'encoder_visual',None) is not None:

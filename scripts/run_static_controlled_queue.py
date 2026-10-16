@@ -3,9 +3,10 @@ import json,os,subprocess,sys,time
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
+PROJECT=next(p for p in ROOT.parents if p.name=='2027-CVPR')
 OUT=ROOT/'runs/static_E2_E3_20261010'
-OLD=ROOT.parent/'2027-CVPR-closedloop-sbf-parity'
-FULL=ROOT.parent/'2027-CVPR-full-token-rgb'
+OLD=PROJECT/'Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity'
+FULL=PROJECT/'Ablations/GraphNav/2027-CVPR-full-token-rgb'
 BASE=[sys.executable,str(ROOT/'scripts/train_static_extension.py'),
  '--template',str(FULL/'runs/final_a0_a5_evaluation/geometry_best.pt'),
  '--train',str(FULL/'data/revised_static/graphnav_train_seen.jsonl'),

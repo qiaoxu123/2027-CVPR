@@ -16,3 +16,13 @@ checkpoints/
 *.ckpt
 *.safetensors
 .DS_Store
+
+# Large experiment assets are preserved in the graphnav-results-20261016 release.
+/calibrated_residual/*.pt
+/absolute_residual/*.pt
+/calibrated_smoke/*.pt
+/absolute_smoke/*.pt
+/full_resolution_384/*/predictions.jsonl
+/visual_evaluations/*/predictions.jsonl
+/optimized_resolution_parity/**/predictions.jsonl
+/optimized_resolution_parity_v2/**/predictions.jsonl

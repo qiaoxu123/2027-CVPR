@@ -3,7 +3,8 @@ import json,os,subprocess,sys,time
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 ROOT=Path(__file__).resolve().parents[1]
-W=ROOT.parent;OLD=W/'2027-CVPR-closedloop-sbf-parity';FULL=W/'2027-CVPR-full-token-rgb'
+PROJECT=next(p for p in ROOT.parents if p.name=='2027-CVPR')
+W=PROJECT;OLD=W/'Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity';FULL=W/'Ablations/GraphNav/2027-CVPR-full-token-rgb'
 Q=ROOT/'runs/static_E2_E3_20261010';OUT=ROOT/'runs/static_post_validation_v2_20261010'
 ENV=dict(os.environ,PYTHONPATH=str(ROOT),HF_HUB_OFFLINE='1',OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',TOKENIZERS_PARALLELISM='false')
 
@@ -20,8 +21,8 @@ def main():
     recipes={name:Q/name/'best.pt' for name in ('A4_full','A4_self','A4_zero_geometry','A4_relation','A3_relation001','A3_relation005')}
     recipes['A3_relation000']=ROOT/'runs/static_E2_zero_forward_v2_20261010/best.pt'
     state('all training complete; Seen128 controller validation',checkpoints={k:str(v) for k,v in recipes.items()})
-    source=W/'SBFNav-CityNav-Reproduction/runs/sbfnav_main_e20_bs16_s0_20260929/source'
-    base=[sys.executable,'scripts/evaluate_closedloop.py','--sbf-source',str(source),'--config',str(source/'configs/sbfnav/main.yaml'),'--data-root',str(W/'DATA/sbfnav-data'),'--split','val_seen','--model','static-transfer','--head-checkpoint',str(OLD/'runs/a3_trajectory_stop_seed0/best.pt'),'--reference-a3-checkpoint',str(FULL/'runs/final_a0_a5_evaluation/geometry_best.pt'),'--head-execution','guarded-blend','--stop-threshold','.3','--max-episodes','128','--evaluation-concurrency','2']
+    source=W/'Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source'
+    base=[sys.executable,'scripts/evaluate_closedloop.py','--sbf-source',str(source),'--config',str(source/'configs/sbfnav/main.yaml'),'--data-root',str(W.parent/'DATA/sbfnav-data'),'--split','val_seen','--model','static-transfer','--head-checkpoint',str(OLD/'runs/a3_trajectory_stop_seed0/best.pt'),'--reference-a3-checkpoint',str(FULL/'runs/final_a0_a5_evaluation/geometry_best.pt'),'--head-execution','guarded-blend','--stop-threshold','.3','--max-episodes','128','--evaluation-concurrency','2']
     # Fully report failed recipes too; these Seen128 tests are diagnostics, not
     # an Unseen-based search. Original controller parameters always unchanged.
     def navigation(item):

@@ -40,11 +40,19 @@ class MultiScaleAppearanceMatcher(nn.Module):
         language = F.normalize(text.float() + .1*self.text_residual(text.float()), dim=-1)
         # Process supported scales only: most global grid cells are unknown.
         # Invalid vectors are never substituted for a negative observation.
-        visual = torch.zeros_like(images, dtype=torch.float32)
-        if valid.any():
-            present = images[valid].float()
-            visual[valid] = F.normalize(present + .1*self.image_residual(present), dim=-1)
-        per_scale = (visual * language[:, None, None]).sum(-1)
+        if images.shape[1]>8192:
+            per_scale=torch.zeros_like(valid,dtype=torch.float32)
+            if valid.any():
+                present=images[valid].float()
+                visual=F.normalize(present+.1*self.image_residual(present),dim=-1)
+                batch_ids=valid.nonzero()[:,0]
+                per_scale[valid]=(visual*language[batch_ids]).sum(-1)
+        else:
+            visual = torch.zeros_like(images, dtype=torch.float32)
+            if valid.any():
+                present = images[valid].float()
+                visual[valid] = F.normalize(present + .1*self.image_residual(present), dim=-1)
+            per_scale = (visual * language[:, None, None]).sum(-1)
         weights = self.scale_quality(quality.float()).squeeze(-1).masked_fill(~valid, -1e4)
         weights = weights.softmax(-1) * valid
         weights = weights / weights.sum(-1, keepdim=True).clamp_min(1e-9)
