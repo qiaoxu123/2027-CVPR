@@ -26,9 +26,10 @@ def retrieval_ids(logits):
 
 
 class GraphNavStage1Policy:
-    def __init__(self,checkpoint,directory,*,device='cuda',visual_control='real',history_control='checkpoint'):
+    def __init__(self,checkpoint,directory,*,device='cuda',visual_control='real',history_control='checkpoint',landmark_context='references'):
         state=torch.load(checkpoint,map_location='cpu',weights_only=True)
         self.protocol=state['protocol']
+        self.landmark_context=landmark_context
         if self.protocol['name']!='graphnav-v1-stage1' or self.protocol['active_observation']:raise ValueError('Stage1 complete non-active checkpoint required')
         self.args=SimpleNamespace(**state['a3_args']);self.device=torch.device(device)
         self.directory=Path(directory);self.directory.mkdir(parents=True,exist_ok=True)
@@ -45,6 +46,10 @@ class GraphNavStage1Policy:
 
     def set_episode(self,episode,transform,catalog):
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
+        from .landmark_context import public_context,context_audit
+        self.extra_context=public_context(self.record,catalog) if self.landmark_context!='references' else []
+        self.context_audit=context_audit(self.record,self.extra_context,self.landmark_context)
+        (self.directory/'landmark_context.json').write_text(json.dumps(self.context_audit,indent=2))
         self.visited_goal_cells=set();self.inputs=None;self.memory=None
 
     @torch.no_grad()
@@ -55,6 +60,9 @@ class GraphNavStage1Policy:
             path=self.directory/'current_public_query.jsonl';path.write_text(json.dumps(self.record)+'\n')
             ds=FullCandidateDataset(path,grid_size=self.args.grid_size,max_landmarks=self.args.max_landmarks,max_roads=self.args.max_roads,max_relations=self.args.max_relations,prior_sigma_m=self.args.prior_sigma_m,rule_sigma_m=self.args.rule_sigma_m)
             self.inputs,self.tokens,self.mask,self.names=_batch_inputs(collate_full([ds[0]]),self.bert,self.device,'geometry')
+            if self.landmark_context!='references':
+                from .landmark_context import append_context
+                self.inputs,self.names=append_context(self.inputs,self.names,self.record,self.extra_context,self.bert,self.landmark_context)
             with torch.autocast('cuda',dtype=torch.bfloat16):self.base=self.model.a3(self.inputs,variant='geometry',tokens=self.tokens,token_mask=self.mask,node_emb=self.names)
             self.native_text=self.native.texts([instruction]).detach().clone();self.appearance_text=self.native.texts([appearance_query(instruction)]).detach().clone()
             self.bounds=torch.tensor(self.record['world_bounds'],device=self.device,dtype=torch.float32)[None]
@@ -82,5 +90,5 @@ class GraphNavStage1Policy:
             belief_top16_world_xy=self.world.gather(1,dynamic[...,None].expand(-1,-1,2))[0].cpu().tolist(),
             observed_grid_ids=output.observed[0].nonzero().flatten().cpu().tolist(),
             appearance_top1_world_xy=self.world[0,winner[0]].cpu().tolist()if output.observed.any()else None,
-            active_observation=False)
+            active_observation=False,landmark_context=self.context_audit)
         return prediction

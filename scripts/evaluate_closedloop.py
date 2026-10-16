@@ -109,7 +109,12 @@ def main():
     parser.add_argument('--stop-threshold',type=float,default=.5)
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
+    parser.add_argument('--landmark-context',choices=('references','all_named','all_named_masked'),default=None)
     args = parser.parse_args()
+    if args.landmark_context is not None and (args.model!='graphnav-v1' or args.split!='val_seen' or not args.stage1_diagnostic):
+        raise ValueError('Landmark context intervention requires graphnav-v1 Val-Seen diagnostic')
+    if args.landmark_context is not None and args.stage1_grid_size not in (None,28):
+        raise ValueError('Landmark context intervention is fixed at 28x28')
     if args.stage1_resolution_eval:
         torch.set_num_threads(1)
         import cv2
@@ -200,7 +205,8 @@ def main():
             from graphnav.stage1_runtime import GraphNavStage1Policy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             runtime=GraphNavStage1Policy(args.checkpoint,output/'public_inputs',
-                visual_control=args.stage1_visual_control,history_control=args.stage1_history_control)
+                visual_control=args.stage1_visual_control,history_control=args.stage1_history_control,
+                landmark_context=args.landmark_context or 'references')
             builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='joint-active':
             from graphnav.joint_active_runtime import JointActivePolicy
