@@ -155,10 +155,13 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
                 break
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
         predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if self.execution.startswith('guarded-') else None
-        arrival_guard=predicted_goal_distance is None or predicted_goal_distance<=1e-3
+        from .trajectory_policy import stop_arrival_allowed
+        arrival_guard_m=getattr(self,'stop_arrival_guard_m',1e-3)
+        arrival_guard=stop_arrival_allowed(predicted_goal_distance,arrival_guard_m)
         height=float(state.pose[2])-GROUND_LEVEL[self.record['map_name']]
         altitude_guard=10.-1e-5<=height<=100.+1e-5
         return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop' and arrival_guard and altitude_guard),
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
                 execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability,predicted_goal_distance=predicted_goal_distance,stop_altitude_guard=altitude_guard,
+                stop_arrival_guard_m=arrival_guard_m,stop_arrival_guard_passed=arrival_guard,
                 explored_goal_cells=len(self.visited_goal_cells),selected_goal_xy=(inputs['bounds'][:,:2]+inputs['candidate_xy'][torch.arange(1,device=self.device),candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2]))[0].float().cpu().tolist()))

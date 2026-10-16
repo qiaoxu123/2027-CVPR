@@ -21,6 +21,13 @@ def calibrated_stop_probability(logits,positive_weight=1.):
     return torch.sigmoid(logits.float()-math.log(positive_weight))
 
 
+def stop_arrival_allowed(predicted_distance, radius_m=1e-3):
+    """Public predicted-goal guard only; -1 disables this guard, not Stop/height."""
+    if not math.isfinite(radius_m) or (radius_m < 0 and radius_m != -1.):
+        raise ValueError('arrival radius must be nonnegative or -1 to disable')
+    return predicted_distance is None or radius_m == -1. or predicted_distance <= radius_m
+
+
 def convergent_first_waypoint(pose,goal,learned,*,blend=1.,step=50.):
     """Taper the learned first-step deviation at its own predicted goal, no labels."""
     if not 0<=blend<=1:raise ValueError('blend must be in [0,1]')

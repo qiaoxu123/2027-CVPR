@@ -48,6 +48,12 @@ def validate_stage1_frozen_evaluation(args):
 
 def configure_stage1_controls(args):
     """Keep formal defaults; allow explicit Val-Seen-only interventions."""
+    arrival=getattr(args,'stage1_arrival_guard_m',None)
+    if arrival is not None:
+        if not args.stage1_diagnostic or args.split!='val_seen' or args.stage1_grid_size not in (None,28):
+            raise ValueError('Stop arrival intervention requires 28-grid Val-Seen diagnostic')
+        if not np.isfinite(arrival) or (arrival<0 and arrival!=-1):
+            raise ValueError('Arrival radius must be nonnegative or -1 to disable')
     if getattr(args,'stage1_resolution_eval',False):
         if args.stage1_grid_size!=384:raise ValueError('Full resolution intervention must be the fixed 384 grid')
         if args.stage1_visual_control!='real' or args.stage1_history_control!='checkpoint':raise ValueError('Resolution evaluation requires unchanged visual/history controls')
@@ -109,7 +115,10 @@ def main():
     parser.add_argument('--stop-threshold',type=float,default=.5)
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
+    parser.add_argument('--stage1-arrival-guard-m',type=float,default=None,help='Seen-only predicted-goal Stop guard radius; -1 disables only XY guard')
     args = parser.parse_args()
+    if args.stage1_arrival_guard_m is not None and args.model!='graphnav-v1':
+        raise ValueError('Stop arrival intervention requires GraphNav-V1')
     if args.stage1_resolution_eval:
         torch.set_num_threads(1)
         import cv2
@@ -253,6 +262,7 @@ def main():
     profiler=None
     if args.model=='graphnav-v1':
         runtime.stop_threshold=args.stop_threshold
+        if args.stage1_arrival_guard_m is not None:runtime.stop_arrival_guard_m=args.stage1_arrival_guard_m
         if args.stage1_grid_size is not None: runtime.args.grid_size=args.stage1_grid_size
         if args.profile:
             from graphnav.profiling import DecisionProfiler
