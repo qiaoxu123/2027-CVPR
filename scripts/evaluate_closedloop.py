@@ -99,7 +99,12 @@ def main():
     parser.add_argument('--stop-threshold',type=float,default=.5)
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
+    parser.add_argument('--profile-hett',action='store_true',help='Episode CUDA Event profiling following the HETT module-hook protocol')
     args = parser.parse_args()
+    if args.profile_hett:
+        args.profile=True
+        if args.model!='graphnav-v1' or args.split!='val_unseen':
+            raise ValueError('This frozen HETT profiling run requires GraphNav-V1 Val-Unseen')
     if args.model=='graphnav-v1':
         configure_stage1_controls(args)
         validate_stage1_frozen_evaluation(args)
@@ -230,7 +235,10 @@ def main():
         if args.stage1_grid_size is not None: runtime.args.grid_size=args.stage1_grid_size
         if args.profile:
             from graphnav.profiling import DecisionProfiler
-            profiler=DecisionProfiler(torch.cuda.synchronize)
+            if args.profile_hett:
+                from graphnav.hett_profiling import HETTEpisodeProfiler
+                profiler=HETTEpisodeProfiler(torch.cuda.synchronize)
+            else:profiler=DecisionProfiler(torch.cuda.synchronize)
             profiler.instrument(runtime,builder)
     if args.stage1_grid_size is not None:
         from graphnav.diagnostic_fields import install_field_capture
