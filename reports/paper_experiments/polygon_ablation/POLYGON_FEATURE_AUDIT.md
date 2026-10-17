@@ -1,6 +1,6 @@
 # PolyBelief Polygon Geometry 信息通路审计
 
-本审计和frozen_plan.json在任何新实验结果产生之前写入。原权重、共享数据和归档输出不修改。
+初版审计和frozen_plan.json在任何新实验结果产生之前写入。后续仅追加消费范围及公开分组数量核验，不变更表示、预算或分组规则；版本记录见Git历史及源快照。原权重、共享数据和归档输出不修改。
 
 |通路|使用位置|包含的完整几何信息|本实验处理|
 |---|---|---|---|
@@ -31,3 +31,7 @@ No Inside仅清除Inside通道，signed boundary的负号仍编码Inside；因�
 几何分组阈值在frozen_plan.json中预先固定，不读取结果；按公开参照物形状统计，不使用GT目标形状或不可靠目标–参照物标签。多地标的类型分组允许重叠并分别报告N。4张Unseen地图不能当2679或2697个独立场景。
 
 新增三项预结果冻结旁路干预：仅把prior、仅把rules+relation_fields、仅把节点形状改为Centroid允许信息，其他模型输入及权重不变，单独量化旁路依赖。它们同样不是公平重训表示比较。
+
+补充消费范围核验：`prior_buildings`只由`variant=building_prior`读取，在本次`variant=geometry`中不参与logits；仍与prior同步重建，以免将来复用其他variant时产生旁路。关系节点也不在`entity_valid`的候选–地标注意力有效集合中；其显式约束主要通过rules/relation_fields进入。本表“保留/重建”不意味着每个打包字段都在当前variant中产生影响。
+
+公开分组审计（dataset_group_counts.json）：当前Train/Seen/Unseen实际开放Polyline引用均为0；Road-like结果来自源TrafficRoad面状区域，不能作为开放道路中心线优势证据。Seen/Unseen仅6/19个Query具有至少两条明确且唯一绑定的解析关系，复杂关系组统计只能作为小样本探索。Seen 23图、Unseen 4图；regular/irregular组显著不平衡，报告中必须同时保留N。
