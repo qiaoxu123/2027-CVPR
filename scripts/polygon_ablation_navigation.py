@@ -13,7 +13,7 @@ from scripts.polygon_ablation_plan import OUT
 from scripts.polygon_ablation_engine import model_for, make_dataset, event
 from graphnav.a3_runtime import A3TrajectoryPolicy, public_static_record
 from graphnav.candidate_geometry import collate_full
-from graphnav.polygon_ablation import geometry_view
+from graphnav.polygon_ablation import geometry_view, geometry_groups
 from graphnav.full_experiment import _batch_inputs
 from graphnav.trajectory_policy import CandidateTrajectoryStop
 from graphnav.closedloop import PublicEpisode, PublicCatalog, ClosedLoopProtocol, rollout, score_trace, aggregate
@@ -36,6 +36,12 @@ def public_query_features(record_key,plan_sha256):
     else:path.write_text(record_key+'\n')
     dataset=make_dataset(plan,path)
     return dataset[0],dataset._prepared(0)[0]
+
+
+@lru_cache(maxsize=6000)
+def public_query_groups(record_key,plan_sha256):
+    _,graph=public_query_features(record_key,plan_sha256)
+    return tuple(geometry_groups(graph['entities'],graph['relations']))
 
 
 class PolygonPolicy(A3TrajectoryPolicy):
@@ -161,12 +167,16 @@ def navigate(plan,encoder,job,scope,representation,checkpoint=None,split='val_se
             policy.set_episode(public,builder.transform(public.map_name),catalog)
             poses,termination,timings,diagnostics=rollout(public,builder,controller,policy.predict,ground[public.map_name],protocol,synchronize=torch.cuda.synchronize)
             score=score_trace(poses,record.target_position,record.trajectory,termination,decision_seconds=timings)
+            # Group from the exact public references used for THIS episode,
+            # not a GT target or an assumed deduplicated-query annotation.
+            public_key=json.dumps(policy.record,sort_keys=True)
             assert len(poses)-1<=20
             if len(poses)>1:
                 delta=np.diff(poses,axis=0)
                 assert np.linalg.norm(delta[:,:2],axis=1).max()<=50.+1e-4
                 assert np.abs(delta[:,2]).max()<=10.+1e-4
             row=dict(index=int(i),episode_id=list(record.episode_id),map_name=record.map_name,poses=poses.tolist(),termination=termination,
+                     groups=list(public_query_groups(public_key,signature['plan_sha256'])),public_record_sha256=hashlib.sha256(public_key.encode()).hexdigest(),
                      decision_seconds=timings,step_diagnostics=diagnostics,metrics=score)
             f.write(json.dumps(row)+'\n');f.flush();metrics.append(score)
             if (position+1)%100==0:event(phase='navigation',job=job,split=split,smoke=smoke,completed=position+1,total=expected,seconds=time.time()-started)

@@ -35,3 +35,7 @@ No Inside仅清除Inside通道，signed boundary的负号仍编码Inside；因�
 补充消费范围核验：`prior_buildings`只由`variant=building_prior`读取，在本次`variant=geometry`中不参与logits；仍与prior同步重建，以免将来复用其他variant时产生旁路。关系节点也不在`entity_valid`的候选–地标注意力有效集合中；其显式约束主要通过rules/relation_fields进入。本表“保留/重建”不意味着每个打包字段都在当前variant中产生影响。
 
 公开分组审计（dataset_group_counts.json）：当前Train/Seen/Unseen实际开放Polyline引用均为0；Road-like结果来自源TrafficRoad面状区域，不能作为开放道路中心线优势证据。Seen/Unseen仅6/19个Query具有至少两条明确且唯一绑定的解析关系，复杂关系组统计只能作为小样本探索。Seen 23图、Unseen 4图；regular/irregular组显著不平衡，报告中必须同时保留N。
+
+控制器来源补充核验（controller_static_weight_alignment.json）：虽然预注册head的来源SHA严格验证通过，其训练定位模型与冻结C的几何子模块有70/80个张量不同（最大差5.2411）。这意味着包括冻结Full在内的闭环均是同一旧head的迁移测试，不是正式完整模型的导航复现。该head在任何本轮结果前已固定，不因差异而改选；公平表示贡献主要以静态重训验证，导航迁移限制单独报告。当前冻结C几何参数与initial_sources中原始静态来源也有小幅差异，不能把initial_sources的静态SHA当成本次实际冻结参数；实际来源始终是BASE C Epoch1权重SHA。
+
+No Inside Information仅指10-D候选–地标描述符中的Inside通道及signed boundary符号，prior等其他Polygon旁路在Descriptor Only中仍保留，不能据此宣称模型完全没有Inside相关信息。

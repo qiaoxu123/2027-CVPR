@@ -66,6 +66,10 @@ def paired_rows(a,b,endpoint,metrics):
     output=[];maps=[];ids=[]
     for k,r in left.items():
         s=right[k];assert r['map_name']==s['map_name']
+        if endpoint=='navigation' and 'public_record_sha256' in r:
+            assert r['public_record_sha256']==s['public_record_sha256'], 'Paired episodes have different public inputs'
+        if 'groups' in r and 'groups' in s:
+            assert r['groups']==s['groups'], 'Paired samples have different predeclared groups'
         x=r if endpoint=='localization' else r['metrics']
         y=s if endpoint=='localization' else s['metrics']
         output.append([x[v]-y[v] for v in metrics]);maps.append(r['map_name']);ids.append(k)
@@ -75,23 +79,43 @@ def paired_rows(a,b,endpoint,metrics):
 def summarize(plan=None,partial=False):
     plan=plan or init();local=[];navigation=[];data={};groups=[];maprows=[];stat={}
     training_done=list((OUT/'training').glob('*/complete.json'))
-    training_status=[];epoch_seconds=[]
+    training_status=[];epoch_seconds=[];training_runs={}
     for name in plan['unique_training_jobs']:
         folder=OUT/'training'/name
         history=json.loads((folder/'history.json').read_text()) if (folder/'history.json').exists() else []
         finished=json.loads((folder/'complete.json').read_text()) if (folder/'complete.json').exists() else {}
+        if (folder/'config.json').exists():
+            config=json.loads((folder/'config.json').read_text())
+            assert config['gat_message_passing'] is False
+            if finished:assert len(history)==15
+            training_runs[name]=dict(config=config,history=history,complete=bool(finished))
         epoch_seconds += [r['seconds'] for r in history]
         training_status.append(dict(job=name,status='Done' if finished else 'Running' if (folder/'config.json').exists() else 'Pending',
                                     epochs_completed=len(history),required_epochs=15,checkpoint_sha256=finished.get('checkpoint_sha256',''),
                                     selected_epoch=max(history,key=lambda r:(r['train_dev']['R@1'],-r['train_dev']['NE'],-r['epoch']))['epoch'] if finished else None,
                                     result_path=str(folder)))
     write_csv('training_status.csv',training_status)
+    checks=[]
+    capacities={(r['config']['parameters'],r['config']['optimized_parameters']) for r in training_runs.values()}
+    assert len(capacities)<=1, 'Network capacity differs across representations'
+    for seed in (0,1,2):
+        runs=[r for r in training_runs.values() if r['config']['seed']==seed]
+        hashes={r['config']['initial_state_sha256'] for r in runs}
+        assert len(hashes)<=1, 'Initialization differs within a seed'
+        for epoch in range(1,16):
+            orders={h['data_order_sha256'] for r in runs for h in r['history'] if h['epoch']==epoch}
+            assert len(orders)<=1, f'Data order differs for seed {seed}, epoch {epoch}'
+        if not partial:assert len(runs)==5 and all(r['complete'] for r in runs)
+        checks.append(dict(seed=seed,initialized_conditions=len(runs),required_unique_conditions=5,
+                           complete_conditions=sum(r['complete'] for r in runs),matching_initial_states=True if runs else None,
+                           matching_epoch_orders=True if any(r['history'] for r in runs) else None,
+                           initial_state_sha256=next(iter(hashes)) if hashes else None))
+    atomic_json(dict(all_required_runs_complete=len(training_done)==15,capacity=list(capacities),checks=checks),OUT/'matched_training_checks.json')
     execution=dict(status='Running' if partial else 'Done',completed_training_runs=len(training_done),required_training_runs=15,
                    trained_static_complete=(OUT/'all_static_complete.json').exists(),
                    active_progress=json.loads((OUT/'progress.json').read_text()) if (OUT/'progress.json').exists() else {})
     execution['remaining_training_seconds_estimate']=(225-sum(r['epochs_completed'] for r in training_status))*float(np.mean(epoch_seconds)) if epoch_seconds else None
     atomic_json(execution,OUT/'execution_status.json')
-    episode_queries={}
     # Only completed metrics are eligible. Raw partial files are preserved but
     # never summarized as a complete split.
     for f in sorted((OUT/'localization').glob('*/*.json')):
@@ -137,17 +161,8 @@ def summarize(plan=None,partial=False):
             raw=data[(r['phase'],r['scope'],r['representation'],r['seed'],r['split'],endpoint)]
             # Group membership defined before results from public map geometry.
             if endpoint=='navigation':
-                source_rows=data.get((r['phase'],r['scope'],r['representation'],r['seed'],r['split'],'localization'),[])
-                # Exact public query IDs cannot be recovered from episode IDs alone;
-                # use the dataset's fixed published Episode -> map/instruction map.
-                from scripts.polygon_ablation_navigation import resources
-                if r['split'] not in episode_queries:
-                    ds,*_=resources(plan,r['split'])
-                    episode_queries[r['split']]={tuple(ds[i].episode_id):(ds[i].map_name,ds[i].instruction) for i in range(len(ds))}
-                by_episode=episode_queries[r['split']]
-                from scripts.polygon_ablation_plan import query_key
-                qgroups={x['query_id']:x['groups'] for x in source_rows}
-                memberships={identity(x,endpoint):qgroups.get(query_key(dict(zip(('map_name','instruction'),by_episode[tuple(x['episode_id'])]))),['group_unknown']) for x in raw}
+                assert all('groups' in x and 'public_record_sha256' in x for x in raw)
+                memberships={identity(x,endpoint):x['groups'] for x in raw}
             else:memberships={identity(x,endpoint):x['groups'] for x in raw}
             names=sorted({g for v in memberships.values() for g in v}|{'regular','irregular','compact','elongated','small','large','point_like','area_like','road_like','single_landmark_name','multiple_landmark_names','explicit_bound_relation','multiple_explicit_bound_relations'})
             for group in names:
@@ -252,7 +267,7 @@ def summarize(plan=None,partial=False):
         if values:
             for v in values:
                 lower,upper=v['map_ci95_pp']
-                support='地图级正收益区间下界>0' if lower>0 and v['delta_pp']>0 else '未取得地图级明确正收益支持'
+                support='整地图重采样、Episode加权CI下界>0' if lower>0 and v['delta_pp']>0 else '未取得Episode加权地图级明确正收益支持'
                 answers.append(f"- {v['split']} {metric}，Full Polygon−{v['control']}：{v['delta_pp']:+.4f}pp，整地图95%CI [{lower:+.4f},{upper:+.4f}]pp；{support}。")
     if not answers:answers=['- 公平重训及完整闭环尚未全部完成，不能从冻结特征敏感性直接判断表示优劣。']
     dependence=[]
@@ -267,13 +282,17 @@ def summarize(plan=None,partial=False):
 独立训练已完成{len(training_done)}/15；当前结果行数：静态{len(local)}、导航{len(navigation)}，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
+全部模型参数727696，其中优化参数453517；保留相同未激活GAT/视觉分支的结构，但不执行GAT消息传递或RGB推理。matched_training_checks.json逐Seed核验初始化、容量及每Epoch数据顺序。
 Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；共18个逻辑条件、15次独立训练。seed0预先指定优先闭环，并保留seed1/2所有结果。
 所有静态评估完成标志all_static_complete.json先于任何闭环。静态Seen2426/Unseen2679，导航Seen2470/Unseen2697；原始定位/导航结果未冒充本实验结果。
+
+指标沿用现有evaluator：Recall命中半径20m；SR为最后位置到GT的XY距离≤20m，不额外要求policy_stop；OSR为路径任一点命中；SPL为SR乘起点–目标直线距离/max(实际XY路径长度,起点–目标距离)。NE为最终XY距离（米）。False_Stop_Rate为失败policy_stop数/policy_stop总数，无policy_stop时为null；另保留失败stop数/全部Episode的false_stop_episode_fraction，不能把无主动stop当作0%错误停止。以上GT均只用于loss或推理完成后的评分。
 
 ## 三个最终问题
 
 1. Full Polygon是否比Centroid/Bounding Box更好：以下End-to-End重训配对效应给出实际方向，不预设正收益；统计区间跨零或点估计为负时，不能写成普遍优势。
 2. Seen/Unseen是否一致及统计支持：分别报告；4张Unseen地图仅为4个独立地图簇，主要依据整地图cluster CI和Leave-One-Map-Out，不能以Episode CI替代。
+   簇按官方map_name地图块定义，并非4座独立城市；不能把该结果扩写成跨城市泛化结论。
 3. 来源是边界/Inside/Extent还是旁路：Descriptor Only的Full与BBox只改变边界/Inside，Extent相同；End-to-End还改变prior/rules/relation_fields及节点统计。冻结No Inside仍保留signed boundary符号；No Inside Information另清除符号。仅冻结敏感性不能证明某模块公平重训后的独立因果贡献。
 
 '''+ '\n'.join(answers)+'''
@@ -315,6 +334,7 @@ End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增�
 
 全部使用同一个原始预训练Trajectory/Stop Head，SHA为'''+plan['navigation']['head_sha256']+'''，不微调；28×28、stop0.3、20决策、水平≤50m、垂直≤10m，原1mm预测目标到达门控保留。
 重训后的候选上下文与旧head的分布可能不匹配，因此导航差异同时含表示和固定控制器迁移响应；不将其隐瞒或分别微调head以提高结果。
+controller_static_weight_alignment.json直接比较参数张量：冻结C几何子模块与head训练时定位模型有70/80个张量不同（最大绝对差5.2411）；与其原始静态来源也有50/80个张量不同（最大绝对差0.00315）。因此连冻结Full基线也属于预注册旧head的迁移，不是正式完整PolyBelief的闭环复现。保留预先选定的head不变，不根据结果替换更有利的head；主要表示归因依据静态公平重训，导航只衡量固定head下的执行迁移。
 本实验为几何/语言定位和控制器迁移，不启用RGB/历史，不把它与384或独立视觉残差的提升相加。
 public_static_record只使用公开地标绑定/名称/轮廓，目标和未来轨迹仅在forward/rollout之后评分；渲染优化须先通过128条完整轨迹与原观测builder逐点一致性。
 闭环CPU特征缓存按完整public_static_record内容及计划SHA精确键控，仅保存公开几何和虚拟零标签打包架子；不按GT目标或近似文本匹配。跨Seed复用不变输入，不复用其他权重的预测。单测验证缓存与原转换逐Tensor完全一致、各表示不修改共享输入；Seen128参考路径同时关闭缓存并使用原观测builder，以完整轨迹精确校验两项执行优化。

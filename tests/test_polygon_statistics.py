@@ -31,3 +31,10 @@ def test_pairing_uses_ids_and_rejects_mismatched_queries():
     d,m,k=paired_rows(a,b,'localization',['R@1'])
     assert d[:,0].tolist()==[1.,-1.] and k==['x','y']
     with pytest.raises(AssertionError):paired_rows(a,b[:1],'localization',['R@1'])
+
+
+def test_navigation_pairing_rejects_changed_public_inputs():
+    a=[dict(episode_id=['m',1],map_name='m',public_record_sha256='same',metrics={'SR':1.})]
+    b=[dict(episode_id=['m',1],map_name='m',public_record_sha256='changed',metrics={'SR':0.})]
+    with pytest.raises(AssertionError,match='different public inputs'):
+        paired_rows(a,b,'navigation',['SR'])

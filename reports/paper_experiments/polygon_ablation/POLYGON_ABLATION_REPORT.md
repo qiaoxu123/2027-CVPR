@@ -1,16 +1,20 @@
 # PolyBelief Polygon Geometry 独立贡献验证
 
 状态：部分完成；未完成项目保留Pending。[信息通路审计](POLYGON_FEATURE_AUDIT.md)与frozen_plan.json先于实验结果产生。
-独立训练已完成4/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
+独立训练已完成8/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
+全部模型参数727696，其中优化参数453517；保留相同未激活GAT/视觉分支的结构，但不执行GAT消息传递或RGB推理。matched_training_checks.json逐Seed核验初始化、容量及每Epoch数据顺序。
 Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；共18个逻辑条件、15次独立训练。seed0预先指定优先闭环，并保留seed1/2所有结果。
 所有静态评估完成标志all_static_complete.json先于任何闭环。静态Seen2426/Unseen2679，导航Seen2470/Unseen2697；原始定位/导航结果未冒充本实验结果。
+
+指标沿用现有evaluator：Recall命中半径20m；SR为最后位置到GT的XY距离≤20m，不额外要求policy_stop；OSR为路径任一点命中；SPL为SR乘起点–目标直线距离/max(实际XY路径长度,起点–目标距离)。NE为最终XY距离（米）。False_Stop_Rate为失败policy_stop数/policy_stop总数，无policy_stop时为null；另保留失败stop数/全部Episode的false_stop_episode_fraction，不能把无主动stop当作0%错误停止。以上GT均只用于loss或推理完成后的评分。
 
 ## 三个最终问题
 
 1. Full Polygon是否比Centroid/Bounding Box更好：以下End-to-End重训配对效应给出实际方向，不预设正收益；统计区间跨零或点估计为负时，不能写成普遍优势。
 2. Seen/Unseen是否一致及统计支持：分别报告；4张Unseen地图仅为4个独立地图簇，主要依据整地图cluster CI和Leave-One-Map-Out，不能以Episode CI替代。
+   簇按官方map_name地图块定义，并非4座独立城市；不能把该结果扩写成跨城市泛化结论。
 3. 来源是边界/Inside/Extent还是旁路：Descriptor Only的Full与BBox只改变边界/Inside，Extent相同；End-to-End还改变prior/rules/relation_fields及节点统计。冻结No Inside仍保留signed boundary符号；No Inside Information另清除符号。仅冻结敏感性不能证明某模块公平重训后的独立因果贡献。
 
 - 公平重训及完整闭环尚未全部完成，不能从冻结特征敏感性直接判断表示优劣。
@@ -104,8 +108,10 @@ End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增�
 
 全部使用同一个原始预训练Trajectory/Stop Head，SHA为51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd，不微调；28×28、stop0.3、20决策、水平≤50m、垂直≤10m，原1mm预测目标到达门控保留。
 重训后的候选上下文与旧head的分布可能不匹配，因此导航差异同时含表示和固定控制器迁移响应；不将其隐瞒或分别微调head以提高结果。
+controller_static_weight_alignment.json直接比较参数张量：冻结C几何子模块与head训练时定位模型有70/80个张量不同（最大绝对差5.2411）；与其原始静态来源也有50/80个张量不同（最大绝对差0.00315）。因此连冻结Full基线也属于预注册旧head的迁移，不是正式完整PolyBelief的闭环复现。保留预先选定的head不变，不根据结果替换更有利的head；主要表示归因依据静态公平重训，导航只衡量固定head下的执行迁移。
 本实验为几何/语言定位和控制器迁移，不启用RGB/历史，不把它与384或独立视觉残差的提升相加。
 public_static_record只使用公开地标绑定/名称/轮廓，目标和未来轨迹仅在forward/rollout之后评分；渲染优化须先通过128条完整轨迹与原观测builder逐点一致性。
+闭环CPU特征缓存按完整public_static_record内容及计划SHA精确键控，仅保存公开几何和虚拟零标签打包架子；不按GT目标或近似文本匹配。跨Seed复用不变输入，不复用其他权重的预测。单测验证缓存与原转换逐Tensor完全一致、各表示不修改共享输入；Seen128参考路径同时关闭缓存并使用原观测builder，以完整轨迹精确校验两项执行优化。
 配置、源/权重SHA、Query清单、Train-Dev分组、初始化及每epoch数据顺序hash、训练断点、逐Query/episode预测和日志均原地保留。复现命令：`python -m scripts.run_polygon_ablation --resume`；统计重建：`python -m scripts.polygon_ablation_statistics`。
 implementation_provenance.json及source_snapshot_manifest.json记录实现Commit与代码SHA；frozen_plan.json中的source_commit是实验开始前的基线Commit。旧架构args保留来源字段（如原continue_from/seed），实际独立随机初始化、Seed和预算以新config.json及顶层Checkpoint元数据为准，不执行旧continue_from。navigation_data_audit.json记录processed_citynav目录与revised静态记录的Query ID集合一致性及全部来源SHA，导航started.json另记录实际策略代码SHA。
 静态评估沿用原static_recall的topk(8)并列排序，R@1/4/8由其前缀得到；闭环保留原模型topk(20)候选与原head选择。BF16并列分数时两者首位可能不同，不能把静态R@1和闭环SR的差额全部归因于执行控制。所有表示使用相同协议，不为个别表示修正并列顺序。

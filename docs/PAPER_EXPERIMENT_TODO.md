@@ -60,7 +60,7 @@
 |---|---|---|
 |几何通路审计、三种表示、无旁路/容量/缓存测试|Done|POLYGON_FEATURE_AUDIT.md; tests.log|
 |冻结权重完整静态干预|Done|24次实际完整评估+2个Full输入相同的scope别名|
-|两口径3Seed公平重训|Running|4/15独立训练；training_status.csv及training/*/complete.json|
+|两口径3Seed公平重训|Running|8/15独立训练；training_status.csv及training/*/complete.json|
 |所有重训权重Seen/Unseen完整静态评估|Pending|0/36逻辑结果行|
 |原始/优化执行路径Seen128精确一致性|Pending|rendering_parity.json（完成前不允许声称通过）|
 |同一冻结Trajectory/Stop全量闭环|Pending|0/62逻辑结果行；54次实际全split评估，Full别名另计|
