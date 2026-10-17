@@ -1,7 +1,7 @@
 # PolyBelief Polygon Geometry 独立贡献验证
 
 状态：部分完成；未完成项目保留Pending。[信息通路审计](POLYGON_FEATURE_AUDIT.md)与frozen_plan.json先于实验结果产生。
-独立训练已完成15/15；当前结果行数：静态62、导航4，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
+独立训练已完成15/15；当前结果行数：静态62、导航27，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
 几何定位子网参数727696，其中优化参数453517；公共冻结BERT和固定控制器另计且各条件完全相同。保留相同未激活GAT/视觉分支的结构，但不执行GAT消息传递或RGB推理。matched_training_checks.json逐Seed核验初始化、容量及每Epoch数据顺序。
@@ -154,6 +154,7 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 |localization|end_to_end|full_polygon|1|val_unseen|2679|0.20119447555057857|0.3684210526315789|0.48114968271743186||||53.745322871848956||
 |localization|end_to_end|full_polygon|2|val_seen|2426|0.40272052761747734|0.6240725474031328|0.7440230832646332||||31.408823947201853||
 |localization|end_to_end|full_polygon|2|val_unseen|2679|0.2123926838372527|0.3602090332213512|0.46061963419186264||||51.84313869600912||
+|navigation|descriptor_only|centroid|0|val_seen|2470||||0.39271255060728744|0.3800313440434636|0.47530364372469636|32.53492126253428|0.6072874493927125|
 
 ## 几何复杂度与范围限制
 

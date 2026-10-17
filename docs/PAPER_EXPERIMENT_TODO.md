@@ -54,7 +54,7 @@
 
 ## Polygon独立贡献实验进度
 
-状态：Running。新静态结果62行，导航结果4行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。
+状态：Running。新静态结果62行，导航结果27行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。
 
 |task|status|evidence|
 |---|---|---|
@@ -63,6 +63,6 @@
 |两口径3Seed公平重训|Done|15/15独立训练；training_status.csv及training/*/complete.json|
 |所有重训权重Seen/Unseen完整静态评估|Done|36/36逻辑结果行|
 |原始/优化执行路径Seen128精确一致性|Done|rendering_parity.json（完成前不允许声称通过）|
-|同一冻结Trajectory/Stop全量闭环|Running|4/62逻辑结果行；54次实际全split评估，Full别名另计|
+|同一冻结Trajectory/Stop全量闭环|Running|27/62逻辑结果行；54次实际全split评估，Full别名另计|
 |三Seed配对、地图簇CI及LOMO和分组分析|Running|paired_statistics.json; seed_summary.csv; geometry_subgroup_results.csv|
 |原始结果和权重远程备份|Running|frozen_remote_sync.json为冻结阶段已验证归档；最终remote_sync.json另记|

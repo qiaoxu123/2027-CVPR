@@ -5,9 +5,10 @@ import subprocess
 import tempfile
 import traceback
 import time
+import torch
 
 from scripts.polygon_ablation_plan import HERE,OUT,WORKSPACE
-from graphnav.checkpointing import file_sha256,atomic_json
+from graphnav.checkpointing import file_sha256,atomic_json,resolve_checkpoint_resource
 
 REPO='qiaoxu123/2027-CVPR'
 GIT=['git','-c','url.https://github.com/qiaoxu123/2027-CVPR.git.insteadOf=https://github.com/qiaoxu123/2027-CVPR-Dev.git','-c','credential.helper=!gh auth git-credential']
@@ -65,7 +66,11 @@ def _sync():
     files=[p for p in OUT.rglob('*') if p.is_file() and '.cache' not in p.parts and
            'public_inputs' not in p.parts and p.name not in ('run.lock','remote_sync.json','remote_sync_failure.json')]
     plan=json.loads((OUT/'frozen_plan.json').read_text())
-    files=sorted(set(files+[Path(plan['base_checkpoint']),*[Path(v['path']) for v in plan['sources'].values()]]))
+    head_path=plan['navigation']['head_checkpoint']
+    head_state=torch.load(head_path,map_location='cpu',weights_only=True)
+    head_manifest=resolve_checkpoint_resource(head_state['args']['cache'],head_path)/'manifest.json'
+    assert file_sha256(head_manifest)==head_state['input_fingerprint']['cache_manifest']['sha256']
+    files=sorted(set(files+[head_manifest,Path(plan['base_checkpoint']),*[Path(v['path']) for v in plan['sources'].values()]]))
     reuse_warning=None
     try:previous,reference=verified_previous_stage()
     except Exception as error:
