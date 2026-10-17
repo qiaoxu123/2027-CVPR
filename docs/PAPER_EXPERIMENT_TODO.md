@@ -16,7 +16,7 @@
 |Table1原论文Reference及全方法缺口|Done|全部|SBFNav Table1；官方资源|reports/paper_experiments/table1_paper_reported.csv|严格本地复现仍有缺口，见各方法条目|11个方法三split有值或明确缺失；Human只作上限|离线；已完成|
 |Table1本地共同指标与协议分表|Done|全部|已有metrics及逐Episode轨迹|reports/paper_experiments/table1_ours_unified.csv|未完成方法留空；不表示全部baseline完成|本地值与论文值分离，所有协议偏差保留|离线；已完成|
 |官方Easy/Medium/Hard及Test离线统计|Done|Test-Unseen|CityNav发布子集ID；既有预测|reports/paper_experiments/difficulty_analysis.md|论文未发布阈值生成程序，准确使用官方清单|互斥且覆盖5281；全部ID、源SHA及计数核验|CPU数分钟；已完成|
-|Polygon vs Centroid vs Bounding Box闭环|Running|Val-Seen / Val-Unseen|新实验：固定Train-Dev、3seed、独立初始化|reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md|正在执行完整队列|三组同清单、同控制器和选模规则；静态结果另表|仅推理约3×15–40分钟；若需独立训练另估，不在本轮启动|
+|Polygon vs Centroid vs Bounding Box闭环|Done|Val-Seen / Val-Unseen|新实验：固定Train-Dev、3seed、独立初始化|reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md|无；诊断与重训两口径分别报告，结果正负均保留|三组同清单、同控制器和选模规则；静态结果另表|仅推理约3×15–40分钟；若需独立训练另估，不在本轮启动|
 |Geometry-only vs Geometry + Visual Belief|Done|Val-Seen子集|正式冻结模型Seen128|reports/paper_experiments/ablation_results.csv|只有Seen128正式权重干预；全量双validation尚未补齐|当前完成范围明确为128条；后续扩展须匹配权重与样本|已完成；扩展约2×15–40分钟|
 |Calibrated Visual Residual四组完整泛化|Done|Val-Seen / Val-Unseen|相同已训练calibrated_residual/best.pt|VISUAL_RESIDUAL_UNSEEN_VALIDATION.md|Test未运行且无需用Test选候选|四组2470/2697；逐条配对、Zero一致|已有全部结果，禁止重跑|
 |视觉残差地图级Bootstrap|Done|Val-Seen / Val-Unseen|既有20,000次paired bootstrap|visual_residual_unseen_validation/bootstrap_results.json|仅4张Unseen地图；主比较SR CI下界=0，不能称明确跨地图正收益|固定seed；episode加权及地图等权；CI如实保留|已完成|
@@ -54,7 +54,7 @@
 
 ## Polygon独立贡献实验进度
 
-状态：Running。新静态结果62行，导航结果27行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。
+状态：Done。新静态结果62行，导航结果62行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。
 
 |task|status|evidence|
 |---|---|---|
@@ -63,6 +63,6 @@
 |两口径3Seed公平重训|Done|15/15独立训练；training_status.csv及training/*/complete.json|
 |所有重训权重Seen/Unseen完整静态评估|Done|36/36逻辑结果行|
 |原始/优化执行路径Seen128精确一致性|Done|rendering_parity.json（完成前不允许声称通过）|
-|同一冻结Trajectory/Stop全量闭环|Running|27/62逻辑结果行；54次实际全split评估，Full别名另计|
-|三Seed配对、地图簇CI及LOMO和分组分析|Running|paired_statistics.json; seed_summary.csv; geometry_subgroup_results.csv|
+|同一冻结Trajectory/Stop全量闭环|Done|62/62逻辑结果行；54次实际全split评估，Full别名另计|
+|三Seed配对、地图簇CI及LOMO和分组分析|Done|paired_statistics.json; seed_summary.csv; geometry_subgroup_results.csv|
 |原始结果和权重远程备份|Running|frozen_remote_sync.json为冻结阶段已验证归档；最终remote_sync.json另记|

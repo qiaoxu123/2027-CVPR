@@ -1,0 +1,47 @@
+{
+  "status": "Done",
+  "source_commit": "d88acc513afd463804a2a8a195555032ba90b5e2",
+  "signature": {
+    "scope": "descriptor_only",
+    "representation": "centroid",
+    "checkpoint_sha256": "1f457c50570dd25df73d12f6fd0c40e8af41be7221d076e42493772248d49e5e",
+    "head_sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+    "plan_sha256": "bb1397f31b395de099a4d330ff07a104d287bd195020b639cf61d3eadbee5f2b",
+    "navigation_data_audit_sha256": "048edc97fb21b8224b19563991f551e1816aec3855d1639aac493679747758fb",
+    "policy_source_sha256": "9b31f147ccdc5f02abc3b5b5e553d6f42b7b57f668b197ebfa927bb0ffe99fef",
+    "split": "val_seen",
+    "smoke": false,
+    "original_builder": false,
+    "public_feature_cache": true
+  },
+  "metrics": {
+    "SR": 0.38502024291497977,
+    "OSR": 0.4688259109311741,
+    "SPL": 0.37244028889454583,
+    "NE": 33.3071131152514,
+    "nDTW": 0.29138425490197967,
+    "sDTW": 0.13584364598327475,
+    "steps": 7.8323886639676115,
+    "path_length": 197.3885288375375,
+    "policy_stop": 0.9910931174089069,
+    "inference_ms": 3.8575559161247037,
+    "episodes": 2470,
+    "False_Stop_Rate": 0.6131535947712419,
+    "false_stop_episode_fraction": 0.6076923076923076,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "seconds": 88.73426651954651,
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "controller_transfer_limitation": "Same unchanged pretrained head for all arms; newly trained candidate contexts may shift latent distribution. No per-representation controller adaptation.",
+  "pose_rendering": "Pose-only rendering elision; original-builder Seen128 exact trace parity required"
+}
