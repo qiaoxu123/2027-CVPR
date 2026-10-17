@@ -82,3 +82,9 @@ common_episode_metrics.csv保存本次可重算来源的逐Episode共同指标�
 ## 远程备份
 
 代码和报告已同步到research/visual-residual-20261013；新增四组完整Unseen逐Episode轨迹及恢复的MGP权重另存[远程资产](https://github.com/qiaoxu123/2027-CVPR/releases/tag/polybelief-paper-experiments-20261017)。17个文件，压缩包205203635字节；GitHub服务端SHA与本地一致，下载manifest复核通过。校验与恢复清单见remote_sync.json、POLYBELIEF_ASSET_MANIFEST.json及POLYBELIEF_SHA256SUMS。原冻结权重继续使用旧release，不重复上传。
+
+<!-- POLYGON_ABLATION_UPDATE -->
+
+## Polygon独立贡献补充
+
+状态：Running。新静态结果26行，导航结果0行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。

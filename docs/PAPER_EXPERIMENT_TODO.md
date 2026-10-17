@@ -16,7 +16,7 @@
 |Table1原论文Reference及全方法缺口|Done|全部|SBFNav Table1；官方资源|reports/paper_experiments/table1_paper_reported.csv|严格本地复现仍有缺口，见各方法条目|11个方法三split有值或明确缺失；Human只作上限|离线；已完成|
 |Table1本地共同指标与协议分表|Done|全部|已有metrics及逐Episode轨迹|reports/paper_experiments/table1_ours_unified.csv|未完成方法留空；不表示全部baseline完成|本地值与论文值分离，所有协议偏差保留|离线；已完成|
 |官方Easy/Medium/Hard及Test离线统计|Done|Test-Unseen|CityNav发布子集ID；既有预测|reports/paper_experiments/difficulty_analysis.md|论文未发布阈值生成程序，准确使用官方清单|互斥且覆盖5281；全部ID、源SHA及计数核验|CPU数分钟；已完成|
-|Polygon vs Centroid vs Bounding Box闭环|Pending|Val-Seen / Val-Unseen|历史几何分支仅部分静态对照|reports/paper_experiments/asset_inventory.csv|没有确认同一冻结正式模型的三组闭环证据；需定义移除形状后的可比输入，不自行改网络|三组同清单、同控制器和选模规则；静态结果另表|仅推理约3×15–40分钟；若需独立训练另估，不在本轮启动|
+|Polygon vs Centroid vs Bounding Box闭环|Running|Val-Seen / Val-Unseen|新实验：固定Train-Dev、3seed、独立初始化|reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md|正在执行完整队列|三组同清单、同控制器和选模规则；静态结果另表|仅推理约3×15–40分钟；若需独立训练另估，不在本轮启动|
 |Geometry-only vs Geometry + Visual Belief|Done|Val-Seen子集|正式冻结模型Seen128|reports/paper_experiments/ablation_results.csv|只有Seen128正式权重干预；全量双validation尚未补齐|当前完成范围明确为128条；后续扩展须匹配权重与样本|已完成；扩展约2×15–40分钟|
 |Calibrated Visual Residual四组完整泛化|Done|Val-Seen / Val-Unseen|相同已训练calibrated_residual/best.pt|VISUAL_RESIDUAL_UNSEEN_VALIDATION.md|Test未运行且无需用Test选候选|四组2470/2697；逐条配对、Zero一致|已有全部结果，禁止重跑|
 |视觉残差地图级Bootstrap|Done|Val-Seen / Val-Unseen|既有20,000次paired bootstrap|visual_residual_unseen_validation/bootstrap_results.json|仅4张Unseen地图；主比较SR CI下界=0，不能称明确跨地图正收益|固定seed；episode加权及地图等权；CI如实保留|已完成|
@@ -49,3 +49,9 @@
 |Random严格本地复现缺口|Blocked|Val-Seen / Val-Unseen / Test-Unseen|官方资源；具体见baseline_protocol_audit.md|reports/paper_experiments/table1_local_other_protocols.csv|Historical native policies exist; no saved full-split trajectories with complete provenance for this frozen observed-only protocol.|代码/权重/数据SHA/逐Episode/日志/命令/冻结选模完整，保持方法原身份|本地固定策略CPU数分钟；论文随机策略不明确，禁止fit|
 |SBFNav严格本地复现缺口|Blocked|Val-Seen / Val-Unseen / Test-Unseen|官方资源；具体见baseline_protocol_audit.md|reports/paper_experiments/table1_local_other_protocols.csv|Independent reimplementation has trajectories; validation epoch14 vs Test epoch12; old selection used Val-Unseen, incompatible with new selection constraint.|代码/权重/数据SHA/逐Episode/日志/命令/冻结选模完整，保持方法原身份|严格Seen-only重新选模需新训练/作者权重，历史Unseen选模不能洗白|
 |统一baseline多种子与同硬件效率|Pending|Val-Seen / Val-Unseen|先完成单种子严格复现|reports/paper_experiments/missing_results.md|部分历史Random为5seed均值，不能与单seed不加标识混排|按预先预算多seed；同硬件测量；不据Unseen/Test选择seed|约单seed预算×种子数；本轮不启动|
+
+<!-- POLYGON_ABLATION_UPDATE -->
+
+## Polygon独立贡献实验进度
+
+状态：Running。新静态结果26行，导航结果0行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。

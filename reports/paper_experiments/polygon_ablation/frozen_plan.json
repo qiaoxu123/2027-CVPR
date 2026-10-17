@@ -1,0 +1,303 @@
+{
+  "version": "polygon-independent-contribution-v1",
+  "created": 1792216664.6166773,
+  "source_commit": "47ab082b412493567a9d7738ea8256a462a656b3",
+  "base_checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+  "sources": {
+    "a3": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+      "sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7"
+    },
+    "head": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt",
+      "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+    },
+    "reference": {
+      "path": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+    }
+  },
+  "args": {
+    "train": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+    "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+    "val_unseen": "data/revised_static/graphnav_val_unseen.jsonl",
+    "dataset_version": "revised",
+    "match_mode": "fuzzy",
+    "variants": [
+      "tokens",
+      "geometry",
+      "gat"
+    ],
+    "roads_json": null,
+    "device": "cuda",
+    "hardware": "RTX Pro 6000 96GB",
+    "batch_size": 16,
+    "epochs": 15,
+    "rgb_epochs": 3,
+    "lr": 5e-05,
+    "rgb_lr": 0.0001,
+    "workers": 4,
+    "max_train_batches": 0,
+    "seed": 1,
+    "output": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/static_final_analysis_20261010/E1_seed1",
+    "text_backbone": "bert-base-uncased",
+    "grid_size": 28,
+    "max_landmarks": 16,
+    "max_roads": 0,
+    "max_relations": 8,
+    "hidden": 128,
+    "heads": 4,
+    "vision_dim": 768,
+    "top_k": 20,
+    "min_visual_coverage": 0.3,
+    "crop_extent_m": 100.0,
+    "visual_cache_size": 4096,
+    "prior_sigma_m": 25.0,
+    "rule_sigma_m": 25.0,
+    "rule_weight": 1.0,
+    "max_text_length": 96,
+    "resume": null,
+    "train_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt",
+    "seen_bert_cache": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt",
+    "init_bidirectional": null,
+    "variant": "geometry",
+    "graph_control": "full",
+    "continue_from": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_replicate_seed1/best.pt",
+    "relation_weight": 0.0,
+    "relation_auxiliary": false,
+    "relation_supervision_version": null
+  },
+  "paths": {
+    "train_seen": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl",
+    "val_seen": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl",
+    "val_unseen": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_unseen.jsonl"
+  },
+  "input_sha256": {
+    "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_train_seen.jsonl": "2c2b8c9e2f02b7e26664ab0271c304969d1cd4bb0b792bbbf32e72d775e7f54c",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_seen.jsonl": "8eadde5b548a00fd66c71f96ef2d1226cad0993f166eafede32f209bde0d97b2",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/data/revised_static/graphnav_val_unseen.jsonl": "7408c87314cd869e72b8dd0635e93585e745fe56fd83bfac5de62645f83909a6",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/static_final_analysis_20261010/E1_seed1/best.pt": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_train_fp32/bert_tokens.pt": "e7268793cee7eb2d6b1ffa93b75a27c148a83e24b99bbd6dd6ff0ab99d38d2fa",
+    "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_dynamic_seen_fp32/bert_tokens.pt": "65d713d204bc5322466006960c555286e8cd8e95fd113c2bf40d12dbd6626f5c"
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "epochs": 15,
+  "batch_size": 16,
+  "lr": 5e-05,
+  "optimizer": "AdamW",
+  "weight_decay": 0.01,
+  "gradient_clip_norm": 1.0,
+  "selection": "Train-Dev R@1/20m, then lowest NE, earliest tied epoch; no Val-Seen/Unseen/Test selection",
+  "training_order": "same seed and epoch -> same torch.Generator permutation over Train-Fit; same per-epoch dropout RNG seed; matching random initialization across representations/scopes",
+  "loss": "existing cross_entropy_goal Gaussian spatial target, unchanged default sigma_cells=0.9",
+  "frozen_interventions": [
+    [
+      "descriptor_only",
+      "full_polygon"
+    ],
+    [
+      "descriptor_only",
+      "centroid"
+    ],
+    [
+      "descriptor_only",
+      "bounding_box"
+    ],
+    [
+      "descriptor_only",
+      "no_boundary"
+    ],
+    [
+      "descriptor_only",
+      "no_inside"
+    ],
+    [
+      "descriptor_only",
+      "no_extent"
+    ],
+    [
+      "descriptor_only",
+      "no_inside_information"
+    ],
+    [
+      "end_to_end",
+      "centroid"
+    ],
+    [
+      "end_to_end",
+      "bounding_box"
+    ],
+    [
+      "descriptor_only",
+      "prior_to_centroid"
+    ],
+    [
+      "descriptor_only",
+      "rules_to_centroid"
+    ],
+    [
+      "descriptor_only",
+      "nodes_to_centroid"
+    ]
+  ],
+  "training_conditions": [
+    [
+      "descriptor_only",
+      "centroid",
+      0
+    ],
+    [
+      "descriptor_only",
+      "centroid",
+      1
+    ],
+    [
+      "descriptor_only",
+      "centroid",
+      2
+    ],
+    [
+      "descriptor_only",
+      "bounding_box",
+      0
+    ],
+    [
+      "descriptor_only",
+      "bounding_box",
+      1
+    ],
+    [
+      "descriptor_only",
+      "bounding_box",
+      2
+    ],
+    [
+      "descriptor_only",
+      "full_polygon",
+      0
+    ],
+    [
+      "descriptor_only",
+      "full_polygon",
+      1
+    ],
+    [
+      "descriptor_only",
+      "full_polygon",
+      2
+    ],
+    [
+      "end_to_end",
+      "centroid",
+      0
+    ],
+    [
+      "end_to_end",
+      "centroid",
+      1
+    ],
+    [
+      "end_to_end",
+      "centroid",
+      2
+    ],
+    [
+      "end_to_end",
+      "bounding_box",
+      0
+    ],
+    [
+      "end_to_end",
+      "bounding_box",
+      1
+    ],
+    [
+      "end_to_end",
+      "bounding_box",
+      2
+    ],
+    [
+      "end_to_end",
+      "full_polygon",
+      0
+    ],
+    [
+      "end_to_end",
+      "full_polygon",
+      1
+    ],
+    [
+      "end_to_end",
+      "full_polygon",
+      2
+    ]
+  ],
+  "unique_training_jobs": [
+    "descriptor_only__bounding_box__seed0",
+    "descriptor_only__bounding_box__seed1",
+    "descriptor_only__bounding_box__seed2",
+    "descriptor_only__centroid__seed0",
+    "descriptor_only__centroid__seed1",
+    "descriptor_only__centroid__seed2",
+    "end_to_end__bounding_box__seed0",
+    "end_to_end__bounding_box__seed1",
+    "end_to_end__bounding_box__seed2",
+    "end_to_end__centroid__seed0",
+    "end_to_end__centroid__seed1",
+    "end_to_end__centroid__seed2",
+    "shared_full_polygon__full_polygon__seed0",
+    "shared_full_polygon__full_polygon__seed1",
+    "shared_full_polygon__full_polygon__seed2"
+  ],
+  "shared_full_note": "Full Polygon inputs are identical in both scopes with GAT disabled, hence one trained run per seed is reused by byte-identical checkpoint SHA; 18 logical conditions,15 unique runs.",
+  "feature_center": "original arithmetic vertex mean, including source closing vertex; shared same point across all representations, even when it is not the AABB center",
+  "road_policy": "verified open line: never close. Centroid/BBox unavailable line boundary/inside masked; near/along fall back to available point. TrafficRoad source areas remain polygons. Actual dataset max_roads=0; counts audited.",
+  "groups": {
+    "irregular": "any valid polygon area/minimum_rotated_rectangle_area < .85; otherwise regular",
+    "elongated": "any valid polygon minimum_rotated_rectangle aspect >=3; otherwise compact",
+    "large": "max valid surface polygon area >1000m^2; otherwise small",
+    "point_like": "nonroad surface area <=25m^2",
+    "road_like": "verified open polyline OR TrafficRoad surface, original type preserved",
+    "area_like": "nonroad surface >25m^2",
+    "landmark_count": "distinct canonical referenced names; ambiguous same-name fragments not counted as distinct names",
+    "relations": "only explicitly parsed, uniquely bound named anchor groups; >=2 for multiple; not GT relational annotations",
+    "overlapping": "type flags may overlap in multi-landmark queries; report N separately; invalid shapes marked unknown, never dropped from overall metrics"
+  },
+  "navigation": {
+    "splits": {
+      "val_seen": 2470,
+      "val_unseen": 2697
+    },
+    "grid": 28,
+    "stop": 0.3,
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "arrival_guard_m": 0.001,
+    "head_checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt",
+    "head_sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd",
+    "execution": "guarded-blend",
+    "seed_order": [
+      0,
+      1,
+      2
+    ],
+    "smoke_indices": "same existing evenly_spaced_indices(...,128)",
+    "observations": "geometry/pose-only policy; no RGB branch. Original rollout and controller reused. Pose-only rendering optimization requires exact Seen128 trajectory parity first."
+  },
+  "bootstrap": {
+    "draws": 10000,
+    "seed": 20261017,
+    "cluster": "map_name; retain all queries/episodes per sampled map",
+    "seed_summary": "mean and sample std(ddof=1); seed-averaged per-sample effects, fixed seed set; seeds are not extra independent maps"
+  },
+  "no_test_access": true,
+  "pre_result_addendum": "Before any new evaluation: add frozen prior/rules/node path-to-centroid interventions to separate Polygon bypass dependence; no tuning or architecture change."
+}
