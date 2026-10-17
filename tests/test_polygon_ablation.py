@@ -65,9 +65,13 @@ def item_for(poly):
 
 
 @pytest.mark.parametrize('rep',['centroid','bounding_box'])
-def test_end_to_end_has_no_hidden_shape_information(rep):
+@pytest.mark.parametrize('polygon_b',[
+    [[-2,0],[0,-2],[2,0],[0,2]],
+    [[-2,-2],[0,-2],[2,0],[2,2],[0,2],[-2,0]],
+])
+def test_end_to_end_has_no_hidden_shape_information(rep,polygon_b):
     a,g,b=item_for([[-2,-2],[2,-2],[2,2],[-2,2]])
-    c,h,_=item_for([[-2,0],[0,-2],[2,0],[0,2]])
+    c,h,_=item_for(polygon_b)
     first=geometry_view(a,g,b,representation=rep,scope='end_to_end')
     second=geometry_view(c,h,b,representation=rep,scope='end_to_end')
     for key in ('nodes','prior','prior_buildings','rules','relation_fields','pair_geometry','adjacency','edges'):

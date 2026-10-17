@@ -1,7 +1,7 @@
 # PolyBelief Polygon Geometry 独立贡献验证
 
 状态：部分完成；未完成项目保留Pending。[信息通路审计](POLYGON_FEATURE_AUDIT.md)与frozen_plan.json先于实验结果产生。
-独立训练已完成8/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
+独立训练已完成12/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
 全部模型参数727696，其中优化参数453517；保留相同未激活GAT/视觉分支的结构，但不执行GAT消息传递或RGB推理。matched_training_checks.json逐Seed核验初始化、容量及每Epoch数据顺序。
