@@ -51,19 +51,38 @@ def _sync():
     listing=scratch/'files.txt';listing.write_text(''.join(str(p.relative_to(WORKSPACE))+'\n' for p in sorted(files)))
     archive=scratch/'polybelief-polygon-ablation.tar.zst'
     subprocess.run(['tar','--zstd','-cf',str(archive),'-C',str(WORKSPACE),'-T',str(listing)],check=True)
-    sums=scratch/'POLYGON_SHA256SUMS';sums.write_text(''.join(f'{file_sha256(p)}  {p.name}\n' for p in (archive,mp)))
+    archives=[archive]
+    # GitHub release assets have a per-file size limit. Chunk the byte stream
+    # without changing or omitting any experiment file when needed.
+    if archive.stat().st_size>1500*1024**2:
+        archives=[]
+        with archive.open('rb') as source:
+            part=0
+            while source.tell()<archive.stat().st_size:
+                target=scratch/f'{archive.name}.part{part:03d}'
+                with target.open('wb') as dest:
+                    remaining=1500*1024**2
+                    while remaining:
+                        block=source.read(min(8*1024**2,remaining))
+                        if not block:break
+                        dest.write(block);remaining-=len(block)
+                archives.append(target);part+=1
+    assets=[*archives,mp]
+    sums=scratch/'POLYGON_SHA256SUMS';sums.write_text(''.join(f'{file_sha256(p)}  {p.name}\n' for p in assets));assets.append(sums)
     probe=subprocess.run(['gh','release','view',tag,'--repo',REPO],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
     if probe.returncode==0:
         raise ValueError('Release tag already exists but no verified local receipt; preserve remote asset, investigate before overwrite')
     notes=scratch/'notes.md';notes.write_text('Completed pre-registered Polygon geometry contribution experiments. Frozen interventions and independent three-seed retraining, Descriptor Only and End-to-End, are reported separately. Positive and negative results preserved. See the committed POLYGON_ABLATION_REPORT.md. No original model or prior result overwritten. Restore from Workspace after checking SHA256SUMS and per-file manifest.\n')
-    subprocess.run(['gh','release','create',tag,str(archive),str(mp),str(sums),'--repo',REPO,'--target',source_commit,'--title','PolyBelief Polygon contribution experiment assets','--notes-file',str(notes),'--prerelease'],check=True)
+    notes.write_text(notes.read_text()+'If the archive is chunked, concatenate .part000, .part001, ... in lexical order to restore polybelief-polygon-ablation.tar.zst before extraction.\n')
+    subprocess.run(['gh','release','create',tag,*map(str,assets),'--repo',REPO,'--target',source_commit,'--title','PolyBelief Polygon contribution experiment assets','--notes-file',str(notes),'--prerelease'],check=True)
     remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
-    for f in (archive,mp,sums):
+    for f in assets:
         a=next(a for a in remote['assets'] if a['name']==f.name)
         if a['digest']!='sha256:'+file_sha256(f) or a['size']!=f.stat().st_size:
             raise ValueError('Remote digest/size differs: '+f.name)
     atomic_json(dict(status='Done',verified=True,source_commit=source_commit,branch=branch,release_url=remote['html_url'],
                      archive_bytes=archive.stat().st_size,archive_sha256=file_sha256(archive),files=len(files),
+                     assets=[dict(name=p.name,bytes=p.stat().st_size,sha256=file_sha256(p)) for p in assets],
                      remote_server_digest_matches=True,time=time.time()),OUT/'remote_sync.json')
     (OUT/'POLYGON_ASSET_MANIFEST.json').write_bytes(mp.read_bytes())
     (OUT/'POLYGON_SHA256SUMS').write_bytes(sums.read_bytes())

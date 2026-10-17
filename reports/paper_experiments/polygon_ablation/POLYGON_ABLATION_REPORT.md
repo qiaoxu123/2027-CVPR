@@ -1,6 +1,7 @@
 # PolyBelief Polygon Geometry 独立贡献验证
 
 状态：部分完成；未完成项目保留Pending。[信息通路审计](POLYGON_FEATURE_AUDIT.md)与frozen_plan.json先于实验结果产生。
+独立训练已完成1/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
 Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；共18个逻辑条件、15次独立训练。seed0预先指定优先闭环，并保留seed1/2所有结果。
@@ -34,6 +35,40 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 |val_unseen|nodes_to_centroid|0.0|[-0.9099181073703366, 0.6655574043261231]|
 
 
+## 冻结权重完整静态结果
+
+这些是当前权重的输入干预，不能代替公平重训结论。完整逐样本预测与配对变化保留。
+
+|scope|representation|split|samples|R@1|R@4|R@8|NE|
+|---|---|---|---|---|---|---|---|
+|descriptor_only|bounding_box|val_seen|2426|0.46949711459192084|0.6723000824402309|0.7765869744435284|29.488187087314344|
+|descriptor_only|bounding_box|val_unseen|2679|0.22172452407614782|0.3803658081373647|0.4916013437849944|51.38930784120805|
+|descriptor_only|centroid|val_seen|2426|0.4167353668590272|0.6112943116240726|0.7333058532563891|33.552677345909764|
+|descriptor_only|centroid|val_unseen|2679|0.1709593131765584|0.3176558417319896|0.4135871593878313|58.257374373132855|
+|descriptor_only|full_polygon|val_seen|2426|0.4703215169002473|0.6859027205276175|0.7802967848309975|29.35631595771861|
+|descriptor_only|full_polygon|val_unseen|2679|0.22209779768570362|0.389324374766704|0.49981336319522207|51.9385775548391|
+|descriptor_only|no_boundary|val_seen|2426|0.4134377576257213|0.6170651277823578|0.7308326463314098|33.34613400447103|
+|descriptor_only|no_boundary|val_unseen|2679|0.1683463979096678|0.3124300111982083|0.4158268010451661|58.55248492880516|
+|descriptor_only|no_extent|val_seen|2426|0.4727947238252267|0.6838417147568013|0.7819455894476505|29.396742128234997|
+|descriptor_only|no_extent|val_unseen|2679|0.2284434490481523|0.3915640164240388|0.5016797312430011|51.769615369129646|
+|descriptor_only|no_inside|val_seen|2426|0.47444352844187965|0.6879637262984336|0.782769991755977|29.060094899120944|
+|descriptor_only|no_inside|val_unseen|2679|0.22620380739081747|0.39455020530048523|0.5054124673385592|51.32555580415046|
+|descriptor_only|no_inside_information|val_seen|2426|0.4765045342126958|0.685078318219291|0.7786479802143446|29.108529021375354|
+|descriptor_only|no_inside_information|val_unseen|2679|0.23254945875326613|0.3975363941769317|0.5162374020156775|51.687409684390175|
+|descriptor_only|nodes_to_centroid|val_seen|2426|0.4600164880461665|0.6723000824402309|0.7790601813685079|29.631226209943588|
+|descriptor_only|nodes_to_centroid|val_unseen|2679|0.22209779768570362|0.3814856289660321|0.49832026875699886|53.07160165208451|
+|descriptor_only|prior_to_centroid|val_seen|2426|0.4505358615004122|0.6817807089859852|0.7802967848309975|29.62495038200781|
+|descriptor_only|prior_to_centroid|val_unseen|2679|0.22508398656215006|0.4001493094438223|0.5218365061590146|51.75259106011923|
+|descriptor_only|rules_to_centroid|val_seen|2426|0.4711459192085738|0.6892003297609234|0.7823577906018137|29.223253046370495|
+|descriptor_only|rules_to_centroid|val_unseen|2679|0.22471071295259426|0.3896976483762598|0.5020530048525569|51.61414480231599|
+|end_to_end|bounding_box|val_seen|2426|0.45383347073371805|0.6694146743610883|0.7753503709810388|29.70868491266546|
+|end_to_end|bounding_box|val_unseen|2679|0.22284434490481522|0.3926838372527062|0.49570735349010825|50.722553726584664|
+|end_to_end|centroid|val_seen|2426|0.42126957955482275|0.6174773289365211|0.72959604286892|32.7037455541038|
+|end_to_end|centroid|val_unseen|2679|0.18066442702500934|0.3340798805524449|0.4419559537140724|57.664070723371836|
+|end_to_end|full_polygon|val_seen|2426|0.4703215169002473|0.6859027205276175|0.7802967848309975|29.35631595771861|
+|end_to_end|full_polygon|val_unseen|2679|0.22209779768570362|0.389324374766704|0.49981336319522207|51.9385775548391|
+
+
 ## 三Seed均值及样本标准差
 
 比例列均为0–1，NE为米；delta_pp及map_ci95_pp明确使用百分点。每seed原始结果分别保留在两个results.csv中，不选择最佳seed。
@@ -43,14 +78,26 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 
 ## End-to-End主要配对效应（seed平均）
 
-|endpoint|split|control|metric|delta_pp|map_ci95_pp|maps|
-|---|---|---|---|---|---|---|
+|endpoint|split|control|metric|delta_pp|episode_ci95_pp|map_ci95_pp|map_equal_delta_pp|map_equal_ci95_pp|maps|
+|---|---|---|---|---|---|---|---|---|---|
+
+
+所有Seed、指标及对照的帮助/损害/不变数、逐地图效应和Leave-One-Map-Out结果见paired_summary.csv和paired_statistics.json。下表给出每个Seed的原始结果：
+
+|endpoint|scope|representation|seed|split|samples|R@1|R@4|R@8|SR|SPL|OSR|NE|False_Stop_Rate|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
 ## 几何复杂度与范围限制
 
 geometry_subgroup_results.csv按预先固定的旋转最小包围矩形填充率0.85、长宽比3、最大地标面积1000m²、点状面积25m²及源类型/名称数分组；每组保留R@1/SR、NE和N，不剔除Polygon退化组。
 多参照物的类型旗标可重叠，不能把组N相加当全样本数。关系组只使用明确解析且唯一绑定的公开参照，非GT目标–参照关系；不能强称所有复杂关系均得到验证。
 完整分组、每图实值、paired_statistics.json中的help/hurt/unchanged、两种地图权重及Leave-One-Map-Out敏感性均随结果保存。百分位区间未作多重比较校正，分组分析属于探索性。
+
+End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增加独立地图数；N为每Seed样本数）：
+
+|endpoint|split|group|samples_per_seed|independent_maps|centroid_R@1_mean|bounding_box_R@1_mean|full_polygon_R@1_mean|centroid_SR_mean|bounding_box_SR_mean|full_polygon_SR_mean|full_minus_centroid_pp|full_minus_bounding_box_pp|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
 
 ## 控制器与可复现性
 
@@ -59,5 +106,6 @@ geometry_subgroup_results.csv按预先固定的旋转最小包围矩形填充率
 本实验为几何/语言定位和控制器迁移，不启用RGB/历史，不把它与384或独立视觉残差的提升相加。
 public_static_record只使用公开地标绑定/名称/轮廓，目标和未来轨迹仅在forward/rollout之后评分；渲染优化须先通过128条完整轨迹与原观测builder逐点一致性。
 配置、源/权重SHA、Query清单、Train-Dev分组、初始化及每epoch数据顺序hash、训练断点、逐Query/episode预测和日志均原地保留。复现命令：`python -m scripts.run_polygon_ablation --resume`；统计重建：`python -m scripts.polygon_ablation_statistics`。
+implementation_provenance.json及source_snapshot_manifest.json记录实现Commit与代码SHA；frozen_plan.json中的source_commit是实验开始前的基线Commit。旧架构args保留来源字段（如原continue_from/seed），实际独立随机初始化、Seed和预算以新config.json及顶层Checkpoint元数据为准，不执行旧continue_from。navigation_data_audit.json记录processed_citynav目录与revised静态记录的Query ID集合一致性及全部来源SHA，导航started.json另记录实际策略代码SHA。
 
 若主要End-to-End Unseen效应未获地图级正下界支持，论文核心创新应强调“使用完整公开几何的可解释接口/表示设计”，而不能声称已证明Polygon跨地图优于点/框。若仅Descriptor Only有效，也只能声称候选–地标描述符的条件增量价值。

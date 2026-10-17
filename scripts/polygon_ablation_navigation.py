@@ -4,6 +4,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import time
 import sys
+from functools import lru_cache
 import numpy as np
 import torch
 
@@ -68,7 +69,17 @@ class PoseOnlyBuilder:
     def build_from_poses(self,episode,poses):return SimpleNamespace(pose=np.asarray(poses[-1]).copy())
 
 
+@lru_cache(maxsize=1)
+def audited_navigation_inputs():
+    audit=json.loads((OUT/'navigation_data_audit.json').read_text())
+    for row in audit['files']:
+        assert file_sha256(row['path'])==row['sha256'], 'Navigation input changed: '+row['path']
+    assert all(r['all_public_queries_match'] for r in audit['splits'].values())
+    return audit
+
+
 def resources(plan,split):
+    audit=audited_navigation_inputs()
     source=PROJECT/'Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source'
     sys.path.insert(0,str(source))
     from sbfnav.config import load_config, apply_overrides
@@ -78,6 +89,7 @@ def resources(plan,split):
     from sbfnav.mapdata import GROUND_LEVEL
     data=WORKSPACE/'DATA/sbfnav-data'
     cfg=apply_overrides(load_config(source/'configs/sbfnav/main.yaml'),['data.root='+str(data)])
+    assert cfg['data']['version']==audit['navigation_loader_version']
     dataset=CityNavDataset(data,split,version=cfg['data']['version'])
     catalog=CityReferCatalog(data/'cityrefer')
     builder=PlanningStateBuilder(data,PublicCatalog(catalog),canvas_size=cfg['model']['canvas_size'],field_size=28,
@@ -100,6 +112,8 @@ def navigate(plan,encoder,job,scope,representation,checkpoint=None,split='val_se
     manifest=[dict(index=int(i),episode_id=list(data[i].episode_id),map_name=data[i].map_name) for i in indices]
     signature=dict(scope=scope,representation=representation,checkpoint_sha256=file_sha256(checkpoint) if checkpoint else plan['input_sha256'][str(__import__('scripts.polygon_ablation_plan',fromlist=['BASE']).BASE)],
                    head_sha256=plan['navigation']['head_sha256'],plan_sha256=file_sha256(OUT/'frozen_plan.json'),
+                   navigation_data_audit_sha256=file_sha256(OUT/'navigation_data_audit.json'),
+                   policy_source_sha256=file_sha256(__file__),
                    split=split,smoke=smoke,original_builder=original_builder)
     if (folder/'started.json').exists():
         assert json.loads((folder/'started.json').read_text())==signature

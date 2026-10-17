@@ -1,0 +1,87 @@
+{
+  "train_seen": {
+    "queries": 21166,
+    "unique_queries": 21166,
+    "independent_maps": 24,
+    "map_counts": {
+      "birmingham_block_1": 2515,
+      "birmingham_block_3": 1515,
+      "birmingham_block_4": 850,
+      "birmingham_block_7": 344,
+      "birmingham_block_9": 898,
+      "birmingham_block_10": 276,
+      "birmingham_block_11": 17,
+      "birmingham_block_12": 729,
+      "birmingham_block_13": 30,
+      "cambridge_block_4": 293,
+      "cambridge_block_6": 278,
+      "cambridge_block_7": 1339,
+      "cambridge_block_9": 1519,
+      "cambridge_block_12": 1390,
+      "cambridge_block_13": 1759,
+      "cambridge_block_17": 368,
+      "cambridge_block_18": 508,
+      "cambridge_block_19": 378,
+      "cambridge_block_20": 1861,
+      "cambridge_block_21": 1591,
+      "cambridge_block_23": 276,
+      "cambridge_block_25": 153,
+      "cambridge_block_28": 1422,
+      "cambridge_block_33": 857
+    },
+    "manifest_sha256": "bace9c7b362bd91834a5b78f3a5b7c3c9ce2fcaf8a0e11aa0804d6b1c9c19dca"
+  },
+  "val_seen": {
+    "queries": 2426,
+    "unique_queries": 2426,
+    "independent_maps": 23,
+    "map_counts": {
+      "birmingham_block_1": 302,
+      "birmingham_block_3": 160,
+      "birmingham_block_4": 96,
+      "birmingham_block_7": 38,
+      "birmingham_block_9": 103,
+      "birmingham_block_10": 37,
+      "birmingham_block_11": 2,
+      "birmingham_block_12": 74,
+      "cambridge_block_4": 31,
+      "cambridge_block_6": 33,
+      "cambridge_block_7": 160,
+      "cambridge_block_9": 177,
+      "cambridge_block_12": 157,
+      "cambridge_block_13": 190,
+      "cambridge_block_17": 44,
+      "cambridge_block_18": 60,
+      "cambridge_block_19": 45,
+      "cambridge_block_20": 207,
+      "cambridge_block_21": 187,
+      "cambridge_block_23": 32,
+      "cambridge_block_25": 23,
+      "cambridge_block_28": 169,
+      "cambridge_block_33": 99
+    },
+    "manifest_sha256": "8afcc9d38bfee6e9c909e4e655bb9f8d3c244489501f6ef1fa6e5ca74a91f1a3"
+  },
+  "val_unseen": {
+    "queries": 2679,
+    "unique_queries": 2679,
+    "independent_maps": 4,
+    "map_counts": {
+      "birmingham_block_5": 910,
+      "cambridge_block_10": 911,
+      "cambridge_block_2": 291,
+      "cambridge_block_3": 567
+    },
+    "manifest_sha256": "6a67c423637c35f9058dd87a43014f7c7d74ecf091838fd01d4698b44bf197cc"
+  },
+  "train_dev": {
+    "queries": {
+      "train_fit": 19032,
+      "train_dev": 2134
+    },
+    "train_fit_objects": 3543,
+    "train_dev_objects": 398,
+    "object_overlap": 0,
+    "selection": "Train-Dev R@1/20m, then lowest NE, earliest tied epoch; no Val-Seen/Unseen/Test selection"
+  }
+}

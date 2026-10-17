@@ -13,7 +13,7 @@ from graphnav.checkpointing import atomic_json,file_sha256
 def write_csv(name,rows):
     keys=list(dict.fromkeys(k for r in rows for k in r)) or ['status','phase','scope','representation','seed','split','samples']
     with (OUT/name).open('w',newline='') as f:
-        w=csv.DictWriter(f,fieldnames=keys);w.writeheader();w.writerows(rows)
+        w=csv.DictWriter(f,fieldnames=keys,lineterminator='\n');w.writeheader();w.writerows(rows)
 
 
 def table(rows,cols):
@@ -74,6 +74,11 @@ def paired_rows(a,b,endpoint,metrics):
 
 def summarize(plan=None,partial=False):
     plan=plan or init();local=[];navigation=[];data={};groups=[];maprows=[];stat={}
+    training_done=list((OUT/'training').glob('*/complete.json'))
+    execution=dict(status='Running' if partial else 'Done',completed_training_runs=len(training_done),required_training_runs=15,
+                   trained_static_complete=(OUT/'all_static_complete.json').exists(),
+                   active_progress=json.loads((OUT/'progress.json').read_text()) if (OUT/'progress.json').exists() else {})
+    atomic_json(execution,OUT/'execution_status.json')
     episode_queries={}
     # Only completed metrics are eligible. Raw partial files are preserved but
     # never summarized as a complete split.
@@ -108,6 +113,12 @@ def summarize(plan=None,partial=False):
                         data[target]=data[source]
                         original=next(r for r in rows if (r['phase'],r['scope'],r['representation'],r['seed'],r['split'])==source[:5])
                         rows.append(dict(original,scope='end_to_end',alias_of_scope='descriptor_only; identical Full Polygon inputs and checkpoint SHA'))
+    if not partial:
+        expected={(phase,scope,rep,seed,split,endpoint)
+                  for phase,conditions in [('frozen',[(s,r,None) for s,r in FROZEN]),('retrained',TRAINED)]
+                  for scope,rep,seed in conditions for split in ('val_seen','val_unseen')
+                  for endpoint in ('localization','navigation')}
+        assert expected <= data.keys(), f'Missing completed conditions: {expected-data.keys()}'
     for endpoint,rows in [('localization',local),('navigation',navigation)]:
         metrics=('R@1','R@4','R@8','NE') if endpoint=='localization' else ('SR','SPL','OSR','NE')
         for r in list(rows):
@@ -179,7 +190,29 @@ def summarize(plan=None,partial=False):
     write_csv('localization_results.csv',local);write_csv('navigation_results.csv',navigation)
     write_csv('polygon_ablation_results.csv',[dict(r,endpoint='localization') for r in local]+[dict(r,endpoint='navigation') for r in navigation])
     write_csv('geometry_subgroup_results.csv',groups);write_csv('per_map_results.csv',maprows);write_csv('seed_summary.csv',summaries)
+    subgroup_summary=[]
+    for key in sorted({(r['endpoint'],r['split'],r['group']) for r in groups if r['phase']=='retrained' and r['scope']=='end_to_end'}):
+        endpoint,split,group=key;metric='R@1' if endpoint=='localization' else 'SR'
+        row=dict(endpoint=endpoint,split=split,group=group)
+        for rep in ('centroid','bounding_box','full_polygon'):
+            values=[r for r in groups if (r['phase'],r['scope'],r['representation'],r['endpoint'],r['split'],r['group'])==('retrained','end_to_end',rep,*key)]
+            if len(values)==3:
+                assert len({r['samples'] for r in values})==1
+                row['samples_per_seed']=values[0]['samples'];row['independent_maps']=values[0]['independent_maps']
+                row[f'{rep}_{metric}_mean']=float(np.mean([r[metric] for r in values])) if values[0]['samples'] else None
+        for rep in ('centroid','bounding_box'):
+            f=row.get(f'full_polygon_{metric}_mean');b=row.get(f'{rep}_{metric}_mean')
+            row[f'full_minus_{rep}_pp']=100*(f-b) if f is not None and b is not None else None
+        subgroup_summary.append(row)
+    write_csv('geometry_subgroup_seed_summary.csv',subgroup_summary)
     atomic_json(dict(protocol=plan['bootstrap'],comparisons=stat),OUT/'paired_statistics.json')
+    paired_summary=[]
+    for comparison,result in stat.items():
+        for metric,value in result['metrics'].items():
+            lomo=[x['episode_weighted'][metric] for x in result['leave_one_map_out']]
+            paired_summary.append(dict(comparison=comparison,metric=metric,samples=result['samples'],independent_maps=result['independent_maps'],
+                                       **value,lomo_episode_weighted_min=min(lomo) if lomo else None,lomo_episode_weighted_max=max(lomo) if lomo else None))
+    write_csv('paired_summary.csv',paired_summary)
     logs=defaultdict(list)
     if (OUT/'events.jsonl').exists():
         for line in (OUT/'events.jsonl').read_text().splitlines():
@@ -196,7 +229,10 @@ def summarize(plan=None,partial=False):
                 if label in stat:
                     for k in metrics:
                         v=stat[label]['metrics'][k];verdict.append(dict(endpoint=endpoint,split=split,control=other,metric=k,
-                            delta_pp=100*v['delta'],map_ci95_pp=[100*x for x in v['map_cluster_episode_weighted_ci95']],maps=stat[label]['independent_maps']))
+                            delta_pp=100*v['delta'],episode_ci95_pp=[100*x for x in v['episode_ci95']],
+                            map_ci95_pp=[100*x for x in v['map_cluster_episode_weighted_ci95']],
+                            map_equal_delta_pp=100*v['map_equal_delta'],map_equal_ci95_pp=[100*x for x in v['map_cluster_map_equal_ci95']],
+                            maps=stat[label]['independent_maps']))
     audit='[信息通路审计](POLYGON_FEATURE_AUDIT.md)'
     answers=[]
     for endpoint,metric in [('localization','R@1'),('navigation','SR'),('navigation','SPL')]:
@@ -216,6 +252,7 @@ def summarize(plan=None,partial=False):
     report=f'''# PolyBelief Polygon Geometry 独立贡献验证
 
 状态：{'部分完成；未完成项目保留Pending' if partial else '所有预注册静态及导航条件已完成'}。{audit}与frozen_plan.json先于实验结果产生。
+独立训练已完成{len(training_done)}/15；当前结果行数：静态{len(local)}、导航{len(navigation)}，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
 Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；共18个逻辑条件、15次独立训练。seed0预先指定优先闭环，并保留seed1/2所有结果。
@@ -233,6 +270,12 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 
 '''+table(dependence,['split','intervention','delta_R1_pp','map_ci95_pp'])+'''
 
+## 冻结权重完整静态结果
+
+这些是当前权重的输入干预，不能代替公平重训结论。完整逐样本预测与配对变化保留。
+
+'''+table([r for r in local if r['phase']=='frozen'],['scope','representation','split','samples','R@1','R@4','R@8','NE'])+'''
+
 ## 三Seed均值及样本标准差
 
 比例列均为0–1，NE为米；delta_pp及map_ci95_pp明确使用百分点。每seed原始结果分别保留在两个results.csv中，不选择最佳seed。
@@ -240,12 +283,20 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 '''+table(summaries,['endpoint','scope','representation','split','seeds','samples_per_seed','R@1_mean','R@1_std','R@4_mean','R@4_std','R@8_mean','R@8_std','SR_mean','SR_std','SPL_mean','SPL_std','NE_mean','NE_std'])+'''
 ## End-to-End主要配对效应（seed平均）
 
-'''+table(verdict,['endpoint','split','control','metric','delta_pp','map_ci95_pp','maps'])+'''
+'''+table(verdict,['endpoint','split','control','metric','delta_pp','episode_ci95_pp','map_ci95_pp','map_equal_delta_pp','map_equal_ci95_pp','maps'])+'''
+
+所有Seed、指标及对照的帮助/损害/不变数、逐地图效应和Leave-One-Map-Out结果见paired_summary.csv和paired_statistics.json。下表给出每个Seed的原始结果：
+
+'''+table([dict(r,endpoint=e) for e,rs in [('localization',local),('navigation',navigation)] for r in rs if r['phase']=='retrained'],['endpoint','scope','representation','seed','split','samples','R@1','R@4','R@8','SR','SPL','OSR','NE','False_Stop_Rate'])+'''
 ## 几何复杂度与范围限制
 
 geometry_subgroup_results.csv按预先固定的旋转最小包围矩形填充率0.85、长宽比3、最大地标面积1000m²、点状面积25m²及源类型/名称数分组；每组保留R@1/SR、NE和N，不剔除Polygon退化组。
 多参照物的类型旗标可重叠，不能把组N相加当全样本数。关系组只使用明确解析且唯一绑定的公开参照，非GT目标–参照关系；不能强称所有复杂关系均得到验证。
 完整分组、每图实值、paired_statistics.json中的help/hurt/unchanged、两种地图权重及Leave-One-Map-Out敏感性均随结果保存。百分位区间未作多重比较校正，分组分析属于探索性。
+
+End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增加独立地图数；N为每Seed样本数）：
+
+'''+table(subgroup_summary,['endpoint','split','group','samples_per_seed','independent_maps','centroid_R@1_mean','bounding_box_R@1_mean','full_polygon_R@1_mean','centroid_SR_mean','bounding_box_SR_mean','full_polygon_SR_mean','full_minus_centroid_pp','full_minus_bounding_box_pp'])+'''
 
 ## 控制器与可复现性
 
@@ -254,6 +305,7 @@ geometry_subgroup_results.csv按预先固定的旋转最小包围矩形填充率
 本实验为几何/语言定位和控制器迁移，不启用RGB/历史，不把它与384或独立视觉残差的提升相加。
 public_static_record只使用公开地标绑定/名称/轮廓，目标和未来轨迹仅在forward/rollout之后评分；渲染优化须先通过128条完整轨迹与原观测builder逐点一致性。
 配置、源/权重SHA、Query清单、Train-Dev分组、初始化及每epoch数据顺序hash、训练断点、逐Query/episode预测和日志均原地保留。复现命令：`python -m scripts.run_polygon_ablation --resume`；统计重建：`python -m scripts.polygon_ablation_statistics`。
+implementation_provenance.json及source_snapshot_manifest.json记录实现Commit与代码SHA；frozen_plan.json中的source_commit是实验开始前的基线Commit。旧架构args保留来源字段（如原continue_from/seed），实际独立随机初始化、Seed和预算以新config.json及顶层Checkpoint元数据为准，不执行旧continue_from。navigation_data_audit.json记录processed_citynav目录与revised静态记录的Query ID集合一致性及全部来源SHA，导航started.json另记录实际策略代码SHA。
 
 若主要End-to-End Unseen效应未获地图级正下界支持，论文核心创新应强调“使用完整公开几何的可解释接口/表示设计”，而不能声称已证明Polygon跨地图优于点/框。若仅Descriptor Only有效，也只能声称候选–地标描述符的条件增量价值。
 '''
