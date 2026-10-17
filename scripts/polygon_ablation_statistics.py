@@ -234,6 +234,14 @@ def summarize(plan=None,partial=False):
             row[f'full_minus_{rep}_pp']=100*(f-b) if f is not None and b is not None else None
         subgroup_summary.append(row)
     write_csv('geometry_subgroup_seed_summary.csv',subgroup_summary)
+    strata={r['group']:r for r in subgroup_summary if r['endpoint']=='localization' and r['split']=='val_unseen'}
+    subgroup_interpretation=[]
+    key='full_minus_bounding_box_pp'
+    if all(strata.get(g,{}).get(key) is not None for g in ('elongated','compact','irregular','regular','large','small','multiple_landmark_names','single_landmark_name')):
+        for a,b in [('elongated','compact'),('irregular','regular'),('large','small'),('multiple_landmark_names','single_landmark_name')]:
+            subgroup_interpretation.append(f"- Unseen静态Full−Box R@1：{a} {strata[a][key]:+.4f}pp（N={strata[a]['samples_per_seed']}），{b} {strata[b][key]:+.4f}pp（N={strata[b]['samples_per_seed']}）。")
+        if strata['elongated'][key]<=strata['compact'][key] and strata['irregular'][key]<=strata['regular'][key]:
+            subgroup_interpretation.append('- 描述性模式不支持优势主要集中于狭长或非规则地标；此处未作组间交互的确证性检验，不能把组间点估计差当作因果证明。多地标正向模式可供后续研究，但复杂可靠关系仅19个Query，不据此确证复杂关系优势。')
     atomic_json(dict(protocol=plan['bootstrap'],comparisons=stat),OUT/'paired_statistics.json')
     paired_summary=[]
     for comparison,result in stat.items():
@@ -272,6 +280,9 @@ def summarize(plan=None,partial=False):
                 support='整地图重采样、Episode加权CI下界>0' if lower>0 and v['delta_pp']>0 else '未取得Episode加权地图级明确正收益支持'
                 answers.append(f"- {v['split']} {metric}，Full Polygon−{v['control']}：{v['delta_pp']:+.4f}pp，整地图95%CI [{lower:+.4f},{upper:+.4f}]pp；{support}。")
     if not answers:answers=['- 公平重训及完整闭环尚未全部完成，不能从冻结特征敏感性直接判断表示优劣。']
+    for v in verdict:
+        if v['endpoint']=='localization' and v['metric'] in ('R@4','R@8') and (v['map_ci95_pp'][0]>0 or v['map_ci95_pp'][1]<0):
+            answers.append(f"- 次要检索指标 {v['split']} Full−{v['control']} {v['metric']}：{v['delta_pp']:+.4f}pp，地图95%CI {v['map_ci95_pp']}pp。仅限该指标的点态区间，未作多重比较校正，不能替代Top-1/导航结论。")
     dependence=[]
     for split in ('val_seen','val_unseen'):
         for rep in ('no_boundary','no_inside','no_inside_information','no_extent','prior_to_centroid','rules_to_centroid','nodes_to_centroid'):
@@ -331,6 +342,8 @@ dataset_group_counts.json显示Seen/Unseen“多条明确绑定关系”仅6/19�
 End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增加独立地图数；N为每Seed样本数）：
 
 '''+table(subgroup_summary,['endpoint','split','group','samples_per_seed','independent_maps','centroid_R@1_mean','bounding_box_R@1_mean','full_polygon_R@1_mean','centroid_SR_mean','bounding_box_SR_mean','full_polygon_SR_mean','full_minus_centroid_pp','full_minus_bounding_box_pp'])+'''
+
+'''+ '\n'.join(subgroup_interpretation)+'''
 
 ## 控制器与可复现性
 
