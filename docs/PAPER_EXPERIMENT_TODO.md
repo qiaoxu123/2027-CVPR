@@ -66,3 +66,9 @@
 |同一冻结Trajectory/Stop全量闭环|Done|62/62逻辑结果行；54次实际全split评估，Full别名另计|
 |三Seed配对、地图簇CI及LOMO和分组分析|Done|paired_statistics.json; seed_summary.csv; geometry_subgroup_results.csv|
 |原始结果和权重远程备份|Done|frozen_remote_sync.json为冻结阶段已验证归档；最终remote_sync.json另记|
+
+<!-- GEOMBELIEF_REMAINING -->
+
+## GeomBelief independent contribution experiments
+
+Archived Polygon baseline 34d2974 retained. New complete metric rows: 13/84 (includes reused controls). See [map geometry report](../reports/paper_experiments/geombelief_remaining/MAP_GEOMETRY_ABLATION_REPORT.md) and reports/paper_experiments/geombelief_remaining/experiment_manifest.json for exact paths, SHA, missing experiments and paired statistics. P1 fair visual-input retraining remains Pending until explicitly completed; existing Real/Zero/Shuffle/No-belief results are reused.
