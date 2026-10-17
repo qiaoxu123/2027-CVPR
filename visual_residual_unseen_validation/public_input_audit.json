@@ -1,0 +1,28 @@
+{
+  "residual_forward": {
+    "forbidden_fields_found": [],
+    "source_sha256": "fd3e2c98933a38a55587a11fc2e530ce538e602daefb25b312675167ecb68793"
+  },
+  "stage1_forward": {
+    "forbidden_fields_found": [],
+    "source_sha256": "8a83f04356f74dfd851357f12eaefbb190a14bcdc40205d9cf0c98cdf3e47418"
+  },
+  "public_batch_filter": {
+    "forbidden_fields_found": [],
+    "source_sha256": "5616867c962d233bb33d2a184934cf74ec39c308eab1c463cb52ba5dc679592d"
+  },
+  "public_episode_fields": [
+    "map_name",
+    "instruction",
+    "start_pose",
+    "references",
+    "reference_names"
+  ],
+  "manual_path_audit": [
+    "Evaluator builds PublicEpisode(map_name, instruction, start_pose, reference polygons/names); policy does not receive the label-bearing dataset record.",
+    "Real target and human future trajectory enter score_trace only after rollout. The public packing target_xy=[0,0] scaffold is omitted by _batch_inputs.",
+    "Residual forward accepts only current/past ROI features, validity/quality, text, pose, public bounds, static logits/context and grid geometry.",
+    "Native observation builder supplies the actual current footprint. CandidateMemory accepts strictly increasing observed steps; unobserved pixels are not a negative/future gallery.",
+    "GT is used here only for post-hoc metrics/case descriptions, never supplied to the inference networks."
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+  "selected_stage": "C",
+  "all_stages_complete": true,
+  "completed_epochs": {
+    "A": 3,
+    "B": 3,
+    "C": 5
+  },
+  "visual_control": "real",
+  "history_control": "checkpoint",
+  "stop_threshold": 0.3,
+  "active_observation": false,
+  "selection": "Existing Calibrated checkpoint selected only by Train Dev; fixed four controls, no Unseen/Test selection",
+  "frozen": 1791621180.0963433,
+  "provenance": {
+    "commit": "62abf74c269ff273b35ac4f6afcef7788cca2705",
+    "working_diff_sha256": "9fa9a896a8154f5741b728cabca5fd34ac87d77fcbdd679fa8c1f900a237a539"
+  },
+  "validation_kind": "calibrated-residual-val-unseen-v1",
+  "calibrated_residual_checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/calibrated_residual/best.pt",
+  "calibrated_residual_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+  "allowed_visual_controls": [
+    "real",
+    "no-belief",
+    "zero",
+    "shuffle"
+  ],
+  "grid_size": 28,
+  "expected_episode_manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+  "input_sha256": {
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/processed_citynav/citynav_val_unseen.json": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/rental/20260922_1/Workspace/DATA/sbfnav-data/cityrefer/processed_descriptions.json": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b"
+  },
+  "bootstrap_replicates": 20000,
+  "bootstrap_seed": 20261017,
+  "training": false,
+  "seen_reused": {
+    "real": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_seen_real",
+    "no-belief": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_seen_no-belief",
+    "zero": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_seen_zero",
+    "shuffle": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_seen_shuffle"
+  }
+}

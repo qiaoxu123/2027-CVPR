@@ -1,0 +1,25 @@
+{
+  "declared_at": "2026-10-17T10:20:21.355903+08:00",
+  "primary_comparison": "Val-Unseen Real minus No-belief",
+  "primary_estimand": "Episode-weighted mean SR difference",
+  "acceptance": "Positive primary delta_SR and lower bound of whole-map paired cluster bootstrap 95% CI greater than zero",
+  "additional_required_estimand": "Equal-map mean difference, reported separately with its whole-map cluster interval",
+  "other_comparisons": [
+    "Real minus Zero",
+    "Real minus Shuffle"
+  ],
+  "effects": [
+    "SR",
+    "SPL"
+  ],
+  "resamples": 20000,
+  "episode_seed": 20261017,
+  "map_seed": 20261018,
+  "map_sampling": "Draw M of M maps uniformly with replacement; keep all episodes in each selected map, including repetitions",
+  "episode_weighting": "Ratio of sampled map effect sums to sampled map episode counts",
+  "equal_map_weighting": "Mean of sampled map means",
+  "interval": "Two-sided percentile [2.5%,97.5%], pointwise, no multiplicity adjustment",
+  "case_selection": "Within each SR improvement/degradation category: descending absolute NE change, prefer different maps, at most two cases per category per split",
+  "model_or_threshold_selection_on_unseen": false,
+  "analysis_source_sha256": "1fe0d61a490ad77d0afe4c1e8c3672b37d856b6409862c3c2f73a58fe91b324c"
+}

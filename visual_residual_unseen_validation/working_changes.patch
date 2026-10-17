@@ -1,0 +1,69 @@
+diff --git a/scripts/evaluate_closedloop.py b/scripts/evaluate_closedloop.py
+index 3a247a8..cb36237 100644
+--- a/scripts/evaluate_closedloop.py
++++ b/scripts/evaluate_closedloop.py
+@@ -35,7 +35,19 @@ def validate_stage1_frozen_evaluation(args):
+     epochs = frozen.get('completed_epochs', {})
+     if any(epochs.get(stage, 0) < minimum for stage, minimum in [('A', 3), ('B', 3), ('C', 5)]):
+         raise ValueError('Full Stage1 A/B/C training required before held-out evaluation')
+-    if (frozen.get('visual_control') != args.stage1_visual_control
++    residual=getattr(args,'stage1_residual_checkpoint',None)
++    residual_validation=bool(residual and args.split=='val_unseen')
++    if residual_validation:
++        if (frozen.get('validation_kind')!='calibrated-residual-val-unseen-v1'
++                or frozen.get('calibrated_residual_sha256')!=sha(residual)
++                or frozen.get('grid_size')!=28
++                or getattr(args,'stage1_grid_size',None) is not None
++                or getattr(args,'stage1_resolution_eval',False)
++                or args.max_episodes is not None
++                or set(frozen.get('allowed_visual_controls',[]))!={'real','no-belief','zero','shuffle'}):
++            raise ValueError('Residual Unseen validation requires fixed weights, 28 grid, full split and separately frozen controls')
++    visual_matches=(args.stage1_visual_control in frozen['allowed_visual_controls']) if residual_validation else (frozen.get('visual_control')==args.stage1_visual_control)
++    if (not visual_matches
+             or frozen.get('history_control') != args.stage1_history_control
+             or frozen.get('stop_threshold') != args.stop_threshold
+             or frozen.get('active_observation') is not False):
+@@ -119,8 +131,8 @@ def main():
+         validate_stage1_frozen_evaluation(args)
+     if (args.profile or args.stage1_diagnostic or args.stage1_resolution_eval or args.stage1_grid_size is not None) and args.model!='graphnav-v1':
+         raise ValueError('Stage1 diagnostic controls require --model graphnav-v1')
+-    if args.stage1_residual_checkpoint and (args.model!='graphnav-v1' or args.split!='val_seen'):
+-        raise ValueError('Calibrated residual selection requires Seen validation')
++    if args.stage1_residual_checkpoint and (args.model!='graphnav-v1' or args.split not in ('val_seen','val_unseen')):
++        raise ValueError('Calibrated residual supports Seen and pre-frozen full Unseen validation; no Test selection')
+     if args.profile and args.split=='test_unseen': raise ValueError('Profiling must use validation data')
+     if args.split=='test_unseen' and args.model!='graphnav-v1':
+         if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
+@@ -150,6 +162,8 @@ def main():
+     if output.exists() and not args.resume: raise ValueError('refusing to overwrite evaluation')
+     output.mkdir(parents=True,exist_ok=args.resume)
+     signature=dict(args={k:v for k,v in vars(args).items() if k!='resume' and v is not None},checkpoint_sha256=sha(args.checkpoint))
++    if args.stage1_residual_checkpoint and args.split=='val_unseen':
++        signature['calibrated_residual_sha256']=sha(args.stage1_residual_checkpoint)
+     if args.resume:
+         previous_signature=json.loads((output/'eval_started.json').read_text())
+         previous_signature['args']={k:v for k,v in previous_signature['args'].items() if v is not None}
+@@ -185,6 +199,12 @@ def main():
+                  'start_pose':record.start_pose.tolist()} for i,record in zip(indices,episodes)]
+     if args.resume and json.loads((output/'episodes.json').read_text())!=manifest:raise ValueError('Resume episode manifest differs')
+     (output/'episodes.json').write_text(json.dumps(manifest,indent=2))
++    if args.stage1_residual_checkpoint and args.split=='val_unseen':
++        declared=json.loads(Path(args.frozen_final_candidate).read_text())
++        if sha(output/'episodes.json')!=declared.get('expected_episode_manifest_sha256'):
++            raise ValueError('Residual Unseen episode list differs from the pre-frozen full split')
++        for path,expected in declared.get('input_sha256',{}).items():
++            if sha(path)!=expected:raise ValueError('Residual Unseen source data differs from the pre-frozen inputs')
+     state = config['state']
+     builder = PlanningStateBuilder(args.data_root, PublicCatalog(catalog),
+         canvas_size=config['model']['canvas_size'],field_size=config['model']['field_size'],
+@@ -250,6 +270,10 @@ def main():
+     if args.stage1_residual_checkpoint:
+         from graphnav.calibrated_residual_runtime import install_calibrated_residual
+         install_calibrated_residual(runtime,args.stage1_residual_checkpoint,args.checkpoint)
++        if args.split=='val_unseen':
++            if runtime.args.grid_size!=28:raise ValueError('Residual generalization requires the original 28 grid')
++            if any(p.requires_grad for module in (runtime.model,runtime.bert.model,runtime.native.model) for p in module.parameters()):
++                raise ValueError('All residual validation model parameters must remain frozen')
+     profiler=None
+     if args.model=='graphnav-v1':
+         runtime.stop_threshold=args.stop_threshold
