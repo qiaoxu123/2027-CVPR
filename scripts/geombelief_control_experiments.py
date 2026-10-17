@@ -1,5 +1,5 @@
 """Frozen complete C model control attribution; real current-pose RGB, resumable."""
-import json,os,sys,time,fcntl,traceback,subprocess
+import json,os,sys,time,fcntl,traceback,subprocess,argparse
 from pathlib import Path
 import numpy as np
 import torch
@@ -23,10 +23,13 @@ def events(poses,diagnostics,target,termination):
         final_predicted_goal_error_m=float(np.linalg.norm(np.asarray(diagnostics[-1]['selected_goal_xy'])-np.asarray(target)[:2])))
 
 def main():
-    plan=init();lock=(OUT/'control_run.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);torch.set_num_threads(1)
-    atomic_json(dict(pid=os.getpid(),started=time.time(),argv=sys.argv),OUT/'control_process.json')
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--arms',nargs='+',choices=ARMS,default=list(ARMS));args=parser.parse_args()
+    plan=init();locks=[];torch.set_num_threads(1)
+    for arm in sorted(set(args.arms)):
+        lock=(OUT/f'control_{arm}.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);locks.append(lock)
+    atomic_json(dict(pid=os.getpid(),started=time.time(),argv=sys.argv,arms=args.arms),OUT/f'control_process_{os.getpid()}.json')
     A3TrajectoryPolicy.predict_field=controlled_predict_field
-    runtime=GraphNavStage1Policy(plan['base_checkpoint'],OUT/'controller_inputs')
+    runtime=GraphNavStage1Policy(plan['base_checkpoint'],OUT/'controller_inputs'/str(os.getpid()))
     assert runtime.args.grid_size==28 and runtime.stop_threshold==.3
     for module in (runtime.model,runtime.bert.model,runtime.native.model):assert not any(p.requires_grad for p in module.parameters())
     for smoke in (True,False):
@@ -39,9 +42,9 @@ def main():
             # Correct unmodified control is archived, never silently rerun.
             atomic_json(dict(status='Done',source=str(baseline),checkpoint_sha256=file_sha256(plan['base_checkpoint']),
                 predictions_sha256=file_sha256(baseline/'predictions.jsonl')),OUT/f'formal_baseline_{split}.json')
-            builder=NativeObservationBuilder(base,WORKSPACE/'DATA/sbfnav-data/rgbd',OUT/'controller_observations'/split)
+            builder=NativeObservationBuilder(base,WORKSPACE/'DATA/sbfnav-data/rgbd',OUT/'controller_observations'/str(os.getpid())/split)
             indices=evenly_spaced_indices(len(data),128 if smoke else None)
-            for arm in ARMS:
+            for arm in args.arms:
                 folder=OUT/'controller'/arm/(split+('_smoke128' if smoke else ''));folder.mkdir(parents=True,exist_ok=True)
                 signature=dict(arm=arm,split=split,smoke=smoke,checkpoint_sha256=file_sha256(plan['base_checkpoint']),
                     source_sha256=file_sha256(Path(__file__)),policy_sha256=file_sha256(HERE/'graphnav/geombelief_control.py'),
@@ -52,7 +55,7 @@ def main():
                     old=json.loads((folder/'config.json').read_text());signature['source_commit']=old['source_commit']
                     if old['source_sha256']!=signature['source_sha256']:
                         current=signature['source_sha256'];signature['source_sha256']=old['source_sha256'];assert old==signature
-                        atomic_json(dict(old_source=old['source_sha256'],new_source=current,reason='Scheduling-only update: both split smokes first and same-runtime formal control after historical parity drift; unchanged intervention policy SHA'),folder/'orchestration_migration.json')
+                        atomic_json(dict(old_source=old['source_sha256'],new_source=current,reason='Scheduling/scratch isolation update: both split smokes first, matched-runtime control, disjoint locked workers with process-private scratch; unchanged intervention policy SHA'),folder/'orchestration_migration.json')
                     assert old==signature
                 else:atomic_json(signature,folder/'config.json')
                 manifest=[dict(index=int(i),episode_id=list(data[i].episode_id),map_name=data[i].map_name) for i in indices]
@@ -76,7 +79,9 @@ def main():
                         f.write(json.dumps(row)+'\n');f.flush();scores.append(score)
                         if (pos+1)%25==0:print(json.dumps(dict(arm=arm,split=split,smoke=smoke,completed=pos+1,total=len(indices))),flush=True)
                 atomic_json(dict(status='Done',signature=signature,metrics=aggregate(scores)),folder/'metrics.json')
-    atomic_json(dict(status='Done',new_conditions=6,archived_baseline_preserved=True,same_runtime_baseline_revalidation=True),OUT/'control_complete.json')
+    if all((OUT/'controller'/arm/split/'metrics.json').exists() for arm in ARMS for split in ('val_seen','val_unseen')):
+        atomic_json(dict(status='Done',new_conditions=6,archived_baseline_preserved=True,same_runtime_baseline_revalidation=True),OUT/'control_complete.json')
+    atomic_json(dict(status='Done',arms=args.arms,pid=os.getpid()),OUT/f'control_worker_{os.getpid()}_complete.json')
 
 HERE=Path(__file__).resolve().parents[1]
 if __name__=='__main__':

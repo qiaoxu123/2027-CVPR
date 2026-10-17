@@ -1,0 +1,50 @@
+[
+  {
+    "split": "train_seen",
+    "queries": 21166,
+    "singleton_schema_queries": 988,
+    "effective_changed_queries": 11490,
+    "effective_unchanged_queries": 9676,
+    "per_path_changed": {
+      "nodes": 11326,
+      "pair_geometry": 11116,
+      "prior": 10724,
+      "prior_buildings": 6595,
+      "rules": 2303,
+      "relation_fields": 2303
+    },
+    "limitation": "Non-singleton queries can share identical spatial bundles; count these as uncorrupted rather than claiming every permutation destroys grounding. This weakens, not strengthens, the intervention."
+  },
+  {
+    "split": "val_seen",
+    "queries": 2426,
+    "singleton_schema_queries": 318,
+    "effective_changed_queries": 1068,
+    "effective_unchanged_queries": 1358,
+    "per_path_changed": {
+      "nodes": 1057,
+      "pair_geometry": 1051,
+      "prior": 1002,
+      "prior_buildings": 615,
+      "rules": 191,
+      "relation_fields": 191
+    },
+    "limitation": "Non-singleton queries can share identical spatial bundles; count these as uncorrupted rather than claiming every permutation destroys grounding. This weakens, not strengthens, the intervention."
+  },
+  {
+    "split": "val_unseen",
+    "queries": 2679,
+    "singleton_schema_queries": 107,
+    "effective_changed_queries": 1607,
+    "effective_unchanged_queries": 1072,
+    "per_path_changed": {
+      "nodes": 1581,
+      "pair_geometry": 1561,
+      "prior": 1502,
+      "prior_buildings": 1146,
+      "rules": 388,
+      "relation_fields": 388
+    },
+    "limitation": "Non-singleton queries can share identical spatial bundles; count these as uncorrupted rather than claiming every permutation destroys grounding. This weakens, not strengthens, the intervention."
+  }
+]

@@ -96,7 +96,7 @@ def main():
     atomic_json(manifest,OUT/'qualitative_manifest.json')
     text='# GeomBelief qualitative cases\n\nAll images are rendered from real CityNav RGB-D at actual executed poses. Map polygons, language, goal annotations and trajectories come from recorded public inputs and evaluation-only GT. English figure labels; no invented paths.\n\n'
     for r in manifest:text+=f'## {r["case"]}\n\nEpisode `{r["episode_id"]}`; {r["split"]}; NE {r["actual_metrics"]["NE"]:.2f} m. Source trace and SHA: qualitative_manifest.json.\n\n![{r["case"]}](figures/{r["case"]}.png)\n\n'
-    text+='## Correct versus shuffled geometry belief\n\nPending all static models being frozen. The heatmap uses predeclared Seed0, never a selected favorable seed. No fabricated probability field is substituted for missing logits.\n'
+    text+='## Correct versus shuffled geometry belief\n\nPending all static models being frozen. The heatmap uses predeclared Seed0 and the first publicly changed geometry query, never a favorable seed or outcome. No fabricated probability field is substituted for missing logits.\n'
     (OUT/'qualitative_cases.md').write_text(text)
 
 if __name__=='__main__':main()

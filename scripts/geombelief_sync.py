@@ -33,9 +33,20 @@ def main():
         remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
         archive=next(a for a in remote['assets'] if a.get('digest')=='sha256:'+r['archive_sha256'])
         assert archive['size']==r['archive_bytes'];references.append(dict(release_url=r['release_url'],archive_sha256=r['archive_sha256'],bytes=r['archive_bytes'],reverified=True))
+    # Reused calibrated residual and original visual traces are held in these
+    # already published assets; verify their small local manifests and server digests.
+    for tag,mpath,archive_name,archive_sha in (
+        ('graphnav-results-20261016',HERE/'ASSET_MANIFEST.json','graphnav-results-20261016.tar.zst','b12e6e938320294c703c783d33087f7a3b17940c88d30604663f553a987bb00f'),
+        ('polybelief-paper-experiments-20261017',HERE/'reports/paper_experiments/POLYBELIEF_ASSET_MANIFEST.json','polybelief-paper-experiments-20261017.tar.zst','8a3066b6391269bf22c915ebc6fb1f87ca3de13db1e2000bbaf46f6967a0adda')):
+        remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
+        ma=next(a for a in remote['assets'] if a['name']==mpath.name)
+        assert ma.get('digest')=='sha256:'+file_sha256(mpath)
+        archive=next(a for a in remote['assets'] if a['name']==archive_name)
+        assert archive.get('digest')=='sha256:'+archive_sha
+        references.append(dict(release_url=remote['html_url'],archive_sha256=archive_sha,bytes=archive['size'],manifest_sha256=file_sha256(mpath),reverified=True))
     excluded={'map_run.lock','control_run.lock','visual_run.lock','remote_sync.json','remote_transport.log','GEOMBELIEF_ASSET_MANIFEST.json','GEOMBELIEF_SHA256SUMS'}
-    exclude_dirs={'.cache','public_inputs','controller_inputs','controller_observations','visual_inputs','visual_observations','rendered'}
-    files=sorted(p for p in OUT.rglob('*') if p.is_file() and p.name not in excluded and not set(p.relative_to(OUT).parts)&exclude_dirs)
+    exclude_dirs={'.cache','public_inputs','controller_inputs','controller_observations','visual_inputs','visual_observations','fixed_goal_inputs','fixed_goal_observations','rendered'}
+    files=sorted(p for p in OUT.rglob('*') if p.is_file() and p.suffix!='.lock' and p.name not in excluded and not set(p.relative_to(OUT).parts)&exclude_dirs)
     manifest=dict(source_commit=commit,branch=branch,restore_root='Workspace',reused_verified_releases=references,
         excludes='Shared read-only DATA and reproducible scratch/cache only; all new training weights, logs and sample traces included',
         files=[dict(path=str(p.relative_to(WORKSPACE)),bytes=p.stat().st_size,sha256=file_sha256(p)) for p in files])

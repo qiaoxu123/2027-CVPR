@@ -19,6 +19,9 @@ def main():
     plan=init();lock=(OUT/'visual_run.lock').open('w');fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB);torch.set_num_threads(1)
     atomic_json(dict(pid=os.getpid(),started=time.time(),status='Running',training=False),OUT/'visual_process.json')
     cp=HERE/'calibrated_residual/best.pt'
+    frozen=json.loads((OUT/'frozen_visual_input_plan.json').read_text())
+    assert frozen['residual_sha256']==file_sha256(cp) and frozen['base_checkpoint_sha256']==file_sha256(plan['base_checkpoint'])
+    assert frozen['input_source_sha256']==file_sha256(HERE/'graphnav/geombelief_visual_inputs.py')
     for arm in ARMS:
         policy=GraphNavStage1Policy(plan['base_checkpoint'],OUT/'visual_inputs'/arm)
         install_calibrated_residual(policy,cp,plan['base_checkpoint']);install_input_intervention(policy,arm)
@@ -27,7 +30,7 @@ def main():
             folder=OUT/'visual'/arm/split;folder.mkdir(parents=True,exist_ok=True)
             signature=dict(arm=arm,kind='frozen_input_intervention_not_fair_retraining',split=split,
                 checkpoint_sha256=file_sha256(plan['base_checkpoint']),residual_sha256=file_sha256(cp),
-                source_sha256=file_sha256(__file__),input_mask_sha256=file_sha256(HERE/'graphnav/geombelief_visual_inputs.py'),
+                source_sha256=file_sha256(__file__),frozen_visual_plan_sha256=file_sha256(OUT/'frozen_visual_input_plan.json'),input_mask_sha256=file_sha256(HERE/'graphnav/geombelief_visual_inputs.py'),
                 protocol=protocol.__dict__,stop_threshold=.3,source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip())
             if (folder/'config.json').exists():
                 old=json.loads((folder/'config.json').read_text());signature['source_commit']=old['source_commit'];assert signature==old

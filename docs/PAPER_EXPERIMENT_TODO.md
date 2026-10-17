@@ -71,4 +71,4 @@
 
 ## GeomBelief independent contribution experiments
 
-Archived Polygon baseline 34d2974 retained. New complete metric rows: 13/84 (includes reused controls). See [map geometry report](../reports/paper_experiments/geombelief_remaining/MAP_GEOMETRY_ABLATION_REPORT.md) and reports/paper_experiments/geombelief_remaining/experiment_manifest.json for exact paths, SHA, missing experiments and paired statistics. P1 fair visual-input retraining remains Pending until explicitly completed; existing Real/Zero/Shuffle/No-belief results are reused.
+Archived Polygon baseline 34d2974 retained. New complete metric rows: 44/96 (includes reused controls). See [map geometry report](../reports/paper_experiments/geombelief_remaining/MAP_GEOMETRY_ABLATION_REPORT.md) and reports/paper_experiments/geombelief_remaining/experiment_manifest.json for exact paths, SHA, missing experiments and paired statistics. P1 fair visual-input retraining remains Pending until explicitly completed; existing Real/Zero/Shuffle/No-belief results are reused.

@@ -25,3 +25,5 @@ The fixed controller is the archived pretrained trajectory/Stop head. Newly trai
 Data: 2426/2679 unique Seen/Unseen queries; navigation 2470/2697. No Test inference, training or tuning. Model selection only fixed Train-Dev R@1@20m, then NE, then earliest tied epoch. Paired 10,000-draw map bootstrap and seed means use all seeds; four Unseen map blocks do not establish broad cross-city generalization.
 
 Navigation donor cache access is whitelisted to nodes/prior/prior_buildings/rules/relation_fields/pair_geometry before constructing policy inputs. Cached target labels are never exposed through the donor policy dictionary. Dataset targets and expert trajectories remain in the outer evaluator solely for post-rollout scoring. Oracle coordinates are an explicit exception only in separately labeled controller diagnostics.
+
+Metrics: localization recall uses a 20 m radius; navigation SR uses final XY NE ≤20 m regardless of termination. False-Stop Rate = failed policy_stop episodes / all policy_stop episodes; if no policy_stop occurs it is undefined (empty/None), not zero. SPL uses Euclidean start-to-goal length and actual XY path length.

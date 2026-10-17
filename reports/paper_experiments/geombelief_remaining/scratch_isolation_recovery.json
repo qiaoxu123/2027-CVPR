@@ -1,0 +1,23 @@
+{
+  "reason": "Parallel workers shared current_public_query.jsonl; empty-file failure observed. Preserve all old output, reject every potentially affected full-evaluation tail.",
+  "safe_prefix_evidence": "Last completed progress event in pre-parallel control_workflow.log: predicted_direct val_seen 2050. No pre-parallel full oracle episodes.",
+  "repair": "Per-process controller_inputs and controller_observations; per-arm run locks; only verified prefix retained.",
+  "records": [
+    {
+      "arm": "predicted_direct",
+      "original_lines": 2448,
+      "retained_verified_prefix": 2050,
+      "quarantined_tail": 398,
+      "archived_path": "reports/paper_experiments/geombelief_remaining/recovery/shared_scratch_collision/predicted_direct_val_seen_predictions.jsonl",
+      "original_sha256": "9db086c6e6d9914359b60134e9748e7bc0dc84aaa9ecff011cd0e62ce7071e89"
+    },
+    {
+      "arm": "oracle_direct",
+      "original_lines": 19,
+      "retained_verified_prefix": 0,
+      "quarantined_tail": 19,
+      "archived_path": "reports/paper_experiments/geombelief_remaining/recovery/shared_scratch_collision/oracle_direct_val_seen_predictions.jsonl",
+      "original_sha256": "62992d1fff8886afeaa83729c153cd45d48bf97619c5f66234e96bef3e6f5aff"
+    }
+  ]
+}

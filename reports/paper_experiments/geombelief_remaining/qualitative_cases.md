@@ -22,4 +22,6 @@ Episode `['birmingham_block_5', 1, 1]`; val_unseen; NE 110.04 m. Source trace an
 
 ## Correct versus shuffled geometry belief
 
-Pending all static models being frozen. The heatmap uses predeclared Seed0, never a selected favorable seed. No fabricated probability field is substituted for missing logits.
+Actual normalized model probabilities, predeclared Seed0 and first Val-Unseen query with changed public node geometry; no result-based selection. Cyan outlines are the geometry supplied to each model. Recipient language and landmark names are unchanged. Separately budget-matched trained models; not a same-weight feature intervention. Source IDs, donor and checkpoint SHAs: belief_figure_manifest.json.
+
+![Actual goal belief](figures/correct_vs_shuffled_belief.png)

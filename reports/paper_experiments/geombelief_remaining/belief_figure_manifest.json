@@ -1,0 +1,24 @@
+{
+  "split": "val_unseen",
+  "query_id": "df7d1a645c51a8d0224f5e204aaec7cf70f5f6661a34a49aabf5e24eda03ba10",
+  "episode_id": "birmingham_block_5:1:1:0",
+  "donor_query_id": "352a6f4d2e524a1ae2964040200273f8bcdcb4679b54f61f6f53cc960bda785b",
+  "query_index": 0,
+  "seed": 0,
+  "source": [
+    {
+      "arm": "correct",
+      "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/training/shared_full_polygon__full_polygon__seed0/best.pt",
+      "sha256": "6b0f737d971b537419dc861de5a30865f3d7d218c34b6681ee8d8ac66bc7ec86"
+    },
+    {
+      "arm": "shuffled",
+      "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/training/map_geometry__shuffled__seed0/best.pt",
+      "sha256": "5a57fbd42a01c35be63593fba1c8cb224bb500ca790d525ebee1b005106cdcb4"
+    }
+  ],
+  "donor_index": 473,
+  "selection": "First query with changed public node geometry; no score or target used for case selection",
+  "interpretation": "Two separately but identically budgeted trained models, each with its own correct/shuffled input scheme; not a frozen-weight intervention",
+  "map_and_language_sha256": "7408c87314cd869e72b8dd0635e93585e745fe56fd83bfac5de62645f83909a6"
+}

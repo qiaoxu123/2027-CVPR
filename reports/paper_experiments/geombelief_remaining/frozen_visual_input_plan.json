@@ -1,0 +1,16 @@
+{
+  "kind": "frozen_residual_input_interventions_not_fair_retraining",
+  "arms": [
+    "geometry_pose",
+    "rgb_text",
+    "current_rgb"
+  ],
+  "base_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "residual_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+  "input_source_sha256": "8825b39b55a5b577c32d9dfa5d5e55b0f2119dead31cd51d8720d5352aff9236",
+  "geometry_pose": "Zero projected current/history RGB-text products and native appearance scores; keep static geometry-language context, static logits, pose distance and common visibility/ROI quality metadata.",
+  "rgb_text": "Zero geometric-language candidate context, static logits/probability and explicit pose distance; retain RGB/text and common visibility/quality metadata.",
+  "current_rgb": "Disable history consistently including features, validity, quality and native fusion.",
+  "limitation": "These are residual descriptor subsets on the SAME frozen geometric base and common observation support. Not strict map-free or sensor-free complete-system baselines.",
+  "selection": "No training/model selection or threshold tuning; established checkpoint and thresholds fixed before new held-out inference"
+}

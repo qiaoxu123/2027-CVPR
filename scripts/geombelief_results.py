@@ -28,7 +28,7 @@ def map_paths(arm,seed,split,endpoint):
     return folder/split/'metrics.json',folder/split/'predictions.jsonl',cp
 
 def summarize():
-    OUT.mkdir(parents=True,exist_ok=True);data={};result=[];means=[];stats={};manifest=[]
+    OUT.mkdir(parents=True,exist_ok=True);data={};result=[];means=[];stats={};manifest=[];per_map=[]
     for endpoint in ('localization','navigation'):
         metrics=('R@1','R@4','R@8','NE') if endpoint=='localization' else ('SR','SPL','OSR','NE','False_Stop_Rate')
         for split,n in [('val_seen',2426 if endpoint=='localization' else 2470),('val_unseen',2679 if endpoint=='localization' else 2697)]:
@@ -43,6 +43,11 @@ def summarize():
                         assert len({x['query_id'] if endpoint=='localization' else tuple(x['episode_id']) for x in actual})==n
                         summary=json.loads(metric.read_text())['metrics'];r.update(samples=n,**{k:summary[k] for k in metrics});members.append(r)
                         data[endpoint,split,arm,seed]=actual
+                        grouped=defaultdict(list)
+                        for sample in actual:grouped[sample['map_name']].append(sample)
+                        for map_name,group in grouped.items():
+                            values={k:float(np.mean([g[k] for g in group])) for k in metrics} if endpoint=='localization' else aggregate([g['metrics'] for g in group])
+                            per_map.append(dict(endpoint=endpoint,split=split,arm=LABELS[arm],seed=seed,map_name=map_name,samples=len(group),**{k:values[k] for k in metrics}))
                     result.append(r);manifest.append(r.copy())
                 if len(members)==3:
                     m=dict(endpoint=endpoint,split=split,arm=LABELS[arm],arm_key=arm,seeds=3,samples_per_seed=n)
@@ -51,7 +56,7 @@ def summarize():
                         m[k+'_mean']=float(np.mean(values)) if all(v is not None for v in values) else None
                         m[k+'_std']=float(np.std(values,ddof=1)) if all(v is not None for v in values) else None
                     means.append(m)
-            tests=[('correct','name_type'),('correct','shuffled'),('distance_direction','name_type'),('distance','name_type'),('direction','name_type'),('distance_direction','distance'),('distance_direction','direction')]
+            tests=[('correct','name_type'),('correct','shuffled'),('distance_direction','name_type'),('distance','name_type'),('direction','name_type'),('distance_direction','distance'),('distance_direction','direction'),('correct','distance'),('correct','direction'),('correct','distance_direction')]
             paired_metrics=list(metrics[:3] if endpoint=='localization' else ('SR','SPL'))
             for left,right in tests:
                 if not all((endpoint,split,a,s) in data for a in (left,right) for s in (0,1,2)):continue
@@ -62,7 +67,7 @@ def summarize():
                     maps,identities=m,ids;deltas.append(d)
                     stats[f'{endpoint}/{split}/{left}-minus-{right}/seed{seed}']=paired_ci(d,m,paired_metrics)
                 stats[f'{endpoint}/{split}/{left}-minus-{right}/seed_mean']=paired_ci(np.mean(deltas,0),maps,paired_metrics)
-    csvwrite('map_geometry_results.csv',result);csvwrite('map_geometry_seed_summary.csv',means)
+    csvwrite('map_geometry_results.csv',result);csvwrite('map_geometry_seed_summary.csv',means);csvwrite('map_geometry_per_map.csv',per_map)
     control=[];control_data={};formal=json.loads((OLD/'frozen_plan.json').read_text())['base_checkpoint']
     for split,n in [('val_seen',2470),('val_unseen',2697)]:
         for arm in ('predicted_guarded_blend','predicted_direct','predicted_waypoint','oracle_direct','oracle_guarded_blend','rule_arrival'):
@@ -70,7 +75,7 @@ def summarize():
                 folder=OUT/'controller'/'predicted_guarded_blend'/split
             else:folder=OUT/'controller'/arm/split
             ok=bool(folder and (folder/'metrics.json').exists() and (folder/'predictions.jsonl').exists())
-            r=dict(arm=arm,split=split,status='Done' if ok else 'Pending',expected_episodes=n,checkpoint_sha256=file_sha256(formal),result_path=str(folder),oracle_diagnostic=arm.startswith('oracle'))
+            r=dict(scope='native_dynamic_belief',arm=arm,split=split,status='Done' if ok else 'Pending',expected_episodes=n,checkpoint_sha256=file_sha256(formal),result_path=str(folder),oracle_diagnostic=arm.startswith('oracle'))
             if ok:
                 rr=rows(folder/'predictions.jsonl');assert len(rr)==n
                 mm=aggregate([x['metrics'] for x in rr]);r.update(episodes=n,**{k:mm[k] for k in ('SR','SPL','OSR','NE','False_Stop_Rate')})
@@ -87,6 +92,28 @@ def summarize():
             if all((split,a) in control_data for a in (left,right)):
                 d,m,ids=paired_rows(control_data[split,left],control_data[split,right],'navigation',['SR','SPL'])
                 stats[f'controller/{split}/{left}-minus-{right}']=paired_ci(d,m,['SR','SPL'])
+    fixed_data={}
+    for split,n in [('val_seen',2470),('val_unseen',2697)]:
+        for arm in ('predicted_guarded_blend','predicted_direct','predicted_waypoint','oracle_direct','oracle_guarded_blend','rule_arrival'):
+            folder=OUT/'controller_fixed_goal'/arm/split
+            ok=(folder/'metrics.json').exists() and (folder/'predictions.jsonl').exists()
+            r=dict(scope='identical_initial_belief',arm=arm,split=split,status='Done' if ok else 'Pending',expected_episodes=n,checkpoint_sha256=file_sha256(formal),result_path=str(folder),oracle_diagnostic=arm.startswith('oracle'))
+            if ok:
+                rr=rows(folder/'predictions.jsonl');assert len(rr)==n
+                mm=aggregate([x['metrics'] for x in rr]);r.update(episodes=n,**{k:mm[k] for k in ('SR','SPL','OSR','NE','False_Stop_Rate')})
+                fixed_data[split,arm]=rr
+                failures=[x for x in rr if not x['metrics']['SR']]
+                r['failed_episodes']=len(failures);r['failed_with_visited_success_region']=sum(x['metrics']['OSR']>0 for x in failures)
+                r['failed_without_visited_success_region']=sum(x['metrics']['OSR']==0 for x in failures)
+                for reason in ('policy_stop','stagnation','horizon'):r[reason+'_episodes']=sum(x['termination']==reason for x in rr)
+            control.append(r);manifest.append(r.copy())
+        for left,right in [('predicted_waypoint','predicted_direct'),('predicted_guarded_blend','predicted_waypoint'),('predicted_guarded_blend','predicted_direct'),('oracle_direct','predicted_direct'),('oracle_guarded_blend','predicted_guarded_blend'),('predicted_guarded_blend','rule_arrival')]:
+            if all((split,a) in fixed_data for a in (left,right)):
+                d,m,ids=paired_rows(fixed_data[split,left],fixed_data[split,right],'navigation',['SR','SPL'])
+                stats[f'controller_fixed_goal/{split}/{left}-minus-{right}']=paired_ci(d,m,['SR','SPL'])
+        if (split,'predicted_guarded_blend') in fixed_data and (split,'predicted_guarded_blend') in control_data:
+            d,m,ids=paired_rows(control_data[split,'predicted_guarded_blend'],fixed_data[split,'predicted_guarded_blend'],'navigation',['SR','SPL'])
+            stats[f'belief_updating/{split}/native-minus-initially-frozen']=paired_ci(d,m,['SR','SPL'])
     csvwrite('controller_ablation_results.csv',control)
     atomic_json(stats,OUT/'paired_statistics.json')
     atomic_json(dict(model='GeomBelief',parent_commit='34d2974',source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
@@ -101,8 +128,15 @@ def summarize():
         if '/seed_mean' not in key:continue
         for name,s in v['metrics'].items():cis.append(dict(comparison=key,metric=name,delta_pp=100*s['delta'],map_CI95_pp=[100*x for x in s['map_cluster_episode_weighted_ci95']],maps=v['independent_maps']))
     report+='\n## Paired map-cluster intervals\n\n'+table(cis,['comparison','metric','delta_pp','map_CI95_pp','maps'])
-    report+='\nThe three predeclared primary contrasts are Correct−Name/Type, Correct−Shuffle and Distance+Direction−Name/Type. Other simple-geometry contrasts and R@4/R@8 are secondary. Rates are fractions in per-seed tables; effects in the CI table are percentage points.\n'
-    report+='\nConfidence intervals are pointwise, not multiplicity-adjusted. Episode bootstrap, equal-map estimates, every map and leave-one-map-out are in paired_statistics.json. Four Unseen maps are map blocks, not four independent cities. No missing or partial result is treated as zero.\n'
+    report+='\nThe three predeclared primary contrasts are Correct−Name/Type, Correct−Shuffle and Distance+Direction−Name/Type. Other simple-geometry contrasts and R@4/R@8 are secondary. Correct versus individual simple-geometry arms is an exploratory completeness analysis added after static means were inspected; it does not affect checkpoint choice or hyperparameters. Rates are fractions in per-seed tables; effects in the CI table are percentage points.\n'
+    report+='\nConfidence intervals are pointwise, not multiplicity-adjusted. Episode bootstrap, equal-map estimates, paired map differences and leave-one-map-out are in paired_statistics.json; absolute per-map per-seed metrics are in map_geometry_per_map.csv. Four Unseen maps are map blocks, not four independent cities. No missing or partial result is treated as zero.\n'
+    if (OUT/'shuffle_effectiveness.json').exists():
+        report+='\n## Actual shuffle corruption\n\n'+table(json.loads((OUT/'shuffle_effectiveness.json').read_text()),['split','queries','singleton_schema_queries','effective_changed_queries','effective_unchanged_queries'])
+        report+='\nDifferent query indices can have identical map bundles. These are counted as unchanged, not falsely described as corrupted geometry. This distribution-preserving shuffle is weaker than corrupting every landmark.\n'
+    if (OUT/'controller_context_distribution.csv').exists():
+        audit=list(csv.DictReader((OUT/'controller_context_distribution.csv').open()))
+        report+='\n## Fixed-controller input distribution\n\n'+table(audit,['split','arm','seed','top1_context_norm','top1_context_cosine_to_head_training','same_grid_context_relative_L2'])
+        report+='\nThese latent diagnostics compare against the actual head-training locator. Different independently trained latent bases make cosine/L2 descriptive, not a semantic performance criterion. No controller was adapted.\n'
     report+='\n## Conclusions\n\n'
     for left,right in [('correct','name_type'),('correct','shuffled'),('distance_direction','name_type')]:
         for endpoint,metric in [('localization','R@1'),('navigation','SR')]:
@@ -113,8 +147,8 @@ def summarize():
             else:report+=f'- {left} − {right}, Unseen {metric}: Pending complete three-seed paired results.\n'
     report+='\nCorrect-minus-Name tests all map geometry together, not uniquely language–geometry interaction. A language-shuffle factorial would be needed to isolate that interaction; none is claimed here. Fixed-head transfer and possibly memorized Seen map/name priors limit causal interpretation of navigation.\n'
     (OUT/'MAP_GEOMETRY_ABLATION_REPORT.md').write_text(report)
-    control_report=(OUT/'CONTROL_ATTRIBUTION_REPORT.md').read_text().split('\n## Results')[0]
-    control_report+='\n## Results\n\n'+table(control,['arm','split','status','episodes','SR','SPL','OSR','NE','False_Stop_Rate','failed_without_visited_success_region','failed_with_visited_success_region'])
+    control_report=(OUT/'CONTROL_PROTOCOL.md').read_text()
+    control_report+='\n## Results\n\n'+table(control,['scope','arm','split','status','episodes','SR','SPL','OSR','NE','False_Stop_Rate','failed_without_visited_success_region','failed_with_visited_success_region'])
     control_report+='\nFull-split paired controller intervals are in paired_statistics.json. Oracle gains measure recoverable error under the specified intervention; they are not an additive percentage of failure uniquely caused by localization. OSR−SR identifies visited-but-not-retained success, not automatically a Stop error. Learned Stop versus rule uses the same 0.001 m gate.\n'
     (OUT/'CONTROL_ATTRIBUTION_REPORT.md').write_text(control_report)
     for dest in (HERE/'docs/PAPER_EXPERIMENT_TODO.md',HERE/'reports/paper_experiments/PAPER_EXPERIMENT_SUMMARY.md'):

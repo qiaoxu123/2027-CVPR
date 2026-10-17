@@ -5,7 +5,7 @@ def residual_input_mask(x,arm):
     if x.shape[-1]!=106:raise ValueError('Unexpected calibrated residual interface')
     y=x.clone()
     if arm=='geometry_pose':
-        y[...,16:98]=0  # both RGB/text interactions and all image-quality channels
+        y[...,16:80]=0  # both semantic RGB/text interactions; keep shared geometric support/quality
         y[...,100:102]=0  # current/history appearance scores
     elif arm=='rgb_text':
         y[...,:16]=0  # spatial-language candidate context

@@ -1,6 +1,6 @@
 # GeomBelief frozen complete-model control attribution
 
-Status: Running. No new outcome is claimed until complete paired split results exist.
+Protocol record. Actual completion and results are reported per scope/split below.
 
 Complete formal C Epoch1 SHA: 00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a. All language, visual and trajectory/Stop parameters remain frozen. Original full Seen/Unseen Guarded-Blend is retained as historical reference. A separate same-runtime Guarded-Blend is evaluated after smoke parity found small intermediate-pose numerical drift; controller paired inference uses the new matched runtime control. This is distinct from the map-ablation's legacy controller transfer.
 
@@ -21,25 +21,45 @@ Success uses final XY NE ≤20 m, independently of whether policy_stop occurred.
 
 Each trace stores initial/final goal error, predicted-goal arrivals, GT success-region visits (post-rollout only), learned Stop request, policy stop, horizon and stagnation. Failure attribution is descriptive/counterfactual, not an additive decomposition of interacting locator/vision/controller effects.
 
+## Strict identical-goal control
+
+The native dynamic scope fixes weights and candidate-selection rules, but different motion yields different future RGB and thus different later candidate fields. It cannot alone satisfy identical candidate values across controllers. Therefore the primary execution-only analysis also uses **identical_initial_belief**: all six controls consume the exact same serialized first-observation GoalField (logits, candidate IDs/coordinates and candidate contexts) for an Episode. Only pose and the chosen execution/Stop intervention vary; Oracle overrides the first controller coordinate only. All first fields are produced by the original complete C weights from a real initial RGB observation, before using any target or teacher data. No future observation is available to these controllers.
+
+This scope is a controlled diagnostic, not the native dynamic formal policy. Guarded-Blend refers to the unchanged execution strategy under a frozen initial belief. Its timing excludes precomputation and must not be presented as native full-model profiling. Every trace has the shared initial_field_sha256; field equality across arms is checked. Both Seen128 and Unseen128 precede the full split. Native dynamic-minus-initial-frozen Guarded-Blend measures allowing later belief updates, with coupled observation/path consequences, not an additive isolated RGB percentage.
+
+## Runtime and recovery evidence
+
+Historical exact trajectory parity was rejected (birmingham_block_9:110:0; same final NE/SR but small intermediate-pose differences). A new matched-runtime formal control is retained separately; original published metrics remain unchanged. The attempted prefix replay was not used. See rule_replay_certificate.json.
+
+Parallel scratch-file collision was detected and repaired by per-process input/render directories and per-arm locks. All potentially affected tails were quarantined, with the verified pre-parallel prefix retained. See scratch_isolation_recovery.json; excluded output is never part of metrics. This scheduling repair changes no policy weights or parameters.
+
 ## Results
 
-|arm|split|status|episodes|SR|SPL|OSR|NE|False_Stop_Rate|failed_without_visited_success_region|failed_with_visited_success_region|
-|---|---|---|---|---|---|---|---|---|---|---|
-|predicted_guarded_blend|val_seen|Done|2470|0.4761133603238866|0.46002843520078085|0.5566801619433198|29.11917144218048|0.5238866396761134|1095|199|
-|predicted_direct|val_seen|Pending|||||||||
-|predicted_waypoint|val_seen|Pending|||||||||
-|oracle_direct|val_seen|Pending|||||||||
-|oracle_guarded_blend|val_seen|Pending|||||||||
-|rule_arrival|val_seen|Pending|||||||||
-|predicted_guarded_blend|val_unseen|Pending|||||||||
-|predicted_direct|val_unseen|Pending|||||||||
-|predicted_waypoint|val_unseen|Pending|||||||||
-|oracle_direct|val_unseen|Pending|||||||||
-|oracle_guarded_blend|val_unseen|Pending|||||||||
-|rule_arrival|val_unseen|Pending|||||||||
+|scope|arm|split|status|episodes|SR|SPL|OSR|NE|False_Stop_Rate|failed_without_visited_success_region|failed_with_visited_success_region|
+|---|---|---|---|---|---|---|---|---|---|---|---|
+|native_dynamic_belief|predicted_guarded_blend|val_seen|Pending|||||||||
+|native_dynamic_belief|predicted_direct|val_seen|Done|2470|0.4757085020242915|0.46230986248381456|0.551417004048583|29.16107078935657|0.5220618556701031|1108|187|
+|native_dynamic_belief|predicted_waypoint|val_seen|Pending|||||||||
+|native_dynamic_belief|oracle_direct|val_seen|Done|2470|1.0|0.9999999998027225|1.0|1.359082426619433e-07|0.0|0|0|
+|native_dynamic_belief|oracle_guarded_blend|val_seen|Pending|||||||||
+|native_dynamic_belief|rule_arrival|val_seen|Pending|||||||||
+|native_dynamic_belief|predicted_guarded_blend|val_unseen|Pending|||||||||
+|native_dynamic_belief|predicted_direct|val_unseen|Pending|||||||||
+|native_dynamic_belief|predicted_waypoint|val_unseen|Pending|||||||||
+|native_dynamic_belief|oracle_direct|val_unseen|Pending|||||||||
+|native_dynamic_belief|oracle_guarded_blend|val_unseen|Pending|||||||||
+|native_dynamic_belief|rule_arrival|val_unseen|Pending|||||||||
+|identical_initial_belief|predicted_guarded_blend|val_seen|Pending|||||||||
+|identical_initial_belief|predicted_direct|val_seen|Pending|||||||||
+|identical_initial_belief|predicted_waypoint|val_seen|Pending|||||||||
+|identical_initial_belief|oracle_direct|val_seen|Pending|||||||||
+|identical_initial_belief|oracle_guarded_blend|val_seen|Pending|||||||||
+|identical_initial_belief|rule_arrival|val_seen|Pending|||||||||
+|identical_initial_belief|predicted_guarded_blend|val_unseen|Pending|||||||||
+|identical_initial_belief|predicted_direct|val_unseen|Pending|||||||||
+|identical_initial_belief|predicted_waypoint|val_unseen|Pending|||||||||
+|identical_initial_belief|oracle_direct|val_unseen|Pending|||||||||
+|identical_initial_belief|oracle_guarded_blend|val_unseen|Pending|||||||||
+|identical_initial_belief|rule_arrival|val_unseen|Pending|||||||||
 
 Full-split paired controller intervals are in paired_statistics.json. Oracle gains measure recoverable error under the specified intervention; they are not an additive percentage of failure uniquely caused by localization. OSR−SR identifies visited-but-not-retained success, not automatically a Stop error. Learned Stop versus rule uses the same 0.001 m gate.
-
-## Historical runtime parity finding
-
-Exact rule-prefix reuse was rejected: birmingham_block_9:110:0 had identical final NE/SR but intermediate pose and Stop-probability differences. See rule_replay_certificate.json. No counterfactual prefix was accepted as full evaluation. All control conditions including the matched-runtime formal control are evaluated with actual current-pose RGB. Original archived formal metrics remain unchanged.
