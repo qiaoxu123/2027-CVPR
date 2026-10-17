@@ -78,3 +78,7 @@ common_episode_metrics.csv保存本次可重算来源的逐Episode共同指标�
 |other_rollout_ms|9.1427|17.1114|140.5101|
 
 上述均值单位ms，方差ms²；GPU事件跨度和端到端wall time分别保留。完整计时边界、并发进程及首次冷启动规则见efficiency_existing_evidence.json和原launch记录；不据此冒充不同baseline的同机速度对比。
+
+## 远程备份
+
+代码和报告已同步到research/visual-residual-20261013；新增四组完整Unseen逐Episode轨迹及恢复的MGP权重另存[远程资产](https://github.com/qiaoxu123/2027-CVPR/releases/tag/polybelief-paper-experiments-20261017)。17个文件，压缩包205203635字节；GitHub服务端SHA与本地一致，下载manifest复核通过。校验与恢复清单见remote_sync.json、POLYBELIEF_ASSET_MANIFEST.json及POLYBELIEF_SHA256SUMS。原冻结权重继续使用旧release，不重复上传。
