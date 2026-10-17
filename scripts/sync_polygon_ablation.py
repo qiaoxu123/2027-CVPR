@@ -13,6 +13,24 @@ REPO='qiaoxu123/2027-CVPR'
 GIT=['git','-c','url.https://github.com/qiaoxu123/2027-CVPR.git.insteadOf=https://github.com/qiaoxu123/2027-CVPR-Dev.git','-c','credential.helper=!gh auth git-credential']
 
 
+def verified_previous_stage():
+    """Reuse immutable server-verified files instead of uploading weights twice."""
+    receipt_path=OUT/'training_static_remote_sync.json'
+    manifest_path=OUT/'POLYGON_TRAINING_STATIC_ASSET_MANIFEST.json'
+    if not receipt_path.exists() or not manifest_path.exists():return {},None
+    receipt=json.loads(receipt_path.read_text())
+    if not receipt.get('verified'):return {},None
+    tag=receipt['release_url'].rsplit('/',1)[-1]
+    remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
+    archive=next(a for a in remote['assets'] if a['name']=='polygon-trained-static-validation.tar.zst')
+    metadata=next(a for a in remote['assets'] if a['name']==manifest_path.name)
+    assert archive['digest']=='sha256:'+receipt['archive_sha256'] and archive['size']==receipt['archive_bytes']
+    assert metadata['digest']=='sha256:'+file_sha256(manifest_path) and metadata['size']==manifest_path.stat().st_size
+    rows=json.loads(manifest_path.read_text())['files']
+    return {r['path']:r for r in rows},dict(release_url=receipt['release_url'],archive_sha256=receipt['archive_sha256'],
+                                            archive_name=archive['name'],manifest_sha256=file_sha256(manifest_path))
+
+
 def sync_completed_experiment():
     if not (OUT/'workflow_complete.json').exists():return
     if (OUT/'remote_sync.json').exists() and json.loads((OUT/'remote_sync.json').read_text()).get('verified'):
@@ -41,14 +59,29 @@ def _sync():
     plan_sha=file_sha256(OUT/'frozen_plan.json')
     tag='polybelief-polygon-ablation-20261017-'+plan_sha[:8]
     scratch=Path(tempfile.mkdtemp(prefix='polybelief-polygon-assets-'))
-    # Cache tensors are reproducible and excluded; all actual trained weights,
-    # raw episode/query predictions and stable logs are retained.
+    # Keep every actual output, either here or in a reverified previous asset.
+    # Reproducible caches are excluded. Include the original C/static/head
+    # source weights as well, so the fixed-controller experiment is restorable.
     files=[p for p in OUT.rglob('*') if p.is_file() and '.cache' not in p.parts and
            'public_inputs' not in p.parts and p.name not in ('run.lock','remote_sync.json','remote_sync_failure.json')]
+    plan=json.loads((OUT/'frozen_plan.json').read_text())
+    files=sorted(set(files+[Path(plan['base_checkpoint']),*[Path(v['path']) for v in plan['sources'].values()]]))
+    reuse_warning=None
+    try:previous,reference=verified_previous_stage()
+    except Exception as error:
+        # A missing/changed old asset never silently loses coverage: upload all.
+        previous,reference={},None;reuse_warning=str(error)
+    rows=[];archive_files=[]
+    for p in files:
+        row=dict(path=str(p.relative_to(WORKSPACE)),bytes=p.stat().st_size,sha256=file_sha256(p))
+        old=previous.get(row['path'])
+        row['storage']='verified_previous_stage' if old and old['bytes']==row['bytes'] and old['sha256']==row['sha256'] else 'this_archive'
+        if row['storage']=='this_archive':archive_files.append(p)
+        rows.append(row)
     manifest=dict(source_commit=source_commit,restore_root='Workspace',excluded='Shared DATA and reproducible feature caches',
-                  files=[dict(path=str(p.relative_to(WORKSPACE)),bytes=p.stat().st_size,sha256=file_sha256(p)) for p in sorted(files)])
+                  previous_verified_stage=reference,previous_reuse_warning=reuse_warning,files=rows)
     mp=scratch/'POLYGON_ASSET_MANIFEST.json';mp.write_text(json.dumps(manifest,indent=2)+'\n')
-    listing=scratch/'files.txt';listing.write_text(''.join(str(p.relative_to(WORKSPACE))+'\n' for p in sorted(files)))
+    listing=scratch/'files.txt';listing.write_text(''.join(str(p.relative_to(WORKSPACE))+'\n' for p in archive_files))
     archive=scratch/'polybelief-polygon-ablation.tar.zst'
     subprocess.run(['tar','--zstd','-cf',str(archive),'-C',str(WORKSPACE),'-T',str(listing)],check=True)
     archives=[archive]
@@ -73,6 +106,8 @@ def _sync():
     if probe.returncode==0:
         raise ValueError('Release tag already exists but no verified local receipt; preserve remote asset, investigate before overwrite')
     notes=scratch/'notes.md';notes.write_text('Completed pre-registered Polygon geometry contribution experiments. Frozen interventions and independent three-seed retraining, Descriptor Only and End-to-End, are reported separately. Positive and negative results preserved. See the committed POLYGON_ABLATION_REPORT.md. No original model or prior result overwritten. Restore from Workspace after checking SHA256SUMS and per-file manifest.\n')
+    if reference:
+        notes.write_text(notes.read_text()+f"First restore the reverified training/static archive from {reference['release_url']}, then this archive. Files marked verified_previous_stage in POLYGON_ASSET_MANIFEST.json are byte-identical and not uploaded twice. Use tar --skip-old-files when restoring into an existing workspace; verify all file hashes.\n")
     notes.write_text(notes.read_text()+'If the archive is chunked, concatenate .part000, .part001, ... in lexical order to restore polybelief-polygon-ablation.tar.zst before extraction.\n')
     subprocess.run(['gh','release','create',tag,*map(str,assets),'--repo',REPO,'--target',source_commit,'--title','PolyBelief Polygon contribution experiment assets','--notes-file',str(notes),'--prerelease'],check=True)
     remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
@@ -82,6 +117,7 @@ def _sync():
             raise ValueError('Remote digest/size differs: '+f.name)
     atomic_json(dict(status='Done',verified=True,source_commit=source_commit,branch=branch,release_url=remote['html_url'],
                      archive_bytes=archive.stat().st_size,archive_sha256=file_sha256(archive),files=len(files),
+                     files_in_archive=len(archive_files),reused_files=len(files)-len(archive_files),previous_verified_stage=reference,
                      assets=[dict(name=p.name,bytes=p.stat().st_size,sha256=file_sha256(p)) for p in assets],
                      remote_server_digest_matches=True,time=time.time()),OUT/'remote_sync.json')
     (OUT/'POLYGON_ASSET_MANIFEST.json').write_bytes(mp.read_bytes())
