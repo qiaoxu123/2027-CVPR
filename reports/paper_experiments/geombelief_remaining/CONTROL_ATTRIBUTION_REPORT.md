@@ -2,7 +2,7 @@
 
 Status: Running. No new outcome is claimed until complete paired split results exist.
 
-Complete formal C Epoch1 SHA: 00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a. All language, visual and trajectory/Stop parameters remain frozen. Original full Seen/Unseen Guarded-Blend is reused. This is distinct from the map-ablation's legacy controller transfer.
+Complete formal C Epoch1 SHA: 00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a. All language, visual and trajectory/Stop parameters remain frozen. Original full Seen/Unseen Guarded-Blend is retained as historical reference. A separate same-runtime Guarded-Blend is evaluated after smoke parity found small intermediate-pose numerical drift; controller paired inference uses the new matched runtime control. This is distinct from the map-ablation's legacy controller transfer.
 
 |Condition|Waypoint|Stop|Goal|
 |---|---|---|---|
@@ -39,3 +39,7 @@ Each trace stores initial/final goal error, predicted-goal arrivals, GT success-
 |rule_arrival|val_unseen|Pending|||||||||
 
 Full-split paired controller intervals are in paired_statistics.json. Oracle gains measure recoverable error under the specified intervention; they are not an additive percentage of failure uniquely caused by localization. OSR−SR identifies visited-but-not-retained success, not automatically a Stop error. Learned Stop versus rule uses the same 0.001 m gate.
+
+## Historical runtime parity finding
+
+Exact rule-prefix reuse was rejected: birmingham_block_9:110:0 had identical final NE/SR but intermediate pose and Stop-probability differences. See rule_replay_certificate.json. No counterfactual prefix was accepted as full evaluation. All control conditions including the matched-runtime formal control are evaluated with actual current-pose RGB. Original archived formal metrics remain unchanged.

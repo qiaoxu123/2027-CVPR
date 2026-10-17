@@ -9,7 +9,7 @@ from graphnav.full_experiment import _batch_inputs
 from scripts import polygon_ablation_navigation as nav
 from scripts import polygon_ablation_engine as engine
 from scripts.polygon_ablation_plan import canonical_job,query_key
-from scripts.geombelief_map_experiments import OLD,OUT
+from scripts.geombelief_map_experiments import OLD,OUT,HERE
 
 class MapPolicy(nav.PolygonPolicy):
     donor_lookup=None
@@ -34,13 +34,16 @@ class MapPolicy(nav.PolygonPolicy):
         return self.fields[key],None
 
 def run_all(plan):
+    atomic_json(dict(policy_source_sha256=file_sha256(__file__),input_mask_source_sha256=file_sha256(HERE/'graphnav/geombelief_inputs.py'),note='Subclass/input-control code augments the reused navigation engine; see experiment_manifest source hashes'),OUT/'map_policy_source.json')
     nav.OUT=OUT;engine.OUT=OUT;nav.PolygonPolicy=MapPolicy
     encoder=engine.encoder_for(plan)
     for split in ('val_seen','val_unseen'):
         manifest=json.loads((OUT/f'{split}_shuffle_manifest.json').read_text())
         MapPolicy.donor_lookup={r['query_id']:r['donor_index'] for r in manifest}
         payload=torch.load(OLD/f'.cache/{split}_geometry.pt',map_location='cpu',weights_only=True,mmap=True)
-        MapPolicy.donor_tensors=payload['tensors']
+        # Strip evaluation labels before exposing any donor data to the policy.
+        MapPolicy.donor_tensors={k:payload['tensors'][k] for k in ('nodes','prior','prior_buildings','rules','relation_fields','pair_geometry')}
+        del payload
         for seed in (0,1,2):
             for arm in ARMS:
                 job=canonical_job('map_geometry',arm,seed);cp=OUT/'training'/job/'best.pt'

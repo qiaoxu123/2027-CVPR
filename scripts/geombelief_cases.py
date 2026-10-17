@@ -23,10 +23,12 @@ def get_row(path,eid):
 
 def draw_map(ax,record,target,trajectories=(),goals=()):
     b=np.asarray(record['world_bounds']);lo,span=b[:2],b[2:]-b[:2]
+    labelled=set()
     for i,l in enumerate(record['landmarks']):
         xy=lo+np.asarray(l['contour'])*span
         ax.add_patch(Polygon(xy,closed=True,facecolor='#93b6ca',edgecolor='#376078',alpha=.45))
-        center=xy.mean(0);ax.text(*center,l['name'],fontsize=6,ha='center',clip_on=True)
+        if l['name'] not in labelled:
+            center=xy.mean(0);ax.text(*center,l['name'],fontsize=7,ha='center',clip_on=True);labelled.add(l['name'])
     ax.scatter(*target[:2],marker='*',s=140,c='#269653',label='Ground-truth goal',zorder=7)
     ax.add_patch(Circle(target[:2],20,fill=False,color='#269653',ls='--',lw=1,label='20 m success region'))
     for label,row,color in trajectories:

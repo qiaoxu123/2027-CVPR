@@ -42,7 +42,6 @@ def main():
             builder=NativeObservationBuilder(base,WORKSPACE/'DATA/sbfnav-data/rgbd',OUT/'controller_observations'/split)
             indices=evenly_spaced_indices(len(data),128 if smoke else None)
             for arm in ARMS:
-                if arm=='predicted_guarded_blend':continue
                 folder=OUT/'controller'/arm/(split+('_smoke128' if smoke else ''));folder.mkdir(parents=True,exist_ok=True)
                 signature=dict(arm=arm,split=split,smoke=smoke,checkpoint_sha256=file_sha256(plan['base_checkpoint']),
                     source_sha256=file_sha256(Path(__file__)),policy_sha256=file_sha256(HERE/'graphnav/geombelief_control.py'),
@@ -53,7 +52,7 @@ def main():
                     old=json.loads((folder/'config.json').read_text());signature['source_commit']=old['source_commit']
                     if old['source_sha256']!=signature['source_sha256']:
                         current=signature['source_sha256'];signature['source_sha256']=old['source_sha256'];assert old==signature
-                        atomic_json(dict(old_source=old['source_sha256'],new_source=current,reason='Both split smoke checks before full splits; unchanged policy hash'),folder/'orchestration_migration.json')
+                        atomic_json(dict(old_source=old['source_sha256'],new_source=current,reason='Scheduling-only update: both split smokes first and same-runtime formal control after historical parity drift; unchanged intervention policy SHA'),folder/'orchestration_migration.json')
                     assert old==signature
                 else:atomic_json(signature,folder/'config.json')
                 manifest=[dict(index=int(i),episode_id=list(data[i].episode_id),map_name=data[i].map_name) for i in indices]
@@ -77,7 +76,7 @@ def main():
                         f.write(json.dumps(row)+'\n');f.flush();scores.append(score)
                         if (pos+1)%25==0:print(json.dumps(dict(arm=arm,split=split,smoke=smoke,completed=pos+1,total=len(indices))),flush=True)
                 atomic_json(dict(status='Done',signature=signature,metrics=aggregate(scores)),folder/'metrics.json')
-    atomic_json(dict(status='Done',new_conditions=5,baseline_reused=True),OUT/'control_complete.json')
+    atomic_json(dict(status='Done',new_conditions=6,archived_baseline_preserved=True,same_runtime_baseline_revalidation=True),OUT/'control_complete.json')
 
 HERE=Path(__file__).resolve().parents[1]
 if __name__=='__main__':

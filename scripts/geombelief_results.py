@@ -67,7 +67,7 @@ def summarize():
     for split,n in [('val_seen',2470),('val_unseen',2697)]:
         for arm in ('predicted_guarded_blend','predicted_direct','predicted_waypoint','oracle_direct','oracle_guarded_blend','rule_arrival'):
             if arm=='predicted_guarded_blend':
-                ref=OUT/f'formal_baseline_{split}.json';folder=Path(json.loads(ref.read_text())['source']) if ref.exists() else None
+                folder=OUT/'controller'/'predicted_guarded_blend'/split
             else:folder=OUT/'controller'/arm/split
             ok=bool(folder and (folder/'metrics.json').exists() and (folder/'predictions.jsonl').exists())
             r=dict(arm=arm,split=split,status='Done' if ok else 'Pending',expected_episodes=n,checkpoint_sha256=file_sha256(formal),result_path=str(folder),oracle_diagnostic=arm.startswith('oracle'))
@@ -100,7 +100,8 @@ def summarize():
     for key,v in stats.items():
         if '/seed_mean' not in key:continue
         for name,s in v['metrics'].items():cis.append(dict(comparison=key,metric=name,delta_pp=100*s['delta'],map_CI95_pp=[100*x for x in s['map_cluster_episode_weighted_ci95']],maps=v['independent_maps']))
-    report+='\n## Primary map-cluster paired intervals\n\n'+table(cis,['comparison','metric','delta_pp','map_CI95_pp','maps'])
+    report+='\n## Paired map-cluster intervals\n\n'+table(cis,['comparison','metric','delta_pp','map_CI95_pp','maps'])
+    report+='\nThe three predeclared primary contrasts are Correct−Name/Type, Correct−Shuffle and Distance+Direction−Name/Type. Other simple-geometry contrasts and R@4/R@8 are secondary. Rates are fractions in per-seed tables; effects in the CI table are percentage points.\n'
     report+='\nConfidence intervals are pointwise, not multiplicity-adjusted. Episode bootstrap, equal-map estimates, every map and leave-one-map-out are in paired_statistics.json. Four Unseen maps are map blocks, not four independent cities. No missing or partial result is treated as zero.\n'
     report+='\n## Conclusions\n\n'
     for left,right in [('correct','name_type'),('correct','shuffled'),('distance_direction','name_type')]:
@@ -120,7 +121,8 @@ def summarize():
         text=dest.read_text().split('\n<!-- GEOMBELIEF_REMAINING -->')[0]
         text+='\n<!-- GEOMBELIEF_REMAINING -->\n\n## GeomBelief independent contribution experiments\n\n'
         text+=f'Archived Polygon baseline 34d2974 retained. New complete metric rows: {sum(r["status"]=="Done" for r in manifest)}/{len(manifest)} (includes reused controls). '
-        text+='See [map geometry report](../reports/paper_experiments/geombelief_remaining/MAP_GEOMETRY_ABLATION_REPORT.md) and reports/paper_experiments/geombelief_remaining/experiment_manifest.json for exact paths, SHA, missing experiments and paired statistics. P1 fair visual-input retraining remains Pending until explicitly completed; existing Real/Zero/Shuffle/No-belief results are reused.\n'
+        target='../reports/paper_experiments/geombelief_remaining/MAP_GEOMETRY_ABLATION_REPORT.md' if dest.parent.name=='docs' else 'geombelief_remaining/MAP_GEOMETRY_ABLATION_REPORT.md'
+        text+=f'See [map geometry report]({target}) and reports/paper_experiments/geombelief_remaining/experiment_manifest.json for exact paths, SHA, missing experiments and paired statistics. P1 fair visual-input retraining remains Pending until explicitly completed; existing Real/Zero/Shuffle/No-belief results are reused.\n'
         dest.write_text(text)
 
 if __name__=='__main__':summarize()
