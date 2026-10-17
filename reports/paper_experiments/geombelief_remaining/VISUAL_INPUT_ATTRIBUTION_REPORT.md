@@ -4,9 +4,11 @@ Original complete Real/Zero/Shuffle/No-belief Seen/Unseen experiments are reused
 
 New Geometry+Pose, RGB+Text and Current-RGB controls are **frozen-weight inference interventions**, not fair retraining. All retain the same frozen geometric baseline goal belief; labels refer to inputs to the residual correction module. RGB+Text Only therefore does not mean a full map-free navigation model.
 
-Geometry+Pose masks both projected RGB/text interactions, every image-quality channel and current/history appearance score. RGB+Text masks candidate geometric-language context, static relative logits/probability and pose distance. Both preserve common observed-support indicators and the residual visibility gate; thus this isolates RGB semantic descriptors beyond geometry/pose, not the ability to infer physical visibility from actual observation support. Current RGB disables history features, validity, quality and fusion consistently. All parameters, candidate grid, Stop0.3 and controller remain unchanged.
+Geometry+Pose masks both projected RGB/text interactions and current/history appearance scores. RGB+Text masks candidate geometric-language context, static relative logits/probability and pose distance. Both preserve common geometric ROI quality/support indicators and the residual visibility gate (current orthophoto-crop depth-validity proxy and known pose/footprint, not perspective occlusion sensing); thus this isolates RGB semantic descriptors beyond geometry/pose, not the ability to infer physical visibility from actual observation support. Current RGB disables history features, validity, quality and fusion consistently. All parameters, candidate grid, Stop0.3 and controller remain unchanged.
 
 Zero versus No-belief equality is enforced by the existing residual's meaningful-RGB gate. It cannot be reused as a fair trained Geometry+Pose model: zeroing RGB disables the residual outright. A favorable inference mask is also not evidence a model trained from scratch on that subset would perform best.
+
+The Real reference is historical and is not rerun, as requested. The formal C control audit observed small historical/current intermediate-pose numerical differences. No new same-runtime complete Real residual run is available; small differences in the new mask-versus-Real comparisons can therefore include runtime variation as well as masking. These comparisons are diagnostic, not an uncontaminated causal estimate of modality value. Original four-arm paired conclusions retain their original shared protocol.
 
 Fair retraining of these three residual input schemes remains Pending, with estimated additional 8 GPU-hours from the actual archived 3-epoch runtime (9565.5s per scheme), plus navigation. No Unseen/Test tuning or weight selection is permitted. Existing calibrated checkpoint selected on Train-Dev is used throughout the new diagnostic inference.
 
@@ -18,18 +20,18 @@ Rates below are fractions, NE is meters. Pointwise paired bootstrap uses 10,000 
 |zero|val_seen|Done|archived_full_validation|2470|0.47368421052631576|0.4595848256433525|0.5538461538461539|29.253030150070142|0.5263157894736842|
 |shuffle|val_seen|Done|archived_full_validation|2470|0.46923076923076923|0.43419287830228337|0.5955465587044534|29.038146390951603|0.5305791818550021|
 |no-belief|val_seen|Done|archived_full_validation|2470|0.47368421052631576|0.4595848256433525|0.5538461538461539|29.253030150070142|0.5263157894736842|
-|geometry_pose|val_seen|Pending|frozen_input_intervention_not_fair_retraining|||||||
-|rgb_text|val_seen|Pending|frozen_input_intervention_not_fair_retraining|||||||
-|current_rgb|val_seen|Pending|frozen_input_intervention_not_fair_retraining|||||||
+|geometry_pose|val_seen|Done|frozen_input_intervention_not_fair_retraining|2470|0.4744939271255061|0.45623612652244916|0.5724696356275304|29.05926431948075|0.5255060728744939|
+|rgb_text|val_seen|Done|frozen_input_intervention_not_fair_retraining|2470|0.4834008097165992|0.451067795196489|0.5975708502024292|28.975703529947165|0.5165991902834008|
+|current_rgb|val_seen|Done|frozen_input_intervention_not_fair_retraining|2470|0.4805668016194332|0.45614348273629673|0.5894736842105263|29.002766349596367|0.5192385581206966|
 |RGB + Geometry + Pose|val_seen|Done|exact_alias_of_archived_real_not_new_experiment|2470|0.4870445344129555|0.46494088505594233|0.5817813765182186|28.930326471488257|0.5129554655870445|
 |Current RGB + History|val_seen|Done|exact_alias_of_archived_real_not_new_experiment|2470|0.4870445344129555|0.46494088505594233|0.5817813765182186|28.930326471488257|0.5129554655870445|
 |real|val_unseen|Done|archived_full_validation|2697|0.23952539859102706|0.2276250823849327|0.3455691509084168|50.681843726310845|0.7601188265874489|
 |zero|val_unseen|Done|archived_full_validation|2697|0.22135706340378197|0.21529588731760127|0.3129403040415276|51.75753258960896|0.7784786641929499|
 |shuffle|val_unseen|Done|archived_full_validation|2697|0.22617723396366332|0.20805578992057383|0.3474230626622173|51.6328583728313|0.7734026745913819|
 |no-belief|val_unseen|Done|archived_full_validation|2697|0.22135706340378197|0.21529588731760127|0.3129403040415276|51.75753258960896|0.7784786641929499|
-|geometry_pose|val_unseen|Pending|frozen_input_intervention_not_fair_retraining|||||||
-|rgb_text|val_unseen|Pending|frozen_input_intervention_not_fair_retraining|||||||
-|current_rgb|val_unseen|Pending|frozen_input_intervention_not_fair_retraining|||||||
+|geometry_pose|val_unseen|Done|frozen_input_intervention_not_fair_retraining|2697|0.22617723396366332|0.21641049798350562|0.325176121616611|51.67417338919925|0.7736549165120594|
+|rgb_text|val_unseen|Done|frozen_input_intervention_not_fair_retraining|2697|0.24731182795698925|0.22750995682740238|0.3696700037078235|50.402239660515136|0.7520446096654275|
+|current_rgb|val_unseen|Done|frozen_input_intervention_not_fair_retraining|2697|0.22877271041898406|0.21751274086169206|0.3422321097515758|51.17132725267952|0.7710575139146568|
 |RGB + Geometry + Pose|val_unseen|Done|exact_alias_of_archived_real_not_new_experiment|2697|0.23952539859102706|0.2276250823849327|0.3455691509084168|50.681843726310845|0.7601188265874489|
 |Current RGB + History|val_unseen|Done|exact_alias_of_archived_real_not_new_experiment|2697|0.23952539859102706|0.2276250823849327|0.3455691509084168|50.681843726310845|0.7601188265874489|
 |geometry_pose|Train-Seen/Train-Dev then Val-Seen/Val-Unseen|Pending|fair_retraining|||||||

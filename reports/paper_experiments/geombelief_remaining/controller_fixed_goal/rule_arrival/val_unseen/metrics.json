@@ -1,0 +1,44 @@
+{
+  "status": "Done",
+  "signature": {
+    "scope": "identical_initial_belief",
+    "arm": "rule_arrival",
+    "split": "val_unseen",
+    "smoke": false,
+    "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "source_sha256": "12f5521f2167804aa884f320561faeb4a5ed4b078a189def9d626f0966a6878f",
+    "policy_sha256": "44d244f490fca4c14bd266b95d751bb89bb38ff7a6e1e4594e0cc9f07b5b835a",
+    "protocol": {
+      "horizon": 20,
+      "horizontal_step_m": 50.0,
+      "vertical_step_m": 10.0,
+      "min_altitude_m": 10.0,
+      "max_altitude_m": 100.0,
+      "stagnation_steps": 5,
+      "stagnation_tolerance_m": 0.0001,
+      "success_radius_m": 20.0,
+      "dimensions": 2
+    },
+    "stop_threshold": 0.3,
+    "arrival_guard_m": 0.001,
+    "source_commit": "c7d4ca58680f433b6c686a717910a0d55efe4887",
+    "future_observations": false
+  },
+  "metrics": {
+    "SR": 0.2232109751575825,
+    "OSR": 0.3133110863922877,
+    "SPL": 0.21677632391962415,
+    "NE": 51.79535043201316,
+    "nDTW": 0.2551386774270515,
+    "sDTW": 0.08348019925090744,
+    "steps": 7.096403411197627,
+    "path_length": 208.99948115995505,
+    "policy_stop": 1.0,
+    "inference_ms": 7.818823820447541,
+    "episodes": 2697,
+    "False_Stop_Rate": 0.7767890248424175,
+    "false_stop_episode_fraction": 0.7767890248424175,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "latency_not_comparable_to_native_full_model": true
+}

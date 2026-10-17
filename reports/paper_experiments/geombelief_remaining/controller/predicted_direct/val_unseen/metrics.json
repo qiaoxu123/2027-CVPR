@@ -1,0 +1,43 @@
+{
+  "status": "Done",
+  "signature": {
+    "arm": "predicted_direct",
+    "split": "val_unseen",
+    "smoke": false,
+    "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "source_sha256": "053dcdcdba649019a9969c4ec801adddfc10d1d7c331b32e57eda4261b9d31ca",
+    "policy_sha256": "44d244f490fca4c14bd266b95d751bb89bb38ff7a6e1e4594e0cc9f07b5b835a",
+    "stop_threshold": 0.3,
+    "arrival_guard_m": 0.001,
+    "protocol": {
+      "horizon": 20,
+      "horizontal_step_m": 50.0,
+      "vertical_step_m": 10.0,
+      "min_altitude_m": 10.0,
+      "max_altitude_m": 100.0,
+      "stagnation_steps": 5,
+      "stagnation_tolerance_m": 0.0001,
+      "success_radius_m": 20.0,
+      "dimensions": 2
+    },
+    "visual": "original checkpoint/current+checkpoint history",
+    "candidate_selection": "always original belief top1; oracle replaces only its controller coordinate; unchanged candidate context",
+    "source_commit": "65430a545ca78ce9916312a72606321002a892f2"
+  },
+  "metrics": {
+    "SR": 0.22691879866518352,
+    "OSR": 0.30626622172784573,
+    "SPL": 0.22050504464804493,
+    "NE": 51.55983731628355,
+    "nDTW": 0.26048401313470426,
+    "sDTW": 0.08437633591418035,
+    "steps": 4.847979236188357,
+    "path_length": 208.39767843573085,
+    "policy_stop": 0.9829440118650352,
+    "inference_ms": 79.67051938705228,
+    "episodes": 2697,
+    "False_Stop_Rate": 0.7721614485099962,
+    "false_stop_episode_fraction": 0.7589914720059325,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  }
+}

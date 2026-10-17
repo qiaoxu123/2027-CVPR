@@ -32,3 +32,9 @@ This scope is a controlled diagnostic, not the native dynamic formal policy. Gua
 Historical exact trajectory parity was rejected (birmingham_block_9:110:0; same final NE/SR but small intermediate-pose differences). A new matched-runtime formal control is retained separately; original published metrics remain unchanged. The attempted prefix replay was not used. See rule_replay_certificate.json.
 
 Parallel scratch-file collision was detected and repaired by per-process input/render directories and per-arm locks. All potentially affected tails were quarantined, with the verified pre-parallel prefix retained. See scratch_isolation_recovery.json; excluded output is never part of metrics. This scheduling repair changes no policy weights or parameters.
+
+Metric definitions: SR is final XY NE ≤20 m; OSR is any visited pose within 20 m; SPL uses the shared evaluator’s original shortest-distance/path-length convention. False-Stop Rate is failed active policy stops divided by all active policy stops, and is undefined (`null`) when there are no active stops. The per-Episode false-stop indicator is also retained separately; it has a different denominator.
+
+## Arrival arithmetic audit
+
+The shared controlled-policy wrapper recomputes the nominal 0.001 m world-distance gate using NumPy float64, whereas the archived runtime computed its norm in float32 tensors. Offline GPU float32-norm checks at every recorded decision in all 24 full-split control runs found zero arrival-boolean disagreements and zero Stop-request disagreements attributable to this precision difference. See arrival_precision_audit.json and scripts/geombelief_arrival_precision_audit.py. This is an audit of observed states, not a counterfactual replay or a reason to overwrite archived formal metrics.

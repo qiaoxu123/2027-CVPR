@@ -1,0 +1,224 @@
+{
+  "threshold_m": 0.001,
+  "current_control": "float64 world-distance recomputed from selected goal and pose; same for every controlled arm",
+  "archived_runtime": "float32 tensor-distance guard",
+  "note": "Offline float32 GPU norm comparison on observed trace states. Not a counterfactual replay; no metrics altered or thresholds tuned.",
+  "results": [
+    {
+      "scope": "controller",
+      "split": "val_seen",
+      "arm": "oracle_direct",
+      "decisions": 13721,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_seen",
+      "arm": "oracle_guarded_blend",
+      "decisions": 19451,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_seen",
+      "arm": "predicted_direct",
+      "decisions": 13873,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_seen",
+      "arm": "predicted_guarded_blend",
+      "decisions": 19608,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_seen",
+      "arm": "predicted_waypoint",
+      "decisions": 49371,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_seen",
+      "arm": "rule_arrival",
+      "decisions": 19588,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_unseen",
+      "arm": "oracle_direct",
+      "decisions": 15613,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_unseen",
+      "arm": "oracle_guarded_blend",
+      "decisions": 21895,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_unseen",
+      "arm": "predicted_direct",
+      "decisions": 15726,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_unseen",
+      "arm": "predicted_guarded_blend",
+      "decisions": 22144,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_unseen",
+      "arm": "predicted_waypoint",
+      "decisions": 53901,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller",
+      "split": "val_unseen",
+      "arm": "rule_arrival",
+      "decisions": 22107,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_seen",
+      "arm": "oracle_direct",
+      "decisions": 13725,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_seen",
+      "arm": "oracle_guarded_blend",
+      "decisions": 19444,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_seen",
+      "arm": "predicted_direct",
+      "decisions": 13776,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_seen",
+      "arm": "predicted_guarded_blend",
+      "decisions": 19439,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_seen",
+      "arm": "predicted_waypoint",
+      "decisions": 49375,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_seen",
+      "arm": "rule_arrival",
+      "decisions": 19420,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_unseen",
+      "arm": "oracle_direct",
+      "decisions": 15633,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_unseen",
+      "arm": "oracle_guarded_blend",
+      "decisions": 21899,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_unseen",
+      "arm": "predicted_direct",
+      "decisions": 15631,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_unseen",
+      "arm": "predicted_guarded_blend",
+      "decisions": 21889,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_unseen",
+      "arm": "predicted_waypoint",
+      "decisions": 53898,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    },
+    {
+      "scope": "controller_fixed_goal",
+      "split": "val_unseen",
+      "arm": "rule_arrival",
+      "decisions": 21836,
+      "arrival_disagreements": 0,
+      "potential_stop_request_disagreements": 0,
+      "details": []
+    }
+  ]
+}

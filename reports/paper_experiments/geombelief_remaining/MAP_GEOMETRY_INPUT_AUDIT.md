@@ -27,3 +27,13 @@ Data: 2426/2679 unique Seen/Unseen queries; navigation 2470/2697. No Test infere
 Navigation donor cache access is whitelisted to nodes/prior/prior_buildings/rules/relation_fields/pair_geometry before constructing policy inputs. Cached target labels are never exposed through the donor policy dictionary. Dataset targets and expert trajectories remain in the outer evaluator solely for post-rollout scoring. Oracle coordinates are an explicit exception only in separately labeled controller diagnostics.
 
 Metrics: localization recall uses a 20 m radius; navigation SR uses final XY NE ≤20 m regardless of termination. False-Stop Rate = failed policy_stop episodes / all policy_stop episodes; if no policy_stop occurs it is undefined (empty/None), not zero. SPL uses Euclidean start-to-goal length and actual XY path length.
+
+## Reference-name permissions
+
+The navigation loader uses the supplied processed CityRefer description's `landmarks` annotation. `CityReferCatalog.referenced_landmark_names` indexes it by map/object ID/description ID, then resolves the provided names by normalized string/edit distance against the map catalog. Object ID is an annotation lookup key; it is not a locator input, and the target coordinate/teacher route is not used to choose references. This is annotation-assisted landmark linking, not a newly demonstrated raw-text-only entity recognizer. Every map-input arm shares this same language/name/type interface. Comparisons to methods without supplied reference-name annotations must disclose that input privilege.
+
+## Observation support permissions
+
+Native visual/control experiments use actual CityNav orthophoto crops at executed poses. The supplied surface-height raster produces a current-crop vertical-depth validity proxy; this is not a perspective occlusion simulation. The policy does not receive the whole raster or the surface_height_m array. Candidate pooling uses the current crop’s depth_valid mask and known footprint/pose for support and geometric ROI quality. Therefore RGB semantic encodings share extra support/pose metadata; the new residual RGB+Text mask is not a depth-free, geometry-free full-system baseline. Map-only locator experiments use none of these visual observations.
+
+The generic dataset implementation also contains geometry-dependent ranking of unmentioned external roads. That path is inactive here: the frozen configuration has max_roads=0 and roads_json=null for every arm and Seed. Named road-like CityRefer references remain in the common supplied semantic reference set; their numeric geometry is masked under Name/Type Only.

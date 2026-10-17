@@ -1,6 +1,6 @@
 # GeomBelief qualitative cases
 
-All images are rendered from real CityNav RGB-D at actual executed poses. Map polygons, language, goal annotations and trajectories come from recorded public inputs and evaluation-only GT. English figure labels; no invented paths.
+Images are crops of the real CityNav orthophoto at actual executed poses. The environment uses an orthographic crop and a surface-height-derived vertical-depth proxy, not a perspective occlusion renderer or a separately captured onboard photograph. Only the visited crop and its support metadata enter the policy. Map polygons, language, goal annotations and trajectories come from recorded public inputs and evaluation-only GT. English figure labels; no invented paths.
 
 ## visual_improved
 

@@ -25,6 +25,9 @@ def main():
     receipt=OUT/'remote_sync.json'
     if receipt.exists() and json.loads(receipt.read_text()).get('verified'):return
     commit,branch=commit_push('Complete GeomBelief map geometry and frozen controller attribution')
+    experiment_manifest=OUT/'experiment_manifest.json'
+    em=json.loads(experiment_manifest.read_text());em['packaged_code_commit']=commit;atomic_json(em,experiment_manifest)
+    commit,branch=commit_push('Link experiment provenance to committed GeomBelief implementation')
     references=[]
     # Reverify both old assets that hold reused correct-geometry training and
     # navigation outputs, including original C/head source weights.

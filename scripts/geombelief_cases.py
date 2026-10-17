@@ -75,7 +75,7 @@ def main():
         fig,axes=plt.subplots(1,2,figsize=(11,4.8),constrained_layout=True)
         draw_map(axes[0],static,record.target_position,paths,goals)
         axes[0].set_title('Public map geometry and executed paths')
-        axes[1].imshow(obs['bgr'][...,::-1]);axes[1].axis('off');axes[1].set_title(f'Actual current RGB at decision {step}')
+        axes[1].imshow(obs['bgr'][...,::-1]);axes[1].axis('off');axes[1].set_title(f'Visited orthophoto crop at decision {step}')
         fig.suptitle('\n'.join(textwrap.wrap(record.instruction,110))+'\nEpisode: '+':'.join(map(str,eid)),fontsize=9)
         for suffix in ('png','pdf'):fig.savefig(out/f'{name}.{suffix}',dpi=180)
         plt.close(fig)
@@ -84,7 +84,7 @@ def main():
             obs0=builder.build_from_poses(public,np.asarray(real['poses'])[:1]).current_observation
             fig,axes=plt.subplots(1,2,figsize=(11,4.8),constrained_layout=True)
             draw_map(axes[0],static,record.target_position);axes[0].set_title('Language-grounded public landmark geometry')
-            axes[1].imshow(obs0['bgr'][...,::-1]);axes[1].axis('off');axes[1].set_title('Actual initial RGB observation')
+            axes[1].imshow(obs0['bgr'][...,::-1]);axes[1].axis('off');axes[1].set_title('Initial-pose orthophoto crop')
             fig.suptitle('\n'.join(textwrap.wrap(record.instruction,110)),fontsize=9)
             for suffix in ('png','pdf'):fig.savefig(out/f'language_map_goal.{suffix}',dpi=180)
             plt.close(fig)
@@ -94,9 +94,13 @@ def main():
             comparator_metrics=other['metrics'] if other_path else None,figure=str(out/f'{name}.png'),public_map=static,
             selection='First archived typical example of the requested outcome; formal false-stop is first failed policy_stop in fixed episode order. Illustrative, not representative causal evidence.'))
     atomic_json(manifest,OUT/'qualitative_manifest.json')
-    text='# GeomBelief qualitative cases\n\nAll images are rendered from real CityNav RGB-D at actual executed poses. Map polygons, language, goal annotations and trajectories come from recorded public inputs and evaluation-only GT. English figure labels; no invented paths.\n\n'
+    text='# GeomBelief qualitative cases\n\nImages are crops of the real CityNav orthophoto at actual executed poses. The environment uses an orthographic crop and a surface-height-derived vertical-depth proxy, not a perspective occlusion renderer or a separately captured onboard photograph. Only the visited crop and its support metadata enter the policy. Map polygons, language, goal annotations and trajectories come from recorded public inputs and evaluation-only GT. English figure labels; no invented paths.\n\n'
     for r in manifest:text+=f'## {r["case"]}\n\nEpisode `{r["episode_id"]}`; {r["split"]}; NE {r["actual_metrics"]["NE"]:.2f} m. Source trace and SHA: qualitative_manifest.json.\n\n![{r["case"]}](figures/{r["case"]}.png)\n\n'
     text+='## Correct versus shuffled geometry belief\n\nPending all static models being frozen. The heatmap uses predeclared Seed0 and the first publicly changed geometry query, never a favorable seed or outcome. No fabricated probability field is substituted for missing logits.\n'
+    previous=(OUT/'qualitative_cases.md').read_text() if (OUT/'qualitative_cases.md').exists() else ''
+    marker='## Correct versus shuffled geometry belief'
+    if marker in previous and 'belief_figure_manifest.json' in previous:
+        text=text.split(marker)[0]+marker+previous.split(marker,1)[1]
     (OUT/'qualitative_cases.md').write_text(text)
 
 if __name__=='__main__':main()

@@ -20,7 +20,7 @@ def main():
     from scripts.geombelief_visual_results import summarize as visual_summary
     from scripts.geombelief_verify import main as verify
     summarize();visual_summary();verify()
-    live=json.loads((OUT/'live_status.json').read_text());live.update(timestamp=time.time(),status='CoreComplete; synchronizing remote',pending_gates=[]);atomic_json(live,OUT/'live_status.json')
+    live=json.loads((OUT/'live_status.json').read_text());live.update(timestamp=time.time(),status='CoreComplete; synchronizing remote',pending_gates=[],map_navigation_complete=30,native_control_complete=12,fixed_goal_complete=12,visual_complete=6);atomic_json(live,OUT/'live_status.json')
     stats=json.loads((OUT/'paired_statistics.json').read_text());stats.update(json.loads((OUT/'visual_input_paired_statistics.json').read_text()));atomic_json(stats,OUT/'paired_statistics.json')
     def effect(key,metric):
         s=stats[key]['metrics'][metric];lo,hi=s['map_cluster_episode_weighted_ci95']

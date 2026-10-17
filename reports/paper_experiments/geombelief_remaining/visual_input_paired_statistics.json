@@ -1,1 +1,1772 @@
-{}
+{
+  "visual/val_seen/real-minus-geometry_pose": {
+    "samples": 2470,
+    "independent_maps": 23,
+    "draws": 10000,
+    "seed": 20261017,
+    "limitations": "Pointwise percentile CIs; no multiple-comparison adjustment. Episode bootstrap is diagnostic only; map clusters primary. Few maps imply discrete, unstable intervals; more draws do not add maps.",
+    "metrics": {
+      "SR": {
+        "delta": 0.012550607287449392,
+        "episode_ci95": [
+          0.004453441295546558,
+          0.020647773279352227
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.003624748039233986,
+          0.02146119304778771
+        ],
+        "map_equal_delta": 0.0116909899613039,
+        "map_cluster_map_equal_ci95": [
+          0.0009512058206539475,
+          0.021764190992465227
+        ],
+        "improved": 67,
+        "degraded": 36,
+        "unchanged": 2367
+      },
+      "SPL": {
+        "delta": 0.008704758533493175,
+        "episode_ci95": [
+          0.0014249433089289412,
+          0.016116872437374134
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.0011265794554195829,
+          0.015969408634031537
+        ],
+        "map_equal_delta": 0.008240677839515223,
+        "map_cluster_map_equal_ci95": [
+          -0.0015833209594681642,
+          0.01775305267798213
+        ],
+        "improved": 366,
+        "degraded": 337,
+        "unchanged": 1767
+      }
+    },
+    "per_map": [
+      {
+        "map_name": "birmingham_block_1",
+        "samples": 320,
+        "SR": 0.034375,
+        "SPL": 0.02571534110499702
+      },
+      {
+        "map_name": "birmingham_block_10",
+        "samples": 37,
+        "SR": 0.0,
+        "SPL": -0.00030606524276337646
+      },
+      {
+        "map_name": "birmingham_block_11",
+        "samples": 2,
+        "SR": 0.0,
+        "SPL": 0.0
+      },
+      {
+        "map_name": "birmingham_block_12",
+        "samples": 81,
+        "SR": 0.024691358024691357,
+        "SPL": 0.02316844726909415
+      },
+      {
+        "map_name": "birmingham_block_3",
+        "samples": 161,
+        "SR": 0.037267080745341616,
+        "SPL": 0.027315955693012345
+      },
+      {
+        "map_name": "birmingham_block_4",
+        "samples": 100,
+        "SR": 0.02,
+        "SPL": 0.010617239551718522
+      },
+      {
+        "map_name": "birmingham_block_7",
+        "samples": 39,
+        "SR": 0.07692307692307693,
+        "SPL": 0.07130035981205264
+      },
+      {
+        "map_name": "birmingham_block_9",
+        "samples": 105,
+        "SR": 0.01904761904761905,
+        "SPL": 0.012429355466259579
+      },
+      {
+        "map_name": "cambridge_block_12",
+        "samples": 157,
+        "SR": 0.01910828025477707,
+        "SPL": 0.019455175977888817
+      },
+      {
+        "map_name": "cambridge_block_13",
+        "samples": 190,
+        "SR": -0.010526315789473684,
+        "SPL": -0.006868704347567457
+      },
+      {
+        "map_name": "cambridge_block_17",
+        "samples": 44,
+        "SR": 0.0,
+        "SPL": -8.896482127121716e-06
+      },
+      {
+        "map_name": "cambridge_block_18",
+        "samples": 60,
+        "SR": 0.03333333333333333,
+        "SPL": 0.016465396920611185
+      },
+      {
+        "map_name": "cambridge_block_19",
+        "samples": 47,
+        "SR": -0.06382978723404255,
+        "SPL": -0.06179275658688289
+      },
+      {
+        "map_name": "cambridge_block_20",
+        "samples": 207,
+        "SR": 0.004830917874396135,
+        "SPL": 0.0038554268190180473
+      },
+      {
+        "map_name": "cambridge_block_21",
+        "samples": 190,
+        "SR": 0.0,
+        "SPL": -0.005504626429981614
+      },
+      {
+        "map_name": "cambridge_block_23",
+        "samples": 32,
+        "SR": 0.0,
+        "SPL": 0.002062763019242162
+      },
+      {
+        "map_name": "cambridge_block_25",
+        "samples": 23,
+        "SR": 0.0,
+        "SPL": -0.010086267870115543
+      },
+      {
+        "map_name": "cambridge_block_28",
+        "samples": 170,
+        "SR": 0.0,
+        "SPL": -0.004188567792670946
+      },
+      {
+        "map_name": "cambridge_block_33",
+        "samples": 99,
+        "SR": 0.0,
+        "SPL": -0.004281711895321412
+      },
+      {
+        "map_name": "cambridge_block_4",
+        "samples": 31,
+        "SR": 0.03225806451612903,
+        "SPL": 0.03225806451612903
+      },
+      {
+        "map_name": "cambridge_block_6",
+        "samples": 33,
+        "SR": 0.030303030303030304,
+        "SPL": 0.028706768420193183
+      },
+      {
+        "map_name": "cambridge_block_7",
+        "samples": 162,
+        "SR": 0.0,
+        "SPL": 0.0016257084666688071
+      },
+      {
+        "map_name": "cambridge_block_9",
+        "samples": 180,
+        "SR": 0.011111111111111112,
+        "SPL": 0.007597183919394992
+      }
+    ],
+    "leave_one_map_out": [
+      {
+        "excluded_map": "birmingham_block_1",
+        "samples": 2150,
+        "episode_weighted": {
+          "SR": 0.009302325581395349,
+          "SPL": 0.006172950894943755
+        },
+        "map_equal": {
+          "SR": 0.010659898595908622,
+          "SPL": 0.007446374963811506
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_10",
+        "samples": 2433,
+        "episode_weighted": {
+          "SR": 0.012741471434443074,
+          "SPL": 0.008841791200867396
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008629166161436979
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_11",
+        "samples": 2468,
+        "episode_weighted": {
+          "SR": 0.012560777957860616,
+          "SPL": 0.008711812632790973
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008615254104947734
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_12",
+        "samples": 2389,
+        "episode_weighted": {
+          "SR": 0.012138970280452072,
+          "SPL": 0.008214361385069691
+        },
+        "map_equal": {
+          "SR": 0.011100064140240833,
+          "SPL": 0.007562142865443453
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_3",
+        "samples": 2309,
+        "episode_weighted": {
+          "SR": 0.010827197921177999,
+          "SPL": 0.007407052711629768
+        },
+        "map_equal": {
+          "SR": 0.010528440380211274,
+          "SPL": 0.007373619755265354
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_4",
+        "samples": 2370,
+        "episode_weighted": {
+          "SR": 0.012236286919831224,
+          "SPL": 0.008624063131880284
+        },
+        "map_equal": {
+          "SR": 0.01131330768681771,
+          "SPL": 0.008132652307142347
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_7",
+        "samples": 2431,
+        "episode_weighted": {
+          "SR": 0.011517893870835048,
+          "SPL": 0.007700551026350501
+        },
+        "map_equal": {
+          "SR": 0.008725895099405124,
+          "SPL": 0.00537432865894534
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_9",
+        "samples": 2365,
+        "episode_weighted": {
+          "SR": 0.01226215644820296,
+          "SPL": 0.008539395878972884
+        },
+        "map_equal": {
+          "SR": 0.011356597730107755,
+          "SPL": 0.008050283401935934
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_12",
+        "samples": 2313,
+        "episode_weighted": {
+          "SR": 0.012105490704712495,
+          "SPL": 0.007975050129355635
+        },
+        "map_equal": {
+          "SR": 0.011353840402509663,
+          "SPL": 0.007730927924134606
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_13",
+        "samples": 2280,
+        "episode_weighted": {
+          "SR": 0.014473684210526316,
+          "SPL": 0.010002547106914887
+        },
+        "map_equal": {
+          "SR": 0.012700867495430153,
+          "SPL": 0.008927467938928072
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_17",
+        "samples": 2426,
+        "episode_weighted": {
+          "SR": 0.012778235779060182,
+          "SPL": 0.0088627967942876
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008615658490498966
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_18",
+        "samples": 2410,
+        "episode_weighted": {
+          "SR": 0.012033195020746889,
+          "SPL": 0.008511547619291059
+        },
+        "map_equal": {
+          "SR": 0.010707247080757105,
+          "SPL": 0.00786682697219268
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_19",
+        "samples": 2423,
+        "episode_weighted": {
+          "SR": 0.014032191498142799,
+          "SPL": 0.010072229936983746
+        },
+        "map_equal": {
+          "SR": 0.015123752561092378,
+          "SPL": 0.011424015767987865
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_20",
+        "samples": 2263,
+        "episode_weighted": {
+          "SR": 0.013256738842244807,
+          "SPL": 0.009148334169770829
+        },
+        "map_equal": {
+          "SR": 0.01200281141979971,
+          "SPL": 0.008440007431356004
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_21",
+        "samples": 2280,
+        "episode_weighted": {
+          "SR": 0.013596491228070176,
+          "SPL": 0.009888873947116066
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008865464397219625
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_23",
+        "samples": 2438,
+        "episode_weighted": {
+          "SR": 0.012715340442986054,
+          "SPL": 0.008791938130070702
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008521492149527635
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_25",
+        "samples": 2447,
+        "episode_weighted": {
+          "SR": 0.012668573763792398,
+          "SPL": 0.008881380359109431
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.009073720826316621
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_28",
+        "samples": 2300,
+        "episode_weighted": {
+          "SR": 0.013478260869565217,
+          "SPL": 0.009657743522818344
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008805643550069141
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_33",
+        "samples": 2371,
+        "episode_weighted": {
+          "SR": 0.013074652045550401,
+          "SPL": 0.009247002553928695
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008809877372916887
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_4",
+        "samples": 2439,
+        "episode_weighted": {
+          "SR": 0.012300123001230012,
+          "SPL": 0.008405393020798738
+        },
+        "map_equal": {
+          "SR": 0.010756122936084576,
+          "SPL": 0.007148978445123687
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_6",
+        "samples": 2437,
+        "episode_weighted": {
+          "SR": 0.012310217480508822,
+          "SPL": 0.008433906532565346
+        },
+        "map_equal": {
+          "SR": 0.010844988127589064,
+          "SPL": 0.007310400994938953
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_7",
+        "samples": 2308,
+        "episode_weighted": {
+          "SR": 0.013431542461005199,
+          "SPL": 0.00920164159710909
+        },
+        "map_equal": {
+          "SR": 0.012222398595908625,
+          "SPL": 0.008541358265553696
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_9",
+        "samples": 2290,
+        "episode_weighted": {
+          "SR": 0.012663755458515284,
+          "SPL": 0.008791816800103503
+        },
+        "map_equal": {
+          "SR": 0.01171734809085812,
+          "SPL": 0.008269927563157052
+        }
+      }
+    ],
+    "reference_runtime_limitation": "Real is reused from the original complete experiment as requested; new masks run now. Historical native C exact trajectory parity failed. No new same-runtime full Real was run, so very small differences cannot be uniquely assigned to masking rather than numerical runtime variation."
+  },
+  "visual/val_seen/real-minus-rgb_text": {
+    "samples": 2470,
+    "independent_maps": 23,
+    "draws": 10000,
+    "seed": 20261017,
+    "limitations": "Pointwise percentile CIs; no multiple-comparison adjustment. Episode bootstrap is diagnostic only; map clusters primary. Few maps imply discrete, unstable intervals; more draws do not add maps.",
+    "metrics": {
+      "SR": {
+        "delta": 0.0036437246963562753,
+        "episode_ci95": [
+          -0.005668016194331984,
+          0.012955465587044534
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          -0.009046874384527514,
+          0.017110350587022045
+        ],
+        "map_equal_delta": 0.005060358998754966,
+        "map_cluster_map_equal_ci95": [
+          -0.0067283828986621245,
+          0.01651142685669693
+        ],
+        "improved": 72,
+        "degraded": 63,
+        "unchanged": 2335
+      },
+      "SPL": {
+        "delta": 0.013873089859453428,
+        "episode_ci95": [
+          0.005087098603243499,
+          0.022495541748649636
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.001743682823395661,
+          0.025801404809966608
+        ],
+        "map_equal_delta": 0.013656456895494324,
+        "map_cluster_map_equal_ci95": [
+          0.001540406814159015,
+          0.025954553078164164
+        ],
+        "improved": 544,
+        "degraded": 280,
+        "unchanged": 1646
+      }
+    },
+    "per_map": [
+      {
+        "map_name": "birmingham_block_1",
+        "samples": 320,
+        "SR": 0.003125,
+        "SPL": 0.018652496574422184
+      },
+      {
+        "map_name": "birmingham_block_10",
+        "samples": 37,
+        "SR": 0.0,
+        "SPL": 0.014774105741554413
+      },
+      {
+        "map_name": "birmingham_block_11",
+        "samples": 2,
+        "SR": 0.0,
+        "SPL": 0.0
+      },
+      {
+        "map_name": "birmingham_block_12",
+        "samples": 81,
+        "SR": 0.0,
+        "SPL": 0.024117528554783302
+      },
+      {
+        "map_name": "birmingham_block_3",
+        "samples": 161,
+        "SR": 0.043478260869565216,
+        "SPL": 0.04653446743312052
+      },
+      {
+        "map_name": "birmingham_block_4",
+        "samples": 100,
+        "SR": 0.01,
+        "SPL": 0.028304259075920192
+      },
+      {
+        "map_name": "birmingham_block_7",
+        "samples": 39,
+        "SR": 0.07692307692307693,
+        "SPL": 0.09735091810108266
+      },
+      {
+        "map_name": "birmingham_block_9",
+        "samples": 105,
+        "SR": 0.009523809523809525,
+        "SPL": 0.02087352582903395
+      },
+      {
+        "map_name": "cambridge_block_12",
+        "samples": 157,
+        "SR": 0.01910828025477707,
+        "SPL": 0.03405593873548745
+      },
+      {
+        "map_name": "cambridge_block_13",
+        "samples": 190,
+        "SR": -0.031578947368421054,
+        "SPL": -0.01624133983472597
+      },
+      {
+        "map_name": "cambridge_block_17",
+        "samples": 44,
+        "SR": 0.0,
+        "SPL": -7.276200227532029e-06
+      },
+      {
+        "map_name": "cambridge_block_18",
+        "samples": 60,
+        "SR": 0.016666666666666666,
+        "SPL": 0.024632848195145877
+      },
+      {
+        "map_name": "cambridge_block_19",
+        "samples": 47,
+        "SR": -0.06382978723404255,
+        "SPL": -0.059789089672727225
+      },
+      {
+        "map_name": "cambridge_block_20",
+        "samples": 207,
+        "SR": 0.0,
+        "SPL": 0.007880136233631395
+      },
+      {
+        "map_name": "cambridge_block_21",
+        "samples": 190,
+        "SR": -0.042105263157894736,
+        "SPL": -0.03048416565183763
+      },
+      {
+        "map_name": "cambridge_block_23",
+        "samples": 32,
+        "SR": 0.03125,
+        "SPL": 0.03324122368960877
+      },
+      {
+        "map_name": "cambridge_block_25",
+        "samples": 23,
+        "SR": 0.0,
+        "SPL": -0.010008706727695488
+      },
+      {
+        "map_name": "cambridge_block_28",
+        "samples": 170,
+        "SR": 0.0,
+        "SPL": 0.011550418961611308
+      },
+      {
+        "map_name": "cambridge_block_33",
+        "samples": 99,
+        "SR": 0.0,
+        "SPL": -0.003189043261986095
+      },
+      {
+        "map_name": "cambridge_block_4",
+        "samples": 31,
+        "SR": 0.0,
+        "SPL": 0.0021604190133998596
+      },
+      {
+        "map_name": "cambridge_block_6",
+        "samples": 33,
+        "SR": 0.0,
+        "SPL": 0.015649109889096232
+      },
+      {
+        "map_name": "cambridge_block_7",
+        "samples": 162,
+        "SR": -0.006172839506172839,
+        "SPL": 0.0040610270625671945
+      },
+      {
+        "map_name": "cambridge_block_9",
+        "samples": 180,
+        "SR": 0.05,
+        "SPL": 0.049979706855104104
+      }
+    ],
+    "leave_one_map_out": [
+      {
+        "excluded_map": "birmingham_block_1",
+        "samples": 2150,
+        "episode_weighted": {
+          "SR": 0.0037209302325581397,
+          "SPL": 0.013161736301876665
+        },
+        "map_equal": {
+          "SR": 0.005148329862334738,
+          "SPL": 0.013429364182815788
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_10",
+        "samples": 2433,
+        "episode_weighted": {
+          "SR": 0.0036991368680641184,
+          "SPL": 0.013859387603950857
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.013605654675218865
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_11",
+        "samples": 2468,
+        "episode_weighted": {
+          "SR": 0.003646677471636953,
+          "SPL": 0.013884332233731745
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.014277204936198608
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_12",
+        "samples": 2389,
+        "episode_weighted": {
+          "SR": 0.0037672666387609877,
+          "SPL": 0.013525748070285695
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.013180953638253917
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_3",
+        "samples": 2309,
+        "episode_weighted": {
+          "SR": 0.0008661758336942399,
+          "SPL": 0.011595704935520807
+        },
+        "map_equal": {
+          "SR": 0.0033140907318999543,
+          "SPL": 0.01216200187105677
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_4",
+        "samples": 2370,
+        "episode_weighted": {
+          "SR": 0.0033755274261603376,
+          "SPL": 0.013264179765931625
+        },
+        "map_equal": {
+          "SR": 0.004835829862334738,
+          "SPL": 0.012990647705474968
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_7",
+        "samples": 2431,
+        "episode_weighted": {
+          "SR": 0.0024681201151789387,
+          "SPL": 0.012533873363598414
+        },
+        "map_equal": {
+          "SR": 0.0017938718203766954,
+          "SPL": 0.00985216320433122
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_9",
+        "samples": 2365,
+        "episode_weighted": {
+          "SR": 0.0033826638477801266,
+          "SPL": 0.013562288262495312
+        },
+        "map_equal": {
+          "SR": 0.004857474883979759,
+          "SPL": 0.01332840830760616
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_12",
+        "samples": 2313,
+        "episode_weighted": {
+          "SR": 0.0025940337224383916,
+          "SPL": 0.0125031342721048
+        },
+        "map_equal": {
+          "SR": 0.0044218171234812345,
+          "SPL": 0.012729207720949182
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_13",
+        "samples": 2280,
+        "episode_weighted": {
+          "SR": 0.006578947368421052,
+          "SPL": 0.016382625667301715
+        },
+        "map_equal": {
+          "SR": 0.006725782015444785,
+          "SPL": 0.01501544765595888
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_17",
+        "samples": 2426,
+        "episode_weighted": {
+          "SR": 0.003709810387469085,
+          "SPL": 0.014124835987493797
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.014277535672572589
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_18",
+        "samples": 2410,
+        "episode_weighted": {
+          "SR": 0.0033195020746887966,
+          "SPL": 0.013605212058564815
+        },
+        "map_equal": {
+          "SR": 0.004532799559304435,
+          "SPL": 0.013157530018237435
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_19",
+        "samples": 2423,
+        "episode_weighted": {
+          "SR": 0.004952538175815105,
+          "SPL": 0.015301947654753663
+        },
+        "map_equal": {
+          "SR": 0.008191729282063943,
+          "SPL": 0.016994890830413483
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_20",
+        "samples": 2263,
+        "episode_weighted": {
+          "SR": 0.003977021652673442,
+          "SPL": 0.014421274305120751
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.013919016925579002
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_21",
+        "samples": 2280,
+        "episode_weighted": {
+          "SR": 0.007456140350877193,
+          "SPL": 0.01756952781872766
+        },
+        "map_equal": {
+          "SR": 0.007204250914966317,
+          "SPL": 0.015662848829463956
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_23",
+        "samples": 2438,
+        "episode_weighted": {
+          "SR": 0.003281378178835111,
+          "SPL": 0.013618873172593304
+        },
+        "map_equal": {
+          "SR": 0.003869920771425647,
+          "SPL": 0.012766240223034575
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_25",
+        "samples": 2447,
+        "episode_weighted": {
+          "SR": 0.0036779730281977932,
+          "SPL": 0.014097561180051878
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.014732146151093861
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_28",
+        "samples": 2300,
+        "episode_weighted": {
+          "SR": 0.00391304347826087,
+          "SPL": 0.014044765534511325
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.013752185892489006
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_33",
+        "samples": 2371,
+        "episode_weighted": {
+          "SR": 0.003795866722901729,
+          "SPL": 0.01458551127616473
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.014422161448107068
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_4",
+        "samples": 2439,
+        "episode_weighted": {
+          "SR": 0.0036900369003690036,
+          "SPL": 0.014021959394602108
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.01417900407195316
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_6",
+        "samples": 2437,
+        "episode_weighted": {
+          "SR": 0.0036930652441526466,
+          "SPL": 0.013849040347357311
+        },
+        "map_equal": {
+          "SR": 0.005290375316880192,
+          "SPL": 0.01356588175942151
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_7",
+        "samples": 2308,
+        "episode_weighted": {
+          "SR": 0.004332755632582322,
+          "SPL": 0.014561804839130879
+        },
+        "map_equal": {
+          "SR": 0.005570958930797139,
+          "SPL": 0.01409261279699101
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_9",
+        "samples": 2290,
+        "episode_weighted": {
+          "SR": 0.0,
+          "SPL": 0.011035015161105347
+        },
+        "map_equal": {
+          "SR": 0.003017648044152919,
+          "SPL": 0.012005400079148422
+        }
+      }
+    ],
+    "reference_runtime_limitation": "Real is reused from the original complete experiment as requested; new masks run now. Historical native C exact trajectory parity failed. No new same-runtime full Real was run, so very small differences cannot be uniquely assigned to masking rather than numerical runtime variation."
+  },
+  "visual/val_seen/real-minus-current_rgb": {
+    "samples": 2470,
+    "independent_maps": 23,
+    "draws": 10000,
+    "seed": 20261017,
+    "limitations": "Pointwise percentile CIs; no multiple-comparison adjustment. Episode bootstrap is diagnostic only; map clusters primary. Few maps imply discrete, unstable intervals; more draws do not add maps.",
+    "metrics": {
+      "SR": {
+        "delta": 0.006477732793522267,
+        "episode_ci95": [
+          -0.0032388663967611335,
+          0.016194331983805668
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          -0.004656704989632642,
+          0.016564540980650706
+        ],
+        "map_equal_delta": 0.009316566402314758,
+        "map_cluster_map_equal_ci95": [
+          0.0001264145420422415,
+          0.018957248252441532
+        ],
+        "improved": 83,
+        "degraded": 67,
+        "unchanged": 2320
+      },
+      "SPL": {
+        "delta": 0.008797402319645691,
+        "episode_ci95": [
+          -9.953841958240897e-05,
+          0.017651089153124175
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          -0.00038741212286600595,
+          0.01720918045072663
+        ],
+        "map_equal_delta": 0.010282375033389538,
+        "map_cluster_map_equal_ci95": [
+          0.0018911910927616865,
+          0.019354476441132366
+        ],
+        "improved": 476,
+        "degraded": 313,
+        "unchanged": 1681
+      }
+    },
+    "per_map": [
+      {
+        "map_name": "birmingham_block_1",
+        "samples": 320,
+        "SR": 0.01875,
+        "SPL": 0.015979637233719698
+      },
+      {
+        "map_name": "birmingham_block_10",
+        "samples": 37,
+        "SR": 0.0,
+        "SPL": -0.01004595992916631
+      },
+      {
+        "map_name": "birmingham_block_11",
+        "samples": 2,
+        "SR": 0.0,
+        "SPL": 0.0
+      },
+      {
+        "map_name": "birmingham_block_12",
+        "samples": 81,
+        "SR": 0.024691358024691357,
+        "SPL": 0.016181192408436608
+      },
+      {
+        "map_name": "birmingham_block_3",
+        "samples": 161,
+        "SR": 0.037267080745341616,
+        "SPL": 0.038567039850567926
+      },
+      {
+        "map_name": "birmingham_block_4",
+        "samples": 100,
+        "SR": 0.0,
+        "SPL": 0.00016876432640174354
+      },
+      {
+        "map_name": "birmingham_block_7",
+        "samples": 39,
+        "SR": 0.0,
+        "SPL": 0.007939555500459803
+      },
+      {
+        "map_name": "birmingham_block_9",
+        "samples": 105,
+        "SR": 0.0380952380952381,
+        "SPL": 0.03678957930089817
+      },
+      {
+        "map_name": "cambridge_block_12",
+        "samples": 157,
+        "SR": 0.01910828025477707,
+        "SPL": 0.024753177559913703
+      },
+      {
+        "map_name": "cambridge_block_13",
+        "samples": 190,
+        "SR": -0.042105263157894736,
+        "SPL": -0.028969553628714662
+      },
+      {
+        "map_name": "cambridge_block_17",
+        "samples": 44,
+        "SR": 0.0,
+        "SPL": 8.88499832409704e-07
+      },
+      {
+        "map_name": "cambridge_block_18",
+        "samples": 60,
+        "SR": -0.016666666666666666,
+        "SPL": -0.022385615674455375
+      },
+      {
+        "map_name": "cambridge_block_19",
+        "samples": 47,
+        "SR": 0.0,
+        "SPL": -0.0012448057630667292
+      },
+      {
+        "map_name": "cambridge_block_20",
+        "samples": 207,
+        "SR": 0.004830917874396135,
+        "SPL": 0.011437282601845926
+      },
+      {
+        "map_name": "cambridge_block_21",
+        "samples": 190,
+        "SR": -0.021052631578947368,
+        "SPL": -0.010245803520302976
+      },
+      {
+        "map_name": "cambridge_block_23",
+        "samples": 32,
+        "SR": 0.0,
+        "SPL": 0.0
+      },
+      {
+        "map_name": "cambridge_block_25",
+        "samples": 23,
+        "SR": 0.043478260869565216,
+        "SPL": 0.041503966468908964
+      },
+      {
+        "map_name": "cambridge_block_28",
+        "samples": 170,
+        "SR": 0.0058823529411764705,
+        "SPL": 0.009897745417260913
+      },
+      {
+        "map_name": "cambridge_block_33",
+        "samples": 99,
+        "SR": -0.010101010101010102,
+        "SPL": -0.008117174502907916
+      },
+      {
+        "map_name": "cambridge_block_4",
+        "samples": 31,
+        "SR": 0.06451612903225806,
+        "SPL": 0.06451612903225806
+      },
+      {
+        "map_name": "cambridge_block_6",
+        "samples": 33,
+        "SR": 0.030303030303030304,
+        "SPL": 0.03239790001267644
+      },
+      {
+        "map_name": "cambridge_block_7",
+        "samples": 162,
+        "SR": 0.006172839506172839,
+        "SPL": 0.008461126114462295
+      },
+      {
+        "map_name": "cambridge_block_9",
+        "samples": 180,
+        "SR": 0.011111111111111112,
+        "SPL": 0.008909554458930696
+      }
+    ],
+    "leave_one_map_out": [
+      {
+        "excluded_map": "birmingham_block_1",
+        "samples": 2150,
+        "episode_weighted": {
+          "SR": 0.004651162790697674,
+          "SPL": 0.007728418518481186
+        },
+        "map_equal": {
+          "SR": 0.008887773966056335,
+          "SPL": 0.010023408569738167
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_10",
+        "samples": 2433,
+        "episode_weighted": {
+          "SR": 0.006576243321002877,
+          "SPL": 0.00908396393214304
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.011206390258960258
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_11",
+        "samples": 2468,
+        "episode_weighted": {
+          "SR": 0.006482982171799027,
+          "SPL": 0.008804531494945245
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.010749755716725427
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_12",
+        "samples": 2389,
+        "episode_weighted": {
+          "SR": 0.0058601925491837585,
+          "SPL": 0.008547051965023651
+        },
+        "map_equal": {
+          "SR": 0.008617712237661276,
+          "SPL": 0.010014246970887397
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_3",
+        "samples": 2309,
+        "episode_weighted": {
+          "SR": 0.0043308791684712,
+          "SPL": 0.006721650200772372
+        },
+        "map_equal": {
+          "SR": 0.008046088477631717,
+          "SPL": 0.00899670845079052
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_4",
+        "samples": 2370,
+        "episode_weighted": {
+          "SR": 0.006751054852320675,
+          "SPL": 0.009161479872103242
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.010742084610979892
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_7",
+        "samples": 2431,
+        "episode_weighted": {
+          "SR": 0.00658165364047717,
+          "SPL": 0.00881116456808183
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.010388866830340888
+        }
+      },
+      {
+        "excluded_map": "birmingham_block_9",
+        "samples": 2365,
+        "episode_weighted": {
+          "SR": 0.00507399577167019,
+          "SPL": 0.0075546206777719034
+        },
+        "map_equal": {
+          "SR": 0.008008444961727331,
+          "SPL": 0.009077502112139146
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_12",
+        "samples": 2313,
+        "episode_weighted": {
+          "SR": 0.005620406398616515,
+          "SPL": 0.007714368721408743
+        },
+        "map_equal": {
+          "SR": 0.008871488499930106,
+          "SPL": 0.009624611282183893
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_13",
+        "samples": 2280,
+        "episode_weighted": {
+          "SR": 0.010526315789473684,
+          "SPL": 0.011944648648675721
+        },
+        "map_equal": {
+          "SR": 0.011653922291415188,
+          "SPL": 0.012066553608939733
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_17",
+        "samples": 2426,
+        "episode_weighted": {
+          "SR": 0.006595218466611707,
+          "SPL": 0.008956943378207847
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.010749715330369407
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_18",
+        "samples": 2410,
+        "episode_weighted": {
+          "SR": 0.007053941908713693,
+          "SPL": 0.009573743016594267
+        },
+        "map_equal": {
+          "SR": 0.010497622450904822,
+          "SPL": 0.011767283701927944
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_19",
+        "samples": 2423,
+        "episode_weighted": {
+          "SR": 0.006603384234420141,
+          "SPL": 0.008992195460333885
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.010806337796864823
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_20",
+        "samples": 2263,
+        "episode_weighted": {
+          "SR": 0.006628369421122404,
+          "SPL": 0.008555928515661846
+        },
+        "map_equal": {
+          "SR": 0.009520459517220149,
+          "SPL": 0.01022987923482334
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_21",
+        "samples": 2280,
+        "episode_weighted": {
+          "SR": 0.008771929824561403,
+          "SPL": 0.01038433613964142
+        },
+        "map_equal": {
+          "SR": 0.010696984492372127,
+          "SPL": 0.011215474058557379
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_23",
+        "samples": 2438,
+        "episode_weighted": {
+          "SR": 0.006562756357670222,
+          "SPL": 0.00891287273565417
+        },
+        "map_equal": {
+          "SR": 0.009740046693329065,
+          "SPL": 0.010749755716725427
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_25",
+        "samples": 2447,
+        "episode_weighted": {
+          "SR": 0.006129955046996322,
+          "SPL": 0.008489984675414777
+        },
+        "map_equal": {
+          "SR": 0.007763762108348826,
+          "SPL": 0.008863211786320473
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_28",
+        "samples": 2300,
+        "episode_weighted": {
+          "SR": 0.006521739130434782,
+          "SPL": 0.008716072612430657
+        },
+        "map_equal": {
+          "SR": 0.009472667014184678,
+          "SPL": 0.010299858197759021
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_33",
+        "samples": 2371,
+        "episode_weighted": {
+          "SR": 0.007169970476592155,
+          "SPL": 0.009503662591865351
+        },
+        "map_equal": {
+          "SR": 0.01019918351610225,
+          "SPL": 0.011118718194130333
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_4",
+        "samples": 2439,
+        "episode_weighted": {
+          "SR": 0.005740057400574006,
+          "SPL": 0.008089210221207406
+        },
+        "map_equal": {
+          "SR": 0.006807495373680969,
+          "SPL": 0.007817204397077332
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_6",
+        "samples": 2437,
+        "episode_weighted": {
+          "SR": 0.006155108740254411,
+          "SPL": 0.008477822334471294
+        },
+        "map_equal": {
+          "SR": 0.008362636225009506,
+          "SPL": 0.009277123897967407
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_7",
+        "samples": 2308,
+        "episode_weighted": {
+          "SR": 0.006499133448873483,
+          "SPL": 0.008821005762123905
+        },
+        "map_equal": {
+          "SR": 0.009459463079412117,
+          "SPL": 0.01036515907515896
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_9",
+        "samples": 2290,
+        "episode_weighted": {
+          "SR": 0.00611353711790393,
+          "SPL": 0.008788586867649491
+        },
+        "map_equal": {
+          "SR": 0.00923499618827856,
+          "SPL": 0.010344775968592214
+        }
+      }
+    ],
+    "reference_runtime_limitation": "Real is reused from the original complete experiment as requested; new masks run now. Historical native C exact trajectory parity failed. No new same-runtime full Real was run, so very small differences cannot be uniquely assigned to masking rather than numerical runtime variation."
+  },
+  "visual/val_unseen/real-minus-geometry_pose": {
+    "samples": 2697,
+    "independent_maps": 4,
+    "draws": 10000,
+    "seed": 20261017,
+    "limitations": "Pointwise percentile CIs; no multiple-comparison adjustment. Episode bootstrap is diagnostic only; map clusters primary. Few maps imply discrete, unstable intervals; more draws do not add maps.",
+    "metrics": {
+      "SR": {
+        "delta": 0.013348164627363738,
+        "episode_ci95": [
+          0.0070448646644419724,
+          0.020022246941045607
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.005775577557755775,
+          0.020098846787479408
+        ],
+        "map_equal_delta": 0.011896366103666916,
+        "map_cluster_map_equal_ci95": [
+          0.004970902487122447,
+          0.018821829720211385
+        ],
+        "improved": 59,
+        "degraded": 23,
+        "unchanged": 2615
+      },
+      "SPL": {
+        "delta": 0.011214584401427082,
+        "episode_ci95": [
+          0.005229867189578308,
+          0.01754209307854078
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.004827108112325591,
+          0.017154003974600214
+        ],
+        "map_equal_delta": 0.009524636884228707,
+        "map_cluster_map_equal_ci95": [
+          0.0033723053598503187,
+          0.015742969489759537
+        ],
+        "improved": 218,
+        "degraded": 147,
+        "unchanged": 2332
+      }
+    },
+    "per_map": [
+      {
+        "map_name": "birmingham_block_5",
+        "samples": 914,
+        "SR": 0.02188183807439825,
+        "SPL": 0.018927641912189323
+      },
+      {
+        "map_name": "cambridge_block_10",
+        "samples": 919,
+        "SR": 0.006528835690968444,
+        "SPL": 0.006188952222470174
+      },
+      {
+        "map_name": "cambridge_block_2",
+        "samples": 293,
+        "SR": 0.0034129692832764505,
+        "SPL": 0.0005556584972304635
+      },
+      {
+        "map_name": "cambridge_block_3",
+        "samples": 571,
+        "SR": 0.01576182136602452,
+        "SPL": 0.012426294905024867
+      }
+    ],
+    "leave_one_map_out": [
+      {
+        "excluded_map": "birmingham_block_5",
+        "samples": 1783,
+        "episode_weighted": {
+          "SR": 0.0089736399326977,
+          "SPL": 0.0072607231760559825
+        },
+        "map_equal": {
+          "SR": 0.008567875446756471,
+          "SPL": 0.006390301874908501
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_10",
+        "samples": 1778,
+        "episode_weighted": {
+          "SR": 0.01687289088863892,
+          "SPL": 0.013812197434307501
+        },
+        "map_equal": {
+          "SR": 0.013685542907899738,
+          "SPL": 0.01063653177148155
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_2",
+        "samples": 2404,
+        "episode_weighted": {
+          "SR": 0.014559068219633943,
+          "SPL": 0.012513696418868682
+        },
+        "map_equal": {
+          "SR": 0.01472416504379707,
+          "SPL": 0.012514296346561454
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_3",
+        "samples": 2126,
+        "episode_weighted": {
+          "SR": 0.012699905926622766,
+          "SPL": 0.010889143809915168
+        },
+        "map_equal": {
+          "SR": 0.010607881016214382,
+          "SPL": 0.00855741754396332
+        }
+      }
+    ],
+    "reference_runtime_limitation": "Real is reused from the original complete experiment as requested; new masks run now. Historical native C exact trajectory parity failed. No new same-runtime full Real was run, so very small differences cannot be uniquely assigned to masking rather than numerical runtime variation."
+  },
+  "visual/val_unseen/real-minus-rgb_text": {
+    "samples": 2697,
+    "independent_maps": 4,
+    "draws": 10000,
+    "seed": 20261017,
+    "limitations": "Pointwise percentile CIs; no multiple-comparison adjustment. Episode bootstrap is diagnostic only; map clusters primary. Few maps imply discrete, unstable intervals; more draws do not add maps.",
+    "metrics": {
+      "SR": {
+        "delta": -0.00778642936596218,
+        "episode_ci95": [
+          -0.015943641082684465,
+          0.0
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          -0.024855012427506214,
+          0.006040268456375839
+        ],
+        "map_equal_delta": -0.00699915327598926,
+        "map_cluster_map_equal_ci95": [
+          -0.02084187593649285,
+          0.005891388073154976
+        ],
+        "improved": 50,
+        "degraded": 71,
+        "unchanged": 2576
+      },
+      "SPL": {
+        "delta": 0.00011512555753032534,
+        "episode_ci95": [
+          -0.006995299269005874,
+          0.007215156022961108
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          -0.011600499997595477,
+          0.009605568540776531
+        ],
+        "map_equal_delta": -0.0006258801749662855,
+        "map_cluster_map_equal_ci95": [
+          -0.011073852219131628,
+          0.009822091869199058
+        ],
+        "improved": 270,
+        "degraded": 189,
+        "unchanged": 2238
+      }
+    },
+    "per_map": [
+      {
+        "map_name": "birmingham_block_5",
+        "samples": 914,
+        "SR": -0.02954048140043764,
+        "SPL": -0.012097465534116917
+      },
+      {
+        "map_name": "cambridge_block_10",
+        "samples": 919,
+        "SR": 0.006528835690968444,
+        "SPL": 0.00889502359520606
+      },
+      {
+        "map_name": "cambridge_block_2",
+        "samples": 293,
+        "SR": -0.010238907849829351,
+        "SPL": -0.010050238904146339
+      },
+      {
+        "map_name": "cambridge_block_3",
+        "samples": 571,
+        "SR": 0.005253940455341506,
+        "SPL": 0.010749160143192054
+      }
+    ],
+    "leave_one_map_out": [
+      {
+        "excluded_map": "birmingham_block_5",
+        "samples": 1783,
+        "episode_weighted": {
+          "SR": 0.0033651149747616375,
+          "SPL": 0.006375534002715739
+        },
+        "map_equal": {
+          "SR": 0.000514622765493533,
+          "SPL": 0.0031979816114172583
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_10",
+        "samples": 1778,
+        "episode_weighted": {
+          "SR": -0.015185601799775027,
+          "SPL": -0.0044229657229106194
+        },
+        "map_equal": {
+          "SR": -0.011508482931641827,
+          "SPL": -0.003799514765023734
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_2",
+        "samples": 2404,
+        "episode_weighted": {
+          "SR": -0.0074875207986688855,
+          "SPL": 0.0013540822078095508
+        },
+        "map_equal": {
+          "SR": -0.00591923508470923,
+          "SPL": 0.002515572734760399
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_3",
+        "samples": 2126,
+        "episode_weighted": {
+          "SR": -0.011288805268109126,
+          "SPL": -0.0027409580494371475
+        },
+        "map_equal": {
+          "SR": -0.011083517853099516,
+          "SPL": -0.004417560281019066
+        }
+      }
+    ],
+    "reference_runtime_limitation": "Real is reused from the original complete experiment as requested; new masks run now. Historical native C exact trajectory parity failed. No new same-runtime full Real was run, so very small differences cannot be uniquely assigned to masking rather than numerical runtime variation."
+  },
+  "visual/val_unseen/real-minus-current_rgb": {
+    "samples": 2697,
+    "independent_maps": 4,
+    "draws": 10000,
+    "seed": 20261017,
+    "limitations": "Pointwise percentile CIs; no multiple-comparison adjustment. Episode bootstrap is diagnostic only; map clusters primary. Few maps imply discrete, unstable intervals; more draws do not add maps.",
+    "metrics": {
+      "SR": {
+        "delta": 0.010752688172043012,
+        "episode_ci95": [
+          0.0025954764553207266,
+          0.01853911753800519
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.0,
+          0.02444913975249019
+        ],
+        "map_equal_delta": 0.009091604991747635,
+        "map_cluster_map_equal_ci95": [
+          0.0,
+          0.02215536105032823
+        ],
+        "improved": 76,
+        "degraded": 47,
+        "unchanged": 2574
+      },
+      "SPL": {
+        "delta": 0.010112341523240654,
+        "episode_ci95": [
+          0.0028178418505288875,
+          0.01743908816189149
+        ],
+        "map_cluster_episode_weighted_ci95": [
+          0.001139400518523237,
+          0.021989422241661817
+        ],
+        "map_equal_delta": 0.00816984683719628,
+        "map_cluster_map_equal_ci95": [
+          0.00121726103331125,
+          0.020258345913128598
+        ],
+        "improved": 245,
+        "degraded": 171,
+        "unchanged": 2281
+      }
+    },
+    "per_map": [
+      {
+        "map_name": "birmingham_block_5",
+        "samples": 914,
+        "SR": 0.02954048140043764,
+        "SPL": 0.026426690426974157
+      },
+      {
+        "map_name": "cambridge_block_10",
+        "samples": 919,
+        "SR": 0.0,
+        "SPL": 0.0017533123715919152
+      },
+      {
+        "map_name": "cambridge_block_2",
+        "samples": 293,
+        "SR": 0.006825938566552901,
+        "SPL": 0.003818174855188468
+      },
+      {
+        "map_name": "cambridge_block_3",
+        "samples": 571,
+        "SR": 0.0,
+        "SPL": 0.0006812096950305852
+      }
+    ],
+    "leave_one_map_out": [
+      {
+        "excluded_map": "birmingham_block_5",
+        "samples": 1783,
+        "episode_weighted": {
+          "SR": 0.0011217049915872126,
+          "SPL": 0.0017492933471259977
+        },
+        "map_equal": {
+          "SR": 0.0022753128555176336,
+          "SPL": 0.0020842323072703226
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_10",
+        "samples": 1778,
+        "episode_weighted": {
+          "SR": 0.016310461192350956,
+          "SPL": 0.014432897085875746
+        },
+        "map_equal": {
+          "SR": 0.012122139988996847,
+          "SPL": 0.010308691659064404
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_2",
+        "samples": 2404,
+        "episode_weighted": {
+          "SR": 0.011231281198003328,
+          "SPL": 0.010879475813481618
+        },
+        "map_equal": {
+          "SR": 0.009846827133479213,
+          "SPL": 0.009620404164532219
+        }
+      },
+      {
+        "excluded_map": "cambridge_block_3",
+        "samples": 2126,
+        "episode_weighted": {
+          "SR": 0.013640639698965193,
+          "SPL": 0.012645350118681831
+        },
+        "map_equal": {
+          "SR": 0.012122139988996847,
+          "SPL": 0.01066605921791818
+        }
+      }
+    ],
+    "reference_runtime_limitation": "Real is reused from the original complete experiment as requested; new masks run now. Historical native C exact trajectory parity failed. No new same-runtime full Real was run, so very small differences cannot be uniquely assigned to masking rather than numerical runtime variation."
+  }
+}
