@@ -12,7 +12,7 @@ The Real reference is historical and is not rerun, as requested. The formal C co
 
 Fair retraining of these three residual input schemes remains Pending, with estimated additional 8 GPU-hours from the actual archived 3-epoch runtime (9565.5s per scheme), plus navigation. No Unseen/Test tuning or weight selection is permitted. Existing calibrated checkpoint selected on Train-Dev is used throughout the new diagnostic inference.
 
-Rates below are fractions, NE is meters. Pointwise paired bootstrap uses 10,000 draws and map clusters; only four Unseen map blocks. Existing primary Real/No-belief and Real/Shuffle intervals are preserved in ../../../../visual_residual_unseen_validation/bootstrap_results.json and not rerun.
+Rates below are fractions, NE is meters. Pointwise paired bootstrap uses 10,000 draws and map clusters; only four Unseen map blocks. Existing primary Real/No-belief and Real/Shuffle intervals are preserved in ../../../visual_residual_unseen_validation/bootstrap_results.json and not rerun.
 
 |arm|split|status|kind|episodes|SR|SPL|OSR|NE|False_Stop_Rate|
 |---|---|---|---|---|---|---|---|---|---|

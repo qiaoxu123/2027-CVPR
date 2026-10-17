@@ -21,10 +21,14 @@ All core experiments complete. Three matched seeds per map geometry arm; origina
 - Unseen SR, direction-minus-name_type: +5.698 pp (map-cluster 95% CI [+1.491, +10.086]; positive pointwise map-cluster support).
 - Unseen R@1, distance_direction-minus-name_type: +18.029 pp (map-cluster 95% CI [+9.298, +25.124]; positive pointwise map-cluster support).
 - Unseen SR, distance_direction-minus-name_type: +18.057 pp (map-cluster 95% CI [+9.279, +25.168]; positive pointwise map-cluster support).
-- Unseen R@1, distance_direction-minus-distance: -1.058 pp (map-cluster 95% CI [-2.998, +1.161]; CI crosses zero).
-- Unseen SR, distance_direction-minus-distance: -1.038 pp (map-cluster 95% CI [-2.955, +0.897]; CI crosses zero).
+- Unseen R@1, distance_direction-minus-distance: -1.058 pp (map-cluster 95% CI [-2.998, +1.161]; CI includes zero).
+- Unseen SR, distance_direction-minus-distance: -1.038 pp (map-cluster 95% CI [-2.955, +0.897]; CI includes zero).
 - Unseen R@1, distance_direction-minus-direction: +12.169 pp (map-cluster 95% CI [+7.522, +15.945]; positive pointwise map-cluster support).
 - Unseen SR, distance_direction-minus-direction: +12.359 pp (map-cluster 95% CI [+7.788, +16.063]; positive pointwise map-cluster support).
+
+Exploratory completeness check (added after inspecting static means; no model or parameter selection):
+- Unseen R@1, Correct − Distance Only: +0.299 pp (map-cluster 95% CI [-0.888, +2.169]; CI includes zero).
+- Unseen SR, Correct − Distance Only: +0.000 pp (map-cluster 95% CI [-1.188, +1.938]; CI includes zero).
 
 ## 3. Localization, visual correction, trajectory and Stop
 
@@ -38,24 +42,26 @@ All core experiments complete. Three matched seeds per map geometry arm; origina
 - controller, Unseen SPL, oracle_guarded_blend-minus-predicted_guarded_blend: +77.309 pp (map-cluster 95% CI [+69.361, +85.806]; positive pointwise map-cluster support).
 - controller_fixed_goal, Unseen SR, predicted_waypoint-minus-predicted_direct: -2.558 pp (map-cluster 95% CI [-4.703, -0.494]; negative pointwise map-cluster support).
 - controller_fixed_goal, Unseen SPL, predicted_waypoint-minus-predicted_direct: -7.681 pp (map-cluster 95% CI [-10.257, -4.500]; negative pointwise map-cluster support).
-- controller, Unseen SR, predicted_waypoint-minus-predicted_direct: -2.521 pp (map-cluster 95% CI [-4.703, +0.030]; CI crosses zero).
+- controller, Unseen SR, predicted_waypoint-minus-predicted_direct: -2.521 pp (map-cluster 95% CI [-4.703, +0.030]; CI includes zero).
 - controller, Unseen SPL, predicted_waypoint-minus-predicted_direct: -7.723 pp (map-cluster 95% CI [-10.589, -4.186]; negative pointwise map-cluster support).
 - controller_fixed_goal, Unseen SR, predicted_guarded_blend-minus-predicted_waypoint: +2.558 pp (map-cluster 95% CI [+0.494, +4.703]; positive pointwise map-cluster support).
 - controller_fixed_goal, Unseen SPL, predicted_guarded_blend-minus-predicted_waypoint: +7.598 pp (map-cluster 95% CI [+4.454, +10.144]; positive pointwise map-cluster support).
 - controller, Unseen SR, predicted_guarded_blend-minus-predicted_waypoint: +2.410 pp (map-cluster 95% CI [+0.066, +4.538]; positive pointwise map-cluster support).
 - controller, Unseen SPL, predicted_guarded_blend-minus-predicted_waypoint: +7.522 pp (map-cluster 95% CI [+4.272, +10.155]; positive pointwise map-cluster support).
-- controller_fixed_goal, Unseen SR, predicted_guarded_blend-minus-predicted_direct: +0.000 pp (map-cluster 95% CI [+0.000, +0.000]; CI crosses zero).
+- controller_fixed_goal, Unseen SR, predicted_guarded_blend-minus-predicted_direct: +0.000 pp (map-cluster 95% CI [+0.000, +0.000]; CI includes zero).
 - controller_fixed_goal, Unseen SPL, predicted_guarded_blend-minus-predicted_direct: -0.082 pp (map-cluster 95% CI [-0.117, -0.044]; negative pointwise map-cluster support).
-- controller, Unseen SR, predicted_guarded_blend-minus-predicted_direct: -0.111 pp (map-cluster 95% CI [-0.418, +0.166]; CI crosses zero).
-- controller, Unseen SPL, predicted_guarded_blend-minus-predicted_direct: -0.201 pp (map-cluster 95% CI [-0.500, +0.086]; CI crosses zero).
-- controller_fixed_goal, Unseen SR, predicted_guarded_blend-minus-rule_arrival: +0.000 pp (map-cluster 95% CI [+0.000, +0.000]; CI crosses zero).
-- controller_fixed_goal, Unseen SPL, predicted_guarded_blend-minus-rule_arrival: -0.000 pp (map-cluster 95% CI [-0.000, +0.000]; CI crosses zero).
-- controller, Unseen SR, predicted_guarded_blend-minus-rule_arrival: +0.000 pp (map-cluster 95% CI [+0.000, +0.000]; CI crosses zero).
-- controller, Unseen SPL, predicted_guarded_blend-minus-rule_arrival: -0.000 pp (map-cluster 95% CI [-0.000, +0.000]; CI crosses zero).
-- Allowing later belief updates, Unseen SR native Guarded-Blend minus initially frozen belief: +0.260 pp (map-cluster 95% CI [+0.000, +0.395]; CI crosses zero).
+- controller, Unseen SR, predicted_guarded_blend-minus-predicted_direct: -0.111 pp (map-cluster 95% CI [-0.418, +0.166]; CI includes zero).
+- controller, Unseen SPL, predicted_guarded_blend-minus-predicted_direct: -0.201 pp (map-cluster 95% CI [-0.500, +0.086]; CI includes zero).
+- controller_fixed_goal, Unseen SR, predicted_guarded_blend-minus-rule_arrival: +0.000 pp (map-cluster 95% CI [+0.000, +0.000]; CI includes zero).
+- controller_fixed_goal, Unseen SPL, predicted_guarded_blend-minus-rule_arrival: -0.000 pp (map-cluster 95% CI [-0.000, +0.000]; CI includes zero).
+- controller, Unseen SR, predicted_guarded_blend-minus-rule_arrival: +0.000 pp (map-cluster 95% CI [+0.000, +0.000]; CI includes zero).
+- controller, Unseen SPL, predicted_guarded_blend-minus-rule_arrival: -0.000 pp (map-cluster 95% CI [-0.000, +0.000]; CI includes zero).
+- Allowing later belief updates, Unseen SR native Guarded-Blend minus initially frozen belief: +0.260 pp (map-cluster 95% CI [+0.000, +0.395]; CI includes zero).
 - Frozen calibrated residual, Unseen SR Real − geometry_pose: +1.335 pp (map-cluster 95% CI [+0.578, +2.010]; positive pointwise map-cluster support).
-- Frozen calibrated residual, Unseen SR Real − rgb_text: -0.779 pp (map-cluster 95% CI [-2.486, +0.604]; CI crosses zero).
-- Frozen calibrated residual, Unseen SR Real − current_rgb: +1.075 pp (map-cluster 95% CI [+0.000, +2.445]; CI crosses zero).
+- Frozen calibrated residual, Unseen SR Real − rgb_text: -0.779 pp (map-cluster 95% CI [-2.486, +0.604]; CI includes zero).
+- Frozen calibrated residual, Unseen SR Real − current_rgb: +1.075 pp (map-cluster 95% CI [+0.000, +2.445]; CI includes zero).
+
+The new Real-versus-masked visual comparisons are frozen-input dependency diagnostics, not fair retraining. Real is reused from the historical experiment as requested, so small runtime differences cannot be completely separated from masking. The original full Real/No-belief comparison did not meet its positive Unseen SR and strictly positive map-cluster lower-bound criterion. A favorable masked variant is not selected as a new model using Unseen results.
 
 Oracle intervention quantifies recoverable error under a specified diagnostic controller, not a uniquely additive fraction attributable to localization. OSR−SR describes reaching but not ending in the success region, not automatically a learned-Stop failure. Geometry ablations use a transferred pretrained controller; formal controller controls use the original complete C weights; calibrated visual experiments use the previously trained residual. These different configurations cannot have their gains added together.
 

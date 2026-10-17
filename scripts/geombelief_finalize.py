@@ -24,7 +24,7 @@ def main():
     stats=json.loads((OUT/'paired_statistics.json').read_text());stats.update(json.loads((OUT/'visual_input_paired_statistics.json').read_text()));atomic_json(stats,OUT/'paired_statistics.json')
     def effect(key,metric):
         s=stats[key]['metrics'][metric];lo,hi=s['map_cluster_episode_weighted_ci95']
-        label='positive pointwise map-cluster support' if lo>0 else 'negative pointwise map-cluster support' if hi<0 else 'CI crosses zero'
+        label='positive pointwise map-cluster support' if lo>0 else 'negative pointwise map-cluster support' if hi<0 else 'CI includes zero'
         return f'{100*s["delta"]:+.3f} pp (map-cluster 95% CI [{100*lo:+.3f}, {100*hi:+.3f}]; {label})'
     text='# GeomBelief core experiment conclusions\n\nAll core experiments complete. Three matched seeds per map geometry arm; original Correct Geometry reused. New formal-control evaluations use the same runtime after exact historical trajectory parity failed. No original checkpoint/result was overwritten. New visual-input controls are frozen interventions; fair visual-input retraining remains Pending.\n\n'
     text+='## 1. Does correct geometry beat language/name/type alone?\n\n'
@@ -36,6 +36,9 @@ def main():
     for pair in ('distance-minus-name_type','direction-minus-name_type','distance_direction-minus-name_type','distance_direction-minus-distance','distance_direction-minus-direction'):
         for endpoint,metric in [('localization','R@1'),('navigation','SR')]:
             key=f'{endpoint}/val_unseen/{pair}/seed_mean';text+=f'- Unseen {metric}, {pair}: '+effect(key,metric)+'.\n'
+    text+='\nExploratory completeness check (added after inspecting static means; no model or parameter selection):\n'
+    for endpoint,metric in [('localization','R@1'),('navigation','SR')]:
+        text+=f'- Unseen {metric}, Correct − Distance Only: '+effect(f'{endpoint}/val_unseen/correct-minus-distance/seed_mean',metric)+'.\n'
     text+='\n## 3. Localization, visual correction, trajectory and Stop\n\n'
     for pair in ('oracle_direct-minus-predicted_direct','oracle_guarded_blend-minus-predicted_guarded_blend','predicted_waypoint-minus-predicted_direct','predicted_guarded_blend-minus-predicted_waypoint','predicted_guarded_blend-minus-predicted_direct','predicted_guarded_blend-minus-rule_arrival'):
         for scope in ('controller_fixed_goal','controller'):
@@ -45,6 +48,8 @@ def main():
     for arm in ('geometry_pose','rgb_text','current_rgb'):
         text+=f'- Frozen calibrated residual, Unseen SR Real − {arm}: '+effect('visual/val_unseen/real-minus-'+arm,'SR')+'.\n'
     text+='''
+The new Real-versus-masked visual comparisons are frozen-input dependency diagnostics, not fair retraining. Real is reused from the historical experiment as requested, so small runtime differences cannot be completely separated from masking. The original full Real/No-belief comparison did not meet its positive Unseen SR and strictly positive map-cluster lower-bound criterion. A favorable masked variant is not selected as a new model using Unseen results.
+
 Oracle intervention quantifies recoverable error under a specified diagnostic controller, not a uniquely additive fraction attributable to localization. OSR−SR describes reaching but not ending in the success region, not automatically a learned-Stop failure. Geometry ablations use a transferred pretrained controller; formal controller controls use the original complete C weights; calibrated visual experiments use the previously trained residual. These different configurations cannot have their gains added together.
 
 ## Recommended paper tables and scope of claims
