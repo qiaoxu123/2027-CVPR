@@ -1,7 +1,7 @@
 # PolyBelief Polygon Geometry 独立贡献验证
 
 状态：部分完成；未完成项目保留Pending。[信息通路审计](POLYGON_FEATURE_AUDIT.md)与frozen_plan.json先于实验结果产生。
-独立训练已完成1/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
+独立训练已完成4/15；当前结果行数：静态26、导航0，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
 Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；共18个逻辑条件、15次独立训练。seed0预先指定优先闭环，并保留seed1/2所有结果。
@@ -91,6 +91,7 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 
 geometry_subgroup_results.csv按预先固定的旋转最小包围矩形填充率0.85、长宽比3、最大地标面积1000m²、点状面积25m²及源类型/名称数分组；每组保留R@1/SR、NE和N，不剔除Polygon退化组。
 多参照物的类型旗标可重叠，不能把组N相加当全样本数。关系组只使用明确解析且唯一绑定的公开参照，非GT目标–参照关系；不能强称所有复杂关系均得到验证。
+dataset_group_counts.json显示Seen/Unseen“多条明确绑定关系”仅6/19个Query；Regular仅174/192，而Irregular为2177/2481，组间难度及大小等因素混杂，不能从不同组绝对SR差异直接推断因果交互。当前真实开放Polyline数量为0，Road-like结果仅说明TrafficRoad面状区域，不能外推到开放中心线。
 完整分组、每图实值、paired_statistics.json中的help/hurt/unchanged、两种地图权重及Leave-One-Map-Out敏感性均随结果保存。百分位区间未作多重比较校正，分组分析属于探索性。
 
 End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增加独立地图数；N为每Seed样本数）：
@@ -107,5 +108,6 @@ End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增�
 public_static_record只使用公开地标绑定/名称/轮廓，目标和未来轨迹仅在forward/rollout之后评分；渲染优化须先通过128条完整轨迹与原观测builder逐点一致性。
 配置、源/权重SHA、Query清单、Train-Dev分组、初始化及每epoch数据顺序hash、训练断点、逐Query/episode预测和日志均原地保留。复现命令：`python -m scripts.run_polygon_ablation --resume`；统计重建：`python -m scripts.polygon_ablation_statistics`。
 implementation_provenance.json及source_snapshot_manifest.json记录实现Commit与代码SHA；frozen_plan.json中的source_commit是实验开始前的基线Commit。旧架构args保留来源字段（如原continue_from/seed），实际独立随机初始化、Seed和预算以新config.json及顶层Checkpoint元数据为准，不执行旧continue_from。navigation_data_audit.json记录processed_citynav目录与revised静态记录的Query ID集合一致性及全部来源SHA，导航started.json另记录实际策略代码SHA。
+静态评估沿用原static_recall的topk(8)并列排序，R@1/4/8由其前缀得到；闭环保留原模型topk(20)候选与原head选择。BF16并列分数时两者首位可能不同，不能把静态R@1和闭环SR的差额全部归因于执行控制。所有表示使用相同协议，不为个别表示修正并列顺序。
 
 若主要End-to-End Unseen效应未获地图级正下界支持，论文核心创新应强调“使用完整公开几何的可解释接口/表示设计”，而不能声称已证明Polygon跨地图优于点/框。若仅Descriptor Only有效，也只能声称候选–地标描述符的条件增量价值。

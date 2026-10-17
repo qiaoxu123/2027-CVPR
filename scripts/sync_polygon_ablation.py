@@ -86,7 +86,12 @@ def _sync():
                      remote_server_digest_matches=True,time=time.time()),OUT/'remote_sync.json')
     (OUT/'POLYGON_ASSET_MANIFEST.json').write_bytes(mp.read_bytes())
     (OUT/'POLYGON_SHA256SUMS').write_bytes(sums.read_bytes())
-    subprocess.run(['git','add',str(OUT.relative_to(HERE))],cwd=HERE,check=True)
+    indexes=[HERE/'docs/PAPER_EXPERIMENT_TODO.md',HERE/'reports/paper_experiments/PAPER_EXPERIMENT_SUMMARY.md']
+    for path in indexes:
+        path.write_text(path.read_text().replace('|原始结果和权重远程备份|Running|','|原始结果和权重远程备份|Done|'))
+    report=OUT/'POLYGON_ABLATION_REPORT.md'
+    report.write_text(report.read_text()+f"\n远程同步已校验：[完整权重、逐样本结果和日志归档]({remote['html_url']})。服务器资产SHA及逐文件清单见remote_sync.json与POLYGON_ASSET_MANIFEST.json。\n")
+    subprocess.run(['git','add',str(OUT.relative_to(HERE)),*[str(p.relative_to(HERE)) for p in indexes]],cwd=HERE,check=True)
     subprocess.run(['git','commit','-m','Record verified remote Polygon experiment asset backup'],cwd=HERE,check=True)
     subprocess.run([*GIT,'push','origin',branch],cwd=HERE,check=True)
 

@@ -101,3 +101,37 @@ def test_geometry_attention_never_calls_gat_message_passing_and_capacity_matches
         f=model(batch,variant='geometry',tokens=torch.zeros(1,3,768),token_mask=torch.ones(1,3,dtype=torch.bool),node_emb=torch.zeros(1,3,768))
         assert torch.isfinite(f.belief_logits).all()
         assert sum(p.numel() for p in model.parameters())==count
+
+
+def test_representation_views_do_not_mutate_shared_public_feature_cache():
+    item,g,b=item_for([[-2,-2],[2,-2],[2,2],[-2,2]])
+    original={k:v.clone() for k,v in item.items() if isinstance(v,torch.Tensor)}
+    geometry=[e['geometry_m'].copy() for e in g['entities']]
+    for scope in ('descriptor_only','end_to_end'):
+        for rep in ('centroid','bounding_box','full_polygon'):
+            geometry_view(item,g,b,representation=rep,scope=scope)
+            for key,value in original.items():torch.testing.assert_close(item[key],value,rtol=0,atol=0)
+            for e,xy in zip(g['entities'],geometry):np.testing.assert_array_equal(e['geometry_m'],xy)
+
+
+def test_public_query_cache_matches_uncached_conversion_exactly(tmp_path,monkeypatch):
+    import json
+    import scripts.polygon_ablation_navigation as nav
+    from graphnav.checkpointing import file_sha256
+    plan={'args':dict(max_landmarks=16,max_roads=0,max_relations=8,prior_sigma_m=25.,rule_sigma_m=25.)}
+    (tmp_path/'frozen_plan.json').write_text(json.dumps(plan))
+    record=dict(map_name='synthetic',instruction='near Anchor',world_bounds=[-4,-4,4,4],physical_map_sizes=[8,8],
+                landmarks=[dict(name='Anchor',object_type='Building',contour=[[.25,.25],[.75,.25],[.75,.75],[.25,.75]])],target_xy=[0.,0.])
+    key=json.dumps(record,sort_keys=True);raw=tmp_path/'raw.jsonl';raw.write_text(key+'\n')
+    direct=nav.make_dataset(plan,raw)[0];calls=[];original=nav.make_dataset
+    def counted(*args):calls.append(1);return original(*args)
+    monkeypatch.setattr(nav,'OUT',tmp_path);monkeypatch.setattr(nav,'make_dataset',counted)
+    nav.public_query_features.cache_clear()
+    try:
+        cached,_=nav.public_query_features(key,file_sha256(tmp_path/'frozen_plan.json'))
+        repeated,_=nav.public_query_features(key,file_sha256(tmp_path/'frozen_plan.json'))
+        assert repeated is cached and len(calls)==1
+        for k,v in direct.items():
+            if isinstance(v,torch.Tensor):torch.testing.assert_close(cached[k],v,rtol=0,atol=0)
+            else:assert cached[k]==v
+    finally:nav.public_query_features.cache_clear()

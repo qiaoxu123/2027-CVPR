@@ -1,5 +1,6 @@
 """Same pretrained head, Guarded-Blend and shared evaluator for every geometry."""
 import json
+import hashlib
 from pathlib import Path
 from types import SimpleNamespace
 import time
@@ -20,10 +21,28 @@ from graphnav.checkpointing import file_sha256, atomic_json, resolve_checkpoint_
 from graphnav.workspace_paths import PROJECT, WORKSPACE
 
 
+@lru_cache(maxsize=6000)
+def public_query_features(record_key,plan_sha256):
+    """Reuse CPU geometry only, across seeds/arms; never cache a GT record.
+
+    Same dataset conversion as the uncached path, keyed by the complete public
+    record and immutable plan SHA. Views copy every tensor they change.
+    """
+    assert file_sha256(OUT/'frozen_plan.json')==plan_sha256
+    plan=json.loads((OUT/'frozen_plan.json').read_text())
+    scratch=OUT/'public_inputs';scratch.mkdir(exist_ok=True)
+    path=scratch/(hashlib.sha256(record_key.encode()).hexdigest()+'.jsonl')
+    if path.exists():assert path.read_text()==record_key+'\n'
+    else:path.write_text(record_key+'\n')
+    dataset=make_dataset(plan,path)
+    return dataset[0],dataset._prepared(0)[0]
+
+
 class PolygonPolicy(A3TrajectoryPolicy):
-    def __init__(self,plan,checkpoint,scope,representation,encoder,scratch):
+    def __init__(self,plan,checkpoint,scope,representation,encoder,scratch,*,cache_public=True):
         self.plan=plan;self.args=SimpleNamespace(**plan['args']);self.device=torch.device('cuda')
         self.scope,self.representation=scope,representation
+        self.cache_public=cache_public
         self.model=model_for(plan,frozen=checkpoint is None)
         if checkpoint:
             state=torch.load(checkpoint,map_location='cpu',weights_only=True)
@@ -50,8 +69,12 @@ class PolygonPolicy(A3TrajectoryPolicy):
         # targets, future poses, or outcomes. No approximate text-only matching.
         key=json.dumps(self.record,sort_keys=True)
         if key not in self.fields:
-            path=self.scratch/'current_public_query.jsonl';path.write_text(key+'\n')
-            ds=make_dataset(self.plan,path);item=geometry_view(ds[0],ds._prepared(0)[0],self.record['world_bounds'],
+            if self.cache_public:
+                base,graph=public_query_features(key,file_sha256(OUT/'frozen_plan.json'))
+            else:
+                path=self.scratch/'current_public_query.jsonl';path.write_text(key+'\n')
+                dataset=make_dataset(self.plan,path);base,graph=dataset[0],dataset._prepared(0)[0]
+            item=geometry_view(base,graph,self.record['world_bounds'],
                          scope=self.scope,representation=self.representation,
                          prior_sigma_m=self.args.prior_sigma_m,rule_sigma_m=self.args.rule_sigma_m)
             batch=collate_full([item]);x,t,m,n=_batch_inputs(batch,self.encoder,self.device,'geometry')
@@ -114,7 +137,7 @@ def navigate(plan,encoder,job,scope,representation,checkpoint=None,split='val_se
                    head_sha256=plan['navigation']['head_sha256'],plan_sha256=file_sha256(OUT/'frozen_plan.json'),
                    navigation_data_audit_sha256=file_sha256(OUT/'navigation_data_audit.json'),
                    policy_source_sha256=file_sha256(__file__),
-                   split=split,smoke=smoke,original_builder=original_builder)
+                   split=split,smoke=smoke,original_builder=original_builder,public_feature_cache=not original_builder)
     if (folder/'started.json').exists():
         assert json.loads((folder/'started.json').read_text())==signature
         assert json.loads((folder/'episodes.json').read_text())==manifest
@@ -127,7 +150,7 @@ def navigate(plan,encoder,job,scope,representation,checkpoint=None,split='val_se
     done=[json.loads(l) for l in trace.read_text().splitlines()] if trace.exists() else []
     assert [r['episode_id'] for r in done]==[r['episode_id'] for r in manifest[:len(done)]]
     builder=base if original_builder else PoseOnlyBuilder(base)
-    policy=PolygonPolicy(plan,checkpoint,scope,representation,encoder,folder/'public_inputs')
+    policy=PolygonPolicy(plan,checkpoint,scope,representation,encoder,folder/'public_inputs',cache_public=not original_builder)
     metrics=[r['metrics'] for r in done];started=time.time()
     with trace.open('a') as f:
         for position,i in enumerate(indices):
@@ -164,4 +187,5 @@ def verify_rendering_parity(first,second):
         assert np.array_equal(np.asarray(x['poses']),np.asarray(y['poses']))
         for key in ('SR','SPL','OSR','NE','false_stop'):
             assert x['metrics'][key]==y['metrics'][key]
-    atomic_json(dict(samples=128,all_trajectories_exact=True,all_terminations_exact=True,all_navigation_metrics_exact=True),OUT/'rendering_parity.json')
+    atomic_json(dict(samples=128,all_trajectories_exact=True,all_terminations_exact=True,all_navigation_metrics_exact=True,
+                     original_reference='Original renderer and uncached public geometry conversion',optimized='Pose-only renderer and exact-public-record CPU feature cache'),OUT/'rendering_parity.json')

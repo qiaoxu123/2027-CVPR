@@ -75,9 +75,21 @@ def paired_rows(a,b,endpoint,metrics):
 def summarize(plan=None,partial=False):
     plan=plan or init();local=[];navigation=[];data={};groups=[];maprows=[];stat={}
     training_done=list((OUT/'training').glob('*/complete.json'))
+    training_status=[];epoch_seconds=[]
+    for name in plan['unique_training_jobs']:
+        folder=OUT/'training'/name
+        history=json.loads((folder/'history.json').read_text()) if (folder/'history.json').exists() else []
+        finished=json.loads((folder/'complete.json').read_text()) if (folder/'complete.json').exists() else {}
+        epoch_seconds += [r['seconds'] for r in history]
+        training_status.append(dict(job=name,status='Done' if finished else 'Running' if (folder/'config.json').exists() else 'Pending',
+                                    epochs_completed=len(history),required_epochs=15,checkpoint_sha256=finished.get('checkpoint_sha256',''),
+                                    selected_epoch=max(history,key=lambda r:(r['train_dev']['R@1'],-r['train_dev']['NE'],-r['epoch']))['epoch'] if finished else None,
+                                    result_path=str(folder)))
+    write_csv('training_status.csv',training_status)
     execution=dict(status='Running' if partial else 'Done',completed_training_runs=len(training_done),required_training_runs=15,
                    trained_static_complete=(OUT/'all_static_complete.json').exists(),
                    active_progress=json.loads((OUT/'progress.json').read_text()) if (OUT/'progress.json').exists() else {})
+    execution['remaining_training_seconds_estimate']=(225-sum(r['epochs_completed'] for r in training_status))*float(np.mean(epoch_seconds)) if epoch_seconds else None
     atomic_json(execution,OUT/'execution_status.json')
     episode_queries={}
     # Only completed metrics are eligible. Raw partial files are preserved but
@@ -305,6 +317,7 @@ End-to-End三Seed平均分组结果（同一Query/Episode重复三个Seed不增�
 重训后的候选上下文与旧head的分布可能不匹配，因此导航差异同时含表示和固定控制器迁移响应；不将其隐瞒或分别微调head以提高结果。
 本实验为几何/语言定位和控制器迁移，不启用RGB/历史，不把它与384或独立视觉残差的提升相加。
 public_static_record只使用公开地标绑定/名称/轮廓，目标和未来轨迹仅在forward/rollout之后评分；渲染优化须先通过128条完整轨迹与原观测builder逐点一致性。
+闭环CPU特征缓存按完整public_static_record内容及计划SHA精确键控，仅保存公开几何和虚拟零标签打包架子；不按GT目标或近似文本匹配。跨Seed复用不变输入，不复用其他权重的预测。单测验证缓存与原转换逐Tensor完全一致、各表示不修改共享输入；Seen128参考路径同时关闭缓存并使用原观测builder，以完整轨迹精确校验两项执行优化。
 配置、源/权重SHA、Query清单、Train-Dev分组、初始化及每epoch数据顺序hash、训练断点、逐Query/episode预测和日志均原地保留。复现命令：`python -m scripts.run_polygon_ablation --resume`；统计重建：`python -m scripts.polygon_ablation_statistics`。
 implementation_provenance.json及source_snapshot_manifest.json记录实现Commit与代码SHA；frozen_plan.json中的source_commit是实验开始前的基线Commit。旧架构args保留来源字段（如原continue_from/seed），实际独立随机初始化、Seed和预算以新config.json及顶层Checkpoint元数据为准，不执行旧continue_from。navigation_data_audit.json记录processed_citynav目录与revised静态记录的Query ID集合一致性及全部来源SHA，导航started.json另记录实际策略代码SHA。
 静态评估沿用原static_recall的topk(8)并列排序，R@1/4/8由其前缀得到；闭环保留原模型topk(20)候选与原head选择。BF16并列分数时两者首位可能不同，不能把静态R@1和闭环SR的差额全部归因于执行控制。所有表示使用相同协议，不为个别表示修正并列顺序。
@@ -325,6 +338,16 @@ implementation_provenance.json及source_snapshot_manifest.json记录实现Commit
                     lines[i]='|'.join(cells)
             text='\n'.join(lines)+'\n'
         update=f'\n## {title}\n\n状态：'+('Running' if partial else 'Done')+f'。新静态结果{len(local)}行，导航结果{len(navigation)}行。独立报告位于reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md；冻结干预与3seed公平重训、Descriptor Only与End-to-End严格分开。\n'
+        update+='\n'+table([
+            dict(task='几何通路审计、三种表示、无旁路/容量/缓存测试',status='Done',evidence='POLYGON_FEATURE_AUDIT.md; tests.log'),
+            dict(task='冻结权重完整静态干预',status='Done' if sum(r['phase']=='frozen' for r in local)==26 else 'Running',evidence='24次实际完整评估+2个Full输入相同的scope别名'),
+            dict(task='两口径3Seed公平重训',status='Done' if len(training_done)==15 else 'Running',evidence=f'{len(training_done)}/15独立训练；training_status.csv及training/*/complete.json'),
+            dict(task='所有重训权重Seen/Unseen完整静态评估',status='Done' if (OUT/'all_static_complete.json').exists() else 'Pending',evidence=f"{sum(r['phase']=='retrained' for r in local)}/36逻辑结果行"),
+            dict(task='原始/优化执行路径Seen128精确一致性',status='Done' if (OUT/'rendering_parity.json').exists() else 'Pending',evidence='rendering_parity.json（完成前不允许声称通过）'),
+            dict(task='同一冻结Trajectory/Stop全量闭环',status='Done' if len(navigation)==62 else 'Running' if navigation else 'Pending',evidence=f'{len(navigation)}/62逻辑结果行；54次实际全split评估，Full别名另计'),
+            dict(task='三Seed配对、地图簇CI及LOMO和分组分析',status='Running' if partial else 'Done',evidence='paired_statistics.json; seed_summary.csv; geometry_subgroup_results.csv'),
+            dict(task='原始结果和权重远程备份',status='Done' if (OUT/'remote_sync.json').exists() else 'Running',evidence='frozen_remote_sync.json为冻结阶段已验证归档；最终remote_sync.json另记')
+        ],['task','status','evidence'])
         path.write_text(text+marker+update)
     from scripts.polygon_ablation_index_update import update_index
     update_index(local,navigation,partial)
