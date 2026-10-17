@@ -5,6 +5,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import time
 import sys
+import subprocess
 from functools import lru_cache
 import numpy as np
 import torch
@@ -149,6 +150,12 @@ def navigate(plan,encoder,job,scope,representation,checkpoint=None,split='val_se
         assert json.loads((folder/'episodes.json').read_text())==manifest
     else:
         atomic_json(signature,folder/'started.json');atomic_json(manifest,folder/'episodes.json')
+    version_path=folder/'code_version.json'
+    if not version_path.exists():
+        atomic_json(dict(source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+                         policy_source_sha256=signature['policy_source_sha256']),version_path)
+    version=json.loads(version_path.read_text())
+    assert version['policy_source_sha256']==signature['policy_source_sha256']
     if (folder/'metrics.json').exists():
         assert json.loads((folder/'metrics.json').read_text())['metrics']['episodes']==expected
         return folder
@@ -180,7 +187,7 @@ def navigate(plan,encoder,job,scope,representation,checkpoint=None,split='val_se
                      decision_seconds=timings,step_diagnostics=diagnostics,metrics=score)
             f.write(json.dumps(row)+'\n');f.flush();metrics.append(score)
             if (position+1)%100==0:event(phase='navigation',job=job,split=split,smoke=smoke,completed=position+1,total=expected,seconds=time.time()-started)
-    atomic_json(dict(status='Done',signature=signature,metrics=aggregate(metrics),seconds=time.time()-started,protocol=protocol.__dict__,
+    atomic_json(dict(status='Done',source_commit=version['source_commit'],signature=signature,metrics=aggregate(metrics),seconds=time.time()-started,protocol=protocol.__dict__,
                      controller_transfer_limitation='Same unchanged pretrained head for all arms; newly trained candidate contexts may shift latent distribution. No per-representation controller adaptation.',
                      pose_rendering='Original observation builder' if original_builder else 'Pose-only rendering elision; original-builder Seen128 exact trace parity required'),folder/'metrics.json')
     del policy

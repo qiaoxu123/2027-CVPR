@@ -137,7 +137,9 @@ def summarize(plan=None,partial=False):
         assert len(rows)==d['metrics']['episodes']==plan['navigation']['splits'][split]
         key=(phase,scope,rep,seed,split,'navigation');data[key]=rows
         navigation.append(dict(status='Done',phase=phase,scope=scope,representation=rep,seed=seed,split=split,samples=len(rows),
-                               **d['metrics'],checkpoint_sha256=s['checkpoint_sha256'],head_sha256=s['head_sha256'],result_path=str(f),predictions=str(f.parent/'predictions.jsonl')))
+                               **d['metrics'],checkpoint_sha256=s['checkpoint_sha256'],head_sha256=s['head_sha256'],source_commit=d['source_commit'],
+                               policy_source_sha256=s['policy_source_sha256'],navigation_data_audit_sha256=s['navigation_data_audit_sha256'],
+                               result_path=str(f),predictions=str(f.parent/'predictions.jsonl')))
     # Exact Full-input identity allows aliases without rerunning/choosing seeds.
     for split in ('val_seen','val_unseen'):
         for phase,seeds in [('frozen',[None]),('retrained',[0,1,2])]:
@@ -282,7 +284,7 @@ def summarize(plan=None,partial=False):
 独立训练已完成{len(training_done)}/15；当前结果行数：静态{len(local)}、导航{len(navigation)}，包含明确标记的Full跨口径相同输入别名。最新运行阶段另见progress.json及workflow.log。
 主对照是End-to-End独立重训；Descriptor Only仅解释描述符增量，冻结干预仅解释已训练权重的依赖。
 相同10-D/模型容量、3个种子、15epoch、batch16、AdamW5e-5。训练样本按Train对象分组保留固定Dev，选择只用Dev R@1及NE；未用Unseen/Test选模或修改配置。
-全部模型参数727696，其中优化参数453517；保留相同未激活GAT/视觉分支的结构，但不执行GAT消息传递或RGB推理。matched_training_checks.json逐Seed核验初始化、容量及每Epoch数据顺序。
+几何定位子网参数727696，其中优化参数453517；公共冻结BERT和固定控制器另计且各条件完全相同。保留相同未激活GAT/视觉分支的结构，但不执行GAT消息传递或RGB推理。matched_training_checks.json逐Seed核验初始化、容量及每Epoch数据顺序。
 Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；共18个逻辑条件、15次独立训练。seed0预先指定优先闭环，并保留seed1/2所有结果。
 所有静态评估完成标志all_static_complete.json先于任何闭环。静态Seen2426/Unseen2679，导航Seen2470/Unseen2697；原始定位/导航结果未冒充本实验结果。
 
