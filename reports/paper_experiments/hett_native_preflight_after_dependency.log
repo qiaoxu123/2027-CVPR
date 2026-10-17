@@ -1,0 +1,136 @@
+usage: main.py [-h] [--seed SEED] [--mode {train,eval,visualize}]
+               [--local_rank LOCAL_RANK] [--world_size WORLD_SIZE]
+               [--ignore_id IGNORE_ID] [--grid_size GRID_SIZE]
+               [--heatmap_sigma HEATMAP_SIGMA]
+               [--heatmap_loss_weight HEATMAP_LOSS_WEIGHT]
+               [--stage1_switch_dist STAGE1_SWITCH_DIST]
+               [--belief_grid_size BELIEF_GRID_SIZE]
+               [--trajectory_top_k TRAJECTORY_TOP_K]
+               [--trajectory_nms_kernel TRAJECTORY_NMS_KERNEL]
+               [--trajectory_steps TRAJECTORY_STEPS]
+               [--trajectory_loss_weight TRAJECTORY_LOSS_WEIGHT]
+               [--trajectory_residual_scale TRAJECTORY_RESIDUAL_SCALE]
+               [--demb DEMB] [--encoder_heads ENCODER_HEADS]
+               [--encoder_layers ENCODER_LAYERS]
+               [--dropout_transformer_encoder DROPOUT_TRANSFORMER_ENCODER]
+               [--num_input_actions NUM_INPUT_ACTIONS]
+               [--dropout_emb DROPOUT_EMB] [--num_l_layers NUM_L_LAYERS]
+               [--num_h_layers NUM_H_LAYERS] [--num_x_layers NUM_X_LAYERS]
+               [--num_replacement] [--ml_weight ML_WEIGHT]
+               [--entropy_loss_weight ENTROPY_LOSS_WEIGHT]
+               [--teacher_weight TEACHER_WEIGHT]
+               [--teacher_warmup_epochs TEACHER_WARMUP_EPOCHS]
+               [--darknet_model_file DARKNET_MODEL_FILE]
+               [--darknet_weight_file DARKNET_WEIGHT_FILE] [--finetune_bert]
+               [--finetune_darknet] [--log_every LOG_EVERY]
+               [--log_dir LOG_DIR] [--map_size MAP_SIZE]
+               [--map_meters MAP_METERS]
+               [--map_update_interval MAP_UPDATE_INTERVAL]
+               [--max_depth MAX_DEPTH] [--altitude ALTITUDE]
+               [--ablate {rgb,depth,tracking,landmark,gsam,}]
+               [--alt_env {,flood,ground_fissure}]
+               [--optim {rms,adam,adamW,sgd}] [--decay WEIGHT_DECAY]
+               [--feedback FEEDBACK] [--nss_w NSS_W] [--nss_r NSS_R]
+               [--epsilon EPSILON] [--learning_rate LEARNING_RATE]
+               [--batch_size BATCH_SIZE] [--epochs EPOCHS] [--iters ITERS]
+               [--checkpoint CHECKPOINT] [--resume_optimizer]
+               [--save_every SAVE_EVERY]
+               [--train_trajectory_type {sp,mturk,both}]
+               [--train_episode_sample_size TRAIN_EPISODE_SAMPLE_SIZE]
+               [--ignoreid IGNOREID] [--eval_every EVAL_EVERY] [--eval_first]
+               [--max_action_len MAX_ACTION_LEN] [--eval_client {crop,airsim}]
+               [--success_dist SUCCESS_DIST] [--move_iteration MOVE_ITERATION]
+               [--gps_noise_scale GPS_NOISE_SCALE]
+
+options:
+  -h, --help            show this help message and exit
+  --seed SEED
+  --mode {train,eval,visualize}
+  --local_rank LOCAL_RANK
+  --world_size WORLD_SIZE
+                        number of gpus
+  --ignore_id IGNORE_ID
+                        ignoreid for action
+  --grid_size GRID_SIZE
+  --heatmap_sigma HEATMAP_SIGMA
+                        Gaussian sigma (in grid cells) for Stage-1 heatmap
+                        supervision
+  --heatmap_loss_weight HEATMAP_LOSS_WEIGHT
+                        Weight of the Stage-1 heatmap loss
+  --stage1_switch_dist STAGE1_SWITCH_DIST
+                        Legacy hard-switch threshold; unused by trajectory-
+                        belief execution
+  --belief_grid_size BELIEF_GRID_SIZE
+                        Dense spatial-belief resolution; independent of the
+                        7x7 HETT history grid
+  --trajectory_top_k TRAJECTORY_TOP_K
+                        Number of NMS trajectory proposals retained from the
+                        dense belief field
+  --trajectory_nms_kernel TRAJECTORY_NMS_KERNEL
+                        Odd NMS kernel size used to diversify dense spatial
+                        proposals
+  --trajectory_steps TRAJECTORY_STEPS
+                        Number of future 2D waypoints predicted for each
+                        trajectory mode
+  --trajectory_loss_weight TRAJECTORY_LOSS_WEIGHT
+                        Weight of dense heatmap-weighted future trajectory
+                        supervision
+  --trajectory_residual_scale TRAJECTORY_RESIDUAL_SCALE
+                        Maximum normalized residual around each linear
+                        trajectory anchor
+  --demb DEMB
+  --encoder_heads ENCODER_HEADS
+  --encoder_layers ENCODER_LAYERS
+  --dropout_transformer_encoder DROPOUT_TRANSFORMER_ENCODER
+  --num_input_actions NUM_INPUT_ACTIONS
+  --dropout_emb DROPOUT_EMB
+  --num_l_layers NUM_L_LAYERS
+  --num_h_layers NUM_H_LAYERS
+  --num_x_layers NUM_X_LAYERS
+  --num_replacement, -num_replacement
+  --ml_weight ML_WEIGHT
+  --entropy_loss_weight ENTROPY_LOSS_WEIGHT
+  --teacher_weight TEACHER_WEIGHT
+  --teacher_warmup_epochs TEACHER_WARMUP_EPOCHS
+                        Use teacher rollout only for this many initial
+                        training epochs; student rollout remains active
+                        throughout
+  --darknet_model_file DARKNET_MODEL_FILE
+  --darknet_weight_file DARKNET_WEIGHT_FILE
+  --finetune_bert       Fine-tune the pretrained BERT backbone; by default
+                        only the HETT language task head is trained
+  --finetune_darknet    Fine-tune DarkNet visual backbone; frozen by default
+                        for trajectory-belief training
+  --log_every LOG_EVERY
+  --log_dir LOG_DIR
+  --map_size MAP_SIZE
+  --map_meters MAP_METERS
+  --map_update_interval MAP_UPDATE_INTERVAL
+  --max_depth MAX_DEPTH
+  --altitude ALTITUDE
+  --ablate {rgb,depth,tracking,landmark,gsam,}
+  --alt_env {,flood,ground_fissure}
+  --optim {rms,adam,adamW,sgd}
+  --decay WEIGHT_DECAY
+  --feedback FEEDBACK   How to choose next position, one of ``teacher``,
+                        ``sample`` and ``argmax``
+  --nss_w NSS_W
+  --nss_r NSS_R
+  --epsilon EPSILON
+  --learning_rate LEARNING_RATE
+  --batch_size BATCH_SIZE
+  --epochs EPOCHS
+  --iters ITERS
+  --checkpoint CHECKPOINT
+  --resume_optimizer
+  --save_every SAVE_EVERY
+  --train_trajectory_type {sp,mturk,both}
+  --train_episode_sample_size TRAIN_EPISODE_SAMPLE_SIZE
+  --ignoreid IGNOREID   ignoreid for action
+  --eval_every EVAL_EVERY
+  --eval_first
+  --max_action_len MAX_ACTION_LEN
+  --eval_client {crop,airsim}
+  --success_dist SUCCESS_DIST
+  --move_iteration MOVE_ITERATION
+  --gps_noise_scale GPS_NOISE_SCALE

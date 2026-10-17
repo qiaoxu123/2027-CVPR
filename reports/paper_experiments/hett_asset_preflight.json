@@ -1,0 +1,18 @@
+{
+  "checkpoint": "/home/rental/20260922_1/Workspace/DATA/hett/release/checkpoint/best_val_unseen",
+  "bytes": 675603246,
+  "sha256": "bb59e46afad00d64f0c69a938037f8b9090e158c51a1b0814de483c0095e277a",
+  "source_commit": "baf1eb1448d154f02e09d66fff9c5621f0ede47a",
+  "status": "official_asset_present_incompatible_local_method_identity",
+  "initial_dependency_failure": "tensorboardX absent; fixed using isolated /tmp target, shared environment unchanged",
+  "isolated_help_passed": true,
+  "native_paths_hardcoded": true,
+  "native_output_isolation_missing": true,
+  "local_parser_contains_trajectory_belief_research_flags": true,
+  "note": "HETT/main is a modified research checkout. Do not relabel this policy as official HETT or load official weights with strict=False. Need checkpoint-compatible upstream source SHA and isolated output/export wrapper before inference. Existing historical aggregate is retained, not promoted to verified reproduction.",
+  "commands": [
+    "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout 45 <reproduction-python> main.py --help",
+    "<reproduction-python> -m pip install --no-deps --target /tmp/polybelief-hett-preflight-20261017 tensorboardX",
+    "PYTHONPATH=/tmp/polybelief-hett-preflight-20261017:<HETT/main> HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout 45 <reproduction-python> main.py --help"
+  ]
+}

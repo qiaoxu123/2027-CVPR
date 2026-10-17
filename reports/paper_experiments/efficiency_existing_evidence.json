@@ -1,0 +1,232 @@
+{
+  "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/profiling-val-unseen-20261016/profiling_val_unseen/full/profile.json",
+  "sha256": "531e921c7ef5c1ffe7910539b907546c7ca2444e681cbbb828801e915f76c446",
+  "evidence": {
+    "samples": 22144,
+    "units": "ms; population variance ms²",
+    "all": {
+      "rollout_ms": {
+        "min": 31.15669099497609,
+        "mean": 48.16590320516072,
+        "population_variance": 595.401954018187
+      },
+      "language_gpu_ms": {
+        "min": 0.0,
+        "mean": 3.0655687399574614,
+        "population_variance": 72.93940250068474
+      },
+      "vision_gpu_ms": {
+        "min": 11.203136444091797,
+        "mean": 13.13341629584293,
+        "population_variance": 1.459912197605207
+      },
+      "static_graph_gpu_ms": {
+        "min": 0.0,
+        "mean": 0.3459496410574355,
+        "population_variance": 4.059302034943399
+      },
+      "visual_residual_history_gpu_ms": {
+        "min": 2.156543731689453,
+        "mean": 3.444857235938698,
+        "population_variance": 0.23628569440285863
+      },
+      "trajectory_stop_gpu_ms": {
+        "min": 3.9414079189300537,
+        "mean": 4.342640823410081,
+        "population_variance": 0.19393754441668298
+      },
+      "model_inference_gpu_ms": {
+        "min": 17.46726357936859,
+        "mean": 24.332432736206606,
+        "population_variance": 110.03675766997183
+      },
+      "environment_ms": {
+        "min": 3.918303002137691,
+        "mean": 6.722032196387252,
+        "population_variance": 110.29764507618424
+      },
+      "other_rollout_ms": {
+        "min": 9.142723074182868,
+        "mean": 17.111438272566858,
+        "population_variance": 140.51013222882187
+      }
+    },
+    "excluding_first": {
+      "rollout_ms": {
+        "min": 31.15669099497609,
+        "mean": 48.100617614374464,
+        "population_variance": 501.0465009459354
+      },
+      "language_gpu_ms": {
+        "min": 0.0,
+        "mean": 3.0524246796453482,
+        "population_variance": 69.11695909392468
+      },
+      "vision_gpu_ms": {
+        "min": 11.203136444091797,
+        "mean": 13.129224591077959,
+        "population_variance": 1.0708994382991406
+      },
+      "static_graph_gpu_ms": {
+        "min": 0.0,
+        "mean": 0.3338385729028922,
+        "population_variance": 0.8114483485650151
+      },
+      "visual_residual_history_gpu_ms": {
+        "min": 2.156543731689453,
+        "mean": 3.442730390981936,
+        "population_variance": 0.13612865735485177
+      },
+      "trajectory_stop_gpu_ms": {
+        "min": 3.9414079189300537,
+        "mean": 4.341243219166726,
+        "population_variance": 0.15069248030954266
+      },
+      "model_inference_gpu_ms": {
+        "min": 17.46726357936859,
+        "mean": 24.299461453774864,
+        "population_variance": 85.96886361861894
+      },
+      "environment_ms": {
+        "min": 3.918303002137691,
+        "mean": 6.700200262376207,
+        "population_variance": 99.74805748809811
+      },
+      "other_rollout_ms": {
+        "min": 9.142723074182868,
+        "mean": 17.100955898223393,
+        "population_variance": 138.08329128072435
+      }
+    },
+    "first": {
+      "map_name": "birmingham_block_5",
+      "episode_id": [
+        "birmingham_block_5",
+        1,
+        1
+      ],
+      "step": 0,
+      "rollout_ms": 1493.7847399851307,
+      "language_gpu_ms": 294.1144962310791,
+      "vision_gpu_ms": 105.95033490657806,
+      "static_graph_gpu_ms": 268.5213317871094,
+      "visual_residual_history_gpu_ms": 50.53958511352539,
+      "trajectory_stop_gpu_ms": 35.28979158401489,
+      "model_inference_gpu_ms": 754.4155396223068,
+      "environment_ms": 490.1465470029507,
+      "other_rollout_ms": 249.22265335987322
+    },
+    "slowest_five": [
+      {
+        "map_name": "birmingham_block_5",
+        "episode_id": [
+          "birmingham_block_5",
+          1,
+          1
+        ],
+        "step": 0,
+        "rollout_ms": 1493.7847399851307,
+        "language_gpu_ms": 294.1144962310791,
+        "vision_gpu_ms": 105.95033490657806,
+        "static_graph_gpu_ms": 268.5213317871094,
+        "visual_residual_history_gpu_ms": 50.53958511352539,
+        "trajectory_stop_gpu_ms": 35.28979158401489,
+        "model_inference_gpu_ms": 754.4155396223068,
+        "environment_ms": 490.1465470029507,
+        "other_rollout_ms": 249.22265335987322
+      },
+      {
+        "map_name": "cambridge_block_2",
+        "episode_id": [
+          "cambridge_block_2",
+          4,
+          0
+        ],
+        "step": 0,
+        "rollout_ms": 856.2418109795544,
+        "language_gpu_ms": 29.283296585083008,
+        "vision_gpu_ms": 12.903935670852661,
+        "static_graph_gpu_ms": 2.766432046890259,
+        "visual_residual_history_gpu_ms": 3.0938241481781006,
+        "trajectory_stop_gpu_ms": 4.149407982826233,
+        "model_inference_gpu_ms": 52.19689643383026,
+        "environment_ms": 430.24697399232537,
+        "other_rollout_ms": 373.7979405533988
+      },
+      {
+        "map_name": "birmingham_block_5",
+        "episode_id": [
+          "birmingham_block_5",
+          135,
+          4
+        ],
+        "step": 0,
+        "rollout_ms": 550.7729910023045,
+        "language_gpu_ms": 28.005760669708252,
+        "vision_gpu_ms": 13.094719588756561,
+        "static_graph_gpu_ms": 2.819295883178711,
+        "visual_residual_history_gpu_ms": 3.086143970489502,
+        "trajectory_stop_gpu_ms": 4.255295991897583,
+        "model_inference_gpu_ms": 51.26121610403061,
+        "environment_ms": 469.4408079958521,
+        "other_rollout_ms": 30.070966902421787
+      },
+      {
+        "map_name": "birmingham_block_5",
+        "episode_id": [
+          "birmingham_block_5",
+          2,
+          2
+        ],
+        "step": 0,
+        "rollout_ms": 539.1382340167183,
+        "language_gpu_ms": 25.596320152282715,
+        "vision_gpu_ms": 12.540159940719604,
+        "static_graph_gpu_ms": 2.7396159172058105,
+        "visual_residual_history_gpu_ms": 3.0345919132232666,
+        "trajectory_stop_gpu_ms": 4.15881609916687,
+        "model_inference_gpu_ms": 48.06950402259827,
+        "environment_ms": 457.9337769828271,
+        "other_rollout_ms": 33.134953011292964
+      },
+      {
+        "map_name": "cambridge_block_10",
+        "episode_id": [
+          "cambridge_block_10",
+          134,
+          4
+        ],
+        "step": 0,
+        "rollout_ms": 531.1635560065042,
+        "language_gpu_ms": 30.972511291503906,
+        "vision_gpu_ms": 15.046080231666565,
+        "static_graph_gpu_ms": 2.754240036010742,
+        "visual_residual_history_gpu_ms": 3.3343679904937744,
+        "trajectory_stop_gpu_ms": 4.439231872558594,
+        "model_inference_gpu_ms": 56.54643142223358,
+        "environment_ms": 447.28790697990917,
+        "other_rollout_ms": 27.329217604361475
+      }
+    ],
+    "timing": "HETT-style module CUDA Event spans, nested child spans subtracted to avoid double counting; no synchronized host wrappers around model modules. Environment observations use synchronized host wall time. Normal shared-rollout per-decision synchronization remains. Episode totals include public episode setup through final decision; model loading and post-rollout metrics are excluded. CUDA intervals may include host launch gaps; vision includes native ROI pooling.",
+    "environment": "See launch_record.json and gpu_activity.jsonl for observed concurrent GPU processes."
+  },
+  "parameter_count": {
+    "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+    "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "policy_parameters": 1053290,
+    "policy_components": {
+      "polygon_language_goal_localizer": 727696,
+      "visual_appearance_matcher": 264325,
+      "causal_quality_history": 7,
+      "candidate_trajectory_and_stop": 61261
+    },
+    "frozen_bert_parameters": 109482240,
+    "frozen_siglip_parameters": 881854466,
+    "all_resident_parameters": 992389996,
+    "command": "python -m scripts.count_polybelief_parameters",
+    "note": "CPU strict state loading; no training or inference. Includes inactive legacy branches; all parameters frozen at inference. Backbone text and image towers counted together exactly as runtime model.parameters()."
+  },
+  "peak_gpu_allocated_gib": 3.782536506652832,
+  "note": "Original frozen28 model, not calibrated residual or384. GPU timing and wall time definitions remain separate."
+}

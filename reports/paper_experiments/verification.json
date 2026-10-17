@@ -1,0 +1,120 @@
+{
+  "checks": [
+    {
+      "method": "PolyBelief",
+      "split": "val_seen",
+      "exact_id_coverage": true,
+      "per_episode_trace_metrics_match": true,
+      "source_aggregate_match": true,
+      "episodes": 2470
+    },
+    {
+      "method": "PolyBelief",
+      "split": "val_unseen",
+      "exact_id_coverage": true,
+      "per_episode_trace_metrics_match": true,
+      "source_aggregate_match": true,
+      "episodes": 2697
+    },
+    {
+      "method": "PolyBelief",
+      "split": "test_unseen",
+      "exact_id_coverage": true,
+      "per_episode_trace_metrics_match": true,
+      "source_aggregate_match": true,
+      "episodes": 5281
+    },
+    {
+      "method": "HTNav",
+      "variant": "reproduction_20261012",
+      "split": "val_seen",
+      "episodes": 2470,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 5.213929311446169,
+      "common_SPL_percent": 5.226916765288439,
+      "SPL_difference_pp": 0.012987453842270291,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "HTNav",
+      "variant": "reproduction_20261012",
+      "split": "val_unseen",
+      "episodes": 2697,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 3.233764569113843,
+      "common_SPL_percent": 3.3071379269371657,
+      "SPL_difference_pp": 0.07337335782332266,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "HTNav",
+      "variant": "reproduction_20261012",
+      "split": "test_unseen",
+      "episodes": 5281,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 5.602940408736683,
+      "common_SPL_percent": 5.667110015696737,
+      "SPL_difference_pp": 0.06416960696005436,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "HTNav",
+      "variant": "alignment_20261013",
+      "split": "val_seen",
+      "episodes": 2470,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 1.0249110554723784,
+      "common_SPL_percent": 1.0205104677966481,
+      "SPL_difference_pp": -0.004400587675730261,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "HTNav",
+      "variant": "alignment_20261013",
+      "split": "val_unseen",
+      "episodes": 2697,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 1.020710441720121,
+      "common_SPL_percent": 1.0232580027163527,
+      "SPL_difference_pp": 0.002547560996231768,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "AerialVLN-GSM",
+      "variant": "reproduction_20261012",
+      "split": "val_seen",
+      "episodes": 2498,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 3.899791951807642,
+      "common_SPL_percent": 3.899791951807642,
+      "SPL_difference_pp": 0.0,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "AerialVLN-GSM",
+      "variant": "reproduction_20261012",
+      "split": "val_unseen",
+      "episodes": 2826,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 2.43121559978194,
+      "common_SPL_percent": 2.43121559978194,
+      "SPL_difference_pp": 0.0,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    },
+    {
+      "method": "AerialVLN-GSM",
+      "variant": "reproduction_20261012",
+      "split": "test_unseen",
+      "episodes": 5311,
+      "native_NE_SR_OSR_match": true,
+      "native_SPL_percent": 3.584887885476816,
+      "common_SPL_percent": 3.584887885476816,
+      "SPL_difference_pp": 0.0,
+      "note": "HTNav native optimal length is generated discrete shortest teacher path; common evaluator uses Euclidean start-goal length. Both values retained."
+    }
+  ],
+  "all_passed": true,
+  "inference_runs_started": 0,
+  "training_runs_started": 0,
+  "official_weights_untouched": true
+}

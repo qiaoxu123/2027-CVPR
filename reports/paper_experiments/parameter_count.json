@@ -1,0 +1,16 @@
+{
+  "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "policy_parameters": 1053290,
+  "policy_components": {
+    "polygon_language_goal_localizer": 727696,
+    "visual_appearance_matcher": 264325,
+    "causal_quality_history": 7,
+    "candidate_trajectory_and_stop": 61261
+  },
+  "frozen_bert_parameters": 109482240,
+  "frozen_siglip_parameters": 881854466,
+  "all_resident_parameters": 992389996,
+  "command": "python -m scripts.count_polybelief_parameters",
+  "note": "CPU strict state loading; no training or inference. Includes inactive legacy branches; all parameters frozen at inference. Backbone text and image towers counted together exactly as runtime model.parameters()."
+}

@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/home/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/scripts/build_paper_experiments.py", line 509, in <module>
+    result = build()
+  File "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/scripts/build_paper_experiments.py", line 325, in build
+    m = load(p / 'metrics.json')
+  File "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/scripts/build_paper_experiments.py", line 39, in load
+    return json.loads(Path(p).read_text())
+  File "/home/20260922_1/miniconda3/envs/geonav/lib/python3.10/pathlib.py", line 1134, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/home/20260922_1/miniconda3/envs/geonav/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: '/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/eval_epoch14/val_seen/metrics.json'
+Traceback (most recent call last):
+  File "/home/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/20260922_1/miniconda3/envs/geonav/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/scripts/build_paper_experiments.py", line 509, in <module>
+    result = build()
+  File "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/scripts/build_paper_experiments.py", line 371, in build
+    assert np.isclose(metrics[k], native.get(k, native.get(keys[k])) * (1 if k == 'NE' else 100), atol=1e-8), (method, split, k)
+AssertionError: ('HTNav', 'val_seen', 'SPL')
+{"unified": 37, "local": 44, "difficulty": 36, "ablations": 35, "dataaudit": 4, "paper": 42, "paperdifficulty": 21}
+{"unified": 37, "local": 44, "difficulty": 36, "ablations": 35, "dataaudit": 4, "paper": 42, "paperdifficulty": 21}
+{"unified": 37, "local": 44, "difficulty": 36, "ablations": 35, "dataaudit": 4, "paper": 42, "paperdifficulty": 21}
+{"unified": 37, "local": 44, "difficulty": 36, "ablations": 35, "dataaudit": 4, "paper": 42, "paperdifficulty": 21}
