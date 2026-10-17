@@ -113,7 +113,7 @@ def summarize(plan=None,partial=False):
     atomic_json(dict(all_required_runs_complete=len(training_done)==15,capacity=list(capacities),checks=checks),OUT/'matched_training_checks.json')
     execution=dict(status='Running' if partial else 'Done',completed_training_runs=len(training_done),required_training_runs=15,
                    trained_static_complete=(OUT/'all_static_complete.json').exists(),
-                   active_progress=json.loads((OUT/'progress.json').read_text()) if (OUT/'progress.json').exists() else {})
+                   active_progress=(json.loads((OUT/'progress.json').read_text()) if (OUT/'progress.json').exists() else {}) if partial else dict(status='Done',phase='complete'))
     execution['remaining_training_seconds_estimate']=(225-sum(r['epochs_completed'] for r in training_status))*float(np.mean(epoch_seconds)) if epoch_seconds else None
     atomic_json(execution,OUT/'execution_status.json')
     # Only completed metrics are eligible. Raw partial files are preserved but
@@ -283,12 +283,16 @@ def summarize(plan=None,partial=False):
     for v in verdict:
         if v['endpoint']=='localization' and v['metric'] in ('R@4','R@8') and (v['map_ci95_pp'][0]>0 or v['map_ci95_pp'][1]<0):
             answers.append(f"- 次要检索指标 {v['split']} Full−{v['control']} {v['metric']}：{v['delta_pp']:+.4f}pp，地图95%CI {v['map_ci95_pp']}pp。仅限该指标的点态区间，未作多重比较校正，不能替代Top-1/导航结论。")
-    dependence=[]
+    dependence=[];navigation_dependence=[]
     for split in ('val_seen','val_unseen'):
         for rep in ('no_boundary','no_inside','no_inside_information','no_extent','prior_to_centroid','rules_to_centroid','nodes_to_centroid'):
             key=f'localization/frozen_feature_dependence/{split}/full-minus-{rep}'
             if key in stat:
                 v=stat[key]['metrics']['R@1'];dependence.append(dict(split=split,intervention=rep,delta_R1_pp=100*v['delta'],map_ci95_pp=[100*x for x in v['map_cluster_episode_weighted_ci95']]))
+            nav_key=f'navigation/frozen_feature_dependence/{split}/full-minus-{rep}'
+            if nav_key in stat:
+                for metric,value in stat[nav_key]['metrics'].items():
+                    navigation_dependence.append(dict(split=split,intervention=rep,metric=metric,delta_pp=100*value['delta'],map_ci95_pp=[100*x for x in value['map_cluster_episode_weighted_ci95']]))
     report=f'''# PolyBelief Polygon Geometry 独立贡献验证
 
 状态：{'部分完成；未完成项目保留Pending' if partial else '所有预注册静态及导航条件已完成'}。{audit}与frozen_plan.json先于实验结果产生。
@@ -319,6 +323,14 @@ Full Polygon在两个口径的输入完全相同，每seed按同一SHA复用；�
 这些是当前权重的输入干预，不能代替公平重训结论。完整逐样本预测与配对变化保留。
 
 '''+table([r for r in local if r['phase']=='frozen'],['scope','representation','split','samples','R@1','R@4','R@8','NE'])+'''
+
+冻结权重完整闭环结果（相同旧head的迁移诊断，不与独立重训均值混合）：
+
+'''+table([r for r in navigation if r['phase']=='frozen'],['scope','representation','split','samples','SR','SPL','OSR','NE','False_Stop_Rate'])+'''
+
+冻结Full−通路干预的导航依赖（负值同样保留）：
+
+'''+table(navigation_dependence,['split','intervention','metric','delta_pp','map_ci95_pp'])+'''
 
 ## 三Seed均值及样本标准差
 
@@ -359,6 +371,11 @@ implementation_provenance.json及source_snapshot_manifest.json记录实现Commit
 
 若主要End-to-End Unseen效应未获地图级正下界支持，论文核心创新应强调“使用完整公开几何的可解释接口/表示设计”，而不能声称已证明Polygon跨地图优于点/框。若仅Descriptor Only有效，也只能声称候选–地标描述符的条件增量价值。
 '''
+    receipt_path=OUT/'remote_sync.json'
+    if receipt_path.exists():
+        receipt=json.loads(receipt_path.read_text())
+        if receipt.get('verified'):
+            report+=f"\n远程同步已校验：[完整权重、逐样本结果和日志归档]({receipt['release_url']})。服务器资产SHA及逐文件清单见remote_sync.json与POLYGON_ASSET_MANIFEST.json。\n"
     (OUT/'POLYGON_ABLATION_REPORT.md').write_text(report)
     # Append a bounded, replaceable update; do not regenerate/overwrite older tables.
     for path,title in [(HERE/'docs/PAPER_EXPERIMENT_TODO.md','Polygon独立贡献实验进度'),(HERE/'reports/paper_experiments/PAPER_EXPERIMENT_SUMMARY.md','Polygon独立贡献补充')]:

@@ -14,6 +14,12 @@ REPO='qiaoxu123/2027-CVPR'
 GIT=['git','-c','url.https://github.com/qiaoxu123/2027-CVPR.git.insteadOf=https://github.com/qiaoxu123/2027-CVPR-Dev.git','-c','credential.helper=!gh auth git-credential']
 
 
+def transport_run(command,**kwargs):
+    # Keep the completed evaluation log byte-stable during hashing/upload.
+    with (OUT/'remote_transport.log').open('a') as log:
+        return subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,**kwargs)
+
+
 def verified_previous_stage():
     """Reuse immutable server-verified files instead of uploading weights twice."""
     receipt_path=OUT/'training_static_remote_sync.json'
@@ -22,7 +28,7 @@ def verified_previous_stage():
     receipt=json.loads(receipt_path.read_text())
     if not receipt.get('verified'):return {},None
     tag=receipt['release_url'].rsplit('/',1)[-1]
-    remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
+    remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True,stderr=subprocess.PIPE))
     archive=next(a for a in remote['assets'] if a['name']=='polygon-trained-static-validation.tar.zst')
     metadata=next(a for a in remote['assets'] if a['name']==manifest_path.name)
     assert archive['digest']=='sha256:'+receipt['archive_sha256'] and archive['size']==receipt['archive_bytes']
@@ -51,11 +57,11 @@ def _sync():
     existing=subprocess.check_output(['git','diff','--cached','--name-only'],cwd=HERE,text=True).splitlines()
     if any(not any(p==a or p.startswith(a+'/') for a in allowed) for p in existing):
         raise ValueError('Unrelated staged files exist; refuse to include them in automatic experiment commit')
-    subprocess.run(['git','add',*allowed],cwd=HERE,check=True)
+    transport_run(['git','add',*allowed],cwd=HERE,check=True)
     if subprocess.run(['git','diff','--cached','--quiet'],cwd=HERE).returncode:
-        subprocess.run(['git','commit','-m','Complete paired Polygon representation experiments and map-level analysis'],cwd=HERE,check=True)
+        transport_run(['git','commit','-m','Complete paired Polygon representation experiments and map-level analysis'],cwd=HERE,check=True)
     branch=subprocess.check_output(['git','branch','--show-current'],cwd=HERE,text=True).strip()
-    subprocess.run([*GIT,'push','origin',branch],cwd=HERE,check=True)
+    transport_run([*GIT,'push','origin',branch],cwd=HERE,check=True)
     source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=HERE,text=True).strip()
     plan_sha=file_sha256(OUT/'frozen_plan.json')
     tag='polybelief-polygon-ablation-20261017-'+plan_sha[:8]
@@ -64,7 +70,7 @@ def _sync():
     # Reproducible caches are excluded. Include the original C/static/head
     # source weights as well, so the fixed-controller experiment is restorable.
     files=[p for p in OUT.rglob('*') if p.is_file() and '.cache' not in p.parts and
-           'public_inputs' not in p.parts and p.name not in ('run.lock','remote_sync.json','remote_sync_failure.json')]
+           'public_inputs' not in p.parts and p.name not in ('run.lock','remote_sync.json','remote_sync_failure.json','remote_transport.log')]
     plan=json.loads((OUT/'frozen_plan.json').read_text())
     head_path=plan['navigation']['head_checkpoint']
     head_state=torch.load(head_path,map_location='cpu',weights_only=True)
@@ -88,7 +94,7 @@ def _sync():
     mp=scratch/'POLYGON_ASSET_MANIFEST.json';mp.write_text(json.dumps(manifest,indent=2)+'\n')
     listing=scratch/'files.txt';listing.write_text(''.join(str(p.relative_to(WORKSPACE))+'\n' for p in archive_files))
     archive=scratch/'polybelief-polygon-ablation.tar.zst'
-    subprocess.run(['tar','--zstd','-cf',str(archive),'-C',str(WORKSPACE),'-T',str(listing)],check=True)
+    transport_run(['tar','--zstd','-cf',str(archive),'-C',str(WORKSPACE),'-T',str(listing)],check=True)
     archives=[archive]
     # GitHub release assets have a per-file size limit. Chunk the byte stream
     # without changing or omitting any experiment file when needed.
@@ -114,8 +120,8 @@ def _sync():
     if reference:
         notes.write_text(notes.read_text()+f"First restore the reverified training/static archive from {reference['release_url']}, then this archive. Files marked verified_previous_stage in POLYGON_ASSET_MANIFEST.json are byte-identical and not uploaded twice. Use tar --skip-old-files when restoring into an existing workspace; verify all file hashes.\n")
     notes.write_text(notes.read_text()+'If the archive is chunked, concatenate .part000, .part001, ... in lexical order to restore polybelief-polygon-ablation.tar.zst before extraction.\n')
-    subprocess.run(['gh','release','create',tag,*map(str,assets),'--repo',REPO,'--target',source_commit,'--title','PolyBelief Polygon contribution experiment assets','--notes-file',str(notes),'--prerelease'],check=True)
-    remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True))
+    transport_run(['gh','release','create',tag,*map(str,assets),'--repo',REPO,'--target',source_commit,'--title','PolyBelief Polygon contribution experiment assets','--notes-file',str(notes),'--prerelease'],check=True)
+    remote=json.loads(subprocess.check_output(['gh','api',f'repos/{REPO}/releases/tags/{tag}'],text=True,stderr=subprocess.PIPE))
     for f in assets:
         a=next(a for a in remote['assets'] if a['name']==f.name)
         if a['digest']!='sha256:'+file_sha256(f) or a['size']!=f.stat().st_size:
@@ -132,9 +138,9 @@ def _sync():
         path.write_text(path.read_text().replace('|原始结果和权重远程备份|Running|','|原始结果和权重远程备份|Done|'))
     report=OUT/'POLYGON_ABLATION_REPORT.md'
     report.write_text(report.read_text()+f"\n远程同步已校验：[完整权重、逐样本结果和日志归档]({remote['html_url']})。服务器资产SHA及逐文件清单见remote_sync.json与POLYGON_ASSET_MANIFEST.json。\n")
-    subprocess.run(['git','add',str(OUT.relative_to(HERE)),*[str(p.relative_to(HERE)) for p in indexes]],cwd=HERE,check=True)
-    subprocess.run(['git','commit','-m','Record verified remote Polygon experiment asset backup'],cwd=HERE,check=True)
-    subprocess.run([*GIT,'push','origin',branch],cwd=HERE,check=True)
+    transport_run(['git','add',str(OUT.relative_to(HERE)),*[str(p.relative_to(HERE)) for p in indexes]],cwd=HERE,check=True)
+    transport_run(['git','commit','-m','Record verified remote Polygon experiment asset backup'],cwd=HERE,check=True)
+    transport_run([*GIT,'push','origin',branch],cwd=HERE,check=True)
 
 
 if __name__=='__main__':sync_completed_experiment()

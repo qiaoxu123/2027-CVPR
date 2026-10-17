@@ -1,0 +1,986 @@
+{
+  "status": "12 frozen configurations, both complete splits; independent retrain navigation still running",
+  "source_commit": "d88acc513afd463804a2a8a195555032ba90b5e2",
+  "files": [
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_features/manifest.json",
+      "bytes": 7966,
+      "sha256": "d5626baa09c4f480ece88c4130f2340ac637720e3b030db3f6f130b0b625a0b8"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/2027-CVPR-closedloop-sbf-parity/runs/a3_trajectory_stop_seed0/best.pt",
+      "bytes": 773253,
+      "sha256": "51d8af7f05a9a718a9dc0ed12721a24ca6dd252e2714cb25948f22cb88cd2dbd"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/2027-CVPR-full-token-rgb/runs/final_a0_a5_evaluation/geometry_best.pt",
+      "bytes": 2940343,
+      "sha256": "2008085175d3da5f84fa1fc880d3ef38ba3c3fdd7595bd33a3c856f22d6baf2c"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/POLYGON_ABLATION_REPORT.md",
+      "bytes": 29029,
+      "sha256": "dac2b6043ebdc737f334117129c9241ffa56499b5d0cfd2bc0b3ab37a945ef69"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/POLYGON_FEATURE_AUDIT.md",
+      "bytes": 6790,
+      "sha256": "e734bf08034b803cb7e53c703bf9e3a2db11b49960725649fd8ae8505b88a2d9"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/frozen_plan.json",
+      "bytes": 11227,
+      "sha256": "bb1397f31b395de099a4d330ff07a104d287bd195020b639cf61d3eadbee5f2b"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen/metrics.json",
+      "bytes": 1924,
+      "sha256": "9556d77d6a9af7ef086d4740fe3dc762d2b2b10b2536ce9282cf63e4e8c01889"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen/predictions.jsonl",
+      "bytes": 11902950,
+      "sha256": "90152a8f9785ef15228ea5b08bb3afd43ff7b45cc409b44f6747bfc42be5d92a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen/started.json",
+      "bytes": 627,
+      "sha256": "dcee4aa03c9b90e69b8f5300e844a0cd91c6b6bde96e766c74f9b1aa5f86b05d"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen_seen128/metrics.json",
+      "bytes": 1872,
+      "sha256": "dd5b104c63ce43b66890948baad739d4669fee5978d03ccb9b60a1da01521f22"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen_seen128/predictions.jsonl",
+      "bytes": 634825,
+      "sha256": "9da30a66450e0defa46a6070da25f8ebeeff00644d333a55becfcbffdb0f0ad2"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_seen_seen128/started.json",
+      "bytes": 626,
+      "sha256": "4ac9b404524770308af152d467071e442a01a5f06f01e1fe617e990d80d3076a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_unseen/metrics.json",
+      "bytes": 1925,
+      "sha256": "c9c12fcb2763b317946b3ef5c94cc6e12fef228622de0191972ae7109743117c"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_unseen/predictions.jsonl",
+      "bytes": 13150506,
+      "sha256": "346f58c24d9ba49a55e4a23c668f5d0bd052d85c23b91a4141b5bf54eb30fdc3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__bounding_box/val_unseen/started.json",
+      "bytes": 629,
+      "sha256": "c2fa1e4f43bd63c3d5336f1619d2d047c74ec0c8e9572bfaad446d8f2fb68c07"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen/metrics.json",
+      "bytes": 1915,
+      "sha256": "717e00e96454fcea9699f76830ea6cff946cbc4a4142a68c57cefba2512b3b77"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen/predictions.jsonl",
+      "bytes": 12264372,
+      "sha256": "2779f9bb2a37fce7b234b6abd8ba4a03bce03981d5d4990709d566fa66d48db6"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen/started.json",
+      "bytes": 623,
+      "sha256": "8a1e2100949e2263d55a9216a2bf0511257da57746565dece1e684a9602e96f1"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen_seen128/metrics.json",
+      "bytes": 1870,
+      "sha256": "ef4ee5878e240bb41d38d559bf89c02e641a79ff63a02e7805ffbb27da3bec31"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen_seen128/predictions.jsonl",
+      "bytes": 660409,
+      "sha256": "ddb4d5835e7c566326aef8d62399a92c7a7903ee61faaebb53152b7b71449f08"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_seen_seen128/started.json",
+      "bytes": 622,
+      "sha256": "ed9e5df9fb541a65f85c90da88375c180aea0a66b6557a572b2e340cc0003c08"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_unseen/metrics.json",
+      "bytes": 1919,
+      "sha256": "1b906c5e90ce6c37c5dca03202998aa20a3d62d6c11a98e94f0117217b06166c"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_unseen/predictions.jsonl",
+      "bytes": 13592040,
+      "sha256": "f95e24986bf99d101165f4929e98104a8593c8d7d17b40f3a57589f6fab8e56e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__centroid/val_unseen/started.json",
+      "bytes": 625,
+      "sha256": "795aa116a3b526dd9b564357a2d5805c957e919d86cd2257d017fc3ce380615b"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen/metrics.json",
+      "bytes": 1922,
+      "sha256": "073b648cec6fdcf13d6d87edaf2358e81aeea761579264853410d82153b7ac04"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen/predictions.jsonl",
+      "bytes": 12007568,
+      "sha256": "c0b04c706c9bbf1ba93f2d9759571e8dcccb5d40747e3cd96a3222cfd21565bf"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen/started.json",
+      "bytes": 627,
+      "sha256": "e1072b1f6a90b069c64bfceb39755728c143df426bcb0bec5bc26e95430af743"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "325e6d3c730398e605e3a6faf97310e91f172e6b1845528c2648c955999f3355"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128/metrics.json",
+      "bytes": 1869,
+      "sha256": "2b8a776565ddf0b55a562db6a37ae90757a1f386dbd769dda587d64eff8f135e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128/predictions.jsonl",
+      "bytes": 644211,
+      "sha256": "e6f077e4496d094cde4acdbeda0d13e07b8e9513800fc3356bf8b88a6878f5eb"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128/started.json",
+      "bytes": 626,
+      "sha256": "fdf432a59f707d38e17f0fd3a46126277c2ad6ec214dee20d97ad32d04572cac"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128_original_builder/code_version.json",
+      "bytes": 159,
+      "sha256": "325e6d3c730398e605e3a6faf97310e91f172e6b1845528c2648c955999f3355"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128_original_builder/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128_original_builder/metrics.json",
+      "bytes": 1815,
+      "sha256": "065ebe2c0f02074042f41e3830df69c426535c54bdd3bfaaae1c61cf14f63ab2"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128_original_builder/predictions.jsonl",
+      "bytes": 644121,
+      "sha256": "d478db210dfdc7ce662908bc4117fe549e3ef19f93cd06e5e1b3ad74a0f751ce"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_seen_seen128_original_builder/started.json",
+      "bytes": 626,
+      "sha256": "e2d3bff3a752b05e1185dbca7de4ee129587827c66c1ce8b15ef51d8599218ad"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "650fe7d06c2bd0964ac5eb6edafacbc8fcc616767da79caa39e1bb214a08b80a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_unseen/metrics.json",
+      "bytes": 1926,
+      "sha256": "d0b232cfff9454a7c26e4f9e42ea6236c123f4120f9e043ac818aceeb72496fc"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_unseen/predictions.jsonl",
+      "bytes": 13194682,
+      "sha256": "59bfdf37029c18e830513c3584e466adb9bb56e955aba8148101485528baec53"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__full_polygon/val_unseen/started.json",
+      "bytes": 629,
+      "sha256": "b34cc99a672ec82b0ac8dcab7a7dea1e9f1e912f5d56b2f6a5996bceb2a17529"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "2cece15db93ffb79dde3fe9c80fa496b455bbdf9dfe018f62668322267280231"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen/metrics.json",
+      "bytes": 1924,
+      "sha256": "1f6a04d84dc4ee0ff1ad21f74c37b94b0f9419713935c1083cd397328f9196e8"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen/predictions.jsonl",
+      "bytes": 12275390,
+      "sha256": "b6967cbcfefe2888153ec4b8269b59e344fb942978eca606f8cfb01d22462447"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen/started.json",
+      "bytes": 626,
+      "sha256": "be532b6700613407f342021a9b187c099916a194c3019fb4db9d35b892e4cdae"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "2cece15db93ffb79dde3fe9c80fa496b455bbdf9dfe018f62668322267280231"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen_seen128/metrics.json",
+      "bytes": 1868,
+      "sha256": "03373d5326bb56b78a47bef434a91f1ddcbd3acd51e574503afe8934874ca2db"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen_seen128/predictions.jsonl",
+      "bytes": 662534,
+      "sha256": "523b3a425c345e4db7bf24f59dc17370a47d6534a8e73e257488e29ca77f32c6"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_seen_seen128/started.json",
+      "bytes": 625,
+      "sha256": "30671a9de7f1b9a6e414da27df6079e5b543a241f34b75a13651b829ca5ef155"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "2cece15db93ffb79dde3fe9c80fa496b455bbdf9dfe018f62668322267280231"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_unseen/metrics.json",
+      "bytes": 1925,
+      "sha256": "6ddc6686b6578415bef6a850a981d909ec91aed736110ce182dcce13e1b32cec"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_unseen/predictions.jsonl",
+      "bytes": 13565241,
+      "sha256": "95204d4b8d74ed7bbf899042a960afd7529f0e1ce34f52a4d27017f35ff12c17"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_boundary/val_unseen/started.json",
+      "bytes": 628,
+      "sha256": "641de70610f0583c60e40a0351cfccd40ab578377bd7316e1645db26daf00621"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen/metrics.json",
+      "bytes": 1919,
+      "sha256": "277c81acb35cd235f2ea29b61f2d32563f11ec1434ab51b9a33b295be07af131"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen/predictions.jsonl",
+      "bytes": 11994410,
+      "sha256": "ce964df9fe158bfe321ffe2c6fe6489090a19a71041736a5fef1e8b48f96cfe7"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen/started.json",
+      "bytes": 624,
+      "sha256": "7252ea9e05f4992b24c8a8eb6615acd5a549437f7943f93e9e0f68876b779ac8"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen_seen128/metrics.json",
+      "bytes": 1868,
+      "sha256": "5155554d90c64c0a6c376b592072e6486459dac72b771c685074025afe78423e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen_seen128/predictions.jsonl",
+      "bytes": 645066,
+      "sha256": "3211e48c4813a097c31789a61c3b009731890009b2aad6771b4e5dd8c217fc96"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_seen_seen128/started.json",
+      "bytes": 623,
+      "sha256": "a3e41c679898a4a5948b2a511fbe412b28d3d88365c865d75212bb05787a3a96"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_unseen/metrics.json",
+      "bytes": 1925,
+      "sha256": "f15795acd09cf7d2bc2a057c6ff20b03b95d3dd576e80254d55b6a85163d5e82"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_unseen/predictions.jsonl",
+      "bytes": 13200602,
+      "sha256": "993be43a31a5fd10ba438921a65132a72ba4f423110684411ca32666460581ba"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_extent/val_unseen/started.json",
+      "bytes": 626,
+      "sha256": "3bfb4cec67333bbe255375894b739f767b5a0973ea26d12a8118f208a0bf452f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "2cece15db93ffb79dde3fe9c80fa496b455bbdf9dfe018f62668322267280231"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen/metrics.json",
+      "bytes": 1918,
+      "sha256": "c5f43b601709c41ecc06ce49467f094ad34fe988919e3be77f2eb6a199d86bc6"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen/predictions.jsonl",
+      "bytes": 11991259,
+      "sha256": "56c16bf81a261f8897802b998b266784b4de78f78951125c790592dbe5953fdf"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen/started.json",
+      "bytes": 624,
+      "sha256": "3429f36d6e8d2c7c7adf8d7706f5552bd1a78ea8ca4d7c8ee700988d09d40a57"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "2cece15db93ffb79dde3fe9c80fa496b455bbdf9dfe018f62668322267280231"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen_seen128/metrics.json",
+      "bytes": 1871,
+      "sha256": "64ddacf5c21e6e1824c04f71cd543b8a4ac3513c8032071763e15cdce9a460e1"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen_seen128/predictions.jsonl",
+      "bytes": 639351,
+      "sha256": "9d2d35eb2e14dbdc1231c714fb7cf0c85a00309975ad5e69e33d805be74ba945"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_seen_seen128/started.json",
+      "bytes": 623,
+      "sha256": "d654655b259796e0bc72b97cdd72f17bd62bc79101930162dcbb9f03bdf835c0"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_unseen/metrics.json",
+      "bytes": 1922,
+      "sha256": "969bb1a2a79c3fd3a0c214d4090e7ea016a54faccc125a44d1c631a40dac54a7"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_unseen/predictions.jsonl",
+      "bytes": 13178224,
+      "sha256": "50eb899dfb35ff305cc6a7fa39021d75d157d87f0a7f7d9f536bf06741b7397f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside/val_unseen/started.json",
+      "bytes": 626,
+      "sha256": "add435d4dab776f17a79f288dab7af2ddce7b556e7ccc79fa430ec4349ae6318"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen/metrics.json",
+      "bytes": 1933,
+      "sha256": "e2e1e05e6c38bf5766e1f616cc7564298efe54d90bf0a4bcf1a4ec6068279c6c"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen/predictions.jsonl",
+      "bytes": 12033274,
+      "sha256": "79336dc628a21dff8e9cea534ec2554ee9ad2ec0cb1f79b49e408a6b12a27ffe"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen/started.json",
+      "bytes": 636,
+      "sha256": "a5a3fc8233af1b7d34dd79b7fc37bcdded51064a8c1de37af431c2cbed5277b8"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen_seen128/metrics.json",
+      "bytes": 1878,
+      "sha256": "305f49e1540be80b83684598b41c7de85eb4b47a7f3392b235fb8a3a62135e29"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen_seen128/predictions.jsonl",
+      "bytes": 644607,
+      "sha256": "f1c707a3dc8c485e18ea87aa63b4a6cbc875e066ca238c0f788930642096c586"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_seen_seen128/started.json",
+      "bytes": 635,
+      "sha256": "c8eaab19c8517a9aa07325bc4e5cc015dab67f75d386f15637ac7fd773430def"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_unseen/metrics.json",
+      "bytes": 1933,
+      "sha256": "1cd81274616e4755148ccf39255d9a17406c3003fedda9b313ee7923fbfd0458"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_unseen/predictions.jsonl",
+      "bytes": 13256823,
+      "sha256": "81b87a42fac429fd39c1c19f7a246be91a8f498f134eb9751b1472cec2157a76"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__no_inside_information/val_unseen/started.json",
+      "bytes": 638,
+      "sha256": "0ead420fd4458b193c009592c61a449a69fe487d747af484f486ed5d10322427"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen/metrics.json",
+      "bytes": 1926,
+      "sha256": "370c73983692e48c469471d2ef84ec7b86e3361242ba6aaab96876d7603e3d77"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen/predictions.jsonl",
+      "bytes": 11927366,
+      "sha256": "0e35362ea997d6027ef3bf741452bc1eb4a7c33f7d6014b0024a5aa7ae7947cf"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen/started.json",
+      "bytes": 632,
+      "sha256": "fe8b2a996a816b357910b49bb4321b8469dda5b6d39bd6f8d2c8462db7a15ffb"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen_seen128/metrics.json",
+      "bytes": 1875,
+      "sha256": "2cdf78fd41d483864b2eb526360dea342d3e343ad2a37517efceb47306cd6fe6"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen_seen128/predictions.jsonl",
+      "bytes": 647504,
+      "sha256": "697132a2f096a6f7e6e3ba9a936ab91d7a5700bd72c216302c5a48dae8b32200"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_seen_seen128/started.json",
+      "bytes": 631,
+      "sha256": "59f3418ea9cd9ee8215692a58d51e3443ea2baa631e7e6a9537d61557f08b94d"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_unseen/metrics.json",
+      "bytes": 1931,
+      "sha256": "761d00427d2bee2f53488d75af2ac6c8f1eebc53788eb37176cb0a1bbe062d7a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_unseen/predictions.jsonl",
+      "bytes": 13192738,
+      "sha256": "2ecaad19391a0068344d38a38944dc55bd511e8d821af1581e5298ba54b6090a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__nodes_to_centroid/val_unseen/started.json",
+      "bytes": 634,
+      "sha256": "a852b14a31307e71200d8dcde7f077460edbf12f915b87f83451eb0686579920"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen/metrics.json",
+      "bytes": 1926,
+      "sha256": "8a9a0dde41a32b8c37e11bd84afff2d7b29bd2058ddeeed820759bbccbf63334"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen/predictions.jsonl",
+      "bytes": 11824756,
+      "sha256": "c8d4bbcdded2f6d9d56d230765c948ee4d5661b6c4e6018b56db6e9869aa48c7"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen/started.json",
+      "bytes": 632,
+      "sha256": "91ff7e23cd625ff8c811ae79c3b9db0424d6a036845444ce9c2138053f1d9063"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen_seen128/metrics.json",
+      "bytes": 1862,
+      "sha256": "fee00978b9e6282c24602db2c6be444af252867369b0ecc6ee7500dc3d5abba8"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen_seen128/predictions.jsonl",
+      "bytes": 631582,
+      "sha256": "69d19c27fb7cb34a0a59a409a978c1dcc22051d2ab44987af6699808d0a41a55"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_seen_seen128/started.json",
+      "bytes": 631,
+      "sha256": "90c11b142c56ffb037b987d6821fffcccbc79bf2877c6cffd2e20007821ea4a4"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_unseen/metrics.json",
+      "bytes": 1931,
+      "sha256": "ae0e012fbdbe28fc2557cd7ecd48f921376495662413df31524226da19486438"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_unseen/predictions.jsonl",
+      "bytes": 13001725,
+      "sha256": "6265487e2bb25c3ba5af2262b24c4791e3fab0e91dc6edf0f39c46df703a794a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__prior_to_centroid/val_unseen/started.json",
+      "bytes": 634,
+      "sha256": "bd7d32b4efc32aeb9cedc577841540cbae20252a794087c2c986c248a01cce3c"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen/metrics.json",
+      "bytes": 1928,
+      "sha256": "c9c90294a248ced77964ce6822834ba5a85af182a71730d1fdef6e8af410d336"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen/predictions.jsonl",
+      "bytes": 12018624,
+      "sha256": "dc79954b62264aefb6ea4299f8ebfcdc25308d660e389e13204ffd468ca8e145"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen/started.json",
+      "bytes": 632,
+      "sha256": "d9ed3e872bcdb97de5ed8c87d7a7d1dd7a64c39e9045ccb99c37146e26c59a8f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen_seen128/metrics.json",
+      "bytes": 1875,
+      "sha256": "7833b8d51470e8db0a37d38ecf059577e91e2feacb84669974cdc751e5bdf5b9"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen_seen128/predictions.jsonl",
+      "bytes": 643715,
+      "sha256": "6e48e83c16c24dcb4dd05ab82963df5ffa309137832a5a792c02b2c14f6603e3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_seen_seen128/started.json",
+      "bytes": 631,
+      "sha256": "728f6532f3245a0b0716fb97c46bb600e6f640c5b8005add8fa55ed14b0a2995"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_unseen/metrics.json",
+      "bytes": 1929,
+      "sha256": "56707868d0074ab591f55a63dfac7347511f2741c37cff8b27be60a8c0e30887"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_unseen/predictions.jsonl",
+      "bytes": 13193322,
+      "sha256": "9a12081bcd201819f6d71599df7a3e8686ee6a24514bf0e23c235f7fdc995583"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__descriptor_only__rules_to_centroid/val_unseen/started.json",
+      "bytes": 634,
+      "sha256": "773c20d9492466544c21202537e702981f48f699de519d16563617d3c4dd9502"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen/metrics.json",
+      "bytes": 1916,
+      "sha256": "e5f288cb0be35bffc05a593a91b138bd2e6672d17ec72a8e958205b6542d0b80"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen/predictions.jsonl",
+      "bytes": 11884939,
+      "sha256": "4a11f360e28b34395374850cd53ad3b2b7accb201bc8825ac0405ed0f7fa7d98"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen/started.json",
+      "bytes": 622,
+      "sha256": "2c505b8f70d45cc293f082a096adfa7b065532101b89fb39b74e30926601f440"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen_seen128/metrics.json",
+      "bytes": 1857,
+      "sha256": "245c2a74b342ceb2384e31b88ccbaafbb0c8b72126698f8e464f6e5d67099f74"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen_seen128/predictions.jsonl",
+      "bytes": 629322,
+      "sha256": "0f52218acf0e8b848c1733ac8cb6d3f8c80bc270c2964416b544d92f50a97b57"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_seen_seen128/started.json",
+      "bytes": 621,
+      "sha256": "5522fa9b5cdecf1ad0644c1d948e91a44e5212617b857c18a4a110b10b2b35d7"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_unseen/metrics.json",
+      "bytes": 1920,
+      "sha256": "d3019c73acdc13dee28a2c88fa849a1e2cd1bf9051287dd3432aff820fc349ba"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_unseen/predictions.jsonl",
+      "bytes": 13094668,
+      "sha256": "cb03499020bdd29267ed6ba100aeaf8e82a5d3c26d84a9aa64e986fdb89438b7"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__bounding_box/val_unseen/started.json",
+      "bytes": 624,
+      "sha256": "2c30f729462ac2e04cd18d303fda328c5ca447d8af262220e3bcf1a310b2e1d7"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen/episodes.json",
+      "bytes": 340464,
+      "sha256": "51215819cf407ea384b5c99218fa3201abd3c0480b0c619b124e66f62201ddd3"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen/metrics.json",
+      "bytes": 1914,
+      "sha256": "4467fecbf45f37488421571e9e1d4e2b54fd8dc4603020bb17c8a083f72a0fb9"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen/predictions.jsonl",
+      "bytes": 12129962,
+      "sha256": "2e2d78084330eddabb2984a06c00c7efa0504f67add07314afc310cca941a0cb"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen/started.json",
+      "bytes": 618,
+      "sha256": "b51ebfe338319dc296e6da76b3c8825072bae4d9e67651b115b64423ba8c0ab6"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen_seen128/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen_seen128/episodes.json",
+      "bytes": 17648,
+      "sha256": "93aaf8428537f34376f778ff1034350294214fb7772897c7d3e4b306529a208f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen_seen128/metrics.json",
+      "bytes": 1866,
+      "sha256": "624f6381140140076c126e3323b5cd7086aefeecf651e39c9be8fcf25d685196"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen_seen128/predictions.jsonl",
+      "bytes": 650414,
+      "sha256": "4b761f3bf8f6d6dd72528f7be60ef35833e96a1c0bb9291b11910dde286f528a"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_seen_seen128/started.json",
+      "bytes": 617,
+      "sha256": "8037fd1431db872576f7c91936b91a7bfdf728a01362585333aedf863f9e16bb"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_unseen/code_version.json",
+      "bytes": 159,
+      "sha256": "3ed4d35e7eb29ee36d4a04771b3888b504a21b57fbb54105e7e4a7a7937e33ed"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_unseen/episodes.json",
+      "bytes": 370447,
+      "sha256": "113cf4dbc8482b22928491858d591761d71c98cde70d3094e5658afc33d67d8e"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_unseen/metrics.json",
+      "bytes": 1918,
+      "sha256": "71139d79e6a2231b588b2314c225dd2c00a16a9080c443e7a541e1b21ab7e6bf"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_unseen/predictions.jsonl",
+      "bytes": 13446667,
+      "sha256": "74bf0c55eeaffc134ad4fa840b8f8128bb37c82d1054fac4fd8c99d8fdb6874f"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation/frozen__end_to_end__centroid/val_unseen/started.json",
+      "bytes": 620,
+      "sha256": "ccfde7d2d8386972ce6c716be5aba8ab33669aa220bcbc0b8939e75e2db76a74"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/navigation_data_audit.json",
+      "bytes": 12148,
+      "sha256": "048edc97fb21b8224b19563991f551e1816aec3855d1639aac493679747758fb"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/paired_statistics.json",
+      "bytes": 751417,
+      "sha256": "cfc88fd6d005957f59e04977a6b62da30e5a02840c6c6e3dbc2f68b14300ab61"
+    },
+    {
+      "path": "2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/rendering_parity.json",
+      "bytes": 292,
+      "sha256": "84aab04a3e9ea2514d36c0ed6eee1943bb457c9004384884d7e3bf80adf77c75"
+    },
+    {
+      "path": "2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+      "bytes": 10778317,
+      "sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a"
+    },
+    {
+      "path": "2027-CVPR/GraphNav/runs/static_final_analysis_20261010/E1_seed1/best.pt",
+      "bytes": 6634573,
+      "sha256": "9d9be861bf7e9cac986d747867990de3d409ccb9bc1545862d71a620448380d7"
+    }
+  ]
+}
