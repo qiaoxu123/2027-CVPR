@@ -25,3 +25,9 @@ Episode `['birmingham_block_5', 1, 1]`; val_unseen; NE 110.04 m. Source trace an
 Actual normalized model probabilities, predeclared Seed0 and first Val-Unseen query with changed public node geometry; no result-based selection. Cyan outlines are the geometry supplied to each model. Recipient language and landmark names are unchanged. Separately budget-matched trained models; not a same-weight feature intervention. Source IDs, donor and checkpoint SHAs: belief_figure_manifest.json.
 
 ![Actual goal belief](figures/correct_vs_shuffled_belief.png)
+
+## Aggregate static localization
+
+![Matched three-seed static localization](figures/map_geometry_static.png)
+
+Actual complete validation results; bars are three-seed means and error bars are sample standard deviations, not cross-map confidence intervals. Exact inputs are recorded in static_figure_manifest.json.

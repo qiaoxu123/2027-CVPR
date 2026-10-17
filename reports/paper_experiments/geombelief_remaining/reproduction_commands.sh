@@ -12,6 +12,7 @@ GEOMBELIEF_PY=/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproductio
 "$GEOMBELIEF_PY" -m scripts.geombelief_shuffle_audit
 "$GEOMBELIEF_PY" -m scripts.geombelief_cases
 "$GEOMBELIEF_PY" -m scripts.geombelief_belief_figure
+"$GEOMBELIEF_PY" -m scripts.geombelief_static_figure
 "$GEOMBELIEF_PY" -m scripts.geombelief_results
 "$GEOMBELIEF_PY" -m scripts.geombelief_visual_results
 "$GEOMBELIEF_PY" -m scripts.geombelief_verify

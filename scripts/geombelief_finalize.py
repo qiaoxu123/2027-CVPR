@@ -6,11 +6,21 @@ from scripts.geombelief_map_experiments import OUT,HERE
 
 def main():
     gates=['map_complete.json','control_complete.json','visual_complete.json','controller_context_audit.json','belief_figure_manifest.json','shuffle_effectiveness.json','fixed_goal_complete.json']
-    while not all((OUT/g).exists() for g in gates):time.sleep(30)
+    while not all((OUT/g).exists() for g in gates):
+        atomic_json(dict(timestamp=time.time(),status='Running',
+            training_complete=len(list((OUT/'training').glob('*/complete.json'))),training_required=15,
+            static_complete=len(list((OUT/'localization').glob('*/val_seen.json')))+len(list((OUT/'localization').glob('*/val_unseen.json'))),static_required=30,
+            map_navigation_complete=sum((p/'metrics.json').exists() for p in (OUT/'navigation').glob('*/val_*') if '128' not in p.name),map_navigation_required=30,
+            native_control_complete=sum((p/'metrics.json').exists() for p in (OUT/'controller').glob('*/val_*') if '128' not in p.name),native_control_required=12,
+            fixed_goal_complete=sum((p/'metrics.json').exists() for p in (OUT/'controller_fixed_goal').glob('*/val_*') if '128' not in p.name),fixed_goal_required=12,
+            visual_complete=sum((p/'metrics.json').exists() for p in (OUT/'visual').glob('*/val_*')),visual_required=6,
+            pending_gates=[g for g in gates if not (OUT/g).exists()],active_failure_records=[str(p) for p in OUT.glob('*failure.json')]),OUT/'live_status.json')
+        time.sleep(30)
     from scripts.geombelief_results import summarize
     from scripts.geombelief_visual_results import summarize as visual_summary
     from scripts.geombelief_verify import main as verify
     summarize();visual_summary();verify()
+    live=json.loads((OUT/'live_status.json').read_text());live.update(timestamp=time.time(),status='CoreComplete; synchronizing remote',pending_gates=[]);atomic_json(live,OUT/'live_status.json')
     stats=json.loads((OUT/'paired_statistics.json').read_text());stats.update(json.loads((OUT/'visual_input_paired_statistics.json').read_text()));atomic_json(stats,OUT/'paired_statistics.json')
     def effect(key,metric):
         s=stats[key]['metrics'][metric];lo,hi=s['map_cluster_episode_weighted_ci95']
@@ -66,6 +76,7 @@ Map-cluster bootstrap resamples whole maps; paired episode bootstrap is suppleme
     assert tests.returncode==0
     from scripts.geombelief_sync import main as sync
     sync();atomic_json(dict(status='Done',core=True,remote_verified=True,fair_visual_retraining='Pending'),OUT/'finalization_complete.json')
+    live.update(timestamp=time.time(),status='Done',remote_verified=True);atomic_json(live,OUT/'live_status.json')
     # Include final completion receipt in the branch after asset verification.
     from scripts.geombelief_sync import commit_push
     commit_push('Record GeomBelief core experiment completion')
