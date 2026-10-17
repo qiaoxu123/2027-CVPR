@@ -375,3 +375,5 @@ implementation_provenance.json及source_snapshot_manifest.json记录实现Commit
 静态评估沿用原static_recall的topk(8)并列排序，R@1/4/8由其前缀得到；闭环保留原模型topk(20)候选与原head选择。BF16并列分数时两者首位可能不同，不能把静态R@1和闭环SR的差额全部归因于执行控制。所有表示使用相同协议，不为个别表示修正并列顺序。
 
 若主要End-to-End Unseen效应未获地图级正下界支持，论文核心创新应强调“使用完整公开几何的可解释接口/表示设计”，而不能声称已证明Polygon跨地图优于点/框。若仅Descriptor Only有效，也只能声称候选–地标描述符的条件增量价值。
+
+远程同步已校验：[完整权重、逐样本结果和日志归档](https://github.com/qiaoxu123/2027-CVPR/releases/tag/polybelief-polygon-ablation-20261017-bb1397f3)。服务器资产SHA及逐文件清单见remote_sync.json与POLYGON_ASSET_MANIFEST.json。

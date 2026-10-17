@@ -98,4 +98,4 @@ common_episode_metrics.csv保存本次可重算来源的逐Episode共同指标�
 |原始/优化执行路径Seen128精确一致性|Done|rendering_parity.json（完成前不允许声称通过）|
 |同一冻结Trajectory/Stop全量闭环|Done|62/62逻辑结果行；54次实际全split评估，Full别名另计|
 |三Seed配对、地图簇CI及LOMO和分组分析|Done|paired_statistics.json; seed_summary.csv; geometry_subgroup_results.csv|
-|原始结果和权重远程备份|Running|frozen_remote_sync.json为冻结阶段已验证归档；最终remote_sync.json另记|
+|原始结果和权重远程备份|Done|frozen_remote_sync.json为冻结阶段已验证归档；最终remote_sync.json另记|
