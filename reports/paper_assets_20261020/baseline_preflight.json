@@ -1,0 +1,65 @@
+{
+  "MGP": {
+    "command": [
+      "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/.reproduction-env/bin/python",
+      "main_goal_predictor.py",
+      "--help"
+    ],
+    "cwd": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/CityNav-GSM/external/citynav",
+    "returncode": 1,
+    "log": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/sources/mgp_native_preflight.log",
+    "log_sha256": "9b713fb376ce3a56e352934864f3f18726ef053f972a8145914ad74814d4cd90",
+    "result": "Blocked: native helper cannot import groundingdino in the declared reproduction environment",
+    "wrapper_restriction": "Upstream main_goal_predictor.py unconditionally iterates Seen/Unseen/Test, performs terminal goal selection and writes native outputs. A split/ID/isolated-output/common-metric wrapper is not validated for recovered weight."
+  },
+  "FlightGPT": {
+    "snapshot": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/FlightGPT/model_weight/Flightgpt",
+    "shards": [
+      {
+        "file": "model-00001-of-00004.safetensors",
+        "present": false
+      },
+      {
+        "file": "model-00002-of-00004.safetensors",
+        "present": false
+      },
+      {
+        "file": "model-00003-of-00004.safetensors",
+        "present": false
+      },
+      {
+        "file": "model-00004-of-00004.safetensors",
+        "present": false
+      }
+    ],
+    "complete": false
+  },
+  "HETT": {
+    "checkpoint": "/home/rental/20260922_1/Workspace/DATA/hett/release/checkpoint/best_val_unseen",
+    "bytes": 675603246,
+    "sha256": "bb59e46afad00d64f0c69a938037f8b9090e158c51a1b0814de483c0095e277a",
+    "source_commit": "baf1eb1448d154f02e09d66fff9c5621f0ede47a",
+    "status": "official_asset_present_incompatible_local_method_identity",
+    "initial_dependency_failure": "tensorboardX absent; fixed using isolated /tmp target, shared environment unchanged",
+    "isolated_help_passed": true,
+    "native_paths_hardcoded": true,
+    "native_output_isolation_missing": true,
+    "local_parser_contains_trajectory_belief_research_flags": true,
+    "note": "HETT/main is a modified research checkout. Do not relabel this policy as official HETT or load official weights with strict=False. Need checkpoint-compatible upstream source SHA and isolated output/export wrapper before inference. Existing historical aggregate is retained, not promoted to verified reproduction.",
+    "commands": [
+      "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout 45 <reproduction-python> main.py --help",
+      "<reproduction-python> -m pip install --no-deps --target /tmp/polybelief-hett-preflight-20261017 tensorboardX",
+      "PYTHONPATH=/tmp/polybelief-hett-preflight-20261017:<HETT/main> HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout 45 <reproduction-python> main.py --help"
+    ]
+  },
+  "HTNav": {
+    "official_weight_found": false,
+    "upstream_probe": "sources/upstream_probe.json",
+    "local_independent_models_are_not_official": true
+  },
+  "GeoNav": {
+    "local_model": "DeepSeek Flash substitution",
+    "official_model": "GPT-4o API",
+    "same_method_identity": false
+  }
+}

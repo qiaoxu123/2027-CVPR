@@ -1,0 +1,58 @@
+{
+  "GeomBelief_source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/profiling-val-unseen-20261016/profiling_val_unseen/full/profile.json",
+  "GeomBelief_whole_episode_source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/profiling-val-unseen-20261016/profiling_val_unseen/profile_val_unseen_full.json",
+  "GeomBelief_whole_episode_sha256": "482fa0aff76ef1f66300534ae0665b5ce84d843eea1a7ad5ea23573c6cd65586",
+  "GeomBelief_launch_record": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/profiling-val-unseen-20261016/profiling_val_unseen/launch_record.json",
+  "GeomBelief_launch_sha256": "55065548f3d067d70d257b45236cc2baa0f8cb30320cfbcc5bfcf2bacd6524e9",
+  "GeomBelief_first_episode": {
+    "index": 0,
+    "sample_id": "('birmingham_block_5', 1, 1)",
+    "map": "birmingham_block_5",
+    "rollout_seconds": 1.7857061650138348,
+    "language_gpu_seconds": 0.2941144962310791,
+    "vision_gpu_seconds": 0.19126159870624543,
+    "policy_gpu_seconds": 0.40351464426517486,
+    "model_inference_gpu_seconds": 0.8888907392024994,
+    "environment_observation_seconds": 0.5373886470042635,
+    "other_rollout_seconds": 0.35942677880707197,
+    "steps": 6,
+    "decisions": 7,
+    "navigation_error": 110.04353251312295
+  },
+  "common_episode_ids": 2697,
+  "GeomBelief_environment": "See launch_record.json and gpu_activity.jsonl for observed concurrent GPU processes.",
+  "GeomBelief_timing": "HETT-style module CUDA Event spans, nested child spans subtracted to avoid double counting; no synchronized host wrappers around model modules. Environment observations use synchronized host wall time. Normal shared-rollout per-decision synchronization remains. Episode totals include public episode setup through final decision; model loading and post-rollout metrics are excluded. CUDA intervals may include host launch gaps; vision includes native ROI pooling.",
+  "HETT_source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/HETT/hett-main-system-opt/artifacts/profiling/profile_val_unseen_full.json",
+  "HETT_checkpoint": "/home/rental/20260922_1/Workspace/hett-main-system-opt/checkpoints/main_system_teacherfix_b8_adam_2ep/best_val_unseen",
+  "HETT_checkpoint_epoch": 9,
+  "HETT_samples": 2697,
+  "HETT_first_sample": {
+    "index": 0,
+    "sample_id": "('birmingham_block_5', 1, 1)",
+    "map": "birmingham_block_5",
+    "rollout_seconds": 2.4352325298823416,
+    "environment_observation_seconds": 1.7275082289706916,
+    "language_gpu_seconds": 0.13556959533691407,
+    "vision_gpu_seconds": 0.19913273429870607,
+    "policy_gpu_seconds": 0.26816636967658997,
+    "model_inference_gpu_seconds": 0.6028686993122101,
+    "steps": 20,
+    "navigation_error": 85.13890000300607,
+    "other_rollout_seconds": 0.10485560159943996
+  },
+  "HETT_excluding_first": {
+    "count": 2696,
+    "min": 0.06398311397060752,
+    "mean": 0.19998876168919405,
+    "variance": 0.00044635469939572264,
+    "stddev": 0.021127108164529347,
+    "max": 0.5076063158921897
+  },
+  "strictly_matched": false,
+  "reason": "Same GPU model and compatible whole-episode module-span reports exist; per-decision GeomBelief remains a separate scope. Model/checkpoint identities, native controls/step counts and run conditions differ. Historical HETT is a locally trained teacherfix model, not the official published weight. Geometric subcomponent is not isolated in HETT. No official controlled speedup ratio is justified.",
+  "misleading_directory_probe": {
+    "path": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/diagnostics_20261013/profile_hett/metrics.json",
+    "actual_model": "GraphNav-V1 Stage1; initialized from verified A3 Epoch14 and pretrained controller; bounded visual residual + causal quality history; original Guarded-Blend, no active sensing",
+    "decision": "Excluded: directory name is not evidence of HETT model identity."
+  }
+}

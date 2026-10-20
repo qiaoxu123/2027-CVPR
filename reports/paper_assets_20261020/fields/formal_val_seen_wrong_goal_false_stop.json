@@ -1,0 +1,844 @@
+{
+  "case_id": "formal_val_seen_wrong_goal_false_stop",
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "residual_checkpoint_sha256": null,
+  "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+  "dataset_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "source_code": {
+    "graphnav/stage1_runtime.py": "f2985f0933efe6db69b449066b50fcf709c93110631160cfd45b041c142a38cf",
+    "graphnav/stage1.py": "2649d59bfa66e20b84016132eee8a2562714e8e7d4b917bfa76e8749a90f24da",
+    "graphnav/calibrated_residual_runtime.py": "f433a057b5e63c21967d6b788493a99203f034d8c2e8e885fd3683279dec1675",
+    "graphnav/renderer.py": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747"
+  },
+  "frames": [
+    {
+      "step": 0,
+      "pose": [
+        33.6426964733,
+        561.3063272661,
+        141.8241423345,
+        0.21685326479936456
+      ],
+      "footprint_world": [
+        [
+          133.9957275390625,
+          718.3735961914062
+        ],
+        [
+          190.7099609375,
+          460.95330810546875
+        ],
+        [
+          -66.71034240722656,
+          404.23907470703125
+        ],
+        [
+          -123.424560546875,
+          661.6593627929688
+        ]
+      ]
+    },
+    {
+      "step": 1,
+      "pose": [
+        77.19722747802734,
+        544.67041015625,
+        131.8241423345,
+        -0.3648551448923115
+      ],
+      "footprint_world": [
+        [
+          234.43576049804688,
+          614.9912719726562
+        ],
+        [
+          147.51808166503906,
+          387.431884765625
+        ],
+        [
+          -80.04131317138672,
+          474.34954833984375
+        ],
+        [
+          6.876373291015625,
+          701.908935546875
+        ]
+      ]
+    },
+    {
+      "step": 2,
+      "pose": [
+        120.93505859375,
+        528.4057006835938,
+        121.82414233450001,
+        -0.35602217851231666
+      ],
+      "footprint_world": [
+        [
+          264.68792724609375,
+          594.2252807617188
+        ],
+        [
+          186.75462341308594,
+          384.65283203125
+        ],
+        [
+          -22.817825317382812,
+          462.58612060546875
+        ],
+        [
+          55.11549377441406,
+          672.1585693359375
+        ]
+      ]
+    },
+    {
+      "step": 3,
+      "pose": [
+        164.85342407226562,
+        512.880615234375,
+        111.82414233450001,
+        -0.3397883017699124
+      ],
+      "footprint_world": [
+        [
+          294.7577819824219,
+          574.9296875
+        ],
+        [
+          226.90249633789062,
+          382.97625732421875
+        ],
+        [
+          34.949066162109375,
+          450.83154296875
+        ],
+        [
+          102.80435180664062,
+          642.7849731445312
+        ]
+      ]
+    },
+    {
+      "step": 4,
+      "pose": [
+        209.008056640625,
+        498.3158874511719,
+        103.26164245605469,
+        -0.3186188668634171
+      ],
+      "footprint_world": [
+        [
+          326.7560729980469,
+          557.6515502929688
+        ],
+        [
+          268.3437194824219,
+          380.56787109375
+        ],
+        [
+          91.26004028320312,
+          438.980224609375
+        ],
+        [
+          149.67239379882812,
+          616.0639038085938
+        ]
+      ]
+    },
+    {
+      "step": 5,
+      "pose": [
+        258.0741271972656,
+        488.7368469238281,
+        93.63664245605469,
+        -0.19280232116831553
+      ],
+      "footprint_world": [
+        [
+          356.15478515625,
+          554.7766723632812
+        ],
+        [
+          324.11395263671875,
+          390.65618896484375
+        ],
+        [
+          159.9934844970703,
+          422.697021484375
+        ],
+        [
+          192.0343017578125,
+          586.8175048828125
+        ]
+      ]
+    },
+    {
+      "step": 6,
+      "pose": [
+        307.29693603515625,
+        479.9581604003906,
+        84.01164245605469,
+        -0.17649029583037387
+      ],
+      "footprint_world": [
+        [
+          393.1219482421875,
+          539.803466796875
+        ],
+        [
+          367.1422424316406,
+          394.1331481933594
+        ],
+        [
+          221.471923828125,
+          420.11285400390625
+        ],
+        [
+          247.45162963867188,
+          565.7831420898438
+        ]
+      ]
+    },
+    {
+      "step": 7,
+      "pose": [
+        356.5413818359375,
+        471.3189697265625,
+        74.32414245605469,
+        -0.17366753833156884
+      ],
+      "footprint_world": [
+        [
+          430.98138427734375,
+          523.5384521484375
+        ],
+        [
+          408.7608947753906,
+          396.87896728515625
+        ],
+        [
+          282.10137939453125,
+          419.0994567871094
+        ],
+        [
+          304.3218688964844,
+          545.7589721679688
+        ]
+      ]
+    },
+    {
+      "step": 8,
+      "pose": [
+        389.8210144042969,
+        466.99041748046875,
+        64.76164245605469,
+        -0.1293400117255222
+      ],
+      "footprint_world": [
+        [
+          451.15789794921875,
+          514.2080078125
+        ],
+        [
+          437.03863525390625,
+          405.653564453125
+        ],
+        [
+          328.484130859375,
+          419.7727966308594
+        ],
+        [
+          342.6033935546875,
+          528.3272705078125
+        ]
+      ]
+    },
+    {
+      "step": 9,
+      "pose": [
+        393.2668151855469,
+        464.46893310546875,
+        55.19914245605469,
+        -0.6317221476296893
+      ],
+      "footprint_world": [
+        [
+          456.3966979980469,
+          474.2475891113281
+        ],
+        [
+          403.04547119140625,
+          401.33905029296875
+        ],
+        [
+          330.1369323730469,
+          454.6902770996094
+        ],
+        [
+          383.4881591796875,
+          527.5988159179688
+        ]
+      ]
+    },
+    {
+      "step": 10,
+      "pose": [
+        393.18359375,
+        464.2876892089844,
+        46.01164245605469,
+        -2.001248328907645
+      ],
+      "footprint_world": [
+        [
+          410.8697814941406,
+          416.5702209472656
+        ],
+        [
+          345.46612548828125,
+          446.60150146484375
+        ],
+        [
+          375.4974060058594,
+          512.005126953125
+        ],
+        [
+          440.90106201171875,
+          481.973876953125
+        ]
+      ]
+    },
+    {
+      "step": 11,
+      "pose": [
+        393.178466796875,
+        464.28570556640625,
+        37.94914245605469,
+        -2.772425996582618
+      ],
+      "footprint_world": [
+        [
+          377.2129821777344,
+          428.16961669921875
+        ],
+        [
+          357.0623779296875,
+          480.2511901855469
+        ],
+        [
+          409.1439514160156,
+          500.40179443359375
+        ],
+        [
+          429.2945556640625,
+          448.3202209472656
+        ]
+      ]
+    }
+  ],
+  "replay_checks": [
+    {
+      "step": 0,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 1,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 2,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 3,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 4,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 5,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 6,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 7,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 8,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 9,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 10,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    },
+    {
+      "step": 11,
+      "static_top16_world_xy": 0.0,
+      "belief_top16_world_xy": 0.0,
+      "selected_goal_xy": 0.0,
+      "stop_probability": 0.0
+    }
+  ],
+  "replay_matches_saved_diagnostics": true,
+  "arrays": "fields/formal_val_seen_wrong_goal_false_stop.npz",
+  "arrays_sha256": "b2d4e573954ec8cb1115add67748a6f2918ca20d5575c3a1824bc9a08df9f3e4",
+  "statistics": [
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 0,
+      "comparison": "static_to_observed",
+      "belief_L1": 6.500671912600823e-05,
+      "KL_p_to_q_nats": 1.3631059995963923e-06,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1265134960412979,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 1,
+      "comparison": "static_to_observed",
+      "belief_L1": 7.965314775516996e-05,
+      "KL_p_to_q_nats": 1.9648881698114887e-06,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1298067420721054,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 1,
+      "comparison": "previous_to_current",
+      "belief_L1": 2.344707419863568e-05,
+      "KL_p_to_q_nats": 3.722079637419389e-07,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1298067420721054,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 2,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.0001485261455900196,
+      "KL_p_to_q_nats": 3.3411058401736016e-06,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.12979289889335632,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 2,
+      "comparison": "previous_to_current",
+      "belief_L1": 7.590176150966075e-05,
+      "KL_p_to_q_nats": 1.593412062302553e-06,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.12979289889335632,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 3,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.00014691332057925136,
+      "KL_p_to_q_nats": 3.458894896653653e-06,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1333930790424347,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 3,
+      "comparison": "previous_to_current",
+      "belief_L1": 1.2376587804167412e-05,
+      "KL_p_to_q_nats": 1.1306358084468767e-07,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1333930790424347,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 4,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.0017298452195682887,
+      "KL_p_to_q_nats": 3.797322570538617e-05,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.12751184403896332,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 4,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.0016000878637871976,
+      "KL_p_to_q_nats": 3.512106982668025e-05,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.12751184403896332,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 5,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.006770040953310493,
+      "KL_p_to_q_nats": 0.000181685192981571,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.13788242638111115,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 5,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.005592778695257272,
+      "KL_p_to_q_nats": 0.00016533626766874142,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.13788242638111115,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 6,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.01609311394874687,
+      "KL_p_to_q_nats": 0.0004158852028559071,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1489914357662201,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 6,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.010950028889142972,
+      "KL_p_to_q_nats": 0.00028793571605665035,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.1489914357662201,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 7,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.053679464288027966,
+      "KL_p_to_q_nats": 0.0016869094130505665,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.14885619282722473,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 7,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.04964377576220584,
+      "KL_p_to_q_nats": 0.001638520743108351,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.14885619282722473,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 8,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.0527151906174613,
+      "KL_p_to_q_nats": 0.0016494789359535686,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.14901238679885864,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 8,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.0020759951073327128,
+      "KL_p_to_q_nats": 1.7198765203805454e-05,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.14901238679885864,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 9,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.05575051796690205,
+      "KL_p_to_q_nats": 0.001854782037544392,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.15438491106033325,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 9,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.004493612683606667,
+      "KL_p_to_q_nats": 3.106302346372966e-05,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.15438491106033325,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 10,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.05555716413942889,
+      "KL_p_to_q_nats": 0.0018406549380952672,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.15749779343605042,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 10,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.0005947855872824342,
+      "KL_p_to_q_nats": 1.4579933924276758e-06,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.15749779343605042,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 11,
+      "comparison": "static_to_observed",
+      "belief_L1": 0.05530444737419031,
+      "KL_p_to_q_nats": 0.001818895964854529,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.15252414345741272,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    },
+    {
+      "case_id": "formal_val_seen_wrong_goal_false_stop",
+      "split": "val_seen",
+      "episode_id": "birmingham_block_1:11:1",
+      "model_identity": "formal",
+      "control": "real",
+      "step": 11,
+      "comparison": "previous_to_current",
+      "belief_L1": 0.00041994487049065374,
+      "KL_p_to_q_nats": 5.259007549434728e-07,
+      "top1_shift_m": 0.0,
+      "top1_cell_changed": 0,
+      "reference_top1_error_m": 34.284857653523886,
+      "observed_top1_error_m": 34.284857653523886,
+      "residual_max_abs": 0.15252414345741272,
+      "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+      "scope": "archived real executed pose prefix; controls are matched-path offline interventions, not independent rollouts"
+    }
+  ]
+}

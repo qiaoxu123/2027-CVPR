@@ -1,0 +1,30 @@
+{
+  "figure": "figure1_overview",
+  "cases": [
+    {
+      "case_id": "formal_val_unseen_success",
+      "episode_id": [
+        "birmingham_block_5",
+        8,
+        4
+      ],
+      "split": "val_unseen",
+      "dataset_version": "processed_citynav",
+      "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+      "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "residual_checkpoint_sha256": null,
+      "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_unseen/predictions.jsonl",
+      "source_predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290"
+    }
+  ],
+  "command": "python reports/paper_assets_20261020/scripts/plot_figures.py",
+  "data_kind": "Measured CityNav map, frozen prediction fields, executed trajectories; no generated scene",
+  "source_bundle": "cases.jsonl; replay_manifest.json; fields/*.npz and fields/*.json; geometry_case.json",
+  "public_map_context_sha256": "ae9bc3c1f43ee34b321a73ca1719c07ca9594608bca92f9d1e401591b9966097",
+  "observation_index": "observation_index.json",
+  "image_use": "No RGB or raw raster pixels. Derived map/prediction figure. CityNav CC BY 4.0; map attribution: OpenStreetMap contributors (https://www.openstreetmap.org/copyright).",
+  "sha256": {
+    "pdf": "d1716c5c88d81843b207a45351c74dd1b2fed92a34d2adf65371d89774fbaf81",
+    "png": "f5c93164343cb786760c26be1480be4c000b578fcdba56da0a3031925dca0a20"
+  }
+}

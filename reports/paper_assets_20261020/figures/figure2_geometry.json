@@ -1,0 +1,57 @@
+{
+  "figure": "figure2_geometry",
+  "cases": [],
+  "command": "python reports/paper_assets_20261020/scripts/plot_figures.py",
+  "data_kind": "Measured CityNav map, frozen prediction fields, executed trajectories; no generated scene",
+  "source_bundle": "cases.jsonl; replay_manifest.json; fields/*.npz and fields/*.json; geometry_case.json",
+  "public_map_context_sha256": "ae9bc3c1f43ee34b321a73ca1719c07ca9594608bca92f9d1e401591b9966097",
+  "observation_index": "observation_index.json",
+  "image_use": "No RGB or raw raster pixels. Derived map/prediction figure. CityNav CC BY 4.0; map attribution: OpenStreetMap contributors (https://www.openstreetmap.org/copyright).",
+  "sha256": {
+    "pdf": "284c87644a23ae4236fe1e5624a3c0992df1446e25f2bb3ed01a238d2ecf1ba8",
+    "png": "d7848caacd55e3947fc85166a2fe4fe1bf6a989b382eb2eddeb836c1097d72be"
+  },
+  "geometry_case": "geometry_case.json",
+  "episode_id": "birmingham_block_5:8:5:0",
+  "split": "val_unseen",
+  "dataset_version": "revised",
+  "source_query_sha256": "7408c87314cd869e72b8dd0635e93585e745fe56fd83bfac5de62645f83909a6",
+  "sources": [
+    {
+      "arm": "name_type",
+      "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/training/map_geometry__name_type__seed0/best.pt",
+      "checkpoint_sha256": "a2e63c67fc732ad7b1ae23abc0a79e10eecc231c1bbad2b6a4e1f812aeb3267f",
+      "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/localization/map_geometry__name_type__seed0/val_unseen.localization.jsonl",
+      "source_sha256": "7c1844f80138d646b1d66cf3235bccac156ab88e0b22b37c37b395bf6d8b3e4b",
+      "top1_xy": [
+        478.5410697251558,
+        1121.427668350935
+      ],
+      "top1_error_m": 358.29061494787334
+    },
+    {
+      "arm": "shuffled",
+      "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/training/map_geometry__shuffled__seed0/best.pt",
+      "checkpoint_sha256": "5a57fbd42a01c35be63593fba1c8cb224bb500ca790d525ebee1b005106cdcb4",
+      "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/localization/map_geometry__shuffled__seed0/val_unseen.localization.jsonl",
+      "source_sha256": "2c14149c9df29e3cfd2ca798e6c0814754793aaf4f389b05873d3b9ce0f40b43",
+      "top1_xy": [
+        792.9053605496883,
+        907.0883894503116
+      ],
+      "top1_error_m": 22.286770689196924
+    },
+    {
+      "arm": "correct",
+      "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/training/shared_full_polygon__full_polygon__seed0/best.pt",
+      "checkpoint_sha256": "6b0f737d971b537419dc861de5a30865f3d7d218c34b6681ee8d8ac66bc7ec86",
+      "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/localization/trained__descriptor_only__full_polygon__seed0/val_unseen.localization.jsonl",
+      "source_sha256": "bc793e87a99ee2612f5886c6436920d225040ec55b447125db683daed9294bdd",
+      "top1_xy": [
+        778.616081649065,
+        907.0883894503116
+      ],
+      "top1_error_m": 12.021662811703274
+    }
+  ]
+}
