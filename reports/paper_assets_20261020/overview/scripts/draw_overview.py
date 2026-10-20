@@ -107,6 +107,8 @@ def main():
  fig.text(.018,.013,'CityNav / OpenStreetMap contributors • birmingham_block_5:8:4 • formal frozen C1',fontsize=5.6,color='#52626d')
  fig.text(.982,.013,'LOCAL RGB • redistribution unconfirmed' if args.include_rgb else 'PUBLIC • map geometry; no RGB pixels',ha='right',fontsize=5.4,color='#52626d')
  for ext in ['pdf','png','svg']:fig.savefig(out/f'geombelief_overview.{ext}',dpi=450,facecolor='white',metadata={'Creator':'GeomBelief real-evidence plotting script'} if ext=='pdf' else None)
+ svg_path=out/'geombelief_overview.svg'
+ svg_path.write_text('\n'.join(line.rstrip() for line in svg_path.read_text().splitlines())+'\n')
  plt.close(fig)
  manifest={'episode_id':E['episode_id'],'include_rgb':args.include_rgb,'figure_inches':[7.2,3.0],'aspect_ratio':7.2/3.0,'display_world_bounds':v,'shared_color_norm':{'type':'log','vmin':norm.vmin,'vmax':norm.vmax,'alpha':.72,'under':'saturated to lower color; values unchanged'},'checkpoint_sha256':E['checkpoint_sha256'],'source_fields_sha256':E['source_array_sha256'],'source_evidence_sha256':sha(root/'OVERVIEW_EVIDENCE.json'),'script_sha256':sha(__file__),'outputs':{ext:sha(out/f'geombelief_overview.{ext}') for ext in ['pdf','png','svg']}}
  (out/'render_manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');print(out)
