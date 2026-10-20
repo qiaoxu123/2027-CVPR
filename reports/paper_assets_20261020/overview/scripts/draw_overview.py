@@ -24,7 +24,7 @@ def label(ax,text,xy,offset=(0,0),color=INK,size=6.5,ha='left'):
 def main():
  default_root=Path(__file__).resolve().parents[1]
  if not (default_root/'OVERVIEW_EVIDENCE.json').exists():default_root=default_root/'figures/author'
- ap=argparse.ArgumentParser();ap.add_argument('--source-dir',type=Path,default=default_root);ap.add_argument('--output-dir',type=Path);ap.add_argument('--include-rgb',action='store_true');args=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--source-dir',type=Path,default=default_root);ap.add_argument('--output-dir',type=Path);ap.add_argument('--include-rgb',action='store_true');ap.add_argument('--separate-panels',action='store_true');args=ap.parse_args()
  root=args.source_dir;E=json.loads((root/'OVERVIEW_EVIDENCE.json').read_text());D=np.load(root/'source/overview_fields.npz');M=json.loads((root/'source/map.json').read_text())
  assert sha(root/'source/overview_fields.npz')==E['source_array_sha256']
  out=args.output_dir or root/'figures';out.mkdir(parents=True,exist_ok=True)
@@ -92,6 +92,12 @@ def main():
   ins=c.inset_axes([.045,.50,.34,.34]);ins.imshow(obs['bgr'][...,::-1],interpolation='nearest');ins.set_xticks([]);ins.set_yticks([])
   for s in ins.spines.values():s.set_color('white');s.set_linewidth(1)
   ins.text(.0,1.025,'Pose-conditioned\nOrthophoto Observation',transform=ins.transAxes,fontsize=5.9,va='bottom',color=INK,bbox=dict(fc='white',ec='none',pad=1,alpha=.95))
+ if args.separate_panels:
+  if not args.include_rgb:raise ValueError('Separate RGB panels require --include-rgb')
+  from export_rgb_panels import export_panels
+  export_panels(fig,axes,im,E,D,out,root)
+  plt.close(fig)
+  return
  # Short interpretation under the panels: no unsupported causal claim.
  fig.text(.018,.178,'Landmark + candidate locations',fontsize=6.9)
  fig.text(.350,.178,'Language + geometry → global belief',fontsize=6.9)
