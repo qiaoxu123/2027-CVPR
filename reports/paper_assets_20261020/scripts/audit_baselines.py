@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 SPLITS=('val_seen','val_unseen','test_unseen')
 POLICIES={
+ 'AerialVLN+GSM':dict(inputs='language + RGB/depth + GSM; CityNav adaptation',action_space='native discrete actions; local dual-GRU adaptation separate',max_steps='native/local protocol recorded per result; not assumed equal to 20 bounded waypoints',stop='native/local progress/action logic',limitation='CityNav published adaptation and independent local reimplementation are separate; no verified author CityNav-adaptation checkpoint is substituted. Local training assumptions/controls remain explicit.'),
  'MGP':dict(inputs='language + GSM/map; goal and progress controller',action_space='native macro + repeated primitive moves; historical variants retained',max_steps='20 macro; move_iteration=5 in archived faithful wrapper',stop='predicted progress (historical threshold .75)',limitation='Official checkpoint recovered; historical result checkpoint path is absent. Native cache/goal-readout variants and OSR differ. No new full evaluation claimed.'),
  'FlightGPT':dict(inputs='language + current RGB + global annotated orthophoto/map',action_space='VLM action sequence',max_steps='2 VLM rounds x up to 75 primitive actions in released eval.py',stop='VLM-generated actions/native environment',limitation='Public 16.60GB GRPO shards not locally complete; vLLM environment and fixed-ID evaluator not validated. No local navigation score.'),
  'HETT':dict(inputs='language + map + RGB/depth + history',action_space='coarse goal and fine actions',max_steps='native budget must be verified in checkpoint-compatible wrapper',stop='native learned progress/action logic; not GraphNav .3',limitation='Official best_val_unseen checkpoint present. Research checkout cannot stand in for upstream model; no verified complete native inference/export environment. Existing documentation-only scores are historical evidence.'),
@@ -45,7 +46,7 @@ def main():
         if r['method'] not in POLICIES or r['dataset']!='original_CityNav':continue
         entry=dict(method=r['method'],variant='published original benchmark reference',evidence_layer='published_table',dataset='original_paper_no_file_hash',split=r['split'],
               **{k:r[k] for k in ('NE','SR','OSR','SPL')},source_url=r['source_url'],source_sha256=sha(OLD/'table1_paper_reported.csv'),source_locator='Archived table1_paper_reported.csv; secondary transcription retained',status='Archived published reference; secondary provenance',strictly_comparable=False)
-        if r['method'] in ('MGP','HTNav','FlightGPT','Seq2Seq+GSM','CMA+GSM'):
+        if r['method'] in ('MGP','HTNav','FlightGPT','Seq2Seq+GSM','CMA+GSM','AerialVLN+GSM'):
             start=table.index(r['method']+'\n')+len(r['method'])+1
             found=[float(x) for x in table[start:].splitlines()[:12]];i=SPLITS.index(r['split'])
             assert found[4*i:4*i+4]==[float(r[k]) for k in ('NE','SR','OSR','SPL')]
@@ -92,6 +93,7 @@ def main():
         r.update({k:v for k,v in meta.items() if k!='limitation'})
         r['limitation']=r.get('limitation','')+('; ' if r.get('limitation') else '')+meta['limitation']
         r['selection_policy']='Seen128 SR/SPL then Train Dev; never Unseen/Test' if r['method']=='GeomBelief' else ('best_val_unseen filename on official release; not selected anew in this audit' if r['method']=='HETT' else 'Historical/source selection retained; no new Unseen/Test selection')
+        if r['method']=='MGP' and (OUT/'baseline_preflight.json').exists():r['native_preflight']=read(OUT/'baseline_preflight.json')['MGP']['result']
     csvwrite(OUT/'baseline_results.csv',rows)
     # Compare exact current manuscript revised rows with the independently parsed sources.
     tex=(PAPER/'sec/5_experiments.tex').read_text();checks=[]
@@ -105,6 +107,17 @@ def main():
         assert len(numbers)==12 and all(abs(a-b)<=.0051 for a,b in zip(numbers,refs)),(method,numbers,refs)
         checks.append(dict(method=method,checked_metrics=12,all_match_at_paper_precision=True))
     dump(OUT/'baseline_table_checks.json',checks)
+    original_checks=[]
+    original_tex=tex.split('\\label{tab:baselines_original}',1)[1].split('\\end{table}',1)[0]
+    for method in ('Seq2Seq+GSM','CMA+GSM','AerialVLN+GSM','MGP','FlightGPT','HETT','HTNav','GeoNav'):
+        line=next(l for l in original_tex.splitlines() if l.startswith(method+'~'))
+        numbers=[float(v) for v in re.findall(r'(?<![A-Za-z])\d+\.\d+',line)];refs=[]
+        for split in SPLITS:
+            ref=next(r for r in rows if r['method']==method and r['split']==split and r['evidence_layer']=='published_table' and r['dataset']=='original_paper_no_file_hash')
+            refs.extend(float(ref[k]) for k in ('SR','SPL'))
+        assert len(numbers)==6 and all(abs(a-b)<.0051 for a,b in zip(numbers,refs)),(method,numbers,refs)
+        original_checks.append(dict(method=method,checked_metrics=6,all_match_at_paper_precision=True))
+    dump(OUT/'baseline_original_table_checks.json',original_checks)
     # Current upstream README/commit probes; raw third-party text stays local.
     probes=[]
     for method,repo in [('MGP','water-cookie/citynav'),('HETT','crotonyl/HETT'),('HTNav','tyrofanfan/HTNav'),('FlightGPT','Uavln/FlightGPT'),('GeoNav','Xhtshr/geonav-official')]:
@@ -130,6 +143,9 @@ def main():
       '', 'There is no newly completed strict official-weight matched evaluation in this bundle. MGP historical refined three-split outputs already exist and are retained; recovered weight identity cannot be retroactively asserted. HETT requires a clean checkpoint-compatible runtime and isolated ID-preserving exporter; FlightGPT lacks complete shards/runtime; HTNav lacks official trained weights; original GeoNav requires the original API protocol. No training is necessary for asset organization and none was started.',
       '', 'No Val-Unseen/Test-Unseen checkpoint selection occurred. Existing release and historical selection provenance is retained, including HETT best_val_unseen. No cross-protocol ranking, significance or speedup claim is made.',
       '', 'Machine-readable evidence: baseline_results.csv, baseline_table_checks.json, sources/upstream_probe.json. Every local source is rehashed; missing weights and predictions remain explicit.']
+    lines += ['', '## Original-table coverage', '', 'All 48 SR/SPL cells in the current original-data manuscript table also match the indexed published references, including AerialVLN+GSM. Together with 60 revised-table cells, this checks 108 manuscript numeric cells. Full NE/SR/OSR/SPL are retained in the CSV wherever available; unavailable original-source details remain explicit.']
+    if (OUT/'baseline_preflight.json').exists():
+        lines += ['', '## Fresh native readiness probe', '', 'MGP native `main_goal_predictor.py --help` fails in the declared reproduction environment with `ModuleNotFoundError: No module named groundingdino`; see baseline_preflight.json and sources/mgp_native_preflight.log for command, exit status and SHA. The native entrypoint unconditionally loops all splits and applies terminal goal selection, so it is not an already-validated isolated fixed-ID common-protocol evaluator. The actual FlightGPT snapshot contains metadata/tokenizer files and zero of four complete weight shards. No native training or Test inference was launched.']
     (OUT/'BASELINE_AUDIT.md').write_text('\n'.join(lines)+'\n')
     print('baseline rows',len(rows),'manuscript revised cells checked',sum(r['checked_metrics'] for r in checks))
 

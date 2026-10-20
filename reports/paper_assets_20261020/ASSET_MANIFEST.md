@@ -38,7 +38,7 @@ No entire orthophoto, CityNav dataset, checkpoint or private credential is inclu
 |Real dense fields, 310 probability-change rows|Existing|fields/; replay_manifest.json; belief_change_statistics.csv|
 |Four real derived vector PDF/PNG figures|Existing|figures/ and per-figure JSON sidecars|
 |Full RGB versions|Existing, local-only|local_only/figures/ (not committed); IMAGE_USE.md|
-|Published/local/official-asset baseline layers, 104 rows|Existing|baseline_results.csv; BASELINE_AUDIT.md|
+|Published/local/official-asset baseline layers, 110 rows|Existing|baseline_results.csv; BASELINE_AUDIT.md|
 |Fresh MGP dependency and FlightGPT shard checks|Existing|baseline_preflight.json; sources/mgp_native_preflight.log|
 |10,448 offline-rescored episodes and 48 subgroup rows|Existing|episode_statistics.csv; subgroup_statistics.csv; offline_metric_verification.json|
 |Full-split same-GPU whole-episode and decision profiling|Existing, different model/control identities|profiling_comparison.csv; profiling_scope.json|

@@ -4,6 +4,7 @@ import argparse,re,ast,subprocess,shutil
 
 def paper_notes(commit):
     url=f'https://github.com/qiaoxu123/2027-CVPR/tree/{commit}/reports/paper_assets_20261020'
+    build=read(OUT/'latex_build.json');pages=build['pages'];reference_page=build['references_start_page']
     text=f'''# Real CityNav visual evidence manifest — 2026-10-20
 
 Experiment evidence commit: `{commit}` on `research/visual-residual-20261013`.
@@ -25,12 +26,12 @@ The uploaded drawings contain real measured map/prediction/trajectory/observatio
 
 Original conceptual artwork is retained as `figures/overview_conceptual.tex` and `figures/visual_evidence_conceptual.tex`, outside the live manuscript inputs. Fixed source-order, outcome-selected examples illustrate behavior; they are not unbiased frequency/causal estimates and were not used to choose weights. GT enters scoring/plotting only.
 
-Validation and local LaTeX build: `notes/latex_build.json`. The working draft compiles to 12 pages (references from page 10); page-budget editing remains outside this asset audit. No undefined references/citations or overfull boxes remain. Existing package/font warnings are recorded. The three official full-split results, weights and original logs are unchanged.
+Validation and local LaTeX build: `notes/latex_build.json`. The working draft compiles to {pages} pages (references from page {reference_page}); page-budget editing remains outside this asset audit. No undefined references/citations or overfull boxes remain. Existing package/font warnings are recorded. The three official full-split results, weights and original logs are unchanged. Concurrent remote layout work through c8bdaba was integrated without force-pushing it away; its architecture and measured profiling graphics remain live and all illustrative source files are preserved. Standalone figure filenames identify the four real-data deliverables; extra architecture/profiling figures have their own manuscript counters.
 '''
     (PAPER/'notes/visual_evidence_manifest.md').write_text(text)
     for name in ('baseline_verification.md','bibliography_verification.md'):
         p=PAPER/'notes'/name;s=p.read_text()
-        if '## Immutable evidence commit' not in s:s+=f'\n## Immutable evidence commit\n\n[{commit}]({url}), including source tables, hashes, CSVs, exact protocol restrictions and reproduction scripts.\n'
+        s=s.split('## Immutable evidence commit')[0].rstrip()+f'\n\n## Immutable evidence commit\n\n[{commit}]({url}), including source tables, hashes, CSVs, exact protocol restrictions and reproduction scripts.\n'
         p.write_text(s)
     dump(PAPER/'notes/experiment_asset_commit.json',dict(repo='qiaoxu123/2027-CVPR',branch='research/visual-residual-20261013',commit=commit,bundle='reports/paper_assets_20261020',url=url))
 
@@ -44,9 +45,13 @@ def main():
     import pymupdf
     pdf=PAPER/'build/main.pdf';doc=pymupdf.open(pdf);log=(PAPER/'build/main.log').read_text();old=read(OUT/'latex_build.json')
     old.update(pdf_sha256=sha(pdf),pages=len(doc),undefined_citations=bool(re.search(r'Citation .* undefined',log)),undefined_references=bool(re.search(r'Reference .* undefined',log)),overfull_hbox='Overfull \\hbox' in log)
+    old['references_start_page']=next(i+1 for i,page in enumerate(doc) if '\nReferences\n' in page.get_text())
+    old['notes']=re.sub(r'Current \d+-page',f'Current {len(doc)}-page',old['notes'])
+    old['notes']=re.sub(r'references from page \d+',f'references from page {old["references_start_page"]}',old['notes'])
     assert not any(old[k] for k in ('undefined_citations','undefined_references','overfull_hbox'))
     for dest in (OUT/'latex_build.json',PAPER/'notes/latex_build.json'):dump(dest,old)
     shutil.copyfile(PAPER/'build/compile_stdout.log',OUT/'latex_compile.log')
+    report=OUT/'REPORT.md';s=report.read_text();s=re.sub(r'compiles to \d+ pages, references beginning on page \d+',f'compiles to {len(doc)} pages, references beginning on page {old["references_start_page"]}',s);report.write_text(s)
     checks=read(OUT/'verification.json');checks['latex_build']=old;checks['profiling_common_ids']=read(OUT/'profiling_scope.json')['common_episode_ids'];dump(OUT/'verification.json',checks)
     secret=re.compile(rb'\b(?:github_pat_|ghp_|hf_|sk-)[A-Za-z0-9_\-]{18,}');rows=[]
     for p in sorted(OUT.rglob('*')):

@@ -32,6 +32,10 @@ No Val-Unseen/Test-Unseen checkpoint selection occurred. Existing release and hi
 
 Machine-readable evidence: baseline_results.csv, baseline_table_checks.json, sources/upstream_probe.json. Every local source is rehashed; missing weights and predictions remain explicit.
 
+## Original-table coverage
+
+All 48 SR/SPL cells in the current original-data manuscript table also match the indexed published references, including AerialVLN+GSM. Together with 60 revised-table cells, this checks 108 manuscript numeric cells. Full NE/SR/OSR/SPL are retained in the CSV wherever available; unavailable original-source details remain explicit.
+
 ## Fresh native readiness probe
 
-The 2026-10-20 MGP native `main_goal_predictor.py --help` fails in the declared reproduction environment with `ModuleNotFoundError: No module named 'groundingdino'`; exact source, command, exit code and log SHA are in `baseline_preflight.json`. The native entrypoint also loops all three splits and applies terminal goal selection, so it is not an already-validated isolated fixed-ID common-protocol evaluator. This dependency/protocol gap is additional to the missing historical-weight linkage, not a claim that MGP has no public model. FlightGPT's actual locked snapshot has tokenizer/config metadata and zero complete weight shards. No native training or Test inference was launched.
+MGP native `main_goal_predictor.py --help` fails in the declared reproduction environment with `ModuleNotFoundError: No module named groundingdino`; see baseline_preflight.json and sources/mgp_native_preflight.log for command, exit status and SHA. The native entrypoint unconditionally loops all splits and applies terminal goal selection, so it is not an already-validated isolated fixed-ID common-protocol evaluator. The actual FlightGPT snapshot contains metadata/tokenizer files and zero of four complete weight shards. No native training or Test inference was launched.

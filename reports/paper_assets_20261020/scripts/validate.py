@@ -47,6 +47,8 @@ def main():
         assert sha(r['checkpoint'])==r['checkpoint_sha256']
         assert sha(r['source'])==r['source_sha256']
     audit=read(OUT/'baseline_table_checks.json');assert len(audit)==5 and all(r['all_match_at_paper_precision'] for r in audit);checks['manuscript_baseline_numeric_cells']=sum(r['checked_metrics'] for r in audit)
+    original=read(OUT/'baseline_original_table_checks.json');assert len(original)==8 and all(r['all_match_at_paper_precision'] for r in original)
+    checks['manuscript_original_baseline_numeric_cells']=sum(r['checked_metrics'] for r in original)
     baseline=list(csv.DictReader((OUT/'baseline_results.csv').open()))
     assert all(not any(r[k] for k in ['NE','SR','OSR','SPL']) for r in baseline if r['evidence_layer']=='official_released_asset')
     checks['baseline_rows']=len(baseline)

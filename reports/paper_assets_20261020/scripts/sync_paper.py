@@ -48,10 +48,13 @@ def main():
 ''')
     method=PAPER/'sec/4_method.tex';text=method.read_text();text=text.replace('\\input{figures/visual_evidence}','% Measured visual evidence appears with the corresponding experiment.');method.write_text(text)
     exp=PAPER/'sec/5_experiments.tex';text=exp.read_text()
-    if '\\input{figures/citynav/geometry}' not in text:
+    if '\\input{figures/citynav/geometry}' not in text+(PAPER/'sec/3_problem.tex').read_text():
         text=text.replace('\\subsection{Independent Contribution of Map Geometry}','\\input{figures/citynav/geometry}\n\n\\subsection{Independent Contribution of Map Geometry}')
+    if '\\input{figures/visual_evidence}' not in text:
         text=text.replace('\\subsection{Observation-Conditioned Visual Correction}','\\input{figures/visual_evidence}\n\n\\subsection{Observation-Conditioned Visual Correction}')
+    if '\\input{figures/citynav/navigation}' not in text:
         text=text.replace('\\subsection{Goal Selection, Waypoints, and Stopping}','\\input{figures/citynav/navigation}\n\n\\subsection{Goal Selection, Waypoints, and Stopping}')
+    if '\\paragraph{Traceable qualitative evidence.}' not in text:
         text=text.replace('\\subsection{Limitations}',r'''\paragraph{Traceable qualitative evidence.}
 Figures~\ref{fig:real_geometry}, \ref{fig:evidence}, and \ref{fig:real_navigation} use measured validation records. Frozen replay matches archived Top-16 goals, selected targets, and Stop probabilities for nine episode--model cases (eight distinct episodes; 80 observed-frame instances). The released audit contains 310 per-step/comparison rows of belief L1, KL divergence, and Top-1 displacement. Offline XY rescoring of all 10,448 archived evaluation episodes reproduces the formal NE/SR/OSR/SPL; no new Test navigation or checkpoint selection was performed. In the saved weak-projection visibility partition, 332/2,470 Seen episodes are strictly visible at the start, with SR 51.51\%; this is a descriptive subset, not a human-verified grounding score. RGB crops remain locally indexed until underlying raster redistribution terms are established; the submitted derived figures show actual observed footprints.
 
@@ -65,7 +68,7 @@ subprocess.run([sys.executable,str(root/'source/scripts/plot_figures.py'),'--out
 ''')
     (target/'README.md').write_text('''# Real CityNav evidence
 
-PDF is the vector publication artifact; PNG is the preview. JSON sidecars trace each figure to episode, data version, source predictions, checkpoints and generation command. `source/` contains the lightweight fields, traces for nine selected validation episodes, map context, frame indices and plotting scripts. No raw RGB, large dataset or checkpoint is included.
+PDF is the vector publication artifact; PNG is the preview. JSON sidecars trace each figure to episode, data version, source predictions, checkpoints and generation command. `source/` contains the lightweight fields, traces for nine episode--model cases (eight distinct validation episodes), map context, frame indices and plotting scripts. No raw RGB, large dataset or checkpoint is included.
 
 From the manuscript repository, rebuild using Python with numpy, matplotlib and shapely:
 
@@ -73,7 +76,7 @@ From the manuscript repository, rebuild using Python with numpy, matplotlib and 
 python figures/citynav/reproduce.py
 ```
 
-Figures 1 and 4 use the formal frozen C checkpoint; Figure 2 uses three separately matched trained heads; Figure 3 uses the independently calibrated visual residual. They must not be combined into one new model or used to claim an unbiased visual gain. All scenes and traces are real data; the old conceptual drawings are retained in `figures/*_conceptual.tex` and are no longer inserted into the manuscript.
+Standalone figure1 and figure4 use the formal frozen C checkpoint; figure2 uses three separately matched trained heads; figure3 uses the independently calibrated visual residual. They must not be combined into one new model or used to claim an unbiased visual gain. The extra preserved architecture illustration has its own live manuscript counter; use LaTeX labels and JSON sidecars rather than assuming standalone filenames equal every paper figure number. All scenes and traces are real data; old conceptual city/result drawings remain tracked as history and are not live empirical figures.
 
 Actual RGB-containing figures stay on the lab server under the experiment bundle's `local_only/figures/`. See `notes/visual_evidence_manifest.md` for image terms and full reproduction instructions. Map attribution: CityNav / OpenStreetMap contributors, https://www.openstreetmap.org/copyright.
 ''')
