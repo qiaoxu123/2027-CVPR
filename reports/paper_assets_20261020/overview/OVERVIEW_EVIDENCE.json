@@ -1,0 +1,384 @@
+{
+  "episode_id": [
+    "birmingham_block_5",
+    8,
+    4
+  ],
+  "case_id": "formal_val_unseen_success",
+  "split": "val_unseen",
+  "dataset_version": "Revised CityNav (processed_citynav archive)",
+  "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+  "map_name": "birmingham_block_5",
+  "instruction_verbatim": "This is a large building just besides a large dirt track on Aldridge Road.",
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "residual_checkpoint": null,
+  "model_identity": "Formal GeomBelief / GraphNav-V1 frozen C epoch1; no independent CVR",
+  "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_unseen/predictions.jsonl",
+  "source_predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290",
+  "sources": [
+    {
+      "file": "cases.jsonl",
+      "sha256": "b5dddfbcdbfb4a6c37a0bd1b759af08fb3824942e5c0574c605e0fa220bacd1a"
+    },
+    {
+      "file": "fields/formal_val_unseen_success.npz",
+      "sha256": "498c2d8b6faa3daa4a9bcac6fb8fe127b806d5ac10f8ff89c5c80a3991cbd51f"
+    },
+    {
+      "file": "fields/formal_val_unseen_success.json",
+      "sha256": "844caabb14b6b4e6e6a6c03af8af10d80c9cad401fa486f5b114575c2cc45eef"
+    },
+    {
+      "file": "replay_manifest.json",
+      "sha256": "52453bdd2d5a1d6149366800f4baf269fd6b488231b0e581e774e905d3fb43c0"
+    },
+    {
+      "file": "observation_index.json",
+      "sha256": "739090dae21aae0928ce24af24ab1ec5f59e10e2b6c68b1142e90127bf93b2a1"
+    },
+    {
+      "file": "public_map_context.json",
+      "sha256": "ae9bc3c1f43ee34b321a73ca1719c07ca9594608bca92f9d1e401591b9966097"
+    },
+    {
+      "file": "final_evidence/MODEL_MECHANISM_AUDIT.md",
+      "sha256": "5c67adcd0edd49893273c7e35e5487c65a56dd18e6b38546e9c09ee44dbd868a"
+    },
+    {
+      "file": "final_evidence/RGB_FRAME_INDEX.json",
+      "sha256": "6888463b47f044d3cb86e04ec314f9eca9f784ed61eff468a8e98d1bcc13ca3f"
+    }
+  ],
+  "step": 7,
+  "display_world_bounds": [
+    560,
+    830,
+    800,
+    1070
+  ],
+  "model_world_bounds": [
+    400.0,
+    800.0,
+    800.0,
+    1200.0
+  ],
+  "candidate_grid": [
+    28,
+    28
+  ],
+  "candidate_ids_for_display": [
+    222,
+    83,
+    135
+  ],
+  "candidate_selection": "Descending static score, deterministic 60m spatial separation inside display crop; examples are actual grid cells, not object detections. No GT used.",
+  "reference_landmark": "Aldridge Road",
+  "dirt_track_note": "Instruction text only: no verified dirt-track polygon exists in the supplied reference map; no invented annotation.",
+  "geometry": {
+    "top1_xy": [
+      778.5714111328125,
+      907.142822265625
+    ],
+    "nearest_road_boundary_xy": [
+      791.1112882001958,
+      894.6029451982417
+    ],
+    "boundary_distance_m": 17.73406421918476,
+    "direction_from_boundary_plus_x_deg": 135.0,
+    "direction_note": "Measured world-XY angle, not a compass bearing or an asserted language direction."
+  },
+  "GT_xyz": [
+    773.4375,
+    917.9375,
+    14.8350028992
+  ],
+  "selected_goal_xy": [
+    778.5714111328125,
+    907.142822265625
+  ],
+  "final_pose": [
+    778.5713500976562,
+    907.142822265625,
+    42.08696746826172,
+    -0.09065988720074511
+  ],
+  "metrics": {
+    "NE_m": 11.95330432199467,
+    "SR": 1.0,
+    "L1_B0_Bt": 0.02620390917490542,
+    "KL_B0_Bt_nats": 0.0004059186043223494,
+    "top1_shift_m": 0.0
+  },
+  "ROI": {
+    "current_supported_candidates": 6,
+    "current_or_history_supported_candidates": 127,
+    "method": "Exact archived _small_grid_masks on SHA-matched observation; current/history union independently matches every saved formal observed mask. Not semantic visibility.",
+    "source_code_sha256": "bb0680ff68cb3bc92cdfdbe2570b4d487f268befcea2be91d3e8feb7820f890d"
+  },
+  "observation_crops": [
+    {
+      "step": 0,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step0.npz",
+      "sha256": "a1f12e92a5d7f430e87e98a5f2b85a799bf0b429bc6885df6204b2f977b0a895",
+      "footprint_world": [
+        [
+          673.2371215820312,
+          926.6865234375
+        ],
+        [
+          602.5337524414062,
+          1103.08447265625
+        ],
+        [
+          778.9317016601562,
+          1173.787841796875
+        ],
+        [
+          849.6350708007812,
+          997.389892578125
+        ]
+      ],
+      "pose": [
+        726.0843822743,
+        1050.2372269421,
+        104.0557157319,
+        -2.7603817930634693
+      ]
+    },
+    {
+      "step": 1,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step1.npz",
+      "sha256": "c475ffc787971118b366db994f9f8ff82a814e24e5ec71dcb0e5271750f320d7",
+      "footprint_world": [
+        [
+          849.333251953125,
+          950.3247680664062
+        ],
+        [
+          686.41796875,
+          896.616455078125
+        ],
+        [
+          632.7095947265625,
+          1059.53173828125
+        ],
+        [
+          795.6248779296875,
+          1113.239990234375
+        ]
+      ],
+      "pose": [
+        741.0214233398438,
+        1004.92822265625,
+        94.80571746826172,
+        -1.2523459573578886
+      ]
+    },
+    {
+      "step": 2,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step2.npz",
+      "sha256": "a067e1e39fa30b8c4c526ec4b828dc15091a6aa2f4370df2364e46c29c017269",
+      "footprint_world": [
+        [
+          855.1290893554688,
+          913.347412109375
+        ],
+        [
+          711.20556640625,
+          861.6849975585938
+        ],
+        [
+          659.5431518554688,
+          1005.6085205078125
+        ],
+        [
+          803.4666748046875,
+          1057.27099609375
+        ]
+      ],
+      "pose": [
+        757.3361206054688,
+        959.4779663085938,
+        85.49321746826172,
+        -1.2261642015956316
+      ]
+    },
+    {
+      "step": 3,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step3.npz",
+      "sha256": "ae4526c8d8e72743a52f9413cd48c6b16f9169e7d6bca35dbb6d5cd9abb14d21",
+      "footprint_world": [
+        [
+          858.9969482421875,
+          872.3471069335938
+        ],
+        [
+          732.6814575195312,
+          827.8768310546875
+        ],
+        [
+          688.211181640625,
+          954.1923217773438
+        ],
+        [
+          814.5266723632812,
+          998.66259765625
+        ]
+      ],
+      "pose": [
+        773.6040649414062,
+        913.2697143554688,
+        75.99321746826172,
+        -1.2322900560846046
+      ]
+    },
+    {
+      "step": 4,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step4.npz",
+      "sha256": "aed5ff493c872a0f36434541b27fc0ddd6543fca5158fbad9c06c7b6ec7c38a9",
+      "footprint_world": [
+        [
+          858.392333984375,
+          891.7913208007812
+        ],
+        [
+          763.279052734375,
+          826.4148559570312
+        ],
+        [
+          697.902587890625,
+          921.5281372070312
+        ],
+        [
+          793.015869140625,
+          986.9046020507812
+        ]
+      ],
+      "pose": [
+        778.1474609375,
+        906.6597290039062,
+        66.74321746826172,
+        -0.9686085261599314
+      ]
+    },
+    {
+      "step": 5,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step5.npz",
+      "sha256": "a8fec95817ae94a06eeba625d0f644c91897df01adaa1c99e032e792626f493a",
+      "footprint_world": [
+        [
+          774.3759155273438,
+          976.3945922851562
+        ],
+        [
+          847.8316040039062,
+          911.2744750976562
+        ],
+        [
+          782.7114868164062,
+          837.8187866210938
+        ],
+        [
+          709.2557983398438,
+          902.9389038085938
+        ]
+      ],
+      "pose": [
+        778.543701171875,
+        907.106689453125,
+        58.11821746826172,
+        0.8454777805589466
+      ]
+    },
+    {
+      "step": 6,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step6.npz",
+      "sha256": "35b0fb77b408e71acc0880b978be28503a7f940267a6c9c6d50c4dd2d619aa31",
+      "footprint_world": [
+        [
+          769.59814453125,
+          963.5611572265625
+        ],
+        [
+          834.9882202148438,
+          916.1148071289062
+        ],
+        [
+          787.5418701171875,
+          850.7247314453125
+        ],
+        [
+          722.1517944335938,
+          898.1710815429688
+        ]
+      ],
+      "pose": [
+        778.5700073242188,
+        907.1429443359375,
+        49.43071746826172,
+        0.9431020235038197
+      ]
+    },
+    {
+      "step": 7,
+      "local_path": "/home/rental/20260922_1/Workspace/2027-CVPR/GeomBelief-assets/reports/paper_assets_20261020/local_only/observations/formal_val_unseen_success_step7.npz",
+      "sha256": "8dbe3712c1b1b8790aad13b52232ff7aeafcdede2bf180fc1f484cfa1b6be9f9",
+      "footprint_world": [
+        [
+          814.4791870117188,
+          937.0660400390625
+        ],
+        [
+          808.4945068359375,
+          871.2349853515625
+        ],
+        [
+          742.6635131835938,
+          877.2196044921875
+        ],
+        [
+          748.648193359375,
+          943.0506591796875
+        ]
+      ],
+      "pose": [
+        778.5713500976562,
+        907.142822265625,
+        42.08696746826172,
+        -0.09065988720074511
+      ]
+    }
+  ],
+  "raster": {
+    "local_path": "/home/rental/20260922_1/Workspace/DATA/rgbd/birmingham_block_5.png",
+    "sha256": "704b8ec728ca370530fed120eebd02498f02e4102558a600f7eed7e850176301",
+    "surface_tif": "/home/rental/20260922_1/Workspace/DATA/rgbd/birmingham_block_5.tif",
+    "surface_sha256": "795e1a742a9809b87c1be6e8ae636bb85890b0dfd429e2162df7f35af75123a6",
+    "pixel_corner_to_world_affine": [
+      0.1,
+      0.0,
+      400.0,
+      0.0,
+      -0.1,
+      1200.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "extent": [
+      400.0,
+      800.0,
+      800.0,
+      1200.0
+    ],
+    "origin": "upper",
+    "observation_registration": "Four-corner world-to-frame homography to (0,0),(383,0),(383,383),(0,383); cv2.INTER_LINEAR; constant black border.",
+    "public_redistribution_permission": "Unconfirmed: RGB full figure remains local_only."
+  },
+  "mechanism": "Bt=softmax(s0+Delta_t); fixed s0, current/history feature evidence; no recursive probability update.",
+  "replay_scope": "Read saved arrays; recompute only deterministic ROI support and figure statistics; no neural inference/training.",
+  "public_figure": "No orthophoto or input RGB pixels. Real map geometry, archived beliefs and executed path.",
+  "GT_usage": "Plot and evaluation only.",
+  "plot_normalization": "B0 and Bt normalized over all 784 candidates; shared logarithmic color normalization and fixed opacity; no per-panel rescaling or interpolated cells.",
+  "source_array_sha256": "75467c43b92006165403d77b5b1a4376ed7b793f80d0e191307c6e29261869bf"
+}
