@@ -1,0 +1,286 @@
+{
+  "original_four_figures_regenerated": false,
+  "figures": [
+    {
+      "figure": "figure1_overview",
+      "cases": [
+        {
+          "case_id": "formal_val_unseen_success",
+          "episode_id": [
+            "birmingham_block_5",
+            8,
+            4
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_unseen/predictions.jsonl",
+          "source_predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290"
+        }
+      ],
+      "separate_geometry_heads": [],
+      "image_use": "No RGB or raw raster pixels. Derived map/prediction figure. CityNav CC BY 4.0; map attribution: OpenStreetMap contributors (https://www.openstreetmap.org/copyright).",
+      "artifacts": [
+        {
+          "file": "reports/paper_assets_20261020/figures/figure1_overview.pdf",
+          "sha256": "d1716c5c88d81843b207a45351c74dd1b2fed92a34d2adf65371d89774fbaf81",
+          "matches_paper_copy": true
+        },
+        {
+          "file": "reports/paper_assets_20261020/figures/figure1_overview.png",
+          "sha256": "f5c93164343cb786760c26be1480be4c000b578fcdba56da0a3031925dca0a20",
+          "matches_paper_copy": true
+        }
+      ]
+    },
+    {
+      "figure": "figure2_geometry",
+      "cases": [],
+      "separate_geometry_heads": [
+        {
+          "arm": "name_type",
+          "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/training/map_geometry__name_type__seed0/best.pt",
+          "checkpoint_sha256": "a2e63c67fc732ad7b1ae23abc0a79e10eecc231c1bbad2b6a4e1f812aeb3267f",
+          "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/localization/map_geometry__name_type__seed0/val_unseen.localization.jsonl",
+          "source_sha256": "7c1844f80138d646b1d66cf3235bccac156ab88e0b22b37c37b395bf6d8b3e4b",
+          "top1_xy": [
+            478.5410697251558,
+            1121.427668350935
+          ],
+          "top1_error_m": 358.29061494787334
+        },
+        {
+          "arm": "shuffled",
+          "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/training/map_geometry__shuffled__seed0/best.pt",
+          "checkpoint_sha256": "5a57fbd42a01c35be63593fba1c8cb224bb500ca790d525ebee1b005106cdcb4",
+          "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/geombelief_remaining/localization/map_geometry__shuffled__seed0/val_unseen.localization.jsonl",
+          "source_sha256": "2c14149c9df29e3cfd2ca798e6c0814754793aaf4f389b05873d3b9ce0f40b43",
+          "top1_xy": [
+            792.9053605496883,
+            907.0883894503116
+          ],
+          "top1_error_m": 22.286770689196924
+        },
+        {
+          "arm": "correct",
+          "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/training/shared_full_polygon__full_polygon__seed0/best.pt",
+          "checkpoint_sha256": "6b0f737d971b537419dc861de5a30865f3d7d218c34b6681ee8d8ac66bc7ec86",
+          "source": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/reports/paper_experiments/polygon_ablation/localization/trained__descriptor_only__full_polygon__seed0/val_unseen.localization.jsonl",
+          "source_sha256": "bc793e87a99ee2612f5886c6436920d225040ec55b447125db683daed9294bdd",
+          "top1_xy": [
+            778.616081649065,
+            907.0883894503116
+          ],
+          "top1_error_m": 12.021662811703274
+        }
+      ],
+      "image_use": "No RGB or raw raster pixels. Derived map/prediction figure. CityNav CC BY 4.0; map attribution: OpenStreetMap contributors (https://www.openstreetmap.org/copyright).",
+      "artifacts": [
+        {
+          "file": "reports/paper_assets_20261020/figures/figure2_geometry.pdf",
+          "sha256": "284c87644a23ae4236fe1e5624a3c0992df1446e25f2bb3ed01a238d2ecf1ba8",
+          "matches_paper_copy": true
+        },
+        {
+          "file": "reports/paper_assets_20261020/figures/figure2_geometry.png",
+          "sha256": "d7848caacd55e3947fc85166a2fe4fe1bf6a989b382eb2eddeb836c1097d72be",
+          "matches_paper_copy": true
+        }
+      ]
+    },
+    {
+      "figure": "figure3_visual_updates",
+      "cases": [
+        {
+          "case_id": "visual_corrected",
+          "episode_id": [
+            "birmingham_block_5",
+            8,
+            5
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_unseen_real/predictions.jsonl",
+          "source_predictions_sha256": "4f55de3015c628b876273af293cf6a5dcef8f263dab9aa716aee73c36e729442"
+        },
+        {
+          "case_id": "visual_reinforced",
+          "episode_id": [
+            "birmingham_block_5",
+            8,
+            4
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_unseen_real/predictions.jsonl",
+          "source_predictions_sha256": "4f55de3015c628b876273af293cf6a5dcef8f263dab9aa716aee73c36e729442"
+        },
+        {
+          "case_id": "visual_degraded",
+          "episode_id": [
+            "birmingham_block_5",
+            33,
+            0
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/visual_evaluations/calibrated_residual_full_unseen_real/predictions.jsonl",
+          "source_predictions_sha256": "4f55de3015c628b876273af293cf6a5dcef8f263dab9aa716aee73c36e729442"
+        }
+      ],
+      "separate_geometry_heads": [],
+      "image_use": "No RGB or raw raster pixels. Derived map/prediction figure. CityNav CC BY 4.0; map attribution: OpenStreetMap contributors (https://www.openstreetmap.org/copyright).",
+      "artifacts": [
+        {
+          "file": "reports/paper_assets_20261020/figures/figure3_visual_updates.pdf",
+          "sha256": "4387b9b74a2753da21283100fbd695c6507c7f48da00204b8f793c21f5c2b7fc",
+          "matches_paper_copy": true
+        },
+        {
+          "file": "reports/paper_assets_20261020/figures/figure3_visual_updates.png",
+          "sha256": "adca16616fdc66ba4e7802f6c472fcdb97992b90e6df6b6245e61c7b215f085e",
+          "matches_paper_copy": true
+        }
+      ]
+    },
+    {
+      "figure": "figure4_navigation",
+      "cases": [
+        {
+          "case_id": "formal_val_seen_success",
+          "episode_id": [
+            "birmingham_block_1",
+            11,
+            2
+          ],
+          "split": "val_seen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_seen/predictions.jsonl",
+          "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002"
+        },
+        {
+          "case_id": "formal_val_unseen_success",
+          "episode_id": [
+            "birmingham_block_5",
+            8,
+            4
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_unseen/predictions.jsonl",
+          "source_predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290"
+        },
+        {
+          "case_id": "formal_val_seen_wrong_goal_false_stop",
+          "episode_id": [
+            "birmingham_block_1",
+            11,
+            1
+          ],
+          "split": "val_seen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_seen/predictions.jsonl",
+          "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002"
+        },
+        {
+          "case_id": "formal_val_unseen_wrong_goal_false_stop",
+          "episode_id": [
+            "birmingham_block_5",
+            1,
+            2
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_unseen/predictions.jsonl",
+          "source_predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290"
+        },
+        {
+          "case_id": "formal_val_seen_visited_but_failed",
+          "episode_id": [
+            "birmingham_block_1",
+            125,
+            0
+          ],
+          "split": "val_seen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_seen/predictions.jsonl",
+          "source_predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002"
+        },
+        {
+          "case_id": "formal_val_unseen_visited_but_failed",
+          "episode_id": [
+            "birmingham_block_5",
+            1,
+            1
+          ],
+          "split": "val_unseen",
+          "dataset_version": "processed_citynav",
+          "dataset_sha256": "73720c81ad9ca38dd5f54dbe0d992c57072ad0bf85182e15d92252998977cfac",
+          "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+          "residual_checkpoint_sha256": null,
+          "source_predictions": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/full_unseen/predictions.jsonl",
+          "source_predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290"
+        }
+      ],
+      "separate_geometry_heads": [],
+      "image_use": "No RGB or raw raster pixels. Derived map/prediction figure. CityNav CC BY 4.0; map attribution: OpenStreetMap contributors (https://www.openstreetmap.org/copyright).",
+      "artifacts": [
+        {
+          "file": "reports/paper_assets_20261020/figures/figure4_navigation.pdf",
+          "sha256": "8fdae99b379e81496a25503f2e4c5319c0f56463784f0b9467e535624c012163",
+          "matches_paper_copy": true
+        },
+        {
+          "file": "reports/paper_assets_20261020/figures/figure4_navigation.png",
+          "sha256": "b7271cb3b10d8939c90c4b67ad6a104109f065480c35fcbdae7a3318f7930e86",
+          "matches_paper_copy": true
+        }
+      ]
+    }
+  ],
+  "units": {
+    "map_axes": "world meters; +Y not verified geographic north",
+    "belief": "normalized probability",
+    "overview_residual": "logit delta; fixed [-0.5,0.5] display",
+    "visual_difference": "normalized probability difference; per-row symmetric scales",
+    "goal_errors": "horizontal meters",
+    "GT_circle": "20-meter evaluator radius"
+  },
+  "colors": {
+    "GT": "green star",
+    "predicted_goal": "yellow X",
+    "executed_path": "blue",
+    "actual_final_pose": "red square",
+    "observation_footprint": "cyan",
+    "probability": "magma with shared log scales within comparison",
+    "signed_residual_or_difference": "RdBu_r (red positive, blue negative)",
+    "shuffled_geometry_donor": "dotted cyan; recipient context solid"
+  },
+  "caption_audit": "See PAPER_METHOD_CORRECTIONS.md: current four captions already distinguish formal, CVR, separate geometry and matched-path controls."
+}

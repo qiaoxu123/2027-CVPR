@@ -1,0 +1,57 @@
+{
+  "upstream_metadata": [
+    {
+      "repo": "crotonyl/HETT",
+      "readme_blob_sha": "a12e50d4c50646b0bae7b600eb85a68251b8d0d5",
+      "readme_content_sha256": "c36f9f56567d45c23c54f9baac46ef78efe334ecc4e79ab82734aa429c9e7aee",
+      "upload_in_progress_notice": false,
+      "releases": [],
+      "weight_readiness_inference": "Readme/release metadata only; no native inference or weight compatibility assertion"
+    },
+    {
+      "repo": "tyrofanfan/HTNav",
+      "readme_blob_sha": "3c369b3b3b2085c27b61102a86833863e6e2879a",
+      "readme_content_sha256": "e063286b2e858b2f6e2da550b2c66d80dcdac4f167f0a03a360a2d6988295051",
+      "upload_in_progress_notice": true,
+      "releases": [],
+      "weight_readiness_inference": "Readme/release metadata only; no native inference or weight compatibility assertion"
+    }
+  ],
+  "archived_HETT_asset": {
+    "checkpoint": "/home/rental/20260922_1/Workspace/DATA/hett/release/checkpoint/best_val_unseen",
+    "bytes": 675603246,
+    "sha256": "bb59e46afad00d64f0c69a938037f8b9090e158c51a1b0814de483c0095e277a",
+    "source_commit": "baf1eb1448d154f02e09d66fff9c5621f0ede47a",
+    "status": "official_asset_present_incompatible_local_method_identity",
+    "initial_dependency_failure": "tensorboardX absent; fixed using isolated /tmp target, shared environment unchanged",
+    "isolated_help_passed": true,
+    "native_paths_hardcoded": true,
+    "native_output_isolation_missing": true,
+    "local_parser_contains_trajectory_belief_research_flags": true,
+    "note": "HETT/main is a modified research checkout. Do not relabel this policy as official HETT or load official weights with strict=False. Need checkpoint-compatible upstream source SHA and isolated output/export wrapper before inference. Existing historical aggregate is retained, not promoted to verified reproduction.",
+    "commands": [
+      "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout 45 <reproduction-python> main.py --help",
+      "<reproduction-python> -m pip install --no-deps --target /tmp/polybelief-hett-preflight-20261017 tensorboardX",
+      "PYTHONPATH=/tmp/polybelief-hett-preflight-20261017:<HETT/main> HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout 45 <reproduction-python> main.py --help"
+    ]
+  },
+  "archived_HTNav_status": {
+    "official_weight_found": false,
+    "upstream_probe": "sources/upstream_probe.json",
+    "local_independent_models_are_not_official": true
+  },
+  "archived_HETT_path_exists_on_this_host": false,
+  "local_candidate_files": [
+    {
+      "path": "/home/ubuntu5/Workspace/HETT/weights/best.pt",
+      "bytes": 752399389,
+      "sha256": "39a86886d479b5d2840c0cf564ac800d929d9b6c34ab85ae39082c7348c396fd",
+      "equals_archived_official_HETT_sha": false,
+      "note": "Filename alone is not evidence of a HETT navigation checkpoint; this weights directory also contains yolo_v3.cfg."
+    }
+  ],
+  "matched_official_HETT_runtime_and_evaluator_verified": false,
+  "verified_official_HTNav_checkpoint_found": false,
+  "no_forced_reproduction": true,
+  "new_training": false
+}

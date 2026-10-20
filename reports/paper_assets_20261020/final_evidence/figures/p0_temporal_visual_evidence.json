@@ -1,0 +1,86 @@
+{
+  "cases": [
+    {
+      "case_id": "formal_val_unseen_success",
+      "episode_id": [
+        "birmingham_block_5",
+        8,
+        4
+      ],
+      "model_identity": "formal",
+      "base_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "residual_checkpoint_sha256": null,
+      "source_fields_sha256": "498c2d8b6faa3daa4a9bcac6fb8fe127b806d5ac10f8ff89c5c80a3991cbd51f",
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "case_id": "visual_corrected",
+      "episode_id": [
+        "birmingham_block_5",
+        8,
+        5
+      ],
+      "model_identity": "calibrated_residual",
+      "base_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "residual_checkpoint_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+      "source_fields_sha256": "c5b656f7975f819c100a4936571738e28ce770cc8be1f8db900f95e0b3d95059",
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "case_id": "visual_degraded",
+      "episode_id": [
+        "birmingham_block_5",
+        33,
+        0
+      ],
+      "model_identity": "calibrated_residual",
+      "base_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "residual_checkpoint_sha256": "5fc1a3e115b71d14fe1e8fbaf3ed29c1863d8b2bc080455d89f7a4e503d25f11",
+      "source_fields_sha256": "20b7c1c5475870c51e56234e85339d3ac6f5b8af472ce563e230f2829c588247",
+      "steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    }
+  ],
+  "rgb_pixels": false,
+  "source_statistics": "VISUAL_CAUSAL_CASES.csv",
+  "units": {
+    "error": "meters",
+    "L1": "unitless",
+    "entropy_change": "nats"
+  },
+  "limits": "Input/control sensitivity is not proof of semantic understanding. Only annotated selected cases; no population frequency claim.",
+  "sha256": {
+    "pdf": "98a091dc8a85b5947fce65a5ea3a36f2561affb60cbe496e9b0e037828b87438",
+    "png": "7c7a66d3179d6f872afabd3acd422acb1942483aaee8e64157558cdd7287e650"
+  }
+}

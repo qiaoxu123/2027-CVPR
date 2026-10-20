@@ -1,0 +1,123 @@
+{
+  "archived_comparisons_verified": 310,
+  "per_frame_control_rows": 164,
+  "cases": 9,
+  "unique_episodes": 8,
+  "Real_changes_dense_Top1_cases": [
+    {
+      "case_id": "visual_corrected",
+      "episode_id": [
+        "birmingham_block_5",
+        8,
+        5
+      ],
+      "model_identity": "calibrated_residual"
+    },
+    {
+      "case_id": "visual_reinforced",
+      "episode_id": [
+        "birmingham_block_5",
+        8,
+        4
+      ],
+      "model_identity": "calibrated_residual"
+    },
+    {
+      "case_id": "visual_degraded",
+      "episode_id": [
+        "birmingham_block_5",
+        33,
+        0
+      ],
+      "model_identity": "calibrated_residual"
+    }
+  ],
+  "matched_path_max_s0_plus_delta_discrepancy_logits": 9.522773325443268e-07,
+  "max_residual_outside_recorded_observed_logits": 0,
+  "paired_navigation_rows_read": 15501,
+  "paired_navigation_source_sha256": "8ca278bbab60577ba9ca70c1c8da21cfa5cc1fbe20ab8543578eb6c3bcb68d16",
+  "real_wins_zero_and_shuffle_count": 88,
+  "paired_rows_match_archived_aggregate_metrics": [
+    {
+      "split": "val_seen",
+      "comparison": "zero",
+      "branch": "real",
+      "metrics_sha256": "44c83699782ada089a884ff2fa89e57793c5ed9c51edb3194dbbe96376ee79d6"
+    },
+    {
+      "split": "val_seen",
+      "comparison": "zero",
+      "branch": "zero",
+      "metrics_sha256": "572ed3f70146d6ecdf4eafe9838b37a0c4891871e88fe931c4d895ce34b14155"
+    },
+    {
+      "split": "val_seen",
+      "comparison": "shuffle",
+      "branch": "real",
+      "metrics_sha256": "44c83699782ada089a884ff2fa89e57793c5ed9c51edb3194dbbe96376ee79d6"
+    },
+    {
+      "split": "val_seen",
+      "comparison": "shuffle",
+      "branch": "shuffle",
+      "metrics_sha256": "f661e951940d428d23f8d650375a3e08c360fbb0f697d7cbe4341a4aa1639ae9"
+    },
+    {
+      "split": "val_seen",
+      "comparison": "no-belief",
+      "branch": "real",
+      "metrics_sha256": "44c83699782ada089a884ff2fa89e57793c5ed9c51edb3194dbbe96376ee79d6"
+    },
+    {
+      "split": "val_seen",
+      "comparison": "no-belief",
+      "branch": "no-belief",
+      "metrics_sha256": "7433eb1ec80ead34a5a4a15430ad266c75bfc3165b6c50d70eb784ff93df6731"
+    },
+    {
+      "split": "val_unseen",
+      "comparison": "zero",
+      "branch": "real",
+      "metrics_sha256": "66461280e228ee8e5bda69391ed1c26e9ed63bf167bb3ef716591c8770c6aafb"
+    },
+    {
+      "split": "val_unseen",
+      "comparison": "zero",
+      "branch": "zero",
+      "metrics_sha256": "a82e3cd2628175cfb90b146a488de9361aecf74d0b3af047fa9cbe2e7c24ffa8"
+    },
+    {
+      "split": "val_unseen",
+      "comparison": "shuffle",
+      "branch": "real",
+      "metrics_sha256": "66461280e228ee8e5bda69391ed1c26e9ed63bf167bb3ef716591c8770c6aafb"
+    },
+    {
+      "split": "val_unseen",
+      "comparison": "shuffle",
+      "branch": "shuffle",
+      "metrics_sha256": "80caf1974774f99324a1f7ad3fe1695b9794fc18cae32bd4d91feaeaf5f2eb30"
+    },
+    {
+      "split": "val_unseen",
+      "comparison": "no-belief",
+      "branch": "real",
+      "metrics_sha256": "66461280e228ee8e5bda69391ed1c26e9ed63bf167bb3ef716591c8770c6aafb"
+    },
+    {
+      "split": "val_unseen",
+      "comparison": "no-belief",
+      "branch": "no-belief",
+      "metrics_sha256": "91c22950b6d35b524eb788203f42b28c23131c35f9cbd930d4fac4a57eb8aacf"
+    }
+  ],
+  "semantic_disambiguation_verified": false,
+  "limits": [
+    "case selection is outcome-conditioned",
+    "True optical visibility is unknown",
+    "CVR uses geometry, pose, masks and quality as well as RGB x text",
+    "Zero changes the CVR meaningful-feature gate; it is not a support-preserving content-only test",
+    "Shuffle tests candidate-image association, not exclusively semantic object identity",
+    "Matched-path belief changes and independent rollout SR are distinct evidence"
+  ]
+}
