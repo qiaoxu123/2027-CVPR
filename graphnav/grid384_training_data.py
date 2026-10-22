@@ -16,8 +16,8 @@ class Grid384Dataset(Stage1Dataset):
         super().__init__(root,verify=verify)
         args=dict(self.manifest['protocol']['a3_args']);args['grid_size']=384
         self.static=FullCandidateDataset(self.root/'queries.jsonl',**{k:args[k] for k in ('grid_size','max_landmarks','max_roads','max_relations','prior_sigma_m','rule_sigma_m')},deduplicate_queries=False)
-        self.static._prepared=lru_cache(maxsize=2)(self.static._prepare)
-        self.static._pair_cache=lru_cache(maxsize=2)(self.static._pair_features)
+        self.static._prepared=lru_cache(maxsize=32)(self.static._prepare)
+        self.static._pair_cache=lru_cache(maxsize=32)(self.static._pair_features)
         self.manifest={**self.manifest,'protocol':{**self.manifest['protocol'],'a3_args':args}}
 
 class OnlineCollate:

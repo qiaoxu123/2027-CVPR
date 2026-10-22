@@ -13,6 +13,7 @@ User authorized new 384 training and complete evaluation. Isolated worktree: res
 
 - Reuse original full Train-Seen sampling metadata: 21,878 episodes, 87,512 states, same seed 0 and map+instruction 5% internal Dev exclusion. All original source cache chunks are SHA-verified; only poses, text and labels are reused.
 - Recompute observation support and frozen ROI vectors at true 384 candidate coordinates from real orthophoto pose-conditioned observations. No interpolation/relabeling of 28-grid ROI arrays. History accepts strictly earlier frames with original pose deduplication.
+- Candidate geometry uses a bounded32-query CPU LRU to reuse public geometry across the four sampled states without unbounded RAM growth.
 - New derived feature cache is bounded at 160 GiB and stops writing below 40 GiB disk free; missing entries can be recomputed. Raw datasets stay read-only.
 - Goal supervision preserves normalized sigma 0.9/28: sigma_cells=0.9×384/28=12.342857 at384. Keeping0.9cells would silently narrow the physical label width13.7×. Old trainer defaults remain0.9; new training explicitly passes the scaled value.
 - A=3, B=3, C=5 complete epochs. Microbatch 4, gradient accumulation 4: effective batch 16. Original AdamW group learning rates and cosine schedule measured in optimizer updates.
