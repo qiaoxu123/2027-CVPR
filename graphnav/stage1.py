@@ -126,11 +126,11 @@ class GraphNavStage1(nn.Module):
 
 
 def stage1_losses(output,*,grid_world,target_world,pose_world,teacher_world,valid_teacher_z,bounds,
-                  observed_scales,teacher_logits=None,stage='A'):
+                  observed_scales,teacher_logits=None,stage='A',goal_sigma_cells=.9):
     distance=(grid_world-target_world[:,None,:2]).norm(dim=-1)
     target=(target_world[:,:2]-bounds[:,:2])/(bounds[:,2:]-bounds[:,:2]);grid_size=int(math.sqrt(grid_world.shape[1]))
-    goal=cross_entropy_goal(output.static.belief_logits,target,grid_size=grid_size)
-    belief=cross_entropy_goal(output.belief.belief_logits,target,grid_size=grid_size)
+    goal=cross_entropy_goal(output.static.belief_logits,target,grid_size=grid_size,sigma_cells=goal_sigma_cells)
+    belief=cross_entropy_goal(output.belief.belief_logits,target,grid_size=grid_size,sigma_cells=goal_sigma_cells)
     positive,negative=visual_supervision_regions(grid_world,target_world,observed_scales)
     positive=positive&output.observed;negative=negative&output.observed
     eligible=positive.any(-1)&negative.any(-1)

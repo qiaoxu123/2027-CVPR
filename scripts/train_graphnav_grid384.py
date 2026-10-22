@@ -1,5 +1,6 @@
 """Full A/B/C epochs with strict pretrained migration, causal inputs and Seen selection."""
 import argparse
+from itertools import islice
 import copy
 import csv
 import json
@@ -41,7 +42,8 @@ def epoch(model,loader,bert,device,stage,optimizer=None,scheduler=None,max_batch
     if progress:
         start_batch=progress['next_batch'];total=progress['total'];count=progress['count'];visual_eligible=progress['visual_eligible'];rank_gain=progress['rank_gain'];appearance_hit=progress['appearance_hit'];gradient_norms=progress['gradient_norms'];previous_seconds=progress['seconds']
     if optimizer is not None:optimizer.zero_grad(set_to_none=True)
-    for iteration,(static,public,labels)in enumerate(loader,start=start_batch):
+    iterator=islice(loader,max(0,max_batches-start_batch)) if max_batches else loader
+    for iteration,(static,public,labels)in enumerate(iterator,start=start_batch):
         if max_batches and iteration>=max_batches:break
         x,t,m,n=_batch_inputs(static,bert,device,'geometry');public={k:v.to(device,non_blocking=True)for k,v in public.items()};labels={k:v.to(device,non_blocking=True)for k,v in labels.items()}
         with torch.set_grad_enabled(optimizer is not None),torch.autocast('cuda',dtype=torch.bfloat16):
@@ -51,7 +53,7 @@ def epoch(model,loader,bert,device,stage,optimizer=None,scheduler=None,max_batch
             with torch.no_grad(),torch.autocast('cuda',dtype=torch.bfloat16):teacher_logits=teacher(x,variant='geometry',tokens=t,token_mask=m,node_emb=n).belief_logits
         world=public['bounds'][:,None,:2]+x['grid_xy']*(public['bounds'][:,None,2:]-public['bounds'][:,None,:2])
         scales=public['roi_valid']|(public['history_valid']if stage!='A'else torch.zeros_like(public['roi_valid']))
-        losses=stage1_losses(output,grid_world=world,pose_world=public['pose_world'],bounds=public['bounds'],**labels,observed_scales=scales,teacher_logits=teacher_logits,stage=stage)
+        losses=stage1_losses(output,grid_world=world,pose_world=public['pose_world'],bounds=public['bounds'],**labels,observed_scales=scales,teacher_logits=teacher_logits,stage=stage,goal_sigma_cells=.9*384/28)
         if not torch.isfinite(losses['total']):raise ValueError('nonfinite Stage1 loss')
         if optimizer is not None:
             group_start=(iteration//accumulation)*accumulation
@@ -136,7 +138,7 @@ def main():
     optimizer=torch.optim.AdamW(groups,weight_decay=.01)
     steps=math.ceil(len(sampler)/(a.batch_size*a.accumulation))*a.epochs;warmup=max(1,int(.05*steps))
     scheduler=torch.optim.lr_scheduler.LambdaLR(optimizer,lambda s:(s+1)/warmup if s<warmup else .5*(1+math.cos(math.pi*min(1,(s-warmup)/max(steps-warmup,1)))))
-    fingerprint=dict(training_grid=384,implementation={str(path):file_sha256(path) for path in [Path(__file__),Path('graphnav/grid384_training_data.py'),Path('graphnav/full_localization.py'),Path('graphnav/observed_patch_scales.py')]},cache_manifest=file_sha256(Path(a.cache)/'manifest.json'),sources=source,sbf_config=file_sha256(a.sbf_config),init=file_sha256(a.init)if a.init else None)
+    fingerprint=dict(training_grid=384,implementation={str(path):file_sha256(path) for path in [Path(__file__),Path('graphnav/grid384_training_data.py'),Path('graphnav/full_localization.py'),Path('graphnav/stage1.py'),Path('graphnav/observed_patch_scales.py')]},cache_manifest=file_sha256(Path(a.cache)/'manifest.json'),sources=source,sbf_config=file_sha256(a.sbf_config),init=file_sha256(a.init)if a.init else None)
     history=[];best=(-1e30,-1e30,-1e30);start=1;pending=None;resume_rng=None;resume_progress=None
     if a.init and not a.smoke:
         prior=torch.load(a.init,map_location='cpu',weights_only=True)
@@ -161,7 +163,7 @@ def main():
     if resume_rng is not None:restore_rng(resume_rng)
     config=dict(args=vars(a),a3_args=a3_args,protocol=protocol(data.manifest['backbone_revision'],a.stage),sources=source,
         hardware=dict(gpu=torch.cuda.get_device_name(0),gpu_total_bytes=torch.cuda.get_device_properties(0).total_memory,torch_version=str(torch.__version__),cuda=torch.version.cuda),
-        training_grid_size=384,candidate_count=147456,effective_batch_size=a.batch_size*a.accumulation,pretrained_grid_size=28,
+        goal_supervision=dict(sigma_cells=.9*384/28,normalized_sigma=.9/28,reference_grid=28),training_grid_size=384,candidate_count=147456,effective_batch_size=a.batch_size*a.accumulation,pretrained_grid_size=28,
         frozen_backbones=dict(bert_revision=bert.revision,siglip_revision=data.manifest['backbone_revision']),
         losses=dict(goal=1.,visual=.1,belief=1.,rank=.05,trajectory=.1,trajectory_mode=.02,trajectory_rank=.05,stop=.05,anchor=1.),
         train_states=len(sampler),dev_states=len(dev_indices),dev_episodes=sorted(dev),dev_public_queries=sorted(dev_keys),seed=a.seed,
