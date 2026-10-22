@@ -160,7 +160,14 @@ class FullTokenGeometryLocalizer(nn.Module):
                         batch["nodes"], node_emb, batch["node_types"],
                         batch["adjacency"], batch["edges"], batch["node_valid"],
                     )
-                geo = self.geometry_proj(batch["pair_geometry"].to(features.dtype))
+                # Invalid padded landmarks have exactly zero softmax weight.
+                # For dense grids, omit their pair MLP activations without changing the model.
+                dense_entities = batch["entity_valid"].bool().any(0) if q > 8192 and variant == "geometry" else None
+                pair_geometry = batch["pair_geometry"]
+                if dense_entities is not None:
+                    nodes = nodes[:, dense_entities]
+                    pair_geometry = pair_geometry[:, :, dense_entities]
+                geo = self.geometry_proj(pair_geometry.to(features.dtype))
                 pair_context = nodes[:, None] + geo
                 relevance = self.pair_logits(torch.tanh(
                     self.pair_query(features)[:, :, None] +
@@ -168,6 +175,7 @@ class FullTokenGeometryLocalizer(nn.Module):
                 )).squeeze(-1)
                 # Add a learned null anchor: empty map still produces finite logits.
                 valid = batch["entity_valid"].bool()
+                if dense_entities is not None:valid = valid[:, dense_entities]
                 relevance = relevance.masked_fill(~valid[:, None], -1e4)
                 null_score = relevance.new_zeros((b, q, 1))
                 relevance = torch.softmax(
