@@ -11,7 +11,7 @@ def main():
  torch.set_num_threads(1);torch.manual_seed(17)
  ck=torch.load(PROJECT/'GraphNav/runs/graphnav_v1_stage1/best.pt',weights_only=True,map_location='cpu');args=SimpleNamespace(**ck['a3_args'])
  model=new_model(args,'cuda').float();old=copy.deepcopy(model)
- scope=dict(module.__dict__);exec(compile(subprocess.check_output(['git','show','HEAD:graphnav/full_localization.py'],text=True),'<original>','exec'),scope)
+ scope=dict(module.__dict__);exec(compile(subprocess.check_output(['git','show','21c42f4c721104454fd03340ef180b2ffccd4058:graphnav/full_localization.py'],text=True),'<original>','exec'),scope)
  old.forward=types.MethodType(scope[type(model).__name__].forward,old)
  ds=FullCandidateDataset(PROJECT/'GraphNav/data/graphnav_stage1_frames/queries.jsonl',grid_size=96,max_landmarks=args.max_landmarks,max_roads=args.max_roads,max_relations=args.max_relations,prior_sigma_m=args.prior_sigma_m,rule_sigma_m=args.rule_sigma_m)
  batch=collate_full([ds[0]]);x={k:v.cuda() for k,v in batch.items() if torch.is_tensor(v)};tokens=torch.randn(1,8,768,device='cuda');mask=torch.ones(1,8,dtype=torch.bool,device='cuda');names=torch.randn(1,x['nodes'].shape[1],768,device='cuda')
