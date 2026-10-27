@@ -85,6 +85,8 @@ def main():
     p=argparse.ArgumentParser()
     for key in ('cache','sources','stage','output','sbf-source','sbf-config','data-root'):p.add_argument('--'+key,required=True)
     p.add_argument('--init');p.add_argument('--resume');p.add_argument('--epochs',type=int,required=True)
+    p.add_argument('--fusion-kind',choices=('original','joint-rgb-geometry'),default='original',
+                   help='Original independent visual residual or integrated RGB/geometric goal localizer')
     p.add_argument('--batch-size',type=int,default=16);p.add_argument('--workers',type=int,default=4);p.add_argument('--seed',type=int,default=0)
     p.add_argument('--max-batches',type=int);p.add_argument('--smoke',action='store_true')
     a=p.parse_args();out=Path(a.output)
@@ -92,7 +94,7 @@ def main():
     if out.exists() and not a.resume:raise ValueError('refusing stage overwrite')
     out.mkdir(parents=True,exist_ok=True);random.seed(a.seed);np.random.seed(a.seed);torch.manual_seed(a.seed)
     source=json.loads(Path(a.sources).read_text());paths={k:v['path']for k,v in source.items()};device=torch.device('cuda')
-    model,a3_args=initialize_model(paths,device,a.init);model.configure_stage(a.stage)
+    model,a3_args=initialize_model(paths,device,a.init,model_type=a.fusion_kind);model.configure_stage(a.stage)
     data=Stage1Dataset(a.cache)
     if data.manifest['smoke_only'] and not a.smoke:raise ValueError('limited features cannot be full training')
     if data.manifest['protocol']['a3_sha256']!=EXPECTED['a3']:raise ValueError('feature geometry was not validated for Epoch14')
@@ -111,9 +113,16 @@ def main():
     sampler=TrainingSampler(data,a.seed,dev)
     generator=torch.Generator();common=dict(batch_size=a.batch_size,num_workers=a.workers,pin_memory=True,collate_fn=collate_stage1,persistent_workers=a.workers>0)
     train=DataLoader(data,sampler=sampler,generator=generator,**common);validation=DataLoader(Subset(data,dev_indices),shuffle=False,**common)
-    groups=[dict(params=list(model.matcher.parameters())+[model.visual_gain],lr=1e-4,name='visual')]
+    visual_params=list(model.matcher.parameters())
+    if a.fusion_kind=='joint-rgb-geometry':
+        visual_params+=list(model.a3.rgb_query.parameters())
+    else:
+        visual_params+=[model.visual_gain]
+    groups=[dict(params=visual_params,lr=1e-4,name='visual')]
     if a.stage!='A':groups.append(dict(params=model.history.parameters(),lr=1e-4,name='history'))
-    if a.stage=='C':groups.extend([dict(params=[p for p in model.a3.parameters()if p.requires_grad],lr=1e-5,name='a3'),dict(params=model.trajectory.parameters(),lr=2e-5,name='trajectory_stop')])
+    if a.stage=='C':
+        groups.extend([dict(params=[p for name,p in model.a3.named_parameters() if p.requires_grad and not name.startswith('rgb_query.')],lr=1e-5,name='a3'),
+                       dict(params=model.trajectory.parameters(),lr=2e-5,name='trajectory_stop')])
     optimizer=torch.optim.AdamW(groups,weight_decay=.01)
     steps=math.ceil(len(sampler)/a.batch_size)*a.epochs;warmup=max(1,int(.05*steps))
     scheduler=torch.optim.lr_scheduler.LambdaLR(optimizer,lambda s:(s+1)/warmup if s<warmup else .5*(1+math.cos(math.pi*min(1,(s-warmup)/max(steps-warmup,1)))))
@@ -135,10 +144,15 @@ def main():
     baseline=torch.load(paths['a3'],map_location='cpu',weights_only=True)
     train_cache=baseline['input_fingerprint']['train_bert_cache']['path'];seen_cache=baseline['input_fingerprint']['seen_bert_cache']['path']
     bert.load_cache(train_cache);embeddings=bert.cache.copy();bert.load_cache(seen_cache);bert.cache.update(embeddings);del embeddings
-    teacher=copy.deepcopy(model.a3).requires_grad_(False).eval()if a.stage=='C'else None
+    if a.stage=='C' and a.fusion_kind=='joint-rgb-geometry':
+        from types import SimpleNamespace
+        from graphnav.full_experiment import new_model
+        teacher=new_model(SimpleNamespace(**a3_args),device).requires_grad_(False).eval()
+    else:
+        teacher=copy.deepcopy(model.a3).requires_grad_(False).eval()if a.stage=='C'else None
     if teacher is not None:teacher.load_state_dict(baseline['model'],strict=True)
     if resume_rng is not None:restore_rng(resume_rng)
-    config=dict(args=vars(a),a3_args=a3_args,protocol=protocol(data.manifest['backbone_revision'],a.stage),sources=source,
+    config=dict(args=vars(a),a3_args=a3_args,protocol=protocol(data.manifest['backbone_revision'],a.stage,model_type=a.fusion_kind),sources=source,
         frozen_backbones=dict(bert_revision=bert.revision,siglip_revision=data.manifest['backbone_revision']),
         losses=dict(goal=1.,visual=.1,belief=1.,rank=.05,trajectory=.1,trajectory_mode=.02,trajectory_rank=.05,stop=.05,anchor=1.),
         train_states=len(sampler),dev_states=len(dev_indices),dev_episodes=sorted(dev),dev_public_queries=sorted(dev_keys),seed=a.seed,
