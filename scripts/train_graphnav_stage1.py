@@ -177,7 +177,7 @@ def main():
             destination=out/f'seen128_epoch{e:02d}'
             if not (destination/'metrics.json').exists():
                 if destination.exists():destination.rename(out/f'seen128_epoch{e:02d}_failed_{int(time.time())}')
-                command=[sys.executable,'-m','scripts.evaluate_closedloop','--model','graphnav-v1','--sbf-source',a.sbf_source,'--config',a.sbf_config,'--checkpoint',str(out/'last.pt'),'--data-root',a.data_root,'--split','val_seen','--max-episodes','128','--output',str(destination)]
+                command=[sys.executable,'-m','scripts.evaluate_closedloop','--model',('graphnav-joint-rgb' if a.fusion_kind=='joint-rgb-geometry' else 'graphnav-v1'),'--sbf-source',a.sbf_source,'--config',a.sbf_config,'--checkpoint',str(out/'last.pt'),'--data-root',a.data_root,'--split','val_seen','--max-episodes','128','--output',str(destination)]
                 with (out/f'seen128_epoch{e:02d}.log').open('a')as stream:subprocess.run(command,check=True,stdout=stream,stderr=subprocess.STDOUT)
             evaluation=json.loads((destination/'metrics.json').read_text())
             if evaluation['checkpoint_sha256']!=file_sha256(out/'last.pt'):raise ValueError('validation checkpoint differs')
