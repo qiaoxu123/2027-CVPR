@@ -26,13 +26,21 @@ def retrieval_ids(logits):
 
 
 class GraphNavStage1Policy:
-    def __init__(self,checkpoint,directory,*,device='cuda',visual_control='real',history_control='checkpoint'):
+    def __init__(self,checkpoint,directory,*,device='cuda',visual_control='real',history_control='checkpoint',model_type='original'):
         state=torch.load(checkpoint,map_location='cpu',weights_only=True)
         self.protocol=state['protocol']
-        if self.protocol['name']!='graphnav-v1-stage1' or self.protocol['active_observation']:raise ValueError('Stage1 complete non-active checkpoint required')
+        expected='graphnav-joint-rgb-geometry-v1' if model_type=='joint-rgb-geometry' else 'graphnav-v1-stage1'
+        if model_type not in ('original','joint-rgb-geometry') or self.protocol['name']!=expected or self.protocol['active_observation']:
+            raise ValueError('Stage1 checkpoint model/protocol mismatch')
+        self.model_type=model_type
         self.args=SimpleNamespace(**state['a3_args']);self.device=torch.device(device)
         self.directory=Path(directory);self.directory.mkdir(parents=True,exist_ok=True)
-        self.model=GraphNavStage1(new_model(self.args,self.device),residual_bound=self.protocol['residual_bound']).to(self.device)
+        if model_type=='joint-rgb-geometry':
+            from .joint_rgb_geometry import JointRGBGeometryStage1
+            cls=JointRGBGeometryStage1
+        else:
+            cls=GraphNavStage1
+        self.model=cls(new_model(self.args,self.device),residual_bound=self.protocol['residual_bound']).to(self.device)
         self.model.load_state_dict(state['model'],strict=True);self.model.requires_grad_(False);self.model.eval()
         self.bert=FrozenBERTTokens(self.args.text_backbone,device=device,max_length=getattr(self.args,'max_text_length',96))
         expected_bert=state.get('config',{}).get('frozen_backbones',{}).get('bert_revision')
@@ -75,7 +83,7 @@ class GraphNavStage1Policy:
         self.memory.update(frame)
         initial=retrieval_ids(output.static.belief_logits);dynamic=retrieval_ids(output.belief.belief_logits)
         winner=output.appearance_scores.masked_fill(~output.observed,-1e4).argmax(-1)
-        prediction.diagnostics.update(policy='GraphNav-V1 A3 Epoch14 initialization + observed visual belief + causal quality memory + pretrained guarded control',
+        prediction.diagnostics.update(policy=('Joint RGB/Geometry pre-attention fused localization + causal memory + original guarded control' if self.model_type=='joint-rgb-geometry' else 'GraphNav-V1 A3 Epoch14 initialization + observed visual belief + causal quality memory + pretrained guarded control'),
             observation_step=int(state.step),history_enabled=self.use_history,history_unique_views=self.memory.accepted,history_duplicates=self.memory.duplicates,history_unobserved_frames=self.memory.unobserved,
             visual_control=self.visual_control,residual_max_abs=float(output.delta.abs().max()),visual_gain=float(self.model.visual_gain.tanh()),
             static_top16_world_xy=self.world.gather(1,initial[...,None].expand(-1,-1,2))[0].cpu().tolist(),
