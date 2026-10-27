@@ -37,7 +37,14 @@ def initialize_model(paths,device,init=None,model_type='original'):
     else:
         cls = GraphNavStage1
     model=cls(new_model(SimpleNamespace(**a3['args']),device)).to(device)
-    model.a3.load_state_dict(a3['model'],strict=True);model.trajectory.load_state_dict(head['model'],strict=True)
+    if model_type == 'joint-rgb-geometry':
+        incompatible = model.a3.load_state_dict(a3['model'], strict=False)
+        expected_new = {'rgb_query.0.weight', 'rgb_query.0.bias', 'rgb_query.1.weight'}
+        if set(incompatible.missing_keys) != expected_new or incompatible.unexpected_keys:
+            raise ValueError('joint adapter initialization differs from verified A3')
+    else:
+        model.a3.load_state_dict(a3['model'], strict=True)
+    model.trajectory.load_state_dict(head['model'], strict=True)
     if init:
         previous=torch.load(init,map_location='cpu',weights_only=True)
         expected_name = 'graphnav-joint-rgb-geometry-v1' if model_type == 'joint-rgb-geometry' else 'graphnav-v1-stage1'
