@@ -2,7 +2,8 @@
 
 Only the new small network is instantiated for optimization. All original
 backbone features are immutable, provenance-bound caches. No benchmark split is
-read. Smoke/partial caches cannot be used by this entrypoint.
+read. Smoke caches are forbidden; a user-authorized completed-episode snapshot
+is accepted with separately verified provenance and target-disjoint labels.
 """
 import argparse
 import json
@@ -30,7 +31,8 @@ class CachedViews(Dataset):
 
     def __getitem__(self,index):
         entry=self.entries[index]
-        row=torch.load(self.directory/entry['filename'],map_location='cpu',weights_only=False)
+        from .collected_snapshot import load_cache_row
+        row=load_cache_row(self.directory,entry,self.partition)
         expected=self.source[entry['episode']]
         if row['signature_sha256']!=self.signature or row['episode']!=entry['episode'] or row['step']!=entry['step']:
             raise ValueError('Cache row provenance/observation identity mismatch')
@@ -158,7 +160,7 @@ def runtime_hashes():
 
 def training_hashes():
     return {name:sha(ROOT/'experiments/a2_waldo_landmark_belief'/name)
-            for name in ('train.py','training_protocol.py','batching.py','model.py','core.py','observed_geometry.py')}
+            for name in ('train.py','training_protocol.py','batching.py','model.py','core.py','observed_geometry.py','collected_snapshot.py')}
 
 
 def main():
@@ -167,11 +169,10 @@ def main():
     parser.add_argument('--output',type=Path,default=ROOT/'runs/a2_waldo_landmark_20261027/training')
     parser.add_argument('--resume',action='store_true')
     args=parser.parse_args()
-    from .prepare import cache_signature
+    from .collected_snapshot import verify_cache_origin,cache_source
     from torch.utils.tensorboard import SummaryWriter
-    saved_signature=json.loads((args.cache/'signature.json').read_text())
-    if cache_signature()!=saved_signature:raise ValueError('Current sources/data differ from full extraction signature')
-    source=json.loads((ROOT/'runs/a2_waldo_landmark_20261027/source_manifest.json').read_text())
+    verify_cache_origin(args.cache)
+    source=cache_source(args.cache)
     manifest=validate_complete_cache(args.cache,source,hash_rows=True)
     smoke=json.loads((ROOT/'reports/a2_execution_20261027/informative_cuda_smoke.json').read_text())
     smoke_hashes={name:sha(ROOT/'experiments/a2_waldo_landmark_belief'/name)
@@ -211,7 +212,9 @@ def main():
     save(dict(config=TRAIN_CONFIG,model_config=model.config,cache_manifest_sha256=sha(args.cache/'manifest.json'),
               cache_signature_sha256=manifest['signature_sha256'],training_code_sha256=code_sha,
               runtime_code_sha256=runtime_hashes(),training_modules_sha256=training_hashes(),a0_sha256=A0_SHA,
-              train_views=len(train),dev_views=len(dev),selection_population='TRAIN-dev only'),args.output/'protocol.json')
+              train_views=len(train),dev_views=len(dev),selection_population='TRAIN-dev only',
+              cache_path=str(args.cache.resolve()),data_scope=manifest.get('scope','original_full_collection'),
+              original_full_collection_complete=manifest.get('original_full_collection_complete',True)),args.output/'protocol.json')
     for epoch in range(start_epoch,RANK_EPOCHS+REFINE_EPOCHS+1):
         refine=epoch>RANK_EPOCHS
         if epoch==RANK_EPOCHS+1:

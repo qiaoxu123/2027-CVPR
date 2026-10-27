@@ -2,6 +2,7 @@
 
 ## [0.2.0-a2-dev] - 2026-10-28
 ### Features
+- Honor user-requested collection stop with an immutable completed-episode snapshot, secondary target-disjoint train/dev/calibration split, load-time cross-partition label masking and unchanged full20+5 epoch schedule.
 - Add target-instance-disjoint A2 supervision protocol and full CityNav train source audit.
 - Validate public landmark identities and complete BERT mention spans; retain ambiguity and truncation as unknown.
 - Integrate observed native384 WALDO boxes, actual frozen SigLIP2 box crops, per-landmark BERT context and conservative updates through an optional frozen-A0 hook.

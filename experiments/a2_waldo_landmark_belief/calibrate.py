@@ -131,7 +131,8 @@ def main():
     save(analysis_signature,signature_file)
     model=LandmarkBeliefNetwork(**state['model_config']).cuda().eval().requires_grad_(False)
     model.load_state_dict(state['model'],strict=True)
-    source=json.loads((ROOT/'runs/a2_waldo_landmark_20261027/source_manifest.json').read_text())
+    from .collected_snapshot import cache_source
+    source=cache_source(args.cache)
     manifest=json.loads((args.cache/'manifest.json').read_text())
     dataset=CachedViews(args.cache,manifest,source,'calibration')
     signature=dict(checkpoint_sha256=sha(args.training/'best.pt'),cache_signature_sha256=manifest['signature_sha256'],

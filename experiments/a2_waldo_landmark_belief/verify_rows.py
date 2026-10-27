@@ -21,8 +21,16 @@ def main():
     torch.set_num_threads(2);torch.manual_seed(0)
     rows=[];paths=[]
     signature=sha(args.cache/'signature.json')
-    for path in sorted(args.cache.glob('train_*.pt')):
-        row=torch.load(path,map_location='cpu',weights_only=False)
+    from .collected_snapshot import cache_source
+    from .train import CachedViews
+    import json
+    if (args.cache/'manifest.json').exists():
+        manifest=json.loads((args.cache/'manifest.json').read_text())
+        dataset=CachedViews(args.cache,manifest,cache_source(args.cache),'train')
+        iterator=((args.cache/entry['filename'],dataset[i]) for i,entry in enumerate(dataset.entries))
+    else:
+        iterator=((path,torch.load(path,map_location='cpu',weights_only=False)) for path in sorted(args.cache.glob('train_*.pt')))
+    for path,row in iterator:
         if row['signature_sha256']!=signature:
             raise ValueError('Smoke cache signature mismatch')
         if informative_refinement_view(row):

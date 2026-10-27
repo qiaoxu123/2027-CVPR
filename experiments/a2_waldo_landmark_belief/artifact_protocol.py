@@ -41,14 +41,13 @@ def verify_curves(history,directory):
 
 def verify_training_artifacts(directory,cache,*,hash_cache_rows=True):
     from .train import runtime_hashes,training_hashes
-    from .prepare import cache_signature
+    from .collected_snapshot import verify_cache_origin,cache_source
     directory,cache=Path(directory),Path(cache)
     marker=json.loads((directory/'training_complete.json').read_text())
     if marker['status']!='full20plus5_training_complete_calibration_pending' or marker['rank_epochs']!=20 or marker['refine_epochs']!=5:
         raise ValueError('Full20+5 training completion marker required')
-    if cache_signature()!=json.loads((cache/'signature.json').read_text()):
-        raise ValueError('Frozen data/feature-extraction provenance changed')
-    source=json.loads((ROOT/'runs/a2_waldo_landmark_20261027/source_manifest.json').read_text())
+    verify_cache_origin(cache)
+    source=cache_source(cache)
     manifest=validate_complete_cache(cache,source,hash_rows=hash_cache_rows)
     counts={p:sum(e['split']==p for e in manifest['entries']) for p in ('train','dev','calibration')}
     history=json.loads((directory/'history.json').read_text())
