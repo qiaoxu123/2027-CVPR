@@ -111,27 +111,35 @@ def main():
             if completed['epochs'] != stage_epochs or completed['smoke']:
                 raise ValueError(f'{label} stage {stage} incomplete or smoke')
             previous = train/'best.pt'
-        best = previous  # completed and Seen-selected C-stage best checkpoint
-        selected = arm/'seen128_selected'
-        metrics_path = selected/'metrics.json'
-        if not metrics_path.exists():
-            if selected.exists():
-                raise ValueError(f'partial eval exists, archive and inspect first: {selected}')
-            launch([
-                sys.executable, '-m', 'scripts.evaluate_closedloop',
-                '--model', evaluation_model,
-                '--sbf-source', args.sbf_source, '--config', args.sbf_config,
-                '--data-root', args.data_root, '--checkpoint', str(best),
-                '--split', 'val_seen', '--max-episodes', '128',
-                '--stop-threshold', '.3', '--head-execution', 'guarded-blend',
-                '--output', str(selected),
-            ], arm/'eval_console.log')
-        evaluated = json.loads(metrics_path.read_text())
-        if evaluated['checkpoint_sha256'] != sha(best):
-            raise ValueError(f'checkpoint/evaluation SHA mismatch: {label}')
+        candidates = []
+        for stage in ('B', 'C'):
+            checkpoint = arm/'stages'/stage/'best.pt'
+            selected = arm/f'seen128_{stage}_candidate'
+            metrics_path = selected/'metrics.json'
+            if not metrics_path.exists():
+                if selected.exists():
+                    raise ValueError(f'partial eval exists, archive and inspect first: {selected}')
+                launch([
+                    sys.executable, '-m', 'scripts.evaluate_closedloop',
+                    '--model', evaluation_model,
+                    '--sbf-source', args.sbf_source, '--config', args.sbf_config,
+                    '--data-root', args.data_root, '--checkpoint', str(checkpoint),
+                    '--split', 'val_seen', '--max-episodes', '128',
+                    '--stop-threshold', '.3', '--head-execution', 'guarded-blend',
+                    '--output', str(selected),
+                ], arm/f'eval_{stage}_console.log')
+            evaluated = json.loads(metrics_path.read_text())
+            if evaluated['checkpoint_sha256'] != sha(checkpoint):
+                raise ValueError(f'checkpoint/evaluation SHA mismatch: {label} {stage}')
+            state = torch.load(checkpoint, map_location='cpu', weights_only=True)
+            dev_recall = float(state['history'][-1]['dev']['belief_R@1/20m'])
+            metric = evaluated['metrics']
+            candidates.append(((metric['SR'], metric['SPL'], dev_recall), stage, checkpoint, evaluated))
+        _, selected_stage, best, evaluated = max(candidates, key=lambda item: item[0])
         summary[label] = dict(
-            checkpoint_sha256=sha(best), fusion_kind=fusion,
-            completed_epochs=dict(STAGES), metrics=evaluated['metrics'],
+            selected_stage=selected_stage, checkpoint_sha256=sha(best),
+            fusion_kind=fusion, completed_epochs=dict(STAGES),
+            metrics=evaluated['metrics'],
             episode_manifest_sha256=evaluated['episode_manifest_sha256'],
         )
     a = summary[ARMS[0][0]]
