@@ -54,7 +54,7 @@ def main():
     parser.add_argument('--frozen-final-candidate',help='Completed Seen-selected frozen candidate, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1','graphnav-joint-rgb'], default='sbfnav')
     parser.add_argument('--stage1-visual-control',choices=['real','zero','shuffle','no-belief'],default='real')
     parser.add_argument('--stage1-history-control',choices=['checkpoint','current','history'],default='checkpoint')
     parser.add_argument('--disable-joint-active',action='store_true')
@@ -85,10 +85,19 @@ def main():
     parser.add_argument('--explore-candidates',type=int,default=0)
     parser.add_argument('--head-execution',choices=['joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'],default='joint')
     args = parser.parse_args()
-    if args.model=='graphnav-v1':
+    if args.model in ('graphnav-v1','graphnav-joint-rgb'):
         args.stop_threshold=.3;args.head_execution='guarded-blend';args.explore_candidates=0
-        validate_stage1_frozen_evaluation(args)
-    if args.split=='test_unseen' and args.model!='graphnav-v1':
+        if args.model=='graphnav-v1':
+            validate_stage1_frozen_evaluation(args)
+        elif args.split in ('val_unseen','test_unseen'):
+            if not args.frozen_final_candidate:raise ValueError('joint RGB unseen requires frozen Seen-selected manifest')
+            frozen=json.loads(Path(args.frozen_final_candidate).read_text())
+            if (frozen.get('checkpoint_sha256')!=sha(args.checkpoint) or
+                    frozen.get('model')!='graphnav-joint-rgb' or frozen.get('joint_training_complete') is not True):
+                raise ValueError('joint RGB checkpoint was not frozen after complete paired training')
+            if args.split=='test_unseen' and args.max_episodes is not None:
+                raise ValueError('Test Unseen requires full evaluation')
+    if args.split=='test_unseen' and args.model not in ('graphnav-v1','graphnav-joint-rgb'):
         if args.model!='joint-active' or args.max_episodes is not None or not args.frozen_final_candidate:
             raise ValueError('Test Unseen requires full evaluation of explicitly frozen joint Seen Best after20 epochs')
         frozen=json.loads(Path(args.frozen_final_candidate).read_text())
@@ -153,11 +162,12 @@ def main():
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
-        if args.model=='graphnav-v1':
+        if args.model in ('graphnav-v1','graphnav-joint-rgb'):
             from graphnav.stage1_runtime import GraphNavStage1Policy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             runtime=GraphNavStage1Policy(args.checkpoint,output/'public_inputs',
-                visual_control=args.stage1_visual_control,history_control=args.stage1_history_control)
+                visual_control=args.stage1_visual_control,history_control=args.stage1_history_control,
+                model_type='joint-rgb-geometry' if args.model=='graphnav-joint-rgb' else 'original')
             builder=NativeObservationBuilder(builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='joint-active':
             from graphnav.joint_active_runtime import JointActivePolicy
@@ -219,7 +229,7 @@ def main():
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
-            if args.model=='graphnav-v1':
+            if args.model in ('graphnav-v1','graphnav-joint-rgb'):
                 query=(record.map_name,record.instruction)
                 if query not in retrieval_queries:
                     retrieval_queries.add(query)
@@ -283,8 +293,8 @@ def main():
         report['reference_a3_checkpoint_sha256']=sha(args.reference_a3_checkpoint)
         report['static_variant']=runtime.static_variant;report['static_graph_control']=runtime.static_control
         report['controller_transfer_note']='Original head provenance verified against original A3; compatible new static features are an explicitly evaluated distribution shift, not controller retraining.'
-    if args.model=='graphnav-v1':
-        report['model']='GraphNav-V1 Stage1; initialized from verified A3 Epoch14 and pretrained controller; bounded visual residual + causal quality history; original Guarded-Blend, no active sensing'
+    if args.model in ('graphnav-v1','graphnav-joint-rgb'):
+        report['model']=('GraphNav joint RGB/geometry pre-attention candidate localization; no visual logit residual, original Guarded-Blend' if args.model=='graphnav-joint-rgb' else 'GraphNav-V1 Stage1; initialized from verified A3 Epoch14 and pretrained controller; bounded visual residual + causal quality history; original Guarded-Blend, no active sensing')
         report['goal_retrieval']=dict(unique_queries=len(retrieval_rows),
             **{key:float(np.mean([r[key]for r in retrieval_rows]))for key in retrieval_rows[0]},
             note='Private targets accessed only after rollout. Initial static, first observed belief, and final observed belief are separate. R@1/4/8 preserve legacy FP32 topk(8) tie ordering; R@16 extends that ordering. Final observation time differs per episode.')
