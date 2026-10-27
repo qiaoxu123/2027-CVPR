@@ -1,0 +1,75 @@
+{
+  "arms": {
+    "A1_joint_rgb_geometry": {
+      "selected_stage": "C",
+      "checkpoint": "/home/20261024_1/Workspace/.workspace/joint-rgb-geometry-retrain-20261027/runs/joint_rgb_geometry_A1_20261027/A1_joint_rgb_geometry/stages/C/best.pt",
+      "checkpoint_sha256": "35384927869dccf2d3976ddaffbad00043edfa3e130deb391b3b6df94ca137f1",
+      "fusion_kind": "joint-rgb-geometry",
+      "completed_epochs": {
+        "A": 3,
+        "B": 3,
+        "C": 5
+      },
+      "metrics": {
+        "SR": 0.5,
+        "OSR": 0.6171875,
+        "SPL": 0.45410501069835496,
+        "NE": 28.096823012443448,
+        "nDTW": 0.30555012717952257,
+        "sDTW": 0.16577235962199405,
+        "steps": 8.734375,
+        "path_length": 231.20780908678364,
+        "policy_stop": 0.9921875,
+        "inference_ms": 42.98799275444963,
+        "episodes": 128,
+        "False_Stop_Rate": 0.5039370078740157,
+        "false_stop_episode_fraction": 0.5,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "episode_manifest_sha256": "ebef159ca4c9a0c7e9a3fcfdf83a413a7e34809166ba548c30340b6cd7ecc695"
+    }
+  },
+  "completed_epochs": {
+    "A": 3,
+    "B": 3,
+    "C": 5
+  },
+  "all_stages_complete": true,
+  "joint_training_complete": true,
+  "visual_control": "real",
+  "history_control": "checkpoint",
+  "stop_threshold": 0.3,
+  "head_execution": "guarded-blend",
+  "active_observation": false,
+  "sbf_config_sha256": "425621ad137d6d3e123c6a96a7ea614128e09e9753dc39cf0492d6d0bd81b27f",
+  "sbf_source_sha256": {
+    "sbfnav/__init__.py": "c1fbe3790814fe6d0d3f919e81198dfad344d925351aed902d87087cccc5a2e2",
+    "sbfnav/candidate_proposal.py": "b26289bd587f2db7e524271fc5d8a841f2b2441042b273036c748a8c3751c00c",
+    "sbfnav/checkpointing.py": "668f07bb242a97aae7512ca38b08e29944a1848dc5e1bef8aa3caaf1cf280599",
+    "sbfnav/config.py": "2d6855e7c0465d0c08ccc638c6d579e37c20d3c8c68a76f31b856d0a2c44a3bb",
+    "sbfnav/coordinates.py": "537319565f4d76664bd6fadf20efb58d6b271efc666f119be10d9b9a65a9131c",
+    "sbfnav/dataset.py": "928ccdab5b3c6405b710d2464a8ad2dbae6ebe05a32a2ece60f747cb8f8b235a",
+    "sbfnav/field_targets.py": "98597c69c1ab629b7329f0d1b30fcce049cce87a7f8c18ad2c08f6e4d9a521ff",
+    "sbfnav/losses.py": "8e98349fa30c3f45733b676a5ee5b571be1bb7c0e21fa9aa3db0d8aec2f6756f",
+    "sbfnav/mapdata.py": "54b7d8f4d8ca36131366a2c03a10a75d5676222f318b7927babacc35d7788d1e",
+    "sbfnav/metrics.py": "59cf13ec72a796046fb288951cdccce4840d12918d3373458bc97ea5d6d3611f",
+    "sbfnav/model_factory.py": "79b99f345003a1a59d344884c1e9e6d6646c525145b461c972e40d03a6e39b46",
+    "sbfnav/models/__init__.py": "ac25a7637acfd307dd304b3b28007c79b902dc2b6fa9616e205fcef864a39087",
+    "sbfnav/models/altitude_head.py": "c9ad1fe3aff185b8f47d4fcadfe56b95cc3c6846531ebbdaa947b18b054e4ee1",
+    "sbfnav/models/belief_field.py": "66b00a67ec1ad452fae4e97c2625bad2500909a28f90976e7a9445a511aea73e",
+    "sbfnav/models/language_encoder.py": "ffc6a5955c5a913f091f7bf9b6a5c4ba769f7816433e2aee0c5024a94469fc62",
+    "sbfnav/models/residual_cnn.py": "292c17511885a4d8fde93b571ac359efa2171b419eb306bbc7c352834e2a328b",
+    "sbfnav/models/sbfnav.py": "6d04770ad92b22b04a4c4961b6d1d04fae8d5bcbc62bfebfd4459afd007103e8",
+    "sbfnav/models/selector.py": "3bb84deebeb629ff30e1838a8849a7ed85e17d602d79b334c1a70bdc4e37fb40",
+    "sbfnav/navigation.py": "6b49036ec82e13aa4fd00e32a07febf13c7940b89eaaeda2dce5f185f2cce219",
+    "sbfnav/planning_state.py": "5cfd48a89bf0807efeffc4e7dfaa3bc10b5e9a4c9ee7b5adf4cdad1bf4402370",
+    "sbfnav/runtime.py": "b7069b41f79675b02cd31ce58d85521cfcc64c4dcee74dc8645b39e3f2fe16b0",
+    "sbfnav/training_data.py": "6c13879ac5047d274635a7ced4085d8ff0a7693a79a53a1c295aee1be0724f8e",
+    "sbfnav/validation.py": "cb90531ec8b53cbf858e3cc04ba1b80e35461af4936f7e8a956a777dfe53011f",
+    "sbfnav/visualization.py": "98147b5f44037b53ae773790bbbe3968616c0df901187928177910e7ada9eaa2"
+  },
+  "data_root": "/home/20261024_1/Workspace/DATA/sbfnav-data",
+  "protocol_sha256": "73e8d667153d3dfee38f7b34905b037bd1ed6eefaf4f90b9d2739bdaf2673cdd",
+  "selection": "Seen128 SR then SPL then internal dev recall; no full split selection",
+  "frozen_at_utc": "2026-10-27T15:07:23.869300+00:00"
+}
