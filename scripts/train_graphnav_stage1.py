@@ -1,5 +1,6 @@
 """Full A/B/C epochs with strict pretrained migration, causal inputs and Seen selection."""
 import argparse
+import hashlib
 import copy
 import csv
 import json
@@ -20,6 +21,20 @@ from graphnav.stage1_checkpoint import initialize_model,module_sha,protocol,EXPE
 from graphnav.stage1_data import Stage1Dataset,collate_stage1
 from graphnav.stage1_runtime import retrieval_ids
 from graphnav.token_language import FrozenBERTTokens
+
+
+def frozen_geometry_sha(model, fusion_kind):
+    """Hash original A3 weights excluding only the intentionally trainable adapter."""
+    if fusion_kind=='original':
+        return module_sha(model.a3)
+    digest=hashlib.sha256()
+    for name,value in sorted(model.a3.state_dict().items()):
+        if name.startswith('rgb_query.'):
+            continue
+        digest.update(name.encode())
+        digest.update(str(value.dtype).encode())
+        digest.update(value.detach().cpu().contiguous().numpy().tobytes())
+    return digest.hexdigest()
 
 
 class TrainingSampler(Sampler):
@@ -131,7 +146,7 @@ def main():
     if a.init and not a.smoke:
         prior=torch.load(a.init,map_location='cpu',weights_only=True)
         if prior['args'].get('smoke'):raise ValueError('Smoke checkpoint cannot initialize full Stage1 training')
-    frozen=dict(a3=module_sha(model.a3),trajectory=module_sha(model.trajectory))
+    frozen=dict(a3=frozen_geometry_sha(model,a.fusion_kind),trajectory=module_sha(model.trajectory))
     if a.resume:
         state=torch.load(a.resume,map_location='cpu',weights_only=True)
         if state['input_fingerprint']!=fingerprint:raise ValueError('resume input SHA differs')
@@ -168,7 +183,8 @@ def main():
             record=dict(epoch=e,stage=a.stage,train=epoch(model,train,bert,device,a.stage,optimizer,scheduler,a.max_batches,teacher),
                         dev=epoch(model,validation,bert,device,a.stage,max_batches=a.max_batches,teacher=teacher))
         if a.stage in ('A','B'):
-            if module_sha(model.a3)!=frozen['a3']or module_sha(model.trajectory)!=frozen['trajectory']:raise ValueError('frozen strong baseline parameters changed')
+            if frozen_geometry_sha(model,a.fusion_kind)!=frozen['a3'] or module_sha(model.trajectory)!=frozen['trajectory']:
+                raise ValueError('frozen strong baseline parameters changed')
         state=dict(model=model.state_dict(),optimizer=optimizer.state_dict(),scheduler=scheduler.state_dict(),rng=rng_state(),epoch=e,
             args=vars(a),a3_args=a3_args,source_sha256=EXPECTED,protocol=config['protocol'],input_fingerprint=fingerprint,
             history=history+[record],best_key=list(best),validation_complete=False,provenance=provenance(),config=config)
