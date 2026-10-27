@@ -1,7 +1,7 @@
 """Run the ONE essential paired comparison: original residual vs joint RGB/geometry.
 
-Single seed; same expert-prefix cache, verified A3/head, C-stage joint
-retraining budget, original closed-loop evaluator and Seen128 episodes.
+Single seed; same expert-prefix cache, verified A3/head, ORIGINAL A3/B3/C5
+staged training protocol, original closed-loop evaluator and Seen128 episodes.
 This script is intentionally NOT a multi-seed / shuffle / zero-RGB sweep.
 CUDA, full CityNav data, pretrained model caches and original checkpoints
 must be available on the training host.
@@ -16,6 +16,7 @@ import sys
 import torch
 
 
+STAGES = (('A', 3), ('B', 3), ('C', 5))
 ARMS = (('A0_original_residual', 'original', 'graphnav-v1'),
         ('A1_joint_rgb_geometry', 'joint-rgb-geometry', 'graphnav-joint-rgb'))
 
@@ -42,12 +43,9 @@ def main():
         p.add_argument('--'+name, required=True)
     p.add_argument('--output', default='runs/joint_rgb_geometry_core_20261027')
     p.add_argument('--seed', type=int, default=0)
-    p.add_argument('--epochs', type=int, default=11)
     p.add_argument('--batch-size', type=int, default=16)
     p.add_argument('--workers', type=int, default=4)
     args = p.parse_args()
-    if args.epochs != 11:
-        raise ValueError('paired ablation protocol fixes 11 jointly optimized epochs')
     if not torch.cuda.is_available():
         raise RuntimeError('full paired training requires CUDA host with CityNav data')
     output = Path(args.output).resolve()
@@ -66,8 +64,8 @@ def main():
     protocol = dict(
         experiment='one_seed_paired_original_vs_joint_rgb_geometry',
         model='graphnav-stage1',
-        seed=args.seed, epochs=args.epochs, batch_size=args.batch_size,
-        stage='C_from_original_A3_and_original_trajectory',
+        seed=args.seed, epochs=dict(STAGES), batch_size=args.batch_size,
+        stage='original A3/B3/C5 schedule from verified A3 and original trajectory',
         feature_cache_sha256=sha(Path(args.cache)/'manifest.json'),
         original_sources_sha256=sha(args.sources),
         evaluation_split='val_seen',
@@ -84,31 +82,36 @@ def main():
     summary = {}
     for label, fusion, evaluation_model in ARMS:
         arm = output/label
-        train = arm/'train'
-        last = train/'last.pt'
-        complete = train/'complete.json'
-        best = train/'best.pt'
-        if not complete.exists():
-            if train.exists() and not last.exists():
-                raise ValueError(f'cannot safely resume partial run without last.pt: {train}')
-            command = [
-                sys.executable, '-m', 'scripts.train_graphnav_stage1',
-                '--cache', args.cache, '--sources', args.sources,
-                '--stage', 'C', '--epochs', str(args.epochs),
-                '--fusion-kind', fusion,
-                '--sbf-source', args.sbf_source, '--sbf-config', args.sbf_config,
-                '--data-root', args.data_root, '--output', str(train),
-                '--batch-size', str(args.batch_size), '--workers', str(args.workers),
-                '--seed', str(args.seed),
-            ]
-            if last.exists():
-                command.extend(['--resume', str(last)])
-            launch(command, arm/'train_console.log')
-        if not complete.exists() or not best.exists():
-            raise RuntimeError(f'training did not complete: {label}')
-        complete_data = json.loads(complete.read_text())
-        if complete_data['epochs'] != args.epochs or complete_data['smoke']:
-            raise ValueError(f'incomplete or smoke run: {label}')
+        previous = None
+        for stage, stage_epochs in STAGES:
+            train = arm/'stages'/stage
+            last = train/'last.pt'
+            complete = train/'complete.json'
+            if not complete.exists():
+                if train.exists() and not last.exists():
+                    raise ValueError(f'cannot safely resume partial run without last.pt: {train}')
+                command = [
+                    sys.executable, '-m', 'scripts.train_graphnav_stage1',
+                    '--cache', args.cache, '--sources', args.sources,
+                    '--stage', stage, '--epochs', str(stage_epochs),
+                    '--fusion-kind', fusion,
+                    '--sbf-source', args.sbf_source, '--sbf-config', args.sbf_config,
+                    '--data-root', args.data_root, '--output', str(train),
+                    '--batch-size', str(args.batch_size), '--workers', str(args.workers),
+                    '--seed', str(args.seed),
+                ]
+                if previous is not None:
+                    command.extend(['--init', str(previous)])
+                if last.exists():
+                    command.extend(['--resume', str(last)])
+                launch(command, arm/f'train_{stage}_console.log')
+            if not complete.exists() or not (train/'best.pt').exists():
+                raise RuntimeError(f'{label} stage {stage} did not complete')
+            completed = json.loads(complete.read_text())
+            if completed['epochs'] != stage_epochs or completed['smoke']:
+                raise ValueError(f'{label} stage {stage} incomplete or smoke')
+            previous = train/'best.pt'
+        best = previous  # completed and Seen-selected C-stage best checkpoint
         selected = arm/'seen128_selected'
         metrics_path = selected/'metrics.json'
         if not metrics_path.exists():
@@ -128,7 +131,7 @@ def main():
             raise ValueError(f'checkpoint/evaluation SHA mismatch: {label}')
         summary[label] = dict(
             checkpoint_sha256=sha(best), fusion_kind=fusion,
-            metrics=evaluated['metrics'],
+            completed_epochs=dict(STAGES), metrics=evaluated['metrics'],
             episode_manifest_sha256=evaluated['episode_manifest_sha256'],
         )
     a = summary[ARMS[0][0]]
