@@ -57,6 +57,17 @@ class JointRGBGeometryStage1(GraphNavStage1):
         super().configure_stage(stage)
         # The legacy residual gain is intentionally dead in this architecture.
         self.visual_gain.requires_grad_(False)
+        # During original A/B phases, freeze the geometric localizer but still
+        # train the new RGB adapter inside it (in place of the residual head).
+        self.a3.rgb_query.requires_grad_(True)
+        self.train(self.training)
+
+    def train(self, mode=True):
+        super().train(mode)
+        if mode and self.stage in ('A', 'B'):
+            self.a3.eval()  # no stochastic dropout in the frozen base
+            self.a3.rgb_query.train(True)
+        return self
 
     def forward(self, *, static_inputs, tokens, token_mask, node_emb,
                 native_text, appearance_text, roi_features, roi_valid, roi_quality,
