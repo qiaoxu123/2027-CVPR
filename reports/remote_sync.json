@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "branch": "research/local-semantic-geometry-refinement-20261027",
+  "verified_code_commit": "fa078868c6b2be9565337e3a2de8e46b5ff8c49f",
+  "release_url": "https://github.com/qiaoxu123/2027-CVPR/releases/tag/local-semantic-geometry-refinement-20261027-v0.1.1",
+  "archive_name": "local-semantic-geometry-refinement-20261027-v0.1.1.tar.zst",
+  "archive_bytes": 271025511,
+  "archive_sha256": "0cff80783b2416082e4290e48d698160737b711fbe2dac97df742a22fd737f08",
+  "github_digest_verified": true,
+  "restored_file_hashes_verified": 1393,
+  "clone_head_verified": "fa078868c6b2be9565337e3a2de8e46b5ff8c49f",
+  "restored_tests_passed": 27,
+  "restored_cached_only_optimizer_updates": 1,
+  "external_project_root_disabled": true,
+  "restoration_method": "Fresh remote code clone and local complete archive proven byte-identical to published asset by GitHub SHA256 and size; every manifest file verified",
+  "full_asset_redownload": false,
+  "redownload_note": "Slow redundant CDN transfer canceled; no claim of complete remote redownload",
+  "training_scope": "one relation epoch plus one offset epoch,162 updates; not full-budget efficacy training",
+  "correction_gate_enabled": false,
+  "external_dependencies": [
+    "raw CityNav/RGBD",
+    "generic pretrained Hugging Face cache"
+  ],
+  "rulings": [
+    "Batch8 uses observation-wise gradient accumulation; some throughput cost",
+    "External raw dataset and generic HF cache remain external; supplied feature cache supports cached-only training"
+  ],
+  "caveat": "No navigation improvement claim; independent code-review fixes verified, mandatory adversarial-review service timed out"
+}
