@@ -17,17 +17,30 @@ def module_sha(module):
     return h.hexdigest()
 
 
-def initialize_model(paths,device,init=None,model_type='original'):
+def initialize_model(paths,device,init=None,model_type='original',bootstrap=None):
     for key,sha in EXPECTED.items():
         if file_sha256(paths[key])!=sha:raise ValueError('required pretrained SHA mismatch: '+key)
     a3=torch.load(paths['a3'],map_location='cpu',weights_only=True)
     head=torch.load(paths['head'],map_location='cpu',weights_only=True)
     reference=torch.load(paths['reference'],map_location='cpu',weights_only=True)
     validate_static_transfer(a3['args'],reference['args'])
-    cache=resolve_checkpoint_resource(head['args']['cache'],paths['head'])/'manifest.json'
-    if file_sha256(cache)!=head['input_fingerprint']['cache_manifest']['sha256']:raise ValueError('original head cache provenance differs')
-    import json
-    if json.loads(cache.read_text())['protocol']['checkpoint_sha256']!=EXPECTED['reference']:raise ValueError('head original reference mismatch')
+    if bootstrap is not None:
+        # Explicit recovery from the preserved, immutable pre-training snapshot.
+        # Do not synthesize the missing historical feature-cache provenance.
+        if file_sha256(bootstrap)!='b044909700e1912a49d69551abe95b6fad22b3d0c0e8fd162d230ee6272c4f45':
+            raise ValueError('bootstrap checkpoint SHA mismatch')
+        initial=torch.load(bootstrap,map_location='cpu',weights_only=True)
+        if initial['epoch']!=0 or initial['source_sha256']!=EXPECTED:
+            raise ValueError('bootstrap initialization lineage differs')
+        for prefix,state in [('a3',a3),('trajectory',head)]:
+            stored={k[len(prefix)+1:]:v for k,v in initial['model'].items() if k.startswith(prefix+'.')}
+            if stored.keys()!=state['model'].keys() or any(not torch.equal(stored[k],v) for k,v in state['model'].items()):
+                raise ValueError('bootstrap module differs: '+prefix)
+    else:
+        cache=resolve_checkpoint_resource(head['args']['cache'],paths['head'])/'manifest.json'
+        if file_sha256(cache)!=head['input_fingerprint']['cache_manifest']['sha256']:raise ValueError('original head cache provenance differs')
+        import json
+        if json.loads(cache.read_text())['protocol']['checkpoint_sha256']!=EXPECTED['reference']:raise ValueError('head original reference mismatch')
     if head['protocol']['stop_positive_weight']!=20 or head['protocol']['observed_fraction']!=0:raise ValueError('original head input/calibration mismatch')
     if model_type not in ('original', 'joint-rgb-geometry'):
         raise ValueError('unknown Stage1 model_type')
@@ -45,6 +58,11 @@ def initialize_model(paths,device,init=None,model_type='original'):
     else:
         model.a3.load_state_dict(a3['model'], strict=True)
     model.trajectory.load_state_dict(head['model'], strict=True)
+    if bootstrap is not None:
+        incompatible = model.load_state_dict(initial['model'], strict=False)
+        expected_new = {'a3.rgb_query.0.weight','a3.rgb_query.0.bias','a3.rgb_query.1.weight'} if model_type=='joint-rgb-geometry' else set()
+        if set(incompatible.missing_keys)!=expected_new or incompatible.unexpected_keys:
+            raise ValueError('bootstrap shared initialization differs')
     if init:
         previous=torch.load(init,map_location='cpu',weights_only=True)
         expected_name = 'graphnav-joint-rgb-geometry-v1' if model_type == 'joint-rgb-geometry' else 'graphnav-v1-stage1'

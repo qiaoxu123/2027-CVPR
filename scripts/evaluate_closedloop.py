@@ -25,13 +25,20 @@ def sha(path):
 
 def validate_stage1_frozen_evaluation(args):
     """Require completed Seen selection and unchanged controls for held-out splits."""
-    if args.split not in ('val_unseen', 'test_unseen'):
+    if args.split not in ('val_unseen', 'test_unseen') and not args.frozen_final_candidate:
         return
     if not args.frozen_final_candidate:
         raise ValueError('Stage1 held-out evaluation requires a Seen-selected frozen manifest')
     frozen = json.loads(Path(args.frozen_final_candidate).read_text())
     if frozen.get('checkpoint_sha256') != sha(args.checkpoint) or not frozen.get('all_stages_complete'):
         raise ValueError('Held-out checkpoint differs from completed, frozen Stage1 selection')
+    if frozen.get('sbf_config_sha256') and frozen['sbf_config_sha256']!=sha(args.config):
+        raise ValueError('frozen controller config changed')
+    if frozen.get('sbf_source_sha256'):
+        current={str(p.relative_to(args.sbf_source)):sha(p) for p in sorted(Path(args.sbf_source).glob('sbfnav/**/*.py'))}
+        if current!=frozen['sbf_source_sha256']:raise ValueError('frozen controller source changed')
+    if frozen.get('data_root') and str(Path(args.data_root).resolve())!=frozen['data_root']:
+        raise ValueError('frozen data root changed')
     epochs = frozen.get('completed_epochs', {})
     if any(epochs.get(stage, 0) < minimum for stage, minimum in [('A', 3), ('B', 3), ('C', 5)]):
         raise ValueError('Full Stage1 A/B/C training required before held-out evaluation')
@@ -87,8 +94,9 @@ def main():
     args = parser.parse_args()
     if args.model in ('graphnav-v1','graphnav-joint-rgb'):
         args.stop_threshold=.3;args.head_execution='guarded-blend';args.explore_candidates=0
+        validate_stage1_frozen_evaluation(args)
         if args.model=='graphnav-v1':
-            validate_stage1_frozen_evaluation(args)
+            pass
         elif args.split in ('val_unseen','test_unseen'):
             if not args.frozen_final_candidate:raise ValueError('joint RGB unseen requires frozen Seen-selected manifest')
             frozen=json.loads(Path(args.frozen_final_candidate).read_text())
@@ -229,23 +237,25 @@ def main():
                 GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
+            retrieval_row=None
             if args.model in ('graphnav-v1','graphnav-joint-rgb'):
                 query=(record.map_name,record.instruction)
+                row={}
+                for label,points in [('initial_static',diagnostics[0]['static_top16_world_xy']),
+                                     ('dynamic_first',diagnostics[0]['belief_top16_world_xy']),
+                                     ('dynamic_final',diagnostics[-1]['belief_top16_world_xy'])]:
+                    distance=np.linalg.norm(np.asarray(points)-record.target_position[:2],axis=-1)
+                    row[label+'_NE_m']=float(distance[0])
+                    for k in (1,4,8,16):row[label+f'_R@{k}/20m']=float(distance[:k].min()<=20)
+                row['dynamic_first_step']=diagnostics[0]['observation_step']
+                row['dynamic_final_step']=diagnostics[-1]['observation_step']
+                row['history_unique_views']=diagnostics[-1]['history_unique_views']
+                row['history_duplicates']=diagnostics[-1]['history_duplicates']
+                visual=diagnostics[-1]['appearance_top1_world_xy']
+                row['appearance_spatial_r1_at20m']=float(np.linalg.norm(np.asarray(visual)-record.target_position[:2])<=20) if visual is not None else 0.
+                retrieval_row=row
                 if query not in retrieval_queries:
                     retrieval_queries.add(query)
-                    row={}
-                    for label,points in [('initial_static',diagnostics[0]['static_top16_world_xy']),
-                                         ('dynamic_first',diagnostics[0]['belief_top16_world_xy']),
-                                         ('dynamic_final',diagnostics[-1]['belief_top16_world_xy'])]:
-                        distance=np.linalg.norm(np.asarray(points)-record.target_position[:2],axis=-1)
-                        row[label+'_NE_m']=float(distance[0])
-                        for k in (1,4,8,16):row[label+f'_R@{k}/20m']=float(distance[:k].min()<=20)
-                    row['dynamic_first_step']=diagnostics[0]['observation_step']
-                    row['dynamic_final_step']=diagnostics[-1]['observation_step']
-                    row['history_unique_views']=diagnostics[-1]['history_unique_views']
-                    row['history_duplicates']=diagnostics[-1]['history_duplicates']
-                    visual=diagnostics[-1]['appearance_top1_world_xy']
-                    row['appearance_spatial_r1_at20m']=float(np.linalg.norm(np.asarray(visual)-record.target_position[:2])<=20) if visual is not None else 0.
                     retrieval_rows.append(row)
             if args.model=='joint-active':
                 active_counts.update(d['active_action'] for d in diagnostics if 'active_action' in d)
@@ -263,7 +273,9 @@ def main():
             rows.append(metrics); maps[record.map_name].append(metrics); terminations[termination]+=1
             stream.write(json.dumps(dict(index=record.index,episode_id=record.episode_id,
                 map_name=record.map_name,poses=poses.tolist(),termination=termination,
-                metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
+                metrics=metrics,goal_retrieval=retrieval_row,
+                public_query_sha256=hashlib.sha256((record.map_name+'\n'+record.instruction).encode()).hexdigest(),
+                decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
     report = dict(model=('Joint A3 + observed appearance/history + trained trajectory/Stop; active sensing opt-in' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'

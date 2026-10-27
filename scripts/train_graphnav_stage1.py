@@ -99,7 +99,7 @@ def epoch(model,loader,bert,device,stage,optimizer=None,scheduler=None,max_batch
 def main():
     p=argparse.ArgumentParser()
     for key in ('cache','sources','stage','output','sbf-source','sbf-config','data-root'):p.add_argument('--'+key,required=True)
-    p.add_argument('--init');p.add_argument('--resume');p.add_argument('--epochs',type=int,required=True)
+    p.add_argument('--bootstrap-checkpoint');p.add_argument('--bert-cache');p.add_argument('--init');p.add_argument('--resume');p.add_argument('--epochs',type=int,required=True)
     p.add_argument('--fusion-kind',choices=('original','joint-rgb-geometry'),default='original',
                    help='Original independent visual residual or integrated RGB/geometric goal localizer')
     p.add_argument('--batch-size',type=int,default=16);p.add_argument('--workers',type=int,default=4);p.add_argument('--seed',type=int,default=0)
@@ -109,7 +109,7 @@ def main():
     if out.exists() and not a.resume:raise ValueError('refusing stage overwrite')
     out.mkdir(parents=True,exist_ok=True);random.seed(a.seed);np.random.seed(a.seed);torch.manual_seed(a.seed)
     source=json.loads(Path(a.sources).read_text());paths={k:v['path']for k,v in source.items()};device=torch.device('cuda')
-    model,a3_args=initialize_model(paths,device,a.init,model_type=a.fusion_kind);model.configure_stage(a.stage)
+    model,a3_args=initialize_model(paths,device,a.init,model_type=a.fusion_kind,bootstrap=a.bootstrap_checkpoint);model.configure_stage(a.stage)
     data=Stage1Dataset(a.cache)
     if data.manifest['smoke_only'] and not a.smoke:raise ValueError('limited features cannot be full training')
     if data.manifest['protocol']['a3_sha256']!=EXPECTED['a3']:raise ValueError('feature geometry was not validated for Epoch14')
@@ -142,6 +142,8 @@ def main():
     steps=math.ceil(len(sampler)/a.batch_size)*a.epochs;warmup=max(1,int(.05*steps))
     scheduler=torch.optim.lr_scheduler.LambdaLR(optimizer,lambda s:(s+1)/warmup if s<warmup else .5*(1+math.cos(math.pi*min(1,(s-warmup)/max(steps-warmup,1)))))
     fingerprint=dict(cache_manifest=file_sha256(Path(a.cache)/'manifest.json'),sources=source,sbf_config=file_sha256(a.sbf_config),init=file_sha256(a.init)if a.init else None)
+    if a.bootstrap_checkpoint:fingerprint['bootstrap_checkpoint']=file_sha256(a.bootstrap_checkpoint)
+    if a.bert_cache:fingerprint['bert_cache']=file_sha256(a.bert_cache)
     history=[];best=(-1e30,-1e30,-1e30);start=1;pending=None;resume_rng=None
     if a.init and not a.smoke:
         prior=torch.load(a.init,map_location='cpu',weights_only=True)
@@ -157,8 +159,11 @@ def main():
         if not state['validation_complete']:pending=history[-1];history=history[:-1];start=state['epoch']
     bert=FrozenBERTTokens(a3_args['text_backbone'],max_length=a3_args.get('max_text_length',96))
     baseline=torch.load(paths['a3'],map_location='cpu',weights_only=True)
-    train_cache=baseline['input_fingerprint']['train_bert_cache']['path'];seen_cache=baseline['input_fingerprint']['seen_bert_cache']['path']
-    bert.load_cache(train_cache);embeddings=bert.cache.copy();bert.load_cache(seen_cache);bert.cache.update(embeddings);del embeddings
+    if a.bert_cache:
+        bert.load_cache(a.bert_cache)
+    else:
+        train_cache=baseline['input_fingerprint']['train_bert_cache']['path'];seen_cache=baseline['input_fingerprint']['seen_bert_cache']['path']
+        bert.load_cache(train_cache);embeddings=bert.cache.copy();bert.load_cache(seen_cache);bert.cache.update(embeddings);del embeddings
     if a.stage=='C' and a.fusion_kind=='joint-rgb-geometry':
         from types import SimpleNamespace
         from graphnav.full_experiment import new_model
@@ -175,6 +180,8 @@ def main():
         actual_trainable_parameters=sum(p.numel()for p in model.parameters()if p.requires_grad),frozen_bert_parameters=sum(p.numel()for p in bert.model.parameters()))
     import yaml
     (out/'config.yaml').write_text(yaml.safe_dump(config,allow_unicode=True,sort_keys=False))
+    from torch.utils.tensorboard import SummaryWriter
+    writer=SummaryWriter(str(out/'tensorboard'))
     for e in range(start,a.epochs+1):
         generator.manual_seed(a.seed+e);sampler.base.epoch=e
         reusing_pending=pending is not None
@@ -210,7 +217,12 @@ def main():
         rows=[dict(epoch=h['epoch'],stage=h['stage'],**{split+'_'+k:v for split in ('train','dev','seen128')for k,v in h.get(split,{}).items()if isinstance(v,(float,int))})for h in history]
         with (out/'training.csv').open('w')as f:
             w=csv.DictWriter(f,fieldnames=list(dict.fromkeys(k for r in rows for k in r)));w.writeheader();w.writerows(rows)
+        for split in ('train','dev','seen128'):
+            for key,value in record.get(split,{}).items():
+                if isinstance(value,(int,float)):writer.add_scalar(split+'/'+key,value,e)
+        writer.flush()
         print(json.dumps(record),flush=True)
+    writer.close()
     atomic_json(dict(stage=a.stage,epochs=a.epochs,smoke=a.smoke,train_states=len(sampler),dev_states=len(dev_indices),best_key=list(best),frozen_integrity=frozen),out/'complete.json')
 
 

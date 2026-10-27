@@ -64,3 +64,39 @@ python -m compileall -q graphnav scripts
 This runs only focused CPU tests (automated by the branch-only GitHub Actions workflow). They cannot replace the needed real CityNav CUDA smoke, memory profiling and full-training integrity checks.
 
 The formal paper's archived checkpoint/results are a descriptive external reference only. The causal architecture comparison is **A0 vs A1 after matched retraining**, not A1 vs the original archived result, because stochastic optimization and model selection can differ.
+
+## Local execution extension (2026-10-27)
+
+The local runner now completes **both** seed-0 arms before final selection/freezing,
+then evaluates every episode of Val-Seen (2470) and Val-Unseen (2697), in that order,
+using the same frozen checkpoints. Seen128 remains development selection only.
+No Test-Unseen or additional ablation is scheduled.
+
+Server checkout: `/home/20261024_1/Workspace/.workspace/joint-rgb-geometry-retrain-20261027`.
+Run `bash scripts/run_core_pair_local.sh`; `--smoke-only` executes only the CPU tests
+and real CUDA A/B/C smoke for both architectures. The entrypoint uses the existing
+`graphnav` Conda Python directly and takes an exclusive execution lock.
+
+The migrated original frame cache is incomplete. The runner instead uses the
+already fully reconstructed original source-data cache at
+`GraphNav/data/rebuilt_stage1_20261025/frames` (87512 states, 21878 episodes), with
+all chunk hashes checked on every stage entry. Reconstruction provenance and
+exact source-weight checks are saved in `reports/core_pair_20261027/input_verification.json`.
+Original A3/head/reference files retain the required SHA values. The preserved
+epoch-zero snapshot (SHA `b044909700e1912a49d69551abe95b6fad22b3d0c0e8fd162d230ee6272c4f45`)
+provides a strict recovery path when the historical head-cache manifest is absent;
+its A3 and trajectory tensors must exactly equal the separately verified source
+weights. Both arms receive all 112 identical common initial tensors. A1 adds only
+its RGB query adapter. The regenerated frozen BERT cache is fingerprinted and
+must match the original model revision/token protocol.
+
+Each stage writes TensorBoard events, training.csv, history.json, console logs,
+last/best checkpoints and complete.json. A single `frozen_pair.json` fixes both
+selected checkpoint hashes and controls before any full evaluation starts.
+Per-episode predictions preserve goal retrieval, public-query hash and source
+identity for paired statistics. `scripts.summarize_core_pair` validates complete
+counts, checkpoint hashes and paired manifests before producing results.json,
+metrics.csv, by_map.csv and RESULTS.md. It reports paired episode bootstrap CIs,
+exact SR McNemar, query-cluster SR bootstrap and query-level retrieval CIs.
+All rates are fractions; NE is meters. A single seed does not measure
+training-seed uncertainty. Large files remain in ignored server `runs/`.

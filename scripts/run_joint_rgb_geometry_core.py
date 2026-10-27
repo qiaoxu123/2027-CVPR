@@ -12,6 +12,8 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from datetime import datetime, timezone
+from graphnav.checkpointing import atomic_json
 
 import torch
 
@@ -37,10 +39,17 @@ def launch(command, log):
         subprocess.run(command, stdout=out, stderr=subprocess.STDOUT, check=True)
 
 
+def candidate_dev_recall(state):
+    # best.pt can contain later history when resuming old runs. Use its saved selection key.
+    return float(state['best_key'][2])
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('cache','sources','sbf-source','sbf-config','data-root'):
         p.add_argument('--'+name, required=True)
+    p.add_argument('--bootstrap-checkpoint')
+    p.add_argument('--bert-cache')
     p.add_argument('--output', default='runs/joint_rgb_geometry_core_20261027')
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--batch-size', type=int, default=16)
@@ -58,6 +67,8 @@ def main():
         if not path.exists():
             raise FileNotFoundError(f'{role}: {path}')
     manifest = json.loads((Path(args.cache)/'manifest.json').read_text())
+    if sum(c['rows'] for c in manifest['chunks'])!=87512 or len(manifest['protocol']['episode_indices'])!=21878:
+        raise ValueError('core pair requires all 87512 original source states')
     if not manifest.get('complete') or manifest.get('smoke_only'):
         raise ValueError('full original Stage1 expert-prefix cache required')
 
@@ -68,8 +79,13 @@ def main():
         stage='original A3/B3/C5 schedule from verified A3 and original trajectory',
         feature_cache_sha256=sha(Path(args.cache)/'manifest.json'),
         original_sources_sha256=sha(args.sources),
-        evaluation_split='val_seen',
-        episode_count=128,
+        sbf_config_sha256=sha(args.sbf_config),
+        sbf_source_sha256={str(p.relative_to(args.sbf_source)):sha(p) for p in sorted(Path(args.sbf_source).glob('sbfnav/**/*.py'))},
+        data_root=str(Path(args.data_root).resolve()),
+        selection_split='val_seen128',
+        final_splits=dict(val_seen=2470,val_unseen=2697),
+        bootstrap_sha256=sha(args.bootstrap_checkpoint) if args.bootstrap_checkpoint else None,
+        bert_cache_sha256=sha(args.bert_cache) if args.bert_cache else None,
         other_controls='original GraphNav-V1; no extra instance detector',
     )
     identity = output/'paired_protocol.json'
@@ -79,6 +95,7 @@ def main():
     else:
         identity.write_text(json.dumps(protocol, indent=2))
 
+    if args.seed != 0:raise ValueError('core pair requires seed 0')
     summary = {}
     for label, fusion, evaluation_model in ARMS:
         arm = output/label
@@ -100,6 +117,8 @@ def main():
                     '--batch-size', str(args.batch_size), '--workers', str(args.workers),
                     '--seed', str(args.seed),
                 ]
+                for flag in ('bootstrap_checkpoint','bert_cache'):
+                    if getattr(args,flag):command.extend(['--'+flag.replace('_','-'),getattr(args,flag)])
                 if previous is not None:
                     command.extend(['--init', str(previous)])
                 if last.exists():
@@ -111,6 +130,9 @@ def main():
             if completed['epochs'] != stage_epochs or completed['smoke']:
                 raise ValueError(f'{label} stage {stage} incomplete or smoke')
             previous = train/'best.pt'
+    # Complete BOTH arms before selecting/freezing either final checkpoint.
+    for label, fusion, evaluation_model in ARMS:
+        arm = output/label
         candidates = []
         for stage in ('B', 'C'):
             checkpoint = arm/'stages'/stage/'best.pt'
@@ -132,12 +154,12 @@ def main():
             if evaluated['checkpoint_sha256'] != sha(checkpoint):
                 raise ValueError(f'checkpoint/evaluation SHA mismatch: {label} {stage}')
             state = torch.load(checkpoint, map_location='cpu', weights_only=True)
-            dev_recall = float(state['history'][-1]['dev']['belief_R@1/20m'])
+            dev_recall = candidate_dev_recall(state)
             metric = evaluated['metrics']
             candidates.append(((metric['SR'], metric['SPL'], dev_recall), stage, checkpoint, evaluated))
         _, selected_stage, best, evaluated = max(candidates, key=lambda item: item[0])
         summary[label] = dict(
-            selected_stage=selected_stage, checkpoint_sha256=sha(best),
+            selected_stage=selected_stage, checkpoint=str(best.resolve()), checkpoint_sha256=sha(best),
             fusion_kind=fusion, completed_epochs=dict(STAGES),
             metrics=evaluated['metrics'],
             episode_manifest_sha256=evaluated['episode_manifest_sha256'],
@@ -146,13 +168,43 @@ def main():
     b = summary[ARMS[1][0]]
     if a['episode_manifest_sha256'] != b['episode_manifest_sha256']:
         raise ValueError('paired arms have different episode manifests')
-    delta = {key: b['metrics'][key] - a['metrics'][key]
-             for key in ('SR','SPL','OSR','NE','nDTW','sDTW')
-             if key in a['metrics'] and key in b['metrics']}
-    final = dict(protocol=protocol, arms=summary, joint_minus_original=delta,
-                 scope='single seed Seen128 only: not heldout proof or full-split result')
-    (output/'core_pair_results.json').write_text(json.dumps(final, indent=2))
-    print(json.dumps(final, indent=2))
+    frozen_path=output/'frozen_pair.json'
+    frozen=dict(arms=summary,completed_epochs=dict(STAGES),all_stages_complete=True,
+                joint_training_complete=True,visual_control='real',history_control='checkpoint',
+                stop_threshold=.3,head_execution='guarded-blend',active_observation=False,
+                sbf_config_sha256=protocol['sbf_config_sha256'],sbf_source_sha256=protocol['sbf_source_sha256'],
+                data_root=protocol['data_root'],protocol_sha256=sha(identity),selection='Seen128 SR then SPL then internal dev recall; no full split selection')
+    if frozen_path.exists():
+        old=json.loads(frozen_path.read_text())
+        if {k:v for k,v in old.items() if k!='frozen_at_utc'}!=frozen:
+            raise ValueError('refuse to change previously frozen pair')
+    else:
+        frozen['frozen_at_utc']=datetime.now(timezone.utc).isoformat()
+        atomic_json(frozen,frozen_path)
+    for label,fusion,evaluation_model in ARMS:
+        selected=summary[label];arm=output/label
+        manifest=dict(frozen,**{k:v for k,v in selected.items() if k not in frozen},model=evaluation_model)
+        arm_freeze=arm/'frozen_final_candidate.json'
+        if not arm_freeze.exists():atomic_json(manifest,arm_freeze)
+        if json.loads(arm_freeze.read_text())['checkpoint_sha256']!=selected['checkpoint_sha256']:
+            raise ValueError('frozen arm checkpoint differs')
+    # No full evaluation or Unseen access occurs until the pair is frozen above.
+    for split,count in (('val_seen',2470),('val_unseen',2697)):
+        for label,fusion,evaluation_model in ARMS:
+            arm=output/label;selected=summary[label];destination=arm/('full_'+split)
+            report=destination/'metrics.json'
+            if not report.exists():
+                if destination.exists():raise ValueError('partial full evaluation; inspect/archive before retry: '+str(destination))
+                launch([sys.executable,'-m','scripts.evaluate_closedloop','--model',evaluation_model,
+                        '--sbf-source',args.sbf_source,'--config',args.sbf_config,'--data-root',args.data_root,
+                        '--checkpoint',selected['checkpoint'],'--split',split,
+                        '--frozen-final-candidate',str(arm/'frozen_final_candidate.json'),
+                        '--output',str(destination)],arm/('eval_full_'+split+'.log'))
+            result=json.loads(report.read_text())
+            if result['metrics']['episodes']!=count or result['checkpoint_sha256']!=selected['checkpoint_sha256']:
+                raise ValueError('full evaluation count/checkpoint mismatch')
+    from scripts.summarize_core_pair import summarize
+    summarize(output)
 
 
 if __name__ == '__main__':

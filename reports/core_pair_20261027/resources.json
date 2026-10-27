@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-10-27T20:31:49.431473",
+  "os": {
+    "system": "Linux",
+    "release": "7.0.0-38-generic",
+    "version": "#38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2",
+    "machine": "x86_64",
+    "python_version": "3.10.22"
+  },
+  "cpu": {
+    "physical_cores": 12,
+    "logical_cores": 24,
+    "max_frequency_mhz": 4954.565000000001,
+    "architecture": "x86_64",
+    "processor": "x86_64",
+    "current_frequency_mhz": 3247.8354166666663
+  },
+  "memory": {
+    "total_gb": 125.7,
+    "available_gb": 118.66,
+    "used_gb": 7.04,
+    "percent_used": 5.6,
+    "swap_total_gb": 8.0,
+    "swap_available_gb": 5.81
+  },
+  "disk": {
+    "path": "/home/20261024_1/Workspace/.workspace/joint-rgb-geometry-retrain-20261027",
+    "total_gb": 1831.67,
+    "available_gb": 993.64,
+    "used_gb": 744.91,
+    "percent_used": 42.8
+  },
+  "gpu": {
+    "nvidia_gpus": [],
+    "amd_gpus": [],
+    "apple_silicon": null,
+    "total_gpus": 0,
+    "available_backends": []
+  },
+  "recommendations": {
+    "parallel_processing": {
+      "strategy": "high_parallelism",
+      "suggested_workers": 22,
+      "libraries": [
+        "joblib",
+        "multiprocessing",
+        "dask"
+      ]
+    },
+    "memory_strategy": {
+      "strategy": "memory_abundant",
+      "note": "Can load most datasets into memory"
+    },
+    "gpu_acceleration": {
+      "available": false,
+      "note": "No GPU detected, use CPU-based libraries"
+    },
+    "large_data_handling": {
+      "strategy": "disk_abundant",
+      "note": "Sufficient space for large intermediate files"
+    }
+  },
+  "verified_torch_cuda": {
+    "available": true,
+    "torch": "2.8.0+cu128",
+    "device": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+    "total_memory_bytes": 101962612736
+  },
+  "resource_script_gpu_detection_note": "Resource helper reported no GPU; direct nvidia-smi and torch CUDA verify RTX PRO 6000 available."
+}
