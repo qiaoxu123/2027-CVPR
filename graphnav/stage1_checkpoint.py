@@ -17,7 +17,7 @@ def module_sha(module):
     return h.hexdigest()
 
 
-def initialize_model(paths,device,init=None):
+def initialize_model(paths,device,init=None,model_type='original'):
     for key,sha in EXPECTED.items():
         if file_sha256(paths[key])!=sha:raise ValueError('required pretrained SHA mismatch: '+key)
     a3=torch.load(paths['a3'],map_location='cpu',weights_only=True)
@@ -29,17 +29,27 @@ def initialize_model(paths,device,init=None):
     import json
     if json.loads(cache.read_text())['protocol']['checkpoint_sha256']!=EXPECTED['reference']:raise ValueError('head original reference mismatch')
     if head['protocol']['stop_positive_weight']!=20 or head['protocol']['observed_fraction']!=0:raise ValueError('original head input/calibration mismatch')
-    model=GraphNavStage1(new_model(SimpleNamespace(**a3['args']),device)).to(device)
+    if model_type not in ('original', 'joint-rgb-geometry'):
+        raise ValueError('unknown Stage1 model_type')
+    if model_type == 'joint-rgb-geometry':
+        from .joint_rgb_geometry import JointRGBGeometryStage1
+        cls = JointRGBGeometryStage1
+    else:
+        cls = GraphNavStage1
+    model=cls(new_model(SimpleNamespace(**a3['args']),device)).to(device)
     model.a3.load_state_dict(a3['model'],strict=True);model.trajectory.load_state_dict(head['model'],strict=True)
     if init:
         previous=torch.load(init,map_location='cpu',weights_only=True)
-        if previous['protocol']['name']!='graphnav-v1-stage1' or previous['source_sha256']!=EXPECTED:raise ValueError('Stage1 checkpoint initialization lineage differs')
+        expected_name = 'graphnav-joint-rgb-geometry-v1' if model_type == 'joint-rgb-geometry' else 'graphnav-v1-stage1'
+        if previous['protocol']['name']!=expected_name or previous['source_sha256']!=EXPECTED:raise ValueError('Stage1 checkpoint initialization lineage differs')
         model.load_state_dict(previous['model'],strict=True)
     return model,a3['args']
 
 
-def protocol(backbone_revision,stage):
-    return dict(name='graphnav-v1-stage1',backbone='google/siglip2-large-patch16-384',backbone_revision=backbone_revision,
+def protocol(backbone_revision,stage,model_type='original'):
+    if model_type not in ('original', 'joint-rgb-geometry'):raise ValueError('invalid experiment model_type')
+    name='graphnav-joint-rgb-geometry-v1' if model_type=='joint-rgb-geometry' else 'graphnav-v1-stage1'
+    return dict(name=name,backbone='google/siglip2-large-patch16-384',backbone_revision=backbone_revision,
         stage=stage,use_history=stage in ('B','C'),active_observation=False,new_gat=False,relation_loss=False,
         residual_bound=.5,stop_threshold=.3,stop_positive_weight=20.,execution='guarded-blend',horizon=20,
         horizontal_step_m=50.,vertical_step_m=10.,freeze_bert=True,freeze_siglip=True,
