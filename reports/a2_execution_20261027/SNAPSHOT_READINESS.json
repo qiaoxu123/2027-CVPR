@@ -1,5 +1,5 @@
 {
-  "status": "implementation_and_full_snapshot_audit_passed_cuda_pending",
+  "status": "full20plus5_training_started_after_cpu_data_and_cuda_gates",
   "cpu_tests": 322,
   "independent_review": "approve; findings=[]; 14 independent CPU regressions and git diff --check passed",
   "actual_adversarial_review": "invoked through codex-companion; remote connection reconnecting; see server log adversarial_snapshot.log",
@@ -19,5 +19,18 @@
     "train": 5600,
     "dev": 485,
     "calibration": 470
-  }
+  },
+  "cuda_smoke": "informative_train_cuda_backward_passed; 4 actual derived-TRAIN views; finite nonzero language/rank/trust/offset gradients",
+  "training_service": "graphnav-a2-train-collected-20261028.service",
+  "training_cache": "runs/a2_waldo_landmark_20261027/collected_snapshot",
+  "training_output": "runs/a2_waldo_landmark_20261027/training_collected",
+  "training_log": "runs/a2_waldo_landmark_20261027/training_collected.log",
+  "service_stage": "first ranking epoch active",
+  "training_started": true,
+  "first_batch": {
+    "views": 800,
+    "rank_views": 155,
+    "loss": 1.9972733418643474
+  },
+  "monitor_interval_seconds": 300
 }
