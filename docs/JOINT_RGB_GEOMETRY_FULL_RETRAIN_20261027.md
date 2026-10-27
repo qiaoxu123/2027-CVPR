@@ -1,6 +1,6 @@
 # Joint RGB–Geometry Full Retraining Ablation (2026-10-27)
 
-Status: **protocol and implementation specification only; NOT implemented, trained or experimentally verified**.
+Status: **core A0/A1 model, training and evaluation code implemented on research branch**. Focused CPU checks have been submitted to GitHub Actions; no complete remote GPU training or navigation result is claimed. Other interventions remain planned only.
 
 ## 0. Authoritative baseline and identity
 
@@ -41,7 +41,7 @@ Bt = softmax(logits_0 ... logits_783)  # NO separate RGB residual
 - Do NOT fine-tune frozen BERT/SigLIP2: "full retraining" means all **trainable goal-localizer, new fusion/quality modules and trajectory/Stop parameters** are optimized jointly, not reopening pretrained foundation encoders.
 - Start both matched arms from the **same verified** A3 Seed1 Epoch14 and original trajectory/Stop weights; initialize new RGB-fusion layers randomly with a fixed seed. Do NOT initialize the new model from the final 00f2acc0 checkpoint.
 - Full/restart training, not a frozen-base one- or two-epoch adapter. No oracle target inputs, GT-boxes or additional WALDO supervision.
-- Paper's A3/B3/C5 staged optimization has early frozen phases. To test the user's requested **joint full retraining from the outset**, train **both matched arms** (original separate-residual vs feature-level joint-fusion) with A3 + their RGB components + Trajectory/Stop trainable over the same 11-epoch budget; use matched seed(s), effective batch, LR schedule, optimization steps, observations and selected losses. Log any intentional loss modification explicitly, ideally keeping all meaningful goal/belief/visual-ranking/trajectory/Stop weights and supervision identical.
+- **Keep the paper's A3/B3/C5 schedule exactly** for both matched arms (3+3+5 epochs). In A/B freeze the original A3 geometry layers and trajectory/Stop, but train the arm-specific visual fusion parameterization (original residual or new pre-attention RGB adapter); stage B also trains history. In C unfreeze A3 geometry and trajectory/Stop while retaining frozen BERT/SigLIP2. Use identical sample cache, seed, batches, learning rates for common modules, optimization steps and supervision. The new adapter occupies the original visual LR group, not the frozen geometric LR group during A/B.
 - Auxiliary visual ranking losses must not silently become a different task: if the original matcher-specific loss cannot be applied identically to a branch-free architecture, define an equivalent supervised candidate-discrimination auxiliary signal for BOTH matched arms and report the difference from the archived formal objective.
 - Keep initial `L_static` geometry-only (B0) and `L_belief` on fused Bt with the same ground-truth goal location; preserve original 20m legal target, waypoint/Stop teacher labels, stop pos weight 20, `guarded-blend` and 0.3 stop threshold.
 - Use the existing complete ~87,512 expert-prefix state cache if hash/protocol checks pass (original ~83,140 train / ~4,372 internal dev), respecting the original query-group split. No hidden Unseen selection. Recompute trainable A3 on each step; **do not reuse a `base_field` that blocks A3 gradients**.
@@ -52,8 +52,8 @@ Bt = softmax(logits_0 ... logits_783)  # NO separate RGB residual
 | Arm | Initialization/training | RGB mechanism |
 | --- | --- | --- |
 | P0 archive | Frozen archived formal checkpoint, report only | original separate residual; context/reference |
-| A0 paired-original | Verified original A3 + controller, 11-epoch joint full retrain | original residual |
-| A1 **paired-joint** | Exactly matched A0 initialization, steps and training | RGB integrated in full candidate–landmark localizer, no post-hoc residual |
+| A0 paired-original | Verified original A3 + controller, paper's A3/B3/C5 full retrain | original residual |
+| A1 **paired-joint** | Paper's A3/B3/C5 budget and matched initial A3/controller | RGB integrated in full candidate–landmark localizer, no post-hoc residual |
 | A1-zero | Fixed A1 weights; inference-only control | zero current+history RGB features, preserve ROI validity/quality |
 | A1-shuffle | Fixed A1 weights; inference-only control | shuffle supported ROI feature–candidate association within scale, preserve masks and pose |
 | A1-current-only | Fixed A1 weights; inference-only control | no history, same current image |
@@ -76,8 +76,8 @@ If budget is tight, prioritize A0 and A1 paired runs, one seed first; then multi
 
 1. Add `graphnav/joint_rgb_geometry.py` or a strictly opt-in extension of `FullTokenGeometryLocalizer`; preserve `geometry` and the original forward API defaults.
 2. Add separate `JointRGBGeometryStage1` model wrapper and checkpoint identity; no change to original archive loading behavior.
-3. Extend `scripts/train_graphnav_stage1.py` via new entrypoint or experiment-specific runner for paired 11-epoch joint optimization; preserve exact current/history data extraction.
+3. Extend `scripts/train_graphnav_stage1.py` with opt-in `--fusion-kind` and use `scripts/run_joint_rgb_geometry_core.py` to execute matched A3/B3/C5 schedules; preserve exact current/history extraction.
 4. Add `JointRGBGeometryPolicy` + explicit evaluation model argument to the shared `scripts/evaluate_closedloop.py`; do not change original `graphnav-v1` execution path.
-5. Write and run tests before committing a "ready-to-train" label, then run full GPU training on the data-host machine. This branch currently contains the protocol only.
+5. The branch contains code and focused tests, but remote GPU/data-host execution is still required. The single-seed A0/A1 experiment is the ONLY active arm; zero/shuffle/current-only and extra seeds are deferred.
 
 This experiment is **city-scale grid-candidate RGB fusion**, not instance-level box detection, 3D reconstruction, 384×384 goal-grid retraining, or a new controller.
