@@ -60,3 +60,12 @@ def test_candidate_trust_uses_verified_box_labels_without_claiming_view_absence(
     grad=out['candidate_match_logits'].grad
     assert grad[:,0].abs().sum()>0 and grad[:,1].abs().sum()>0
     assert (grad[:,2:]==0).all()
+
+
+def test_candidate_trust_and_local_offset_use_landmark_geometry():
+    net=LandmarkBeliefNetwork(text_dim=12,vision_dim=16,hidden=16,heads=2).eval()
+    inputs=sample();before=net(**inputs)
+    inputs['pair_geometry'][:,0,:,0]+=2
+    after=net(**inputs)
+    assert not torch.allclose(before['candidate_match_logits'][:,0],after['candidate_match_logits'][:,0])
+    assert not torch.allclose(before['offset'][:,0],after['offset'][:,0])

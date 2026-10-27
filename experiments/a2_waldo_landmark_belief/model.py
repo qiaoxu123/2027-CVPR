@@ -46,9 +46,15 @@ class LandmarkBeliefNetwork(nn.Module):
         pair = torch.cat((geometry, alignment[...,None], mismatch[...,None]), -1)
         scores, pair_scores, reliable = self.scorer(box_rgb, box_valid, context, refs, pair, pair_valid)
         box = self.scorer.box(box_rgb.float())
-        ref_weights = refs.float() / refs.sum(-1,keepdim=True).clamp_min(1)
-        sentence = (context * ref_weights[...,None]).sum(1)
-        joint = torch.cat((box, sentence[:,None].expand(-1,box.shape[1],-1)), -1)
+        # Trust and local offsets must see the same language/geometric pair
+        # evidence as ranking. A visual+sentence-only confidence cannot check
+        # whether a visually plausible car satisfies its landmark relation.
+        active=pair_valid.bool() & box_valid[:,:,None].bool() & refs[:,None,:].bool()
+        weights=pair_scores.softmax(-1)*active
+        weights=weights/weights.sum(-1,keepdim=True).clamp_min(1e-8)
+        pair_embedding=torch.tanh(box[:,:,None]+context[:,None]+self.scorer.geometry(pair))
+        relation_context=(pair_embedding*weights[...,None]).sum(-2)
+        joint = torch.cat((box,relation_context), -1)
         offset = self.offset(joint).tanh() * offset_limit.float()
         candidate_match = self.match(joint).squeeze(-1)
         winner=scores.argmax(-1,keepdim=True)

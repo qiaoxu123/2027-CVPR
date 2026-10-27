@@ -1,0 +1,39 @@
+{
+  "scope": "Training/queue implementation review; no claim of completed training or model efficacy",
+  "status": "reviewed_cpu_gates_passed_updated_cuda_pending",
+  "cpu_tests": 311,
+  "a2_tests": 39,
+  "config": {
+    "seed": 0,
+    "batch_size": 8,
+    "workers": 2,
+    "lr": 0.0003,
+    "weight_decay": 0.01,
+    "rank_epochs": 20,
+    "refine_epochs": 5,
+    "gradient_clip": 5.0,
+    "selection": "ranking: MRR then dev loss; refinement: MRR then offset MAE then dev loss",
+    "rank_loss_weight": 1.0,
+    "direction_weight": 0.2,
+    "distance_weight": 0.2,
+    "trust_weight": 0.2,
+    "offset_weight": 0.25
+  },
+  "tests_log_sha256": "92b277ac67b73cc46e24aba61638b9d1f140ca43c21fcba41ba1759f69ae00f5",
+  "model_code_sha256": "d3869e9ac70f154c11f91fdfc0aa8883c8f5e41acc43bedd152c774be0da51b9",
+  "review": {
+    "verdict": "approve",
+    "mode": "independent read-only CPU adversarial review",
+    "actual_plugin": "invoked; training runtime reported workspace routing discovery timeout; logs retained",
+    "fixed_findings": [
+      "Final-epoch history and TensorBoard recovery",
+      "Best alias written ahead of last checkpoint",
+      "GPU lock inherited by children after waiter death",
+      "Reachable offset head CUDA preflight coverage"
+    ]
+  },
+  "updated_cuda_preflight_pending": true,
+  "formal_training_started": false,
+  "calibration_pending": true,
+  "full_benchmark_pending": true
+}

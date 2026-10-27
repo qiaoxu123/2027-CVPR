@@ -11,6 +11,7 @@ Scope: only the requested A2 seed-0 model, frozen archived A0 including original
 6. Per-map/paired SR, OSR, SPL, NE, nDTW, sDTW, False-Stop and Recall; repair/break/fallback, candidate coverage, latency and visual cases. Final A0/A1 and A0/A2 report, curves, provenance. Push code and small reports to A2 branch; leave weights/cache server-side.
 
 ## Current authoritative state
-- A1 done; A2 source audit CPU process launched 2026-10-28.
-- New protocol/mentions regressions: 14 passing. Dataset/detector audit and CUDA integration pending; no A2 full training claimed.
+- A1 complete; A2 full source audit and corrected TRAIN association audit passed. Full extraction is running in `graphnav-a2-cache-20261028.service` with the only GPU workload.
+- 311 CPU tests passed. Original frozen-A0 CUDA parity and initial informative-ranking smoke passed. The updated geometry-conditioned trust/offset model needs its new full-cache CUDA gate after extraction exits.
+- Fixed20+5 trainer and CPU-only sequential waiter reviewed. Pin/schedule the waiter, then implement independent calibration, internal diagnostics and the full evaluator while the cache is live. No second GPU job and no full-training claim yet.
 - ETA 2–4 days is preliminary scheduling only, pending measured extraction throughput.
