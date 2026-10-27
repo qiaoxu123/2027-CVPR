@@ -1,0 +1,6 @@
+#!/home/20261024_1/miniconda3/envs/graphnav/bin/python
+import sys
+from ultralytics.cfg import entrypoint
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(entrypoint())

@@ -1,0 +1,121 @@
+{
+  "enabled": false,
+  "alpha": 0.0,
+  "threshold": 0.5,
+  "temperature": 0.5,
+  "checkpoint_sha256": "ee49159941893b3542412903eb3bc085d07892575a5d2d55efa3f0d6df94bfe4",
+  "config_sha256": "467e5da0a3d8debf50ef9de63e08abf5ee1082712b680d5449f99987d977a4de",
+  "calibration_positive_views": 8,
+  "calibration_negative_views": 22,
+  "candidate_summary": {
+    "views": 123,
+    "eligible": true,
+    "ranked_views": 8,
+    "rank1": 0.625,
+    "mrr": 0.6681818181818182,
+    "xy_error": 20.013244152069092,
+    "new_errors": 0,
+    "repairs": 3,
+    "mean_loss": 0.1652119500748056
+  },
+  "probes": [
+    {
+      "threshold": 0.5,
+      "alpha": 0.0,
+      "gains": 0,
+      "losses": 0,
+      "xy_error": 21.2953633331671,
+      "updates": 0
+    },
+    {
+      "threshold": 0.5,
+      "alpha": 0.1,
+      "gains": 2,
+      "losses": 0,
+      "xy_error": 20.827159997893542,
+      "updates": 96
+    },
+    {
+      "threshold": 0.5,
+      "alpha": 0.25,
+      "gains": 5,
+      "losses": 3,
+      "xy_error": 21.341502274924178,
+      "updates": 96
+    },
+    {
+      "threshold": 0.5,
+      "alpha": 0.5,
+      "gains": 4,
+      "losses": 10,
+      "xy_error": 22.908407769552092,
+      "updates": 96
+    },
+    {
+      "threshold": 0.7,
+      "alpha": 0.0,
+      "gains": 0,
+      "losses": 0,
+      "xy_error": 21.2953633331671,
+      "updates": 0
+    },
+    {
+      "threshold": 0.7,
+      "alpha": 0.1,
+      "gains": 2,
+      "losses": 0,
+      "xy_error": 20.827159997893542,
+      "updates": 96
+    },
+    {
+      "threshold": 0.7,
+      "alpha": 0.25,
+      "gains": 5,
+      "losses": 3,
+      "xy_error": 21.341502274924178,
+      "updates": 96
+    },
+    {
+      "threshold": 0.7,
+      "alpha": 0.5,
+      "gains": 4,
+      "losses": 10,
+      "xy_error": 22.908407769552092,
+      "updates": 96
+    },
+    {
+      "threshold": 0.9,
+      "alpha": 0.0,
+      "gains": 0,
+      "losses": 0,
+      "xy_error": 21.2953633331671,
+      "updates": 0
+    },
+    {
+      "threshold": 0.9,
+      "alpha": 0.1,
+      "gains": 2,
+      "losses": 0,
+      "xy_error": 20.827159997893542,
+      "updates": 96
+    },
+    {
+      "threshold": 0.9,
+      "alpha": 0.25,
+      "gains": 5,
+      "losses": 3,
+      "xy_error": 21.341502274924178,
+      "updates": 96
+    },
+    {
+      "threshold": 0.9,
+      "alpha": 0.5,
+      "gains": 4,
+      "losses": 10,
+      "xy_error": 22.908407769552092,
+      "updates": 96
+    }
+  ],
+  "reason": "insufficient evidence or no safe measured gain: exact main-model fallback",
+  "scope": "train-internal calibration only; XY improvements here are calibration, not heldout results"
+}
