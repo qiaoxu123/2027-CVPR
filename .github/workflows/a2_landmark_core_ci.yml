@@ -1,0 +1,28 @@
+name: A2 Landmark Relation CPU Checks
+
+on:
+  push:
+    branches:
+      - research/a2-waldo-landmark-belief-20261027
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install PyTorch CPU
+        run: python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Install A2 standalone test dependencies
+        run: python -m pip install numpy opencv-python-headless pytest
+      - name: Check Python syntax
+        run: python -m compileall -q experiments/a2_waldo_landmark_belief tests/test_a2_landmark_relations.py tests/test_a2_landmark_mentions.py
+      - name: Test A2 landmark and conservative fusion invariants
+        run: python -m pytest -q tests/test_a2_landmark_relations.py tests/test_a2_landmark_mentions.py
