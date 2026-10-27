@@ -1,9 +1,9 @@
 {
-  "version": 1,
+  "version": 2,
   "repository": "qiaoxu123/2027-CVPR",
   "branch": "research/local-semantic-geometry-refinement-20261027",
-  "release_tag": "local-semantic-geometry-refinement-20261027-v0.1",
-  "archive": "local-semantic-geometry-refinement-20261027.tar.zst",
+  "release_tag": "local-semantic-geometry-refinement-20261027-v0.1.1",
+  "archive": "local-semantic-geometry-refinement-20261027-v0.1.1.tar.zst",
   "scope": "complete current implementation, runtime snapshots, all860 final cached views, final two-stage pilot weights and verification outputs",
   "exclusions": [
     "Original external CityNav/RGBD dataset",
@@ -19,23 +19,23 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 135,
-      "sha256": "6e592bbda521a4cf3ca5bc21837586f0011507df31dc77a310d70ae168f17622"
+      "bytes": 138,
+      "sha256": "cd32a3d5542e2618c410985210645cfbbc6a00a5583b46a81279b352f00990b7"
     },
     {
       "path": "CHANGELOG.md",
-      "bytes": 894,
-      "sha256": "025f1e3fc287f981b21c92005df81fb01bd3881992df00f9b4507d8dba65b477"
+      "bytes": 1238,
+      "sha256": "29479cc06c5009bbd0cb26d74c85aeac8dea9a5124d3c3298eba72c93bce0cc2"
     },
     {
       "path": "LEDGER.md",
-      "bytes": 2553,
-      "sha256": "08addcafaf6243e4bb67911dc40ee0d9d7745500ac466e578d2c35c6b8b5a9de"
+      "bytes": 2837,
+      "sha256": "2bcca92b7118120024136063090d2db6c1feb3240a6a7f94b84689230f2131db"
     },
     {
       "path": "README.md",
-      "bytes": 6010,
-      "sha256": "efa7afa65c7cc199c84d8a93250a17be57019e52c5a43d5e5d9cdf945ff76ced"
+      "bytes": 6158,
+      "sha256": "f6bcca50c96c13f9a358a9160e1437928093cfa7f66f38441f3f53530d191271"
     },
     {
       "path": "assets/main_checkpoint.pt",
@@ -4394,8 +4394,8 @@
     },
     {
       "path": "reports/STATUS.md",
-      "bytes": 2659,
-      "sha256": "af28f3cab901ba5f50223759a1d08e77628376eddb580747374f2204b417c8e7"
+      "bytes": 2689,
+      "sha256": "661e860aa7729a07bf01f5d96222783bc03b059da2185d603a29ca5c5ab99317"
     },
     {
       "path": "reports/ablations.json",
@@ -4499,8 +4499,8 @@
     },
     {
       "path": "reports/tests.log",
-      "bytes": 1987,
-      "sha256": "7ede1b9a392b7c6c4c5d13f8513aded327c2f6dd172f124b7155aafc130a8aaa"
+      "bytes": 2074,
+      "sha256": "74999cd872bf9815a0165f4658fa8440ce66b16ba35da1dbfa9ea9bf0e48d78f"
     },
     {
       "path": "reports/training.json",
@@ -5693,6 +5693,81 @@
       "sha256": "33fcd0cf42023fabc1cff93e8769f949e3f92a39219a8b7de157fc612a1de37a"
     },
     {
+      "path": "runtime/waldo_vendor/ultralytics/data/__init__.py",
+      "bytes": 702,
+      "sha256": "2ac57fffcc1644dce377e8947885f9ecfbed99eb76f0c4b18c7a86d6ec7e6283"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/annotator.py",
+      "bytes": 3152,
+      "sha256": "29e4b719c23f8039a3621624772d988903b1e16a9ad07ed71208a0dc153d989e"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/augment.py",
+      "bytes": 148749,
+      "sha256": "8a2ed527f8059502657cff5ed5545a8a664ddf2b2b121a60736124d4aa475484"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/base.py",
+      "bytes": 25018,
+      "sha256": "35d254f9be67afeb3fe6a7bf6743d59eb8b191967f18eea11a4d1267fab46be5"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/build.py",
+      "bytes": 22073,
+      "sha256": "16f13c60db87c051aec086eae82263dc7227207a8c2326c0365f013471c2609f"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/converter.py",
+      "bytes": 52701,
+      "sha256": "132871c377275302830ad976d9c11107f19e842e9ad1ff784e6362182fe38580"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/dataset.py",
+      "bytes": 62870,
+      "sha256": "31041c96064ee78feb8485fff9e3df080f714d59abe606ed983f0aed399b6e3c"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/loaders.py",
+      "bytes": 37121,
+      "sha256": "b8c0182f3aadccd06659b0717a4be3a09e2cba5c08e801a4b60751b1f854546e"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/scripts/download_weights.sh",
+      "bytes": 595,
+      "sha256": "d32f17b59c4eaeeedd5538570c55172c706e20280e22a64d530a722f8461ea58"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/scripts/get_coco.sh",
+      "bytes": 1768,
+      "sha256": "52e26925ea37a90a531d520d78ea663f43589a0f0f844144dc0f09de32ab9cfc"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/scripts/get_coco128.sh",
+      "bytes": 650,
+      "sha256": "aa645097f84e2abb1d1eb4eb9f242e1481f4d680f3de57dacf5dfc3a019f2edf"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/scripts/get_imagenet.sh",
+      "bytes": 1705,
+      "sha256": "86be361f5e9b338ee24f6eeb812ecca44a3e19e3990185105e0af40767309f8f"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/split.py",
+      "bytes": 5737,
+      "sha256": "d55bd63b7fe860e0a1084e4f794fd82d2624f876bc0176e62c937b81e20220c3"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/split_dota.py",
+      "bytes": 13670,
+      "sha256": "faf8771ed11f1208e4ebb6dbe2cbbb611755648212413417c821ce612aea6386"
+    },
+    {
+      "path": "runtime/waldo_vendor/ultralytics/data/utils.py",
+      "bytes": 49124,
+      "sha256": "6e375b84c07d1cdacac15915132bc075d3655ee668a68f5dd295c64aa2216cf7"
+    },
+    {
       "path": "runtime/waldo_vendor/ultralytics/engine/__init__.py",
       "bytes": 70,
       "sha256": "966e8c72415808f4dba88a17ef0d2cfdd6b176335e05e296e835e9a6fd7e4143"
@@ -6871,6 +6946,11 @@
       "path": "scripts/visualize.py",
       "bytes": 4991,
       "sha256": "6df62fd8ed31f95059c8cfbbba734079337a395a290bf5747660ec75f5ae267b"
+    },
+    {
+      "path": "tests/test_bundle.py",
+      "bytes": 643,
+      "sha256": "ad6d357af95b15110535afbb986282fe74ac55908f81c859633d396b812867e2"
     },
     {
       "path": "tests/test_core.py",

@@ -57,10 +57,12 @@
 在该分支根目录恢复完整资产：
 
 ```bash
-gh release download local-semantic-geometry-refinement-20261027-v0.1 --repo qiaoxu123/2027-CVPR --pattern local-semantic-geometry-refinement-20261027.tar.zst
-tar --zstd -xf local-semantic-geometry-refinement-20261027.tar.zst
+gh release download local-semantic-geometry-refinement-20261027-v0.1.1 --repo qiaoxu123/2027-CVPR --pattern local-semantic-geometry-refinement-20261027-v0.1.1.tar.zst
+tar --zstd -xf local-semantic-geometry-refinement-20261027-v0.1.1.tar.zst
 ```
 
 Release说明记录压缩包SHA256；SYNC_MANIFEST.json逐项记录解包后的文件哈希。资产包也含代码快照，可在独立目录完整恢复；旧版调试缓存和过期smoke权重只在本机归档，不作为当前可用版本发布。
+
+使用v0.1.1或之后的包；初始v0.1漏打Ultralytics的data子包，已由恢复测试发现并修复，不能独立恢复。
 
 仅用已同步特征训练可使用 `scripts/train.py --cached-only --output runs/new_training`；这仍核验缓存/配置、主模型、WALDO及源码哈希，但不打开未参与该次训练的外部原始annotation。重建观测/闭环评测需要设置 `CITYNAV_DATA_ROOT`、`CITYNAV_RGBD_ROOT`，必要时设置 `CITYNAV_PROJECT_ROOT`；加载冻结编码器仍需原Hugging Face缓存。缓存条目支持换机器后的本地路径重定位，不能绕过内容校验。
