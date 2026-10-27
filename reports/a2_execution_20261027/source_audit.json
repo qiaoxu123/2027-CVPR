@@ -1,0 +1,56 @@
+{
+  "status": "source_audit_complete_detector_funnel_pending",
+  "episodes": 21878,
+  "target_instances": 3941,
+  "split_counts": {
+    "train": {
+      "episodes": 17407,
+      "reference_queries": 27040,
+      "reference_records": 61188,
+      "linked_references": 14493,
+      "token_aligned_references": 12230,
+      "episodes_with_link": 10184,
+      "truncated_instructions": 8,
+      "target_type:Building": 6469,
+      "target_type:Car": 9367,
+      "target_type:Ground": 985,
+      "target_type:Parking": 586,
+      "target_instances": 3136
+    },
+    "calibration": {
+      "episodes": 2133,
+      "reference_queries": 3427,
+      "reference_records": 7648,
+      "linked_references": 1861,
+      "token_aligned_references": 1573,
+      "episodes_with_link": 1265,
+      "truncated_instructions": 2,
+      "target_type:Building": 829,
+      "target_type:Car": 1074,
+      "target_type:Parking": 101,
+      "target_type:Ground": 129,
+      "target_instances": 386
+    },
+    "dev": {
+      "episodes": 2338,
+      "reference_queries": 3602,
+      "reference_records": 8454,
+      "linked_references": 1796,
+      "token_aligned_references": 1522,
+      "episodes_with_link": 1280,
+      "truncated_instructions": 1,
+      "target_type:Building": 970,
+      "target_type:Car": 1200,
+      "target_type:Ground": 112,
+      "target_type:Parking": 56,
+      "target_instances": 419
+    }
+  },
+  "group_disjoint": true,
+  "source_manifest_sha256": "1550841badcb0d353f75967962ad531eac85f1d4aac263587cf0ddabc9926e9c",
+  "seconds": 17.547977278009057,
+  "limitations": [
+    "Detector coverage and reliable positive/negative associations not yet measured.",
+    "Public name homonyms and unresolved aliases remain masked; no fuzzy identity assignment."
+  ]
+}

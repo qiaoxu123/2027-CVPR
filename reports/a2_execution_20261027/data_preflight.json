@@ -1,0 +1,32 @@
+{
+  "status": "passed_for_full_cache_not_full_training",
+  "at_utc": "2026-10-27T16:59:12.317433+00:00",
+  "unit_tests": {
+    "passed": 300,
+    "warning_count": 1,
+    "log_sha256": "c22f723acf6d2733dc1abaadfaea28005b5d9043e375627146256cdb71a52ac3"
+  },
+  "cuda_smoke_sha256": "86f91fd6bde934811d6a5e7c7b80de69b78154db2a9123a8e206896c683fa34b",
+  "informative_cuda_sha256": "313b45dc5f229821e5d8701c70215cd4bc51d4c75d791488fe7afe6284d7f85e",
+  "source_audit_sha256": "aed93fd5858091bbddc0b64a1520e437e403018cb2e734c6ef4d90316359eb84",
+  "train_smoke_sha256": "8d2ed9ebf3c4ffefb146218369a66a223b4f6d8b147e00969857668a47111e19",
+  "independent_review": {
+    "verdict": "approve for corrected implementation only",
+    "train_views": 192,
+    "accepted_car_anchors": 2432,
+    "actual_position_distance_over_1m": 0,
+    "multiple_anchors_in_box": 0,
+    "anchor_outside_box": 0,
+    "wrong_anchor_coordinates": 0,
+    "visual_cases_reviewed": 24
+  },
+  "actual_adversarial_plugin": "invoked twice; workspace routing discovery timed out; logs retained server-side; independent read-only reviewer applied adversarial prompt",
+  "remaining": [
+    "full cache and funnel audit",
+    "full20+5 training",
+    "internal-dev checkpoint selection",
+    "independent calibration and freeze",
+    "full A0/A2 Seen2470 and Unseen2697",
+    "full reports, curves and publication"
+  ]
+}

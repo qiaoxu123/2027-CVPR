@@ -1,6 +1,6 @@
 # A2: Language-Landmark-Conditioned WALDO Box Relations for Belief Refinement
 
-**Status (2026-10-27):** design and standalone, testable pair-relation/fusion primitives; **no fully integrated CUDA experiment or claimed navigation gain**. This is a separate branch off main. The frozen A0 formal GraphNav-V1 checkpoint, legacy evaluator, and A1 experiments must not be changed.
+**Status (2026-10-28):** opt-in frozen-A0 integration, full TRAIN source audit, actual-observation CUDA/parity and informative-ranking backward gates passed; full feature extraction is running. **Full 20+5 training, calibration and benchmark evaluation remain pending; no navigation gain is claimed.** This is a separate branch off main. The frozen A0 formal GraphNav-V1 checkpoint, legacy evaluator, and A1 experiments must not be changed. See `docs/superpowers/plans/2026-10-28-a2-execution.md` and `reports/a2_execution_20261027/data_preflight.json`.
 
 ## Research question
 

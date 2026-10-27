@@ -38,3 +38,15 @@ def test_missing_or_unlinked_mention_does_not_invent_landmark():
     )
     assert valid.tolist() == [False, False]
     assert not mask.any()
+
+
+def test_partial_truncated_landmark_mention_fails_closed():
+    text='north of Central Library'
+    mask,valid=landmark_mention_spans(text,[(0,0),(0,5),(6,8),(9,16),(0,0)],[dict(name='Central Library',linked=True)])
+    assert not valid.any() and not mask.any()
+
+
+def test_unicode_matching_preserves_original_offset_positions():
+    text='near Straße Church'
+    mask,valid=landmark_mention_spans(text,[(0,4),(5,11),(12,18)],[dict(name='Straße Church',linked=True)])
+    assert valid.tolist()==[True] and mask.tolist()==[[False,True,True]]

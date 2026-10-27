@@ -33,24 +33,25 @@ def landmark_mention_spans(
         raise ValueError("fast-tokenizer character offsets required [T,2]")
     if not np.issubdtype(pairs.dtype, np.integer):
         raise ValueError("token offsets must be integers")
-    if np.any(pairs < 0) or np.any(pairs[:, 1] < pairs[:, 0]):
+    if np.any(pairs < 0) or np.any(pairs[:, 1] < pairs[:, 0]) or np.any(pairs > len(instruction)):
         raise ValueError("invalid token offsets")
     t, l = len(pairs), len(references)
     masks = np.zeros((l, t), bool)
     eligible = np.zeros(l, bool)
-    lower = instruction.casefold()
     candidate_spans = []
     for j, reference in enumerate(references):
         if not reference.get("linked", False):
             candidate_spans.append([])
             continue
         aliases = list(reference.get("aliases") or []) + [reference.get("name", "")]
-        aliases = sorted({str(v).strip().casefold() for v in aliases if v and str(v).strip()},
+        aliases = sorted({str(v).strip() for v in aliases if v and str(v).strip()},
                          key=lambda a: (-len(a), a))
         matches = []
         for alias in aliases:
             regex = r"(?<!\w)" + re.escape(alias) + r"(?!\w)"
-            matches.extend((m.start(), m.end()) for m in re.finditer(regex, lower))
+            # Match the original string: casefold can change character counts
+            # (e.g. German sharp s), invalidating tokenizer offsets.
+            matches.extend((m.start(), m.end()) for m in re.finditer(regex, instruction, re.IGNORECASE))
         # Only maximal matched spans; shorter aliases nested in a longer name
         # cannot masquerade as a separate landmark mention.
         maximal = [span for span in sorted(set(matches), key=lambda p: (p[0], -(p[1]-p[0])))
@@ -73,7 +74,12 @@ def landmark_mention_spans(
             continue
         for a, b in spans:
             overlap = (pairs[:, 1] > a) & (pairs[:, 0] < b) & (pairs[:, 1] > pairs[:, 0])
-            if overlap.any():
+            covered = np.zeros(b-a, dtype=bool)
+            for start, end in pairs[overlap]:
+                covered[max(start,a)-a:min(end,b)-a] = True
+            required = np.array([not ch.isspace() for ch in instruction[a:b]], dtype=bool)
+            # A truncated multiword name must never become a verified mention.
+            if overlap.any() and covered[required].all():
                 masks[j] |= overlap
         eligible[j] = masks[j].any()
     return masks, eligible
