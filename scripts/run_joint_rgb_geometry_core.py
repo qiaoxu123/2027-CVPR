@@ -39,6 +39,10 @@ def launch(command, log):
         subprocess.run(command, stdout=out, stderr=subprocess.STDOUT, check=True)
 
 
+def scheduled_arms(a1_only):
+    return ARMS[1:] if a1_only else ARMS
+
+
 def candidate_dev_recall(state):
     # best.pt can contain later history when resuming old runs. Use its saved selection key.
     return float(state['best_key'][2])
@@ -48,6 +52,8 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ('cache','sources','sbf-source','sbf-config','data-root'):
         p.add_argument('--'+name, required=True)
+    p.add_argument('--a1-only',action='store_true',help='User-authorized A1-only training; A0 stays an archived reference')
+    p.add_argument('--a0-reference-root')
     p.add_argument('--bootstrap-checkpoint')
     p.add_argument('--bert-cache')
     p.add_argument('--output', default='runs/joint_rgb_geometry_core_20261027')
@@ -57,6 +63,8 @@ def main():
     args = p.parse_args()
     if not torch.cuda.is_available():
         raise RuntimeError('full paired training requires CUDA host with CityNav data')
+    arms=scheduled_arms(args.a1_only)
+    if args.a1_only and not args.a0_reference_root:raise ValueError('A1-only reporting requires archived A0 reference')
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     source = json.loads(Path(args.sources).read_text())
@@ -73,7 +81,7 @@ def main():
         raise ValueError('full original Stage1 expert-prefix cache required')
 
     protocol = dict(
-        experiment='one_seed_paired_original_vs_joint_rgb_geometry',
+        experiment=('a1_only_archived_A0_reference' if args.a1_only else 'one_seed_paired_original_vs_joint_rgb_geometry'),
         model='graphnav-stage1',
         seed=args.seed, epochs=dict(STAGES), batch_size=args.batch_size,
         stage='original A3/B3/C5 schedule from verified A3 and original trajectory',
@@ -87,6 +95,8 @@ def main():
         bootstrap_sha256=sha(args.bootstrap_checkpoint) if args.bootstrap_checkpoint else None,
         bert_cache_sha256=sha(args.bert_cache) if args.bert_cache else None,
         other_controls='original GraphNav-V1; no extra instance detector',
+        trained_arms=[arm[0]for arm in arms],
+        a0_reference_root=str(Path(args.a0_reference_root).resolve())if args.a0_reference_root else None,
     )
     identity = output/'paired_protocol.json'
     if identity.exists():
@@ -97,7 +107,7 @@ def main():
 
     if args.seed != 0:raise ValueError('core pair requires seed 0')
     summary = {}
-    for label, fusion, evaluation_model in ARMS:
+    for label, fusion, evaluation_model in arms:
         arm = output/label
         previous = None
         for stage, stage_epochs in STAGES:
@@ -130,8 +140,8 @@ def main():
             if completed['epochs'] != stage_epochs or completed['smoke']:
                 raise ValueError(f'{label} stage {stage} incomplete or smoke')
             previous = train/'best.pt'
-    # Complete BOTH arms before selecting/freezing either final checkpoint.
-    for label, fusion, evaluation_model in ARMS:
+    # Complete every scheduled training arm before final checkpoint selection.
+    for label, fusion, evaluation_model in arms:
         arm = output/label
         candidates = []
         for stage in ('B', 'C'):
@@ -164,9 +174,7 @@ def main():
             metrics=evaluated['metrics'],
             episode_manifest_sha256=evaluated['episode_manifest_sha256'],
         )
-    a = summary[ARMS[0][0]]
-    b = summary[ARMS[1][0]]
-    if a['episode_manifest_sha256'] != b['episode_manifest_sha256']:
+    if len(summary)==2 and summary[ARMS[0][0]]['episode_manifest_sha256']!=summary[ARMS[1][0]]['episode_manifest_sha256']:
         raise ValueError('paired arms have different episode manifests')
     frozen_path=output/'frozen_pair.json'
     frozen=dict(arms=summary,completed_epochs=dict(STAGES),all_stages_complete=True,
@@ -181,16 +189,16 @@ def main():
     else:
         frozen['frozen_at_utc']=datetime.now(timezone.utc).isoformat()
         atomic_json(frozen,frozen_path)
-    for label,fusion,evaluation_model in ARMS:
+    for label,fusion,evaluation_model in arms:
         selected=summary[label];arm=output/label
         manifest=dict(frozen,**{k:v for k,v in selected.items() if k not in frozen},model=evaluation_model)
         arm_freeze=arm/'frozen_final_candidate.json'
         if not arm_freeze.exists():atomic_json(manifest,arm_freeze)
         if json.loads(arm_freeze.read_text())['checkpoint_sha256']!=selected['checkpoint_sha256']:
             raise ValueError('frozen arm checkpoint differs')
-    # No full evaluation or Unseen access occurs until the pair is frozen above.
+    # No full evaluation or Unseen access occurs until scheduled checkpoints are frozen above.
     for split,count in (('val_seen',2470),('val_unseen',2697)):
-        for label,fusion,evaluation_model in ARMS:
+        for label,fusion,evaluation_model in arms:
             arm=output/label;selected=summary[label];destination=arm/('full_'+split)
             report=destination/'metrics.json'
             if not report.exists():
@@ -204,7 +212,7 @@ def main():
             if result['metrics']['episodes']!=count or result['checkpoint_sha256']!=selected['checkpoint_sha256']:
                 raise ValueError('full evaluation count/checkpoint mismatch')
     from scripts.summarize_core_pair import summarize
-    summarize(output)
+    summarize(output,reference_root=args.a0_reference_root)
 
 
 if __name__ == '__main__':

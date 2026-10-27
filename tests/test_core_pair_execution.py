@@ -62,3 +62,9 @@ def test_report_formats_absent_policy_stop_rate():
     from scripts.summarize_core_pair import format_metric
     assert format_metric(None)=='N/A'
     assert format_metric(.5)=='0.500000'
+
+
+def test_a1_only_schedule_does_not_include_A0():
+    from scripts.run_joint_rgb_geometry_core import scheduled_arms
+    assert [a[0]for a in scheduled_arms(True)]==['A1_joint_rgb_geometry']
+    assert len(scheduled_arms(False))==2

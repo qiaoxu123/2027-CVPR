@@ -100,3 +100,22 @@ metrics.csv, by_map.csv and RESULTS.md. It reports paired episode bootstrap CIs,
 exact SR McNemar, query-cluster SR bootstrap and query-level retrieval CIs.
 All rates are fractions; NE is meters. A single seed does not measure
 training-seed uncertainty. Large files remain in ignored server `runs/`.
+
+## Superseding user instruction: train A1 only
+
+On 2026-10-27 the user explicitly cancelled A0 retraining and requested A1 only.
+A0 was stopped during Stage A epoch 2; the completed epoch 1 snapshots and logs
+remain in the original core-pair run directory and are ineligible as a completed
+retraining result. `reports/core_pair_20261027/A0_retraining_cancelled.json` records
+this scope change.
+
+`bash scripts/run_a1_local.sh` executes A1 seed 0, full A3/B3/C5, with the same
+verified cache/initialization/control settings and successful smoke evidence.
+Outputs are isolated in `runs/joint_rgb_geometry_A1_20261027`. The A1-only runner
+removes all A0 retraining dependencies. It freezes A1 using Seen128/internal dev
+and then evaluates complete Val-Seen2470 and Val-Unseen2697. The preserved formal
+A0 full-split archive is read only during final reporting, after A1 is frozen and
+evaluated. Comparisons explicitly describe A0 as an archived reference, not a
+matched-retraining causal comparison. Its checkpoint, dataset and paired episode
+manifest hashes must match. Archived per-episode retrieval is recovered from saved
+rollout diagnostics and private metric labels only after rollout.

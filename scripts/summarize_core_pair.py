@@ -75,16 +75,51 @@ def retrieval_summary(rows):
     return dict(unique_queries=len(unique),**{k:float(np.mean([v[k]for v in unique.values()]))for k in next(iter(unique.values()))if 'R@' in k or k.endswith('NE_m')})
 
 
-def summarize(root):
+def normalize_archived_rows(rows,split,root):
+    import hashlib
+    import sys
+    protocol=json.loads((root/'paired_protocol.json').read_text())
+    config=next((root/'A1_joint_rgb_geometry/stages/A').glob('config.yaml'))
+    import yaml
+    settings=yaml.safe_load(config.read_text())['args']
+    sys.path.insert(0,settings['sbf_source'])
+    from sbfnav.dataset import CityNavDataset
+    dataset=CityNavDataset(settings['data_root'],split,version='processed_citynav')
+    for row in rows:
+        record=dataset[int(row['index'])]
+        if list(record.episode_id)!=row['episode_id'] or record.map_name!=row['map_name']:
+            raise ValueError('historical source episode differs')
+        row['public_query_sha256']=hashlib.sha256((record.map_name+'\n'+record.instruction).encode()).hexdigest()
+        diagnostics=row['step_diagnostics'];retrieval={}
+        for label,points in [('initial_static',diagnostics[0]['static_top16_world_xy']),('dynamic_first',diagnostics[0]['belief_top16_world_xy']),('dynamic_final',diagnostics[-1]['belief_top16_world_xy'])]:
+            distance=np.linalg.norm(np.asarray(points)-record.target_position[:2],axis=-1)
+            retrieval[label+'_NE_m']=float(distance[0])
+            for k in (1,4,8,16):retrieval[label+f'_R@{k}/20m']=float(distance[:k].min()<=20)
+        row['goal_retrieval']=retrieval
+
+
+def summarize(root,reference_root=None):
     root=Path(root);frozen=json.loads((root/'frozen_pair.json').read_text());result=dict(frozen_pair_sha256=file_sha256(root/'frozen_pair.json'),frozen_at_utc=frozen['frozen_at_utc'],seed=0,splits={},statistics='10000 paired episode bootstrap samples, seed 0; SR additionally query-cluster bootstrap and exact two-sided McNemar. Single training seed; episode uncertainty is not training-seed uncertainty.')
+    reference=Path(reference_root)if reference_root else None
+    if reference is not None:
+        reference_frozen=json.loads((reference/'frozen_final_candidate.json').read_text())
+        result['comparison_scope']='A1 retrained seed0 vs archived formal A0; not matched retraining or causal architecture evidence'
+        result['archived_A0_checkpoint_sha256']=reference_frozen['checkpoint_sha256']
+        result['archived_A0_root']=str(reference.resolve())
     tables=[]
     for split,count in (('val_seen',2470),('val_unseen',2697)):
         reports=[];rows=[]
         for arm in ARMS:
-            folder=root/arm/('full_'+split);report=json.loads((folder/'metrics.json').read_text());reports.append(report)
+            historical=reference is not None and arm==ARMS[0]
+            folder=(reference/('full_seen'if split=='val_seen'else 'full_unseen'))if historical else root/arm/('full_'+split)
+            report=json.loads((folder/'metrics.json').read_text());reports.append(report)
             records=[json.loads(line)for line in (folder/'predictions.jsonl').read_text().splitlines()];rows.append(records)
             if len(records)!=count or len({r['index']for r in records})!=count or report['metrics']['episodes']!=count:raise ValueError('incomplete full evaluation')
-            if report['checkpoint_sha256']!=frozen['arms'][arm]['checkpoint_sha256']:raise ValueError('evaluation changed frozen checkpoint')
+            expected=reference_frozen['checkpoint_sha256']if historical else frozen['arms'][arm]['checkpoint_sha256']
+            if report['checkpoint_sha256']!=expected:raise ValueError('evaluation changed frozen checkpoint')
+            if historical:
+                normalize_archived_rows(records,split,root)
+        if sorted(reports[0]['input_sha256'].values())!=sorted(reports[1]['input_sha256'].values()):raise ValueError('historical and new evaluation data SHA differ')
         if reports[0]['episode_manifest_sha256']!=reports[1]['episode_manifest_sha256']:raise ValueError('paired manifests differ')
         statistics=paired_statistics(*rows)
         maps={}
@@ -105,7 +140,7 @@ def summarize(root):
                 map_rows.append(dict(split=split,map=name,episodes=record['episodes'],metric=key,A0=record['A0'][key],A1=record['A1'][key],**record['paired'][key]))
     with (report_dir/'by_map.csv').open('w')as f:
         w=csv.DictWriter(f,fieldnames=list(map_rows[0]));w.writeheader();w.writerows(map_rows)
-    lines=['# Core RGB fusion pair, seed 0','',f"Both A3/B3/C5 training runs completed. Checkpoints frozen at {frozen['frozen_at_utc']} before full evaluation.",'','| Split | Metric | A0 | A1 | A1−A0 | Paired 95% CI |','|---|---|---:|---:|---:|---|']
+    lines=['# Core RGB fusion pair, seed 0','',(f"A1 completed A3/B3/C5 and was frozen at {frozen['frozen_at_utc']} before full evaluation. A0 is the existing formal archive; this is not a matched-retraining comparison." if reference is not None else f"Both A3/B3/C5 training runs completed. Checkpoints frozen at {frozen['frozen_at_utc']} before full evaluation."),'','| Split | Metric | A0 | A1 | A1−A0 | Paired 95% CI |','|---|---|---:|---:|---:|---|']
     for row in tables:
         lines.append(f"| {row['split']} | {row['metric']} | {format_metric(row['A0'])} | {format_metric(row['A1'])} | {format_metric(row['A1_minus_A0'],signed=True)} | {row['paired_bootstrap_95ci']} |")
     lines+=['','## Target localization recall (unique public queries)','','| Split | Belief | K | A0 | A1 | A1−A0 | Paired query 95% CI |','|---|---|---:|---:|---:|---:|---|']

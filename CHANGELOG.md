@@ -9,3 +9,7 @@
 - Single training seed; bootstrap episode intervals do not measure training-seed uncertainty. Dataset duplicates are retained; SR also reports query-cluster intervals.
 - Goal recall deduplicates map+instruction and distinguishes initial static, first observed and final observed belief. False-Stop uses policy stops as denominator, with episode fraction reported separately.
 - Checkpoints, TensorBoard events and raw trajectories remain on the local server under runs/joint_rgb_geometry_core_20261027.
+
+### User Scope Update
+- A0 retraining cancelled at the user's request during Stage A epoch 2; preserve its epoch 1 checkpoint/logs without treating it as full training.
+- Complete only A1 seed 0 A3/B3/C5 and both full validation splits. Use existing formal A0 solely as an explicitly labeled archived reference after A1 selection is frozen.
