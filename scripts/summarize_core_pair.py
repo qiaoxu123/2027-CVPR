@@ -75,7 +75,12 @@ def retrieval_summary(rows):
     return dict(unique_queries=len(unique),**{k:float(np.mean([v[k]for v in unique.values()]))for k in next(iter(unique.values()))if 'R@' in k or k.endswith('NE_m')})
 
 
-def normalize_archived_rows(rows,split,root):
+def validate_report_inputs(paths,expected_sha256):
+    actual=[file_sha256(path)for path in paths]
+    if sorted(actual)!=sorted(expected_sha256.values()):raise ValueError('live source data differs from frozen evaluation inputs')
+
+
+def normalize_archived_rows(rows,split,root,expected_input_sha256):
     import hashlib
     import sys
     protocol=json.loads((root/'paired_protocol.json').read_text())
@@ -85,6 +90,8 @@ def normalize_archived_rows(rows,split,root):
     sys.path.insert(0,settings['sbf_source'])
     from sbfnav.dataset import CityNavDataset
     dataset=CityNavDataset(settings['data_root'],split,version='processed_citynav')
+    data_root=Path(settings['data_root'])
+    validate_report_inputs([dataset.annotation_path,data_root/'cityrefer/objects.json',data_root/'cityrefer/processed_descriptions.json'],expected_input_sha256)
     for row in rows:
         record=dataset[int(row['index'])]
         if list(record.episode_id)!=row['episode_id'] or record.map_name!=row['map_name']:
@@ -118,7 +125,7 @@ def summarize(root,reference_root=None):
             expected=reference_frozen['checkpoint_sha256']if historical else frozen['arms'][arm]['checkpoint_sha256']
             if report['checkpoint_sha256']!=expected:raise ValueError('evaluation changed frozen checkpoint')
             if historical:
-                normalize_archived_rows(records,split,root)
+                normalize_archived_rows(records,split,root,report['input_sha256'])
         if sorted(reports[0]['input_sha256'].values())!=sorted(reports[1]['input_sha256'].values()):raise ValueError('historical and new evaluation data SHA differ')
         if reports[0]['episode_manifest_sha256']!=reports[1]['episode_manifest_sha256']:raise ValueError('paired manifests differ')
         statistics=paired_statistics(*rows)

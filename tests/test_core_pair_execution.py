@@ -68,3 +68,14 @@ def test_a1_only_schedule_does_not_include_A0():
     from scripts.run_joint_rgb_geometry_core import scheduled_arms
     assert [a[0]for a in scheduled_arms(True)]==['A1_joint_rgb_geometry']
     assert len(scheduled_arms(False))==2
+
+
+def test_historical_recall_rejects_live_label_edits(tmp_path):
+    from scripts.summarize_core_pair import validate_report_inputs
+    from graphnav.checkpointing import file_sha256
+    annotation=tmp_path/'val_seen.json';annotation.write_text('original labels')
+    expected={'old-host/val_seen.json':file_sha256(annotation)}
+    validate_report_inputs([annotation],expected)
+    annotation.write_text('changed labels, identical episode IDs')
+    with pytest.raises(ValueError,match='live source data'):
+        validate_report_inputs([annotation],expected)
