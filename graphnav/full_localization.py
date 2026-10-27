@@ -98,6 +98,8 @@ class FullTokenGeometryLocalizer(nn.Module):
         tokens: torch.Tensor | None = None,
         token_mask: torch.Tensor | None = None,
         node_emb: torch.Tensor | None = None,
+        candidate_rgb: torch.Tensor | None = None,
+        candidate_rgb_valid: torch.Tensor | None = None,
     ) -> GoalField:
         if variant not in self.VARIANTS:
             raise ValueError(f"unknown variant {variant}")
@@ -121,6 +123,17 @@ class FullTokenGeometryLocalizer(nn.Module):
             b, q, _ = xy.shape
             query = self.pos(self._candidate_positional_features(batch))
             query = query + self.rule_map(batch["relation_fields"])
+            # Opt-in pre-attention RGB/geometry fusion. Legacy calls have no
+            # candidate_rgb and retain identical weights, order and behavior.
+            if candidate_rgb is not None:
+                if not hasattr(self, "rgb_query"):
+                    raise ValueError("RGB query fusion requires an explicit joint-model adapter")
+                if candidate_rgb_valid is None or candidate_rgb_valid.shape != query.shape[:2]:
+                    raise ValueError("RGB support must align with candidate grid")
+                if candidate_rgb.shape[:2] != query.shape[:2] or not torch.isfinite(candidate_rgb).all():
+                    raise ValueError("invalid RGB candidate features")
+                visual_query = self.rgb_query(candidate_rgb.float()).to(query.dtype)
+                query = query + visual_query * candidate_rgb_valid[..., None].to(query.dtype)
             word_context, _ = self.token_attn(
                 query, self.lang(tokens), self.lang(tokens),
                 key_padding_mask=~token_mask.bool(), need_weights=False
