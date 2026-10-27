@@ -1,0 +1,75 @@
+{
+  "complete": true,
+  "verified_at_utc": "2026-10-27T15:49:59.522329+00:00",
+  "training": {
+    "A": {
+      "epochs": 3,
+      "train_states_per_epoch": 83140,
+      "dev_states_per_epoch": 4372,
+      "last_checkpoint_sha256": "c4b01324d787cca018e544cc21680cf260229de678a77b73d24105dbc4deb335",
+      "history_sha256": "a5243825ec769a729994ec9862c5ffd77aad30beb80f5fb54b567c9e224f7086"
+    },
+    "B": {
+      "epochs": 3,
+      "train_states_per_epoch": 83140,
+      "dev_states_per_epoch": 4372,
+      "last_checkpoint_sha256": "b79d157d8ea519e104ed2c541474da8c15ac2396e1e79fa995dc86e19d9ec555",
+      "history_sha256": "650f5657e589d252a79dc7d3d135a55529138b43bd19ee8de133bb6985a953c6"
+    },
+    "C": {
+      "epochs": 5,
+      "train_states_per_epoch": 83140,
+      "dev_states_per_epoch": 4372,
+      "last_checkpoint_sha256": "69168be37411b1575cb933ac665e570fcc6905c640e1f72f52cb2f8d2aaade88",
+      "history_sha256": "57bd745fa32bf5280ec7f8c253d99de07c23bf454235bba9e9dcaf4514cd275e"
+    }
+  },
+  "selected_stage": "C",
+  "selected_epoch": 1,
+  "selected_checkpoint_sha256": "35384927869dccf2d3976ddaffbad00043edfa3e130deb391b3b6df94ca137f1",
+  "frozen_at_utc": "2026-10-27T15:07:23.869300+00:00",
+  "audits": {
+    "val_seen": {
+      "A0": {
+        "episodes": 2470,
+        "all_episode_metrics_rescored": true,
+        "all_map_aggregates_recomputed": true,
+        "max_metric_difference": 0.0,
+        "episode_manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+        "predictions_sha256": "1cc838f59e85da58ed129570b573d8104975152b531a96e9e16434cbe7fd9002",
+        "metrics_sha256": "994db5bd5051ed3faa7bdcfe14cd3c16509c08d2bf75e75f0058870b8a819d98"
+      },
+      "A1": {
+        "episodes": 2470,
+        "all_episode_metrics_rescored": true,
+        "all_map_aggregates_recomputed": true,
+        "max_metric_difference": 0.0,
+        "episode_manifest_sha256": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+        "predictions_sha256": "6b49f13b371e012199900a3bf22da7b64c3f6086fa19b1731728e06bbaa0a926",
+        "metrics_sha256": "b17dba3b8f454540933a632141f86bf20f26e75771c76cb4c567a56ba60fcafe"
+      }
+    },
+    "val_unseen": {
+      "A0": {
+        "episodes": 2697,
+        "all_episode_metrics_rescored": true,
+        "all_map_aggregates_recomputed": true,
+        "max_metric_difference": 0.0,
+        "episode_manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+        "predictions_sha256": "47d832e3ee5e8ca52161e29117f8cad034c5afb04263fa98f18bff36a1923290",
+        "metrics_sha256": "116e23be488912849456a9a85d503cc1acda82fd6cd854656a5bf5db70127666"
+      },
+      "A1": {
+        "episodes": 2697,
+        "all_episode_metrics_rescored": true,
+        "all_map_aggregates_recomputed": true,
+        "max_metric_difference": 0.0,
+        "episode_manifest_sha256": "429f4c25ed15e564fa140ed8538563931e0995ca5726a1b6ad4dca6e542bea4d",
+        "predictions_sha256": "b41800757e9ece61dc04c25dfcdf8393917547052bcd1c768db1d7bc529bfeef",
+        "metrics_sha256": "c80bb2eeb2d3241085b1e209022e974b9d47afa6be32a5d06cac6a1fbed30501"
+      }
+    }
+  },
+  "tensorboard_curves_verified": true,
+  "scope": "Complete A1 and archived formal A0 reference. All 10334 saved episode traces independently rescored; no checkpoint or inference setting changed."
+}
