@@ -12,6 +12,7 @@ Scope: only the requested A2 seed-0 model, frozen archived A0 including original
 
 ## Current authoritative state
 - A1 complete; A2 full source audit and corrected TRAIN association audit passed. Full extraction is running in `graphnav-a2-cache-20261028.service` with the only GPU workload.
-- 311 CPU tests passed. Original frozen-A0 CUDA parity and initial informative-ranking smoke passed. The updated geometry-conditioned trust/offset model needs its new full-cache CUDA gate after extraction exits.
-- Fixed20+5 trainer and CPU-only sequential waiter reviewed. Pin/schedule the waiter, then implement independent calibration, internal diagnostics and the full evaluator while the cache is live. No second GPU job and no full-training claim yet.
+- 318 CPU tests passed. Original frozen-A0 CUDA parity and initial informative-ranking smoke passed. The updated geometry-conditioned trust/offset model needs its new full-cache CUDA gate after extraction exits.
+- Fixed20+5 trainer and CPU-only sequential waiter reviewed, pinned and scheduled. New artifact verification and provisional independent calibration modules reviewed; calibration has not run.
+- Next implement the actual TRAIN-calibration closed-loop pilot, immutable freeze bundle, internal diagnostic controls and full evaluator while the cache is live. Do not edit pinned feature/model/training files or launch a second GPU job. No full-training claim yet.
 - ETA 2–4 days is preliminary scheduling only, pending measured extraction throughput.
