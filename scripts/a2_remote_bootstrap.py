@@ -13,6 +13,7 @@ PROJECT=LEGACY/'Workspace/2027-CVPR/Experiments/A2WaldoLandmarkBelief'
 BASE='runs/a2_waldo_landmark_20261027/revision_v3'
 MAIN='graphnav-a2-relation-v3-pipeline-20261028.service'
 POST='graphnav-a2-v3-confirmation-20261028.service'
+NAV='graphnav-a2-v3-navigation-20261028.service'
 POLICY='experiments/a2_waldo_landmark_belief/gpu_execution_policy.json'
 INPUT_MANIFESTS=('current_transfer_plan.json','reuse_manifest.json','exact_compute_files.json','approved_gpu_policy.json')
 
@@ -101,6 +102,7 @@ class Bootstrap:
         self.root=Path(root).resolve();self.project=mapped_path(str(PROJECT),self.root);self.science=self.project/BASE
         self.logs=self.root/'bootstrap_logs';self.logs.mkdir(exist_ok=True)
         self.env=dict(os.environ,XDG_RUNTIME_DIR=f'/run/user/{os.getuid()}',OMP_NUM_THREADS='2',MKL_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2',
+            A2_EXECUTION_HOST_ROOT=str(self.root),
             HF_HOME=str(LEGACY/'.cache/huggingface'),HF_HUB_CACHE=str(LEGACY/'.cache/huggingface/hub'),HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',
             TOKENIZERS_PARALLELISM='false',MPLBACKEND='Agg',MPLCONFIGDIR=str(self.root/'matplotlib'))
         libraries=str(self.root/'tools/root/usr/lib/x86_64-linux-gnu')
@@ -181,7 +183,7 @@ class Bootstrap:
         ready=self.root/'bootstrap_ready.json'
         if ready.exists():
             if json.loads(ready.read_text()).get('launch_sha256')!=self.launch_sha256:raise ValueError('Existing CPU certification belongs to another launch')
-            self.guest(['-c',"from experiments.a2_waldo_landmark_belief.relation_v3_navigation_sources import require_cpu_gates;require_cpu_gates()"],'retain_current_CPU_proofs');return
+            self.guest(['-c',"from experiments.a2_waldo_landmark_belief.relation_v3_navigation_sources import require_cpu_gates;require_cpu_gates();from experiments.a2_waldo_landmark_belief.relation_v3_navigation_pipeline import require_cpu_gates as handoff;handoff(__import__('pathlib').Path('runs/a2_waldo_landmark_20261027/revision_v3'))"],'retain_current_CPU_proofs');return
         archive=archive_untrained_proofs(self.science)
         previous=json.loads((archive/'cpu_gates.json').read_text());expected=previous['initial_weights_sha256']
         old_audit=archive/'original_data_audit.json'
@@ -201,6 +203,7 @@ class Bootstrap:
         self.guest(['-m','experiments.a2_waldo_landmark_belief.relation_v3_confirmation_pipeline','--cpu-gates'],'posttraining_CPU_gate')
         self.guest(['-m','experiments.a2_waldo_landmark_belief.relation_v3_navigation_protocol'],'fixed_pilot_metadata')
         self.guest(['-c',NAVIGATION_CERTIFICATION],'navigation_CPU_gate')
+        self.guest(['-m','experiments.a2_waldo_landmark_belief.relation_v3_navigation_pipeline','--cpu-gates'],'complete_handoff_CPU_gate')
         put(ready,dict(status='remote_CPU_inputs_and_original_initial_weights_verified',initial_weights_sha256=expected,
             launch_sha256=self.launch_sha256,source_sha256=digest(__file__),code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=self.project,text=True).strip(),time=time.time()))
 
@@ -216,12 +219,12 @@ class Bootstrap:
             if str(self.root) not in service['ExecStart'] or module not in service['ExecStart']:raise ValueError('Unit belongs to another execution')
             if service['ActiveState']=='failed' or service['Result']!='success' or int(service['ExecMainStatus'])!=0:raise ValueError('Existing failed unit requires diagnosis; not restarting blindly')
             if int(service['MainPID'])==0:
-                required=self.science/('training/curve_manifest.json' if unit==MAIN else 'post_pipeline_status.json')
+                required=self.science/{MAIN:'training/curve_manifest.json',POST:'post_pipeline_status.json',NAV:'navigation_pipeline_status.json'}[unit]
                 if not required.exists():raise ValueError('Existing terminal unit lacks completion evidence; inspect before resuming')
             return
         command=['systemd-run','--user','--unit='+unit,'--property=RemainAfterExit=yes','--property=WorkingDirectory='+str(self.project)]
-        command += ['--setenv='+k+'='+self.env[k] for k in ('LD_LIBRARY_PATH','XDG_RUNTIME_DIR','OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS','HF_HOME','HF_HUB_CACHE','HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','TOKENIZERS_PARALLELISM','MPLBACKEND','MPLCONFIGDIR')]
-        subprocess.run(command+self.prefix+['-m','experiments.a2_waldo_landmark_belief.'+module],check=True,env=self.env)
+        command += ['--setenv='+k+'='+self.env[k] for k in ('LD_LIBRARY_PATH','XDG_RUNTIME_DIR','A2_EXECUTION_HOST_ROOT','OMP_NUM_THREADS','MKL_NUM_THREADS','OPENBLAS_NUM_THREADS','HF_HOME','HF_HUB_CACHE','HF_HUB_OFFLINE','TRANSFORMERS_OFFLINE','TOKENIZERS_PARALLELISM','MPLBACKEND','MPLCONFIGDIR')]
+        subprocess.run(command+self.prefix+['-m','scripts.a2_guest_service','--unit',unit,'--module','experiments.a2_waldo_landmark_belief.'+module],check=True,env=self.env)
 
     def run(self):
         with host_lock(self.root):
@@ -232,15 +235,18 @@ class Bootstrap:
         self.verify_launch();self.wait_extract();self.verify_launch();self.verify_inputs();self.verify_launch();self.recertify();self.verify_launch()
         target=self.root/'execution_target.json'
         if not target.exists() or json.loads(target.read_text()).get('target')!='remote':self.status('prepared_no_remote_execution_selected');return
-        self.start(MAIN,'relation_v3_pipeline');self.start(POST,'relation_v3_confirmation_pipeline')
+        self.start(MAIN,'relation_v3_pipeline');self.start(POST,'relation_v3_confirmation_pipeline');self.start(NAV,'relation_v3_navigation_pipeline')
         while True:
-            services={name:self.service(name) for name in (MAIN,POST)}
+            services={name:self.service(name) for name in (MAIN,POST,NAV)}
             for name,service in services.items():
                 if service['ActiveState']=='failed' or service['Result']!='success' or int(service['ExecMainStatus'])!=0:raise RuntimeError('Scientific execution unit failed: '+name)
             if all(int(s['MainPID'])==0 and s['SubState'] in ('exited','dead') for s in services.values()):break
             self.status('scientific_pipeline_live',services={k:{n:v[n] for n in ('MainPID','ActiveState','SubState')} for k,v in services.items()});time.sleep(60)
         post=json.loads((self.science/'post_pipeline_status.json').read_text())
-        self.status('scientific_units_terminal',posttraining_state=post['state'],full_benchmark_completed=False)
+        self.guest(['-m','experiments.a2_waldo_landmark_belief.relation_v3_navigation_pipeline','--verify-complete'],'verify_terminal_navigation')
+        self.verify_launch()
+        navigation=json.loads((self.science/'navigation_pipeline_status.json').read_text())
+        self.status('scientific_units_terminal',posttraining_state=post['state'],navigation_state=navigation['state'],full_benchmark_completed=navigation['full_benchmark_completed'])
 
 
 NAVIGATION_CERTIFICATION=r'''

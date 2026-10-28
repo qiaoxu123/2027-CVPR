@@ -98,10 +98,12 @@ def test_only_explicit_remote_target_arms_training(tmp_path,monkeypatch,target):
     for name in ('verify_launch','wait_extract','verify_inputs','recertify'):
         monkeypatch.setattr(job,name,lambda:None)
     monkeypatch.setattr(job,'start',lambda *args:started.append(args))
+    monkeypatch.setattr(job,'guest',lambda *args,**kwargs:None)
     monkeypatch.setattr(job,'service',lambda name:dict(ActiveState='inactive',Result='success',ExecMainStatus='0',MainPID='0',SubState='dead'))
     job.science.mkdir(parents=True);(job.science/'post_pipeline_status.json').write_text('{"state":"finished"}')
+    (job.science/'navigation_pipeline_status.json').write_text('{"state":"finished","full_benchmark_completed":false}')
     job.run()
-    assert len(started)==(2 if target=='remote' else 0)
+    assert len(started)==(3 if target=='remote' else 0)
 
 
 def test_launch_binding_rejects_wrong_revision_source_or_manifest(tmp_path,monkeypatch):
@@ -130,6 +132,7 @@ def test_launch_binding_rejects_wrong_revision_source_or_manifest(tmp_path,monke
     monkeypatch.setattr(job,'verify_inputs',lambda:None)
     monkeypatch.setattr(job,'recertify',lambda:active.write_text('{"changed":true}'))
     monkeypatch.setattr(job,'start',lambda *args:started.append(args))
+    monkeypatch.setattr(job,'guest',lambda *args,**kwargs:None)
     with pytest.raises(ValueError,match='Installed resource policy'):job.run()
     assert not started
     active.write_text('{}')
@@ -155,6 +158,7 @@ def test_changed_source_after_recertification_never_starts_training(tmp_path,mon
     for name in ('wait_extract','verify_inputs'):monkeypatch.setattr(job,name,lambda:None)
     monkeypatch.setattr(job,'recertify',lambda:state.update(changed=True))
     monkeypatch.setattr(job,'start',lambda *args:started.append(args))
+    monkeypatch.setattr(job,'guest',lambda *args,**kwargs:None)
     with pytest.raises(ValueError):job.run()
     assert not started
 

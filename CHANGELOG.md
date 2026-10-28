@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.8.0-a2-serial-navigation-handoff-dev] - 2026-10-28
+### Features
+- Add a persistent serial handoff from actual completed confirmation to the fixed64 A0/A2 pilot, pilot verification, final freeze, complete Seen2470 and Unseen2697 A0/A2 arms, then the verified final report.
+- Bind handoff CPU proofs to scientific runtime/test inventories, reporter/tests, bootstrap/tests and the guest-service wrapper. Recheck sources while queued and between child phases; preserve completed navigation and retry only explicit device-busy rejection.
+- Add a user-space scientific service wrapper that binds actual guest and launcher PIDs, systemd invocation, task/source roots, module/wrapper bytes and the finished status hash without changing original scientific modules.
+- Integrate three supervisors into remote preparation and verify actual final NAV identity, current freeze and full source-bound report before declaring a complete benchmark.
+### Design Rationale
+- A status file cannot override a live predecessor or prove completion by itself. The remote proot launcher and scientific Python really have different PIDs, so their relationship must be explicitly verified.
+- Rejected internal evidence stops the handoff without enabling a correction; final validation never selects a checkpoint or changes a threshold.
+### Notes & Caveats
+- CPU tests and a real remote CPU-only process-identity probe validate orchestration, not A2 performance. Full A2 model CUDA checks,20+5 training, calibration and navigation remain pending transfer completion.
+
 ## [0.7.0-a2-final-reporting-dev] - 2026-10-28
 ### Features
 - Add paired target- and map-cluster final-report statistics, conditional false-stop ratios with explicit zero denominators, query-deduplicated Recall, per-map outcomes, correction/harm/fallback fractions, WALDO coverage and actual inference latency.
