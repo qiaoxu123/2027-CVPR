@@ -1,0 +1,11 @@
+{
+  "scope": "TRAIN cached teacher views only; offline audit, no model or GPU",
+  "views": 31415,
+  "same_pose_groups": 32,
+  "distinct_target_pair_candidates": 0,
+  "pairs": [],
+  "source_annotation_sha256": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+  "cache_manifest_sha256": "d5b43b96deba43d4d0ea8087c16c110cd7a271c67ad4232f8b63e6aad57af261",
+  "criteria": "same map+trajectory4D pose rounded5 decimals, distinct genuine source instruction and target object, target separation>40m; positive pairs would additionally require cached sensor/box equality before inference",
+  "conclusion": "No valid cached pair found; corresponding-target counterfactual diagnostic remains pending"
+}
