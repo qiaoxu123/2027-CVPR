@@ -4,10 +4,11 @@
 ### Features
 - Add an isolated public-only diagnostic feature extractor: retain the original15 risk features and append seven fixed candidate competition/reference/projection quality summaries.
 - Add target-grouped TRAIN-only fixed20-round CPU linear fitting, fit-only normalization, equal zero initialization for15/22-feature comparisons, and class-weight-corrected predictions.
+- Add strict TRAIN-selection-only operating-point choice and unchanged-condition internal DEV assessment, including per-map/per-target outcomes and explicit no-safe-condition fallback.
 ### Design Rationale
 - Internal checks show harmful modifications both with and without useful candidates. Test richer evidence separately, preserving the active V4 model, code and evaluation queues.
 ### Notes & Caveats
-- Feature and linear fitting primitives only: actual data admission/export, condition selection and result reporting are not implemented or executed yet. No new policy is enabled, and no A2>A0 improvement is established.
+- Feature, fitting and condition primitives only: actual data admission/export, durable condition binding and complete report execution are not implemented or executed yet. No new policy is enabled, and no A2>A0 improvement is established.
 - New implementation/tests live outside frozen V4 inventories; all48 training source files remain byte-identical to ac03d24. CPU tests cover masked relationships, empty/single candidates, confidence weights, nonfinite inputs and private-label exclusion.
 
 ## [0.9.0-a2-public-road-reference-dev] - 2026-10-29
