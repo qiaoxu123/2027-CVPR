@@ -13,4 +13,5 @@ def test_runtime_uses_shared_public_features_and_exact_OFF_return():
     assert off is spatial['base_logits'] and not info['updated'] and tensors['features'].shape==(1,15)
     mixed,info,tensors=risk_forward(spatial,rank,head,dict(enabled=True,minimum_gain=.5,maximum_harm=.1,temperature=1.))
     assert mixed.argmax()==1 and info['gate']==.25
-    assert set(tensors)=={'q','available','features','head_logits','corrected_logits'}
+    assert torch.equal(mixed,tensors['fixed_action_logits'])
+    assert set(tensors)=={'q','available','features','head_logits','corrected_logits','scores','fixed_action_logits'}

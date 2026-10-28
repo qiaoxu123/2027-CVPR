@@ -8,7 +8,7 @@
 - v1 safe gate improved only3heldout groups with confidence interval starting0. Direct fixed-action outcome supervision and actual safe operatingpoint selection address the demonstrated mismatch between AUC/distance scores and deployed correction.
 - Keep completed relation/proposal behavior frozen; additional head20+5, new independent confirmation and full navigation remain required. Balanced scores are not probability guarantees.
 ### Notes & Caveats
-- Risk head primitives are CPU-tested, not yet formally trained or CUDA-qualified. Diagnostic classifier AUC gains produced no corrections at transferred dev thresholds and do not prove navigation improvement.
+- Risk head completed actual real-TRAIN CUDA backward and all additional20+5epochs;1550updates and all25dev-checkpoint recomputations verified. Fresh independent confirmation and final navigation are still pending. Diagnostic classifier AUC gains do not prove navigation improvement.
 - v1 original code/weights/calibration and A0/A1 remain unchanged. No new benchmark evaluation or forced gate has occurred.
 
 ## [0.3.0-a2-revision-dev] - 2026-10-28
