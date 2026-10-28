@@ -38,6 +38,8 @@ def source_binding(admission):
     """Bind the isolated code/tests and predeclared design before fitting."""
     files = [*sorted(Path(__file__).parent.glob('*.py')),
              *sorted((ROOT/'diagnostics_tests/evidence_quality').glob('*.py')),
+             ROOT/'diagnostics/__init__.py', ROOT/'diagnostics_tests/__init__.py',
+             ROOT/'scripts/a2_evidence_quality_cpu_20261029.sh',
              ROOT/'docs/superpowers/specs/2026-10-29-a2-evidence-quality-diagnostic-design.md']
     return dict(admission=admission, implementation_sha256={str(p.relative_to(ROOT)):sha(p) for p in files},
                 scope='autonomous_TRAIN2025_internalDEV1029_CPU_only', version=1)

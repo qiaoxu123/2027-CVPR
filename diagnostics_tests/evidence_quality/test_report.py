@@ -13,9 +13,9 @@ def api():
     return importlib.import_module('diagnostics.evidence_quality.report')
 
 
-def signal_packets(tmp_path):
+def signal_packets(tmp_path,binding=None):
     from diagnostics.evidence_quality.packets import write_packets
-    binding=dict(checkpoint_sha256='c'*64);entries={}
+    binding=binding if binding is not None else dict(checkpoint_sha256='c'*64);entries={}
     for role in ('train','dev'):
         ids,a=population(role)
         if role=='dev':
