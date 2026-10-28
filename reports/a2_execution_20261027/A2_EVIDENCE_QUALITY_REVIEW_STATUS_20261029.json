@@ -1,0 +1,18 @@
+{
+  "status": "requested_adversarial_review_failed_without_verdict",
+  "requested_command": "codex-companion.mjs adversarial-review --wait --scope branch --base 0b5a7e7",
+  "reviewed_target_head": "77d80b5",
+  "exit_code": 1,
+  "valid_structured_verdict": false,
+  "error": "workspace routing discovery timed out",
+  "log_sha256": "979fc6d34a694c3d112d3b8b024b54df11f1f7231bf8d464dee7a08da2497367",
+  "supplementary_review": {
+    "agent": "evidence_quality_code_review",
+    "critical_or_important_defects_found": 0,
+    "minor_finding": "Negative report conflated skipped fixed-condition assessment with unopened DEV data",
+    "fix_commit": "07f3cd18ffbf9defad42d50262c7459b8c6d6f72",
+    "fix_readonly_rechecked": true,
+    "not_a_substitute_for_requested_plugin_verdict": true
+  },
+  "no_A2_over_A0_claim": true
+}

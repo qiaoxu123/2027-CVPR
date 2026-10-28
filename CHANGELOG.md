@@ -16,7 +16,8 @@
 ### Design Rationale
 - Internal checks show harmful modifications both with and without useful candidates. Test richer evidence separately, preserving the active V4 model, code and evaluation queues.
 ### Notes & Caveats
-- Real export/fitting/assessment have not executed; independent code review and real remote CPU/entrypoint validation remain pending. Reporting has synthetic positive and rejected-case coverage, fitting has synthetic full20-round coverage with DEV packets deliberately unreadable, and export/storage have synthetic full-population coverage. Final artifact admission has synthetic coverage and an actual live-wait refusal, but cannot yet be exercised on successful real completion. No new policy is enabled, and no A2>A0 improvement is established.
+- Real remote CPU80 tests passed and the native/guest300-second waiter is live, with CUDA hidden and no real packet export/fitting started. Deployment verified all86 original fixed source files unchanged. Requested adversarial tool exited1 on workspace-routing timeout without a verdict; supplementary read-only review found only a corrected reporting ambiguity, not a substitute verdict.
+- Real export/fitting/assessment have not executed. Reporting has synthetic positive and rejected-case coverage, fitting has synthetic full20-round coverage with DEV packets deliberately unreadable, and export/storage have synthetic full-population coverage. Final artifact admission cannot yet be exercised on successful real completion. No new policy is enabled, and no A2>A0 improvement is established.
 - New implementation/tests live outside frozen V4 inventories; all48 training source files remain byte-identical to ac03d24. CPU tests cover masked relationships, empty/single candidates, confidence weights, nonfinite inputs and private-label exclusion.
 
 ## [0.9.0-a2-public-road-reference-dev] - 2026-10-29
