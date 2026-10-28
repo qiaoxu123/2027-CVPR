@@ -17,15 +17,16 @@ from .revision_eval_protocol import require_population,FULL_COUNTS
 
 
 def code_hashes():
-    names=('reference_v4_navigation.py','reference_v4_navigation_sources.py','reference_v4_navigation_freeze.py',
+    names=('reference_v4_navigation_pipeline.py','reference_v4_navigation.py','reference_v4_navigation_sources.py','reference_v4_navigation_freeze.py',
         'reference_v4_navigation_admission.py','reference_v4_navigation_protocol.py','reference_v4_navigation_population.py',
         'relation_v3_navigation_trace.py','relation_v3_navigation_protocol.py','relation_v3_navigation_sources.py',
         'relation_v3_navigation_freeze.py','reference_v4_results.py','relation_v3_results.py','relation_v3_reporting.py','revision_evaluation.py','revision_eval_protocol.py','revision_freeze.py','revision_paired_stats.py')
-    return dict(calibration_code_hashes(),**{n:sha(ROOT/'experiments/a2_waldo_landmark_belief'/n) for n in names})
+    return dict(calibration_code_hashes(),**{n:sha(ROOT/'experiments/a2_waldo_landmark_belief'/n) for n in names},
+                **{'scripts/a2_reference_v4_remote_navigation.sh':sha(ROOT/'scripts/a2_reference_v4_remote_navigation.sh')})
 
 
 def test_hashes():
-    return {str(p.relative_to(ROOT)):sha(p) for folder in ('tests_navigation_v3','tests_navigation_v4','tests_reporting_v3','tests_reporting_v4') for p in sorted((ROOT/folder).rglob('*.py'))}
+    return {str(p.relative_to(ROOT)):sha(p) for folder in ('tests_navigation_v3','tests_navigation_v4','tests_reporting_v3','tests_reporting_v4','tests_handoff_v4') for p in sorted((ROOT/folder).rglob('*.py'))}
 
 
 def cpu_signature(root):
@@ -33,7 +34,9 @@ def cpu_signature(root):
     return dict(implementation=code_hashes(),test_source_sha256=test_hashes(),
         pilot_population_sha256=sha(root/'navigation_pilot_population.json'),
         protocol_sha256=sha(root/'navigation_protocol.json'),
-        posttraining_cpu_gate_sha256=sha(root/'posttraining_cpu_gates.json'))
+        posttraining_cpu_gate_sha256=sha(root/'posttraining_cpu_gates.json'),
+        confirmation_identity_sha256=sha(root/'confirmation_service_identity.json'),
+        confirmation_signature_sha256=sha(root/'post_pipeline_signature.json'))
 
 
 def require_cpu_gates(root=None):
@@ -69,7 +72,7 @@ def cpu_gates(*,root=None):
     environment=dict(os.environ,CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='2',MKL_NUM_THREADS='2')
     with log.open('w') as stream:
         result=subprocess.run([sys.executable,'-m','pytest','-q','tests','tests_confirmation_v3','tests_confirmation_v4',
-            'tests_navigation_v3','tests_navigation_v4','tests_reporting_v3','tests_reporting_v4'],cwd=ROOT,env=environment,stdout=stream,stderr=subprocess.STDOUT)
+            'tests_navigation_v3','tests_navigation_v4','tests_reporting_v3','tests_reporting_v4','tests_handoff_v4'],cwd=ROOT,env=environment,stdout=stream,stderr=subprocess.STDOUT)
     summary=re.search(r'\d+ passed[^\n]*',log.read_text())
     if result.returncode or summary is None or signature!=cpu_signature(root) or torch.cuda.is_initialized():
         raise ValueError('V4 navigation CPU tests failed or sources changed')

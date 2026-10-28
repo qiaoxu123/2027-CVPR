@@ -15,6 +15,7 @@ def fixture(tmp_path,monkeypatch):
     m=module();monkeypatch.setattr(m,'BASE',root.parent)
     monkeypatch.setattr(m,'require_post_cpu_gates',lambda root:None)
     save(dict(status='post_cpu_fixture'),root/'posttraining_cpu_gates.json')
+    save({},root/'confirmation_service_identity.json');save({},root/'post_pipeline_signature.json')
     log=root/'navigation_cpu_tests.log';log.write_text('696 passed in 1s\n')
     proof=dict(m.cpu_signature(root),status='v4_real_navigation_CPU_gates_passed',test_log_sha256=sha(log),
         unit_test_summary='696 passed in 1s',no_GPU_used=True,no_navigation_observations=True)
