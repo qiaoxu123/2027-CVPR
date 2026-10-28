@@ -34,6 +34,8 @@ For merged references, compute area and centroid from the exact union; point con
 
 Builder inspection confirms that teacher/V1 caches lack native RGB/depth, and V2 retains an RGB-valid bitmap but no native RGB/depth. Consequently this revision explicitly disables height evidence for newly grouped references in BOTH reconstructed data and live inference: height difference=0, height-valid=0, metadata states missing by policy. Never synthesize merged height from candidate surfaces or old single-reference summaries. Singleton height sampling remains unchanged. This intentionally loses one source of evidence; the model must learn with the same missing input it sees at inference. Exact region height rasterization is deferred rather than silently approximated.
 
+New occurrence matching can also restore singleton references absent from legacy perception output. Their height is likewise explicitly missing in both reconstruction and live inference. Share reference_rebuild.rebuild_reference_pack after the legacy public extraction: only singleton identities actually present in that extraction can retain its observed surface summary. Reuse public reference identity only, not the destination. New groups and newly restored singletons never borrow candidate height or private object height.
+
 The private training angle/distance labels also currently use ref['contour'] and core._center in relation_v3_data.build_training_row (and the legacy private_labels.label_view). New-version labels must use the same exact union centroid as public pair geometry; old labels and artifacts remain immutable. A versioned region accessor should own this agreement.
 
 ## New cache and execution boundary

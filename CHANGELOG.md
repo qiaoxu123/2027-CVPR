@@ -5,6 +5,7 @@
 - Add inactive, opt-in exact public-region primitives and connected same-name road/footpath resolution, preserving holes and point-touching components.
 - Add public TRAIN/DEV name-availability inventory and tests for ambiguous names, invalid geometry, duplicate identities and legacy single-object behavior.
 - Add opt-in occurrence-specific exact public-name matching and shared union relationship geometry; preserve independent mentions and exact legacy singleton feature outputs without enabling the new path in V3.
+- Add a public-only reference feature rebuild adapter and separate new-region TRAIN label builder, verified with actual frozen CPU BERT on all available source schemas. Newly available references with no legacy surface summary have explicit missing height; original image/instruction/spatial inputs remain unchanged.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
