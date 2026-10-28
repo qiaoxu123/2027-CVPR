@@ -11,6 +11,7 @@
 - Prepare the fixed163fresh confirmation inventory (84FIT/79VERIFY) plus the opaque existing130VERIFY seal. Add a full-training-gated shadowOFF collector with actual RGB/source hashes, post-whole-rollout labels, partial replay archives and actual-inference packet checks.
 - Add the serial post-training service: finish all25 verified epochs first, collect the fixed163 queries, select exactly one rule on84FIT, then replay the sealed130 only for a nonempty choice and evaluate that same rule on209VERIFY once. Preserve rejected decisions without opening heldout performance.
 - Bind the post-training implementation and its separate27 tests to a456-test CPU proof. Validate committed FIT packets, restore an interrupted decision seal, and retain authoritative successful predecessor service state without restarting training.
+- Fix the64-query real-navigation pilot inventory before training, preserve original reserved209 VERIFY source queries, and add root-bound admission that rejects missing/mutated candidate commits before validating complete training and the unique calibration lineage. Navigation-stage tests remain outside both queued source/test inventories;468 combined CPU tests pass.
 ### Design Rationale
 - Opened FIT diagnostics found more tested single-candidate localization opportunities than current mixed proposals. Real frozen-A0 states supplement teacher-state training; unknown object identities remain unknown.
 ### Notes & Caveats
