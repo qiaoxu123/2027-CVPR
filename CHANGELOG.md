@@ -8,12 +8,14 @@
 - Add a public-only reference feature rebuild adapter and separate new-region TRAIN label builder, verified with actual frozen CPU BERT on all available source schemas. Newly available references with no legacy surface summary have explicit missing height; original image/instruction/spatial inputs remain unchanged.
 - Add complete CPU-only TRAIN/DEV overlay construction with immutable-parent byte checks, resumable signature-bound files and strict complete-population loading. Overlays store only changed public reference features; existing image features and private labels are reused from audited parents.
 - Add a separate opt-in live perception wrapper calling legacy extraction once, then the same public reference feature adapter as offline rebuilding. Actual policy/checkpoint admission remains separate and is not enabled in V3.
+- Add separate V4 full20+5 training control and own-feature pretraining proof validation, while preserving V3 numerical training settings and refusing incomplete cache populations or stale GPU/runtime checks.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
 ### Notes & Caveats
 - Not integrated into the running remote V3 experiment. No new trained checkpoint or navigation improvement is claimed.
 - Old caches lack full depth; planned grouped-reference height is explicitly missing in both training and inference. Feature rebuilding, full training and complete evaluation remain required.
+- V4 admission accepts only fresh, uninterrupted complete v1 reference-cache builds. Generic resume has no trusted prior per-file content journal and is not admitted; a query-formatting alias edge case also remains recorded, with no observed occurrence in the actual allowed TRAIN/DEV population.
 
 ## [0.8.0-a2-serial-navigation-handoff-dev] - 2026-10-28
 ### Features

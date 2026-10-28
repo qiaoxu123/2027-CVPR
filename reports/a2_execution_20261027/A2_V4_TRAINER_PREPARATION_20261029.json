@@ -1,0 +1,58 @@
+{
+  "status": "new_trainer_implemented_not_admitted",
+  "cpu_tests_passed": 131,
+  "feature_build_progress": {
+    "state": "building",
+    "processed": 27000,
+    "total": 39087,
+    "resumed": 0,
+    "seconds": 1250.87876890786,
+    "counts": {
+      "train": {
+        "observations": 27000,
+        "old_any_reference": 19283,
+        "new_any_reference": 23092,
+        "recovered_reference": 3809,
+        "lost_reference": 0,
+        "old_spatially_covered": 13093,
+        "new_spatially_covered": 15642,
+        "recovered_spatial_coverage": 2549,
+        "lost_spatial_coverage": 0
+      },
+      "train/teacher_snapshot": {
+        "observations": 27000,
+        "old_any_reference": 19283,
+        "new_any_reference": 23092,
+        "recovered_reference": 3809,
+        "lost_reference": 0,
+        "old_spatially_covered": 13093,
+        "new_spatially_covered": 15642,
+        "recovered_spatial_coverage": 2549,
+        "lost_spatial_coverage": 0
+      }
+    }
+  },
+  "trainer_source_sha256": {
+    "reference_v4_protocol.py": "29cb66cff3e00d60c3992784ca3f6b499fb9390f9c484e11a46c4f01917c1c4a",
+    "reference_v4_train.py": "8678d896794c07bd07bb8160b069d6a17afb937b250b34c2f0370dbdd195958a"
+  },
+  "actual_adversarial_review": {
+    "requested_base": "a082102",
+    "scope_head": "b07a17c",
+    "status": "failed_no_review_verdict",
+    "reason": "workspace routing discovery timed out",
+    "log_sha256": "f734ac9681185016be728f81a135b2f47a9941f91bd2e3c60bdda71062f87c10"
+  },
+  "supplementary_readonly_review": "in_progress",
+  "fresh_unresumed_cache_only": true,
+  "new_training_started": false,
+  "gpu_preflight_complete": false,
+  "full_cache_complete": false,
+  "benchmark_used": false,
+  "remaining": [
+    "Complete all39087 overlays and immutable byte checks",
+    "Finish V4 CPU/CUDA/runtime preparation, policy and independent artifact verifier",
+    "Complete actual serial preflight then full20+5 training",
+    "Independent calibration/freeze and full Seen2470/Unseen2697 comparisons"
+  ]
+}
