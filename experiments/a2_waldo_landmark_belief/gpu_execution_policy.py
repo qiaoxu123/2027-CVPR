@@ -10,6 +10,7 @@ import hashlib,json,os,re,subprocess
 from pathlib import Path
 
 POLICY=Path(__file__).with_suffix('.json')
+NVSMI='/usr/bin/nvidia-smi'
 
 
 def validate_policy(policy):
@@ -20,6 +21,8 @@ def validate_policy(policy):
         return policy
     if not isinstance(policy.get('approval_reference'),str) or not policy['approval_reference'].strip() or not 1<=len(services)<=8:
         raise ValueError('Explicit user-approved service policy required')
+    host=policy.get('approved_host_machine_id_sha256')
+    if host is not None and (not isinstance(host,str) or re.fullmatch('[0-9a-f]{64}',host) is None):raise ValueError('Invalid approved host binding')
     identities=set()
     for service in services:
         identity=tuple(service.get(k) for k in ('uid','process_name','cmdline_sha256'))
@@ -53,8 +56,20 @@ def classify(pids,policy,reader=process_identity,*,self_pid,allow_self=False):
     return blocked
 
 
+def effective_policy(policy,host_sha256):
+    validate_policy(policy)
+    approved=policy.get('approved_host_machine_id_sha256')
+    if policy['mode']=='approved_background_services' and approved is not None and approved!=host_sha256:
+        return dict(mode='exclusive',services=[],approval_reference=None)
+    return policy
+
+
 def blocking_gpu_pids(*,allow_self=False):
     policy=validate_policy(json.loads(POLICY.read_text()))
-    text=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True)
+    if policy.get('approved_host_machine_id_sha256') is not None:
+        try:host=hashlib.sha256(Path('/etc/machine-id').read_bytes()).hexdigest()
+        except OSError:host=None
+        policy=effective_policy(policy,host)
+    text=subprocess.check_output([NVSMI,'--query-compute-apps=pid','--format=csv,noheader'],text=True)
     pids=[int(line.strip()) for line in text.splitlines() if line.strip()]
     return classify(pids,policy,self_pid=os.getpid(),allow_self=allow_self)

@@ -5,6 +5,8 @@
 - Prepare the user-requested RTX5090 migration with exact-file dataset/model reuse, direct remote code/public-weight retrieval and an isolated environment; stop and preserve the local untrained waiters before migration.
 - Keep GPU admission exclusive by default. An explicit source-bound policy may exempt only user-approved existing background services matching UID, executable argument, complete command digest and instance cap; any other A2 or unknown process still blocks. Never stop other users' services.
 - Use the actual user UID for the calibration scheduler's systemd runtime directory rather than a machine-specific UID.
+- Add a locked resumable host bootstrap, explicit execution-target requirement and prebound reviewed-source/input manifests. Preserve orphan formal training records and require current CPU/CUDA/model checks before training.
+- Use a trusted absolute GPU-query binary and host-bound optional service exemptions.
 ### Design Rationale
 - The new host already serves speech models. Resource admission must distinguish those explicitly approved services from another experiment, while retaining serial A2 execution and unchanged data/model/controller/20+5 configuration.
 ### Notes & Caveats

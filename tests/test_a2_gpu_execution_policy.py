@@ -1,4 +1,4 @@
-import hashlib
+import hashlib,json
 import pytest
 from experiments.a2_waldo_landmark_belief.gpu_execution_policy import classify,validate_policy
 
@@ -36,3 +36,26 @@ def test_duplicate_service_and_unreadable_process_are_blocked():
     dict(mode='exclusive',services=[dict(uid=1)],approval_reference=None)])
 def test_absent_approval_or_invalid_policy_cannot_allow_a_process(bad):
     with pytest.raises(ValueError):validate_policy(bad)
+
+
+def test_an_untrusted_PATH_shadow_cannot_hide_busy_processes(tmp_path,monkeypatch):
+    from experiments.a2_waldo_landmark_belief import gpu_execution_policy as module
+    fake=tmp_path/'bin';fake.mkdir();shadow=fake/'nvidia-smi'
+    shadow.write_text('#!/bin/sh\nexit 0\n');shadow.chmod(0o755)
+    trusted=tmp_path/'trusted-nvidia-smi';trusted.write_text('#!/bin/sh\nprintf "1234\\n"\n');trusted.chmod(0o755)
+    policy_path=tmp_path/'policy.json';policy_path.write_text(json.dumps(dict(mode='exclusive',services=[],approval_reference=None)))
+    monkeypatch.setenv('PATH',str(fake));monkeypatch.setattr(module,'NVSMI',str(trusted),raising=False);monkeypatch.setattr(module,'POLICY',policy_path)
+    assert module.blocking_gpu_pids()==[1234]
+
+
+def test_shared_host_policy_stays_exclusive_on_the_other_machine():
+    from experiments.a2_waldo_landmark_belief.gpu_execution_policy import effective_policy
+    shared=dict(policy(),approved_host_machine_id_sha256='a'*64)
+    assert classify([10],effective_policy(shared,'a'*64),lambda p:identity(),self_pid=99)==[]
+    assert classify([10],effective_policy(shared,'b'*64),lambda p:identity(),self_pid=99)==[10]
+    assert classify([10],effective_policy(shared,None),lambda p:identity(),self_pid=99)==[10]
+
+
+@pytest.mark.parametrize('host',[1234,'invalid'])
+def test_invalid_host_binding_is_rejected(host):
+    with pytest.raises(ValueError):validate_policy(dict(policy(),approved_host_machine_id_sha256=host))
