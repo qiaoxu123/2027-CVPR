@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-a2-revision-dev] - 2026-10-28
+### Features
+- Add isolated fresh-seed A2 revision with trusted cross-category negatives, full-pool spatial proposal supervision, current-A0 context, instruction category consistency and a separate benefit gate.
+- Replace candidate-support mass conservation with a bounded global mixture (maximum gate .25), exact OFF fallback and zero offsets.
+- Add full20+5 revision trainer, atomic checkpoints/resume, proposal/map-based selection, pinned CPU/CUDA audit gates and 256 reserved independent confirmation targets.
+### Design Rationale
+- Existing A2's known-only ranking did not reflect full-pool competition; support mass conservation prevented most recoverable errors from changing A0's peak.
+- Grid position supervision uses TRAIN coordinates only in loss, while unknown candidate identities remain unlabelled. All foundation models/controller and28x28 grid remain frozen.
+### Notes & Caveats
+- Existing A0/A1/A2 weights and reports are unchanged. Oracle correction capacity and smoke gradients are not trained navigation gains.
+- Original calibration has been inspected; independent confirmation uses separately reserved never-observed targets. Val-Unseen remains final confirmation only.
+
 ## [0.2.0-a2-dev] - 2026-10-28
 ### Features
 - Honor user-requested collection stop with an immutable completed-episode snapshot, secondary target-disjoint train/dev/calibration split, load-time cross-partition label masking and unchanged full20+5 epoch schedule.

@@ -1,0 +1,52 @@
+{
+  "label_code_sha256": {
+    "revision_data.py": "126abb41b481fd5c13988072d037e7be3503eb59c6c8b897bf4e259e74189449",
+    "revision_fusion.py": "98436e4407405355b6cb5ac5defe11cf9608ffff11a3811cb60beb9cb5ab62a1",
+    "data_protocol.py": "0b6327cdd8095ca18bc8f5413c71ca825043bdd9f15292bd30e9f5987f7257a4"
+  },
+  "status": "all_revision_rows_audited",
+  "cache_signature_sha256": "619e344dbdd1a70cf284ac9b89a43e959f24a98b2948cf8d526cd64d0b636e82",
+  "reserve_sha256": "11eb4fd8a37ff31b99287e58e53a642dc2d77b9f72c68609648978a5f553bdd0",
+  "counts": {
+    "train": {
+      "views": 31415,
+      "positive_views": 6393,
+      "contrast_views": 5792,
+      "known_positive_labels": 6427,
+      "known_negative_labels": 221668,
+      "cross_category_negative_labels": 32408,
+      "zero_offset_trust_positive_labels": 6407
+    },
+    "dev": {
+      "views": 4618,
+      "positive_views": 837,
+      "contrast_views": 526,
+      "known_positive_labels": 840,
+      "known_negative_labels": 5215,
+      "cross_category_negative_labels": 674,
+      "zero_offset_trust_positive_labels": 839
+    },
+    "calibration": {
+      "views": 4226,
+      "positive_views": 854,
+      "contrast_views": 502,
+      "known_positive_labels": 857,
+      "known_negative_labels": 4997,
+      "cross_category_negative_labels": 596,
+      "zero_offset_trust_positive_labels": 852
+    }
+  },
+  "train_oracle": {
+    "train_views": 31415,
+    "a0_failed_views": 9990,
+    "views_with_confirmed_target_proposal": 6389,
+    "failed_views_with_confirmed_proposal": 1713,
+    "new_oracle_corrected": 1713,
+    "new_oracle_broken": 0,
+    "old_positive_support_oracle_corrected": 30
+  },
+  "oracle_max_gate": 0.25,
+  "oracle_scope": "TRAIN-only confirmed target proposal; fixed .25 gate; diagnostic upper opportunity, NOT trained gain",
+  "unknown_identity_negatives": false,
+  "benchmark_data_used": false
+}
