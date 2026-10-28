@@ -156,7 +156,7 @@ def main():
                 checkpoint_sha256=sha(checkpoint),fit_selected_parameters=selected,temperature_report=temp_report,
                 verification=stats,verify_gate=risk,fit_groups=len({tuple(p['group']) for p in fit}),verify_groups=len({tuple(p['group']) for p in verify}),
                 observation_source=source_signature['observation_source'],no_verify_reselection=True,benchmark_used=False,
-                analysis_signature_sha256=sha(a.output/'analysis_signature.json'),confirmation_manifest_sha256=sha(a.confirmation/'manifest.json'),packet_manifest_sha256=sha(a.output/'packets/manifest.json'),
+                analysis_signature_sha256=sha(a.output/'analysis_signature.json'),fit_decision_sha256=sha(a.output/'fit_decision.json'),confirmation_manifest_sha256=sha(a.confirmation/'manifest.json'),packet_manifest_sha256=sha(a.output/'packets/manifest.json'),
                 training_verification_sha256=sha(BASE/'revision_v1/training/artifact_verification.json'),seconds=time.perf_counter()-started)
     save(result,a.output/'candidate_calibration.json');print(json.dumps(result),flush=True)
 

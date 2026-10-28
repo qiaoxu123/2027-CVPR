@@ -31,11 +31,11 @@ Seed0; frozen A0/WALDO/BERT/SigLIP2/controller; grid28; original datasets/result
 ### Task3: Loss, trainer and readiness
 - [x] Implement revision_loss.py and revision_train.py explicit full20+5, proposal/map/benefit/risk supervision and full-pool selection; resume/hash/artifact guards.
 - [x] CPU suite, actual CUDA TRAIN gradient gate, independent adversarial review; pin code/data.
-- [ ] RUNNING: Train under shared flock; supervise actual unit/process and epoch/checkpoint/TB. Export curves and commit/push summaries.
+- [x] Train all20+5 under shared flock; verify every epoch/update/checkpoint/TB. Export curves; selected epoch23, immutable checkpoint b5f7ae68659d1550c77e6d1cb4c32447433e9c2d459b2e4b2ac221ef45a2fc9d.
 
 ### Task4: Independent calibration and real pilot
-- [ ] Preserve new unused TRAIN confirmation targets and split fit/verify before sampling; fixed candidate first.
-- [ ] Confirm updated runtime current-A0 context/fusion matches offline code. Test causal repeated observations and exact fallbacks.
+- [x] Preserve256 new unused TRAIN confirmation targets and split127fit/129verify before sampling; fixed candidate first.
+- [x] Confirm updated runtime current-A0 context/fusion matches offline code. Actual CUDA32-target96-view A0/OFF/ON: exact OFF parity; ON changes52goals/88actions.
 - [ ] Independently calibrate risk, freeze, paired real A0/A2 internal pilot. Failed evidence implies OFF/no launch; revise only using TRAIN development data.
 
 ### Task5: Complete confirmation and publication
@@ -48,3 +48,9 @@ Seed0; frozen A0/WALDO/BERT/SigLIP2/controller; grid28; original datasets/result
 - Runtime/artifact verifier 5af035d: 344CPU pass, actual cache parity0 error; actual frozen-model CUDA runtime and controller/pilot still pending.
 - Current first6 completed epochs: latest dev cached-map R1 .69965 vs A0 .68644, corrected89/broken28; this is NOT navigation SR or final confirmation.
 - Never edit pinned training files while unit live. New confirmation/calibration/pilot/full-evaluation files remain to implement.
+
+## Updated execution ledger 2026-10-28
+- All25 training epochs completed and independently verified. Internal4618-view map R1 .686444->.710481; corrected271/broken160; NE19.9093->18.8901m. These are cached localization diagnostics, not navigation SR.
+- Original training unit and CUDA preflight unit exited successfully. Independent256-target confirmation unit is now active under shared GPU flock; only A0 executes actions, new branch is observational. Calibration follows serially in the same unit.
+- Implemented immutable complete-only evaluation traces, original-controller replay, post-rollout metric/Recall/coverage rescore, paired pilot verification, calibration-source and external-dependency freeze. CPU suite359passed. Formal pilot/full evaluations remain gated and not started.
+- Full A0/A1 benchmark evaluation is already complete; the pending work is the revised A0/A2 comparison. No original result is overwritten.
