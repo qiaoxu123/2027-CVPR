@@ -1,0 +1,80 @@
+{
+  "source_sha256": "8c0b91659d4713b7610e7cf6dcf68fecadc319356c5c570bf780e577fa057c53",
+  "status": "revision_candidate_requires_real_closed_loop_pilot",
+  "gate_final": false,
+  "enabled": false,
+  "scale": 0.0,
+  "threshold": 1.0,
+  "temperature": 1.0,
+  "checkpoint_sha256": "b5f7ae68659d1550c77e6d1cb4c32447433e9c2d459b2e4b2ac221ef45a2fc9d",
+  "fit_selected_parameters": {
+    "scale": 0.1,
+    "threshold": 0.65
+  },
+  "temperature_report": {
+    "sufficient": true,
+    "positive_labels": 282,
+    "negative_labels": 316,
+    "positive_groups": 67,
+    "negative_groups": 72,
+    "choices": [
+      {
+        "temperature": 0.5,
+        "nll": 0.48522864392875004
+      },
+      {
+        "temperature": 1.0,
+        "nll": 0.42100104787506354
+      },
+      {
+        "temperature": 2.0,
+        "nll": 0.44344031729568273
+      },
+      {
+        "temperature": 4.0,
+        "nll": 0.48944762578377354
+      }
+    ],
+    "target": "Proposal expected distance improves A0 by>1m; fit available evidence only; equal target-group NLL"
+  },
+  "verification": {
+    "groups": 129,
+    "views": 1029,
+    "supported_groups": 63,
+    "a0_correct_groups": 90,
+    "broken_groups": 0,
+    "gain_groups": 3,
+    "mean_r1_difference": 0.006023692070203698,
+    "gain_ci95": [
+      0.0,
+      0.014698479814758884
+    ],
+    "mean_ne_difference_m": -0.14006610614064757,
+    "broken_group_rate": 0.0,
+    "broken_group_wilson_upper95": 0.029184268311151257,
+    "metric": "Grid argmax R@1 within20m on real frozen-A0 closed-loop confirmation observations; equal target weights; not navigation SR",
+    "risk_metric": "any original-correct observation broken in a target group / groups with any original-correct observation"
+  },
+  "verify_gate": {
+    "passed": false,
+    "checks": {
+      "enough_supported_groups": true,
+      "enough_a0_correct_groups": true,
+      "enough_gain_groups": false,
+      "positive_group_gain_lower_ci": false,
+      "bounded_group_break_risk": true,
+      "no_mean_ne_increase": true
+    }
+  },
+  "fit_groups": 127,
+  "verify_groups": 129,
+  "observation_source": "real frozen-A0 closed-loop horizon20; revision shadow OFF",
+  "no_verify_reselection": true,
+  "benchmark_used": false,
+  "analysis_signature_sha256": "48cbdf257464d813978e02090bd5bcd301a9e04166547dd2c8b0633f6b9945f0",
+  "fit_decision_sha256": "c844f228f692b3bf19f2c73f06e8893ddda922b12148c4c16d71c3cd8e948614",
+  "confirmation_manifest_sha256": "9588d8d26e2e3c84c9d21fc0b26f3e28d23f87621e5c18493d78bf047e484b78",
+  "packet_manifest_sha256": "e606bbfd66e55f5949cc0a78e7222a9b8762c90bac12f26b920b5dae4103949b",
+  "training_verification_sha256": "f55e3840b528cf6f700bba4cb544c84f9916636586f5440008abc4c92b86cc51",
+  "seconds": 20.226919719018042
+}
