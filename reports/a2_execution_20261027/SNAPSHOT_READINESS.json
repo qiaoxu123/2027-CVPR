@@ -1,5 +1,5 @@
 {
-  "status": "full20plus5_training_and_artifacts_verified_calibration_running",
+  "status": "full_training_and_calibration_complete_no_reliable_gain_full_A0_A2_eval_deferred_for_user_requested_diagnosis",
   "cpu_tests": 322,
   "independent_review": "approve; findings=[]; 14 independent CPU regressions and git diff --check passed",
   "actual_adversarial_review": "Actual codex-companion adversarial-review invoked; failed with workspace routing discovery timed out. Independent read-only adversarial reviewer approved with no findings and14 CPU regression passes. Full local CPU suite322 passed.",
@@ -36,5 +36,8 @@
   "training_service_exit_code": 0,
   "selected_epoch": 21,
   "checkpoint_sha256": "44c57a2af9ecc8dcacbb4c7813fcb6c7d414f286969f0ef4f1d13edbbf84db8b",
-  "calibration_service": "graphnav-a2-calibrate-collected-20261028.service"
+  "calibration_service": "graphnav-a2-calibrate-collected-20261028.service",
+  "calibration_executed": true,
+  "calibration_gate_passed": false,
+  "effect_report": "NO_GAIN_ANALYSIS_ZH.md"
 }

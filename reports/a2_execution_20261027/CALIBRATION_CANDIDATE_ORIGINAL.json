@@ -1,0 +1,78 @@
+{
+  "enabled": false,
+  "alpha": 0.0,
+  "threshold": 1.0,
+  "temperature": 4.0,
+  "checkpoint_sha256": "44c57a2af9ecc8dcacbb4c7813fcb6c7d414f286969f0ef4f1d13edbbf84db8b",
+  "status": "candidate_requires_internal_closed_loop_pilot",
+  "gate_final": false,
+  "selected_fit_parameters": {
+    "alpha": 0.1,
+    "threshold": 0.5
+  },
+  "temperature_calibration": {
+    "sufficient": true,
+    "positive_labels": 408,
+    "negative_labels": 645,
+    "positive_groups": 65,
+    "negative_groups": 61,
+    "fit_losses": [
+      {
+        "temperature": 0.5,
+        "nll": 1.9069185331795273
+      },
+      {
+        "temperature": 1.0,
+        "nll": 1.05295675135804
+      },
+      {
+        "temperature": 2.0,
+        "nll": 0.6997856293563489
+      },
+      {
+        "temperature": 4.0,
+        "nll": 0.605781916482949
+      }
+    ],
+    "scope": "Temperature fitted on verified candidate labels in fit groups; unknown candidates have no BCE labels"
+  },
+  "verify_summary": {
+    "groups": 137,
+    "views": 2217,
+    "supported_groups": 41,
+    "a0_correct_groups": 131,
+    "broken_groups": 1,
+    "gain_groups": 1,
+    "mean_r1_difference": 8.110300081103002e-05,
+    "gain_ci95": [
+      -0.0012165450121654502,
+      0.0014598540145985403
+    ],
+    "mean_ne_difference_m": -0.007411022410582259,
+    "broken_group_rate": 0.007633587786259542,
+    "broken_group_wilson_upper95": 0.033488490698891246,
+    "metric": "dense-grid argmax R1 within20m on cached A0-onpolicy observations, equal target-instance weights; not navigation SR",
+    "risk_metric": "any original-correct observation broken in a target group / groups with any original-correct observation"
+  },
+  "verify_gate": {
+    "passed": false,
+    "checks": {
+      "enough_supported_groups": true,
+      "enough_a0_correct_groups": true,
+      "enough_gain_groups": false,
+      "positive_group_gain_lower_ci": false,
+      "bounded_group_break_risk": true,
+      "no_mean_ne_increase": true
+    }
+  },
+  "checkpoint_eligible": true,
+  "prediction_signature_sha256": "7feade4b9b27160d5db0a4ae0cbf57a97df30efb98ec230c7fb28d9f36ecc9dc",
+  "protocol_sha256": "8dd7d75451f8d4f3a9c7254fbe3982b2a70cf4a7c633f42cefca84179540a001",
+  "analysis_signature_sha256": "6a0e9cdb51d07e74b67fac710494933082acb79f11d1334f76128d1508612216",
+  "training_verification_sha256": "99a1ad6468c21db9150a431b331b6582e9733219e8582118294b2da1faa030cf",
+  "fit_groups": 123,
+  "verify_groups": 137,
+  "no_verify_reselection": true,
+  "benchmark_data_used": false,
+  "seconds": 66.77957669785246
+}

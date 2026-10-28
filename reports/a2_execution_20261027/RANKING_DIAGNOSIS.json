@@ -1,0 +1,38 @@
+{
+  "scope": "Frozen verify teacher cache; diagnostic only, no parameters changed",
+  "counts": {
+    "winner_cross_category_all_views": 801,
+    "positive_views": 441,
+    "positive_views_cross_category_winner": 94,
+    "oracle_target_category_only_winner_positive": 104,
+    "valid_pairs": 118323,
+    "height_valid_pairs": 11869
+  },
+  "by_target_kind": {
+    "1": {
+      "positive_views": 79,
+      "winner_positive": 23,
+      "winner_cross_category": 16
+    },
+    "0": {
+      "positive_views": 362,
+      "winner_positive": 49,
+      "winner_cross_category": 78
+    }
+  },
+  "common_contrast_population": {
+    "views": 204,
+    "known_candidate_mrr": 0.72835179526356,
+    "known_candidate_top1": 0.5686274509803921,
+    "full_pool_top1_verified_target": 0.05392156862745098
+  },
+  "oracle_category_mask_not_deployable": "Uses private target_kind for attribution only. No runtime GT category mask applied.",
+  "offset_target_group_statistics": {
+    "groups": 80,
+    "mean_euclidean_error_change_m": 0.1613543921370058,
+    "bootstrap95ci_m": [
+      0.045201317177240984,
+      0.2735845451342525
+    ]
+  }
+}

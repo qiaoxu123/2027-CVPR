@@ -1,0 +1,217 @@
+{
+  "status": "posthoc_frozen_verify_cache_diagnosis_no_gpu",
+  "scope": "137 heldout calibration targets, teacher trajectory observations only; exploratory causes, not navigation SR",
+  "checkpoint_sha256": "44c57a2af9ecc8dcacbb4c7813fcb6c7d414f286969f0ef4f1d13edbbf84db8b",
+  "parameters": {
+    "alpha": 0.1,
+    "threshold": 0.5,
+    "temperature": 4.0,
+    "enabled": true
+  },
+  "counts": {
+    "views": 2217,
+    "visible": 1301,
+    "with_landmark": 1500,
+    "no_detections": 100,
+    "with_reliable_candidate": 1445,
+    "with_associated_positive": 609,
+    "with_reliable_positive": 441,
+    "with_reachable_positive": 436,
+    "global_gate_pass": 174,
+    "with_eligible_candidate": 273,
+    "changed_belief": 91,
+    "changed_argmax": 7,
+    "a0_failure": 643,
+    "corrected": 1,
+    "broken": 1,
+    "positive_views_winner_positive": 72,
+    "positive_views_global_gate_pass": 75,
+    "positive_views_winner_known_negative": 8,
+    "positive_views_winner_outside_known_mask": 361,
+    "a0_failure_with_reliable_positive": 107,
+    "reachable_views_winner_reachable": 71,
+    "positive_box_count": 436,
+    "positive_offset_changes_nearest_cell": 24,
+    "failed_positive_structural_bound_population": 107,
+    "failed_positive_impossible_any_mass_preserving_alpha": 99,
+    "failed_positive_impossible_at_fixed_alpha": 107,
+    "gated_support_bound_population": 174,
+    "gated_single_cell_union": 84,
+    "gated_outside_peak_cannot_be_beaten_at_fixed_alpha": 139
+  },
+  "trust_label_counts": {
+    "positive_labels": 436,
+    "negative_labels": 1627,
+    "positive_pass_threshold": 48,
+    "negative_pass_threshold": 2
+  },
+  "measurements": {
+    "positive_trust": {
+      "n": 436,
+      "mean": 0.389572690317937,
+      "median": 0.396314799785614,
+      "p10": 0.2570728361606598,
+      "p90": 0.5051770508289337
+    },
+    "positive_center_error_m": {
+      "n": 436,
+      "mean": 0.6732995456977483,
+      "median": 0.28062134981155396,
+      "p10": 0.08432818204164505,
+      "p90": 2.0521605014801025
+    },
+    "positive_refined_error_m": {
+      "n": 436,
+      "mean": 0.763464937597479,
+      "median": 0.4017484188079834,
+      "p10": 0.15155460685491562,
+      "p90": 1.9532583355903625
+    },
+    "known_negative_trust": {
+      "n": 1627,
+      "mean": 0.22925363088824594,
+      "median": 0.22207970917224884,
+      "p10": 0.130394646525383,
+      "p90": 0.33686701059341434
+    },
+    "grid_pitch_m": {
+      "n": 2217,
+      "mean": 13.64571985082149,
+      "median": 14.28924560546875,
+      "p10": 13.742855072021484,
+      "p90": 14.289276123046875
+    },
+    "gated_support_probability_mass": {
+      "n": 174,
+      "mean": 0.10926047364522799,
+      "median": 0.07918466627597809,
+      "p10": 0.029209535755217075,
+      "p90": 0.24326295703649525
+    },
+    "gated_support_cells": {
+      "n": 174,
+      "mean": 2.8620689655172415,
+      "median": 2.0,
+      "p10": 1.0,
+      "p90": 5.700000000000017
+    }
+  },
+  "examples": {
+    "mass_bound_failures": [
+      {
+        "group": [
+          "birmingham_block_1",
+          115
+        ],
+        "episode": 401,
+        "step": 26,
+        "a0_ne_m": 32.28668975830078,
+        "positive_support_cells": 1,
+        "log_positive_support_mass": -3.4538631439208984,
+        "outside_max_logit": -3.0862128734588623
+      },
+      {
+        "group": [
+          "birmingham_block_1",
+          115
+        ],
+        "episode": 401,
+        "step": 78,
+        "a0_ne_m": 32.28668975830078,
+        "positive_support_cells": 1,
+        "log_positive_support_mass": -3.4538631439208984,
+        "outside_max_logit": -3.0862128734588623
+      },
+      {
+        "group": [
+          "birmingham_block_1",
+          115
+        ],
+        "episode": 401,
+        "step": 104,
+        "a0_ne_m": 32.28668975830078,
+        "positive_support_cells": 1,
+        "log_positive_support_mass": -3.4538631439208984,
+        "outside_max_logit": -3.0862128734588623
+      },
+      {
+        "group": [
+          "birmingham_block_1",
+          185
+        ],
+        "episode": 664,
+        "step": 114,
+        "a0_ne_m": 24.560733795166016,
+        "positive_support_cells": 1,
+        "log_positive_support_mass": -13.274964332580566,
+        "outside_max_logit": -12.600394248962402
+      }
+    ],
+    "baseline_failure_candidates": [
+      {
+        "group": [
+          "birmingham_block_1",
+          43
+        ],
+        "episode": 150,
+        "step": 15,
+        "a0_ne_m": 66.14315795898438,
+        "positive_available": true,
+        "winner_positive": false,
+        "winner_known": false,
+        "global_gate_pass": false,
+        "winner_trust": 0.36588817834854126,
+        "candidates": 300
+      },
+      {
+        "group": [
+          "birmingham_block_1",
+          43
+        ],
+        "episode": 150,
+        "step": 26,
+        "a0_ne_m": 66.14315795898438,
+        "positive_available": false,
+        "winner_positive": false,
+        "winner_known": false,
+        "global_gate_pass": false,
+        "winner_trust": 0.3314896523952484,
+        "candidates": 2
+      },
+      {
+        "group": [
+          "birmingham_block_1",
+          43
+        ],
+        "episode": 150,
+        "step": 31,
+        "a0_ne_m": 66.14315795898438,
+        "positive_available": false,
+        "winner_positive": false,
+        "winner_known": false,
+        "global_gate_pass": false,
+        "winner_trust": 0.4321996569633484,
+        "candidates": 5
+      },
+      {
+        "group": [
+          "birmingham_block_1",
+          43
+        ],
+        "episode": 151,
+        "step": 16,
+        "a0_ne_m": 89.65625,
+        "positive_available": true,
+        "winner_positive": false,
+        "winner_known": false,
+        "global_gate_pass": false,
+        "winner_trust": 0.29887211322784424,
+        "candidates": 28
+      }
+    ]
+  },
+  "structural_bound": "For positive-support union U, outside logits stay fixed and updated U mass equals original sum(U). If sum exp(base[U]) <= max exp(base[outside]), no mass-preserving local proposal can beat the outside peak, even with a perfect scorer and alpha=1. At fixed alpha, upper=(1-alpha)*max_inside+alpha*sum_inside.",
+  "no_refitting": true,
+  "no_new_parameter_selection": true,
+  "no_benchmark_data_used": true
+}
