@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.9.0-a2-public-road-reference-dev] - 2026-10-29
+### Features
+- Add inactive, opt-in exact public-region primitives and connected same-name road/footpath resolution, preserving holes and point-touching components.
+- Add public TRAIN/DEV name-availability inventory and tests for ambiguous names, invalid geometry, duplicate identities and legacy single-object behavior.
+### Design Rationale
+- Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
+- Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
+### Notes & Caveats
+- Not integrated into the running remote V3 experiment. No new trained checkpoint or navigation improvement is claimed.
+- Old caches lack full depth; planned grouped-reference height is explicitly missing in both training and inference. Feature rebuilding, full training and complete evaluation remain required.
+
 ## [0.8.0-a2-serial-navigation-handoff-dev] - 2026-10-28
 ### Features
 - Add a persistent serial handoff from actual completed confirmation to the fixed64 A0/A2 pilot, pilot verification, final freeze, complete Seen2470 and Unseen2697 A0/A2 arms, then the verified final report.

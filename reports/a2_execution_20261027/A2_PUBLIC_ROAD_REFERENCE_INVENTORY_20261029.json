@@ -1,0 +1,805 @@
+{
+  "status": "public_reference_inventory_complete",
+  "roles_sha256": "76487ee7b280f6b8ac220dee2cfe0189c76d47e4bdb7406820befef924a8cd49",
+  "annotation_sha256": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+  "public_objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "processed_descriptions_sha256": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b",
+  "unique_source_episodes": 12403,
+  "counts": {
+    "train": {
+      "observations": 33440,
+      "old_any_literal_reference": 22529,
+      "new_any_literal_reference": 28599,
+      "recovered_from_zero": 6126,
+      "lost_all_references": 56,
+      "has_public_road_group": 11095,
+      "recovered_distinct_targets": 687
+    },
+    "train/teacher_snapshot": {
+      "observations": 31415,
+      "old_any_literal_reference": 21291,
+      "new_any_literal_reference": 26895,
+      "recovered_from_zero": 5652,
+      "lost_all_references": 48,
+      "has_public_road_group": 10258,
+      "recovered_distinct_targets": 626
+    },
+    "dev": {
+      "observations": 5647,
+      "old_any_literal_reference": 3556,
+      "new_any_literal_reference": 4680,
+      "recovered_from_zero": 1124,
+      "lost_all_references": 0,
+      "has_public_road_group": 1778,
+      "recovered_distinct_targets": 121
+    },
+    "dev/teacher_snapshot": {
+      "observations": 4618,
+      "old_any_literal_reference": 2998,
+      "new_any_literal_reference": 3805,
+      "recovered_from_zero": 807,
+      "lost_all_references": 0,
+      "has_public_road_group": 1323,
+      "recovered_distinct_targets": 83
+    },
+    "train/revision_v1_A0_closedloop": {
+      "observations": 1004,
+      "old_any_literal_reference": 634,
+      "new_any_literal_reference": 879,
+      "recovered_from_zero": 245,
+      "lost_all_references": 0,
+      "has_public_road_group": 407,
+      "recovered_distinct_targets": 32
+    },
+    "dev/revision_v1_A0_closedloop": {
+      "observations": 1029,
+      "old_any_literal_reference": 558,
+      "new_any_literal_reference": 875,
+      "recovered_from_zero": 317,
+      "lost_all_references": 0,
+      "has_public_road_group": 455,
+      "recovered_distinct_targets": 38
+    },
+    "train/revision_v2_A0_closedloop": {
+      "observations": 1021,
+      "old_any_literal_reference": 604,
+      "new_any_literal_reference": 825,
+      "recovered_from_zero": 229,
+      "lost_all_references": 8,
+      "has_public_road_group": 430,
+      "recovered_distinct_targets": 29
+    }
+  },
+  "lost_reference_source_episode_examples": [
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7630,
+      "instruction": "The brown and white building with the brown roof on Castle Street next to the 12 Castle Street building.",
+      "queries": [
+        "Castle Street",
+        "12 Castle Street"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7634,
+      "instruction": "The brown building on Castle Street to the left of the 12 Castle Street building.",
+      "queries": [
+        "Castle Street",
+        "12 Castle Street"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7643,
+      "instruction": "The dark gray building on Castle Street to the right of the 12 Castle Street building.",
+      "queries": [
+        "Castle Street",
+        "12 Castle Street"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7645,
+      "instruction": "The dark gray building on Castle Street to the right of 12 Castle Street.",
+      "queries": [
+        "12 Castle Street",
+        "Castle Street"
+      ],
+      "old_references": [
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": true
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        }
+      ],
+      "new_references": [
+        {
+          "name": "12 Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7648,
+      "instruction": "The building on the corner of St Peter's Street and Castle Street next to the Castle Street Methodist Church.",
+      "queries": [
+        "St Peter's Street",
+        "Castle Street",
+        "Castle Street Methodist Church"
+      ],
+      "old_references": [
+        {
+          "name": "St Peter's Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "St Peter's Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street Methodist Church",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "St Peter's Street",
+          "linked": false,
+          "valid_mention": false,
+          "grouped": false
+        },
+        {
+          "name": "St Peter's Street",
+          "linked": false,
+          "valid_mention": false,
+          "grouped": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Castle Street Methodist Church",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7650,
+      "instruction": "A building next to the trees along Castle street road. It is near the Castle street Methodist Church.",
+      "queries": [
+        "Castle Street",
+        "Castle Street Methodist Church"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street Methodist Church",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Castle Street Methodist Church",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7651,
+      "instruction": "The small gray building on Castle Street to the left of the Castle Street Methodist Church.",
+      "queries": [
+        "Castle Street",
+        "Castle Street Methodist Church"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street Methodist Church",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Castle Street Methodist Church",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7652,
+      "instruction": "The gray house on Castle Street that is across from the 14-20 Castle Street building.",
+      "queries": [
+        "Castle Street",
+        "14-20 Castle Street"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "14-20 Castle Street",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "14-20 Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7708,
+      "instruction": "The building on Pound Hill road has that a stone or dirt area in front of it and a wall before the parked cars in front of it. It is diagonally across the road from the Pound Hill House.",
+      "queries": [
+        "Pound Hill",
+        "Pound Hill House"
+      ],
+      "old_references": [
+        {
+          "name": "Pound Hill",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Pound Hill",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Pound Hill House",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Pound Hill",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Pound Hill House",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7726,
+      "instruction": "This is a building with a steep brown roof on Pound Hill. In front of it there are several cars parked at an angle. This building is located next to Pound Hill House",
+      "queries": [
+        "Pound Hill",
+        "Pound Hill House"
+      ],
+      "old_references": [
+        {
+          "name": "Pound Hill",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Pound Hill",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Pound Hill House",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Pound Hill",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Pound Hill House",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 7888,
+      "instruction": "On the Pound Hill road, this brown roofed building is directly to the left of Pound Hill House has a red car next to it.",
+      "queries": [
+        "Pound Hill",
+        "Pound Hill House"
+      ],
+      "old_references": [
+        {
+          "name": "Pound Hill",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Pound Hill",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Pound Hill House",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Pound Hill",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Pound Hill House",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 9620,
+      "instruction": "A building on Park Street across from the Busway Park Street that has two blue front doors and no grass in the backyard and is slightly taller than the buildings on either side of it.",
+      "queries": [
+        "Park Street",
+        "The Busway Park Street"
+      ],
+      "old_references": [
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "The Busway Park Street",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Park Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "The Busway Park Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 9790,
+      "instruction": "The large building with a red roof at the corner of The Busway Park Street and Park Street.",
+      "queries": [
+        "The Busway Park Street",
+        "Park Street"
+      ],
+      "old_references": [
+        {
+          "name": "The Busway Park Street",
+          "linked": true,
+          "valid_mention": true
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Park Street",
+          "linked": false,
+          "valid_mention": false
+        }
+      ],
+      "new_references": [
+        {
+          "name": "The Busway Park Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        },
+        {
+          "name": "Park Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 15198,
+      "instruction": "One floor beige house with a gray roof off Gresham Road across from the cobwebs, 4 Gresham Road (Gonville & Caius College) near the edge of the map",
+      "queries": [
+        "Gresham Road",
+        "Cobwebs, 4 Gresham Road (Gonville & Caius College)"
+      ],
+      "old_references": [
+        {
+          "name": "Gresham Road",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Gresham Road",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Cobwebs, 4 Gresham Road (Gonville & Caius College)",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Gresham Road",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Cobwebs, 4 Gresham Road (Gonville & Caius College)",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 15384,
+      "instruction": "The white car parked next to a tree towards the bottom left of the parking lot behind the Kelsey Kerridge Sports Centre, Queen Anne Terrace.",
+      "queries": [
+        "Queen Anne Terrace",
+        "Kelsey Kerridge Sports Centre, Queen Anne Terrace"
+      ],
+      "old_references": [
+        {
+          "name": "Queen Anne Terrace",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Queen Anne Terrace",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Kelsey Kerridge Sports Centre, Queen Anne Terrace",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Queen Anne Terrace",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Kelsey Kerridge Sports Centre, Queen Anne Terrace",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "teacher_snapshot",
+      "episode": 15491,
+      "instruction": "The parking lot behind the Kelsey Kerridge Sports Centre, Queen Anne Terrace.",
+      "queries": [
+        "Queen Anne Terrace",
+        "Kelsey Kerridge Sports Centre, Queen Anne Terrace"
+      ],
+      "old_references": [
+        {
+          "name": "Queen Anne Terrace",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Queen Anne Terrace",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Kelsey Kerridge Sports Centre, Queen Anne Terrace",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Queen Anne Terrace",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "Kelsey Kerridge Sports Centre, Queen Anne Terrace",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    },
+    {
+      "source_kind": "revision_v2_A0_closedloop",
+      "episode": 7625,
+      "instruction": "This is a cut off building at the end of Castle Street, next to 14-20 Castle Street. It has a brown roof with skylight windows in it.",
+      "queries": [
+        "Castle Street",
+        "14-20 Castle Street"
+      ],
+      "old_references": [
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "Castle Street",
+          "linked": false,
+          "valid_mention": false
+        },
+        {
+          "name": "14-20 Castle Street",
+          "linked": true,
+          "valid_mention": true
+        }
+      ],
+      "new_references": [
+        {
+          "name": "Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": true
+        },
+        {
+          "name": "14-20 Castle Street",
+          "linked": true,
+          "valid_mention": false,
+          "grouped": false
+        }
+      ]
+    }
+  ],
+  "calibration_observations_opened": false,
+  "benchmark_used": false,
+  "model_run": false,
+  "limitations": [
+    "Public literal-reference availability only; no candidate coverage or navigation gain measured.",
+    "Complete role inventory checked; per-row feature reconstruction remains separate work."
+  ]
+}
