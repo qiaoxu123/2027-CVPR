@@ -1,0 +1,40 @@
+{
+  "observed_utc": "2026-10-28T19:48:19.151398+00:00",
+  "units": {
+    "graphnav-a2-reference-v4-pipeline-20261029.service": {
+      "MainPID": "2166345",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "cb443153b6b5486ca29cd51bd4556b59"
+    },
+    "graphnav-a2-reference-v4-confirmation-20261029.service": {
+      "MainPID": "2181923",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "b25d4b1aeda04e56bdb16659fb377b0a"
+    }
+  },
+  "queue": {
+    "state": "waiting_for_full_training_and_verification",
+    "phase": "training",
+    "pid": 2181924,
+    "timestamp": 1793216865.2279513,
+    "predecessor_unit": "graphnav-a2-reference-v4-pipeline-20261029.service",
+    "signature_sha256": "3c944eb866de6721c93a6a2d32d03c4a9357b5c0256acfbd90f1108a8ac861c4",
+    "objective_achieved": false,
+    "full_benchmark_completed": false,
+    "training_pid": 2166345
+  },
+  "gpu_compute_pids": [
+    2168279
+  ],
+  "completed_epochs": 2,
+  "posttraining_cpu_gate_sha256": "c67a6efea2d97d14823d7fa6dfb080b9cd21b10c22708129456535551cdbcd75",
+  "independent_observations_started": false,
+  "fit_choice_frozen": false,
+  "objective_achieved": false
+}
