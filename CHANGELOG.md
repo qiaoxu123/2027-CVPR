@@ -18,6 +18,7 @@
 - Add durable V4 post-training scheduling with authoritative predecessor-state checks, retry of unavailable observations, complete training/curve admission, serial GPU use and validated collection/FIT/replay/VERIFY phase reuse.
 - Add separate V4 navigation metadata/admission and public episode-population loading: preserve deterministic64 pilot queries, enforce complete2470/2697 exact episode-index sets, and reject stale/uncommitted/old-version calibration before runtime allocation.
 - Add V4 actual navigation execution/rescoring/resume, native RGB/belief capture, inference-only timing and post-pilot parameter freeze. Normalize pilot episode IDs from verified original records without changing the fixed query inventory.
+- Add actual-log/source-bound V4 navigation CPU preparation and complete frozen-result reporting with reused paired statistics, per-map tables, curves, examples and atomic publication. Refuse stale proof replacement after evaluation starts and refuse incomplete/changed final reports.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
