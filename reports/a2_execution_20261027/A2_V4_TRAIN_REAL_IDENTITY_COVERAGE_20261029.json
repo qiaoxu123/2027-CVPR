@@ -1,0 +1,47 @@
+{
+  "scope": "All 2025 existing autonomous TRAIN observations only; cached association coverage, not visual identity ground truth",
+  "roles_sha256": "76487ee7b280f6b8ac220dee2cfe0189c76d47e4bdb7406820befef924a8cd49",
+  "counts": {
+    "revision_v1_A0_closedloop": {
+      "views": 1004,
+      "candidates": 60691,
+      "views_with_candidates": 939,
+      "association_entries": 60691,
+      "views_with_association_entries": 939,
+      "views_without_private_fields": 0,
+      "known_identity_candidates": 1907,
+      "trusted_identity_candidates": 653,
+      "allowed_trusted_identity_candidates": 364,
+      "views_with_trusted_identity": 404,
+      "views_with_allowed_trusted_identity": 280,
+      "views_with_trusted_target_identity": 191,
+      "candidate_views_without_trusted_identity": 535
+    },
+    "revision_v2_A0_closedloop": {
+      "views": 1021,
+      "candidates": 59560,
+      "views_with_candidates": 990,
+      "association_entries": 0,
+      "views_with_association_entries": 0,
+      "views_without_private_fields": 1021,
+      "known_identity_candidates": 0,
+      "trusted_identity_candidates": 0,
+      "allowed_trusted_identity_candidates": 0,
+      "views_with_trusted_identity": 0,
+      "views_with_allowed_trusted_identity": 0,
+      "views_with_trusted_target_identity": 0,
+      "candidate_views_without_trusted_identity": 990
+    }
+  },
+  "processed": 2025,
+  "seconds": 7.125582456588745,
+  "no_gpu_used": true,
+  "no_new_inference": true,
+  "no_model_or_data_changes": true,
+  "independent_dev_or_benchmark_opened": false,
+  "limitations": [
+    "Cached trusted association is an algorithmic annotation and still requires image checks.",
+    "No association means unknown, not an incorrect detector.",
+    "Raw supervision_allowed flags are historical source flags, not authorization to train across current V4 target roles."
+  ]
+}
