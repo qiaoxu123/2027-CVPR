@@ -7,6 +7,7 @@
 - Add strict TRAIN-selection-only operating-point choice and unchanged-condition internal DEV assessment, including per-map/per-target outcomes and explicit no-safe-condition fallback.
 - Add read-only original-service lifecycle observation, binding all three unit execution identities and distinguishing live waiting from failed/missing/restarted jobs; actual server probe correctly remains waiting.
 - Add final-checkpoint admission reusing all25 artifact/curve verification and original queued-source proofs, requiring all original phases terminal without parsing benchmark performance; ineligible final weights remain explicitly diagnostic-only.
+- Add separate public-only CPU actor inference and private offline outcome attachment, preserving original15 feature bytes and exact unavailable-candidate fallback without updating model parameters.
 ### Design Rationale
 - Internal checks show harmful modifications both with and without useful candidates. Test richer evidence separately, preserving the active V4 model, code and evaluation queues.
 ### Notes & Caveats
