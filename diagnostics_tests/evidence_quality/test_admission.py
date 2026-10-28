@@ -1,5 +1,8 @@
 """Do not confuse live, missing or restarted units with completed experiments."""
 import importlib
+from copy import deepcopy
+import hashlib
+import json
 
 import pytest
 
@@ -62,3 +65,44 @@ def test_service_output_requires_all_three_explicit_unit_identities():
     assert api().parse_service_output('\n\n'.join(blocks)) == services
     with pytest.raises(api().ObservationUnavailable):
         api().parse_service_output('\n\n'.join(blocks[:2]))
+
+
+def checkpoint_headers():
+    from experiments.a2_waldo_landmark_belief.paths import A0_SHA
+    proof = dict(selected_epoch=23, checkpoint_eligible=False, a0_sha256=A0_SHA,
+                 config=dict(version='a2_relation_v4_public_roads'))
+    for key in ('code_sha256','roles_sha256','feature_manifest_sha256',
+                'feature_signature_sha256','feature_build_status_sha256'):
+        proof[key] = {'file.py':'a'*64} if key=='code_sha256' else 'b'*64
+    state = deepcopy(proof); state['epoch'] = state.pop('selected_epoch')
+    return state, proof
+
+
+def test_ineligible_final_checkpoint_is_diagnostic_only_not_relabelled_eligible():
+    state, proof = checkpoint_headers()
+    api().validate_checkpoint_header(state, proof)
+    assert state['checkpoint_eligible'] is False
+
+
+@pytest.mark.parametrize('change', ['epoch','roles','eligibility','version','functional'])
+def test_other_or_untrained_checkpoint_refused(change):
+    state, proof = checkpoint_headers()
+    if change=='epoch': state['epoch'] = 6
+    if change=='roles': state['roles_sha256'] = 'c'*64
+    if change=='eligibility': state['checkpoint_eligible'] = True
+    if change=='version': state['config']['version'] = 'old'
+    if change=='functional': state['scope'] = 'TRAIN_functional_only'
+    with pytest.raises(ValueError):
+        api().validate_checkpoint_header(state, proof)
+
+
+def test_live_service_stops_admission_before_training_artifact_access(tmp_path, monkeypatch):
+    module = api(); services, identities = observations()
+    services[next(iter(services))].update(MainPID='101', ActiveState='active', SubState='running')
+    path = tmp_path/'navigation_service_identity.json'
+    path.write_text(json.dumps(dict(units=identities)))
+    # Replace only unavailable external native observations and their identity file.
+    monkeypatch.setattr(module, 'LIVE_IDENTITY_SHA256', hashlib.sha256(path.read_bytes()).hexdigest())
+    monkeypatch.setattr(module, 'read_services', lambda: services)
+    assert module.admit(tmp_path) is None
+    assert not (tmp_path/'training').exists()

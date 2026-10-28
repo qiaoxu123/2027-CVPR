@@ -1,6 +1,8 @@
 """Observe the original three units without starting, stopping or changing jobs."""
 import os
 import subprocess
+import json
+from pathlib import Path
 
 
 UNITS = (
@@ -74,3 +76,75 @@ def require_terminal_services(services, identities):
                 ('active', 'exited'), ('inactive', 'dead')):
             raise ValueError('Unknown original experiment lifecycle')
     return ready
+
+
+def validate_checkpoint_header(state, proof):
+    """Allow an ineligible final state for diagnosis without changing eligibility."""
+    from experiments.a2_waldo_landmark_belief.paths import A0_SHA
+    keys = ('code_sha256', 'roles_sha256', 'feature_manifest_sha256',
+            'feature_signature_sha256', 'feature_build_status_sha256', 'config')
+    if (state.get('a0_sha256') != A0_SHA
+            or state.get('config', {}).get('version') != 'a2_relation_v4_public_roads'
+            or state.get('scope') == 'TRAIN_functional_only'
+            or state.get('epoch') not in range(21, 26)
+            or state.get('epoch') != proof.get('selected_epoch')
+            or type(state.get('checkpoint_eligible')) is not bool
+            or state['checkpoint_eligible'] != proof.get('checkpoint_eligible')
+            or any(state.get(key) != proof.get(key) for key in keys)):
+        raise ValueError('Final verified V4 diagnostic checkpoint binding changed')
+
+
+def admit(root):
+    """Read no observation tensors until original jobs and all25 proofs finish.
+
+    Benchmark performance is deliberately not parsed, even if the original
+    navigation job completed; its fixed code, native outcome and status bind
+    lifecycle only. This function never calls the final performance reporter.
+    """
+    from experiments.a2_waldo_landmark_belief.paths import sha, ROOT
+    root = Path(root)
+    identity_path = root/'navigation_service_identity.json'
+    if sha(identity_path) != LIVE_IDENTITY_SHA256:
+        raise ValueError('Original predeclared native identity bytes changed')
+    identity = json.loads(identity_path.read_text())
+    services = read_services()
+    if not require_terminal_services(services, identity['units']):
+        return None
+
+    from experiments.a2_waldo_landmark_belief.reference_v4_confirmation_pipeline import admitted_training
+    from experiments.a2_waldo_landmark_belief.reference_v4_navigation_sources import require_cpu_gates, cpu_signature
+    from experiments.a2_waldo_landmark_belief.reference_v4_navigation_pipeline import (
+        predecessor_outcome, POST_UNIT, NAV_UNIT, ADMITTED, REJECTED, WRAPPER,
+    )
+    require_cpu_gates(root)
+    if json.loads((root/'navigation_pipeline_signature.json').read_text()) != cpu_signature(root):
+        raise ValueError('Original navigation queue sources changed')
+    confirmation_identity = json.loads((root/'confirmation_service_identity.json').read_text())
+    post = json.loads((root/'post_pipeline_status.json').read_text())
+    outcome = predecessor_outcome(services[POST_UNIT], post, confirmation_identity)
+    nav = json.loads((root/'navigation_pipeline_status.json').read_text())
+    permitted = ({'full_benchmarks_and_report_complete', 'real_pilot_rejected_no_benchmark'}
+                 if outcome == ADMITTED else {'internal_confirmation_not_admitted'} if outcome in REJECTED else set())
+    if (nav.get('state') not in permitted or nav.get('phase') != 'finished'
+            or nav.get('confirmation_outcome') != outcome
+            or nav.get('native_main_pid') != int(identity['units'][NAV_UNIT]['MainPID'])
+            or nav.get('systemd_invocation_id') != services[NAV_UNIT]['InvocationID']
+            or nav.get('execution_script_sha256') != sha(ROOT/WRAPPER)
+            or nav.get('signature_sha256') != sha(root/'navigation_pipeline_signature.json')
+            or nav.get('full_benchmark_completed') is not (nav.get('state') == 'full_benchmarks_and_report_complete')):
+        raise ValueError('Original navigation lifecycle not fully concluded')
+    proof = admitted_training(root)  # Rehash all25 artifacts and actual curves.
+    checkpoint = root/'training/best.pt'
+    if proof['checkpoint_sha256'] != sha(checkpoint):
+        raise ValueError('Selected checkpoint differs from verified training')
+    import torch
+    state = torch.load(checkpoint, map_location='cpu', weights_only=False)
+    validate_checkpoint_header(state, proof)
+    return dict(checkpoint=str(checkpoint.resolve()), checkpoint_sha256=sha(checkpoint),
+                selected_epoch=proof['selected_epoch'], checkpoint_eligible=proof['checkpoint_eligible'],
+                roles_sha256=proof['roles_sha256'], feature_manifest_sha256=proof['feature_manifest_sha256'],
+                verification_sha256=sha(root/'training/artifact_verification.json'),
+                curve_manifest_sha256=sha(root/'training/curve_manifest.json'),
+                native_identity_sha256=LIVE_IDENTITY_SHA256,
+                original_navigation_state=nav['state'], original_confirmation_outcome=outcome,
+                diagnostic_only=True, no_runtime_enablement=True)

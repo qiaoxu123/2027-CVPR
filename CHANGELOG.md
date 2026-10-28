@@ -6,10 +6,11 @@
 - Add target-grouped TRAIN-only fixed20-round CPU linear fitting, fit-only normalization, equal zero initialization for15/22-feature comparisons, and class-weight-corrected predictions.
 - Add strict TRAIN-selection-only operating-point choice and unchanged-condition internal DEV assessment, including per-map/per-target outcomes and explicit no-safe-condition fallback.
 - Add read-only original-service lifecycle observation, binding all three unit execution identities and distinguishing live waiting from failed/missing/restarted jobs; actual server probe correctly remains waiting.
+- Add final-checkpoint admission reusing all25 artifact/curve verification and original queued-source proofs, requiring all original phases terminal without parsing benchmark performance; ineligible final weights remain explicitly diagnostic-only.
 ### Design Rationale
 - Internal checks show harmful modifications both with and without useful candidates. Test richer evidence separately, preserving the active V4 model, code and evaluation queues.
 ### Notes & Caveats
-- Feature, fitting, condition and service-wait primitives only: final training-artifact admission/export, durable condition binding and complete report execution are not implemented or executed yet. No new policy is enabled, and no A2>A0 improvement is established.
+- Actual data export, durable condition binding and complete report execution remain unimplemented. Final artifact admission has synthetic coverage and an actual live-wait refusal, but cannot yet be exercised on successful real completion. No new policy is enabled, and no A2>A0 improvement is established.
 - New implementation/tests live outside frozen V4 inventories; all48 training source files remain byte-identical to ac03d24. CPU tests cover masked relationships, empty/single candidates, confidence weights, nonfinite inputs and private-label exclusion.
 
 ## [0.9.0-a2-public-road-reference-dev] - 2026-10-29
