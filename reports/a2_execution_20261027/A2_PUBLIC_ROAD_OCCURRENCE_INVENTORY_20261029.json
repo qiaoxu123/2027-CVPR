@@ -1,0 +1,89 @@
+{
+  "status": "public_reference_inventory_complete",
+  "roles_sha256": "76487ee7b280f6b8ac220dee2cfe0189c76d47e4bdb7406820befef924a8cd49",
+  "mention_mode": "occurrence-v1",
+  "annotation_sha256": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+  "public_objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "processed_descriptions_sha256": "8b12575039e6fff6d70d5c616ff4f9ac5693a230d4ffe6716aabfa9afaac410b",
+  "unique_source_episodes": 12403,
+  "counts": {
+    "train": {
+      "observations": 33440,
+      "old_any_literal_reference": 22529,
+      "new_any_literal_reference": 28700,
+      "grouped_with_legacy_matcher_any_reference": 28599,
+      "recovered_from_zero": 6171,
+      "lost_all_references": 0,
+      "has_public_road_group": 11095,
+      "recovered_distinct_targets": 687
+    },
+    "train/teacher_snapshot": {
+      "observations": 31415,
+      "old_any_literal_reference": 21291,
+      "new_any_literal_reference": 26988,
+      "grouped_with_legacy_matcher_any_reference": 26895,
+      "recovered_from_zero": 5697,
+      "lost_all_references": 0,
+      "has_public_road_group": 10258,
+      "recovered_distinct_targets": 626
+    },
+    "dev": {
+      "observations": 5647,
+      "old_any_literal_reference": 3556,
+      "new_any_literal_reference": 4686,
+      "grouped_with_legacy_matcher_any_reference": 4680,
+      "recovered_from_zero": 1130,
+      "lost_all_references": 0,
+      "has_public_road_group": 1778,
+      "recovered_distinct_targets": 121
+    },
+    "dev/teacher_snapshot": {
+      "observations": 4618,
+      "old_any_literal_reference": 2998,
+      "new_any_literal_reference": 3811,
+      "grouped_with_legacy_matcher_any_reference": 3805,
+      "recovered_from_zero": 813,
+      "lost_all_references": 0,
+      "has_public_road_group": 1323,
+      "recovered_distinct_targets": 83
+    },
+    "train/revision_v1_A0_closedloop": {
+      "observations": 1004,
+      "old_any_literal_reference": 634,
+      "new_any_literal_reference": 879,
+      "grouped_with_legacy_matcher_any_reference": 879,
+      "recovered_from_zero": 245,
+      "lost_all_references": 0,
+      "has_public_road_group": 407,
+      "recovered_distinct_targets": 32
+    },
+    "dev/revision_v1_A0_closedloop": {
+      "observations": 1029,
+      "old_any_literal_reference": 558,
+      "new_any_literal_reference": 875,
+      "grouped_with_legacy_matcher_any_reference": 875,
+      "recovered_from_zero": 317,
+      "lost_all_references": 0,
+      "has_public_road_group": 455,
+      "recovered_distinct_targets": 38
+    },
+    "train/revision_v2_A0_closedloop": {
+      "observations": 1021,
+      "old_any_literal_reference": 604,
+      "new_any_literal_reference": 833,
+      "grouped_with_legacy_matcher_any_reference": 825,
+      "recovered_from_zero": 229,
+      "lost_all_references": 0,
+      "has_public_road_group": 430,
+      "recovered_distinct_targets": 29
+    }
+  },
+  "lost_reference_source_episode_examples": [],
+  "calibration_observations_opened": false,
+  "benchmark_used": false,
+  "model_run": false,
+  "limitations": [
+    "Public literal-reference availability only; no candidate coverage or navigation gain measured.",
+    "Complete role inventory checked; per-row feature reconstruction remains separate work."
+  ]
+}

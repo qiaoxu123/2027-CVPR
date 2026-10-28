@@ -20,6 +20,12 @@ Use deterministic member ordering and a public membership-derived identifier. St
 
 Deduplicate normalized queries before resolution; entity identity is (map, sorted member IDs), not alias spelling. Canonical spelling/type text is deterministic from sorted public members. Union accepted public aliases once. If distinct entities claim one exact alias or overlapping instruction mention, mask all conflicting entities. Reject partially overlapping membership groups instead of silently enlarging them. These choices were checked independently against the current resolver/mention consumers.
 
+### Occurrence-specific refinement after full inventory
+
+The first complete inventory exposed56 lost TRAIN observations over17 source instructions because legacy matching masks every appearance of a reference when any one appearance overlaps another public name. Example: a separately mentioned Castle Street plus 12 Castle Street. New opt-in occurrence matching uses only exact word-bounded literal public names. At each textual occurrence a strictly containing longer public name suppresses its shorter nested substring; equal-span claims by distinct entities and partially crossing spans remain ambiguous at that occurrence. Independent nonoverlapping appearances are retained. Apply full-text containment before token coverage so truncation cannot manufacture a shorter verified name. This refines the earlier whole-reference overlap rule above; the original V3 matcher remains untouched.
+
+Complete repeated inventory now has zero lost-any-reference observations, recovering6,171 TRAIN and1,130 DEV observations over687/121 targets. This is public input availability, not localization or navigation evidence. New modules have61 focused/legacy CPU tests, including exact singleton geometry parity and missing grouped height independent of supplied depth values.
+
 ## Exact geometry representation
 
 Existing code assumes one Nx2 contour in core.box_landmark_geometry and perception.extract. Do not pass concatenated rings, a bounding rectangle or a convex hull into that API. Introduce a separately versioned public region representation containing polygon exterior/interior rings; retain the original constituent shapes for auditing. Build the exact geometric union, supporting holes and multiple components. A connected intersection graph can still yield a MultiPolygon when members touch at a point.
