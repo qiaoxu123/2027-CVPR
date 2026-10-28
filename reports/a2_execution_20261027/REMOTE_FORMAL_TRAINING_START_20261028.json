@@ -1,0 +1,74 @@
+{
+  "observed_at": 1793193000.7690463,
+  "runtime_commit": "2750656b2be176acce3bd9610ce6be654b76ee11",
+  "branch": "research/a2-waldo-landmark-belief-20261027",
+  "launch_manifest_sha256": "68d6a4f6725e632c1b944ef0b9d3361ac1695307ee765781508960c4638b7799",
+  "archive_sha256": "50c150dc854b2fc17de877f2868da3a76c77aae08083f43b6cb02f4c24a1cc53",
+  "archive_verified_extracted": true,
+  "source_service": {
+    "MainPID": "1994428",
+    "ExecMainStatus": "0",
+    "ActiveState": "active",
+    "SubState": "running"
+  },
+  "training_processes": [
+    "1995622 /home/20261024_1/miniconda3/envs/graphnav/bin/python -u -m experiments.a2_waldo_landmark_belief.relation_v3_train --resume",
+    "1996302 /home/20261024_1/miniconda3/envs/graphnav/bin/python -u -m experiments.a2_waldo_landmark_belief.relation_v3_train --resume",
+    "1996304 /home/20261024_1/miniconda3/envs/graphnav/bin/python -u -m experiments.a2_waldo_landmark_belief.relation_v3_train --resume"
+  ],
+  "train_views": 33440,
+  "dev_views": 5647,
+  "data_audit_status": "all_v3_TRAIN_dev_rows_sha_and_labels_audited",
+  "cuda_status": "v3_real_TRAIN_CUDA_backward_passed",
+  "cuda_steps": 6,
+  "runtime_status": "v3_real_TRAIN_runtime_preflight_passed",
+  "runtime_proof_sha256": "9d8a737729bd53f2a32b854cc28b5995a0e59a5daf2529510f8e6c4e28b0c5c5",
+  "latest_training_batch": {
+    "batch": 500,
+    "views": 4000,
+    "training": true,
+    "seconds": 59.6227583468426
+  },
+  "completed_epochs": 0,
+  "required_ranking_epochs": 20,
+  "required_refinement_epochs": 5,
+  "improvement_verified": false,
+  "full_benchmark_completed": false,
+  "transport": "101.43.173.9:41022",
+  "environment_repair": {
+    "phase": "after_ref_repair",
+    "returncode": 0,
+    "refs": [
+      {
+        "repo": "bert-base-uncased",
+        "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+        "path": "/mnt/hdd8t/Workspace/2027-CVPR-A2-20261028/legacy_home/.cache/huggingface/hub/models--bert-base-uncased/refs/main",
+        "sha256": "2cddf5a9b63cbf6d5c80c1f9c5ceee322cd0a5d614774e6daf7e37e99ad94d94"
+      },
+      {
+        "repo": "google/siglip2-large-patch16-384",
+        "revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+        "path": "/mnt/hdd8t/Workspace/2027-CVPR-A2-20261028/legacy_home/.cache/huggingface/hub/models--google--siglip2-large-patch16-384/refs/main",
+        "sha256": "168de87e9b423a6fcda612684057fbc179450efd1ac668319a73cea6d8e66ca0"
+      }
+    ],
+    "stdout": "{\"bert\": \"86b5e0934494bd15c9632b12f734a8a67f723594\", \"siglip\": \"1b426889ea62b5a72bf9839009a1b184bfc9c178\", \"bert_tokenizer\": \"BertTokenizerFast\", \"image_processor\": \"SiglipImageProcessor\"}\n",
+    "stderr_tail": "Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.\n",
+    "scientific_source_changed": false,
+    "model_weights_changed": false
+  },
+  "post_status": {
+    "state": "waiting_for_full_training_and_verification",
+    "phase": "training",
+    "pid": 1994434,
+    "timestamp": 1793192960.2557015,
+    "training_pid": 1994428
+  },
+  "navigation_status": {
+    "state": "waiting_for_complete_confirmation",
+    "phase": "confirmation",
+    "pid": 1994438,
+    "time": 1793192960.9794679,
+    "predecessor_pid": 1994432
+  }
+}
