@@ -6,10 +6,12 @@
 - Add untrained evidence-only relation/ranking and risk-head prototypes; candidate ranking excludes A0 prior shortcuts, offsets stay frozen, and observed4m kernels use stable direct coordinate differences.
 - Add source-bound full TRAIN/dev loader and spatial/category utility labels, with exact canonical observation populations and role-SHA guards. Unknown object identities remain unlabelled.
 - Add full-pool utility ranking/trust, relation/category/proposal losses and fixed-action refinement losses; risk-only gradients cannot change the evidence actor, and real-state rows receive absolute8x weight.
+- Integrate the full20+5 trainer, stage21 best-rank restore/fresh optimizer, byte-bound resume/aliases, real/teacher DEV metrics, actual per-epoch inference packets, TensorBoard, all25 DEV/optimizer/artifact verification and exported curves.
+- Add isolated CPU and real-TRAIN CUDA gates,32-target A0/OFF/ON functional preflight with full native belief checksums, and a serial persistent GPU-idle scheduler. Untrained functional policies are limited to signed TRAIN queries; formal enabled gates require independent84FIT/209VERIFY evidence.
 ### Design Rationale
 - Opened FIT diagnostics found more tested single-candidate localization opportunities than current mixed proposals. Real frozen-A0 states supplement teacher-state training; unknown object identities remain unknown.
 ### Notes & Caveats
-- V3 remains untrained. All39087 TRAIN/dev rows passed the integrity-hardened loader audit (386.68s);408CPU tests and six real-TRAIN CPU backward updates passed. CUDA smoke, trainer/runtime integration and full20+5 remain incomplete. No V3 performance or final A0/A2 full-benchmark result exists.
+- V3 remains untrained. All39087 TRAIN/dev rows passed the integrity-hardened loader audit (386.68s);429CPU tests and six real-TRAIN CPU backward updates passed. Trainer/runtime are implemented; actual CUDA smoke/preflight, full20+5, independent confirmation and full navigation remain incomplete. No V3 performance or final A0/A2 full-benchmark result exists.
 - Existing130 VERIFY targets were observed and machine-preprocessed, but not used for comparative performance feedback. The next model must exclude all calibration supervision and statistics, then freeze before one heldout aggregate.
 
 ## [0.4.0-a2-direct-risk-dev] - 2026-10-28

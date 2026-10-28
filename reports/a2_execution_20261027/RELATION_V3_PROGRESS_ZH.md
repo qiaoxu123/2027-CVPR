@@ -25,10 +25,12 @@ V3保留原冻结A0、WALDO、BERT、SigLIP2、导航控制器和28×28网格。
 
 ## 已验证及尚未完成
 
-- 新模型、loss、source role和选模代码所在CPU测试集408项通过，1条既有rasterio警告。
+- 新模型、loss、source role、训练器/运行时/复核及调度代码所在CPU测试集429项通过，1条既有rasterio警告。
 - [真实TRAIN CPU反传](RELATION_V3_CPU_BACKWARD.json)覆盖三种来源各2条，进行了3次排序和3次精修更新，损失/梯度有限。它不是CUDA Smoke，不是正式训练，也不是效果评估。
 - loss、role/来源隔离、完整性加固及选模规则经独立CPU只读审查。实际调用的adversarial-review插件因workspace routing discovery timeout未返回有效报告，不能称为该插件审查通过；调用日志保留服务器。
-- 开发集选模规则已编码：realDEV安全收益优先，同一门控检查teacherDEV保全；分阶段选择checkpoint，全部refinement门控不合格只能保存诊断checkpoint，不消费freshFIT。训练器仍需真实执行20+5、阶段切换、optimizer处理，并逐epoch重新计算同一checkpoint的Q和风险结果。
-- 下一步为训练器/运行时集成、真实CUDA反传和控制器/OFF检查、完整20+5及内部选模。合格后才进行独立FIT/VERIFY、真实闭环pilot，最后完整双验证集评测。当前没有V3正式训练曲线或最终导航提升。
+- 完整训练器与运行时已接入：分阶段选模、stage21恢复best_rank并重置AdamW、原子保存及断点恢复、每轮同checkpoint验证、TensorBoard和逐25轮实际DEV复算。产物证明覆盖所有轮次权重、验证包、日志事件和协议，恢复时不只检查最佳轮次。
+- 串行服务会等待GPU空闲，再执行真实CUDA反传、32TRAIN目标A0/OFF/ON检查、完整20+5和产物复核/曲线导出。真实CUDA检查尚未完成；后续状态以实际服务与进程为准，入队不等于训练开始。
+- 服务`graphnav-a2-relation-v3-pipeline-20261028.service`现已启动；13:15后的实际进程与源码/初始权重证明核验见[服务快照](RELATION_V3_PIPELINE_READY.json)。快照时为等待4个外部GPU任务结束，CUDA尚未开始。快照不是持续在线状态，后续应检查实际systemd服务和进程。
+- 合格后才进行独立FIT/VERIFY、真实闭环pilot，最后完整双验证集评测。当前没有V3正式训练曲线或最终导航提升。
 
 大文件、逐条原始数据、CPU测试及审计日志保留在`runs/a2_waldo_landmark_20261027/`。
