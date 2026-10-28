@@ -12,6 +12,7 @@
 - Complete all39,087 fresh reference overlays and add V4 CPU/CUDA preparation, feature-bound runtime policy, exact32-target three-arm sparse runtime checks, and independent all25-checkpoint verification/curve export. Admission rechecks actual replay evidence and CPU logs instead of trusting summary flags.
 - Add separate V4 independent-confirmation metadata preparation preserving original163 fresh/130 sealed target queries and binding the new feature cache. This step hashes opaque source bytes only; observation collection and final calibration remain separate.
 - Add V4-only independent163-target collection with verified full-training admission, exact A0 shadowOFF capture, feature-bound resume and labels attached only after complete rollouts. No independent observations are collected by deployment or metadata preparation.
+- Add V4 fresh-record packet loading with independent FIT/VERIFY barriers, exact actual-score/action preservation and checkpoint/feature-bound FIT cache checks. Mismatched trained-model caches are rejected even when file commitments are internally consistent.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
