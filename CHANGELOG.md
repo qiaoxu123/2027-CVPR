@@ -6,6 +6,7 @@
 - Add public TRAIN/DEV name-availability inventory and tests for ambiguous names, invalid geometry, duplicate identities and legacy single-object behavior.
 - Add opt-in occurrence-specific exact public-name matching and shared union relationship geometry; preserve independent mentions and exact legacy singleton feature outputs without enabling the new path in V3.
 - Add a public-only reference feature rebuild adapter and separate new-region TRAIN label builder, verified with actual frozen CPU BERT on all available source schemas. Newly available references with no legacy surface summary have explicit missing height; original image/instruction/spatial inputs remain unchanged.
+- Add complete CPU-only TRAIN/DEV overlay construction with immutable-parent byte checks, resumable signature-bound files and strict complete-population loading. Overlays store only changed public reference features; existing image features and private labels are reused from audited parents.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
