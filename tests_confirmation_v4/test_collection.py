@@ -52,3 +52,14 @@ def test_no_eligible_model_leaves_independent_population_unconsumed(monkeypatch)
     def forbidden():raise AssertionError('No data preparation or collection before eligible full training')
     monkeypatch.setattr(m,'prepare',forbidden)
     with pytest.raises(ValueError,match='do not consume'):m.collect()
+
+
+def test_actual_collection_requires_posttraining_cpu_proof_before_source_access(tmp_path,monkeypatch):
+    root,state,_=setup(tmp_path,monkeypatch);m=collector()
+    monkeypatch.setattr(m,'BASE',root.parent);monkeypatch.setattr(m,'require_idle_gpu',lambda **kwargs:None)
+    monkeypatch.setattr(m,'checked_state',lambda checkpoint:state)
+    monkeypatch.setattr(m,'prepare',lambda:None)
+    def forbidden(*args,**kwargs):raise AssertionError('Source access before posttraining CPU admission')
+    monkeypatch.setattr(m,'verify_cache_origin',forbidden)
+    with pytest.raises(FileNotFoundError,match='posttraining_cpu_gates'):
+        m.collect()

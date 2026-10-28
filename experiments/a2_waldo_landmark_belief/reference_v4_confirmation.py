@@ -21,7 +21,7 @@ from .train import atomic_checkpoint
 
 
 def collection_code_hashes():
-    names=('reference_v4_confirmation.py','reference_v4_confirmation_protocol.py',
+    names=('reference_v4_confirmation.py','reference_v4_confirmation_protocol.py','reference_v4_confirmation_preparation.py',
            'relation_v3_confirmation.py','direct_risk_confirmation.py','revision_eval_protocol.py',
            'relation_v3_confirmation_protocol.py')
     return dict(training_code_hashes(),**{name:sha(ROOT/'experiments/a2_waldo_landmark_belief'/name) for name in names})
@@ -51,7 +51,10 @@ def collect():
     root=BASE/'revision_v4';directory=root/'confirmation';checkpoint=root/'training/best.pt'
     require_idle_gpu();state=checked_state(checkpoint)
     if not state['checkpoint_eligible']:raise ValueError('No eligible full25 candidate; do not consume fresh confirmation')
-    prepare();verify_cache_origin(BASE/'collected_snapshot')
+    prepare()
+    from .reference_v4_confirmation_preparation import require_cpu_gates
+    require_cpu_gates(root)
+    verify_cache_origin(BASE/'collected_snapshot')
     population=json.loads((root/'confirmation_population.json').read_text());entries=population['fresh_entries']
     if len(entries)!=163:raise ValueError('All163 predeclared fresh targets required')
     from .prepare import cache_signature

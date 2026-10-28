@@ -14,6 +14,7 @@
 - Add V4-only independent163-target collection with verified full-training admission, exact A0 shadowOFF capture, feature-bound resume and labels attached only after complete rollouts. No independent observations are collected by deployment or metadata preparation.
 - Add V4 fresh-record packet loading with independent FIT/VERIFY barriers, exact actual-score/action preservation and checkpoint/feature-bound FIT cache checks. Mismatched trained-model caches are rejected even when file commitments are internally consistent.
 - Add V4-only immutable FIT-choice/result recording and independent CPU preparation. Failed independent checks explicitly report rejection; only passing candidates advance to a real pilot. CPU proof replacement is prohibited after observation capture or a FIT choice.
+- Add exact-query V4 sealed-observation reference rebuilding and fresh inference using frozen BERT and the shared public adapter. Require frozen FIT choice and current post-training CPU proof before sealed decoding; validate original1034-row population and resumable commitments.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
