@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0-a2-direct-risk-dev] - 2026-10-28
+### Features
+- Preserve completed v1 relation20+5 and its rejected independent confirmation; add isolated public prior/proposal risk features and direct neutral/gain/harm head primitives.
+- Reserve256 new never-observed TRAIN-source targets; add complete frozen originalTRAIN/dev probe extraction, integrity checks and opened-FIT transfer diagnostics.
+### Design Rationale
+- v1 safe gate improved only3heldout groups with confidence interval starting0. Direct fixed-action outcome supervision and actual safe operatingpoint selection address the demonstrated mismatch between AUC/distance scores and deployed correction.
+- Keep completed relation/proposal behavior frozen; additional head20+5, new independent confirmation and full navigation remain required. Balanced scores are not probability guarantees.
+### Notes & Caveats
+- Risk head primitives are CPU-tested, not yet formally trained or CUDA-qualified. Diagnostic classifier AUC gains produced no corrections at transferred dev thresholds and do not prove navigation improvement.
+- v1 original code/weights/calibration and A0/A1 remain unchanged. No new benchmark evaluation or forced gate has occurred.
+
 ## [0.3.0-a2-revision-dev] - 2026-10-28
 ### Features
 - Add isolated fresh-seed A2 revision with trusted cross-category negatives, full-pool spatial proposal supervision, current-A0 context, instruction category consistency and a separate benefit gate.
