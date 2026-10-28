@@ -1,0 +1,38 @@
+{
+  "status": "full20plus5_training_complete_calibration_running",
+  "rank_epochs": 20,
+  "refine_epochs": 5,
+  "chosen_epoch": 21,
+  "checkpoint_eligible": true,
+  "checkpoint_sha256": "44c57a2af9ecc8dcacbb4c7813fcb6c7d414f286969f0ef4f1d13edbbf84db8b",
+  "history_sha256": "b6d51a3ba90a66adb8d575b96621cc8cb677036a4ec8dc8e6a4d0ba385e27c89",
+  "train_views_per_epoch": 31415,
+  "dev_views_per_epoch": 4618,
+  "calibration_used_for_selection": false,
+  "benchmark_data_used": false,
+  "selected_internal_dev": {
+    "loss": 0.5963313570713981,
+    "ranking": 0.3629041576997465,
+    "direction": 0.5397343565921645,
+    "distance": 0.014468593918825615,
+    "match": 0.4329307016106052,
+    "offset": 0.1440018576915925,
+    "views": 4618,
+    "informative_views": 485,
+    "optimizer_updates": 0,
+    "known_candidate_mrr": 0.7547717231222382,
+    "known_candidate_top1": 0.6061855670103092,
+    "offset_mae_m": 0.4570854755865778,
+    "internal_dev_probe": {
+      "a0_correct": 3170,
+      "a2_correct": 3163,
+      "corrected": 1,
+      "broken": 8,
+      "unchanged_belief": 4345
+    },
+    "seconds": 10.524007528787479
+  },
+  "training_service_exit_code": 0,
+  "total_train_dev_compute_seconds": 2169.306751453085,
+  "benchmark_evaluation_complete": false
+}

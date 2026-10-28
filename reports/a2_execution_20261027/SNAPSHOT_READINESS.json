@@ -1,5 +1,5 @@
 {
-  "status": "full20plus5_training_started_after_cpu_data_and_cuda_gates",
+  "status": "full20plus5_training_and_artifacts_verified_calibration_running",
   "cpu_tests": 322,
   "independent_review": "approve; findings=[]; 14 independent CPU regressions and git diff --check passed",
   "actual_adversarial_review": "Actual codex-companion adversarial-review invoked; failed with workspace routing discovery timed out. Independent read-only adversarial reviewer approved with no findings and14 CPU regression passes. Full local CPU suite322 passed.",
@@ -12,7 +12,7 @@
   "data_report": "COLLECTED_SNAPSHOT.json",
   "calibration_on_policy": false,
   "gate_enabled": false,
-  "full_training_complete": false,
+  "full_training_complete": true,
   "full_evaluation_complete": false,
   "data_audit": "all40259rows verified; target overlap0; cross-partition supervised candidates0",
   "informative_views": {
@@ -25,12 +25,16 @@
   "training_cache": "runs/a2_waldo_landmark_20261027/collected_snapshot",
   "training_output": "runs/a2_waldo_landmark_20261027/training_collected",
   "training_log": "runs/a2_waldo_landmark_20261027/training_collected.log",
-  "service_stage": "first ranking epoch active",
+  "service_stage": "independent calibration; benchmark evaluation not started",
   "training_started": true,
   "first_batch": {
     "views": 800,
     "rank_views": 155,
     "loss": 1.9972733418643474
   },
-  "monitor_interval_seconds": 300
+  "monitor_interval_seconds": 300,
+  "training_service_exit_code": 0,
+  "selected_epoch": 21,
+  "checkpoint_sha256": "44c57a2af9ecc8dcacbb4c7813fcb6c7d414f286969f0ef4f1d13edbbf84db8b",
+  "calibration_service": "graphnav-a2-calibrate-collected-20261028.service"
 }
