@@ -18,20 +18,20 @@ Seed0; frozen A0/WALDO/BERT/SigLIP2/controller; grid28; original datasets/result
 - Existing opened calibration cannot be reused as untouched confirmation; no repeated Unseen selection.
 
 ### Task1: Context and bounded fusion
-- [ ] Add failing tests in tests/test_a2_revision_fusion.py for outside-peak correction, exact fallback, normalization/support and gradients.
-- [ ] Implement revision_fusion.py: a0_candidate_context(spatial), proposal_distribution(...), bounded_belief_mix(base,proposal,gate).
-- [ ] Run tests; CPU TRAIN oracle verifies changed mechanism actually can correct cases old mass conservation could not.
+- [x] Add failing tests in tests/test_a2_revision_fusion.py for outside-peak correction, exact fallback, normalization/support and gradients.
+- [x] Implement revision_fusion.py: a0_candidate_context(spatial), proposal_distribution(...), bounded_belief_mix(base,proposal,gate).
+- [x] Run tests; CPU TRAIN oracle verifies changed mechanism actually can correct cases old mass conservation could not.
 
 ### Task2: Data and new network
 - [x] Reserve256 unused original dev/calibration targets before new labels/training; exclude old cached target identities.
-- [ ] Tests for revision_data labels, cross-category supervision and original/derived target isolation.
-- [ ] Implement revision_data.py derived loader; revision_model.py new instruction category, A0-aware rank/trust/benefit heads, zero offset.
-- [ ] Add synthetic gradient/no-GT tests and all-row data audit. Do not modify old model/labels/fusion files.
+- [x] Tests for revision_data labels, cross-category supervision and original/derived target isolation.
+- [x] Implement revision_data.py derived loader; revision_model.py new instruction category, A0-aware rank/trust/benefit heads, zero offset.
+- [x] Add synthetic gradient/no-GT tests and all-row data audit. Do not modify old model/labels/fusion files.
 
 ### Task3: Loss, trainer and readiness
-- [ ] Implement revision_loss.py and revision_train.py explicit full20+5, proposal/map/benefit/risk supervision and full-pool selection; resume/hash/artifact guards.
-- [ ] CPU suite, actual CUDA TRAIN gradient gate, independent adversarial review; pin code/data.
-- [ ] Train under shared flock; supervise actual unit/process and epoch/checkpoint/TB. Export curves and commit/push summaries.
+- [x] Implement revision_loss.py and revision_train.py explicit full20+5, proposal/map/benefit/risk supervision and full-pool selection; resume/hash/artifact guards.
+- [x] CPU suite, actual CUDA TRAIN gradient gate, independent adversarial review; pin code/data.
+- [ ] RUNNING: Train under shared flock; supervise actual unit/process and epoch/checkpoint/TB. Export curves and commit/push summaries.
 
 ### Task4: Independent calibration and real pilot
 - [ ] Preserve new unused TRAIN confirmation targets and split fit/verify before sampling; fixed candidate first.
@@ -42,3 +42,9 @@ Seed0; frozen A0/WALDO/BERT/SigLIP2/controller; grid28; original datasets/result
 - [ ] After internal pass and immutable freeze, complete A0/A2 Seen2470 and Unseen2697, same episodes/controller; resumable raw traces.
 - [ ] Full metrics, maps, paired statistics, coverage/latency/fallback, curves and A0/A1 preserved conclusion.
 - [ ] Independently rescore, verify hashes/remote commits, audit success. Mark goal complete only if actual objective proven.
+
+## Execution ledger 2026-10-28
+- Implementation fa44c8a: full data/340CPU/CUDA/review passed; full20+5 started in graphnav-a2-revision-v1-train-20261028.service with immutable code/data pin.
+- Runtime/artifact verifier 5af035d: 344CPU pass, actual cache parity0 error; actual frozen-model CUDA runtime and controller/pilot still pending.
+- Current first6 completed epochs: latest dev cached-map R1 .69965 vs A0 .68644, corrected89/broken28; this is NOT navigation SR or final confirmation.
+- Never edit pinned training files while unit live. New confirmation/calibration/pilot/full-evaluation files remain to implement.
