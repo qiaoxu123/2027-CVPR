@@ -8,10 +8,11 @@
 - Add read-only original-service lifecycle observation, binding all three unit execution identities and distinguishing live waiting from failed/missing/restarted jobs; actual server probe correctly remains waiting.
 - Add final-checkpoint admission reusing all25 artifact/curve verification and original queued-source proofs, requiring all original phases terminal without parsing benchmark performance; ineligible final weights remain explicitly diagnostic-only.
 - Add separate public-only CPU actor inference and private offline outcome attachment, preserving original15 feature bytes and exact unavailable-candidate fallback without updating model parameters.
+- Add atomic per-role numeric packet storage with exact2025/1029 population checks, ordered source/overlay identity commitments, corruption refusal and distance/outcome consistency validation.
 ### Design Rationale
 - Internal checks show harmful modifications both with and without useful candidates. Test richer evidence separately, preserving the active V4 model, code and evaluation queues.
 ### Notes & Caveats
-- Actual data export, durable condition binding and complete report execution remain unimplemented. Final artifact admission has synthetic coverage and an actual live-wait refusal, but cannot yet be exercised on successful real completion. No new policy is enabled, and no A2>A0 improvement is established.
+- Actual inference-to-packet export orchestration, durable condition binding and complete report execution remain unimplemented. Storage has synthetic full-population coverage. Final artifact admission has synthetic coverage and an actual live-wait refusal, but cannot yet be exercised on successful real completion. No new policy is enabled, and no A2>A0 improvement is established.
 - New implementation/tests live outside frozen V4 inventories; all48 training source files remain byte-identical to ac03d24. CPU tests cover masked relationships, empty/single candidates, confidence weights, nonfinite inputs and private-label exclusion.
 
 ## [0.9.0-a2-public-road-reference-dev] - 2026-10-29
