@@ -1,0 +1,121 @@
+{
+  "status": "direct_risk_real_TRAIN_cuda_backward_passed",
+  "signature": {
+    "config": {
+      "version": "a2_direct_risk_v2",
+      "seed": 0,
+      "discrimination_epochs": 20,
+      "refinement_epochs": 5,
+      "batch_size": 512,
+      "lr": 0.01,
+      "weight_decay": 0.001,
+      "gradient_clip": 5.0,
+      "workers": 0,
+      "refinement_cost_weight": 0.2,
+      "harm_cost": 10.0,
+      "fixed_action": 0.25,
+      "stage21": "continue epoch20 weights and optimizer",
+      "gain_quantiles": [
+        0.0,
+        0.25,
+        0.5,
+        0.75,
+        0.9,
+        0.95
+      ],
+      "harm_quantiles": [
+        0.05,
+        0.1,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "temperatures": [
+        0.5,
+        1.0,
+        2.0,
+        4.0
+      ],
+      "selection": "dev safe operatingpoint primary; AUC auxiliary; all25 completed first"
+    },
+    "code_sha256": {
+      "direct_risk_train.py": "148cb4467b3e21b1f31644ac2801dd9c4dfa752261af9e4597309e7df1abb7af",
+      "direct_risk_head.py": "027f35e68e479dbf107ba8f8b7e40eee80d960dd0b3c94943fbdacffa4ea91ac",
+      "direct_risk_data.py": "bf6e7226fa74320f16b135c6310b936956bbbaa70c649d15f38dc0ef63f865fe",
+      "direct_risk_protocol.py": "74fe6ce63f294b474f26b323242e0f17b86ee6953c40608fd9cfe896ebf74412",
+      "risk_probe.py": "3e42a303251734f78b7f33f19b1fb41e87993192cc6d324528be7de80caf2622",
+      "revision_fusion.py": "98436e4407405355b6cb5ac5defe11cf9608ffff11a3811cb60beb9cb5ab62a1",
+      "revision_confirmation.py": "6cbf4abffeb83577012b6f68845a4b774651c96cf0055288c1867866bc2f3c31",
+      "train.py": "55cdcae6077d13095859efba85e0d714474dfe752edfc0236c81b9e668e71c23",
+      "artifact_protocol.py": "5b6c0f60b34769644c6e116c6f89fc493865f8126bea84505d49abda80b34f7e",
+      "paths.py": "5dafd364a06e92764e68f40860e2a7e9b1c4599b03459998e5ec4c4194fed263"
+    },
+    "lineage": {
+      "source_complete_sha256": "8c29aa069930e4efb992a0be926382978a80907c740d63ca68ba202ccc420ef6",
+      "source_signature_sha256": "6170eca78d804c54c4f69fd8a895c28475752fb10d1362fd20257231ea33d11e",
+      "rank_checkpoint_sha256": "b5f7ae68659d1550c77e6d1cb4c32447433e9c2d459b2e4b2ac221ef45a2fc9d",
+      "rank_training_proof_sha256": "f55e3840b528cf6f700bba4cb544c84f9916636586f5440008abc4c92b86cc51",
+      "rank_training_marker_sha256": "2309431a64676d4697a0d4a21d08a1b43c4880881ee5f984b41c7b2a1ed8b6aa",
+      "next_reserve_sha256": "07d883357d84093c6d03be90c461c256882f6c501bf19afd471191221a4dc65a"
+    },
+    "a0_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "initial_model_sha256": "ff2dc1581a919d3753ec608ac8d7d8d1f8479ea951da2f82e8b6016244416576",
+    "normalization": {
+      "mean": [
+        0.5293454527854919,
+        0.13275651633739471,
+        0.10143584758043289,
+        0.33701053261756897,
+        0.015726562589406967,
+        0.20924298465251923,
+        0.0358988456428051,
+        0.39785802364349365,
+        0.05767659842967987,
+        0.30263301730155945,
+        0.041799258440732956,
+        0.09237900376319885,
+        0.21353879570960999,
+        0.34881114959716797,
+        0.6488301753997803
+      ],
+      "std": [
+        0.09019586443901062,
+        0.1343318372964859,
+        0.04631191864609718,
+        0.3166322112083435,
+        0.01926434226334095,
+        0.28761401772499084,
+        0.04438360407948494,
+        0.14870421588420868,
+        0.0999808982014656,
+        0.3637818396091461,
+        0.0520632304251194,
+        0.19771888852119446,
+        0.27967220544815063,
+        0.34009698033332825,
+        0.47733592987060547
+      ],
+      "class_weights": [
+        0.419554740190506,
+        3.9131789207458496,
+        2.77028226852417
+      ]
+    },
+    "previous_relation_schedule": "completed20ranking+5belief refinement, frozen unchanged",
+    "new_head_schedule": "additional20risk discrimination+5belief risk refinement",
+    "benchmark_used": false,
+    "confirmation_used": false
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "steps": 6,
+  "losses": [
+    1.1757562160491943,
+    1.1235030889511108,
+    1.0751081705093384,
+    1.0440099239349365,
+    1.0048866271972656,
+    0.9698116183280945
+  ],
+  "initial_model_sha256": "ff2dc1581a919d3753ec608ac8d7d8d1f8479ea951da2f82e8b6016244416576",
+  "foundation_parameters_loaded_for_training": false
+}
