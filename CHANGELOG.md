@@ -8,11 +8,13 @@
 - Add full-pool utility ranking/trust, relation/category/proposal losses and fixed-action refinement losses; risk-only gradients cannot change the evidence actor, and real-state rows receive absolute8x weight.
 - Integrate the full20+5 trainer, stage21 best-rank restore/fresh optimizer, byte-bound resume/aliases, real/teacher DEV metrics, actual per-epoch inference packets, TensorBoard, all25 DEV/optimizer/artifact verification and exported curves.
 - Add isolated CPU and real-TRAIN CUDA gates,32-target A0/OFF/ON functional preflight with full native belief checksums, and a serial persistent GPU-idle scheduler. Untrained functional policies are limited to signed TRAIN queries; formal enabled gates require independent84FIT/209VERIFY evidence.
+- Prepare the fixed163fresh confirmation inventory (84FIT/79VERIFY) plus the opaque existing130VERIFY seal. Add a full-training-gated shadowOFF collector with actual RGB/source hashes, post-whole-rollout labels, partial replay archives and actual-inference packet checks.
 ### Design Rationale
 - Opened FIT diagnostics found more tested single-candidate localization opportunities than current mixed proposals. Real frozen-A0 states supplement teacher-state training; unknown object identities remain unknown.
 ### Notes & Caveats
 - V3 remains untrained. All39087 TRAIN/dev rows passed the integrity-hardened loader audit (386.68s);429CPU tests and six real-TRAIN CPU backward updates passed. Trainer/runtime are implemented; actual CUDA smoke/preflight, full20+5, independent confirmation and full navigation remain incomplete. No V3 performance or final A0/A2 full-benchmark result exists.
 - Existing130 VERIFY targets were observed and machine-preprocessed, but not used for comparative performance feedback. The next model must exclude all calibration supervision and statistics, then freeze before one heldout aggregate.
+- Post-training-stage tests live separately in tests_confirmation_v3 so the queued training's429-test source proof stays immutable. Combined CPU validation is438passed; no new confirmation observations or heldout performance feedback have been consumed. Actual GPU/CPU packet tolerance and final navigation still require real execution.
 
 ## [0.4.0-a2-direct-risk-dev] - 2026-10-28
 ### Features
