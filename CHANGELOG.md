@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.6.0-a2-remote-execution-dev] - 2026-10-28
+### Features
+- Prepare the user-requested RTX5090 migration with exact-file dataset/model reuse, direct remote code/public-weight retrieval and an isolated environment; stop and preserve the local untrained waiters before migration.
+- Keep GPU admission exclusive by default. An explicit source-bound policy may exempt only user-approved existing background services matching UID, executable argument, complete command digest and instance cap; any other A2 or unknown process still blocks. Never stop other users' services.
+- Use the actual user UID for the calibration scheduler's systemd runtime directory rather than a machine-specific UID.
+### Design Rationale
+- The new host already serves speech models. Resource admission must distinguish those explicitly approved services from another experiment, while retaining serial A2 execution and unchanged data/model/controller/20+5 configuration.
+### Notes & Caveats
+- Old untrained V3 source proofs and initial tensors were archived before changes. They are historical evidence, not current remote authorization: rebuild CPU/CUDA/functional proofs on the new host and require the same initial-weight fingerprint before training.
+- Migration and transfers remain in progress. No remote formal epoch or final A0/A2 improvement is claimed. Background speech traffic and different hardware must be disclosed with latency results.
+
 ## [0.5.0-a2-onpolicy-relation-dev] - 2026-10-28
 ### Features
 - Preserve v2's failed FIT calibration, with no VERIFY performance aggregate, and version the next target-disjoint data roles: TRAIN33440, DEV5647, independent FIT84 and VERIFY209 targets.

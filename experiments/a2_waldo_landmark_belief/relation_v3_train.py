@@ -21,7 +21,8 @@ CODE_FILES=('relation_v3_train.py','relation_v3_epoch.py','relation_v3_protocol.
     'relation_v3_model.py','relation_v3_fusion.py','relation_v3_loss.py','model.py','core.py','risk_probe.py',
     'revision_fusion.py','batching.py','paths.py','train.py','training_protocol.py','collected_snapshot.py',
     'data_protocol.py','perception.py','observed_geometry.py','direct_risk_protocol.py','policy.py','mentions.py',
-    'prepare.py','revision_confirmation.py','calibration_protocol.py','relation_v3_verify.py','relation_v3_pipeline.py','relation_v3_provenance.py','artifact_protocol.py')
+    'prepare.py','revision_confirmation.py','calibration_protocol.py','relation_v3_verify.py','relation_v3_pipeline.py','relation_v3_provenance.py','artifact_protocol.py',
+    'gpu_execution_policy.py','gpu_execution_policy.json')
 
 
 def code_hashes():return {n:sha(ROOT/'experiments/a2_waldo_landmark_belief'/n) for n in CODE_FILES}
@@ -35,9 +36,8 @@ def fingerprint(weights):
 
 
 def require_idle_gpu(*,allow_self=False):
-    apps=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True).strip()
-    pids=[int(s.strip()) for s in apps.splitlines() if s.strip()]
-    if any(not allow_self or pid!=os.getpid() for pid in pids):raise ValueError('GPU occupied; no parallel A2 GPU work allowed')
+    from .gpu_execution_policy import blocking_gpu_pids
+    if blocking_gpu_pids(allow_self=allow_self):raise ValueError('GPU occupied; no parallel A2 GPU work allowed')
 
 
 def optimizer_for(model):

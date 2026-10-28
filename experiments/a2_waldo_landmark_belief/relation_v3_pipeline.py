@@ -52,8 +52,8 @@ def phase_done(name,root,hashes,roles):
 
 
 def gpu_pids():
-    output=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True)
-    return [int(s.strip()) for s in output.splitlines() if s.strip()]
+    from .gpu_execution_policy import blocking_gpu_pids
+    return blocking_gpu_pids()
 
 
 def is_busy_rejection(log,offset):

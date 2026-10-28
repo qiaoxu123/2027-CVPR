@@ -82,7 +82,7 @@ def run_pipeline():
     def unchanged():
         if cpu_signature(root)!=signature:raise ValueError('Queued post-training source/roles/tests changed')
     while True:
-        unchanged();environment=dict(os.environ,XDG_RUNTIME_DIR='/run/user/1001')
+        unchanged();environment=dict(os.environ,XDG_RUNTIME_DIR=f'/run/user/{os.getuid()}')
         text=subprocess.check_output(['systemctl','--user','show',unit,'-p','LoadState','-p','ActiveState','-p','SubState','-p','MainPID','-p','ExecMainStatus','-p','Result'],text=True,env=environment)
         service=dict(line.split('=',1) for line in text.strip().splitlines())
         files_ready=(root/'training/artifact_verification.json').exists() and (root/'training/curve_manifest.json').exists()
