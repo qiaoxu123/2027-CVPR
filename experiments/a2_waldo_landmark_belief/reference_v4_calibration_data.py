@@ -20,7 +20,8 @@ FEATURE_KEYS=('feature_manifest_sha256','feature_signature_sha256','feature_buil
 
 
 def calibration_code_hashes():
-    names=('reference_v4_sealed_replay.py','reference_v4_replay_context.py','relation_v3_sealed_replay.py',
+    names=('reference_v4_confirmation_pipeline.py','relation_v3_confirmation_pipeline.py','relation_v3_pipeline.py',
+           'reference_v4_sealed_replay.py','reference_v4_replay_context.py','relation_v3_sealed_replay.py',
            'reference_v4_confirmation_preparation.py','reference_v4_calibrate.py','reference_v4_calibration_data.py','relation_v3_calibration_data.py','relation_v3_gate_fit.py',
            'relation_v3_packet.py','direct_risk_calibrate.py','revision_calibrate.py')
     return dict(collection_code_hashes(),**{name:sha(ROOT/'experiments/a2_waldo_landmark_belief'/name) for name in names})

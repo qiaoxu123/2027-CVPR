@@ -49,8 +49,8 @@ Interfaces: `collect()` admits only verified eligible V4 best.pt;163 fixed fresh
 
 Files: separate `reference_v4_calibration_data.py`, `reference_v4_calibrate.py`, `reference_v4_sealed_replay.py`; tests in `tests_confirmation_v4/`.
 Interfaces: feature-bound packet datasets, immutable FIT choice and analysis signatures compatible with `reference_v4_provenance.validate_gate`.
-- [ ] Test role barriers, population completeness, stale feature/packet rejection and no-candidate VERIFY refusal.
-- [ ] Implement public-only rebuilt old observations; recompute real V4 predictions, never reuse V3 predictions; sealed labels only after frozen FIT choice.
+- [x] Test role barriers, population completeness, stale feature/packet rejection and no-candidate VERIFY refusal.
+- [x] Implement public-only rebuilt old observations; recompute real V4 predictions, never reuse V3 predictions; sealed labels only after frozen FIT choice.
 - [ ] CPU suite; serial actual collection/FIT/replay/VERIFY only after eligible training proof.
 
 ### Task4: Frozen full navigation and reports
@@ -79,3 +79,5 @@ Interfaces: immutable validated calibration + full checkpoint;64 TRAIN pilot; fu
 
 - Task3 third component: added `reference_v4_replay_context.py` and `reference_v4_sealed_replay.py` for exact old130 VERIFY public queries, fresh frozen-BERT name/geometry rebuilding and actual V4 inference, preserving original image/A0 inputs and copying target tensors only after forward. Three context and four replay tests first failed on missing implementation. Additional delayed-target-access test and direct collector CPU-admission regression added; the latter failed before guard enforcement and passed after. Full regression641 passed,1 pre-existing warning in18.28s. Supplemental review found no concrete defects. Actual CPU numerical probe on six real rebuilt TRAIN views across all three source families passed with initial model; proof is functional only, not independent performance. Full replay/resume on eligible trained model remains unexecuted.
 - Independent metadata/protocol and all core numerical paths exist, but the durable serial post-training scheduler and full-navigation handoff remain pending. No FIT choice or actual independent confirmation has been consumed. Remote full epochs1 and2 completed, and the same trainer2168279 remains live.
+
+- Task3 scheduler: added `reference_v4_confirmation_pipeline.py`, requiring authoritative successful terminal predecessor state plus complete25 proof and curve bytes, transient observation retry on same handle, no-eligible refusal, serial GPU-idle-gated collect/FIT/replay/VERIFY and actual phase-result validation. Seven new orchestration tests pass; full regression648 passed,1 existing warning in25.62s. Supplementary read-only review found no concrete defects. Added native confirmation adapter retaining exact canonical proot binds; bash syntax checked. Real remote post-stage CPU gate and queued deployment are next; navigation pilot/full benchmark are still pending.
