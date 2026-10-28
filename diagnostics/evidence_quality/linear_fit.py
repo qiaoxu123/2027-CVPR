@@ -49,7 +49,7 @@ def fit_linear(features, outcomes, identities, *, width):
     scale = torch.where(scale < 1e-6, torch.ones_like(scale), scale)
     z = (selected - mean) / scale
     y = outcomes[fit]
-    history = []
+    history, snapshots = [], []
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(0)
         model = nn.Linear(width, 3)
@@ -65,9 +65,11 @@ def fit_linear(features, outcomes, identities, *, width):
             optimizer.zero_grad(set_to_none=True)
             loss.backward(); optimizer.step()
             history.append(dict(epoch=epoch, loss=float(loss.detach())))
+            snapshots.append(dict(epoch=epoch, weight=model.weight.detach().clone(),
+                                  bias=model.bias.detach().clone()))
     return dict(width=width, mean=mean.clone(), scale=scale.clone(),
                 weight=model.weight.detach().clone(), bias=model.bias.detach().clone(),
-                history=history, fit_rows=int(fit.sum()), selection_rows=int((~fit).sum()),
+                history=history, snapshots=snapshots, fit_rows=int(fit.sum()), selection_rows=int((~fit).sum()),
                 initialization='zero', seed=0, epochs=20)
 
 

@@ -72,3 +72,11 @@ def test_invalid_fit_input_rejected(change):
     if change == 'wrong_width': width = 16
     with pytest.raises(ValueError):
         api().fit_linear(x, y, identities(), width=width)
+
+
+def test_every_epoch_retains_its_actual_weights_and_final_matches_epoch20():
+    x,y=sample();state=api().fit_linear(x,y,identities(),width=22)
+    assert [r['epoch'] for r in state['snapshots']]==list(range(1,21))
+    assert torch.equal(state['weight'],state['snapshots'][-1]['weight'])
+    assert torch.equal(state['bias'],state['snapshots'][-1]['bias'])
+    assert not torch.equal(state['snapshots'][0]['weight'],state['snapshots'][-1]['weight'])
