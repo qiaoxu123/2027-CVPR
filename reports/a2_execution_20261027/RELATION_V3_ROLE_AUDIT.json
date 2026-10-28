@@ -1,0 +1,34 @@
+{
+  "status": "v3_target_disjoint_roles_fixed_before_training",
+  "roles_sha256": "76487ee7b280f6b8ac220dee2cfe0189c76d47e4bdb7406820befef924a8cd49",
+  "lineage": {
+    "original_source_sha256": "1550841badcb0d353f75967962ad531eac85f1d4aac263587cf0ddabc9926e9c",
+    "snapshot_manifest_sha256": "d5b43b96deba43d4d0ea8087c16c110cd7a271c67ad4232f8b63e6aad57af261",
+    "v1_manifest_sha256": "9588d8d26e2e3c84c9d21fc0b26f3e28d23f87621e5c18493d78bf047e484b78",
+    "v2_manifest_sha256": "6f22b520668d5230e3315b775e05394739d966e0144112fcbd5f4089f6dbe06d",
+    "v2_failed_candidate_sha256": "07f091307d4f683cb5acf3cdf884d0571ae0864dfe497e6dd959435182adce2e",
+    "v2_fit_decision_sha256": "6c783742af7342c94b11fea26f4b62bb0a6309cad038316f3b8caee9951594ef",
+    "preparation_code_sha256": "63ec88bd1f88c2ca19522d98845664680d5c4d4d4b0ecc34df30db274dd66336"
+  },
+  "observation_counts": {
+    "train": 33440,
+    "dev": 5647,
+    "calibration_verify": 1034
+  },
+  "target_counts": {
+    "train": 2161,
+    "dev": 410,
+    "calibration_fit": 84,
+    "calibration_verify": 209
+  },
+  "old_view_files_scanned": 41850,
+  "fresh_observations_collected": false,
+  "fresh_targets_split_by_original_fixed_hash": {
+    "verify": 79,
+    "fit": 84
+  },
+  "sealed_existing_verify_targets": 130,
+  "sealed_verify_performance_aggregated": false,
+  "all_target_roles_disjoint": true,
+  "note": "v1FIT127+v2FIT126 become TRAIN; v1VERIFY129 becomes DEV; prior versions unchanged; role audit does not prove future loss masking"
+}

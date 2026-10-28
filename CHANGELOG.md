@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.5.0-a2-onpolicy-relation-dev] - 2026-10-28
+### Features
+- Preserve v2's failed FIT calibration, with no VERIFY performance aggregate, and version the next target-disjoint data roles: TRAIN33440, DEV5647, independent FIT84 and VERIFY209 targets.
+- Add untrained evidence-only relation/ranking and risk-head prototypes; candidate ranking excludes A0 prior shortcuts, offsets stay frozen, and observed4m kernels use stable direct coordinate differences.
+- Add source-bound full TRAIN/dev loader and spatial/category utility labels, with exact canonical observation populations and role-SHA guards. Unknown object identities remain unlabelled.
+- Add full-pool utility ranking/trust, relation/category/proposal losses and fixed-action refinement losses; risk-only gradients cannot change the evidence actor, and real-state rows receive absolute8x weight.
+### Design Rationale
+- Opened FIT diagnostics found more tested single-candidate localization opportunities than current mixed proposals. Real frozen-A0 states supplement teacher-state training; unknown object identities remain unknown.
+### Notes & Caveats
+- V3 remains untrained. All39087 TRAIN/dev rows passed the integrity-hardened loader audit (386.68s);408CPU tests and six real-TRAIN CPU backward updates passed. CUDA smoke, trainer/runtime integration and full20+5 remain incomplete. No V3 performance or final A0/A2 full-benchmark result exists.
+- Existing130 VERIFY targets were observed and machine-preprocessed, but not used for comparative performance feedback. The next model must exclude all calibration supervision and statistics, then freeze before one heldout aggregate.
+
 ## [0.4.0-a2-direct-risk-dev] - 2026-10-28
 ### Features
 - Preserve completed v1 relation20+5 and its rejected independent confirmation; add isolated public prior/proposal risk features and direct neutral/gain/harm head primitives.
@@ -8,7 +20,7 @@
 - v1 safe gate improved only3heldout groups with confidence interval starting0. Direct fixed-action outcome supervision and actual safe operatingpoint selection address the demonstrated mismatch between AUC/distance scores and deployed correction.
 - Keep completed relation/proposal behavior frozen; additional head20+5, new independent confirmation and full navigation remain required. Balanced scores are not probability guarantees.
 ### Notes & Caveats
-- Risk head completed actual real-TRAIN CUDA backward and all additional20+5epochs;1550updates and all25dev-checkpoint recomputations verified. Fresh independent confirmation and final navigation are still pending. Diagnostic classifier AUC gains do not prove navigation improvement.
+- Risk head completed actual real-TRAIN CUDA backward and all additional20+5epochs;1550updates and all25dev-checkpoint recomputations verified. Independent256-target/2055-view confirmation completed; all30FIT gates failed, enabled=false and no VERIFY performance aggregate was invoked. Final navigation remains incomplete. Diagnostic classifier AUC does not prove navigation improvement.
 - v1 original code/weights/calibration and A0/A1 remain unchanged. No new benchmark evaluation or forced gate has occurred.
 
 ## [0.3.0-a2-revision-dev] - 2026-10-28

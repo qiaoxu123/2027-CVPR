@@ -1,0 +1,118 @@
+{
+  "status": "all_v3_TRAIN_dev_rows_sha_and_labels_audited",
+  "roles_sha256": "76487ee7b280f6b8ac220dee2cfe0189c76d47e4bdb7406820befef924a8cd49",
+  "label_code_sha256": {
+    "relation_v3_data.py": "6c23b02cf81422c18b4398045a370b8acfe1d3b6cbbf3f2bff336a336241e811",
+    "relation_v3_fusion.py": "4ad7dca4c43646b00fbe2ebe80d3ba15ed3d95665c8adbc1b0517f72e7d2483f",
+    "core.py": "8b0456bc3e4ae59aaffd73c6b827c11ec26692af3129ed35dc479ba6302b5efc"
+  },
+  "counts": {
+    "train": {
+      "counts": {
+        "views": 33440,
+        "valid_candidates": 1262312,
+        "positive_candidates": 203715,
+        "negative_candidates": 1058597,
+        "positive_views": 15007,
+        "contrast_views": 12858,
+        "same_category_negative_candidates": 749491,
+        "geometric_positive_candidates": 223427,
+        "unknown_target_kind_views": 3150,
+        "valid_reference_labels": 27331,
+        "identity_labels_used": 0
+      },
+      "by_source": {
+        "teacher_snapshot": {
+          "views": 31415,
+          "valid_candidates": 1183645,
+          "positive_candidates": 194230,
+          "negative_candidates": 989415,
+          "positive_views": 14387,
+          "contrast_views": 12266,
+          "same_category_negative_candidates": 701801,
+          "geometric_positive_candidates": 213024,
+          "unknown_target_kind_views": 2967,
+          "valid_reference_labels": 25841,
+          "identity_labels_used": 0
+        },
+        "revision_v1_A0_closedloop": {
+          "views": 1004,
+          "valid_candidates": 39616,
+          "positive_candidates": 4591,
+          "negative_candidates": 35025,
+          "positive_views": 313,
+          "contrast_views": 298,
+          "same_category_negative_candidates": 22543,
+          "geometric_positive_candidates": 5073,
+          "unknown_target_kind_views": 124,
+          "valid_reference_labels": 736,
+          "identity_labels_used": 0
+        },
+        "revision_v2_A0_closedloop": {
+          "views": 1021,
+          "valid_candidates": 39051,
+          "positive_candidates": 4894,
+          "negative_candidates": 34157,
+          "positive_views": 307,
+          "contrast_views": 294,
+          "same_category_negative_candidates": 25147,
+          "geometric_positive_candidates": 5330,
+          "unknown_target_kind_views": 59,
+          "valid_reference_labels": 754,
+          "identity_labels_used": 0
+        }
+      },
+      "targets": 2161,
+      "objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+    },
+    "dev": {
+      "counts": {
+        "views": 5647,
+        "valid_candidates": 223760,
+        "positive_candidates": 34701,
+        "negative_candidates": 189059,
+        "positive_views": 2352,
+        "contrast_views": 2079,
+        "same_category_negative_candidates": 135052,
+        "geometric_positive_candidates": 38104,
+        "unknown_target_kind_views": 577,
+        "valid_reference_labels": 4350,
+        "identity_labels_used": 0
+      },
+      "by_source": {
+        "teacher_snapshot": {
+          "views": 4618,
+          "valid_candidates": 179826,
+          "positive_candidates": 29337,
+          "negative_candidates": 150489,
+          "positive_views": 2029,
+          "contrast_views": 1761,
+          "same_category_negative_candidates": 107556,
+          "geometric_positive_candidates": 32483,
+          "unknown_target_kind_views": 473,
+          "valid_reference_labels": 3699,
+          "identity_labels_used": 0
+        },
+        "revision_v1_A0_closedloop": {
+          "views": 1029,
+          "valid_candidates": 43934,
+          "positive_candidates": 5364,
+          "negative_candidates": 38570,
+          "positive_views": 323,
+          "contrast_views": 318,
+          "same_category_negative_candidates": 27496,
+          "geometric_positive_candidates": 5621,
+          "unknown_target_kind_views": 104,
+          "valid_reference_labels": 651,
+          "identity_labels_used": 0
+        }
+      },
+      "targets": 410,
+      "objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+    }
+  },
+  "calibration_tensor_deserializations": 0,
+  "identity_negative_labels_used": false,
+  "supervision": "Spatialkernelpeak<=20m plus targetcategory compatibility; TRAIN/dev owncoordinates only; NOT objectidentity assertion",
+  "seconds": 386.6775912910234
+}
