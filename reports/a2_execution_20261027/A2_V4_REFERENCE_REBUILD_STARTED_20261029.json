@@ -1,0 +1,50 @@
+{
+  "status": "full_cpu_reference_rebuild_started",
+  "unit": "graphnav-a2-reference-v4-build-20261029.service",
+  "observed_service": [
+    "MainPID=1241035",
+    "ExecMainStatus=0",
+    "ActiveState=active",
+    "SubState=running"
+  ],
+  "progress_snapshot": {
+    "state": "building",
+    "processed": 2700,
+    "total": 39087,
+    "resumed": 0,
+    "seconds": 214.30626198090613,
+    "counts": {
+      "train": {
+        "observations": 2700,
+        "old_any_reference": 2103,
+        "new_any_reference": 2463,
+        "recovered_reference": 360,
+        "lost_reference": 0,
+        "old_spatially_covered": 1637,
+        "new_spatially_covered": 1923,
+        "recovered_spatial_coverage": 286,
+        "lost_spatial_coverage": 0
+      },
+      "train/teacher_snapshot": {
+        "observations": 2700,
+        "old_any_reference": 2103,
+        "new_any_reference": 2463,
+        "recovered_reference": 360,
+        "lost_reference": 0,
+        "old_spatially_covered": 1637,
+        "new_spatially_covered": 1923,
+        "recovered_spatial_coverage": 286,
+        "lost_spatial_coverage": 0
+      }
+    }
+  },
+  "expected_train": 33440,
+  "expected_dev": 5647,
+  "original_image_features_reused": true,
+  "training_started": false,
+  "benchmark_used": false,
+  "notes": [
+    "Snapshot only; completion requires full manifest and source/overlay byte checks.",
+    "Remote V3 artifact verification still owns GPU; no parallel GPU work."
+  ]
+}
