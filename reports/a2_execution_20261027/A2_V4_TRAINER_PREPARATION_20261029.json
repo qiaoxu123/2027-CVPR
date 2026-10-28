@@ -43,7 +43,19 @@
     "reason": "workspace routing discovery timed out",
     "log_sha256": "f734ac9681185016be728f81a135b2f47a9941f91bd2e3c60bdda71062f87c10"
   },
-  "supplementary_readonly_review": "in_progress",
+  "supplementary_readonly_review": {
+    "status": "complete",
+    "cpu_tests_passed": 108,
+    "current_unresumed_run_invalidated": false,
+    "generic_resume_fixed": false,
+    "format_alias_bug_fixed": false,
+    "actual_train_dev_alias_cases": 0,
+    "notes": [
+      "No demonstrated GT leakage or offline/live height mismatch invalidating fresh current run.",
+      "Fresh-cache-only V4 training admission blocks untrusted resumed caches.",
+      "Supplementary review is not adversarial-review tool approval."
+    ]
+  },
   "fresh_unresumed_cache_only": true,
   "new_training_started": false,
   "gpu_preflight_complete": false,
