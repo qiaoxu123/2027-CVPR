@@ -10,6 +10,7 @@
 - Add a separate opt-in live perception wrapper calling legacy extraction once, then the same public reference feature adapter as offline rebuilding. Actual policy/checkpoint admission remains separate and is not enabled in V3.
 - Add separate V4 full20+5 training control and own-feature pretraining proof validation, while preserving V3 numerical training settings and refusing incomplete cache populations or stale GPU/runtime checks.
 - Complete all39,087 fresh reference overlays and add V4 CPU/CUDA preparation, feature-bound runtime policy, exact32-target three-arm sparse runtime checks, and independent all25-checkpoint verification/curve export. Admission rechecks actual replay evidence and CPU logs instead of trusting summary flags.
+- Add separate V4 independent-confirmation metadata preparation preserving original163 fresh/130 sealed target queries and binding the new feature cache. This step hashes opaque source bytes only; observation collection and final calibration remain separate.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
