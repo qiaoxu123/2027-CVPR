@@ -41,8 +41,8 @@ Interfaces: `protocol_metadata(roles, source, seal, *, binding, source_sha256, s
 
 Files: `reference_v4_confirmation.py`, `tests_confirmation_v4/test_capture.py`.
 Interfaces: `collect()` admits only verified eligible V4 best.pt;163 fixed fresh A0 shadowOFF trajectories; preserves RGB and public-reference geometry. Reuse unchanged capture/commit validation pure functions, actual `ReferenceV4Policy`.
-- [ ] Write and fail admission/cross-version/fallback tests.
-- [ ] Implement version-bound collection with exact A0 command parity, destination access only after each complete rollout.
+- [x] Write and fail admission/cross-version/fallback tests.
+- [x] Implement version-bound collection with exact A0 command parity, destination access only after each complete rollout.
 - [ ] CPU tests and separate real TRAIN functional proof before heldout collection.
 
 ### Task3: FIT packets, sealed replay and one VERIFY
@@ -67,3 +67,6 @@ Interfaces: immutable validated calibration + full checkpoint;64 TRAIN pilot; fu
 - Active remote scientific commit stays ac03d24; subsequent metadata/code additions remain outside its frozen training inventory.
 
 - Task1: observed eight missing-module test failures, then10 new V4 tests passed including full293-target metadata fixtures, persistence and no tensor-decoding checks. Supplementary independent review found no concrete defects; its missing integration coverage observation was addressed by the final two tests. Actual adversarial companion review is separately running.
+
+- Task2: observed12 missing-module test failures; then13 collector tests passed. Full CPU regression612 passed,1 pre-existing rasterio warning in8.26s. Actual collector is not yet executed on independent data; collection remains prohibited until eligible complete25-round proof. Supplementary reviewer found no concrete defects and23 targeted tests passed; whole rollout/resume still awaits actual admitted execution.
+- Actual adversarial metadata review finished exit1 after repeated network reconnections: workspace routing discovery timed out, no valid structured verdict. No tool approval is claimed and identical route is not retried.
