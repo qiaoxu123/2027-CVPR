@@ -25,6 +25,9 @@ DIRECTORY = BASE/'revision_v4/training'
 CODE_FILES = tuple(sorted(set(FEATURE_CODE_FILES) | {
     'reference_perception.py','reference_v4_protocol.py','reference_v4_train.py',
     'reference_v4_preparation.py','reference_v4_policy.py','reference_v4_verify.py',
+    'reference_v4_provenance.py','reference_v4_preflight.py','artifact_protocol.py','relation_v3_verify.py',
+    'calibration_protocol.py',
+    'relation_v3_preflight.py',
     'relation_v3_train.py','relation_v3_epoch.py','relation_v3_protocol.py','relation_v3_model.py',
     'relation_v3_loss.py','relation_v3_fusion.py','relation_v3_runtime.py','relation_v3_policy.py',
     'model.py','risk_probe.py','revision_fusion.py','batching.py','train.py','training_protocol.py',
@@ -77,9 +80,14 @@ def training_signature():
         ('cpu','cpu_gates.json'),('cuda','cuda_smoke.json'),('runtime','runtime_preflight.json'))}
     proofs = {name:json.loads(path.read_text()) for name,path in paths.items()}
     validate_pretraining_proofs(proofs,binding=binding)
-    from .reference_v4_preparation import test_hashes
+    from .reference_v4_preparation import test_hashes,current_binding
+    current=current_binding(proofs['cpu'])
+    if current!={key:value for key,value in binding.items() if key!='cpu_gates_sha256'}:
+        raise ValueError('V4 CPU/initial/assets proof chain changed')
     if proofs['cpu']['test_source_sha256'] != test_hashes():
         raise ValueError('CPU test sources changed after V4 gate')
+    from .reference_v4_preflight import validate_runtime_proof
+    validate_runtime_proof(BASE/'revision_v4/preflight',proofs['runtime'],binding)
     return dict(binding,config=CONFIG,a0_sha256=A0_SHA,parent_sha256=PARENT_SHA,
                 initial_weights_sha256=proofs['cpu']['initial_weights_sha256'],
                 cuda_smoke_sha256=sha(paths['cuda']),runtime_preflight_sha256=sha(paths['runtime']))
