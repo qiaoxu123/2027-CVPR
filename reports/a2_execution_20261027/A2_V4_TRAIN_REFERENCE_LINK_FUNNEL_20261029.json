@@ -1,0 +1,170 @@
+{
+  "scope": "Four TRAIN instructions underlying all 11 excluded targets; public name resolution and literal text only; character offsets isolate matching from BERT truncation",
+  "objects_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "exclusion_report_sha256": "f8e4fe26c095fb206e99c52adde754905413a54346fc8b498374968fc988ba39",
+  "counts": {
+    "no_literal_instruction_mention": 4,
+    "ambiguous_public_map_identity": 9
+  },
+  "cases": [
+    {
+      "episode": 7452,
+      "map_name": "birmingham_block_12",
+      "object_id": 138,
+      "instruction": "The white car that is 4th from the bottom in the 2nd column of cars from the left in the large parking lot to the right of Manchester => Bournemouth (all stations) footpath.",
+      "processed_landmark_queries": [
+        "CrossCountry: Manchester => Bournemouth (all stations)"
+      ],
+      "audited_query_count": 1,
+      "references": [
+        {
+          "query_name": "CrossCountry: Manchester => Bournemouth (all stations)",
+          "public_name": "CrossCountry: Manchester => Bournemouth (all stations)",
+          "object_id": 154,
+          "public_linked": true,
+          "literal_mention": false,
+          "reason": "no_literal_instruction_mention"
+        }
+      ]
+    },
+    {
+      "episode": 9353,
+      "map_name": "cambridge_block_7",
+      "object_id": 38,
+      "instruction": "A building along the Silver Street at the opposite side of Queen's collage library and the building named Anchor at its left.",
+      "processed_landmark_queries": [
+        "Silver Street",
+        "Queens' College Library",
+        "The Anchor"
+      ],
+      "audited_query_count": 3,
+      "references": [
+        {
+          "query_name": "Silver Street",
+          "public_name": "Silver Street",
+          "object_id": 287,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Silver Street",
+          "public_name": "Silver Street",
+          "object_id": 444,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Silver Street",
+          "public_name": "Silver Street",
+          "object_id": 476,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Silver Street",
+          "public_name": "Silver Street",
+          "object_id": 483,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Silver Street",
+          "public_name": "Silver Street",
+          "object_id": 530,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Queens' College Library",
+          "public_name": "Queens' College Library",
+          "object_id": 76,
+          "public_linked": true,
+          "literal_mention": false,
+          "reason": "no_literal_instruction_mention"
+        },
+        {
+          "query_name": "The Anchor",
+          "public_name": "The Anchor",
+          "object_id": 50,
+          "public_linked": true,
+          "literal_mention": false,
+          "reason": "no_literal_instruction_mention"
+        }
+      ]
+    },
+    {
+      "episode": 11155,
+      "map_name": "cambridge_block_12",
+      "object_id": 16,
+      "instruction": "The gray and brown building to the left of the Cambridge Institute for Sustainability. Leadership building.",
+      "processed_landmark_queries": [
+        "Cambridge Institute For Sustainability Leadership"
+      ],
+      "audited_query_count": 1,
+      "references": [
+        {
+          "query_name": "Cambridge Institute For Sustainability Leadership",
+          "public_name": "Cambridge Institute For Sustainability Leadership",
+          "object_id": 11,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Cambridge Institute For Sustainability Leadership",
+          "public_name": "Cambridge Institute For Sustainability Leadership",
+          "object_id": 16,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        }
+      ]
+    },
+    {
+      "episode": 21608,
+      "map_name": "cambridge_block_33",
+      "object_id": 149,
+      "instruction": "The bright blue car parked in between a white car and a navy blue car in the large gray parking lot behind the buildings at the corner of Abbey Street and Harvest Way.",
+      "processed_landmark_queries": [
+        "Abbey Road",
+        "Harvest Way"
+      ],
+      "audited_query_count": 2,
+      "references": [
+        {
+          "query_name": "Abbey Road",
+          "public_name": "Abbey Road",
+          "object_id": "public-road:abf3f2bf42c146d1405ab33f8892cf544c1a03555dd6737f7e7b871234347fba",
+          "public_linked": true,
+          "literal_mention": false,
+          "reason": "no_literal_instruction_mention"
+        },
+        {
+          "query_name": "Harvest Way",
+          "public_name": "Harvest Way",
+          "object_id": 226,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        },
+        {
+          "query_name": "Harvest Way",
+          "public_name": "Harvest Way",
+          "object_id": 245,
+          "public_linked": false,
+          "literal_mention": false,
+          "reason": "ambiguous_public_map_identity"
+        }
+      ]
+    }
+  ],
+  "no_gpu_used": true,
+  "no_model_inference": true,
+  "no_model_or_data_changes": true,
+  "independent_dev_or_benchmark_opened": false
+}
