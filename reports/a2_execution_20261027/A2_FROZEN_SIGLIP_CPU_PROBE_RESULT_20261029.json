@@ -1,0 +1,33 @@
+{
+  "scope": "Fixed full-instruction frozen SigLIP2 cosine diagnostic; same V4 eligibility; top individual candidate kernel only; not learned A2 or navigation",
+  "roles_sha256": "76487ee7b280f6b8ac220dee2cfe0189c76d47e4bdb7406820befef924a8cd49",
+  "backbone": "google/siglip2-large-patch16-384",
+  "backbone_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "unique_instructions": 382,
+  "counts": {
+    "train": {
+      "views": 2025,
+      "available": 1630,
+      "a0_correct": 1488,
+      "top_candidate_location_correct": 298
+    },
+    "dev": {
+      "views": 1029,
+      "available": 845,
+      "a0_correct": 672,
+      "top_candidate_location_correct": 153
+    }
+  },
+  "no_gpu_used": true,
+  "no_model_or_data_changes": true,
+  "no_threshold_or_checkpoint_selection": true,
+  "independent_or_benchmark_opened": false,
+  "limitations": [
+    "Full instructions may exceed SigLIP text token limit and are truncated by its frozen processor.",
+    "Top single kernel is not current A2 mixture; this is a feasibility diagnostic, not a matched policy comparison.",
+    "InternalDEV does not establish benchmark navigation performance."
+  ],
+  "full_remote_artifact": "runs/a2_waldo_landmark_20261027/revision_v4/diagnostics/frozen_siglip_full_instruction_probe.json",
+  "full_artifact_sha256": "fec8ecd6944c02661b6b00f25e463ed708ad99307f99b7fb6cd561342611f895",
+  "full_artifact_bytes": 688658
+}
