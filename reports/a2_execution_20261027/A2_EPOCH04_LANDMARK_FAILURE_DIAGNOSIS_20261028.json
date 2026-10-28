@@ -1,0 +1,41 @@
+{
+  "status": "A2_epoch04_internal_failure_diagnosis_only",
+  "runtime_commit": "2750656b2be176acce3bd9610ce6be654b76ee11",
+  "source_epoch": 4,
+  "dev_packet_sha256": "decb54516bd54ec2eab9dfc2e782e9c0c360acb969664a2c53238ae336abc0b7",
+  "diagnostic_script_sha256": "ad2e2bf6c4206f034ad5344f1dda81b698c0d97ccd6580eb4e8bf2c195ecef36",
+  "real_dev_views": 1029,
+  "a0_wrong_views": 357,
+  "a0_wrong_covered": 66,
+  "a0_wrong_missing_coverage_causes": {
+    "near_candidate_rejected_by_landmark_relation_validity": 94,
+    "no_observed_grid_cell_within20m": 161,
+    "no_valid_category_compatible_box": 3,
+    "supported_compatible_boxes_peak_farther_than20m": 33
+  },
+  "direct_fixed_mix_corrected": 17,
+  "direct_fixed_mix_broken": 153,
+  "broken_with_coverage": 69,
+  "broken_without_coverage": 84,
+  "reference_rejection_causes": {
+    "public_map_name_ambiguous_or_unverified": 86,
+    "public_name_not_unambiguously_mentioned_in_instruction": 8
+  },
+  "ambiguity_observations": 86,
+  "ambiguity_distinct_targets": 20,
+  "hypothetical_name_group_unblocked_observations": 70,
+  "hypothetical_name_group_unblocked_targets": 16,
+  "public_groups_evaluated": 21,
+  "runtime_changes_deployed": false,
+  "training_changed": false,
+  "no_gpu_used_for_diagnostic": true,
+  "benchmark_used": false,
+  "calibration_used": false,
+  "improvement_verified": false,
+  "limitations": [
+    "Connected same-name road surfaces are a grouping hypothesis, not verified entity identity.",
+    "Counts describe repeated DEV observations, not independent episodes or proven navigation gains.",
+    "Observed target-near grid coverage is not proof of object visibility in RGB.",
+    "A valid candidate is a category-compatible spatial hypothesis, not verified detector identity."
+  ]
+}
