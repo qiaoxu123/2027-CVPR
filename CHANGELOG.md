@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.10.0-a2-evidence-quality-diagnostic-dev] - 2026-10-29
+### Features
+- Add an isolated public-only diagnostic feature extractor: retain the original15 risk features and append seven fixed candidate competition/reference/projection quality summaries.
+### Design Rationale
+- Internal checks show harmful modifications both with and without useful candidates. Test richer evidence separately, preserving the active V4 model, code and evaluation queues.
+### Notes & Caveats
+- Feature extraction only: diagnostic fitting, data admission and result reporting are not implemented or executed yet. No new policy is enabled, and no A2>A0 improvement is established.
+- New implementation/tests live outside frozen V4 inventories; all48 training source files remain byte-identical to ac03d24. CPU tests cover masked relationships, empty/single candidates, confidence weights, nonfinite inputs and private-label exclusion.
+
 ## [0.9.0-a2-public-road-reference-dev] - 2026-10-29
 ### Features
 - Add inactive, opt-in exact public-region primitives and connected same-name road/footpath resolution, preserving holes and point-touching components.
