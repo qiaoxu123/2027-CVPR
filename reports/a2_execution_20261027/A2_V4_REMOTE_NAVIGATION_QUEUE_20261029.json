@@ -1,0 +1,63 @@
+{
+  "observed_utc": "2026-10-28T20:21:21.842686+00:00",
+  "units": {
+    "graphnav-a2-reference-v4-pipeline-20261029.service": {
+      "MainPID": "2166345",
+      "ExecMainPID": "2166345",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "cb443153b6b5486ca29cd51bd4556b59"
+    },
+    "graphnav-a2-reference-v4-confirmation-20261029.service": {
+      "MainPID": "2181923",
+      "ExecMainPID": "2181923",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "b25d4b1aeda04e56bdb16659fb377b0a"
+    },
+    "graphnav-a2-reference-v4-navigation-20261029.service": {
+      "MainPID": "2194726",
+      "ExecMainPID": "2194726",
+      "ExecMainStatus": "0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "running",
+      "InvocationID": "4df83db024e445b0ad3334d0c36a067b"
+    }
+  },
+  "post": {
+    "state": "waiting_for_full_training_and_verification",
+    "phase": "training",
+    "pid": 2181924,
+    "timestamp": 1793218666.8534179,
+    "predecessor_unit": "graphnav-a2-reference-v4-pipeline-20261029.service",
+    "signature_sha256": "3c944eb866de6721c93a6a2d32d03c4a9357b5c0256acfbd90f1108a8ac861c4",
+    "objective_achieved": false,
+    "full_benchmark_completed": false,
+    "training_pid": 2166345
+  },
+  "navigation": {
+    "state": "waiting_for_complete_confirmation",
+    "phase": "confirmation",
+    "pid": 2194728,
+    "timestamp": 1793218766.1917784,
+    "systemd_invocation_id": "4df83db024e445b0ad3334d0c36a067b",
+    "native_main_pid": 2194726,
+    "execution_script_sha256": "f4eeb17b131032af6c14770ad6cbe75965d3ed2d5530616896233afbee8597f8",
+    "signature_sha256": "12d88a1459992b2cf20ec3946cf905e2153c28aef8478332ee2c1a2e873a4eff",
+    "objective_achieved": false,
+    "predecessor_pid": 2181923
+  },
+  "gpu_compute_pids": [
+    2168279
+  ],
+  "completed_epochs": 5,
+  "navigation_cpu_gate_sha256": "739306790a8ef4a858354b2e153b59fee3d976d1acd48fc795a7048235f52686",
+  "independent_observations_started": false,
+  "navigation_started": false,
+  "objective_achieved": false
+}
