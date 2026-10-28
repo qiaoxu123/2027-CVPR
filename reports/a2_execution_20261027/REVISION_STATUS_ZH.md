@@ -8,6 +8,8 @@
 
 原TRAIN31415/dev4618快照重用。数据审计记录32,408个新增可用跨类别负例。TRAIN-only正确候选oracle，在同一.25上限下新融合修正1713、破坏0，旧局部域融合只能修正30；这仅证明结构容量，不是训练后或闭环收益。
 
-完整CPU测试340项通过；独立审查复核18项revision测试，以及50种随机batch的旧逐项/新按批loss和梯度一致性（loss差≤2.384e-7，梯度差0）。真实TRAIN CUDA已通过，rank/language/trust/category/benefit均有非零有限梯度；按批改写后稳态batch8约0.020秒，原逐观测检查约0.25秒。正式训练尚待最终全行数据审计和启动状态确认。
+完整CPU测试340项通过；独立审查复核18项revision测试，以及50种随机batch的旧逐项/新按批loss和梯度一致性（loss差≤2.384e-7，梯度差0）。真实TRAIN CUDA已通过，rank/language/trust/category/benefit均有非零有限梯度；按批改写后稳态batch8约0.020秒，原逐观测检查约0.25秒。全行审计和启动检查已通过，修订版正式20+5训练正在运行，实时状态以服务与日志为准。
 
 设计：docs/superpowers/specs/2026-10-28-a2-revision-design.md；计划：docs/superpowers/plans/2026-10-28-a2-revision-implementation.md。
+
+后续已新增运行时适配和完整训练产物核验器，全部CPU测试344项通过。运行时在8个真实TRAIN缓存上的输入张量与训练逐位一致，融合公式误差0；实际CUDA闭环适配检查仍需等待训练完成后串行执行。
