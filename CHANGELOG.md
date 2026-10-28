@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.7.0-a2-final-reporting-dev] - 2026-10-28
+### Features
+- Add paired target- and map-cluster final-report statistics, conditional false-stop ratios with explicit zero denominators, query-deduplicated Recall, per-map outcomes, correction/harm/fallback fractions, WALDO coverage and actual inference latency.
+- Verify four complete frozen benchmark arms before generating JSON/CSV/Chinese analysis, preserved training curves, paired difference plots and deterministic trajectory examples.
+- Bind reporting implementation/tests across execution; stage complete artifacts and atomically publish on Linux while preserving any previous report.
+### Design Rationale
+- Repeated episodes for the same target and instructions cannot be treated as independent localization queries. Conditional stop ratios require separate per-arm denominators; a mean episode fraction answers a different question.
+- Reporting lives outside the existing training/calibration/navigation source inventories, so preparing analysis cannot change the queued scientific model or its proofs.
+### Notes & Caveats
+- Synthetic CPU tests validate software, not model performance. V3 formal training, independent calibration and complete navigation results remain pending; no improvement is claimed. One seed and few maps limit uncertainty interpretation.
+- Remote preparation stays pinned to its reviewed commit; deploy/rebind deliberately before adding later code to that host.
+
 ## [0.6.0-a2-remote-execution-dev] - 2026-10-28
 ### Features
 - Prepare the user-requested RTX5090 migration with exact-file dataset/model reuse, direct remote code/public-weight retrieval and an isolated environment; stop and preserve the local untrained waiters before migration.
