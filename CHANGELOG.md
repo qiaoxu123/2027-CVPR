@@ -16,6 +16,7 @@
 - Add V4-only immutable FIT-choice/result recording and independent CPU preparation. Failed independent checks explicitly report rejection; only passing candidates advance to a real pilot. CPU proof replacement is prohibited after observation capture or a FIT choice.
 - Add exact-query V4 sealed-observation reference rebuilding and fresh inference using frozen BERT and the shared public adapter. Require frozen FIT choice and current post-training CPU proof before sealed decoding; validate original1034-row population and resumable commitments.
 - Add durable V4 post-training scheduling with authoritative predecessor-state checks, retry of unavailable observations, complete training/curve admission, serial GPU use and validated collection/FIT/replay/VERIFY phase reuse.
+- Add separate V4 navigation metadata/admission and public episode-population loading: preserve deterministic64 pilot queries, enforce complete2470/2697 exact episode-index sets, and reject stale/uncommitted/old-version calibration before runtime allocation.
 ### Design Rationale
 - Existing name ambiguity removes landmark inputs before training. Only complete connected public road sets may be grouped; disconnected names and building homonyms remain unresolved.
 - Exact unions avoid inventing filled regions between separate surfaces. New grouped references require explicit new consumers rather than fake single contours.
