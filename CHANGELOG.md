@@ -8,8 +8,8 @@
 - V4's real candidate recall generalizes poorly to held-out targets. The observed real rows are highly uneven across target groups, so repeated frames can dominate training.
 - V5 changes only TRAIN sample weights; it keeps V4 features, model, losses, optimizer, schedule, DEV selection, and safety gate unchanged.
 ### Notes & Caveats
-- V5 code has passed focused CPU tests but has not yet passed the actual CUDA smoke test or full training. It is not evidence of an A2 navigation gain.
-- Run V5 only after the currently queued V4 verification and diagnostics release the GPU. Keep the V4 branch outputs unchanged.
+- V5 passed 37 server CPU tests and a six-step weighted CUDA smoke test with finite losses, nonzero gradients and frozen parameters unchanged. Full 20+5 training is now running; no navigation gain is established.
+- V5 tests live outside the shared V4 test directory so they cannot change V4's source proof. V4's concurrent artifact replay stopped while its test source list was temporarily altered; V4 artifacts themselves were not edited.
 
 ## [0.10.0-a2-evidence-quality-diagnostic-dev] - 2026-10-29
 ### Features

@@ -15,12 +15,12 @@ from .reference_v5_train import _json_sha, source_binding
 
 PREPARATION = BASE / "revision_v5"
 TEST_FILES = (
-    "tests/test_a2_reference_v5_weighting.py",
-    "tests/test_a2_reference_v5_data.py",
-    "tests/test_a2_reference_v5_protocol.py",
-    "tests/test_a2_reference_v5_train.py",
-    "tests/test_a2_reference_v5_preparation.py",
-    "tests/test_a2_reference_v5_verify.py",
+    "experiments/a2_waldo_landmark_belief/v5_tests/test_a2_reference_v5_weighting.py",
+    "experiments/a2_waldo_landmark_belief/v5_tests/test_a2_reference_v5_data.py",
+    "experiments/a2_waldo_landmark_belief/v5_tests/test_a2_reference_v5_protocol.py",
+    "experiments/a2_waldo_landmark_belief/v5_tests/test_a2_reference_v5_train.py",
+    "experiments/a2_waldo_landmark_belief/v5_tests/test_a2_reference_v5_preparation.py",
+    "experiments/a2_waldo_landmark_belief/v5_tests/test_a2_reference_v5_verify.py",
 )
 
 
