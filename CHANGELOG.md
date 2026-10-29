@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.11.0-a2-target-balanced-v5-dev] - 2026-10-29
+### Features
+- Add a separate V5 trainer that balances each existing TRAIN target group within its source family while preserving V4's 8:1 real-to-teacher group ratio and mean loss-weight scale.
+- Add source-bound CPU and weighted CUDA preflight proofs plus a verifier that recomputes all 25 internal DEV checkpoints.
+### Design Rationale
+- V4's real candidate recall generalizes poorly to held-out targets. The observed real rows are highly uneven across target groups, so repeated frames can dominate training.
+- V5 changes only TRAIN sample weights; it keeps V4 features, model, losses, optimizer, schedule, DEV selection, and safety gate unchanged.
+### Notes & Caveats
+- V5 code has passed focused CPU tests but has not yet passed the actual CUDA smoke test or full training. It is not evidence of an A2 navigation gain.
+- Run V5 only after the currently queued V4 verification and diagnostics release the GPU. Keep the V4 branch outputs unchanged.
+
 ## [0.10.0-a2-evidence-quality-diagnostic-dev] - 2026-10-29
 ### Features
 - Add an isolated public-only diagnostic feature extractor: retain the original15 risk features and append seven fixed candidate competition/reference/projection quality summaries.
