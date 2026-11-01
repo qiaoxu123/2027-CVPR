@@ -94,3 +94,14 @@
 ### Notes & Caveats
 - Fixed seed0 smoke/Pilot with TRAIN-only fitting/calibration; internal Dev is a final diagnostic, not a tuning source. No official validation or navigation run.
 - Probability calibration may be inadmissible because named-relation groups are extremely sparse; in that case the new Gate deliberately produces no additional update. Attention gradients alone do not establish localization improvement.
+
+## [0.10.0] - 2026-11-01
+### Features
+- No-training map-guided observed-RGB projection and frozen AerialVG reference-crop diagnostics, with fixed candidate-region visual correspondence controls.
+- Official CityRefer instance-ID/contour registration evaluation isolated from inference; IoU Top-K, visibility-support strata, failure gallery, group uncertainty and measured ROI latency/memory.
+- Recoverable per-state results and phase reports/commits; optional same-caption target-only shuffle audit retains the original joint-shuffle results.
+### Design Rationale
+- Check whether actual visual evidence improves map-only localization before proposing new networks. Keep maps, poses, proposals and evaluation states fixed across the visual controls.
+### Notes & Caveats
+- CityNav inputs are observed orthophoto crops and vertical-depth-validity proxies; projections are not semantic segmentation or calibrated perspective occlusion.
+- Registered instance contours and geometric support are evaluation proxies; independent human pixel/visibility review remains uncollected. No training, formal validation/Test, paused validation resume or original checkpoint/result changes.

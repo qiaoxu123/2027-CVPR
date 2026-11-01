@@ -1,0 +1,197 @@
+{
+  "states": 635,
+  "visibility": {
+    "neither_projected": 168,
+    "target_projected": 333,
+    "reference_only_projected": 129,
+    "unknown": 5
+  },
+  "reference_evidence": {
+    "states_with_supported_world_relation": 119,
+    "states_where_reference_RGB_can_modulate_relation": 69,
+    "states_with_reference_crops": 397,
+    "total_reference_crops": 644,
+    "states_with_appearance_tokens": 601,
+    "A0_correct_neither_projected": 103
+  },
+  "instance_by_type": {
+    "Building": {
+      "states": 99,
+      "methods": {
+        "native": {
+          "top1": 0.12121212121212122,
+          "top5": 0.2828282828282828,
+          "top15": 0.30303030303030304
+        },
+        "map_only": {
+          "top1": 0.050505050505050504,
+          "top5": 0.24242424242424243,
+          "top15": 0.30303030303030304
+        },
+        "map_rgb": {
+          "top1": 0.10101010101010101,
+          "top5": 0.2828282828282828,
+          "top15": 0.30303030303030304
+        },
+        "shuffled_rgb": {
+          "top1": 0.0707070707070707,
+          "top5": 0.25252525252525254,
+          "top15": 0.30303030303030304
+        }
+      }
+    },
+    "Parking": {
+      "states": 11,
+      "methods": {
+        "native": {
+          "top1": 0.45454545454545453,
+          "top5": 0.5454545454545454,
+          "top15": 0.6363636363636364
+        },
+        "map_only": {
+          "top1": 0.45454545454545453,
+          "top5": 0.5454545454545454,
+          "top15": 0.6363636363636364
+        },
+        "map_rgb": {
+          "top1": 0.45454545454545453,
+          "top5": 0.6363636363636364,
+          "top15": 0.6363636363636364
+        },
+        "shuffled_rgb": {
+          "top1": 0.2727272727272727,
+          "top5": 0.5454545454545454,
+          "top15": 0.6363636363636364
+        }
+      }
+    },
+    "Car": {
+      "states": 134,
+      "methods": {
+        "native": {
+          "top1": 0.022388059701492536,
+          "top5": 0.04477611940298507,
+          "top15": 0.05970149253731343
+        },
+        "map_only": {
+          "top1": 0.007462686567164179,
+          "top5": 0.05223880597014925,
+          "top15": 0.05970149253731343
+        },
+        "map_rgb": {
+          "top1": 0.0,
+          "top5": 0.04477611940298507,
+          "top15": 0.05970149253731343
+        },
+        "shuffled_rgb": {
+          "top1": 0.0,
+          "top5": 0.04477611940298507,
+          "top15": 0.05970149253731343
+        }
+      }
+    },
+    "Ground": {
+      "states": 14,
+      "methods": {
+        "native": {
+          "top1": 0.35714285714285715,
+          "top5": 0.35714285714285715,
+          "top15": 0.35714285714285715
+        },
+        "map_only": {
+          "top1": 0.07142857142857142,
+          "top5": 0.35714285714285715,
+          "top15": 0.35714285714285715
+        },
+        "map_rgb": {
+          "top1": 0.35714285714285715,
+          "top5": 0.35714285714285715,
+          "top15": 0.35714285714285715
+        },
+        "shuffled_rgb": {
+          "top1": 0.21428571428571427,
+          "top5": 0.35714285714285715,
+          "top15": 0.35714285714285715
+        }
+      }
+    }
+  },
+  "instance_eligibility": {
+    "excluded_outside": 259,
+    "eligible": 258,
+    "excluded_tiny_clipped_or_invalid_depth": 47,
+    "excluded_supported": 66,
+    "excluded_invalid_polygon": 5
+  },
+  "spatial_vs_instance": {
+    "eligible": 258,
+    "native_center20_correct": 178,
+    "center20_but_not_instance_IoU50": 153
+  },
+  "official_instance_label_mismatches": 0,
+  "comparisons": {
+    "map_rgb_minus_map_only": {
+      "R1": {
+        "states": 635,
+        "groups": 125,
+        "delta": 0.0031496062992125984,
+        "CI95": [
+          -0.010903426791277258,
+          0.01729559748427673
+        ]
+      },
+      "instance_top1": {
+        "states": 258,
+        "groups": 95,
+        "delta": 0.031007751937984496,
+        "CI95": [
+          0.0,
+          0.06923357664233573
+        ]
+      }
+    },
+    "map_rgb_minus_shuffled_rgb": {
+      "R1": {
+        "states": 635,
+        "groups": 125,
+        "delta": 0.014173228346456693,
+        "CI95": [
+          0.0,
+          0.029641185647425898
+        ]
+      },
+      "instance_top1": {
+        "states": 258,
+        "groups": 95,
+        "delta": 0.027131782945736434,
+        "CI95": [
+          0.003745318352059925,
+          0.055776892430278883
+        ]
+      }
+    },
+    "map_rgb_minus_native": {
+      "R1": {
+        "states": 635,
+        "groups": 125,
+        "delta": -0.01732283464566929,
+        "CI95": [
+          -0.034375,
+          -0.0030300741554518023
+        ]
+      },
+      "instance_top1": {
+        "states": 258,
+        "groups": 95,
+        "delta": -0.01937984496124031,
+        "CI95": [
+          -0.05578107151812331,
+          0.01195219123505976
+        ]
+      }
+    }
+  },
+  "max_footprint_center_error_m": 0.00027295752079226077,
+  "physical_semantic_visibility": "unverified for every state; geometric support only",
+  "human_projection_error": null
+}

@@ -1,0 +1,38 @@
+{
+  "device": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "torch": "2.8.0+cu128",
+  "frozen_model_resident_MiB": 670.1047821044922,
+  "cases": [
+    {
+      "episode": 9037,
+      "step": 15,
+      "references": 0,
+      "baseline_current_encoder_seconds": 0.12202646404815216,
+      "projection_cpu_seconds": 1.0231727729551494,
+      "additional_reference_seconds": 8.456253757079443e-06,
+      "additional_peak_MiB": 0.0,
+      "repetitions": 3
+    },
+    {
+      "episode": 10546,
+      "step": 9,
+      "references": 1,
+      "baseline_current_encoder_seconds": 0.13604216502668956,
+      "projection_cpu_seconds": 0.9572306082894405,
+      "additional_reference_seconds": 0.12326418367835383,
+      "additional_peak_MiB": 1064.4912109375,
+      "repetitions": 3
+    },
+    {
+      "episode": 17283,
+      "step": 22,
+      "references": 2,
+      "baseline_current_encoder_seconds": 0.13142390712164342,
+      "projection_cpu_seconds": 0.43415137690802413,
+      "additional_reference_seconds": 0.21145255172935626,
+      "additional_peak_MiB": 818.607421875,
+      "repetitions": 3
+    }
+  ],
+  "scope": "TRAIN only; same encoder reused; warm3 repetitions; no PNG IO/model loading in timings; projectionCPU+referenceROI added; scoring/kernel overhead not included"
+}
