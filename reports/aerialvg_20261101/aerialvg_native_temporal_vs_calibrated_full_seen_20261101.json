@@ -1,0 +1,87 @@
+{
+  "episodes": 2470,
+  "groups": 2426,
+  "baseline": {
+    "SR": 0.4870445344129555,
+    "OSR": 0.5817813765182186,
+    "SPL": 0.46494088505594233,
+    "NE": 28.930326471488257,
+    "nDTW": 0.3080520227273487,
+    "sDTW": 0.17570635656069009,
+    "steps": 7.109311740890688,
+    "path_length": 200.11230025215184,
+    "policy_stop": 1.0,
+    "inference_ms": 165.05259752567483,
+    "episodes": 2470,
+    "False_Stop_Rate": 0.5129554655870445,
+    "false_stop_episode_fraction": 0.5129554655870445,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "candidate": {
+    "SR": 0.5072874493927125,
+    "OSR": 0.6510121457489878,
+    "SPL": 0.4701153875986156,
+    "NE": 28.271642941784386,
+    "nDTW": 0.31156928264983147,
+    "sDTW": 0.18325018847725447,
+    "steps": 8.081781376518219,
+    "path_length": 217.00525657586653,
+    "policy_stop": 0.9821862348178138,
+    "inference_ms": 152.34651098902725,
+    "episodes": 2470,
+    "False_Stop_Rate": 0.48639736191261335,
+    "false_stop_episode_fraction": 0.4777327935222672,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "deltas": {
+    "SR": {
+      "difference": 2.0242914979757085,
+      "group_bootstrap_95ci": [
+        0.32401454144755293,
+        3.768271573752462
+      ]
+    },
+    "OSR": {
+      "difference": 6.923076923076923,
+      "group_bootstrap_95ci": [
+        5.267316386590463,
+        8.539139442635788
+      ]
+    },
+    "SPL": {
+      "difference": 0.5174502542673197,
+      "group_bootstrap_95ci": [
+        -1.0913642804131853,
+        2.1560318856295853
+      ]
+    },
+    "NE": {
+      "difference": -0.6586835297038729,
+      "group_bootstrap_95ci": [
+        -1.2949785630964736,
+        -0.050959588234675654
+      ]
+    },
+    "steps": {
+      "difference": 0.9724696356275304,
+      "group_bootstrap_95ci": [
+        0.8727561916061101,
+        1.0752153390272292
+      ]
+    },
+    "inference_ms": {
+      "difference": -12.706086536647579,
+      "group_bootstrap_95ci": [
+        -18.10534262325761,
+        -7.218637322055714
+      ]
+    }
+  },
+  "helped": 254,
+  "harmed": 204,
+  "candidate_terminations": {
+    "horizon": 44,
+    "policy_stop": 2426
+  },
+  "note": "Complete predefined paired rollout subset; subgroup/Seen diagnostics are not final held-out confirmation."
+}

@@ -1,0 +1,87 @@
+{
+  "episodes": 2470,
+  "groups": 2426,
+  "baseline": {
+    "SR": 0.4761133603238866,
+    "OSR": 0.5566801619433198,
+    "SPL": 0.46002843520078085,
+    "NE": 29.11917144218048,
+    "nDTW": 0.3039776807830842,
+    "sDTW": 0.1691832638706661,
+    "steps": 6.938461538461539,
+    "path_length": 198.71203226962064,
+    "policy_stop": 1.0,
+    "inference_ms": 47.96551609464107,
+    "episodes": 2470,
+    "False_Stop_Rate": 0.5238866396761134,
+    "false_stop_episode_fraction": 0.5238866396761134,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "candidate": {
+    "SR": 0.5072874493927125,
+    "OSR": 0.6510121457489878,
+    "SPL": 0.4701153875986156,
+    "NE": 28.271642941784386,
+    "nDTW": 0.31156928264983147,
+    "sDTW": 0.18325018847725447,
+    "steps": 8.081781376518219,
+    "path_length": 217.00525657586653,
+    "policy_stop": 0.9821862348178138,
+    "inference_ms": 152.34651098902725,
+    "episodes": 2470,
+    "False_Stop_Rate": 0.48639736191261335,
+    "false_stop_episode_fraction": 0.4777327935222672,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "deltas": {
+    "SR": {
+      "difference": 3.1174089068825914,
+      "group_bootstrap_95ci": [
+        1.5815085158150852,
+        4.744573666365614
+      ]
+    },
+    "OSR": {
+      "difference": 9.433198380566802,
+      "group_bootstrap_95ci": [
+        7.88197251414713,
+        11.012154731322052
+      ]
+    },
+    "SPL": {
+      "difference": 1.00869523978347,
+      "group_bootstrap_95ci": [
+        -0.48744702968843256,
+        2.513873663038749
+      ]
+    },
+    "NE": {
+      "difference": -0.8475285003960925,
+      "group_bootstrap_95ci": [
+        -1.375307655569125,
+        -0.33798404238205193
+      ]
+    },
+    "steps": {
+      "difference": 1.1433198380566802,
+      "group_bootstrap_95ci": [
+        1.0481971630403235,
+        1.2408828881243636
+      ]
+    },
+    "inference_ms": {
+      "difference": 104.38099489438619,
+      "group_bootstrap_95ci": [
+        103.85587534471146,
+        104.92317263984432
+      ]
+    }
+  },
+  "helped": 231,
+  "harmed": 154,
+  "candidate_terminations": {
+    "horizon": 44,
+    "policy_stop": 2426
+  },
+  "note": "Complete predefined paired rollout subset; subgroup/Seen diagnostics are not final held-out confirmation."
+}

@@ -1,8 +1,8 @@
 # AerialVG native features: navigation validation
 
-Status: improvement remains unproven. The frozen temporal candidate is undergoing full Seen evaluation.
+Status: full Seen2470 supports an SR improvement over original GraphNav. Independent Val-Unseen confirmation is in progress; the overall goal remains unachieved.
 
-The encoder uses the official checkpoint's complete Swin, HCA and decoder. Geometry-guided selection retains15 of900 native object queries with actual current RGB/depth support. The trained ranker updates a bounded global belief residual. Native evidence replaces the older SigLIP branch in this experiment. The original trajectory controller, Stop threshold0.3, altitude guard and exact predicted-goal arrival guard are preserved.
+This native experiment uses the original28×28 candidate grid; it is separate from the archived384×384 resolution experiment. The encoder uses the official checkpoint's complete Swin, HCA and decoder. Geometry-guided selection retains15 of900 native object queries with actual current RGB/depth support. The trained ranker updates a bounded global belief residual. Native evidence replaces the older SigLIP branch in this experiment. The original trajectory controller, Stop threshold0.3, altitude guard and exact predicted-goal arrival guard are preserved.
 
 ## Completed paired Seen128
 
@@ -34,3 +34,22 @@ Candidate: `aerialvg_native_plain_sigma8_s0_20261101/best.pt`, real native evide
 Historical full baseline uses the same checkpoint and identical annotation/object/description content hashes. All128 historical selected-baseline pose traces reproduce exactly in the fresh environment (maximum pose error0). Comparisons normalize only migrated dataset roots and preserve relative paths/content hashes; latency across historical environments is not directly comparable. Full visual-asset equality outside the reproduced subset is not independently established by annotation hashes.
 
 Completion still requires a meaningful full paired navigation improvement and independent held-out confirmation after freezing. No new native candidate has been evaluated on Test.
+
+
+## Completed full Seen2470
+
+All2470 episodes and22388 decisions passed source-episode, frozen-weight/control, Stop-guard and recomputed-score verification. An interrupted2047-episode prefix was preserved byte-for-byte and423 episodes appended after exact interrupted2+resumed2 smoke equality. The resumed-session wall time is distinct from total experiment duration.
+
+| Configuration | SR% | OSR% | SPL% | NE(m) |
+|---|---:|---:|---:|---:|
+| Original GraphNav Stage1 |47.6113|55.6680|46.0028|29.1192|
+| Previous calibrated visual residual |48.7045|58.1781|46.4941|28.9303|
+| Frozen AerialVG native queries +8-view window |50.7287|65.1012|47.0115|28.2716|
+
+Versus original GraphNav: SR+3.1174pp, map+instruction grouped95%CI[+1.5815,+4.7446]; helped231/harmed154. Whole-map bootstrap across23 maps gives episode-weighted CI[+1.4275,+4.7561]pp and map-equal difference+2.0778pp, CI[+0.1170,+3.9110]. NE improves0.8475m. SPL point difference+1.0087pp remains uncertain (grouped CI[-0.4874,+2.5139]). Additional steps+1.1433 per episode; native inference averages152.35ms, while historical baseline latency is not a matched-machine cost estimate.
+
+Versus previous calibrated visual residual: SR+2.0243pp, groupedCI[+0.3240,+3.7683], helped254/harmed204. Whole-map episode-weightedCI[0.0000,+4.1443] and map-equalCI[-1.3424,+2.6707] expose heterogeneous gains; geographic robustness over that stronger reference is not established. NE/SPL differences are also uncertain at map level. This comparison preserves checkpoint, input hashes, episode selection and navigation/controller protocol.
+
+The frozen candidate passed the pre-completion acceptance policy (SR at least+2pp with positive grouped lower bound, limited SPL/NE degradation) and was selected once for complete2697-episode Val-Unseen confirmation. Fresh original baseline and native candidate run sequentially with unchanged parameters. No new native Test evaluation or held-out retuning is performed. Passing Seen is not goal completion.
+
+Artifacts: `aerialvg_native_temporal_full_seen_paired_20261101.json`, `aerialvg_native_temporal_vs_calibrated_full_seen_20261101.json`, both corresponding map-cluster reports, full-run `verification.json`, and `aerialvg_native_temporal_seen_selected_20261101.json`.

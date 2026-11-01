@@ -57,4 +57,4 @@ AerialVG 是单帧框级 grounding 数据集，其分层跨注意力在本任务
 
 ## 2026-11-01 原生 AerialVG 分支同步
 
-官方模型理解、原生query训练、因果时序残差、Train实际导航采集及冻结验证证据见 [本次同步索引](reports/aerialvg_20261101/README.md)。新的原生共享评估入口为 `scripts.evaluate_native_shared_closedloop`；现有 `scripts.evaluate_closedloop` 保留历史分辨率与残差评估协议。当前128条试验只有初步正向信号，全量结果尚待核验，不宣称已实现明显提升。
+官方模型理解、原生query训练、因果时序残差、Train实际导航采集及冻结验证证据见 [本次同步索引](reports/aerialvg_20261101/README.md)。新的原生共享评估入口为 `scripts.evaluate_native_shared_closedloop`；现有 `scripts.evaluate_closedloop` 保留历史分辨率与残差评估协议。当前完整Seen2470已核验：SR50.73%，较原GraphNav提高3.12pp，较原视觉残差提高2.02pp；后者地图级置信区间仍触0。完整Val-Unseen2697正在独立验证，不宣称整体目标已完成。

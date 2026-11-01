@@ -1,0 +1,24 @@
+{
+  "kind": "native-aerialvg-frozen-seen-candidate-v1",
+  "native_checkpoint": "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/aerialvg_native_plain_sigma8_s0_20261101/best.pt",
+  "native_checkpoint_sha": "5956313f58b62315e7f56a8f6710d9cb8fb3b600b479c916d859d1c898d5578a",
+  "native_control": "real",
+  "native_history_window": 8,
+  "base_checkpoint_sha": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "stop_threshold": 0.3,
+  "head_execution": "guarded-blend",
+  "active_observation": false,
+  "selection": "Train-selected history8 followed by complete Seen128 pilot; freeze before full2470 Seen",
+  "seen_validation_complete": true,
+  "full_seen_protocol": {
+    "episodes": 2470,
+    "subsampling": false,
+    "no_interim_tuning": true
+  },
+  "historical_baseline_pose_max_error128": 0.0,
+  "seen_full_paired_sha": "8b88c27b289db64c336b83096b95dbb12710dbbc0d4c24192eb88db4af4ac40a",
+  "seen_full_verification_sha": "7f28827f15101bd1fc34506ed110106f8785ab2688e0c364ab213fcf3c80823a",
+  "selection_criteria_sha": "87460085defff345815f2ff492768b26fc88ebab6c84cdffeb8156ee6bf31612",
+  "original_freeze_sha": "8f194f877c41ac9b76c625cce3a6063613c692de9269003a503892dacbb98b9b",
+  "heldout_protocol": "Full Val-Unseen, same frozen native checkpoint/history/control, no retuning or Test access"
+}
