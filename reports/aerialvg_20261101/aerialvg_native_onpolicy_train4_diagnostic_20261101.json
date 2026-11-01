@@ -1,0 +1,55 @@
+{
+  "partition": "train",
+  "episodes": 4,
+  "states": 64,
+  "near_goal_states": 36,
+  "query_coverage20m": 55,
+  "near_goal_wrong_topquery": 4,
+  "consecutive_query_motion": {
+    "count": 60,
+    "median_m": 20.46064567565918,
+    "jump_gt20m": 35
+  },
+  "query_motion_when_agent_moves_le5m": {
+    "count": 22,
+    "median_m": 1.9958868026733398,
+    "jump_gt20m": 6
+  },
+  "frozen_arrival_rule": {
+    "radius_m": 10,
+    "threshold": 0.7,
+    "tp": 8,
+    "fp": 0,
+    "fn": 28,
+    "precision": 1.0,
+    "recall": 0.2222222222222222
+  },
+  "per_episode": [
+    {
+      "index": 483,
+      "states": 11,
+      "near_goal_states": 0,
+      "near_goal_wrong_topquery": 0
+    },
+    {
+      "index": 6770,
+      "states": 13,
+      "near_goal_states": 9,
+      "near_goal_wrong_topquery": 0
+    },
+    {
+      "index": 6791,
+      "states": 20,
+      "near_goal_states": 19,
+      "near_goal_wrong_topquery": 3
+    },
+    {
+      "index": 7408,
+      "states": 20,
+      "near_goal_states": 8,
+      "near_goal_wrong_topquery": 1
+    }
+  ],
+  "collection_sha": "c122e7e36f81d1f846e30c89397136d0e8c3621c89bcf42bd5938e32e3b8d3cf",
+  "note": "Training diagnostics only; dependent frames are not independent samples. Top-query motion alone does not prove global goal instability."
+}

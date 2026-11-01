@@ -1,0 +1,159 @@
+{
+  "results": {
+    "relation": {
+      "real": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6758920402561757,
+        "corrected_NE": 20.714380702728104,
+        "total": 1.1685078448368014,
+        "mass": 1.1682793325169416,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0008507628317851844,
+        "ranking": 0.22817388635336644,
+        "mean_abs_delta": 0.004580384823247222,
+        "observed_fraction": 0.17827296991319602,
+        "samples": 4372,
+        "seconds": 64.27600108110346
+      },
+      "zero": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6752058554437328,
+        "corrected_NE": 20.72056222594559,
+        "total": 1.1699948345753215,
+        "mass": 1.1699948345753215,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0,
+        "ranking": 0.22848075535915252,
+        "mean_abs_delta": 0.0,
+        "observed_fraction": 0.0,
+        "samples": 4372,
+        "seconds": 55.3427356290631
+      },
+      "shuffle": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6756633119853613,
+        "corrected_NE": 20.710464554757888,
+        "total": 1.168568328391055,
+        "mass": 1.1683423262829096,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0008389761870184701,
+        "ranking": 0.22819515469689383,
+        "mean_abs_delta": 0.004545364725358594,
+        "observed_fraction": 0.17827296991319602,
+        "samples": 4372,
+        "seconds": 55.1007189899683
+      },
+      "no_relation": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6758920402561757,
+        "corrected_NE": 20.71947495346209,
+        "total": 1.1686479027186198,
+        "mass": 1.1684426629859597,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0007028021078367135,
+        "ranking": 0.22818132583648376,
+        "mean_abs_delta": 0.004159525887090354,
+        "observed_fraction": 0.17827296991319602,
+        "samples": 4372,
+        "seconds": 54.28132425295189
+      }
+    },
+    "visual": {
+      "real": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6758920402561757,
+        "corrected_NE": 20.712236438011317,
+        "total": 1.1688057484696572,
+        "mass": 1.1686034649746853,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0007543051356937752,
+        "ranking": 0.2282075354146063,
+        "mean_abs_delta": 0.004331836575385446,
+        "observed_fraction": 0.17827296991319602,
+        "samples": 4372,
+        "seconds": 61.002992996014655
+      },
+      "zero": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6752058554437328,
+        "corrected_NE": 20.72056222594559,
+        "total": 1.1699948345753215,
+        "mass": 1.1699948345753215,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0,
+        "ranking": 0.22848075535915252,
+        "mean_abs_delta": 0.0,
+        "observed_fraction": 0.0,
+        "samples": 4372,
+        "seconds": 55.19499776978046
+      },
+      "shuffle": {
+        "static_R1": 0.6752058554437328,
+        "static_NE": 20.72056222594559,
+        "corrected_R1": 0.6756633119853613,
+        "corrected_NE": 20.7103099146788,
+        "total": 1.1688439908751849,
+        "mass": 1.1686432968010514,
+        "baseline_mass": 1.1699948345753215,
+        "drift": 0.0007469115952761121,
+        "ranking": 0.22822056094155546,
+        "mean_abs_delta": 0.004306972796861579,
+        "observed_fraction": 0.17827296991319602,
+        "samples": 4372,
+        "seconds": 54.469027411192656
+      }
+    }
+  },
+  "comparisons": {
+    "relation_vs_visual": {
+      "difference_pp": 0.0,
+      "cluster_bootstrap_95ci_pp": [
+        0.0,
+        0.0
+      ],
+      "helped": 0,
+      "harmed": 0,
+      "episodes": 1093,
+      "states": 4372
+    },
+    "relation_vs_zero": {
+      "difference_pp": 0.0686184812442818,
+      "cluster_bootstrap_95ci_pp": [
+        -0.29734675205855443,
+        0.434583714547118
+      ],
+      "helped": 14,
+      "harmed": 11,
+      "episodes": 1093,
+      "states": 4372
+    },
+    "relation_vs_no_relation": {
+      "difference_pp": 0.0,
+      "cluster_bootstrap_95ci_pp": [
+        0.0,
+        0.0
+      ],
+      "helped": 0,
+      "harmed": 0,
+      "episodes": 1093,
+      "states": 4372
+    },
+    "relation_vs_shuffle": {
+      "difference_pp": 0.022872827081427266,
+      "cluster_bootstrap_95ci_pp": [
+        0.0,
+        0.0686184812442818
+      ],
+      "helped": 1,
+      "harmed": 0,
+      "episodes": 1093,
+      "states": 4372
+    }
+  }
+}

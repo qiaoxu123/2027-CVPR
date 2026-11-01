@@ -1,0 +1,92 @@
+{
+  "partition": "train",
+  "windows": {
+    "1": {
+      "states": 64,
+      "correct": 42,
+      "error_m": 1030.862550020218,
+      "near_states": 36,
+      "near_correct": 29,
+      "goal_jumps_gt20m": 6,
+      "transitions": 60,
+      "R1": 0.65625,
+      "NE_m": 16.107227344065905,
+      "near_R1": 0.8055555555555556
+    },
+    "2": {
+      "states": 64,
+      "correct": 42,
+      "error_m": 947.2652387619019,
+      "near_states": 36,
+      "near_correct": 32,
+      "goal_jumps_gt20m": 2,
+      "transitions": 60,
+      "R1": 0.65625,
+      "NE_m": 14.801019355654716,
+      "near_R1": 0.8888888888888888
+    },
+    "4": {
+      "states": 64,
+      "correct": 43,
+      "error_m": 867.8030323982239,
+      "near_states": 36,
+      "near_correct": 32,
+      "goal_jumps_gt20m": 0,
+      "transitions": 60,
+      "R1": 0.671875,
+      "NE_m": 13.559422381222248,
+      "near_R1": 0.8888888888888888
+    },
+    "8": {
+      "states": 64,
+      "correct": 41,
+      "error_m": 921.2705273628235,
+      "near_states": 36,
+      "near_correct": 31,
+      "goal_jumps_gt20m": 1,
+      "transitions": 60,
+      "R1": 0.640625,
+      "NE_m": 14.394851990044117,
+      "near_R1": 0.8611111111111112
+    }
+  },
+  "episodes": [
+    {
+      "index": 483,
+      "correct_by_window": {
+        "1": 0,
+        "2": 0,
+        "4": 0,
+        "8": 0
+      }
+    },
+    {
+      "index": 6770,
+      "correct_by_window": {
+        "1": 13,
+        "2": 13,
+        "4": 13,
+        "8": 13
+      }
+    },
+    {
+      "index": 6791,
+      "correct_by_window": {
+        "1": 20,
+        "2": 20,
+        "4": 20,
+        "8": 20
+      }
+    },
+    {
+      "index": 7408,
+      "correct_by_window": {
+        "1": 9,
+        "2": 9,
+        "4": 10,
+        "8": 8
+      }
+    }
+  ],
+  "protocol": "Causal arithmetic mean of bounded residuals over observed support within last W actual views; GT scores afterward. Offline state ranking, not a navigation counterfactual."
+}

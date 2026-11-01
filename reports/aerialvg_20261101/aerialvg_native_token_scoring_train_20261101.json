@@ -1,0 +1,62 @@
+{
+  "partition": "train",
+  "states": 1275,
+  "covered_states": 823,
+  "native_top_token_special_states": 0,
+  "native_top_token_latter_half_states": 554,
+  "ranking": {
+    "full_native": {
+      "hits": 330,
+      "all_state_R1": 0.25882352941176473,
+      "covered_state_R1": 0.40097205346294046
+    },
+    "full_trained_correction": {
+      "hits": 603,
+      "all_state_R1": 0.47294117647058825,
+      "covered_state_R1": 0.732685297691373
+    },
+    "no_special_native": {
+      "hits": 330,
+      "all_state_R1": 0.25882352941176473,
+      "covered_state_R1": 0.40097205346294046
+    },
+    "no_special_trained_correction": {
+      "hits": 603,
+      "all_state_R1": 0.47294117647058825,
+      "covered_state_R1": 0.732685297691373
+    },
+    "prefix4_native": {
+      "hits": 338,
+      "all_state_R1": 0.26509803921568625,
+      "covered_state_R1": 0.4106925880923451
+    },
+    "prefix4_trained_correction": {
+      "hits": 592,
+      "all_state_R1": 0.46431372549019606,
+      "covered_state_R1": 0.7193195625759417
+    },
+    "prefix8_native": {
+      "hits": 337,
+      "all_state_R1": 0.2643137254901961,
+      "covered_state_R1": 0.4094775212636695
+    },
+    "prefix8_trained_correction": {
+      "hits": 597,
+      "all_state_R1": 0.4682352941176471,
+      "covered_state_R1": 0.7253948967193196
+    },
+    "prefix16_native": {
+      "hits": 328,
+      "all_state_R1": 0.2572549019607843,
+      "covered_state_R1": 0.3985419198055893
+    },
+    "prefix16_trained_correction": {
+      "hits": 601,
+      "all_state_R1": 0.47137254901960784,
+      "covered_state_R1": 0.7302551640340219
+    }
+  },
+  "train_manifest_sha": "5fe31708ef1b0f4eaad68b9a7d0c49628e724b60d031dcdf2d0d1352ad8b089a",
+  "native_sha": "5956313f58b62315e7f56a8f6710d9cb8fb3b600b479c916d859d1c898d5578a",
+  "protocol": "Fixed geometry-selected15 query cache. Full-context text encoding is unchanged. Prefixes count BERT wordpieces after CLS, not parsed target noun phrases. Original trained correction reused without fitting. GT scores ranking after every score is computed. Exploratory Train-only evidence; does not alter frozen fullSeen candidate or prove navigation gains."
+}

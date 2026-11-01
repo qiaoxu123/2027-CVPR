@@ -1,0 +1,87 @@
+{
+  "episodes": 128,
+  "groups": 128,
+  "baseline": {
+    "SR": 0.5,
+    "OSR": 0.59375,
+    "SPL": 0.4914429508639232,
+    "NE": 27.99638683847295,
+    "nDTW": 0.3013947699765563,
+    "sDTW": 0.16440094585460377,
+    "steps": 7.15625,
+    "path_length": 210.35979328704656,
+    "policy_stop": 1.0,
+    "inference_ms": 45.507754029318875,
+    "episodes": 128,
+    "False_Stop_Rate": 0.5,
+    "false_stop_episode_fraction": 0.5,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "candidate": {
+    "SR": 0.5,
+    "OSR": 0.75,
+    "SPL": 0.4060442614843478,
+    "NE": 28.655468781716394,
+    "nDTW": 0.3034315351293182,
+    "sDTW": 0.1729824021508078,
+    "steps": 12.6875,
+    "path_length": 294.51117548786385,
+    "policy_stop": 0.7265625,
+    "inference_ms": 155.94594253779832,
+    "episodes": 128,
+    "False_Stop_Rate": 0.41935483870967744,
+    "false_stop_episode_fraction": 0.3046875,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "deltas": {
+    "SR": {
+      "difference": 0.0,
+      "group_bootstrap_95ci": [
+        -6.25,
+        6.25
+      ]
+    },
+    "OSR": {
+      "difference": 15.625,
+      "group_bootstrap_95ci": [
+        8.59375,
+        22.65625
+      ]
+    },
+    "SPL": {
+      "difference": -8.53986893795754,
+      "group_bootstrap_95ci": [
+        -14.924101250780678,
+        -2.1693811738506925
+      ]
+    },
+    "NE": {
+      "difference": 0.6590819432434416,
+      "group_bootstrap_95ci": [
+        -0.8890824261110807,
+        2.130849944926306
+      ]
+    },
+    "steps": {
+      "difference": 5.53125,
+      "group_bootstrap_95ci": [
+        4.6404296875,
+        6.53125
+      ]
+    },
+    "inference_ms": {
+      "difference": 110.43818850847946,
+      "group_bootstrap_95ci": [
+        108.39338487661094,
+        112.40153202314053
+      ]
+    }
+  },
+  "helped": 9,
+  "harmed": 9,
+  "candidate_terminations": {
+    "horizon": 35,
+    "policy_stop": 93
+  },
+  "note": "Complete predefined paired rollout subset; subgroup/Seen diagnostics are not final held-out confirmation."
+}

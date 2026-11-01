@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "full_split": false,
+  "split": "val_seen",
+  "episodes": 128,
+  "decisions": 1189,
+  "metrics": {
+    "SR": 0.5234375,
+    "OSR": 0.703125,
+    "SPL": 0.49396920898344204,
+    "NE": 28.610020255788626,
+    "nDTW": 0.31062054501821057,
+    "sDTW": 0.17838336820236866,
+    "steps": 8.3203125,
+    "path_length": 231.5911525640397,
+    "policy_stop": 0.96875,
+    "inference_ms": 156.00163250555966,
+    "episodes": 128,
+    "False_Stop_Rate": 0.46774193548387094,
+    "false_stop_episode_fraction": 0.453125,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "freeze_sha": "8f194f877c41ac9b76c625cce3a6063613c692de9269003a503892dacbb98b9b",
+  "trace_sha": "108a368fc04304ca7b132922e4039d74e750ebcdd4958a9fd1ebbfe6152d440e",
+  "report_sha": "e88f0d55c545ab15966778e9b31e2d929645ffff1bbbdfefb65a4fe00e93adff",
+  "note": "Verifies source episode selection, frozen controls/weights, per-step provenance and recomputed scoring. Does not alone prove efficacy or absence of every possible implementation leak."
+}
