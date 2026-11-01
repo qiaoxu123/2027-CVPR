@@ -1,0 +1,29 @@
+{
+  "kind": "map-guided-frozen-current-v1",
+  "partition": "train",
+  "native_sha": "5956313f58b62315e7f56a8f6710d9cb8fb3b600b479c916d859d1c898d5578a",
+  "aerialvg_sha": "f563437fd0b6f3a2e8e1b037ce15ef6ad40c81aead385fb81dae01c7953cc812",
+  "cohort": "calibration",
+  "cache_manifest_sha": "5fe31708ef1b0f4eaad68b9a7d0c49628e724b60d031dcdf2d0d1352ad8b089a",
+  "catalog_sha": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "source_sha": {
+    "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/map-guided-visual-grounding/scripts/diagnose_map_guided_visual_grounding.py": "39f2045b094c494c95b7d7eaaf4145af2b9820381808b12f26a37f04c037ab0a",
+    "graphnav/map_guided_grounding.py": "766b9ff35b8053576fa3d488aa671feb11c60c2205fe255c2a81f00ff7efea43"
+  },
+  "no_training": true,
+  "constants": {
+    "reference_budget": 2,
+    "appearance_weight": 0.5,
+    "rule_scale": 10.0,
+    "kernel_sigma": 8.0,
+    "bound": 2.0,
+    "null": -10.0
+  },
+  "shuffle": "reverse joint current target-query/reference-crop feature vectors; boxes/map/pose/language fixed",
+  "instance_eval": "official object_id+contour registered bbox IoU>=0.5; >=64pixels/80%inview/60%depth support",
+  "public_depth": "depth_valid only; metric depth/K/R/t/physical occlusion unavailable",
+  "limit": 0,
+  "frozen_before_internal_dev": true,
+  "training_used": false,
+  "selection_policy": "No parameter search; independent TRAIN groups diagnostic; preserve fixed constants despite negative Native comparison"
+}
