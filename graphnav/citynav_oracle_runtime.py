@@ -87,7 +87,7 @@ class OracleRegionEncoder:
         atomic_save(result,path);return result
 
 
-def append_oracle_region(e,normal_pack,authorization,real_crop_feature,footprint,shape):
+def append_oracle_region(e,normal_pack,authorization,real_crop_feature,footprint,shape,depth_valid):
     if not isinstance(authorization,BoxAuthorization):raise TypeError('Oracle-only box authorization required')
     from .citynav_box_diagnostics import bbox_cxcywh
     feature=real_crop_feature.to(e.base.device).float()
@@ -96,8 +96,10 @@ def append_oracle_region(e,normal_pack,authorization,real_crop_feature,footprint
     world=box_world_centers(box[None],footprint,shape).to(e.base.device)[0]
     prior=e.base[(e.grid-world).norm(dim=-1).argmin()]
     score=(feature@e.text.T)[e.text_mask].sigmoid().max()
+    from .object_proposals import box_valid_fraction
+    actual_quality=torch.tensor(float(box_valid_fraction(box[None].cpu().numpy(),depth_valid)[0]),device=e.base.device)
     geometry=torch.stack(((prior-e.base.max()).clamp(-20,0)/5,torch.logit(score.clamp(1e-5,1-1e-5))/5,
-                          torch.ones((),device=e.base.device),box[2],box[3],box[0],box[1],box[2]*box[3]))
+                          actual_quality,box[2],box[3],box[0],box[1],box[2]*box[3]))
     result=dict(normal_pack)
     result['features']=torch.cat([normal_pack['features'],feature.half().float()[None,None]],1)
     result['geometry']=torch.cat([normal_pack['geometry'],geometry[None,None]],1)

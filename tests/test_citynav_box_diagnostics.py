@@ -50,3 +50,27 @@ def test_bbox_world_mapping_keeps_existing_normalized_box_convention():
     box=bbox_cxcywh([10,20,30,40],(100,100))
     world=box_world_centers(box[None],np.array([[0,100],[100,100],[100,0],[0,0]],np.float32),(100,100))
     assert torch.allclose(world[0],torch.tensor([20.,70.]))
+
+
+def test_normal_public_evidence_ignores_private_labels_by_signature():
+    from graphnav.citynav_oracle_runtime import prepare_public_evidence
+    assert 'target_world' not in inspect.signature(prepare_public_evidence).parameters
+    assert 'bbox' not in inspect.signature(prepare_public_evidence).parameters
+    with pytest.raises(TypeError):prepare_public_evidence(target_world=torch.ones(2))
+
+
+def test_forced_selection_and_ideal_evidence_require_oracle_authorization():
+    from graphnav.citynav_oracle_runtime import force_selected,ideal_position
+    with pytest.raises(TypeError):force_selected(None,None,None,0,None)
+    with pytest.raises(TypeError):ideal_position(None,None,None,None)
+
+
+def test_zero_human_reviews_yields_na_not_baseline_disguised_as_verified_oracle():
+    from scripts.diagnose_citynav_box_oracles import summarize,NORMAL_NAMES,ORACLE_NAMES
+    value=dict(error_m=10.,correct=True,corrected_A0=False,damaged_A0=False,corrected_Native=False,damaged_Native=False)
+    row=dict(episode=1,instruction_group='a',instance_group='Car1',category='Car',geometry_hint='full',
+             auto_high_support=True,oracle_authorized=False,actual_visibility_verified=False,stages=None,
+             methods={name:dict(value) for name in NORMAL_NAMES+ORACLE_NAMES},fusion_limit=dict(bounded_impossible=False))
+    report=summarize([row],'verified')
+    assert report['all']['methods']['A_box_exists']['R1'] is None
+    assert report['provenance']['human_verified_states']==0
