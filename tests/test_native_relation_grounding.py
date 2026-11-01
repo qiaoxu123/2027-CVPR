@@ -164,3 +164,69 @@ def test_explicit_ambiguity_and_empty_relations():
     assert f.shape == (1, 8, 8)
     assert not mask.any()
     assert not f.any()
+
+
+def test_diagonal_world_relation_is_not_silently_reduced_to_east():
+    from graphnav.semantic_geometry import parse_spatial_relations
+    entities=graph()['entities']
+    for phrase in ['north-east of The School','north east of The School']:
+        parsed=parse_spatial_relations(phrase,entities)
+        assert [r.kind for r in parsed]==['northeast']
+
+
+def test_masked_tokens_are_ignored_and_active_nonfinite_text_fails_closed():
+    import pytest
+    x=batch();model=RelationAwareQueryRanker()
+    with torch.no_grad():model.head[-1].weight.fill_(.05)
+    expected=model(**x)['logits']
+    x['text'][0,-1]=float('nan')
+    assert torch.equal(model(**x)['logits'],expected)
+    x['text'][0,0]=float('nan')
+    with pytest.raises(ValueError,match='Nonfinite'):model(**x)
+
+
+def test_masked_reference_cannot_change_attention_or_scores():
+    x=batch();model=RelationAwareQueryRanker()
+    with torch.no_grad():model.head[-1].weight.normal_(0,.05)
+    expected=model(**x)
+    x['relation_features'][:,:,1:]=10000
+    actual=model(**x)
+    assert torch.equal(actual['logits'],expected['logits'])
+    assert not actual['attention'][:,:,1:].any()
+    assert not actual['attention'][0,2].any()
+
+
+def test_relation_geometry_uses_translation_invariant_world_coordinates():
+    g=graph();xy=np.array([[50.,90.],[50.,10.]],np.float32)
+    original=public_relation_descriptors(xy,g)[0]
+    offset=np.array([10000.,-3000.],np.float32)
+    shifted=graph();shifted['entities'][0]['geometry_m']+=offset
+    actual=public_relation_descriptors(xy+offset,shifted)[0]
+    assert torch.allclose(actual,original,atol=1e-6)
+
+
+def test_multi_reference_attention_backpropagates_to_query_and_key():
+    x = batch()
+    x['relation_valid'][0, 1] = True
+    x['relation_features'][:, :, 1] = -x['relation_features'][:, :, 0]
+    x['relation_types'][0, 1] = 1
+    model = RelationAwareQueryRanker()
+    # The zero-initialized output head intentionally blocks upstream gradients
+    # at initialization; verify the attention path once the head is active.
+    with torch.no_grad():
+        model.head[-1].weight.normal_(0., .1)
+    model(**x)['logits'][0, 0].backward()
+    for layer in [model.query, model.key, model.reference[0]]:
+        assert layer.weight.grad is not None
+        assert torch.isfinite(layer.weight.grad).all()
+        assert layer.weight.grad.abs().sum() > 0
+
+
+def test_shuffled_ablation_changes_only_valid_query_relation_geometry():
+    from scripts.train_native_relational_grounding import shuffled_relation_inputs
+    x = batch()
+    changed = shuffled_relation_inputs(x)
+    assert torch.equal(changed['relation_features'][0, 0], x['relation_features'][0, 1])
+    assert torch.equal(changed['relation_features'][0, 2], x['relation_features'][0, 2])
+    for key in x.keys() - {'relation_features'}:
+        assert torch.equal(changed[key], x[key])

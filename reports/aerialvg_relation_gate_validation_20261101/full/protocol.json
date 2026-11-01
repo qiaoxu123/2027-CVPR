@@ -1,0 +1,63 @@
+{
+  "kind": "aerialvg-native-relational-gated-pilot-v1",
+  "admitted_for_runtime": false,
+  "base_commit": "a14292c1677964e358b278c7e948f0abfecf929a",
+  "implementation_commit": "a14292c1677964e358b278c7e948f0abfecf929a",
+  "implementation_sha": {
+    "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/aerialvg-relation-gated-validation-20261101/scripts/train_native_relational_grounding.py": "061df5fb61b408e763ee8ce79e1b58025388ebe41a154df9a11e6f43d00ae47a",
+    "graphnav/native_relation_grounding.py": "05ca4cc2a561b95ef1e2206d089397949e8fd852208c5617297d3eaa6b571026",
+    "graphnav/semantic_geometry.py": "c9a7aac6bd2f6b0776f077484f9c321c0e83c1469a7314f00f69d97a248766a9"
+  },
+  "native_checkpoint_sha": "5956313f58b62315e7f56a8f6710d9cb8fb3b600b479c916d859d1c898d5578a",
+  "base_sha": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "train_manifest_sha": "5fe31708ef1b0f4eaad68b9a7d0c49628e724b60d031dcdf2d0d1352ad8b089a",
+  "dev_manifest_sha": "6a7cc7b254bf4a90c78469fb3f868d9c0a8e1c7760e9cbfe0bf2c0293e732d34",
+  "stage1_public_queries_sha": "c073fbbb2fbbb3bb9745e5b31442dc792fa282c9dc685afaa2e609dc7d28a1ee",
+  "train_fit": 1027,
+  "train_calibration": 248,
+  "fit_relation_summary": {
+    "states": 1027,
+    "groups": 203,
+    "named_states": 85,
+    "named_groups": 17,
+    "supervised_states": 49,
+    "supervised_groups": 17,
+    "reference_cardinality": {
+      "0": 942,
+      "1": 85,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    }
+  },
+  "calibration_relation_summary": {
+    "states": 248,
+    "groups": 49,
+    "named_states": 15,
+    "named_groups": 3,
+    "supervised_states": 11,
+    "supervised_groups": 3,
+    "reference_cardinality": {
+      "0": 233,
+      "1": 15,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0
+    }
+  },
+  "data_policy": "fit/calibration disjoint TRAIN instruction groups; Dev once after freeze",
+  "supervision": "20m spatial utility weak label; no target identity claim",
+  "unknown_reference": "unmatched/ambiguous named map reference => no relation update",
+  "epochs": 4,
+  "gate_epochs": 3,
+  "transfer": 0.9,
+  "seed": 0
+}

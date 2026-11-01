@@ -9,6 +9,7 @@ No official Val-Seen / Val-Unseen / Test or navigation control is touched.
 import argparse
 import json
 import math
+import subprocess
 from pathlib import Path
 
 import torch
@@ -100,84 +101,121 @@ def accumulate(acc, item):
         acc[key] = acc.get(key, 0) + value
 
 
+def relation_data_summary(rows):
+    named = [r for r in rows if r['relation_valid'].any()]
+    supervised = []
+    for row in named:
+        distance = (row['query_world'].float() - row['labels']['target_world'][:2].float()).norm(dim=-1)
+        good = (distance <= 20.) & row['valid'].bool()
+        if good.any() and (row['valid'].bool() & ~good).any():
+            supervised.append(row)
+    return dict(states=len(rows), groups=len({r['group'] for r in rows}),
+                named_states=len(named), named_groups=len({r['group'] for r in named}),
+                supervised_states=len(supervised),
+                supervised_groups=len({r['group'] for r in supervised}),
+                reference_cardinality={str(k): sum(int(r['relation_valid'].sum()) == k for r in rows)
+                                       for k in range(9)})
+
+
+def shuffled_relation_inputs(x):
+    """Reverse descriptors across valid queries, leaving Native evidence fixed.
+
+    Permuting reference slots alone is not a meaningful attention ablation.
+    This fixed, label-free permutation disrupts query/reference geometry.
+    """
+    result = dict(x)
+    features = x['relation_features'].clone()
+    for i in range(len(features)):
+        ids = x['valid'][i].nonzero().flatten()
+        features[i, ids] = x['relation_features'][i, ids.flip(0)]
+    result['relation_features'] = features
+    return result
+
+
 @torch.no_grad()
 def evaluate(rows, native, rel, gate, device, sigma, threshold, transfer,
-             batch_size):
+             batch_size, *, ablations=False):
     rel.eval()
     gate.eval()
-    stats = {}
+    stats, ranks, strata = {}, {}, {}
+    max_no_relation_difference = 0.
     for raw in DataLoader(rows, batch_size=batch_size,
                           shuffle=False, collate_fn=collate_relation):
         x = tensor_batch(raw, device, sigma)
         q0, null = old_native(native, x, device)
         candidate = relation_prediction(rel, x, q0, null)
-        ablation = relation_prediction(rel, x, q0, null, enabled=False)
-        assert torch.equal(ablation['logits'], q0.float().masked_fill(
-            ~x['valid'], -1e4)), 'No-relation must exactly preserve Native'
-        q1 = candidate['logits']
+        off = relation_prediction(rel, x, q0, null, enabled=False)
+        assert torch.equal(off['logits'], q0.float().masked_fill(~x['valid'], -1e4))
+        predictions = {'relation': candidate}
+        if ablations:
+            predictions.update(relation_off=off, relation_shuffled=relation_prediction(
+                rel, shuffled_relation_inputs(x), q0, null))
         old_logits, _ = native.update_belief(
-            x['base_logits'], q0, null, x['kernel'], x['observed'],
-            x['valid'], bound=2.)
-        new_logits, _ = native.update_belief(
-            x['base_logits'], q1, null, x['kernel'], x['observed'],
-            x['valid'], bound=2.)
-        fusion = gate_prediction(
-            gate, x, candidate, enabled=True,
-            threshold=threshold, transfer=transfer)
-        targets = training_gate_targets(
-            x['base_logits'], fusion['visual_probability'], fusion['usable'],
-            x['grid_world'], x['target_world'], transfer=transfer)
-        variants = {
-            'native': old_logits,
-            'relation_residual': new_logits,
-            'relation_gate': fusion['logits'],
-        }
+            x['base_logits'], q0, null, x['kernel'], x['observed'], x['valid'], bound=2.)
+        variants = {'native': old_logits}
+        scores = {'native': q0}
+        for prefix, pred in predictions.items():
+            variants[prefix + '_residual'], _ = native.update_belief(
+                x['base_logits'], pred['logits'], null, x['kernel'], x['observed'],
+                x['valid'], bound=2.)
+            fusion = gate_prediction(gate, x, pred, enabled=True,
+                                     threshold=threshold, transfer=transfer)
+            variants[prefix + '_gate'] = fusion['logits']
+            scores[prefix] = pred['logits']
+            accumulate(stats, {prefix + '_accepted': int(fusion['accepted'].sum())})
+            if prefix == 'relation':
+                targets = training_gate_targets(
+                    x['base_logits'], fusion['visual_probability'], fusion['usable'],
+                    x['grid_world'], x['target_world'], transfer=transfer)
+                accumulate(stats, {'gate_recoverable': int(targets['oracle_eligible'].sum())})
+        named = candidate['has_relation']
         for name, value in variants.items():
-            outcome = count_outcomes(
-                x['base_logits'], value, x['grid_world'],
-                x['target_world'])
-            accumulate(stats, {name + '_' + k: v for k, v in outcome.items()})
-        accumulate(stats, {
-            'states': len(x['valid']),
-            'relation_present': int(candidate['has_relation'].sum()),
-            'accepted': int(fusion['accepted'].sum()),
-            'gate_recoverable': int(targets['oracle_eligible'].sum()),
-            'rel_delta_abs_sum': float(candidate['relation_delta'].abs().sum()),
-        })
-        # Selected candidate is a spatial utility label, never instance ID.
-        target_xy = x['target_world'][:, None, :2]
-        distance = (x['query_world'] - target_xy).norm(dim=-1)
+            accumulate(stats, {name + '_' + k: v for k, v in count_outcomes(
+                x['base_logits'], value, x['grid_world'], x['target_world']).items()})
+            for label, mask in [('named', named), ('no_named', ~named)]:
+                if mask.any():
+                    subset = strata.setdefault(label, {})
+                    accumulate(subset, {name + '_' + k: v for k, v in count_outcomes(
+                        x['base_logits'][mask], value[mask], x['grid_world'][mask],
+                        x['target_world'][mask]).items()})
+                    if name == 'native':
+                        accumulate(subset, {'states': int(mask.sum())})
+        distance = (x['query_world'] - x['target_world'][:, None, :2]).norm(dim=-1)
         covered = ((distance <= 20.) & x['valid']).any(-1)
-        ranked_native = distance.gather(
-            1, q0.argmax(-1)[:, None]).squeeze(-1) <= 20.
-        ranked_new = distance.gather(
-            1, q1.argmax(-1)[:, None]).squeeze(-1) <= 20.
-        accumulate(stats, {
-            'candidate_covered': int(covered.sum()),
-            'native_candidate_correct_on_covered': int((ranked_native & covered).sum()),
-            'relation_candidate_correct_on_covered': int((ranked_new & covered).sum()),
-        })
+        for name, score in scores.items():
+            selected = score.masked_fill(~x['valid'], -1e4).argmax(-1)
+            correct = (distance.gather(1, selected[:, None]).squeeze(-1) <= 20.) & covered
+            accumulate(ranks, {name: int(correct.sum()), name + '_named': int((correct & named).sum())})
+        if (~named).any():
+            difference = (candidate['logits'][~named] - off['logits'][~named]).abs().max()
+            max_no_relation_difference = max(max_no_relation_difference, float(difference))
+        accumulate(stats, dict(states=len(named), relation_present=int(named.sum()),
+                              candidate_covered=int(covered.sum()),
+                              rel_delta_abs_sum=float(candidate['relation_delta'].abs().sum()),
+                              valid_queries=int(x['valid'].sum())))
     n = stats['states']
-    result = {
-        'states': n, 'relation_present': stats['relation_present'],
-        'gate_accepted': stats['accepted'],
-        'gate_recoverable': stats['gate_recoverable'],
-        'candidate_covered': stats['candidate_covered'],
-        'native_rank_correct_on_covered': stats['native_candidate_correct_on_covered'],
-        'relation_rank_correct_on_covered': stats['relation_candidate_correct_on_covered'],
-        'mean_relation_delta_abs': stats['rel_delta_abs_sum'] / (15 * n),
-        'A0_R1': stats['native_base_correct'] / n,
-        'A0_NE': stats['native_base_ne_sum'] / n,
-        'threshold': threshold, 'transfer': transfer,
-    }
+    result = dict(states=n, relation_present=stats['relation_present'],
+                  gate_accepted=stats['relation_accepted'], gate_recoverable=stats['gate_recoverable'],
+                  candidate_covered=stats['candidate_covered'],
+                  native_rank_correct_on_covered=ranks['native'],
+                  relation_rank_correct_on_covered=ranks['relation'],
+                  rank_counts=ranks,
+                  mean_relation_delta_abs=stats['rel_delta_abs_sum']/max(stats['valid_queries'], 1),
+                  no_named_max_logit_difference=max_no_relation_difference,
+                  A0_R1=stats['native_base_correct']/n, A0_NE=stats['native_base_ne_sum']/n,
+                  threshold=threshold, transfer=transfer,
+                  data_summary=relation_data_summary(rows))
+    def outcome(acc, name, count):
+        return dict(R1=acc[name+'_updated_correct']/count,
+                    NE=acc[name+'_updated_ne_sum']/count,
+                    corrected=acc[name+'_corrected'], damaged=acc[name+'_damaged'],
+                    net=acc[name+'_corrected']-acc[name+'_damaged'])
     for name in variants:
-        result[name] = {
-            'R1': stats[name + '_updated_correct'] / n,
-            'NE': stats[name + '_updated_ne_sum'] / n,
-            'corrected': stats[name + '_corrected'],
-            'damaged': stats[name + '_damaged'],
-            'net': stats[name + '_corrected'] - stats[name + '_damaged'],
-        }
+        result[name] = outcome(stats, name, n)
+    result['strata'] = {label: dict(states=acc['states'],
+                                   A0_R1=acc['native_base_correct']/acc['states'],
+                                   **{name: outcome(acc, name, acc['states']) for name in variants})
+                        for label, acc in strata.items()}
     return result
 
 
@@ -263,14 +301,18 @@ def main():
     protocol = dict(
         kind='aerialvg-native-relational-gated-pilot-v1',
         admitted_for_runtime=False,
-        base_commit='0a043ed93f79aa74929acd1f155c0afeb0288051',
+        base_commit='a14292c1677964e358b278c7e948f0abfecf929a',
+        implementation_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+        implementation_sha={name: file_sha256(name) for name in (
+            __file__, 'graphnav/native_relation_grounding.py', 'graphnav/semantic_geometry.py')},
         native_checkpoint_sha=source_sha,
         base_sha=config['base_sha'],
         train_manifest_sha=file_sha256(Path(a.train) / 'manifest.json'),
         dev_manifest_sha=file_sha256(Path(a.dev) / 'manifest.json'),
         stage1_public_queries_sha=stage1_sha,
         train_fit=len(fit), train_calibration=len(calibration_rows),
-        train_relation_groups=sum(int(x['relation_valid'].any()) for x in fit),
+        fit_relation_summary=relation_data_summary(fit),
+        calibration_relation_summary=relation_data_summary(calibration_rows),
         data_policy='fit/calibration disjoint TRAIN instruction groups; Dev once after freeze',
         supervision='20m spatial utility weak label; no target identity claim',
         unknown_reference='unmatched/ambiguous named map reference => no relation update',
@@ -279,10 +321,12 @@ def main():
     )
     atomic_json(protocol, out / 'protocol.json')
 
+    initial_relation = {name: p.detach().clone() for name, p in rel.named_parameters()}
+    gradient_max = {}
     history = []
     for epoch in range(a.epochs):
         rel.train()
-        total = supervised = count = 0
+        total = supervised = count = steps = 0
         loader = DataLoader(
             fit, batch_size=a.batch_size, shuffle=True,
             collate_fn=collate_relation,
@@ -296,18 +340,33 @@ def main():
                 pred['logits'], x['valid'], pred['has_relation'],
                 x['query_world'], x['target_world'])
             rel_optimizer.zero_grad(set_to_none=True)
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(rel.parameters(), 2.)
-            rel_optimizer.step()
+            if detail['supervised_rows']:
+                if not torch.isfinite(loss):
+                    raise ValueError('Nonfinite relation loss')
+                loss.backward()
+                for name, parameter in rel.named_parameters():
+                    if parameter.grad is not None:
+                        if not torch.isfinite(parameter.grad).all():
+                            raise ValueError('Nonfinite relation gradient')
+                        module = name.split('.')[0]
+                        gradient_max[module] = max(gradient_max.get(module, 0.), float(parameter.grad.norm()))
+                torch.nn.utils.clip_grad_norm_(rel.parameters(), 2.)
+                rel_optimizer.step()
+                steps += 1
             total += float(loss.detach()) * len(x['valid'])
             supervised += detail['supervised_rows']
             count += len(x['valid'])
         row = dict(epoch=epoch + 1, fit_loss=total / max(count, 1),
-                   supervised_rows=supervised, states=count)
+                   supervised_rows=supervised, states=count, optimizer_steps=steps)
         history.append(row)
         atomic_json(history, out / 'relation_history.json')
         print(json.dumps(row), flush=True)
 
+    atomic_json(dict(gradient_max=gradient_max,
+                     parameter_delta_norm={name: float((p.detach()-initial_relation[name]).norm())
+                                           for name, p in rel.named_parameters()},
+                     frozen_native_has_grad=any(p.grad is not None for p in native.parameters())),
+                out / 'gradient_audit.json')
     # Second stage: freeze relation ranker and fit Gate on its new scores.
     rel.eval().requires_grad_(False)
     gate = ReliabilityGatedBelief().to(device)
@@ -375,7 +434,7 @@ def main():
         raise ValueError('TRAIN/internal Dev group leakage')
     dev_rows = augment_public_relations(dev_rows, static)
     report = evaluate(dev_rows, native, rel, gate, device, sigma,
-                      threshold, a.transfer, a.batch_size)
+                      threshold, a.transfer, a.batch_size, ablations=True)
     atomic_json(report, out / 'internal_dev.json')
     if file_sha256(source) != source_sha or file_sha256(stage1_path) != stage1_sha:
         raise ValueError('Frozen checkpoint or public reference cache changed')

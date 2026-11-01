@@ -210,6 +210,11 @@ def parse_spatial_relations(instruction: str, entities: list[dict]) -> list[Spat
     Multi-matched names stay ambiguous sets, never resolved using target XY.
     """
     text = canonical(instruction)
+    # Canonicalization separates hyphenated compass names; preserve diagonals.
+    for vertical in ("north", "south"):
+        for horizontal in ("east", "west"):
+            text = re.sub(rf"\b{vertical}\s+{horizontal}(?=\s+(?:side\s+)?of\b)",
+                          vertical + horizontal, text)
     group = _reference_groups(entities)
     if not text or not group:
         return []

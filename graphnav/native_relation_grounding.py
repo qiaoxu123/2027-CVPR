@@ -129,7 +129,11 @@ class RelationAwareQueryRanker(nn.Module):
                 or native_logits.shape != (b, n)
                 or native_null.shape != (b,)):
             raise ValueError('Relation ranker public input shape mismatch')
-        if not (torch.isfinite(features).all()
+        clean_text = text.float().masked_fill(~text_mask.bool()[..., None], 0.)
+        if not (torch.isfinite(clean_text).all()
+                and torch.isfinite(geometry).all()
+                and torch.isfinite(native_null).all()
+                and torch.isfinite(features).all()
                 and torch.isfinite(relation_features).all()
                 and torch.isfinite(native_logits.masked_fill(~valid.bool(), 0)).all()):
             raise ValueError('Nonfinite public relation evidence')
@@ -137,7 +141,7 @@ class RelationAwareQueryRanker(nn.Module):
             relation_valid, dtype=torch.bool)
         has_relation = role_valid.any(-1)
         words = text_mask.float()
-        sentence = (text.float() * words[..., None]).sum(1) / words.sum(
+        sentence = (clean_text * words[..., None]).sum(1) / words.sum(
             1, keepdim=True).clamp_min(1)
         query = self.candidate(torch.cat([
             features.float(), sentence[:, None, :].expand(-1, n, -1),
