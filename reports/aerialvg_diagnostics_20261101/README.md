@@ -25,3 +25,14 @@ python -m pytest -q tests/test_aerialvg_fusion_oracles.py
 ```
 
 Oracle为GT参与的离线数学干预，不用于推理/调参；同样固定σ、gain、bound和观测掩码。既非新训练模型，也非正式R@1/SR结果。
+
+## 残余核混合诊断
+
+见 [KERNEL_FEASIBILITY_ZH.md](KERNEL_FEASIBILITY_ZH.md)。可运行：
+
+```bash
+python -m scripts.diagnose_aerialvg_kernel_feasibility --experiment-root /path/to/visual-residual-20261013 --oracles reports/aerialvg_diagnostics_20261101/fusion_oracles_v2.json --output /tmp/kernel-feasibility.json
+python -m pytest -q tests/test_aerialvg_kernel_feasibility.py
+```
+
+依赖SciPy1.15.3。仅检查已有候选核的GT参与概率Oracle，不训练模型；必要条件LP可行解必须通过原更新函数验证，不将数值不可行冒充精确证明。
