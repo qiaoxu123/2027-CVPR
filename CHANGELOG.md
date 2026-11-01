@@ -105,3 +105,14 @@
 ### Notes & Caveats
 - CityNav inputs are observed orthophoto crops and vertical-depth-validity proxies; projections are not semantic segmentation or calibrated perspective occlusion.
 - Registered instance contours and geometric support are evaluation proxies; independent human pixel/visibility review remains uncollected. No training, formal validation/Test, paused validation resume or original checkpoint/result changes.
+
+## [0.11.0] - 2026-11-01
+### Features
+- TRAIN automatic target/reference box proposals with world/pixel geometry, quality flags and physical-instance grouping; editable64-instance human review UI with explicit attestation and image identity checks.
+- Public-only frozen900/validity/NMS/Top15/30/60 waterfall and isolated offline box/position Oracles; actual current RGB crop features, never fabricated query vectors.
+- Human-verified versus unverified-projection modes, negative/unknown review guards, replay checks and C probability-normalization mechanism audits.
+### Design Rationale
+- Separate candidate coverage, visual-language selection, spatial mapping and final belief expression before designing another network.
+### Notes & Caveats
+- No human labels were available: human quality and primary verified Oracles are NA; automatic-box sensitivity results do not establish real visibility or pixel gold truth.
+- Original policy/checkpoints/experiments stay unchanged. No training, internal Dev, formal validation/Test or paused rollout resume.

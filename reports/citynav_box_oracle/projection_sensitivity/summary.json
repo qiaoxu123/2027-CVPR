@@ -1,0 +1,3269 @@
+{
+  "all": {
+    "states": 1275,
+    "episodes": 256,
+    "instructions": 252,
+    "instances": 229,
+    "methods": {
+      "A0": {
+        "states": 1275,
+        "R1": 0.6603921568627451,
+        "NE": 22.02379925152835,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 50,
+        "damaged_Native": 90
+      },
+      "Native15": {
+        "states": 1275,
+        "R1": 0.691764705882353,
+        "NE": 20.202752461036045,
+        "corrected_A0": 90,
+        "damaged_A0": 50,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 1275,
+        "R1": 0.6886274509803921,
+        "NE": 20.554470887441262,
+        "corrected_A0": 88,
+        "damaged_A0": 52,
+        "corrected_Native": 10,
+        "damaged_Native": 14
+      },
+      "Native60": {
+        "states": 1275,
+        "R1": 0.6847058823529412,
+        "NE": 20.85983296831449,
+        "corrected_A0": 84,
+        "damaged_A0": 53,
+        "corrected_Native": 14,
+        "damaged_Native": 23
+      },
+      "A_box_exists": {
+        "states": 1275,
+        "R1": 0.7011764705882353,
+        "NE": 20.05894486116428,
+        "corrected_A0": 94,
+        "damaged_A0": 42,
+        "corrected_Native": 12,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 1275,
+        "R1": 0.6925490196078431,
+        "NE": 20.2482939128081,
+        "corrected_A0": 91,
+        "damaged_A0": 50,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 1275,
+        "R1": 0.6988235294117647,
+        "NE": 20.500794331536575,
+        "corrected_A0": 90,
+        "damaged_A0": 41,
+        "corrected_Native": 15,
+        "damaged_Native": 6
+      },
+      "B_added_box_selected": {
+        "states": 1275,
+        "R1": 0.7152941176470589,
+        "NE": 19.774763164590386,
+        "corrected_A0": 101,
+        "damaged_A0": 31,
+        "corrected_Native": 36,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 1275,
+        "R1": 0.7301960784313726,
+        "NE": 18.429720653342265,
+        "corrected_A0": 120,
+        "damaged_A0": 31,
+        "corrected_Native": 49,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 1275,
+        "R1": 0.7294117647058823,
+        "NE": 18.569497483080507,
+        "corrected_A0": 119,
+        "damaged_A0": 31,
+        "corrected_Native": 48,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 1275,
+        "R1": 0.756078431372549,
+        "NE": 16.96968778635941,
+        "corrected_A0": 152,
+        "damaged_A0": 30,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 1275,
+        "R1": 0.756078431372549,
+        "NE": 16.805863579675265,
+        "corrected_A0": 152,
+        "damaged_A0": 30,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 302,
+        "covered": 197,
+        "recall": 0.652317880794702,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.1456953642384106,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 302,
+        "covered": 196,
+        "recall": 0.6490066225165563,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.15562913907284767,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 302,
+        "covered": 150,
+        "recall": 0.4966887417218543,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 302,
+        "covered": 70,
+        "recall": 0.23178807947019867,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17549668874172186,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2119205298013245
+      },
+      "top30": {
+        "states": 302,
+        "covered": 76,
+        "recall": 0.25165562913907286,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2185430463576159
+      },
+      "top60": {
+        "states": 302,
+        "covered": 88,
+        "recall": 0.2913907284768212,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.23178807947019867
+      }
+    },
+    "labeled_A0_wrong": 99,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 24,
+      "nms_no_match": 16,
+      "top15_no_match": 33,
+      "Native_ranking_error": 10,
+      "success": 6,
+      "Belief_or_mapping_failure": 9,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 75,
+      "valid900": 74,
+      "nms": 58,
+      "top15": 25,
+      "top30": 26,
+      "top60": 32,
+      "Native_top1_match": 15,
+      "Native_corrected": 37,
+      "match_and_corrected": 6
+    },
+    "bounded_impossible_A0_wrong": 174,
+    "annotation_or_actual_visibility_unknown": 1275
+  },
+  "auto_high_support": {
+    "states": 302,
+    "episodes": 111,
+    "instructions": 109,
+    "instances": 100,
+    "methods": {
+      "A0": {
+        "states": 302,
+        "R1": 0.6721854304635762,
+        "NE": 22.71978341467333,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 20,
+        "damaged_Native": 37
+      },
+      "Native15": {
+        "states": 302,
+        "R1": 0.7284768211920529,
+        "NE": 18.599603597099417,
+        "corrected_A0": 37,
+        "damaged_A0": 20,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 302,
+        "R1": 0.7185430463576159,
+        "NE": 19.458631867801905,
+        "corrected_A0": 35,
+        "damaged_A0": 21,
+        "corrected_Native": 3,
+        "damaged_Native": 6
+      },
+      "Native60": {
+        "states": 302,
+        "R1": 0.7119205298013245,
+        "NE": 19.759205450482717,
+        "corrected_A0": 34,
+        "damaged_A0": 22,
+        "corrected_Native": 3,
+        "damaged_Native": 8
+      },
+      "A_box_exists": {
+        "states": 302,
+        "R1": 0.7682119205298014,
+        "NE": 17.992468862541465,
+        "corrected_A0": 41,
+        "damaged_A0": 12,
+        "corrected_Native": 12,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 302,
+        "R1": 0.7317880794701986,
+        "NE": 18.791872971302627,
+        "corrected_A0": 38,
+        "damaged_A0": 20,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 302,
+        "R1": 0.7582781456953642,
+        "NE": 19.85789295103376,
+        "corrected_A0": 37,
+        "damaged_A0": 11,
+        "corrected_Native": 15,
+        "damaged_Native": 6
+      },
+      "B_added_box_selected": {
+        "states": 302,
+        "R1": 0.8278145695364238,
+        "NE": 16.79269514356228,
+        "corrected_A0": 48,
+        "damaged_A0": 1,
+        "corrected_Native": 36,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 302,
+        "R1": 0.890728476821192,
+        "NE": 11.114121627531304,
+        "corrected_A0": 67,
+        "damaged_A0": 1,
+        "corrected_Native": 49,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 302,
+        "R1": 0.8874172185430463,
+        "NE": 11.704239037850046,
+        "corrected_A0": 66,
+        "damaged_A0": 1,
+        "corrected_Native": 48,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 302,
+        "R1": 1.0,
+        "NE": 4.950075583150055,
+        "corrected_A0": 99,
+        "damaged_A0": 0,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 302,
+        "R1": 1.0,
+        "NE": 4.258433650957038,
+        "corrected_A0": 99,
+        "damaged_A0": 0,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 302,
+        "covered": 197,
+        "recall": 0.652317880794702,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.1456953642384106,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 302,
+        "covered": 196,
+        "recall": 0.6490066225165563,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.15562913907284767,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 302,
+        "covered": 150,
+        "recall": 0.4966887417218543,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 302,
+        "covered": 70,
+        "recall": 0.23178807947019867,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17549668874172186,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2119205298013245
+      },
+      "top30": {
+        "states": 302,
+        "covered": 76,
+        "recall": 0.25165562913907286,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2185430463576159
+      },
+      "top60": {
+        "states": 302,
+        "covered": 88,
+        "recall": 0.2913907284768212,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.23178807947019867
+      }
+    },
+    "labeled_A0_wrong": 99,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 24,
+      "nms_no_match": 16,
+      "top15_no_match": 33,
+      "Native_ranking_error": 10,
+      "success": 6,
+      "Belief_or_mapping_failure": 9,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 75,
+      "valid900": 74,
+      "nms": 58,
+      "top15": 25,
+      "top30": 26,
+      "top60": 32,
+      "Native_top1_match": 15,
+      "Native_corrected": 37,
+      "match_and_corrected": 6
+    },
+    "bounded_impossible_A0_wrong": 4,
+    "annotation_or_actual_visibility_unknown": 302
+  },
+  "Oracle_hypothesis_eligible": {
+    "states": 302,
+    "episodes": 111,
+    "instructions": 109,
+    "instances": 100,
+    "methods": {
+      "A0": {
+        "states": 302,
+        "R1": 0.6721854304635762,
+        "NE": 22.71978341467333,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 20,
+        "damaged_Native": 37
+      },
+      "Native15": {
+        "states": 302,
+        "R1": 0.7284768211920529,
+        "NE": 18.599603597099417,
+        "corrected_A0": 37,
+        "damaged_A0": 20,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 302,
+        "R1": 0.7185430463576159,
+        "NE": 19.458631867801905,
+        "corrected_A0": 35,
+        "damaged_A0": 21,
+        "corrected_Native": 3,
+        "damaged_Native": 6
+      },
+      "Native60": {
+        "states": 302,
+        "R1": 0.7119205298013245,
+        "NE": 19.759205450482717,
+        "corrected_A0": 34,
+        "damaged_A0": 22,
+        "corrected_Native": 3,
+        "damaged_Native": 8
+      },
+      "A_box_exists": {
+        "states": 302,
+        "R1": 0.7682119205298014,
+        "NE": 17.992468862541465,
+        "corrected_A0": 41,
+        "damaged_A0": 12,
+        "corrected_Native": 12,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 302,
+        "R1": 0.7317880794701986,
+        "NE": 18.791872971302627,
+        "corrected_A0": 38,
+        "damaged_A0": 20,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 302,
+        "R1": 0.7582781456953642,
+        "NE": 19.85789295103376,
+        "corrected_A0": 37,
+        "damaged_A0": 11,
+        "corrected_Native": 15,
+        "damaged_Native": 6
+      },
+      "B_added_box_selected": {
+        "states": 302,
+        "R1": 0.8278145695364238,
+        "NE": 16.79269514356228,
+        "corrected_A0": 48,
+        "damaged_A0": 1,
+        "corrected_Native": 36,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 302,
+        "R1": 0.890728476821192,
+        "NE": 11.114121627531304,
+        "corrected_A0": 67,
+        "damaged_A0": 1,
+        "corrected_Native": 49,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 302,
+        "R1": 0.8874172185430463,
+        "NE": 11.704239037850046,
+        "corrected_A0": 66,
+        "damaged_A0": 1,
+        "corrected_Native": 48,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 302,
+        "R1": 1.0,
+        "NE": 4.950075583150055,
+        "corrected_A0": 99,
+        "damaged_A0": 0,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 302,
+        "R1": 1.0,
+        "NE": 4.258433650957038,
+        "corrected_A0": 99,
+        "damaged_A0": 0,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 302,
+        "covered": 197,
+        "recall": 0.652317880794702,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.1456953642384106,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 302,
+        "covered": 196,
+        "recall": 0.6490066225165563,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.15562913907284767,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 302,
+        "covered": 150,
+        "recall": 0.4966887417218543,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 302,
+        "covered": 70,
+        "recall": 0.23178807947019867,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17549668874172186,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2119205298013245
+      },
+      "top30": {
+        "states": 302,
+        "covered": 76,
+        "recall": 0.25165562913907286,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2185430463576159
+      },
+      "top60": {
+        "states": 302,
+        "covered": 88,
+        "recall": 0.2913907284768212,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.23178807947019867
+      }
+    },
+    "labeled_A0_wrong": 99,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 24,
+      "nms_no_match": 16,
+      "top15_no_match": 33,
+      "Native_ranking_error": 10,
+      "success": 6,
+      "Belief_or_mapping_failure": 9,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 75,
+      "valid900": 74,
+      "nms": 58,
+      "top15": 25,
+      "top30": 26,
+      "top60": 32,
+      "Native_top1_match": 15,
+      "Native_corrected": 37,
+      "match_and_corrected": 6
+    },
+    "bounded_impossible_A0_wrong": 4,
+    "annotation_or_actual_visibility_unknown": 302
+  },
+  "A0_wrong": {
+    "states": 433,
+    "episodes": 87,
+    "instructions": 86,
+    "instances": 83,
+    "methods": {
+      "A0": {
+        "states": 433,
+        "R1": 0.0,
+        "NE": 46.46904126050566,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 90
+      },
+      "Native15": {
+        "states": 433,
+        "R1": 0.20785219399538107,
+        "NE": 39.68741316305297,
+        "corrected_A0": 90,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 433,
+        "R1": 0.20323325635103925,
+        "NE": 40.66710831909752,
+        "corrected_A0": 88,
+        "damaged_A0": 0,
+        "corrected_Native": 6,
+        "damaged_Native": 8
+      },
+      "Native60": {
+        "states": 433,
+        "R1": 0.19399538106235567,
+        "NE": 41.543203080223556,
+        "corrected_A0": 84,
+        "damaged_A0": 0,
+        "corrected_Native": 10,
+        "damaged_Native": 16
+      },
+      "A_box_exists": {
+        "states": 433,
+        "R1": 0.21709006928406466,
+        "NE": 40.01204638475634,
+        "corrected_A0": 94,
+        "damaged_A0": 0,
+        "corrected_Native": 4,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 433,
+        "R1": 0.21016166281755197,
+        "NE": 39.96350043282498,
+        "corrected_A0": 91,
+        "damaged_A0": 0,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 433,
+        "R1": 0.20785219399538107,
+        "NE": 41.135029381196986,
+        "corrected_A0": 90,
+        "damaged_A0": 0,
+        "corrected_Native": 6,
+        "damaged_Native": 6
+      },
+      "B_added_box_selected": {
+        "states": 433,
+        "R1": 0.23325635103926096,
+        "NE": 39.93746881038983,
+        "corrected_A0": 101,
+        "damaged_A0": 0,
+        "corrected_Native": 17,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 433,
+        "R1": 0.27713625866050806,
+        "NE": 36.3754812501044,
+        "corrected_A0": 120,
+        "damaged_A0": 0,
+        "corrected_Native": 30,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 433,
+        "R1": 0.2748267898383372,
+        "NE": 36.80623087348894,
+        "corrected_A0": 119,
+        "damaged_A0": 0,
+        "corrected_Native": 29,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 433,
+        "R1": 0.3510392609699769,
+        "NE": 32.61484671657686,
+        "corrected_A0": 152,
+        "damaged_A0": 0,
+        "corrected_Native": 62,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 433,
+        "R1": 0.3510392609699769,
+        "NE": 32.27174429481905,
+        "corrected_A0": 152,
+        "damaged_A0": 0,
+        "corrected_Native": 62,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 99,
+        "covered": 75,
+        "recall": 0.7575757575757576,
+        "vl_top1": 0.16161616161616163,
+        "vl_top5": 0.18181818181818182,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 99,
+        "covered": 74,
+        "recall": 0.7474747474747475,
+        "vl_top1": 0.15151515151515152,
+        "vl_top5": 0.1717171717171717,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 99,
+        "covered": 58,
+        "recall": 0.5858585858585859,
+        "vl_top1": 0.15151515151515152,
+        "vl_top5": 0.18181818181818182,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 99,
+        "covered": 25,
+        "recall": 0.25252525252525254,
+        "vl_top1": 0.15151515151515152,
+        "vl_top5": 0.18181818181818182,
+        "Native_top1": 0.15151515151515152,
+        "Native_top5": 0.1919191919191919
+      },
+      "top30": {
+        "states": 99,
+        "covered": 26,
+        "recall": 0.26262626262626265,
+        "vl_top1": 0.15151515151515152,
+        "vl_top5": 0.18181818181818182,
+        "Native_top1": 0.15151515151515152,
+        "Native_top5": 0.1919191919191919
+      },
+      "top60": {
+        "states": 99,
+        "covered": 32,
+        "recall": 0.32323232323232326,
+        "vl_top1": 0.15151515151515152,
+        "vl_top5": 0.18181818181818182,
+        "Native_top1": 0.15151515151515152,
+        "Native_top5": 0.2222222222222222
+      }
+    },
+    "labeled_A0_wrong": 99,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 24,
+      "nms_no_match": 16,
+      "top15_no_match": 33,
+      "Native_ranking_error": 10,
+      "success": 6,
+      "Belief_or_mapping_failure": 9,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 75,
+      "valid900": 74,
+      "nms": 58,
+      "top15": 25,
+      "top30": 26,
+      "top60": 32,
+      "Native_top1_match": 15,
+      "Native_corrected": 37,
+      "match_and_corrected": 6
+    },
+    "bounded_impossible_A0_wrong": 174,
+    "annotation_or_actual_visibility_unknown": 433
+  },
+  "A0_correct": {
+    "states": 842,
+    "episodes": 169,
+    "instructions": 166,
+    "instances": 152,
+    "methods": {
+      "A0": {
+        "states": 842,
+        "R1": 1.0,
+        "NE": 9.45278999988087,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 50,
+        "damaged_Native": 0
+      },
+      "Native15": {
+        "states": 842,
+        "R1": 0.9406175771971497,
+        "NE": 10.182730983633043,
+        "corrected_A0": 0,
+        "damaged_A0": 50,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 842,
+        "R1": 0.9382422802850356,
+        "NE": 10.21151125809784,
+        "corrected_A0": 0,
+        "damaged_A0": 52,
+        "corrected_Native": 4,
+        "damaged_Native": 6
+      },
+      "Native60": {
+        "states": 842,
+        "R1": 0.9370546318289786,
+        "NE": 10.22337304140638,
+        "corrected_A0": 0,
+        "damaged_A0": 53,
+        "corrected_Native": 4,
+        "damaged_Native": 7
+      },
+      "A_box_exists": {
+        "states": 842,
+        "R1": 0.9501187648456056,
+        "NE": 9.798026856751736,
+        "corrected_A0": 0,
+        "damaged_A0": 42,
+        "corrected_Native": 8,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 842,
+        "R1": 0.9406175771971497,
+        "NE": 10.109713837787544,
+        "corrected_A0": 0,
+        "damaged_A0": 50,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 842,
+        "R1": 0.9513064133016627,
+        "NE": 9.889602197922606,
+        "corrected_A0": 0,
+        "damaged_A0": 41,
+        "corrected_Native": 9,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 842,
+        "R1": 0.9631828978622328,
+        "NE": 9.406055866928678,
+        "corrected_A0": 0,
+        "damaged_A0": 31,
+        "corrected_Native": 19,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 842,
+        "R1": 0.9631828978622328,
+        "NE": 9.20108129657504,
+        "corrected_A0": 0,
+        "damaged_A0": 31,
+        "corrected_Native": 19,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 842,
+        "R1": 0.9631828978622328,
+        "NE": 9.19122484882059,
+        "corrected_A0": 0,
+        "damaged_A0": 31,
+        "corrected_Native": 19,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 842,
+        "R1": 0.9643705463182898,
+        "NE": 8.92413693507182,
+        "corrected_A0": 0,
+        "damaged_A0": 30,
+        "corrected_Native": 20,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 842,
+        "R1": 0.9643705463182898,
+        "NE": 8.852506869868542,
+        "corrected_A0": 0,
+        "damaged_A0": 30,
+        "corrected_Native": 20,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 203,
+        "covered": 122,
+        "recall": 0.6009852216748769,
+        "vl_top1": 0.06403940886699508,
+        "vl_top5": 0.12807881773399016,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 203,
+        "covered": 122,
+        "recall": 0.6009852216748769,
+        "vl_top1": 0.06896551724137931,
+        "vl_top5": 0.1477832512315271,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 203,
+        "covered": 92,
+        "recall": 0.45320197044334976,
+        "vl_top1": 0.07389162561576355,
+        "vl_top5": 0.16748768472906403,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 203,
+        "covered": 45,
+        "recall": 0.22167487684729065,
+        "vl_top1": 0.07389162561576355,
+        "vl_top5": 0.1724137931034483,
+        "Native_top1": 0.14285714285714285,
+        "Native_top5": 0.22167487684729065
+      },
+      "top30": {
+        "states": 203,
+        "covered": 50,
+        "recall": 0.24630541871921183,
+        "vl_top1": 0.07389162561576355,
+        "vl_top5": 0.16748768472906403,
+        "Native_top1": 0.14285714285714285,
+        "Native_top5": 0.2315270935960591
+      },
+      "top60": {
+        "states": 203,
+        "covered": 56,
+        "recall": 0.27586206896551724,
+        "vl_top1": 0.07389162561576355,
+        "vl_top5": 0.16748768472906403,
+        "Native_top1": 0.14285714285714285,
+        "Native_top5": 0.23645320197044334
+      }
+    },
+    "labeled_A0_wrong": 0,
+    "first_failure_A0_wrong": {},
+    "A0_wrong_pass_counts": {
+      "raw900": 0,
+      "valid900": 0,
+      "nms": 0,
+      "top15": 0,
+      "top30": 0,
+      "top60": 0,
+      "Native_top1_match": 0,
+      "Native_corrected": 0,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 0,
+    "annotation_or_actual_visibility_unknown": 842
+  },
+  "category_Building": {
+    "states": 474,
+    "episodes": 95,
+    "instructions": 94,
+    "instances": 90,
+    "methods": {
+      "A0": {
+        "states": 474,
+        "R1": 0.6118143459915611,
+        "NE": 27.497675971265583,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 31,
+        "damaged_Native": 37
+      },
+      "Native15": {
+        "states": 474,
+        "R1": 0.6244725738396625,
+        "NE": 24.294454998733624,
+        "corrected_A0": 37,
+        "damaged_A0": 31,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 474,
+        "R1": 0.6139240506329114,
+        "NE": 25.583665203318816,
+        "corrected_A0": 33,
+        "damaged_A0": 32,
+        "corrected_Native": 5,
+        "damaged_Native": 10
+      },
+      "Native60": {
+        "states": 474,
+        "R1": 0.6033755274261603,
+        "NE": 25.968906369516116,
+        "corrected_A0": 29,
+        "damaged_A0": 33,
+        "corrected_Native": 4,
+        "damaged_Native": 14
+      },
+      "A_box_exists": {
+        "states": 474,
+        "R1": 0.630801687763713,
+        "NE": 24.482583609940132,
+        "corrected_A0": 38,
+        "damaged_A0": 29,
+        "corrected_Native": 3,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 474,
+        "R1": 0.6265822784810127,
+        "NE": 24.515251975145016,
+        "corrected_A0": 38,
+        "damaged_A0": 31,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 474,
+        "R1": 0.6350210970464135,
+        "NE": 25.423514926106616,
+        "corrected_A0": 39,
+        "damaged_A0": 28,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 474,
+        "R1": 0.6497890295358649,
+        "NE": 24.356501322884096,
+        "corrected_A0": 42,
+        "damaged_A0": 24,
+        "corrected_Native": 12,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 474,
+        "R1": 0.6729957805907173,
+        "NE": 21.405507811639882,
+        "corrected_A0": 53,
+        "damaged_A0": 24,
+        "corrected_Native": 23,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 474,
+        "R1": 0.6708860759493671,
+        "NE": 21.851332768735002,
+        "corrected_A0": 52,
+        "damaged_A0": 24,
+        "corrected_Native": 22,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 474,
+        "R1": 0.6835443037974683,
+        "NE": 20.63569700227508,
+        "corrected_A0": 58,
+        "damaged_A0": 24,
+        "corrected_Native": 28,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 474,
+        "R1": 0.6835443037974683,
+        "NE": 20.581404413729278,
+        "corrected_A0": 58,
+        "damaged_A0": 24,
+        "corrected_Native": 28,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 61,
+        "covered": 39,
+        "recall": 0.639344262295082,
+        "vl_top1": 0.13114754098360656,
+        "vl_top5": 0.16393442622950818,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 61,
+        "covered": 39,
+        "recall": 0.639344262295082,
+        "vl_top1": 0.13114754098360656,
+        "vl_top5": 0.16393442622950818,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 61,
+        "covered": 35,
+        "recall": 0.5737704918032787,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 61,
+        "covered": 16,
+        "recall": 0.26229508196721313,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": 0.11475409836065574,
+        "Native_top5": 0.18032786885245902
+      },
+      "top30": {
+        "states": 61,
+        "covered": 17,
+        "recall": 0.2786885245901639,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": 0.11475409836065574,
+        "Native_top5": 0.18032786885245902
+      },
+      "top60": {
+        "states": 61,
+        "covered": 23,
+        "recall": 0.3770491803278688,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": 0.11475409836065574,
+        "Native_top5": 0.21311475409836064
+      }
+    },
+    "labeled_A0_wrong": 34,
+    "first_failure_A0_wrong": {
+      "top15_no_match": 12,
+      "raw900_no_match": 7,
+      "Belief_or_mapping_failure": 1,
+      "Native_ranking_error": 7,
+      "success": 4,
+      "nms_no_match": 3
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 27,
+      "valid900": 27,
+      "nms": 24,
+      "top15": 12,
+      "top30": 13,
+      "top60": 17,
+      "Native_top1_match": 5,
+      "Native_corrected": 13,
+      "match_and_corrected": 4
+    },
+    "bounded_impossible_A0_wrong": 70,
+    "annotation_or_actual_visibility_unknown": 474
+  },
+  "category_Car": {
+    "states": 651,
+    "episodes": 131,
+    "instructions": 128,
+    "instances": 116,
+    "methods": {
+      "A0": {
+        "states": 651,
+        "R1": 0.7019969278033794,
+        "NE": 18.505020209904274,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 18,
+        "damaged_Native": 44
+      },
+      "Native15": {
+        "states": 651,
+        "R1": 0.7419354838709677,
+        "NE": 17.59563236838112,
+        "corrected_A0": 44,
+        "damaged_A0": 18,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 651,
+        "R1": 0.7434715821812596,
+        "NE": 17.340630331209727,
+        "corrected_A0": 46,
+        "damaged_A0": 19,
+        "corrected_Native": 4,
+        "damaged_Native": 3
+      },
+      "Native60": {
+        "states": 651,
+        "R1": 0.7419354838709677,
+        "NE": 17.573401918288567,
+        "corrected_A0": 45,
+        "damaged_A0": 19,
+        "corrected_Native": 8,
+        "damaged_Native": 8
+      },
+      "A_box_exists": {
+        "states": 651,
+        "R1": 0.7526881720430108,
+        "NE": 17.272931427312887,
+        "corrected_A0": 45,
+        "damaged_A0": 12,
+        "corrected_Native": 7,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 651,
+        "R1": 0.7419354838709677,
+        "NE": 17.58936843916934,
+        "corrected_A0": 44,
+        "damaged_A0": 18,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 651,
+        "R1": 0.7450076804915514,
+        "NE": 17.467863082473727,
+        "corrected_A0": 40,
+        "damaged_A0": 12,
+        "corrected_Native": 7,
+        "damaged_Native": 5
+      },
+      "B_added_box_selected": {
+        "states": 651,
+        "R1": 0.7619047619047619,
+        "NE": 16.918620799406334,
+        "corrected_A0": 45,
+        "damaged_A0": 6,
+        "corrected_Native": 19,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 651,
+        "R1": 0.7741935483870968,
+        "NE": 16.450234998984637,
+        "corrected_A0": 53,
+        "damaged_A0": 6,
+        "corrected_Native": 21,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 651,
+        "R1": 0.7741935483870968,
+        "NE": 16.398513840685975,
+        "corrected_A0": 53,
+        "damaged_A0": 6,
+        "corrected_Native": 21,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 651,
+        "R1": 0.8033794162826421,
+        "NE": 14.503126051980779,
+        "corrected_A0": 71,
+        "damaged_A0": 5,
+        "corrected_Native": 40,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 651,
+        "R1": 0.8033794162826421,
+        "NE": 14.341884908817148,
+        "corrected_A0": 71,
+        "damaged_A0": 5,
+        "corrected_Native": 40,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 201,
+        "covered": 120,
+        "recall": 0.5970149253731343,
+        "vl_top1": 0.04975124378109453,
+        "vl_top5": 0.07960199004975124,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 201,
+        "covered": 120,
+        "recall": 0.5970149253731343,
+        "vl_top1": 0.04975124378109453,
+        "vl_top5": 0.07960199004975124,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 201,
+        "covered": 78,
+        "recall": 0.3880597014925373,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 201,
+        "covered": 22,
+        "recall": 0.10945273631840796,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": 0.07462686567164178,
+        "Native_top5": 0.1044776119402985
+      },
+      "top30": {
+        "states": 201,
+        "covered": 27,
+        "recall": 0.13432835820895522,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": 0.07462686567164178,
+        "Native_top5": 0.11442786069651742
+      },
+      "top60": {
+        "states": 201,
+        "covered": 33,
+        "recall": 0.16417910447761194,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": 0.07462686567164178,
+        "Native_top5": 0.12437810945273632
+      }
+    },
+    "labeled_A0_wrong": 50,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 15,
+      "nms_no_match": 13,
+      "top15_no_match": 17,
+      "Native_ranking_error": 3,
+      "success": 2
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 35,
+      "valid900": 35,
+      "nms": 22,
+      "top15": 5,
+      "top30": 5,
+      "top60": 7,
+      "Native_top1_match": 2,
+      "Native_corrected": 23,
+      "match_and_corrected": 2
+    },
+    "bounded_impossible_A0_wrong": 82,
+    "annotation_or_actual_visibility_unknown": 651
+  },
+  "category_Ground": {
+    "states": 65,
+    "episodes": 13,
+    "instructions": 13,
+    "instances": 13,
+    "methods": {
+      "A0": {
+        "states": 65,
+        "R1": 0.6153846153846154,
+        "NE": 24.001053773439846,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 2
+      },
+      "Native15": {
+        "states": 65,
+        "R1": 0.6461538461538462,
+        "NE": 22.991727913342988,
+        "corrected_A0": 2,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 65,
+        "R1": 0.6615384615384615,
+        "NE": 22.936213753773615,
+        "corrected_A0": 3,
+        "damaged_A0": 0,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "Native60": {
+        "states": 65,
+        "R1": 0.676923076923077,
+        "NE": 22.928461437958937,
+        "corrected_A0": 4,
+        "damaged_A0": 0,
+        "corrected_Native": 2,
+        "damaged_Native": 0
+      },
+      "A_box_exists": {
+        "states": 65,
+        "R1": 0.676923076923077,
+        "NE": 22.15847832239591,
+        "corrected_A0": 4,
+        "damaged_A0": 0,
+        "corrected_Native": 2,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 65,
+        "R1": 0.6461538461538462,
+        "NE": 22.991727913342988,
+        "corrected_A0": 2,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 65,
+        "R1": 0.676923076923077,
+        "NE": 22.41798208310054,
+        "corrected_A0": 4,
+        "damaged_A0": 0,
+        "corrected_Native": 3,
+        "damaged_Native": 1
+      },
+      "B_added_box_selected": {
+        "states": 65,
+        "R1": 0.7230769230769231,
+        "NE": 21.57869435457083,
+        "corrected_A0": 7,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 65,
+        "R1": 0.7230769230769231,
+        "NE": 21.57869435457083,
+        "corrected_A0": 7,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 65,
+        "R1": 0.7230769230769231,
+        "NE": 21.57869435457083,
+        "corrected_A0": 7,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 65,
+        "R1": 0.7230769230769231,
+        "NE": 21.57869435457083,
+        "corrected_A0": 7,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 65,
+        "R1": 0.7230769230769231,
+        "NE": 21.57869435457083,
+        "corrected_A0": 7,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 9,
+        "covered": 7,
+        "recall": 0.7777777777777778,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 9,
+        "covered": 7,
+        "recall": 0.7777777777777778,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 9,
+        "covered": 7,
+        "recall": 0.7777777777777778,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 9,
+        "covered": 2,
+        "recall": 0.2222222222222222,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": 0.2222222222222222,
+        "Native_top5": 0.2222222222222222
+      },
+      "top30": {
+        "states": 9,
+        "covered": 2,
+        "recall": 0.2222222222222222,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": 0.2222222222222222,
+        "Native_top5": 0.2222222222222222
+      },
+      "top60": {
+        "states": 9,
+        "covered": 2,
+        "recall": 0.2222222222222222,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": 0.2222222222222222,
+        "Native_top5": 0.2222222222222222
+      }
+    },
+    "labeled_A0_wrong": 6,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 2,
+      "top15_no_match": 4
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 4,
+      "valid900": 4,
+      "nms": 4,
+      "top15": 0,
+      "top30": 0,
+      "top60": 0,
+      "Native_top1_match": 0,
+      "Native_corrected": 1,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 11,
+    "annotation_or_actual_visibility_unknown": 65
+  },
+  "category_Parking": {
+    "states": 85,
+    "episodes": 17,
+    "instructions": 17,
+    "instances": 10,
+    "methods": {
+      "A0": {
+        "states": 85,
+        "R1": 0.6470588235294118,
+        "NE": 16.936576275264514,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 1,
+        "damaged_Native": 7
+      },
+      "Native15": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 15.220220379268422,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 85,
+        "R1": 0.7058823529411765,
+        "NE": 15.302221594137304,
+        "corrected_A0": 6,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 1
+      },
+      "Native60": {
+        "states": 85,
+        "R1": 0.7058823529411765,
+        "NE": 15.957538507966435,
+        "corrected_A0": 6,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 1
+      },
+      "A_box_exists": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 15.122713138075436,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 14.720048639353584,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 14.811988184031318,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 14.720048639353584,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 14.587823681270375,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 85,
+        "R1": 0.7176470588235294,
+        "NE": 14.594469590748057,
+        "corrected_A0": 7,
+        "damaged_A0": 1,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 85,
+        "R1": 0.8235294117647058,
+        "NE": 11.892721831097322,
+        "corrected_A0": 16,
+        "damaged_A0": 1,
+        "corrected_Native": 9,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 85,
+        "R1": 0.8235294117647058,
+        "NE": 10.973037215190775,
+        "corrected_A0": 16,
+        "damaged_A0": 1,
+        "corrected_Native": 9,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 31,
+        "covered": 31,
+        "recall": 1.0,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.5161290322580645,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.6129032258064516,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7419354838709677,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7741935483870968,
+        "Native_top1": 0.6451612903225806,
+        "Native_top5": 0.967741935483871
+      },
+      "top30": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7419354838709677,
+        "Native_top1": 0.6451612903225806,
+        "Native_top5": 0.967741935483871
+      },
+      "top60": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7419354838709677,
+        "Native_top1": 0.6451612903225806,
+        "Native_top5": 0.967741935483871
+      }
+    },
+    "labeled_A0_wrong": 9,
+    "first_failure_A0_wrong": {
+      "Belief_or_mapping_failure": 8,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 9,
+      "valid900": 8,
+      "nms": 8,
+      "top15": 8,
+      "top30": 8,
+      "top60": 8,
+      "Native_top1_match": 8,
+      "Native_corrected": 0,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 11,
+    "annotation_or_actual_visibility_unknown": 85
+  },
+  "geometry_full": {
+    "states": 611,
+    "episodes": 205,
+    "instructions": 203,
+    "instances": 182,
+    "methods": {
+      "A0": {
+        "states": 611,
+        "R1": 0.6726677577741408,
+        "NE": 20.84071854883637,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 42,
+        "damaged_Native": 74
+      },
+      "Native15": {
+        "states": 611,
+        "R1": 0.7250409165302782,
+        "NE": 17.74325161518715,
+        "corrected_A0": 74,
+        "damaged_A0": 42,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 611,
+        "R1": 0.7217675941080196,
+        "NE": 18.227971364355323,
+        "corrected_A0": 73,
+        "damaged_A0": 43,
+        "corrected_Native": 8,
+        "damaged_Native": 10
+      },
+      "Native60": {
+        "states": 611,
+        "R1": 0.7184942716857611,
+        "NE": 18.720045434082394,
+        "corrected_A0": 71,
+        "damaged_A0": 43,
+        "corrected_Native": 13,
+        "damaged_Native": 17
+      },
+      "A_box_exists": {
+        "states": 611,
+        "R1": 0.7446808510638298,
+        "NE": 17.443162106453105,
+        "corrected_A0": 78,
+        "damaged_A0": 34,
+        "corrected_Native": 12,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 611,
+        "R1": 0.7266775777414075,
+        "NE": 17.838284922894793,
+        "corrected_A0": 75,
+        "damaged_A0": 42,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 611,
+        "R1": 0.7397708674304418,
+        "NE": 18.36518841533146,
+        "corrected_A0": 74,
+        "damaged_A0": 33,
+        "corrected_Native": 15,
+        "damaged_Native": 6
+      },
+      "B_added_box_selected": {
+        "states": 611,
+        "R1": 0.7741407528641571,
+        "NE": 16.850147927841462,
+        "corrected_A0": 85,
+        "damaged_A0": 23,
+        "corrected_Native": 36,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 611,
+        "R1": 0.8052373158756138,
+        "NE": 14.043389823354794,
+        "corrected_A0": 104,
+        "damaged_A0": 23,
+        "corrected_Native": 49,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 611,
+        "R1": 0.8036006546644845,
+        "NE": 14.335068150549981,
+        "corrected_A0": 103,
+        "damaged_A0": 23,
+        "corrected_Native": 48,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 611,
+        "R1": 0.8592471358428805,
+        "NE": 10.996676393889757,
+        "corrected_A0": 136,
+        "damaged_A0": 22,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 611,
+        "R1": 0.8592471358428805,
+        "NE": 10.654817370121686,
+        "corrected_A0": 136,
+        "damaged_A0": 22,
+        "corrected_Native": 82,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 302,
+        "covered": 197,
+        "recall": 0.652317880794702,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.1456953642384106,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 302,
+        "covered": 196,
+        "recall": 0.6490066225165563,
+        "vl_top1": 0.09602649006622517,
+        "vl_top5": 0.15562913907284767,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 302,
+        "covered": 150,
+        "recall": 0.4966887417218543,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 302,
+        "covered": 70,
+        "recall": 0.23178807947019867,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17549668874172186,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2119205298013245
+      },
+      "top30": {
+        "states": 302,
+        "covered": 76,
+        "recall": 0.25165562913907286,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.2185430463576159
+      },
+      "top60": {
+        "states": 302,
+        "covered": 88,
+        "recall": 0.2913907284768212,
+        "vl_top1": 0.09933774834437085,
+        "vl_top5": 0.17218543046357615,
+        "Native_top1": 0.1456953642384106,
+        "Native_top5": 0.23178807947019867
+      }
+    },
+    "labeled_A0_wrong": 99,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 24,
+      "nms_no_match": 16,
+      "top15_no_match": 33,
+      "Native_ranking_error": 10,
+      "success": 6,
+      "Belief_or_mapping_failure": 9,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 75,
+      "valid900": 74,
+      "nms": 58,
+      "top15": 25,
+      "top30": 26,
+      "top60": 32,
+      "Native_top1_match": 15,
+      "Native_corrected": 37,
+      "match_and_corrected": 6
+    },
+    "bounded_impossible_A0_wrong": 7,
+    "annotation_or_actual_visibility_unknown": 611
+  },
+  "geometry_partial": {
+    "states": 172,
+    "episodes": 111,
+    "instructions": 111,
+    "instances": 108,
+    "methods": {
+      "A0": {
+        "states": 172,
+        "R1": 0.6627906976744186,
+        "NE": 26.824076066876568,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 12
+      },
+      "Native15": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 172,
+        "R1": 0.6976744186046512,
+        "NE": 25.132015968304735,
+        "corrected_A0": 11,
+        "damaged_A0": 5,
+        "corrected_Native": 2,
+        "damaged_Native": 3
+      },
+      "Native60": {
+        "states": 172,
+        "R1": 0.6744186046511628,
+        "NE": 25.832752409889256,
+        "corrected_A0": 9,
+        "damaged_A0": 7,
+        "corrected_Native": 0,
+        "damaged_Native": 5
+      },
+      "A_box_exists": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 172,
+        "R1": 0.7034883720930233,
+        "NE": 23.67925429881312,
+        "corrected_A0": 12,
+        "damaged_A0": 5,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top30": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top60": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      }
+    },
+    "labeled_A0_wrong": 0,
+    "first_failure_A0_wrong": {},
+    "A0_wrong_pass_counts": {
+      "raw900": 0,
+      "valid900": 0,
+      "nms": 0,
+      "top15": 0,
+      "top30": 0,
+      "top60": 0,
+      "Native_top1_match": 0,
+      "Native_corrected": 0,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 16,
+    "annotation_or_actual_visibility_unknown": 172
+  },
+  "geometry_outside": {
+    "states": 487,
+    "episodes": 187,
+    "instructions": 183,
+    "instances": 176,
+    "methods": {
+      "A0": {
+        "states": 487,
+        "R1": 0.6509240246406571,
+        "NE": 21.260432377733,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 3,
+        "damaged_Native": 4
+      },
+      "Native15": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 487,
+        "R1": 0.6509240246406571,
+        "NE": 21.450929243461797,
+        "corrected_A0": 4,
+        "damaged_A0": 4,
+        "corrected_Native": 0,
+        "damaged_Native": 1
+      },
+      "Native60": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.38553443557183,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 1,
+        "damaged_Native": 1
+      },
+      "A_box_exists": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 487,
+        "R1": 0.6529774127310062,
+        "NE": 21.651335363025783,
+        "corrected_A0": 4,
+        "damaged_A0": 3,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top30": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top60": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      }
+    },
+    "labeled_A0_wrong": 0,
+    "first_failure_A0_wrong": {},
+    "A0_wrong_pass_counts": {
+      "raw900": 0,
+      "valid900": 0,
+      "nms": 0,
+      "top15": 0,
+      "top30": 0,
+      "top60": 0,
+      "Native_top1_match": 0,
+      "Native_corrected": 0,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 149,
+    "annotation_or_actual_visibility_unknown": 487
+  },
+  "geometry_unknown": {
+    "states": 5,
+    "episodes": 1,
+    "instructions": 1,
+    "instances": 1,
+    "methods": {
+      "A0": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 75.81867218017578,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native15": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native60": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "A_box_exists": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 5,
+        "R1": 0.0,
+        "NE": 60.07011795043945,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top30": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top60": {
+        "states": 0,
+        "covered": 0,
+        "recall": null,
+        "vl_top1": null,
+        "vl_top5": null,
+        "Native_top1": null,
+        "Native_top5": null
+      }
+    },
+    "labeled_A0_wrong": 0,
+    "first_failure_A0_wrong": {},
+    "A0_wrong_pass_counts": {
+      "raw900": 0,
+      "valid900": 0,
+      "nms": 0,
+      "top15": 0,
+      "top30": 0,
+      "top60": 0,
+      "Native_top1_match": 0,
+      "Native_corrected": 0,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 2,
+    "annotation_or_actual_visibility_unknown": 5
+  },
+  "eligible_Building": {
+    "states": 61,
+    "episodes": 29,
+    "instructions": 29,
+    "instances": 29,
+    "methods": {
+      "A0": {
+        "states": 61,
+        "R1": 0.4426229508196721,
+        "NE": 47.38140415754474,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 7,
+        "damaged_Native": 13
+      },
+      "Native15": {
+        "states": 61,
+        "R1": 0.5409836065573771,
+        "NE": 33.09010457992554,
+        "corrected_A0": 13,
+        "damaged_A0": 7,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 61,
+        "R1": 0.4918032786885246,
+        "NE": 37.30879512380381,
+        "corrected_A0": 10,
+        "damaged_A0": 7,
+        "corrected_Native": 2,
+        "damaged_Native": 5
+      },
+      "Native60": {
+        "states": 61,
+        "R1": 0.45901639344262296,
+        "NE": 38.72656874578507,
+        "corrected_A0": 9,
+        "damaged_A0": 8,
+        "corrected_Native": 1,
+        "damaged_Native": 6
+      },
+      "A_box_exists": {
+        "states": 61,
+        "R1": 0.5901639344262295,
+        "NE": 34.55195641126789,
+        "corrected_A0": 14,
+        "damaged_A0": 5,
+        "corrected_Native": 3,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 61,
+        "R1": 0.5573770491803278,
+        "NE": 34.805805675318986,
+        "corrected_A0": 14,
+        "damaged_A0": 7,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 61,
+        "R1": 0.6229508196721312,
+        "NE": 41.86345549098781,
+        "corrected_A0": 15,
+        "damaged_A0": 4,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 61,
+        "R1": 0.7377049180327869,
+        "NE": 33.572235033160354,
+        "corrected_A0": 18,
+        "damaged_A0": 0,
+        "corrected_Native": 12,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 61,
+        "R1": 0.9180327868852459,
+        "NE": 10.641564142508585,
+        "corrected_A0": 29,
+        "damaged_A0": 0,
+        "corrected_Native": 23,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 61,
+        "R1": 0.9016393442622951,
+        "NE": 14.105843317313273,
+        "corrected_A0": 28,
+        "damaged_A0": 0,
+        "corrected_Native": 22,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 61,
+        "R1": 1.0,
+        "NE": 4.65975555826406,
+        "corrected_A0": 34,
+        "damaged_A0": 0,
+        "corrected_Native": 28,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 61,
+        "R1": 1.0,
+        "NE": 4.237875443990113,
+        "corrected_A0": 34,
+        "damaged_A0": 0,
+        "corrected_Native": 28,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 61,
+        "covered": 39,
+        "recall": 0.639344262295082,
+        "vl_top1": 0.13114754098360656,
+        "vl_top5": 0.16393442622950818,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 61,
+        "covered": 39,
+        "recall": 0.639344262295082,
+        "vl_top1": 0.13114754098360656,
+        "vl_top5": 0.16393442622950818,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 61,
+        "covered": 35,
+        "recall": 0.5737704918032787,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 61,
+        "covered": 16,
+        "recall": 0.26229508196721313,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": 0.11475409836065574,
+        "Native_top5": 0.18032786885245902
+      },
+      "top30": {
+        "states": 61,
+        "covered": 17,
+        "recall": 0.2786885245901639,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": 0.11475409836065574,
+        "Native_top5": 0.18032786885245902
+      },
+      "top60": {
+        "states": 61,
+        "covered": 23,
+        "recall": 0.3770491803278688,
+        "vl_top1": 0.11475409836065574,
+        "vl_top5": 0.14754098360655737,
+        "Native_top1": 0.11475409836065574,
+        "Native_top5": 0.21311475409836064
+      }
+    },
+    "labeled_A0_wrong": 34,
+    "first_failure_A0_wrong": {
+      "top15_no_match": 12,
+      "raw900_no_match": 7,
+      "Belief_or_mapping_failure": 1,
+      "Native_ranking_error": 7,
+      "success": 4,
+      "nms_no_match": 3
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 27,
+      "valid900": 27,
+      "nms": 24,
+      "top15": 12,
+      "top30": 13,
+      "top60": 17,
+      "Native_top1_match": 5,
+      "Native_corrected": 13,
+      "match_and_corrected": 4
+    },
+    "bounded_impossible_A0_wrong": 0,
+    "annotation_or_actual_visibility_unknown": 61
+  },
+  "eligible_Car": {
+    "states": 201,
+    "episodes": 69,
+    "instructions": 67,
+    "instances": 62,
+    "methods": {
+      "A0": {
+        "states": 201,
+        "R1": 0.7512437810945274,
+        "NE": 16.931949971327143,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 13,
+        "damaged_Native": 23
+      },
+      "Native15": {
+        "states": 201,
+        "R1": 0.8009950248756219,
+        "NE": 15.131986985455699,
+        "corrected_A0": 23,
+        "damaged_A0": 13,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 201,
+        "R1": 0.7960199004975125,
+        "NE": 15.180117491762436,
+        "corrected_A0": 23,
+        "damaged_A0": 14,
+        "corrected_Native": 0,
+        "damaged_Native": 1
+      },
+      "Native60": {
+        "states": 201,
+        "R1": 0.7910447761194029,
+        "NE": 15.17267073297975,
+        "corrected_A0": 22,
+        "damaged_A0": 14,
+        "corrected_Native": 0,
+        "damaged_Native": 2
+      },
+      "A_box_exists": {
+        "states": 201,
+        "R1": 0.835820895522388,
+        "NE": 14.086821250951113,
+        "corrected_A0": 24,
+        "damaged_A0": 7,
+        "corrected_Native": 7,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 201,
+        "R1": 0.8009950248756219,
+        "NE": 15.111699334127985,
+        "corrected_A0": 23,
+        "damaged_A0": 13,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 201,
+        "R1": 0.8109452736318408,
+        "NE": 14.718167059457125,
+        "corrected_A0": 19,
+        "damaged_A0": 7,
+        "corrected_Native": 7,
+        "damaged_Native": 5
+      },
+      "B_added_box_selected": {
+        "states": 201,
+        "R1": 0.8656716417910447,
+        "NE": 12.939277874000037,
+        "corrected_A0": 24,
+        "damaged_A0": 1,
+        "corrected_Native": 19,
+        "damaged_Native": 6
+      },
+      "C_box_bounded": {
+        "states": 201,
+        "R1": 0.9054726368159204,
+        "NE": 11.422267147261111,
+        "corrected_A0": 32,
+        "damaged_A0": 1,
+        "corrected_Native": 21,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 201,
+        "R1": 0.9054726368159204,
+        "NE": 11.25475235098037,
+        "corrected_A0": 32,
+        "damaged_A0": 1,
+        "corrected_Native": 21,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 201,
+        "R1": 1.0,
+        "NE": 5.115959065173989,
+        "corrected_A0": 50,
+        "damaged_A0": 0,
+        "corrected_Native": 40,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 201,
+        "R1": 1.0,
+        "NE": 4.59373028806193,
+        "corrected_A0": 50,
+        "damaged_A0": 0,
+        "corrected_Native": 40,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 201,
+        "covered": 120,
+        "recall": 0.5970149253731343,
+        "vl_top1": 0.04975124378109453,
+        "vl_top5": 0.07960199004975124,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 201,
+        "covered": 120,
+        "recall": 0.5970149253731343,
+        "vl_top1": 0.04975124378109453,
+        "vl_top5": 0.07960199004975124,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 201,
+        "covered": 78,
+        "recall": 0.3880597014925373,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 201,
+        "covered": 22,
+        "recall": 0.10945273631840796,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": 0.07462686567164178,
+        "Native_top5": 0.1044776119402985
+      },
+      "top30": {
+        "states": 201,
+        "covered": 27,
+        "recall": 0.13432835820895522,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": 0.07462686567164178,
+        "Native_top5": 0.11442786069651742
+      },
+      "top60": {
+        "states": 201,
+        "covered": 33,
+        "recall": 0.16417910447761194,
+        "vl_top1": 0.05970149253731343,
+        "vl_top5": 0.08955223880597014,
+        "Native_top1": 0.07462686567164178,
+        "Native_top5": 0.12437810945273632
+      }
+    },
+    "labeled_A0_wrong": 50,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 15,
+      "nms_no_match": 13,
+      "top15_no_match": 17,
+      "Native_ranking_error": 3,
+      "success": 2
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 35,
+      "valid900": 35,
+      "nms": 22,
+      "top15": 5,
+      "top30": 5,
+      "top60": 7,
+      "Native_top1_match": 2,
+      "Native_corrected": 23,
+      "match_and_corrected": 2
+    },
+    "bounded_impossible_A0_wrong": 3,
+    "annotation_or_actual_visibility_unknown": 201
+  },
+  "eligible_Ground": {
+    "states": 9,
+    "episodes": 4,
+    "instructions": 4,
+    "instances": 4,
+    "methods": {
+      "A0": {
+        "states": 9,
+        "R1": 0.3333333333333333,
+        "NE": 16.94376775953505,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 1
+      },
+      "Native15": {
+        "states": 9,
+        "R1": 0.4444444444444444,
+        "NE": 16.23113229539659,
+        "corrected_A0": 1,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 9,
+        "R1": 0.5555555555555556,
+        "NE": 15.551986270480686,
+        "corrected_A0": 2,
+        "damaged_A0": 0,
+        "corrected_Native": 1,
+        "damaged_Native": 0
+      },
+      "Native60": {
+        "states": 9,
+        "R1": 0.6666666666666666,
+        "NE": 14.680942323472765,
+        "corrected_A0": 3,
+        "damaged_A0": 0,
+        "corrected_Native": 2,
+        "damaged_Native": 0
+      },
+      "A_box_exists": {
+        "states": 9,
+        "R1": 0.6666666666666666,
+        "NE": 10.21321858300103,
+        "corrected_A0": 3,
+        "damaged_A0": 0,
+        "corrected_Native": 2,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 9,
+        "R1": 0.4444444444444444,
+        "NE": 16.23113229539659,
+        "corrected_A0": 1,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 9,
+        "R1": 0.6666666666666666,
+        "NE": 12.08741241031223,
+        "corrected_A0": 3,
+        "damaged_A0": 0,
+        "corrected_Native": 3,
+        "damaged_Native": 1
+      },
+      "B_added_box_selected": {
+        "states": 9,
+        "R1": 1.0,
+        "NE": 6.0258899264865455,
+        "corrected_A0": 6,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 9,
+        "R1": 1.0,
+        "NE": 6.0258899264865455,
+        "corrected_A0": 6,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 9,
+        "R1": 1.0,
+        "NE": 6.0258899264865455,
+        "corrected_A0": 6,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 9,
+        "R1": 1.0,
+        "NE": 6.0258899264865455,
+        "corrected_A0": 6,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 9,
+        "R1": 1.0,
+        "NE": 6.0258899264865455,
+        "corrected_A0": 6,
+        "damaged_A0": 0,
+        "corrected_Native": 5,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 9,
+        "covered": 7,
+        "recall": 0.7777777777777778,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 9,
+        "covered": 7,
+        "recall": 0.7777777777777778,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 9,
+        "covered": 7,
+        "recall": 0.7777777777777778,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 9,
+        "covered": 2,
+        "recall": 0.2222222222222222,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": 0.2222222222222222,
+        "Native_top5": 0.2222222222222222
+      },
+      "top30": {
+        "states": 9,
+        "covered": 2,
+        "recall": 0.2222222222222222,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": 0.2222222222222222,
+        "Native_top5": 0.2222222222222222
+      },
+      "top60": {
+        "states": 9,
+        "covered": 2,
+        "recall": 0.2222222222222222,
+        "vl_top1": 0.1111111111111111,
+        "vl_top5": 0.2222222222222222,
+        "Native_top1": 0.2222222222222222,
+        "Native_top5": 0.2222222222222222
+      }
+    },
+    "labeled_A0_wrong": 6,
+    "first_failure_A0_wrong": {
+      "raw900_no_match": 2,
+      "top15_no_match": 4
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 4,
+      "valid900": 4,
+      "nms": 4,
+      "top15": 0,
+      "top30": 0,
+      "top60": 0,
+      "Native_top1_match": 0,
+      "Native_corrected": 1,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 0,
+    "annotation_or_actual_visibility_unknown": 9
+  },
+  "eligible_Parking": {
+    "states": 31,
+    "episodes": 9,
+    "instructions": 9,
+    "instances": 5,
+    "methods": {
+      "A0": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 13.396551082211156,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native15": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 13.257236523012962,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native30": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 13.209639653082817,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "Native60": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 13.649163042345355,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "A_box_exists": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 12.989877958451547,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing15_selected": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 11.885797881310985,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_existing900_selected": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 12.137890181233805,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "B_added_box_selected": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 11.885797881310985,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_bounded": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 11.523245576889284,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_target_bounded": {
+        "states": 31,
+        "R1": 0.7096774193548387,
+        "NE": 11.541468231908736,
+        "corrected_A0": 0,
+        "damaged_A0": 0,
+        "corrected_Native": 0,
+        "damaged_Native": 0
+      },
+      "C_box_unbounded": {
+        "states": 31,
+        "R1": 1.0,
+        "NE": 4.133450181253495,
+        "corrected_A0": 9,
+        "damaged_A0": 0,
+        "corrected_Native": 9,
+        "damaged_Native": 0
+      },
+      "C_target_unbounded": {
+        "states": 31,
+        "R1": 1.0,
+        "NE": 1.6117342989290915,
+        "corrected_A0": 9,
+        "damaged_A0": 0,
+        "corrected_Native": 9,
+        "damaged_Native": 0
+      }
+    },
+    "stages": {
+      "raw900": {
+        "states": 31,
+        "covered": 31,
+        "recall": 1.0,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.5161290322580645,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "valid900": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.6129032258064516,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "nms": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7419354838709677,
+        "Native_top1": null,
+        "Native_top5": null
+      },
+      "top15": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7741935483870968,
+        "Native_top1": 0.6451612903225806,
+        "Native_top5": 0.967741935483871
+      },
+      "top30": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7419354838709677,
+        "Native_top1": 0.6451612903225806,
+        "Native_top5": 0.967741935483871
+      },
+      "top60": {
+        "states": 31,
+        "covered": 30,
+        "recall": 0.967741935483871,
+        "vl_top1": 0.3225806451612903,
+        "vl_top5": 0.7419354838709677,
+        "Native_top1": 0.6451612903225806,
+        "Native_top5": 0.967741935483871
+      }
+    },
+    "labeled_A0_wrong": 9,
+    "first_failure_A0_wrong": {
+      "Belief_or_mapping_failure": 8,
+      "valid900_no_match": 1
+    },
+    "A0_wrong_pass_counts": {
+      "raw900": 9,
+      "valid900": 8,
+      "nms": 8,
+      "top15": 8,
+      "top30": 8,
+      "top60": 8,
+      "Native_top1_match": 8,
+      "Native_corrected": 0,
+      "match_and_corrected": 0
+    },
+    "bounded_impossible_A0_wrong": 1,
+    "annotation_or_actual_visibility_unknown": 31
+  },
+  "provenance": {
+    "mode": "projection-hypothesis",
+    "partition": "train",
+    "no_training": true,
+    "human_verified_states": 0,
+    "human_verified_Oracle_results": "NA until human reviews",
+    "projection_hypothesis_states": 302,
+    "semantic_visibility_known": false,
+    "warning": "Projection-sensitivity Oracles are NOT human pixel GT and do NOT prove actual visibility or detector correctness"
+  }
+}

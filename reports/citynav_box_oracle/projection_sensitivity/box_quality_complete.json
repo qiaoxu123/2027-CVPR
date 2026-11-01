@@ -1,0 +1,53 @@
+{
+  "human_reviewed": 0,
+  "human_approved_visible": 0,
+  "human_status_counts": {},
+  "human_auto_confirmed_rate": null,
+  "human_quality_IoU_by_category": null,
+  "human_main_Oracle_ABC": "NA \u2014 no verified visible samples",
+  "grouped_counts": {
+    "all": {
+      "states": 1275,
+      "episodes": 256,
+      "instructions": 252,
+      "instances": 229
+    },
+    "auto_hypotheses": {
+      "states": 302,
+      "episodes": 111,
+      "instructions": 109,
+      "instances": 100
+    },
+    "A0_wrong": {
+      "states": 433,
+      "episodes": 87,
+      "instructions": 86,
+      "instances": 83
+    },
+    "hypothesis_A0_wrong": {
+      "states": 99,
+      "episodes": 37,
+      "instructions": 37,
+      "instances": 36
+    }
+  },
+  "proxy_recall_physical_instance_macro": {
+    "raw900": 0.6046904761904763,
+    "valid900": 0.5946904761904763,
+    "nms": 0.435095238095238,
+    "top15": 0.1366190476190476,
+    "top30": 0.14611904761904762,
+    "top60": 0.1923809523809524
+  },
+  "indirect_reference_geometry": {
+    "geometric_target_outside_states": 487,
+    "outside_with_supported_public_reference": 159,
+    "outside_reference_and_explicit_world_relation": 30,
+    "A0_wrong_in_ref_supported": 63,
+    "Native_corrected_in_ref_supported": 1,
+    "Native_damaged_in_ref_supported": 3,
+    "verified_indirect_visual_evidence": null,
+    "note": "Geometry only; no human reference identity/visibility labels, no validated indirect inference claim"
+  },
+  "caveat": "All proxy recalls still conditional on UNREVIEWED automatic boxes; grouping does not validate labels"
+}

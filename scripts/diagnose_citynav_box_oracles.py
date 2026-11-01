@@ -127,7 +127,13 @@ def main():
             review=reviews.get(identity)
             authorization=None
             if a.oracle_mode!='normal':authorization=authorize_box(a.oracle_mode,ann,review,partition='train')
-            eval_box=authorization.bbox if authorization and authorization.actual_visibility_verified else ann['auto_bbox_xyxy'] if ann['quality']['high_geometric_support'] else None
+            review_negative=bool(review and (review.get('status') in ['rejected','not_visible'] or review.get('visibility')=='not_visible'))
+            if authorization and authorization.actual_visibility_verified:
+                eval_box=authorization.bbox
+            elif a.oracle_mode!='verified' and ann['quality']['high_geometric_support'] and not review_negative:
+                eval_box=ann['auto_bbox_xyxy']
+            else:
+                eval_box=None
             if eval_box is not None:
                 iou=registered_iou(e.boxes,eval_box,ann['image_shape']);diagnostic_stages={}
                 for name,ids in stages.items():
@@ -177,7 +183,7 @@ def main():
                 output['C_box_bounded'],output['C_box_unbounded']=ideal_position(native,e,box_position,authorization)
                 output['C_target_bounded'],output['C_target_unbounded']=ideal_position(native,e,target[:2],authorization)
                 for name in ORACLE_NAMES:output.setdefault(name,output['Native15'])
-            elif a.oracle_mode!='normal':
+            elif a.oracle_mode=='projection-hypothesis':
                 for name in ORACLE_NAMES:output[name]=output['Native15']
             final_errors={name:float(distance[value.argmax()]) for name,value in output.items()}
             record=dict(sample_id=identity,episode=row['episode'],step=row['step'],instruction_group=row['group'],instance_group=ann['instance_group'],category=ann['category'],geometry_hint=ann['geometric_visibility_hint'],

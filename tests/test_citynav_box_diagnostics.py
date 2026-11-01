@@ -74,3 +74,25 @@ def test_zero_human_reviews_yields_na_not_baseline_disguised_as_verified_oracle(
     report=summarize([row],'verified')
     assert report['all']['methods']['A_box_exists']['R1'] is None
     assert report['provenance']['human_verified_states']==0
+
+
+def test_observed_conditional_prior_can_erase_true_region_presence_evidence():
+    # A mechanism counterexample, synthetic unit data only, no real weights changed.
+    from graphnav.object_query_belief import ObjectQueryRanker
+    model=ObjectQueryRanker()
+    with torch.no_grad():model.fusion_gain.fill_(.7741)
+    base=torch.tensor([[.2,0.]])
+    kernel=torch.tensor([[[0.],[1.]]]);observed=torch.tensor([[False,True]])
+    result,_=model.update_belief(base,torch.tensor([[20.]]),torch.tensor([-20.]),kernel,observed,torch.tensor([[True]]),bound=2.)
+    assert torch.equal(result,base)  # V|observed == P0|observed == [1], no update.
+    density=torch.tensor([[0.,1.]])
+    global_ratio=(density.clamp_min(1e-9).log()-base.softmax(-1).clamp_min(1e-9).log()).clamp(-2,2)
+    coherent=base+model.fusion_gain.tanh()*global_ratio*observed
+    assert coherent.argmax(-1).item()==1 and result.argmax(-1).item()==0
+
+
+def test_ideal_observed_density_does_not_invent_location_when_grid_support_empty():
+    from scripts.audit_citynav_fusion_algebra import observed_density_or_base
+    base=torch.tensor([0.,3.,1.])
+    out=observed_density_or_base(torch.zeros(3),torch.zeros(3,dtype=torch.bool),base)
+    assert torch.equal(out,base)

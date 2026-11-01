@@ -1,0 +1,4953 @@
+{
+  "only_TRAIN": true,
+  "no_training": true,
+  "human_verified_states": 0,
+  "scope": "Explicit C position-hypothesis mechanism audit, not a deployment improvement",
+  "summary": {
+    "all": {
+      "original_conditional_clipped": {
+        "states": 302,
+        "R1": 0.8874172185430463,
+        "NE": 11.704239037850046,
+        "corrected_A0": 66,
+        "damaged_A0": 1
+      },
+      "conditional_unclipped": {
+        "states": 302,
+        "R1": 0.8940397350993378,
+        "NE": 10.247707240431515,
+        "corrected_A0": 68,
+        "damaged_A0": 1
+      },
+      "global_prior_clipped": {
+        "states": 302,
+        "R1": 0.9403973509933775,
+        "NE": 8.338522769954821,
+        "corrected_A0": 82,
+        "damaged_A0": 1
+      },
+      "global_prior_unclipped": {
+        "states": 302,
+        "R1": 0.9602649006622517,
+        "NE": 6.215525528255677,
+        "corrected_A0": 88,
+        "damaged_A0": 1
+      },
+      "ideal_density_observed_only": {
+        "states": 302,
+        "R1": 1.0,
+        "NE": 4.464187674372401,
+        "corrected_A0": 99,
+        "damaged_A0": 0
+      }
+    },
+    "A0_wrong": {
+      "original_conditional_clipped": {
+        "states": 99,
+        "R1": 0.6666666666666666,
+        "NE": 24.685077149458607,
+        "corrected_A0": 66,
+        "damaged_A0": 0
+      },
+      "conditional_unclipped": {
+        "states": 99,
+        "R1": 0.6868686868686869,
+        "NE": 20.36805168185571,
+        "corrected_A0": 68,
+        "damaged_A0": 0
+      },
+      "global_prior_clipped": {
+        "states": 99,
+        "R1": 0.8282828282828283,
+        "NE": 15.110804105045819,
+        "corrected_A0": 82,
+        "damaged_A0": 0
+      },
+      "global_prior_unclipped": {
+        "states": 99,
+        "R1": 0.8888888888888888,
+        "NE": 8.760722433677827,
+        "corrected_A0": 88,
+        "damaged_A0": 0
+      },
+      "ideal_density_observed_only": {
+        "states": 99,
+        "R1": 1.0,
+        "NE": 5.112678280984513,
+        "corrected_A0": 99,
+        "damaged_A0": 0
+      }
+    },
+    "A0_correct": {
+      "original_conditional_clipped": {
+        "states": 203,
+        "R1": 0.9950738916256158,
+        "NE": 5.373682520366067,
+        "corrected_A0": 0,
+        "damaged_A0": 1
+      },
+      "conditional_unclipped": {
+        "states": 203,
+        "R1": 0.9950738916256158,
+        "NE": 5.3121698034807965,
+        "corrected_A0": 0,
+        "damaged_A0": 1
+      },
+      "global_prior_clipped": {
+        "states": 203,
+        "R1": 0.9950738916256158,
+        "NE": 5.035784581905515,
+        "corrected_A0": 0,
+        "damaged_A0": 1
+      },
+      "global_prior_unclipped": {
+        "states": 203,
+        "R1": 0.9950738916256158,
+        "NE": 4.974271865020245,
+        "corrected_A0": 0,
+        "damaged_A0": 1
+      },
+      "ideal_density_observed_only": {
+        "states": 203,
+        "R1": 1.0,
+        "NE": 4.1479287085862,
+        "corrected_A0": 0,
+        "damaged_A0": 0
+      }
+    }
+  },
+  "records": [
+    {
+      "sample_id": "train:483:55",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:137",
+      "A0_error": 25.547422409057617,
+      "Native_error": 25.547422409057617,
+      "observed_A0_probability_mass": 0.8196993470191956,
+      "errors": {
+        "original_conditional_clipped": 7.361412048339844,
+        "conditional_unclipped": 7.361412048339844,
+        "global_prior_clipped": 7.361412048339844,
+        "global_prior_unclipped": 7.361412048339844,
+        "ideal_density_observed_only": 7.361412048339844
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:483:74",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:137",
+      "A0_error": 25.547422409057617,
+      "Native_error": 39.40393829345703,
+      "observed_A0_probability_mass": 0.8079639673233032,
+      "errors": {
+        "original_conditional_clipped": 7.361412048339844,
+        "conditional_unclipped": 7.361412048339844,
+        "global_prior_clipped": 7.361412048339844,
+        "global_prior_unclipped": 7.361412048339844,
+        "ideal_density_observed_only": 7.361412048339844
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6770:5",
+      "category": "Building",
+      "instance_group": "birmingham_block_10:17",
+      "A0_error": 3.1761698722839355,
+      "Native_error": 3.1761698722839355,
+      "observed_A0_probability_mass": 0.9071851968765259,
+      "errors": {
+        "original_conditional_clipped": 3.1761698722839355,
+        "conditional_unclipped": 3.1761698722839355,
+        "global_prior_clipped": 3.1761698722839355,
+        "global_prior_unclipped": 3.1761698722839355,
+        "ideal_density_observed_only": 2.523993730545044
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6770:12",
+      "category": "Building",
+      "instance_group": "birmingham_block_10:17",
+      "A0_error": 3.1761698722839355,
+      "Native_error": 3.1761698722839355,
+      "observed_A0_probability_mass": 0.975873589515686,
+      "errors": {
+        "original_conditional_clipped": 3.1761698722839355,
+        "conditional_unclipped": 3.1761698722839355,
+        "global_prior_clipped": 3.1761698722839355,
+        "global_prior_unclipped": 3.1761698722839355,
+        "ideal_density_observed_only": 2.523993730545044
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6770:18",
+      "category": "Building",
+      "instance_group": "birmingham_block_10:17",
+      "A0_error": 3.1761698722839355,
+      "Native_error": 3.1761698722839355,
+      "observed_A0_probability_mass": 0.9681832790374756,
+      "errors": {
+        "original_conditional_clipped": 3.1761698722839355,
+        "conditional_unclipped": 3.1761698722839355,
+        "global_prior_clipped": 3.1761698722839355,
+        "global_prior_unclipped": 3.1761698722839355,
+        "ideal_density_observed_only": 2.523993730545044
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6770:25",
+      "category": "Building",
+      "instance_group": "birmingham_block_10:17",
+      "A0_error": 3.1761698722839355,
+      "Native_error": 5.681578636169434,
+      "observed_A0_probability_mass": 0.9715902805328369,
+      "errors": {
+        "original_conditional_clipped": 3.1761698722839355,
+        "conditional_unclipped": 3.1761698722839355,
+        "global_prior_clipped": 3.1761698722839355,
+        "global_prior_unclipped": 3.1761698722839355,
+        "ideal_density_observed_only": 2.523993730545044
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7593:30",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9848208427429199,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7593:60",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9758073091506958,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7593:91",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9568101763725281,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7593:121",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9323636293411255,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3945:13",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:330",
+      "A0_error": 18.47699737548828,
+      "Native_error": 18.47699737548828,
+      "observed_A0_probability_mass": 0.39828920364379883,
+      "errors": {
+        "original_conditional_clipped": 5.853039264678955,
+        "conditional_unclipped": 5.853039264678955,
+        "global_prior_clipped": 5.853039264678955,
+        "global_prior_unclipped": 5.853039264678955,
+        "ideal_density_observed_only": 5.853039264678955
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3945:28",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:330",
+      "A0_error": 18.47699737548828,
+      "Native_error": 18.47699737548828,
+      "observed_A0_probability_mass": 0.7490228414535522,
+      "errors": {
+        "original_conditional_clipped": 5.853039264678955,
+        "conditional_unclipped": 5.853039264678955,
+        "global_prior_clipped": 5.853039264678955,
+        "global_prior_unclipped": 5.853039264678955,
+        "ideal_density_observed_only": 5.853039264678955
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5013:37",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:181",
+      "A0_error": 31.834869384765625,
+      "Native_error": 31.834869384765625,
+      "observed_A0_probability_mass": 0.09209092706441879,
+      "errors": {
+        "original_conditional_clipped": 31.834869384765625,
+        "conditional_unclipped": 31.834869384765625,
+        "global_prior_clipped": 31.834869384765625,
+        "global_prior_unclipped": 4.916588306427002,
+        "ideal_density_observed_only": 4.916588306427002
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5377:4",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:43",
+      "A0_error": 22.95487403869629,
+      "Native_error": 11.777827262878418,
+      "observed_A0_probability_mass": 0.867357611656189,
+      "errors": {
+        "original_conditional_clipped": 3.3288071155548096,
+        "conditional_unclipped": 3.3288071155548096,
+        "global_prior_clipped": 11.777827262878418,
+        "global_prior_unclipped": 3.3288071155548096,
+        "ideal_density_observed_only": 2.868438959121704
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5377:9",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:43",
+      "A0_error": 22.95487403869629,
+      "Native_error": 11.777827262878418,
+      "observed_A0_probability_mass": 0.861747682094574,
+      "errors": {
+        "original_conditional_clipped": 11.777827262878418,
+        "conditional_unclipped": 3.3288071155548096,
+        "global_prior_clipped": 11.777827262878418,
+        "global_prior_unclipped": 3.3288071155548096,
+        "ideal_density_observed_only": 2.868438959121704
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5377:15",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:43",
+      "A0_error": 22.95487403869629,
+      "Native_error": 11.777827262878418,
+      "observed_A0_probability_mass": 0.8228141069412231,
+      "errors": {
+        "original_conditional_clipped": 11.777827262878418,
+        "conditional_unclipped": 11.777827262878418,
+        "global_prior_clipped": 11.777827262878418,
+        "global_prior_unclipped": 11.777827262878418,
+        "ideal_density_observed_only": 9.520360946655273
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5377:20",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:43",
+      "A0_error": 22.95487403869629,
+      "Native_error": 11.777827262878418,
+      "observed_A0_probability_mass": 0.6632249355316162,
+      "errors": {
+        "original_conditional_clipped": 11.777827262878418,
+        "conditional_unclipped": 11.777827262878418,
+        "global_prior_clipped": 11.777827262878418,
+        "global_prior_unclipped": 11.777827262878418,
+        "ideal_density_observed_only": 11.65608024597168
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15120:43",
+      "category": "Building",
+      "instance_group": "cambridge_block_18:30",
+      "A0_error": 10.733494758605957,
+      "Native_error": 27.513378143310547,
+      "observed_A0_probability_mass": 0.9629036784172058,
+      "errors": {
+        "original_conditional_clipped": 4.035940647125244,
+        "conditional_unclipped": 4.035940647125244,
+        "global_prior_clipped": 4.035940647125244,
+        "global_prior_unclipped": 4.035940647125244,
+        "ideal_density_observed_only": 4.035940647125244
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15391:510",
+      "category": "Car",
+      "instance_group": "cambridge_block_19:59",
+      "A0_error": 19.925405502319336,
+      "Native_error": 8.53831958770752,
+      "observed_A0_probability_mass": 0.41106441617012024,
+      "errors": {
+        "original_conditional_clipped": 8.53831958770752,
+        "conditional_unclipped": 8.53831958770752,
+        "global_prior_clipped": 8.53831958770752,
+        "global_prior_unclipped": 8.53831958770752,
+        "ideal_density_observed_only": 8.53831958770752
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2336:27",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:615",
+      "A0_error": 17.987567901611328,
+      "Native_error": 17.987567901611328,
+      "observed_A0_probability_mass": 0.9088043570518494,
+      "errors": {
+        "original_conditional_clipped": 1.9939072132110596,
+        "conditional_unclipped": 1.9939072132110596,
+        "global_prior_clipped": 1.9939072132110596,
+        "global_prior_unclipped": 1.9939072132110596,
+        "ideal_density_observed_only": 1.9939072132110596
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2336:41",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:615",
+      "A0_error": 17.987567901611328,
+      "Native_error": 17.987567901611328,
+      "observed_A0_probability_mass": 0.0,
+      "errors": {
+        "original_conditional_clipped": 17.987567901611328,
+        "conditional_unclipped": 17.987567901611328,
+        "global_prior_clipped": 17.987567901611328,
+        "global_prior_unclipped": 17.987567901611328,
+        "ideal_density_observed_only": 17.987567901611328
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2336:55",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:615",
+      "A0_error": 17.987567901611328,
+      "Native_error": 29.48874855041504,
+      "observed_A0_probability_mass": 0.9319584965705872,
+      "errors": {
+        "original_conditional_clipped": 1.9939072132110596,
+        "conditional_unclipped": 1.9939072132110596,
+        "global_prior_clipped": 1.9939072132110596,
+        "global_prior_unclipped": 1.9939072132110596,
+        "ideal_density_observed_only": 1.9939072132110596
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7612:15",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:19",
+      "A0_error": 2.2705018520355225,
+      "Native_error": 2.2705018520355225,
+      "observed_A0_probability_mass": 0.981937050819397,
+      "errors": {
+        "original_conditional_clipped": 2.2705018520355225,
+        "conditional_unclipped": 2.2705018520355225,
+        "global_prior_clipped": 2.2705018520355225,
+        "global_prior_unclipped": 2.2705018520355225,
+        "ideal_density_observed_only": 1.3035516738891602
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7612:22",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:19",
+      "A0_error": 2.2705018520355225,
+      "Native_error": 2.2705018520355225,
+      "observed_A0_probability_mass": 0.9871506094932556,
+      "errors": {
+        "original_conditional_clipped": 2.2705018520355225,
+        "conditional_unclipped": 2.2705018520355225,
+        "global_prior_clipped": 2.2705018520355225,
+        "global_prior_unclipped": 2.2705018520355225,
+        "ideal_density_observed_only": 1.3035516738891602
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7612:30",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:19",
+      "A0_error": 2.2705018520355225,
+      "Native_error": 2.2705018520355225,
+      "observed_A0_probability_mass": 0.9691712856292725,
+      "errors": {
+        "original_conditional_clipped": 2.2705018520355225,
+        "conditional_unclipped": 2.2705018520355225,
+        "global_prior_clipped": 2.2705018520355225,
+        "global_prior_unclipped": 2.2705018520355225,
+        "ideal_density_observed_only": 1.3035516738891602
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3946:14",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:330",
+      "A0_error": 18.47699737548828,
+      "Native_error": 18.47699737548828,
+      "observed_A0_probability_mass": 0.9368770122528076,
+      "errors": {
+        "original_conditional_clipped": 5.853039264678955,
+        "conditional_unclipped": 5.853039264678955,
+        "global_prior_clipped": 5.853039264678955,
+        "global_prior_unclipped": 5.853039264678955,
+        "ideal_density_observed_only": 5.853039264678955
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3946:29",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:330",
+      "A0_error": 18.47699737548828,
+      "Native_error": 18.47699737548828,
+      "observed_A0_probability_mass": 0.9216904640197754,
+      "errors": {
+        "original_conditional_clipped": 5.853039264678955,
+        "conditional_unclipped": 5.853039264678955,
+        "global_prior_clipped": 5.853039264678955,
+        "global_prior_unclipped": 5.853039264678955,
+        "ideal_density_observed_only": 5.853039264678955
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5017:40",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 15.91081714630127,
+      "Native_error": 8.731600761413574,
+      "observed_A0_probability_mass": 0.8866176605224609,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5017:81",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 15.91081714630127,
+      "Native_error": 8.731600761413574,
+      "observed_A0_probability_mass": 0.9062448740005493,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5017:123",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 15.91081714630127,
+      "Native_error": 8.731600761413574,
+      "observed_A0_probability_mass": 0.86525958776474,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5017:164",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 15.91081714630127,
+      "Native_error": 8.731600761413574,
+      "observed_A0_probability_mass": 0.7515895962715149,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5840:63",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:80",
+      "A0_error": 8.16168212890625,
+      "Native_error": 8.118568420410156,
+      "observed_A0_probability_mass": 0.19141094386577606,
+      "errors": {
+        "original_conditional_clipped": 8.118568420410156,
+        "conditional_unclipped": 8.118568420410156,
+        "global_prior_clipped": 8.118568420410156,
+        "global_prior_unclipped": 8.118568420410156,
+        "ideal_density_observed_only": 8.118568420410156
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15385:27",
+      "category": "Car",
+      "instance_group": "cambridge_block_19:58",
+      "A0_error": 15.601892471313477,
+      "Native_error": 15.601892471313477,
+      "observed_A0_probability_mass": 0.2365368902683258,
+      "errors": {
+        "original_conditional_clipped": 15.601892471313477,
+        "conditional_unclipped": 15.601892471313477,
+        "global_prior_clipped": 5.078357219696045,
+        "global_prior_unclipped": 5.078357219696045,
+        "ideal_density_observed_only": 5.078357219696045
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15385:41",
+      "category": "Car",
+      "instance_group": "cambridge_block_19:58",
+      "A0_error": 15.601892471313477,
+      "Native_error": 5.078357219696045,
+      "observed_A0_probability_mass": 0.41521480679512024,
+      "errors": {
+        "original_conditional_clipped": 5.078357219696045,
+        "conditional_unclipped": 5.078357219696045,
+        "global_prior_clipped": 5.078357219696045,
+        "global_prior_unclipped": 5.078357219696045,
+        "ideal_density_observed_only": 5.078357219696045
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18457:27",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:257",
+      "A0_error": 16.630401611328125,
+      "Native_error": 30.39522361755371,
+      "observed_A0_probability_mass": 0.7255386710166931,
+      "errors": {
+        "original_conditional_clipped": 16.630401611328125,
+        "conditional_unclipped": 16.630401611328125,
+        "global_prior_clipped": 16.630401611328125,
+        "global_prior_unclipped": 16.630401611328125,
+        "ideal_density_observed_only": 16.630401611328125
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19279:5",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:49",
+      "A0_error": 3.595278739929199,
+      "Native_error": 3.595278739929199,
+      "observed_A0_probability_mass": 0.8811696171760559,
+      "errors": {
+        "original_conditional_clipped": 3.595278739929199,
+        "conditional_unclipped": 3.595278739929199,
+        "global_prior_clipped": 3.595278739929199,
+        "global_prior_unclipped": 3.595278739929199,
+        "ideal_density_observed_only": 3.595278739929199
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19279:10",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:49",
+      "A0_error": 3.595278739929199,
+      "Native_error": 3.595278739929199,
+      "observed_A0_probability_mass": 0.8689074516296387,
+      "errors": {
+        "original_conditional_clipped": 3.595278739929199,
+        "conditional_unclipped": 3.595278739929199,
+        "global_prior_clipped": 3.595278739929199,
+        "global_prior_unclipped": 3.595278739929199,
+        "ideal_density_observed_only": 3.595278739929199
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19279:16",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:49",
+      "A0_error": 3.595278739929199,
+      "Native_error": 3.595278739929199,
+      "observed_A0_probability_mass": 0.816051185131073,
+      "errors": {
+        "original_conditional_clipped": 3.595278739929199,
+        "conditional_unclipped": 3.595278739929199,
+        "global_prior_clipped": 3.595278739929199,
+        "global_prior_unclipped": 3.595278739929199,
+        "ideal_density_observed_only": 3.595278739929199
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19279:21",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:49",
+      "A0_error": 3.595278739929199,
+      "Native_error": 3.595278739929199,
+      "observed_A0_probability_mass": 0.6588826775550842,
+      "errors": {
+        "original_conditional_clipped": 3.595278739929199,
+        "conditional_unclipped": 3.595278739929199,
+        "global_prior_clipped": 3.595278739929199,
+        "global_prior_unclipped": 3.595278739929199,
+        "ideal_density_observed_only": 3.595278739929199
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:20047:38",
+      "category": "Building",
+      "instance_group": "cambridge_block_28:139",
+      "A0_error": 23.343992233276367,
+      "Native_error": 12.09630298614502,
+      "observed_A0_probability_mass": 0.7451199293136597,
+      "errors": {
+        "original_conditional_clipped": 12.09630298614502,
+        "conditional_unclipped": 7.6081013679504395,
+        "global_prior_clipped": 12.09630298614502,
+        "global_prior_unclipped": 7.6081013679504395,
+        "ideal_density_observed_only": 7.6081013679504395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:20047:51",
+      "category": "Building",
+      "instance_group": "cambridge_block_28:139",
+      "A0_error": 23.343992233276367,
+      "Native_error": 12.09630298614502,
+      "observed_A0_probability_mass": 0.7617301940917969,
+      "errors": {
+        "original_conditional_clipped": 12.09630298614502,
+        "conditional_unclipped": 7.6081013679504395,
+        "global_prior_clipped": 12.09630298614502,
+        "global_prior_unclipped": 7.6081013679504395,
+        "ideal_density_observed_only": 7.6081013679504395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8030:21",
+      "category": "Car",
+      "instance_group": "cambridge_block_6:38",
+      "A0_error": 9.690718650817871,
+      "Native_error": 9.690718650817871,
+      "observed_A0_probability_mass": 0.6967682838439941,
+      "errors": {
+        "original_conditional_clipped": 5.630338668823242,
+        "conditional_unclipped": 5.630338668823242,
+        "global_prior_clipped": 5.630338668823242,
+        "global_prior_unclipped": 5.630338668823242,
+        "ideal_density_observed_only": 5.630338668823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8030:43",
+      "category": "Car",
+      "instance_group": "cambridge_block_6:38",
+      "A0_error": 9.690718650817871,
+      "Native_error": 14.91198444366455,
+      "observed_A0_probability_mass": 0.7383246421813965,
+      "errors": {
+        "original_conditional_clipped": 5.630338668823242,
+        "conditional_unclipped": 5.630338668823242,
+        "global_prior_clipped": 5.630338668823242,
+        "global_prior_unclipped": 5.630338668823242,
+        "ideal_density_observed_only": 5.630338668823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8030:64",
+      "category": "Car",
+      "instance_group": "cambridge_block_6:38",
+      "A0_error": 9.690718650817871,
+      "Native_error": 9.690718650817871,
+      "observed_A0_probability_mass": 0.6788557767868042,
+      "errors": {
+        "original_conditional_clipped": 5.630338668823242,
+        "conditional_unclipped": 5.630338668823242,
+        "global_prior_clipped": 5.630338668823242,
+        "global_prior_unclipped": 5.630338668823242,
+        "ideal_density_observed_only": 5.630338668823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9353:33",
+      "category": "Building",
+      "instance_group": "cambridge_block_7:38",
+      "A0_error": 3.7211008071899414,
+      "Native_error": 15.861432075500488,
+      "observed_A0_probability_mass": 0.7846902012825012,
+      "errors": {
+        "original_conditional_clipped": 3.7211008071899414,
+        "conditional_unclipped": 3.7211008071899414,
+        "global_prior_clipped": 3.7211008071899414,
+        "global_prior_unclipped": 3.7211008071899414,
+        "ideal_density_observed_only": 3.7211008071899414
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9353:45",
+      "category": "Building",
+      "instance_group": "cambridge_block_7:38",
+      "A0_error": 3.7211008071899414,
+      "Native_error": 13.582185745239258,
+      "observed_A0_probability_mass": 0.8600265979766846,
+      "errors": {
+        "original_conditional_clipped": 3.7211008071899414,
+        "conditional_unclipped": 3.7211008071899414,
+        "global_prior_clipped": 3.7211008071899414,
+        "global_prior_unclipped": 3.7211008071899414,
+        "ideal_density_observed_only": 3.7211008071899414
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:1696:61",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:451",
+      "A0_error": 28.36838150024414,
+      "Native_error": 28.36838150024414,
+      "observed_A0_probability_mass": 0.9958301782608032,
+      "errors": {
+        "original_conditional_clipped": 6.522306442260742,
+        "conditional_unclipped": 6.522306442260742,
+        "global_prior_clipped": 6.522306442260742,
+        "global_prior_unclipped": 6.522306442260742,
+        "ideal_density_observed_only": 6.522306442260742
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:1696:82",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:451",
+      "A0_error": 28.36838150024414,
+      "Native_error": 15.027015686035156,
+      "observed_A0_probability_mass": 0.9069427847862244,
+      "errors": {
+        "original_conditional_clipped": 6.522306442260742,
+        "conditional_unclipped": 6.522306442260742,
+        "global_prior_clipped": 6.522306442260742,
+        "global_prior_unclipped": 6.522306442260742,
+        "ideal_density_observed_only": 6.522306442260742
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6806:6",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.014930725097656,
+      "observed_A0_probability_mass": 0.5814561247825623,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6806:12",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.014930725097656,
+      "observed_A0_probability_mass": 0.574012815952301,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6806:19",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.5523710250854492,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6806:25",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.46343421936035156,
+      "errors": {
+        "original_conditional_clipped": 8.43892765045166,
+        "conditional_unclipped": 8.43892765045166,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7597:12",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.145280361175537,
+      "Native_error": 4.145280361175537,
+      "observed_A0_probability_mass": 0.9900996088981628,
+      "errors": {
+        "original_conditional_clipped": 4.145280361175537,
+        "conditional_unclipped": 4.145280361175537,
+        "global_prior_clipped": 4.145280361175537,
+        "global_prior_unclipped": 4.145280361175537,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7597:24",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.145280361175537,
+      "Native_error": 4.145280361175537,
+      "observed_A0_probability_mass": 0.9919317960739136,
+      "errors": {
+        "original_conditional_clipped": 4.145280361175537,
+        "conditional_unclipped": 4.145280361175537,
+        "global_prior_clipped": 4.145280361175537,
+        "global_prior_unclipped": 4.145280361175537,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7597:37",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.145280361175537,
+      "Native_error": 4.145280361175537,
+      "observed_A0_probability_mass": 0.988842248916626,
+      "errors": {
+        "original_conditional_clipped": 4.145280361175537,
+        "conditional_unclipped": 4.145280361175537,
+        "global_prior_clipped": 4.145280361175537,
+        "global_prior_unclipped": 4.145280361175537,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7597:49",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.145280361175537,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.9589149951934814,
+      "errors": {
+        "original_conditional_clipped": 4.145280361175537,
+        "conditional_unclipped": 4.145280361175537,
+        "global_prior_clipped": 4.145280361175537,
+        "global_prior_unclipped": 4.145280361175537,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3851:45",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:303",
+      "A0_error": 16.963958740234375,
+      "Native_error": 7.17995023727417,
+      "observed_A0_probability_mass": 0.9572528004646301,
+      "errors": {
+        "original_conditional_clipped": 7.268240451812744,
+        "conditional_unclipped": 7.268240451812744,
+        "global_prior_clipped": 7.268240451812744,
+        "global_prior_unclipped": 7.268240451812744,
+        "ideal_density_observed_only": 7.17995023727417
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3851:61",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:303",
+      "A0_error": 16.963958740234375,
+      "Native_error": 7.17995023727417,
+      "observed_A0_probability_mass": 0.935190737247467,
+      "errors": {
+        "original_conditional_clipped": 7.268240451812744,
+        "conditional_unclipped": 7.268240451812744,
+        "global_prior_clipped": 7.268240451812744,
+        "global_prior_unclipped": 7.268240451812744,
+        "ideal_density_observed_only": 7.17995023727417
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4970:6",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:173",
+      "A0_error": 12.273076057434082,
+      "Native_error": 21.925552368164062,
+      "observed_A0_probability_mass": 0.910459041595459,
+      "errors": {
+        "original_conditional_clipped": 5.2419304847717285,
+        "conditional_unclipped": 5.2419304847717285,
+        "global_prior_clipped": 5.2419304847717285,
+        "global_prior_unclipped": 5.2419304847717285,
+        "ideal_density_observed_only": 5.2419304847717285
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4970:13",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:173",
+      "A0_error": 12.273076057434082,
+      "Native_error": 21.925552368164062,
+      "observed_A0_probability_mass": 0.8989865779876709,
+      "errors": {
+        "original_conditional_clipped": 5.2419304847717285,
+        "conditional_unclipped": 5.2419304847717285,
+        "global_prior_clipped": 5.2419304847717285,
+        "global_prior_unclipped": 5.2419304847717285,
+        "ideal_density_observed_only": 5.2419304847717285
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4970:19",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:173",
+      "A0_error": 12.273076057434082,
+      "Native_error": 21.925552368164062,
+      "observed_A0_probability_mass": 0.8726298809051514,
+      "errors": {
+        "original_conditional_clipped": 5.2419304847717285,
+        "conditional_unclipped": 5.2419304847717285,
+        "global_prior_clipped": 5.2419304847717285,
+        "global_prior_unclipped": 5.2419304847717285,
+        "ideal_density_observed_only": 5.2419304847717285
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4970:26",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:173",
+      "A0_error": 12.273076057434082,
+      "Native_error": 21.925552368164062,
+      "observed_A0_probability_mass": 0.509128749370575,
+      "errors": {
+        "original_conditional_clipped": 5.2419304847717285,
+        "conditional_unclipped": 5.2419304847717285,
+        "global_prior_clipped": 5.2419304847717285,
+        "global_prior_unclipped": 5.2419304847717285,
+        "ideal_density_observed_only": 5.2419304847717285
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11863:37",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:184",
+      "A0_error": 13.705255508422852,
+      "Native_error": 2.9379584789276123,
+      "observed_A0_probability_mass": 0.8782833814620972,
+      "errors": {
+        "original_conditional_clipped": 2.9379584789276123,
+        "conditional_unclipped": 2.9379584789276123,
+        "global_prior_clipped": 2.9379584789276123,
+        "global_prior_unclipped": 2.9379584789276123,
+        "ideal_density_observed_only": 2.9379584789276123
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11863:49",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:184",
+      "A0_error": 13.705255508422852,
+      "Native_error": 2.9379584789276123,
+      "observed_A0_probability_mass": 0.5213760137557983,
+      "errors": {
+        "original_conditional_clipped": 2.9379584789276123,
+        "conditional_unclipped": 2.9379584789276123,
+        "global_prior_clipped": 2.9379584789276123,
+        "global_prior_unclipped": 2.9379584789276123,
+        "ideal_density_observed_only": 2.9379584789276123
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15871:7",
+      "category": "Building",
+      "instance_group": "cambridge_block_20:83",
+      "A0_error": 29.186250686645508,
+      "Native_error": 3.5261616706848145,
+      "observed_A0_probability_mass": 0.33021658658981323,
+      "errors": {
+        "original_conditional_clipped": 3.5261616706848145,
+        "conditional_unclipped": 3.5261616706848145,
+        "global_prior_clipped": 3.5261616706848145,
+        "global_prior_unclipped": 3.5261616706848145,
+        "ideal_density_observed_only": 3.5261616706848145
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:21692:64",
+      "category": "Car",
+      "instance_group": "cambridge_block_33:172",
+      "A0_error": 3.43341326713562,
+      "Native_error": 3.43341326713562,
+      "observed_A0_probability_mass": 0.8675633668899536,
+      "errors": {
+        "original_conditional_clipped": 3.43341326713562,
+        "conditional_unclipped": 3.43341326713562,
+        "global_prior_clipped": 3.43341326713562,
+        "global_prior_unclipped": 3.43341326713562,
+        "ideal_density_observed_only": 3.43341326713562
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:21692:129",
+      "category": "Car",
+      "instance_group": "cambridge_block_33:172",
+      "A0_error": 3.43341326713562,
+      "Native_error": 3.43341326713562,
+      "observed_A0_probability_mass": 0.7738165855407715,
+      "errors": {
+        "original_conditional_clipped": 3.43341326713562,
+        "conditional_unclipped": 3.43341326713562,
+        "global_prior_clipped": 3.43341326713562,
+        "global_prior_unclipped": 3.43341326713562,
+        "ideal_density_observed_only": 3.43341326713562
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:21692:194",
+      "category": "Car",
+      "instance_group": "cambridge_block_33:172",
+      "A0_error": 3.43341326713562,
+      "Native_error": 12.405000686645508,
+      "observed_A0_probability_mass": 0.6108590364456177,
+      "errors": {
+        "original_conditional_clipped": 3.43341326713562,
+        "conditional_unclipped": 3.43341326713562,
+        "global_prior_clipped": 3.43341326713562,
+        "global_prior_unclipped": 3.43341326713562,
+        "ideal_density_observed_only": 3.43341326713562
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:21692:259",
+      "category": "Car",
+      "instance_group": "cambridge_block_33:172",
+      "A0_error": 3.43341326713562,
+      "Native_error": 3.43341326713562,
+      "observed_A0_probability_mass": 0.42103660106658936,
+      "errors": {
+        "original_conditional_clipped": 3.43341326713562,
+        "conditional_unclipped": 3.43341326713562,
+        "global_prior_clipped": 3.43341326713562,
+        "global_prior_unclipped": 3.43341326713562,
+        "ideal_density_observed_only": 3.43341326713562
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7764:9",
+      "category": "Building",
+      "instance_group": "cambridge_block_4:33",
+      "A0_error": 17.41266441345215,
+      "Native_error": 20.34954833984375,
+      "observed_A0_probability_mass": 0.8367173671722412,
+      "errors": {
+        "original_conditional_clipped": 7.832357883453369,
+        "conditional_unclipped": 7.832357883453369,
+        "global_prior_clipped": 7.832357883453369,
+        "global_prior_unclipped": 7.832357883453369,
+        "ideal_density_observed_only": 4.746360778808594
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10282:20",
+      "category": "Building",
+      "instance_group": "cambridge_block_9:183",
+      "A0_error": 27.470426559448242,
+      "Native_error": 5.5838446617126465,
+      "observed_A0_probability_mass": 0.8355990648269653,
+      "errors": {
+        "original_conditional_clipped": 5.5838446617126465,
+        "conditional_unclipped": 5.5838446617126465,
+        "global_prior_clipped": 5.5838446617126465,
+        "global_prior_unclipped": 5.5838446617126465,
+        "ideal_density_observed_only": 5.5838446617126465
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:961:16",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:256",
+      "A0_error": 3.1189656257629395,
+      "Native_error": 3.1189656257629395,
+      "observed_A0_probability_mass": 0.979730486869812,
+      "errors": {
+        "original_conditional_clipped": 3.1189656257629395,
+        "conditional_unclipped": 3.1189656257629395,
+        "global_prior_clipped": 3.1189656257629395,
+        "global_prior_unclipped": 3.1189656257629395,
+        "ideal_density_observed_only": 3.1189656257629395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:961:33",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:256",
+      "A0_error": 3.1189656257629395,
+      "Native_error": 3.1189656257629395,
+      "observed_A0_probability_mass": 0.9093735814094543,
+      "errors": {
+        "original_conditional_clipped": 3.1189656257629395,
+        "conditional_unclipped": 3.1189656257629395,
+        "global_prior_clipped": 3.1189656257629395,
+        "global_prior_unclipped": 3.1189656257629395,
+        "ideal_density_observed_only": 3.1189656257629395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:961:50",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:256",
+      "A0_error": 3.1189656257629395,
+      "Native_error": 16.975662231445312,
+      "observed_A0_probability_mass": 0.8292474150657654,
+      "errors": {
+        "original_conditional_clipped": 3.1189656257629395,
+        "conditional_unclipped": 3.1189656257629395,
+        "global_prior_clipped": 3.1189656257629395,
+        "global_prior_unclipped": 3.1189656257629395,
+        "ideal_density_observed_only": 3.1189656257629395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:961:67",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:256",
+      "A0_error": 3.1189656257629395,
+      "Native_error": 3.1189656257629395,
+      "observed_A0_probability_mass": 0.2923603355884552,
+      "errors": {
+        "original_conditional_clipped": 3.1189656257629395,
+        "conditional_unclipped": 3.1189656257629395,
+        "global_prior_clipped": 3.1189656257629395,
+        "global_prior_unclipped": 3.1189656257629395,
+        "ideal_density_observed_only": 3.1189656257629395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6815:6",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:2",
+      "A0_error": 20.216022491455078,
+      "Native_error": 34.499229431152344,
+      "observed_A0_probability_mass": 0.5357794761657715,
+      "errors": {
+        "original_conditional_clipped": 34.499229431152344,
+        "conditional_unclipped": 34.499229431152344,
+        "global_prior_clipped": 5.945135116577148,
+        "global_prior_unclipped": 5.945135116577148,
+        "ideal_density_observed_only": 5.945135116577148
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6815:13",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:2",
+      "A0_error": 20.216022491455078,
+      "Native_error": 5.945135116577148,
+      "observed_A0_probability_mass": 0.9605363011360168,
+      "errors": {
+        "original_conditional_clipped": 5.945135116577148,
+        "conditional_unclipped": 5.945135116577148,
+        "global_prior_clipped": 5.945135116577148,
+        "global_prior_unclipped": 5.945135116577148,
+        "ideal_density_observed_only": 5.945135116577148
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6815:27",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:2",
+      "A0_error": 20.216022491455078,
+      "Native_error": 20.216022491455078,
+      "observed_A0_probability_mass": 0.053599197417497635,
+      "errors": {
+        "original_conditional_clipped": 20.216022491455078,
+        "conditional_unclipped": 20.216022491455078,
+        "global_prior_clipped": 5.945135116577148,
+        "global_prior_unclipped": 5.945135116577148,
+        "ideal_density_observed_only": 5.945135116577148
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7589:29",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 64.16881561279297,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9340929985046387,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7589:45",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 64.16881561279297,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9291249513626099,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7589:60",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 64.16881561279297,
+      "Native_error": 64.16881561279297,
+      "observed_A0_probability_mass": 0.40002167224884033,
+      "errors": {
+        "original_conditional_clipped": 64.16881561279297,
+        "conditional_unclipped": 64.16881561279297,
+        "global_prior_clipped": 64.16881561279297,
+        "global_prior_unclipped": 64.16881561279297,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4851:14",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:139",
+      "A0_error": 2.5395941734313965,
+      "Native_error": 11.777929306030273,
+      "observed_A0_probability_mass": 0.3771326541900635,
+      "errors": {
+        "original_conditional_clipped": 11.777929306030273,
+        "conditional_unclipped": 11.777929306030273,
+        "global_prior_clipped": 11.777929306030273,
+        "global_prior_unclipped": 11.777929306030273,
+        "ideal_density_observed_only": 11.777929306030273
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11864:17",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:184",
+      "A0_error": 13.705255508422852,
+      "Native_error": 2.9379584789276123,
+      "observed_A0_probability_mass": 0.9084968566894531,
+      "errors": {
+        "original_conditional_clipped": 2.9379584789276123,
+        "conditional_unclipped": 2.9379584789276123,
+        "global_prior_clipped": 2.9379584789276123,
+        "global_prior_unclipped": 2.9379584789276123,
+        "ideal_density_observed_only": 2.9379584789276123
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11864:23",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:184",
+      "A0_error": 13.705255508422852,
+      "Native_error": 2.9379584789276123,
+      "observed_A0_probability_mass": 0.5582253336906433,
+      "errors": {
+        "original_conditional_clipped": 2.9379584789276123,
+        "conditional_unclipped": 2.9379584789276123,
+        "global_prior_clipped": 2.9379584789276123,
+        "global_prior_unclipped": 2.9379584789276123,
+        "ideal_density_observed_only": 2.9379584789276123
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14046:19",
+      "category": "Building",
+      "instance_group": "cambridge_block_13:4",
+      "A0_error": 63.234649658203125,
+      "Native_error": 63.234649658203125,
+      "observed_A0_probability_mass": 0.17974057793617249,
+      "errors": {
+        "original_conditional_clipped": 63.234649658203125,
+        "conditional_unclipped": 63.234649658203125,
+        "global_prior_clipped": 13.737948417663574,
+        "global_prior_unclipped": 5.141955375671387,
+        "ideal_density_observed_only": 5.141955375671387
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14046:26",
+      "category": "Building",
+      "instance_group": "cambridge_block_13:4",
+      "A0_error": 63.234649658203125,
+      "Native_error": 27.55705451965332,
+      "observed_A0_probability_mass": 0.6792336702346802,
+      "errors": {
+        "original_conditional_clipped": 13.737948417663574,
+        "conditional_unclipped": 5.141955375671387,
+        "global_prior_clipped": 13.737948417663574,
+        "global_prior_unclipped": 5.141955375671387,
+        "ideal_density_observed_only": 5.141955375671387
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14688:3",
+      "category": "Building",
+      "instance_group": "cambridge_block_18:11",
+      "A0_error": 5.548140048980713,
+      "Native_error": 22.904491424560547,
+      "observed_A0_probability_mass": 0.6893504858016968,
+      "errors": {
+        "original_conditional_clipped": 4.042630672454834,
+        "conditional_unclipped": 4.042630672454834,
+        "global_prior_clipped": 4.042630672454834,
+        "global_prior_unclipped": 4.042630672454834,
+        "ideal_density_observed_only": 4.042630672454834
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:16452:16",
+      "category": "Car",
+      "instance_group": "cambridge_block_20:242",
+      "A0_error": 3.722350597381592,
+      "Native_error": 3.722350597381592,
+      "observed_A0_probability_mass": 0.703034520149231,
+      "errors": {
+        "original_conditional_clipped": 3.722350597381592,
+        "conditional_unclipped": 3.722350597381592,
+        "global_prior_clipped": 3.722350597381592,
+        "global_prior_unclipped": 3.722350597381592,
+        "ideal_density_observed_only": 3.722350597381592
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18083:66",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:175",
+      "A0_error": 31.2336483001709,
+      "Native_error": 45.41780471801758,
+      "observed_A0_probability_mass": 0.7250363826751709,
+      "errors": {
+        "original_conditional_clipped": 5.11611795425415,
+        "conditional_unclipped": 5.11611795425415,
+        "global_prior_clipped": 5.11611795425415,
+        "global_prior_unclipped": 5.11611795425415,
+        "ideal_density_observed_only": 5.11611795425415
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18083:89",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:175",
+      "A0_error": 31.2336483001709,
+      "Native_error": 31.2336483001709,
+      "observed_A0_probability_mass": 0.6468828916549683,
+      "errors": {
+        "original_conditional_clipped": 5.11611795425415,
+        "conditional_unclipped": 5.11611795425415,
+        "global_prior_clipped": 5.11611795425415,
+        "global_prior_unclipped": 5.11611795425415,
+        "ideal_density_observed_only": 5.11611795425415
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9094:8",
+      "category": "Ground",
+      "instance_group": "cambridge_block_7:359",
+      "A0_error": 24.89103889465332,
+      "Native_error": 24.89103889465332,
+      "observed_A0_probability_mass": 0.555571436882019,
+      "errors": {
+        "original_conditional_clipped": 4.882136344909668,
+        "conditional_unclipped": 4.882136344909668,
+        "global_prior_clipped": 4.882136344909668,
+        "global_prior_unclipped": 4.882136344909668,
+        "ideal_density_observed_only": 4.882136344909668
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9094:17",
+      "category": "Ground",
+      "instance_group": "cambridge_block_7:359",
+      "A0_error": 24.89103889465332,
+      "Native_error": 24.89103889465332,
+      "observed_A0_probability_mass": 0.739932119846344,
+      "errors": {
+        "original_conditional_clipped": 4.882136344909668,
+        "conditional_unclipped": 4.882136344909668,
+        "global_prior_clipped": 4.882136344909668,
+        "global_prior_unclipped": 4.882136344909668,
+        "ideal_density_observed_only": 4.882136344909668
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9094:27",
+      "category": "Ground",
+      "instance_group": "cambridge_block_7:359",
+      "A0_error": 24.89103889465332,
+      "Native_error": 17.05164337158203,
+      "observed_A0_probability_mass": 0.5160964727401733,
+      "errors": {
+        "original_conditional_clipped": 4.882136344909668,
+        "conditional_unclipped": 4.882136344909668,
+        "global_prior_clipped": 4.882136344909668,
+        "global_prior_unclipped": 4.882136344909668,
+        "ideal_density_observed_only": 4.882136344909668
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6798:12",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.014930725097656,
+      "observed_A0_probability_mass": 0.687414824962616,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6798:25",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.6860729455947876,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6798:37",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.6297639012336731,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6798:50",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.5791887640953064,
+      "errors": {
+        "original_conditional_clipped": 8.43892765045166,
+        "conditional_unclipped": 8.43892765045166,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7308:9",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:111",
+      "A0_error": 5.8158369064331055,
+      "Native_error": 34.5055046081543,
+      "observed_A0_probability_mass": 0.9716401100158691,
+      "errors": {
+        "original_conditional_clipped": 5.8158369064331055,
+        "conditional_unclipped": 5.8158369064331055,
+        "global_prior_clipped": 5.8158369064331055,
+        "global_prior_unclipped": 5.8158369064331055,
+        "ideal_density_observed_only": 5.8158369064331055
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7308:19",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:111",
+      "A0_error": 5.8158369064331055,
+      "Native_error": 34.35667037963867,
+      "observed_A0_probability_mass": 0.9681180715560913,
+      "errors": {
+        "original_conditional_clipped": 5.8158369064331055,
+        "conditional_unclipped": 5.8158369064331055,
+        "global_prior_clipped": 5.8158369064331055,
+        "global_prior_unclipped": 5.8158369064331055,
+        "ideal_density_observed_only": 5.8158369064331055
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7308:29",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:111",
+      "A0_error": 5.8158369064331055,
+      "Native_error": 9.11260986328125,
+      "observed_A0_probability_mass": 0.9030619859695435,
+      "errors": {
+        "original_conditional_clipped": 5.8158369064331055,
+        "conditional_unclipped": 5.8158369064331055,
+        "global_prior_clipped": 5.8158369064331055,
+        "global_prior_unclipped": 5.8158369064331055,
+        "ideal_density_observed_only": 5.8158369064331055
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7308:39",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:111",
+      "A0_error": 5.8158369064331055,
+      "Native_error": 34.5055046081543,
+      "observed_A0_probability_mass": 0.5547723770141602,
+      "errors": {
+        "original_conditional_clipped": 5.8158369064331055,
+        "conditional_unclipped": 5.8158369064331055,
+        "global_prior_clipped": 5.8158369064331055,
+        "global_prior_unclipped": 5.8158369064331055,
+        "ideal_density_observed_only": 5.8158369064331055
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7591:41",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.8737945556640625,
+      "Native_error": 4.8737945556640625,
+      "observed_A0_probability_mass": 0.9613094329833984,
+      "errors": {
+        "original_conditional_clipped": 2.834885597229004,
+        "conditional_unclipped": 2.834885597229004,
+        "global_prior_clipped": 2.834885597229004,
+        "global_prior_unclipped": 2.834885597229004,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7591:83",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.8737945556640625,
+      "Native_error": 4.8737945556640625,
+      "observed_A0_probability_mass": 0.9527809619903564,
+      "errors": {
+        "original_conditional_clipped": 2.834885597229004,
+        "conditional_unclipped": 2.834885597229004,
+        "global_prior_clipped": 2.834885597229004,
+        "global_prior_unclipped": 2.834885597229004,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5015:21",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 23.003795623779297,
+      "Native_error": 40.1491584777832,
+      "observed_A0_probability_mass": 0.63409024477005,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5015:32",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 23.003795623779297,
+      "Native_error": 8.731600761413574,
+      "observed_A0_probability_mass": 0.9556137919425964,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5015:43",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:182",
+      "A0_error": 23.003795623779297,
+      "Native_error": 8.731600761413574,
+      "observed_A0_probability_mass": 0.7772916555404663,
+      "errors": {
+        "original_conditional_clipped": 8.731600761413574,
+        "conditional_unclipped": 5.609830379486084,
+        "global_prior_clipped": 8.731600761413574,
+        "global_prior_unclipped": 5.609830379486084,
+        "ideal_density_observed_only": 5.609830379486084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5344:6",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:34",
+      "A0_error": 14.116985321044922,
+      "Native_error": 14.116985321044922,
+      "observed_A0_probability_mass": 0.7978181838989258,
+      "errors": {
+        "original_conditional_clipped": 14.116985321044922,
+        "conditional_unclipped": 14.116985321044922,
+        "global_prior_clipped": 3.280174493789673,
+        "global_prior_unclipped": 3.280174493789673,
+        "ideal_density_observed_only": 3.280174493789673
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5344:12",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:34",
+      "A0_error": 14.116985321044922,
+      "Native_error": 14.116985321044922,
+      "observed_A0_probability_mass": 0.8546754121780396,
+      "errors": {
+        "original_conditional_clipped": 14.116985321044922,
+        "conditional_unclipped": 14.116985321044922,
+        "global_prior_clipped": 3.280174493789673,
+        "global_prior_unclipped": 3.280174493789673,
+        "ideal_density_observed_only": 3.280174493789673
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6221:106",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:192",
+      "A0_error": 10.09915542602539,
+      "Native_error": 10.09915542602539,
+      "observed_A0_probability_mass": 0.4456349015235901,
+      "errors": {
+        "original_conditional_clipped": 8.105804443359375,
+        "conditional_unclipped": 8.105804443359375,
+        "global_prior_clipped": 8.105804443359375,
+        "global_prior_unclipped": 8.105804443359375,
+        "ideal_density_observed_only": 8.105804443359375
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15126:16",
+      "category": "Building",
+      "instance_group": "cambridge_block_18:35",
+      "A0_error": 30.53011703491211,
+      "Native_error": 30.53011703491211,
+      "observed_A0_probability_mass": 0.5279775857925415,
+      "errors": {
+        "original_conditional_clipped": 4.911196231842041,
+        "conditional_unclipped": 4.1523332595825195,
+        "global_prior_clipped": 13.207083702087402,
+        "global_prior_unclipped": 4.1523332595825195,
+        "ideal_density_observed_only": 4.1523332595825195
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15126:33",
+      "category": "Building",
+      "instance_group": "cambridge_block_18:35",
+      "A0_error": 30.53011703491211,
+      "Native_error": 30.53011703491211,
+      "observed_A0_probability_mass": 0.25745630264282227,
+      "errors": {
+        "original_conditional_clipped": 30.53011703491211,
+        "conditional_unclipped": 30.53011703491211,
+        "global_prior_clipped": 13.207083702087402,
+        "global_prior_unclipped": 4.1523332595825195,
+        "ideal_density_observed_only": 4.1523332595825195
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15126:67",
+      "category": "Building",
+      "instance_group": "cambridge_block_18:35",
+      "A0_error": 30.53011703491211,
+      "Native_error": 16.89045524597168,
+      "observed_A0_probability_mass": 0.8739210963249207,
+      "errors": {
+        "original_conditional_clipped": 13.207083702087402,
+        "conditional_unclipped": 4.1523332595825195,
+        "global_prior_clipped": 13.207083702087402,
+        "global_prior_unclipped": 4.1523332595825195,
+        "ideal_density_observed_only": 4.1523332595825195
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:16809:165",
+      "category": "Car",
+      "instance_group": "cambridge_block_20:333",
+      "A0_error": 10.157940864562988,
+      "Native_error": 10.157940864562988,
+      "observed_A0_probability_mass": 0.9295255541801453,
+      "errors": {
+        "original_conditional_clipped": 4.783633708953857,
+        "conditional_unclipped": 4.783633708953857,
+        "global_prior_clipped": 4.783633708953857,
+        "global_prior_unclipped": 4.783633708953857,
+        "ideal_density_observed_only": 4.783633708953857
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:16809:221",
+      "category": "Car",
+      "instance_group": "cambridge_block_20:333",
+      "A0_error": 10.157940864562988,
+      "Native_error": 4.783633708953857,
+      "observed_A0_probability_mass": 0.9040491580963135,
+      "errors": {
+        "original_conditional_clipped": 4.783633708953857,
+        "conditional_unclipped": 4.783633708953857,
+        "global_prior_clipped": 4.783633708953857,
+        "global_prior_unclipped": 4.783633708953857,
+        "ideal_density_observed_only": 4.783633708953857
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19228:2",
+      "category": "Building",
+      "instance_group": "cambridge_block_23:33",
+      "A0_error": 20.456073760986328,
+      "Native_error": 20.456073760986328,
+      "observed_A0_probability_mass": 0.8157259821891785,
+      "errors": {
+        "original_conditional_clipped": 2.8306808471679688,
+        "conditional_unclipped": 2.8306808471679688,
+        "global_prior_clipped": 2.8306808471679688,
+        "global_prior_unclipped": 2.8306808471679688,
+        "ideal_density_observed_only": 2.788735866546631
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19228:5",
+      "category": "Building",
+      "instance_group": "cambridge_block_23:33",
+      "A0_error": 20.456073760986328,
+      "Native_error": 11.37439250946045,
+      "observed_A0_probability_mass": 0.7566506862640381,
+      "errors": {
+        "original_conditional_clipped": 2.8306808471679688,
+        "conditional_unclipped": 2.8306808471679688,
+        "global_prior_clipped": 2.8306808471679688,
+        "global_prior_unclipped": 2.8306808471679688,
+        "ideal_density_observed_only": 2.788735866546631
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19228:8",
+      "category": "Building",
+      "instance_group": "cambridge_block_23:33",
+      "A0_error": 20.456073760986328,
+      "Native_error": 2.8306808471679688,
+      "observed_A0_probability_mass": 0.7256648540496826,
+      "errors": {
+        "original_conditional_clipped": 2.8306808471679688,
+        "conditional_unclipped": 2.8306808471679688,
+        "global_prior_clipped": 2.8306808471679688,
+        "global_prior_unclipped": 2.8306808471679688,
+        "ideal_density_observed_only": 2.788735866546631
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19228:11",
+      "category": "Building",
+      "instance_group": "cambridge_block_23:33",
+      "A0_error": 20.456073760986328,
+      "Native_error": 11.37439250946045,
+      "observed_A0_probability_mass": 0.5446292757987976,
+      "errors": {
+        "original_conditional_clipped": 2.8306808471679688,
+        "conditional_unclipped": 2.8306808471679688,
+        "global_prior_clipped": 2.8306808471679688,
+        "global_prior_unclipped": 2.8306808471679688,
+        "ideal_density_observed_only": 2.788735866546631
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:20969:48",
+      "category": "Car",
+      "instance_group": "cambridge_block_28:289",
+      "A0_error": 26.628894805908203,
+      "Native_error": 9.303567886352539,
+      "observed_A0_probability_mass": 0.7656788229942322,
+      "errors": {
+        "original_conditional_clipped": 9.303567886352539,
+        "conditional_unclipped": 9.303567886352539,
+        "global_prior_clipped": 9.303567886352539,
+        "global_prior_unclipped": 9.303567886352539,
+        "ideal_density_observed_only": 9.303567886352539
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:20969:64",
+      "category": "Car",
+      "instance_group": "cambridge_block_28:289",
+      "A0_error": 26.628894805908203,
+      "Native_error": 9.303567886352539,
+      "observed_A0_probability_mass": 0.7918751239776611,
+      "errors": {
+        "original_conditional_clipped": 9.303567886352539,
+        "conditional_unclipped": 5.174189567565918,
+        "global_prior_clipped": 9.303567886352539,
+        "global_prior_unclipped": 5.174189567565918,
+        "ideal_density_observed_only": 5.174189567565918
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8745:85",
+      "category": "Building",
+      "instance_group": "cambridge_block_7:157",
+      "A0_error": 16.06161117553711,
+      "Native_error": 15.853707313537598,
+      "observed_A0_probability_mass": 0.6317082643508911,
+      "errors": {
+        "original_conditional_clipped": 7.1866679191589355,
+        "conditional_unclipped": 7.1866679191589355,
+        "global_prior_clipped": 7.1866679191589355,
+        "global_prior_unclipped": 7.1866679191589355,
+        "ideal_density_observed_only": 7.104464054107666
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10863:14",
+      "category": "Ground",
+      "instance_group": "cambridge_block_9:443",
+      "A0_error": 2.9170641899108887,
+      "Native_error": 2.9170641899108887,
+      "observed_A0_probability_mass": 0.4170524775981903,
+      "errors": {
+        "original_conditional_clipped": 2.9170641899108887,
+        "conditional_unclipped": 2.9170641899108887,
+        "global_prior_clipped": 2.9170641899108887,
+        "global_prior_unclipped": 2.9170641899108887,
+        "ideal_density_observed_only": 2.9170641899108887
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10863:19",
+      "category": "Ground",
+      "instance_group": "cambridge_block_9:443",
+      "A0_error": 2.9170641899108887,
+      "Native_error": 2.9170641899108887,
+      "observed_A0_probability_mass": 0.8760030269622803,
+      "errors": {
+        "original_conditional_clipped": 2.9170641899108887,
+        "conditional_unclipped": 2.9170641899108887,
+        "global_prior_clipped": 2.9170641899108887,
+        "global_prior_unclipped": 2.9170641899108887,
+        "ideal_density_observed_only": 2.9170641899108887
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:369:7",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:108",
+      "A0_error": 21.06637954711914,
+      "Native_error": 21.06637954711914,
+      "observed_A0_probability_mass": 0.7119057178497314,
+      "errors": {
+        "original_conditional_clipped": 8.115324974060059,
+        "conditional_unclipped": 8.115324974060059,
+        "global_prior_clipped": 8.115324974060059,
+        "global_prior_unclipped": 8.115324974060059,
+        "ideal_density_observed_only": 8.115324974060059
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:369:16",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:108",
+      "A0_error": 21.06637954711914,
+      "Native_error": 21.06637954711914,
+      "observed_A0_probability_mass": 0.26114583015441895,
+      "errors": {
+        "original_conditional_clipped": 21.06637954711914,
+        "conditional_unclipped": 21.06637954711914,
+        "global_prior_clipped": 8.115324974060059,
+        "global_prior_unclipped": 8.115324974060059,
+        "ideal_density_observed_only": 8.115324974060059
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:369:24",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:108",
+      "A0_error": 21.06637954711914,
+      "Native_error": 10.350639343261719,
+      "observed_A0_probability_mass": 0.8966732025146484,
+      "errors": {
+        "original_conditional_clipped": 8.115324974060059,
+        "conditional_unclipped": 8.115324974060059,
+        "global_prior_clipped": 8.115324974060059,
+        "global_prior_unclipped": 8.115324974060059,
+        "ideal_density_observed_only": 8.115324974060059
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:369:33",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:108",
+      "A0_error": 21.06637954711914,
+      "Native_error": 10.350639343261719,
+      "observed_A0_probability_mass": 0.7910866737365723,
+      "errors": {
+        "original_conditional_clipped": 8.115324974060059,
+        "conditional_unclipped": 8.115324974060059,
+        "global_prior_clipped": 8.115324974060059,
+        "global_prior_unclipped": 8.115324974060059,
+        "ideal_density_observed_only": 8.115324974060059
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6552:42",
+      "category": "Building",
+      "instance_group": "birmingham_block_10:13",
+      "A0_error": 3.9837327003479004,
+      "Native_error": 10.627599716186523,
+      "observed_A0_probability_mass": 0.8147982358932495,
+      "errors": {
+        "original_conditional_clipped": 3.9837327003479004,
+        "conditional_unclipped": 3.9837327003479004,
+        "global_prior_clipped": 3.9837327003479004,
+        "global_prior_unclipped": 3.9837327003479004,
+        "ideal_density_observed_only": 3.9837327003479004
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6800:7",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 3.101818084716797,
+      "Native_error": 1.6263151168823242,
+      "observed_A0_probability_mass": 0.6387691497802734,
+      "errors": {
+        "original_conditional_clipped": 1.6263151168823242,
+        "conditional_unclipped": 1.6263151168823242,
+        "global_prior_clipped": 1.6263151168823242,
+        "global_prior_unclipped": 1.6263151168823242,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6800:14",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 3.101818084716797,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.6626264452934265,
+      "errors": {
+        "original_conditional_clipped": 1.6263151168823242,
+        "conditional_unclipped": 1.6263151168823242,
+        "global_prior_clipped": 1.6263151168823242,
+        "global_prior_unclipped": 1.6263151168823242,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6800:22",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 3.101818084716797,
+      "Native_error": 3.101818084716797,
+      "observed_A0_probability_mass": 0.6438356041908264,
+      "errors": {
+        "original_conditional_clipped": 1.6263151168823242,
+        "conditional_unclipped": 1.6263151168823242,
+        "global_prior_clipped": 1.6263151168823242,
+        "global_prior_unclipped": 1.6263151168823242,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6800:29",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 3.101818084716797,
+      "Native_error": 1.6263151168823242,
+      "observed_A0_probability_mass": 0.5942820310592651,
+      "errors": {
+        "original_conditional_clipped": 1.6263151168823242,
+        "conditional_unclipped": 1.6263151168823242,
+        "global_prior_clipped": 1.6263151168823242,
+        "global_prior_unclipped": 1.6263151168823242,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7278:10",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:106",
+      "A0_error": 2.5779166221618652,
+      "Native_error": 2.5779166221618652,
+      "observed_A0_probability_mass": 0.9576979875564575,
+      "errors": {
+        "original_conditional_clipped": 2.5779166221618652,
+        "conditional_unclipped": 2.5779166221618652,
+        "global_prior_clipped": 2.5779166221618652,
+        "global_prior_unclipped": 2.5779166221618652,
+        "ideal_density_observed_only": 2.5779166221618652
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7278:16",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:106",
+      "A0_error": 2.5779166221618652,
+      "Native_error": 2.5779166221618652,
+      "observed_A0_probability_mass": 0.9925754070281982,
+      "errors": {
+        "original_conditional_clipped": 2.5779166221618652,
+        "conditional_unclipped": 2.5779166221618652,
+        "global_prior_clipped": 2.5779166221618652,
+        "global_prior_unclipped": 2.5779166221618652,
+        "ideal_density_observed_only": 2.5779166221618652
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7278:21",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:106",
+      "A0_error": 2.5779166221618652,
+      "Native_error": 2.5779166221618652,
+      "observed_A0_probability_mass": 0.9071512818336487,
+      "errors": {
+        "original_conditional_clipped": 2.5779166221618652,
+        "conditional_unclipped": 2.5779166221618652,
+        "global_prior_clipped": 2.5779166221618652,
+        "global_prior_unclipped": 2.5779166221618652,
+        "ideal_density_observed_only": 2.5779166221618652
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7590:30",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 4.302648067474365,
+      "observed_A0_probability_mass": 0.9787992238998413,
+      "errors": {
+        "original_conditional_clipped": 4.302648067474365,
+        "conditional_unclipped": 4.302648067474365,
+        "global_prior_clipped": 4.302648067474365,
+        "global_prior_unclipped": 4.302648067474365,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7590:61",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 4.302648067474365,
+      "observed_A0_probability_mass": 0.9857662916183472,
+      "errors": {
+        "original_conditional_clipped": 4.302648067474365,
+        "conditional_unclipped": 4.302648067474365,
+        "global_prior_clipped": 4.302648067474365,
+        "global_prior_unclipped": 4.302648067474365,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7590:93",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 4.302648067474365,
+      "observed_A0_probability_mass": 0.9881619215011597,
+      "errors": {
+        "original_conditional_clipped": 4.302648067474365,
+        "conditional_unclipped": 4.302648067474365,
+        "global_prior_clipped": 4.302648067474365,
+        "global_prior_unclipped": 4.302648067474365,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7590:124",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 4.302648067474365,
+      "Native_error": 4.302648067474365,
+      "observed_A0_probability_mass": 0.8926630020141602,
+      "errors": {
+        "original_conditional_clipped": 4.302648067474365,
+        "conditional_unclipped": 4.302648067474365,
+        "global_prior_clipped": 4.302648067474365,
+        "global_prior_unclipped": 4.302648067474365,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3856:43",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:305",
+      "A0_error": 1.5728199481964111,
+      "Native_error": 1.5728199481964111,
+      "observed_A0_probability_mass": 0.8087483048439026,
+      "errors": {
+        "original_conditional_clipped": 1.5728199481964111,
+        "conditional_unclipped": 1.5728199481964111,
+        "global_prior_clipped": 1.5728199481964111,
+        "global_prior_unclipped": 1.5728199481964111,
+        "ideal_density_observed_only": 1.5728199481964111
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3856:66",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:305",
+      "A0_error": 1.5728199481964111,
+      "Native_error": 1.5728199481964111,
+      "observed_A0_probability_mass": 0.6004908084869385,
+      "errors": {
+        "original_conditional_clipped": 1.5728199481964111,
+        "conditional_unclipped": 1.5728199481964111,
+        "global_prior_clipped": 1.5728199481964111,
+        "global_prior_unclipped": 1.5728199481964111,
+        "ideal_density_observed_only": 1.5728199481964111
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3856:88",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:305",
+      "A0_error": 1.5728199481964111,
+      "Native_error": 1.5728199481964111,
+      "observed_A0_probability_mass": 0.263099730014801,
+      "errors": {
+        "original_conditional_clipped": 1.5728199481964111,
+        "conditional_unclipped": 1.5728199481964111,
+        "global_prior_clipped": 1.5728199481964111,
+        "global_prior_unclipped": 1.5728199481964111,
+        "ideal_density_observed_only": 1.5728199481964111
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4380:18",
+      "category": "Building",
+      "instance_group": "birmingham_block_4:13",
+      "A0_error": 65.27597045898438,
+      "Native_error": 54.18796920776367,
+      "observed_A0_probability_mass": 0.9335984587669373,
+      "errors": {
+        "original_conditional_clipped": 11.967610359191895,
+        "conditional_unclipped": 6.564788341522217,
+        "global_prior_clipped": 11.967610359191895,
+        "global_prior_unclipped": 6.564788341522217,
+        "ideal_density_observed_only": 6.564788341522217
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4380:28",
+      "category": "Building",
+      "instance_group": "birmingham_block_4:13",
+      "A0_error": 65.27597045898438,
+      "Native_error": 65.27597045898438,
+      "observed_A0_probability_mass": 0.40242570638656616,
+      "errors": {
+        "original_conditional_clipped": 82.54859161376953,
+        "conditional_unclipped": 6.564788341522217,
+        "global_prior_clipped": 82.54859161376953,
+        "global_prior_unclipped": 6.564788341522217,
+        "ideal_density_observed_only": 6.564788341522217
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4380:37",
+      "category": "Building",
+      "instance_group": "birmingham_block_4:13",
+      "A0_error": 65.27597045898438,
+      "Native_error": 65.27597045898438,
+      "observed_A0_probability_mass": 0.25565266609191895,
+      "errors": {
+        "original_conditional_clipped": 82.54859161376953,
+        "conditional_unclipped": 82.54859161376953,
+        "global_prior_clipped": 82.54859161376953,
+        "global_prior_unclipped": 6.564788341522217,
+        "ideal_density_observed_only": 6.564788341522217
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6091:24",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:149",
+      "A0_error": 6.913782596588135,
+      "Native_error": 21.072263717651367,
+      "observed_A0_probability_mass": 0.8452481031417847,
+      "errors": {
+        "original_conditional_clipped": 6.913782596588135,
+        "conditional_unclipped": 6.913782596588135,
+        "global_prior_clipped": 6.913782596588135,
+        "global_prior_unclipped": 6.913782596588135,
+        "ideal_density_observed_only": 6.913782596588135
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6091:37",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:149",
+      "A0_error": 6.913782596588135,
+      "Native_error": 6.913782596588135,
+      "observed_A0_probability_mass": 0.7080368995666504,
+      "errors": {
+        "original_conditional_clipped": 6.913782596588135,
+        "conditional_unclipped": 6.913782596588135,
+        "global_prior_clipped": 6.913782596588135,
+        "global_prior_unclipped": 6.913782596588135,
+        "ideal_density_observed_only": 6.913782596588135
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6091:49",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:149",
+      "A0_error": 6.913782596588135,
+      "Native_error": 6.913782596588135,
+      "observed_A0_probability_mass": 0.5231726765632629,
+      "errors": {
+        "original_conditional_clipped": 6.913782596588135,
+        "conditional_unclipped": 6.913782596588135,
+        "global_prior_clipped": 6.913782596588135,
+        "global_prior_unclipped": 6.913782596588135,
+        "ideal_density_observed_only": 6.913782596588135
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14415:6",
+      "category": "Building",
+      "instance_group": "cambridge_block_17:37",
+      "A0_error": 5.62381649017334,
+      "Native_error": 29.277565002441406,
+      "observed_A0_probability_mass": 0.5403213500976562,
+      "errors": {
+        "original_conditional_clipped": 4.947042942047119,
+        "conditional_unclipped": 4.947042942047119,
+        "global_prior_clipped": 4.947042942047119,
+        "global_prior_unclipped": 4.947042942047119,
+        "ideal_density_observed_only": 4.947042942047119
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14415:10",
+      "category": "Building",
+      "instance_group": "cambridge_block_17:37",
+      "A0_error": 5.62381649017334,
+      "Native_error": 24.710546493530273,
+      "observed_A0_probability_mass": 0.638548731803894,
+      "errors": {
+        "original_conditional_clipped": 4.947042942047119,
+        "conditional_unclipped": 4.947042942047119,
+        "global_prior_clipped": 4.947042942047119,
+        "global_prior_unclipped": 4.947042942047119,
+        "ideal_density_observed_only": 4.947042942047119
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18737:43",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:316",
+      "A0_error": 32.325279235839844,
+      "Native_error": 32.325279235839844,
+      "observed_A0_probability_mass": 0.08316910266876221,
+      "errors": {
+        "original_conditional_clipped": 32.325279235839844,
+        "conditional_unclipped": 32.325279235839844,
+        "global_prior_clipped": 7.462216854095459,
+        "global_prior_unclipped": 7.462216854095459,
+        "ideal_density_observed_only": 7.462216854095459
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8397:23",
+      "category": "Building",
+      "instance_group": "cambridge_block_7:58",
+      "A0_error": 12.770450592041016,
+      "Native_error": 12.770450592041016,
+      "observed_A0_probability_mass": 0.7497591972351074,
+      "errors": {
+        "original_conditional_clipped": 3.200833797454834,
+        "conditional_unclipped": 3.200833797454834,
+        "global_prior_clipped": 3.200833797454834,
+        "global_prior_unclipped": 3.200833797454834,
+        "ideal_density_observed_only": 3.200833797454834
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8397:36",
+      "category": "Building",
+      "instance_group": "cambridge_block_7:58",
+      "A0_error": 12.770450592041016,
+      "Native_error": 12.770450592041016,
+      "observed_A0_probability_mass": 0.5353798270225525,
+      "errors": {
+        "original_conditional_clipped": 3.200833797454834,
+        "conditional_unclipped": 3.200833797454834,
+        "global_prior_clipped": 3.200833797454834,
+        "global_prior_unclipped": 3.200833797454834,
+        "ideal_density_observed_only": 3.200833797454834
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10381:43",
+      "category": "Car",
+      "instance_group": "cambridge_block_9:207",
+      "A0_error": 13.181204795837402,
+      "Native_error": 13.181204795837402,
+      "observed_A0_probability_mass": 0.9462667107582092,
+      "errors": {
+        "original_conditional_clipped": 5.724164009094238,
+        "conditional_unclipped": 5.724164009094238,
+        "global_prior_clipped": 5.724164009094238,
+        "global_prior_unclipped": 5.724164009094238,
+        "ideal_density_observed_only": 5.724164009094238
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10381:64",
+      "category": "Car",
+      "instance_group": "cambridge_block_9:207",
+      "A0_error": 13.181204795837402,
+      "Native_error": 13.181204795837402,
+      "observed_A0_probability_mass": 0.9484267830848694,
+      "errors": {
+        "original_conditional_clipped": 5.724164009094238,
+        "conditional_unclipped": 5.724164009094238,
+        "global_prior_clipped": 5.724164009094238,
+        "global_prior_unclipped": 5.724164009094238,
+        "ideal_density_observed_only": 5.724164009094238
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10381:86",
+      "category": "Car",
+      "instance_group": "cambridge_block_9:207",
+      "A0_error": 13.181204795837402,
+      "Native_error": 13.181204795837402,
+      "observed_A0_probability_mass": 0.8968627452850342,
+      "errors": {
+        "original_conditional_clipped": 5.724164009094238,
+        "conditional_unclipped": 5.724164009094238,
+        "global_prior_clipped": 5.724164009094238,
+        "global_prior_unclipped": 5.724164009094238,
+        "ideal_density_observed_only": 5.724164009094238
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2122:119",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:554",
+      "A0_error": 22.490421295166016,
+      "Native_error": 27.377178192138672,
+      "observed_A0_probability_mass": 0.9922197461128235,
+      "errors": {
+        "original_conditional_clipped": 8.35760498046875,
+        "conditional_unclipped": 8.35760498046875,
+        "global_prior_clipped": 8.35760498046875,
+        "global_prior_unclipped": 8.35760498046875,
+        "ideal_density_observed_only": 6.484102725982666
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6667:15",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:45",
+      "A0_error": 2.0434932708740234,
+      "Native_error": 3.223757743835449,
+      "observed_A0_probability_mass": 0.8326734304428101,
+      "errors": {
+        "original_conditional_clipped": 2.0434932708740234,
+        "conditional_unclipped": 2.0434932708740234,
+        "global_prior_clipped": 2.0434932708740234,
+        "global_prior_unclipped": 2.0434932708740234,
+        "ideal_density_observed_only": 2.0434932708740234
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7177:4",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:84",
+      "A0_error": 37.13175582885742,
+      "Native_error": 51.413780212402344,
+      "observed_A0_probability_mass": 0.975161075592041,
+      "errors": {
+        "original_conditional_clipped": 8.60517692565918,
+        "conditional_unclipped": 8.60517692565918,
+        "global_prior_clipped": 8.60517692565918,
+        "global_prior_unclipped": 8.60517692565918,
+        "ideal_density_observed_only": 5.825244903564453
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7177:9",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:84",
+      "A0_error": 37.13175582885742,
+      "Native_error": 37.13175582885742,
+      "observed_A0_probability_mass": 0.9383558630943298,
+      "errors": {
+        "original_conditional_clipped": 37.13175582885742,
+        "conditional_unclipped": 37.13175582885742,
+        "global_prior_clipped": 37.13175582885742,
+        "global_prior_unclipped": 37.13175582885742,
+        "ideal_density_observed_only": 5.825244903564453
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7177:20",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:84",
+      "A0_error": 37.13175582885742,
+      "Native_error": 37.13175582885742,
+      "observed_A0_probability_mass": 0.36816132068634033,
+      "errors": {
+        "original_conditional_clipped": 37.13175582885742,
+        "conditional_unclipped": 37.13175582885742,
+        "global_prior_clipped": 37.13175582885742,
+        "global_prior_unclipped": 37.13175582885742,
+        "ideal_density_observed_only": 5.825244903564453
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7613:26",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:19",
+      "A0_error": 1.4551900625228882,
+      "Native_error": 1.4551900625228882,
+      "observed_A0_probability_mass": 0.9721468091011047,
+      "errors": {
+        "original_conditional_clipped": 1.4551900625228882,
+        "conditional_unclipped": 1.4551900625228882,
+        "global_prior_clipped": 1.4551900625228882,
+        "global_prior_unclipped": 1.4551900625228882,
+        "ideal_density_observed_only": 1.3035516738891602
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7613:53",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:19",
+      "A0_error": 1.4551900625228882,
+      "Native_error": 1.4551900625228882,
+      "observed_A0_probability_mass": 0.9794924855232239,
+      "errors": {
+        "original_conditional_clipped": 1.4551900625228882,
+        "conditional_unclipped": 1.4551900625228882,
+        "global_prior_clipped": 1.4551900625228882,
+        "global_prior_unclipped": 1.4551900625228882,
+        "ideal_density_observed_only": 1.3035516738891602
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2833:8",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:3",
+      "A0_error": 123.4824447631836,
+      "Native_error": 67.69587707519531,
+      "observed_A0_probability_mass": 0.26917868852615356,
+      "errors": {
+        "original_conditional_clipped": 9.228106498718262,
+        "conditional_unclipped": 5.152472972869873,
+        "global_prior_clipped": 9.228106498718262,
+        "global_prior_unclipped": 5.152472972869873,
+        "ideal_density_observed_only": 5.152472972869873
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2833:16",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:3",
+      "A0_error": 123.4824447631836,
+      "Native_error": 71.91940307617188,
+      "observed_A0_probability_mass": 0.38200151920318604,
+      "errors": {
+        "original_conditional_clipped": 9.228106498718262,
+        "conditional_unclipped": 5.152472972869873,
+        "global_prior_clipped": 9.228106498718262,
+        "global_prior_unclipped": 5.152472972869873,
+        "ideal_density_observed_only": 5.152472972869873
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2833:25",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:3",
+      "A0_error": 123.4824447631836,
+      "Native_error": 137.7678985595703,
+      "observed_A0_probability_mass": 0.8600285649299622,
+      "errors": {
+        "original_conditional_clipped": 9.228106498718262,
+        "conditional_unclipped": 5.152472972869873,
+        "global_prior_clipped": 9.228106498718262,
+        "global_prior_unclipped": 5.152472972869873,
+        "ideal_density_observed_only": 5.152472972869873
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2833:33",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:3",
+      "A0_error": 123.4824447631836,
+      "Native_error": 5.152472972869873,
+      "observed_A0_probability_mass": 0.21871650218963623,
+      "errors": {
+        "original_conditional_clipped": 5.152472972869873,
+        "conditional_unclipped": 5.152472972869873,
+        "global_prior_clipped": 9.228106498718262,
+        "global_prior_unclipped": 5.152472972869873,
+        "ideal_density_observed_only": 5.152472972869873
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4359:11",
+      "category": "Building",
+      "instance_group": "birmingham_block_4:3",
+      "A0_error": 16.903564453125,
+      "Native_error": 16.903564453125,
+      "observed_A0_probability_mass": 0.9941317439079285,
+      "errors": {
+        "original_conditional_clipped": 7.219435691833496,
+        "conditional_unclipped": 7.219435691833496,
+        "global_prior_clipped": 7.219435691833496,
+        "global_prior_unclipped": 7.219435691833496,
+        "ideal_density_observed_only": 7.215026378631592
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6136:39",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:167",
+      "A0_error": 76.1171646118164,
+      "Native_error": 76.1171646118164,
+      "observed_A0_probability_mass": 0.16328895092010498,
+      "errors": {
+        "original_conditional_clipped": 76.1171646118164,
+        "conditional_unclipped": 76.1171646118164,
+        "global_prior_clipped": 6.522636413574219,
+        "global_prior_unclipped": 6.522636413574219,
+        "ideal_density_observed_only": 6.522636413574219
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6136:79",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:167",
+      "A0_error": 76.1171646118164,
+      "Native_error": 76.1171646118164,
+      "observed_A0_probability_mass": 0.067543163895607,
+      "errors": {
+        "original_conditional_clipped": 76.1171646118164,
+        "conditional_unclipped": 76.1171646118164,
+        "global_prior_clipped": 6.522636413574219,
+        "global_prior_unclipped": 6.522636413574219,
+        "ideal_density_observed_only": 6.522636413574219
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6136:118",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:167",
+      "A0_error": 76.1171646118164,
+      "Native_error": 76.1171646118164,
+      "observed_A0_probability_mass": 0.036084942519664764,
+      "errors": {
+        "original_conditional_clipped": 76.1171646118164,
+        "conditional_unclipped": 76.1171646118164,
+        "global_prior_clipped": 6.522636413574219,
+        "global_prior_unclipped": 6.522636413574219,
+        "ideal_density_observed_only": 6.522636413574219
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14552:204",
+      "category": "Car",
+      "instance_group": "cambridge_block_17:76",
+      "A0_error": 26.32758331298828,
+      "Native_error": 26.32758331298828,
+      "observed_A0_probability_mass": 0.12745946645736694,
+      "errors": {
+        "original_conditional_clipped": 26.32758331298828,
+        "conditional_unclipped": 26.32758331298828,
+        "global_prior_clipped": 4.912703514099121,
+        "global_prior_unclipped": 2.31754207611084,
+        "ideal_density_observed_only": 2.31754207611084
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15039:5",
+      "category": "Car",
+      "instance_group": "cambridge_block_18:105",
+      "A0_error": 15.188583374023438,
+      "Native_error": 8.058749198913574,
+      "observed_A0_probability_mass": 0.7492074966430664,
+      "errors": {
+        "original_conditional_clipped": 8.058749198913574,
+        "conditional_unclipped": 8.058749198913574,
+        "global_prior_clipped": 8.058749198913574,
+        "global_prior_unclipped": 8.058749198913574,
+        "ideal_density_observed_only": 5.814030170440674
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15039:11",
+      "category": "Car",
+      "instance_group": "cambridge_block_18:105",
+      "A0_error": 15.188583374023438,
+      "Native_error": 17.58086585998535,
+      "observed_A0_probability_mass": 0.9315658807754517,
+      "errors": {
+        "original_conditional_clipped": 8.058749198913574,
+        "conditional_unclipped": 8.058749198913574,
+        "global_prior_clipped": 8.058749198913574,
+        "global_prior_unclipped": 8.058749198913574,
+        "ideal_density_observed_only": 5.957264423370361
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15039:16",
+      "category": "Car",
+      "instance_group": "cambridge_block_18:105",
+      "A0_error": 15.188583374023438,
+      "Native_error": 14.185860633850098,
+      "observed_A0_probability_mass": 0.8787084817886353,
+      "errors": {
+        "original_conditional_clipped": 8.058749198913574,
+        "conditional_unclipped": 8.058749198913574,
+        "global_prior_clipped": 8.058749198913574,
+        "global_prior_unclipped": 8.058749198913574,
+        "ideal_density_observed_only": 5.814030170440674
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15039:22",
+      "category": "Car",
+      "instance_group": "cambridge_block_18:105",
+      "A0_error": 15.188583374023438,
+      "Native_error": 15.188583374023438,
+      "observed_A0_probability_mass": 0.10793742537498474,
+      "errors": {
+        "original_conditional_clipped": 15.188583374023438,
+        "conditional_unclipped": 15.188583374023438,
+        "global_prior_clipped": 8.058749198913574,
+        "global_prior_unclipped": 8.058749198913574,
+        "ideal_density_observed_only": 5.814030170440674
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19274:9",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:48",
+      "A0_error": 16.700204849243164,
+      "Native_error": 16.700204849243164,
+      "observed_A0_probability_mass": 0.8148906826972961,
+      "errors": {
+        "original_conditional_clipped": 16.700204849243164,
+        "conditional_unclipped": 16.700204849243164,
+        "global_prior_clipped": 16.700204849243164,
+        "global_prior_unclipped": 16.700204849243164,
+        "ideal_density_observed_only": 3.171293258666992
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19274:19",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:48",
+      "A0_error": 16.700204849243164,
+      "Native_error": 16.700204849243164,
+      "observed_A0_probability_mass": 0.6518522500991821,
+      "errors": {
+        "original_conditional_clipped": 16.700204849243164,
+        "conditional_unclipped": 16.700204849243164,
+        "global_prior_clipped": 16.700204849243164,
+        "global_prior_unclipped": 16.700204849243164,
+        "ideal_density_observed_only": 3.171293258666992
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19274:30",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:48",
+      "A0_error": 16.700204849243164,
+      "Native_error": 16.700204849243164,
+      "observed_A0_probability_mass": 0.839211642742157,
+      "errors": {
+        "original_conditional_clipped": 16.700204849243164,
+        "conditional_unclipped": 16.700204849243164,
+        "global_prior_clipped": 16.700204849243164,
+        "global_prior_unclipped": 16.700204849243164,
+        "ideal_density_observed_only": 3.171293258666992
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19274:40",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:48",
+      "A0_error": 16.700204849243164,
+      "Native_error": 16.700204849243164,
+      "observed_A0_probability_mass": 0.25730496644973755,
+      "errors": {
+        "original_conditional_clipped": 16.700204849243164,
+        "conditional_unclipped": 16.700204849243164,
+        "global_prior_clipped": 16.700204849243164,
+        "global_prior_unclipped": 16.700204849243164,
+        "ideal_density_observed_only": 3.171293258666992
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8143:51",
+      "category": "Ground",
+      "instance_group": "cambridge_block_6:111",
+      "A0_error": 7.848933219909668,
+      "Native_error": 9.822844505310059,
+      "observed_A0_probability_mass": 0.9756406545639038,
+      "errors": {
+        "original_conditional_clipped": 7.848933219909668,
+        "conditional_unclipped": 7.848933219909668,
+        "global_prior_clipped": 7.848933219909668,
+        "global_prior_unclipped": 7.848933219909668,
+        "ideal_density_observed_only": 7.848933219909668
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8967:6",
+      "category": "Car",
+      "instance_group": "cambridge_block_7:219",
+      "A0_error": 24.283926010131836,
+      "Native_error": 7.885426998138428,
+      "observed_A0_probability_mass": 0.6031195521354675,
+      "errors": {
+        "original_conditional_clipped": 7.885426998138428,
+        "conditional_unclipped": 7.885426998138428,
+        "global_prior_clipped": 7.885426998138428,
+        "global_prior_unclipped": 7.885426998138428,
+        "ideal_density_observed_only": 7.680584907531738
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8967:14",
+      "category": "Car",
+      "instance_group": "cambridge_block_7:219",
+      "A0_error": 24.283926010131836,
+      "Native_error": 7.885426998138428,
+      "observed_A0_probability_mass": 0.6776924729347229,
+      "errors": {
+        "original_conditional_clipped": 7.885426998138428,
+        "conditional_unclipped": 7.885426998138428,
+        "global_prior_clipped": 7.885426998138428,
+        "global_prior_unclipped": 7.885426998138428,
+        "ideal_density_observed_only": 7.680584907531738
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8967:21",
+      "category": "Car",
+      "instance_group": "cambridge_block_7:219",
+      "A0_error": 24.283926010131836,
+      "Native_error": 7.885426998138428,
+      "observed_A0_probability_mass": 0.720628023147583,
+      "errors": {
+        "original_conditional_clipped": 7.885426998138428,
+        "conditional_unclipped": 7.885426998138428,
+        "global_prior_clipped": 7.885426998138428,
+        "global_prior_unclipped": 7.885426998138428,
+        "ideal_density_observed_only": 7.680584907531738
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8967:29",
+      "category": "Car",
+      "instance_group": "cambridge_block_7:219",
+      "A0_error": 24.283926010131836,
+      "Native_error": 24.283926010131836,
+      "observed_A0_probability_mass": 0.20435187220573425,
+      "errors": {
+        "original_conditional_clipped": 24.283926010131836,
+        "conditional_unclipped": 24.283926010131836,
+        "global_prior_clipped": 7.885426998138428,
+        "global_prior_unclipped": 7.885426998138428,
+        "ideal_density_observed_only": 7.680584907531738
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:10198:5",
+      "category": "Building",
+      "instance_group": "cambridge_block_9:159",
+      "A0_error": 34.48738098144531,
+      "Native_error": 2.7190723419189453,
+      "observed_A0_probability_mass": 0.24231429398059845,
+      "errors": {
+        "original_conditional_clipped": 2.7190723419189453,
+        "conditional_unclipped": 2.7190723419189453,
+        "global_prior_clipped": 12.381037712097168,
+        "global_prior_unclipped": 2.7190723419189453,
+        "ideal_density_observed_only": 2.7190723419189453
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7248:13",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:99",
+      "A0_error": 14.314793586730957,
+      "Native_error": 0.2576291263103485,
+      "observed_A0_probability_mass": 0.9812917709350586,
+      "errors": {
+        "original_conditional_clipped": 0.2576291263103485,
+        "conditional_unclipped": 0.2576291263103485,
+        "global_prior_clipped": 0.2576291263103485,
+        "global_prior_unclipped": 0.2576291263103485,
+        "ideal_density_observed_only": 0.2576291263103485
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7248:19",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:99",
+      "A0_error": 14.314793586730957,
+      "Native_error": 0.2576291263103485,
+      "observed_A0_probability_mass": 0.9344186782836914,
+      "errors": {
+        "original_conditional_clipped": 0.2576291263103485,
+        "conditional_unclipped": 0.2576291263103485,
+        "global_prior_clipped": 0.2576291263103485,
+        "global_prior_unclipped": 0.2576291263103485,
+        "ideal_density_observed_only": 0.2576291263103485
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7611:20",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 27.80794906616211,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.9094929099082947,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7611:41",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 27.80794906616211,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.7717462778091431,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4764:72",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:123",
+      "A0_error": 16.614473342895508,
+      "Native_error": 6.094089508056641,
+      "observed_A0_probability_mass": 0.9204469919204712,
+      "errors": {
+        "original_conditional_clipped": 6.094089508056641,
+        "conditional_unclipped": 6.094089508056641,
+        "global_prior_clipped": 6.094089508056641,
+        "global_prior_unclipped": 6.094089508056641,
+        "ideal_density_observed_only": 6.094089508056641
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5374:7",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:42",
+      "A0_error": 5.768141269683838,
+      "Native_error": 5.768141269683838,
+      "observed_A0_probability_mass": 0.8802512884140015,
+      "errors": {
+        "original_conditional_clipped": 5.768141269683838,
+        "conditional_unclipped": 5.768141269683838,
+        "global_prior_clipped": 5.768141269683838,
+        "global_prior_unclipped": 5.768141269683838,
+        "ideal_density_observed_only": 5.768141269683838
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5374:15",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:42",
+      "A0_error": 5.768141269683838,
+      "Native_error": 5.768141269683838,
+      "observed_A0_probability_mass": 0.8119412660598755,
+      "errors": {
+        "original_conditional_clipped": 5.768141269683838,
+        "conditional_unclipped": 5.768141269683838,
+        "global_prior_clipped": 5.768141269683838,
+        "global_prior_unclipped": 5.768141269683838,
+        "ideal_density_observed_only": 5.768141269683838
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5374:23",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:42",
+      "A0_error": 5.768141269683838,
+      "Native_error": 5.768141269683838,
+      "observed_A0_probability_mass": 0.8435796499252319,
+      "errors": {
+        "original_conditional_clipped": 5.768141269683838,
+        "conditional_unclipped": 5.768141269683838,
+        "global_prior_clipped": 5.768141269683838,
+        "global_prior_unclipped": 5.768141269683838,
+        "ideal_density_observed_only": 5.768141269683838
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5374:31",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:42",
+      "A0_error": 5.768141269683838,
+      "Native_error": 5.768141269683838,
+      "observed_A0_probability_mass": 0.9247415661811829,
+      "errors": {
+        "original_conditional_clipped": 5.768141269683838,
+        "conditional_unclipped": 5.768141269683838,
+        "global_prior_clipped": 5.768141269683838,
+        "global_prior_unclipped": 5.768141269683838,
+        "ideal_density_observed_only": 5.768141269683838
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5983:3",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:112",
+      "A0_error": 13.612794876098633,
+      "Native_error": 12.92548942565918,
+      "observed_A0_probability_mass": 0.9352826476097107,
+      "errors": {
+        "original_conditional_clipped": 7.212347030639648,
+        "conditional_unclipped": 7.212347030639648,
+        "global_prior_clipped": 7.212347030639648,
+        "global_prior_unclipped": 7.212347030639648,
+        "ideal_density_observed_only": 7.212347030639648
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5983:7",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:112",
+      "A0_error": 13.612794876098633,
+      "Native_error": 12.92548942565918,
+      "observed_A0_probability_mass": 0.8991812467575073,
+      "errors": {
+        "original_conditional_clipped": 7.212347030639648,
+        "conditional_unclipped": 7.212347030639648,
+        "global_prior_clipped": 7.212347030639648,
+        "global_prior_unclipped": 7.212347030639648,
+        "ideal_density_observed_only": 7.212347030639648
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5983:11",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:112",
+      "A0_error": 13.612794876098633,
+      "Native_error": 12.92548942565918,
+      "observed_A0_probability_mass": 0.8437274694442749,
+      "errors": {
+        "original_conditional_clipped": 7.212347030639648,
+        "conditional_unclipped": 7.212347030639648,
+        "global_prior_clipped": 7.212347030639648,
+        "global_prior_unclipped": 7.212347030639648,
+        "ideal_density_observed_only": 7.212347030639648
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15450:18",
+      "category": "Parking",
+      "instance_group": "cambridge_block_19:536",
+      "A0_error": 5.958046913146973,
+      "Native_error": 5.958046913146973,
+      "observed_A0_probability_mass": 0.8047254085540771,
+      "errors": {
+        "original_conditional_clipped": 5.958046913146973,
+        "conditional_unclipped": 5.958046913146973,
+        "global_prior_clipped": 5.958046913146973,
+        "global_prior_unclipped": 5.958046913146973,
+        "ideal_density_observed_only": 5.958046913146973
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7965:16",
+      "category": "Building",
+      "instance_group": "cambridge_block_6:16",
+      "A0_error": 13.569958686828613,
+      "Native_error": 5.6292619705200195,
+      "observed_A0_probability_mass": 0.6232452988624573,
+      "errors": {
+        "original_conditional_clipped": 5.6292619705200195,
+        "conditional_unclipped": 5.6292619705200195,
+        "global_prior_clipped": 5.6292619705200195,
+        "global_prior_unclipped": 5.6292619705200195,
+        "ideal_density_observed_only": 5.6292619705200195
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6939:6",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:31",
+      "A0_error": 7.97477912902832,
+      "Native_error": 22.23366355895996,
+      "observed_A0_probability_mass": 0.5675575137138367,
+      "errors": {
+        "original_conditional_clipped": 22.23366355895996,
+        "conditional_unclipped": 22.23366355895996,
+        "global_prior_clipped": 22.23366355895996,
+        "global_prior_unclipped": 22.23366355895996,
+        "ideal_density_observed_only": 6.404626369476318
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6939:13",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:31",
+      "A0_error": 7.97477912902832,
+      "Native_error": 22.23366355895996,
+      "observed_A0_probability_mass": 0.8546881675720215,
+      "errors": {
+        "original_conditional_clipped": 7.97477912902832,
+        "conditional_unclipped": 7.97477912902832,
+        "global_prior_clipped": 7.97477912902832,
+        "global_prior_unclipped": 7.97477912902832,
+        "ideal_density_observed_only": 6.404626369476318
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7609:9",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 29.953739166259766,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.9142513275146484,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7609:20",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 29.953739166259766,
+      "Native_error": 30.63810157775879,
+      "observed_A0_probability_mass": 0.8944386839866638,
+      "errors": {
+        "original_conditional_clipped": 30.63810157775879,
+        "conditional_unclipped": 30.63810157775879,
+        "global_prior_clipped": 30.63810157775879,
+        "global_prior_unclipped": 30.63810157775879,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7609:30",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 29.953739166259766,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.9110723733901978,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7609:41",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 29.953739166259766,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.9215980768203735,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4181:48",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:41",
+      "A0_error": 34.00991439819336,
+      "Native_error": 19.72493553161621,
+      "observed_A0_probability_mass": 0.906131386756897,
+      "errors": {
+        "original_conditional_clipped": 5.443768501281738,
+        "conditional_unclipped": 5.443768501281738,
+        "global_prior_clipped": 5.443768501281738,
+        "global_prior_unclipped": 5.443768501281738,
+        "ideal_density_observed_only": 5.443768501281738
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4181:64",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:41",
+      "A0_error": 34.00991439819336,
+      "Native_error": 19.72493553161621,
+      "observed_A0_probability_mass": 0.6152499914169312,
+      "errors": {
+        "original_conditional_clipped": 5.443768501281738,
+        "conditional_unclipped": 5.443768501281738,
+        "global_prior_clipped": 5.443768501281738,
+        "global_prior_unclipped": 5.443768501281738,
+        "ideal_density_observed_only": 5.443768501281738
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14246:14",
+      "category": "Ground",
+      "instance_group": "cambridge_block_13:492",
+      "A0_error": 21.379243850708008,
+      "Native_error": 21.19649887084961,
+      "observed_A0_probability_mass": 0.47378912568092346,
+      "errors": {
+        "original_conditional_clipped": 8.634512901306152,
+        "conditional_unclipped": 8.634512901306152,
+        "global_prior_clipped": 8.634512901306152,
+        "global_prior_unclipped": 8.634512901306152,
+        "ideal_density_observed_only": 8.634512901306152
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14246:44",
+      "category": "Ground",
+      "instance_group": "cambridge_block_13:492",
+      "A0_error": 21.379243850708008,
+      "Native_error": 21.19649887084961,
+      "observed_A0_probability_mass": 0.7790884971618652,
+      "errors": {
+        "original_conditional_clipped": 8.634512901306152,
+        "conditional_unclipped": 8.634512901306152,
+        "global_prior_clipped": 8.634512901306152,
+        "global_prior_unclipped": 8.634512901306152,
+        "ideal_density_observed_only": 8.634512901306152
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14246:59",
+      "category": "Ground",
+      "instance_group": "cambridge_block_13:492",
+      "A0_error": 21.379243850708008,
+      "Native_error": 21.19649887084961,
+      "observed_A0_probability_mass": 0.6117730736732483,
+      "errors": {
+        "original_conditional_clipped": 8.634512901306152,
+        "conditional_unclipped": 8.634512901306152,
+        "global_prior_clipped": 8.634512901306152,
+        "global_prior_unclipped": 8.634512901306152,
+        "ideal_density_observed_only": 8.634512901306152
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14529:27",
+      "category": "Car",
+      "instance_group": "cambridge_block_17:71",
+      "A0_error": 10.543511390686035,
+      "Native_error": 10.543511390686035,
+      "observed_A0_probability_mass": 0.9892659187316895,
+      "errors": {
+        "original_conditional_clipped": 3.9145023822784424,
+        "conditional_unclipped": 3.9145023822784424,
+        "global_prior_clipped": 3.9145023822784424,
+        "global_prior_unclipped": 3.9145023822784424,
+        "ideal_density_observed_only": 3.9145023822784424
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14529:42",
+      "category": "Car",
+      "instance_group": "cambridge_block_17:71",
+      "A0_error": 10.543511390686035,
+      "Native_error": 3.9145023822784424,
+      "observed_A0_probability_mass": 0.8580183386802673,
+      "errors": {
+        "original_conditional_clipped": 3.9145023822784424,
+        "conditional_unclipped": 3.9145023822784424,
+        "global_prior_clipped": 3.9145023822784424,
+        "global_prior_unclipped": 3.9145023822784424,
+        "ideal_density_observed_only": 3.9145023822784424
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14529:56",
+      "category": "Car",
+      "instance_group": "cambridge_block_17:71",
+      "A0_error": 10.543511390686035,
+      "Native_error": 3.9145023822784424,
+      "observed_A0_probability_mass": 0.24063178896903992,
+      "errors": {
+        "original_conditional_clipped": 3.9145023822784424,
+        "conditional_unclipped": 3.9145023822784424,
+        "global_prior_clipped": 3.9145023822784424,
+        "global_prior_unclipped": 3.9145023822784424,
+        "ideal_density_observed_only": 3.9145023822784424
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19304:13",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:55",
+      "A0_error": 3.4068968296051025,
+      "Native_error": 3.4068968296051025,
+      "observed_A0_probability_mass": 0.7994769811630249,
+      "errors": {
+        "original_conditional_clipped": 3.4068968296051025,
+        "conditional_unclipped": 3.4068968296051025,
+        "global_prior_clipped": 3.4068968296051025,
+        "global_prior_unclipped": 3.4068968296051025,
+        "ideal_density_observed_only": 3.4068968296051025
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19304:28",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:55",
+      "A0_error": 3.4068968296051025,
+      "Native_error": 3.4068968296051025,
+      "observed_A0_probability_mass": 0.8006569743156433,
+      "errors": {
+        "original_conditional_clipped": 3.4068968296051025,
+        "conditional_unclipped": 3.4068968296051025,
+        "global_prior_clipped": 3.4068968296051025,
+        "global_prior_unclipped": 3.4068968296051025,
+        "ideal_density_observed_only": 3.4068968296051025
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19304:42",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:55",
+      "A0_error": 3.4068968296051025,
+      "Native_error": 3.4068968296051025,
+      "observed_A0_probability_mass": 0.8080317974090576,
+      "errors": {
+        "original_conditional_clipped": 3.4068968296051025,
+        "conditional_unclipped": 3.4068968296051025,
+        "global_prior_clipped": 3.4068968296051025,
+        "global_prior_unclipped": 3.4068968296051025,
+        "ideal_density_observed_only": 3.4068968296051025
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19304:57",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:55",
+      "A0_error": 3.4068968296051025,
+      "Native_error": 3.4068968296051025,
+      "observed_A0_probability_mass": 0.6812723875045776,
+      "errors": {
+        "original_conditional_clipped": 3.4068968296051025,
+        "conditional_unclipped": 3.4068968296051025,
+        "global_prior_clipped": 3.4068968296051025,
+        "global_prior_unclipped": 3.4068968296051025,
+        "ideal_density_observed_only": 3.4068968296051025
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7908:16",
+      "category": "Building",
+      "instance_group": "cambridge_block_4:36",
+      "A0_error": 21.917692184448242,
+      "Native_error": 21.917692184448242,
+      "observed_A0_probability_mass": 0.7393420934677124,
+      "errors": {
+        "original_conditional_clipped": 3.361023426055908,
+        "conditional_unclipped": 3.361023426055908,
+        "global_prior_clipped": 3.361023426055908,
+        "global_prior_unclipped": 3.361023426055908,
+        "ideal_density_observed_only": 3.361023426055908
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7908:21",
+      "category": "Building",
+      "instance_group": "cambridge_block_4:36",
+      "A0_error": 21.917692184448242,
+      "Native_error": 22.07576560974121,
+      "observed_A0_probability_mass": 0.7817095518112183,
+      "errors": {
+        "original_conditional_clipped": 3.361023426055908,
+        "conditional_unclipped": 3.361023426055908,
+        "global_prior_clipped": 3.361023426055908,
+        "global_prior_unclipped": 3.361023426055908,
+        "ideal_density_observed_only": 3.361023426055908
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8812:28",
+      "category": "Car",
+      "instance_group": "cambridge_block_7:176",
+      "A0_error": 3.8740859031677246,
+      "Native_error": 3.8740859031677246,
+      "observed_A0_probability_mass": 0.9160972833633423,
+      "errors": {
+        "original_conditional_clipped": 3.8740859031677246,
+        "conditional_unclipped": 3.8740859031677246,
+        "global_prior_clipped": 3.8740859031677246,
+        "global_prior_unclipped": 3.8740859031677246,
+        "ideal_density_observed_only": 3.8740859031677246
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:8812:38",
+      "category": "Car",
+      "instance_group": "cambridge_block_7:176",
+      "A0_error": 3.8740859031677246,
+      "Native_error": 3.8740859031677246,
+      "observed_A0_probability_mass": 0.6089504957199097,
+      "errors": {
+        "original_conditional_clipped": 3.8740859031677246,
+        "conditional_unclipped": 3.8740859031677246,
+        "global_prior_clipped": 3.8740859031677246,
+        "global_prior_unclipped": 3.8740859031677246,
+        "ideal_density_observed_only": 3.8740859031677246
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6726:8",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:61",
+      "A0_error": 10.82394027709961,
+      "Native_error": 12.392545700073242,
+      "observed_A0_probability_mass": 0.9436004161834717,
+      "errors": {
+        "original_conditional_clipped": 4.65439510345459,
+        "conditional_unclipped": 4.65439510345459,
+        "global_prior_clipped": 4.65439510345459,
+        "global_prior_unclipped": 4.65439510345459,
+        "ideal_density_observed_only": 4.65439510345459
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6726:17",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:61",
+      "A0_error": 10.82394027709961,
+      "Native_error": 12.392545700073242,
+      "observed_A0_probability_mass": 0.9562278985977173,
+      "errors": {
+        "original_conditional_clipped": 4.65439510345459,
+        "conditional_unclipped": 4.65439510345459,
+        "global_prior_clipped": 4.65439510345459,
+        "global_prior_unclipped": 4.65439510345459,
+        "ideal_density_observed_only": 4.65439510345459
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6726:27",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:61",
+      "A0_error": 10.82394027709961,
+      "Native_error": 4.65439510345459,
+      "observed_A0_probability_mass": 0.9352486729621887,
+      "errors": {
+        "original_conditional_clipped": 4.65439510345459,
+        "conditional_unclipped": 4.65439510345459,
+        "global_prior_clipped": 4.65439510345459,
+        "global_prior_unclipped": 4.65439510345459,
+        "ideal_density_observed_only": 4.65439510345459
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6726:36",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:61",
+      "A0_error": 10.82394027709961,
+      "Native_error": 4.65439510345459,
+      "observed_A0_probability_mass": 0.8667643070220947,
+      "errors": {
+        "original_conditional_clipped": 4.65439510345459,
+        "conditional_unclipped": 4.65439510345459,
+        "global_prior_clipped": 4.65439510345459,
+        "global_prior_unclipped": 4.65439510345459,
+        "ideal_density_observed_only": 4.65439510345459
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7599:23",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.146132469177246,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.9631335735321045,
+      "errors": {
+        "original_conditional_clipped": 4.146132469177246,
+        "conditional_unclipped": 4.146132469177246,
+        "global_prior_clipped": 4.146132469177246,
+        "global_prior_unclipped": 4.146132469177246,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7599:47",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.146132469177246,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.9573081731796265,
+      "errors": {
+        "original_conditional_clipped": 4.146132469177246,
+        "conditional_unclipped": 4.146132469177246,
+        "global_prior_clipped": 4.146132469177246,
+        "global_prior_unclipped": 4.146132469177246,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7599:71",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.146132469177246,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.9601702690124512,
+      "errors": {
+        "original_conditional_clipped": 4.146132469177246,
+        "conditional_unclipped": 4.146132469177246,
+        "global_prior_clipped": 4.146132469177246,
+        "global_prior_unclipped": 4.146132469177246,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7599:95",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.146132469177246,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.6586935520172119,
+      "errors": {
+        "original_conditional_clipped": 4.146132469177246,
+        "conditional_unclipped": 4.146132469177246,
+        "global_prior_clipped": 4.146132469177246,
+        "global_prior_unclipped": 4.146132469177246,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4834:69",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:135",
+      "A0_error": 8.78617000579834,
+      "Native_error": 11.729974746704102,
+      "observed_A0_probability_mass": 0.7913806438446045,
+      "errors": {
+        "original_conditional_clipped": 8.78617000579834,
+        "conditional_unclipped": 8.78617000579834,
+        "global_prior_clipped": 8.78617000579834,
+        "global_prior_unclipped": 8.78617000579834,
+        "ideal_density_observed_only": 8.468287467956543
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4834:92",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:135",
+      "A0_error": 8.78617000579834,
+      "Native_error": 8.468287467956543,
+      "observed_A0_probability_mass": 0.4971489906311035,
+      "errors": {
+        "original_conditional_clipped": 8.78617000579834,
+        "conditional_unclipped": 8.78617000579834,
+        "global_prior_clipped": 8.78617000579834,
+        "global_prior_unclipped": 8.78617000579834,
+        "ideal_density_observed_only": 8.468287467956543
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:13158:26",
+      "category": "Car",
+      "instance_group": "cambridge_block_13:178",
+      "A0_error": 8.494476318359375,
+      "Native_error": 8.494476318359375,
+      "observed_A0_probability_mass": 0.9998819828033447,
+      "errors": {
+        "original_conditional_clipped": 6.628355503082275,
+        "conditional_unclipped": 6.628355503082275,
+        "global_prior_clipped": 6.628355503082275,
+        "global_prior_unclipped": 6.628355503082275,
+        "ideal_density_observed_only": 6.628355503082275
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:13158:53",
+      "category": "Car",
+      "instance_group": "cambridge_block_13:178",
+      "A0_error": 8.494476318359375,
+      "Native_error": 8.494476318359375,
+      "observed_A0_probability_mass": 0.9111180305480957,
+      "errors": {
+        "original_conditional_clipped": 6.628355503082275,
+        "conditional_unclipped": 6.628355503082275,
+        "global_prior_clipped": 6.628355503082275,
+        "global_prior_unclipped": 6.628355503082275,
+        "ideal_density_observed_only": 6.628355503082275
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:13158:81",
+      "category": "Car",
+      "instance_group": "cambridge_block_13:178",
+      "A0_error": 8.494476318359375,
+      "Native_error": 8.494476318359375,
+      "observed_A0_probability_mass": 0.999984860420227,
+      "errors": {
+        "original_conditional_clipped": 6.628355503082275,
+        "conditional_unclipped": 6.628355503082275,
+        "global_prior_clipped": 6.628355503082275,
+        "global_prior_unclipped": 6.628355503082275,
+        "ideal_density_observed_only": 6.628355503082275
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15322:65",
+      "category": "Building",
+      "instance_group": "cambridge_block_19:40",
+      "A0_error": 24.224822998046875,
+      "Native_error": 32.126014709472656,
+      "observed_A0_probability_mass": 0.9255409240722656,
+      "errors": {
+        "original_conditional_clipped": 4.102348327636719,
+        "conditional_unclipped": 4.102348327636719,
+        "global_prior_clipped": 4.102348327636719,
+        "global_prior_unclipped": 4.102348327636719,
+        "ideal_density_observed_only": 4.102348327636719
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:17967:15",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:142",
+      "A0_error": 17.124267578125,
+      "Native_error": 2.9329497814178467,
+      "observed_A0_probability_mass": 0.9019642472267151,
+      "errors": {
+        "original_conditional_clipped": 2.9329497814178467,
+        "conditional_unclipped": 2.9329497814178467,
+        "global_prior_clipped": 2.9329497814178467,
+        "global_prior_unclipped": 2.9329497814178467,
+        "ideal_density_observed_only": 2.9329497814178467
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:17967:32",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:142",
+      "A0_error": 17.124267578125,
+      "Native_error": 2.9329497814178467,
+      "observed_A0_probability_mass": 0.9634723663330078,
+      "errors": {
+        "original_conditional_clipped": 2.9329497814178467,
+        "conditional_unclipped": 2.9329497814178467,
+        "global_prior_clipped": 2.9329497814178467,
+        "global_prior_unclipped": 2.9329497814178467,
+        "ideal_density_observed_only": 2.9329497814178467
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:20223:30",
+      "category": "Building",
+      "instance_group": "cambridge_block_28:180",
+      "A0_error": 28.46065902709961,
+      "Native_error": 28.46065902709961,
+      "observed_A0_probability_mass": 0.2088005542755127,
+      "errors": {
+        "original_conditional_clipped": 28.46065902709961,
+        "conditional_unclipped": 28.46065902709961,
+        "global_prior_clipped": 3.738400459289551,
+        "global_prior_unclipped": 3.738400459289551,
+        "ideal_density_observed_only": 3.738400459289551
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7660:26",
+      "category": "Building",
+      "instance_group": "cambridge_block_4:7",
+      "A0_error": 12.968748092651367,
+      "Native_error": 18.121673583984375,
+      "observed_A0_probability_mass": 0.6941725015640259,
+      "errors": {
+        "original_conditional_clipped": 3.2336525917053223,
+        "conditional_unclipped": 3.2336525917053223,
+        "global_prior_clipped": 3.2336525917053223,
+        "global_prior_unclipped": 3.2336525917053223,
+        "ideal_density_observed_only": 3.2336525917053223
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7660:35",
+      "category": "Building",
+      "instance_group": "cambridge_block_4:7",
+      "A0_error": 12.968748092651367,
+      "Native_error": 18.121673583984375,
+      "observed_A0_probability_mass": 0.5420123338699341,
+      "errors": {
+        "original_conditional_clipped": 3.2336525917053223,
+        "conditional_unclipped": 3.2336525917053223,
+        "global_prior_clipped": 3.2336525917053223,
+        "global_prior_unclipped": 3.2336525917053223,
+        "ideal_density_observed_only": 3.2336525917053223
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9677:25",
+      "category": "Building",
+      "instance_group": "cambridge_block_9:33",
+      "A0_error": 7.7653117179870605,
+      "Native_error": 7.312276363372803,
+      "observed_A0_probability_mass": 0.9673829078674316,
+      "errors": {
+        "original_conditional_clipped": 7.7653117179870605,
+        "conditional_unclipped": 7.7653117179870605,
+        "global_prior_clipped": 7.7653117179870605,
+        "global_prior_unclipped": 7.7653117179870605,
+        "ideal_density_observed_only": 7.312276363372803
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:9677:33",
+      "category": "Building",
+      "instance_group": "cambridge_block_9:33",
+      "A0_error": 7.7653117179870605,
+      "Native_error": 13.745381355285645,
+      "observed_A0_probability_mass": 0.6594147086143494,
+      "errors": {
+        "original_conditional_clipped": 7.7653117179870605,
+        "conditional_unclipped": 7.7653117179870605,
+        "global_prior_clipped": 7.7653117179870605,
+        "global_prior_unclipped": 7.7653117179870605,
+        "ideal_density_observed_only": 7.312276363372803
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2348:6",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:621",
+      "A0_error": 9.411359786987305,
+      "Native_error": 9.411359786987305,
+      "observed_A0_probability_mass": 0.9124172925949097,
+      "errors": {
+        "original_conditional_clipped": 9.411359786987305,
+        "conditional_unclipped": 9.411359786987305,
+        "global_prior_clipped": 9.411359786987305,
+        "global_prior_unclipped": 9.411359786987305,
+        "ideal_density_observed_only": 8.562790870666504
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2348:12",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:621",
+      "A0_error": 9.411359786987305,
+      "Native_error": 9.411359786987305,
+      "observed_A0_probability_mass": 0.8944867849349976,
+      "errors": {
+        "original_conditional_clipped": 9.411359786987305,
+        "conditional_unclipped": 9.411359786987305,
+        "global_prior_clipped": 9.411359786987305,
+        "global_prior_unclipped": 9.411359786987305,
+        "ideal_density_observed_only": 8.562790870666504
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2348:19",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:621",
+      "A0_error": 9.411359786987305,
+      "Native_error": 9.411359786987305,
+      "observed_A0_probability_mass": 0.8953462839126587,
+      "errors": {
+        "original_conditional_clipped": 9.411359786987305,
+        "conditional_unclipped": 9.411359786987305,
+        "global_prior_clipped": 9.411359786987305,
+        "global_prior_unclipped": 9.411359786987305,
+        "ideal_density_observed_only": 8.562790870666504
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2348:25",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:621",
+      "A0_error": 9.411359786987305,
+      "Native_error": 9.411359786987305,
+      "observed_A0_probability_mass": 0.7091933488845825,
+      "errors": {
+        "original_conditional_clipped": 9.411359786987305,
+        "conditional_unclipped": 9.411359786987305,
+        "global_prior_clipped": 9.411359786987305,
+        "global_prior_unclipped": 9.411359786987305,
+        "ideal_density_observed_only": 8.562790870666504
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6669:37",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:46",
+      "A0_error": 11.047526359558105,
+      "Native_error": 7.507354259490967,
+      "observed_A0_probability_mass": 0.7825671434402466,
+      "errors": {
+        "original_conditional_clipped": 5.543694496154785,
+        "conditional_unclipped": 5.543694496154785,
+        "global_prior_clipped": 5.543694496154785,
+        "global_prior_unclipped": 5.543694496154785,
+        "ideal_density_observed_only": 4.855871677398682
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6669:49",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:46",
+      "A0_error": 11.047526359558105,
+      "Native_error": 5.543694496154785,
+      "observed_A0_probability_mass": 0.9616175889968872,
+      "errors": {
+        "original_conditional_clipped": 5.543694496154785,
+        "conditional_unclipped": 5.543694496154785,
+        "global_prior_clipped": 5.543694496154785,
+        "global_prior_unclipped": 5.543694496154785,
+        "ideal_density_observed_only": 4.855871677398682
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6802:23",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:19",
+      "A0_error": 55.04456329345703,
+      "Native_error": 55.04456329345703,
+      "observed_A0_probability_mass": 0.21328802406787872,
+      "errors": {
+        "original_conditional_clipped": 55.04456329345703,
+        "conditional_unclipped": 55.04456329345703,
+        "global_prior_clipped": 55.04456329345703,
+        "global_prior_unclipped": 2.244225025177002,
+        "ideal_density_observed_only": 2.244225025177002
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7473:46",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:143",
+      "A0_error": 3.1938390731811523,
+      "Native_error": 3.1938390731811523,
+      "observed_A0_probability_mass": 0.8293992280960083,
+      "errors": {
+        "original_conditional_clipped": 3.1938390731811523,
+        "conditional_unclipped": 3.1938390731811523,
+        "global_prior_clipped": 3.1938390731811523,
+        "global_prior_unclipped": 3.1938390731811523,
+        "ideal_density_observed_only": 3.1938390731811523
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7473:61",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:143",
+      "A0_error": 3.1938390731811523,
+      "Native_error": 3.5650463104248047,
+      "observed_A0_probability_mass": 0.9795275926589966,
+      "errors": {
+        "original_conditional_clipped": 3.1938390731811523,
+        "conditional_unclipped": 3.1938390731811523,
+        "global_prior_clipped": 3.1938390731811523,
+        "global_prior_unclipped": 3.1938390731811523,
+        "ideal_density_observed_only": 3.1938390731811523
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7602:41",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:3",
+      "A0_error": 2.404987096786499,
+      "Native_error": 2.404987096786499,
+      "observed_A0_probability_mass": 0.9738129377365112,
+      "errors": {
+        "original_conditional_clipped": 2.404987096786499,
+        "conditional_unclipped": 2.404987096786499,
+        "global_prior_clipped": 2.404987096786499,
+        "global_prior_unclipped": 2.404987096786499,
+        "ideal_density_observed_only": 1.0285736322402954
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7602:82",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:3",
+      "A0_error": 2.404987096786499,
+      "Native_error": 2.404987096786499,
+      "observed_A0_probability_mass": 0.978020966053009,
+      "errors": {
+        "original_conditional_clipped": 2.404987096786499,
+        "conditional_unclipped": 2.404987096786499,
+        "global_prior_clipped": 2.404987096786499,
+        "global_prior_unclipped": 2.404987096786499,
+        "ideal_density_observed_only": 1.0285736322402954
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7602:165",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:3",
+      "A0_error": 2.404987096786499,
+      "Native_error": 2.404987096786499,
+      "observed_A0_probability_mass": 0.7435126304626465,
+      "errors": {
+        "original_conditional_clipped": 2.404987096786499,
+        "conditional_unclipped": 2.404987096786499,
+        "global_prior_clipped": 2.404987096786499,
+        "global_prior_unclipped": 2.404987096786499,
+        "ideal_density_observed_only": 1.0285736322402954
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5575:5",
+      "category": "Building",
+      "instance_group": "birmingham_block_7:16",
+      "A0_error": 238.3067169189453,
+      "Native_error": 238.39215087890625,
+      "observed_A0_probability_mass": 0.8711529970169067,
+      "errors": {
+        "original_conditional_clipped": 12.273070335388184,
+        "conditional_unclipped": 1.4064711332321167,
+        "global_prior_clipped": 12.273070335388184,
+        "global_prior_unclipped": 1.4064711332321167,
+        "ideal_density_observed_only": 1.4064711332321167
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5575:11",
+      "category": "Building",
+      "instance_group": "birmingham_block_7:16",
+      "A0_error": 238.3067169189453,
+      "Native_error": 47.431610107421875,
+      "observed_A0_probability_mass": 0.7397550344467163,
+      "errors": {
+        "original_conditional_clipped": 12.273070335388184,
+        "conditional_unclipped": 1.4064711332321167,
+        "global_prior_clipped": 12.273070335388184,
+        "global_prior_unclipped": 1.4064711332321167,
+        "ideal_density_observed_only": 1.4064711332321167
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5575:16",
+      "category": "Building",
+      "instance_group": "birmingham_block_7:16",
+      "A0_error": 238.3067169189453,
+      "Native_error": 47.431610107421875,
+      "observed_A0_probability_mass": 0.661187469959259,
+      "errors": {
+        "original_conditional_clipped": 12.273070335388184,
+        "conditional_unclipped": 1.4064711332321167,
+        "global_prior_clipped": 12.273070335388184,
+        "global_prior_unclipped": 1.4064711332321167,
+        "ideal_density_observed_only": 1.4064711332321167
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5575:22",
+      "category": "Building",
+      "instance_group": "birmingham_block_7:16",
+      "A0_error": 238.3067169189453,
+      "Native_error": 47.05086898803711,
+      "observed_A0_probability_mass": 0.5097049474716187,
+      "errors": {
+        "original_conditional_clipped": 238.3067169189453,
+        "conditional_unclipped": 1.4064711332321167,
+        "global_prior_clipped": 12.273070335388184,
+        "global_prior_unclipped": 1.4064711332321167,
+        "ideal_density_observed_only": 1.4064711332321167
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6306:5",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:210",
+      "A0_error": 120.58168029785156,
+      "Native_error": 120.58168029785156,
+      "observed_A0_probability_mass": 0.12254879623651505,
+      "errors": {
+        "original_conditional_clipped": 120.58168029785156,
+        "conditional_unclipped": 120.58168029785156,
+        "global_prior_clipped": 9.407068252563477,
+        "global_prior_unclipped": 9.407068252563477,
+        "ideal_density_observed_only": 8.154126167297363
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6306:11",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:210",
+      "A0_error": 120.58168029785156,
+      "Native_error": 120.58168029785156,
+      "observed_A0_probability_mass": 0.11216713488101959,
+      "errors": {
+        "original_conditional_clipped": 120.58168029785156,
+        "conditional_unclipped": 120.58168029785156,
+        "global_prior_clipped": 9.407068252563477,
+        "global_prior_unclipped": 9.407068252563477,
+        "ideal_density_observed_only": 8.154126167297363
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6306:16",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:210",
+      "A0_error": 120.58168029785156,
+      "Native_error": 120.58168029785156,
+      "observed_A0_probability_mass": 0.052729856222867966,
+      "errors": {
+        "original_conditional_clipped": 120.58168029785156,
+        "conditional_unclipped": 120.58168029785156,
+        "global_prior_clipped": 120.58168029785156,
+        "global_prior_unclipped": 12.133857727050781,
+        "ideal_density_observed_only": 11.190503120422363
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6306:22",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:210",
+      "A0_error": 120.58168029785156,
+      "Native_error": 120.58168029785156,
+      "observed_A0_probability_mass": 0.0675707459449768,
+      "errors": {
+        "original_conditional_clipped": 120.58168029785156,
+        "conditional_unclipped": 120.58168029785156,
+        "global_prior_clipped": 9.407068252563477,
+        "global_prior_unclipped": 9.407068252563477,
+        "ideal_density_observed_only": 8.154126167297363
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11969:28",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:210",
+      "A0_error": 16.787940979003906,
+      "Native_error": 16.787940979003906,
+      "observed_A0_probability_mass": 0.37159958481788635,
+      "errors": {
+        "original_conditional_clipped": 16.787940979003906,
+        "conditional_unclipped": 16.787940979003906,
+        "global_prior_clipped": 3.5329792499542236,
+        "global_prior_unclipped": 3.5329792499542236,
+        "ideal_density_observed_only": 3.5329792499542236
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11969:42",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:210",
+      "A0_error": 16.787940979003906,
+      "Native_error": 16.787940979003906,
+      "observed_A0_probability_mass": 0.9951972365379333,
+      "errors": {
+        "original_conditional_clipped": 3.5329792499542236,
+        "conditional_unclipped": 3.5329792499542236,
+        "global_prior_clipped": 3.5329792499542236,
+        "global_prior_unclipped": 3.5329792499542236,
+        "ideal_density_observed_only": 3.5329792499542236
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:11969:57",
+      "category": "Car",
+      "instance_group": "cambridge_block_12:210",
+      "A0_error": 16.787940979003906,
+      "Native_error": 16.787940979003906,
+      "observed_A0_probability_mass": 0.99552321434021,
+      "errors": {
+        "original_conditional_clipped": 3.5329792499542236,
+        "conditional_unclipped": 3.5329792499542236,
+        "global_prior_clipped": 3.5329792499542236,
+        "global_prior_unclipped": 3.5329792499542236,
+        "ideal_density_observed_only": 3.5329792499542236
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:12914:61",
+      "category": "Building",
+      "instance_group": "cambridge_block_13:107",
+      "A0_error": 18.245708465576172,
+      "Native_error": 18.245708465576172,
+      "observed_A0_probability_mass": 0.7165868878364563,
+      "errors": {
+        "original_conditional_clipped": 3.3436858654022217,
+        "conditional_unclipped": 3.3436858654022217,
+        "global_prior_clipped": 3.3436858654022217,
+        "global_prior_unclipped": 3.3436858654022217,
+        "ideal_density_observed_only": 3.3436858654022217
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:12914:82",
+      "category": "Building",
+      "instance_group": "cambridge_block_13:107",
+      "A0_error": 18.245708465576172,
+      "Native_error": 18.245708465576172,
+      "observed_A0_probability_mass": 0.8513752222061157,
+      "errors": {
+        "original_conditional_clipped": 3.3436858654022217,
+        "conditional_unclipped": 3.3436858654022217,
+        "global_prior_clipped": 3.3436858654022217,
+        "global_prior_unclipped": 3.3436858654022217,
+        "ideal_density_observed_only": 3.3436858654022217
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:15670:10",
+      "category": "Building",
+      "instance_group": "cambridge_block_20:35",
+      "A0_error": 3.806689739227295,
+      "Native_error": 23.403324127197266,
+      "observed_A0_probability_mass": 0.3234439790248871,
+      "errors": {
+        "original_conditional_clipped": 3.806689739227295,
+        "conditional_unclipped": 3.806689739227295,
+        "global_prior_clipped": 3.806689739227295,
+        "global_prior_unclipped": 3.806689739227295,
+        "ideal_density_observed_only": 3.806689739227295
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18821:5",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:337",
+      "A0_error": 20.362979888916016,
+      "Native_error": 8.22562026977539,
+      "observed_A0_probability_mass": 0.7301828861236572,
+      "errors": {
+        "original_conditional_clipped": 6.080428600311279,
+        "conditional_unclipped": 6.080428600311279,
+        "global_prior_clipped": 6.080428600311279,
+        "global_prior_unclipped": 6.080428600311279,
+        "ideal_density_observed_only": 6.080428600311279
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18821:11",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:337",
+      "A0_error": 20.362979888916016,
+      "Native_error": 8.22562026977539,
+      "observed_A0_probability_mass": 0.6630855798721313,
+      "errors": {
+        "original_conditional_clipped": 6.080428600311279,
+        "conditional_unclipped": 6.080428600311279,
+        "global_prior_clipped": 6.080428600311279,
+        "global_prior_unclipped": 6.080428600311279,
+        "ideal_density_observed_only": 6.080428600311279
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18821:23",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:337",
+      "A0_error": 20.362979888916016,
+      "Native_error": 8.22562026977539,
+      "observed_A0_probability_mass": 0.23880821466445923,
+      "errors": {
+        "original_conditional_clipped": 6.080428600311279,
+        "conditional_unclipped": 6.080428600311279,
+        "global_prior_clipped": 6.080428600311279,
+        "global_prior_unclipped": 6.080428600311279,
+        "ideal_density_observed_only": 6.080428600311279
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5377:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:43",
+      "A0_error": 22.95487403869629,
+      "Native_error": 11.777827262878418,
+      "observed_A0_probability_mass": 0.8917921185493469,
+      "errors": {
+        "original_conditional_clipped": 3.3288071155548096,
+        "conditional_unclipped": 3.3288071155548096,
+        "global_prior_clipped": 3.3288071155548096,
+        "global_prior_unclipped": 3.3288071155548096,
+        "ideal_density_observed_only": 2.868438959121704
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:3946:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_3:330",
+      "A0_error": 18.47699737548828,
+      "Native_error": 18.47699737548828,
+      "observed_A0_probability_mass": 0.845980167388916,
+      "errors": {
+        "original_conditional_clipped": 5.853039264678955,
+        "conditional_unclipped": 5.853039264678955,
+        "global_prior_clipped": 5.853039264678955,
+        "global_prior_unclipped": 5.853039264678955,
+        "ideal_density_observed_only": 5.853039264678955
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19279:0",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:49",
+      "A0_error": 3.595278739929199,
+      "Native_error": 3.595278739929199,
+      "observed_A0_probability_mass": 0.848726749420166,
+      "errors": {
+        "original_conditional_clipped": 3.595278739929199,
+        "conditional_unclipped": 3.595278739929199,
+        "global_prior_clipped": 3.595278739929199,
+        "global_prior_unclipped": 3.595278739929199,
+        "ideal_density_observed_only": 3.595278739929199
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6806:0",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.5349440574645996,
+      "errors": {
+        "original_conditional_clipped": 3.101818084716797,
+        "conditional_unclipped": 3.101818084716797,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7597:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.145280361175537,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.9803292751312256,
+      "errors": {
+        "original_conditional_clipped": 4.145280361175537,
+        "conditional_unclipped": 4.145280361175537,
+        "global_prior_clipped": 4.145280361175537,
+        "global_prior_unclipped": 4.145280361175537,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4970:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_4:173",
+      "A0_error": 12.273076057434082,
+      "Native_error": 21.925552368164062,
+      "observed_A0_probability_mass": 0.7950771450996399,
+      "errors": {
+        "original_conditional_clipped": 5.2419304847717285,
+        "conditional_unclipped": 5.2419304847717285,
+        "global_prior_clipped": 5.2419304847717285,
+        "global_prior_unclipped": 5.2419304847717285,
+        "ideal_density_observed_only": 5.2419304847717285
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:21692:0",
+      "category": "Car",
+      "instance_group": "cambridge_block_33:172",
+      "A0_error": 3.43341326713562,
+      "Native_error": 3.43341326713562,
+      "observed_A0_probability_mass": 0.9724426865577698,
+      "errors": {
+        "original_conditional_clipped": 3.43341326713562,
+        "conditional_unclipped": 3.43341326713562,
+        "global_prior_clipped": 3.43341326713562,
+        "global_prior_unclipped": 3.43341326713562,
+        "ideal_density_observed_only": 3.43341326713562
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7764:0",
+      "category": "Building",
+      "instance_group": "cambridge_block_4:33",
+      "A0_error": 17.41266441345215,
+      "Native_error": 20.34954833984375,
+      "observed_A0_probability_mass": 0.7852424383163452,
+      "errors": {
+        "original_conditional_clipped": 7.832357883453369,
+        "conditional_unclipped": 7.832357883453369,
+        "global_prior_clipped": 7.832357883453369,
+        "global_prior_unclipped": 7.832357883453369,
+        "ideal_density_observed_only": 4.746360778808594
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:961:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:256",
+      "A0_error": 3.1189656257629395,
+      "Native_error": 3.1189656257629395,
+      "observed_A0_probability_mass": 0.9877512454986572,
+      "errors": {
+        "original_conditional_clipped": 3.1189656257629395,
+        "conditional_unclipped": 3.1189656257629395,
+        "global_prior_clipped": 3.1189656257629395,
+        "global_prior_unclipped": 3.1189656257629395,
+        "ideal_density_observed_only": 3.1189656257629395
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7589:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:1",
+      "A0_error": 64.16881561279297,
+      "Native_error": 1.6719701290130615,
+      "observed_A0_probability_mass": 0.9381015300750732,
+      "errors": {
+        "original_conditional_clipped": 1.6719701290130615,
+        "conditional_unclipped": 1.6719701290130615,
+        "global_prior_clipped": 1.6719701290130615,
+        "global_prior_unclipped": 1.6719701290130615,
+        "ideal_density_observed_only": 0.9664955735206604
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:14688:0",
+      "category": "Building",
+      "instance_group": "cambridge_block_18:11",
+      "A0_error": 5.548140048980713,
+      "Native_error": 13.051985740661621,
+      "observed_A0_probability_mass": 0.7862366437911987,
+      "errors": {
+        "original_conditional_clipped": 4.042630672454834,
+        "conditional_unclipped": 4.042630672454834,
+        "global_prior_clipped": 4.042630672454834,
+        "global_prior_unclipped": 4.042630672454834,
+        "ideal_density_observed_only": 4.042630672454834
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6798:0",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 9.441176414489746,
+      "Native_error": 8.43892765045166,
+      "observed_A0_probability_mass": 0.6128154993057251,
+      "errors": {
+        "original_conditional_clipped": 8.43892765045166,
+        "conditional_unclipped": 8.43892765045166,
+        "global_prior_clipped": 3.101818084716797,
+        "global_prior_unclipped": 3.101818084716797,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7308:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:111",
+      "A0_error": 5.8158369064331055,
+      "Native_error": 5.8158369064331055,
+      "observed_A0_probability_mass": 0.9923787117004395,
+      "errors": {
+        "original_conditional_clipped": 5.8158369064331055,
+        "conditional_unclipped": 5.8158369064331055,
+        "global_prior_clipped": 5.8158369064331055,
+        "global_prior_unclipped": 5.8158369064331055,
+        "ideal_density_observed_only": 5.8158369064331055
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19228:0",
+      "category": "Building",
+      "instance_group": "cambridge_block_23:33",
+      "A0_error": 20.456073760986328,
+      "Native_error": 2.8306808471679688,
+      "observed_A0_probability_mass": 0.8152204751968384,
+      "errors": {
+        "original_conditional_clipped": 2.8306808471679688,
+        "conditional_unclipped": 2.8306808471679688,
+        "global_prior_clipped": 2.8306808471679688,
+        "global_prior_unclipped": 2.8306808471679688,
+        "ideal_density_observed_only": 2.788735866546631
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6800:0",
+      "category": "Parking",
+      "instance_group": "birmingham_block_11:18",
+      "A0_error": 3.101818084716797,
+      "Native_error": 10.439240455627441,
+      "observed_A0_probability_mass": 0.6384700536727905,
+      "errors": {
+        "original_conditional_clipped": 1.6263151168823242,
+        "conditional_unclipped": 1.6263151168823242,
+        "global_prior_clipped": 1.6263151168823242,
+        "global_prior_unclipped": 1.6263151168823242,
+        "ideal_density_observed_only": 1.6263151168823242
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7278:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:106",
+      "A0_error": 2.5779166221618652,
+      "Native_error": 2.5779166221618652,
+      "observed_A0_probability_mass": 0.8300115466117859,
+      "errors": {
+        "original_conditional_clipped": 2.5779166221618652,
+        "conditional_unclipped": 2.5779166221618652,
+        "global_prior_clipped": 2.5779166221618652,
+        "global_prior_unclipped": 2.5779166221618652,
+        "ideal_density_observed_only": 2.5779166221618652
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7613:0",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:19",
+      "A0_error": 1.4551900625228882,
+      "Native_error": 1.4551900625228882,
+      "observed_A0_probability_mass": 0.9772350788116455,
+      "errors": {
+        "original_conditional_clipped": 1.4551900625228882,
+        "conditional_unclipped": 1.4551900625228882,
+        "global_prior_clipped": 1.4551900625228882,
+        "global_prior_unclipped": 1.4551900625228882,
+        "ideal_density_observed_only": 1.3035516738891602
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2833:0",
+      "category": "Building",
+      "instance_group": "birmingham_block_3:3",
+      "A0_error": 123.4824447631836,
+      "Native_error": 123.4824447631836,
+      "observed_A0_probability_mass": 0.4657992124557495,
+      "errors": {
+        "original_conditional_clipped": 9.228106498718262,
+        "conditional_unclipped": 5.152472972869873,
+        "global_prior_clipped": 9.228106498718262,
+        "global_prior_unclipped": 5.152472972869873,
+        "ideal_density_observed_only": 5.152472972869873
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:4359:0",
+      "category": "Building",
+      "instance_group": "birmingham_block_4:3",
+      "A0_error": 16.903564453125,
+      "Native_error": 16.903564453125,
+      "observed_A0_probability_mass": 0.9817230105400085,
+      "errors": {
+        "original_conditional_clipped": 7.219435691833496,
+        "conditional_unclipped": 7.219435691833496,
+        "global_prior_clipped": 7.219435691833496,
+        "global_prior_unclipped": 7.219435691833496,
+        "ideal_density_observed_only": 7.215026378631592
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7611:0",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 27.80794906616211,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.92454993724823,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5374:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_7:42",
+      "A0_error": 5.768141269683838,
+      "Native_error": 5.768141269683838,
+      "observed_A0_probability_mass": 0.8656224608421326,
+      "errors": {
+        "original_conditional_clipped": 5.768141269683838,
+        "conditional_unclipped": 5.768141269683838,
+        "global_prior_clipped": 5.768141269683838,
+        "global_prior_unclipped": 5.768141269683838,
+        "ideal_density_observed_only": 5.768141269683838
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6939:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_12:31",
+      "A0_error": 7.97477912902832,
+      "Native_error": 7.97477912902832,
+      "observed_A0_probability_mass": 0.9818018078804016,
+      "errors": {
+        "original_conditional_clipped": 7.97477912902832,
+        "conditional_unclipped": 7.97477912902832,
+        "global_prior_clipped": 7.97477912902832,
+        "global_prior_unclipped": 7.97477912902832,
+        "ideal_density_observed_only": 6.404626369476318
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7609:0",
+      "category": "Parking",
+      "instance_group": "birmingham_block_13:18",
+      "A0_error": 29.953739166259766,
+      "Native_error": 28.543806076049805,
+      "observed_A0_probability_mass": 0.9266136288642883,
+      "errors": {
+        "original_conditional_clipped": 28.543806076049805,
+        "conditional_unclipped": 28.543806076049805,
+        "global_prior_clipped": 28.543806076049805,
+        "global_prior_unclipped": 28.543806076049805,
+        "ideal_density_observed_only": 1.4206455945968628
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:19304:0",
+      "category": "Car",
+      "instance_group": "cambridge_block_23:55",
+      "A0_error": 3.4068968296051025,
+      "Native_error": 3.4068968296051025,
+      "observed_A0_probability_mass": 0.8064197301864624,
+      "errors": {
+        "original_conditional_clipped": 3.4068968296051025,
+        "conditional_unclipped": 3.4068968296051025,
+        "global_prior_clipped": 3.4068968296051025,
+        "global_prior_unclipped": 3.4068968296051025,
+        "ideal_density_observed_only": 3.4068968296051025
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6726:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_10:61",
+      "A0_error": 10.82394027709961,
+      "Native_error": 12.392545700073242,
+      "observed_A0_probability_mass": 0.9540414214134216,
+      "errors": {
+        "original_conditional_clipped": 4.65439510345459,
+        "conditional_unclipped": 4.65439510345459,
+        "global_prior_clipped": 4.65439510345459,
+        "global_prior_unclipped": 4.65439510345459,
+        "ideal_density_observed_only": 4.65439510345459
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:7599:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_13:2",
+      "A0_error": 4.146132469177246,
+      "Native_error": 4.146132469177246,
+      "observed_A0_probability_mass": 0.9545168876647949,
+      "errors": {
+        "original_conditional_clipped": 4.146132469177246,
+        "conditional_unclipped": 4.146132469177246,
+        "global_prior_clipped": 4.146132469177246,
+        "global_prior_unclipped": 4.146132469177246,
+        "ideal_density_observed_only": 1.3981986045837402
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:2348:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_1:621",
+      "A0_error": 9.411359786987305,
+      "Native_error": 9.411359786987305,
+      "observed_A0_probability_mass": 0.7515623569488525,
+      "errors": {
+        "original_conditional_clipped": 9.411359786987305,
+        "conditional_unclipped": 9.411359786987305,
+        "global_prior_clipped": 9.411359786987305,
+        "global_prior_unclipped": 9.411359786987305,
+        "ideal_density_observed_only": 8.562790870666504
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:5575:0",
+      "category": "Building",
+      "instance_group": "birmingham_block_7:16",
+      "A0_error": 238.3067169189453,
+      "Native_error": 238.3067169189453,
+      "observed_A0_probability_mass": 0.711487352848053,
+      "errors": {
+        "original_conditional_clipped": 12.273070335388184,
+        "conditional_unclipped": 1.4064711332321167,
+        "global_prior_clipped": 12.273070335388184,
+        "global_prior_unclipped": 1.4064711332321167,
+        "ideal_density_observed_only": 1.4064711332321167
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:6306:0",
+      "category": "Car",
+      "instance_group": "birmingham_block_9:210",
+      "A0_error": 120.58168029785156,
+      "Native_error": 120.58168029785156,
+      "observed_A0_probability_mass": 0.04801226407289505,
+      "errors": {
+        "original_conditional_clipped": 120.58168029785156,
+        "conditional_unclipped": 120.58168029785156,
+        "global_prior_clipped": 120.58168029785156,
+        "global_prior_unclipped": 8.154126167297363,
+        "ideal_density_observed_only": 8.154126167297363
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    },
+    {
+      "sample_id": "train:18821:0",
+      "category": "Car",
+      "instance_group": "cambridge_block_21:337",
+      "A0_error": 20.362979888916016,
+      "Native_error": 8.22562026977539,
+      "observed_A0_probability_mass": 0.7211717367172241,
+      "errors": {
+        "original_conditional_clipped": 6.080428600311279,
+        "conditional_unclipped": 6.080428600311279,
+        "global_prior_clipped": 6.080428600311279,
+        "global_prior_unclipped": 6.080428600311279,
+        "ideal_density_observed_only": 6.080428600311279
+      },
+      "mode": "UNVERIFIED_POSITION_HYPOTHESIS_OFFLINE_NOT_DEPLOYABLE"
+    }
+  ]
+}
