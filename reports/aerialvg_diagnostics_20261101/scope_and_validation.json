@@ -1,0 +1,31 @@
+{
+  "base_commit": "fcfde0bcd9e7f6cc66d0a1f23302ecd4ec9289f6",
+  "diagnostic_only": true,
+  "new_training": false,
+  "new_closed_loop": false,
+  "checkpoint_unchanged": true,
+  "checkpoint_sha": "5956313f58b62315e7f56a8f6710d9cb8fb3b600b479c916d859d1c898d5578a",
+  "train_states": 1275,
+  "internal_dev_states": 635,
+  "archived_navigation_episodes_per_configuration": 128,
+  "archived_navigation_split": "val_seen, archived traces only; no source labels",
+  "test_unseen_access": false,
+  "formal_protocol_or_weights_modified": false,
+  "tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "source_sha256": {
+    "scripts/diagnose_aerialvg_candidate_bottlenecks.py": "0ded689ee866f8df96c15f333eefa3578f1b2c49140e039d8e8ad935a023a30e",
+    "scripts/diagnose_aerialvg_navigation_failures.py": "17b284f98eb79c60b4eaa0be32f20c2629bfad1ce04230da07ff1f1989cbdbc8",
+    "scripts/render_aerialvg_bottleneck_report.py": "809855aadfb16b416caa3e1dce2c497a7d49bbff2690c24ee2b9d9d403391ff1",
+    "tests/test_aerialvg_bottleneck_diagnostics.py": "71a41dc74bd0f87c93ce7b63f97dab1a200758a3fafaadbccac230b3356c8d1b",
+    "tests/test_aerialvg_diagnostic_artifacts.py": "10939080b4a29ce7ba746e24dea64d0bd1a52c9dbfeaadcd3068bed530ca8e4b"
+  },
+  "artifacts_sha256": {
+    "candidate_summary.json": "99d02f998435918c259f229bb368afee1572cb320fb8dd4da3ae8e555e6c572c",
+    "navigation_summary.json": "b7a98b4f4adc75959a247c4fb2a18097e557ea9094b1efaac0418583671d605f",
+    "REPORT_ZH.md": "de0667fa8a416e665c7afdcd568d40759315a0960faf1b8aa605cce376516c82"
+  },
+  "existing_validation_process_state": "Paused with SIGSTOP, outputs retained; not resumed"
+}
