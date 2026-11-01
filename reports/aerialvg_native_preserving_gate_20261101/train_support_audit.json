@@ -1,0 +1,158 @@
+{
+  "states": {
+    "all": 1275,
+    "no_supported_relation": 1071,
+    "direct_name_mention": 1120,
+    "parsed": 204,
+    "unique_relation": 100,
+    "unique_with_positive": 60,
+    "ranking_supervised": 60,
+    "ambiguous_only": 104,
+    "unique_missing_positive": 40,
+    "genuine_multi_anchor": 15
+  },
+  "group_count_semantics": "at least one state in the group meets each flag; coverage/missing coverage can overlap",
+  "instruction_groups": {
+    "direct_name_mention": 221,
+    "no_supported_relation": 212,
+    "all": 252,
+    "unique_missing_positive": 18,
+    "parsed": 40,
+    "unique_relation": 20,
+    "unique_with_positive": 20,
+    "ranking_supervised": 20,
+    "ambiguous_only": 20,
+    "genuine_multi_anchor": 3
+  },
+  "parsed_relation_kinds_by_group": {
+    "near": 18,
+    "south": 2,
+    "along": 11,
+    "between": 7,
+    "north": 2
+  },
+  "public_entity_occurrences_across_instruction_groups": 827,
+  "raw_landmark_occurrences_across_instruction_groups": 827,
+  "name_mention_definition": "direct canonical whole-name phrase; aliases not counted by this audit proxy",
+  "examples": [
+    {
+      "instruction": "A light colored car on Willmore Road, it's on the right side of the road when you're facing Celine Grove road. The car is pointed in the opposite direction of Celine Grove Road and is behind three other light colored cars.",
+      "public_names": [
+        "Willmore Road",
+        "Celine Grove"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "The white car on Nobel Way that is the only car seen on that road.",
+      "public_names": [
+        "Nobel Way"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "The black car on The Broadway that is 11 cars behind the light gray car closest to the intersection with Birchfield Road.",
+      "public_names": [
+        "The Broadway",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "The middle of three white cars parked in a group away from the other cars in the parking lot of Wellington and Birchfield Road.",
+      "public_names": [
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road",
+        "Birchfield Road"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "The white car parked below the Aston Lane/Wellhead Lane intersection, it is to the right of the unmarked large white roofed building. The white car is parked by itself and facing a big blue box to the right of the white roofed building.",
+      "public_names": [
+        "Aston Lane / Wellhead Lane",
+        "Aston Lane / Wellhead Lane",
+        "Aston Lane",
+        "Aston Lane",
+        "Wellhead Lane"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "Left side of a brown and white home with a brown roof on the corner of the map that has one black car parked in front of it, near the corner of Aldridge Road and Holford Drive",
+      "public_names": [
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Aldridge Road",
+        "Holford Drive"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "The gray car that is 7th from the left in the row of cars parked against the long side of the James Dyson Building.",
+      "public_names": [
+        "James Dyson Building"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "this is the red car, this car is south of Tennis Court road and north of Kenny B building. There is a blue car to the right of this car.",
+      "public_names": [
+        "Tennis Court Road",
+        "Tennis Court Road",
+        "Tennis Court Road",
+        "Tennis Court Road",
+        "Tennis Court Road"
+      ],
+      "relation_kinds": [
+        "south"
+      ],
+      "ambiguous": true
+    },
+    {
+      "instruction": "A building at the end of Chesterton Road and Springfield Road",
+      "public_names": [
+        "Springfield Road",
+        "Springfield Road",
+        "Chesterton Road",
+        "Chesterton Road",
+        "Chesterton Road",
+        "Chesterton Road",
+        "Chesterton Road",
+        "Chesterton Road"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    },
+    {
+      "instruction": "The gray building to the right of the Regent Street Dental Surgery.",
+      "public_names": [
+        "Regent Street Dental Surgery"
+      ],
+      "relation_kinds": [],
+      "ambiguous": false
+    }
+  ]
+}

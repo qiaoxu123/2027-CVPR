@@ -82,3 +82,15 @@
 
 ### Publication compatibility
 - Publish native shared evaluation as `scripts.evaluate_native_shared_closedloop`; preserve the existing resolution/residual evaluation entry point. Native launchers use the isolated entry point. All18 experiment test files:44 pass,3 asset-dependent skips.
+
+## [0.9.0] - 2026-11-01
+### Features
+- Isolated Native-preserving relation Gate: reject/disabled/no-reference exactly retains frozen Native Residual; TRAIN labels compare proposed fusion against Native.
+- TRAIN group probability calibration and safe low-threshold selection with a fail-closed admission rule when calibration lacks either class.
+- Public multiple reference anchors, real map distractors, geometry/attention supervision and final Belief localization/KL/preservation losses in a separate experimental trainer.
+### Design Rationale
+- Preserve the strongest existing baseline while testing whether relation evidence adds utility. Separate original Gate/Native APIs and checkpoints from the new experiment.
+- Preserve between anchors individually; do not treat public name binding or map distractors as verified visual target instance annotations.
+### Notes & Caveats
+- Fixed seed0 smoke/Pilot with TRAIN-only fitting/calibration; internal Dev is a final diagnostic, not a tuning source. No official validation or navigation run.
+- Probability calibration may be inadmissible because named-relation groups are extremely sparse; in that case the new Gate deliberately produces no additional update. Attention gradients alone do not establish localization improvement.
