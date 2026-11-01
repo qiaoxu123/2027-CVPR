@@ -9,3 +9,5 @@ Base: fcfde0bcd9e7f6cc66d0a1f23302ecd4ec9289f6. Diagnostic-only branch; no train
 5. [complete] Meaningful diagnostic unit/invariant tests and concise Chinese report. Publication is verified by the final remote Git ref rather than this pre-commit plan.
 
 Definitions: A0 is the cached frozen static base_logits/grid_world (GraphNav A3 geometry), not an extra trained checkpoint.20m coverage is geospatial proximity, not target-instance matching. Candidate/fusion statistics are separate Train and internalDev. Archived128 navigation is descriptive only and does not tune Val-Seen.
+
+6. [complete] Read-only posterior/kernel Oracle decomposition on same Train/internalDev states. Exact actual-model accounting reproduced; preserve mass versus idealize mass; separate relaxed bounded residual impossibility from unknown restricted-Oracle failures. No formal validation resumed.
