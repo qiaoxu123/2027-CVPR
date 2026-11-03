@@ -1,0 +1,65 @@
+{
+  "review_n": 101,
+  "reviewer": "current-session AI, not independent human gold",
+  "sampling": "30 direct,30 indirect,1 identity,20 no-anchor,20 unresolved; deterministic seed20261105; frozen parser before final review",
+  "confusion": {
+    "direct_geometry": {
+      "direct_geometry": 27,
+      "indirect_geometry": 3
+    },
+    "indirect_geometry": {
+      "indirect_geometry": 23,
+      "direct_geometry": 6,
+      "uncertain": 1
+    },
+    "direct_identity": {
+      "direct_identity": 1
+    },
+    "no_confirmed_anchor": {
+      "indirect_geometry": 1,
+      "no_confirmed_anchor": 16,
+      "direct_geometry": 2,
+      "uncertain": 1
+    },
+    "uncertain": {
+      "indirect_geometry": 14,
+      "direct_geometry": 5,
+      "uncertain": 1
+    }
+  },
+  "estimates": {
+    "direct_including_identity": {
+      "estimated_tasks": 11174.8,
+      "estimated_percent": 50.78992818834651,
+      "stratified_bootstrap95_percent": [
+        42.96654849559131,
+        58.872517271157164
+      ]
+    },
+    "indirect": {
+      "estimated_tasks": 10054.650000000001,
+      "estimated_percent": 45.698800109081,
+      "stratified_bootstrap95_percent": [
+        37.3551646819986,
+        53.80396289731236
+      ]
+    },
+    "no_explicit_reliable_anchor": {
+      "estimated_tasks": 260.0,
+      "estimated_percent": 1.1817107535678575,
+      "stratified_bootstrap95_percent": [
+        0.8862830651758931,
+        1.403281519861831
+      ]
+    },
+    "uncertain": {
+      "estimated_tasks": 512.5500000000001,
+      "estimated_percent": 2.3295609490046365,
+      "stratified_bootstrap95_percent": [
+        0.0,
+        5.752886101263521
+      ]
+    }
+  },
+  "warning": "Sampling intervals do not include reviewer error or parser design uncertainty; estimates are not exhaustive human counts."
+}

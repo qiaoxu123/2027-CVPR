@@ -1,0 +1,55 @@
+{
+  "n": 22002,
+  "unique_map_instruction": 21303,
+  "maps": 24,
+  "mutually_exclusive": {
+    "direct_geometry": 9356,
+    "no_confirmed_anchor": 325,
+    "indirect_geometry": 7182,
+    "uncertain": 5138,
+    "direct_identity": 1
+  },
+  "overlap": {
+    "explicit_public_name": 20959,
+    "direct_geometry_path": 9356,
+    "indirect_geometry_path": 8780
+  },
+  "by_target_category": {
+    "Building": {
+      "direct_geometry": 5184,
+      "no_confirmed_anchor": 44,
+      "indirect_geometry": 1544,
+      "uncertain": 1514,
+      "direct_identity": 1
+    },
+    "Car": {
+      "direct_geometry": 3144,
+      "no_confirmed_anchor": 261,
+      "indirect_geometry": 5205,
+      "uncertain": 3131
+    },
+    "Ground": {
+      "direct_geometry": 580,
+      "no_confirmed_anchor": 7,
+      "indirect_geometry": 292,
+      "uncertain": 349
+    },
+    "Parking": {
+      "direct_geometry": 448,
+      "indirect_geometry": 141,
+      "uncertain": 144,
+      "no_confirmed_anchor": 13
+    }
+  },
+  "provenance": {
+    "source": "/home/20261024_1/Workspace/DATA/sbfnav-data/original_citynav/citynav_train_seen.json",
+    "source_sha256": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245",
+    "catalog": "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json",
+    "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "spacy": "3.7.5",
+    "parser": "en_core_web_sm",
+    "parser_version": "3.7.1",
+    "GT_usage": "TRAIN target category guides noun-role selection; TRAIN instance IDs check explicit self-name identity; no target coordinates/contours used to construct links",
+    "limitations": "automated dependency interpretation; manual sample audit required; no name binding does not prove impossible association"
+  }
+}
