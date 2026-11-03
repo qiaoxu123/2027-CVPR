@@ -69,7 +69,9 @@ def main():
     p.add_argument('--public-catalog',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--reference-phrases',action='store_true')
+    p.add_argument('--runtime-output',type=Path,help='Export public map/text-only runtime role list')
     a=p.parse_args()
+    if a.runtime_output and (a.runtime_output.exists() or not a.reference_phrases):raise ValueError('new runtime path and reference-phrases mode required')
     if a.output.exists():raise FileExistsError('preserve earlier role cache')
     frames=[json.loads(line) for line in a.public_frames.read_text().splitlines()]
     queries={f['task_key']:(f['map_name'],f['instruction']) for f in frames}
@@ -85,6 +87,10 @@ def main():
         result[key]=parsed
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+    if a.runtime_output:
+        runtime=[dict(map_name=queries[key][0],instruction=queries[key][1],target_text=r['target_text'],context_text=r['reference_text'],version='local-roles-v2') for key,r in result.items()]
+        a.runtime_output.parent.mkdir(parents=True,exist_ok=True)
+        a.runtime_output.write_text(json.dumps(runtime,ensure_ascii=False,indent=2)+'\n')
     provenance=dict(public_frames_sha256=hashlib.sha256(a.public_frames.read_bytes()).hexdigest(),
                     public_catalog_sha256=hashlib.sha256(a.public_catalog.read_bytes()).hexdigest(),
                     source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
