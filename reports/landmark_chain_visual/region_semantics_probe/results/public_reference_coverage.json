@@ -1,0 +1,148 @@
+{
+  "complete": true,
+  "scopes": [
+    "TRAIN-fit",
+    "TRAIN-dev"
+  ],
+  "counts": {
+    "fit_observations": 900,
+    "fit_ambiguous_name_mentions": 698,
+    "dev_observations": 92,
+    "dev_ambiguous_name_mentions": 70,
+    "invalid_public_polygon": 10,
+    "unsupported_public_type": 18
+  },
+  "by_subset": {
+    "fit": {
+      "reference_frames": 817,
+      "frames": 626,
+      "tasks": 244,
+      "reference_groups": 191,
+      "name_families": 182,
+      "by_scale": {
+        "1": {
+          "eligible_reference_frames": 260,
+          "frames": 235,
+          "tasks": 149,
+          "reference_groups": 114,
+          "name_families": 111,
+          "positives": 2560,
+          "negatives": 20564
+        },
+        "3": {
+          "eligible_reference_frames": 134,
+          "frames": 125,
+          "tasks": 90,
+          "reference_groups": 67,
+          "name_families": 66,
+          "positives": 1275,
+          "negatives": 5140
+        },
+        "7": {
+          "eligible_reference_frames": 45,
+          "frames": 42,
+          "tasks": 36,
+          "reference_groups": 25,
+          "name_families": 25,
+          "positives": 418,
+          "negatives": 1090
+        }
+      }
+    },
+    "dev": {
+      "reference_frames": 48,
+      "frames": 42,
+      "tasks": 12,
+      "reference_groups": 9,
+      "name_families": 9,
+      "by_scale": {
+        "1": {
+          "eligible_reference_frames": 8,
+          "frames": 8,
+          "tasks": 5,
+          "reference_groups": 5,
+          "name_families": 5,
+          "positives": 28,
+          "negatives": 609
+        },
+        "3": {
+          "eligible_reference_frames": 4,
+          "frames": 4,
+          "tasks": 4,
+          "reference_groups": 4,
+          "name_families": 4,
+          "positives": 9,
+          "negatives": 228
+        },
+        "7": {
+          "eligible_reference_frames": 1,
+          "frames": 1,
+          "tasks": 1,
+          "reference_groups": 1,
+          "name_families": 1,
+          "positives": 3,
+          "negatives": 69
+        }
+      }
+    }
+  },
+  "dev_unseen_name": {
+    "reference_frames": 36,
+    "frames": 36,
+    "tasks": 10,
+    "reference_groups": 6,
+    "name_families": 6,
+    "by_scale": {
+      "1": {
+        "eligible_reference_frames": 6,
+        "frames": 6,
+        "tasks": 4,
+        "reference_groups": 4,
+        "name_families": 4,
+        "positives": 18,
+        "negatives": 408
+      },
+      "3": {
+        "eligible_reference_frames": 3,
+        "frames": 3,
+        "tasks": 3,
+        "reference_groups": 3,
+        "name_families": 3,
+        "positives": 3,
+        "negatives": 150
+      },
+      "7": {
+        "eligible_reference_frames": 0,
+        "frames": 0,
+        "tasks": 0,
+        "reference_groups": 0,
+        "name_families": 0,
+        "positives": 0,
+        "negatives": 0
+      }
+    }
+  },
+  "dev_unseen_name_definition": "normalized public name absent from every selected fit observation; not guaranteed physical identity uniqueness",
+  "supervision": "geometry proxy only, no confirmed RGB instance or visibility labels",
+  "private_target_labels_read": false,
+  "normal_inference_modified": false,
+  "positive_coverage": 0.9,
+  "negative_coverage": 0.01,
+  "uncertainty_margin_m": 2.0,
+  "scale_patch_sizes": [
+    1,
+    3,
+    7
+  ],
+  "no_positive_policy": "exclude from ranking; never create Null absence labels",
+  "seconds": 4.96543363109231,
+  "feature_manifest_sha256": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+  "observation_manifest_sha256": "6627e1bb9819c2864bf1534e84352c190a8ae9e0addd5c1cde1623147fd7cbec",
+  "public_frames_sha256": "488bd00a1250c574366dc42bec42f7f21a7f7ba0265d642fe0e00f704c1f3249",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "filter_sha256": "3e6301f92d30e7b9f713ec6e91ff8ea6b728b6e6d24e201d9a5e0eed32bbc165",
+  "weak_labels_sha256": "2d6e6d2eabc49933f2668d90511bb390dbf3d2290c3caf0757b4a3dfeed1189c",
+  "records_sha256": "8068ac13981277df242ed3c84360a580e575100b2fe6237d4a6e0496e3f6f519",
+  "producer_code_sha256": "e1ecededa8784665dd475c467a8870feb1cbc2e3db372728f774368dc1691b52",
+  "label_code_sha256": "29c2836b41d4f2517eb5346729143350627ec8ead5baab305a510aa43f63b056"
+}

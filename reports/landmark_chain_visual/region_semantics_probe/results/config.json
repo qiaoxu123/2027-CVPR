@@ -1,0 +1,30 @@
+{
+  "config": {
+    "cache": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features",
+    "labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_labels_v1",
+    "native_text": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_text_v1.pt",
+    "output": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_suite_v1_s0/pilot",
+    "epochs": 3,
+    "max_batches": 0,
+    "resume": false
+  },
+  "fingerprint": {
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_labels_v1/summary.json": "6fbc9cbe8b97dfd209da59f7e24875e51c88f569e2d3495479c5b5c844efba59",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_labels_v1/loss_labels_private.pt": "351877bc51eef19812323518611eaa85d5367b06860eba31b00402e2445d4f5b",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_text_v1.pt": "f54e6e1b602f0c3d8c32cc36155fcd78d8da39f3925c5bda957c39d8925c155f",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_region_semantic_probe.py": "2a009970ce024d3877c1d13ea2d389470d5e9bb6f568972d7260eec11d95c12f",
+    "graphnav/region_semantic_probe.py": "77c607e050b3e7fc040f43b062f996f8f0c3afa9bc09d88eb664b0f3211d01b0"
+  },
+  "train_patches": 22933,
+  "class_counts": [
+    12961.0,
+    5476.0,
+    4496.0
+  ],
+  "parameters": 9219,
+  "model_inputs": [
+    "image_features"
+  ],
+  "supervision": "TRAIN contour region proxy only, not confirmed pixel-instance labels"
+}
