@@ -1,0 +1,102 @@
+{
+  "reviewer": "current Codex direct image review; no external API or Qwen",
+  "purpose": "TRAIN label-quality audit, not human pixel GT",
+  "rows": [
+    {
+      "review_index": 0,
+      "frame_key": "train_00733_0030",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "uncertain",
+      "note": "红点在白车，候选中心偏到车侧缝隙/邻车，不确认同实例。",
+      "human_verified": false
+    },
+    {
+      "review_index": 1,
+      "frame_key": "train_03039_0045",
+      "map_point_vehicle_support": "not_supported",
+      "candidate_same_instance_support": "not_supported",
+      "note": "红点及候选中心附近呈路面，没有可确认车辆；原因未知，不猜测时相或配准原因。",
+      "human_verified": false
+    },
+    {
+      "review_index": 2,
+      "frame_key": "train_18846_0000",
+      "map_point_vehicle_support": "uncertain",
+      "candidate_same_instance_support": "uncertain",
+      "note": "车辆区域极小且临图像边界，只能认出停车行列，不能确认该实例。",
+      "human_verified": false
+    },
+    {
+      "review_index": 3,
+      "frame_key": "train_20814_0035",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "supported",
+      "note": "红点在路边白车，候选落在同车前侧；仅AI视觉支持，不是像素金标准。",
+      "human_verified": false
+    },
+    {
+      "review_index": 4,
+      "frame_key": "train_11884_0022",
+      "map_point_vehicle_support": "uncertain",
+      "candidate_same_instance_support": "uncertain",
+      "note": "小车像素少、车排密集，红/青点贴近多车边缘，身份不确定。",
+      "human_verified": false
+    },
+    {
+      "review_index": 5,
+      "frame_key": "train_21465_0074",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "supported",
+      "note": "白车在红车旁，红点在车身、候选在同车前端附近。",
+      "human_verified": false
+    },
+    {
+      "review_index": 6,
+      "frame_key": "train_02921_0031",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "uncertain",
+      "note": "红点在灰车车身，候选偏到车侧/路缘，窗口混合背景。",
+      "human_verified": false
+    },
+    {
+      "review_index": 7,
+      "frame_key": "train_05140_0000",
+      "map_point_vehicle_support": "uncertain",
+      "candidate_same_instance_support": "uncertain",
+      "note": "目标只是几个像素的亮斑，难可靠核验候选身份。",
+      "human_verified": false
+    },
+    {
+      "review_index": 8,
+      "frame_key": "train_18593_0068",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "supported",
+      "note": "白车清楚，青点在同车前后部分；红点附近有无效黑洞，需保留遮挡/像素缺失不确定性。",
+      "human_verified": false
+    },
+    {
+      "review_index": 9,
+      "frame_key": "train_20632_0020",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "supported",
+      "note": "黑车在红蓝车之间，红/青点均位于该车范围附近。",
+      "human_verified": false
+    },
+    {
+      "review_index": 10,
+      "frame_key": "train_01899_0158",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "uncertain",
+      "note": "红点位于灰车，候选在车边/道路交界，不能确认窗口代表同实例。",
+      "human_verified": false
+    },
+    {
+      "review_index": 11,
+      "frame_key": "train_10475_0064",
+      "map_point_vehicle_support": "supported",
+      "candidate_same_instance_support": "supported",
+      "note": "蓝色车辆清楚，青点在同车前端附近，轮廓边缘仍有误差。",
+      "human_verified": false
+    }
+  ]
+}
