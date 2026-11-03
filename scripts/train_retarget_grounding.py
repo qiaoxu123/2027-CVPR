@@ -19,6 +19,7 @@ from graphnav.checkpointing import atomic_json,atomic_save,file_sha256,rng_state
 from graphnav.instance_ranking_loss import noncar_position_auxiliary
 from graphnav.retarget_training_data import retarget_overrides,weak_instance_mask
 from graphnav.uncertain_instance_loss import uncertain_instance_loss
+from graphnav.target_language_conditioning import condition_target_language
 from graphnav.visual_chain_position import WorldLikelihoodPositionHead,visual_chain_loss
 from scripts.train_local_chain_position import records,collate as old_collate,batch_inputs,evaluate
 
@@ -84,6 +85,7 @@ def main():
     for key in ('cache','fit-labels','dev-labels','filter','role-vectors','teacher','public-inputs','warm-start','output'):
         parser.add_argument('--'+key,type=Path,required=True)
     parser.add_argument('--loss-mode',choices=('coarse','soft-instance'),required=True)
+    parser.add_argument('--target-language',choices=('role','full-instruction'),default='role')
     parser.add_argument('--epochs',type=int,default=3);parser.add_argument('--steps-per-epoch',type=int,default=159)
     parser.add_argument('--resume',action='store_true');args=parser.parse_args()
     smoke=args.steps_per_epoch==2
@@ -94,7 +96,7 @@ def main():
     fingerprint={str(path):file_sha256(path) for path in (args.cache/'manifest.json',args.fit_labels,args.dev_labels,args.filter,args.role_vectors,
         args.teacher/'summary.json',args.teacher/'public_links.json',args.teacher/'loss_labels_private.pt',args.public_inputs/'summary.json',
         args.public_inputs/'public_inputs.pt',args.warm_start,Path(__file__),Path('graphnav/retarget_training_data.py'),
-        Path('graphnav/uncertain_instance_loss.py'),Path('graphnav/visual_chain_position.py'),Path('graphnav/instance_ranking_loss.py'),Path('scripts/train_local_chain_position.py'))}
+        Path('graphnav/uncertain_instance_loss.py'),Path('graphnav/target_language_conditioning.py'),Path('graphnav/visual_chain_position.py'),Path('graphnav/instance_ranking_loss.py'),Path('scripts/train_local_chain_position.py'))}
     source=torch.load(args.warm_start,map_location='cpu',weights_only=True)
     if source['architecture']!='world-likelihood-v3' or source['feature_manifest_sha256']!=file_sha256(args.cache/'manifest.json') or source['role_vectors_sha256']!=file_sha256(args.role_vectors):raise ValueError('warm-start protocol mismatch')
     teacher_proof=json.loads((args.teacher/'summary.json').read_text())
@@ -108,6 +110,7 @@ def main():
     allowed=set(json.loads(args.filter.read_text())['frame_keys'])
     base=records(args.cache,args.fit_labels,'fit',roles,'reference',allowed)
     fit,dataset_summary=attach_retarget_data(base,args.fit_labels,args.teacher,args.public_inputs)
+    fit=condition_target_language(fit,args.target_language)
     config={key:str(value) if isinstance(value,Path) else value for key,value in vars(args).items()};config.update(role_mode='reference',seed=0,batch_size=8,lr=.001)
     history=[];start=0;fine_gradient=None
     if args.resume:
@@ -162,8 +165,10 @@ def main():
     if {r['map_name'] for r in dev}&{r['map_name'] for r in fit}:raise ValueError('fitting/development map leakage')
     baseline=WorldLikelihoodPositionHead().cuda().eval();baseline.load_state_dict(source['model'])
     reference=evaluate(baseline,dev,'cuda',8)
-    results={control:evaluate(model,dev,'cuda',8,control) for control in ('real','zero','shuffle','no_geometry','full_text')}
-    atomic_json(dict(checkpoint_sha256=file_sha256(args.output/'final.pt'),frozen_baseline=reference,results=results,
+    conditioned_dev=condition_target_language(dev,args.target_language)
+    input_only_reference=evaluate(baseline,conditioned_dev,'cuda',8)
+    results={control:evaluate(model,conditioned_dev,'cuda',8,control) for control in ('real','zero','shuffle','no_geometry','full_text')}
+    atomic_json(dict(checkpoint_sha256=file_sha256(args.output/'final.pt'),frozen_baseline=reference,input_only_reference=input_only_reference,results=results,
         navigation_run=False,warning='TRAIN development Goal scores, not actual instance accuracy or SR'),args.output/'development.json')
     atomic_json(dict(status='complete',strict_original_deployment_load=True),args.output/'status.json')
     print(json.dumps(dict(status='complete',results={key:value['metrics'] for key,value in results.items()})),flush=True)
