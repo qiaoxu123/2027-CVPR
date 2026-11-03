@@ -1,0 +1,196 @@
+{
+  "all": {
+    "episodes": 2470,
+    "successes": 1206,
+    "SR": 0.4882591093117409,
+    "OSR": 0.5708502024291497,
+    "SPL": 0.46954978922372115,
+    "NE": 28.728203559539438,
+    "nDTW": 0.3052015229347964,
+    "sr_wilson95": [
+      0.4685797740939963,
+      0.5079749077781195
+    ],
+    "maps": 23
+  },
+  "by_relation": {
+    "direct_geometry": {
+      "episodes": 1161,
+      "successes": 536,
+      "SR": 0.4616709732988803,
+      "OSR": 0.5417743324720069,
+      "SPL": 0.4454721365579916,
+      "NE": 28.195629050564065,
+      "nDTW": 0.3002031000175658,
+      "sr_wilson95": [
+        0.4331681837745075,
+        0.4904265686906861
+      ],
+      "maps": 23
+    },
+    "indirect_geometry": {
+      "episodes": 771,
+      "successes": 391,
+      "SR": 0.5071335927367056,
+      "OSR": 0.5992217898832685,
+      "SPL": 0.48696563559943157,
+      "NE": 28.97081013166852,
+      "nDTW": 0.30757644546997803,
+      "sr_wilson95": [
+        0.47189619826786144,
+        0.5423002542770784
+      ],
+      "maps": 23
+    },
+    "no_confirmed_anchor": {
+      "episodes": 6,
+      "successes": 1,
+      "SR": 0.16666666666666666,
+      "OSR": 0.3333333333333333,
+      "SPL": 0.1655972357153683,
+      "NE": 58.51625726627876,
+      "nDTW": 0.3185973151452935,
+      "sr_wilson95": [
+        0.030053369748306635,
+        0.5635028221864702
+      ],
+      "maps": 5
+    },
+    "uncertain": {
+      "episodes": 532,
+      "successes": 278,
+      "SR": 0.5225563909774437,
+      "OSR": 0.5958646616541353,
+      "SPL": 0.5002833465738891,
+      "NE": 29.20290471662298,
+      "nDTW": 0.3125168029705423,
+      "sr_wilson95": [
+        0.48010243932083946,
+        0.5646869281402382
+      ],
+      "maps": 22
+    }
+  },
+  "direct_by_target": {
+    "Building": {
+      "episodes": 698,
+      "successes": 287,
+      "SR": 0.41117478510028654,
+      "OSR": 0.505730659025788,
+      "SPL": 0.39584033648686034,
+      "NE": 29.993581591589926,
+      "nDTW": 0.29114075534041833,
+      "sr_wilson95": [
+        0.37525489544392115,
+        0.44806702656342584
+      ],
+      "maps": 22
+    },
+    "Car": {
+      "episodes": 351,
+      "successes": 195,
+      "SR": 0.5555555555555556,
+      "OSR": 0.6182336182336182,
+      "SPL": 0.539356130781677,
+      "NE": 23.85112539001146,
+      "nDTW": 0.3296823416215194,
+      "sr_wilson95": [
+        0.5032490908850236,
+        0.6066591485005755
+      ],
+      "maps": 21
+    },
+    "Ground": {
+      "episodes": 75,
+      "successes": 33,
+      "SR": 0.44,
+      "OSR": 0.5066666666666667,
+      "SPL": 0.4189941550842338,
+      "NE": 32.390354068450264,
+      "nDTW": 0.2511538369258888,
+      "sr_wilson95": [
+        0.3333145749124916,
+        0.5525322861854451
+      ],
+      "maps": 8
+    },
+    "Parking": {
+      "episodes": 37,
+      "successes": 21,
+      "SR": 0.5675675675675675,
+      "OSR": 0.5675675675675675,
+      "SPL": 0.5448116794679349,
+      "NE": 26.988751614792346,
+      "nDTW": 0.2909327625455924,
+      "sr_wilson95": [
+        0.4091418109016808,
+        0.7132828072284269
+      ],
+      "maps": 8
+    }
+  },
+  "direct_map_bootstrap95": [
+    0.41160949868073876,
+    0.500873616773442
+  ],
+  "model": "GraphNav-V1 Stage1; initialized from verified A3 Epoch14 and pretrained controller; bounded visual residual + causal quality history; original Guarded-Blend, no active sensing",
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "protocol": {
+    "sbf_source": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source",
+    "config": "/home/rental/20260922_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+    "checkpoint": "/home/rental/20260922_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+    "data_root": "/home/rental/20260922_1/Workspace/DATA/sbfnav-data",
+    "split": "val_seen",
+    "frozen_final_candidate": "full_resolution_384/frozen_resolution.json",
+    "max_episodes": null,
+    "output": "full_resolution_384/val_seen",
+    "model": "graphnav-v1",
+    "stage1_resolution_eval": true,
+    "stage1_save_fields": false,
+    "profile": false,
+    "stage1_diagnostic": false,
+    "stage1_grid_size": 384,
+    "stage1_visual_control": "real",
+    "stage1_history_control": "checkpoint",
+    "disable_joint_active": false,
+    "joint_execution": "checkpoint",
+    "reference_a3_checkpoint": null,
+    "dynamic_checkpoint": null,
+    "evidence_checkpoint": null,
+    "active_observation": false,
+    "active_max_actions": 2,
+    "joint_active_observation": false,
+    "joint_stop_guard_m": 20.0,
+    "joint_stop_threshold": null,
+    "joint_visual_control": "full",
+    "visual_checkpoint": null,
+    "visual_history": false,
+    "disable_visual": false,
+    "graph_control": "full",
+    "visual_control": "full",
+    "observed_cache": null,
+    "evaluation_concurrency": 1,
+    "head_checkpoint": null,
+    "stop_threshold": 0.3,
+    "explore_candidates": 0,
+    "head_execution": "guarded-blend"
+  },
+  "classifier": "Unmodified TRAIN association classifier, automatic not human gold",
+  "annotation_usage": "Posthoc target category and explicit identity only; no GT coordinates used in relation classification or model rerun",
+  "split": "val_seen",
+  "coverage": "2470/2470; existing rollouts, no new navigation, no tuning",
+  "parser": {
+    "spacy": "3.7.5",
+    "name": "core_web_sm",
+    "version": "3.7.1"
+  },
+  "source_sha256": {
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/processed_citynav/citynav_val_seen.json": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/full_resolution_384/val_seen/eval_started.json": "cb2632b299b3ab678666da095e44a85e65ec812ca699beb3e5594876330463ef",
+    "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/full_resolution_384/val_seen/metrics.json": "61dd3e775e8f49fad65cd1f70bfb26423579589b964aa7dcbf543e7f23f081e2",
+    "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/full_resolution_384/val_seen/predictions.jsonl": "8a7f94979d92e1db7f15b74527244c272b8f2edd441982476a9c1913ea302835",
+    "scripts/analyze_instruction_landmark_association.py": "018054a786fc60517479e7d8b2732e936b752cf148cd477ac5b9c83498c11aa1",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/report_direct_relation_navigation.py": "eb7d073e543f4faffe2564b8100f4b3e320312168a663b6339ce773179b363f8"
+  }
+}
