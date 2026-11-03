@@ -1,0 +1,358 @@
+{
+  "cases": 27,
+  "maps": 9,
+  "common_center_subset": 19,
+  "a0": {
+    "correct": 19,
+    "ne_m": 17.105386296908062
+  },
+  "methods": {
+    "Native144": {
+      "correct": 24,
+      "goal_r1": 0.8888888888888888,
+      "goal_ne_m": 10.768603488251015,
+      "corrected_a0": 5,
+      "harmed_a0": 0,
+      "corrected_144": 0,
+      "harmed_144": 0,
+      "proxies": {
+        "cosine": {
+          "-2": {
+            "present": 15,
+            "raw_center_support": 15,
+            "top1": 1,
+            "top5": 9,
+            "top15": 12,
+            "conditional_top1": 0.06666666666666667,
+            "mrr": 0.14138417407565887,
+            "common_top1": 1,
+            "common_top5": 9
+          },
+          "0": {
+            "present": 19,
+            "raw_center_support": 20,
+            "top1": 3,
+            "top5": 12,
+            "top15": 16,
+            "conditional_top1": 0.15789473684210525,
+            "mrr": 0.24235419171234318,
+            "common_top1": 3,
+            "common_top5": 12
+          },
+          "2": {
+            "present": 22,
+            "raw_center_support": 22,
+            "top1": 3,
+            "top5": 13,
+            "top15": 18,
+            "conditional_top1": 0.13636363636363635,
+            "mrr": 0.27249822463415385,
+            "common_top1": 3,
+            "common_top5": 12
+          }
+        },
+        "visual_score": {
+          "-2": {
+            "present": 15,
+            "raw_center_support": 15,
+            "top1": 1,
+            "top5": 7,
+            "top15": 11,
+            "conditional_top1": 0.06666666666666667,
+            "mrr": 0.13330637320975486,
+            "common_top1": 1,
+            "common_top5": 7
+          },
+          "0": {
+            "present": 19,
+            "raw_center_support": 20,
+            "top1": 2,
+            "top5": 9,
+            "top15": 14,
+            "conditional_top1": 0.10526315789473684,
+            "mrr": 0.18193953017624515,
+            "common_top1": 2,
+            "common_top5": 9
+          },
+          "2": {
+            "present": 22,
+            "raw_center_support": 22,
+            "top1": 3,
+            "top5": 11,
+            "top15": 19,
+            "conditional_top1": 0.13636363636363635,
+            "mrr": 0.24516998285114225,
+            "common_top1": 3,
+            "common_top5": 10
+          }
+        }
+      }
+    },
+    "Native576": {
+      "correct": 24,
+      "goal_r1": 0.8888888888888888,
+      "goal_ne_m": 10.142966504450198,
+      "corrected_a0": 5,
+      "harmed_a0": 0,
+      "corrected_144": 0,
+      "harmed_144": 0,
+      "proxies": {
+        "cosine": {
+          "-2": {
+            "present": 25,
+            "raw_center_support": 25,
+            "top1": 9,
+            "top5": 15,
+            "top15": 21,
+            "conditional_top1": 0.36,
+            "mrr": 0.44173802889831476,
+            "common_top1": 7,
+            "common_top5": 11
+          },
+          "0": {
+            "present": 26,
+            "raw_center_support": 26,
+            "top1": 10,
+            "top5": 18,
+            "top15": 22,
+            "conditional_top1": 0.38461538461538464,
+            "mrr": 0.4895775350711543,
+            "common_top1": 7,
+            "common_top5": 13
+          },
+          "2": {
+            "present": 27,
+            "raw_center_support": 27,
+            "top1": 10,
+            "top5": 19,
+            "top15": 23,
+            "conditional_top1": 0.37037037037037035,
+            "mrr": 0.5019232140834999,
+            "common_top1": 7,
+            "common_top5": 13
+          }
+        },
+        "visual_score": {
+          "-2": {
+            "present": 25,
+            "raw_center_support": 25,
+            "top1": 0,
+            "top5": 4,
+            "top15": 11,
+            "conditional_top1": 0.0,
+            "mrr": 0.09804622979118359,
+            "common_top1": 0,
+            "common_top5": 3
+          },
+          "0": {
+            "present": 26,
+            "raw_center_support": 26,
+            "top1": 1,
+            "top5": 6,
+            "top15": 13,
+            "conditional_top1": 0.038461538461538464,
+            "mrr": 0.1463476975050856,
+            "common_top1": 1,
+            "common_top5": 5
+          },
+          "2": {
+            "present": 27,
+            "raw_center_support": 27,
+            "top1": 1,
+            "top5": 7,
+            "top15": 16,
+            "conditional_top1": 0.037037037037037035,
+            "mrr": 0.17634606988105228,
+            "common_top1": 1,
+            "common_top5": 6
+          }
+        }
+      }
+    },
+    "Native144Shuffle": {
+      "correct": 23,
+      "goal_r1": 0.8518518518518519,
+      "goal_ne_m": 14.830168123598453,
+      "corrected_a0": 4,
+      "harmed_a0": 0,
+      "corrected_144": 1,
+      "harmed_144": 2,
+      "proxies": {
+        "cosine": {
+          "-2": {
+            "present": 15,
+            "raw_center_support": 15,
+            "top1": 0,
+            "top5": 0,
+            "top15": 1,
+            "conditional_top1": 0.0,
+            "mrr": 0.015675357771074486,
+            "common_top1": 0,
+            "common_top5": 0
+          },
+          "0": {
+            "present": 19,
+            "raw_center_support": 20,
+            "top1": 0,
+            "top5": 0,
+            "top15": 2,
+            "conditional_top1": 0.0,
+            "mrr": 0.021826168386727546,
+            "common_top1": 0,
+            "common_top5": 0
+          },
+          "2": {
+            "present": 22,
+            "raw_center_support": 22,
+            "top1": 0,
+            "top5": 0,
+            "top15": 3,
+            "conditional_top1": 0.0,
+            "mrr": 0.0288916534332424,
+            "common_top1": 0,
+            "common_top5": 0
+          }
+        },
+        "visual_score": {
+          "-2": {
+            "present": 15,
+            "raw_center_support": 15,
+            "top1": 1,
+            "top5": 2,
+            "top15": 4,
+            "conditional_top1": 0.06666666666666667,
+            "mrr": 0.07263474839170629,
+            "common_top1": 1,
+            "common_top5": 2
+          },
+          "0": {
+            "present": 19,
+            "raw_center_support": 20,
+            "top1": 2,
+            "top5": 3,
+            "top15": 4,
+            "conditional_top1": 0.10526315789473684,
+            "mrr": 0.10937757467701623,
+            "common_top1": 2,
+            "common_top5": 3
+          },
+          "2": {
+            "present": 22,
+            "raw_center_support": 22,
+            "top1": 2,
+            "top5": 3,
+            "top15": 4,
+            "conditional_top1": 0.09090909090909091,
+            "mrr": 0.11521559598500417,
+            "common_top1": 2,
+            "common_top5": 3
+          }
+        }
+      }
+    },
+    "Native576Shuffle": {
+      "correct": 22,
+      "goal_r1": 0.8148148148148148,
+      "goal_ne_m": 13.466655139569882,
+      "corrected_a0": 4,
+      "harmed_a0": 1,
+      "corrected_144": 0,
+      "harmed_144": 2,
+      "proxies": {
+        "cosine": {
+          "-2": {
+            "present": 25,
+            "raw_center_support": 25,
+            "top1": 0,
+            "top5": 0,
+            "top15": 1,
+            "conditional_top1": 0.0,
+            "mrr": 0.015881680476490006,
+            "common_top1": 0,
+            "common_top5": 0
+          },
+          "0": {
+            "present": 26,
+            "raw_center_support": 26,
+            "top1": 0,
+            "top5": 0,
+            "top15": 1,
+            "conditional_top1": 0.0,
+            "mrr": 0.016678549987489952,
+            "common_top1": 0,
+            "common_top5": 0
+          },
+          "2": {
+            "present": 27,
+            "raw_center_support": 27,
+            "top1": 0,
+            "top5": 0,
+            "top15": 2,
+            "conditional_top1": 0.0,
+            "mrr": 0.019685261169920885,
+            "common_top1": 0,
+            "common_top5": 0
+          }
+        },
+        "visual_score": {
+          "-2": {
+            "present": 25,
+            "raw_center_support": 25,
+            "top1": 0,
+            "top5": 2,
+            "top15": 2,
+            "conditional_top1": 0.0,
+            "mrr": 0.0445952110286584,
+            "common_top1": 0,
+            "common_top5": 1
+          },
+          "0": {
+            "present": 26,
+            "raw_center_support": 26,
+            "top1": 0,
+            "top5": 3,
+            "top15": 3,
+            "conditional_top1": 0.0,
+            "mrr": 0.05415727784113112,
+            "common_top1": 0,
+            "common_top5": 2
+          },
+          "2": {
+            "present": 27,
+            "raw_center_support": 27,
+            "top1": 0,
+            "top5": 4,
+            "top15": 4,
+            "conditional_top1": 0.0,
+            "mrr": 0.07332678757941168,
+            "common_top1": 0,
+            "common_top5": 3
+          }
+        }
+      }
+    }
+  },
+  "runtime": {
+    "medians": {
+      "preprocess_seconds": 0.0038932878524065018,
+      "encoder_seconds": 0.011397558730095625,
+      "pool144_seconds": 0.002387082204222679,
+      "pool576_seconds": 0.00495179183781147
+    },
+    "head_and_export_median": {
+      "Native144": 0.0023105530999600887,
+      "Native576": 0.0021727047860622406,
+      "Native144Shuffle": 0.002106316853314638,
+      "Native576Shuffle": 0.0021806750446558
+    },
+    "peak_gpu_gib": 3.4503960609436035,
+    "pooling_shape_min_cosine": 0.0
+  },
+  "warning": "Annotation-selected TRAIN27 AI weak appearance boxes only. Proxies are lattice-center ranking, NOT detector recall, verified instance accuracy or navigation SR.",
+  "sha256": {
+    "predictions": "f5c214b7aab6c176c1ed93732b154192a928e6c2c3e8c098734ab7adb5fa6059",
+    "seal": "d87bf3635a16a2f73777f08e6b4ba0836834db8e355af2fe963ef6b4616bd96c",
+    "annotations": "df0fb62d6b09d0321e663f420837db8c493d84580190d2dd04c74fdd9e7647aa",
+    "producer": "be1344b117eacf19fd1888507a52879b9edc09decb4db837498f67318191fdc6"
+  }
+}
