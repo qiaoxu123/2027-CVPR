@@ -1,0 +1,32 @@
+{
+  "tasks_sha256": "e87557abc208849e610351e0dea263b5c2f6c434ddf141d623cbeaf92ef3dd63",
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "methods": [
+    "E3_visual_only",
+    "E1_neutral_context"
+  ],
+  "camera_yaw": "native per-pose yaw",
+  "zero_A3_prior": true,
+  "zero_A3_candidate_context": true,
+  "named_polygon_input_E3": false,
+  "sigma_oracle_m": 20.0,
+  "visual_gain": "unchanged checkpoint",
+  "source_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_visual_only_landmark_navigation.py": "939bfebd3edddbe97422a78f380867296ae1b6e24a98387f97f003845014d743",
+    "graphnav/visual_only_diagnostic.py": "b2e8bc3bed6fd1a6d816d18b88ad4800fb9b8bfae4d765c2c92ebf4c3dc75af0",
+    "graphnav/landmark_navigation_diagnostic.py": "83f92dac030a65535f6d4f61fe8bfaf54f6f56b4adea389888ef28b4607a949f",
+    "graphnav/a3_runtime.py": "2c0f9be782416b23b3215887e0381460eca10043858999f9b27163d631b0a27c",
+    "graphnav/closedloop.py": "440529a7cdc6ed73b71647fd3192edf6ebc4bb826611c705064ae6eb34fa4d7e"
+  }
+}

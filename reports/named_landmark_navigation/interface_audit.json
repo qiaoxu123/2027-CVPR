@@ -1,0 +1,60 @@
+{
+  "train_tasks": 22002,
+  "train_own_target_named_mentions": 86,
+  "train_own_target_named_mention_classes": {
+    "indirect_geometry": 21,
+    "uncertain": 17,
+    "direct_geometry": 47,
+    "direct_identity": 1
+  },
+  "train_parsed_direct_identity": 1,
+  "other_types": {
+    "Building+TrafficRoad": 3,
+    "Ground": 2,
+    "Building+Footpath+TrafficRoad": 3
+  },
+  "e2_tasks_goal_changed": 3,
+  "e2_steps": 509,
+  "e2_steps_selected_goal_matches_static_top1": 498,
+  "e2_max_observed_residual_abs": 0.08926887810230255,
+  "decision_median_ms": {
+    "E1": 45.198684092611074,
+    "E2": 44.207660015672445
+  },
+  "strict_polygon_inside_threshold_m": 0.001,
+  "source_target_geometry_used": false,
+  "caveat": "TRAIN identity metadata used only in this distribution audit; automatic own-name counts are not human semantic gold.",
+  "failure_grid_representability": [
+    {
+      "index": 0,
+      "name": "Celine Grove",
+      "min_available_grid_polygon_distance_m": 0.0,
+      "grid_cells_within20": 12,
+      "initial_predicted_goal_polygon_distance_m": 26.007136704853973,
+      "final_NE": 26.007103400918545,
+      "OSR": 0.0
+    },
+    {
+      "index": 1,
+      "name": "St. Teresa of the Child Jesus Catholic Church",
+      "min_available_grid_polygon_distance_m": 0.0,
+      "grid_cells_within20": 33,
+      "initial_predicted_goal_polygon_distance_m": 24.970397577566455,
+      "final_NE": 24.970425196511613,
+      "OSR": 0.0
+    },
+    {
+      "index": 39,
+      "name": "Park Lodge",
+      "min_available_grid_polygon_distance_m": 0.0,
+      "grid_cells_within20": 15,
+      "initial_predicted_goal_polygon_distance_m": 23.68528234872203,
+      "final_NE": 23.68528234872203,
+      "OSR": 1.0
+    }
+  ],
+  "e2_initial_static_correct": 61,
+  "e2_initial_dynamic_correct": 61,
+  "e2_initial_visual_corrections": 0,
+  "e2_initial_visual_harms": 0
+}

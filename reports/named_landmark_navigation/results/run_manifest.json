@@ -1,0 +1,32 @@
+{
+  "checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "selection_sha256": "eef936ec3ea6488ae232db15ab6756184756e7c2e53edf873bd5e77fe0814304",
+  "tasks_sha256": "e87557abc208849e610351e0dea263b5c2f6c434ddf141d623cbeaf92ef3dd63",
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "camera_yaw": "original per-pose native yaw; no rotation override",
+  "methods": [
+    "E1",
+    "E2"
+  ],
+  "goal_definition": "Public named polygon union clipped to map; SR final distance<=20m, OSR ever<=20m",
+  "runner_sha256": "45989329a81af7be9f381e8082cddcd2f005f6efa80f4070e483bc2f1a5a1c6c",
+  "source_sha256": {
+    "graphnav/landmark_navigation_diagnostic.py": "83f92dac030a65535f6d4f61fe8bfaf54f6f56b4adea389888ef28b4607a949f",
+    "graphnav/stage1_runtime.py": "f2985f0933efe6db69b449066b50fcf709c93110631160cfd45b041c142a38cf",
+    "graphnav/a3_runtime.py": "2c0f9be782416b23b3215887e0381460eca10043858999f9b27163d631b0a27c",
+    "graphnav/closedloop.py": "440529a7cdc6ed73b71647fd3192edf6ebc4bb826611c705064ae6eb34fa4d7e",
+    "graphnav/renderer.py": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747",
+    "graphnav/stage1.py": "2649d59bfa66e20b84016132eee8a2562714e8e7d4b917bfa76e8749a90f24da"
+  },
+  "public_catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+}

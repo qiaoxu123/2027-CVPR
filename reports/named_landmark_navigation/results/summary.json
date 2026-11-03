@@ -1,0 +1,2303 @@
+{
+  "summary": {
+    "E1": {
+      "n": 64,
+      "successes": 64,
+      "SR": 1.0,
+      "OSR": 1.0,
+      "NE": 0.00013603265263706525,
+      "terminations": {
+        "policy_stop": 63,
+        "horizon": 1
+      },
+      "ever_correct_goal": 64,
+      "first_goal_correct": 64,
+      "final_goal_correct": 64,
+      "entered_polygon": 63,
+      "near5m": 64
+    },
+    "E2": {
+      "n": 64,
+      "successes": 61,
+      "SR": 0.953125,
+      "OSR": 0.96875,
+      "NE": 4.7806245201551665,
+      "terminations": {
+        "policy_stop": 64
+      },
+      "ever_correct_goal": 61,
+      "first_goal_correct": 61,
+      "final_goal_correct": 61,
+      "entered_polygon": 24,
+      "near5m": 40
+    }
+  },
+  "by_category": {
+    "E1": {
+      "Building": {
+        "n": 32,
+        "successes": 32,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 0.00011560445630235494,
+        "terminations": {
+          "policy_stop": 32
+        },
+        "ever_correct_goal": 32,
+        "first_goal_correct": 32,
+        "final_goal_correct": 32,
+        "entered_polygon": 31,
+        "near5m": 32
+      },
+      "Road": {
+        "n": 24,
+        "successes": 24,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 0.0001420347025953332,
+        "terminations": {
+          "policy_stop": 24
+        },
+        "ever_correct_goal": 24,
+        "first_goal_correct": 24,
+        "final_goal_correct": 24,
+        "entered_polygon": 24,
+        "near5m": 24
+      },
+      "Other": {
+        "n": 8,
+        "successes": 8,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 0.0001997392881011026,
+        "terminations": {
+          "policy_stop": 7,
+          "horizon": 1
+        },
+        "ever_correct_goal": 8,
+        "first_goal_correct": 8,
+        "final_goal_correct": 8,
+        "entered_polygon": 8,
+        "near5m": 8
+      }
+    },
+    "E2": {
+      "Building": {
+        "n": 32,
+        "successes": 30,
+        "SR": 0.9375,
+        "OSR": 0.96875,
+        "NE": 4.793808219417738,
+        "terminations": {
+          "policy_stop": 32
+        },
+        "ever_correct_goal": 30,
+        "first_goal_correct": 30,
+        "final_goal_correct": 30,
+        "entered_polygon": 14,
+        "near5m": 22
+      },
+      "Road": {
+        "n": 24,
+        "successes": 23,
+        "SR": 0.9583333333333334,
+        "OSR": 0.9583333333333334,
+        "NE": 5.1900449596426705,
+        "terminations": {
+          "policy_stop": 24
+        },
+        "ever_correct_goal": 23,
+        "first_goal_correct": 23,
+        "final_goal_correct": 23,
+        "entered_polygon": 6,
+        "near5m": 13
+      },
+      "Other": {
+        "n": 8,
+        "successes": 8,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 3.4996284046423725,
+        "terminations": {
+          "policy_stop": 8
+        },
+        "ever_correct_goal": 8,
+        "first_goal_correct": 8,
+        "final_goal_correct": 8,
+        "entered_polygon": 4,
+        "near5m": 5
+      }
+    }
+  },
+  "by_ambiguity": {
+    "E1": {
+      "single_polygon": {
+        "n": 41,
+        "successes": 41,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 0.00011824544023560264,
+        "terminations": {
+          "policy_stop": 41
+        },
+        "ever_correct_goal": 41,
+        "first_goal_correct": 41,
+        "final_goal_correct": 41,
+        "entered_polygon": 40,
+        "near5m": 41
+      },
+      "multi_polygon": {
+        "n": 23,
+        "successes": 23,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 0.00016774029213532468,
+        "terminations": {
+          "policy_stop": 22,
+          "horizon": 1
+        },
+        "ever_correct_goal": 23,
+        "first_goal_correct": 23,
+        "final_goal_correct": 23,
+        "entered_polygon": 23,
+        "near5m": 23
+      }
+    },
+    "E2": {
+      "single_polygon": {
+        "n": 41,
+        "successes": 38,
+        "SR": 0.926829268292683,
+        "OSR": 0.9512195121951219,
+        "NE": 5.3755852204582855,
+        "terminations": {
+          "policy_stop": 41
+        },
+        "ever_correct_goal": 38,
+        "first_goal_correct": 38,
+        "final_goal_correct": 38,
+        "entered_polygon": 16,
+        "near5m": 26
+      },
+      "multi_polygon": {
+        "n": 23,
+        "successes": 23,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 3.720042402223519,
+        "terminations": {
+          "policy_stop": 23
+        },
+        "ever_correct_goal": 23,
+        "first_goal_correct": 23,
+        "final_goal_correct": 23,
+        "entered_polygon": 8,
+        "near5m": 14
+      }
+    }
+  },
+  "failure_tags_nonexclusive": {
+    "E1": {},
+    "E2": {
+      "never_correct_landmark_goal": 3,
+      "stopped_outside_landmark20m": 3,
+      "entered20m_but_failed_to_finish_there": 1
+    }
+  },
+  "paired": {
+    "both_success": 61.0,
+    "only_E1_success": 3,
+    "only_E2_success": 0,
+    "both_fail": 0
+  },
+  "binding_audit": [
+    {
+      "index": 0,
+      "name": "Celine Grove",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 1,
+      "name": "St. Teresa of the Child Jesus Catholic Church",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 2,
+      "name": "The Food Warehouse",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 3,
+      "name": "Willmore Road",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 4,
+      "name": "Aldridge Road",
+      "polygon_count": 3,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 3,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 5,
+      "name": "Park Hotel",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 6,
+      "name": "Nobel Way",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 7,
+      "name": "Holford Drive",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 8,
+      "name": "Timet",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 9,
+      "name": "West Midlands Police Custody Suite",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 10,
+      "name": "Penhurst Avenue",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 11,
+      "name": "Perry Barr Carpets",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 12,
+      "name": "Aston Lane",
+      "polygon_count": 3,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 3,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 13,
+      "name": "NT Wholesale Cash & Carry",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 14,
+      "name": "Perry Barr Methodist Church",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 15,
+      "name": "Aston Lane",
+      "polygon_count": 2,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 16,
+      "name": "Aldridge Road",
+      "polygon_count": 9,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 9,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 17,
+      "name": "W. D. M. Cars",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 18,
+      "name": "West Midlands Police Custody Suite",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 19,
+      "name": "Inglis Building",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 20,
+      "name": "James Dyson Building",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 21,
+      "name": "Panton Street",
+      "polygon_count": 9,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 9,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 22,
+      "name": "St Peter's Terrace",
+      "polygon_count": 2,
+      "source_types": [
+        "Building",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 23,
+      "name": "Corn Exchange Street",
+      "polygon_count": 2,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 24,
+      "name": "Maitland Robinson Library",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 25,
+      "name": "Sedgwick Building",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 26,
+      "name": "The Quadrangle",
+      "polygon_count": 1,
+      "source_types": [
+        "Ground"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 27,
+      "name": "Chesterton Road",
+      "polygon_count": 6,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 6,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 28,
+      "name": "Student Castle Cambridge",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 29,
+      "name": "Victoria Road",
+      "polygon_count": 10,
+      "source_types": [
+        "Building",
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 10,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 30,
+      "name": "Catholic Church of Our Lady and the English Martyrs",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 31,
+      "name": "Drosier Road",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 32,
+      "name": "Gonville Hotel",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 33,
+      "name": "Essex House",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 34,
+      "name": "Gonville Place",
+      "polygon_count": 8,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 8,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 35,
+      "name": "YMCA",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 36,
+      "name": "Adam and Eve Street",
+      "polygon_count": 2,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 37,
+      "name": "Angel & Blume",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 38,
+      "name": "Fitzroy Street",
+      "polygon_count": 2,
+      "source_types": [
+        "Building",
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 39,
+      "name": "Park Lodge",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 40,
+      "name": "Cambridge Community Kitchen",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 41,
+      "name": "Eden Chapel",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 42,
+      "name": "Victoria Avenue",
+      "polygon_count": 4,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 4,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 43,
+      "name": "Ferry Path",
+      "polygon_count": 4,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 4,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 44,
+      "name": "Nelson Court",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 45,
+      "name": "Collier Road",
+      "polygon_count": 2,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 46,
+      "name": "Mumford Building",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 47,
+      "name": "Petersfield Mansions",
+      "polygon_count": 4,
+      "source_types": [
+        "Building",
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 4,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 48,
+      "name": "Swinhoe House",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 49,
+      "name": "Belvoir Road",
+      "polygon_count": 2,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 50,
+      "name": "Broadmeadows",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 51,
+      "name": "Woodvale Lodge",
+      "polygon_count": 2,
+      "source_types": [
+        "Building",
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 52,
+      "name": "Abbey Street",
+      "polygon_count": 4,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 4,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 53,
+      "name": "Beche Road",
+      "polygon_count": 3,
+      "source_types": [
+        "Building",
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 3,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 54,
+      "name": "Rose and Crown House",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 55,
+      "name": "Pound Hill House",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 56,
+      "name": "St Peter's Street",
+      "polygon_count": 2,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 2,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 57,
+      "name": "Inglis Building",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 58,
+      "name": "Scholars' Garden",
+      "polygon_count": 1,
+      "source_types": [
+        "Ground"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 59,
+      "name": "The Fen Causeway",
+      "polygon_count": 10,
+      "source_types": [
+        "Bridge",
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 3,
+      "runtime_resolved_count": 10,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 60,
+      "name": "Fitzwilliam Pharmacy",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 61,
+      "name": "Silver Street",
+      "polygon_count": 5,
+      "source_types": [
+        "Footpath",
+        "TrafficRoad"
+      ],
+      "components": 2,
+      "runtime_resolved_count": 5,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 62,
+      "name": "Benson Hall",
+      "polygon_count": 1,
+      "source_types": [
+        "Building"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    },
+    {
+      "index": 63,
+      "name": "Richmond Terrace",
+      "polygon_count": 1,
+      "source_types": [
+        "TrafficRoad"
+      ],
+      "components": 1,
+      "runtime_resolved_count": 1,
+      "missing_public_ids": [],
+      "unexpected_public_ids": []
+    }
+  ],
+  "stop_at_first_entry": [
+    {
+      "index": 0,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.4045944809913635,
+      "predicted_goal_distance": 2.0391652584075928,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 1,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.40083616971969604,
+      "predicted_goal_distance": 1.1735002994537354,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 2,
+      "method": "E1",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 0.4581959843635559,
+      "predicted_goal_distance": 3.192944288253784,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 2,
+      "method": "E2",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 0.5088784694671631,
+      "predicted_goal_distance": 3.344717502593994,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 3,
+      "method": "E1",
+      "first_entry_step": 8,
+      "SR": 1.0,
+      "stop_probability": 0.36758124828338623,
+      "predicted_goal_distance": 18.921838760375977,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 3,
+      "method": "E2",
+      "first_entry_step": 9,
+      "SR": 1.0,
+      "stop_probability": 0.6523233652114868,
+      "predicted_goal_distance": 2.0158531665802,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 4,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.46596336364746094,
+      "predicted_goal_distance": 0.8418099284172058,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 4,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.44272565841674805,
+      "predicted_goal_distance": 1.9278345108032227,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 5,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.4235462546348572,
+      "predicted_goal_distance": 2.849177837371826,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 5,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.4854460060596466,
+      "predicted_goal_distance": 2.626774311065674,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 6,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.4737473428249359,
+      "predicted_goal_distance": 0.9106132984161377,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 6,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.46207737922668457,
+      "predicted_goal_distance": 0.9510647654533386,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 7,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.38592302799224854,
+      "predicted_goal_distance": 0.3565765619277954,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 7,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.512782871723175,
+      "predicted_goal_distance": 0.4627499282360077,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 8,
+      "method": "E1",
+      "first_entry_step": 8,
+      "SR": 1.0,
+      "stop_probability": 0.4932548701763153,
+      "predicted_goal_distance": 2.5831756591796875,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 8,
+      "method": "E2",
+      "first_entry_step": 8,
+      "SR": 1.0,
+      "stop_probability": 0.5283800959587097,
+      "predicted_goal_distance": 1.0618451833724976,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 9,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.3567536473274231,
+      "predicted_goal_distance": 2.899822235107422,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 9,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.22616265714168549,
+      "predicted_goal_distance": 23.12714195251465,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 10,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.397089421749115,
+      "predicted_goal_distance": 0.17147119343280792,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 10,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.013484911061823368,
+      "predicted_goal_distance": 37.45204162597656,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 11,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.17729322612285614,
+      "predicted_goal_distance": 19.87343406677246,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 11,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.2114771008491516,
+      "predicted_goal_distance": 22.259450912475586,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 12,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.2918621003627777,
+      "predicted_goal_distance": 17.336320877075195,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 12,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 4.5592016249429435e-05,
+      "predicted_goal_distance": 56.49675369262695,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 13,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.26978132128715515,
+      "predicted_goal_distance": 19.13128089904785,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 13,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.08009589463472366,
+      "predicted_goal_distance": 25.050474166870117,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 14,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.3567536473274231,
+      "predicted_goal_distance": 6.684334754943848,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 14,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.25319015979766846,
+      "predicted_goal_distance": 23.0797061920166,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 15,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.32517120242118835,
+      "predicted_goal_distance": 2.098248243331909,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 15,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.34607046842575073,
+      "predicted_goal_distance": 2.018224000930786,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 16,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.3217519223690033,
+      "predicted_goal_distance": 1.3682587146759033,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 16,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.06443945318460464,
+      "predicted_goal_distance": 32.85392379760742,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 17,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.23307213187217712,
+      "predicted_goal_distance": 15.773250579833984,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 17,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.23587670922279358,
+      "predicted_goal_distance": 21.468040466308594,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 18,
+      "method": "E1",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.512782871723175,
+      "predicted_goal_distance": 2.6623404026031494,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 18,
+      "method": "E2",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.0014612769009545445,
+      "predicted_goal_distance": 50.98758316040039,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 19,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.4971606731414795,
+      "predicted_goal_distance": 1.4241822957992554,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 19,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.4932548701763153,
+      "predicted_goal_distance": 2.896735191345215,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 20,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.4121444821357727,
+      "predicted_goal_distance": 11.5778226852417,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 20,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.4776443541049957,
+      "predicted_goal_distance": 0.9480092525482178,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 21,
+      "method": "E1",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.2822693884372711,
+      "predicted_goal_distance": 19.50648307800293,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 21,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.4932548701763153,
+      "predicted_goal_distance": 3.3644795417785645,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 22,
+      "method": "E1",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.3603472411632538,
+      "predicted_goal_distance": 1.1435848474502563,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 22,
+      "method": "E2",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.40083616971969604,
+      "predicted_goal_distance": 16.56804847717285,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 23,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.3785441219806671,
+      "predicted_goal_distance": 7.141983985900879,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 23,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.05672397464513779,
+      "predicted_goal_distance": 35.07955551147461,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 24,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.4737473428249359,
+      "predicted_goal_distance": 5.7906904220581055,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 24,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.38592302799224854,
+      "predicted_goal_distance": 16.22205924987793,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 25,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.25914448499679565,
+      "predicted_goal_distance": 10.590265274047852,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 25,
+      "method": "E2",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 0.3639565706253052,
+      "predicted_goal_distance": 7.279177665710449,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 26,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.4465840458869934,
+      "predicted_goal_distance": 1.4691240787506104,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 26,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.058312054723501205,
+      "predicted_goal_distance": 36.43290710449219,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 27,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.2983625829219818,
+      "predicted_goal_distance": 18.61626625061035,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 27,
+      "method": "E2",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 1.0512178683086404e-08,
+      "predicted_goal_distance": 115.96674346923828,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 28,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.4311937391757965,
+      "predicted_goal_distance": 1.7223230600357056,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 28,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.36758124828338623,
+      "predicted_goal_distance": 5.572230815887451,
+      "altitude_guard": false,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 29,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.21673516929149628,
+      "predicted_goal_distance": 11.336446762084961,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 29,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.3496149182319641,
+      "predicted_goal_distance": 0.34573373198509216,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 30,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.26671430468559265,
+      "predicted_goal_distance": 19.093162536621094,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 30,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.46207737922668457,
+      "predicted_goal_distance": 3.3048722743988037,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 31,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.4581959843635559,
+      "predicted_goal_distance": 4.475264072418213,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 31,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.05361947789788246,
+      "predicted_goal_distance": 34.85057067871094,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 32,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.4737473428249359,
+      "predicted_goal_distance": 1.1141437292099,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 32,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.5244848132133484,
+      "predicted_goal_distance": 1.3296668529510498,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 33,
+      "method": "E1",
+      "first_entry_step": 8,
+      "SR": 1.0,
+      "stop_probability": 0.7318968772888184,
+      "predicted_goal_distance": 4.576770782470703,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 33,
+      "method": "E2",
+      "first_entry_step": 8,
+      "SR": 1.0,
+      "stop_probability": 0.5166857242584229,
+      "predicted_goal_distance": 19.39540672302246,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 34,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.5049730539321899,
+      "predicted_goal_distance": 1.481446623802185,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 34,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.21541181206703186,
+      "predicted_goal_distance": 22.31000328063965,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 35,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.4971606731414795,
+      "predicted_goal_distance": 1.0910261869430542,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 35,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.5205864906311035,
+      "predicted_goal_distance": 0.7952285408973694,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 36,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.6344006657600403,
+      "predicted_goal_distance": 1.0491093397140503,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 36,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.5361599326133728,
+      "predicted_goal_distance": 12.720200538635254,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 37,
+      "method": "E1",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.48154404759407043,
+      "predicted_goal_distance": 1.0191723108291626,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 37,
+      "method": "E2",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.64520263671875,
+      "predicted_goal_distance": 1.3311421871185303,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 38,
+      "method": "E1",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 0.5400434732437134,
+      "predicted_goal_distance": 3.757369041442871,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 38,
+      "method": "E2",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 1.7331652557572852e-08,
+      "predicted_goal_distance": 89.58959197998047,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 39,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.3183516561985016,
+      "predicted_goal_distance": 1.0373749732971191,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 39,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 0.0,
+      "stop_probability": 0.002091860631480813,
+      "predicted_goal_distance": 42.30910110473633,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 40,
+      "method": "E1",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 0.5088784694671631,
+      "predicted_goal_distance": 2.810673236846924,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 40,
+      "method": "E2",
+      "first_entry_step": 7,
+      "SR": 1.0,
+      "stop_probability": 0.25914448499679565,
+      "predicted_goal_distance": 25.699867248535156,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 41,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.4581959843635559,
+      "predicted_goal_distance": 1.3492786884307861,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 41,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.5747218728065491,
+      "predicted_goal_distance": 0.9978331327438354,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 42,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.37122097611427307,
+      "predicted_goal_distance": 0.7400784492492676,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 42,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.40083616971969604,
+      "predicted_goal_distance": 0.25981083512306213,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 43,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.2918621003627777,
+      "predicted_goal_distance": 0.6912813186645508,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 43,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.3286091685295105,
+      "predicted_goal_distance": 0.6005991101264954,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 44,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.3183516561985016,
+      "predicted_goal_distance": 1.702194094657898,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 44,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.2487841695547104,
+      "predicted_goal_distance": 17.173648834228516,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 45,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.2886433005332947,
+      "predicted_goal_distance": 12.412529945373535,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 45,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.2854456603527069,
+      "predicted_goal_distance": 24.506031036376953,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 46,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.4350300431251526,
+      "predicted_goal_distance": 2.6723737716674805,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 46,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.3286091685295105,
+      "predicted_goal_distance": 17.395723342895508,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 47,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.24732695519924164,
+      "predicted_goal_distance": 4.172138214111328,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 47,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.26978132128715515,
+      "predicted_goal_distance": 2.0910842418670654,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 48,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.3603472411632538,
+      "predicted_goal_distance": 1.2992600202560425,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 48,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.40083616971969604,
+      "predicted_goal_distance": 6.945349216461182,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 49,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.43887418508529663,
+      "predicted_goal_distance": 15.90369701385498,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 49,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.15057384967803955,
+      "predicted_goal_distance": 30.386611938476562,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 50,
+      "method": "E1",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.23029081523418427,
+      "predicted_goal_distance": 17.423946380615234,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 50,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.3531761169433594,
+      "predicted_goal_distance": 2.9042975902557373,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 51,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.15157581865787506,
+      "predicted_goal_distance": 12.139162063598633,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 51,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.2983625829219818,
+      "predicted_goal_distance": 3.1263210773468018,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 52,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.30164381861686707,
+      "predicted_goal_distance": 0.8626711368560791,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 52,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.023697832599282265,
+      "predicted_goal_distance": 36.013404846191406,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 53,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.4504488408565521,
+      "predicted_goal_distance": 1.9862278699874878,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 53,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.39335474371910095,
+      "predicted_goal_distance": 12.811172485351562,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 54,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.2854456603527069,
+      "predicted_goal_distance": 1.3452692031860352,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 54,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.3390328288078308,
+      "predicted_goal_distance": 0.9075426459312439,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 55,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.3217519223690033,
+      "predicted_goal_distance": 0.5819662809371948,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 55,
+      "method": "E2",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.3531761169433594,
+      "predicted_goal_distance": 5.973357677459717,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 56,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.37122097611427307,
+      "predicted_goal_distance": 0.9158661365509033,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 56,
+      "method": "E2",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.38222676515579224,
+      "predicted_goal_distance": 3.0776803493499756,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 57,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.6160977482795715,
+      "predicted_goal_distance": 1.3205093145370483,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 57,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.6868680715560913,
+      "predicted_goal_distance": 6.53061580657959,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 58,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.3390328288078308,
+      "predicted_goal_distance": 12.774038314819336,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 58,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 3.233001189073548e-05,
+      "predicted_goal_distance": 61.495174407958984,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 59,
+      "method": "E1",
+      "first_entry_step": 1,
+      "SR": 1.0,
+      "stop_probability": 0.25024712085723877,
+      "predicted_goal_distance": 1.3065176010131836,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 59,
+      "method": "E2",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 5.3385242893000395e-08,
+      "predicted_goal_distance": 96.751220703125,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 60,
+      "method": "E1",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.5283800959587097,
+      "predicted_goal_distance": 16.273527145385742,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 60,
+      "method": "E2",
+      "first_entry_step": 3,
+      "SR": 1.0,
+      "stop_probability": 0.5823414325714111,
+      "predicted_goal_distance": 12.689043998718262,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 61,
+      "method": "E1",
+      "first_entry_step": 2,
+      "SR": 1.0,
+      "stop_probability": 0.2728705108165741,
+      "predicted_goal_distance": 17.7097225189209,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 61,
+      "method": "E2",
+      "first_entry_step": 5,
+      "SR": 1.0,
+      "stop_probability": 0.15157581865787506,
+      "predicted_goal_distance": 27.68609619140625,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 62,
+      "method": "E1",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.5400434732437134,
+      "predicted_goal_distance": 0.8973697423934937,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 62,
+      "method": "E2",
+      "first_entry_step": 6,
+      "SR": 1.0,
+      "stop_probability": 0.5708984136581421,
+      "predicted_goal_distance": 3.7442336082458496,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 63,
+      "method": "E1",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.5322720408439636,
+      "predicted_goal_distance": 4.444004058837891,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    },
+    {
+      "index": 63,
+      "method": "E2",
+      "first_entry_step": 4,
+      "SR": 1.0,
+      "stop_probability": 0.2140943706035614,
+      "predicted_goal_distance": 25.95744514465332,
+      "altitude_guard": true,
+      "note": "Original Stop guard: probability>=0.3, predicted-point distance<=0.001m, legal altitude"
+    }
+  ],
+  "runtime": {
+    "complete": true,
+    "summary": {
+      "E1": {
+        "episodes": 64,
+        "successes": 64.0,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 0.00013603265263706525,
+        "terminations": {
+          "policy_stop": 63,
+          "horizon": 1
+        }
+      },
+      "E2": {
+        "episodes": 64,
+        "successes": 61.0,
+        "SR": 0.953125,
+        "OSR": 0.96875,
+        "NE": 4.7806245201551665,
+        "terminations": {
+          "policy_stop": 64
+        }
+      }
+    },
+    "seconds_current_session": 62.308936913032085,
+    "peak_gpu_allocated_gib": 3.7696003913879395,
+    "checkpoint_sha256_after": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a"
+  },
+  "paired_checks_passed": true,
+  "warnings": [
+    "Fixed64 public-name diagnostic, not official CityNav task SR.",
+    "Multiple polygons are alternatives; reaching any fragment counts, not verified instance identity.",
+    "No collision/3D visibility guarantee; original orthophoto navigation environment.",
+    "Failure tags describe recorded behavior; do not independently identify visual vs language encoder causes."
+  ]
+}

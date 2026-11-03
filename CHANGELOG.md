@@ -1,5 +1,14 @@
 # Changelog
 
+## [named-landmark-navigation-diagnostic] - 2026-11-04
+### Features
+- 新增独立公开地标名称任务E1/E2冻结闭环诊断、Polygon距离评分、可恢复记录及真实RGB轨迹图册。
+- 追加严格不执行A3、均匀先验、零几何上下文的仅视觉组及匹配Oracle接口控制；正常推理入口不变。
+### Design Rationale
+- 将公开地图Goal已知的控制能力与名称到位置预测分开；道路、多碎片地标不使用质心评价，不读取旧CityNav目标点推理。
+### Notes & Caveats
+- 64组名称级任务不是官方实例目标任务SR；原Checkpoint/默认推理入口/控制阈值不变。E2允许公开具名Polygon，不能冒充纯视觉成绩。
+
 ## [landmark-associated-train-v1] - 2026-11-04
 ### Features
 - 新增可复现TRAIN关联筛选生成器、原始/processed兼容数据及后续拟合配置；移除未找到关联和不确定类并保存逐条日志。
