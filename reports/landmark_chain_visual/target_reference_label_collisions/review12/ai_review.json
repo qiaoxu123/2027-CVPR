@@ -1,0 +1,110 @@
+[
+  {
+    "frame_key": "train_00733_0030",
+    "category": "Car",
+    "assessment": "unknown",
+    "note": "投影位于图像下缘、邻近白色车辆与树冠。原文brown及第14排/第3辆无法在当前视图核验，不作为确定像素实例正例。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_13691_0050",
+    "category": "Car",
+    "assessment": "unsafe-patch-instance-label",
+    "note": "轮廓中能看见白车，但几何正patch也靠近路面/墙体，不能保证每个紫色patch都属于白车。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_18593_0068",
+    "category": "Car",
+    "assessment": "unsafe-multiple-instances",
+    "note": "绿色Car轮廓同时覆盖红车、白车、银/灰色车辆，多个紫色patch落在不同车辆附近，不能全部当同一目标实例。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_12590_0032",
+    "category": "Building",
+    "assessment": "unsafe-pixel-mask",
+    "note": "大建筑轮廓包含庭院/停车地面，屋顶与地面都出现几何正patch；只能是粗区域监督，不能当建筑像素分割。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_09602_0026",
+    "category": "Building",
+    "assessment": "unknown",
+    "note": "目标建筑在右缘部分裁剪，轮廓和正patch含屋顶及邻近区域；无法仅凭当前片段核验完整多色建筑身份。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_10163_0020",
+    "category": "Building",
+    "assessment": "unsafe-pixel-mask",
+    "note": "屋顶大致对应，但轮廓包含临街/树木边界，正patch不全是目标屋顶。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_17188_0214",
+    "category": "Parking",
+    "assessment": "coarse-region-supported",
+    "note": "投影大体覆盖可见停车区域及车辆，可作带不确定性的功能区域提案，不是精确像素金标准。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_13970_0106",
+    "category": "Parking",
+    "assessment": "unknown",
+    "note": "Parking轮廓覆盖建筑/庭院混合区域；无法把全部正patch视为可见停车地面。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_14014_0015",
+    "category": "Parking",
+    "assessment": "coarse-region-supported",
+    "note": "停车场及车辆大体对应，夹有绿化及裁剪边界，适合区域级弱监督而非实例像素真值。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_06311_0009",
+    "category": "Ground",
+    "assessment": "unknown",
+    "note": "Ground目标大部分超出上边界，仅有少量草地可见；不足以核验完整运动场。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_12270_0007",
+    "category": "Ground",
+    "assessment": "coarse-region-supported",
+    "note": "草坪区域较清楚，正patch多位于草坪内部；边缘步道与几何配准仍有不确定性。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  },
+  {
+    "frame_key": "train_18846_0042",
+    "category": "Ground",
+    "assessment": "unknown-occlusion",
+    "note": "草带投影大部分被树冠覆盖，不能将可见树冠像素当作目标草地像素。",
+    "reviewer": "current Codex direct inspection of actual RGB panels",
+    "human_verified": false,
+    "pixel_gt": false
+  }
+]
