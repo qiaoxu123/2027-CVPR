@@ -21,6 +21,16 @@ from graphnav.local_chain_raster import rasterized_goal_logprob
 INPUTS=('prior_logits','local_uv','image_features','target_text','context_text','public_geometry','quality','local_valid')
 
 
+def merge_fit_observations(base, extra):
+    keys={r['task_key'] for r in base}
+    if any(r['task_key'] not in keys for r in extra):
+        raise ValueError('non-fit target in additional observations')
+    frames=[r['frame_key'] for r in base+extra]
+    if len(set(frames))!=len(frames):
+        raise ValueError('duplicate fit observations')
+    return base+extra
+
+
 def records(cache,labels,subset,role_vectors=None,role_mode='full'):
     meta=json.loads((cache/'manifest.json').read_text())
     if not meta['complete']:raise ValueError('complete feature cache required')
@@ -115,6 +125,8 @@ def main():
     p.add_argument('--architecture',choices=('legacy','visual-chain-v2'),default='legacy')
     p.add_argument('--role-vectors',type=Path)
     p.add_argument('--role-mode',choices=('full','reference'),default='full')
+    p.add_argument('--extra-fit-cache',type=Path)
+    p.add_argument('--extra-fit-labels',type=Path)
     a=p.parse_args()
     torch.manual_seed(a.seed);np.random.seed(a.seed)
     torch.set_num_threads(4)
@@ -122,6 +134,7 @@ def main():
     role_vectors=torch.load(a.role_vectors,map_location='cpu',weights_only=True) if a.role_vectors else None
     if a.architecture=='visual-chain-v2' and role_vectors is None:raise ValueError('explicit role vectors/phrases required')
     if a.confirm_checkpoint:
+        if a.extra_fit_cache or a.extra_fit_labels:raise ValueError('no augmentation in confirmation')
         if a.output.exists():raise FileExistsError('confirmation output already exists; no repeated evaluation')
         if not a.confirm_labels or a.fit_labels or a.dev_labels:raise ValueError('confirm labels only in confirmation mode')
         state=torch.load(a.confirm_checkpoint,map_location=a.device,weights_only=True)
@@ -136,11 +149,21 @@ def main():
     if a.output.exists() and not a.resume:raise FileExistsError('do not overwrite experiment')
     a.output.mkdir(parents=True,exist_ok=True)
     fit=records(a.cache,a.fit_labels,'fit',role_vectors,a.role_mode);dev=records(a.cache,a.dev_labels,'dev',role_vectors,a.role_mode)
+    if bool(a.extra_fit_cache)!=bool(a.extra_fit_labels):raise ValueError('both extra fit inputs required')
+    if a.extra_fit_cache:
+        original=json.loads((a.cache/'manifest.json').read_text())
+        added=json.loads((a.extra_fit_cache/'manifest.json').read_text())
+        for key in ('checkpoint_sha256','public_catalog_sha256','static_queries_sha256','roles_sha256','camera_yaw_rad','global_grid','local_candidate_count','window_patch_sizes'):
+            if original[key]!=added[key]:raise ValueError('additional feature protocol mismatch: '+key)
+        if any(value!='fit' or original['map_assignment'].get(key)!='fit' for key,value in added['map_assignment'].items()):raise ValueError('non-fit additional map')
+        fit=merge_fit_observations(fit,records(a.extra_fit_cache,a.extra_fit_labels,'fit',role_vectors,a.role_mode))
     initial={k:v.detach().cpu().clone() for k,v in model.state_dict().items()}
     optimizer=torch.optim.AdamW(model.parameters(),lr=a.lr,weight_decay=.001)
     start_epoch=0;history=[];best=(-1.,float('-inf'))
     fingerprint={key:file_sha256(path) for key,path in [('feature_manifest_sha256',a.cache/'manifest.json'),('fit_labels_sha256',a.fit_labels),('dev_labels_sha256',a.dev_labels)]}
     if a.role_vectors:fingerprint['role_vectors_sha256']=file_sha256(a.role_vectors)
+    if a.extra_fit_cache:
+        fingerprint.update(extra_feature_manifest_sha256=file_sha256(a.extra_fit_cache/'manifest.json'),extra_fit_labels_sha256=file_sha256(a.extra_fit_labels))
     if a.architecture=='visual-chain-v2':
         code_root=Path(__file__).resolve().parents[1]
         fingerprint.update(model_code_sha256=file_sha256(code_root/'graphnav/visual_chain_position.py'),

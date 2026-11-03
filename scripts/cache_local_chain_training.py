@@ -33,6 +33,18 @@ def public_query(record):
     return result
 
 
+def assign_maps(maps, frozen=None):
+    if frozen is not None:
+        if any(m not in frozen for m in maps):
+            raise ValueError('missing frozen map partition')
+        if any(frozen[m] not in ('fit','dev','confirm') for m in maps):
+            raise ValueError('invalid frozen map partition')
+        return {m:frozen[m] for m in maps}
+    maps=sorted(set(maps),key=lambda m:hashlib.sha256(('chain-split-0:'+m).encode()).hexdigest())
+    if len(maps)<9:raise ValueError('at least nine TRAIN maps for disjoint split required')
+    return {m:('fit' if i<len(maps)-6 else 'dev' if i<len(maps)-3 else 'confirm') for i,m in enumerate(maps)}
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('observations','static-queries','public-catalog','checkpoint','roles','output'):
@@ -40,6 +52,7 @@ def main():
     p.add_argument('--backbone',required=True)
     p.add_argument('--batch-size',type=int,default=4)
     p.add_argument('--device',default='cuda')
+    p.add_argument('--partition-from',type=Path,help='Preserve map_assignment from an existing feature manifest')
     a=p.parse_args()
     if a.output.exists():raise FileExistsError('do not overwrite cached evidence')
     observed=json.loads((a.observations/'manifest.json').read_text())
@@ -53,17 +66,19 @@ def main():
             record=json.loads(line);key=(record['map_name'],record['instruction'])
             if key in selected and key not in static:static[key]=public_query(record)
     if set(static)!=selected:raise ValueError('selected queries missing in verified original TRAIN protocol')
-    maps=sorted({x[0] for x in selected},key=lambda m:hashlib.sha256(('chain-split-0:'+m).encode()).hexdigest())
-    if len(maps)<9:raise ValueError('at least nine TRAIN maps for disjoint split required')
-    assignment={m:('fit' if i<len(maps)-6 else 'dev' if i<len(maps)-3 else 'confirm') for i,m in enumerate(maps)}
+    maps={x[0] for x in selected}
+    frozen=json.loads(a.partition_from.read_text())['map_assignment'] if a.partition_from else None
+    assignment=assign_maps(maps,frozen)
     a.output.mkdir(parents=True)
     meta=dict(complete=False,split='train_seen',map_assignment=assignment,
+              partition_source_sha256=file_sha256(a.partition_from) if a.partition_from else None,
               observation_manifest_sha256=file_sha256(a.observations/'manifest.json'),
               roles_sha256=file_sha256(a.roles),public_catalog_sha256=file_sha256(a.public_catalog),
               checkpoint_sha256=file_sha256(a.checkpoint),static_queries_sha256=file_sha256(a.static_queries),
               code_sha256=file_sha256(__file__), chunks=[],camera_yaw_rad=observed['fixed_camera_yaw_rad'],
               global_grid=28,local_candidate_count=144,window_patch_sizes=[1,3,7],
-              warning='Reference-trajectory TRAIN features, no closed-loop SR. World-goal weak supervision only.')
+              observation_source=observed.get('source','reference-trajectory TRAIN observations'),
+              warning='Frozen TRAIN observation features, not navigation performance. World-goal weak supervision only.')
     atomic_json(meta,a.output/'manifest.json')
     keys=list(queries)
     query_path=a.output/'public_queries.jsonl'
