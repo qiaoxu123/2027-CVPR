@@ -50,8 +50,8 @@ def evaluate(model,data,control='real',donors=None):
         x=public_inputs(batch,'cuda');extra={}
         if control=='wrong-frame':
             extra['transport_image_features']=torch.stack([donors.get(k,batch['image_features'][i]) for i,k in enumerate(batch['frame_key'])]).cuda()
-        packed,energy=model(**x,control='real' if control=='wrong-frame' else control,return_evidence=True)
-        chosen=packed[:,:784].argmax(-1).cpu();baseline=model.base(**batch_inputs(batch,'cuda'))[:,:784].argmax(-1).cpu()
+        packed,energy,base=model(**x,control='real' if control=='wrong-frame' else control,return_base=True)
+        chosen=packed[:,:784].argmax(-1).cpu();baseline=base[:,:784].argmax(-1).cpu()
         for i,c in enumerate(chosen):
             target=batch['target_world'][i];world=batch['candidate_world'][i]
             ne=float((world[c]-target).norm());old=float((world[baseline[i]]-target).norm())
@@ -100,8 +100,8 @@ def main():
     first=collate(fit[:8]);x=public_inputs(first,'cuda')
     if start==0:
         with torch.no_grad():
-            old=model.base(**batch_inputs(first,'cuda'));new=model(**x)
-        if not torch.equal(old,new):raise RuntimeError('zero initialization changed original prediction')
+            new,energy,old=model(**x,return_base=True)
+        if not torch.equal(energy,torch.zeros_like(energy)) or not torch.equal(old,new):raise RuntimeError('zero evidence changed same-call original prediction')
     atomic_json(dict(config=config,fingerprint=fingerprint,fit_frames=len(fit),trainable_parameters=sum(x.numel() for x in model.transport.parameters()),normal_inference_unchanged=True),a.output/'config.json')
     started=time.perf_counter();torch.cuda.reset_peak_memory_stats()
     for epoch in range(start,a.epochs):

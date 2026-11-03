@@ -58,7 +58,7 @@ class ReferenceTransportPositionHead(nn.Module):
         super().train(mode);self.base.eval();return self
 
     def forward(self,*,prior_logits,local_uv,image_features,target_text,context_text,public_geometry,quality,local_valid,
-                global_world,local_world,instruction_text,control='real',transport_image_features=None,return_evidence=False):
+                global_world,local_world,instruction_text,control='real',transport_image_features=None,return_evidence=False,return_base=False):
         with torch.no_grad():
             packed=self.base(prior_logits=prior_logits,local_uv=local_uv,image_features=image_features,target_text=target_text,
                 context_text=context_text,public_geometry=public_geometry,quality=quality,local_valid=local_valid)
@@ -80,4 +80,5 @@ class ReferenceTransportPositionHead(nn.Module):
         cells=prior_logits.shape[-1]
         if self.mode=='local':evidence=evidence*local_evidence_coverage(local_uv,valid,cells)
         result=torch.cat((packed[:,:cells]+evidence,packed[:,cells:]),-1)
+        if return_base:return result,evidence,packed
         return (result,evidence) if return_evidence else result
