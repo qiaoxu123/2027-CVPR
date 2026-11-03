@@ -1,5 +1,7 @@
 # 进度
 
+2026-11-04 当前状态补记：固定Val-Seen128已完成（f3c4c08）：Original45/128，新方法52/128，+11纠正/-4误改，未通过至少84/128门槛，未启动全量/Test。当前新增关系输入审计：400条仅38条通过保守单参照提案；四组left/right/near/behind旧局部视觉文本输入相同，新增公共关系码可区分。14 tests passed。没有新训练/新SR，下一步先扩展TRAIN关系表示覆盖，不能只依赖38条训练。
+
 2026-11-03：全量语言关联分析已推送2303ce1。创建独立Goal分支；实读Stage1、matcher、patch pooling与runtime。读取真实权重核对grid和gain，定位完整恢复缓存。尚未新训练、尚无新SR。
 
 2026-11-03：新增read-only审计脚本及中文设计报告。使用恢复完整TRAIN缓存首个有支持帧，复制原matcher权重在RTX PRO6000上完成forward/backward（合成梯度检查目标，非训练），梯度有限。原始tests/test_stage1.py与tests/test_appearance_matching.py合计10 passed（1.29s）。原模型文件未写入，未启动导航。新分支目前仅审计/设计，没有声称新模块收益。
