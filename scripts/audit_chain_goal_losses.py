@@ -17,16 +17,22 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('run','data-root','sbf-source','output'):p.add_argument('--'+key,type=Path,required=True)
     p.add_argument('--case-type',choices=('harms','corrections'),default='harms')
+    p.add_argument('--split',choices=('train_seen','val_seen'),default='train_seen')
+    p.add_argument('--max-cases',type=int)
     a=p.parse_args()
+    if a.max_cases is not None and a.max_cases<1:raise ValueError('positive visualization count required')
+    source_manifest=json.loads((a.run/'run_manifest.json').read_text())
+    if source_manifest.get('split','train_seen')!=a.split:raise ValueError('analysis split differs from actual rollout')
     if a.output.exists():raise FileExistsError('preserve previous audit')
     a.output.mkdir(parents=True);(a.output/'frames').mkdir()
     sys.path.insert(0,str(a.sbf_source))
     from sbfnav.dataset import CityNavDataset, CityReferCatalog
     from sbfnav.mapdata import GROUND_LEVEL
-    ds=CityNavDataset(a.data_root,'train_seen',version='processed_citynav')
+    ds=CityNavDataset(a.data_root,a.split,version='processed_citynav')
     catalog=CityReferCatalog(a.data_root/'cityrefer')
     rows={m:{x['index']:x for x in map(json.loads,(a.run/m/'predictions.jsonl').read_text().splitlines())} for m in ('original','real')}
     selected=[i for i,x in rows['original'].items() if (bool(x['metrics']['SR']) and not rows['real'][i]['metrics']['SR'])] if a.case_type=='harms' else [i for i,x in rows['real'].items() if x['metrics']['SR'] and not rows['original'][i]['metrics']['SR']]
+    if a.max_cases is not None:selected=selected[:a.max_cases]
     renderer=FixedYawObservation(CityNavObservedViewRenderer(a.data_root/'rgbd',a.output/'unused',image_size=384),0.)
     records=[];links=[]
     for index in selected:
@@ -39,7 +45,7 @@ def main():
         fig,axes=plt.subplots(1,len(steps)+1,figsize=(4*(len(steps)+1),4))
         for m,color in [('original','blue'),('real','red')]:
             xy=np.asarray(rows[m][index]['poses'])[:,:2];axes[0].plot(*xy.T,'-o',color=color,markersize=2,label=m)
-        axes[0].scatter(*gt,c='green',marker='*',s=70);axes[0].set_aspect('equal');axes[0].legend();axes[0].set_title(f'TRAIN {index}; posthoc GT')
+        axes[0].scatter(*gt,c='green',marker='*',s=70);axes[0].set_aspect('equal');axes[0].legend();axes[0].set_title(f'{a.split} {index}; posthoc GT')
         per_frame=[]
         for ax,s in zip(axes[1:],steps):
             obs=renderer.current_rgbd(record.map_name,r['poses'][s],GROUND_LEVEL[record.map_name]);im=obs['bgr']
@@ -57,10 +63,10 @@ def main():
             overlap=polygon.intersection(Polygon(obs['footprint_world'])).area
             per_frame[-1].update(target_contour_intersection_m2=overlap,target_contour_covered_fraction=overlap/max(polygon.area,1e-9))
         fig.suptitle(record.instruction,fontsize=8,wrap=True);fig.tight_layout();fig.savefig(a.output/f'case_{index}.png',dpi=130);plt.close(fig)
-        records.append(dict(index=index,instruction=record.instruction,loss_steps=loss_steps,frames=per_frame,
+        records.append(dict(split=a.split,index=index,instruction=record.instruction,loss_steps=loss_steps,frames=per_frame,
                             target_category=obj['object_type'],target_polygon_area_m2=polygon.area,
                             target_bounds=polygon.bounds,target_point_in_polygon=polygon.covers(Point(gt))))
-        links.append(f'<h2>TRAIN {index}</h2><a href="case_{index}.png"><img width="1400" src="case_{index}.png"></a>')
+        links.append(f'<h2>{a.split} {index}</h2><a href="case_{index}.png"><img width="1400" src="case_{index}.png"></a>')
     (a.output/'cases.json').write_text(json.dumps(records,indent=2))
     (a.output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>配对闭环案例：实际输入像素SHA核验</h1><p>绿色仅是事后GT世界点投影，不是人工实例框；红色是当时Goal。不可见性仍未知。所有图像来自实际决策位姿。</p>'+''.join(links))
     print(json.dumps(records))

@@ -1,0 +1,3458 @@
+{
+  "split": "val_seen",
+  "dataset_version": "processed_citynav",
+  "episodes": 128,
+  "full_split_performance_claim": false,
+  "gate": {
+    "passed": false,
+    "original_successes": 45,
+    "ours_successes": 52,
+    "episodes": 128,
+    "minimum_ours_successes": 84,
+    "requires_more_successes_than_original": true
+  },
+  "reports": {
+    "original": {
+      "method": "original",
+      "split": "val_seen",
+      "episodes": 128,
+      "metrics": {
+        "SR": 0.3515625,
+        "OSR": 0.4375,
+        "SPL": 0.33934411241826107,
+        "NE": 36.215495216755826,
+        "nDTW": 0.2964815306621119,
+        "sDTW": 0.12414207096541802,
+        "steps": 6.8984375,
+        "path_length": 191.52798321198628,
+        "policy_stop": 0.9921875,
+        "inference_ms": 53.88703647129146,
+        "episodes": 128,
+        "False_Stop_Rate": 0.6456692913385826,
+        "false_stop_episode_fraction": 0.640625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 127,
+        "horizon": 1
+      },
+      "seconds_current_session": 65.76587535999715,
+      "gpu_peak_allocated_gib": 3.769369602203369,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 5,
+      "warning": "Fixed128 Val-Seen pilot, NOT full split SR or model selection; no Test access."
+    },
+    "real": {
+      "method": "real",
+      "split": "val_seen",
+      "episodes": 128,
+      "metrics": {
+        "SR": 0.40625,
+        "OSR": 0.546875,
+        "SPL": 0.3314682649348125,
+        "NE": 34.674443193804976,
+        "nDTW": 0.29694730391454927,
+        "sDTW": 0.14658709005566684,
+        "steps": 9.3125,
+        "path_length": 217.1815225340669,
+        "policy_stop": 0.9296875,
+        "inference_ms": 39.433302771810496,
+        "episodes": 128,
+        "False_Stop_Rate": 0.6134453781512605,
+        "false_stop_episode_fraction": 0.5703125,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 119,
+        "horizon": 9
+      },
+      "seconds_current_session": 68.24792873882689,
+      "gpu_peak_allocated_gib": 3.7567639350891113,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 49,
+      "warning": "Fixed128 Val-Seen pilot, NOT full split SR or model selection; no Test access."
+    }
+  },
+  "corrections": [
+    155,
+    436,
+    491,
+    629,
+    1765,
+    1917,
+    1937,
+    2079,
+    2118,
+    2363,
+    1224
+  ],
+  "harms": [
+    73,
+    222,
+    551,
+    2379
+  ],
+  "net": 7,
+  "physical_targets": 117,
+  "maps": 22,
+  "paired_SR_delta": 0.0546875,
+  "physical_group_bootstrap95": [
+    0.0,
+    0.11475409836065574
+  ],
+  "map_bootstrap95": [
+    0.0,
+    0.10976448869993274
+  ],
+  "per_episode": [
+    {
+      "index": 16,
+      "physical_group": [
+        "birmingham_block_1",
+        27
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 46.54846288395046,
+      "ours_NE": 46.54851113064887,
+      "original_goal": {
+        "first_ne_m": 46.54855346016437,
+        "final_ne_m": 46.54855346016437,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 46.54855346016437,
+        "final_ne_m": 46.54855346016437,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 25,
+      "physical_group": [
+        "birmingham_block_1",
+        74
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 2.9482860631416745,
+      "ours_NE": 2.948276257428659,
+      "original_goal": {
+        "first_ne_m": 2.948276257428659,
+        "final_ne_m": 2.948276257428659,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 12.175115512063732,
+        "final_ne_m": 2.948276257428659,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 35,
+      "physical_group": [
+        "birmingham_block_1",
+        97
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 83.32287111973663,
+      "ours_NE": 85.08462420304497,
+      "original_goal": {
+        "first_ne_m": 83.32288636697767,
+        "final_ne_m": 83.32288636697767,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 33.27794457137373,
+        "final_ne_m": 85.08458884308438,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 40,
+      "physical_group": [
+        "birmingham_block_1",
+        117
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 19.275256663805013,
+      "ours_NE": 9.225719016304396,
+      "original_goal": {
+        "first_ne_m": 19.27498143255377,
+        "final_ne_m": 19.27498143255377,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 19.27498143255377,
+        "final_ne_m": 9.225448174950683,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 45,
+      "physical_group": [
+        "birmingham_block_1",
+        125
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 30.960581268587728,
+      "ours_NE": 45.156351662928905,
+      "original_goal": {
+        "first_ne_m": 30.960577142764528,
+        "final_ne_m": 30.960577142764528,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 30.960577142764528,
+        "final_ne_m": 45.156447747824224,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 56,
+      "physical_group": [
+        "birmingham_block_1",
+        131
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 38.352773639341464,
+      "ours_NE": 38.352773639341464,
+      "original_goal": {
+        "first_ne_m": 38.35276561865916,
+        "final_ne_m": 38.35276561865916,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 38.35276561865916,
+        "final_ne_m": 38.35276561865916,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 73,
+      "physical_group": [
+        "birmingham_block_1",
+        149
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 1.0,
+      "ours_SR": 0.0,
+      "original_NE": 13.257355794601713,
+      "ours_NE": 25.323478486323527,
+      "original_goal": {
+        "first_ne_m": 13.257455234042487,
+        "final_ne_m": 13.257455234042487,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 13.257455234042487,
+        "final_ne_m": 25.32296068119942,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 141,
+      "physical_group": [
+        "birmingham_block_1",
+        302
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 52.658122922603795,
+      "ours_NE": 52.65787235720279,
+      "original_goal": {
+        "first_ne_m": 52.657812024977105,
+        "final_ne_m": 52.657812024977105,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 52.657812024977105,
+        "final_ne_m": 52.657812024977105,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 152,
+      "physical_group": [
+        "birmingham_block_1",
+        346
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 25.904054426474314,
+      "ours_NE": 36.41589892828522,
+      "original_goal": {
+        "first_ne_m": 25.90388688141086,
+        "final_ne_m": 25.90388688141086,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 25.90388688141086,
+        "final_ne_m": 36.416715196381766,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 155,
+      "physical_group": [
+        "birmingham_block_1",
+        346
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 20.746625325334346,
+      "ours_NE": 17.21334797780099,
+      "original_goal": {
+        "first_ne_m": 20.74644270048854,
+        "final_ne_m": 20.74644270048854,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 20.74644270048854,
+        "final_ne_m": 17.24963036517774,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 4
+      }
+    },
+    {
+      "index": 190,
+      "physical_group": [
+        "birmingham_block_1",
+        377
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 30.72852658403919,
+      "ours_NE": 30.728767404429167,
+      "original_goal": {
+        "first_ne_m": 30.728551283309347,
+        "final_ne_m": 30.728551283309347,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 30.728551283309347,
+        "final_ne_m": 30.728551283309347,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 3
+      }
+    },
+    {
+      "index": 222,
+      "physical_group": [
+        "birmingham_block_1",
+        456
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 1.0,
+      "ours_SR": 0.0,
+      "original_NE": 13.199145220912705,
+      "ours_NE": 25.542206781532695,
+      "original_goal": {
+        "first_ne_m": 13.19913159142246,
+        "final_ne_m": 13.19913159142246,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 13.19913159142246,
+        "final_ne_m": 25.542228443367208,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 2
+      }
+    },
+    {
+      "index": 234,
+      "physical_group": [
+        "birmingham_block_1",
+        486
+      ],
+      "map_name": "birmingham_block_1",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 3.6968680554427107,
+      "ours_NE": 3.6968680554427107,
+      "original_goal": {
+        "first_ne_m": 3.6968461418123884,
+        "final_ne_m": 3.6968461418123884,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 3.6968461418123884,
+        "final_ne_m": 3.6968461418123884,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 758,
+      "physical_group": [
+        "birmingham_block_10",
+        56
+      ],
+      "map_name": "birmingham_block_10",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 12.963977671581675,
+      "ours_NE": 12.963860750645765,
+      "original_goal": {
+        "first_ne_m": 12.963825670308733,
+        "final_ne_m": 12.963825670308733,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 18.866954899177472,
+        "final_ne_m": 12.963825670308733,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 762,
+      "physical_group": [
+        "birmingham_block_11",
+        0
+      ],
+      "map_name": "birmingham_block_11",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 47.743892034092966,
+      "ours_NE": 41.412293149517595,
+      "original_goal": {
+        "first_ne_m": 47.743892034092966,
+        "final_ne_m": 47.743892034092966,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 47.743892034092966,
+        "final_ne_m": 41.41217289146889,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 774,
+      "physical_group": [
+        "birmingham_block_12",
+        37
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 4.170143200184526,
+      "ours_NE": 4.170096952528531,
+      "original_goal": {
+        "first_ne_m": 4.170209923830117,
+        "final_ne_m": 4.170209923830117,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 18.213665452281433,
+        "final_ne_m": 4.170209923830117,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 788,
+      "physical_group": [
+        "birmingham_block_12",
+        51
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 3.4172118673166576,
+      "ours_NE": 3.4177151700367787,
+      "original_goal": {
+        "first_ne_m": 3.4172118673166576,
+        "final_ne_m": 3.4172118673166576,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 11.11357773584783,
+        "final_ne_m": 3.4172118673166576,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 790,
+      "physical_group": [
+        "birmingham_block_12",
+        57
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 27.64539842834253,
+      "ours_NE": 27.645520447932245,
+      "original_goal": {
+        "first_ne_m": 27.64539842834253,
+        "final_ne_m": 27.64539842834253,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 27.64539842834253,
+        "final_ne_m": 27.64539842834253,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 3
+      }
+    },
+    {
+      "index": 814,
+      "physical_group": [
+        "birmingham_block_12",
+        95
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 27.30350713866303,
+      "ours_NE": 27.30338602579814,
+      "original_goal": {
+        "first_ne_m": 13.250668294040688,
+        "final_ne_m": 27.30350713866303,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 12.931688185620073,
+        "final_ne_m": 27.30350713866303,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 2
+      }
+    },
+    {
+      "index": 838,
+      "physical_group": [
+        "birmingham_block_12",
+        37
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 18.213898085069477,
+      "ours_NE": 18.213787062523277,
+      "original_goal": {
+        "first_ne_m": 18.213665452281433,
+        "final_ne_m": 18.213665452281433,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 18.174481187798367,
+        "final_ne_m": 18.213665452281433,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 841,
+      "physical_group": [
+        "birmingham_block_12",
+        152
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 8.224096199319124,
+      "ours_NE": 8.22438789038652,
+      "original_goal": {
+        "first_ne_m": 8.224471523857193,
+        "final_ne_m": 8.224471523857193,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 8.224471523857193,
+        "final_ne_m": 8.224471523857193,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 844,
+      "physical_group": [
+        "birmingham_block_12",
+        156
+      ],
+      "map_name": "birmingham_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 79.57222860489047,
+      "ours_NE": 77.50929362194316,
+      "original_goal": {
+        "first_ne_m": 79.57230260024217,
+        "final_ne_m": 79.57230260024217,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 79.57230260024217,
+        "final_ne_m": 77.50929362194316,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 336,
+      "physical_group": [
+        "birmingham_block_3",
+        36
+      ],
+      "map_name": "birmingham_block_3",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 19.91636420326286,
+      "ours_NE": 19.91647535648585,
+      "original_goal": {
+        "first_ne_m": 19.91639342954625,
+        "final_ne_m": 19.91639342954625,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 19.91639342954625,
+        "final_ne_m": 19.91639342954625,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 3
+      }
+    },
+    {
+      "index": 347,
+      "physical_group": [
+        "birmingham_block_3",
+        56
+      ],
+      "map_name": "birmingham_block_3",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 77.47018488695367,
+      "ours_NE": 77.47086583030504,
+      "original_goal": {
+        "first_ne_m": 77.47018131435367,
+        "final_ne_m": 77.47018131435367,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 77.47018131435367,
+        "final_ne_m": 77.47018131435367,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 362,
+      "physical_group": [
+        "birmingham_block_3",
+        102
+      ],
+      "map_name": "birmingham_block_3",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 120.84199794380098,
+      "ours_NE": 102.14932998663485,
+      "original_goal": {
+        "first_ne_m": 120.84231593227213,
+        "final_ne_m": 120.84231593227213,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 90.31335141476585,
+        "final_ne_m": 102.14938938383436,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 436,
+      "physical_group": [
+        "birmingham_block_3",
+        363
+      ],
+      "map_name": "birmingham_block_3",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 51.137611293971844,
+      "ours_NE": 19.779838006178455,
+      "original_goal": {
+        "first_ne_m": 51.13797137753135,
+        "final_ne_m": 51.13797137753135,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 64.76101029110538,
+        "final_ne_m": 19.77983333622554,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 448,
+      "physical_group": [
+        "birmingham_block_3",
+        372
+      ],
+      "map_name": "birmingham_block_3",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 29.02339984209793,
+      "ours_NE": 29.02339984209793,
+      "original_goal": {
+        "first_ne_m": 29.023480007145636,
+        "final_ne_m": 29.023480007145636,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 29.023480007145636,
+        "final_ne_m": 29.023480007145636,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 478,
+      "physical_group": [
+        "birmingham_block_3",
+        283
+      ],
+      "map_name": "birmingham_block_3",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 7.048442771115168,
+      "ours_NE": 13.575938032482748,
+      "original_goal": {
+        "first_ne_m": 7.048471416478148,
+        "final_ne_m": 7.048471416478148,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 7.048471416478148,
+        "final_ne_m": 13.57613136583595,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 491,
+      "physical_group": [
+        "birmingham_block_4",
+        9
+      ],
+      "map_name": "birmingham_block_4",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 41.720735041858966,
+      "ours_NE": 16.053489122106186,
+      "original_goal": {
+        "first_ne_m": 41.72075117666821,
+        "final_ne_m": 41.72075117666821,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 41.72075117666821,
+        "final_ne_m": 16.05351411103122,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 513,
+      "physical_group": [
+        "birmingham_block_4",
+        24
+      ],
+      "map_name": "birmingham_block_4",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 27.27080037561987,
+      "ours_NE": 27.270807075463562,
+      "original_goal": {
+        "first_ne_m": 27.27061297016479,
+        "final_ne_m": 27.27061297016479,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 27.27061297016479,
+        "final_ne_m": 27.27061297016479,
+        "ever_correct": true,
+        "lost_correct_goal": 2,
+        "recovered_goal": 2
+      }
+    },
+    {
+      "index": 515,
+      "physical_group": [
+        "birmingham_block_4",
+        29
+      ],
+      "map_name": "birmingham_block_4",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 48.0133910529286,
+      "ours_NE": 51.757571642774096,
+      "original_goal": {
+        "first_ne_m": 48.01302457380564,
+        "final_ne_m": 48.01302457380564,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 54.08344800064825,
+        "final_ne_m": 51.75757338001688,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 532,
+      "physical_group": [
+        "birmingham_block_4",
+        68
+      ],
+      "map_name": "birmingham_block_4",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 8.187575886427934,
+      "ours_NE": 8.18756568610254,
+      "original_goal": {
+        "first_ne_m": 8.187440436145192,
+        "final_ne_m": 8.187440436145192,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 8.187440436145192,
+        "final_ne_m": 8.187440436145192,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 551,
+      "physical_group": [
+        "birmingham_block_4",
+        141
+      ],
+      "map_name": "birmingham_block_4",
+      "original_SR": 1.0,
+      "ours_SR": 0.0,
+      "original_NE": 19.25837366486351,
+      "ours_NE": 33.1282548021323,
+      "original_goal": {
+        "first_ne_m": 19.258228477508073,
+        "final_ne_m": 19.258228477508073,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 19.258228477508073,
+        "final_ne_m": 33.128140334968805,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 552,
+      "physical_group": [
+        "birmingham_block_4",
+        157
+      ],
+      "map_name": "birmingham_block_4",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 26.46299336825089,
+      "ours_NE": 26.463056105171553,
+      "original_goal": {
+        "first_ne_m": 26.463056105171553,
+        "final_ne_m": 26.463056105171553,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 26.463056105171553,
+        "final_ne_m": 26.463056105171553,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 584,
+      "physical_group": [
+        "birmingham_block_7",
+        17
+      ],
+      "map_name": "birmingham_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 35.572865974501916,
+      "ours_NE": 35.572835718434455,
+      "original_goal": {
+        "first_ne_m": 35.5726523534109,
+        "final_ne_m": 35.5726523534109,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 35.5726523534109,
+        "final_ne_m": 35.5726523534109,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 606,
+      "physical_group": [
+        "birmingham_block_7",
+        73
+      ],
+      "map_name": "birmingham_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 21.906855823180674,
+      "ours_NE": 21.906764687990194,
+      "original_goal": {
+        "first_ne_m": 21.906601151105512,
+        "final_ne_m": 21.906601151105512,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 21.906601151105512,
+        "final_ne_m": 21.906601151105512,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 627,
+      "physical_group": [
+        "birmingham_block_9",
+        24
+      ],
+      "map_name": "birmingham_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 35.286593645412346,
+      "ours_NE": 21.70900897060276,
+      "original_goal": {
+        "first_ne_m": 35.28652429837282,
+        "final_ne_m": 35.28652429837282,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 35.28652429837282,
+        "final_ne_m": 21.709139327003765,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 629,
+      "physical_group": [
+        "birmingham_block_9",
+        28
+      ],
+      "map_name": "birmingham_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 62.881836900667956,
+      "ours_NE": 13.43169133203256,
+      "original_goal": {
+        "first_ne_m": 62.881913216485586,
+        "final_ne_m": 62.881913216485586,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 62.881913216485586,
+        "final_ne_m": 13.43169133203256,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 714,
+      "physical_group": [
+        "birmingham_block_9",
+        35
+      ],
+      "map_name": "birmingham_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 33.806252395560065,
+      "ours_NE": 31.212093283232793,
+      "original_goal": {
+        "first_ne_m": 33.806252395560065,
+        "final_ne_m": 33.806252395560065,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 33.806252395560065,
+        "final_ne_m": 31.211791266507753,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1252,
+      "physical_group": [
+        "cambridge_block_12",
+        9
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 7.946304770919784,
+      "ours_NE": 7.073037308021097,
+      "original_goal": {
+        "first_ne_m": 7.94635430658828,
+        "final_ne_m": 7.94635430658828,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 7.94635430658828,
+        "final_ne_m": 7.0730713261833555,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1275,
+      "physical_group": [
+        "cambridge_block_12",
+        44
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 94.50502119091476,
+      "ours_NE": 78.74151440592684,
+      "original_goal": {
+        "first_ne_m": 94.50530436237811,
+        "final_ne_m": 94.50530436237811,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 94.50530436237811,
+        "final_ne_m": 79.57687896262995,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1303,
+      "physical_group": [
+        "cambridge_block_12",
+        94
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 13.666558331245207,
+      "ours_NE": 13.666615699914395,
+      "original_goal": {
+        "first_ne_m": 13.666558331245207,
+        "final_ne_m": 13.666558331245207,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 13.666558331245207,
+        "final_ne_m": 13.666558331245207,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1320,
+      "physical_group": [
+        "cambridge_block_12",
+        189
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 17.649531845581407,
+      "ours_NE": 17.649482808839064,
+      "original_goal": {
+        "first_ne_m": 17.649555491760594,
+        "final_ne_m": 17.649555491760594,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 17.649555491760594,
+        "final_ne_m": 17.649555491760594,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1330,
+      "physical_group": [
+        "cambridge_block_12",
+        202
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 37.63775782326199,
+      "ours_NE": 37.637727593895335,
+      "original_goal": {
+        "first_ne_m": 37.637746025865596,
+        "final_ne_m": 37.637746025865596,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 37.637746025865596,
+        "final_ne_m": 37.637746025865596,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1350,
+      "physical_group": [
+        "cambridge_block_12",
+        220
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 50.67197364797122,
+      "ours_NE": 50.67190768167752,
+      "original_goal": {
+        "first_ne_m": 50.67197364797122,
+        "final_ne_m": 50.67197364797122,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 50.67197364797122,
+        "final_ne_m": 50.67197364797122,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1374,
+      "physical_group": [
+        "cambridge_block_12",
+        251
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 7.378112737444319,
+      "ours_NE": 7.378178544205662,
+      "original_goal": {
+        "first_ne_m": 7.378112737444319,
+        "final_ne_m": 7.378112737444319,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      },
+      "ours_goal": {
+        "first_ne_m": 16.41613594910432,
+        "final_ne_m": 7.378112737444319,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1389,
+      "physical_group": [
+        "cambridge_block_12",
+        37
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 36.36792647907596,
+      "ours_NE": 36.368291797454205,
+      "original_goal": {
+        "first_ne_m": 36.36792570915772,
+        "final_ne_m": 36.36792570915772,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 36.36792570915772,
+        "final_ne_m": 36.36792570915772,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1406,
+      "physical_group": [
+        "cambridge_block_12",
+        335
+      ],
+      "map_name": "cambridge_block_12",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 79.25550374127869,
+      "ours_NE": 79.25551930363076,
+      "original_goal": {
+        "first_ne_m": 79.25526674108825,
+        "final_ne_m": 79.25526674108825,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 79.25526674108825,
+        "final_ne_m": 79.25526674108825,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1409,
+      "physical_group": [
+        "cambridge_block_13",
+        22
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 19.709997042141055,
+      "ours_NE": 19.710025584066624,
+      "original_goal": {
+        "first_ne_m": 19.70963513522238,
+        "final_ne_m": 19.70963513522238,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 19.70963513522238,
+        "final_ne_m": 19.70963513522238,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1428,
+      "physical_group": [
+        "cambridge_block_13",
+        50
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 21.887238556583334,
+      "ours_NE": 21.887299506720233,
+      "original_goal": {
+        "first_ne_m": 21.887607477868233,
+        "final_ne_m": 21.887607477868233,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 21.887607477868233,
+        "final_ne_m": 21.887607477868233,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1448,
+      "physical_group": [
+        "cambridge_block_13",
+        86
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 160.19589505651584,
+      "ours_NE": 160.19591489757732,
+      "original_goal": {
+        "first_ne_m": 160.19588603747468,
+        "final_ne_m": 160.19588603747468,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 160.19588603747468,
+        "final_ne_m": 160.19588603747468,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1457,
+      "physical_group": [
+        "cambridge_block_13",
+        97
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 58.0952232894168,
+      "ours_NE": 38.453087459130856,
+      "original_goal": {
+        "first_ne_m": 58.095359202732936,
+        "final_ne_m": 58.095359202732936,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 58.095359202732936,
+        "final_ne_m": 38.453221356697156,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1473,
+      "physical_group": [
+        "cambridge_block_13",
+        124
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 9.460267860692367,
+      "ours_NE": 9.460077188572408,
+      "original_goal": {
+        "first_ne_m": 9.460267860692367,
+        "final_ne_m": 9.460267860692367,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 9.460267860692367,
+        "final_ne_m": 9.460267860692367,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1504,
+      "physical_group": [
+        "cambridge_block_13",
+        249
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 9.550709152144575,
+      "ours_NE": 9.550870574736289,
+      "original_goal": {
+        "first_ne_m": 9.550546059121201,
+        "final_ne_m": 9.550546059121201,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 23.259442155465713,
+        "final_ne_m": 9.550546059121201,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 2
+      }
+    },
+    {
+      "index": 1587,
+      "physical_group": [
+        "cambridge_block_13",
+        130
+      ],
+      "map_name": "cambridge_block_13",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 14.833168878797801,
+      "ours_NE": 14.833168878797801,
+      "original_goal": {
+        "first_ne_m": 14.833168878797801,
+        "final_ne_m": 14.833168878797801,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 14.833168878797801,
+        "final_ne_m": 14.833168878797801,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1599,
+      "physical_group": [
+        "cambridge_block_17",
+        14
+      ],
+      "map_name": "cambridge_block_17",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 55.74762965173404,
+      "ours_NE": 55.74753608268467,
+      "original_goal": {
+        "first_ne_m": 55.74760389835279,
+        "final_ne_m": 55.74760389835279,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 55.74760389835279,
+        "final_ne_m": 55.74760389835279,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1602,
+      "physical_group": [
+        "cambridge_block_17",
+        14
+      ],
+      "map_name": "cambridge_block_17",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 55.747834389421996,
+      "ours_NE": 56.981048253230384,
+      "original_goal": {
+        "first_ne_m": 55.74760389835279,
+        "final_ne_m": 55.74760389835279,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 55.74760389835279,
+        "final_ne_m": 56.98095420513056,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1637,
+      "physical_group": [
+        "cambridge_block_17",
+        74
+      ],
+      "map_name": "cambridge_block_17",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 93.34886755203085,
+      "ours_NE": 93.34883119314844,
+      "original_goal": {
+        "first_ne_m": 93.34833616914283,
+        "final_ne_m": 93.34833616914283,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 93.34833616914283,
+        "final_ne_m": 93.34833616914283,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1653,
+      "physical_group": [
+        "cambridge_block_18",
+        33
+      ],
+      "map_name": "cambridge_block_18",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 16.300773922726382,
+      "ours_NE": 16.30077302185024,
+      "original_goal": {
+        "first_ne_m": 16.300766716115778,
+        "final_ne_m": 16.300766716115778,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 26.6504350686323,
+        "final_ne_m": 16.300766716115778,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1672,
+      "physical_group": [
+        "cambridge_block_18",
+        70
+      ],
+      "map_name": "cambridge_block_18",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 11.73142688080224,
+      "ours_NE": 4.343458406970601,
+      "original_goal": {
+        "first_ne_m": 11.731486434343674,
+        "final_ne_m": 11.731486434343674,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 11.731486434343674,
+        "final_ne_m": 4.343458406970601,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1682,
+      "physical_group": [
+        "cambridge_block_18",
+        80
+      ],
+      "map_name": "cambridge_block_18",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 2.8955333412678965,
+      "ours_NE": 2.894786399401489,
+      "original_goal": {
+        "first_ne_m": 2.8948723713324234,
+        "final_ne_m": 2.8948723713324234,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 2.8948723713324234,
+        "final_ne_m": 2.8948723713324234,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1689,
+      "physical_group": [
+        "cambridge_block_18",
+        99
+      ],
+      "map_name": "cambridge_block_18",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 26.409454074010334,
+      "ours_NE": 38.671628046547724,
+      "original_goal": {
+        "first_ne_m": 31.450508175437392,
+        "final_ne_m": 26.40951154260504,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 31.450508175437392,
+        "final_ne_m": 38.671637858114664,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1701,
+      "physical_group": [
+        "cambridge_block_18",
+        33
+      ],
+      "map_name": "cambridge_block_18",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 19.971577253261316,
+      "ours_NE": 19.984366234765737,
+      "original_goal": {
+        "first_ne_m": 19.971548103256993,
+        "final_ne_m": 19.971548103256993,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 32.50068932118391,
+        "final_ne_m": 19.971548103256993,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1705,
+      "physical_group": [
+        "cambridge_block_19",
+        1
+      ],
+      "map_name": "cambridge_block_19",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 141.37366509487504,
+      "ours_NE": 141.3736005212444,
+      "original_goal": {
+        "first_ne_m": 141.37368661942517,
+        "final_ne_m": 141.37368661942517,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 151.79051833466318,
+        "final_ne_m": 141.37368661942517,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1718,
+      "physical_group": [
+        "cambridge_block_19",
+        45
+      ],
+      "map_name": "cambridge_block_19",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 66.54622333621903,
+      "ours_NE": 66.54627596625741,
+      "original_goal": {
+        "first_ne_m": 66.54663636883606,
+        "final_ne_m": 66.54663636883606,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 66.54663636883606,
+        "final_ne_m": 66.54663636883606,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1721,
+      "physical_group": [
+        "cambridge_block_19",
+        45
+      ],
+      "map_name": "cambridge_block_19",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 22.41490285023732,
+      "ours_NE": 34.60460901684725,
+      "original_goal": {
+        "first_ne_m": 22.4149262352484,
+        "final_ne_m": 22.4149262352484,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 22.4149262352484,
+        "final_ne_m": 34.60463676594679,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1753,
+      "physical_group": [
+        "cambridge_block_20",
+        4
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 17.7263368009655,
+      "ours_NE": 18.055095620537955,
+      "original_goal": {
+        "first_ne_m": 17.7263368009655,
+        "final_ne_m": 17.7263368009655,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 17.7263368009655,
+        "final_ne_m": 17.7263368009655,
+        "ever_correct": true,
+        "lost_correct_goal": 5,
+        "recovered_goal": 5
+      }
+    },
+    {
+      "index": 1765,
+      "physical_group": [
+        "cambridge_block_20",
+        27
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 26.6330597598302,
+      "ours_NE": 15.071137427582673,
+      "original_goal": {
+        "first_ne_m": 26.6330597598302,
+        "final_ne_m": 26.6330597598302,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 15.071187308511819,
+        "final_ne_m": 15.071187308511819,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1813,
+      "physical_group": [
+        "cambridge_block_20",
+        128
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 13.304085675895145,
+      "ours_NE": 12.530771858322119,
+      "original_goal": {
+        "first_ne_m": 13.303731362761814,
+        "final_ne_m": 13.303731362761814,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 13.303731362761814,
+        "final_ne_m": 13.303731362761814,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1814,
+      "physical_group": [
+        "cambridge_block_20",
+        128
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 154.02246970860182,
+      "ours_NE": 135.39003710577853,
+      "original_goal": {
+        "first_ne_m": 154.02246970860182,
+        "final_ne_m": 154.02246970860182,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 154.02246970860182,
+        "final_ne_m": 135.39075201207987,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1834,
+      "physical_group": [
+        "cambridge_block_20",
+        185
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 44.14306003656379,
+      "ours_NE": 44.143006671734085,
+      "original_goal": {
+        "first_ne_m": 25.331561108169822,
+        "final_ne_m": 44.14284657736424,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 25.331561108169822,
+        "final_ne_m": 44.14284657736424,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1862,
+      "physical_group": [
+        "cambridge_block_20",
+        211
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 15.573768354705592,
+      "ours_NE": 11.814186633007452,
+      "original_goal": {
+        "first_ne_m": 15.573895544698287,
+        "final_ne_m": 15.573895544698287,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 15.573895544698287,
+        "final_ne_m": 12.907136088456305,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1889,
+      "physical_group": [
+        "cambridge_block_20",
+        265
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 2.694341322176932,
+      "ours_NE": 16.59727858304275,
+      "original_goal": {
+        "first_ne_m": 20.967770293230522,
+        "final_ne_m": 2.694778701887191,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      },
+      "ours_goal": {
+        "first_ne_m": 20.967770293230522,
+        "final_ne_m": 17.58974230781732,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1891,
+      "physical_group": [
+        "cambridge_block_20",
+        284
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 105.72428536899714,
+      "ours_NE": 105.72428536899714,
+      "original_goal": {
+        "first_ne_m": 105.72428536899714,
+        "final_ne_m": 105.72428536899714,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 105.72428536899714,
+        "final_ne_m": 105.72428536899714,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1914,
+      "physical_group": [
+        "cambridge_block_20",
+        357
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 92.00784324981701,
+      "ours_NE": 91.43376101732242,
+      "original_goal": {
+        "first_ne_m": 80.19046877054241,
+        "final_ne_m": 92.00717964498885,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 80.19046877054241,
+        "final_ne_m": 92.00717964498885,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1917,
+      "physical_group": [
+        "cambridge_block_20",
+        367
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 30.754138468395357,
+      "ours_NE": 16.47981857541728,
+      "original_goal": {
+        "first_ne_m": 30.754138468395357,
+        "final_ne_m": 30.754138468395357,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 30.754138468395357,
+        "final_ne_m": 16.480069928023784,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1925,
+      "physical_group": [
+        "cambridge_block_20",
+        383
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 54.86800586636557,
+      "ours_NE": 54.86811769433781,
+      "original_goal": {
+        "first_ne_m": 54.86800586636557,
+        "final_ne_m": 54.86800586636557,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 54.86800586636557,
+        "final_ne_m": 54.86800586636557,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1926,
+      "physical_group": [
+        "cambridge_block_20",
+        410
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 14.688735314552702,
+      "ours_NE": 14.68896849689629,
+      "original_goal": {
+        "first_ne_m": 14.68896343823504,
+        "final_ne_m": 14.68896343823504,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 14.68896343823504,
+        "final_ne_m": 14.68896343823504,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1937,
+      "physical_group": [
+        "cambridge_block_20",
+        5
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 24.29571314330546,
+      "ours_NE": 10.474938128922823,
+      "original_goal": {
+        "first_ne_m": 24.29511175388878,
+        "final_ne_m": 24.29511175388878,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 10.474919314211698,
+        "final_ne_m": 10.474919314211698,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1943,
+      "physical_group": [
+        "cambridge_block_20",
+        128
+      ],
+      "map_name": "cambridge_block_20",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 45.21375425307297,
+      "ours_NE": 45.214307506998345,
+      "original_goal": {
+        "first_ne_m": 45.213968007811935,
+        "final_ne_m": 45.213968007811935,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 45.213968007811935,
+        "final_ne_m": 45.213968007811935,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1979,
+      "physical_group": [
+        "cambridge_block_21",
+        26
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 15.26222380531542,
+      "ours_NE": 15.262195015382137,
+      "original_goal": {
+        "first_ne_m": 15.26234590624831,
+        "final_ne_m": 15.26234590624831,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 15.26234590624831,
+        "final_ne_m": 15.26234590624831,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1994,
+      "physical_group": [
+        "cambridge_block_21",
+        84
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 23.384494893351533,
+      "ours_NE": 38.02984364310334,
+      "original_goal": {
+        "first_ne_m": 38.02984364310334,
+        "final_ne_m": 23.384494893351533,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 37.42076530981389,
+        "final_ne_m": 38.02984364310334,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2004,
+      "physical_group": [
+        "cambridge_block_21",
+        105
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 36.58261969948976,
+      "ours_NE": 74.8411202171791,
+      "original_goal": {
+        "first_ne_m": 36.582360364428396,
+        "final_ne_m": 36.582360364428396,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 36.582360364428396,
+        "final_ne_m": 74.8409483323505,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2008,
+      "physical_group": [
+        "cambridge_block_21",
+        108
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 75.82697209743968,
+      "ours_NE": 75.82697209743968,
+      "original_goal": {
+        "first_ne_m": 75.8276008995215,
+        "final_ne_m": 75.8276008995215,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 75.8276008995215,
+        "final_ne_m": 75.8276008995215,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2042,
+      "physical_group": [
+        "cambridge_block_21",
+        193
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 37.725464710885014,
+      "ours_NE": 37.72550484337346,
+      "original_goal": {
+        "first_ne_m": 37.726048099694474,
+        "final_ne_m": 37.726048099694474,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 37.726048099694474,
+        "final_ne_m": 37.726048099694474,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2048,
+      "physical_group": [
+        "cambridge_block_21",
+        197
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 38.532854597685024,
+      "ours_NE": 36.71695300676327,
+      "original_goal": {
+        "first_ne_m": 38.532854597685024,
+        "final_ne_m": 38.532854597685024,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 38.532854597685024,
+        "final_ne_m": 36.71729487762146,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2079,
+      "physical_group": [
+        "cambridge_block_21",
+        285
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 22.46525943473003,
+      "ours_NE": 8.517958768348755,
+      "original_goal": {
+        "first_ne_m": 22.46467807704042,
+        "final_ne_m": 22.46467807704042,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 22.46467807704042,
+        "final_ne_m": 8.51711574857333,
+        "ever_correct": true,
+        "lost_correct_goal": 3,
+        "recovered_goal": 4
+      }
+    },
+    {
+      "index": 2092,
+      "physical_group": [
+        "cambridge_block_21",
+        312
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 37.09268922140658,
+      "ours_NE": 37.09268922140658,
+      "original_goal": {
+        "first_ne_m": 37.09267536400741,
+        "final_ne_m": 37.09267536400741,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 37.09267536400741,
+        "final_ne_m": 37.09267536400741,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2101,
+      "physical_group": [
+        "cambridge_block_21",
+        320
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 17.893280150856693,
+      "ours_NE": 17.893061088470656,
+      "original_goal": {
+        "first_ne_m": 17.893335793781294,
+        "final_ne_m": 17.893335793781294,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 6.629706132742586,
+        "final_ne_m": 17.893335793781294,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2118,
+      "physical_group": [
+        "cambridge_block_21",
+        341
+      ],
+      "map_name": "cambridge_block_21",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 22.54382740937605,
+      "ours_NE": 16.29175524695658,
+      "original_goal": {
+        "first_ne_m": 22.54407503298527,
+        "final_ne_m": 22.54407503298527,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 22.54407503298527,
+        "final_ne_m": 16.291876896481895,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2159,
+      "physical_group": [
+        "cambridge_block_23",
+        35
+      ],
+      "map_name": "cambridge_block_23",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 28.849655645373538,
+      "ours_NE": 28.849655645373538,
+      "original_goal": {
+        "first_ne_m": 28.849655645373538,
+        "final_ne_m": 28.849655645373538,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 28.849655645373538,
+        "final_ne_m": 28.849655645373538,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2167,
+      "physical_group": [
+        "cambridge_block_23",
+        40
+      ],
+      "map_name": "cambridge_block_23",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 2.2442598402530622,
+      "ours_NE": 2.2443537664829845,
+      "original_goal": {
+        "first_ne_m": 2.2442598402530622,
+        "final_ne_m": 2.2442598402530622,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 9.715514460910592,
+        "final_ne_m": 2.2442598402530622,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2176,
+      "physical_group": [
+        "cambridge_block_23",
+        45
+      ],
+      "map_name": "cambridge_block_23",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 20.448845926436736,
+      "ours_NE": 20.448070506637652,
+      "original_goal": {
+        "first_ne_m": 20.448845926436736,
+        "final_ne_m": 20.448845926436736,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 20.448845926436736,
+        "final_ne_m": 20.448845926436736,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2187,
+      "physical_group": [
+        "cambridge_block_25",
+        4
+      ],
+      "map_name": "cambridge_block_25",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 67.49651584783575,
+      "ours_NE": 84.65083621580183,
+      "original_goal": {
+        "first_ne_m": 67.49691936742012,
+        "final_ne_m": 67.49691936742012,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 66.09296917837392,
+        "final_ne_m": 84.63596319923981,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2206,
+      "physical_group": [
+        "cambridge_block_28",
+        56
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 23.381851796616946,
+      "ours_NE": 23.381581805553342,
+      "original_goal": {
+        "first_ne_m": 23.381581805553342,
+        "final_ne_m": 23.381581805553342,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 23.381581805553342,
+        "final_ne_m": 23.381581805553342,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2227,
+      "physical_group": [
+        "cambridge_block_28",
+        80
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 25.188672155599104,
+      "ours_NE": 25.188732842358174,
+      "original_goal": {
+        "first_ne_m": 7.0638555485449706,
+        "final_ne_m": 25.188672155599104,
+        "ever_correct": true,
+        "lost_correct_goal": 2,
+        "recovered_goal": 1
+      },
+      "ours_goal": {
+        "first_ne_m": 7.0638555485449706,
+        "final_ne_m": 25.188672155599104,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2269,
+      "physical_group": [
+        "cambridge_block_28",
+        143
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 10.899778520123187,
+      "ours_NE": 10.900032386846505,
+      "original_goal": {
+        "first_ne_m": 10.899646258574606,
+        "final_ne_m": 10.899646258574606,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 20.551642627352496,
+        "final_ne_m": 10.899646258574606,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2277,
+      "physical_group": [
+        "cambridge_block_28",
+        167
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 42.92279592358592,
+      "ours_NE": 26.995742798054245,
+      "original_goal": {
+        "first_ne_m": 42.92279592358592,
+        "final_ne_m": 42.92279592358592,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 53.15146474881694,
+        "final_ne_m": 26.995624283141954,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2305,
+      "physical_group": [
+        "cambridge_block_28",
+        233
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 26.274589166516776,
+      "ours_NE": 26.27470722754486,
+      "original_goal": {
+        "first_ne_m": 26.274651224299166,
+        "final_ne_m": 26.274651224299166,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 26.274651224299166,
+        "final_ne_m": 26.274651224299166,
+        "ever_correct": true,
+        "lost_correct_goal": 2,
+        "recovered_goal": 2
+      }
+    },
+    {
+      "index": 2325,
+      "physical_group": [
+        "cambridge_block_28",
+        270
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 11.03154512785973,
+      "ours_NE": 11.03177847420359,
+      "original_goal": {
+        "first_ne_m": 11.03154512785973,
+        "final_ne_m": 11.03154512785973,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 11.03154512785973,
+        "final_ne_m": 11.03154512785973,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2338,
+      "physical_group": [
+        "cambridge_block_28",
+        290
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 2.6245120168286533,
+      "ours_NE": 2.6246830232293425,
+      "original_goal": {
+        "first_ne_m": 2.624654224873823,
+        "final_ne_m": 2.624654224873823,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 2.624654224873823,
+        "final_ne_m": 2.624654224873823,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2353,
+      "physical_group": [
+        "cambridge_block_28",
+        65
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 31.701017591965783,
+      "ours_NE": 31.491061268803698,
+      "original_goal": {
+        "first_ne_m": 31.701017591965783,
+        "final_ne_m": 31.701017591965783,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 31.491061268803698,
+        "final_ne_m": 31.491061268803698,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2363,
+      "physical_group": [
+        "cambridge_block_28",
+        122
+      ],
+      "map_name": "cambridge_block_28",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 30.274876189717002,
+      "ours_NE": 18.126523989700726,
+      "original_goal": {
+        "first_ne_m": 30.27499780633243,
+        "final_ne_m": 30.27499780633243,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 30.27499780633243,
+        "final_ne_m": 18.12653498274703,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 2379,
+      "physical_group": [
+        "cambridge_block_33",
+        3
+      ],
+      "map_name": "cambridge_block_33",
+      "original_SR": 1.0,
+      "ours_SR": 0.0,
+      "original_NE": 19.050333393253982,
+      "ours_NE": 24.288091318352986,
+      "original_goal": {
+        "first_ne_m": 19.050372616216272,
+        "final_ne_m": 19.050372616216272,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 19.050372616216272,
+        "final_ne_m": 24.28850723679764,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2390,
+      "physical_group": [
+        "cambridge_block_33",
+        46
+      ],
+      "map_name": "cambridge_block_33",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 25.557849610550047,
+      "ours_NE": 25.557849610550047,
+      "original_goal": {
+        "first_ne_m": 25.557962533699683,
+        "final_ne_m": 25.557962533699683,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 25.557962533699683,
+        "final_ne_m": 25.557962533699683,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 2412,
+      "physical_group": [
+        "cambridge_block_33",
+        73
+      ],
+      "map_name": "cambridge_block_33",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 52.560724809183895,
+      "ours_NE": 41.64042162532418,
+      "original_goal": {
+        "first_ne_m": 52.560724809183895,
+        "final_ne_m": 52.560724809183895,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 52.560724809183895,
+        "final_ne_m": 41.64090387437059,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 880,
+      "physical_group": [
+        "cambridge_block_6",
+        11
+      ],
+      "map_name": "cambridge_block_6",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 17.442601070081842,
+      "ours_NE": 2.775259892702061,
+      "original_goal": {
+        "first_ne_m": 17.442560604230096,
+        "final_ne_m": 17.442560604230096,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 17.442560604230096,
+        "final_ne_m": 2.7754366387332023,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 903,
+      "physical_group": [
+        "cambridge_block_6",
+        108
+      ],
+      "map_name": "cambridge_block_6",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 24.217309029246262,
+      "ours_NE": 24.217291240751752,
+      "original_goal": {
+        "first_ne_m": 24.217291240751752,
+        "final_ne_m": 24.217291240751752,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 24.217291240751752,
+        "final_ne_m": 24.217291240751752,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 919,
+      "physical_group": [
+        "cambridge_block_7",
+        8
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 11.814874522185427,
+      "ours_NE": 11.814080188311909,
+      "original_goal": {
+        "first_ne_m": 11.814874522185427,
+        "final_ne_m": 11.814874522185427,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 11.814874522185427,
+        "final_ne_m": 11.814874522185427,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 928,
+      "physical_group": [
+        "cambridge_block_7",
+        20
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 22.288128410418896,
+      "ours_NE": 22.28807420149043,
+      "original_goal": {
+        "first_ne_m": 22.288300478799016,
+        "final_ne_m": 22.288300478799016,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 22.288300478799016,
+        "final_ne_m": 22.288300478799016,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 939,
+      "physical_group": [
+        "cambridge_block_7",
+        54
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 17.24241761409223,
+      "ours_NE": 17.242570203268258,
+      "original_goal": {
+        "first_ne_m": 17.242675119270974,
+        "final_ne_m": 17.242675119270974,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 17.242675119270974,
+        "final_ne_m": 17.242675119270974,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 941,
+      "physical_group": [
+        "cambridge_block_7",
+        54
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 10.79742671841134,
+      "ours_NE": 17.242798865912814,
+      "original_goal": {
+        "first_ne_m": 10.79735657960819,
+        "final_ne_m": 10.79735657960819,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 10.79735657960819,
+        "final_ne_m": 17.242675119270974,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 951,
+      "physical_group": [
+        "cambridge_block_7",
+        71
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 25.600729269673817,
+      "ours_NE": 25.600604404415154,
+      "original_goal": {
+        "first_ne_m": 25.600668682610028,
+        "final_ne_m": 25.600668682610028,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 25.600668682610028,
+        "final_ne_m": 25.600668682610028,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 969,
+      "physical_group": [
+        "cambridge_block_7",
+        100
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 28.839415755991286,
+      "ours_NE": 28.839481761026704,
+      "original_goal": {
+        "first_ne_m": 28.839349751063153,
+        "final_ne_m": 28.839349751063153,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 46.16672625327414,
+        "final_ne_m": 28.839349751063153,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 985,
+      "physical_group": [
+        "cambridge_block_7",
+        123
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 39.30450073369176,
+      "ours_NE": 39.304487969681176,
+      "original_goal": {
+        "first_ne_m": 39.30505066806035,
+        "final_ne_m": 39.30505066806035,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 39.30505066806035,
+        "final_ne_m": 39.30505066806035,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 997,
+      "physical_group": [
+        "cambridge_block_7",
+        188
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 10.808480992675138,
+      "ours_NE": 10.808515898255616,
+      "original_goal": {
+        "first_ne_m": 10.808531061672431,
+        "final_ne_m": 10.808531061672431,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 10.808531061672431,
+        "final_ne_m": 10.808531061672431,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1015,
+      "physical_group": [
+        "cambridge_block_7",
+        198
+      ],
+      "map_name": "cambridge_block_7",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 33.375437400238525,
+      "ours_NE": 33.37489952126301,
+      "original_goal": {
+        "first_ne_m": 33.375437400238525,
+        "final_ne_m": 33.375437400238525,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 33.375437400238525,
+        "final_ne_m": 33.375437400238525,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1105,
+      "physical_group": [
+        "cambridge_block_9",
+        91
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 36.19735440073667,
+      "ours_NE": 36.19735440073667,
+      "original_goal": {
+        "first_ne_m": 36.19674408154646,
+        "final_ne_m": 36.19674408154646,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 36.19674408154646,
+        "final_ne_m": 36.19674408154646,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1139,
+      "physical_group": [
+        "cambridge_block_9",
+        151
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 8.773621762931688,
+      "ours_NE": 8.773621762931688,
+      "original_goal": {
+        "first_ne_m": 8.77369906718337,
+        "final_ne_m": 8.77369906718337,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 8.77369906718337,
+        "final_ne_m": 8.77369906718337,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1161,
+      "physical_group": [
+        "cambridge_block_9",
+        169
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 94.3012329163592,
+      "ours_NE": 83.0217093350624,
+      "original_goal": {
+        "first_ne_m": 94.08227731002567,
+        "final_ne_m": 94.08227731002567,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 124.41926736746194,
+        "final_ne_m": 83.02161905723031,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1169,
+      "physical_group": [
+        "cambridge_block_9",
+        194
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 239.44905165616362,
+      "ours_NE": 228.26898519208265,
+      "original_goal": {
+        "first_ne_m": 239.44888052288493,
+        "final_ne_m": 239.44888052288493,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 239.44888052288493,
+        "final_ne_m": 228.2688133185307,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1178,
+      "physical_group": [
+        "cambridge_block_9",
+        230
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 1.0,
+      "ours_SR": 1.0,
+      "original_NE": 17.728407317441466,
+      "ours_NE": 17.72841069855612,
+      "original_goal": {
+        "first_ne_m": 17.728356800164303,
+        "final_ne_m": 17.728356800164303,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 17.728356800164303,
+        "final_ne_m": 17.728356800164303,
+        "ever_correct": true,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1215,
+      "physical_group": [
+        "cambridge_block_9",
+        418
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 31.499132797306828,
+      "ours_NE": 31.49919355893796,
+      "original_goal": {
+        "first_ne_m": 31.49919355893796,
+        "final_ne_m": 31.49919355893796,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 31.49919355893796,
+        "final_ne_m": 31.49919355893796,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1224,
+      "physical_group": [
+        "cambridge_block_9",
+        446
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 1.0,
+      "original_NE": 21.02622300330626,
+      "ours_NE": 6.74632869112832,
+      "original_goal": {
+        "first_ne_m": 6.746448540648991,
+        "final_ne_m": 21.02622489638327,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 6.746448540648991,
+        "final_ne_m": 6.746448540648991,
+        "ever_correct": true,
+        "lost_correct_goal": 1,
+        "recovered_goal": 1
+      }
+    },
+    {
+      "index": 1240,
+      "physical_group": [
+        "cambridge_block_9",
+        169
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 35.138165029729684,
+      "ours_NE": 24.20038642991019,
+      "original_goal": {
+        "first_ne_m": 35.138061315428885,
+        "final_ne_m": 35.138061315428885,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 35.138061315428885,
+        "final_ne_m": 24.200715434517544,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1241,
+      "physical_group": [
+        "cambridge_block_9",
+        169
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 45.27251347560752,
+      "ours_NE": 45.27251347560752,
+      "original_goal": {
+        "first_ne_m": 45.27252702106062,
+        "final_ne_m": 45.27252702106062,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 45.27252702106062,
+        "final_ne_m": 45.27252702106062,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1243,
+      "physical_group": [
+        "cambridge_block_9",
+        227
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 23.52037452214925,
+      "ours_NE": 23.52037452214925,
+      "original_goal": {
+        "first_ne_m": 23.52037452214925,
+        "final_ne_m": 23.52037452214925,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 23.52037452214925,
+        "final_ne_m": 23.52037452214925,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    },
+    {
+      "index": 1244,
+      "physical_group": [
+        "cambridge_block_9",
+        227
+      ],
+      "map_name": "cambridge_block_9",
+      "original_SR": 0.0,
+      "ours_SR": 0.0,
+      "original_NE": 23.520245422347333,
+      "ours_NE": 23.520245422347333,
+      "original_goal": {
+        "first_ne_m": 23.52037452214925,
+        "final_ne_m": 23.52037452214925,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      },
+      "ours_goal": {
+        "first_ne_m": 23.52037452214925,
+        "final_ne_m": 23.52037452214925,
+        "ever_correct": false,
+        "lost_correct_goal": 0,
+        "recovered_goal": 0
+      }
+    }
+  ],
+  "warning": "Fixed128 only; no tuning/checkpoint selection on Val; Test not accessed"
+}
