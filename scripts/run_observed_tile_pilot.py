@@ -21,13 +21,14 @@ from graphnav.visual_chain_position import WorldLikelihoodPositionHead
 
 
 @torch.inference_mode()
-def encode(native,images,masks):
+def encode(native,images,masks,*,only_first=False):
     torch.cuda.synchronize();torch.cuda.reset_peak_memory_stats();started=time.perf_counter()
     pixels=native.processor(images=[cv2.cvtColor(x,cv2.COLOR_BGR2RGB) for x in images],return_tensors='pt').to(native.device)
     assert tuple(pixels['pixel_values'].shape)==(len(images),3,384,384)
     shape=tuple(masks.shape[:2]);flat=masks.reshape(-1,masks.shape[-1]);supported=flat.any(-1)
     with torch.autocast('cuda',dtype=torch.bfloat16):
-        tokens=native.model.vision_model(**pixels).last_hidden_state.reshape(-1,native.dimension)
+        encoded=native.model.vision_model(**pixels).last_hidden_state
+        tokens=encoded[0] if only_first else encoded.reshape(-1,native.dimension)
         if tokens.shape[0]!=flat.shape[-1]:raise ValueError('tile-major tokens and physical masks differ')
         values=torch.zeros(len(flat),native.dimension,device=native.device,dtype=torch.float32)
         if supported.any():
@@ -63,6 +64,7 @@ def predict(head,query,region,features):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--batch-audit',action='store_true')
     for key in ('selection','observations','rgbd','sbf-source','checkpoint','output'):p.add_argument('--'+key,type=Path,required=True)
     p.add_argument('--backbone',type=Path,required=True);a=p.parse_args()
     if a.output.exists():raise FileExistsError('preserve pilot; no outcome-based reruns')
@@ -72,7 +74,7 @@ def main():
         suffix='.json' if name=='public_selection' else '.pt'
         if file_sha256(a.selection/(name+suffix))!=manifest[name+'_sha256']:raise ValueError('selected public inputs changed')
     selection=json.loads((a.selection/'public_selection.json').read_text());queries=torch.load(a.selection/'public_inputs.pt',map_location='cpu',weights_only=True)
-    if len(selection)!=24 or not manifest['all_fit']:raise ValueError('frozen 24 fit cases required')
+    if len(selection)!=manifest['cases'] or not 1<=len(selection)<=64 or not manifest['all_fit']:raise ValueError('bounded frozen fit selection required')
     sys.path.insert(0,str(a.sbf_source));from sbfnav.mapdata import GROUND_LEVEL
     a.output.mkdir(parents=True);(a.output/'images').mkdir();(a.output/'features').mkdir()
     native=ObservedSigLIPMatchingEncoder(str(a.backbone));head=WorldLikelihoodPositionHead().cuda().eval().requires_grad_(False)
@@ -85,6 +87,7 @@ def main():
         geometry_source_sha256=file_sha256(Path('graphnav/observed_tile_regions.py')),
         backbone=str(a.backbone),backbone_weights_sha256={x.name:file_sha256(x) for x in sorted(a.backbone.glob('*.safetensors'))},
         inference_reads_private_labels=False,camera_yaw_rad=0.,weights_frozen=True,methods=['Whole384_144','Interpolated768_144','Native768_144','Interpolated768_576','Native768_576'])
+    if a.batch_audit:frozen['methods'].append('Whole384Repeat4_144')
     atomic_json(frozen,a.output/'run_manifest.json');predictions={};stats=[]
     dense_sparse_ids=np.array([y*24+x for y in range(1,24,2) for x in range(1,24,2)])
     for index,case in enumerate(selection):
@@ -104,15 +107,22 @@ def main():
         # All 144 comparisons share the same geometry and common validity.
         methods={'Whole384_144':(sparse,whole),'Interpolated768_144':(sparse,inter_features[dense_sparse_ids]),
             'Native768_144':(sparse,native_features[dense_sparse_ids]),'Interpolated768_576':(dense,inter_features),'Native768_576':(dense,native_features)}
+        repeat=None;repeat_time=None
+        if a.batch_audit:
+            repeat,repeat_time=encode(native,[low['bgr']]*4,old_masks,only_first=True)
+            methods['Whole384Repeat4_144']=(sparse,repeat)
         predictions[key]={name:predict(head,query,region,features) for name,(region,features) in methods.items()}
         atomic_save(dict(whole384=whole,interpolated768=inter_features,native768=native_features,
-            dense={k:v for k,v in dense.items() if k!='masks'},sparse_indices=dense_sparse_ids),a.output/'features'/(key+'.pt'))
+            dense={k:torch.from_numpy(v.copy()) for k,v in dense.items() if k!='masks'},sparse_indices=torch.from_numpy(dense_sparse_ids),whole384_repeat4=repeat),a.output/'features'/(key+'.pt'))
         for name,rgb in [('low384',low['bgr']),('native768',high['bgr']),('interpolated768',interp)]:
             out=a.output/'images'/(key+'_'+name+'.png')
             if not cv2.imwrite(str(out),rgb):raise IOError(out)
         valid=torch.from_numpy(sparse['valid']);similarity=F.cosine_similarity(whole[valid].float(),query['cached_image_features'][valid].float(),dim=-1)
         stats.append(dict(case_key=key,map_name=case['map_name'],render_seconds=render_seconds,whole384=whole_time,interpolated768=inter_time,native768=native_time,
             old_valid=int(old_valid.sum()),common_valid_144=int(sparse['valid'].sum()),common_valid_576=int(dense['valid'].sum()),
+            repeat4_runtime=repeat_time,
+            repeat4_cache_cosine_mean=float(F.cosine_similarity(repeat[valid].float(),query['cached_image_features'][valid].float(),dim=-1).mean()) if repeat is not None and valid.any() else None,
+            repeat4_cache_cosine_min=float(F.cosine_similarity(repeat[valid].float(),query['cached_image_features'][valid].float(),dim=-1).min()) if repeat is not None and valid.any() else None,
             cache_cosine_mean=float(similarity.mean()) if similarity.numel() else None,cache_cosine_min=float(similarity.min()) if similarity.numel() else None,
             footprint_world=np.asarray(high['footprint_world']).tolist(),camera_pose=np.asarray(high['pose']).tolist(),
             images={name:file_sha256(a.output/'images'/(key+'_'+name+'.png')) for name in ('low384','native768','interpolated768')}))

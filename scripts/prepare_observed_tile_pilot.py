@@ -1,5 +1,6 @@
 """Freeze 24 fit-only queries, separating public image inputs and private scoring."""
 import argparse
+from collections import Counter
 import hashlib
 import json
 from pathlib import Path
@@ -11,6 +12,7 @@ from scripts.analyze_instruction_landmark_association import PublicNames
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--hard-cars',action='store_true',help='12 A0-error-selected fit diagnostics; never a representative benchmark')
     for key in ('root','catalog','output'):p.add_argument('--'+key,type=Path,required=True)
     a=p.parse_args()
     if a.output.exists():raise FileExistsError('preserve selected pilot')
@@ -48,7 +50,26 @@ def main():
             seen.add(frame);count+=1
             if count==4:break
         if count!=4:raise ValueError('not enough distinct fit targets')
-    assert len(selected)==24 and len(seen)==24
+    if a.hard_cars:
+        excluded_groups={tuple(v['physical_group']) for v in private.values()};excluded_frames=set(seen)
+        selected=[];private={};seen=set();chosen_groups=set()
+        candidates=json.loads((r/'retarget_training_data_v1/public_links.json').read_text())
+        candidates.sort(key=lambda x:hashlib.sha256(('tile-hard12-seed0:'+x['sample_key']).encode()).hexdigest())
+        for link in candidates:
+            target=private_retarget[link['sample_key']];group=tuple(target['physical_group']);q=query_inputs[link['task_key']]
+            bounds=torch.tensor(q['world_bounds']);choice=int(q['prior_logits'].argmax())
+            xy=bounds[:2]+torch.tensor([(choice%28+.5)/28,(choice//28+.5)/28])*(bounds[2:]-bounds[:2])
+            error=float((xy-torch.tensor(target['target_world'])).norm())
+            frame=link['source_frame_key']
+            if error<=20 or group in excluded_groups or group in chosen_groups or frame in excluded_frames or frame in seen:continue
+            case=link['sample_key'];task=retarget_tasks[link['task_key']]
+            selected.append(dict(case_key=case,source_frame_key=frame,task_key=link['task_key'],map_name=task['map_name'],instruction=task['instruction']))
+            private[case]=dict(category='Car',target_world=target['target_world'],physical_group=list(group),
+                label_quality='unreviewed geometry proxy; A0-error-selected fit diagnostic',human_pixel_gt=False,selection_a0_ne_m=error)
+            chosen_groups.add(group);seen.add(frame)
+            if len(selected)==12:break
+    expected=12 if a.hard_cars else 24
+    assert len(selected)==expected and len(seen)==expected
     if any(manifest['map_assignment'][x['map_name']]!='fit' for x in selected):raise ValueError('fit-only pilot')
     source={}
     for chunk in manifest['chunks']:
@@ -73,8 +94,8 @@ def main():
             cached_local_valid=row['local_valid'],cached_quality=row['quality'],frame=frame)
     a.output.mkdir(parents=True)
     atomic_json(selected,a.output/'public_selection.json');atomic_save(inputs,a.output/'public_inputs.pt');atomic_json(private,a.output/'private_scoring.json')
-    atomic_json(dict(cases=24,Car=12,Building=4,Parking=4,Ground=4,all_fit=True,camera_yaw=0,
-        selection='12 previously reviewed fit Car proposals, including uncertain; 4 other targets/category by hash; no new outcome filtering',
+    atomic_json(dict(cases=len(selected),categories=dict(Counter(x['category'] for x in private.values())),all_fit=True,camera_yaw=0,
+        selection=('12 new physical Car targets and source frames, hash selected among A0-error>20m fit proposals; explicitly outcome-conditioned diagnostic' if a.hard_cars else '12 previously reviewed fit Car proposals, including uncertain; 4 other targets/category by hash; no new outcome filtering'),
         warning='Biased exploratory fit pilot, no human pixel GT; no generalization or SR claim',
         public_selection_sha256=file_sha256(a.output/'public_selection.json'),public_inputs_sha256=file_sha256(a.output/'public_inputs.pt'),
         private_scoring_sha256=file_sha256(a.output/'private_scoring.json'),review_sha256=file_sha256(review_path),feature_manifest_sha256=file_sha256(cache/'manifest.json'),
