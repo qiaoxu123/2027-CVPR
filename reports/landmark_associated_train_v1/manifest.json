@@ -1,0 +1,114 @@
+{
+  "version": "landmark-associated-train-v1",
+  "complete": true,
+  "keep_categories": [
+    "direct_geometry",
+    "direct_identity",
+    "indirect_geometry"
+  ],
+  "remove_categories": [
+    "no_confirmed_anchor",
+    "uncertain"
+  ],
+  "classification": "Frozen full-corpus automatic dependency classification; no sample-review overrides",
+  "official_total": 22002,
+  "official_retained": 16539,
+  "official_removed": 5463,
+  "processed_total": 21878,
+  "processed_retained": 16539,
+  "processed_removed": 5339,
+  "counts": {
+    "official": {
+      "direct_geometry": 9356,
+      "no_confirmed_anchor": 325,
+      "indirect_geometry": 7182,
+      "uncertain": 5138,
+      "direct_identity": 1
+    },
+    "processed": {
+      "direct_geometry": 9356,
+      "indirect_geometry": 7182,
+      "uncertain": 5135,
+      "no_confirmed_anchor": 204,
+      "direct_identity": 1
+    }
+  },
+  "by_target_category": {
+    "Building": {
+      "retained": 6729,
+      "removed": 1558
+    },
+    "Car": {
+      "retained": 8349,
+      "removed": 3392
+    },
+    "Ground": {
+      "retained": 872,
+      "removed": 356
+    },
+    "Parking": {
+      "retained": 589,
+      "removed": 157
+    }
+  },
+  "partition_sizes": {
+    "fit": 15202,
+    "dev": 670,
+    "confirm": 667
+  },
+  "partition_object_id_groups": {
+    "fit": 3607,
+    "confirm": 154,
+    "dev": 145
+  },
+  "recommended_fit_annotations": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/datasets/landmark_associated_train_v1_provenance/processed_fit.json",
+  "warnings": [
+    "Automatic relation labels are not human verified.",
+    "Selected TRAIN distribution excludes ambiguous instructions; formal evaluation must remain unfiltered.",
+    "Old TRAIN dev/confirm partitions retain their prior exposure history; not fresh independent data.",
+    "Source indices change after filtering: use processed_index.jsonl; never reuse positional caches without mapping.",
+    "Target coordinates, trajectory and IDs are preserved as annotation fields, not new inference inputs."
+  ],
+  "source_sha256": {
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/original_citynav/citynav_train_seen.json": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/processed_citynav/citynav_train_seen.json": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/reports/instruction_landmark_association/records.json": "e6f26f1f419b3f10ccf8685dfdb1a7536f26205e628e4c45a39eae4741ee5b88",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/reports/instruction_landmark_association/summary.json": "1abccbe0bfabaec06b59d3d4147d1e0df1fb831b5e6a46d4257d86190d87943d",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/build_landmark_associated_train.py": "91fb71fda73f466511aa2e87fb99b21f812fe54558386ffc0bf40306036116a6"
+  },
+  "files": {
+    "official_train_associated.json": {
+      "sha256": "d8b077d68ab9280d0679cb5005d10566c0453295173bf743a6e5bc0499fca8b3",
+      "bytes": 133151740
+    },
+    "processed_all.json": {
+      "sha256": "d8b077d68ab9280d0679cb5005d10566c0453295173bf743a6e5bc0499fca8b3",
+      "bytes": 133151740
+    },
+    "processed_confirm.json": {
+      "sha256": "5c024bf0861a594b001b679617dfed9a55c177560382cd124d0a946cadf9ee58",
+      "bytes": 4650482
+    },
+    "processed_dev.json": {
+      "sha256": "175fcbc47da3b9c31097b504c381cf36bb334257f39ba85303ef00ee70244927",
+      "bytes": 6190104
+    },
+    "processed_fit.json": {
+      "sha256": "a9dc3e7cdc9166f4212fe60082221070576c2ff1578ce0d80f23c9086d7e42d6",
+      "bytes": 122311160
+    },
+    "processed_index.jsonl": {
+      "sha256": "3e4f8831a6772ebf153ddbb668b01c6ca59163a92067a17f73848237e232900b",
+      "bytes": 5776204
+    },
+    "removed_records.jsonl": {
+      "sha256": "3548ad90d8078debc37d355c9872ba5c102dbcdc6e6f9b9b1f4a8e85d48902b6",
+      "bytes": 2425247
+    },
+    "retained_records.jsonl": {
+      "sha256": "dd5d8d51c1a676f4dd41ec3958cf058b5cb512379aa265bce1bbbd94f4fdf0e9",
+      "bytes": 6888915
+    }
+  }
+}

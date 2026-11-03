@@ -1,5 +1,13 @@
 # Changelog
 
+## [landmark-associated-train-v1] - 2026-11-04
+### Features
+- 新增可复现TRAIN关联筛选生成器、原始/processed兼容数据及后续拟合配置；移除未找到关联和不确定类并保存逐条日志。
+### Design Rationale
+- 固定全量自动分类，保持原始字段、既有地图分组及完整来源索引，防止版本索引错配和内部验证混入拟合。
+### Notes & Caveats
+- 筛选不是人工质量认证；原分组曝光历史不重置，正式评测不筛选。大型数据仅保存服务器，本次未训练。
+
 ## [landmark-chain-pilot] - 2026-11-03
 ### Features
 - 独立固定yaw观测适配器及TRAIN分层采集、冻结SigLIP2特征缓存脚本。
