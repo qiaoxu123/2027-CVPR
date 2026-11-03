@@ -18,6 +18,7 @@ import numpy as np
 from graphnav.checkpointing import file_sha256
 from graphnav.fixed_yaw_observation import FixedYawObservation
 from graphnav.renderer import CityNavObservedViewRenderer
+from graphnav.train_confirmation_selection import selected_train_tasks
 from graphnav.landmark_projection import world_to_frame, frame_to_world
 
 
@@ -33,6 +34,7 @@ def main():
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--yaw-rad', type=float, default=0.)
     p.add_argument('--exclude-tasks', type=Path)
+    p.add_argument('--selected-tasks', type=Path, help='Frozen TRAIN identity manifest, no outcome selection')
     a = p.parse_args()
     if min(a.per_category, a.steps) < 1:
         raise ValueError('positive task/frame counts required')
@@ -68,6 +70,9 @@ def main():
         if len(chosen) < a.per_category:
             chosen += [g for g in candidates if g not in chosen][:a.per_category-len(chosen)]
         selected += [(g, groups[g][0]) for g in chosen]
+    if a.selected_tasks:
+        if a.exclude_tasks:raise ValueError('explicit selected manifest cannot be mixed with sampling exclusions')
+        selected=selected_train_tasks(ds._raw_records,objects,json.loads(a.selected_tasks.read_text()))
     # Map-major ordering avoids repeated orthophoto loads; fixed selection is hash-based.
     selected.sort(key=lambda x: (x[0][1], x[1]))
     a.output.mkdir(parents=True)
@@ -83,6 +88,7 @@ def main():
                     image_size=[384,384], steps_selection='uniform index; no GT distance selection',
                     seed=a.seed, selected_physical_instances=len(selected), categories={}, frames=0,
                     excluded_tasks_sha256=file_sha256(a.exclude_tasks) if a.exclude_tasks else None,
+                    selected_tasks_sha256=file_sha256(a.selected_tasks) if a.selected_tasks else None,
                     warning='TRAIN observation capture only. Trajectories are dataset references; this is NOT closed-loop evaluation.')
     (a.output/'manifest.json').write_text(json.dumps(manifest, indent=2))
     started = time.perf_counter()

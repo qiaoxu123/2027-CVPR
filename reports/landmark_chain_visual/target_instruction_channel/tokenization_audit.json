@@ -1,0 +1,56 @@
+{
+  "model_max_tokens": 64,
+  "groups": {
+    "original400": {
+      "queries": 400,
+      "truncated": 11,
+      "max_untruncated_tokens": 92,
+      "mean_untruncated_tokens": 36.5375
+    },
+    "retarget236": {
+      "queries": 236,
+      "truncated": 6,
+      "max_untruncated_tokens": 81,
+      "mean_untruncated_tokens": 38.851694915254235
+    }
+  },
+  "collision_pairs": [
+    {
+      "task_keys": [
+        "retarget_00645",
+        "retarget_00590"
+      ],
+      "full_instruction_token_ids_equal": false
+    },
+    {
+      "task_keys": [
+        "retarget_01263",
+        "retarget_01943"
+      ],
+      "full_instruction_token_ids_equal": false
+    },
+    {
+      "task_keys": [
+        "retarget_07162",
+        "retarget_07105"
+      ],
+      "full_instruction_token_ids_equal": false
+    },
+    {
+      "task_keys": [
+        "retarget_07550",
+        "retarget_07050"
+      ],
+      "full_instruction_token_ids_equal": false
+    },
+    {
+      "task_keys": [
+        "retarget_19074",
+        "retarget_18241"
+      ],
+      "full_instruction_token_ids_equal": false
+    }
+  ],
+  "private_labels_read": false,
+  "warning": "Public text audit only. Whole string is retained in data; model can truncate later constraints."
+}

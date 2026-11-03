@@ -1,0 +1,11 @@
+# 独立TRAIN确认：评分前冻结
+
+已冻结完整指令目标通道final模型3f6a1d016a2b1cc1edaf69d5c7c5cb5461ab608cc85314ec59d163030d5d076e。使用3张原留出TRAIN地图的全部剩余65个物理目标（Car30、Building35），排除旧400、24试验以及已消费的64确认实例。无Parking/Ground，不能外推其类别表现。具体索引与SHA见confirmation_selection_freeze.json。
+
+仅新局部头的拟合/选择独立；原A0预训练使用合法完整TRAIN，不宣称全模型未见数据。冻结后禁止根据确认结果改角色、损失、权重或挑观察。
+
+先复用原采样器按每条参考轨迹均匀4时刻采集384原生当前RGB，camera yaw0，保留agent yaw及Footprint；参考轨迹观察用于离线定位，不是闭环。高低空/无有效支持均保留统计，不按目标距离、可见性或结果挑帧。公开RGB/输入与私有GT分离。
+
+冻结A0/SigLIP2重新生成该65任务缓存。对照原冻结V3、重跑Role、FullTarget以及FullTarget打乱RGB；先保存全部模型预测，再汇总GT结果。比较Goal R1、NE、纠正/误改及实例分组差异，不扫参数。
+
+FullTarget必须同时优于原冻结V3/Role的R1与NE，并显示优于Shuffle，才在同65条冻结任务追加真实配对闭环；否则不启动导航、不扩大到Val。即使通过也不宣称达到Val128>65%门槛。旧64与旧Val128不参与本候选筛选。
