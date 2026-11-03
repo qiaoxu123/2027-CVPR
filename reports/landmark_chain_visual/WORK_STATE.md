@@ -67,3 +67,5 @@
 - 原nav24空间支持后验分析：Real7neverCorrect失败中6几何/5深度/6近20m空间候选，Original11中10/9/9。仅代理，不能等于真实可见/实例命中；不能假定neverCorrect全是未观测。
 - 下一步：先输入级Gray RGB与像素块Shuffle控制（候选/真实深度/质量保持不变），因为featureShuffle也动位置编码；再独立视觉得分弱世界定位监督/必要时视觉语言对比，切断几何/先验/相机中心捷径。参考分支应提取实际中间对象/区域NP，目前只是全文context不能称完整链。最终Goal损失应在投回的固定世界格上，保真/argmax目标对齐。新方案用新物理目标确认，别再调旧confirm24。
 - 全目标仍要求最终导航：未跑Val128，需冻结后至少84/128且有配对收益才全量；无Test访问。原RGB/SigLIP/A3/控制权重均保留不改。
+
+2026-11-04 continuation: 19 related tests passed. Both V2 full/reference 3epoch fits complete; reference output visual_chain_v2_reference_s0_r1, best sha5a33d705d3ca95e8700052b314ffbce6d47fb5e2640f738209b3bae0589111e2. Reference dev92 R1 .8043478 NE18.4114 +6/-4; full epoch3 .7934783 NE18.7539 +5/-4. See V2_PROGRESS_zh.md. Next actual V2 dev25 closedloop/content ablations, no Val yet. Input content controls completed: gray19/25, patchshuffle20/25 versus real20/25. All new training jobs terminal.

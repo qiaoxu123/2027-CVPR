@@ -36,18 +36,53 @@ def role(doc,mentions):
                 fallback=False,parse=graph)
 
 
+def reference_phrases(doc,parsed,mentions):
+    """Visual descriptions of intermediate objects; names remain in global text."""
+    graph=parsed['parse'];target=graph.get('target_token');ids=set()
+    for path in graph.get('paths',[]):ids.update(path['nodes'][1:-1])
+    for edge in graph.get('edges',[]):
+        if target in (edge['a'],edge['b']):ids.add(edge['b'] if edge['a']==target else edge['a'])
+    def is_public(t):return any(m['start']<=t.idx<m['end'] for m in mentions)
+    chunks={chunk.root.i:chunk.text for chunk in doc.noun_chunks}
+    phrases=[]
+    for i in sorted(ids):
+        token=doc[i]
+        if i==target or is_public(token) or token.pos_ not in ('NOUN','PROPN'):continue
+        text=chunks.get(i,token.text)
+        for prep in token.children:
+            if prep.lower_=='of':
+                obj=next((t for t in prep.children if t.dep_=='pobj'),None)
+                if obj is not None and obj.lemma_.lower() in ('car','vehicle','row','lot','tree'):
+                    text+=' of '+chunks.get(obj.i,obj.text)
+        phrases.append(text)
+    if not phrases:
+        for m in mentions:
+            for kind in m['types']:
+                visual_type='road' if 'road' in kind.lower() else 'building' if kind=='Building' else 'parking area' if kind=='Parking' else 'ground area' if kind=='Ground' else None
+                if visual_type:phrases.append(visual_type)
+    return list(dict.fromkeys(phrases))
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--public-frames',type=Path,required=True)
     p.add_argument('--public-catalog',type=Path,required=True)
     p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--reference-phrases',action='store_true')
     a=p.parse_args()
     if a.output.exists():raise FileExistsError('preserve earlier role cache')
     frames=[json.loads(line) for line in a.public_frames.read_text().splitlines()]
     queries={f['task_key']:(f['map_name'],f['instruction']) for f in frames}
     catalog=PublicNames(json.loads(a.public_catalog.read_text()))
     nlp=spacy.load('en_core_web_sm')
-    result={key:role(nlp(text),catalog.match(name,text)) for key,(name,text) in queries.items()}
+    result={}
+    for key,(name,text) in queries.items():
+        doc=nlp(text);mentions=catalog.match(name,text);parsed=role(doc,mentions)
+        if a.reference_phrases:
+            phrases=reference_phrases(doc,parsed,mentions)
+            parsed.update(reference_phrases=phrases,reference_text='; '.join(phrases) if phrases else text,
+                          original_instruction=text,reference_frame='unspecified unless explicit cardinal',version='local-roles-v2')
+        result[key]=parsed
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     provenance=dict(public_frames_sha256=hashlib.sha256(a.public_frames.read_bytes()).hexdigest(),

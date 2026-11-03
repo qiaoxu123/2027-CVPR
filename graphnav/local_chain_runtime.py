@@ -17,6 +17,8 @@ from .full_localization import GoalField
 from .local_chain_observation import local_patch_regions
 from .local_chain_position import LocalChainPositionHead
 from .local_chain_raster import raster_goal_field
+from .rgb_content_controls import controlled_rgb
+from .visual_chain_position import VisualChainPositionHead
 from .observed_patch_scales import masked_native_pool
 from .stage1 import preserved_proposal_order
 from .stage1_runtime import GraphNavStage1Policy
@@ -46,11 +48,14 @@ def local_goal_field(base,global_xy,local_uv,logits,local_valid):
 class LocalChainPolicy(GraphNavStage1Policy):
     def __init__(self,checkpoint,local_checkpoint,public_roles,directory,*,device='cuda',control='real',field_mode='grid'):
         super().__init__(checkpoint,directory,device=device)
-        if control not in ('real','zero','shuffle','no_geometry','full_text','a3'):
+        if control not in ('real','zero','shuffle','no_geometry','full_text','a3','gray-rgb','rgb-shuffle'):
             raise ValueError('unknown frozen local intervention')
         state=torch.load(local_checkpoint,map_location='cpu',weights_only=True)
-        self.position=LocalChainPositionHead().to(device).eval().requires_grad_(False)
+        architecture=state.get('architecture','legacy')
+        if architecture=='visual-chain-v2' and field_mode!='grid':raise ValueError('visual-chain v2 requires fixed-world Belief')
+        self.position=(VisualChainPositionHead() if architecture=='visual-chain-v2' else LocalChainPositionHead()).to(device).eval().requires_grad_(False)
         self.position.load_state_dict(state['model'],strict=True)
+        self.role_mode=state.get('config',{}).get('role_mode','full')
         roles=json.loads(Path(public_roles).read_text())
         self.roles={(r['map_name'],r['instruction']):r for r in roles}
         self.control=control
@@ -65,7 +70,8 @@ class LocalChainPolicy(GraphNavStage1Policy):
         role=self.roles.get((episode.map_name,episode.instruction))
         self.role_fallback=role is None
         self.target_phrase=role['target_text'] if role else episode.instruction
-        self.context_phrase=role['context_text'] if role else episode.instruction
+        self.context_phrase=role['context_text'] if role and self.role_mode=='reference' else episode.instruction
+        if role and self.role_mode=='reference' and role.get('version')!='local-roles-v2':raise ValueError('reference role cache version mismatch')
 
     @torch.no_grad()
     def predict(self,state,instruction):
@@ -87,10 +93,11 @@ class LocalChainPolicy(GraphNavStage1Policy):
             return prediction
         observation=state.current_observation
         world,masks,valid,quality=local_patch_regions(observation)
+        encoder_rgb=controlled_rgb(observation['bgr'],self.control)
         features=torch.zeros(144,3,1024,device=self.device)
         if valid.any():
             import cv2
-            pixels=self.native.processor(images=[cv2.cvtColor(observation['bgr'],cv2.COLOR_BGR2RGB)],return_tensors='pt').to(self.device)
+            pixels=self.native.processor(images=[cv2.cvtColor(encoder_rgb,cv2.COLOR_BGR2RGB)],return_tensors='pt').to(self.device)
             with torch.autocast('cuda',dtype=torch.bfloat16):
                 patches=self.native.model.vision_model(**pixels).last_hidden_state[0]
                 supported=masks.any(-1)
@@ -120,6 +127,7 @@ class LocalChainPolicy(GraphNavStage1Policy):
         prediction.diagnostics.update(policy='Frozen local-position hypotheses + unchanged original Trajectory/Stop',
             local_control=self.control,local_hypotheses=int(valid.sum()),role_fallback=self.role_fallback,
             field_mode=self.field_mode,local_probability_mass=float(logits.softmax(-1)[:,self.base.belief_logits.shape[-1]:].sum()),
+            encoder_rgb_sha256=self.native.image_key(encoder_rgb),
             camera_yaw_rad=observation.get('camera_yaw_rad'),agent_yaw_rad=float(state.pose[3]),
             posterior_hypotheses=int(field.belief_logits.shape[-1]),
             global_prior_top1_xy=(self.bounds[:2]+self.inputs['grid_xy'][0,self.base.belief_logits[0].argmax()].float().cpu().numpy()*(self.bounds[2:]-self.bounds[:2])).tolist(),

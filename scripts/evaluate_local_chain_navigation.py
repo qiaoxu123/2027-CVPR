@@ -24,7 +24,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('sbf-source','data-root','config','checkpoint','local-checkpoint','public-roles','episode-manifest','output'):
         p.add_argument('--'+key,type=Path,required=True)
-    p.add_argument('--methods',nargs='+',choices=('original','real','zero','shuffle','a3'),default=['original','real','zero','shuffle'])
+    p.add_argument('--methods',nargs='+',choices=('original','real','zero','shuffle','a3','gray-rgb','rgb-shuffle'),default=['original','real','zero','shuffle'])
     p.add_argument('--smoke-episodes',type=int)
     p.add_argument('--resume',action='store_true')
     p.add_argument('--field-mode',choices=('grid','direct'),default='grid')
