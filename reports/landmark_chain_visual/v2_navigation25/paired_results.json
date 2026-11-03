@@ -1,0 +1,250 @@
+{
+  "original": {
+    "report": {
+      "method": "original",
+      "split": "train_seen",
+      "episodes": 25,
+      "metrics": {
+        "SR": 0.84,
+        "OSR": 0.92,
+        "SPL": 0.8058551424597059,
+        "NE": 17.891440438667402,
+        "nDTW": 0.3208565696592056,
+        "sDTW": 0.28642064863663336,
+        "steps": 7.0,
+        "path_length": 192.73436188656126,
+        "policy_stop": 1.0,
+        "inference_ms": 63.61853846367503,
+        "episodes": 25,
+        "False_Stop_Rate": 0.16,
+        "false_stop_episode_fraction": 0.16,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 25
+      },
+      "seconds_current_session": 13.74254727200605,
+      "gpu_peak_allocated_gib": 3.7557191848754883,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 1,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [],
+    "harms": [],
+    "net": 0,
+    "initial_inputs_equal": true
+  },
+  "real": {
+    "report": {
+      "method": "real",
+      "split": "train_seen",
+      "episodes": 25,
+      "metrics": {
+        "SR": 0.76,
+        "OSR": 0.84,
+        "SPL": 0.6393252658655988,
+        "NE": 23.30289779267362,
+        "nDTW": 0.3465769229479999,
+        "sDTW": 0.3099690607850618,
+        "steps": 8.72,
+        "path_length": 205.52150101979416,
+        "policy_stop": 0.96,
+        "inference_ms": 39.721470552911256,
+        "episodes": 25,
+        "False_Stop_Rate": 0.25,
+        "false_stop_episode_fraction": 0.24,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 24,
+        "horizon": 1
+      },
+      "seconds_current_session": 12.207575007108971,
+      "gpu_peak_allocated_gib": 3.756157398223877,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 8,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [],
+    "harms": [
+      8123,
+      8125
+    ],
+    "net": -2,
+    "initial_inputs_equal": true
+  },
+  "gray-rgb": {
+    "report": {
+      "method": "gray-rgb",
+      "split": "train_seen",
+      "episodes": 25,
+      "metrics": {
+        "SR": 0.68,
+        "OSR": 0.84,
+        "SPL": 0.5736767117702292,
+        "NE": 26.106373140463027,
+        "nDTW": 0.3288567171761958,
+        "sDTW": 0.2767610456850224,
+        "steps": 8.88,
+        "path_length": 207.8455611869222,
+        "policy_stop": 0.96,
+        "inference_ms": 39.74989976846046,
+        "episodes": 25,
+        "False_Stop_Rate": 0.3333333333333333,
+        "false_stop_episode_fraction": 0.32,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 24,
+        "horizon": 1
+      },
+      "seconds_current_session": 12.449492234969512,
+      "gpu_peak_allocated_gib": 3.756225109100342,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 12,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [],
+    "harms": [
+      8123,
+      8125,
+      14739,
+      14988
+    ],
+    "net": -4,
+    "initial_inputs_equal": true
+  },
+  "rgb-shuffle": {
+    "report": {
+      "method": "rgb-shuffle",
+      "split": "train_seen",
+      "episodes": 25,
+      "metrics": {
+        "SR": 0.68,
+        "OSR": 0.84,
+        "SPL": 0.5377258853990022,
+        "NE": 23.600224174157947,
+        "nDTW": 0.34751478995982876,
+        "sDTW": 0.2735195707634473,
+        "steps": 9.96,
+        "path_length": 220.8625824589067,
+        "policy_stop": 0.92,
+        "inference_ms": 44.100592270786066,
+        "episodes": 25,
+        "False_Stop_Rate": 0.30434782608695654,
+        "false_stop_episode_fraction": 0.28,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 23,
+        "horizon": 2
+      },
+      "seconds_current_session": 14.827983516966924,
+      "gpu_peak_allocated_gib": 3.756157398223877,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 15,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [
+      14744
+    ],
+    "harms": [
+      8123,
+      8125,
+      8176,
+      14739,
+      14988
+    ],
+    "net": -4,
+    "initial_inputs_equal": true
+  },
+  "full-context": {
+    "report": {
+      "method": "real",
+      "split": "train_seen",
+      "episodes": 25,
+      "metrics": {
+        "SR": 0.76,
+        "OSR": 0.88,
+        "SPL": 0.6373253066225005,
+        "NE": 23.112725471613675,
+        "nDTW": 0.34257116151027217,
+        "sDTW": 0.3056553712157318,
+        "steps": 9.2,
+        "path_length": 212.09467650039426,
+        "policy_stop": 0.96,
+        "inference_ms": 45.50520141375079,
+        "episodes": 25,
+        "False_Stop_Rate": 0.25,
+        "false_stop_episode_fraction": 0.24,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 24,
+        "horizon": 1
+      },
+      "seconds_current_session": 14.476564920973033,
+      "gpu_peak_allocated_gib": 3.7569146156311035,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 10,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [],
+    "harms": [
+      8123,
+      8125
+    ],
+    "net": -2,
+    "initial_inputs_equal": true
+  }
+}

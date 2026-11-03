@@ -69,3 +69,5 @@
 - 全目标仍要求最终导航：未跑Val128，需冻结后至少84/128且有配对收益才全量；无Test访问。原RGB/SigLIP/A3/控制权重均保留不改。
 
 2026-11-04 continuation: 19 related tests passed. Both V2 full/reference 3epoch fits complete; reference output visual_chain_v2_reference_s0_r1, best sha5a33d705d3ca95e8700052b314ffbce6d47fb5e2640f738209b3bae0589111e2. Reference dev92 R1 .8043478 NE18.4114 +6/-4; full epoch3 .7934783 NE18.7539 +5/-4. See V2_PROGRESS_zh.md. Next actual V2 dev25 closedloop/content ablations, no Val yet. Input content controls completed: gray19/25, patchshuffle20/25 versus real20/25. All new training jobs terminal.
+
+V2 real closedloop completed (125 trajectories total, 5x25): Original21/25, reference19/25, full-context19/25, gray17/25, pixelshuffle17/25. Original->reference +0/-2, same two harms8123/8125 as full-context; reference4neverGoalcorrectfailures/2oncecorrectlost. No Val. New reports v2_navigation25, reusable summarize_chain_navigation.py validates identical first poses and observed RGB SHA across all five. Next inspect actual failure8123/8125 observations/localmass; training Goal precision/preservation hypothesis must be evidence-backed before further iteration.
