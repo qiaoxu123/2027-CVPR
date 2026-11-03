@@ -11,7 +11,7 @@ import time
 
 import numpy as np
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader,RandomSampler
 
 from graphnav.checkpointing import atomic_json,atomic_save,file_sha256,rng_state,restore_rng
 from graphnav.local_chain_position import LocalChainPositionHead,position_loss
@@ -32,7 +32,7 @@ def merge_fit_observations(base, extra):
     return base+extra
 
 
-def records(cache,labels,subset,role_vectors=None,role_mode='full'):
+def records(cache,labels,subset,role_vectors=None,role_mode='full',allowed_frames=None):
     meta=json.loads((cache/'manifest.json').read_text())
     if not meta['complete']:raise ValueError('complete feature cache required')
     truth={r['frame_key']:r for r in map(json.loads,labels.read_text().splitlines()) if r['status']=='captured'}
@@ -42,6 +42,7 @@ def records(cache,labels,subset,role_vectors=None,role_mode='full'):
         if file_sha256(path)!=chunk['sha256']:raise ValueError('corrupt feature chunk')
         for r in torch.load(path,map_location='cpu',weights_only=True)['records']:
             if r['subset']!=subset:continue
+            if allowed_frames is not None and r['frame_key'] not in allowed_frames:continue
             if r['frame_key'] not in truth:raise ValueError('missing same-subset label')
             label=truth[r['frame_key']]
             r.update(target_world=torch.tensor(label['target_world'][:2],dtype=torch.float32),category=label['category'])
@@ -129,7 +130,10 @@ def main():
     p.add_argument('--extra-fit-cache',type=Path)
     p.add_argument('--extra-fit-labels',type=Path)
     p.add_argument('--loss-mode',choices=('standard','precision-preserve'),default='standard')
+    p.add_argument('--fit-observation-filter',type=Path)
+    p.add_argument('--steps-per-epoch',type=int,default=0)
     a=p.parse_args()
+    if a.steps_per_epoch<0:raise ValueError('nonnegative step budget required')
     if a.loss_mode=='precision-preserve' and a.architecture!='world-likelihood-v3':raise ValueError('precision loss requires V3')
     torch.manual_seed(a.seed);np.random.seed(a.seed)
     torch.set_num_threads(4)
@@ -137,6 +141,7 @@ def main():
     role_vectors=torch.load(a.role_vectors,map_location='cpu',weights_only=True) if a.role_vectors else None
     if a.architecture in ('visual-chain-v2','world-likelihood-v3') and role_vectors is None:raise ValueError('explicit role vectors/phrases required')
     if a.confirm_checkpoint:
+        if a.fit_observation_filter:raise ValueError('no fitting filter in confirmation')
         if a.extra_fit_cache or a.extra_fit_labels:raise ValueError('no augmentation in confirmation')
         if a.output.exists():raise FileExistsError('confirmation output already exists; no repeated evaluation')
         if not a.confirm_labels or a.fit_labels or a.dev_labels:raise ValueError('confirm labels only in confirmation mode')
@@ -151,7 +156,8 @@ def main():
     if a.confirm_labels or not a.fit_labels or not a.dev_labels:raise ValueError('fit/dev labels only during training')
     if a.output.exists() and not a.resume:raise FileExistsError('do not overwrite experiment')
     a.output.mkdir(parents=True,exist_ok=True)
-    fit=records(a.cache,a.fit_labels,'fit',role_vectors,a.role_mode);dev=records(a.cache,a.dev_labels,'dev',role_vectors,a.role_mode)
+    allowed=set(json.loads(a.fit_observation_filter.read_text())['frame_keys']) if a.fit_observation_filter else None
+    fit=records(a.cache,a.fit_labels,'fit',role_vectors,a.role_mode,allowed);dev=records(a.cache,a.dev_labels,'dev',role_vectors,a.role_mode)
     if bool(a.extra_fit_cache)!=bool(a.extra_fit_labels):raise ValueError('both extra fit inputs required')
     if a.extra_fit_cache:
         original=json.loads((a.cache/'manifest.json').read_text())
@@ -165,6 +171,7 @@ def main():
     start_epoch=0;history=[];best=(-1.,float('-inf'))
     fingerprint={key:file_sha256(path) for key,path in [('feature_manifest_sha256',a.cache/'manifest.json'),('fit_labels_sha256',a.fit_labels),('dev_labels_sha256',a.dev_labels)]}
     if a.role_vectors:fingerprint['role_vectors_sha256']=file_sha256(a.role_vectors)
+    if a.fit_observation_filter:fingerprint['fit_observation_filter_sha256']=file_sha256(a.fit_observation_filter)
     if a.loss_mode=='precision-preserve':fingerprint['loss_code_sha256']=file_sha256(Path(__file__).resolve().parents[1]/'graphnav/precision_preserve_loss.py')
     if a.extra_fit_cache:
         fingerprint.update(extra_feature_manifest_sha256=file_sha256(a.extra_fit_cache/'manifest.json'),extra_fit_labels_sha256=file_sha256(a.extra_fit_labels))
@@ -178,6 +185,7 @@ def main():
         if any(state[k]!=v for k,v in fingerprint.items()):raise ValueError('resume input SHA mismatch')
         if any(state['config'][key]!=getattr(a,key) for key in ('lr','seed','batch_size','max_batches')):raise ValueError('resume configuration mismatch')
         if state.get('architecture','legacy')!=a.architecture or state['config'].get('role_mode','full')!=a.role_mode:raise ValueError('resume architecture/role mismatch')
+        if state['config'].get('steps_per_epoch',0)!=a.steps_per_epoch:raise ValueError('resume update budget changed')
         if state['config'].get('loss_mode','standard')!=a.loss_mode:raise ValueError('resume loss changed')
         model.load_state_dict(state['model']);optimizer.load_state_dict(state['optimizer']);restore_rng(state['rng'])
         start_epoch=state['epoch'];history=state['history'];best=tuple(state['best'])
@@ -189,7 +197,8 @@ def main():
     for epoch in range(start_epoch,a.epochs):
         model.train();losses=[];eligible=0;examples=0;color_rows=0;fine_car_rows=0;preservation_rows=0
         generator=torch.Generator().manual_seed(a.seed+epoch)
-        loader=DataLoader(fit,batch_size=a.batch_size,shuffle=True,generator=generator,collate_fn=collate)
+        sampler=RandomSampler(fit,replacement=True,num_samples=a.steps_per_epoch*a.batch_size,generator=generator) if a.steps_per_epoch else None
+        loader=DataLoader(fit,batch_size=a.batch_size,shuffle=sampler is None,sampler=sampler,generator=generator,collate_fn=collate)
         for step,batch in enumerate(loader):
             if a.max_batches and step>=a.max_batches:break
             optimizer.zero_grad(set_to_none=True)

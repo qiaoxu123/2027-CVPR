@@ -1,0 +1,421 @@
+{
+  "network_input_shape": [
+    1,
+    3,
+    384,
+    384
+  ],
+  "backbone_snapshot": "/home/20261024_1/.cache/huggingface/hub/models--google--siglip2-large-patch16-384/snapshots/1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "physical_targets": 24,
+  "frames": 24,
+  "gpu_peak_gib": 3.6017589569091797,
+  "crop_seconds": 42.02012849226594,
+  "crops": 4646,
+  "warning": "Fit-set late reference states; world point distance proxy, NOT pixel-instance match or closed-loop SR. 48/112px crops are resized by frozen SigLIP to384, no new native detail.",
+  "blind_predictions_sha256": "968a7650bf7c626a502d0e6beb641f1e60c9fa0e1b2ecdc0601e8a07d43869b1",
+  "statistics": {
+    "all": {
+      "frames": 24,
+      "support5": 16,
+      "support20": 20,
+      "methods": {
+        "native_pool_1": {
+          "top1_5m": 6,
+          "top1_20m": 16,
+          "top5_5m": 8,
+          "top5_20m": 18
+        },
+        "native_pool_3": {
+          "top1_5m": 7,
+          "top1_20m": 16,
+          "top5_5m": 9,
+          "top5_20m": 17
+        },
+        "native_pool_7": {
+          "top1_5m": 7,
+          "top1_20m": 15,
+          "top5_5m": 8,
+          "top5_20m": 15
+        },
+        "crop_48": {
+          "top1_5m": 6,
+          "top1_20m": 15,
+          "top5_5m": 10,
+          "top5_20m": 18
+        },
+        "crop_112": {
+          "top1_5m": 5,
+          "top1_20m": 16,
+          "top5_5m": 9,
+          "top5_20m": 17
+        }
+      }
+    },
+    "Car": {
+      "frames": 6,
+      "support5": 5,
+      "support20": 5,
+      "methods": {
+        "native_pool_1": {
+          "top1_5m": 4,
+          "top1_20m": 5,
+          "top5_5m": 5,
+          "top5_20m": 5
+        },
+        "native_pool_3": {
+          "top1_5m": 5,
+          "top1_20m": 5,
+          "top5_5m": 5,
+          "top5_20m": 5
+        },
+        "native_pool_7": {
+          "top1_5m": 4,
+          "top1_20m": 5,
+          "top5_5m": 5,
+          "top5_20m": 5
+        },
+        "crop_48": {
+          "top1_5m": 5,
+          "top1_20m": 5,
+          "top5_5m": 5,
+          "top5_20m": 5
+        },
+        "crop_112": {
+          "top1_5m": 4,
+          "top1_20m": 5,
+          "top5_5m": 5,
+          "top5_20m": 5
+        }
+      }
+    },
+    "Building": {
+      "frames": 6,
+      "support5": 4,
+      "support20": 5,
+      "methods": {
+        "native_pool_1": {
+          "top1_5m": 0,
+          "top1_20m": 5,
+          "top5_5m": 0,
+          "top5_20m": 5
+        },
+        "native_pool_3": {
+          "top1_5m": 0,
+          "top1_20m": 4,
+          "top5_5m": 0,
+          "top5_20m": 5
+        },
+        "native_pool_7": {
+          "top1_5m": 1,
+          "top1_20m": 4,
+          "top5_5m": 1,
+          "top5_20m": 4
+        },
+        "crop_48": {
+          "top1_5m": 0,
+          "top1_20m": 4,
+          "top5_5m": 1,
+          "top5_20m": 5
+        },
+        "crop_112": {
+          "top1_5m": 0,
+          "top1_20m": 5,
+          "top5_5m": 1,
+          "top5_20m": 5
+        }
+      }
+    },
+    "Ground": {
+      "frames": 6,
+      "support5": 5,
+      "support20": 5,
+      "methods": {
+        "native_pool_1": {
+          "top1_5m": 1,
+          "top1_20m": 2,
+          "top5_5m": 1,
+          "top5_20m": 3
+        },
+        "native_pool_3": {
+          "top1_5m": 0,
+          "top1_20m": 3,
+          "top5_5m": 2,
+          "top5_20m": 3
+        },
+        "native_pool_7": {
+          "top1_5m": 0,
+          "top1_20m": 2,
+          "top5_5m": 0,
+          "top5_20m": 2
+        },
+        "crop_48": {
+          "top1_5m": 0,
+          "top1_20m": 2,
+          "top5_5m": 2,
+          "top5_20m": 3
+        },
+        "crop_112": {
+          "top1_5m": 0,
+          "top1_20m": 2,
+          "top5_5m": 2,
+          "top5_20m": 3
+        }
+      }
+    },
+    "Parking": {
+      "frames": 6,
+      "support5": 2,
+      "support20": 5,
+      "methods": {
+        "native_pool_1": {
+          "top1_5m": 1,
+          "top1_20m": 4,
+          "top5_5m": 2,
+          "top5_20m": 5
+        },
+        "native_pool_3": {
+          "top1_5m": 2,
+          "top1_20m": 4,
+          "top5_5m": 2,
+          "top5_20m": 4
+        },
+        "native_pool_7": {
+          "top1_5m": 2,
+          "top1_20m": 4,
+          "top5_5m": 2,
+          "top5_20m": 4
+        },
+        "crop_48": {
+          "top1_5m": 1,
+          "top1_20m": 4,
+          "top5_5m": 2,
+          "top5_20m": 5
+        },
+        "crop_112": {
+          "top1_5m": 1,
+          "top1_20m": 4,
+          "top5_5m": 1,
+          "top5_20m": 4
+        }
+      }
+    }
+  },
+  "pixel_geometry_proxies": [
+    {
+      "frame_key": "train_16858_0065",
+      "category": "Car",
+      "geometry_proxy_bbox_width_px": 60.76329803466797,
+      "geometry_proxy_bbox_height_px": 51.373047828674316,
+      "geometry_proxy_area_px2": 2240.344691274112,
+      "geometry_proxy_in_view_area_px2": 0.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_07595_0059",
+      "category": "Car",
+      "geometry_proxy_bbox_width_px": 23.419342041015625,
+      "geometry_proxy_bbox_height_px": 65.64552307128906,
+      "geometry_proxy_area_px2": 1444.473009728361,
+      "geometry_proxy_in_view_area_px2": 1444.473009728361,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_03593_0023",
+      "category": "Car",
+      "geometry_proxy_bbox_width_px": 603.4415512084961,
+      "geometry_proxy_bbox_height_px": 769.3882446289062,
+      "geometry_proxy_area_px2": 367043.3630985723,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_18386_0119",
+      "category": "Car",
+      "geometry_proxy_bbox_width_px": 424.72681427001953,
+      "geometry_proxy_bbox_height_px": 382.25709664821625,
+      "geometry_proxy_area_px2": 132644.67708355468,
+      "geometry_proxy_in_view_area_px2": 124202.72048586537,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_20451_0098",
+      "category": "Car",
+      "geometry_proxy_bbox_width_px": 1102.6875305175781,
+      "geometry_proxy_bbox_height_px": 948.3323059082031,
+      "geometry_proxy_area_px2": 826453.5733182876,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_07149_0080",
+      "category": "Car",
+      "geometry_proxy_bbox_width_px": 643.3574981689453,
+      "geometry_proxy_bbox_height_px": 788.4659423828125,
+      "geometry_proxy_area_px2": 416692.0471166865,
+      "geometry_proxy_in_view_area_px2": 145316.7852098936,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_09864_0038",
+      "category": "Building",
+      "geometry_proxy_bbox_width_px": 1193.7608261108398,
+      "geometry_proxy_bbox_height_px": 1453.85400390625,
+      "geometry_proxy_area_px2": 780369.0780399751,
+      "geometry_proxy_in_view_area_px2": 82558.68042731998,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_00098_0059",
+      "category": "Building",
+      "geometry_proxy_bbox_width_px": 320.46226501464844,
+      "geometry_proxy_bbox_height_px": 315.28551864624023,
+      "geometry_proxy_area_px2": 64944.8207257092,
+      "geometry_proxy_in_view_area_px2": 46656.75522078028,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_08483_0110",
+      "category": "Building",
+      "geometry_proxy_bbox_width_px": 2717.672119140625,
+      "geometry_proxy_bbox_height_px": 2549.1373291015625,
+      "geometry_proxy_area_px2": 4831574.642642461,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_00018_0101",
+      "category": "Building",
+      "geometry_proxy_bbox_width_px": 668.32763671875,
+      "geometry_proxy_bbox_height_px": 1116.26025390625,
+      "geometry_proxy_area_px2": 466004.9753984629,
+      "geometry_proxy_in_view_area_px2": 102721.30150475902,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_16045_0050",
+      "category": "Building",
+      "geometry_proxy_bbox_width_px": 89.58576965332031,
+      "geometry_proxy_bbox_height_px": 77.41365814208984,
+      "geometry_proxy_area_px2": 4613.709178451216,
+      "geometry_proxy_in_view_area_px2": 4613.709178451216,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_03067_0037",
+      "category": "Building",
+      "geometry_proxy_bbox_width_px": 216.76553344726562,
+      "geometry_proxy_bbox_height_px": 237.83950996398926,
+      "geometry_proxy_area_px2": 40492.951663736574,
+      "geometry_proxy_in_view_area_px2": 36811.922666551734,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_12213_0031",
+      "category": "Ground",
+      "geometry_proxy_bbox_width_px": 251.95203399658203,
+      "geometry_proxy_bbox_height_px": 346.25597381591797,
+      "geometry_proxy_area_px2": 52803.860362957,
+      "geometry_proxy_in_view_area_px2": 46538.05174263335,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_13844_0020",
+      "category": "Ground",
+      "geometry_proxy_bbox_width_px": 26.684593200683594,
+      "geometry_proxy_bbox_height_px": 37.42765808105469,
+      "geometry_proxy_area_px2": 555.5145659301779,
+      "geometry_proxy_in_view_area_px2": 555.5145659301779,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_07843_0068",
+      "category": "Ground",
+      "geometry_proxy_bbox_width_px": 132.24093627929688,
+      "geometry_proxy_bbox_height_px": 560.7996520996094,
+      "geometry_proxy_area_px2": 57334.15375010173,
+      "geometry_proxy_in_view_area_px2": 32214.723894420687,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_10607_0096",
+      "category": "Ground",
+      "geometry_proxy_bbox_width_px": 181.7675552368164,
+      "geometry_proxy_bbox_height_px": 223.45733642578125,
+      "geometry_proxy_area_px2": 17455.85321153968,
+      "geometry_proxy_in_view_area_px2": 9237.51808664962,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_10754_0007",
+      "category": "Ground",
+      "geometry_proxy_bbox_width_px": 59.45320129394531,
+      "geometry_proxy_bbox_height_px": 70.10179138183594,
+      "geometry_proxy_area_px2": 2863.023468064377,
+      "geometry_proxy_in_view_area_px2": 2863.023468064377,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_13861_0140",
+      "category": "Ground",
+      "geometry_proxy_bbox_width_px": 247.62451171875,
+      "geometry_proxy_bbox_height_px": 226.23214530944824,
+      "geometry_proxy_area_px2": 26355.886981984862,
+      "geometry_proxy_in_view_area_px2": 0.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_10893_0086",
+      "category": "Parking",
+      "geometry_proxy_bbox_width_px": 5185.2899169921875,
+      "geometry_proxy_bbox_height_px": 3751.22119140625,
+      "geometry_proxy_area_px2": 12645839.225671604,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_05135_0023",
+      "category": "Parking",
+      "geometry_proxy_bbox_width_px": 5946.65771484375,
+      "geometry_proxy_bbox_height_px": 5288.0089111328125,
+      "geometry_proxy_area_px2": 20563336.430975113,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_18873_0036",
+      "category": "Parking",
+      "geometry_proxy_bbox_width_px": 24.667739868164062,
+      "geometry_proxy_bbox_height_px": 12.489913940429688,
+      "geometry_proxy_area_px2": 263.1996949935565,
+      "geometry_proxy_in_view_area_px2": 263.1996949935565,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_14024_0036",
+      "category": "Parking",
+      "geometry_proxy_bbox_width_px": 96.09688568115234,
+      "geometry_proxy_bbox_height_px": 125.60516357421875,
+      "geometry_proxy_area_px2": 6440.937996042892,
+      "geometry_proxy_in_view_area_px2": 6440.937996042892,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_06338_0221",
+      "category": "Parking",
+      "geometry_proxy_bbox_width_px": 1383.41455078125,
+      "geometry_proxy_bbox_height_px": 1776.8812866210938,
+      "geometry_proxy_area_px2": 1569704.3840409885,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    },
+    {
+      "frame_key": "train_07607_0166",
+      "category": "Parking",
+      "geometry_proxy_bbox_width_px": 10115.53857421875,
+      "geometry_proxy_bbox_height_px": 8981.7724609375,
+      "geometry_proxy_area_px2": 51198735.21162027,
+      "geometry_proxy_in_view_area_px2": 146689.0,
+      "visibility": "unknown; no human pixel labels"
+    }
+  ]
+}
