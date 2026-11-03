@@ -1,0 +1,1130 @@
+[
+  {
+    "episode": 12642,
+    "instruction": "This is a flat roofed building. this building is between the Dining Hall building and the West Range building. Next to this building is the Howard Theater building.",
+    "v1_groups": [
+      {
+        "owner_token": 5,
+        "owner_phrase": "a flat roofed building",
+        "target_to_owner": [
+          5
+        ],
+        "endpoints": [
+          {
+            "token": 12,
+            "phrase": "Dining Hall",
+            "public_ids": [
+              "72"
+            ]
+          },
+          {
+            "token": 16,
+            "phrase": "West Range",
+            "public_ids": [
+              "75"
+            ]
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 5,
+        "owner_phrase": "a flat roofed building",
+        "target_to_owner": [
+          5
+        ],
+        "endpoints": [
+          {
+            "token": 12,
+            "phrase": "Dining Hall",
+            "public_ids": [
+              "72"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 16,
+            "phrase": "West Range",
+            "public_ids": [
+              "75"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 8797,
+    "instruction": "The dark gray tiny building between the Provost's Lodge and the Friars' Building.",
+    "v1_groups": [
+      {
+        "owner_token": 4,
+        "owner_phrase": "The dark gray tiny building",
+        "target_to_owner": [
+          4
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "the Provost's Lodge",
+            "public_ids": [
+              "139"
+            ]
+          },
+          {
+            "token": 10,
+            "phrase": "the Friars' Building",
+            "public_ids": [
+              "71"
+            ]
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 4,
+        "owner_phrase": "The dark gray tiny building",
+        "target_to_owner": [
+          4
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "the Provost's Lodge",
+            "public_ids": [
+              "139"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 10,
+            "phrase": "the Friars' Building",
+            "public_ids": [
+              "71"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 17565,
+    "instruction": "Center section of a three-story multi-unit gray home with a gray roof that has four chimneys on it, that is in between King Street and Jesus Lane on the edge of the map",
+    "v1_groups": [
+      {
+        "owner_token": 1,
+        "owner_phrase": "Center section",
+        "target_to_owner": [
+          1
+        ],
+        "endpoints": [
+          {
+            "token": 27,
+            "phrase": "King Street",
+            "public_ids": [
+              "368",
+              "370",
+              "479",
+              "481"
+            ]
+          },
+          {
+            "token": 29,
+            "phrase": "Jesus Lane",
+            "public_ids": [
+              "369",
+              "377",
+              "458",
+              "480",
+              "485"
+            ]
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 1,
+        "owner_phrase": "Center section",
+        "target_to_owner": [
+          1
+        ],
+        "endpoints": [
+          {
+            "token": 27,
+            "phrase": "King Street",
+            "public_ids": [
+              "368",
+              "370",
+              "479",
+              "481"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 29,
+            "phrase": "Jesus Lane",
+            "public_ids": [
+              "369",
+              "377",
+              "458",
+              "480",
+              "485"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "目标为房屋中心section，不等于整个道路间区域；只能提供粗区域约束。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 18349,
+    "instruction": "This white car is parked in the very large parking lot in between Fitzroy Lane and salmon Lane. There is a white car parked on one side of it and a free open parking space on the other side of it. It is towards the top right hand corner of the parking lot. It is the fourth white car from the right",
+    "v1_groups": [
+      {
+        "owner_token": 10,
+        "owner_phrase": "the very large parking lot",
+        "target_to_owner": [
+          2,
+          10
+        ],
+        "endpoints": [
+          {
+            "token": 13,
+            "phrase": "Fitzroy Lane",
+            "public_ids": [
+              "380",
+              "472",
+              "488"
+            ]
+          },
+          {
+            "token": 15,
+            "phrase": "salmon Lane",
+            "public_ids": [
+              "387",
+              "499"
+            ]
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 10,
+        "owner_phrase": "the very large parking lot",
+        "target_to_owner": [
+          2,
+          10
+        ],
+        "endpoints": [
+          {
+            "token": 13,
+            "phrase": "Fitzroy Lane",
+            "public_ids": [
+              "380",
+              "472",
+              "488"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 15,
+            "phrase": "salmon Lane",
+            "public_ids": [
+              "387",
+              "499"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "between作用于停车场，车辆只是位于停车场内；保留两层作用域。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 13590,
+    "instruction": "Between Craik-Marshall Building and Genetics Building , this black car is second car north of a red car.",
+    "v1_groups": [
+      {
+        "owner_token": 7,
+        "owner_phrase": "this black car",
+        "target_to_owner": [
+          7
+        ],
+        "endpoints": [
+          {
+            "token": 1,
+            "phrase": "Craik-Marshall Building",
+            "public_ids": [
+              "13"
+            ]
+          },
+          {
+            "token": 3,
+            "phrase": "Genetics Building",
+            "public_ids": [
+              "16"
+            ]
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 7,
+        "owner_phrase": "this black car",
+        "target_to_owner": [
+          7
+        ],
+        "endpoints": [
+          {
+            "token": 1,
+            "phrase": "Craik-Marshall Building",
+            "public_ids": [
+              "13"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 3,
+            "phrase": "Genetics Building",
+            "public_ids": [
+              "16"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 12706,
+    "instruction": "This is a C-shaped building located between Geography Building and Anatomy School. There are some angled parking spots in front of its entrance.",
+    "v1_groups": [
+      {
+        "owner_token": 6,
+        "owner_phrase": "a C-shaped building",
+        "target_to_owner": [
+          6
+        ],
+        "endpoints": [
+          {
+            "token": 9,
+            "phrase": "Geography Building",
+            "public_ids": [
+              "26"
+            ]
+          },
+          {
+            "token": 11,
+            "phrase": "Anatomy School",
+            "public_ids": [
+              "48"
+            ]
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 6,
+        "owner_phrase": "a C-shaped building",
+        "target_to_owner": [
+          6
+        ],
+        "endpoints": [
+          {
+            "token": 9,
+            "phrase": "Geography Building",
+            "public_ids": [
+              "26"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 11,
+            "phrase": "Anatomy School",
+            "public_ids": [
+              "48"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-public-anchors",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 10552,
+    "instruction": "A white vehicle parked between two trees in the first drive off of Portugal Street between Park Parade and New Park Streets.",
+    "v1_groups": [
+      {
+        "owner_token": 10,
+        "owner_phrase": "the first drive",
+        "target_to_owner": [
+          2,
+          10
+        ],
+        "endpoints": [
+          {
+            "token": 15,
+            "phrase": "Park Parade",
+            "public_ids": [
+              "253",
+              "497"
+            ]
+          },
+          {
+            "token": 19,
+            "phrase": "New Park Streets",
+            "public_ids": []
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 10,
+        "owner_phrase": "the first drive",
+        "target_to_owner": [
+          2,
+          10
+        ],
+        "endpoints": [
+          {
+            "token": 15,
+            "phrase": "Park Parade",
+            "public_ids": [
+              "253",
+              "497"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 19,
+            "phrase": "New Park Streets",
+            "public_ids": [],
+            "name_unresolved": true
+          }
+        ],
+        "kind": "unresolved-name-endpoint",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "New Park Streets未绑定公开名，不能当普通视觉实例；v2保留名称未知。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 12332,
+    "instruction": "Rectangular grass section in between the Browns - Cambridge building and a row of trees next to the edge of the map off Fitzwilliam Museum Road",
+    "v1_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "Rectangular grass section",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 6,
+            "phrase": "Browns - Cambridge",
+            "public_ids": [
+              "15"
+            ]
+          },
+          {
+            "token": 10,
+            "phrase": "a row",
+            "public_ids": []
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "Rectangular grass section",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 6,
+            "phrase": "Browns - Cambridge",
+            "public_ids": [
+              "15"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 10,
+            "phrase": "a row of trees",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "row of trees应保留trees语义；v2补全组合短语。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 7924,
+    "instruction": "The dark gray roof building between Honey Hill road and Kettle's Yard Gallery. It's behind the St Peters building.",
+    "v1_groups": [
+      {
+        "owner_token": 4,
+        "owner_phrase": "The dark gray roof building",
+        "target_to_owner": [
+          4
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "Honey Hill road",
+            "public_ids": []
+          },
+          {
+            "token": 9,
+            "phrase": "Kettle's Yard Gallery",
+            "public_ids": [
+              "30",
+              "33"
+            ]
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 4,
+        "owner_phrase": "The dark gray roof building",
+        "target_to_owner": [
+          4
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "Honey Hill road",
+            "public_ids": [],
+            "name_unresolved": true
+          },
+          {
+            "token": 9,
+            "phrase": "Kettle's Yard Gallery",
+            "public_ids": [
+              "30",
+              "33"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "unresolved-name-endpoint",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "Honey Hill road是待绑定道路名，不是匿名参照；v2标记未知。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 11289,
+    "instruction": "The L-shaped white building in between the Central Delivery Unit and the University accommodation service (kellet lodge) building.",
+    "v1_groups": [
+      {
+        "owner_token": 5,
+        "owner_phrase": "The L-shaped white building",
+        "target_to_owner": [
+          5
+        ],
+        "endpoints": [
+          {
+            "token": 11,
+            "phrase": "the Central Delivery Unit",
+            "public_ids": []
+          },
+          {
+            "token": 14,
+            "phrase": "the University accommodation service (kellet lodge",
+            "public_ids": [
+              "14"
+            ]
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 5,
+        "owner_phrase": "The L-shaped white building",
+        "target_to_owner": [
+          5
+        ],
+        "endpoints": [
+          {
+            "token": 11,
+            "phrase": "the Central Delivery Unit",
+            "public_ids": [],
+            "name_unresolved": true
+          },
+          {
+            "token": 14,
+            "phrase": "the University accommodation service (kellet lodge",
+            "public_ids": [
+              "14"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "unresolved-name-endpoint",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "Central Delivery Unit有专名性质，v2保留未知；不强制视觉正标签。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 14878,
+    "instruction": "This building is in between Linsfield Road and Regent Street it is the one directly facing the Hills Road Street behind it there is a circular octagon looking roof building and some trees behind it as well",
+    "v1_groups": [
+      {
+        "owner_token": 1,
+        "owner_phrase": "This building",
+        "target_to_owner": [
+          1
+        ],
+        "endpoints": [
+          {
+            "token": 6,
+            "phrase": "Linsfield Road",
+            "public_ids": []
+          },
+          {
+            "token": 8,
+            "phrase": "Regent Street",
+            "public_ids": [
+              "118",
+              "138"
+            ]
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 1,
+        "owner_phrase": "This building",
+        "target_to_owner": [
+          1
+        ],
+        "endpoints": [
+          {
+            "token": 6,
+            "phrase": "Linsfield Road",
+            "public_ids": [],
+            "name_unresolved": true
+          },
+          {
+            "token": 8,
+            "phrase": "Regent Street",
+            "public_ids": [
+              "118",
+              "138"
+            ],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "unresolved-name-endpoint",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "Linsfield Road疑似错拼，不能擅自绑定Lensfield Road；v2标记未知。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 12715,
+    "instruction": "A cross-shaped building in between the mineralogy building and the Combine Facility building.",
+    "v1_groups": [
+      {
+        "owner_token": 4,
+        "owner_phrase": "A cross-shaped building",
+        "target_to_owner": [
+          4
+        ],
+        "endpoints": [
+          {
+            "token": 8,
+            "phrase": "the mineralogy building",
+            "public_ids": [
+              "47"
+            ]
+          },
+          {
+            "token": 13,
+            "phrase": "the Combine Facility building",
+            "public_ids": []
+          }
+        ],
+        "kind": "one-public-one-visual",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 4,
+        "owner_phrase": "A cross-shaped building",
+        "target_to_owner": [
+          4
+        ],
+        "endpoints": [
+          {
+            "token": 8,
+            "phrase": "the mineralogy building",
+            "public_ids": [
+              "47"
+            ],
+            "name_unresolved": false
+          },
+          {
+            "token": 13,
+            "phrase": "the Combine Facility building",
+            "public_ids": [],
+            "name_unresolved": true
+          }
+        ],
+        "kind": "unresolved-name-endpoint",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "Combine Facility名称未绑定，v2保留未知，不将其当匿名实例。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 5192,
+    "instruction": "The brown car parked between the pink car and the white car, and the white car is behind, parked on the middle row of the parking lot of the corner building that located on the Station Bridge Road and Wellington Road.",
+    "v1_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "The brown car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "the pink car",
+            "public_ids": []
+          },
+          {
+            "token": 11,
+            "phrase": "the white car",
+            "public_ids": []
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "The brown car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "the pink car",
+            "public_ids": [],
+            "name_unresolved": false
+          },
+          {
+            "token": 11,
+            "phrase": "the white car",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 11984,
+    "instruction": "The red car between a blue car and a white car in the parking lot of the University Chemical Laboratory.",
+    "v1_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "The red car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 6,
+            "phrase": "a blue car",
+            "public_ids": []
+          },
+          {
+            "token": 10,
+            "phrase": "a white car",
+            "public_ids": []
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "The red car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 6,
+            "phrase": "a blue car",
+            "public_ids": [],
+            "name_unresolved": false
+          },
+          {
+            "token": 10,
+            "phrase": "a white car",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 20750,
+    "instruction": "The dark blue car parked between a white car and a tree by the Broadmeadows building.",
+    "v1_groups": [
+      {
+        "owner_token": 3,
+        "owner_phrase": "The dark blue car",
+        "target_to_owner": [
+          3
+        ],
+        "endpoints": [
+          {
+            "token": 8,
+            "phrase": "a white car",
+            "public_ids": []
+          },
+          {
+            "token": 11,
+            "phrase": "a tree",
+            "public_ids": []
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 3,
+        "owner_phrase": "The dark blue car",
+        "target_to_owner": [
+          3
+        ],
+        "endpoints": [
+          {
+            "token": 8,
+            "phrase": "a white car",
+            "public_ids": [],
+            "name_unresolved": false
+          },
+          {
+            "token": 11,
+            "phrase": "a tree",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 6317,
+    "instruction": "Dark blue car in between a gray car and an empty spot, in a triangular parking lot on the edge of the map, facing a triangular grass field with one tree on it off Aldridge Road",
+    "v1_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "Dark blue car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "a gray car",
+            "public_ids": []
+          },
+          {
+            "token": 11,
+            "phrase": "an empty spot",
+            "public_ids": []
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "Dark blue car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "a gray car",
+            "public_ids": [],
+            "name_unresolved": false
+          },
+          {
+            "token": 11,
+            "phrase": "an empty spot",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 11892,
+    "instruction": "The Silver car that is parked between the white car and the Silver car, parked behind the light brown building with grey roof that is on the Brookside Road.",
+    "v1_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "The Silver car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 9,
+            "phrase": "the white car",
+            "public_ids": []
+          },
+          {
+            "token": 13,
+            "phrase": "the Silver car",
+            "public_ids": []
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "The Silver car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 9,
+            "phrase": "the white car",
+            "public_ids": [],
+            "name_unresolved": false
+          },
+          {
+            "token": 13,
+            "phrase": "the Silver car",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  },
+  {
+    "episode": 7515,
+    "instruction": "A blue car in between a purple car and an empty space, with a black car in front of it, that is to the left of the West Midlands police custody Suite, next to the tennis court, off Holford Drive",
+    "v1_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "A blue car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "a purple car",
+            "public_ids": []
+          },
+          {
+            "token": 11,
+            "phrase": "an empty space",
+            "public_ids": []
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "v2_groups": [
+      {
+        "owner_token": 2,
+        "owner_phrase": "A blue car",
+        "target_to_owner": [
+          2
+        ],
+        "endpoints": [
+          {
+            "token": 7,
+            "phrase": "a purple car",
+            "public_ids": [],
+            "name_unresolved": false
+          },
+          {
+            "token": 11,
+            "phrase": "an empty space",
+            "public_ids": [],
+            "name_unresolved": false
+          }
+        ],
+        "kind": "two-visual-references",
+        "reference_frame": "orientation-independent-between",
+        "semantic_truth_verified": false
+      }
+    ],
+    "note": "原文支持当前between端点关系；其他外观、实例或邻近约束仍需保留，不能视为完整语义金标准。",
+    "reviewer": "current Codex direct language review",
+    "human_verified": false
+  }
+]

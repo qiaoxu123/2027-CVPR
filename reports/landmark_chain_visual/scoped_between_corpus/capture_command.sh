@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain
+/home/20261024_1/Workspace/third_party/aerialvg_env/bin/python -m scripts.prepare_landmark_chain_pilot --data-root /home/20261024_1/Workspace/DATA/sbfnav-data --rgbd /home/20261024_1/Workspace/DATA/rgbd --objects /home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json --sbf-source /home/20261024_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source --output /home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/scoped_between_train294_observations_v1 --selected-tasks /home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/scoped_between_training_selection_v1/selected_tasks_private.json --steps 4 --seed 0 --yaw-rad 0 > /tmp/scoped_between_capture/run.log 2>&1
+printf '%s\n' "$?" > /tmp/scoped_between_capture/exit_code
