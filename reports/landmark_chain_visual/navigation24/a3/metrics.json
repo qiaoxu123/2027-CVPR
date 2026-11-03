@@ -1,0 +1,39 @@
+{
+  "method": "a3",
+  "split": "train_seen",
+  "episodes": 24,
+  "metrics": {
+    "SR": 0.5416666666666666,
+    "OSR": 0.6666666666666666,
+    "SPL": 0.5172466396181593,
+    "NE": 34.2652147248881,
+    "nDTW": 0.3442327735815737,
+    "sDTW": 0.22275140095819898,
+    "steps": 5.625,
+    "path_length": 132.4249892192744,
+    "policy_stop": 1.0,
+    "inference_ms": 12.138266551633095,
+    "episodes": 24,
+    "False_Stop_Rate": 0.4583333333333333,
+    "false_stop_episode_fraction": 0.4583333333333333,
+    "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+  },
+  "terminations": {
+    "policy_stop": 24
+  },
+  "seconds_current_session": 3.920056068105623,
+  "gpu_peak_allocated_gib": 3.7416892051696777,
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "lost_correct_goals": 0,
+  "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+}

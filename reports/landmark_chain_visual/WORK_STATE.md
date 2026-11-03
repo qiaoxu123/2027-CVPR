@@ -46,3 +46,15 @@
 - 下一步最有证据假说：局部损失仍可借几何/先验捷径，需分离视觉专属分数并加独立视觉世界位置监督（仍弱监督，不能称像素实例标签），在TRAIN开发并用新物理目标确认。不要重复使用当前confirm24调参。必须补完整原Stage1 RGB+历史对照与控制器runtime；当前仅A3基线，尚无新闭环SR。只有冻结方案ValSeen128至少84成功且配对改善才全量。
 
 导航端提醒：Goal要求最终导航，不能长期停留离线。下一阶段还须优先接入原控制器并补完整原Stage1 RGB+历史同观测对照，可先以冻结TRAIN小闭环检查执行机制（不作为正式性能），用真实动作/Stop结果判断局部候选离线收益是否可执行。当前未实现该runtime、未跑新闭环；不可声称原系统SR被改善。
+
+## 2026-11-04第四阶段更新（导航已实际完成）
+- 新graphnav/local_chain_runtime.py与scripts/evaluate_local_chain_navigation.py；原正常入口未改，shared rollout使用实际预测轨迹采观测，不读参考未来。28相关tests passed。
+- Server navigation_train24完成Original/A3/Real/Zero/Shuffle各24条，共120真实闭环；navigation_smoke2仅2条接口检查。无存活训练/导航任务要等待；不要重启已完成任务。
+- 原完整RGB+历史13/24 SR54.17 SPL.5173 NE34.265；A3同13/24；Real15/24 SR62.5 SPL.3990 NE28.550，Zero14/24，Shuffle15/24。Real/Shuffle逐任务成功集合完全一样。SR只按原工程最终XY20m，不强制Stop；Real无Stop，不能称停止已解决。
+- Real全20步，无Stop；last预测Goal距离中位2.932m(原.000137)，连续Goal位移中位3.639m，Goal丢失10轨迹15次；Shuffle14轨迹27次。9失败末次Goal全错、7从未正确、2曾正确。不能只修Stop；不要调阈值。
+- 真实120轨迹、参数/代码SHA、归因、6实例18决策位姿重建PNG/HTML、报告与图表已保存reports/landmark_chain_visual/navigation24。重入resume验证所有已完成Episode跳过，轨迹/指标SHA一致。大文件server保留；图册RGB是实际已访问决策姿态确定性重建，原runtime未记录逐像素SHA，已诚实标明。
+- 下一阶段优先：把联合全局/局部位置概率投回原固定世界784格，保持原控制器候选/上下文/熵支持，避免相机移动后局部点集变化导致到达距离无法收敛；这是位置表示改进，不改Stop、不锁上一帧Goal。先TRAIN开发，不用旧24确认组调参。
+- 同时针对图像捷径：独立视觉位置评分/弱世界Goal监督，分离几何/先验；从实际语法路径抽中间参照NP而不是全文context。全fit1256有效帧局部特征paircos中位.446，并非全同，先不要盲目多crop/换大模型。新物理目标确认。
+- 后续最终必须新冻结方案128 Val-Seen配对，严格至少84/128且有相对收益才全量。当前TRAIN24不是Val门槛，无新Val/Test。
+
+重要确定性修正：Direct候选网格不含相机光心，最近局部点距agent约16√2·h/383，合法h≥10时至少.5908m>.001到达Guard；所以选局部点时几何上无法Stop。原控制器没问题，是新接口设计错误。下一步必须将概率投回原固定世界784格，Direct仅保留负对照；不用放宽Stop或上帧锁定掩盖。已记录~/.Codex/lessons.md。

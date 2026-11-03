@@ -19,3 +19,13 @@
 ### Notes & Caveats
 - 独立Goal位置有提升，但Shuffle没有退化、角色查询没有净增益，尚未证明视觉实例对应有效；没有新闭环SR。
 - 监督为弱世界位置，不是人工像素实例标注。原导航默认入口保持不变。
+
+## [local-chain-closed-loop-diagnostic] - 2026-11-04
+### Features
+- 新增独立冻结TRAIN闭环入口，复用原Trajectory/Stop与控制器；支持原完整RGB历史及局部头Real/Zero/Shuffle/A3对照。
+- 完成24任务×5组实际闭环、失败/Stop归因和6例真实决策位姿RGB图册。
+### Design Rationale
+- 用真实闭环检验离线位置增益，避免把参考轨迹回放或Goal R1当SR。
+### Notes & Caveats
+- Real SR15/24、Original13/24，但Shuffle同为15/24；视觉空间对应未证明。
+- 新头无Stop且SPL下降，需要保持固定世界Belief支持；原入口、权重、Stop阈值不改。无Val/Test成绩。
