@@ -1,0 +1,45 @@
+{
+  "config": {
+    "cache": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features",
+    "fit_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_fit.jsonl",
+    "dev_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_dev.jsonl",
+    "fit_observation_filter": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/public_deployment_filter.json",
+    "role_vectors": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/reference_vectors_v2.pt",
+    "region_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_labels_v1",
+    "warm_start": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/world_v3_envelope_s0/best.pt",
+    "output": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_auxiliary_goal_suite_v1_s0/goal_only_s0",
+    "auxiliary_weight": 0.0,
+    "epochs": 3,
+    "steps_per_epoch": 159,
+    "resume": false,
+    "role_mode": "reference",
+    "seed": 0,
+    "batch_size": 8,
+    "lr": 0.001
+  },
+  "fingerprint": {
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_fit.jsonl": "adb0523852bf34e284b666638dc14f363446d89e83834bcd6f504d327e2154ad",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_dev.jsonl": "31c857af48e256b450cf7d71a05dcc4d14110b90c3e1079dc673bbe11f713f8a",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/public_deployment_filter.json": "3e6301f92d30e7b9f713ec6e91ff8ea6b728b6e6d24e201d9a5e0eed32bbc165",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/reference_vectors_v2.pt": "76991d92ffa0363886285e0102739a84123165cfecd505b63afe60cead4b2539",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_labels_v1/summary.json": "6fbc9cbe8b97dfd209da59f7e24875e51c88f569e2d3495479c5b5c844efba59",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/region_semantic_probe_labels_v1/loss_labels_private.pt": "351877bc51eef19812323518611eaa85d5367b06860eba31b00402e2445d4f5b",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/world_v3_envelope_s0/best.pt": "e5a43a59d3695397e0453a677a7aebd63552b55ae7c5fa354c9f5a88a63b2435",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_region_auxiliary_goal.py": "84abf186098d74f55e4214566badb248cf41e3969540883701643c2bdbab6310",
+    "graphnav/region_auxiliary_loss.py": "4d05480a3ffadd198ce63ecb57a84157ee4435f5ca5ef54c0679217f2a93575e",
+    "graphnav/visual_chain_position.py": "3a0793364348a1915239e071174641c6c62e390d1033f0d6796faeaa6e20c94e",
+    "graphnav/world_likelihood_evidence.py": "c9b755aaedf8a5b19c49a8a47d47b88fb526e1c01019c2e1bbd52f53fcba411f",
+    "graphnav/local_chain_raster.py": "aa817fcb77e1742e3664461d9b91f442b75ce22106897a355f74b22fc8ecff30",
+    "scripts/train_local_chain_position.py": "35b9ca9631c38dffebc8eedbeeed4700739991d70a21e5138fd14a33be4ae0ae"
+  },
+  "fit_frames": 900,
+  "class_counts": [
+    12961,
+    5476,
+    4496
+  ],
+  "inference_parameters": 150467,
+  "training_only_parameters": 579,
+  "normal_inference_changed": false
+}
