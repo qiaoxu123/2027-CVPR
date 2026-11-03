@@ -1,0 +1,4643 @@
+{
+  "checkpoint_sha256": "a2a850160452ecc13f7b7b15402075b7e2f30f287181a7254a5186e9fa762ad5",
+  "labels_sha256": "f36b6ab93a82ae77c84695c88adce263b4eb54861b6344b3aeeba49e71c0865b",
+  "split": "TRAIN independent confirm maps",
+  "results": {
+    "real": {
+      "metrics": {
+        "frames": 91,
+        "physical_targets": 24,
+        "goal_r1": 0.5934065934065934,
+        "goal_ne_m": 24.76101981676542,
+        "baseline_goal_r1": 0.5384615384615384,
+        "baseline_goal_ne_m": 34.073966298784526,
+        "corrections": 9,
+        "harms": 4,
+        "local_selected": 53,
+        "task_balanced_goal_r1": 0.5972222222222222,
+        "net": 5
+      },
+      "rows": [
+        {
+          "frame_key": "train_05316_0000",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.549786567687988,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05316_0011",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.148366928100586,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0022",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 7.051893711090088,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0033",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 15.994061470031738,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0000",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 17.842538833618164,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0013",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 26.106689453125,
+          "success": false,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0026",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.698844909667969,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0039",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 3.6196448802948,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0000",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0019",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0039",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 35.34339141845703,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0059",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05555_0000",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 6.648492813110352,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0010",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 22.563936233520508,
+          "success": false,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0020",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 19.237672805786133,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0031",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 17.654857635498047,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0000",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 60.30241394042969,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0007",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0014",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0022",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0000",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0013",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 26.766592025756836,
+          "success": false,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0027",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 17.730199813842773,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0041",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 6.952629089355469,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0000",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 31.847169876098633,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0005",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 22.050230026245117,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0010",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 33.225364685058594,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0000",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0016",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0032",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.441356658935547,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0049",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 26.950807571411133,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14344_0000",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0066",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0132",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0198",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 5.194358825683594,
+          "success": true,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0000",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.421363830566406,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14392_0017",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 7.328425884246826,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0035",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.222978115081787,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0053",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 14.756826400756836,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14395_0000",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0118",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0237",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0356",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0000",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0013",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0026",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0040",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 7.885778427124023,
+          "success": true,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0000",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 6.341057300567627,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0027",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 38.55846405029297,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0055",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 52.86272430419922,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0083",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 4.749985694885254,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0000",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 12.528275489807129,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0075",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14501_0151",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 6.105616092681885,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0227",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 0.41694486141204834,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14565_0000",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0026",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0052",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 15.053633689880371,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0000",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0012",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0024",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 1.8891268968582153,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0037",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 4.506701469421387,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0000",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0007",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 7.0539774894714355,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0015",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14599_0000",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 105.75885772705078,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0008",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 11.448567390441895,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0016",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 83.3839111328125,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0024",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 14.730894088745117,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19379_0000",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0090",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0180",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0271",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 13.081987380981445,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0000",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 22.086055755615234,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0018",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 64.91779327392578,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0036",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19391_0055",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0000",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0039",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.7845687866211,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0078",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 39.20592498779297,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0117",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 2.1586825847625732,
+          "success": true,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0000",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 22.68328094482422,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0012",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 5.130887508392334,
+          "success": true,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0024",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 8.405234336853027,
+          "success": true,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0000",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 13.068870544433594,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0015",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 28.538827896118164,
+          "success": false,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0031",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 12.355890274047852,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0000",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0021",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0043",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 11.194114685058594,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0065",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        }
+      ]
+    },
+    "zero": {
+      "metrics": {
+        "frames": 91,
+        "physical_targets": 24,
+        "goal_r1": 0.5604395604395604,
+        "goal_ne_m": 30.824229058328566,
+        "baseline_goal_r1": 0.5384615384615384,
+        "baseline_goal_ne_m": 34.073966298784526,
+        "corrections": 5,
+        "harms": 3,
+        "local_selected": 31,
+        "task_balanced_goal_r1": 0.5590277777777778,
+        "net": 2
+      },
+      "rows": [
+        {
+          "frame_key": "train_05316_0000",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.549786567687988,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05316_0011",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.148366928100586,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0022",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 7.051893711090088,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0033",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 15.714520454406738,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0000",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 10.827346801757812,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0013",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.967604637145996,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05334_0026",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.698844909667969,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0039",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.967604637145996,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0000",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0019",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0039",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0059",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05555_0000",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 6.648492813110352,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0010",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 7.558477878570557,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0020",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 18.23091697692871,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05555_0031",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 18.23091697692871,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0000",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0007",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0014",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0022",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0000",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0013",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 26.766592025756836,
+          "success": false,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0027",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 23.88980484008789,
+          "success": false,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0041",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14307_0000",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 31.847169876098633,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0005",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 22.050230026245117,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0010",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 29.059749603271484,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0000",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0016",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0032",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.441356658935547,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0049",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 28.496057510375977,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14344_0000",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0066",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0132",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0198",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 4.49402379989624,
+          "success": true,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0000",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.421363830566406,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14392_0017",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 7.328425884246826,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0035",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.222978115081787,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0053",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 14.756826400756836,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14395_0000",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0118",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0237",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0356",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0000",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0013",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0026",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0040",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14463_0000",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 6.341057300567627,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0027",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 7.675384998321533,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0055",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 39.21015548706055,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0083",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 4.749985694885254,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0000",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 12.528275489807129,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0075",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14501_0151",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14501_0227",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0000",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0026",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0052",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 15.053633689880371,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0000",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0012",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0024",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 1.8891268968582153,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0037",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0000",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0007",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0015",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14599_0000",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 105.75885772705078,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0008",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 11.448567390441895,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0016",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 83.3839111328125,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0024",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 101.27694702148438,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0000",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0090",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0180",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0271",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.529431343078613,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0000",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19391_0018",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 64.91779327392578,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0036",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19391_0055",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0000",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0039",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0078",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0117",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19505_0000",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 22.68328094482422,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0012",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 130.88558959960938,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19505_0024",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 130.88558959960938,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0000",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 13.068870544433594,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0015",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 28.538827896118164,
+          "success": false,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0031",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 13.068870544433594,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0000",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0021",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0043",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0065",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        }
+      ]
+    },
+    "shuffle": {
+      "metrics": {
+        "frames": 91,
+        "physical_targets": 24,
+        "goal_r1": 0.6043956043956044,
+        "goal_ne_m": 24.80263143188351,
+        "baseline_goal_r1": 0.5384615384615384,
+        "baseline_goal_ne_m": 34.073966298784526,
+        "corrections": 10,
+        "harms": 4,
+        "local_selected": 54,
+        "task_balanced_goal_r1": 0.6076388888888888,
+        "net": 6
+      },
+      "rows": [
+        {
+          "frame_key": "train_05316_0000",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.549786567687988,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05316_0011",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.148366928100586,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0022",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 7.051893711090088,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0033",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 15.49663257598877,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0000",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 17.842538833618164,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0013",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 26.106689453125,
+          "success": false,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0026",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.698844909667969,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0039",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 1.2460392713546753,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0000",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0019",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0039",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 49.85023880004883,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0059",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05555_0000",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 6.648492813110352,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0010",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 7.558477878570557,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0020",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 8.808073043823242,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0031",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 18.23091697692871,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0000",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 60.30241394042969,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0007",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0014",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0022",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0000",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0013",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 26.766592025756836,
+          "success": false,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0027",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 23.88980484008789,
+          "success": false,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0041",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 11.513989448547363,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0000",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 31.847169876098633,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0005",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 22.050230026245117,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0010",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 29.375335693359375,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0000",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 64.38043212890625,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0016",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0032",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.441356658935547,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0049",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 26.181907653808594,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14344_0000",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0066",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0132",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0198",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 4.49402379989624,
+          "success": true,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0000",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.421363830566406,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14392_0017",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 7.3836188316345215,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0035",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 4.21514368057251,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0053",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 15.814627647399902,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14395_0000",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0118",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0237",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0356",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0000",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0013",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0026",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0040",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 8.919625282287598,
+          "success": true,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0000",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 12.051105499267578,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0027",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 7.675384998321533,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0055",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 46.5973014831543,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0083",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 5.07844877243042,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0000",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 12.528275489807129,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0075",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14501_0151",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 11.64584732055664,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0227",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 0.4942985773086548,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14565_0000",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0026",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0052",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 15.053633689880371,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0000",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0012",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0024",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 1.8891268968582153,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0037",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 1.2133409976959229,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0000",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0007",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 7.0539774894714355,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0015",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 1.8444983959197998,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0000",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 105.75885772705078,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0008",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 11.448567390441895,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0016",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 83.3839111328125,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0024",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 14.730894088745117,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19379_0000",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0090",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0180",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0271",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 9.4120454788208,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0000",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 35.00310134887695,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0018",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 63.92418670654297,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0036",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19391_0055",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0000",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0039",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.7845687866211,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0078",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 39.20592498779297,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0117",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 4.612195014953613,
+          "success": true,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0000",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 22.68328094482422,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0012",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 7.329251766204834,
+          "success": true,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0024",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 10.541068077087402,
+          "success": true,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0000",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 13.068870544433594,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0015",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 28.538827896118164,
+          "success": false,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0031",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 4.298863410949707,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0000",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0021",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0043",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 11.194114685058594,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0065",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        }
+      ]
+    },
+    "no_geometry": {
+      "metrics": {
+        "frames": 91,
+        "physical_targets": 24,
+        "goal_r1": 0.5604395604395604,
+        "goal_ne_m": 28.69858072616242,
+        "baseline_goal_r1": 0.5384615384615384,
+        "baseline_goal_ne_m": 34.073966298784526,
+        "corrections": 5,
+        "harms": 3,
+        "local_selected": 44,
+        "task_balanced_goal_r1": 0.5590277777777778,
+        "net": 2
+      },
+      "rows": [
+        {
+          "frame_key": "train_05316_0000",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.549786567687988,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05316_0011",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.148366928100586,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0022",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 7.051893711090088,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0033",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 15.994061470031738,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0000",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 17.842538833618164,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0013",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 26.106689453125,
+          "success": false,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0026",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.698844909667969,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0039",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 3.6196448802948,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0000",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0019",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0039",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0059",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05555_0000",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 6.648492813110352,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0010",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 22.563936233520508,
+          "success": false,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0020",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 19.237672805786133,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0031",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 17.654857635498047,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0000",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 60.30241394042969,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0007",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0014",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0022",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0000",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0013",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0027",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 17.730199813842773,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0041",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 6.952629089355469,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0000",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 31.847169876098633,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0005",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 22.050230026245117,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0010",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 29.059749603271484,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0000",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0016",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0032",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.441356658935547,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0049",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 26.950807571411133,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14344_0000",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0066",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0132",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0198",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 5.194358825683594,
+          "success": true,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0000",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.421363830566406,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14392_0017",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 7.328425884246826,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0035",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.222978115081787,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0053",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 14.756826400756836,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14395_0000",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0118",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0237",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0356",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0000",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0013",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0026",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0040",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14463_0000",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 6.341057300567627,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0027",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 38.55846405029297,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0055",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 52.86272430419922,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0083",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 4.749985694885254,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0000",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 12.528275489807129,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0075",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14501_0151",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 6.105616092681885,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0227",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 0.41694486141204834,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14565_0000",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0026",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0052",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 15.053633689880371,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0000",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0012",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0024",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 1.8891268968582153,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0037",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 4.506701469421387,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0000",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0007",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0015",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14599_0000",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 105.75885772705078,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0008",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 11.448567390441895,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0016",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 83.3839111328125,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0024",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 101.27694702148438,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0000",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0090",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0180",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0271",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.529431343078613,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0000",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 22.086055755615234,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0018",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 64.91779327392578,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0036",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19391_0055",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0000",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0039",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.7845687866211,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0078",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 39.20592498779297,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0117",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 2.1586825847625732,
+          "success": true,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0000",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 22.68328094482422,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0012",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 130.88558959960938,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19505_0024",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 130.88558959960938,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0000",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 13.068870544433594,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0015",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 28.538827896118164,
+          "success": false,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0031",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 12.355890274047852,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0000",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0021",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0043",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0065",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        }
+      ]
+    },
+    "full_text": {
+      "metrics": {
+        "frames": 91,
+        "physical_targets": 24,
+        "goal_r1": 0.5934065934065934,
+        "goal_ne_m": 24.84329877613665,
+        "baseline_goal_r1": 0.5384615384615384,
+        "baseline_goal_ne_m": 34.073966298784526,
+        "corrections": 9,
+        "harms": 4,
+        "local_selected": 56,
+        "task_balanced_goal_r1": 0.5972222222222222,
+        "net": 5
+      },
+      "rows": [
+        {
+          "frame_key": "train_05316_0000",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.549786567687988,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05316_0011",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 12.148366928100586,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0022",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 7.051893711090088,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05316_0033",
+          "task_key": "train_05316",
+          "category": "Building",
+          "ne_m": 15.994061470031738,
+          "success": true,
+          "baseline_ne_m": 12.549786567687988,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0000",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 17.842538833618164,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0013",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 26.106689453125,
+          "success": false,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0026",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 9.698844909667969,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05334_0039",
+          "task_key": "train_05334",
+          "category": "Car",
+          "ne_m": 3.6196448802948,
+          "success": true,
+          "baseline_ne_m": 9.967604637145996,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0000",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0019",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05474_0039",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 35.34339141845703,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05474_0059",
+          "task_key": "train_05474",
+          "category": "Car",
+          "ne_m": 39.87478256225586,
+          "success": false,
+          "baseline_ne_m": 39.87478256225586,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05555_0000",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 6.648492813110352,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0010",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 22.563936233520508,
+          "success": false,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0020",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 19.237672805786133,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05555_0031",
+          "task_key": "train_05555",
+          "category": "Parking",
+          "ne_m": 17.654857635498047,
+          "success": true,
+          "baseline_ne_m": 18.23091697692871,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0000",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 68.96018981933594,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_05560_0007",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0014",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_05560_0022",
+          "task_key": "train_05560",
+          "category": "Parking",
+          "ne_m": 62.234291076660156,
+          "success": false,
+          "baseline_ne_m": 62.234291076660156,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0000",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 14.549202919006348,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14301_0013",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 26.766592025756836,
+          "success": false,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0027",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 17.730199813842773,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14301_0041",
+          "task_key": "train_14301",
+          "category": "Building",
+          "ne_m": 6.952629089355469,
+          "success": true,
+          "baseline_ne_m": 14.549202919006348,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0000",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 31.847169876098633,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0005",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 22.050230026245117,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14307_0010",
+          "task_key": "train_14307",
+          "category": "Building",
+          "ne_m": 20.800092697143555,
+          "success": false,
+          "baseline_ne_m": 29.059749603271484,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0000",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 46.97174835205078,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0016",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.438186645507812,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14318_0032",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 23.441356658935547,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14318_0049",
+          "task_key": "train_14318",
+          "category": "Building",
+          "ne_m": 26.950807571411133,
+          "success": false,
+          "baseline_ne_m": 23.438186645507812,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14344_0000",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0066",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0132",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 30.186494827270508,
+          "success": false,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14344_0198",
+          "task_key": "train_14344",
+          "category": "Building",
+          "ne_m": 5.194358825683594,
+          "success": true,
+          "baseline_ne_m": 30.186494827270508,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0000",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.421363830566406,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14392_0017",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 7.328425884246826,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0035",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 5.222978115081787,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14392_0053",
+          "task_key": "train_14392",
+          "category": "Building",
+          "ne_m": 14.756826400756836,
+          "success": true,
+          "baseline_ne_m": 5.421363830566406,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14395_0000",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0118",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0237",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14395_0356",
+          "task_key": "train_14395",
+          "category": "Building",
+          "ne_m": 18.227048873901367,
+          "success": true,
+          "baseline_ne_m": 18.227048873901367,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0000",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0013",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 34.60226058959961,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14401_0026",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 31.751220703125,
+          "success": false,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14401_0040",
+          "task_key": "train_14401",
+          "category": "Building",
+          "ne_m": 8.743974685668945,
+          "success": true,
+          "baseline_ne_m": 34.60226058959961,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0000",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 6.341057300567627,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0027",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 38.55846405029297,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0055",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 52.86272430419922,
+          "success": false,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14463_0083",
+          "task_key": "train_14463",
+          "category": "Building",
+          "ne_m": 4.749985694885254,
+          "success": true,
+          "baseline_ne_m": 36.50202560424805,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0000",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 12.528275489807129,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0075",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 7.94245719909668,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14501_0151",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 6.105616092681885,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14501_0227",
+          "task_key": "train_14501",
+          "category": "Car",
+          "ne_m": 0.41694486141204834,
+          "success": true,
+          "baseline_ne_m": 7.94245719909668,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14565_0000",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0026",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 9.12100887298584,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14565_0052",
+          "task_key": "train_14565",
+          "category": "Car",
+          "ne_m": 15.053633689880371,
+          "success": true,
+          "baseline_ne_m": 9.12100887298584,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0000",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0012",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 2.4306344985961914,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14582_0024",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 1.8891268968582153,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14582_0037",
+          "task_key": "train_14582",
+          "category": "Ground",
+          "ne_m": 4.506701469421387,
+          "success": true,
+          "baseline_ne_m": 2.4306344985961914,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0000",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 10.516023635864258,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_14593_0007",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 7.0539774894714355,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14593_0015",
+          "task_key": "train_14593",
+          "category": "Parking",
+          "ne_m": 0.23018696904182434,
+          "success": true,
+          "baseline_ne_m": 10.516023635864258,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0000",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 105.75885772705078,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0008",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 11.448567390441895,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0016",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 83.3839111328125,
+          "success": false,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_14599_0024",
+          "task_key": "train_14599",
+          "category": "Parking",
+          "ne_m": 14.730894088745117,
+          "success": true,
+          "baseline_ne_m": 101.27694702148438,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19379_0000",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0090",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0180",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 11.939535140991211,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19379_0271",
+          "task_key": "train_19379",
+          "category": "Building",
+          "ne_m": 13.081987380981445,
+          "success": true,
+          "baseline_ne_m": 11.939535140991211,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0000",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 22.086055755615234,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0018",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 64.91779327392578,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19391_0036",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19391_0055",
+          "task_key": "train_19391",
+          "category": "Building",
+          "ne_m": 69.55747985839844,
+          "success": false,
+          "baseline_ne_m": 69.55747985839844,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0000",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.80659484863281,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19456_0039",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 113.7845687866211,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0078",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 39.20592498779297,
+          "success": false,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19456_0117",
+          "task_key": "train_19456",
+          "category": "Car",
+          "ne_m": 2.1586825847625732,
+          "success": true,
+          "baseline_ne_m": 113.80659484863281,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0000",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 22.68328094482422,
+          "success": false,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0012",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 5.130887508392334,
+          "success": true,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19505_0024",
+          "task_key": "train_19505",
+          "category": "Ground",
+          "ne_m": 8.405234336853027,
+          "success": true,
+          "baseline_ne_m": 130.88558959960938,
+          "baseline_success": false,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0000",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 13.068870544433594,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19517_0015",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 28.538827896118164,
+          "success": false,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19517_0031",
+          "task_key": "train_19517",
+          "category": "Parking",
+          "ne_m": 12.355890274047852,
+          "success": true,
+          "baseline_ne_m": 13.068870544433594,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0000",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0021",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        },
+        {
+          "frame_key": "train_19523_0043",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 11.194114685058594,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": true
+        },
+        {
+          "frame_key": "train_19523_0065",
+          "task_key": "train_19523",
+          "category": "Parking",
+          "ne_m": 17.956687927246094,
+          "success": true,
+          "baseline_ne_m": 17.956687927246094,
+          "baseline_success": true,
+          "chosen_local": false
+        }
+      ]
+    }
+  },
+  "warning": "Offline Goal prediction, NOT closed-loop SR or verified instance matching"
+}

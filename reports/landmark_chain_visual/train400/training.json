@@ -1,0 +1,79 @@
+{
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 2.647096665400379,
+      "local_supervised": 729,
+      "examples": 1271,
+      "seconds": 2.472522637108341,
+      "dev": {
+        "frames": 92,
+        "physical_targets": 25,
+        "goal_r1": 0.8152173913043478,
+        "goal_ne_m": 18.720600484505944,
+        "baseline_goal_r1": 0.782608695652174,
+        "baseline_goal_ne_m": 19.39976523751798,
+        "corrections": 5,
+        "harms": 2,
+        "local_selected": 36,
+        "task_balanced_goal_r1": 0.83,
+        "net": 3
+      }
+    },
+    {
+      "epoch": 2,
+      "loss": 2.5727580759510302,
+      "local_supervised": 729,
+      "examples": 1271,
+      "seconds": 4.405128589132801,
+      "dev": {
+        "frames": 92,
+        "physical_targets": 25,
+        "goal_r1": 0.7934782608695652,
+        "goal_ne_m": 18.93298535502475,
+        "baseline_goal_r1": 0.782608695652174,
+        "baseline_goal_ne_m": 19.39976523751798,
+        "corrections": 4,
+        "harms": 3,
+        "local_selected": 43,
+        "task_balanced_goal_r1": 0.81,
+        "net": 1
+      }
+    },
+    {
+      "epoch": 3,
+      "loss": 2.5394042160526014,
+      "local_supervised": 729,
+      "examples": 1271,
+      "seconds": 6.309352827025577,
+      "dev": {
+        "frames": 92,
+        "physical_targets": 25,
+        "goal_r1": 0.8043478260869565,
+        "goal_ne_m": 18.862652067904886,
+        "baseline_goal_r1": 0.782608695652174,
+        "baseline_goal_ne_m": 19.39976523751798,
+        "corrections": 4,
+        "harms": 2,
+        "local_selected": 40,
+        "task_balanced_goal_r1": 0.82,
+        "net": 2
+      }
+    }
+  ],
+  "first_batch_gradient_norms": {
+    "local_mass_bias": 0.03732210397720337,
+    "image.weight": 9.594052971806377e-05,
+    "image.bias": 4.525416807155125e-05,
+    "text.weight": 7.026558159850538e-05,
+    "text.bias": 6.807556201238185e-05,
+    "geometry.weight": 0.011063873767852783,
+    "geometry.bias": 0.0022428827360272408,
+    "score.0.weight": 0.04820910096168518,
+    "score.0.bias": 0.01132819801568985,
+    "score.2.weight": 0.02458195574581623,
+    "score.2.bias": 0.03732210397720337
+  },
+  "peak_allocated_gib": 0.05230998992919922,
+  "changed_parameter_tensors": 11
+}

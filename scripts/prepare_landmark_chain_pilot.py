@@ -32,6 +32,7 @@ def main():
     p.add_argument('--steps', type=int, default=4)
     p.add_argument('--seed', type=int, default=0)
     p.add_argument('--yaw-rad', type=float, default=0.)
+    p.add_argument('--exclude-tasks', type=Path)
     a = p.parse_args()
     if min(a.per_category, a.steps) < 1:
         raise ValueError('positive task/frame counts required')
@@ -42,10 +43,13 @@ def main():
     from sbfnav.mapdata import GROUND_LEVEL
     ds = CityNavDataset(a.data_root, 'train_seen', version='processed_citynav')
     objects = json.loads(a.objects.read_text())
+    excluded = {tuple(task['physical_group']) for task in json.loads(a.exclude_tasks.read_text())} if a.exclude_tasks else set()
     groups = defaultdict(list)
     for i, raw in enumerate(ds._raw_records):
         name = f"{raw['area']}_block_{raw['block']}"
         oid = int(raw['object_ids'][0])
+        if (name, oid) in excluded:
+            continue
         category = objects[name][str(oid)]['object_type']
         groups[(category, name, oid)].append(i)
     def key(group):
@@ -78,6 +82,7 @@ def main():
                     preparation_sha256=file_sha256(__file__), fixed_camera_yaw_rad=a.yaw_rad,
                     image_size=[384,384], steps_selection='uniform index; no GT distance selection',
                     seed=a.seed, selected_physical_instances=len(selected), categories={}, frames=0,
+                    excluded_tasks_sha256=file_sha256(a.exclude_tasks) if a.exclude_tasks else None,
                     warning='TRAIN observation capture only. Trajectories are dataset references; this is NOT closed-loop evaluation.')
     (a.output/'manifest.json').write_text(json.dumps(manifest, indent=2))
     started = time.perf_counter()

@@ -1,0 +1,822 @@
+[
+  {
+    "task_key": "train_00018",
+    "instruction": "The large building on Wellington Rd / Grosvenor Rd that has a parking lot beside it and a white box in the backyard in front of the Full Circle Events & Exhibition Ltd building.",
+    "target_text": "The large building",
+    "context_text": "The large building on Wellington Rd / Grosvenor Rd that has a parking lot beside it and a white box in the backyard in front of the Full Circle Events & Exhibition Ltd building.",
+    "reference_text": "The large building on Wellington Rd / Grosvenor Rd that has a parking lot beside it and a white box in the backyard in front of the Full Circle Events & Exhibition Ltd building.",
+    "fallback": false,
+    "parse": {
+      "category": "direct_geometry",
+      "target": "building",
+      "target_token": 2,
+      "paths": [
+        {
+          "nodes": [
+            2,
+            4
+          ],
+          "labels": [
+            "building",
+            "Wellington Rd / Grosvenor Rd"
+          ],
+          "relations": [
+            "on"
+          ],
+          "hops": 1,
+          "public_names": [
+            "Wellington Rd / Grosvenor Rd"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 2,
+          "b": 4,
+          "relation": "on",
+          "evidence": "building -> on -> Wellington Rd / Grosvenor Rd"
+        },
+        {
+          "a": 9,
+          "b": 2,
+          "relation": "beside",
+          "evidence": "lot -> beside -> it"
+        },
+        {
+          "a": 15,
+          "b": 18,
+          "relation": "in",
+          "evidence": "box -> in -> backyard"
+        },
+        {
+          "a": 15,
+          "b": 25,
+          "relation": "front of",
+          "evidence": "front -> of -> Events"
+        },
+        {
+          "a": 15,
+          "b": 29,
+          "relation": "front of",
+          "evidence": "front -> of -> building"
+        }
+      ],
+      "generic_target_references": [
+        "lot"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": true,
+      "has_indirect": false
+    }
+  },
+  {
+    "task_key": "train_00093",
+    "instruction": "This is a small one-story building with a white gabled roof. There are blue, green and white tents in the green area behind this building. On the other side of this building are 3 buildings with red pyramid roofs, these buildings are on the side of wellington road.",
+    "target_text": "a small one-story building with a white gabled roof",
+    "context_text": "This is a small one-story building with a white gabled roof. There are blue, green and white tents in the green area behind this building. On the other side of this building are 3 buildings with red pyramid roofs, these buildings are on the side of wellington road.",
+    "reference_text": "This is a small one-story building with a white gabled roof. There are blue, green and white tents in the green area behind this building. On the other side of this building are 3 buildings with red pyramid roofs, these buildings are on the side of wellington road.",
+    "fallback": false,
+    "parse": {
+      "category": "direct_geometry",
+      "target": "building",
+      "target_token": 7,
+      "paths": [
+        {
+          "nodes": [
+            7,
+            52
+          ],
+          "labels": [
+            "building",
+            "wellington road"
+          ],
+          "relations": [
+            "side of"
+          ],
+          "hops": 1,
+          "public_names": [
+            "Wellington Road"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 21,
+          "b": 25,
+          "relation": "in",
+          "evidence": "tents -> in -> area"
+        },
+        {
+          "a": 25,
+          "b": 7,
+          "relation": "behind",
+          "evidence": "area -> behind -> building"
+        },
+        {
+          "a": 7,
+          "b": 52,
+          "relation": "side of",
+          "evidence": "side -> of -> wellington road"
+        }
+      ],
+      "generic_target_references": [
+        "area"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": true,
+      "has_indirect": false
+    }
+  },
+  {
+    "task_key": "train_00098",
+    "instruction": "Three tier white and brown building with a gray roof, that has one blue car, one white car and one black car parked in front of it, off Grosvenor Road beside the edge of the map",
+    "target_text": "one blue car",
+    "context_text": "Three tier white and brown building with a gray roof, that has one blue car, one white car and one black car parked in front of it, off Grosvenor Road beside the edge of the map",
+    "reference_text": "Three tier white and brown building with a gray roof, that has one blue car, one white car and one black car parked in front of it, off Grosvenor Road beside the edge of the map",
+    "fallback": false,
+    "parse": {
+      "category": "direct_geometry",
+      "target": "car",
+      "target_token": 15,
+      "paths": [
+        {
+          "nodes": [
+            15,
+            31
+          ],
+          "labels": [
+            "car",
+            "Grosvenor Road"
+          ],
+          "relations": [
+            "off"
+          ],
+          "hops": 1,
+          "public_names": [
+            "Grosvenor Road"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 23,
+          "b": 15,
+          "relation": "front of",
+          "evidence": "front -> of -> it"
+        },
+        {
+          "a": 15,
+          "b": 31,
+          "relation": "off",
+          "evidence": "has -> off -> Grosvenor Road"
+        },
+        {
+          "a": 15,
+          "b": 37,
+          "relation": "edge of",
+          "evidence": "edge -> of -> map"
+        }
+      ],
+      "generic_target_references": [
+        "car",
+        "map"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": true,
+      "has_indirect": false
+    }
+  },
+  {
+    "task_key": "train_00197",
+    "instruction": "The yellow vehicle in front of the white building at the bottom right of the reddish tan parking lot to the right of the Full Circle Events & Exhibitions Ltd.",
+    "target_text": "The yellow vehicle",
+    "context_text": "The yellow vehicle in front of the white building at the bottom right of the reddish tan parking lot to the right of the Full Circle Events & Exhibitions Ltd.",
+    "reference_text": "The yellow vehicle in front of the white building at the bottom right of the reddish tan parking lot to the right of the Full Circle Events & Exhibitions Ltd.",
+    "fallback": false,
+    "parse": {
+      "category": "direct_geometry",
+      "target": "vehicle",
+      "target_token": 2,
+      "paths": [
+        {
+          "nodes": [
+            2,
+            24
+          ],
+          "labels": [
+            "vehicle",
+            "Full Circle Events & Exhibitions Ltd."
+          ],
+          "relations": [
+            "right of"
+          ],
+          "hops": 1,
+          "public_names": [
+            "Full Circle Events & Exhibitions Ltd"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 2,
+          "b": 8,
+          "relation": "front of",
+          "evidence": "front -> of -> building"
+        },
+        {
+          "a": 2,
+          "b": 18,
+          "relation": "right of",
+          "evidence": "right -> of -> lot"
+        },
+        {
+          "a": 2,
+          "b": 24,
+          "relation": "right of",
+          "evidence": "right -> of -> Full Circle Events & Exhibitions Ltd."
+        }
+      ],
+      "generic_target_references": [
+        "building",
+        "lot"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": true,
+      "has_indirect": false
+    }
+  },
+  {
+    "task_key": "train_00278",
+    "instruction": "The only red car that is park on the curved of the Grosvenor Road.",
+    "target_text": "The only red car",
+    "context_text": "The only red car that is park on the curved of the Grosvenor Road.",
+    "reference_text": "The only red car that is park on the curved of the Grosvenor Road.",
+    "fallback": false,
+    "parse": {
+      "category": "indirect_geometry",
+      "target": "car",
+      "target_token": 3,
+      "paths": [
+        {
+          "nodes": [
+            3,
+            9,
+            12
+          ],
+          "labels": [
+            "car",
+            "curved",
+            "Grosvenor Road"
+          ],
+          "relations": [
+            "on",
+            "of"
+          ],
+          "hops": 2,
+          "public_names": [
+            "Grosvenor Road"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 3,
+          "b": 9,
+          "relation": "on",
+          "evidence": "is -> on -> curved"
+        },
+        {
+          "a": 9,
+          "b": 12,
+          "relation": "of",
+          "evidence": "curved -> of -> Grosvenor Road"
+        }
+      ],
+      "generic_target_references": [
+        "curved"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": false,
+      "has_indirect": true
+    }
+  },
+  {
+    "task_key": "train_00301",
+    "instruction": "One white car in between a dark blue car and another white car and a dirt lot off Wellington Road across from a two-story Gray House with a brown roof",
+    "target_text": "One white car with a brown roof",
+    "context_text": "One white car in between a dark blue car and another white car and a dirt lot off Wellington Road across from a two-story Gray House with a brown roof",
+    "reference_text": "One white car in between a dark blue car and another white car and a dirt lot off Wellington Road across from a two-story Gray House with a brown roof",
+    "fallback": false,
+    "parse": {
+      "category": "indirect_geometry",
+      "target": "car",
+      "target_token": 2,
+      "paths": [
+        {
+          "nodes": [
+            2,
+            16,
+            18
+          ],
+          "labels": [
+            "car",
+            "lot",
+            "Wellington Road"
+          ],
+          "relations": [
+            "between",
+            "off"
+          ],
+          "hops": 2,
+          "public_names": [
+            "Wellington Road"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 2,
+          "b": 8,
+          "relation": "between",
+          "evidence": "in -> between -> car"
+        },
+        {
+          "a": 2,
+          "b": 12,
+          "relation": "between",
+          "evidence": "in -> between -> car"
+        },
+        {
+          "a": 2,
+          "b": 16,
+          "relation": "between",
+          "evidence": "in -> between -> lot"
+        },
+        {
+          "a": 16,
+          "b": 18,
+          "relation": "off",
+          "evidence": "lot -> off -> Wellington Road"
+        },
+        {
+          "a": 2,
+          "b": 26,
+          "relation": "from",
+          "evidence": "across -> from -> House"
+        }
+      ],
+      "generic_target_references": [
+        "car",
+        "car",
+        "lot",
+        "House"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": false,
+      "has_indirect": true
+    }
+  },
+  {
+    "task_key": "train_00568",
+    "instruction": "this is a black car, from the front there are black, red, white, black cars, behind it are silver, white and black cars. the last black car is just around the corner. these cars are on leslie road and near the corner of celine grove road.",
+    "target_text": "a black car",
+    "context_text": "this is a black car, from the front there are black, red, white, black cars, behind it are silver, white and black cars. the last black car is just around the corner. these cars are on leslie road and near the corner of celine grove road.",
+    "reference_text": "this is a black car, from the front there are black, red, white, black cars, behind it are silver, white and black cars. the last black car is just around the corner. these cars are on leslie road and near the corner of celine grove road.",
+    "fallback": false,
+    "parse": {
+      "category": "direct_geometry",
+      "target": "car",
+      "target_token": 4,
+      "paths": [
+        {
+          "nodes": [
+            4,
+            44
+          ],
+          "labels": [
+            "car",
+            "leslie road"
+          ],
+          "relations": [
+            "on"
+          ],
+          "hops": 1,
+          "public_names": [
+            "Leslie Road"
+          ]
+        },
+        {
+          "nodes": [
+            4,
+            51,
+            50
+          ],
+          "labels": [
+            "car",
+            "road",
+            "celine grove"
+          ],
+          "relations": [
+            "corner of",
+            "associated region"
+          ],
+          "hops": 2,
+          "public_names": [
+            "Celine Grove"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 4,
+          "b": 44,
+          "relation": "on",
+          "evidence": "are -> on -> leslie road"
+        },
+        {
+          "a": 51,
+          "b": 50,
+          "relation": "associated region",
+          "evidence": "celine grove -> road"
+        },
+        {
+          "a": 4,
+          "b": 51,
+          "relation": "corner of",
+          "evidence": "corner -> of -> road"
+        }
+      ],
+      "generic_target_references": [
+        "road"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": true,
+      "has_indirect": true
+    }
+  },
+  {
+    "task_key": "train_00699",
+    "instruction": "The dark blue car that is 1st from the left in the 14th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.",
+    "target_text": "The dark blue car",
+    "context_text": "The dark blue car that is 1st from the left in the 14th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.",
+    "reference_text": "The dark blue car that is 1st from the left in the 14th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.",
+    "fallback": false,
+    "parse": {
+      "category": "uncertain",
+      "target": "car",
+      "target_token": 3,
+      "paths": [],
+      "edges": [
+        {
+          "a": 3,
+          "b": 13,
+          "relation": "in",
+          "evidence": "is -> in -> row"
+        },
+        {
+          "a": 13,
+          "b": 15,
+          "relation": "of",
+          "evidence": "row -> of -> cars"
+        },
+        {
+          "a": 13,
+          "b": 20,
+          "relation": "in",
+          "evidence": "row -> in -> lot"
+        },
+        {
+          "a": 13,
+          "b": 24,
+          "relation": "behind",
+          "evidence": "row -> behind -> Building"
+        }
+      ],
+      "generic_target_references": [
+        "row"
+      ],
+      "reason": "public names present but target-to-anchor scope unresolved",
+      "scope_uncertain": true,
+      "frame_only_mentions": [
+        "side"
+      ],
+      "scope_repairs": [],
+      "has_direct": false,
+      "has_indirect": false
+    }
+  },
+  {
+    "task_key": "train_00733",
+    "instruction": "The brown car that is 3rd from the right in the 14th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right",
+    "target_text": "The brown car",
+    "context_text": "The brown car that is 3rd from the right in the 14th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right",
+    "reference_text": "The brown car that is 3rd from the right in the 14th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right",
+    "fallback": false,
+    "parse": {
+      "category": "uncertain",
+      "target": "car",
+      "target_token": 2,
+      "paths": [],
+      "edges": [
+        {
+          "a": 2,
+          "b": 12,
+          "relation": "in",
+          "evidence": "is -> in -> row"
+        },
+        {
+          "a": 12,
+          "b": 14,
+          "relation": "of",
+          "evidence": "row -> of -> cars"
+        },
+        {
+          "a": 12,
+          "b": 19,
+          "relation": "in",
+          "evidence": "row -> in -> lot"
+        },
+        {
+          "a": 12,
+          "b": 23,
+          "relation": "behind",
+          "evidence": "row -> behind -> Building"
+        }
+      ],
+      "generic_target_references": [
+        "row"
+      ],
+      "reason": "public names present but target-to-anchor scope unresolved",
+      "scope_uncertain": true,
+      "frame_only_mentions": [
+        "side"
+      ],
+      "scope_repairs": [],
+      "has_direct": false,
+      "has_indirect": false
+    }
+  },
+  {
+    "task_key": "train_00839",
+    "instruction": "A black car in between an orange car and an empty space, with the empty space in front of it, near the edge of the map, parked in the third row from the top in the parking lot of the One Stop building",
+    "target_text": "A black car",
+    "context_text": "A black car in between an orange car and an empty space, with the empty space in front of it, near the edge of the map, parked in the third row from the top in the parking lot of the One Stop building",
+    "reference_text": "A black car in between an orange car and an empty space, with the empty space in front of it, near the edge of the map, parked in the third row from the top in the parking lot of the One Stop building",
+    "fallback": false,
+    "parse": {
+      "category": "indirect_geometry",
+      "target": "car",
+      "target_token": 2,
+      "paths": [
+        {
+          "nodes": [
+            2,
+            27,
+            40,
+            43
+          ],
+          "labels": [
+            "car",
+            "map",
+            "lot",
+            "One Stop"
+          ],
+          "relations": [
+            "edge of",
+            "in",
+            "of"
+          ],
+          "hops": 3,
+          "public_names": [
+            "One Stop"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 2,
+          "b": 7,
+          "relation": "between",
+          "evidence": "in -> between -> car"
+        },
+        {
+          "a": 2,
+          "b": 11,
+          "relation": "between",
+          "evidence": "in -> between -> space"
+        },
+        {
+          "a": 2,
+          "b": 16,
+          "relation": "with",
+          "evidence": "car -> with -> space"
+        },
+        {
+          "a": 16,
+          "b": 2,
+          "relation": "front of",
+          "evidence": "front -> of -> it"
+        },
+        {
+          "a": 2,
+          "b": 27,
+          "relation": "edge of",
+          "evidence": "edge -> of -> map"
+        },
+        {
+          "a": 27,
+          "b": 33,
+          "relation": "in",
+          "evidence": "parked -> in -> row"
+        },
+        {
+          "a": 27,
+          "b": 40,
+          "relation": "in",
+          "evidence": "parked -> in -> lot"
+        },
+        {
+          "a": 40,
+          "b": 43,
+          "relation": "of",
+          "evidence": "lot -> of -> One Stop"
+        }
+      ],
+      "generic_target_references": [
+        "car",
+        "space",
+        "space",
+        "space",
+        "map"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [],
+      "has_direct": false,
+      "has_indirect": true
+    }
+  },
+  {
+    "task_key": "train_00853",
+    "instruction": "This is a black car parked in the fourth row of the parking space from the Food Warehouse. On its left and right and behind is an empty spot. One spot over on its right is a red car facing the opposite direction.",
+    "target_text": "a black car",
+    "context_text": "This is a black car parked in the fourth row of the parking space from the Food Warehouse. On its left and right and behind is an empty spot. One spot over on its right is a red car facing the opposite direction.",
+    "reference_text": "This is a black car parked in the fourth row of the parking space from the Food Warehouse. On its left and right and behind is an empty spot. One spot over on its right is a red car facing the opposite direction.",
+    "fallback": false,
+    "parse": {
+      "category": "indirect_geometry",
+      "target": "car",
+      "target_token": 4,
+      "paths": [
+        {
+          "nodes": [
+            4,
+            9,
+            15
+          ],
+          "labels": [
+            "car",
+            "row",
+            "the Food Warehouse"
+          ],
+          "relations": [
+            "in",
+            "from"
+          ],
+          "hops": 2,
+          "public_names": [
+            "The Food Warehouse"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "a": 4,
+          "b": 9,
+          "relation": "in",
+          "evidence": "parked -> in -> row"
+        },
+        {
+          "a": 9,
+          "b": 13,
+          "relation": "of",
+          "evidence": "row -> of -> space"
+        },
+        {
+          "a": 9,
+          "b": 15,
+          "relation": "from",
+          "evidence": "parked -> from -> the Food Warehouse"
+        }
+      ],
+      "generic_target_references": [
+        "row"
+      ],
+      "reason": "dependency-linked explicit public landmark path",
+      "scope_uncertain": false,
+      "frame_only_mentions": [],
+      "scope_repairs": [
+        {
+          "region": "row",
+          "relation": "from",
+          "anchor": "the Food Warehouse"
+        }
+      ],
+      "has_direct": false,
+      "has_indirect": true
+    }
+  },
+  {
+    "task_key": "train_00919",
+    "instruction": "A white car parked in the parking area in front of the building named One stop. It is parked at the left side of the fourth lane from the right with a black car parked at its right side, there is no car parked at left side and at the front of it. There is a tree in front of it",
+    "target_text": "A white car",
+    "context_text": "A white car parked in the parking area in front of the building named One stop. It is parked at the left side of the fourth lane from the right with a black car parked at its right side, there is no car parked at left side and at the front of it. There is a tree in front of it",
+    "reference_text": "A white car parked in the parking area in front of the building named One stop. It is parked at the left side of the fourth lane from the right with a black car parked at its right side, there is no car parked at left side and at the front of it. There is a tree in front of it",
+    "fallback": false,
+    "parse": {
+      "category": "uncertain",
+      "target": "car",
+      "target_token": 2,
+      "paths": [],
+      "edges": [
+        {
+          "a": 2,
+          "b": 7,
+          "relation": "in",
+          "evidence": "parked -> in -> area"
+        },
+        {
+          "a": 7,
+          "b": 12,
+          "relation": "front of",
+          "evidence": "front -> of -> building"
+        },
+        {
+          "a": 2,
+          "b": 26,
+          "relation": "side of",
+          "evidence": "side -> of -> lane"
+        },
+        {
+          "a": 2,
+          "b": 33,
+          "relation": "with",
+          "evidence": "parked -> with -> car"
+        },
+        {
+          "a": 43,
+          "b": 2,
+          "relation": "front of",
+          "evidence": "front -> of -> it"
+        },
+        {
+          "a": 58,
+          "b": 2,
+          "relation": "front of",
+          "evidence": "front -> of -> it"
+        }
+      ],
+      "generic_target_references": [
+        "area",
+        "lane",
+        "car",
+        "car",
+        "tree"
+      ],
+      "reason": "public names present but target-to-anchor scope unresolved",
+      "scope_uncertain": true,
+      "frame_only_mentions": [],
+      "scope_repairs": [
+        {
+          "region": "area",
+          "relation": "front of",
+          "anchor": "building"
+        }
+      ],
+      "has_direct": false,
+      "has_indirect": false
+    }
+  }
+]

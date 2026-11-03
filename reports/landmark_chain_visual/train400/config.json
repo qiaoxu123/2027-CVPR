@@ -1,0 +1,25 @@
+{
+  "config": {
+    "cache": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features",
+    "fit_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_fit.jsonl",
+    "dev_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_dev.jsonl",
+    "confirm_labels": null,
+    "output": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_head_pilot_s0",
+    "epochs": 3,
+    "batch_size": 8,
+    "lr": 0.001,
+    "seed": 0,
+    "device": "cuda",
+    "max_batches": 0,
+    "resume": false,
+    "confirm_checkpoint": null
+  },
+  "feature_manifest_sha256": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+  "fit_labels_sha256": "adb0523852bf34e284b666638dc14f363446d89e83834bcd6f504d327e2154ad",
+  "dev_labels_sha256": "31c857af48e256b450cf7d71a05dcc4d14110b90c3e1079dc673bbe11f713f8a",
+  "fit_frames": 1271,
+  "dev_frames": 92,
+  "trainable_parameters": 150338,
+  "selection": "TRAIN dev Goal R1 then NE",
+  "supervision": "world-position only; no pixel instance labels"
+}

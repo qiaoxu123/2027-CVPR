@@ -34,3 +34,15 @@
 - 87帧空间Top1全文3→11，小ROI目标文本13、分尺度11；小ROI全文shuffle11、zero10。视觉性能增益未证明；新分尺度规则不作为已有效方法。共同25帧NE全文77.58→74.42，目标文本90.30、分尺度88.78。
 - reports/landmark_chain_visual/pilot24/REPORT_zh.md、所有逐帧JSON、SHAmanifest及24实例图册cases/index.html已生成。相关17 tests passed，源码compile通过。
 - 下一步：观测内细粒度位置候选/直接分布头+独立TRAIN训练与确认；不要继续搜索本24例规则权重。尚无新任务训练权重、Goal Belief指标或SR，不得声称>65%。
+
+## 2026-11-04第三阶段更新（训练已实际完成）
+- 新模块：graphnav/local_chain_position.py、local_chain_observation.py；scripts/cache_local_chain_training.py、parse_local_chain_roles.py、train_local_chain_position.py。原模型/默认入口不变，SigLIP2冻结，无AerialVG。
+- Server root GraphNav/runs/landmark_chain_visual：fixed_yaw_train400_s1（400目标、1454帧，排除24开发目标），chain_train400_features（完整输入SHA、地图划分），chain_head_pilot_s0（best/last/训练日志/一次确认），chain_head_smoke_s0（8batch Smoke且恢复到第2轮）。所有任务已终止正常完成，不要当仍在训练。
+- 18fit地图351目标1271帧；3dev地图25目标92帧；3confirm地图24目标91帧。确认标签单独CLI路径，训练未读取；确认前freeze_for_confirm已封存。
+- Main训练seed0 lr.001 batch8三轮，最佳1轮devR1 81.52 vs冻结A3 78.26；11tensor更新；25相关tests passed。
+- 新头将784全局原A3假设与144当前观测局部位置假设联合归一化，无旧±.197上限；局部3窗口1/3/7patch，不是高分辨率重新编码。
+- 一次确认：Real GoalR1 59.34 NE24.761 vs A3 53.85 NE34.074，纠正9误改4；Shuffle60.44 NE24.803，Zero56.04，NoGeom56.04，FullText59.34。目标组95CI含0。无法证明视觉对应或关系语义真实增益；Car净收益0。不要把GoalR1写SR。
+- best SHA a2a850160452ecc13f7b7b15402075b7e2f30f287181a7254a5186e9fa762ad5。原主权重仍00f2acc...未变。reports/landmark_chain_visual/train400保存完整中文报告/实际日志/权重说明/图表/确认json。
+- 下一步最有证据假说：局部损失仍可借几何/先验捷径，需分离视觉专属分数并加独立视觉世界位置监督（仍弱监督，不能称像素实例标签），在TRAIN开发并用新物理目标确认。不要重复使用当前confirm24调参。必须补完整原Stage1 RGB+历史对照与控制器runtime；当前仅A3基线，尚无新闭环SR。只有冻结方案ValSeen128至少84成功且配对改善才全量。
+
+导航端提醒：Goal要求最终导航，不能长期停留离线。下一阶段还须优先接入原控制器并补完整原Stage1 RGB+历史同观测对照，可先以冻结TRAIN小闭环检查执行机制（不作为正式性能），用真实动作/Stop结果判断局部候选离线收益是否可执行。当前未实现该runtime、未跑新闭环；不可声称原系统SR被改善。
