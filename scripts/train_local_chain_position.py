@@ -15,7 +15,7 @@ from torch.utils.data import DataLoader
 
 from graphnav.checkpointing import atomic_json,atomic_save,file_sha256,rng_state,restore_rng
 from graphnav.local_chain_position import LocalChainPositionHead,position_loss
-from graphnav.visual_chain_position import VisualChainPositionHead,visual_chain_loss
+from graphnav.visual_chain_position import VisualChainPositionHead,WorldLikelihoodPositionHead,visual_chain_loss
 from graphnav.local_chain_raster import rasterized_goal_logprob
 
 INPUTS=('prior_logits','local_uv','image_features','target_text','context_text','public_geometry','quality','local_valid')
@@ -122,7 +122,7 @@ def main():
     p.add_argument('--max-batches',type=int,default=0)
     p.add_argument('--resume',action='store_true')
     p.add_argument('--confirm-checkpoint',type=Path)
-    p.add_argument('--architecture',choices=('legacy','visual-chain-v2'),default='legacy')
+    p.add_argument('--architecture',choices=('legacy','visual-chain-v2','world-likelihood-v3'),default='legacy')
     p.add_argument('--role-vectors',type=Path)
     p.add_argument('--role-mode',choices=('full','reference'),default='full')
     p.add_argument('--extra-fit-cache',type=Path)
@@ -130,9 +130,9 @@ def main():
     a=p.parse_args()
     torch.manual_seed(a.seed);np.random.seed(a.seed)
     torch.set_num_threads(4)
-    model=(VisualChainPositionHead() if a.architecture=='visual-chain-v2' else LocalChainPositionHead()).to(a.device)
+    model={'legacy':LocalChainPositionHead,'visual-chain-v2':VisualChainPositionHead,'world-likelihood-v3':WorldLikelihoodPositionHead}[a.architecture]().to(a.device)
     role_vectors=torch.load(a.role_vectors,map_location='cpu',weights_only=True) if a.role_vectors else None
-    if a.architecture=='visual-chain-v2' and role_vectors is None:raise ValueError('explicit role vectors/phrases required')
+    if a.architecture in ('visual-chain-v2','world-likelihood-v3') and role_vectors is None:raise ValueError('explicit role vectors/phrases required')
     if a.confirm_checkpoint:
         if a.extra_fit_cache or a.extra_fit_labels:raise ValueError('no augmentation in confirmation')
         if a.output.exists():raise FileExistsError('confirmation output already exists; no repeated evaluation')
@@ -164,7 +164,7 @@ def main():
     if a.role_vectors:fingerprint['role_vectors_sha256']=file_sha256(a.role_vectors)
     if a.extra_fit_cache:
         fingerprint.update(extra_feature_manifest_sha256=file_sha256(a.extra_fit_cache/'manifest.json'),extra_fit_labels_sha256=file_sha256(a.extra_fit_labels))
-    if a.architecture=='visual-chain-v2':
+    if a.architecture in ('visual-chain-v2','world-likelihood-v3'):
         code_root=Path(__file__).resolve().parents[1]
         fingerprint.update(model_code_sha256=file_sha256(code_root/'graphnav/visual_chain_position.py'),
                            raster_code_sha256=file_sha256(code_root/'graphnav/local_chain_raster.py'),
@@ -189,7 +189,7 @@ def main():
             if a.max_batches and step>=a.max_batches:break
             optimizer.zero_grad(set_to_none=True)
             public=batch_inputs(batch,a.device)
-            if a.architecture=='visual-chain-v2':
+            if a.architecture in ('visual-chain-v2','world-likelihood-v3'):
                 logits,visual=model(**public,return_visual=True)
                 terms=visual_chain_loss(model,logits,visual,public,batch['candidate_world'].to(a.device),batch['target_world'].to(a.device),batch['category'],batch['target_phrase'])
                 color_rows+=terms['color_rows']

@@ -74,3 +74,24 @@ def visual_chain_loss(model,joint,visual,inputs,candidate_world,target_world,cat
         contrast_rows=len(selected)
     return dict(total=goal+.1*rank+.5*visual_loss+.1*contrast,goal=goal,rank=rank,visual=visual_loss,
                 contrast=contrast,local_supervised=int(local_eligible.sum()),color_rows=contrast_rows)
+
+
+class WorldLikelihoodPositionHead(VisualChainPositionHead):
+    """Same visual/geometry capacity; likelihood updates one fixed world support."""
+    def __init__(self,dimension=1024,hidden=64):
+        super().__init__(dimension,hidden)
+        self.local_mass_bias.requires_grad_(False)
+        for layer in (self.visual_score[-1],self.spatial_score[-1]):
+            nn.init.normal_(layer.weight,std=1e-3);nn.init.zeros_(layer.bias)
+
+    def forward(self,*,prior_logits,local_uv,image_features,target_text,context_text,public_geometry,quality,local_valid,return_visual=False):
+        from .world_likelihood_evidence import world_evidence_logits
+        joint,visual=super().forward(prior_logits=prior_logits,local_uv=local_uv,image_features=image_features,target_text=target_text,
+            context_text=context_text,public_geometry=public_geometry,quality=quality,local_valid=local_valid,return_visual=True)
+        cells=prior_logits.shape[-1];grid=math.isqrt(cells)
+        prior=prior_logits.detach().float().log_softmax(-1)
+        local_prior=F.grid_sample(prior.exp().view(-1,1,grid,grid),(local_uv.float()*2-1)[:,None],align_corners=False,padding_mode='border').reshape_as(local_valid).clamp_min(1e-12).log()
+        energy=joint[:,cells:]-local_prior-self.local_mass_bias-math.log(cells)+local_valid.sum(-1,keepdim=True).clamp_min(1).float().log()
+        updated=world_evidence_logits(prior_logits,local_uv,energy,local_valid)
+        packed=torch.cat((updated,torch.full_like(energy,float('-inf'))),-1)
+        return (packed,visual) if return_visual else packed

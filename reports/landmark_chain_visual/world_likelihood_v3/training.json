@@ -1,0 +1,86 @@
+{
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 3.3067047873383046,
+      "local_supervised": 729,
+      "color_contrastive_rows": 15,
+      "examples": 1271,
+      "seconds": 3.0802201579790562,
+      "dev": {
+        "frames": 92,
+        "physical_targets": 25,
+        "goal_r1": 0.8043478260869565,
+        "goal_ne_m": 17.193565728871718,
+        "baseline_goal_r1": 0.782608695652174,
+        "baseline_goal_ne_m": 19.39976523751798,
+        "corrections": 7,
+        "harms": 5,
+        "local_selected": 0,
+        "task_balanced_goal_r1": 0.8133333333333332,
+        "net": 2
+      }
+    },
+    {
+      "epoch": 2,
+      "loss": 3.1772982279459634,
+      "local_supervised": 729,
+      "color_contrastive_rows": 19,
+      "examples": 1271,
+      "seconds": 5.499981462024152,
+      "dev": {
+        "frames": 92,
+        "physical_targets": 25,
+        "goal_r1": 0.8043478260869565,
+        "goal_ne_m": 19.226082651511483,
+        "baseline_goal_r1": 0.782608695652174,
+        "baseline_goal_ne_m": 19.39976523751798,
+        "corrections": 6,
+        "harms": 4,
+        "local_selected": 0,
+        "task_balanced_goal_r1": 0.8166666666666665,
+        "net": 2
+      }
+    },
+    {
+      "epoch": 3,
+      "loss": 3.130419114850602,
+      "local_supervised": 729,
+      "color_contrastive_rows": 34,
+      "examples": 1271,
+      "seconds": 7.976915694074705,
+      "dev": {
+        "frames": 92,
+        "physical_targets": 25,
+        "goal_r1": 0.8043478260869565,
+        "goal_ne_m": 19.01385841421459,
+        "baseline_goal_r1": 0.782608695652174,
+        "baseline_goal_ne_m": 19.39976523751798,
+        "corrections": 6,
+        "harms": 4,
+        "local_selected": 0,
+        "task_balanced_goal_r1": 0.8166666666666665,
+        "net": 2
+      }
+    }
+  ],
+  "first_batch_gradient_norms": {
+    "local_mass_bias": null,
+    "image.weight": 2.720796146604698e-06,
+    "image.bias": 3.096613227171474e-06,
+    "text.weight": 3.623637530836277e-05,
+    "text.bias": 4.124730912735686e-05,
+    "geometry.weight": 7.592259862576611e-06,
+    "geometry.bias": 3.8000889617251232e-06,
+    "visual_score.0.weight": 1.30794533106382e-05,
+    "visual_score.0.bias": 0.0009436488035134971,
+    "visual_score.2.weight": 0.0374394990503788,
+    "visual_score.2.bias": 0.2440701425075531,
+    "spatial_score.0.weight": 0.0035157413221895695,
+    "spatial_score.0.bias": 0.0011069421889260411,
+    "spatial_score.2.weight": 0.2453225702047348,
+    "spatial_score.2.bias": 0.2440701127052307
+  },
+  "peak_allocated_gib": 0.05952787399291992,
+  "changed_parameter_tensors": 14
+}

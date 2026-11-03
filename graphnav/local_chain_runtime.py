@@ -18,7 +18,7 @@ from .local_chain_observation import local_patch_regions
 from .local_chain_position import LocalChainPositionHead
 from .local_chain_raster import raster_goal_field
 from .rgb_content_controls import controlled_rgb
-from .visual_chain_position import VisualChainPositionHead
+from .visual_chain_position import VisualChainPositionHead,WorldLikelihoodPositionHead
 from .observed_patch_scales import masked_native_pool
 from .stage1 import preserved_proposal_order
 from .stage1_runtime import GraphNavStage1Policy
@@ -52,8 +52,8 @@ class LocalChainPolicy(GraphNavStage1Policy):
             raise ValueError('unknown frozen local intervention')
         state=torch.load(local_checkpoint,map_location='cpu',weights_only=True)
         architecture=state.get('architecture','legacy')
-        if architecture=='visual-chain-v2' and field_mode!='grid':raise ValueError('visual-chain v2 requires fixed-world Belief')
-        self.position=(VisualChainPositionHead() if architecture=='visual-chain-v2' else LocalChainPositionHead()).to(device).eval().requires_grad_(False)
+        if architecture in ('visual-chain-v2','world-likelihood-v3') and field_mode!='grid':raise ValueError('visual-chain v2 requires fixed-world Belief')
+        self.position={'legacy':LocalChainPositionHead,'visual-chain-v2':VisualChainPositionHead,'world-likelihood-v3':WorldLikelihoodPositionHead}[architecture]().to(device).eval().requires_grad_(False)
         self.position.load_state_dict(state['model'],strict=True)
         self.role_mode=state.get('config',{}).get('role_mode','full')
         roles=json.loads(Path(public_roles).read_text())
