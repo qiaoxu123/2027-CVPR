@@ -16,6 +16,7 @@ from graphnav.local_chain_observation import local_patch_regions
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     for key in ('run','data-root','sbf-source','output'):p.add_argument('--'+key,type=Path,required=True)
+    p.add_argument('--case-type',choices=('harms','corrections'),default='harms')
     a=p.parse_args()
     if a.output.exists():raise FileExistsError('preserve previous audit')
     a.output.mkdir(parents=True);(a.output/'frames').mkdir()
@@ -25,7 +26,7 @@ def main():
     ds=CityNavDataset(a.data_root,'train_seen',version='processed_citynav')
     catalog=CityReferCatalog(a.data_root/'cityrefer')
     rows={m:{x['index']:x for x in map(json.loads,(a.run/m/'predictions.jsonl').read_text().splitlines())} for m in ('original','real')}
-    selected=[i for i,x in rows['original'].items() if x['metrics']['SR'] and not rows['real'][i]['metrics']['SR']]
+    selected=[i for i,x in rows['original'].items() if (bool(x['metrics']['SR']) and not rows['real'][i]['metrics']['SR'])] if a.case_type=='harms' else [i for i,x in rows['real'].items() if x['metrics']['SR'] and not rows['original'][i]['metrics']['SR']]
     renderer=FixedYawObservation(CityNavObservedViewRenderer(a.data_root/'rgbd',a.output/'unused',image_size=384),0.)
     records=[];links=[]
     for index in selected:
@@ -61,7 +62,7 @@ def main():
                             target_bounds=polygon.bounds,target_point_in_polygon=polygon.covers(Point(gt))))
         links.append(f'<h2>TRAIN {index}</h2><a href="case_{index}.png"><img width="1400" src="case_{index}.png"></a>')
     (a.output/'cases.json').write_text(json.dumps(records,indent=2))
-    (a.output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>正确Goal丢失：实际输入像素SHA核验</h1><p>绿色仅是事后GT世界点投影，不是人工实例框；红色是当时Goal。不可见性仍未知。所有图像来自实际决策位姿。</p>'+''.join(links))
+    (a.output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>配对闭环案例：实际输入像素SHA核验</h1><p>绿色仅是事后GT世界点投影，不是人工实例框；红色是当时Goal。不可见性仍未知。所有图像来自实际决策位姿。</p>'+''.join(links))
     print(json.dumps(records))
 
 

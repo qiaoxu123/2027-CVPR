@@ -1,0 +1,384 @@
+{
+  "original": {
+    "report": {
+      "method": "original",
+      "split": "train_seen",
+      "episodes": 64,
+      "metrics": {
+        "SR": 0.734375,
+        "OSR": 0.78125,
+        "SPL": 0.7008232960662686,
+        "NE": 15.890456297663487,
+        "nDTW": 0.40307417276112706,
+        "sDTW": 0.3114471863808156,
+        "steps": 5.953125,
+        "path_length": 150.97144249177103,
+        "policy_stop": 1.0,
+        "inference_ms": 61.04865733658899,
+        "episodes": 64,
+        "False_Stop_Rate": 0.265625,
+        "false_stop_episode_fraction": 0.265625,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 64
+      },
+      "seconds_current_session": 29.609021343989298,
+      "gpu_peak_allocated_gib": 3.7571868896484375,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 3,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [],
+    "harms": [],
+    "net": 0,
+    "delta_SR": 0.0,
+    "SR_intervals": {
+      "target_bootstrap95": [
+        0.0,
+        0.0
+      ],
+      "map_bootstrap95": [
+        0.0,
+        0.0
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "NE_delta_m": 0.0,
+    "NE_intervals": {
+      "target_bootstrap95": [
+        0.0,
+        0.0
+      ],
+      "map_bootstrap95": [
+        0.0,
+        0.0
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "mcnemar_exact_independent_targets_p": 1.0,
+    "by_category": {
+      "Building": {
+        "episodes": 30,
+        "SR": 0.7,
+        "NE": 16.978852864439702
+      },
+      "Car": {
+        "episodes": 31,
+        "SR": 0.7419354838709677,
+        "NE": 15.499951999591094
+      },
+      "Ground": {
+        "episodes": 3,
+        "SR": 1.0,
+        "NE": 9.041701709982727
+      }
+    },
+    "never_goal_correct_failed": 16,
+    "once_goal_correct_failed": 1
+  },
+  "real": {
+    "report": {
+      "method": "real",
+      "split": "train_seen",
+      "episodes": 64,
+      "metrics": {
+        "SR": 0.703125,
+        "OSR": 0.875,
+        "SPL": 0.5805122135143412,
+        "NE": 17.548360718245092,
+        "nDTW": 0.4049697575782576,
+        "sDTW": 0.30792278374217313,
+        "steps": 9.65625,
+        "path_length": 185.3080116788825,
+        "policy_stop": 0.921875,
+        "inference_ms": 39.82436900771866,
+        "episodes": 64,
+        "False_Stop_Rate": 0.3050847457627119,
+        "false_stop_episode_fraction": 0.28125,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 59,
+        "horizon": 5
+      },
+      "seconds_current_session": 32.80536639387719,
+      "gpu_peak_allocated_gib": 3.755049705505371,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 27,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [
+      5269,
+      5283
+    ],
+    "harms": [
+      5549,
+      14286,
+      14436,
+      14476
+    ],
+    "net": -2,
+    "delta_SR": -0.03125,
+    "SR_intervals": {
+      "target_bootstrap95": [
+        -0.109375,
+        0.046875
+      ],
+      "map_bootstrap95": [
+        -0.09797979797979797,
+        0.034967741935483854
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "NE_delta_m": 1.6579044205816045,
+    "NE_intervals": {
+      "target_bootstrap95": [
+        -0.4862173267362283,
+        4.00745707081518
+      ],
+      "map_bootstrap95": [
+        0.23896579674192925,
+        2.5254286644500787
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "mcnemar_exact_independent_targets_p": 0.6875,
+    "by_category": {
+      "Building": {
+        "episodes": 30,
+        "SR": 0.6666666666666666,
+        "NE": 18.35649502364547
+      },
+      "Car": {
+        "episodes": 31,
+        "SR": 0.7096774193548387,
+        "NE": 17.50268800210994
+      },
+      "Ground": {
+        "episodes": 3,
+        "SR": 1.0,
+        "NE": 9.93896906430453
+      }
+    },
+    "never_goal_correct_failed": 9,
+    "once_goal_correct_failed": 10
+  },
+  "gray-rgb": {
+    "report": {
+      "method": "gray-rgb",
+      "split": "train_seen",
+      "episodes": 64,
+      "metrics": {
+        "SR": 0.765625,
+        "OSR": 0.8125,
+        "SPL": 0.6513157093001872,
+        "NE": 15.891309024847512,
+        "nDTW": 0.40785359901712226,
+        "sDTW": 0.3350328338895718,
+        "steps": 7.796875,
+        "path_length": 164.86909649316826,
+        "policy_stop": 0.984375,
+        "inference_ms": 40.776287707831365,
+        "episodes": 64,
+        "False_Stop_Rate": 0.23809523809523808,
+        "false_stop_episode_fraction": 0.234375,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 63,
+        "horizon": 1
+      },
+      "seconds_current_session": 28.208802836947143,
+      "gpu_peak_allocated_gib": 3.754878044128418,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 16,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [
+      5283,
+      14519,
+      14570
+    ],
+    "harms": [
+      14436
+    ],
+    "net": 2,
+    "delta_SR": 0.03125,
+    "SR_intervals": {
+      "target_bootstrap95": [
+        -0.03125,
+        0.09375
+      ],
+      "map_bootstrap95": [
+        0.012745098039215686,
+        0.039324675324675325
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "NE_delta_m": 0.0008527271840244044,
+    "NE_intervals": {
+      "target_bootstrap95": [
+        -1.0345255119147556,
+        1.0955291335078485
+      ],
+      "map_bootstrap95": [
+        -0.4973406910891645,
+        0.5343947882639026
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "mcnemar_exact_independent_targets_p": 0.625,
+    "by_category": {
+      "Building": {
+        "episodes": 30,
+        "SR": 0.7,
+        "NE": 17.495795920070197
+      },
+      "Car": {
+        "episodes": 31,
+        "SR": 0.8064516129032258,
+        "NE": 15.001454628887165
+      },
+      "Ground": {
+        "episodes": 3,
+        "SR": 1.0,
+        "NE": 9.041602164210923
+      }
+    },
+    "never_goal_correct_failed": 12,
+    "once_goal_correct_failed": 3
+  },
+  "rgb-shuffle": {
+    "report": {
+      "method": "rgb-shuffle",
+      "split": "train_seen",
+      "episodes": 64,
+      "metrics": {
+        "SR": 0.75,
+        "OSR": 0.796875,
+        "SPL": 0.5847590625754051,
+        "NE": 16.276200391958245,
+        "nDTW": 0.4070715107206114,
+        "sDTW": 0.3247476744559281,
+        "steps": 10.40625,
+        "path_length": 185.93020099867596,
+        "policy_stop": 0.890625,
+        "inference_ms": 39.185144598518335,
+        "episodes": 64,
+        "False_Stop_Rate": 0.24561403508771928,
+        "false_stop_episode_fraction": 0.21875,
+        "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+      },
+      "terminations": {
+        "policy_stop": 57,
+        "horizon": 7
+      },
+      "seconds_current_session": 33.95743723795749,
+      "gpu_peak_allocated_gib": 3.755035400390625,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "lost_correct_goals": 16,
+      "warning": "Real closed-loop TRAIN diagnostic, not official Val/Test SR; paired model weights frozen before rollout."
+    },
+    "corrections": [
+      5283,
+      14519
+    ],
+    "harms": [
+      14436
+    ],
+    "net": 1,
+    "delta_SR": 0.015625,
+    "SR_intervals": {
+      "target_bootstrap95": [
+        -0.03125,
+        0.0625
+      ],
+      "map_bootstrap95": [
+        0.0,
+        0.034967741935483854
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "NE_delta_m": 0.385744094294758,
+    "NE_intervals": {
+      "target_bootstrap95": [
+        -0.09014890908731786,
+        1.031555285778966
+      ],
+      "map_bootstrap95": [
+        0.2880346945678893,
+        0.49223553037130646
+      ],
+      "maps": 3,
+      "map_warning": "Only three maps; cluster interval is descriptive, not strong significance evidence"
+    },
+    "mcnemar_exact_independent_targets_p": 1.0,
+    "by_category": {
+      "Building": {
+        "episodes": 30,
+        "SR": 0.7,
+        "NE": 17.364503974043803
+      },
+      "Car": {
+        "episodes": 31,
+        "SR": 0.7741935483870968,
+        "NE": 15.815351799104464
+      },
+      "Ground": {
+        "episodes": 3,
+        "SR": 1.0,
+        "NE": 10.1552666972584
+      }
+    },
+    "never_goal_correct_failed": 13,
+    "once_goal_correct_failed": 3
+  }
+}
