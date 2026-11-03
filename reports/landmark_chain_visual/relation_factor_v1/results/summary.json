@@ -1,0 +1,213 @@
+{
+  "methods": {
+    "A0": {
+      "frames": 92,
+      "goal_r1": 0.782608695652174,
+      "goal_ne_m": 19.39976523751798
+    },
+    "Frozen V3": {
+      "frames": 92,
+      "goal_r1": 0.8586956521739131,
+      "goal_ne_m": 17.271351215632066
+    },
+    "Hidden": {
+      "frames": 92,
+      "physical_targets": 25,
+      "goal_r1": 0.8695652173913043,
+      "goal_ne_m": 16.93006041257278,
+      "task_balanced_goal_r1": 0.8766666666666666,
+      "base_corrections": 1,
+      "base_harms": 0,
+      "base_net": 1,
+      "a0_corrections": 9,
+      "a0_harms": 1,
+      "a0_net": 8
+    },
+    "Typed": {
+      "frames": 92,
+      "physical_targets": 25,
+      "goal_r1": 0.8695652173913043,
+      "goal_ne_m": 17.05780243355295,
+      "task_balanced_goal_r1": 0.8766666666666666,
+      "base_corrections": 1,
+      "base_harms": 0,
+      "base_net": 1,
+      "a0_corrections": 9,
+      "a0_harms": 1,
+      "a0_net": 8
+    },
+    "Typed + shuffled references": {
+      "frames": 92,
+      "physical_targets": 25,
+      "goal_r1": 0.8695652173913043,
+      "goal_ne_m": 17.05780243355295,
+      "task_balanced_goal_r1": 0.8766666666666666,
+      "base_corrections": 1,
+      "base_harms": 0,
+      "base_net": 1,
+      "a0_corrections": 9,
+      "a0_harms": 1,
+      "a0_net": 8
+    },
+    "Typed + hidden relation types": {
+      "frames": 92,
+      "physical_targets": 25,
+      "goal_r1": 0.8695652173913043,
+      "goal_ne_m": 17.124234295409657,
+      "task_balanced_goal_r1": 0.8766666666666666,
+      "base_corrections": 1,
+      "base_harms": 0,
+      "base_net": 1,
+      "a0_corrections": 9,
+      "a0_harms": 1,
+      "a0_net": 8
+    },
+    "Typed + no new map score": {
+      "frames": 92,
+      "physical_targets": 25,
+      "goal_r1": 0.8695652173913043,
+      "goal_ne_m": 17.01463679904523,
+      "task_balanced_goal_r1": 0.8766666666666666,
+      "base_corrections": 1,
+      "base_harms": 0,
+      "base_net": 1,
+      "a0_corrections": 9,
+      "a0_harms": 1,
+      "a0_net": 8
+    }
+  },
+  "paired_controls": {
+    "real": {
+      "goal_positions_changed": 0,
+      "success_changed": 0
+    },
+    "shuffle-references": {
+      "goal_positions_changed": 0,
+      "success_changed": 0
+    },
+    "no-map-score": {
+      "goal_positions_changed": 1,
+      "success_changed": 0
+    },
+    "hidden-relations": {
+      "goal_positions_changed": 3,
+      "success_changed": 0
+    }
+  },
+  "conditional": {
+    "active": {
+      "frames": 50,
+      "goal_r1": 0.92,
+      "goal_ne_m": 11.572393198013305
+    },
+    "inactive": {
+      "frames": 42,
+      "goal_r1": 0.8095238095238095,
+      "goal_ne_m": 23.588051523481095
+    }
+  },
+  "by_category": {
+    "Building": {
+      "hidden": {
+        "frames": 16,
+        "goal_r1": 0.8125,
+        "goal_ne_m": 19.27374067902565
+      },
+      "typed": {
+        "frames": 16,
+        "goal_r1": 0.8125,
+        "goal_ne_m": 19.27374067902565
+      }
+    },
+    "Car": {
+      "hidden": {
+        "frames": 22,
+        "goal_r1": 1.0,
+        "goal_ne_m": 7.3270861452276055
+      },
+      "typed": {
+        "frames": 22,
+        "goal_r1": 1.0,
+        "goal_ne_m": 7.3270861452276055
+      }
+    },
+    "Ground": {
+      "hidden": {
+        "frames": 14,
+        "goal_r1": 1.0,
+        "goal_ne_m": 11.161803347723824
+      },
+      "typed": {
+        "frames": 14,
+        "goal_r1": 1.0,
+        "goal_ne_m": 11.161803347723824
+      }
+    },
+    "Parking": {
+      "hidden": {
+        "frames": 40,
+        "goal_r1": 0.775,
+        "goal_ne_m": 23.293114125728607
+      },
+      "typed": {
+        "frames": 40,
+        "goal_r1": 0.775,
+        "goal_ne_m": 23.586920773983003
+      }
+    }
+  },
+  "fit": {
+    "hidden": {
+      "frames": 900,
+      "physical_targets": 351,
+      "goal_r1": 0.6533333333333333,
+      "goal_ne_m": 19.88714553806517,
+      "task_balanced_goal_r1": 0.6635802469135802,
+      "base_corrections": 9,
+      "base_harms": 6,
+      "base_net": 3,
+      "a0_corrections": 58,
+      "a0_harms": 37,
+      "a0_net": 21
+    },
+    "typed": {
+      "frames": 900,
+      "physical_targets": 351,
+      "goal_r1": 0.6488888888888888,
+      "goal_ne_m": 20.193558004432255,
+      "task_balanced_goal_r1": 0.6623931623931624,
+      "base_corrections": 4,
+      "base_harms": 5,
+      "base_net": -1,
+      "a0_corrections": 53,
+      "a0_harms": 36,
+      "a0_net": 17
+    }
+  },
+  "grouped95_delta_r1_pp": [
+    0.0,
+    3.3333333333333335
+  ],
+  "hidden_vs_typed_positions_changed": 1,
+  "reference_mass_median": 0.879746288061142,
+  "head_benchmark": {
+    "base_ms": 1.596262559760362,
+    "with_factor_ms": 2.713740060571581,
+    "added_ms": 1.1174775008112192,
+    "note": "Single-state cached-feature GPU head only, excludes RGB and text encoding."
+  },
+  "checkpoints": {
+    "hidden": {
+      "sha256": "8dd8fc9a121ef124d3e5d8f95d5f76bf2f990902671dd02421b812d74f3c52ef",
+      "selected_epoch": 3
+    },
+    "typed": {
+      "sha256": "75602cd4d58258de31ec646bc929b1ce8e30bdbe422552908d4a7fcc49f1e58b",
+      "selected_epoch": 2
+    }
+  },
+  "base_checkpoint_sha256": "e5a43a59d3695397e0453a677a7aebd63552b55ae7c5fa354c9f5a88a63b2435",
+  "independent_confirmation_run": false,
+  "navigation_run": false,
+  "decision": "No enlargement: typed predicates did not beat hidden predicates; reference RGB shuffle unchanged final Goals."
+}

@@ -1,0 +1,79 @@
+{
+  "reviewer": "current Codex AI semantic reading, not human gold",
+  "sampling": "TRAIN-fit only, seed20261104, six single-reference and six multiple-reference tasks; no pixel labels or target coordinates read",
+  "rows": [
+    {
+      "task_key": "train_18135",
+      "instruction": "this is the white car, on the last floor of the multi-storey car park by the salmon lane, on the fitzroy lane side. On one side of this car are white, two black and three white cars in order, and on the other side are red, white, black and gray cars.",
+      "classification": "nonvisual_reference_type",
+      "note": "关系on last floor有语言依据，但floor不是当前正射RGB可直接定位的独立视觉物体；三维层数也未提供可靠观测。"
+    },
+    {
+      "task_key": "train_15478",
+      "instruction": "This is a parking area directly to the right of the YMCA if you're facing it from Gonville Place.",
+      "classification": "missing_viewpoint_condition",
+      "note": "parking right of YMCA提取正确，但原文限定从Gonville Place面向YMCA；新提案未编码这个参考系条件，不宜当世界right。"
+    },
+    {
+      "task_key": "train_06361",
+      "instruction": "The narrow tan parking lot to the left of the West Midlands Police Custody Suite building on Holford Drive.",
+      "classification": "usable_partial",
+      "note": "目标停车场left of Police Custody Suite成立；后续建筑on Holford Drive未完整保留在该分支。"
+    },
+    {
+      "task_key": "train_09229",
+      "instruction": "The large, green, ground area in front of St. Catherine's College Chapel, and closest to Queens Lane.",
+      "classification": "usable_partial",
+      "note": "ground front of Chapel成立；closest Queens Lane约束尚未支持；Chapel当前未绑定为公开名称。"
+    },
+    {
+      "task_key": "train_09990",
+      "instruction": "The tan building with a gray and brown roof to the left of the Galleria building on Bridge Street.",
+      "classification": "usable_partial",
+      "note": "目标tan building left of Galleria成立；目标屋顶和道路信息仍由原文/原模型保留，新增分支并不完整。"
+    },
+    {
+      "task_key": "train_12253",
+      "instruction": "This is the land located in front of Fitzwilliam Museum. Near this ground, there are a white car and a white van",
+      "classification": "usable_partial",
+      "note": "land front of Fitzwilliam Museum成立；后句白车/白van没有成为明确可定位参照实例。"
+    },
+    {
+      "task_key": "train_15415",
+      "instruction": "A red car parked at an angle in the lot of a rectangular building with an angled gray roof, the car is located in a small lot between Gresham Road and the YMCA.",
+      "classification": "spurious_reference",
+      "note": "at an angle不是目标near一个可定位物体angle；small lot作为inside参照则有原文支持。"
+    },
+    {
+      "task_key": "train_00197",
+      "instruction": "The yellow vehicle in front of the white building at the bottom right of the reddish tan parking lot to the right of the Full Circle Events & Exhibitions Ltd.",
+      "classification": "wrong_scope",
+      "note": "bottom-right parking lot和lot right of Full Circle属于中间对象作用域，不宜均直接挂到目标车辆；front white building有依据。"
+    },
+    {
+      "task_key": "train_06753",
+      "instruction": "The parking lot near the Weighbridge Offices that has white painted lines and three green cars in it.",
+      "classification": "wrong_relation",
+      "note": "near Weighbridge Offices有依据，但parking contains Offices无原文支持；painted lines/green cars的关系被错误共指。"
+    },
+    {
+      "task_key": "train_10549",
+      "instruction": "This is a lawn located right near Bin Brook. Next to it is Ramsay Hall. Behind it there is another lawn on which Hall is located.",
+      "classification": "ambiguous_scope",
+      "note": "第二个it存在指代歧义；Hall located on another lawn不应直接转换成目标lawn supports Hall，Hall名称绑定也不唯一。"
+    },
+    {
+      "task_key": "train_00018",
+      "instruction": "The large building on Wellington Rd / Grosvenor Rd that has a parking lot beside it and a white box in the backyard in front of the Full Circle Events & Exhibition Ltd building.",
+      "classification": "usable_partial",
+      "note": "building on named road和parking lot beside building两条目标关系成立；后续white box关系未纳入当前目标分支。"
+    },
+    {
+      "task_key": "train_17134",
+      "instruction": "A blue car parked at the right side of the Clarendon street, A light green car parked in front of it and a silver car parked behind it.",
+      "classification": "usable_partial",
+      "note": "蓝车behind light-green car及front silver car符合前后关系逆转；Clarendon Street的right-side整体约束尚未支持。"
+    }
+  ],
+  "warning": "Purposive strata, n=12; no population error-rate inference"
+}

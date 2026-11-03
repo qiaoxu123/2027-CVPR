@@ -1,0 +1,58 @@
+{
+  "config": {
+    "cache": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features",
+    "fit_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_fit.jsonl",
+    "dev_labels": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_dev.jsonl",
+    "fit_observation_filter": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/public_deployment_filter.json",
+    "base_checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/world_v3_envelope_s0/best.pt",
+    "base_role_vectors": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/reference_vectors_v2.pt",
+    "roles": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/relation_factor_roles_v1/roles.json",
+    "reference_vectors": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/relation_factor_vectors_v1.pt",
+    "catalog": "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json",
+    "output": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/relation_factor_suite_v1_s0/typed_s0",
+    "relation_mode": "typed",
+    "epochs": 3,
+    "steps_per_epoch": 159,
+    "batch_size": 8,
+    "lr": 0.001,
+    "seed": 0,
+    "device": "cuda",
+    "resume": false
+  },
+  "fingerprint": {
+    "fit_labels": "adb0523852bf34e284b666638dc14f363446d89e83834bcd6f504d327e2154ad",
+    "dev_labels": "31c857af48e256b450cf7d71a05dcc4d14110b90c3e1079dc673bbe11f713f8a",
+    "fit_observation_filter": "3e6301f92d30e7b9f713ec6e91ff8ea6b728b6e6d24e201d9a5e0eed32bbc165",
+    "base_checkpoint": "e5a43a59d3695397e0453a677a7aebd63552b55ae7c5fa354c9f5a88a63b2435",
+    "base_role_vectors": "76991d92ffa0363886285e0102739a84123165cfecd505b63afe60cead4b2539",
+    "roles": "91fe7e70f91f5427f19227610658114a1a06afd8aea5fa2b4085d85b8a56ba2a",
+    "reference_vectors": "43cbad92ad9e13a99d7a08b2b6014158c9dc8305159228b763ba26239e67c843",
+    "catalog": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "feature_manifest": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "scripts/train_world_relation_factor.py": "a42aaa1152647f10d7bf785a22e21fdf903075124b82fff68bc48f9c36855a91",
+    "graphnav/world_relation_factor.py": "76b60b4769735a0245d23050921cc88261ff4778f7e16faa1afea417451bf936",
+    "graphnav/relation_factor_data.py": "eaf510fd427255c26198b63906442c593d7db1049940695eabc80c5c4d362a30",
+    "graphnav/relation_factor_roles.py": "bb74df64421fe37ffeb04f3f0f2ce24aa0e993bedc17f1f66fdd8f603eda68d1",
+    "graphnav/visual_chain_position.py": "3a0793364348a1915239e071174641c6c62e390d1033f0d6796faeaa6e20c94e",
+    "graphnav/world_likelihood_evidence.py": "c9b755aaedf8a5b19c49a8a47d47b88fb526e1c01019c2e1bbd52f53fcba411f",
+    "scripts/train_local_chain_position.py": "35b9ca9631c38dffebc8eedbeeed4700739991d70a21e5138fd14a33be4ae0ae"
+  },
+  "dataset": {
+    "fit": {
+      "frames": 900,
+      "tasks": 351,
+      "active_frames": 400,
+      "active_tasks": 166,
+      "multi_reference_frames": 137
+    },
+    "dev": {
+      "frames": 92,
+      "tasks": 25,
+      "active_frames": 50,
+      "active_tasks": 14,
+      "multi_reference_frames": 17
+    }
+  },
+  "trainable_parameters": 76060,
+  "supervision": "TRAIN world goal loss only; no reference instance labels or pixel GT"
+}

@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "stages": [
+    {
+      "stage": "smoke",
+      "returncode": 0,
+      "ended_utc": "2026-11-03T19:11:41.245917+00:00"
+    },
+    {
+      "stage": "resume-smoke",
+      "returncode": 0,
+      "ended_utc": "2026-11-03T19:11:50.455839+00:00"
+    },
+    {
+      "stage": "hidden",
+      "returncode": 0,
+      "ended_utc": "2026-11-03T19:12:12.089318+00:00"
+    },
+    {
+      "stage": "typed",
+      "returncode": 0,
+      "ended_utc": "2026-11-03T19:12:33.527162+00:00"
+    }
+  ],
+  "started_utc": "2026-11-03T19:11:31.921708+00:00",
+  "current_stage": "typed",
+  "current_command": [
+    "/home/20261024_1/Workspace/third_party/aerialvg_env/bin/python",
+    "-m",
+    "scripts.train_world_relation_factor",
+    "--cache",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features",
+    "--fit-labels",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_fit.jsonl",
+    "--dev-labels",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/fixed_yaw_train400_s1/labels_dev.jsonl",
+    "--fit-observation-filter",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/public_deployment_filter.json",
+    "--base-checkpoint",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/world_v3_envelope_s0/best.pt",
+    "--base-role-vectors",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/reference_vectors_v2.pt",
+    "--roles",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/relation_factor_roles_v1/roles.json",
+    "--reference-vectors",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/relation_factor_vectors_v1.pt",
+    "--catalog",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json",
+    "--relation-mode",
+    "typed",
+    "--output",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/relation_factor_suite_v1_s0/typed_s0"
+  ]
+}
