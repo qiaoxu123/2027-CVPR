@@ -132,6 +132,7 @@ def main():
     p.add_argument('--loss-mode',choices=('standard','precision-preserve'),default='standard')
     p.add_argument('--fit-observation-filter',type=Path)
     p.add_argument('--steps-per-epoch',type=int,default=0)
+    p.add_argument('--canonical-fit-order',action='store_true')
     a=p.parse_args()
     if a.steps_per_epoch<0:raise ValueError('nonnegative step budget required')
     if a.loss_mode=='precision-preserve' and a.architecture!='world-likelihood-v3':raise ValueError('precision loss requires V3')
@@ -166,6 +167,7 @@ def main():
             if original[key]!=added[key]:raise ValueError('additional feature protocol mismatch: '+key)
         if any(value!='fit' or original['map_assignment'].get(key)!='fit' for key,value in added['map_assignment'].items()):raise ValueError('non-fit additional map')
         fit=merge_fit_observations(fit,records(a.extra_fit_cache,a.extra_fit_labels,'fit',role_vectors,a.role_mode))
+    if a.canonical_fit_order:fit.sort(key=lambda r:(r['map_name'],r['task_key'],r['step']))
     initial={k:v.detach().cpu().clone() for k,v in model.state_dict().items()}
     optimizer=torch.optim.AdamW(model.parameters(),lr=a.lr,weight_decay=.001)
     start_epoch=0;history=[];best=(-1.,float('-inf'))
@@ -185,6 +187,7 @@ def main():
         if any(state[k]!=v for k,v in fingerprint.items()):raise ValueError('resume input SHA mismatch')
         if any(state['config'][key]!=getattr(a,key) for key in ('lr','seed','batch_size','max_batches')):raise ValueError('resume configuration mismatch')
         if state.get('architecture','legacy')!=a.architecture or state['config'].get('role_mode','full')!=a.role_mode:raise ValueError('resume architecture/role mismatch')
+        if state['config'].get('canonical_fit_order',False)!=a.canonical_fit_order:raise ValueError('resume observation ordering changed')
         if state['config'].get('steps_per_epoch',0)!=a.steps_per_epoch:raise ValueError('resume update budget changed')
         if state['config'].get('loss_mode','standard')!=a.loss_mode:raise ValueError('resume loss changed')
         model.load_state_dict(state['model']);optimizer.load_state_dict(state['optimizer']);restore_rng(state['rng'])

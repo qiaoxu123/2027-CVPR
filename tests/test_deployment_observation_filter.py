@@ -20,3 +20,14 @@ def test_filter_does_not_need_target_labels_or_change_input_pose():
     f=frame(25.);copy=dict(f)
     assert observation_in_envelope(f,0.) and f==copy
     with pytest.raises(ValueError):observation_in_envelope(frame(float('nan')),0.)
+
+
+def test_aligned_training_pose_preserves_xy_yaw_and_initial_observation():
+    from graphnav.deployment_observation_filter import aligned_observation_pose
+    low={'agent_pose':[12.,34.,105.,1.2],'step':10}
+    assert aligned_observation_pose(low,100.)==[12.,34.,110.,1.2]
+    assert low['agent_pose'][2]==105.
+    high={'agent_pose':[12.,34.,250.,-2.1],'step':10}
+    assert aligned_observation_pose(high,100.)==[12.,34.,200.,-2.1]
+    high['step']=0
+    assert aligned_observation_pose(high,100.)==high['agent_pose']
