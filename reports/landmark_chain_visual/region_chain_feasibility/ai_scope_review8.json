@@ -1,0 +1,160 @@
+{
+  "reviewer": "current Codex direct public-text review, not human gold",
+  "sampling": "seed0 shuffle of public containment proposals; no GT coordinates read",
+  "rows": [
+    {
+      "task_key": "train_01899",
+      "instruction": "A multi-colored white and black car this is in between another black car in the gray car, the white car in front of it, towards the center of the row, in the first row from the bottom in the parking lot of the One Stop building",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          7,
+          38,
+          45
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "A multi-colored white and black car",
+          "the first row",
+          "the parking lot"
+        ]
+      },
+      "review": "supported",
+      "note": "明确在第一排/停车场内。"
+    },
+    {
+      "task_key": "train_18878",
+      "instruction": "Parking lot on the side of a two-story beige home with a large multicolored gray and brown roof, that has three vehicles in the parking lot near green dumpster off parsonage Street",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          24,
+          28
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "three vehicles",
+          "the parking lot"
+        ]
+      },
+      "review": "wrong_target_role_same_region",
+      "note": "原文目标为停车场，解析以其中three vehicles为目标；区域类型巧合同为Parking。"
+    },
+    {
+      "task_key": "train_02203",
+      "instruction": "The red car that is 8th from the left in the 9th row of cars in the parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop building to the right.",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          2,
+          12,
+          18
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "The red car",
+          "the 9th row",
+          "the parking lot"
+        ]
+      },
+      "review": "supported",
+      "note": "目标车在第九排，车排在停车场内。"
+    },
+    {
+      "task_key": "train_08924",
+      "instruction": "A white truck, that is facing a black car, and is a cross from a group of four vehicles, one dark blue two red and one blue in a parking lot in front of the Masters Lodge off Queens Lane",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          2,
+          33
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "A white truck",
+          "a parking lot"
+        ]
+      },
+      "review": "uncertain_scope",
+      "note": "停车场可能修饰隔着的四辆车，不能确认目标truck也在内。"
+    },
+    {
+      "task_key": "train_11884",
+      "instruction": "This is a black car, gray on one side, white on the other, and another white car behind it. these cars and other cars are in the parking lot of the University Chemical Laboratory building and this parking lot is on the side of Panton Street. This car is in the first row of parking at the Panton Street entrance, with turquoise cars on one side and red on the other.",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          4,
+          32
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "a black car",
+          "the parking lot"
+        ]
+      },
+      "review": "supported",
+      "note": "these cars包括目标车，后文明确在停车场内。"
+    },
+    {
+      "task_key": "train_01838",
+      "instruction": "A multi-colored dark blue and white car in between two black cars with an orange car in front of it, in the center area of the row, parked in the first row from the bottom in the parking lot of the One Stop building",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          8,
+          35,
+          42
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "A multi-colored dark blue and white car",
+          "the first row",
+          "the parking lot"
+        ]
+      },
+      "review": "supported",
+      "note": "目标车位于第一排，车排在停车场内。"
+    },
+    {
+      "task_key": "train_11878",
+      "instruction": "A dark blue car in between a black car and an empty spot that has the word reserved on it, in the center row in the parking lot of the University chemical Laboratory off Panton Street",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          3,
+          24,
+          28
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "A dark blue car",
+          "the center row",
+          "the parking lot"
+        ]
+      },
+      "review": "supported",
+      "note": "center row in parking lot，包含链明确。"
+    },
+    {
+      "task_key": "train_04467",
+      "instruction": "The gray car that is 2nd from the left in the front row of cars in the parking lot behind the NT Wholesale Cash & Carry, when viewed aerially with the Tufnol Building to the left.",
+      "proposal": {
+        "region": "Parking",
+        "path": [
+          2,
+          12,
+          18
+        ],
+        "kind": "target-in-intermediate-region",
+        "path_phrases": [
+          "The gray car",
+          "the front row",
+          "the parking lot"
+        ]
+      },
+      "review": "supported",
+      "note": "目标在front row，车排在parking lot。"
+    }
+  ]
+}
