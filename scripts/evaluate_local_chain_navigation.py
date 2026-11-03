@@ -27,7 +27,10 @@ def main():
     p.add_argument('--methods',nargs='+',choices=('original','real','zero','shuffle','a3'),default=['original','real','zero','shuffle'])
     p.add_argument('--smoke-episodes',type=int)
     p.add_argument('--resume',action='store_true')
+    p.add_argument('--field-mode',choices=('grid','direct'),default='grid')
     a=p.parse_args()
+    if a.smoke_episodes is not None and a.smoke_episodes<1:raise ValueError('positive smoke episode count required')
+    if len(set(a.methods))!=len(a.methods):raise ValueError('duplicate methods')
     sys.path.insert(0,str(a.sbf_source.resolve()))
     from sbfnav.config import load_config,apply_overrides,validate_config
     from sbfnav.dataset import CityNavDataset,CityReferCatalog
@@ -53,7 +56,8 @@ def main():
     indices=frozen['indices'][:a.smoke_episodes] if a.smoke_episodes else frozen['indices']
     fingerprint=dict(episode_manifest_sha256=file_sha256(a.episode_manifest),checkpoint_sha256=file_sha256(a.checkpoint),
                      local_checkpoint_sha256=file_sha256(a.local_checkpoint),public_roles_sha256=file_sha256(a.public_roles),
-                     controller_protocol=asdict(protocol),camera_yaw_rad=0.,methods=a.methods,smoke_episodes=a.smoke_episodes,
+                     controller_protocol=asdict(protocol),camera_yaw_rad=0.,methods=a.methods,smoke_episodes=a.smoke_episodes,field_mode=a.field_mode,
+                     raster_sha256=file_sha256(Path(__file__).resolve().parents[1]/'graphnav/local_chain_raster.py'),
                      runner_sha256=file_sha256(__file__),runtime_sha256=file_sha256(Path(__file__).resolve().parents[1]/'graphnav/local_chain_runtime.py'),
                      public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),
                      train_annotation_sha256=file_sha256(dataset.annotation_path))
@@ -80,10 +84,16 @@ def main():
         controller=BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,vertical_step_m=protocol.vertical_step_m,
                         minimum_above_ground_m=protocol.min_altitude_m,maximum_above_ground_m=protocol.max_altitude_m)
         if method=='original':runtime=GraphNavStage1Policy(a.checkpoint,out/'public_inputs')
-        else:runtime=LocalChainPolicy(a.checkpoint,a.local_checkpoint,a.public_roles,out/'public_inputs',control=method)
+        else:runtime=LocalChainPolicy(a.checkpoint,a.local_checkpoint,a.public_roles,out/'public_inputs',control=method,field_mode=a.field_mode)
         if (runtime.stop_threshold,runtime.execution,runtime.explore_candidates,runtime.stop_positive_weight)!=(.3,'guarded-blend',0,20.):
             raise ValueError('control/Stop changed')
         torch.cuda.reset_peak_memory_stats();started=time.perf_counter()
+        def observed_policy(state,instruction):
+            prediction=runtime.predict(state,instruction)
+            obs=state.current_observation
+            prediction.diagnostics.update(observed_rgb_sha256=runtime.native.image_key(obs['bgr']),
+                camera_pose=np.asarray(obs['pose']).tolist(),footprint_world=np.asarray(obs['footprint_world']).tolist())
+            return prediction
         with path.open('a') as stream:
             for index in indices:
                 if index in completed:continue
@@ -91,7 +101,7 @@ def main():
                 episode=PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
                     tuple(catalog.referenced_landmarks(record)),tuple(catalog.referenced_landmark_names(record)))
                 runtime.set_episode(episode,builder.transform(episode.map_name),catalog)
-                poses,termination,timings,diagnostics=rollout(episode,builder,controller,runtime.predict,
+                poses,termination,timings,diagnostics=rollout(episode,builder,controller,observed_policy,
                     GROUND_LEVEL[episode.map_name],protocol,synchronize=torch.cuda.synchronize)
                 # Policy has finished. Only the scorer sees target/reference labels.
                 metrics=score_trace(poses,record.target_position,record.trajectory,termination,radius=20.,decision_seconds=timings)

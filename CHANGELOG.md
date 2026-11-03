@@ -29,3 +29,13 @@
 ### Notes & Caveats
 - Real SR15/24、Original13/24，但Shuffle同为15/24；视觉空间对应未证明。
 - 新头无Stop且SPL下降，需要保持固定世界Belief支持；原入口、权重、Stop阈值不改。无Val/Test成绩。
+
+## [fixed-world-belief-interface] - 2026-11-04
+### Features
+- 局部位置概率可微投回原固定世界网格，默认使用grid；Direct只作负对照保留。
+- 逐决策记录真实观测SHA、相机姿态和Footprint，并核验实例重建图像内容。
+### Design Rationale
+- 相机锚定patch网格不含光心，无法满足严格到达Guard；固定世界Goal支持修复可到达性，不改Stop阈值。
+### Notes & Caveats
+- 同25条TRAIN开发任务，Direct→Grid Stop2→25、SR18→20，但原完整模型21成功；新方案尚未超过基线。
+- 开发结果不是独立确认或Val成绩；32项测试通过，原权重/普通入口保持不变。

@@ -16,6 +16,7 @@ from .full_experiment import _batch_inputs
 from .full_localization import GoalField
 from .local_chain_observation import local_patch_regions
 from .local_chain_position import LocalChainPositionHead
+from .local_chain_raster import raster_goal_field
 from .observed_patch_scales import masked_native_pool
 from .stage1 import preserved_proposal_order
 from .stage1_runtime import GraphNavStage1Policy
@@ -43,7 +44,7 @@ def local_goal_field(base,global_xy,local_uv,logits,local_valid):
 
 
 class LocalChainPolicy(GraphNavStage1Policy):
-    def __init__(self,checkpoint,local_checkpoint,public_roles,directory,*,device='cuda',control='real'):
+    def __init__(self,checkpoint,local_checkpoint,public_roles,directory,*,device='cuda',control='real',field_mode='grid'):
         super().__init__(checkpoint,directory,device=device)
         if control not in ('real','zero','shuffle','no_geometry','full_text','a3'):
             raise ValueError('unknown frozen local intervention')
@@ -53,6 +54,8 @@ class LocalChainPolicy(GraphNavStage1Policy):
         roles=json.loads(Path(public_roles).read_text())
         self.roles={(r['map_name'],r['instruction']):r for r in roles}
         self.control=control
+        if field_mode not in ('grid','direct'):raise ValueError('unknown Goal representation')
+        self.field_mode=field_mode
 
     def set_episode(self,episode,transform,catalog):
         super().set_episode(episode,transform,catalog)
@@ -109,13 +112,17 @@ class LocalChainPolicy(GraphNavStage1Policy):
             image_features=features.half()[None],target_text=(self.context_vector if self.control=='full_text' else self.target_vector).half(),
             context_text=self.context_vector.half(),public_geometry=torch.from_numpy(geometry).half().to(self.device)[None],
             quality=torch.from_numpy(quality).to(self.device)[None],local_valid=valid_tensor)
-        field=local_goal_field(self.base,self.inputs['grid_xy'],uv,logits,valid_tensor)
+        # Only fixed world cells are deployable Stop targets. Direct mode is
+        # retained solely to reproduce the documented non-stopping control.
+        mapper=raster_goal_field if self.field_mode=='grid' else local_goal_field
+        field=mapper(self.base,self.inputs['grid_xy'],uv,logits,valid_tensor)
         prediction=A3TrajectoryPolicy.predict_field(self,state,field)
         prediction.diagnostics.update(policy='Frozen local-position hypotheses + unchanged original Trajectory/Stop',
             local_control=self.control,local_hypotheses=int(valid.sum()),role_fallback=self.role_fallback,
+            field_mode=self.field_mode,local_probability_mass=float(logits.softmax(-1)[:,self.base.belief_logits.shape[-1]:].sum()),
             camera_yaw_rad=observation.get('camera_yaw_rad'),agent_yaw_rad=float(state.pose[3]),
             posterior_hypotheses=int(field.belief_logits.shape[-1]),
             global_prior_top1_xy=(self.bounds[:2]+self.inputs['grid_xy'][0,self.base.belief_logits[0].argmax()].float().cpu().numpy()*(self.bounds[2:]-self.bounds[:2])).tolist(),
-            selected_local=bool(field.candidate_ids[0,0]>=self.base.belief_logits.shape[-1]),
+            selected_local=(bool(field.candidate_ids[0,0]>=self.base.belief_logits.shape[-1]) if self.field_mode=='direct' else None),
             active_observation=False)
         return prediction
