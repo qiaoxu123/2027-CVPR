@@ -1,0 +1,2873 @@
+{
+  "scope": "frozen local observed-cell spatial ranking only; NOT instance accuracy, NOT Goal Belief or SR",
+  "warning": "20m world proximity does not prove correct-instance recognition; no human boxes or verified visibility. Development samples only.",
+  "sealed_prediction_sha256": "22c7640707e1c6d5730967ddc5e87723891a531f90abc3a8b04a60f23584d7d5",
+  "labels_sha256": "f6c73962c44b5f1a3f288fc7d1c678e1f344efee89410a23f1c9d5f82092d57c",
+  "true_visibility_unknown": 87,
+  "summary": {
+    "all_captured": {
+      "original_text": {
+        "frames": 87,
+        "physical_targets": 24,
+        "spatial_top1": 0.034482758620689655,
+        "spatial_top5": 0.12643678160919541,
+        "top1_ne_m": 137.4321730999565,
+        "task_balanced_top1": 0.03819444444444444,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "target_text": {
+        "frames": 87,
+        "physical_targets": 24,
+        "spatial_top1": 0.05747126436781609,
+        "spatial_top5": 0.13793103448275862,
+        "top1_ne_m": 141.0118366364012,
+        "task_balanced_top1": 0.05902777777777777,
+        "spatial_corrections_vs_original": 2,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_multiscale": {
+        "frames": 87,
+        "physical_targets": 24,
+        "spatial_top1": 0.06896551724137931,
+        "spatial_top5": 0.12643678160919541,
+        "top1_ne_m": 141.44911784899313,
+        "task_balanced_top1": 0.07638888888888888,
+        "spatial_corrections_vs_original": 3,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_shuffled": {
+        "frames": 87,
+        "physical_targets": 24,
+        "spatial_top1": 0.022988505747126436,
+        "spatial_top5": 0.13793103448275862,
+        "top1_ne_m": 142.6770303536052,
+        "task_balanced_top1": 0.024305555555555552,
+        "spatial_corrections_vs_original": 2,
+        "spatial_harms_vs_original": 3
+      }
+    },
+    "geometric_support_only_not_verified_visible": {
+      "original_text": {
+        "frames": 25,
+        "physical_targets": 16,
+        "spatial_top1": 0.12,
+        "spatial_top5": 0.44,
+        "top1_ne_m": 77.5815481351503,
+        "task_balanced_top1": 0.08333333333333333,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "target_text": {
+        "frames": 25,
+        "physical_targets": 16,
+        "spatial_top1": 0.2,
+        "spatial_top5": 0.48,
+        "top1_ne_m": 78.96104448850116,
+        "task_balanced_top1": 0.20833333333333334,
+        "spatial_corrections_vs_original": 2,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_multiscale": {
+        "frames": 25,
+        "physical_targets": 16,
+        "spatial_top1": 0.24,
+        "spatial_top5": 0.44,
+        "top1_ne_m": 83.54050704559127,
+        "task_balanced_top1": 0.23958333333333331,
+        "spatial_corrections_vs_original": 3,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_shuffled": {
+        "frames": 25,
+        "physical_targets": 16,
+        "spatial_top1": 0.08,
+        "spatial_top5": 0.48,
+        "top1_ne_m": 84.56349087980507,
+        "task_balanced_top1": 0.0625,
+        "spatial_corrections_vs_original": 2,
+        "spatial_harms_vs_original": 3
+      }
+    },
+    "Building": {
+      "original_text": {
+        "frames": 21,
+        "physical_targets": 6,
+        "spatial_top1": 0.047619047619047616,
+        "spatial_top5": 0.19047619047619047,
+        "top1_ne_m": 131.60785807380975,
+        "task_balanced_top1": 0.05555555555555555,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "target_text": {
+        "frames": 21,
+        "physical_targets": 6,
+        "spatial_top1": 0.047619047619047616,
+        "spatial_top5": 0.14285714285714285,
+        "top1_ne_m": 130.21278155411136,
+        "task_balanced_top1": 0.05555555555555555,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_multiscale": {
+        "frames": 21,
+        "physical_targets": 6,
+        "spatial_top1": 0.09523809523809523,
+        "spatial_top5": 0.14285714285714285,
+        "top1_ne_m": 126.6327437081897,
+        "task_balanced_top1": 0.1111111111111111,
+        "spatial_corrections_vs_original": 1,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_shuffled": {
+        "frames": 21,
+        "physical_targets": 6,
+        "spatial_top1": 0.047619047619047616,
+        "spatial_top5": 0.19047619047619047,
+        "top1_ne_m": 125.5975685449923,
+        "task_balanced_top1": 0.05555555555555555,
+        "spatial_corrections_vs_original": 1,
+        "spatial_harms_vs_original": 1
+      }
+    },
+    "Car": {
+      "original_text": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.045454545454545456,
+        "spatial_top5": 0.18181818181818182,
+        "top1_ne_m": 92.96588740363924,
+        "task_balanced_top1": 0.041666666666666664,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "target_text": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.045454545454545456,
+        "spatial_top5": 0.13636363636363635,
+        "top1_ne_m": 106.03093824701288,
+        "task_balanced_top1": 0.041666666666666664,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_multiscale": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.045454545454545456,
+        "spatial_top5": 0.18181818181818182,
+        "top1_ne_m": 100.61956509098901,
+        "task_balanced_top1": 0.041666666666666664,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_shuffled": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.0,
+        "spatial_top5": 0.18181818181818182,
+        "top1_ne_m": 125.74345660152545,
+        "task_balanced_top1": 0.0,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 1
+      }
+    },
+    "Ground": {
+      "original_text": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.045454545454545456,
+        "spatial_top5": 0.045454545454545456,
+        "top1_ne_m": 177.10098090376903,
+        "task_balanced_top1": 0.05555555555555555,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "target_text": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.13636363636363635,
+        "spatial_top5": 0.13636363636363635,
+        "top1_ne_m": 173.47401055297343,
+        "task_balanced_top1": 0.13888888888888887,
+        "spatial_corrections_vs_original": 2,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_multiscale": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.09090909090909091,
+        "spatial_top5": 0.09090909090909091,
+        "top1_ne_m": 177.24439923907016,
+        "task_balanced_top1": 0.09722222222222221,
+        "spatial_corrections_vs_original": 1,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_shuffled": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.0,
+        "spatial_top5": 0.09090909090909091,
+        "top1_ne_m": 164.44193460571918,
+        "task_balanced_top1": 0.0,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 1
+      }
+    },
+    "Parking": {
+      "original_text": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.0,
+        "spatial_top5": 0.09090909090909091,
+        "top1_ne_m": 143.92965464999563,
+        "task_balanced_top1": 0.0,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "target_text": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.0,
+        "spatial_top5": 0.13636363636363635,
+        "top1_ne_m": 152.161137352422,
+        "task_balanced_top1": 0.0,
+        "spatial_corrections_vs_original": 0,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_multiscale": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.045454545454545456,
+        "spatial_top5": 0.09090909090909091,
+        "top1_ne_m": 159.49033400054066,
+        "task_balanced_top1": 0.05555555555555555,
+        "spatial_corrections_vs_original": 1,
+        "spatial_harms_vs_original": 0
+      },
+      "scope_shuffled": {
+        "frames": 22,
+        "physical_targets": 6,
+        "spatial_top1": 0.045454545454545456,
+        "spatial_top5": 0.09090909090909091,
+        "top1_ne_m": 155.4390667902912,
+        "task_balanced_top1": 0.041666666666666664,
+        "spatial_corrections_vs_original": 1,
+        "spatial_harms_vs_original": 0
+      }
+    }
+  },
+  "rows": [
+    {
+      "frame_key": "train_00146_0000",
+      "task_key": "train_00146",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 221.73892242174844
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 218.54408632579424
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 218.54408632579424
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 212.34211052542778
+        }
+      }
+    },
+    {
+      "frame_key": "train_00146_0011",
+      "task_key": "train_00146",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 124.49897979681045
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 129.20575846001825
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 129.20575846001825
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 92.29425485386783
+        }
+      }
+    },
+    {
+      "frame_key": "train_00146_0022",
+      "task_key": "train_00146",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 70.67691247548888
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 70.67691247548888
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 70.67691247548888
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 70.67691247548888
+        }
+      }
+    },
+    {
+      "frame_key": "train_00146_0033",
+      "task_key": "train_00146",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_00545_0000",
+      "task_key": "train_00545",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 285.3753671446939
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 285.3753671446939
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 285.3753671446939
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 316.0247415044471
+        }
+      }
+    },
+    {
+      "frame_key": "train_00545_0027",
+      "task_key": "train_00545",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_00545_0054",
+      "task_key": "train_00545",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 70.03637655010502
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 60.889438963389026
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 60.889438963389026
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 108.1933737258435
+        }
+      }
+    },
+    {
+      "frame_key": "train_00545_0081",
+      "task_key": "train_00545",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_06719_0000",
+      "task_key": "train_06719",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 179.49572488497384
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 179.49572488497384
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 179.49572488497384
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 177.43600227033565
+        }
+      }
+    },
+    {
+      "frame_key": "train_06719_0062",
+      "task_key": "train_06719",
+      "category": "Car",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 22.909479652879153
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 22.909479652879153
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 22.909479652879153
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 22.909479652879153
+        }
+      }
+    },
+    {
+      "frame_key": "train_06719_0124",
+      "task_key": "train_06719",
+      "category": "Car",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 13.842276261162729
+        },
+        "target_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 13.842276261162729
+        },
+        "scope_multiscale": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 13.842276261162729
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 23.19558254790122
+        }
+      }
+    },
+    {
+      "frame_key": "train_06719_0186",
+      "task_key": "train_06719",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_07527_0000",
+      "task_key": "train_07527",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 255.96360245474153
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 255.96360245474153
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 254.8850108849513
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 241.50097554024745
+        }
+      }
+    },
+    {
+      "frame_key": "train_07527_0018",
+      "task_key": "train_07527",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 116.35095086849778
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 116.35095086849778
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 116.35095086849778
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 197.99866488133324
+        }
+      }
+    },
+    {
+      "frame_key": "train_07527_0036",
+      "task_key": "train_07527",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 73.96851919031012
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 73.96851919031012
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 73.96851919031012
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 98.03380930696838
+        }
+      }
+    },
+    {
+      "frame_key": "train_07527_0054",
+      "task_key": "train_07527",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_03998_0000",
+      "task_key": "train_03998",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_03998_0042",
+      "task_key": "train_03998",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 120.94261246802293
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 120.94261246802293
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 120.94261246802293
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 180.53903790501306
+        }
+      }
+    },
+    {
+      "frame_key": "train_03998_0085",
+      "task_key": "train_03998",
+      "category": "Car",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 177.00893792324703
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 90.28973221149357
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 135.39745532453563
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 69.84912563317454
+        }
+      }
+    },
+    {
+      "frame_key": "train_03998_0128",
+      "task_key": "train_03998",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_04369_0000",
+      "task_key": "train_04369",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 345.07712764463076
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 302.8194577972758
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 302.8194577972758
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 352.3681391446537
+        }
+      }
+    },
+    {
+      "frame_key": "train_04369_0031",
+      "task_key": "train_04369",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 134.9443635590961
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 146.5000753411162
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 134.9443635590961
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 209.70373190833283
+        }
+      }
+    },
+    {
+      "frame_key": "train_04369_0063",
+      "task_key": "train_04369",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 44.422656040029295
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 44.422656040029295
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 44.422656040029295
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 44.422656040029295
+        }
+      }
+    },
+    {
+      "frame_key": "train_06348_0000",
+      "task_key": "train_06348",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 180.80293614955775
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 108.68240109473331
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 149.30919916786553
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 157.93171151446043
+        }
+      }
+    },
+    {
+      "frame_key": "train_06348_0019",
+      "task_key": "train_06348",
+      "category": "Parking",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 23.015478903170145
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 23.015478903170145
+        },
+        "scope_multiscale": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 18.15277853993612
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 108.68240109473331
+        }
+      }
+    },
+    {
+      "frame_key": "train_06348_0039",
+      "task_key": "train_06348",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_11180_0000",
+      "task_key": "train_11180",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 169.45489956272618
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 169.45489956272618
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 169.45489956272618
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 44.76940641602349
+        }
+      }
+    },
+    {
+      "frame_key": "train_11180_0014",
+      "task_key": "train_11180",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 112.19829054689798
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 35.82050167974198
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 112.19829054689798
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 84.09579811810784
+        }
+      }
+    },
+    {
+      "frame_key": "train_11180_0028",
+      "task_key": "train_11180",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 16.737789825900542
+        },
+        "target_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 16.737789825900542
+        },
+        "scope_multiscale": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 16.737789825900542
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 31.873168456073426
+        }
+      }
+    },
+    {
+      "frame_key": "train_13635_0000",
+      "task_key": "train_13635",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 84.42662162031132
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 184.30073943827622
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 184.30073943827622
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 144.56643151644036
+        }
+      }
+    },
+    {
+      "frame_key": "train_13635_0033",
+      "task_key": "train_13635",
+      "category": "Car",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 21.598997888292363
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 58.472342874162635
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 58.472342874162635
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 50.80482427472166
+        }
+      }
+    },
+    {
+      "frame_key": "train_13635_0067",
+      "task_key": "train_13635",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_13954_0000",
+      "task_key": "train_13954",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 172.3908368931664
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 234.9654153199377
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 234.9654153199377
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 199.8563403527882
+        }
+      }
+    },
+    {
+      "frame_key": "train_13954_0017",
+      "task_key": "train_13954",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 147.74443441495796
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 226.48480721390015
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 147.74443441495796
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 136.28327921926982
+        }
+      }
+    },
+    {
+      "frame_key": "train_13954_0034",
+      "task_key": "train_13954",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 76.88048905076356
+        },
+        "target_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 11.35704629675598
+        },
+        "scope_multiscale": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 11.35704629675598
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 97.0175318745781
+        }
+      }
+    },
+    {
+      "frame_key": "train_13954_0051",
+      "task_key": "train_13954",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_13984_0000",
+      "task_key": "train_13984",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 152.6172445500831
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 152.6172445500831
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 152.6172445500831
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 152.6172445500831
+        }
+      }
+    },
+    {
+      "frame_key": "train_13984_0015",
+      "task_key": "train_13984",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 139.21281300628246
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 139.21281300628246
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 139.21281300628246
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 129.90711674425185
+        }
+      }
+    },
+    {
+      "frame_key": "train_13984_0030",
+      "task_key": "train_13984",
+      "category": "Parking",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 30.671869579407986
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 68.61380602527068
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 49.15223922800233
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 36.91433218983625
+        }
+      }
+    },
+    {
+      "frame_key": "train_14576_0000",
+      "task_key": "train_14576",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 60.7856501422
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 60.7856501422
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 60.7856501422
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 20.034354302995553
+        }
+      }
+    },
+    {
+      "frame_key": "train_14576_0068",
+      "task_key": "train_14576",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 61.03762387455599
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 61.03762387455599
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 56.65672648232665
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 28.390620360744098
+        }
+      }
+    },
+    {
+      "frame_key": "train_14576_0136",
+      "task_key": "train_14576",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 19.932442472814568
+        },
+        "target_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 19.932442472814568
+        },
+        "scope_multiscale": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 19.932442472814568
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 28.390620360744098
+        }
+      }
+    },
+    {
+      "frame_key": "train_15435_0000",
+      "task_key": "train_15435",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 300.482699900686
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 279.27443232714484
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 279.27443232714484
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 316.5447820170545
+        }
+      }
+    },
+    {
+      "frame_key": "train_15435_0025",
+      "task_key": "train_15435",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 300.4096979074619
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 304.3290476857001
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 284.6800575293004
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 259.5090584192098
+        }
+      }
+    },
+    {
+      "frame_key": "train_15435_0050",
+      "task_key": "train_15435",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 291.6522487840865
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 144.3086428137253
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 266.646279916421
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 238.03797269615706
+        }
+      }
+    },
+    {
+      "frame_key": "train_15435_0076",
+      "task_key": "train_15435",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_16200_0000",
+      "task_key": "train_16200",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 36.66370872230959
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 36.66370872230959
+        },
+        "scope_multiscale": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 15.81339767712946
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 24.35078974413446
+        }
+      }
+    },
+    {
+      "frame_key": "train_16200_0038",
+      "task_key": "train_16200",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 24.35078974413446
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 24.35078974413446
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 24.35078974413446
+        },
+        "scope_shuffled": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 15.81339767712946
+        }
+      }
+    },
+    {
+      "frame_key": "train_16200_0076",
+      "task_key": "train_16200",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 24.35078974413446
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 24.35078974413446
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 24.35078974413446
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 24.35078974413446
+        }
+      }
+    },
+    {
+      "frame_key": "train_17035_0000",
+      "task_key": "train_17035",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 37.479723531839525
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 37.479723531839525
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 37.479723531839525
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 169.0602959916247
+        }
+      }
+    },
+    {
+      "frame_key": "train_17035_0104",
+      "task_key": "train_17035",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 48.85933515076191
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 48.85933515076191
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 48.85933515076191
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 100.36644969322555
+        }
+      }
+    },
+    {
+      "frame_key": "train_17035_0208",
+      "task_key": "train_17035",
+      "category": "Car",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 43.07602632385999
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 48.85933515076191
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 48.85933515076191
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 29.547234870669815
+        }
+      }
+    },
+    {
+      "frame_key": "train_17172_0000",
+      "task_key": "train_17172",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 319.2526784780721
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 318.1993154950577
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 316.90468547537193
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 311.2910907994081
+        }
+      }
+    },
+    {
+      "frame_key": "train_17172_0061",
+      "task_key": "train_17172",
+      "category": "Parking",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 173.78068810485127
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 245.52264770308923
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 245.52264770308923
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 140.46640894581174
+        }
+      }
+    },
+    {
+      "frame_key": "train_17172_0123",
+      "task_key": "train_17172",
+      "category": "Parking",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 140.95644882354563
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 273.8263505987559
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 273.8263505987559
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 68.09963972463147
+        }
+      }
+    },
+    {
+      "frame_key": "train_17172_0185",
+      "task_key": "train_17172",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_17662_0000",
+      "task_key": "train_17662",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 220.1966584163986
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 187.0981129382423
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 187.0981129382423
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 108.71854383927975
+        }
+      }
+    },
+    {
+      "frame_key": "train_17662_0038",
+      "task_key": "train_17662",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 135.86569627053484
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 135.86569627053484
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 155.1688114957057
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 276.8846177252471
+        }
+      }
+    },
+    {
+      "frame_key": "train_17662_0077",
+      "task_key": "train_17662",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 51.161260829732534
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 178.8768233214491
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 51.161260829732534
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 203.78707466201604
+        }
+      }
+    },
+    {
+      "frame_key": "train_17662_0116",
+      "task_key": "train_17662",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_18753_0000",
+      "task_key": "train_18753",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 179.67727277443396
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 179.67727277443396
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 179.67727277443396
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 211.50994430125405
+        }
+      }
+    },
+    {
+      "frame_key": "train_18753_0018",
+      "task_key": "train_18753",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 58.282465610661724
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 207.59359992899877
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 81.3152794755991
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 134.26018313017804
+        }
+      }
+    },
+    {
+      "frame_key": "train_18753_0036",
+      "task_key": "train_18753",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 51.47709326934327
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 51.47709326934327
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 51.47709326934327
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 147.88914200517326
+        }
+      }
+    },
+    {
+      "frame_key": "train_18753_0055",
+      "task_key": "train_18753",
+      "category": "Car",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_07858_0000",
+      "task_key": "train_07858",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_07858_0011",
+      "task_key": "train_07858",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 88.20744745557985
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 88.20744745557985
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 88.20744745557985
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 88.20744745557985
+        }
+      }
+    },
+    {
+      "frame_key": "train_07858_0022",
+      "task_key": "train_07858",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_07858_0033",
+      "task_key": "train_07858",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_08150_0000",
+      "task_key": "train_08150",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 282.08331428688825
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 281.8867041789895
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 312.96226803174267
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 310.6421010079434
+        }
+      }
+    },
+    {
+      "frame_key": "train_08150_0105",
+      "task_key": "train_08150",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_08150_0210",
+      "task_key": "train_08150",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 99.38494726908408
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 99.38494726908408
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 99.38494726908408
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 99.38494726908408
+        }
+      }
+    },
+    {
+      "frame_key": "train_08432_0000",
+      "task_key": "train_08432",
+      "category": "Building",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 83.0725175491026
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 68.91192754620891
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 68.91192754620891
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 83.0725175491026
+        }
+      }
+    },
+    {
+      "frame_key": "train_08432_0049",
+      "task_key": "train_08432",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 149.33054684972132
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 149.33054684972132
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 149.33054684972132
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 40.86031495489232
+        }
+      }
+    },
+    {
+      "frame_key": "train_08432_0098",
+      "task_key": "train_08432",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 404.19953532917816
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 404.19953532917816
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 404.19953532917816
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 340.3720099759205
+        }
+      }
+    },
+    {
+      "frame_key": "train_08432_0148",
+      "task_key": "train_08432",
+      "category": "Building",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_09260_0000",
+      "task_key": "train_09260",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 237.94017169426644
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 265.26151869035186
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 265.26151869035186
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 178.0496826663978
+        }
+      }
+    },
+    {
+      "frame_key": "train_09260_0032",
+      "task_key": "train_09260",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 358.9266733583917
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 406.41399670904406
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 386.3290886066982
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 294.1600717616557
+        }
+      }
+    },
+    {
+      "frame_key": "train_09260_0064",
+      "task_key": "train_09260",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 74.64192235522692
+        },
+        "target_text": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 3.2726549202341912
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 88.77760417534293
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 203.38672223482084
+        }
+      }
+    },
+    {
+      "frame_key": "train_09260_0096",
+      "task_key": "train_09260",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_10849_0000",
+      "task_key": "train_10849",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 183.3479485023846
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 148.81016709737267
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 148.81016709737267
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 158.0482854535067
+        }
+      }
+    },
+    {
+      "frame_key": "train_10849_0094",
+      "task_key": "train_10849",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 169.03283763883232
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 200.77654119436863
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 148.81016709737267
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 121.57837551917463
+        }
+      }
+    },
+    {
+      "frame_key": "train_10849_0188",
+      "task_key": "train_10849",
+      "category": "Ground",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 174.04273681830654
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 200.77654119436863
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 200.77654119436863
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 106.19814278110188
+        }
+      }
+    },
+    {
+      "frame_key": "train_10849_0283",
+      "task_key": "train_10849",
+      "category": "Ground",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    },
+    {
+      "frame_key": "train_10899_0000",
+      "task_key": "train_10899",
+      "category": "Parking",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 22.834741135047413
+        },
+        "target_text": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 30.77992460042049
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": true,
+          "top1_ne_m": 30.77992460042049
+        },
+        "scope_shuffled": {
+          "top1": true,
+          "top5": true,
+          "top1_ne_m": 14.870974417859742
+        }
+      }
+    },
+    {
+      "frame_key": "train_10899_0065",
+      "task_key": "train_10899",
+      "category": "Parking",
+      "geometrically_supported": true,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 173.4400029419814
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 42.729001025784896
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 160.15940067918476
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 223.8735372769379
+        }
+      }
+    },
+    {
+      "frame_key": "train_10899_0130",
+      "task_key": "train_10899",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 267.869398108806
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 344.7275573145531
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 323.30579805977885
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": 361.1906474122253
+        }
+      }
+    },
+    {
+      "frame_key": "train_10899_0195",
+      "task_key": "train_10899",
+      "category": "Parking",
+      "geometrically_supported": false,
+      "true_visibility": "unknown",
+      "instance_match": "unknown",
+      "methods": {
+        "original_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "target_text": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_multiscale": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        },
+        "scope_shuffled": {
+          "top1": false,
+          "top5": false,
+          "top1_ne_m": null
+        }
+      }
+    }
+  ]
+}

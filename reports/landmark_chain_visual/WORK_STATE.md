@@ -23,3 +23,14 @@
 5. 正式Test只在最终冻结后，遵守freeze manifest，不依据Test反馈改模型。没有独立收益则保留负结果、停止扩大。
 
 约束：原始指令保留；GT仅TRAIN损失/事后评分，不进入正常策略；不使用未来图像；既有暂停任务不自动恢复。固定yaw0表示朝东非北朝上，XYZ不变；原生栅格信息上限不因放大而增加。语言left/right/front/behind参考系未知时不硬编世界方向。
+
+## 2026-11-03第二阶段权威更新（覆盖上文“尚未采集”旧状态）
+
+- 固定yaw适配器graphnav/fixed_yaw_observation.py已完成，原正常入口未改。
+- 24物理实例/16图/87参考轨迹帧已真实采集；数据server目录：GraphNav/runs/landmark_chain_visual/fixed_yaw_pilot_24_s0。相机yaw0、agent姿态不变。目标标签独立private文件，仅监督/事后评分。
+- 同RGB冻结SigLIP2原ROI32/64/128及小ROI8/16/32编码都完成，目录fixed_yaw_features_24_s0与fixed_yaw_features_smallroi_24_s0；大文件不提交。
+- 指令角色由当前会话AI整理，非Qwen。任务显示类别元数据，非严格盲解析金标准；保留原文/不确定方向。
+- 原ROI22帧无任何ROI，小ROI13帧；GT点几何/深度代理支持但无ROI10→4。近20m候选支持25→38。
+- 87帧空间Top1全文3→11，小ROI目标文本13、分尺度11；小ROI全文shuffle11、zero10。视觉性能增益未证明；新分尺度规则不作为已有效方法。共同25帧NE全文77.58→74.42，目标文本90.30、分尺度88.78。
+- reports/landmark_chain_visual/pilot24/REPORT_zh.md、所有逐帧JSON、SHAmanifest及24实例图册cases/index.html已生成。相关17 tests passed，源码compile通过。
+- 下一步：观测内细粒度位置候选/直接分布头+独立TRAIN训练与确认；不要继续搜索本24例规则权重。尚无新任务训练权重、Goal Belief指标或SR，不得声称>65%。
