@@ -18,6 +18,7 @@ from graphnav.local_chain_position import LocalChainPositionHead,position_loss
 from graphnav.visual_chain_position import VisualChainPositionHead,WorldLikelihoodPositionHead,visual_chain_loss
 from graphnav.local_chain_raster import rasterized_goal_logprob
 from graphnav.precision_preserve_loss import precision_preserve_loss
+from graphnav.instance_ranking_loss import instance_ranking_loss,noncar_position_auxiliary
 
 INPUTS=('prior_logits','local_uv','image_features','target_text','context_text','public_geometry','quality','local_valid')
 
@@ -62,6 +63,7 @@ def collate(rows):
     if 'target_phrase' in rows[0]:
         out['target_phrase']=[r['target_phrase'] for r in rows]
         out['full_text']=torch.stack([r['full_text'] for r in rows])
+    if 'instance_labels' in rows[0]:out['instance_labels']=torch.stack([r['instance_labels'] for r in rows])
     return out
 
 
@@ -133,7 +135,13 @@ def main():
     p.add_argument('--fit-observation-filter',type=Path)
     p.add_argument('--steps-per-epoch',type=int,default=0)
     p.add_argument('--canonical-fit-order',action='store_true')
+    p.add_argument('--instance-labels',type=Path)
+    p.add_argument('--instance-loss-weight',type=float,default=.5)
+    p.add_argument('--car-core-replaces-local',action='store_true')
     a=p.parse_args()
+    if a.car_core_replaces_local and not a.instance_labels:raise ValueError('Car auxiliary replacement requires private instance labels')
+    if a.instance_labels and a.architecture!='world-likelihood-v3':raise ValueError('instance loss requires V3')
+    if not 0<=a.instance_loss_weight<=10:raise ValueError('bounded nonnegative instance loss weight required')
     if a.steps_per_epoch<0:raise ValueError('nonnegative step budget required')
     if a.loss_mode=='precision-preserve' and a.architecture!='world-likelihood-v3':raise ValueError('precision loss requires V3')
     torch.manual_seed(a.seed);np.random.seed(a.seed)
@@ -142,6 +150,7 @@ def main():
     role_vectors=torch.load(a.role_vectors,map_location='cpu',weights_only=True) if a.role_vectors else None
     if a.architecture in ('visual-chain-v2','world-likelihood-v3') and role_vectors is None:raise ValueError('explicit role vectors/phrases required')
     if a.confirm_checkpoint:
+        if a.instance_labels:raise ValueError('private fit instance labels prohibited in confirmation')
         if a.fit_observation_filter:raise ValueError('no fitting filter in confirmation')
         if a.extra_fit_cache or a.extra_fit_labels:raise ValueError('no augmentation in confirmation')
         if a.output.exists():raise FileExistsError('confirmation output already exists; no repeated evaluation')
@@ -168,11 +177,28 @@ def main():
         if any(value!='fit' or original['map_assignment'].get(key)!='fit' for key,value in added['map_assignment'].items()):raise ValueError('non-fit additional map')
         fit=merge_fit_observations(fit,records(a.extra_fit_cache,a.extra_fit_labels,'fit',role_vectors,a.role_mode))
     if a.canonical_fit_order:fit.sort(key=lambda r:(r['map_name'],r['task_key'],r['step']))
+    if a.instance_labels:
+        instance_manifest=a.instance_labels.parent/'summary.json'
+        proof=json.loads(instance_manifest.read_text())
+        if proof['primary_feature_manifest_sha256']!=file_sha256(a.cache/'manifest.json') or a.extra_fit_cache is None or proof['extra_feature_manifest_sha256']!=file_sha256(a.extra_fit_cache/'manifest.json'):raise ValueError('instance annotation feature provenance mismatch')
+        if proof['private_labels_sha256']!=file_sha256(a.instance_labels):raise ValueError('instance annotations changed')
+        masks=torch.load(a.instance_labels,map_location='cpu',weights_only=True)
+        keys={r['frame_key'] for r in fit}
+        if not set(masks).issubset(keys):raise ValueError('non-fit instance annotations')
+        for r in fit:
+            if r['category']=='Car' and r['frame_key'] not in masks:raise ValueError('missing Car instance annotation')
+            label=masks.get(r['frame_key'],torch.full_like(r['local_valid'],-1,dtype=torch.int8))
+            if label.shape!=r['local_valid'].shape or not ((label==-1)|(label==0)|(label==1)).all():raise ValueError('invalid instance label')
+            r['instance_labels']=label
     initial={k:v.detach().cpu().clone() for k,v in model.state_dict().items()}
     optimizer=torch.optim.AdamW(model.parameters(),lr=a.lr,weight_decay=.001)
     start_epoch=0;history=[];best=(-1.,float('-inf'))
     fingerprint={key:file_sha256(path) for key,path in [('feature_manifest_sha256',a.cache/'manifest.json'),('fit_labels_sha256',a.fit_labels),('dev_labels_sha256',a.dev_labels)]}
     if a.role_vectors:fingerprint['role_vectors_sha256']=file_sha256(a.role_vectors)
+    if a.instance_labels:
+        fingerprint['private_instance_labels_sha256']=file_sha256(a.instance_labels)
+        fingerprint['instance_annotation_manifest_sha256']=file_sha256(a.instance_labels.parent/'summary.json')
+        fingerprint['instance_loss_code_sha256']=file_sha256(Path(__file__).resolve().parents[1]/'graphnav/instance_ranking_loss.py')
     if a.fit_observation_filter:fingerprint['fit_observation_filter_sha256']=file_sha256(a.fit_observation_filter)
     if a.loss_mode=='precision-preserve':fingerprint['loss_code_sha256']=file_sha256(Path(__file__).resolve().parents[1]/'graphnav/precision_preserve_loss.py')
     if a.extra_fit_cache:
@@ -187,6 +213,8 @@ def main():
         if any(state[k]!=v for k,v in fingerprint.items()):raise ValueError('resume input SHA mismatch')
         if any(state['config'][key]!=getattr(a,key) for key in ('lr','seed','batch_size','max_batches')):raise ValueError('resume configuration mismatch')
         if state.get('architecture','legacy')!=a.architecture or state['config'].get('role_mode','full')!=a.role_mode:raise ValueError('resume architecture/role mismatch')
+        if state['config'].get('car_core_replaces_local',False)!=a.car_core_replaces_local:raise ValueError('resume Car supervision mode changed')
+        if state['config'].get('instance_loss_weight',.5)!=a.instance_loss_weight:raise ValueError('resume instance weight changed')
         if state['config'].get('canonical_fit_order',False)!=a.canonical_fit_order:raise ValueError('resume observation ordering changed')
         if state['config'].get('steps_per_epoch',0)!=a.steps_per_epoch:raise ValueError('resume update budget changed')
         if state['config'].get('loss_mode','standard')!=a.loss_mode:raise ValueError('resume loss changed')
@@ -195,10 +223,10 @@ def main():
     config={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()}
     atomic_json(dict(config=config,**fingerprint,fit_frames=len(fit),dev_frames=len(dev),
                      trainable_parameters=sum(p.numel() for p in model.parameters()),selection='TRAIN dev Goal R1 then NE',
-                     supervision='world-position only; no pixel instance labels'),a.output/'config.json')
-    started=time.perf_counter();first_gradient=None
+                     supervision=('world-position + weak registered-instance ranking; no verified pixel labels' if a.instance_labels else 'world-position only; no pixel instance labels')),a.output/'config.json')
+    started=time.perf_counter();first_gradient=None;first_instance_gradient=None
     for epoch in range(start_epoch,a.epochs):
-        model.train();losses=[];eligible=0;examples=0;color_rows=0;fine_car_rows=0;preservation_rows=0
+        model.train();losses=[];eligible=0;examples=0;color_rows=0;fine_car_rows=0;preservation_rows=0;instance_rows=0;instance_positives=0;instance_negatives=0
         generator=torch.Generator().manual_seed(a.seed+epoch)
         sampler=RandomSampler(fit,replacement=True,num_samples=a.steps_per_epoch*a.batch_size,generator=generator) if a.steps_per_epoch else None
         loader=DataLoader(fit,batch_size=a.batch_size,shuffle=sampler is None,sampler=sampler,generator=generator,collate_fn=collate)
@@ -210,6 +238,18 @@ def main():
                 logits,visual=model(**public,return_visual=True)
                 loss_fn=precision_preserve_loss if a.loss_mode=='precision-preserve' else visual_chain_loss
                 terms=loss_fn(model,logits,visual,public,batch['candidate_world'].to(a.device),batch['target_world'].to(a.device),batch['category'],batch['target_phrase'])
+                if a.instance_labels:
+                    iloss,counts=instance_ranking_loss(visual,batch['instance_labels'].to(a.device),public['local_valid'])
+                    if counts['rows'] and first_instance_gradient is None:
+                        grad=torch.autograd.grad(iloss,model.image.weight,retain_graph=True)[0]
+                        first_instance_gradient=float(grad.norm())
+                        if not torch.isfinite(grad).all() or first_instance_gradient<=0:raise RuntimeError('no effective instance visual gradient')
+                    if a.car_core_replaces_local:
+                        distance=(batch['candidate_world'][:,784:].to(a.device)-batch['target_world'][:,None].to(a.device)).norm(dim=-1)
+                        nongroup=noncar_position_auxiliary(visual,distance,public['local_valid'],batch['category'])
+                        terms['total']=terms['total']-.5*terms['visual']+.5*nongroup
+                    terms['total']=terms['total']+a.instance_loss_weight*iloss
+                    instance_rows+=counts['rows'];instance_positives+=counts['positives'];instance_negatives+=counts['negatives']
                 color_rows+=terms['color_rows']
                 fine_car_rows+=terms.get('fine_car_rows',0);preservation_rows+=terms.get('preservation_rows',0)
             else:
@@ -225,6 +265,7 @@ def main():
         validation=evaluate(model,dev,a.device,a.batch_size)
         entry=dict(epoch=epoch+1,loss=float(np.mean(losses)),local_supervised=eligible,color_contrastive_rows=color_rows,examples=examples,
                    fine_car_rows=fine_car_rows,preservation_rows=preservation_rows,
+                   instance_rows=instance_rows,instance_positives=instance_positives,instance_negatives=instance_negatives,
                    seconds=time.perf_counter()-started,dev=validation['metrics'])
         history.append(entry)
         key=(entry['dev']['goal_r1'],-entry['dev']['goal_ne_m']);is_best=key>best
@@ -233,7 +274,7 @@ def main():
                    config=config,history=history,best=best,**fingerprint)
         atomic_save(state,a.output/'last.pt')
         if is_best:atomic_save(state,a.output/'best.pt')
-        atomic_json(dict(history=history,first_batch_gradient_norms=first_gradient,
+        atomic_json(dict(history=history,first_batch_gradient_norms=first_gradient,first_instance_visual_gradient_norm=first_instance_gradient,
                          peak_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
                          changed_parameter_tensors=sum(not torch.equal(v.detach().cpu(),initial[k]) for k,v in model.state_dict().items())),a.output/'training.json')
         print(json.dumps(entry),flush=True)
