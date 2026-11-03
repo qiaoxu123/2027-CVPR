@@ -50,7 +50,7 @@ def evaluate(model,data,control='real',donors=None):
         x=public_inputs(batch,'cuda');extra={}
         if control=='wrong-frame':
             extra['transport_image_features']=torch.stack([donors.get(k,batch['image_features'][i]) for i,k in enumerate(batch['frame_key'])]).cuda()
-        packed,energy,base=model(**x,control='real' if control=='wrong-frame' else control,return_base=True)
+        packed,energy,base=model(**x,**extra,control='real' if control=='wrong-frame' else control,return_base=True)
         chosen=packed[:,:784].argmax(-1).cpu();baseline=base[:,:784].argmax(-1).cpu()
         for i,c in enumerate(chosen):
             target=batch['target_world'][i];world=batch['candidate_world'][i]
