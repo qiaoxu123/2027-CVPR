@@ -17,6 +17,7 @@ from graphnav.checkpointing import atomic_json,atomic_save,file_sha256,rng_state
 from graphnav.local_chain_position import LocalChainPositionHead,position_loss
 from graphnav.visual_chain_position import VisualChainPositionHead,WorldLikelihoodPositionHead,visual_chain_loss
 from graphnav.local_chain_raster import rasterized_goal_logprob
+from graphnav.precision_preserve_loss import precision_preserve_loss
 
 INPUTS=('prior_logits','local_uv','image_features','target_text','context_text','public_geometry','quality','local_valid')
 
@@ -127,7 +128,9 @@ def main():
     p.add_argument('--role-mode',choices=('full','reference'),default='full')
     p.add_argument('--extra-fit-cache',type=Path)
     p.add_argument('--extra-fit-labels',type=Path)
+    p.add_argument('--loss-mode',choices=('standard','precision-preserve'),default='standard')
     a=p.parse_args()
+    if a.loss_mode=='precision-preserve' and a.architecture!='world-likelihood-v3':raise ValueError('precision loss requires V3')
     torch.manual_seed(a.seed);np.random.seed(a.seed)
     torch.set_num_threads(4)
     model={'legacy':LocalChainPositionHead,'visual-chain-v2':VisualChainPositionHead,'world-likelihood-v3':WorldLikelihoodPositionHead}[a.architecture]().to(a.device)
@@ -162,6 +165,7 @@ def main():
     start_epoch=0;history=[];best=(-1.,float('-inf'))
     fingerprint={key:file_sha256(path) for key,path in [('feature_manifest_sha256',a.cache/'manifest.json'),('fit_labels_sha256',a.fit_labels),('dev_labels_sha256',a.dev_labels)]}
     if a.role_vectors:fingerprint['role_vectors_sha256']=file_sha256(a.role_vectors)
+    if a.loss_mode=='precision-preserve':fingerprint['loss_code_sha256']=file_sha256(Path(__file__).resolve().parents[1]/'graphnav/precision_preserve_loss.py')
     if a.extra_fit_cache:
         fingerprint.update(extra_feature_manifest_sha256=file_sha256(a.extra_fit_cache/'manifest.json'),extra_fit_labels_sha256=file_sha256(a.extra_fit_labels))
     if a.architecture in ('visual-chain-v2','world-likelihood-v3'):
@@ -174,6 +178,7 @@ def main():
         if any(state[k]!=v for k,v in fingerprint.items()):raise ValueError('resume input SHA mismatch')
         if any(state['config'][key]!=getattr(a,key) for key in ('lr','seed','batch_size','max_batches')):raise ValueError('resume configuration mismatch')
         if state.get('architecture','legacy')!=a.architecture or state['config'].get('role_mode','full')!=a.role_mode:raise ValueError('resume architecture/role mismatch')
+        if state['config'].get('loss_mode','standard')!=a.loss_mode:raise ValueError('resume loss changed')
         model.load_state_dict(state['model']);optimizer.load_state_dict(state['optimizer']);restore_rng(state['rng'])
         start_epoch=state['epoch'];history=state['history'];best=tuple(state['best'])
     config={k:str(v) if isinstance(v,Path) else v for k,v in vars(a).items()}
@@ -182,7 +187,7 @@ def main():
                      supervision='world-position only; no pixel instance labels'),a.output/'config.json')
     started=time.perf_counter();first_gradient=None
     for epoch in range(start_epoch,a.epochs):
-        model.train();losses=[];eligible=0;examples=0;color_rows=0
+        model.train();losses=[];eligible=0;examples=0;color_rows=0;fine_car_rows=0;preservation_rows=0
         generator=torch.Generator().manual_seed(a.seed+epoch)
         loader=DataLoader(fit,batch_size=a.batch_size,shuffle=True,generator=generator,collate_fn=collate)
         for step,batch in enumerate(loader):
@@ -191,8 +196,10 @@ def main():
             public=batch_inputs(batch,a.device)
             if a.architecture in ('visual-chain-v2','world-likelihood-v3'):
                 logits,visual=model(**public,return_visual=True)
-                terms=visual_chain_loss(model,logits,visual,public,batch['candidate_world'].to(a.device),batch['target_world'].to(a.device),batch['category'],batch['target_phrase'])
+                loss_fn=precision_preserve_loss if a.loss_mode=='precision-preserve' else visual_chain_loss
+                terms=loss_fn(model,logits,visual,public,batch['candidate_world'].to(a.device),batch['target_world'].to(a.device),batch['category'],batch['target_phrase'])
                 color_rows+=terms['color_rows']
+                fine_car_rows+=terms.get('fine_car_rows',0);preservation_rows+=terms.get('preservation_rows',0)
             else:
                 logits=model(**public)
                 terms=position_loss(logits,batch['candidate_world'].to(a.device),batch['target_world'].to(a.device),global_cells=784)
@@ -205,6 +212,7 @@ def main():
             optimizer.step();losses.append(float(terms['total'].detach()));eligible+=terms['local_supervised'];examples+=len(batch['target_world'])
         validation=evaluate(model,dev,a.device,a.batch_size)
         entry=dict(epoch=epoch+1,loss=float(np.mean(losses)),local_supervised=eligible,color_contrastive_rows=color_rows,examples=examples,
+                   fine_car_rows=fine_car_rows,preservation_rows=preservation_rows,
                    seconds=time.perf_counter()-started,dev=validation['metrics'])
         history.append(entry)
         key=(entry['dev']['goal_r1'],-entry['dev']['goal_ne_m']);is_best=key>best
