@@ -1,0 +1,35 @@
+/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_direction_belief.py:23: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  torch.cuda.synchronize();(a.output/'smoke.json').write_text(json.dumps(dict(loss=float(loss),gradient_abs=float(smoke.parameters_by_word.weight.grad.abs().sum()),seconds=time.perf_counter()-t,device=torch.cuda.get_device_name(0),parameters=sum(p.numel() for p in smoke.parameters())),indent=2));del smoke,optimizer
+{"model": "direction_synthetic", "step": 40, "loss": 3.6095361709594727, "seconds": 1.3489917838014662}
+{"model": "direction_synthetic", "step": 80, "loss": 3.0561065673828125, "seconds": 1.5308451177552342}
+{"model": "direction_synthetic", "step": 120, "loss": 2.856502056121826, "seconds": 1.7130922130309045}
+{"model": "direction_synthetic", "step": 160, "loss": 2.991114854812622, "seconds": 1.907163362018764}
+{"model": "direction_synthetic", "step": 200, "loss": 2.977616310119629, "seconds": 2.108504944946617}
+{"model": "direction_synthetic", "step": 240, "loss": 2.977452278137207, "seconds": 2.301603376865387}
+{"model": "direction_synthetic", "step": 280, "loss": 2.7543373107910156, "seconds": 2.495464662089944}
+{"model": "direction_synthetic", "step": 320, "loss": 3.134601354598999, "seconds": 2.681880921125412}
+{"model": "direction_synthetic", "step": 360, "loss": 2.8815083503723145, "seconds": 2.8714930810965598}
+{"model": "direction_synthetic", "step": 400, "loss": 3.0764150619506836, "seconds": 3.0562741747125983}
+{"model": "direction_real", "step": 40, "loss": 6.576192855834961, "seconds": 3.2192761888727546}
+{"model": "direction_real", "step": 80, "loss": 5.194202423095703, "seconds": 3.382235122844577}
+{"model": "direction_real", "step": 120, "loss": 6.018497467041016, "seconds": 3.545756808947772}
+{"model": "direction_real", "step": 160, "loss": 4.685275554656982, "seconds": 3.7066533849574625}
+{"model": "direction_real", "step": 200, "loss": 4.688451766967773, "seconds": 3.869902189821005}
+{"model": "direction_real", "step": 240, "loss": 4.368290424346924, "seconds": 4.031643762718886}
+{"model": "nodirection_synthetic", "step": 40, "loss": 5.204635143280029, "seconds": 4.1845678319223225}
+{"model": "nodirection_synthetic", "step": 80, "loss": 5.04768705368042, "seconds": 4.3378207720816135}
+{"model": "nodirection_synthetic", "step": 120, "loss": 5.131161689758301, "seconds": 4.495581197086722}
+{"model": "nodirection_synthetic", "step": 160, "loss": 5.062676429748535, "seconds": 4.650563342962414}
+{"model": "nodirection_synthetic", "step": 200, "loss": 4.925159931182861, "seconds": 4.807161233853549}
+{"model": "nodirection_synthetic", "step": 240, "loss": 5.196987628936768, "seconds": 4.9617207958363}
+{"model": "nodirection_synthetic", "step": 280, "loss": 4.842067718505859, "seconds": 5.116078789811581}
+{"model": "nodirection_synthetic", "step": 320, "loss": 5.162110328674316, "seconds": 5.264818585012108}
+{"model": "nodirection_synthetic", "step": 360, "loss": 4.967230796813965, "seconds": 5.429135651793331}
+{"model": "nodirection_synthetic", "step": 400, "loss": 5.207825183868408, "seconds": 5.585951935034245}
+{"model": "nodirection_real", "step": 40, "loss": 4.426513671875, "seconds": 5.740582448896021}
+{"model": "nodirection_real", "step": 80, "loss": 4.063243865966797, "seconds": 5.897460712119937}
+{"model": "nodirection_real", "step": 120, "loss": 4.877799034118652, "seconds": 6.058657609857619}
+{"model": "nodirection_real", "step": 160, "loss": 4.244539260864258, "seconds": 6.213651196099818}
+{"model": "nodirection_real", "step": 200, "loss": 4.602988243103027, "seconds": 6.366400164086372}
+{"model": "nodirection_real", "step": 240, "loss": 4.442032814025879, "seconds": 6.519518123939633}

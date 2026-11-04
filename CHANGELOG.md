@@ -258,3 +258,12 @@
 - 候选稳定只重排现有候选并gather原context，不改变Belief logits；错误旧候选至多短暂延迟，不能永久锁定。到达接口仍依赖原学习式Stop，不使用GT或Polygon距离。
 ### Notes & Caveats
 - 原默认策略、权重、Stop概率阈值及Horizon20不变。宽松到达存在错误Goal上的提前误停反例，不能据开发集结果直接部署。所有成绩为TRAIN具名地标诊断任务。
+
+## [direction-belief-transform] - 2026-11-04
+### Features
+- 新增32参数、方向条件的Anchor→Target Belief位移核；支持四个工程世界方向和显式参考朝向下的四个相对方向。
+- 完成合成/真实TRAIN同预算无方向对照、公开输入预测封存、原目标GT事后评分及当前冻结PGVB Anchor小样本检查。
+### Design Rationale
+- 以可解释位移与不确定性验证词是否控制分布，避免直接扩展完整视觉关系网络；真实参考系不确定时拒绝强制转换。
+### Notes & Caveats
+- 冻结原PGVB/视觉骨干/导航器，不做外观识别或闭环。真实筛选无east、west仅2个评估配对；地图真实地理北尚无CRS校验。真实目标覆盖不足，未证明PGVB Anchor增益，不自动部署。

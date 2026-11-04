@@ -1,0 +1,28 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+____________ test_shift_kernel_obeys_east_north_grid_and_normalizes ____________
+
+    def test_shift_kernel_obeys_east_north_grid_and_normalizes():
+>    from graphnav.direction_belief import apply_offset_kernel
+E    ModuleNotFoundError: No module named 'graphnav.direction_belief'
+
+tests/test_direction_belief.py:5: ModuleNotFoundError
+_______ test_relative_frame_requires_explicit_heading_and_gradients_flow _______
+
+    def test_relative_frame_requires_explicit_heading_and_gradients_flow():
+>    from graphnav.direction_belief import DirectionBelief
+E    ModuleNotFoundError: No module named 'graphnav.direction_belief'
+
+tests/test_direction_belief.py:15: ModuleNotFoundError
+_______________ test_known_heading_rotates_relative_kernel_only ________________
+
+    def test_known_heading_rotates_relative_kernel_only():
+>    from graphnav.direction_belief import rotate_means
+E    ModuleNotFoundError: No module named 'graphnav.direction_belief'
+
+tests/test_direction_belief.py:24: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_direction_belief.py::test_shift_kernel_obeys_east_north_grid_and_normalizes
+FAILED tests/test_direction_belief.py::test_relative_frame_requires_explicit_heading_and_gradients_flow
+FAILED tests/test_direction_belief.py::test_known_heading_rotates_relative_kernel_only
+3 failed in 0.98s
