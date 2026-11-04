@@ -187,7 +187,8 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.inputs = None
         self.visited_goal_cells = set()
         self.pgvb_calls = 0
-        self.acquisition.reset()
+        if getattr(self, "acquisition", None) is not None:
+            self.acquisition.reset()
         self._last_observation_metadata = None
         self.unified.reset_episode()
 
