@@ -69,8 +69,12 @@ def test_unknown_or_mixed_name_never_navigates_as_if_confirmed():
         contour=[[0, 10], [4, 10], [4, 14], [0, 14]],
     )
     s = parse_unified_instruction("Go to Victoria Street.", "toy", objects)
-    assert s["intent"] == "unresolved"
-    assert s["reason"] == "unsupported_or_mixed_public_types"
+    assert s["intent"] == "navigate_to_landmark"
+    assert s["approved_for_inference"] is True
+    assert s["reason"] == "explicit_named_goal_geometry_only"
+    assert s["landmark"]["visual_supported"] is False
+    assert len(s["landmark"]["public_ids"]) == 3
+    assert "mixed_or_unsupported_public_landmark_type" in s["ambiguity"]
 
 
 def test_complex_target_is_not_silently_the_public_landmark_goal():
@@ -154,3 +158,15 @@ def test_runtime_has_no_legacy_stage1_or_parallel_pgvb_inheritance():
     assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, PGVBNamedLandmarkPolicy)
     assert "_pgvb_forward" not in UnifiedPGVBNamedLandmarkPolicy.__dict__
     assert "_observed_inputs" in UnifiedPGVBNamedLandmarkPolicy.__dict__
+
+def test_ground_landmark_uses_public_geometry_only():
+    objects = _objects()
+    objects["ground"] = dict(
+        name="Station Square", object_type="Ground",
+        contour=[[40, 40], [70, 40], [70, 70], [40, 70]],
+    )
+    spec = parse_unified_instruction("Navigate to Station Square.", "toy", objects)
+    assert spec["approved_for_inference"]
+    assert spec["landmark"]["type"] == "Other"
+    assert not spec["landmark"]["visual_supported"]
+    assert spec["target_GT_used"] is False
