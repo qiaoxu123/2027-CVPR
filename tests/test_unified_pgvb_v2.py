@@ -229,3 +229,25 @@ def test_shared_rgb_preprocessor_calls_exactly_one_vision_forward(monkeypatch):
     assert calls == ["vision"]
     assert output["image_features"].shape == (1, 2, 3, 1024)
     assert output["local_uv"].shape == (1, 2, 2)
+
+
+def test_zero_init_joint_geometry_visual_fusion_is_identity_then_trainable():
+    torch.manual_seed(20261104)
+    model = UnifiedPGVB(geometry=TinyGeometry()).eval()
+    inputs, observed = _inputs(), _observed()
+    base = model.forward_field(**inputs, observed=observed)
+    model.joint_ready = True
+    joint = model.forward_field(**inputs, observed=observed)
+    torch.testing.assert_close(
+        joint["field"].belief_logits, base["field"].belief_logits,
+        rtol=0, atol=0,
+    )
+    torch.testing.assert_close(
+        joint["field"].candidate_context,
+        base["field"].candidate_context,
+        rtol=0, atol=0,
+    )
+    loss = joint["field"].belief_logits.square().sum()
+    loss.backward()
+    assert model.joint_logits[-1].weight.grad is not None
+    assert torch.isfinite(model.joint_logits[-1].weight.grad).all()
