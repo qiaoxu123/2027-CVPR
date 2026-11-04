@@ -160,3 +160,72 @@ def test_v2_builder_preserves_exact_stage1_geometry_weights(tmp_path):
     )
     with pytest.raises(FileExistsError):
         build_unified_checkpoint(stage1_path, pgvb_path, output)
+
+
+def test_shared_rgb_preprocessor_calls_exactly_one_vision_forward(monkeypatch):
+    """The 3 local scales must pool ONE patch map, not run vision 3 times."""
+    import numpy as np
+    from graphnav import pgvb_observation as obs
+
+    calls = []
+
+    class FakeBatch(dict):
+        def to(self, device):
+            return self
+
+    class Vision:
+        head = object()
+        def __call__(self, **kwargs):
+            calls.append("vision")
+            return SimpleNamespace(
+                last_hidden_state=torch.ones(1, 576, 1024),
+            )
+
+    vision = Vision()
+    native = SimpleNamespace(
+        processor=lambda **kwargs: FakeBatch(),
+        model=SimpleNamespace(vision_model=vision),
+        dimension=1024,
+        texts=lambda words: torch.ones(1, 1024),
+    )
+    monkeypatch.setattr(
+        obs, "local_landmark_anchor",
+        lambda *_: dict(pixel_usable=True, positive_patches=2),
+    )
+    monkeypatch.setattr(
+        obs, "native_dense_regions", lambda _: {},
+    )
+    monkeypatch.setattr(
+        obs, "sparse_view",
+        lambda _: dict(
+            valid=np.ones(2, dtype=bool),
+            quality=np.ones((2, 3)),
+            world=np.array([[15., 10.], [16., 11.]], dtype=np.float32),
+            masks=np.ones((2, 3, 576), dtype=bool),
+        ),
+    )
+    monkeypatch.setattr(
+        obs, "masked_native_pool",
+        lambda head, patches, masks: torch.ones(len(masks), 1024),
+    )
+    monkeypatch.setattr(
+        obs, "local_anchor_tokens",
+        lambda *args: np.ones((16, 4), np.float32),
+    )
+    output, status = obs.encode_landmark_observation(
+        observation=dict(
+            bgr=np.zeros((384, 384, 3), np.uint8),
+            footprint_world=np.zeros((4, 2), np.float32),
+        ),
+        landmark=dict(
+            name="Alpha Hall", typ="Building",
+            contours=[[[0, 0], [4, 0], [4, 4], [0, 4]]],
+        ),
+        record=dict(world_bounds=[0, 0, 100, 100]),
+        native=native,
+        device=torch.device("cpu"),
+    )
+    assert status == "available"
+    assert calls == ["vision"]
+    assert output["image_features"].shape == (1, 2, 3, 1024)
+    assert output["local_uv"].shape == (1, 2, 2)
