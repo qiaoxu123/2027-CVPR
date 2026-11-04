@@ -27,3 +27,23 @@ jobs:
             --grid-size 4 --max-landmarks 3 --top-k 3 --hidden 32 \
             --text-dim 16 --waypoints 3 --batch-size 2 \
             --output runs/ci/smoke.pt
+
+  unified-language-tests:
+    name: UnifiedPGVB language and visual routing (CPU)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+      - name: Install CPU runtime
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e '.[dev,data]' pyyaml
+      - name: Test unified language and PGVB interfaces
+        run: |
+          pytest -q tests/test_unified_instruction.py \
+                    tests/test_unified_pgvb.py \
+                    tests/test_pgvb_navigation_runtime.py
