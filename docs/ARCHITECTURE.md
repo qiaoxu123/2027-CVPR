@@ -1,3 +1,5 @@
+> **历史架构文档（GraphNav-V1）**：以下内容用于原方案复现，不是当前UnifiedPGVB-v2的实际结构。当前主方案请看 [V2架构说明](../reports/unified_pgvb/README_zh.md) 与 [GPU测试计划](UNIFIED_PGVB_V2_TEST_PLAN_zh.md)。V1完整版本保留在 `archive/graphnav-v1-pre-unified-20261104`。
+
 # GraphNav 技术设计：图主导的独立 CityNav 语言导航
 
 ## 1. 目标
