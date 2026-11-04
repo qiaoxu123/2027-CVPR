@@ -10,11 +10,16 @@ from torch.nn import functional as F
 
 from .direction_belief import DirectionBelief
 from .polygon_guided_visual import PolygonGuidedVisualBelief
+from .full_localization import GoalField
+from .world_likelihood_evidence import world_evidence_logits
+from .stage1 import preserved_proposal_order
 
 
 class UnifiedPGVB(nn.Module):
-    def __init__(self, dimension=1024, hidden=64, heads=4):
+    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None):
         super().__init__()
+        self.geometry = geometry
+        self._geometry_cache = None
         self.pgvb = PolygonGuidedVisualBelief(dimension, hidden, heads)
         self.direction = DirectionBelief()
         self.target_text = nn.Linear(dimension, hidden)
@@ -24,6 +29,125 @@ class UnifiedPGVB(nn.Module):
         self.target_gain = nn.Parameter(torch.zeros(()))
         self.direction_ready = False
         self.target_ready = False
+
+    def reset_episode(self):
+        """Never reuse cached map/word geometry across different episodes."""
+        self._geometry_cache = None
+
+    def _geometry_field(self, static_inputs, tokens, token_mask, node_emb):
+        if self.geometry is None:
+            raise RuntimeError("UnifiedPGVB requires its internal geometry module")
+        cacheable = (
+            not self.training
+            and not any(p.requires_grad for p in self.geometry.parameters())
+        )
+        if cacheable and self._geometry_cache is not None:
+            return self._geometry_cache
+        base = self.geometry(
+            static_inputs, variant="geometry", tokens=tokens,
+            token_mask=token_mask, node_emb=node_emb,
+        )
+        if cacheable:
+            self._geometry_cache = base
+        return base
+
+    def forward_field(
+        self, *, static_inputs, tokens, token_mask, node_emb,
+        observed=None, bound=0.5,
+    ):
+        """ONE integrated geometry + PGVB field generator.
+
+        Static A3 geometry is an internal submodule; the PGVB score and its
+        rasterization are applied in this very module, not in a second policy.
+        Returns the exact GoalField contract expected by frozen Trajectory/Stop.
+        For frozen geometry, a per-episode cached field saves repeated BERT/GAT
+        work; trainable geometry always runs without a detached cache.
+        """
+        if not 0 < bound <= 1:
+            raise ValueError("Bounded visual evidence is required")
+        base = self._geometry_field(
+            static_inputs, tokens, token_mask, node_emb,
+        )
+        empty_audit = dict(
+            active=False, covered_cells=0, max_abs_delta=0.,
+            changed_top1=False,
+        )
+        if observed is None:
+            return dict(
+                field=base, geometry_field=base,
+                landmark_scores=None, evidence=None, audit=empty_audit,
+            )
+        required = {
+            "local_uv", "image_features", "name_text", "type_text",
+            "polygon_tokens", "valid",
+        }
+        if set(observed) != required:
+            raise ValueError("Observed visual input keys do not match UnifiedPGVB")
+        uv, valid = observed["local_uv"], observed["valid"]
+        scores = self.pgvb(
+            image_features=observed["image_features"],
+            name_text=observed["name_text"],
+            type_text=observed["type_text"],
+            polygon_tokens=observed["polygon_tokens"],
+            valid=valid,
+        ).float()
+        if scores.shape != valid.shape or uv.shape != (*scores.shape, 2):
+            raise ValueError("Observed world projection does not match patch scores")
+        evidence = (uv, scores, valid)
+        if not valid.any() or scores[valid].float().std(unbiased=False) < 1e-6:
+            return dict(
+                field=base, geometry_field=base,
+                landmark_scores=scores, evidence=evidence, audit=empty_audit,
+            )
+        if base.dense_context is None:
+            raise ValueError("Unified geometry must emit dense candidate context")
+        zeros = torch.zeros_like(base.belief_logits, dtype=torch.float32)
+        centered = scores.clone()
+        for i in range(len(scores)):
+            if valid[i].any():
+                centered[i] -= centered[i, valid[i]].mean()
+        neutral = zeros.log_softmax(-1)
+        visual = world_evidence_logits(
+            zeros, uv, centered, valid,
+        ) - neutral
+        coverage = world_evidence_logits(
+            zeros, uv, torch.ones_like(centered), valid,
+        ) - neutral
+        covered = coverage > 0.5
+        delta = bound * torch.tanh(visual / 5.) * covered
+        if not covered.any() or delta.abs().max() <= 1e-8:
+            return dict(
+                field=base, geometry_field=base,
+                landmark_scores=scores, evidence=evidence, audit=empty_audit,
+            )
+        logits = base.belief_logits.float() + delta
+        ids = preserved_proposal_order(logits, base.candidate_ids)
+        dense = base.dense_context
+        xy = static_inputs["grid_xy"].gather(
+            1, ids[..., None].expand(-1, -1, 2),
+        )
+        context = dense.gather(
+            1, ids[..., None].expand(-1, -1, dense.shape[-1]),
+        )
+        field = GoalField(
+            belief_logits=logits,
+            candidate_ids=ids,
+            candidate_xy=xy,
+            candidate_context=context,
+            dense_context=dense,
+            visual_coverage=covered.float(),
+        )
+        return dict(
+            field=field, geometry_field=base,
+            landmark_scores=scores, evidence=evidence,
+            audit=dict(
+                active=True, covered_cells=int(covered.sum()),
+                max_abs_delta=float(delta.abs().max().detach()),
+                changed_top1=bool(
+                    (ids[:, 0] != base.candidate_ids[:, 0]).any()
+                ),
+            ),
+        )
 
     def forward_structured(self, instruction, **encoded_inputs):
         """Take the validated language adapter output without a second network.
@@ -36,6 +160,8 @@ class UnifiedPGVB(nn.Module):
                 or instruction.get("target_GT_used") is not False
                 or instruction.get("relations")):
             raise ValueError("Only validated named-landmark tasks are supported")
+        if "static_inputs" in encoded_inputs:
+            return self.forward_field(**encoded_inputs)
         return self(**encoded_inputs)
 
     def forward(
