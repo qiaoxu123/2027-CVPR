@@ -103,7 +103,7 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
         return self.pgvb(**kwargs)
 
     @torch.no_grad()
-    def _observed_scores(self, observation):
+    def _observed_inputs(self, observation):
         landmark = self._landmark
         if landmark is None:
             return None, "unsupported_or_unresolved_name"
@@ -138,12 +138,28 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
             name_text = self.native.texts([landmark["name"]]).detach()
             type_text = self.native.texts([landmark["typ"]]).detach()
             polygon = local_anchor_tokens(landmark["contours"], observation["footprint_world"])
-            scores = self._pgvb_forward(image_features=features[None], name_text=name_text,
-                               type_text=type_text,
-                               polygon_tokens=torch.from_numpy(polygon)[None].to(self.device),
-                               valid=torch.from_numpy(valid)[None].to(self.device))
-        return (torch.from_numpy(local_uv)[None].to(self.device),
-                scores.float(), torch.from_numpy(valid)[None].to(self.device)), "available"
+        return (dict(
+            local_uv=torch.from_numpy(local_uv)[None].to(self.device),
+            image_features=features[None],
+            name_text=name_text,
+            type_text=type_text,
+            polygon_tokens=torch.from_numpy(polygon)[None].to(self.device),
+            valid=torch.from_numpy(valid)[None].to(self.device),
+        ), "available")
+
+    @torch.no_grad()
+    def _observed_scores(self, observation):
+        """Historical PGVB scorer built from ONE shared observation extractor."""
+        inputs, reason = self._observed_inputs(observation)
+        if inputs is None:
+            return None, reason
+        model_inputs = {k: v for k, v in inputs.items() if k != "local_uv"}
+        with torch.autocast(
+            "cuda", dtype=torch.bfloat16,
+            enabled=self.device.type == "cuda",
+        ):
+            scores = self._pgvb_forward(**model_inputs)
+        return (inputs["local_uv"], scores.float(), inputs["valid"]), reason
 
     def _timed_scores(self, observation):
         if self.device.type == "cuda": torch.cuda.synchronize(self.device)
