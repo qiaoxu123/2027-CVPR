@@ -22,7 +22,8 @@ def main():
     p.add_argument('--resume',action='store_true')
     p.add_argument('--pgvb-bound',type=float,default=0.5)
     p.add_argument('--max-new-tasks',type=int)
-    p.add_argument('--methods',nargs='+',choices=['UnifiedPGVB'],default=['UnifiedPGVB'])
+    p.add_argument('--goal-task-index',type=int,help='One task from frozen64; no change to task selection')
+    p.add_argument('--methods',nargs='+',choices=['Geometry','LegacyPGVB','TrackedPGVB'],default=['TrackedPGVB'])
     a=p.parse_args()
     sys.path.insert(0,str(a.sbf_source.resolve()))
     from sbfnav.config import load_config,apply_overrides,validate_config
@@ -37,6 +38,11 @@ def main():
     selected=json.loads((a.selection/'manifest.json').read_text())
     if selected['tasks_sha256']!=file_sha256(a.selection/'tasks_public.json') or len(tasks)!=64:
         raise ValueError('Frozen64 public task set required')
+    if len(set(a.methods))!=len(a.methods):raise ValueError('Duplicate methods')
+    if a.goal_task_index is not None:
+        tasks=[task for task in tasks if task['index']==a.goal_task_index]
+        if len(tasks)!=1:raise ValueError('Requested goal index is not in frozen64')
+    expected_tasks=len(tasks)*len(a.methods)
     checkpoint_sha=file_sha256(a.checkpoint)
     unified_sha=file_sha256(a.unified_checkpoint)
     if not 0 < a.pgvb_bound <= 1:raise ValueError('PGVB bound must be in (0,1]')
@@ -49,12 +55,14 @@ def main():
     if protocol!=ClosedLoopProtocol():raise ValueError('Original controller protocol changed')
     fingerprint=dict(checkpoint_sha256=checkpoint_sha,unified_checkpoint_sha256=unified_sha,pgvb_bound=a.pgvb_bound,selection_sha256=file_sha256(a.selection/'manifest.json'),
         tasks_sha256=selected['tasks_sha256'],protocol=asdict(protocol),camera_yaw='original per-pose native yaw; no rotation override',
-        methods=['UnifiedPGVB'],goal_definition='Public named polygon union clipped to map; SR final distance<=20m, OSR ever<=20m',
+        methods=list(a.methods),goal_task_index=a.goal_task_index,
+        gate_policy='RGB evidence versus shifted patch negative control, two-frame confirmation; no distance gate',
+        goal_definition='Public named polygon union clipped to map; SR final distance<=20m, OSR ever<=20m',
         PGVB='ONE integrated geometry+visual GoalField network; controller-only downstream',
         runner_sha256=file_sha256(__file__),source_sha256={k:file_sha256(Path(k)) for k in [
             'graphnav/landmark_navigation_diagnostic.py','graphnav/stage1_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py',
             'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/pgvb_navigation_runtime.py','graphnav/full_localization.py','graphnav/candidate_geometry.py','graphnav/unified_instruction.py','graphnav/pgvb_observation.py','scripts/build_unified_pgvb_v2.py',
-            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/pgvb_closedloop_audit.py',
+            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/landmark_acquisition.py','graphnav/pgvb_closedloop_audit.py',
             'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
         public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),
         sbf_source_sha256={str(p.relative_to(a.sbf_source)):file_sha256(p) for p in sorted(a.sbf_source.rglob('*.py'))},
@@ -93,6 +101,7 @@ def main():
                 episode=PublicEpisode(task['map_name'],task['instruction'],np.asarray(task['start_pose'],float),(),(task['landmark_name'],))
                 transform=builder.transform(episode.map_name)
                 policy_runtime=runtime
+                policy_runtime.mode={'Geometry':'geometry','LegacyPGVB':'legacy','TrackedPGVB':'tracked'}[method]
                 policy_runtime.set_episode(episode,transform,catalog)
                 region=public_region(task['public_polygons'],task['world_bounds'])
                 from graphnav.pgvb_closedloop_audit import DecisionRecorder
@@ -104,7 +113,7 @@ def main():
                 goal_distance=shapely.distance(shapely.points(goals),region)
                 for step,(d,gne) in enumerate(zip(diagnostics,goal_distance)):
                     d['public_landmark_goal_distance_m']=float(gne)
-                    d['pgvb_enabled']=True
+                    d['pgvb_enabled']=(method!='Geometry')
                 row=dict(index=task['index'],task_id=task['task_id'],method=method,map_name=task['map_name'],
                     category=task['category'],public_types=task['public_types'],landmark_name=task['landmark_name'],
                     instruction=task['instruction'],poses=poses.tolist(),termination=termination,metrics=metrics,
@@ -113,7 +122,7 @@ def main():
                         ever_correct=bool((goal_distance<=20).any()),
                         lost_correct=int(((goal_distance[:-1]<=20)&(goal_distance[1:]>20)).sum())))
                 stream.write(json.dumps(row)+'\n');stream.flush();os.fsync(stream.fileno());rows.append(row);completed.add((method,task['index']))
-                print(json.dumps(dict(method=method,index=task['index'],completed=len(rows),total=64,SR=metrics['SR'],NE=metrics['NE'],
+                print(json.dumps(dict(method=method,index=task['index'],completed=len(rows),total=expected_tasks,SR=metrics['SR'],NE=metrics['NE'],
                     termination=termination,seconds=time.perf_counter()-started)),flush=True)
             new_tasks+=1
     summary={}
@@ -123,7 +132,7 @@ def main():
             summary[method]=dict(episodes=len(group),successes=sum(r['metrics']['SR'] for r in group),
                 **{k:float(np.mean([r['metrics'][k] for r in group])) for k in ('SR','OSR','NE')},
                 terminations=dict(Counter(r['termination'] for r in group)))
-    atomic_json(dict(complete=len(rows)==64,summary=summary,unified_checkpoint_sha256_after=file_sha256(a.unified_checkpoint),seconds_current_session=time.perf_counter()-started,
+    atomic_json(dict(complete=len(rows)==expected_tasks,expected_tasks=expected_tasks,summary=summary,unified_checkpoint_sha256_after=file_sha256(a.unified_checkpoint),seconds_current_session=time.perf_counter()-started,
         peak_gpu_allocated_gib=torch.cuda.max_memory_allocated()/2**30,
         checkpoint_sha256_after=file_sha256(a.checkpoint)),a.output/'metrics.json')
     if file_sha256(a.checkpoint)!=checkpoint_sha or file_sha256(a.unified_checkpoint)!=unified_sha:raise ValueError('Checkpoint unexpectedly changed')
