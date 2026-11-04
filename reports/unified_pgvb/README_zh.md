@@ -11,7 +11,7 @@
 - UnifiedPGVB.target_text/target_score：预留目标外观Head，尚未训练，必须拒绝推理。
 - Trajectory/Stop：只保留原GraphNav冻结的轨迹与停止控制头，不再产生或修改GoalField。
 
-原Stage1模型壳只用于严格加载已有权重；之后从中迁走Geometry、保留Controller，并释放其余模块。新运行时没有单独A3前向、Matcher、History或外部PGVB融合。
+V2运行时**完全不实例化旧GraphNavStage1网络，也不继承原PGVB策略类**：直接由统一Checkpoint构建UnifiedPGVB（含A3 Geometry），从原Stage1文件只提取冻结Trajectory/Stop控制头和协议指纹。共享RGB预处理是无额外可训练参数的工具函数，不是第二套视觉网络。新运行时没有单独A3前向、Matcher、History或外部PGVB融合。
 
 ## 速度与正确性约束
 
