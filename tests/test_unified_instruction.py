@@ -147,18 +147,10 @@ def test_runtime_refuses_target_reference_confusion_before_geometry(monkeypatch)
         policy.set_episode(wrong, None, catalog)
 
 
-def test_runtime_dispatches_unified_pgvb_not_legacy_scorer():
-    policy = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
-    policy.instruction_spec = parse_unified_instruction(
-        "Navigate to The Food Warehouse.", "toy", _objects(),
-    )
-    seen = []
-    policy.unified = SimpleNamespace(
-        forward_structured=lambda spec, **kw: (
-            seen.append((spec["intent"], kw["x"]))
-            or {"landmark_scores": torch.tensor([[3.]])}
-        )
-    )
-    scored = policy._pgvb_forward(x=7)
-    assert seen == [("navigate_to_landmark", 7)]
-    torch.testing.assert_close(scored, torch.tensor([[3.]]))
+def test_runtime_has_no_legacy_stage1_or_parallel_pgvb_inheritance():
+    from graphnav.stage1_runtime import GraphNavStage1Policy
+    from graphnav.pgvb_navigation_runtime import PGVBNamedLandmarkPolicy
+    assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, GraphNavStage1Policy)
+    assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, PGVBNamedLandmarkPolicy)
+    assert "_pgvb_forward" not in UnifiedPGVBNamedLandmarkPolicy.__dict__
+    assert "_observed_inputs" in UnifiedPGVBNamedLandmarkPolicy.__dict__
