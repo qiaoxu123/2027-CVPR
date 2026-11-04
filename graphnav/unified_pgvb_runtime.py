@@ -21,6 +21,7 @@ from .checkpointing import file_sha256
 from .full_experiment import _batch_inputs, new_model
 from .landmark_alias import canonical_name
 from .landmark_acquisition import LandmarkAcquisition
+from .landmark_neighborhood import nearby_public_geometry
 from .landmark_region_supervision import named_union
 from .landmark_region_supervision import public_type
 from .local_landmark_anchor import named_public_polygons
@@ -126,6 +127,7 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.acquisition = LandmarkAcquisition()
         self._last_observation_metadata = None
         self._public_region = None
+        self._neighbor_geometry = []
         self.record = None
         self.inputs = None
         self.instruction_spec = None
@@ -173,6 +175,10 @@ class UnifiedPGVBNamedLandmarkPolicy:
             else None
         )
         self._public_region = named_union(matched["contours"])
+        self._neighbor_geometry = nearby_public_geometry(
+            public_objects, self._public_region, matched["ids"],
+            radius_m=100., limit=12,
+        )
         self.record = public_static_record(
             episode, transform, catalog,
             max_landmarks=self.args.max_landmarks,
@@ -287,6 +293,18 @@ class UnifiedPGVBNamedLandmarkPolicy:
                 metadata.get("source_support") if metadata else None
             ),
             projection_is_not_identity_proof=True,
+            # Diagnostic-only public geometry. No neighboring object alters
+            # the named-goal policy, gate or Stop.
+            nearby_objects_after_arrival=(
+                getattr(self, "_neighbor_geometry", [])
+                if public_distance is not None and public_distance <= 20.
+                else []
+            ),
+            nearby_object_count=(
+                len(getattr(self, "_neighbor_geometry", []))
+                if public_distance is not None and public_distance <= 20.
+                else 0
+            ),
         )
         prediction.diagnostics.update(
             positioning_mode=mode,
