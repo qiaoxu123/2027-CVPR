@@ -23,7 +23,7 @@ def main():
     p.add_argument('--pgvb-bound',type=float,default=0.5)
     p.add_argument('--max-new-tasks',type=int)
     p.add_argument('--goal-task-index',type=int,help='One task from frozen64; no change to task selection')
-    p.add_argument('--methods',nargs='+',choices=['Geometry','LegacyPGVB','TrackedPGVB'],default=['TrackedPGVB'])
+    p.add_argument('--methods',nargs='+',choices=['Geometry','LegacyPGVB','TrackedPGVB','StableTrackedPGVB'],default=['TrackedPGVB'])
     a=p.parse_args()
     sys.path.insert(0,str(a.sbf_source.resolve()))
     from sbfnav.config import load_config,apply_overrides,validate_config
@@ -56,13 +56,13 @@ def main():
     fingerprint=dict(checkpoint_sha256=checkpoint_sha,unified_checkpoint_sha256=unified_sha,pgvb_bound=a.pgvb_bound,selection_sha256=file_sha256(a.selection/'manifest.json'),
         tasks_sha256=selected['tasks_sha256'],protocol=asdict(protocol),camera_yaw='original per-pose native yaw; no rotation override',
         methods=list(a.methods),goal_task_index=a.goal_task_index,
-        gate_policy='RGB evidence versus shifted patch negative control, two-frame confirmation; no distance gate',
+        gate_policy='RGB patch-negative control and consecutive confirmation; stable controller goal requires repeated observed advantage when enabled',
         goal_definition='Public named polygon union clipped to map; SR final distance<=20m, OSR ever<=20m',
         PGVB='ONE integrated geometry+visual GoalField network; controller-only downstream',
         runner_sha256=file_sha256(__file__),source_sha256={k:file_sha256(Path(k)) for k in [
             'graphnav/landmark_navigation_diagnostic.py','graphnav/stage1_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py',
             'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/pgvb_navigation_runtime.py','graphnav/full_localization.py','graphnav/candidate_geometry.py','graphnav/unified_instruction.py','graphnav/pgvb_observation.py','scripts/build_unified_pgvb_v2.py',
-            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/landmark_acquisition.py','graphnav/landmark_neighborhood.py','graphnav/pgvb_closedloop_audit.py',
+            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/landmark_acquisition.py','graphnav/stable_navigation_goal.py','graphnav/landmark_neighborhood.py','graphnav/pgvb_closedloop_audit.py',
             'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
         public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),
         sbf_source_sha256={str(p.relative_to(a.sbf_source)):file_sha256(p) for p in sorted(a.sbf_source.rglob('*.py'))},
@@ -101,7 +101,7 @@ def main():
                 episode=PublicEpisode(task['map_name'],task['instruction'],np.asarray(task['start_pose'],float),(),(task['landmark_name'],))
                 transform=builder.transform(episode.map_name)
                 policy_runtime=runtime
-                policy_runtime.mode={'Geometry':'geometry','LegacyPGVB':'legacy','TrackedPGVB':'tracked'}[method]
+                policy_runtime.mode={'Geometry':'geometry','LegacyPGVB':'legacy','TrackedPGVB':'tracked','StableTrackedPGVB':'tracked-stable'}[method]
                 policy_runtime.set_episode(episode,transform,catalog)
                 region=public_region(task['public_polygons'],task['world_bounds'])
                 from graphnav.pgvb_closedloop_audit import DecisionRecorder
@@ -131,6 +131,19 @@ def main():
                     instruction=task['instruction'],poses=poses.tolist(),termination=termination,metrics=metrics,
                     decision_seconds=timings,step_diagnostics=diagnostics,
                     tracking_analysis=tracking_analysis,
+                    stable_goal_analysis=dict(
+                        holding_steps=sum(
+                            d.get('stable_navigation_goal') is not None
+                            and d['stable_navigation_goal'].get('visual_top1_id')
+                                != d['stable_navigation_goal'].get('held_goal_id')
+                            for d in diagnostics
+                        ),
+                        replan_steps=[
+                            i for i,d in enumerate(diagnostics)
+                            if (d.get('stable_navigation_goal') or {}).get('event')=='replanned'
+                        ],
+                        stop_guard_unchanged=True,
+                    ),
                     goal_analysis=dict(initial_ne_m=float(goal_distance[0]),final_ne_m=float(goal_distance[-1]),
                         ever_correct=bool((goal_distance<=20).any()),
                         lost_correct=int(((goal_distance[:-1]<=20)&(goal_distance[1:]>20)).sum())))
