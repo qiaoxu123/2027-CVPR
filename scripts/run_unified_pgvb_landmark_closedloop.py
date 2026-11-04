@@ -23,7 +23,7 @@ def main():
     p.add_argument('--pgvb-bound',type=float,default=0.5)
     p.add_argument('--max-new-tasks',type=int)
     p.add_argument('--goal-task-index',type=int,help='One task from frozen64; no change to task selection')
-    p.add_argument('--methods',nargs='+',choices=['Geometry','LegacyPGVB','TrackedPGVB','StableTrackedPGVB'],default=['TrackedPGVB'])
+    p.add_argument('--methods',nargs='+',choices=['Geometry','LegacyPGVB','TrackedPGVB','StableTrackedPGVB'],default=['StableTrackedPGVB'])
     a=p.parse_args()
     sys.path.insert(0,str(a.sbf_source.resolve()))
     from sbfnav.config import load_config,apply_overrides,validate_config
