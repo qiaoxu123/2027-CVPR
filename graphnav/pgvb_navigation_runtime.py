@@ -98,6 +98,10 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
             self._landmark = dict(name=name, typ=typ, contours=matched["contours"])
         self.pgvb_calls = 0
 
+    def _pgvb_forward(self, **kwargs):
+        """Historical E4 scorer; unified policy overrides this scoring hook."""
+        return self.pgvb(**kwargs)
+
     @torch.no_grad()
     def _observed_scores(self, observation):
         landmark = self._landmark
@@ -134,7 +138,7 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
             name_text = self.native.texts([landmark["name"]]).detach()
             type_text = self.native.texts([landmark["typ"]]).detach()
             polygon = local_anchor_tokens(landmark["contours"], observation["footprint_world"])
-            scores = self.pgvb(image_features=features[None], name_text=name_text,
+            scores = self._pgvb_forward(image_features=features[None], name_text=name_text,
                                type_text=type_text,
                                polygon_tokens=torch.from_numpy(polygon)[None].to(self.device),
                                valid=torch.from_numpy(valid)[None].to(self.device))
