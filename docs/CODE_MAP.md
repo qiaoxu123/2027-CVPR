@@ -2,7 +2,20 @@
 
 本项目保留历史实验以支持复现，**推荐仅从核心模块和正式入口开始阅读**。其余实验脚本请按需查看 [脚本索引](../scripts/README.md)。
 
-## 研究主线
+## 当前主方案：UnifiedPGVB-v2
+
+| 功能 | 核心源码 | 当前入口 |
+|:--|:--|:--|
+| 单定位网络（A3几何+PGVB视觉+融合） | `graphnav/unified_pgvb.py` | `UnifiedPGVB.forward_field` |
+| GT-free结构化语言 | `graphnav/unified_instruction.py` | `parse_unified_instruction` |
+| 单次RGB编码/公开Polygon投影 | `graphnav/pgvb_observation.py` | `encode_landmark_observation` |
+| V2权重迁移 | `scripts/build_unified_pgvb_v2.py` | 仅权重打包，不是训练 |
+| 具名地标闭环 | `graphnav/unified_pgvb_runtime.py` | `scripts/run_unified_pgvb_landmark_closedloop.py` |
+| 冻结动作与Stop | `graphnav/trajectory_policy.py` | `CandidateTrajectoryStop` |
+
+测试前请参阅 [V2测试计划](UNIFIED_PGVB_V2_TEST_PLAN_zh.md)。原GraphNav-V1完整快照位于 `archive/graphnav-v1-pre-unified-20261104`。
+
+## 历史GraphNav-V1研究主线
 
 | 功能 | 核心源码 | 入口 |
 |:--|:--|:--|
