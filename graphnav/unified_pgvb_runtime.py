@@ -1,24 +1,24 @@
-"""Single observed PGVB visual path with frozen A3 geometry and controller.
+"""UnifiedPGVB owns geometry and the sole RGB visual branch.
 
-Unlike historical E4, this NEVER executes GraphNavStage1.forward(), its
-MultiScaleAppearanceMatcher, RGB residual or visual-history branch. The sole
-per-frame image encoding is the SigLIP2 call in PGVB's observed patch scorer.
-Historical checkpoints remain readable for A3 and Trajectory/Stop.
+The old GraphNavStage1 shell exists ONLY for strict legacy weight loading, then
+is removed. No external A3.forward, Matcher, visual residual or visual-history
+network remains in the live policy. Only the frozen Trajectory/Stop head is
+retained separately as the controller.
 """
 import json
+import time
 
 import torch
 
 from .a3_runtime import A3TrajectoryPolicy
 from .candidate_geometry import FullCandidateDataset, collate_full
 from .full_experiment import _batch_inputs
-from .pgvb_navigation_runtime import (
-    PGVBNamedLandmarkPolicy, bounded_pgvb_field,
-)
+from .pgvb_navigation_runtime import PGVBNamedLandmarkPolicy
 from .stage1_runtime import GraphNavStage1Policy
 from .unified_pgvb import UnifiedPGVB
 from .unified_instruction import parse_unified_instruction
 from .landmark_alias import canonical_name
+from .checkpointing import file_sha256
 
 
 class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
@@ -33,32 +33,34 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
         GraphNavStage1Policy.__init__(
             self, checkpoint, directory, device=device,
         )
-        # Strictly load the historical checkpoint first, then remove its
-        # dormant legacy RGB heads from THIS new policy instance. The source
-        # checkpoint and historical E2/E4 runners remain untouched.
-        del self.model.matcher
-        del self.model.history
-        del self.model.visual_gain
-        del self.model.a3.vision_proj
-        del self.model.a3.visual_score
-        del self.visual
-        self.use_history = False
         bundle = torch.load(
             unified_checkpoint, map_location="cpu", weights_only=True,
         )
-        if bundle.get("format") != "unified-pgvb-v1":
-            raise ValueError("Expected unified-pgvb-v1 checkpoint")
+        if bundle.get("format") != "unified-pgvb-v2":
+            raise ValueError("Expected integrated-geometry unified-pgvb-v2 checkpoint")
         config = bundle["config"]
+        if config.get("source", {}).get("stage1_sha256") != file_sha256(checkpoint):
+            raise ValueError("Integrated geometry and controller checkpoint mismatch")
         if config.get("target_ready"):
             raise ValueError("Named-landmark pilot cannot validate target head")
-        self.unified = UnifiedPGVB().to(self.device)
+        if config.get("jointly_trained"):
+            raise ValueError("Unverified jointly-trained model must not use pilot loader")
+        geometry = self.model.a3
+        # Legacy A3 visual layers are inactive in geometry mode; remove them
+        # from the *internal* unified geometry model to avoid a second RGB head.
+        del geometry.vision_proj
+        del geometry.visual_score
+        self.unified = UnifiedPGVB(geometry=geometry).to(self.device)
         self.unified.load_state_dict(bundle["model"], strict=True)
         self.unified.direction_ready = bool(config.get("direction_ready", False))
         self.unified.target_ready = False
         self.unified.eval().requires_grad_(False)
-        # Historical observation routine calls precisely this shared visual
-        # scorer. No additional copy of PGVB or SigLIP2 is allocated.
-        self.pgvb = self.unified.pgvb
+        # Retain ONLY the pretrained controller, never a second localizer.
+        self.head = self.model.trajectory
+        self.head.eval().requires_grad_(False)
+        del self.model
+        del self.visual
+        self.use_history = False
         self.bound = float(bound)
         if not 0 < self.bound <= 1:
             raise ValueError("PGVB correction bound must be in (0,1]")
@@ -90,6 +92,7 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
         if self._landmark is None:
             raise ValueError("No valid public Polygon for named goal")
         self.instruction_spec = spec
+        self.unified.reset_episode()
 
     def _pgvb_forward(self, **kwargs):
         """One shared PGVB vision network, driven by parsed instruction."""
@@ -111,17 +114,11 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
             prior_sigma_m=self.args.prior_sigma_m,
             rule_sigma_m=self.args.rule_sigma_m,
         )
-        self.inputs, tokens, mask, names = _batch_inputs(
+        self.inputs, self.tokens, self.mask, self.names = _batch_inputs(
             collate_full([ds[0]]), self.bert, self.device, "geometry",
         )
-        with torch.autocast(
-            "cuda", dtype=torch.bfloat16,
-            enabled=self.device.type == "cuda",
-        ):
-            self.base = self.model.a3(
-                self.inputs, variant="geometry",
-                tokens=tokens, token_mask=mask, node_emb=names,
-            )
+        # No independent geometry forward. UnifiedPGVB owns the A3 weights
+        # and computes/caches the geometry field within forward_field().
         self.bounds = torch.tensor(
             self.record["world_bounds"],
             device=self.device, dtype=torch.float32,
@@ -137,25 +134,35 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
         if instruction != self.record["instruction"]:
             raise ValueError("Instruction changed within episode")
         self._initialize_geometry()
-        evidence, reason = self._timed_scores(state.current_observation)
-        field = self.base
-        audit = dict(
-            active=False, covered_cells=0, max_abs_delta=0.,
-            changed_top1=False,
-        )
-        if evidence is not None:
-            local_uv, scores, valid = evidence
-            field, audit = bounded_pgvb_field(
-                self.base, self.inputs["grid_xy"],
-                local_uv, scores, valid, bound=self.bound,
+        if self.device.type == "cuda":
+            torch.cuda.synchronize(self.device)
+        started = time.perf_counter()
+        observed, reason = self._observed_inputs(state.current_observation)
+        with torch.autocast(
+            "cuda", dtype=torch.bfloat16,
+            enabled=self.device.type == "cuda",
+        ):
+            result = self.unified.forward_structured(
+                self.instruction_spec,
+                static_inputs=self.inputs,
+                tokens=self.tokens,
+                token_mask=self.mask,
+                node_emb=self.names,
+                observed=observed,
+                bound=self.bound,
             )
+        if self.device.type == "cuda":
+            torch.cuda.synchronize(self.device)
+        self.pgvb_seconds = time.perf_counter() - started
+        base, field = result["geometry_field"], result["field"]
+        evidence, audit = result["evidence"], result["audit"]
         if self.audit_callback is not None:
-            self.audit_callback(self.base, field, evidence)
+            self.audit_callback(base, field, evidence)
         prediction = A3TrajectoryPolicy.predict_field(self, state, field)
         self.pgvb_calls += int(audit["active"])
-        language = getattr(self, "instruction_spec", {})
+        language = self.instruction_spec
         prediction.diagnostics.update(
-            policy="UnifiedPGVB single visual path + frozen A3/control",
+            policy="UnifiedPGVB-v2 integrated geometry+single RGB; frozen controller",
             pgvb_enabled=True,
             pgvb_active=audit["active"],
             pgvb_reason=reason,
@@ -165,11 +172,13 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
             pgvb_changed_top1=audit["changed_top1"],
             pgvb_active_decisions_total=self.pgvb_calls,
             old_stage1_rgb_executed=False,
-            siglip2_rgb_forward=(evidence is not None),
+            siglip2_rgb_forward=(observed is not None),
+            geometry_owner="UnifiedPGVB.geometry",
+            standalone_a3_forward=False,
             direction_head_ready=self.unified.direction_ready,
             target_head_ready=False,
-            language_parser=language.get("version", "not_initialized"),
-            language_intent=language.get("intent", "unknown"),
+            language_parser=language["version"],
+            language_intent=language["intent"],
             named_public_parts=len(
                 language.get("landmark", {}).get("public_ids", [])
             ) if language.get("landmark") else 0,
