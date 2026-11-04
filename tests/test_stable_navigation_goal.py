@@ -150,3 +150,72 @@ def test_config_requires_repeated_evidence_and_valid_margin():
         StableGoalConfig(replan_confirmations=1)
     with pytest.raises(ValueError):
         StableGoalConfig(replan_logit_margin=-1)
+
+
+def test_real_runtime_wires_stabilized_candidate_into_frozen_controller(monkeypatch):
+    from types import SimpleNamespace
+    from graphnav.a3_runtime import A3TrajectoryPolicy
+    from graphnav.unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
+
+    old, xy = _field([0, 0, 4, 2, 1, 0], [2, 3, 4])
+    visual, _ = _field([0, 0, 1, 5, 4, 0], [3, 4, 1], covered=[3, 4])
+    frames = [old, visual]
+    seen = []
+
+    class FakeUnified:
+        direction_ready = False
+
+        def forward_structured(self, spec, **kwargs):
+            model_field = frames.pop(0)
+            return {
+                "geometry_field": old,
+                "field": model_field,
+                "evidence": None,
+                "audit": dict(
+                    active=(model_field is visual), covered_cells=2,
+                    max_abs_delta=.5, changed_top1=(model_field is visual),
+                    acquisition={
+                        "state": "tracking" if model_field is visual else "geometry",
+                        "visual_gain": 2. if model_field is visual else 0.,
+                    },
+                ),
+            }
+
+    obj = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
+    obj.record = {"instruction": "Navigate to Alpha Hall."}
+    obj.mode = "tracked-stable"
+    obj.device = torch.device("cpu")
+    obj.inputs = {"grid_xy": xy}
+    obj.tokens, obj.mask, obj.names = None, None, None
+    obj.bound = .5
+    obj._initialize_geometry_inputs = lambda: None
+    obj._observed_inputs = lambda obs: (None, "synthetic_no_RGB_forward")
+    obj._last_observation_metadata = None
+    obj.stable_goal = StableNavigationGoal()
+    obj.unified = FakeUnified()
+    obj.audit_callback = lambda base, final, evidence: seen.append(
+        int(final.candidate_ids[0, 0])
+    )
+    obj.pgvb_calls, obj.pgvb_seconds = 0, 0.
+    obj.instruction_spec = {
+        "version": "unified-instruction-v1",
+        "intent": "navigate_to_landmark", "landmark": {"public_ids": ["a"]},
+    }
+    obj._public_region = None
+
+    def check_controller(self, state, field):
+        # The original frozen head receives the held Goal and fully aligned
+        # candidate coordinate/context. The stop implementation is unchanged.
+        seen.append(int(field.candidate_ids[0, 0]))
+        torch.testing.assert_close(field.candidate_xy[0, 0], xy[0, 2])
+        return SimpleNamespace(diagnostics={})
+
+    monkeypatch.setattr(A3TrajectoryPolicy, "predict_field", check_controller)
+    state = SimpleNamespace(current_observation={}, pose=[0., 0., 30.])
+    first = obj.predict(state, obj.record["instruction"])
+    second = obj.predict(state, obj.record["instruction"])
+    assert seen == [2, 2, 2, 2]
+    assert first.diagnostics["stable_navigation_goal"]["event"] == "initialized"
+    assert second.diagnostics["stable_navigation_goal"]["held_goal_id"] == 2
+    assert second.diagnostics["stable_navigation_goal"]["visual_top1_id"] == 3
+    assert second.diagnostics["stable_navigation_goal"]["event"] == "pending"
