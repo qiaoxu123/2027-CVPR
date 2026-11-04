@@ -1,0 +1,59 @@
+{
+  "complete": true,
+  "by_subset": {
+    "fit": {
+      "samples": 3405,
+      "eligible": 1550,
+      "eligible_names": 353,
+      "eligible_frames": 1176,
+      "type_counts": {
+        "Road": 702,
+        "Building": 839,
+        "Ground": 9
+      }
+    },
+    "dev": {
+      "samples": 197,
+      "eligible": 85,
+      "eligible_names": 21,
+      "eligible_frames": 84,
+      "type_counts": {
+        "Road": 39,
+        "Building": 46
+      }
+    },
+    "confirm": {
+      "samples": 189,
+      "eligible": 109,
+      "eligible_names": 26,
+      "eligible_frames": 108,
+      "type_counts": {
+        "Road": 72,
+        "Building": 37
+      }
+    }
+  },
+  "named_queries": 518,
+  "excluded": {
+    "duplicate_canonical_name_variants": 6,
+    "source_instruction_removed_from_associated_dataset": 340,
+    "invalid_public_polygon": 48,
+    "mixed_or_unsupported_public_type": 112
+  },
+  "used_filtered_dataset": true,
+  "dataset_manifest_sha256": "f10e45b944d208199526698be33089e4f09a98260456d9ee05473c1811711fe1",
+  "source_manifests": {
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/scoped_between_train294_features_v1/manifest.json": "bd218a1c0ebdb08a7e6709b0ecbfa51a6d57a05f80387b892be380a2bb4497b1",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/public_training_views_v1/features/manifest.json": "e85d751a27fc3c4264fcb01b284609f8289ae2e150a5c03c4682f19e2b5d5fe2"
+  },
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "samples_sha256": "4cf2113d92246d1a6aa25434442f7976b76f12304ea277273932bff4e7ee57a5",
+  "queries_sha256": "422786a8ddc38552baa1149e6fb2766d69b612a192522303741bc65df82ca4c4",
+  "labels_sha256": "35e89f8d5f04b9d8bcf247b744d9902260881aa09b241770d6c2f566c6df5037",
+  "producer_sha256": "b0c9f147b80855d04117ebdf523326f01088b7b77bb5f3560459879d5cbc55a3",
+  "camera_yaw_rad": 0.0,
+  "native_image_size": 384,
+  "original_target_coordinates_and_ids_read": false,
+  "caveat": "Public polygon projection is weak region supervision, not verified pixel identity or visibility; eligible names separated by original map partitions."
+}
