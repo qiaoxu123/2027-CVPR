@@ -8,9 +8,6 @@ import json
 from pathlib import Path
 import shutil
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import numpy as np
 from shapely.geometry import Point, Polygon
 from shapely.ops import unary_union
@@ -76,6 +73,10 @@ def draw_polygon(ax, region, **kwargs):
 
 
 def main():
+    # Plotting is optional for read-only metric tests and headless CPU CI.
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--run', type=Path, required=True)
     p.add_argument('--selection', type=Path, required=True)
