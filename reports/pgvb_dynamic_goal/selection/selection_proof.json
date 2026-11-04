@@ -1,0 +1,85 @@
+{
+  "develop": {
+    "tasks": 24,
+    "source_split": "TRAIN",
+    "subset": "develop",
+    "categories": {
+      "Building": 12,
+      "Road": 12
+    },
+    "maps": [
+      "cambridge_block_12",
+      "cambridge_block_17",
+      "cambridge_block_19",
+      "cambridge_block_25",
+      "cambridge_block_33",
+      "cambridge_block_6"
+    ],
+    "tasks_sha256": "a6d838ba5ef20bcca56acc45e6977d1b62c1674be17f98059b465c63116743c8",
+    "prior64_and_PGVB_cache_names_excluded": true,
+    "selection": "Deterministic name/map balanced; real official TRAIN start only; no target GT or outcomes; public-region initial outside20m"
+  },
+  "confirm": {
+    "tasks": 48,
+    "source_split": "TRAIN",
+    "subset": "confirm",
+    "categories": {
+      "Building": 24,
+      "Road": 24
+    },
+    "maps": [
+      "birmingham_block_10",
+      "birmingham_block_3",
+      "birmingham_block_4",
+      "birmingham_block_7",
+      "cambridge_block_13",
+      "cambridge_block_18",
+      "cambridge_block_20",
+      "cambridge_block_21",
+      "cambridge_block_23",
+      "cambridge_block_28",
+      "cambridge_block_4",
+      "cambridge_block_7",
+      "cambridge_block_9"
+    ],
+    "tasks_sha256": "04d3c2c08eaa7da35fbd367d87f4ce5636a1be660a66f0ff22ed07089ab6bc93",
+    "prior64_and_PGVB_cache_names_excluded": true,
+    "selection": "Deterministic name/map balanced; real official TRAIN start only; no target GT or outcomes; public-region initial outside20m"
+  },
+  "map_assignment": {
+    "cambridge_block_25": "develop",
+    "cambridge_block_19": "develop",
+    "cambridge_block_12": "develop",
+    "cambridge_block_33": "develop",
+    "cambridge_block_6": "develop",
+    "cambridge_block_17": "develop",
+    "cambridge_block_9": "confirm",
+    "cambridge_block_18": "confirm",
+    "cambridge_block_28": "confirm",
+    "birmingham_block_10": "confirm",
+    "cambridge_block_4": "confirm",
+    "cambridge_block_21": "confirm",
+    "cambridge_block_7": "confirm",
+    "birmingham_block_4": "confirm",
+    "cambridge_block_20": "confirm",
+    "birmingham_block_3": "confirm",
+    "cambridge_block_23": "confirm",
+    "birmingham_block_7": "confirm",
+    "cambridge_block_13": "confirm"
+  },
+  "input_sha256": {
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/original_citynav/citynav_train_seen.json": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245",
+    "reports/pgvb/language/structured_train.json.gz": "d0bfd09d485d1738a5ca0d29d9d7125687729a05e213f657ee25557859c1edea",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "reports/pgvb_closedloop64/tasks_public.json": "e87557abc208849e610351e0dea263b5c2f6c434ddf141d623cbeaf92ef3dd63",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/pgvb_local_anchor_v2/data/cache.pt": "45efdb638745f8b859533616ed2f99bf6624f8a627bc1faec2a5cea83760473d",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/prepare_pgvb_dynamic_tasks.py": "b5f6a6b0eec0c3c5bbce6cc00c3cbeb27e65132b24c74dbde291bbbfbb6b2038"
+  },
+  "excluded": {
+    "invalid_public_geometry": 7,
+    "unsupported_type": 23,
+    "illegal_start_height": 9223,
+    "already_within_public_region20": 21
+  },
+  "candidate_groups": 125
+}

@@ -1,0 +1,28 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+__________ test_new_goal_requires_confirmation_and_preserves_context ___________
+
+    def test_new_goal_requires_confirmation_and_preserves_context():
+>    from graphnav.dynamic_goal_interface import CandidateCommitment
+E    ModuleNotFoundError: No module named 'graphnav.dynamic_goal_interface'
+
+tests/test_dynamic_goal_interface.py:11: ModuleNotFoundError
+____________ test_wrong_goal_can_be_replaced_without_unlimited_lock ____________
+
+    def test_wrong_goal_can_be_replaced_without_unlimited_lock():
+>    from graphnav.dynamic_goal_interface import CandidateCommitment
+E    ModuleNotFoundError: No module named 'graphnav.dynamic_goal_interface'
+
+tests/test_dynamic_goal_interface.py:21: ModuleNotFoundError
+_________ test_arrival_depends_on_public_grid_and_learned_stop_not_gt __________
+
+    def test_arrival_depends_on_public_grid_and_learned_stop_not_gt():
+>    from graphnav.dynamic_goal_interface import grid_arrival_tolerance,interface_stop
+E    ModuleNotFoundError: No module named 'graphnav.dynamic_goal_interface'
+
+tests/test_dynamic_goal_interface.py:31: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_dynamic_goal_interface.py::test_new_goal_requires_confirmation_and_preserves_context
+FAILED tests/test_dynamic_goal_interface.py::test_wrong_goal_can_be_replaced_without_unlimited_lock
+FAILED tests/test_dynamic_goal_interface.py::test_arrival_depends_on_public_grid_and_learned_stop_not_gt
+3 failed in 0.99s

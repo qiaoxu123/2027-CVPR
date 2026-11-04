@@ -1,0 +1,26 @@
+{
+  "base_commit": "f49194f43cb0982b4271ac081f9153607971d7c4",
+  "primary": "Arrival",
+  "mechanism_controls": [
+    "E4",
+    "Stability",
+    "Arrival",
+    "Both"
+  ],
+  "selection_reason": "TRAIN develop all SR=23/24; Arrival and Both correct Stop=23 vs E4=20; Arrival uses no temporal memory, fewer steps and slightly lower NE than Both. No threshold search.",
+  "arrival": "min(20m, half diagonal of public 28x28 world grid), learned Stop p>=0.3, same legal-height guard",
+  "stability": "optional one-decision bounded confirmation, cannot retain evicted candidate, suppress Stop while pending",
+  "horizon": 20,
+  "stop_threshold": 0.3,
+  "pgvb_bound": 0.5,
+  "training": false,
+  "confirmation_tasks_sha256": "04d3c2c08eaa7da35fbd367d87f4ce5636a1be660a66f0ff22ed07089ab6bc93",
+  "confirmation_outputs_read": false,
+  "code_sha256": {
+    "graphnav/dynamic_goal_interface.py": "6ae4d3326d071dadea4aa16e1ba69a6bf10061ce7990d3e63c5a21fd80b19891",
+    "scripts/run_pgvb_dynamic_closedloop.py": "3058c0fccb547864cb12c78ff30cbf3214300a02eb72ee290c76528b537690f1",
+    "graphnav/pgvb_navigation_runtime.py": "efa52eabbc34e10da7b7b0db88e6eef99e03600826b54238fe409d8404dff964",
+    "graphnav/pgvb_closedloop_audit.py": "25e322bab3f8f66f3f10c6636619e68a82681cc71b3a74b14c6dd37edef64867"
+  },
+  "development_arrival_trajectory_prefix_exact_baseline": 24
+}
