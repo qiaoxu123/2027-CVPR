@@ -53,7 +53,7 @@ def main():
  ci=np.quantile(deltas,[.025,.975],axis=0);diagnosis=dict(confirmation_anchor_overlap=inside,inside_count=sum(r['target_inside_public_anchor'] for r in inside),support_and_missed_count=sum(r['methods']['polygon_cone']['legal_support_GT20'] and not r['methods']['polygon_cone']['R20'] for r in confirm),paired_group_bootstrap=dict(groups=len(groups),resamples=5000,seed=20261104,R20_delta_CI95=ci[:,0].tolist(),NE_delta_CI95=ci[:,1].tolist(),scope='Exploratory, 13 groups, maps overlap; not a geographic-generalization significance claim'))
  (o/'diagnosis.json').write_text(json.dumps(diagnosis,indent=2));(o/'cases.json').write_text(json.dumps(cases,indent=2))
  with (o/'samples.csv').open('w') as f:
-  cols=['index','candidate_id','episode','subset','word','landmark_name','gt_engineering_direction_margin','gt_polygon_axis_status'];names=cols+[m+'_'+k for m in METHODS for k in ['R20','NE','GT20_mass']];w=csv.DictWriter(f,names);w.writeheader()
+  cols=['index','candidate_id','episode','subset','word','landmark_name','gt_engineering_direction_margin','gt_polygon_axis_status'];names=cols+[m+'_'+k for m in METHODS for k in ['R20','NE','GT20_mass']];w=csv.DictWriter(f,names,lineterminator="\n");w.writeheader()
   for r in details:w.writerow({**{k:r[k] for k in cols},**{m+'_'+k:r['methods'][m][k] for m in METHODS for k in ['R20','NE','GT20_mass']}})
  page='<meta charset="utf-8"><title>Polygon方向区域诊断</title><style>body{font:16px sans-serif;margin:20px}img{width:100%}article{border-top:1px solid #aaa}</style><h1>全量TRAIN扫描与完整Polygon方向区域</h1><p>新确认组全部展示；GT仅后验，非人工像素Gold。没有训练新网络。</p><a href="REPORT_zh.md">中文报告</a><img src="confirmation_summary.png"><img src="four_direction_regions.png">'
  for c in cases:
