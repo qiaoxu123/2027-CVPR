@@ -3,6 +3,7 @@ import argparse
 from collections import Counter
 from dataclasses import asdict
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -21,6 +22,7 @@ def main():
     p.add_argument('--resume',action='store_true')
     p.add_argument('--pgvb-bound',type=float,default=0.5)
     p.add_argument('--max-new-tasks',type=int)
+    p.add_argument('--methods',nargs='+',choices=['E2_original','E4_PGVB','E5_PGVB_only'],default=['E2_original','E4_PGVB','E5_PGVB_only'])
     a=p.parse_args()
     sys.path.insert(0,str(a.sbf_source.resolve()))
     from sbfnav.config import load_config,apply_overrides,validate_config
@@ -37,6 +39,7 @@ def main():
         raise ValueError('Frozen64 public task set required')
     checkpoint_sha=file_sha256(a.checkpoint)
     pgvb_sha=file_sha256(a.pgvb_checkpoint)
+    if pgvb_sha!='ba3073723703ce8188c7f74ae810a622342631bb150bd2597656ff0039f2cf56':raise ValueError('Expected frozen local Anchor PGVB best checkpoint')
     if not 0 < a.pgvb_bound <= 1:raise ValueError('PGVB bound must be in (0,1]')
     if checkpoint_sha!='00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a':
         raise ValueError('Original paper checkpoint required')
@@ -52,8 +55,11 @@ def main():
         runner_sha256=file_sha256(__file__),source_sha256={k:file_sha256(Path(k)) for k in [
             'graphnav/landmark_navigation_diagnostic.py','graphnav/stage1_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py',
             'graphnav/renderer.py','graphnav/stage1.py','graphnav/pgvb_navigation_runtime.py',
-            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py']},
-        public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'))
+            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/pgvb_closedloop_audit.py',
+            'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
+        public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),
+        sbf_source_sha256={str(p.relative_to(a.sbf_source)):file_sha256(p) for p in sorted(a.sbf_source.rglob('*.py'))},
+        diagnostic_capture='detached every-decision RGB/Footprint/PGVB/original/final fields; no diagnostic feedback')
     if a.output.exists():
         if not a.resume or json.loads((a.output/'run_manifest.json').read_text())!=fingerprint:
             raise ValueError('Refuse overwrite or resume under changed inference inputs')
@@ -78,8 +84,8 @@ def main():
     with path.open('a') as stream:
         for task in tasks:
             if a.max_new_tasks is not None and new_tasks>=a.max_new_tasks:break
-            if all((m,task['index']) in completed for m in fingerprint['methods']):continue
-            for method in fingerprint['methods']:
+            if all((m,task['index']) in completed for m in a.methods):continue
+            for method in a.methods:
                 if (method,task['index']) in completed:continue
                 torch.manual_seed(0);np.random.seed(0);torch.cuda.manual_seed_all(0)
                 # Only new landmark name, start and public references enter policy.
@@ -89,7 +95,9 @@ def main():
                 policy_runtime.set_episode(episode,transform,catalog)
                 region=public_region(task['public_polygons'],task['world_bounds'])
                 runtime.enable_pgvb=(method=='E4_PGVB')
-                poses,termination,timings,diagnostics=rollout(episode,builder,controller,policy_runtime.predict,
+                from graphnav.pgvb_closedloop_audit import DecisionRecorder
+                recorder=DecisionRecorder(policy_runtime,a.output/'decisions'/f'{task["index"]:02d}_{method}')
+                poses,termination,timings,diagnostics=rollout(episode,builder,controller,recorder.predict,
                     GROUND_LEVEL[episode.map_name],protocol,synchronize=torch.cuda.synchronize)
                 metrics=polygon_trace_metrics(poses,region,termination)
                 goals=np.asarray([d['selected_goal_xy'] for d in diagnostics])
@@ -104,7 +112,7 @@ def main():
                     goal_analysis=dict(initial_ne_m=float(goal_distance[0]),final_ne_m=float(goal_distance[-1]),
                         ever_correct=bool((goal_distance<=20).any()),
                         lost_correct=int(((goal_distance[:-1]<=20)&(goal_distance[1:]>20)).sum())))
-                stream.write(json.dumps(row)+'\n');stream.flush();rows.append(row);completed.add((method,task['index']))
+                stream.write(json.dumps(row)+'\n');stream.flush();os.fsync(stream.fileno());rows.append(row);completed.add((method,task['index']))
                 print(json.dumps(dict(method=method,index=task['index'],completed=len(rows),total=192,SR=metrics['SR'],NE=metrics['NE'],
                     termination=termination,seconds=time.perf_counter()-started)),flush=True)
             new_tasks+=1

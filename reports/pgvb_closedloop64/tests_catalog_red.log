@@ -1,0 +1,33 @@
+......F.                                                                 [100%]
+=================================== FAILURES ===================================
+____ test_named_catalog_accepts_integer_or_string_public_object_ids[666_0] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x78ce90d41750>
+key = 666
+
+    @__import__('pytest').mark.parametrize('key', [666, '666'])
+    def test_named_catalog_accepts_integer_or_string_public_object_ids(monkeypatch,key):
+        from types import SimpleNamespace
+        from graphnav.pgvb_navigation_runtime import PGVBNamedLandmarkPolicy
+        from graphnav.stage1_runtime import GraphNavStage1Policy
+        monkeypatch.setattr(GraphNavStage1Policy,'set_episode',lambda *a,**k:None)
+        policy=object.__new__(PGVBNamedLandmarkPolicy)
+        episode=SimpleNamespace(reference_names=('Example Road',),map_name='example')
+        catalog=SimpleNamespace(objects={'example':{key:dict(name='Example Road',object_type='TrafficRoad',contour=[[0,0],[10,0],[10,2],[0,2]])}})
+>       policy.set_episode(episode,None,catalog)
+
+tests/test_pgvb_navigation_runtime.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+graphnav/pgvb_navigation_runtime.py:93: in set_episode
+    types = [objects[oid]["object_type"] for oid in matched["ids"]]
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+.0 = <list_iterator object at 0x78ce90d421d0>
+
+>   types = [objects[oid]["object_type"] for oid in matched["ids"]]
+E   KeyError: '666'
+
+graphnav/pgvb_navigation_runtime.py:93: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_pgvb_navigation_runtime.py::test_named_catalog_accepts_integer_or_string_public_object_ids[666_0]
+1 failed, 7 passed in 1.03s

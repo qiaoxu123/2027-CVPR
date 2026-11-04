@@ -62,3 +62,54 @@ def test_invalid_bounds_rejected():
         bounded_pgvb_field(field, uv, torch.zeros(1, 4, 2),
                           torch.ones(1, 4), torch.ones(1, 4, dtype=torch.bool),
                           bound=1.5)
+
+
+def test_visual_reorder_uses_same_world_grid_and_exact_dense_context():
+    field, uv = _original()
+    updated, audit = bounded_pgvb_field(field, uv, uv[:, :4],
+                                      torch.tensor([[-8., -4., 2., 10.]]),
+                                      torch.ones(1, 4, dtype=torch.bool))
+    assert audit['active']
+    assert torch.equal(updated.candidate_xy, uv.gather(1, updated.candidate_ids[..., None].expand(-1, -1, 2)))
+    assert torch.equal(updated.candidate_context, field.dense_context.gather(
+        1, updated.candidate_ids[..., None].expand(-1, -1, field.dense_context.shape[-1])))
+
+
+def test_pack_pgvb_audit_is_detached_and_does_not_change_live_field():
+    from graphnav.pgvb_closedloop_audit import pack_field
+    field, _ = _original()
+    before = field.belief_logits.clone()
+    packed = pack_field(field)
+    packed['logits'][0] = 99
+    assert torch.equal(field.belief_logits, before)
+    assert packed['candidate_context'].shape == (8, 16)
+
+
+@__import__('pytest').mark.parametrize('key', [666, '666'])
+def test_named_catalog_accepts_integer_or_string_public_object_ids(monkeypatch,key):
+    from types import SimpleNamespace
+    from graphnav.pgvb_navigation_runtime import PGVBNamedLandmarkPolicy
+    from graphnav.stage1_runtime import GraphNavStage1Policy
+    monkeypatch.setattr(GraphNavStage1Policy,'set_episode',lambda *a,**k:None)
+    policy=object.__new__(PGVBNamedLandmarkPolicy)
+    episode=SimpleNamespace(reference_names=('Example Road',),map_name='example')
+    catalog=SimpleNamespace(objects={'example':{key:dict(name='Example Road',object_type='TrafficRoad',contour=[[0,0],[10,0],[10,2],[0,2]])}})
+    policy.set_episode(episode,None,catalog)
+    assert policy._landmark['typ']=='Road'
+    assert len(policy._landmark['contours'])==1
+
+
+def test_standalone_no_view_holds_xyz_without_leaking_yaw_into_waypoint():
+    import numpy as np
+    from types import SimpleNamespace
+    from graphnav.pgvb_navigation_runtime import PGVBStandaloneNamedPolicy
+    p=object.__new__(PGVBStandaloneNamedPolicy)
+    p.record={'instruction':'Navigate to Example.'};p.observed_steps=0;p.audit_callback=None;p.pgvb_seconds=0.
+    p._timed_scores=lambda observation:(None,'no_supported_local_anchor')
+    state=SimpleNamespace(pose=np.array([1.,2.,30.,1.57]),current_observation={})
+    result=p.predict(state,p.record['instruction'])
+    assert result.xyz.shape==(3,)
+    np.testing.assert_equal(result.xyz,state.pose[:3])
+    assert not result.should_stop
+    assert result.diagnostics['abstained_no_visual_goal']
+    assert result.diagnostics['geometry_branch_calls']==0

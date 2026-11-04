@@ -1,0 +1,23 @@
+........F                                                                [100%]
+=================================== FAILURES ===================================
+_____ test_standalone_no_view_holds_xyz_without_leaking_yaw_into_waypoint ______
+
+    def test_standalone_no_view_holds_xyz_without_leaking_yaw_into_waypoint():
+        import numpy as np
+        from types import SimpleNamespace
+        from graphnav.pgvb_navigation_runtime import PGVBStandaloneNamedPolicy
+        p=object.__new__(PGVBStandaloneNamedPolicy)
+        p.record={'instruction':'Navigate to Example.'};p.observed_steps=0;p.audit_callback=None;p.pgvb_seconds=0.
+        p._timed_scores=lambda observation:(None,'no_supported_local_anchor')
+        state=SimpleNamespace(pose=np.array([1.,2.,30.,1.57]),current_observation={})
+        result=p.predict(state,p.record['instruction'])
+>       assert result.xyz.shape==(3,)
+E       assert (4,) == (3,)
+E         
+E         At index 0 diff: 4 != 3
+E         Use -v to get more diff
+
+tests/test_pgvb_navigation_runtime.py:111: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_pgvb_navigation_runtime.py::test_standalone_no_view_holds_xyz_without_leaking_yaw_into_waypoint
+1 failed, 8 passed in 1.06s

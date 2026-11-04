@@ -5,6 +5,7 @@ The geometry/Stage1 baseline and trained trajectory/Stop head remain unchanged.
 No private target, oracle location or future observation enters the policy.
 """
 from dataclasses import replace
+import time
 
 import cv2
 import numpy as np
@@ -79,6 +80,8 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
         self.bound = float(bound)
         self.pgvb_calls = 0
         self._landmark = None
+        self.audit_callback = None
+        self.pgvb_seconds = 0.0
 
     def set_episode(self, episode, transform, catalog):
         super().set_episode(episode, transform, catalog)
@@ -86,7 +89,8 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
             raise ValueError("PGVB diagnostic expects one explicitly named goal landmark")
         name = episode.reference_names[0]
         matched = named_public_polygons(catalog.objects[episode.map_name], name)
-        objects = catalog.objects[episode.map_name]
+        # CityReferCatalog uses int IDs; JSON audit catalogs use str IDs.
+        objects = {str(oid): obj for oid, obj in catalog.objects[episode.map_name].items()}
         types = [objects[oid]["object_type"] for oid in matched["ids"]]
         typ = public_type(types)
         self._landmark = None
@@ -137,14 +141,30 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
         return (torch.from_numpy(local_uv)[None].to(self.device),
                 scores.float(), torch.from_numpy(valid)[None].to(self.device)), "available"
 
+    def _timed_scores(self, observation):
+        if self.device.type == "cuda": torch.cuda.synchronize(self.device)
+        start = time.perf_counter()
+        evidence, reason = self._observed_scores(observation)
+        if self.device.type == "cuda": torch.cuda.synchronize(self.device)
+        self.pgvb_seconds = time.perf_counter() - start
+        return evidence, reason
+
     @torch.no_grad()
     def predict(self, state, instruction):
         if not self.enable_pgvb:
-            prediction = super().predict(state, instruction)
-            prediction.diagnostics.update(pgvb_enabled=False, pgvb_active=False)
+            hook = None
+            if self.audit_callback is not None:
+                def capture_original(module, inputs, output):
+                    self.audit_callback(output.belief, output.belief, None)
+                hook = self.model.register_forward_hook(capture_original)
+            try:
+                prediction = super().predict(state, instruction)
+            finally:
+                if hook is not None: hook.remove()
+            prediction.diagnostics.update(pgvb_enabled=False, pgvb_active=False, pgvb_seconds=0.0)
             return prediction
 
-        evidence, reason = self._observed_scores(state.current_observation)
+        evidence, reason = self._timed_scores(state.current_observation)
         result = dict(pgvb_enabled=True, pgvb_active=False, pgvb_reason=reason,
                       pgvb_delta_max_abs=0.0, pgvb_covered_cells=0)
         hook = None
@@ -158,16 +178,22 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
                               pgvb_delta_max_abs=audit["max_abs_delta"],
                               pgvb_covered_cells=audit["covered_cells"],
                               pgvb_changed_top1=audit.get("changed_top1", False))
+                if self.audit_callback is not None:
+                    self.audit_callback(output.belief, field, evidence)
                 return replace(output, belief=field)
 
             hook = self.model.register_forward_hook(apply_evidence)
+        elif self.audit_callback is not None:
+            def capture_fallback(module, inputs, output):
+                self.audit_callback(output.belief, output.belief, None)
+            hook = self.model.register_forward_hook(capture_fallback)
         try:
             prediction = super().predict(state, instruction)
         finally:
             if hook is not None:
                 hook.remove()
         self.pgvb_calls += int(result["pgvb_active"])
-        prediction.diagnostics.update(result, pgvb_active_decisions_total=self.pgvb_calls)
+        prediction.diagnostics.update(result, pgvb_active_decisions_total=self.pgvb_calls, pgvb_seconds=self.pgvb_seconds)
         return prediction
 
 
@@ -198,17 +224,18 @@ class PGVBStandaloneNamedPolicy(PGVBNamedLandmarkPolicy):
 
         if instruction != self.record["instruction"]:
             raise ValueError("Changed instruction during PGVB-only episode")
-        evidence, reason = self._observed_scores(state.current_observation)
+        evidence, reason = self._timed_scores(state.current_observation)
         if evidence is None:
+            if self.audit_callback is not None: self.audit_callback(None, None, None)
             # No search policy was trained. Explicit no-evidence abstention,
             # NOT a spurious guess at a citywide target location.
             return SimpleNamespace(
-                xyz=np.asarray(state.pose).copy(), should_stop=False,
+                xyz=np.asarray(state.pose)[:3].copy(), should_stop=False,
                 diagnostics=dict(
                     policy="PGVB-only observed-domain conditional Goal",
                     selected_goal_xy=np.asarray(state.pose)[:2].tolist(),
                     pgvb_enabled=True, pgvb_active=False,
-                    pgvb_reason=reason, geometry_branch_calls=0,
+                    pgvb_reason=reason, pgvb_seconds=self.pgvb_seconds, geometry_branch_calls=0,
                     candidate_context="neutral_zero",
                     abstained_no_visual_goal=True,
                     observed_steps=self.observed_steps))
@@ -217,12 +244,12 @@ class PGVBStandaloneNamedPolicy(PGVBNamedLandmarkPolicy):
             local_uv=local_uv, scores=scores, valid=valid, grid_size=self.args.grid_size)
         if not bool(result["has_view"].all()):
             return SimpleNamespace(
-                xyz=np.asarray(state.pose).copy(), should_stop=False,
+                xyz=np.asarray(state.pose)[:3].copy(), should_stop=False,
                 diagnostics=dict(
                     policy="PGVB-only observed-domain conditional Goal",
                     selected_goal_xy=np.asarray(state.pose)[:2].tolist(),
                     pgvb_enabled=True, pgvb_active=False,
-                    pgvb_reason="no_world_grid_support",
+                    pgvb_reason="no_world_grid_support", pgvb_seconds=self.pgvb_seconds,
                     geometry_branch_calls=0, candidate_context="neutral_zero",
                     abstained_no_visual_goal=True,
                     observed_steps=self.observed_steps))
@@ -245,11 +272,12 @@ class PGVBStandaloneNamedPolicy(PGVBNamedLandmarkPolicy):
                 1, ids[..., None].expand(-1, -1, dense.shape[-1])),
             dense_context=dense,
             visual_coverage=observed.float())
+        if self.audit_callback is not None: self.audit_callback(None, field, evidence)
         prediction = A3TrajectoryPolicy.predict_field(self, state, field)
         prediction.diagnostics.update(
             policy="PGVB-only observed-domain conditional Goal",
             pgvb_enabled=True, pgvb_active=True,
-            pgvb_reason="observed_conditioned_belief",
+            pgvb_reason="observed_conditioned_belief", pgvb_seconds=self.pgvb_seconds,
             geometry_branch_calls=0, candidate_context="neutral_zero",
             abstained_no_visual_goal=False,
             observed_steps=self.observed_steps,

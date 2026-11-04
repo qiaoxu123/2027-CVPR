@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_pgvb_landmark_closedloop.py", line 133, in <module>
+    if __name__=='__main__':main()
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_pgvb_landmark_closedloop.py", line 95, in main
+    policy_runtime.set_episode(episode,transform,catalog)
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/graphnav/pgvb_navigation_runtime.py", line 93, in set_episode
+    types = [objects[oid]["object_type"] for oid in matched["ids"]]
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/graphnav/pgvb_navigation_runtime.py", line 93, in <listcomp>
+    types = [objects[oid]["object_type"] for oid in matched["ids"]]
+KeyError: '666'

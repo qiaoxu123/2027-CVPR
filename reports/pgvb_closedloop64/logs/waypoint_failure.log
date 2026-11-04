@@ -1,0 +1,16 @@
+{"method": "E2_original", "index": 0, "completed": 1, "total": 192, "SR": 0.0, "NE": 26.007103400918545, "termination": "policy_stop", "seconds": 1.477428738027811}
+{"method": "E4_PGVB", "index": 0, "completed": 2, "total": 192, "SR": 0.0, "NE": 26.007103400918545, "termination": "policy_stop", "seconds": 1.7502601277083158}
+Traceback (most recent call last):
+  File "/home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_pgvb_landmark_closedloop.py", line 133, in <module>
+    if __name__=='__main__':main()
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_pgvb_landmark_closedloop.py", line 100, in main
+    poses,termination,timings,diagnostics=rollout(episode,builder,controller,recorder.predict,
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/graphnav/closedloop.py", line 102, in rollout
+    next_pose = controller.step(poses[-1], prediction.xyz,
+  File "/home/20261024_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/sbfnav/navigation.py", line 65, in step
+    raise ValueError("pose must be xyzyaw and waypoint must be xyz")
+ValueError: pose must be xyzyaw and waypoint must be xyz
