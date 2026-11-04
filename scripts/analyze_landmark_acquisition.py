@@ -73,6 +73,7 @@ def draw_polygon(ax, region, **kwargs):
 
 
 def main():
+    global METHODS
     # Plotting is optional for read-only metric tests and headless CPU CI.
     import matplotlib
     matplotlib.use('Agg')
@@ -81,7 +82,11 @@ def main():
     p.add_argument('--run', type=Path, required=True)
     p.add_argument('--selection', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--methods', nargs=3, default=list(METHODS))
     a = p.parse_args()
+    METHODS = tuple(a.methods)
+    if len(set(METHODS)) != 3:
+        raise ValueError('Three distinct paired methods required')
     rows = [json.loads(x) for x in (a.run/'predictions.jsonl').read_text().splitlines()]
     assert len(rows) == 192 and len({(r['method'], r['index']) for r in rows}) == 192
     tasks = {t['index']: t for t in json.loads((a.selection/'tasks_public.json').read_text())}
@@ -103,7 +108,7 @@ def main():
             evidence_rejection_reasons=dict(Counter(d.get('landmark_acquisition', {}).get('reason', 'not_tracked_mode') for d in ds)),
             category={c: dict(n=sum(r['category'] == c for r in group), SR=float(np.mean([r['metrics']['SR'] for r in group if r['category'] == c]))) for c in sorted({r['category'] for r in group})},
         )
-    paired = [paired_changes(rows, 'Geometry', m) for m in METHODS[1:]] + [paired_changes(rows, 'LegacyPGVB', 'TrackedPGVB')]
+    paired = [paired_changes(rows, 'Geometry', m) for m in METHODS[1:]] + [paired_changes(rows, METHODS[1], METHODS[2])]
     result = dict(summary=summary, paired=paired, metrics_source='Public named Polygon proxy; no original target GT', raw_run=str(a.run), manifest=json.loads((a.run/'run_manifest.json').read_text()))
     (a.output/'summary.json').write_text(json.dumps(result, indent=2, ensure_ascii=False)+'\n')
     with (a.output/'paired_tasks.csv').open('w') as f:
@@ -145,6 +150,8 @@ def main():
                 axes[k, j].imshow(prob.reshape(28, 28), origin='lower', extent=extent)
                 draw_polygon(axes[k, j], region, color='lime', linewidth=1)
                 axes[k, j].plot(*np.vstack([fp, fp[0]]).T, '--', color='white', linewidth=.7)
+                axes[k, j].set_xlim(bounds[0], bounds[2])
+                axes[k, j].set_ylim(bounds[1], bounds[3])
                 axes[k, j].set_title(('Geometry' if j == 1 else 'Final') + f' t={key} / terminal NE={r["metrics"]["NE"]:.2f}m')
             poses = np.asarray(r['poses']); goals = np.array([d['selected_goal_xy'] for d in ds])
             ax = axes[k, 3]
