@@ -170,3 +170,37 @@ def test_ground_landmark_uses_public_geometry_only():
     assert spec["landmark"]["type"] == "Other"
     assert not spec["landmark"]["visual_supported"]
     assert spec["target_GT_used"] is False
+
+def test_mixed_type_named_goal_runtime_uses_geometry_only(monkeypatch):
+    from graphnav import unified_pgvb_runtime as runtime
+    objects = _objects()
+    objects["d"] = dict(
+        name="Victoria Street", object_type="Building",
+        contour=[[0, 10], [4, 10], [4, 14], [0, 14]],
+    )
+    monkeypatch.setattr(
+        runtime, "public_static_record",
+        lambda *args, **kwargs: dict(
+            map_name="toy",
+            instruction="Navigate to Victoria Street.",
+            world_bounds=[0., 0., 100., 100.],
+        ),
+    )
+    policy = object.__new__(runtime.UnifiedPGVBNamedLandmarkPolicy)
+    policy.args = SimpleNamespace(max_landmarks=16)
+    policy.native = SimpleNamespace()
+    policy.unified = SimpleNamespace(reset_episode=lambda: None)
+    episode = SimpleNamespace(
+        instruction="Navigate to Victoria Street.",
+        map_name="toy",
+        reference_names=("Victoria Street",),
+    )
+    policy.set_episode(
+        episode, None, SimpleNamespace(objects={"toy": objects}),
+    )
+    assert policy.instruction_spec["approved_for_inference"]
+    assert policy._landmark is None
+    assert policy.inputs is None
+    evidence, reason = policy._observed_inputs({})
+    assert evidence is None
+    assert reason == "unsupported_or_unresolved_name"
