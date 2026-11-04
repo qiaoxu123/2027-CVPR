@@ -25,6 +25,19 @@ class UnifiedPGVB(nn.Module):
         self.direction_ready = False
         self.target_ready = False
 
+    def forward_structured(self, instruction, **encoded_inputs):
+        """Take the validated language adapter output without a second network.
+
+        Complex targets are explicitly not enabled until the target head and
+        language/spatial reference frame are independently validated.
+        """
+        if (instruction.get("intent") != "navigate_to_landmark"
+                or instruction.get("approved_for_inference") is not True
+                or instruction.get("target_GT_used") is not False
+                or instruction.get("relations")):
+            raise ValueError("Only validated named-landmark tasks are supported")
+        return self(**encoded_inputs)
+
     def forward(
         self, *, image_features, name_text, type_text, polygon_tokens, valid,
         anchor_world=None, direction_id=None, span=None, reference_heading=None,
