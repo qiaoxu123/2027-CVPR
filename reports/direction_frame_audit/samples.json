@@ -1,0 +1,4282 @@
+[
+  {
+    "index": 0,
+    "episode": 221,
+    "map_name": "birmingham_block_1",
+    "instruction": "North of St. Teresa of the Child Jesus Catholic Church and to the left of Fill Circle Events & Exhibitions Ltd, this yellow car is in the far bottom right of the parking lot.",
+    "word": "north",
+    "landmark": "St. Teresa of the Child Jesus Catholic Church",
+    "public_object_ids": [
+      "5"
+    ],
+    "catalog_names": [
+      "St. Teresa of the Child Jesus Catholic Church"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      177.25,
+      595.1875
+    ],
+    "centroid": [
+      218.77903918958575,
+      584.3700083245061
+    ],
+    "grid_mean": [
+      218.86653348126092,
+      584.480420984931
+    ],
+    "centroid_direction_margin": 10.817491675493898,
+    "grid_direction_margin": 10.707079015068985,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 26.661341292134807,
+    "margin_from_max": -9.486298546653643,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e17",
+      "object": "e2",
+      "predicate": "north of",
+      "source_span": [
+        9,
+        127
+      ],
+      "source_text": "St. Teresa of the Child Jesus Catholic Church and to the left of Fill Circle Events & Exhibitions Ltd, this yellow car",
+      "dependency_evidence": "North -> of -> St. Teresa of the Child Jesus Catholic Church",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          262.9969184457,
+          477.0949766009,
+          108.1646546294,
+          1.9998468902682143
+        ],
+        "footprint": [
+          [
+            132.92861938476562,
+            525.5114135742188
+          ],
+          [
+            311.4133605957031,
+            607.1632690429688
+          ],
+          [
+            393.0652160644531,
+            428.67852783203125
+          ],
+          [
+            214.58047485351562,
+            347.02667236328125
+          ]
+        ],
+        "path": "frames/00_221_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          180.6199289118,
+          594.7221251988,
+          15.1240263232,
+          1.5915862903853517
+        ],
+        "footprint": [
+          [
+            175.41827392578125,
+            599.7118530273438
+          ],
+          [
+            185.60968017578125,
+            599.9237670898438
+          ],
+          [
+            185.82159423828125,
+            589.7323608398438
+          ],
+          [
+            175.63018798828125,
+            589.5204467773438
+          ]
+        ],
+        "path": "frames/00_221_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_00_221.png"
+  },
+  {
+    "index": 1,
+    "episode": 398,
+    "map_name": "birmingham_block_1",
+    "instruction": "South of Celine Grove and to the left of St Teresa's Court, it is a black car, second car left of a red car.",
+    "word": "south",
+    "landmark": "Celine Grove",
+    "public_object_ids": [
+      "666"
+    ],
+    "catalog_names": [
+      "Celine Grove"
+    ],
+    "object_types": [
+      "TrafficRoad"
+    ],
+    "polygon_count": 1,
+    "target": [
+      379.65625,
+      592.78125
+    ],
+    "centroid": [
+      385.68184393054423,
+      516.4509085897
+    ],
+    "grid_mean": [
+      386.1564296764672,
+      516.1591988685734
+    ],
+    "centroid_direction_margin": -76.33034141029998,
+    "grid_direction_margin": -76.62205113142659,
+    "interval_status": "opposite_side",
+    "margin_from_min": -63.529013495359095,
+    "margin_from_max": -87.17152387640454,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "Celine Grove为道路；整体质心不能代表指令指涉的局部路段。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e14",
+      "object": "e2",
+      "predicate": "south of",
+      "source_span": [
+        9,
+        77
+      ],
+      "source_text": "Celine Grove and to the left of St Teresa's Court, it is a black car",
+      "dependency_evidence": "South -> of -> Celine Grove",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          236.4689269893,
+          590.1468028605,
+          126.704230306,
+          2.8342573842135073
+        ],
+        "footprint": [
+          [
+            89.96192932128906,
+            514.2340087890625
+          ],
+          [
+            160.55615234375,
+            736.65380859375
+          ],
+          [
+            382.9759521484375,
+            666.0595703125
+          ],
+          [
+            312.3817138671875,
+            443.6397705078125
+          ]
+        ],
+        "path": "frames/01_398_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          379.2800162426,
+          593.478832273,
+          9.8244185638,
+          1.4719740836088475
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_01_398.png"
+  },
+  {
+    "index": 2,
+    "episode": 438,
+    "map_name": "birmingham_block_1",
+    "instruction": "this is the white car, this car is north of St Teresa's Court building and to the right of this car are the red and black cars.",
+    "word": "north",
+    "landmark": "St Teresa's Court",
+    "public_object_ids": [
+      "25"
+    ],
+    "catalog_names": [
+      "St Teresa's Court"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      317.484375,
+      583.046875
+    ],
+    "centroid": [
+      338.7788724989825,
+      590.2314555306366
+    ],
+    "grid_mean": [
+      338.7098236190704,
+      590.3492615364318
+    ],
+    "centroid_direction_margin": -7.184580530636595,
+    "grid_direction_margin": -7.302386536431754,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 10.808255984367406,
+    "margin_from_max": -23.971635319980464,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e4",
+      "object": "e11",
+      "predicate": "north of",
+      "source_span": [
+        18,
+        70
+      ],
+      "source_text": "car, this car is north of St Teresa's Court building",
+      "dependency_evidence": "north -> of -> St Teresa's Court building",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          170.5430711266,
+          604.90505706,
+          127.7168535083,
+          -0.14718653592347422
+        ],
+        "footprint": [
+          [
+            304.2200622558594,
+            704.0623168945312
+          ],
+          [
+            269.7003479003906,
+            471.22802734375
+          ],
+          [
+            36.8660888671875,
+            505.74774169921875
+          ],
+          [
+            71.38580322265625,
+            738.58203125
+          ]
+        ],
+        "path": "frames/02_438_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          317.8277138323,
+          582.5934848226,
+          13.597134182,
+          -0.008950278694198888
+        ],
+        "footprint": [
+          [
+            321.429443359375,
+            586.13134765625
+          ],
+          [
+            321.36553955078125,
+            578.9917602539062
+          ],
+          [
+            314.22601318359375,
+            579.0556640625
+          ],
+          [
+            314.2899169921875,
+            586.1952514648438
+          ]
+        ],
+        "path": "frames/02_438_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_02_438.png"
+  },
+  {
+    "index": 3,
+    "episode": 449,
+    "map_name": "birmingham_block_1",
+    "instruction": "South of Celine Grove and to the left of St Teresa's Court,it is a white car, fifth car south of a tree.",
+    "word": "south",
+    "landmark": "Celine Grove",
+    "public_object_ids": [
+      "666"
+    ],
+    "catalog_names": [
+      "Celine Grove"
+    ],
+    "object_types": [
+      "TrafficRoad"
+    ],
+    "polygon_count": 1,
+    "target": [
+      382.078125,
+      581.9375
+    ],
+    "centroid": [
+      385.68184393054423,
+      516.4509085897
+    ],
+    "grid_mean": [
+      386.1564296764672,
+      516.1591988685734
+    ],
+    "centroid_direction_margin": -65.48659141029998,
+    "grid_direction_margin": -65.77830113142659,
+    "interval_status": "opposite_side",
+    "margin_from_min": -52.685263495359095,
+    "margin_from_max": -76.32777387640454,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "Celine Grove为道路；检查全片段、范围及局部作用点，不据GT挑选推理Anchor。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e14",
+      "object": "e2",
+      "predicate": "south of",
+      "source_span": [
+        9,
+        76
+      ],
+      "source_text": "Celine Grove and to the left of St Teresa's Court,it is a white car",
+      "dependency_evidence": "South -> of -> Celine Grove",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          279.0363322898,
+          408.613314161,
+          100.449743139,
+          0.805592242215553
+        ],
+        "footprint": [
+          [
+            276.45416259765625,
+            536.4639892578125
+          ],
+          [
+            406.88702392578125,
+            411.19549560546875
+          ],
+          [
+            281.6185302734375,
+            280.76263427734375
+          ],
+          [
+            151.1856689453125,
+            406.0311279296875
+          ]
+        ],
+        "path": "frames/03_449_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          381.4871711003,
+          581.7150486036,
+          14.5408977255,
+          0.2819104266331149
+        ],
+        "footprint": [
+          [
+            384.5670166015625,
+            587.3062133789062
+          ],
+          [
+            387.078369140625,
+            578.6351928710938
+          ],
+          [
+            378.4073486328125,
+            576.1238403320312
+          ],
+          [
+            375.89599609375,
+            584.7948608398438
+          ]
+        ],
+        "path": "frames/03_449_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_03_449.png"
+  },
+  {
+    "index": 4,
+    "episode": 1096,
+    "map_name": "birmingham_block_1",
+    "instruction": "this is a white car and it is in the parking lot of the One Stop building. this car is in the 9th park row west of The Food Warehouse and is the 7th car from the north. The parking spaces to the north and south of this car are empty.",
+    "word": "west",
+    "landmark": "The Food Warehouse",
+    "public_object_ids": [
+      "43"
+    ],
+    "catalog_names": [
+      "The Food Warehouse"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      288.234375,
+      754.78125
+    ],
+    "centroid": [
+      199.62520480161584,
+      785.5813317922945
+    ],
+    "grid_mean": [
+      199.43313229061312,
+      785.5208918541023
+    ],
+    "centroid_direction_margin": -88.60917019838416,
+    "grid_direction_margin": -88.80124270938688,
+    "interval_status": "opposite_side",
+    "margin_from_min": -63.235478034535305,
+    "margin_from_max": -116.57637125444387,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "west of修饰第9排停车位；目标在该排内，需保留序数和关系链。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r2",
+      "dependency_predicate": "west of",
+      "subject": "e4",
+      "object": "e26",
+      "predicate": "west of",
+      "source_span": [
+        16,
+        133
+      ],
+      "source_text": "car and it is in the parking lot of the One Stop building. this car is in the 9th park row west of The Food Warehouse",
+      "dependency_evidence": "west -> of -> The Food Warehouse",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          256.7740858145,
+          465.0179590635,
+          145.8700381533,
+          1.9252791289852407
+        ],
+        "footprint": [
+          [
+            82.22535705566406,
+            545.2631225585938
+          ],
+          [
+            337.0192565917969,
+            639.566650390625
+          ],
+          [
+            431.32281494140625,
+            384.77276611328125
+          ],
+          [
+            176.52890014648438,
+            290.46923828125
+          ]
+        ],
+        "path": "frames/04_1096_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          287.7329895526,
+          754.5140727217,
+          8.0345415414,
+          1.4824639239560657
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_04_1096.png"
+  },
+  {
+    "index": 5,
+    "episode": 1161,
+    "map_name": "birmingham_block_1",
+    "instruction": "this is a black car and it is in the parking lot of the One Stop building. this car is in the 14th parking row west of The Food Warehouse and is the 1st car from the south. To the north of this car is another black car, to the south there is no car.",
+    "word": "west",
+    "landmark": "The Food Warehouse",
+    "public_object_ids": [
+      "43"
+    ],
+    "catalog_names": [
+      "The Food Warehouse"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      336.265625,
+      791.875
+    ],
+    "centroid": [
+      199.62520480161584,
+      785.5813317922945
+    ],
+    "grid_mean": [
+      199.43313229061312,
+      785.5208918541023
+    ],
+    "centroid_direction_margin": -136.64042019838416,
+    "grid_direction_margin": -136.83249270938688,
+    "interval_status": "opposite_side",
+    "margin_from_min": -111.2667280345353,
+    "margin_from_max": -164.60762125444387,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "west of修饰第14排停车位；不能忽略排与实例约束。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r2",
+      "dependency_predicate": "west of",
+      "subject": "e4",
+      "object": "e26",
+      "predicate": "west of",
+      "source_span": [
+        16,
+        137
+      ],
+      "source_text": "car and it is in the parking lot of the One Stop building. this car is in the 14th parking row west of The Food Warehouse",
+      "dependency_evidence": "west -> of -> The Food Warehouse",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          372.8133266623,
+          796.8115002783,
+          110.1513632559,
+          -2.2696690676799505
+        ],
+        "footprint": [
+          [
+            385.0497741699219,
+            655.7443237304688
+          ],
+          [
+            231.74610900878906,
+            784.5750732421875
+          ],
+          [
+            360.5768737792969,
+            937.8787231445312
+          ],
+          [
+            513.8805541992188,
+            809.0479736328125
+          ]
+        ],
+        "path": "frames/05_1161_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          335.2478546488,
+          771.9610189604,
+          12.0086651127,
+          -1.1623843042674442
+        ],
+        "footprint": [
+          [
+            337.853271484375,
+            770.929443359375
+          ],
+          [
+            334.21630859375,
+            769.3555908203125
+          ],
+          [
+            332.6424560546875,
+            772.9925537109375
+          ],
+          [
+            336.2794189453125,
+            774.56640625
+          ]
+        ],
+        "path": "frames/05_1161_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_05_1161.png"
+  },
+  {
+    "index": 6,
+    "episode": 2443,
+    "map_name": "birmingham_block_1",
+    "instruction": "this is a blue car and it is in the northwest corner of the construction site north of the Full Circle Events & Exhibitions Ltd building.",
+    "word": "north",
+    "landmark": "Full Circle Events & Exhibitions Ltd",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Full Circle Events & Exhibitions Ltd"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      65.5,
+      585.9375
+    ],
+    "centroid": [
+      194.36582724315866,
+      638.7784712130114
+    ],
+    "grid_mean": [
+      194.40784078349657,
+      638.7092866851712
+    ],
+    "centroid_direction_margin": -52.84097121301136,
+    "grid_direction_margin": -52.77178668517115,
+    "interval_status": "opposite_side",
+    "margin_from_min": -29.678286822178734,
+    "margin_from_max": -77.06100390815823,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "目标在工地内；north of修饰工地，须保留目标→工地→地标链。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r1",
+      "dependency_predicate": "north of",
+      "subject": "e4",
+      "object": "e19",
+      "predicate": "north of",
+      "source_span": [
+        15,
+        136
+      ],
+      "source_text": "car and it is in the northwest corner of the construction site north of the Full Circle Events & Exhibitions Ltd building",
+      "dependency_evidence": "north -> of -> Full Circle Events & Exhibitions Ltd building",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          56.3300780836,
+          654.8934811626,
+          101.4458998908,
+          -0.35230947024321413
+        ],
+        "footprint": [
+          [
+            173.67918395996094,
+            709.1515502929688
+          ],
+          [
+            110.58816528320312,
+            537.5443725585938
+          ],
+          [
+            -61.01902770996094,
+            600.6354370117188
+          ],
+          [
+            2.0719947814941406,
+            772.2426147460938
+          ]
+        ],
+        "path": "frames/06_2443_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          65.903244066,
+          586.2709327833,
+          9.489852899,
+          -2.509768334758305
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_06_2443.png"
+  },
+  {
+    "index": 7,
+    "episode": 2985,
+    "map_name": "birmingham_block_3",
+    "instruction": "this is one of the buildings south of Bragg Road. There is a blue and round object in the backyard of the building to the left of this building.",
+    "word": "south",
+    "landmark": "Bragg Road",
+    "public_object_ids": [
+      "468"
+    ],
+    "catalog_names": [
+      "Bragg Road"
+    ],
+    "object_types": [
+      "TrafficRoad"
+    ],
+    "polygon_count": 1,
+    "target": [
+      701.875,
+      326.046875
+    ],
+    "centroid": [
+      648.5711887304175,
+      324.66566650035776
+    ],
+    "grid_mean": [
+      648.5718713711742,
+      324.6380985183883
+    ],
+    "centroid_direction_margin": -1.3812084996422413,
+    "grid_direction_margin": -1.40877648161171,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 34.25716750122132,
+    "margin_from_max": -44.779158524670265,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e5",
+      "object": "e8",
+      "predicate": "south of",
+      "source_span": [
+        19,
+        48
+      ],
+      "source_text": "buildings south of Bragg Road",
+      "dependency_evidence": "south -> of -> Bragg Road",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          796.2589585645,
+          163.7095472874,
+          136.3773177625,
+          2.9616599640732404
+        ],
+        "footprint": [
+          [
+            653.0006713867188,
+            64.54749298095703
+          ],
+          [
+            697.096923828125,
+            306.9678649902344
+          ],
+          [
+            939.5172729492188,
+            262.8716125488281
+          ],
+          [
+            895.4210205078125,
+            20.45123291015625
+          ]
+        ],
+        "path": "frames/07_2985_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          713.1082681317,
+          319.7521030415,
+          11.6546736923,
+          2.486650416777548
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_07_2985.png"
+  },
+  {
+    "index": 8,
+    "episode": 3163,
+    "map_name": "birmingham_block_3",
+    "instruction": "It is the leftmost building of the 3 buildings on the left side north of Birchfield road. There is a green and round object in the front garden of this building.",
+    "word": "north",
+    "landmark": "Birchfield Road",
+    "public_object_ids": [
+      "467",
+      "476",
+      "477",
+      "484",
+      "497",
+      "498"
+    ],
+    "catalog_names": [
+      "Birchfield Road",
+      "Birchfield Road",
+      "Birchfield Road",
+      "Birchfield Road",
+      "Birchfield Road",
+      "Birchfield Road"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 6,
+    "target": [
+      404.25,
+      76.59375
+    ],
+    "centroid": [
+      467.3604240760362,
+      190.79598891667797
+    ],
+    "grid_mean": [
+      467.3256836541225,
+      190.8023605732931
+    ],
+    "centroid_direction_margin": -114.20223891667797,
+    "grid_direction_margin": -114.2086105732931,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 39.37145059843674,
+    "margin_from_max": -323.375,
+    "fragment_status": [
+      "opposite_side",
+      "within_anchor_extent",
+      "within_anchor_extent",
+      "within_anchor_extent",
+      "opposite_side",
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r1",
+      "dependency_predicate": "north of",
+      "subject": "e4",
+      "object": "e15",
+      "predicate": "north of",
+      "source_span": [
+        19,
+        88
+      ],
+      "source_text": "building of the 3 buildings on the left side north of Birchfield road",
+      "dependency_evidence": "north -> of -> Birchfield road",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          695.7144221512,
+          221.325250804,
+          116.0978399815,
+          -2.918527848188218
+        ],
+        "footprint": [
+          [
+            618.112548828125,
+            98.18768310546875
+          ],
+          [
+            572.5768432617188,
+            298.9271545410156
+          ],
+          [
+            773.3162841796875,
+            344.46282958984375
+          ],
+          [
+            818.8519897460938,
+            143.72335815429688
+          ]
+        ],
+        "path": "frames/08_3163_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          407.2718533286,
+          69.2626753368,
+          26.453894201,
+          -0.5343019491360625
+        ],
+        "footprint": [
+          [
+            425.4577941894531,
+            73.92755126953125
+          ],
+          [
+            411.9367370605469,
+            51.076725006103516
+          ],
+          [
+            389.0859069824219,
+            64.59779357910156
+          ],
+          [
+            402.6069641113281,
+            87.44862365722656
+          ]
+        ],
+        "path": "frames/08_3163_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_08_3163.png"
+  },
+  {
+    "index": 9,
+    "episode": 5410,
+    "map_name": "birmingham_block_7",
+    "instruction": "this gray roofed building is north of Stoneleigh Road and on the corner of Bragg Road. There are two white and one blue cars in front of the building, and a red car on the left.",
+    "word": "north",
+    "landmark": "Stoneleigh Road",
+    "public_object_ids": [
+      "116"
+    ],
+    "catalog_names": [
+      "Stoneleigh Road"
+    ],
+    "object_types": [
+      "TrafficRoad"
+    ],
+    "polygon_count": 1,
+    "target": [
+      813.421875,
+      309.65625
+    ],
+    "centroid": [
+      833.3500683249833,
+      328.79001993050395
+    ],
+    "grid_mean": [
+      833.3449065347197,
+      328.77301898730167
+    ],
+    "centroid_direction_margin": -19.133769930503945,
+    "grid_direction_margin": -19.11676898730167,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 45.161106418918905,
+    "margin_from_max": -78.52200168918921,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e3",
+      "object": "e7",
+      "predicate": "north of",
+      "source_span": [
+        17,
+        53
+      ],
+      "source_text": "building is north of Stoneleigh Road",
+      "dependency_evidence": "north -> of -> Stoneleigh Road",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          967.1181441653,
+          288.1564750327,
+          120.005403258,
+          1.8740850468161043
+        ],
+        "footprint": [
+          [
+            828.1138916015625,
+            360.896728515625
+          ],
+          [
+            1039.8583984375,
+            427.1607666015625
+          ],
+          [
+            1106.1224365234375,
+            215.41619873046875
+          ],
+          [
+            894.3779296875,
+            149.1521759033203
+          ]
+        ],
+        "path": "frames/09_5410_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          813.7150528866,
+          311.638599344,
+          14.5486740221,
+          -2.966710502097215
+        ],
+        "footprint": [
+          [
+            809.2731323242188,
+            305.29022216796875
+          ],
+          [
+            807.3666381835938,
+            316.08050537109375
+          ],
+          [
+            818.1569213867188,
+            317.98699951171875
+          ],
+          [
+            820.0634155273438,
+            307.19671630859375
+          ]
+        ],
+        "path": "frames/09_5410_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_09_5410.png"
+  },
+  {
+    "index": 10,
+    "episode": 5474,
+    "map_name": "birmingham_block_7",
+    "instruction": "this is the white car and it is south of Aston Lane on the corner of Aston Lane/Wellhead Lane. south of this car another black car is partially visible.",
+    "word": "south",
+    "landmark": "Aston Lane",
+    "public_object_ids": [
+      "117",
+      "120"
+    ],
+    "catalog_names": [
+      "Aston Lane",
+      "Aston Lane"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 2,
+    "target": [
+      942.5625,
+      394.0625
+    ],
+    "centroid": [
+      954.2099620910257,
+      371.3980520410292
+    ],
+    "grid_mean": [
+      954.2042840073274,
+      371.37849728068886
+    ],
+    "centroid_direction_margin": -22.66444795897081,
+    "grid_direction_margin": -22.684002719311138,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 5.90625,
+    "margin_from_max": -58.980532094594594,
+    "fragment_status": [
+      "within_anchor_extent",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 6.375359222585177,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e4",
+      "object": "e10",
+      "predicate": "south of",
+      "source_span": [
+        18,
+        51
+      ],
+      "source_text": "car and it is south of Aston Lane",
+      "dependency_evidence": "south -> of -> Aston Lane",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1082.1899065457,
+          368.5876143287,
+          128.3388069267,
+          -2.712809233430298
+        ],
+        "footprint": [
+          [
+            1023.3060302734375,
+            210.5281524658203
+          ],
+          [
+            924.1304931640625,
+            427.4715576171875
+          ],
+          [
+            1141.0738525390625,
+            526.6470947265625
+          ],
+          [
+            1240.2493896484375,
+            309.70367431640625
+          ]
+        ],
+        "path": "frames/10_5474_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          933.1285803363,
+          388.2125495582,
+          9.5703224352,
+          1.3287130092191697
+        ],
+        "footprint": [
+          [
+            932.7628173828125,
+            388.8182678222656
+          ],
+          [
+            933.7343139648438,
+            388.578369140625
+          ],
+          [
+            933.494384765625,
+            387.6068420410156
+          ],
+          [
+            932.5228881835938,
+            387.84674072265625
+          ]
+        ],
+        "path": "frames/10_5474_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_10_5474.png"
+  },
+  {
+    "index": 11,
+    "episode": 5522,
+    "map_name": "birmingham_block_7",
+    "instruction": "White car to the right of the white rectangular building with green stripes on the roof, south of Aston Lane. There are two blue containers to the south of this car.",
+    "word": "south",
+    "landmark": "Aston Lane",
+    "public_object_ids": [
+      "117",
+      "120"
+    ],
+    "catalog_names": [
+      "Aston Lane",
+      "Aston Lane"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 2,
+    "target": [
+      1032.875,
+      383.53125
+    ],
+    "centroid": [
+      954.2099620910257,
+      371.3980520410292
+    ],
+    "grid_mean": [
+      954.2042840073274,
+      371.37849728068886
+    ],
+    "centroid_direction_margin": -12.133197958970811,
+    "grid_direction_margin": -12.152752719311138,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 16.4375,
+    "margin_from_max": -48.449282094594594,
+    "fragment_status": [
+      "within_anchor_extent",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r3",
+      "dependency_predicate": "south of",
+      "subject": "e1",
+      "object": "e19",
+      "predicate": "south of",
+      "source_span": [
+        6,
+        108
+      ],
+      "source_text": "car to the right of the white rectangular building with green stripes on the roof, south of Aston Lane",
+      "dependency_evidence": "south -> of -> Aston Lane",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          923.0409505006,
+          311.3574030106,
+          126.1656022097,
+          0.03132893371399609
+        ],
+        "footprint": [
+          [
+            1036.4112548828125,
+            432.0634460449219
+          ],
+          [
+            1043.7470703125,
+            197.9871063232422
+          ],
+          [
+            809.670654296875,
+            190.65133666992188
+          ],
+          [
+            802.3348999023438,
+            424.7276611328125
+          ]
+        ],
+        "path": "frames/11_5522_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1018.0747444888,
+          371.7224030533,
+          18.2866799747,
+          0.6143612889461649
+        ],
+        "footprint": [
+          [
+            1020.2932739257812,
+            384.5666198730469
+          ],
+          [
+            1030.9189453125,
+            369.50390625
+          ],
+          [
+            1015.8562622070312,
+            358.8782043457031
+          ],
+          [
+            1005.2305908203125,
+            373.94091796875
+          ]
+        ],
+        "path": "frames/11_5522_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_11_5522.png"
+  },
+  {
+    "index": 12,
+    "episode": 5533,
+    "map_name": "birmingham_block_7",
+    "instruction": "This black car is the closest car to the road in the large building's parking lot, between two white-roofed buildings, one large and one small, south of Aston Lane.",
+    "word": "south",
+    "landmark": "Aston Lane",
+    "public_object_ids": [
+      "117",
+      "120"
+    ],
+    "catalog_names": [
+      "Aston Lane",
+      "Aston Lane"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 2,
+    "target": [
+      1018.75,
+      373.078125
+    ],
+    "centroid": [
+      954.2099620910257,
+      371.3980520410292
+    ],
+    "grid_mean": [
+      954.2042840073274,
+      371.37849728068886
+    ],
+    "centroid_direction_margin": -1.6800729589708112,
+    "grid_direction_margin": -1.6996277193111382,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 26.890625,
+    "margin_from_max": -37.996157094594594,
+    "fragment_status": [
+      "desired_side",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r3",
+      "dependency_predicate": "south of",
+      "subject": "e2",
+      "object": "e33",
+      "predicate": "south of",
+      "source_span": [
+        11,
+        163
+      ],
+      "source_text": "car is the closest car to the road in the large building's parking lot, between two white-roofed buildings, one large and one small, south of Aston Lane",
+      "dependency_evidence": "south -> of -> Aston Lane",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1066.852718399,
+          267.7372654615,
+          118.0655044903,
+          2.746544119545233
+        ],
+        "footprint": [
+          [
+            924.304931640625,
+            209.0840606689453
+          ],
+          [
+            1008.199462890625,
+            410.28497314453125
+          ],
+          [
+            1209.400390625,
+            326.3904724121094
+          ],
+          [
+            1125.505859375,
+            125.18955993652344
+          ]
+        ],
+        "path": "frames/12_5533_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1019.0458479196,
+          372.2057461949,
+          8.7212878649,
+          1.9807820794738928
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_12_5533.png"
+  },
+  {
+    "index": 13,
+    "episode": 5672,
+    "map_name": "birmingham_block_7",
+    "instruction": "North of Aston Manor Close, this white roofed building is to the left of a green sport field.",
+    "word": "north",
+    "landmark": "Aston Manor Close",
+    "public_object_ids": [
+      "114",
+      "115"
+    ],
+    "catalog_names": [
+      "Aston Manor Close",
+      "Aston Manor Close"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 2,
+    "target": [
+      977.578125,
+      250.84375
+    ],
+    "centroid": [
+      918.6565058280813,
+      334.8910135033957
+    ],
+    "grid_mean": [
+      918.7709668484745,
+      334.88030682089834
+    ],
+    "centroid_direction_margin": -84.0472635033957,
+    "grid_direction_margin": -84.03655682089834,
+    "interval_status": "opposite_side",
+    "margin_from_min": -56.28458614864866,
+    "margin_from_max": -126.87141047297297,
+    "fragment_status": [
+      "opposite_side",
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "multi_polygon",
+      "literal_direction_or_reference_frame_unresolved"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e7",
+      "object": "e2",
+      "predicate": "north of",
+      "source_span": [
+        9,
+        54
+      ],
+      "source_text": "Aston Manor Close, this white roofed building",
+      "dependency_evidence": "North -> of -> Aston Manor Close",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1039.5550625127,
+          337.7085993995,
+          119.2039848676,
+          -2.8365312119798145
+        ],
+        "footprint": [
+          [
+            967.5850219726562,
+            199.58067321777344
+          ],
+          [
+            901.4271240234375,
+            409.6785888671875
+          ],
+          [
+            1111.5250244140625,
+            475.83648681640625
+          ],
+          [
+            1177.6829833984375,
+            265.73858642578125
+          ]
+        ],
+        "path": "frames/13_5672_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          964.4859916757,
+          257.2899556473,
+          20.6124861759,
+          -2.0601854957960275
+        ],
+        "footprint": [
+          [
+            969.2476196289062,
+            241.67630004882812
+          ],
+          [
+            948.872314453125,
+            252.5282745361328
+          ],
+          [
+            959.7243041992188,
+            272.9035949707031
+          ],
+          [
+            980.099609375,
+            262.0516052246094
+          ]
+        ],
+        "path": "frames/13_5672_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_13_5672.png"
+  },
+  {
+    "index": 14,
+    "episode": 5717,
+    "map_name": "birmingham_block_9",
+    "instruction": "This is the T-shaped red-roofed building and is north of Aldridge Road. To the right of this building is a similar building and to the left is a tree, parking area and triangular green area.",
+    "word": "north",
+    "landmark": "Aldridge Road",
+    "public_object_ids": [
+      "237",
+      "241",
+      "242",
+      "247",
+      "248",
+      "267",
+      "269",
+      "270",
+      "271"
+    ],
+    "catalog_names": [
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 9,
+    "target": [
+      825.625,
+      1141.640625
+    ],
+    "centroid": [
+      844.4797629736054,
+      1052.5540642490596
+    ],
+    "grid_mean": [
+      844.4554042312661,
+      1052.542890650361
+    ],
+    "centroid_direction_margin": 89.08656075094041,
+    "grid_direction_margin": 89.09773434963904,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 259.2826239618954,
+    "margin_from_max": -58.328125,
+    "fragment_status": [
+      "desired_side",
+      "desired_side",
+      "desired_side",
+      "opposite_side",
+      "desired_side",
+      "within_anchor_extent",
+      "desired_side",
+      "opposite_side",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e9",
+      "object": "e14",
+      "predicate": "north of",
+      "source_span": [
+        32,
+        70
+      ],
+      "source_text": "building and is north of Aldridge Road",
+      "dependency_evidence": "north -> of -> Aldridge Road",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          956.0281528512,
+          1050.7684232795,
+          146.0604022929,
+          -0.8675073544015699
+        ],
+        "footprint": [
+          [
+            1148.0252685546875,
+            1034.9681396484375
+          ],
+          [
+            940.2279052734375,
+            858.7713623046875
+          ],
+          [
+            764.031005859375,
+            1066.5687255859375
+          ],
+          [
+            971.828369140625,
+            1242.7655029296875
+          ]
+        ],
+        "path": "frames/14_5717_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          849.6131779544,
+          1139.8486392525,
+          34.8563356253,
+          -3.0991326358604434
+        ],
+        "footprint": [
+          [
+            825.6802978515625,
+            1113.7919921875
+          ],
+          [
+            823.5564575195312,
+            1163.781494140625
+          ],
+          [
+            873.5460205078125,
+            1165.9052734375
+          ],
+          [
+            875.6698608398438,
+            1115.915771484375
+          ]
+        ],
+        "path": "frames/14_5717_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_14_5717.png"
+  },
+  {
+    "index": 15,
+    "episode": 5747,
+    "map_name": "birmingham_block_9",
+    "instruction": "this is the building with the gray roof. this building is the building on the right at the far north of Aldridge road. In front of this building, there is a blue car on the road.",
+    "word": "north",
+    "landmark": "Aldridge Road",
+    "public_object_ids": [
+      "237",
+      "241",
+      "242",
+      "247",
+      "248",
+      "267",
+      "269",
+      "270",
+      "271"
+    ],
+    "catalog_names": [
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 9,
+    "target": [
+      881.0,
+      1197.6875
+    ],
+    "centroid": [
+      844.4797629736054,
+      1052.5540642490596
+    ],
+    "grid_mean": [
+      844.4554042312661,
+      1052.542890650361
+    ],
+    "centroid_direction_margin": 145.1334357509404,
+    "grid_direction_margin": 145.14460934963904,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 315.3294989618954,
+    "margin_from_max": -2.28125,
+    "fragment_status": [
+      "desired_side",
+      "desired_side",
+      "desired_side",
+      "within_anchor_extent",
+      "desired_side",
+      "desired_side",
+      "desired_side",
+      "within_anchor_extent",
+      "desired_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e3",
+      "object": "e22",
+      "predicate": "north of",
+      "source_span": [
+        12,
+        117
+      ],
+      "source_text": "building with the gray roof. this building is the building on the right at the far north of Aldridge road",
+      "dependency_evidence": "north -> of -> Aldridge road",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          887.0670894125,
+          1083.451369952,
+          135.9752906066,
+          -0.6413727164728347
+        ],
+        "footprint": [
+          [
+            1063.603759765625,
+            1109.054443359375
+          ],
+          [
+            912.6701049804688,
+            906.9146728515625
+          ],
+          [
+            710.5303955078125,
+            1057.848388671875
+          ],
+          [
+            861.4640502929688,
+            1259.9881591796875
+          ]
+        ],
+        "path": "frames/15_5747_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          877.0521372485,
+          1194.7183439582,
+          17.2436854292,
+          1.1282781746214317
+        ],
+        "footprint": [
+          [
+            873.531494140625,
+            1204.58056640625
+          ],
+          [
+            886.9143676757812,
+            1198.239013671875
+          ],
+          [
+            880.57275390625,
+            1184.856201171875
+          ],
+          [
+            867.1898803710938,
+            1191.19775390625
+          ]
+        ],
+        "path": "frames/15_5747_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_15_5747.png"
+  },
+  {
+    "index": 16,
+    "episode": 5836,
+    "map_name": "birmingham_block_9",
+    "instruction": "The white car parked and facing the north side of Aldridge Road when viewing the road as a horizontal road. The white car is located between two similarly shaped buildings that have upside down 'T's.",
+    "word": "north",
+    "landmark": "Aldridge Road",
+    "public_object_ids": [
+      "237",
+      "241",
+      "242",
+      "247",
+      "248",
+      "267",
+      "269",
+      "270",
+      "271"
+    ],
+    "catalog_names": [
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road",
+      "Aldridge Road"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 9,
+    "target": [
+      834.34375,
+      1152.34375
+    ],
+    "centroid": [
+      844.4797629736054,
+      1052.5540642490596
+    ],
+    "grid_mean": [
+      844.4554042312661,
+      1052.542890650361
+    ],
+    "centroid_direction_margin": 99.78968575094041,
+    "grid_direction_margin": 99.80085934963904,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 269.9857489618954,
+    "margin_from_max": -47.625,
+    "fragment_status": [
+      "desired_side",
+      "desired_side",
+      "desired_side",
+      "within_anchor_extent",
+      "desired_side",
+      "within_anchor_extent",
+      "desired_side",
+      "opposite_side",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon",
+      "text_scope_review",
+      "position_relation_parse_not_supported"
+    ],
+    "note": "facing the north side描述朝向/道路侧，且原文明确when viewing the road as a horizontal road；不宜作无歧义世界位置标签。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "side of",
+      "subject": "e2",
+      "object": "e10",
+      "predicate": "north side of",
+      "source_span": [
+        10,
+        63
+      ],
+      "source_text": "car parked and facing the north side of Aldridge Road",
+      "dependency_evidence": "side -> of -> Aldridge Road",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          933.0453617506,
+          905.7084991001,
+          102.5274581865,
+          0.9543645653678469
+        ],
+        "footprint": [
+          [
+            911.0022583007812,
+            1034.923095703125
+          ],
+          [
+            1062.2598876953125,
+            927.7515869140625
+          ],
+          [
+            955.0884399414062,
+            776.4939575195312
+          ],
+          [
+            803.830810546875,
+            883.6654052734375
+          ]
+        ],
+        "path": "frames/16_5836_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          833.781231,
+          1151.4581038042,
+          15.1644011586,
+          1.1474541674761847
+        ],
+        "footprint": [
+          [
+            831.1137084960938,
+            1158.5010986328125
+          ],
+          [
+            840.82421875,
+            1154.125732421875
+          ],
+          [
+            836.4487915039062,
+            1144.4151611328125
+          ],
+          [
+            826.73828125,
+            1148.79052734375
+          ]
+        ],
+        "path": "frames/16_5836_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_16_5836.png"
+  },
+  {
+    "index": 17,
+    "episode": 5912,
+    "map_name": "birmingham_block_9",
+    "instruction": "this white car is at the far north of Wellhead Lane. There is a large sand dune on the right side of this road.",
+    "word": "north",
+    "landmark": "Wellhead Lane",
+    "public_object_ids": [
+      "249",
+      "268"
+    ],
+    "catalog_names": [
+      "Wellhead Lane",
+      "Wellhead Lane"
+    ],
+    "object_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "polygon_count": 2,
+    "target": [
+      896.59375,
+      802.1875
+    ],
+    "centroid": [
+      861.1782442983401,
+      857.4423012166179
+    ],
+    "grid_mean": [
+      861.0543452110195,
+      857.527491019988
+    ],
+    "centroid_direction_margin": -55.25480121661792,
+    "grid_direction_margin": -55.33999101998802,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 2.1875,
+    "margin_from_max": -93.26180843917928,
+    "fragment_status": [
+      "opposite_side",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e2",
+      "object": "e9",
+      "predicate": "north of",
+      "source_span": [
+        11,
+        51
+      ],
+      "source_text": "car is at the far north of Wellhead Lane",
+      "dependency_evidence": "north -> of -> Wellhead Lane",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1044.5489329712,
+          894.2384681556,
+          107.4902896663,
+          1.9751811450614793
+        ],
+        "footprint": [
+          [
+            916.3525390625,
+            945.5924072265625
+          ],
+          [
+            1095.9029541015625,
+            1022.4348754882812
+          ],
+          [
+            1172.745361328125,
+            842.884521484375
+          ],
+          [
+            993.1950073242188,
+            766.0420532226562
+          ]
+        ],
+        "path": "frames/17_5912_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          896.2072216704,
+          802.0343861549,
+          10.1713053716,
+          -1.1227102717679622
+        ],
+        "footprint": [
+          [
+            896.6506958007812,
+            801.8788452148438
+          ],
+          [
+            896.0516967773438,
+            801.5908813476562
+          ],
+          [
+            895.7637329101562,
+            802.1898803710938
+          ],
+          [
+            896.3627319335938,
+            802.4778442382812
+          ]
+        ],
+        "path": "frames/17_5912_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_17_5912.png"
+  },
+  {
+    "index": 18,
+    "episode": 6047,
+    "map_name": "birmingham_block_9",
+    "instruction": "this is the white car and it is the second car from the right in the parking lot north of the Perry Barr Bus Depot building. This car has white cars to the north, gray to the right, and gray and black cars to the left.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      960.1875,
+      842.53125
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": 13.082074710820507,
+    "grid_direction_margin": 13.241640770224876,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 42.53125,
+    "margin_from_max": -13.839528883732328,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "text_scope_review"
+    ],
+    "note": "north of修饰停车场；目标包含于停车场。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r1",
+      "dependency_predicate": "north of",
+      "subject": "e4",
+      "object": "e21",
+      "predicate": "north of",
+      "source_span": [
+        18,
+        123
+      ],
+      "source_text": "car and it is the second car from the right in the parking lot north of the Perry Barr Bus Depot building",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot building",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1078.037595897,
+          1095.56652496,
+          137.701820123,
+          -2.2561373248188965
+        ],
+        "footprint": [
+          [
+            1096.100341796875,
+            915.6456298828125
+          ],
+          [
+            898.11669921875,
+            1077.5037841796875
+          ],
+          [
+            1059.974853515625,
+            1275.4874267578125
+          ],
+          [
+            1257.95849609375,
+            1113.6292724609375
+          ]
+        ],
+        "path": "frames/18_6047_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          954.5426132766,
+          820.4145061426,
+          11.1489315864,
+          -1.977639031267289
+        ],
+        "footprint": [
+          [
+            955.2272338867188,
+            818.693115234375
+          ],
+          [
+            952.8212280273438,
+            819.7298583984375
+          ],
+          [
+            953.8579711914062,
+            822.1358642578125
+          ],
+          [
+            956.2639770507812,
+            821.09912109375
+          ]
+        ],
+        "path": "frames/18_6047_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_18_6047.png"
+  },
+  {
+    "index": 19,
+    "episode": 6099,
+    "map_name": "birmingham_block_9",
+    "instruction": "this is the white car and it is the 4th car from the right in the parking lot north of the Perry Barr Bus Depot building. This car has a blue car to its left, a white car to its right and an adjacent white car, the parking spot to the north is vacant.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      960.703125,
+      827.65625
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": -1.7929252891794931,
+    "grid_direction_margin": -1.6333592297751238,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 27.65625,
+    "margin_from_max": -28.714528883732328,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "text_scope_review"
+    ],
+    "note": "north of修饰停车场；目标包含于停车场。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r1",
+      "dependency_predicate": "north of",
+      "subject": "e4",
+      "object": "e21",
+      "predicate": "north of",
+      "source_span": [
+        18,
+        120
+      ],
+      "source_text": "car and it is the 4th car from the right in the parking lot north of the Perry Barr Bus Depot building",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot building",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1061.874057612,
+          1119.0202559409,
+          104.7584741762,
+          -2.051786611518038
+        ],
+        "footprint": [
+          [
+            1102.1085205078125,
+            990.9554443359375
+          ],
+          [
+            933.8092041015625,
+            1078.7857666015625
+          ],
+          [
+            1021.6395874023438,
+            1247.0850830078125
+          ],
+          [
+            1189.9388427734375,
+            1159.2547607421875
+          ]
+        ],
+        "path": "frames/19_6099_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          949.0516003353,
+          835.5251955138,
+          12.5272557804,
+          -1.6208334333180205
+        ],
+        "footprint": [
+          [
+            951.6019897460938,
+            832.7058715820312
+          ],
+          [
+            946.2322387695312,
+            832.9747924804688
+          ],
+          [
+            946.5011596679688,
+            838.3445434570312
+          ],
+          [
+            951.8709106445312,
+            838.0756225585938
+          ]
+        ],
+        "path": "frames/19_6099_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_19_6099.png"
+  },
+  {
+    "index": 20,
+    "episode": 6103,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the north of Perry Barr Bus Depot, this white car is fourth car from the right on the northmost row of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      960.703125,
+      827.65625
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": -1.7929252891794931,
+    "grid_direction_margin": -1.6333592297751238,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 27.65625,
+    "margin_from_max": -28.714528883732328,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e8",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        16,
+        52
+      ],
+      "source_text": "Perry Barr Bus Depot, this white car",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          930.6948443263,
+          1063.0875101365,
+          126.0104147749,
+          -0.746008166130356
+        ],
+        "footprint": [
+          [
+            1094.8585205078125,
+            1069.5572509765625
+          ],
+          [
+            937.1646118164062,
+            898.9237670898438
+          ],
+          [
+            766.5310668945312,
+            1056.6177978515625
+          ],
+          [
+            924.2250366210938,
+            1227.251220703125
+          ]
+        ],
+        "path": "frames/20_6103_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          952.7959532159,
+          804.3227064723,
+          11.6567308081,
+          -1.8223467822196575
+        ],
+        "footprint": [
+          [
+            954.10400390625,
+            802.1097412109375
+          ],
+          [
+            950.5830078125,
+            803.0146484375
+          ],
+          [
+            951.4879150390625,
+            806.53564453125
+          ],
+          [
+            955.0089111328125,
+            805.6307373046875
+          ]
+        ],
+        "path": "frames/20_6103_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_20_6103.png"
+  },
+  {
+    "index": 21,
+    "episode": 6108,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the north of Perry Barr Bus Depot, this dark blue car is the car closest to three orange cubes in the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      960.796875,
+      851.96875
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": 22.519574710820507,
+    "grid_direction_margin": 22.679140770224876,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 51.96875,
+    "margin_from_max": -4.402028883732328,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e9",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        16,
+        56
+      ],
+      "source_text": "Perry Barr Bus Depot, this dark blue car",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1052.9216516011,
+          848.2465962231,
+          125.3323867162,
+          1.9103129007865798
+        ],
+        "footprint": [
+          [
+            905.5582275390625,
+            918.6842041015625
+          ],
+          [
+            1123.3592529296875,
+            995.6099853515625
+          ],
+          [
+            1200.2850341796875,
+            777.8089599609375
+          ],
+          [
+            982.4840087890625,
+            700.8831787109375
+          ]
+        ],
+        "path": "frames/21_6108_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          972.4897487102,
+          856.4783509769,
+          16.6977922374,
+          0.5081232377878825
+        ],
+        "footprint": [
+          [
+            975.1448974609375,
+            865.8076171875
+          ],
+          [
+            981.8190307617188,
+            853.8231811523438
+          ],
+          [
+            969.8345947265625,
+            847.1490478515625
+          ],
+          [
+            963.1604614257812,
+            859.1334838867188
+          ]
+        ],
+        "path": "frames/21_6108_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_21_6108.png"
+  },
+  {
+    "index": 22,
+    "episode": 6186,
+    "map_name": "birmingham_block_9",
+    "instruction": "this is the white car and it is on Holford Drive. To the north of this car is the West Midlands Police Custody Suite and to the south is a building with an invisible roof and partially visible walls.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "public_object_ids": [
+      "17"
+    ],
+    "catalog_names": [
+      "West Midlands Police Custody Suite"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      1168.984375,
+      1173.359375
+    ],
+    "centroid": [
+      1156.2638426298179,
+      1115.6046278116842
+    ],
+    "grid_mean": [
+      1156.2676416778745,
+      1115.5491488896193
+    ],
+    "centroid_direction_margin": -57.75474718831583,
+    "grid_direction_margin": -57.810226110380654,
+    "interval_status": "opposite_side",
+    "margin_from_min": -18.037845017098107,
+    "margin_from_max": -95.999511480215,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "原文是地标在车辆北侧；抽取成车辆在地标南侧，逆关系正确。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r1",
+      "dependency_predicate": "north of",
+      "subject": "e19",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        18,
+        116
+      ],
+      "source_text": "car and it is on Holford Drive. To the north of this car is the West Midlands Police Custody Suite",
+      "dependency_evidence": "north -> of -> car",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1078.9635233059,
+          1025.1195029442,
+          103.5516452185,
+          -2.829708881531871
+        ],
+        "footprint": [
+          [
+            1018.5277709960938,
+            907.171875
+          ],
+          [
+            961.015869140625,
+            1085.5552978515625
+          ],
+          [
+            1139.3992919921875,
+            1143.067138671875
+          ],
+          [
+            1196.9111328125,
+            964.6837768554688
+          ]
+        ],
+        "path": "frames/22_6186_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1167.1877273763,
+          1174.3761555586,
+          8.2609028059,
+          0.42874245265153715
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_22_6186.png"
+  },
+  {
+    "index": 23,
+    "episode": 6215,
+    "map_name": "birmingham_block_9",
+    "instruction": "In the row of nine cars parked to the south of West Midlands Police Custody Suite, this white car is first from the right.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "public_object_ids": [
+      "17"
+    ],
+    "catalog_names": [
+      "West Midlands Police Custody Suite"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      1185.25,
+      1164.515625
+    ],
+    "centroid": [
+      1156.2638426298179,
+      1115.6046278116842
+    ],
+    "grid_mean": [
+      1156.2676416778745,
+      1115.5491488896193
+    ],
+    "centroid_direction_margin": -48.91099718831583,
+    "grid_direction_margin": -48.966476110380654,
+    "interval_status": "opposite_side",
+    "margin_from_min": -9.194095017098107,
+    "margin_from_max": -87.155761480215,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 3.939605435444053,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "south of修饰车排；须保留包含链。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r2",
+      "dependency_predicate": "south of",
+      "subject": "e5",
+      "object": "e11",
+      "predicate": "south of",
+      "source_span": [
+        19,
+        81
+      ],
+      "source_text": "cars parked to the south of West Midlands Police Custody Suite",
+      "dependency_evidence": "south -> of -> West Midlands Police Custody Suite",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1194.0958108935,
+          1175.6158724593,
+          112.969084427,
+          -2.4060031539866924
+        ],
+        "footprint": [
+          [
+            1186.8343505859375,
+            1029.94873046875
+          ],
+          [
+            1048.4287109375,
+            1182.8773193359375
+          ],
+          [
+            1201.3572998046875,
+            1321.282958984375
+          ],
+          [
+            1339.762939453125,
+            1168.3543701171875
+          ]
+        ],
+        "path": "frames/23_6215_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1190.8297127045,
+          1158.4322354041,
+          8.33892283,
+          0.5510423115191245
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_23_6215.png"
+  },
+  {
+    "index": 24,
+    "episode": 6245,
+    "map_name": "birmingham_block_9",
+    "instruction": "In the row of nine cars parked to the south of West Midlands Police Custody Suite, this bluish gray car is second from the right.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "public_object_ids": [
+      "17"
+    ],
+    "catalog_names": [
+      "West Midlands Police Custody Suite"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      1191.703125,
+      1156.59375
+    ],
+    "centroid": [
+      1156.2638426298179,
+      1115.6046278116842
+    ],
+    "grid_mean": [
+      1156.2676416778745,
+      1115.5491488896193
+    ],
+    "centroid_direction_margin": -40.98912218831583,
+    "grid_direction_margin": -41.044601110380654,
+    "interval_status": "opposite_side",
+    "margin_from_min": -1.2722200170981068,
+    "margin_from_max": -79.233886480215,
+    "fragment_status": [
+      "opposite_side"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "literal_direction_or_reference_frame_unresolved",
+      "text_scope_review"
+    ],
+    "note": "south of修饰车排；须保留包含链。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r2",
+      "dependency_predicate": "south of",
+      "subject": "e5",
+      "object": "e11",
+      "predicate": "south of",
+      "source_span": [
+        19,
+        81
+      ],
+      "source_text": "cars parked to the south of West Midlands Police Custody Suite",
+      "dependency_evidence": "south -> of -> West Midlands Police Custody Suite",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1115.7784942814,
+          851.6854128575,
+          101.5199120443,
+          2.2373444741551145
+        ],
+        "footprint": [
+          [
+            987.0366821289062,
+            867.058837890625
+          ],
+          [
+            1131.15185546875,
+            980.4271850585938
+          ],
+          [
+            1244.5201416015625,
+            836.31201171875
+          ],
+          [
+            1100.405029296875,
+            722.9436645507812
+          ]
+        ],
+        "path": "frames/24_6245_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1191.8311816754,
+          1156.4241143247,
+          3.0,
+          3.08499038907238
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_24_6245.png"
+  },
+  {
+    "index": 25,
+    "episode": 6250,
+    "map_name": "birmingham_block_9",
+    "instruction": "In the row of nine cars parked to the south of West Midlands Police Custody Suite, this gray car is third from the left.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "public_object_ids": [
+      "17"
+    ],
+    "catalog_names": [
+      "West Midlands Police Custody Suite"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      1192.390625,
+      1143.984375
+    ],
+    "centroid": [
+      1156.2638426298179,
+      1115.6046278116842
+    ],
+    "grid_mean": [
+      1156.2676416778745,
+      1115.5491488896193
+    ],
+    "centroid_direction_margin": -28.379747188315832,
+    "grid_direction_margin": -28.435226110380654,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 11.337154982901893,
+    "margin_from_max": -66.624511480215,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "text_scope_review"
+    ],
+    "note": "south of修饰车排；须保留包含链。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r2",
+      "dependency_predicate": "south of",
+      "subject": "e5",
+      "object": "e11",
+      "predicate": "south of",
+      "source_span": [
+        19,
+        81
+      ],
+      "source_text": "cars parked to the south of West Midlands Police Custody Suite",
+      "dependency_evidence": "south -> of -> West Midlands Police Custody Suite",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          830.7954610755,
+          885.4925663435,
+          132.4004204707,
+          0.594286466036228
+        ],
+        "footprint": [
+          [
+            863.71923828125,
+            1055.6649169921875
+          ],
+          [
+            1000.9677734375,
+            852.5687866210938
+          ],
+          [
+            797.8717041015625,
+            715.3201904296875
+          ],
+          [
+            660.6231689453125,
+            918.4163208007812
+          ]
+        ],
+        "path": "frames/25_6250_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1192.5799756527,
+          1143.8057350269,
+          7.6515011018,
+          -2.133320332558652
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_25_6250.png"
+  },
+  {
+    "index": 26,
+    "episode": 6517,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the south of The Coppice, this white car is parked north of the Perry Barr footpath, between a tree and a dark blue car.",
+    "word": "south",
+    "landmark": "The Coppice",
+    "public_object_ids": [
+      "0",
+      "238"
+    ],
+    "catalog_names": [
+      "The Coppice",
+      "The Coppice"
+    ],
+    "object_types": [
+      "Building",
+      "TrafficRoad"
+    ],
+    "polygon_count": 2,
+    "target": [
+      978.109375,
+      908.28125
+    ],
+    "centroid": [
+      876.8982235680452,
+      937.95687485762
+    ],
+    "grid_mean": [
+      877.165089827862,
+      938.0587145074874
+    ],
+    "centroid_direction_margin": 29.67562485762005,
+    "grid_direction_margin": 29.777464507487366,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 100.88657944553006,
+    "margin_from_max": -25.141678370786508,
+    "fragment_status": [
+      "within_anchor_extent",
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "multi_polygon",
+      "text_scope_review"
+    ],
+    "note": "同一目标包含两个关系；Perry Barr footpath绑定到Perry Barr可能存在名称范围混淆，需核对公开对象类型。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e8",
+      "object": "e4",
+      "predicate": "south of",
+      "source_span": [
+        16,
+        43
+      ],
+      "source_text": "The Coppice, this white car",
+      "dependency_evidence": "south -> of -> The Coppice",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1121.0498953921,
+          1084.1050363333,
+          140.2725262217,
+          -2.533521334568839
+        ],
+        "footprint": [
+          [
+            1088.51123046875,
+            902.5367431640625
+          ],
+          [
+            939.481689453125,
+            1116.6436767578125
+          ],
+          [
+            1153.588623046875,
+            1265.6732177734375
+          ],
+          [
+            1302.6181640625,
+            1051.5662841796875
+          ]
+        ],
+        "path": "frames/26_6517_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          962.5460422746,
+          912.6049556745,
+          26.9997513391,
+          1.4911605713449616
+        ],
+        "footprint": [
+          [
+            946.8048095703125,
+            931.0764770507812
+          ],
+          [
+            981.0175170898438,
+            928.34619140625
+          ],
+          [
+            978.2872314453125,
+            894.1334838867188
+          ],
+          [
+            944.0745239257812,
+            896.86376953125
+          ]
+        ],
+        "path": "frames/26_6517_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_26_6517.png"
+  },
+  {
+    "index": 27,
+    "episode": 6517,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the south of The Coppice, this white car is parked north of the Perry Barr footpath, between a tree and a dark blue car.",
+    "word": "north",
+    "landmark": "Perry Barr",
+    "public_object_ids": [
+      "211"
+    ],
+    "catalog_names": [
+      "Perry Barr"
+    ],
+    "object_types": [
+      "Footpath"
+    ],
+    "polygon_count": 1,
+    "target": [
+      978.109375,
+      908.28125
+    ],
+    "centroid": [
+      991.2906273357571,
+      910.1380266553148
+    ],
+    "grid_mean": [
+      991.3863351334182,
+      910.1872538233303
+    ],
+    "centroid_direction_margin": -1.8567766553147749,
+    "grid_direction_margin": -1.906003823330252,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 65.78334910845138,
+    "margin_from_max": -73.23851978505127,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous",
+      "text_scope_review",
+      "anchor_name_scope_unverified"
+    ],
+    "note": "同一目标包含两个关系；Perry Barr footpath绑定到Perry Barr可能存在名称范围混淆，需核对公开对象类型。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r1",
+      "dependency_predicate": "north of",
+      "subject": "e8",
+      "object": "e14",
+      "predicate": "north of",
+      "source_span": [
+        40,
+        86
+      ],
+      "source_text": "car is parked north of the Perry Barr footpath",
+      "dependency_evidence": "north -> of -> Perry Barr footpath",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1121.0498953921,
+          1084.1050363333,
+          140.2725262217,
+          -2.533521334568839
+        ],
+        "footprint": [
+          [
+            1088.51123046875,
+            902.5367431640625
+          ],
+          [
+            939.481689453125,
+            1116.6436767578125
+          ],
+          [
+            1153.588623046875,
+            1265.6732177734375
+          ],
+          [
+            1302.6181640625,
+            1051.5662841796875
+          ]
+        ],
+        "path": "frames/27_6517_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          962.5460422746,
+          912.6049556745,
+          26.9997513391,
+          1.4911605713449616
+        ],
+        "footprint": [
+          [
+            946.8048095703125,
+            931.0764770507812
+          ],
+          [
+            981.0175170898438,
+            928.34619140625
+          ],
+          [
+            978.2872314453125,
+            894.1334838867188
+          ],
+          [
+            944.0745239257812,
+            896.86376953125
+          ]
+        ],
+        "path": "frames/27_6517_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_27_6517.png"
+  },
+  {
+    "index": 28,
+    "episode": 6524,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the north of Perry Barr Bus Depot, this dark blue car is first car from the bottom on the leftmost row of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      959.84375,
+      802.71875
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": -26.730425289179493,
+    "grid_direction_margin": -26.570859229775124,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 2.71875,
+    "margin_from_max": -53.65202888373233,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e9",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        16,
+        56
+      ],
+      "source_text": "Perry Barr Bus Depot, this dark blue car",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1015.5977360838,
+          864.3259864459,
+          111.0868013422,
+          1.6893270737463366
+        ],
+        "footprint": [
+          [
+            903.0874633789062,
+            952.8905029296875
+          ],
+          [
+            1104.1622314453125,
+            976.8362426757812
+          ],
+          [
+            1128.1080322265625,
+            775.761474609375
+          ],
+          [
+            927.033203125,
+            751.8157348632812
+          ]
+        ],
+        "path": "frames/28_6524_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          961.4569299226,
+          801.8338694658,
+          15.1049415039,
+          2.60728744315449
+        ],
+        "footprint": [
+          [
+            954.2432861328125,
+            799.9835205078125
+          ],
+          [
+            959.6065673828125,
+            809.0474853515625
+          ],
+          [
+            968.6705322265625,
+            803.6842041015625
+          ],
+          [
+            963.3072509765625,
+            794.6202392578125
+          ]
+        ],
+        "path": "frames/28_6524_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_28_6524.png"
+  },
+  {
+    "index": 29,
+    "episode": 6526,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the north of Perry Barr Bus Depot, this dark gray car is third car from the top on the third row from the left of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      951.125,
+      818.640625
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": -10.808550289179493,
+    "grid_direction_margin": -10.648984229775124,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 18.640625,
+    "margin_from_max": -37.73015388373233,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e9",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        16,
+        56
+      ],
+      "source_text": "Perry Barr Bus Depot, this dark gray car",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1000.7564977586,
+          814.1310312121,
+          146.662595267,
+          1.5775745837761084
+        ],
+        "footprint": [
+          [
+            863.0086059570312,
+            950.0240478515625
+          ],
+          [
+            1136.6495361328125,
+            951.87890625
+          ],
+          [
+            1138.50439453125,
+            678.238037109375
+          ],
+          [
+            864.8634033203125,
+            676.3831787109375
+          ]
+        ],
+        "path": "frames/29_6526_0.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          951.130178247,
+          818.8670805413,
+          11.5194741548,
+          3.046446584313972
+        ],
+        "footprint": [
+          [
+            949.2976684570312,
+            817.3538208007812
+          ],
+          [
+            949.616943359375,
+            820.6995849609375
+          ],
+          [
+            952.9627075195312,
+            820.3803100585938
+          ],
+          [
+            952.6434326171875,
+            817.0345458984375
+          ]
+        ],
+        "path": "frames/29_6526_1.png",
+        "gt_in_footprint": true,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_29_6526.png"
+  },
+  {
+    "index": 30,
+    "episode": 6528,
+    "map_name": "birmingham_block_9",
+    "instruction": "o the north of Perry Barr Bus Depot, this dark blue car is between a white car and an empty parking space,second car from the bottom on the rightmost row of cars facing right in the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      959.0625,
+      833.140625
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": 3.691449710820507,
+    "grid_direction_margin": 3.851015770224876,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 33.140625,
+    "margin_from_max": -23.230153883732328,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e9",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        15,
+        55
+      ],
+      "source_text": "Perry Barr Bus Depot, this dark blue car",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          837.1095313611,
+          933.6208735719,
+          110.0515573601,
+          0.38539628523243913
+        ],
+        "footprint": [
+          [
+            892.2989501953125,
+            1064.1552734375
+          ],
+          [
+            967.6439819335938,
+            878.4314575195312
+          ],
+          [
+            781.920166015625,
+            803.08642578125
+          ],
+          [
+            706.5751342773438,
+            988.8102416992188
+          ]
+        ],
+        "path": "frames/30_6528_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          945.9874911178,
+          834.3298594957,
+          10.8856349151,
+          -1.266055535421454
+        ],
+        "footprint": [
+          [
+            947.2999267578125,
+            833.6454467773438
+          ],
+          [
+            945.3031005859375,
+            833.0173950195312
+          ],
+          [
+            944.675048828125,
+            835.0142211914062
+          ],
+          [
+            946.671875,
+            835.6422729492188
+          ]
+        ],
+        "path": "frames/30_6528_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_30_6528.png"
+  },
+  {
+    "index": 31,
+    "episode": 6533,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the north of Perry Barr Bus Depot, this blue car is second car from the top on the middle row of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "public_object_ids": [
+      "2"
+    ],
+    "catalog_names": [
+      "Perry Barr Bus Depot"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      946.625,
+      833.09375
+    ],
+    "centroid": [
+      1005.2128279744335,
+      829.4491752891795
+    ],
+    "grid_mean": [
+      1005.1300126796776,
+      829.2896092297751
+    ],
+    "centroid_direction_margin": 3.644574710820507,
+    "grid_direction_margin": 3.804140770224876,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 33.09375,
+    "margin_from_max": -23.277028883732328,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "north of",
+      "subject": "e8",
+      "object": "e4",
+      "predicate": "north of",
+      "source_span": [
+        16,
+        51
+      ],
+      "source_text": "Perry Barr Bus Depot, this blue car",
+      "dependency_evidence": "north -> of -> Perry Barr Bus Depot",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1017.519481429,
+          1111.0044732855,
+          110.4885573714,
+          -1.7310143945053338
+        ],
+        "footprint": [
+          [
+            1100.822998046875,
+            995.5870361328125
+          ],
+          [
+            902.1019897460938,
+            1027.7010498046875
+          ],
+          [
+            934.2159423828125,
+            1226.4219970703125
+          ],
+          [
+            1132.9368896484375,
+            1194.3079833984375
+          ]
+        ],
+        "path": "frames/31_6533_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          960.6948370606,
+          817.599765019,
+          11.3750230382,
+          -1.4071816991189534
+        ],
+        "footprint": [
+          [
+            962.4605102539062,
+            816.33447265625
+          ],
+          [
+            959.4295043945312,
+            815.8341064453125
+          ],
+          [
+            958.9291381835938,
+            818.8651123046875
+          ],
+          [
+            961.9601440429688,
+            819.365478515625
+          ]
+        ],
+        "path": "frames/31_6533_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_31_6533.png"
+  },
+  {
+    "index": 32,
+    "episode": 6574,
+    "map_name": "birmingham_block_9",
+    "instruction": "To the south of West Midlands Police Custody Suite, this blue car is near the building, facing a white car.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "public_object_ids": [
+      "17"
+    ],
+    "catalog_names": [
+      "West Midlands Police Custody Suite"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      1183.4375,
+      1083.609375
+    ],
+    "centroid": [
+      1156.2638426298179,
+      1115.6046278116842
+    ],
+    "grid_mean": [
+      1156.2676416778745,
+      1115.5491488896193
+    ],
+    "centroid_direction_margin": 31.995252811684168,
+    "grid_direction_margin": 31.939773889619346,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 71.7121549829019,
+    "margin_from_max": -6.249511480215006,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e8",
+      "object": "e4",
+      "predicate": "south of",
+      "source_span": [
+        16,
+        65
+      ],
+      "source_text": "West Midlands Police Custody Suite, this blue car",
+      "dependency_evidence": "south -> of -> West Midlands Police Custody Suite",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          1089.2562158571,
+          856.4995111116,
+          109.5590572382,
+          2.131308818569537
+        ],
+        "footprint": [
+          [
+            951.7818603515625,
+            887.9474487304688
+          ],
+          [
+            1120.7042236328125,
+            993.973876953125
+          ],
+          [
+            1226.7305908203125,
+            825.0515747070312
+          ],
+          [
+            1057.8082275390625,
+            719.025146484375
+          ]
+        ],
+        "path": "frames/32_6574_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1191.3804815572,
+          1072.4272424886,
+          9.0477703826,
+          -0.666374133351719
+        ],
+        "footprint": null,
+        "path": null,
+        "actual_visibility": "unknown",
+        "reason": "nonpositive_original_altitude"
+      }
+    ],
+    "image": "case_32_6574.png"
+  },
+  {
+    "index": 33,
+    "episode": 6678,
+    "map_name": "birmingham_block_10",
+    "instruction": "South of Weighbridge Offices, this gray roofed building has several cars, two green, parked next to it.",
+    "word": "south",
+    "landmark": "Weighbridge Offices",
+    "public_object_ids": [
+      "17"
+    ],
+    "catalog_names": [
+      "Weighbridge Offices"
+    ],
+    "object_types": [
+      "Building"
+    ],
+    "polygon_count": 1,
+    "target": [
+      1192.703125,
+      1233.875
+    ],
+    "centroid": [
+      1166.8732893711976,
+      1230.3790659296642
+    ],
+    "grid_mean": [
+      1164.9033990547482,
+      1230.3807801584394
+    ],
+    "centroid_direction_margin": -3.4959340703358066,
+    "grid_direction_margin": -3.494219841560607,
+    "interval_status": "within_anchor_extent",
+    "margin_from_min": 17.16249999999991,
+    "margin_from_max": -25.36875000000009,
+    "fragment_status": [
+      "within_anchor_extent"
+    ],
+    "target_to_instance_polygon_distance": 0.0,
+    "flags": [
+      "anchor_extent_ambiguous"
+    ],
+    "note": "字面主客体未见明确倒置；语言参考系及真实地标身份仍须独立来源确认。",
+    "confidence": "geometry_computed; text_review_by_current_assistant; no_human_pixel_gold",
+    "source_relation": {
+      "id": "r0",
+      "dependency_predicate": "south of",
+      "subject": "e7",
+      "object": "e2",
+      "predicate": "south of",
+      "source_span": [
+        9,
+        55
+      ],
+      "source_text": "Weighbridge Offices, this gray roofed building",
+      "dependency_evidence": "South -> of -> Weighbridge Offices",
+      "direction": "subject_relative_to_object",
+      "reference_frame": {
+        "frame": "world_cardinal",
+        "requires_review": false
+      },
+      "relation_kind": "spatial_proposal",
+      "ambiguity": [],
+      "supervision_status": "parser_proposal_not_verified"
+    },
+    "frames": [
+      {
+        "pose": [
+          879.5953204629,
+          1283.5713832901,
+          148.4689367274,
+          -0.3300078285891498
+        ],
+        "footprint": [
+          [
+            1057.7958984375,
+            1370.83984375
+          ],
+          [
+            966.8638305664062,
+            1105.370849609375
+          ],
+          [
+            701.394775390625,
+            1196.302978515625
+          ],
+          [
+            792.3268432617188,
+            1461.77197265625
+          ]
+        ],
+        "path": "frames/33_6678_0.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      },
+      {
+        "pose": [
+          1183.09949601,
+          1220.9421539609,
+          10.2650738196,
+          0.483568107519356
+        ],
+        "footprint": [
+          [
+            1183.9830322265625,
+            1223.77978515625
+          ],
+          [
+            1185.9371337890625,
+            1220.05859375
+          ],
+          [
+            1182.2159423828125,
+            1218.1044921875
+          ],
+          [
+            1180.2618408203125,
+            1221.82568359375
+          ]
+        ],
+        "path": "frames/33_6678_1.png",
+        "gt_in_footprint": false,
+        "actual_visibility": "unknown"
+      }
+    ],
+    "image": "case_33_6678.png"
+  }
+]
