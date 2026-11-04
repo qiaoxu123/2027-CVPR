@@ -1,0 +1,72 @@
+/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/benchmark_unified_pgvb_pilot.py:54: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  loss=weak_landmark_loss(s,labels,fids,types)['total'];loss.backward();torch.nn.utils.clip_grad_norm_(model.pgvb.parameters(),5.);opt.step();return float(loss)
+{
+  "runtime_cold_load_seconds": 4.48984992923215,
+  "fresh_extraction": [
+    {
+      "query_key": "birmingham_block_1::one stop",
+      "frame_id": 12,
+      "seconds": 0.27673189900815487,
+      "siglip2_rgb_forwards": 1,
+      "feature_mae": 1.2551361123769311e-06,
+      "feature_max_error": 0.0001220405101776123,
+      "input_rgb_shape": [
+        384,
+        384,
+        3
+      ],
+      "cached_shape": [
+        144,
+        3,
+        1024
+      ]
+    },
+    {
+      "query_key": "birmingham_block_1::wellington road",
+      "frame_id": 0,
+      "seconds": 0.0473222890868783,
+      "siglip2_rgb_forwards": 1,
+      "feature_mae": 1.251579533345648e-06,
+      "feature_max_error": 0.00012150406837463379,
+      "input_rgb_shape": [
+        384,
+        384,
+        3
+      ],
+      "cached_shape": [
+        144,
+        3,
+        1024
+      ]
+    }
+  ],
+  "geometry_note": "Frozen Geometry one forward per named query; cached during episode; never recomputed in PGVB-only training steps",
+  "resume_one_step_equivalence": {
+    "max_parameter_error": 0.0,
+    "loss_uninterrupted": 0.10621652752161026,
+    "loss_restored": 0.10621652752161026,
+    "passes": true,
+    "probe_not_used_for_training_or_selection": true
+  },
+  "field_summary": {
+    "geometry_only": {
+      "polygon_mass": 0.2642641455555956,
+      "R20": 1.0,
+      "NE": 6.041995391249657
+    },
+    "before": {
+      "polygon_mass": 0.28993167355656624,
+      "R20": 1.0,
+      "NE": 4.298717498779297
+    },
+    "after": {
+      "polygon_mass": 0.29025242167214554,
+      "R20": 1.0,
+      "NE": 4.746165772279103
+    }
+  },
+  "scope": "24 deterministic public named queries, independent TRAIN city; weak Polygon supervision only; no SR claim",
+  "before_sha256": "7a6ec452fff73bef574451901c87c82deaccbfd937f953d839fb6075665c3552",
+  "after_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812"
+}

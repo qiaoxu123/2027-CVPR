@@ -1,0 +1,72 @@
+/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/benchmark_unified_pgvb_pilot.py:54: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:835.)
+  loss=weak_landmark_loss(s,labels,fids,types)['total'];loss.backward();torch.nn.utils.clip_grad_norm_(model.pgvb.parameters(),5.);opt.step();return float(loss)
+{
+  "runtime_cold_load_seconds": 4.41340586123988,
+  "fresh_extraction": [
+    {
+      "query_key": "birmingham_block_1::st teresa s court",
+      "frame_id": 3,
+      "seconds": 0.2962497719563544,
+      "siglip2_rgb_forwards": 1,
+      "feature_mae": 1.2713559272015118e-06,
+      "feature_max_error": 0.0001220405101776123,
+      "input_rgb_shape": [
+        384,
+        384,
+        3
+      ],
+      "cached_shape": [
+        144,
+        3,
+        1024
+      ]
+    },
+    {
+      "query_key": "birmingham_block_1::leslie road",
+      "frame_id": 0,
+      "seconds": 0.04905154509469867,
+      "siglip2_rgb_forwards": 1,
+      "feature_mae": 2.3111779228202067e-06,
+      "feature_max_error": 0.0002359151840209961,
+      "input_rgb_shape": [
+        384,
+        384,
+        3
+      ],
+      "cached_shape": [
+        144,
+        3,
+        1024
+      ]
+    }
+  ],
+  "geometry_note": "Frozen Geometry one forward per named query; cached during episode; never recomputed in PGVB-only training steps",
+  "resume_one_step_equivalence": {
+    "max_parameter_error": 0.0,
+    "loss_uninterrupted": 0.04229516535997391,
+    "loss_restored": 0.04229516535997391,
+    "passes": true,
+    "probe_not_used_for_training_or_selection": true
+  },
+  "field_summary": {
+    "geometry_only": {
+      "polygon_mass": 0.2487477553077042,
+      "R20": 0.9583333333333334,
+      "NE": 5.442286593218644
+    },
+    "before": {
+      "polygon_mass": 0.27347757822523516,
+      "R20": 0.9583333333333334,
+      "NE": 5.060885690152645
+    },
+    "after": {
+      "polygon_mass": 0.2729313721259435,
+      "R20": 0.9583333333333334,
+      "NE": 4.9851382200916605
+    }
+  },
+  "scope": "24 deterministic public named queries, independent TRAIN city; weak Polygon supervision only; no SR claim",
+  "before_sha256": "7a6ec452fff73bef574451901c87c82deaccbfd937f953d839fb6075665c3552",
+  "after_sha256": "c577eef6ae316a0a38a265004caa2f2da4eaeadc73cf0f44473b34d0a6637d51"
+}

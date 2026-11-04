@@ -1,0 +1,15 @@
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_unified_pgvb_training.py _____________
+ImportError while importing test module '/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/tests/test_unified_pgvb_training.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../../miniconda3/envs/graphnav/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_unified_pgvb_training.py:3: in <module>
+    from graphnav.unified_pgvb_training import configure_visual_training,weak_landmark_loss,frame_order
+E   ModuleNotFoundError: No module named 'graphnav.unified_pgvb_training'
+=========================== short test summary info ============================
+ERROR tests/test_unified_pgvb_training.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.04s
