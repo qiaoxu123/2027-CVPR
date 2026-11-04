@@ -1,0 +1,57 @@
+{
+  "complete": true,
+  "by_subset": {
+    "fit": {
+      "samples": 2805,
+      "eligible": 1112,
+      "eligible_names": 297,
+      "eligible_frames": 738,
+      "type_counts": {
+        "Road": 468,
+        "Building": 635,
+        "Ground": 9
+      }
+    },
+    "dev": {
+      "samples": 77,
+      "eligible": 19,
+      "eligible_names": 6,
+      "eligible_frames": 18,
+      "type_counts": {
+        "Road": 13,
+        "Building": 6
+      }
+    },
+    "confirm": {
+      "samples": 77,
+      "eligible": 31,
+      "eligible_names": 9,
+      "eligible_frames": 30,
+      "type_counts": {
+        "Road": 31
+      }
+    }
+  },
+  "named_queries": 433,
+  "excluded": {
+    "duplicate_canonical_name_variants": 6,
+    "source_instruction_removed_from_associated_dataset": 340,
+    "invalid_public_polygon": 48,
+    "mixed_or_unsupported_public_type": 112
+  },
+  "used_filtered_dataset": true,
+  "dataset_manifest_sha256": "f10e45b944d208199526698be33089e4f09a98260456d9ee05473c1811711fe1",
+  "source_manifests": {
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/scoped_between_train294_features_v1/manifest.json": "bd218a1c0ebdb08a7e6709b0ecbfa51a6d57a05f80387b892be380a2bb4497b1"
+  },
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "samples_sha256": "19d5c58cc9e29eef389b47217ca86712fc8b72a390ea84ebf3a0bb80c018bc23",
+  "queries_sha256": "d7cf277b105a5d55d7fd046e00545fa0ae0324af496e5dd386137ad99b3d0d47",
+  "labels_sha256": "1ff2e255f884ab7a9b4dbd40084f3772706cdaf8f90d8f3fb21fa8a4b9135d13",
+  "producer_sha256": "710059687191a5bead0d1cbf4879537b720c8c2a3d1700f609c2bb674476a777",
+  "camera_yaw_rad": 0.0,
+  "native_image_size": 384,
+  "original_target_coordinates_and_ids_read": false,
+  "caveat": "Public polygon projection is weak region supervision, not verified pixel identity or visibility; eligible names separated by original map partitions."
+}
