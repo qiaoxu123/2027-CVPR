@@ -60,7 +60,8 @@ class UnifiedPGVBNamedLandmarkPolicy:
             or not config.get("single_rgb_encoder")
         ):
             raise ValueError("Checkpoint must contain one full geometry+visual model")
-        if config.get("target_ready") or config.get("jointly_trained"):
+        if (config.get("target_ready") or config.get("jointly_trained")
+                or config.get("joint_fusion_ready")):
             raise ValueError("Unvalidated target/joint model cannot use landmark pilot")
 
         self.args = SimpleNamespace(**stage1["a3_args"])
@@ -76,6 +77,7 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.unified.load_state_dict(bundle["model"], strict=True)
         self.unified.direction_ready = bool(config.get("direction_ready", False))
         self.unified.target_ready = False
+        self.unified.joint_ready = False
         self.unified.eval().requires_grad_(False)
 
         # The controller is the only remaining independent trained module.
