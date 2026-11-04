@@ -256,6 +256,6 @@ class UnifiedPGVBNamedLandmarkPolicy:
                 spec["landmark"].get("public_ids", []),
             ),
             language_target_gt_used=False,
-            landmark_visual_supported=self._landmark is not None,
+            landmark_visual_supported=getattr(self, "_landmark", None) is not None,
         )
         return prediction
