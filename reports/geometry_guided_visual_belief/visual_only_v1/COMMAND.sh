@@ -1,0 +1,2 @@
+# Use the graphnav conda environment; choose a fresh output path.
+python -m scripts.audit_visual_only_landmarks --data /home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/landmark_data_augmented_v1 --teacher /home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/teacher_v1 --catalog /home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json --checkpoint /home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/pilot_s0_v1/final.pt --output '<NEW_OUTPUT_DIRECTORY>'

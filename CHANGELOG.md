@@ -2,6 +2,7 @@
 
 ## [geometry-guided-visual-belief-pilot] - 2026-11-04
 ### Features
+- 补充完全不接收几何logits的Visual-only世界Belief接口、覆盖范围/置零/错配对照及数值并列峰测试，单独验收视觉定位。
 - 冻结原A3/SigLIP2，新增139649参数的地标视觉Belief头、公开区域弱监督、多视图对比和几何蒸馏训练。
 - 补充TRAIN公开地标观察，完成v1及世界蒸馏修正v2、反事实和相同条件64地标闭环/置零/原RGB回归。
 ### Design Rationale
