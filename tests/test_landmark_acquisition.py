@@ -6,7 +6,37 @@ from graphnav.landmark_acquisition import (
     AcquisitionThresholds, LandmarkAcquisition,
 )
 from graphnav.unified_pgvb import UnifiedPGVB
-from tests.test_unified_pgvb_v2 import TinyGeometry, _inputs
+from graphnav.full_localization import GoalField
+
+
+class TinyGeometry(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.bias = nn.Parameter(torch.tensor(0.1))
+        self.calls = 0
+
+    def forward(self, batch, *, variant, tokens, token_mask, node_emb):
+        assert variant == 'geometry'
+        self.calls += 1
+        grid = batch['grid_xy']
+        logits = torch.linspace(0, 1, grid.shape[1])[None] + self.bias
+        dense = grid[..., :1].expand(-1, -1, 128).contiguous()
+        ids = logits.topk(20, dim=1).indices
+        return GoalField(
+            belief_logits=logits, candidate_ids=ids,
+            candidate_xy=grid.gather(1, ids[..., None].expand(-1, -1, 2)),
+            candidate_context=dense.gather(1, ids[..., None].expand(-1, -1, 128)),
+            dense_context=dense,
+        )
+
+
+def _inputs():
+    v = (torch.arange(28) + .5) / 28
+    ys, xs = torch.meshgrid(v, v, indexing='ij')
+    return dict(
+        static_inputs={'grid_xy': torch.stack((xs.flatten(), ys.flatten()), -1)[None]},
+        tokens=None, token_mask=None, node_emb=None,
+    )
 
 
 def _patches():
