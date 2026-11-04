@@ -1,5 +1,5 @@
 """Paired legacy/local PGVB evaluation, fixed common and expanded TRAIN Dev."""
-import argparse,collections,json,time
+import argparse,collections,hashlib,json,time
 from pathlib import Path
 import cv2
 import matplotlib
@@ -60,16 +60,27 @@ def main():
     if sum(p.numel() for p in model.parameters())!=sum(p.numel() for p in old_model.parameters()):raise ValueError('Architecture changed')
     a.output.mkdir(parents=True)
     all_rows=[];pairs={};maps={};timings={};subsets=('fit','dev')
+    replacement={}
+    for subset in subsets:
+        pool=[i for i,f in enumerate(data['frames']) if f['subset']==subset and bool(f['valid'].all())]
+        if not pool:continue
+        for i,f in enumerate(data['frames']):
+            if f['subset']!=subset:continue
+            choices=[j for j in pool if data['frames'][j]['frame']['image_sha256']!=f['frame']['image_sha256'] and data['frames'][j]['map_name']!=f['map_name']]
+            if not choices:continue
+            choices.sort(key=lambda j:hashlib.sha256((f['frame']['image_sha256']+data['frames'][j]['frame']['image_sha256']).encode()).hexdigest())
+            replacement[i]=choices[0]
     for subset in subsets:
         indices=[i for i,r in enumerate(data['records']) if r['subset']==subset]
         # Fit is descriptive only; same frozen checkpoint, never new tuning.
-        for control in ('real','old_legacy','old_local','coverage_only','zero_rgb','shuffle_rgb','polygon_zero'):
-            chosen=[i for i in indices if data['records'][i]['hard_negative_indices']] if control in ('wrong_polygon','wrong_name') else indices
+        for control in ('real','old_legacy','old_local','coverage_only','zero_rgb','shuffle_rgb','wrong_rgb','polygon_zero'):
+            chosen=[i for i in indices if data['records'][i]['frame_id'] in replacement] if control=='wrong_rgb' else indices
             score_cache={};duration=[]
             with torch.inference_mode():
                 for start in range(0,len(chosen),32):
                     ids=chosen[start:start+32];batch,labels,rr=pgvb_batch(data,ids,control=control)
                     torch.cuda.synchronize();t=time.perf_counter()
+                    if control=='wrong_rgb':batch['image_features']=torch.stack([data['frames'][replacement[r['frame_id']]]['image_features'] for r in rr]).cuda()
                     if control=='old_legacy':batch['polygon_tokens']=torch.stack([r['legacy_polygon_tokens'] for r in rr]).cuda()
                     score=(old_model if control.startswith('old_') else model)(**batch)
                     if control=='coverage_only':score=torch.zeros_like(score)
@@ -85,7 +96,7 @@ def main():
                         locprob=torch.from_numpy(s).masked_fill(~f['valid'],float('-inf')).softmax(-1).numpy()
                         local=prediction_index(locprob,valid,localxy);top5=np.argsort(-np.where(valid,s,-np.inf))[:5]
                         item=dict(index=index,subset=subset,control=control,frame_id=r['frame_id'],query_key=r['query_key'],type=r['type'],map_name=f['map_name'],
-                            legacy_common=r['legacy_common'],ne=ne,success=ne<=20,mass=float(prob@r['area_fraction'].numpy()),world_xy=world[best].tolist(),
+                            rgb_replacement_frame=replacement[r['frame_id']] if control=='wrong_rgb' else None,legacy_common=r['legacy_common'],ne=ne,success=ne<=20,mass=float(prob@r['area_fraction'].numpy()),world_xy=world[best].tolist(),
                             proxy_top1_label=int(r['labels'][local]),proxy_top5=bool((r['labels'][top5]==1).any()),actual_visibility='unknown',human_pixel_gt=False)
                         all_rows.append(item);score_cache[index]=s
                         if subset=='dev' and control in ('real','old_legacy','old_local','coverage_only','zero_rgb'):
@@ -93,17 +104,17 @@ def main():
             pairs[subset+'::'+control]=pair_metrics(data,score_cache)
             common_scores={i:v for i,v in score_cache.items() if data['records'][i]['legacy_common']}
             pairs[subset+'::common::'+control]=pair_metrics(data,common_scores)
-            timings[subset+'::'+control]=float(np.mean(duration))
+            timings[subset+'::'+control]=float(np.mean(duration)) if duration else None
     summary={s:{c:{typ:aggregate([r for r in all_rows if r['subset']==s and r['control']==c and (typ=='all' or r['type']==typ)]) for typ in ('all','Building','Road')}
-        for c in ('real','old_legacy','old_local','coverage_only','zero_rgb','shuffle_rgb','polygon_zero')} for s in subsets}
+        for c in ('real','old_legacy','old_local','coverage_only','zero_rgb','shuffle_rgb','wrong_rgb','polygon_zero')} for s in subsets}
     changes={}
     real={r['index']:r for r in all_rows if r['control']=='real' and r['subset']=='dev'}
-    for control in ('old_legacy','old_local','coverage_only','zero_rgb','polygon_zero'):
+    for control in ('old_legacy','old_local','coverage_only','zero_rgb','wrong_rgb','polygon_zero'):
         other={r['index']:r for r in all_rows if r['control']==control and r['subset']=='dev'};keys=sorted(real.keys()&other.keys())
         changes[control]=dict(paired=len(keys),real_corrected=sum(real[i]['success'] and not other[i]['success'] for i in keys),
             real_lost=sum(not real[i]['success'] and other[i]['success'] for i in keys),
             real_NE=float(np.mean([real[i]['ne'] for i in keys])),control_NE=float(np.mean([other[i]['ne'] for i in keys])))
-    cohorts={s:{c:{t:aggregate([r for r in all_rows if r['subset']=='dev' and r['control']==c and (r['legacy_common'] if s=='common' else not r['legacy_common']) and (t=='all' or r['type']==t)]) for t in ('all','Building','Road')} for c in ('real','old_legacy','old_local','coverage_only','zero_rgb','shuffle_rgb','polygon_zero')} for s in ('common','added')}
+    cohorts={s:{c:{t:aggregate([r for r in all_rows if r['subset']=='dev' and r['control']==c and (r['legacy_common'] if s=='common' else not r['legacy_common']) and (t=='all' or r['type']==t)]) for t in ('all','Building','Road')} for c in ('real','old_legacy','old_local','coverage_only','zero_rgb','shuffle_rgb','wrong_rgb','polygon_zero')} for s in ('common','added')}
     output=dict(summary=summary,dev_cohorts=cohorts,old_checkpoint_sha256=old_freeze['best_sha256'],architecture_unchanged=True,pairs={k:v['summary'] for k,v in pairs.items()},dev_paired=changes,head_seconds_per_query=timings,
         checkpoint_sha256=freeze['best_sha256'],best_epoch=state['next_epoch'],training_config=state['config'],
         model_frozen_before_evaluation=True,no_formal_val_test=True,no_navigation=True,weak_pixel_labels=True,
