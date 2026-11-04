@@ -40,9 +40,13 @@ def _public_landmark(requested, objects):
     elif kinds <= {"TrafficRoad", "Footpath", "Bridge"}:
         kind = "Road"
     else:
-        return None, "unsupported_or_mixed_public_types"
+        # A public name can label more than one polygon/type. Preserve the
+        # complete union as a named-goal GEOMETRY baseline; do not claim the
+        # RGB landmark classifier supports this ambiguous category.
+        kind = "Other"
     return dict(
         name=matches[0][1], type=kind,
+        visual_supported=(kind != "Other"),
         public_ids=[item[0] for item in matches],
         requested_text=requested, binding="exact_public_catalog",
     ), None
@@ -129,13 +133,19 @@ def parse_unified_instruction(
         return dict(
             version=VERSION, original_instruction=text, map_name=map_name,
             intent="navigate_to_landmark", approved_for_inference=True,
-            reason="explicit_named_goal",
+            reason=(
+                "explicit_named_goal" if landmark["visual_supported"]
+                else "explicit_named_goal_geometry_only"
+            ),
             target=dict(
                 name=landmark["name"], category=landmark["type"],
                 attributes=[], same_as_landmark=True,
             ),
             landmark=landmark, landmarks=[landmark], relations=[],
-            ambiguity=[],
+            ambiguity=(
+                [] if landmark["visual_supported"]
+                else ["mixed_or_unsupported_public_landmark_type"]
+            ),
             source_span=[match.start("name"), match.end("name")],
             target_GT_used=False,
         )
