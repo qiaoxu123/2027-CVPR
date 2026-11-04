@@ -62,7 +62,7 @@ def main():
         runner_sha256=file_sha256(__file__),source_sha256={k:file_sha256(Path(k)) for k in [
             'graphnav/landmark_navigation_diagnostic.py','graphnav/stage1_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py',
             'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/pgvb_navigation_runtime.py','graphnav/full_localization.py','graphnav/candidate_geometry.py','graphnav/unified_instruction.py','graphnav/pgvb_observation.py','scripts/build_unified_pgvb_v2.py',
-            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/landmark_acquisition.py','graphnav/pgvb_closedloop_audit.py',
+            'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/landmark_acquisition.py','graphnav/landmark_neighborhood.py','graphnav/pgvb_closedloop_audit.py',
             'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
         public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),
         sbf_source_sha256={str(p.relative_to(a.sbf_source)):file_sha256(p) for p in sorted(a.sbf_source.rglob('*.py'))},
@@ -114,10 +114,23 @@ def main():
                 for step,(d,gne) in enumerate(zip(diagnostics,goal_distance)):
                     d['public_landmark_goal_distance_m']=float(gne)
                     d['pgvb_enabled']=(method!='Geometry')
+                acquisition_steps=[i for i,d in enumerate(diagnostics) if d.get('landmark_tracking_state')=='tracking']
+                positive_frames=sum(bool(d.get('near_landmark_geometry',{}).get('reliable_positive_patches',0)>=2) for d in diagnostics)
+                near_audited_steps=[i for i,d in enumerate(diagnostics) if d.get('near_landmark_geometry',{}).get('within_20m')]
+                tracking_analysis=dict(
+                    first_tracking_step=acquisition_steps[0] if acquisition_steps else None,
+                    tracking_steps=len(acquisition_steps),
+                    valid_roi_frames=positive_frames,
+                    first_near_geometry_step=near_audited_steps[0] if near_audited_steps else None,
+                    near_geometry_steps=len(near_audited_steps),
+                    max_visual_gain=max((d.get('landmark_visual_gain',0.) for d in diagnostics),default=0.),
+                    activation_is_not_independent_identity_proof=True,
+                )
                 row=dict(index=task['index'],task_id=task['task_id'],method=method,map_name=task['map_name'],
                     category=task['category'],public_types=task['public_types'],landmark_name=task['landmark_name'],
                     instruction=task['instruction'],poses=poses.tolist(),termination=termination,metrics=metrics,
                     decision_seconds=timings,step_diagnostics=diagnostics,
+                    tracking_analysis=tracking_analysis,
                     goal_analysis=dict(initial_ne_m=float(goal_distance[0]),final_ne_m=float(goal_distance[-1]),
                         ever_correct=bool((goal_distance<=20).any()),
                         lost_correct=int(((goal_distance[:-1]<=20)&(goal_distance[1:]>20)).sum())))
