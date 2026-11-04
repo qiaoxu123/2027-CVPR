@@ -27,6 +27,26 @@ class UnifiedPGVB(nn.Module):
             nn.Linear(2 * hidden, hidden), nn.GELU(), nn.Linear(hidden, 1)
         )
         self.target_gain = nn.Parameter(torch.zeros(()))
+        # Joint geometric context + observed RGB evidence. The last layers
+        # are zero-initialized so an untrained v2 exactly reproduces the
+        # verified bounded PGVB rollout; enabling is explicit after training.
+        geometry_hidden = getattr(geometry, "hidden", 128)
+        self.joint_logits = nn.Sequential(
+            nn.LayerNorm(geometry_hidden + 2),
+            nn.Linear(geometry_hidden + 2, geometry_hidden),
+            nn.GELU(),
+            nn.Linear(geometry_hidden, 1),
+        )
+        self.joint_context = nn.Sequential(
+            nn.LayerNorm(geometry_hidden + 2),
+            nn.Linear(geometry_hidden + 2, geometry_hidden),
+            nn.GELU(),
+            nn.Linear(geometry_hidden, geometry_hidden),
+        )
+        for head in (self.joint_logits, self.joint_context):
+            nn.init.zeros_(head[-1].weight)
+            nn.init.zeros_(head[-1].bias)
+        self.joint_ready = False
         self.direction_ready = False
         self.target_ready = False
 
@@ -121,8 +141,25 @@ class UnifiedPGVB(nn.Module):
                 landmark_scores=scores, evidence=evidence, audit=empty_audit,
             )
         logits = base.belief_logits.float() + delta
-        ids = preserved_proposal_order(logits, base.candidate_ids)
         dense = base.dense_context
+        if self.joint_ready:
+            # This genuinely conditions the updated world Belief AND the
+            # controller candidate context on geometry and observed vision.
+            # Unseen cells remain unchanged, never assigned fake negatives.
+            if dense.shape[-1] + 2 != self.joint_logits[0].normalized_shape[0]:
+                raise ValueError("Joint geometry dimension mismatch")
+            joint = torch.cat((
+                dense.float(), visual.unsqueeze(-1),
+                covered.float().unsqueeze(-1),
+            ), dim=-1)
+            logits = logits + (
+                bound * torch.tanh(self.joint_logits(joint).squeeze(-1))
+                * covered.float()
+            )
+            dense = dense.float() + (
+                self.joint_context(joint) * covered[..., None]
+            )
+        ids = preserved_proposal_order(logits, base.candidate_ids)
         xy = static_inputs["grid_xy"].gather(
             1, ids[..., None].expand(-1, -1, 2),
         )
