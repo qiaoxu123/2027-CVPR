@@ -1,0 +1,55 @@
+{
+  "complete": true,
+  "source_manifest_sha256": "8a92557651a966ead8234f90441765c362ce4eeaeb5a5c85701aaeb364732845",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "source_feature_manifests": {
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/scoped_between_train294_features_v1/manifest.json": "bd218a1c0ebdb08a7e6709b0ecbfa51a6d57a05f80387b892be380a2bb4497b1",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/public_training_views_v1/features/manifest.json": "e85d751a27fc3c4264fcb01b284609f8289ae2e150a5c03c4682f19e2b5d5fe2"
+  },
+  "backbone": "/home/20261024_1/.cache/huggingface/hub/models--google--siglip2-large-patch16-384/snapshots/1b426889ea62b5a72bf9839009a1b184bfc9c178",
+  "backbone_sha256": {
+    "model.safetensors": "11bdb3cf00c4dc4f87e437c9c75087ca16fa21aea437b3576c103670ee3c73be"
+  },
+  "counts": {
+    "fit": {
+      "frames": 1704,
+      "queries": 6265,
+      "physical_name_groups": 460,
+      "maps": 15,
+      "types": {
+        "Building": 3535,
+        "Road": 2730
+      }
+    },
+    "dev": {
+      "frames": 343,
+      "queries": 699,
+      "physical_name_groups": 59,
+      "maps": 9,
+      "types": {
+        "Road": 476,
+        "Building": 223
+      }
+    }
+  },
+  "same_image_groups": {
+    "dev::Road": 138,
+    "dev::Building": 56,
+    "fit::Building": 973,
+    "fit::Road": 811
+  },
+  "split_rule": "fit Cambridge / dev Birmingham; no shared city, map, public instance or RGB SHA",
+  "excluded": {
+    "no_eligible_named_region": 226,
+    "insufficient_valid_patches": 51
+  },
+  "seconds": 50.476785813923925,
+  "teacher_logits_used": false,
+  "annotations": "public Polygon projection weak proxies; actual visibility/identity not human verified",
+  "code_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/prepare_pgvb_cache.py": "22e6a39d70c5a4709404b08ecaa13eb451d364d24e24718a59f248a1e7dc7867",
+    "graphnav/polygon_guided_visual.py": "e905e4d3cf245e1306b36cc20910d3a31e9f6e9aac4a352de1884220c148cd3a"
+  },
+  "cache_sha256": "a7a047c0803833705a9da5a5f5e5fe015e387db05a29de6f1e4bffcd909a810d"
+}

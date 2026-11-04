@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-11-04T10:17:30.213774",
+  "os": {
+    "system": "Linux",
+    "release": "7.0.0-38-generic",
+    "version": "#38~24.04.4-Ubuntu SMP PREEMPT_DYNAMIC Mon Sep 14 16:37:11 UTC 2",
+    "machine": "x86_64",
+    "python_version": "3.10.22"
+  },
+  "cpu": {
+    "physical_cores": 12,
+    "logical_cores": 24,
+    "max_frequency_mhz": 4954.565000000001,
+    "architecture": "x86_64",
+    "processor": "x86_64",
+    "current_frequency_mhz": 2913.9089999999997
+  },
+  "memory": {
+    "total_gb": 125.7,
+    "available_gb": 103.82,
+    "used_gb": 21.88,
+    "percent_used": 17.4,
+    "swap_total_gb": 8.0,
+    "swap_available_gb": 0.11
+  },
+  "disk": {
+    "path": "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain",
+    "total_gb": 1831.67,
+    "available_gb": 472.73,
+    "used_gb": 1265.82,
+    "percent_used": 72.8
+  },
+  "gpu": {
+    "nvidia_gpus": [],
+    "amd_gpus": [],
+    "apple_silicon": null,
+    "total_gpus": 0,
+    "available_backends": []
+  },
+  "recommendations": {
+    "parallel_processing": {
+      "strategy": "high_parallelism",
+      "suggested_workers": 22,
+      "libraries": [
+        "joblib",
+        "multiprocessing",
+        "dask"
+      ]
+    },
+    "memory_strategy": {
+      "strategy": "memory_abundant",
+      "note": "Can load most datasets into memory"
+    },
+    "gpu_acceleration": {
+      "available": false,
+      "note": "No GPU detected, use CPU-based libraries"
+    },
+    "large_data_handling": {
+      "strategy": "disk_abundant",
+      "note": "Sufficient space for large intermediate files"
+    }
+  }
+}

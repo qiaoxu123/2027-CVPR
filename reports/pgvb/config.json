@@ -1,0 +1,25 @@
+{
+  "seed": 0,
+  "epochs": 12,
+  "lr": 0.0005,
+  "weight_decay": 0.001,
+  "batch_frames": 4,
+  "hidden": 64,
+  "heads": 4,
+  "loss_weights": {
+    "region": 1,
+    "bce": 0.2,
+    "same_image_pair": 0.3
+  },
+  "parameters": 226306,
+  "data_manifest_sha256": "4997628bebc5240a6b8b67f5461a59f2106c272b78a554845440a482958a30e7",
+  "code_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_pgvb.py": "e5fa825b491d544e64dbeadcbac2608c70b8ebac05beeded78fbea2a0a5fcfe4",
+    "graphnav/polygon_guided_visual.py": "e905e4d3cf245e1306b36cc20910d3a31e9f6e9aac4a352de1884220c148cd3a",
+    "graphnav/pgvb_training.py": "75e7a55201020cbb53b7d1dcb4f0db8e335ef9d53e87d09ba1371a2952775d3c"
+  },
+  "backbone_frozen": true,
+  "LoRA": false,
+  "model_selection": "lowest epoch TRAIN mean loss; held-out city never read",
+  "no_geometry_belief": true
+}

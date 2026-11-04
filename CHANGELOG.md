@@ -1,5 +1,18 @@
 # Changelog
 
+## [pgvb-structured-landmark-pilot] - 2026-11-04
+### Features
+- 全量22,002条官方TRAIN指令导出无目标GT参与的结构化JSON，保留实体/span、方向/参考系、完整最短关系链及歧义；增加60条人工核验工具与24条AI诊断记录。
+- 新增冻结SigLIP2的Polygon Cross-Attention视觉Belief训练、同图同类困难负例、城市隔离、真实GPU Smoke及轮末恢复。
+- 完成12轮5,112步及冻结开发评估，保存覆盖/RGB置零/打乱/Polygon关闭与互换/名称互换消融。
+### Design Rationale
+- 绝对Polygon中心不进入视觉评分，采用相机尺度去中心轮廓；世界投影独立于几何Belief，避免复制地图位置。
+- Cambridge拟合、Birmingham开发，消除相邻地图块同物理地标跨分区；原模型默认入口和Checkpoint不变。
+### Notes & Caveats
+- 本版同图区分训练94.06%、开发50.28%；开发NE弱于覆盖基线，Polygon形状无稳定收益，不进入关系网络阶段。
+- 该负结果仅适用于去中心形状条件实现，未验证完整绝对Polygon配准。Polygon监督是弱代理，非真实可见性或人工像素GT。
+- 没有人类语言Gold，不能报告人工解析准确率；所有自动关系均未批准用于训练。未访问正式Val/Test或运行新闭环。
+
 ## [geometry-guided-visual-belief-pilot] - 2026-11-04
 ### Features
 - 补充完全不接收几何logits的Visual-only世界Belief接口、覆盖范围/置零/错配对照及数值并列峰测试，单独验收视觉定位。
