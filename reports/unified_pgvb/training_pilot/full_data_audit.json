@@ -1,0 +1,44 @@
+{
+  "TRAIN_instructions": 22002,
+  "eligible_source_instructions": 4159,
+  "TRAIN_instructions_without_supported_referenced_visual_supervision": 17843,
+  "valid_unique_frames": 4159,
+  "valid_landmark_queries": 4658,
+  "split": {
+    "fit": {
+      "queries": 2266,
+      "frames": 1956,
+      "maps": 15,
+      "city_names": 231,
+      "query_keys": 248,
+      "types": {
+        "Building": 550,
+        "Road": 1716
+      },
+      "positive_only": 1
+    },
+    "dev": {
+      "queries": 2392,
+      "frames": 2203,
+      "maps": 7,
+      "city_names": 33,
+      "query_keys": 40,
+      "types": {
+        "Road": 1270,
+        "Building": 1122
+      },
+      "positive_only": 0
+    }
+  },
+  "known_label_invalid_patch_rows": 0,
+  "train_dev_city_map_name_RGB_disjoint": true,
+  "ValSeen_smoke_RGB_overlap": 0,
+  "all_model_observations_t0": true,
+  "destination_GT_never_used": true,
+  "feature_coverage_within_eligible_t0_pool": 1.0,
+  "exclusions": {
+    "nonpositive_original_start_altitude": 1,
+    "no_valid_reliable_local_anchor_frame": 4432
+  },
+  "scope": "Only visually supported public Building/Road references at all original TRAIN t0 observations, not all possible future states or true pixel visibility"
+}

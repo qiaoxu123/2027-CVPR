@@ -1,0 +1,93 @@
+{
+  "TRAIN_instructions": 22002,
+  "conservative_public_name_bound_instructions": 20854,
+  "public_name_bindings": 33349,
+  "binding_types": {
+    "Building": 13778,
+    "Road": 18536,
+    "Other": 850,
+    "Ground": 185
+  },
+  "binding_policy": "Exact canonical public names, non-generic only; overlap allowed, not human parsing accuracy",
+  "geometric_in_view_referenced_queries_at_original_start": 11216,
+  "unique_original_start_poses_with_geometric_support": 8591,
+  "binding_start_poses_nonpositive_altitude": 1,
+  "geometric_support_caveat": "No full-TRAIN RGB/depth validity/weak-mask scan yet; this is geometric inventory, not confirmed visibility or full supervision count",
+  "cached_counts": {
+    "fit": {
+      "queries": 6275,
+      "frames": 1711,
+      "types": {
+        "Building": 3541,
+        "Road": 2734
+      },
+      "city_qualified_names": 425,
+      "query_keys": 460,
+      "positive_only": 5
+    },
+    "dev": {
+      "queries": 701,
+      "frames": 345,
+      "types": {
+        "Road": 477,
+        "Building": 224
+      },
+      "city_qualified_names": 49,
+      "query_keys": 59,
+      "positive_only": 2
+    }
+  },
+  "unique_cached_frames": 2056,
+  "cache_supervised_queries": 6976,
+  "cache_unique_query_keys": 519,
+  "cache_feature_coverage": 1.0,
+  "cache_missing_feature_queries": 0,
+  "cache_missing_rgb_files": [],
+  "cache_load_seconds": 4.584127951413393,
+  "source_feature_manifests": [
+    {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/chain_train400_features/manifest.json",
+      "sha256": "6dff6587f5fde3787a83220feb40a07da2fcab9eb7ab29758a5128544391577e",
+      "split": "train_seen",
+      "frames": null,
+      "seconds": 49.94280277611688,
+      "yaw": 0.0
+    },
+    {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/landmark_chain_visual/scoped_between_train294_features_v1/manifest.json",
+      "sha256": "bd218a1c0ebdb08a7e6709b0ecbfa51a6d57a05f80387b892be380a2bb4497b1",
+      "split": "train_seen",
+      "frames": null,
+      "seconds": 38.57616194570437,
+      "yaw": 0.0
+    },
+    {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/public_training_views_v1/features/manifest.json",
+      "sha256": "e85d751a27fc3c4264fcb01b284609f8289ae2e150a5c03c4682f19e2b5d5fe2",
+      "split": "train_seen",
+      "frames": 832,
+      "seconds": 46.94125642627478,
+      "yaw": 0.0
+    }
+  ],
+  "frame_provenance": {
+    "named_public_pose": 731,
+    "other_train_cache": 1325
+  },
+  "cache_no_eligible_named_region_frames": 217,
+  "cache_insufficient_valid_patches_frames": 51,
+  "train_dev_city_map_name_RGB_disjoint": true,
+  "ValSeen64_used_for_training": false,
+  "ValSeen_smoke_RGB_hash_overlap": 0,
+  "destination_GT_used": false,
+  "teacher_trajectory_as_model_input": false,
+  "observation_policy": "Reused verified TRAIN legal observed-view features; public named-pose augmentation and earlier TRAIN observations, yaw=0. Original runtime yaw unchanged. No future observation/history supplied.",
+  "scope": "All 6976 cached queries are real weak-supervision pool, not all 22002 instruction/pose pairs. No dataset-size reduction for speed test.",
+  "cache_sha256": "45efdb638745f8b859533616ed2f99bf6624f8a627bc1faec2a5cea83760473d",
+  "source_sha256": {
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/original_citynav/citynav_train_seen.json": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/pgvb_local_anchor_v2/data/manifest.json": "fcee0ff0fa2a9b07f97621edd52f167543239ed83117aea910a82087bc0e2f4f",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/audit_unified_pgvb_training_data.py": "76ae6ed5178def583e700bb30d3e963c8250494acd24f3df5d8f197c87f8a004"
+  }
+}

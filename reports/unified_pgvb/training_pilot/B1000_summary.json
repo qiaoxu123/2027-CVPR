@@ -1,0 +1,154 @@
+{
+  "stage": "B1000",
+  "start_step": 200,
+  "end_step": 1200,
+  "updates": 1000,
+  "epoch": 2,
+  "offset": 1376,
+  "steps_per_epoch": 428,
+  "stage_seconds": 10.92623007716611,
+  "total_process_seconds": 17.44136933190748,
+  "cache_hash_seconds": 1.0298829637467861,
+  "cache_load_seconds": 4.706240693107247,
+  "mean_step_ms": 9.53670733950424,
+  "queries_per_second": 1541.3055123279953,
+  "frames_per_second": 419.2179796807418,
+  "component_mean_ms": {
+    "data_wait_ms": 0.6916110489365398,
+    "transfer_ms": 1.7131890607427578,
+    "forward_loss_ms": 3.466690099341985,
+    "backward_ms": 2.411925161675531,
+    "optimizer_ms": 0.9552880062018426
+  },
+  "save_seconds": [
+    0.017423491925001144,
+    0.017580721992999315,
+    0.016885681077837944,
+    0.015274239238351583,
+    0.018549623899161816,
+    0.015319549012929201,
+    0.023158568888902664,
+    0.019913094118237495,
+    0.01590812997892499,
+    0.016267171129584312,
+    0.014133576769381762,
+    0.015114068984985352,
+    0.01534128887578845,
+    0.016269119922071695,
+    0.014192608185112476
+  ],
+  "peak_gpu_gib": 0.13499069213867188,
+  "loss_first20": 0.1299162579700351,
+  "loss_last20": 0.09687000140547752,
+  "pgvb_parameter_squared_delta": 1.7066705871780528,
+  "frozen_parameters_bitwise_unchanged": true,
+  "gradient_proof": {
+    "pgvb.log_scale": {
+      "nonzero": 1,
+      "finite": true,
+      "abs_sum": 0.00586470402777195
+    },
+    "pgvb.image.0.weight": {
+      "nonzero": 65533,
+      "finite": true,
+      "abs_sum": 567.1546630859375
+    },
+    "pgvb.image.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 21.81591796875
+    },
+    "pgvb.image.2.weight": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.9118273258209229
+    },
+    "pgvb.image.2.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 1.0024440288543701
+    },
+    "pgvb.text.weight": {
+      "nonzero": 131072,
+      "finite": true,
+      "abs_sum": 94.8750991821289
+    },
+    "pgvb.text.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 2.9188613891601562
+    },
+    "pgvb.polygon.0.weight": {
+      "nonzero": 256,
+      "finite": true,
+      "abs_sum": 5.065739631652832
+    },
+    "pgvb.polygon.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 4.2363739013671875
+    },
+    "pgvb.polygon.2.weight": {
+      "nonzero": 4096,
+      "finite": true,
+      "abs_sum": 15.956241607666016
+    },
+    "pgvb.polygon.2.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 1.7291793823242188
+    },
+    "pgvb.attention.in_proj_weight": {
+      "nonzero": 12288,
+      "finite": true,
+      "abs_sum": 43.0953254699707
+    },
+    "pgvb.attention.in_proj_bias": {
+      "nonzero": 192,
+      "finite": true,
+      "abs_sum": 1.1557754278182983
+    },
+    "pgvb.attention.out_proj.weight": {
+      "nonzero": 4096,
+      "finite": true,
+      "abs_sum": 28.65312385559082
+    },
+    "pgvb.attention.out_proj.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.41083192825317383
+    },
+    "pgvb.score.0.weight": {
+      "nonzero": 8192,
+      "finite": true,
+      "abs_sum": 59.29199981689453
+    },
+    "pgvb.score.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.2043471336364746
+    },
+    "pgvb.score.2.weight": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 3.1571922302246094
+    },
+    "pgvb.score.2.bias": {
+      "nonzero": 1,
+      "finite": true,
+      "abs_sum": 0.003509521484375
+    }
+  },
+  "resume": {
+    "restored_steps": 200,
+    "restored_epoch": 0,
+    "restored_offset": 800,
+    "optimizer_states": 19,
+    "optimizer_step_min": 200.0,
+    "previous_checkpoint_sha256": "43129dc5ddcdb4986318b89db2863330a9145c347e8cc2580f9ea91c1b54b8a5"
+  },
+  "last_sha256": "02fa636ab9b10ad0b78ba1fb56719566213c3000a232bcb531f3632cd87cf323",
+  "best_sha256": "be1025a2815f7a12d0c4be7a071cc1bd0819699da9153256b9abf8150b20f9cb",
+  "GPU_utilization_note": "Device telemetry includes co-tenants, not this process alone",
+  "warmup_excluded": 20
+}

@@ -1,0 +1,139 @@
+{
+  "stage": "Dfull_epoch",
+  "start_step": 0,
+  "end_step": 489,
+  "updates": 489,
+  "epoch": 1,
+  "offset": 0,
+  "steps_per_epoch": 489,
+  "stage_seconds": 5.540318286046386,
+  "total_process_seconds": 13.2639318597503,
+  "cache_hash_seconds": 2.029558951035142,
+  "cache_load_seconds": 4.8462233720347285,
+  "mean_step_ms": 9.32151169927199,
+  "queries_per_second": 497.96547969130836,
+  "frames_per_second": 429.1149471294876,
+  "component_mean_ms": {
+    "data_wait_ms": 0.47136387769887444,
+    "transfer_ms": 1.8685833771409257,
+    "forward_loss_ms": 3.3782593745078993,
+    "backward_ms": 2.3561283898378993,
+    "optimizer_ms": 0.9431072048096261
+  },
+  "save_seconds": [
+    0.017389927990734577,
+    0.014880746137350798,
+    0.0168079468421638,
+    0.015334026888012886,
+    0.016406577080488205,
+    0.01636896701529622,
+    0.01627887738868594
+  ],
+  "peak_gpu_gib": 0.05611848831176758,
+  "loss_first20": 0.9200120836496353,
+  "loss_last20": 0.7069054242223501,
+  "pgvb_parameter_squared_delta": 0.8465151671568378,
+  "frozen_parameters_bitwise_unchanged": true,
+  "gradient_proof": {
+    "pgvb.log_scale": {
+      "nonzero": 1,
+      "finite": true,
+      "abs_sum": 0.021075712516903877
+    },
+    "pgvb.image.0.weight": {
+      "nonzero": 65536,
+      "finite": true,
+      "abs_sum": 5957.96826171875
+    },
+    "pgvb.image.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 145.990234375
+    },
+    "pgvb.image.2.weight": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 9.543758392333984
+    },
+    "pgvb.image.2.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 5.745229244232178
+    },
+    "pgvb.text.weight": {
+      "nonzero": 131072,
+      "finite": true,
+      "abs_sum": 849.248046875
+    },
+    "pgvb.text.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 24.577239990234375
+    },
+    "pgvb.polygon.0.weight": {
+      "nonzero": 256,
+      "finite": true,
+      "abs_sum": 25.819469451904297
+    },
+    "pgvb.polygon.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 21.962326049804688
+    },
+    "pgvb.polygon.2.weight": {
+      "nonzero": 4096,
+      "finite": true,
+      "abs_sum": 98.8323974609375
+    },
+    "pgvb.polygon.2.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 10.40185546875
+    },
+    "pgvb.attention.in_proj_weight": {
+      "nonzero": 12288,
+      "finite": true,
+      "abs_sum": 443.3875732421875
+    },
+    "pgvb.attention.in_proj_bias": {
+      "nonzero": 192,
+      "finite": true,
+      "abs_sum": 8.277379989624023
+    },
+    "pgvb.attention.out_proj.weight": {
+      "nonzero": 4096,
+      "finite": true,
+      "abs_sum": 277.4281005859375
+    },
+    "pgvb.attention.out_proj.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 2.6551971435546875
+    },
+    "pgvb.score.0.weight": {
+      "nonzero": 8192,
+      "finite": true,
+      "abs_sum": 612.6542358398438
+    },
+    "pgvb.score.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.9696722030639648
+    },
+    "pgvb.score.2.weight": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 22.40869140625
+    },
+    "pgvb.score.2.bias": {
+      "nonzero": 1,
+      "finite": true,
+      "abs_sum": 0.000904083251953125
+    }
+  },
+  "resume": null,
+  "last_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "best_sha256": "48cd96c659df34d72ca0243518ea4baaa951a00ac6cb39e96c630881aca4f8b2",
+  "GPU_utilization_note": "Device telemetry includes co-tenants, not this process alone",
+  "warmup_excluded": 20
+}

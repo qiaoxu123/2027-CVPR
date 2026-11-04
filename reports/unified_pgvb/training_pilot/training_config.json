@@ -1,0 +1,42 @@
+{
+  "seed": 42,
+  "lr": 0.0001,
+  "weight_decay": 0.001,
+  "clip_norm": 5.0,
+  "batch_frames": 4,
+  "num_workers": 0,
+  "precision": "cuda_bfloat16; losses float32",
+  "trainable": [
+    "pgvb.log_scale",
+    "pgvb.image.0.weight",
+    "pgvb.image.0.bias",
+    "pgvb.image.2.weight",
+    "pgvb.image.2.bias",
+    "pgvb.text.weight",
+    "pgvb.text.bias",
+    "pgvb.polygon.0.weight",
+    "pgvb.polygon.0.bias",
+    "pgvb.polygon.2.weight",
+    "pgvb.polygon.2.bias",
+    "pgvb.attention.in_proj_weight",
+    "pgvb.attention.in_proj_bias",
+    "pgvb.attention.out_proj.weight",
+    "pgvb.attention.out_proj.bias",
+    "pgvb.score.0.weight",
+    "pgvb.score.0.bias",
+    "pgvb.score.2.weight",
+    "pgvb.score.2.bias"
+  ],
+  "trainable_parameters": 226306,
+  "source_checkpoint_sha256": "7a6ec452fff73bef574451901c87c82deaccbfd937f953d839fb6075665c3552",
+  "data_manifest_sha256": "fcee0ff0fa2a9b07f97621edd52f167543239ed83117aea910a82087bc0e2f4f",
+  "data_cache_sha256": "45efdb638745f8b859533616ed2f99bf6624f8a627bc1faec2a5cea83760473d",
+  "steps_per_epoch": 428,
+  "fit_frames": 1711,
+  "fit_queries": 6275,
+  "code_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_unified_pgvb_v2.py": "c1d0f00f371750f57df689a5cac0b3e0224ca6eaa3cd7ec2a3f8419f06640a81",
+    "graphnav/unified_pgvb_training.py": "6271ac69eaa0ca437b9594ace2ad406533035368cd09562ea2e4105a6ea4f755",
+    "graphnav/unified_pgvb.py": "84f96c4ce80dd784631b508298284ddb300ba46dbace9d05b486b32176fb4ba6"
+  }
+}

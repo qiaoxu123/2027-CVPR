@@ -1,0 +1,136 @@
+{
+  "stage": "A200",
+  "start_step": 0,
+  "end_step": 200,
+  "updates": 200,
+  "epoch": 0,
+  "offset": 800,
+  "steps_per_epoch": 428,
+  "stage_seconds": 2.704574508126825,
+  "total_process_seconds": 9.136137004941702,
+  "cache_hash_seconds": 1.0348765142261982,
+  "cache_load_seconds": 4.685333827044815,
+  "mean_step_ms": 9.57691123088201,
+  "queries_per_second": 1498.3954277164582,
+  "frames_per_second": 417.6711993634727,
+  "component_mean_ms": {
+    "data_wait_ms": 0.6611140134433905,
+    "transfer_ms": 1.7111732650341258,
+    "forward_loss_ms": 3.484779097036355,
+    "backward_ms": 2.428984781727195,
+    "optimizer_ms": 0.980532800571786
+  },
+  "save_seconds": [
+    0.018060334026813507,
+    0.015784031245857477,
+    0.016535322181880474,
+    0.015410801395773888
+  ],
+  "peak_gpu_gib": 0.12222957611083984,
+  "loss_first20": 0.14869815334677697,
+  "loss_last20": 0.13887223079800606,
+  "pgvb_parameter_squared_delta": 0.28204150396049954,
+  "frozen_parameters_bitwise_unchanged": true,
+  "gradient_proof": {
+    "pgvb.log_scale": {
+      "nonzero": 1,
+      "finite": true,
+      "abs_sum": 0.00184701441321522
+    },
+    "pgvb.image.0.weight": {
+      "nonzero": 65530,
+      "finite": true,
+      "abs_sum": 182.77813720703125
+    },
+    "pgvb.image.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 6.70263671875
+    },
+    "pgvb.image.2.weight": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.4071926474571228
+    },
+    "pgvb.image.2.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.313279926776886
+    },
+    "pgvb.text.weight": {
+      "nonzero": 131072,
+      "finite": true,
+      "abs_sum": 34.23738098144531
+    },
+    "pgvb.text.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 1.0273284912109375
+    },
+    "pgvb.polygon.0.weight": {
+      "nonzero": 256,
+      "finite": true,
+      "abs_sum": 0.4048069417476654
+    },
+    "pgvb.polygon.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.32668113708496094
+    },
+    "pgvb.polygon.2.weight": {
+      "nonzero": 4096,
+      "finite": true,
+      "abs_sum": 2.144015312194824
+    },
+    "pgvb.polygon.2.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.205999493598938
+    },
+    "pgvb.attention.in_proj_weight": {
+      "nonzero": 12288,
+      "finite": true,
+      "abs_sum": 13.079080581665039
+    },
+    "pgvb.attention.in_proj_bias": {
+      "nonzero": 192,
+      "finite": true,
+      "abs_sum": 0.2758033275604248
+    },
+    "pgvb.attention.out_proj.weight": {
+      "nonzero": 4096,
+      "finite": true,
+      "abs_sum": 10.650739669799805
+    },
+    "pgvb.attention.out_proj.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.11470043659210205
+    },
+    "pgvb.score.0.weight": {
+      "nonzero": 8192,
+      "finite": true,
+      "abs_sum": 25.32111930847168
+    },
+    "pgvb.score.0.bias": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.09386372566223145
+    },
+    "pgvb.score.2.weight": {
+      "nonzero": 64,
+      "finite": true,
+      "abs_sum": 0.8001251220703125
+    },
+    "pgvb.score.2.bias": {
+      "nonzero": 1,
+      "finite": true,
+      "abs_sum": 0.0084228515625
+    }
+  },
+  "resume": null,
+  "last_sha256": "43129dc5ddcdb4986318b89db2863330a9145c347e8cc2580f9ea91c1b54b8a5",
+  "best_sha256": "e2b9a306deebf9df0bdb4140ea0e02c814cb0a896d146468c8f51c1531d93e93",
+  "GPU_utilization_note": "Device telemetry includes co-tenants, not this process alone",
+  "warmup_excluded": 20
+}

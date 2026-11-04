@@ -1,0 +1,675 @@
+{
+  "runtime_cold_load_seconds": 4.41340586123988,
+  "fresh_extraction": [
+    {
+      "query_key": "birmingham_block_1::st teresa s court",
+      "frame_id": 3,
+      "seconds": 0.2962497719563544,
+      "siglip2_rgb_forwards": 1,
+      "feature_mae": 1.2713559272015118e-06,
+      "feature_max_error": 0.0001220405101776123,
+      "input_rgb_shape": [
+        384,
+        384,
+        3
+      ],
+      "cached_shape": [
+        144,
+        3,
+        1024
+      ]
+    },
+    {
+      "query_key": "birmingham_block_1::leslie road",
+      "frame_id": 0,
+      "seconds": 0.04905154509469867,
+      "siglip2_rgb_forwards": 1,
+      "feature_mae": 2.3111779228202067e-06,
+      "feature_max_error": 0.0002359151840209961,
+      "input_rgb_shape": [
+        384,
+        384,
+        3
+      ],
+      "cached_shape": [
+        144,
+        3,
+        1024
+      ]
+    }
+  ],
+  "Geometry_GPU_forward_seconds": [
+    0.05929716071113944,
+    0.00555723300203681,
+    0.0031027118675410748,
+    0.0027814707718789577,
+    0.002987110987305641,
+    0.0027609020471572876,
+    0.002649360802024603,
+    0.0026878919452428818,
+    0.0026691118255257607,
+    0.002754481043666601,
+    0.002616650890558958,
+    0.0025985920801758766,
+    0.0025576013140380383,
+    0.002830561250448227,
+    0.005838652607053518,
+    0.0026595313102006912,
+    0.0029175421223044395,
+    0.002493911422789097,
+    0.0026576314121484756,
+    0.002930701244622469,
+    0.0025555212050676346,
+    0.002747040707617998,
+    0.0026777610182762146,
+    0.0027704909443855286
+  ],
+  "static_BERT_and_data_setup_seconds": [
+    0.12130363238975406,
+    0.01764947921037674,
+    0.01714080898091197,
+    0.02764723403379321,
+    0.018950960133224726,
+    0.01831582887098193,
+    0.019211679697036743,
+    0.017220607958734035,
+    0.025529823265969753,
+    0.026671453844755888,
+    0.018387899734079838,
+    0.01756042893975973,
+    0.02971040504053235,
+    0.027364063076674938,
+    0.0142813166603446,
+    0.0317667662166059,
+    0.008699825033545494,
+    0.019974519964307547,
+    0.02188433101400733,
+    0.022700591944158077,
+    0.029608924873173237,
+    0.006580512970685959,
+    0.018494029995054007,
+    0.021193160209804773
+  ],
+  "geometry_note": "Frozen Geometry one forward per named query; cached during episode; never recomputed in PGVB-only training steps",
+  "resume_one_step_equivalence": {
+    "max_parameter_error": 0.0,
+    "loss_uninterrupted": 0.04229516535997391,
+    "loss_restored": 0.04229516535997391,
+    "passes": true,
+    "probe_not_used_for_training_or_selection": true
+  },
+  "field_cases": [
+    {
+      "query_key": "birmingham_block_10::weighbridge offices",
+      "frame_id": 52,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.05767595395445824,
+          "R20": false,
+          "NE": 21.081424713134766
+        },
+        "before": {
+          "polygon_mass": 0.07389477640390396,
+          "R20": false,
+          "NE": 21.081424713134766
+        },
+        "after": {
+          "polygon_mass": 0.07381061464548111,
+          "R20": false,
+          "NE": 21.081424713134766
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_12::west midlands police custody suite",
+      "frame_id": 65,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.10935717821121216,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.12765313684940338,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.12901832163333893,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_13::timet",
+      "frame_id": 68,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.09944064915180206,
+          "R20": true,
+          "NE": 5.80840539932251
+        },
+        "before": {
+          "polygon_mass": 0.1069040596485138,
+          "R20": true,
+          "NE": 6.153942584991455
+        },
+        "after": {
+          "polygon_mass": 0.10586760938167572,
+          "R20": true,
+          "NE": 6.153942584991455
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::full circle events exhibitions ltd",
+      "frame_id": 4,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.43873804807662964,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.5443233251571655,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.5401146411895752,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::nike factory store",
+      "frame_id": 7,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.1528904139995575,
+          "R20": true,
+          "NE": 1.4627715349197388
+        },
+        "before": {
+          "polygon_mass": 0.17204202711582184,
+          "R20": true,
+          "NE": 1.4627715349197388
+        },
+        "after": {
+          "polygon_mass": 0.16902627050876617,
+          "R20": true,
+          "NE": 1.4627715349197388
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::one stop",
+      "frame_id": 20,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.392858624458313,
+          "R20": true,
+          "NE": 3.305373191833496
+        },
+        "before": {
+          "polygon_mass": 0.3947058916091919,
+          "R20": true,
+          "NE": 3.305373191833496
+        },
+        "after": {
+          "polygon_mass": 0.39450401067733765,
+          "R20": true,
+          "NE": 3.305373191833496
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::st teresa of the child jesus catholic church",
+      "frame_id": 5,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.09299449622631073,
+          "R20": true,
+          "NE": 9.54018497467041
+        },
+        "before": {
+          "polygon_mass": 0.09955765306949615,
+          "R20": true,
+          "NE": 9.54018497467041
+        },
+        "after": {
+          "polygon_mass": 0.09904924780130386,
+          "R20": true,
+          "NE": 9.54018497467041
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::st teresa s court",
+      "frame_id": 3,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.1006309986114502,
+          "R20": true,
+          "NE": 12.225053787231445
+        },
+        "before": {
+          "polygon_mass": 0.13083688914775848,
+          "R20": true,
+          "NE": 13.45548152923584
+        },
+        "after": {
+          "polygon_mass": 0.12579578161239624,
+          "R20": true,
+          "NE": 13.45548152923584
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::the food warehouse",
+      "frame_id": 19,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.2874417006969452,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.3311975300312042,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.3334815800189972,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::the gym",
+      "frame_id": 7,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.22556564211845398,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.272830605506897,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.27195319533348083,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_3::perry barr carpets",
+      "frame_id": 82,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.11205291748046875,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.12509343028068542,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.12292145192623138,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_4::nt wholesale cash carry",
+      "frame_id": 95,
+      "type": "Building",
+      "polygons": 1,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.5105727910995483,
+          "R20": true,
+          "NE": 4.580841064453125
+        },
+        "before": {
+          "polygon_mass": 0.509701669216156,
+          "R20": true,
+          "NE": 4.580841064453125
+        },
+        "after": {
+          "polygon_mass": 0.5093639492988586,
+          "R20": true,
+          "NE": 4.580841064453125
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_9::aldridge road",
+      "frame_id": 154,
+      "type": "Road",
+      "polygons": 9,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.3642267882823944,
+          "R20": true,
+          "NE": 0.8393595814704895
+        },
+        "before": {
+          "polygon_mass": 0.39168643951416016,
+          "R20": true,
+          "NE": 0.8393595814704895
+        },
+        "after": {
+          "polygon_mass": 0.39200466871261597,
+          "R20": true,
+          "NE": 0.8393595814704895
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_4::birchfield road",
+      "frame_id": 94,
+      "type": "Road",
+      "polygons": 7,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.23141932487487793,
+          "R20": true,
+          "NE": 1.362265706062317
+        },
+        "before": {
+          "polygon_mass": 0.283105731010437,
+          "R20": true,
+          "NE": 1.362265706062317
+        },
+        "after": {
+          "polygon_mass": 0.2850094437599182,
+          "R20": true,
+          "NE": 1.362265706062317
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_3::birchfield road",
+      "frame_id": 70,
+      "type": "Road",
+      "polygons": 6,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.32754817605018616,
+          "R20": true,
+          "NE": 7.940840244293213
+        },
+        "before": {
+          "polygon_mass": 0.36246341466903687,
+          "R20": true,
+          "NE": 7.940840244293213
+        },
+        "after": {
+          "polygon_mass": 0.3626449704170227,
+          "R20": true,
+          "NE": 6.12290096282959
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_4::walsall road",
+      "frame_id": 831,
+      "type": "Road",
+      "polygons": 4,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.16792383790016174,
+          "R20": true,
+          "NE": 16.035053253173828
+        },
+        "before": {
+          "polygon_mass": 0.17396971583366394,
+          "R20": true,
+          "NE": 5.305466651916504
+        },
+        "after": {
+          "polygon_mass": 0.17416176199913025,
+          "R20": true,
+          "NE": 5.305466651916504
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_10::aldridge road",
+      "frame_id": 44,
+      "type": "Road",
+      "polygons": 3,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.4074068069458008,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.4564793109893799,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.45599526166915894,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_3::chesterwood gardens",
+      "frame_id": 793,
+      "type": "Road",
+      "polygons": 3,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.28431928157806396,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.3411659002304077,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.33928990364074707,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_4::aston lane",
+      "frame_id": 94,
+      "type": "Road",
+      "polygons": 3,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.6775172352790833,
+          "R20": true,
+          "NE": 0.0
+        },
+        "before": {
+          "polygon_mass": 0.6775144934654236,
+          "R20": true,
+          "NE": 0.0
+        },
+        "after": {
+          "polygon_mass": 0.6775068640708923,
+          "R20": true,
+          "NE": 0.0
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_4::wellington road",
+      "frame_id": 94,
+      "type": "Road",
+      "polygons": 3,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.12419778853654861,
+          "R20": true,
+          "NE": 15.970499038696289
+        },
+        "before": {
+          "polygon_mass": 0.1387927383184433,
+          "R20": true,
+          "NE": 15.970499038696289
+        },
+        "after": {
+          "polygon_mass": 0.13925477862358093,
+          "R20": true,
+          "NE": 15.970499038696289
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::wellington rd grosvenor rd",
+      "frame_id": 732,
+      "type": "Road",
+      "polygons": 2,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.12180783599615097,
+          "R20": true,
+          "NE": 3.6484129428863525
+        },
+        "before": {
+          "polygon_mass": 0.12389564514160156,
+          "R20": true,
+          "NE": 3.6484129428863525
+        },
+        "after": {
+          "polygon_mass": 0.12349677085876465,
+          "R20": true,
+          "NE": 3.6484129428863525
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_1::wellington road",
+      "frame_id": 0,
+      "type": "Road",
+      "polygons": 2,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.18789543211460114,
+          "R20": true,
+          "NE": 6.864965915679932
+        },
+        "before": {
+          "polygon_mass": 0.199101522564888,
+          "R20": true,
+          "NE": 6.864965915679932
+        },
+        "after": {
+          "polygon_mass": 0.201142355799675,
+          "R20": true,
+          "NE": 6.864965915679932
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_3::canterbury road",
+      "frame_id": 71,
+      "type": "Road",
+      "polygons": 2,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.16397634148597717,
+          "R20": true,
+          "NE": 17.303630828857422
+        },
+        "before": {
+          "polygon_mass": 0.17489475011825562,
+          "R20": true,
+          "NE": 17.303630828857422
+        },
+        "after": {
+          "polygon_mass": 0.1750372350215912,
+          "R20": true,
+          "NE": 17.303630828857422
+        }
+      }
+    },
+    {
+      "query_key": "birmingham_block_3::graham warren way",
+      "frame_id": 77,
+      "type": "Road",
+      "polygons": 2,
+      "metrics": {
+        "geometry_only": {
+          "polygon_mass": 0.33148786425590515,
+          "R20": true,
+          "NE": 2.645796060562134
+        },
+        "before": {
+          "polygon_mass": 0.35165122151374817,
+          "R20": true,
+          "NE": 2.645796060562134
+        },
+        "after": {
+          "polygon_mass": 0.3499022424221039,
+          "R20": true,
+          "NE": 2.645796060562134
+        }
+      }
+    }
+  ],
+  "field_summary": {
+    "geometry_only": {
+      "polygon_mass": 0.2487477553077042,
+      "R20": 0.9583333333333334,
+      "NE": 5.442286593218644
+    },
+    "before": {
+      "polygon_mass": 0.27347757822523516,
+      "R20": 0.9583333333333334,
+      "NE": 5.060885690152645
+    },
+    "after": {
+      "polygon_mass": 0.2729313721259435,
+      "R20": 0.9583333333333334,
+      "NE": 4.9851382200916605
+    }
+  },
+  "scope": "24 deterministic public named queries, independent TRAIN city; weak Polygon supervision only; no SR claim",
+  "before_sha256": "7a6ec452fff73bef574451901c87c82deaccbfd937f953d839fb6075665c3552",
+  "after_sha256": "c577eef6ae316a0a38a265004caa2f2da4eaeadc73cf0f44473b34d0a6637d51"
+}

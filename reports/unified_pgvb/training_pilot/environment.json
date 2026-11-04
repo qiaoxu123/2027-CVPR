@@ -1,0 +1,15 @@
+{
+  "torch": "2.8.0+cu128",
+  "cuda_runtime": "12.8",
+  "cudnn": 91002,
+  "cuda_available": true,
+  "bf16": true,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "compute_capability": [
+    12,
+    0
+  ],
+  "nvidia_smi": "Wed Nov  4 21:27:15 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:03:00.0 Off |                  Off |\n| 31%   51C    P1            184W /  550W |   36159MiB /  97887MiB |     33%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    0   N/A  N/A            3646      G   /usr/lib/xorg/Xorg                       81MiB |\n|    0   N/A  N/A            3902      G   /usr/bin/gnome-shell                     28MiB |\n|    0   N/A  N/A          757617      C   ...party/aerialvg_env/bin/python       4598MiB |\n|    0   N/A  N/A         2397441      C   ...amba/envs/vlm-test/bin/python      21034MiB |\n|    0   N/A  N/A         2853409      C   python                                10344MiB |\n+-----------------------------------------------------------------------------------------+\n",
+  "python": "/home/20261024_1/Workspace/third_party/aerialvg_env/bin/python",
+  "note": "Generic resource detector missed GPU because PATH nvidia-smi wrapper differs; CUDA and /usr/bin/nvidia-smi are authoritative here."
+}
