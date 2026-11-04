@@ -1,0 +1,132 @@
+{
+  "consistency": {
+    "dev": {
+      "native": {
+        "supported_samples": 109,
+        "conditional_G_to_V_KL": 1.0528890604341248,
+        "global_G_to_GV_KL": 0.012041960408176716
+      },
+      "trained": {
+        "supported_samples": 109,
+        "conditional_G_to_V_KL": 1.145403798122745,
+        "global_G_to_GV_KL": 0.10513472944796856
+      }
+    },
+    "confirm": {
+      "native": {
+        "supported_samples": 128,
+        "conditional_G_to_V_KL": 0.9865810007031541,
+        "global_G_to_GV_KL": 0.019912377466715002
+      },
+      "trained": {
+        "supported_samples": 128,
+        "conditional_G_to_V_KL": 1.079910607833881,
+        "global_G_to_GV_KL": 0.12487210597649895
+      }
+    }
+  },
+  "weak_top1_intervals": {
+    "dev": {
+      "native": {
+        "named_groups": 21,
+        "mean_difference": -0.047058823529411764,
+        "name_group_bootstrap95": [
+          -0.24043560606060607,
+          0.1891891891891892
+        ]
+      },
+      "shuffle_rgb": {
+        "named_groups": 21,
+        "mean_difference": 0.21176470588235294,
+        "name_group_bootstrap95": [
+          0.1123566842467324,
+          0.32857142857142857
+        ]
+      },
+      "wrong_rgb": {
+        "named_groups": 21,
+        "mean_difference": 0.17647058823529413,
+        "name_group_bootstrap95": [
+          0.07692307692307693,
+          0.27710843373493976
+        ]
+      },
+      "same_type_rgb": {
+        "named_groups": 21,
+        "mean_difference": 0.1411764705882353,
+        "name_group_bootstrap95": [
+          0.058823529411764705,
+          0.23460648148148125
+        ]
+      }
+    },
+    "confirm": {
+      "native": {
+        "named_groups": 26,
+        "mean_difference": 0.30275229357798167,
+        "name_group_bootstrap95": [
+          0.20191885964912282,
+          0.41414141414141414
+        ]
+      },
+      "shuffle_rgb": {
+        "named_groups": 26,
+        "mean_difference": 0.42201834862385323,
+        "name_group_bootstrap95": [
+          0.2644628099173554,
+          0.5929410951327433
+        ]
+      },
+      "wrong_rgb": {
+        "named_groups": 26,
+        "mean_difference": 0.4036697247706422,
+        "name_group_bootstrap95": [
+          0.2499381188118812,
+          0.5619963842975206
+        ]
+      },
+      "same_type_rgb": {
+        "named_groups": 26,
+        "mean_difference": 0.3853211009174312,
+        "name_group_bootstrap95": [
+          0.23527911164465787,
+          0.5429220779220775
+        ]
+      }
+    }
+  },
+  "regression": {
+    "complete": true,
+    "results": {
+      "Geometry": {
+        "episodes": 64,
+        "SR": 0.953125,
+        "OSR": 0.96875,
+        "NE": 4.789642287138021
+      },
+      "GeometryVisual": {
+        "episodes": 64,
+        "SR": 0.984375,
+        "OSR": 1.0,
+        "NE": 3.095992597187884
+      }
+    },
+    "seconds": 68.95714396983385,
+    "peak_gpu_gib": 3.756777763366699,
+    "original_checkpoint_sha256_after": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "visual_checkpoint_sha256_after": "990a8613d5561025ad2421a4095adb4a43c7fae3d3e69b0eb841724d79f72658"
+  },
+  "nav_changes": {
+    "corrected": 2.0,
+    "harmed": 0.0
+  },
+  "preregistered_gate": {
+    "weak_dev_beats_native": false,
+    "weak_dev_beats_same_type": true,
+    "dev_fusion_no_net_harm": false,
+    "dev_fusion_NE_no_worse": true
+  },
+  "stage1_gate_passed": false,
+  "stage2_started": false,
+  "note": "Weak public region supervision, no human pixel GT. Existing map-group dev/confirm exposure history retained."
+}

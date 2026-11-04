@@ -1,5 +1,17 @@
 # Changelog
 
+## [geometry-guided-visual-belief-pilot] - 2026-11-04
+### Features
+- 冻结原A3/SigLIP2，新增139649参数的地标视觉Belief头、公开区域弱监督、多视图对比和几何蒸馏训练。
+- 补充TRAIN公开地标观察，完成v1及世界蒸馏修正v2、反事实和相同条件64地标闭环/置零/原RGB回归。
+### Design Rationale
+- 将可训练视觉评分与绝对地图坐标分离，显式区分观测域V与全局G+V；未知观察不构造不存在标签。
+- 控制接口保持原raw-logit口径及零证据一致性；蒸馏目标必须与真实世界网格聚合一致。
+### Notes & Caveats
+- 地标任务有2例RGB相关纠正，尚无显著性或原CityNav目标任务SR结论；Dev一致性/误改未过门槛，未进入第二阶段。
+- 同融合的未训练原生评分同为63/64，训练头没有额外成功数；保留这一负对照，不将融合收益冒充训练收益。
+- 标签为Polygon几何代理，不是人类像素GT或真实可见性；原权重、正常入口及控制器未改。
+
 ## [named-landmark-navigation-diagnostic] - 2026-11-04
 ### Features
 - 新增独立公开地标名称任务E1/E2冻结闭环诊断、Polygon距离评分、可恢复记录及真实RGB轨迹图册。

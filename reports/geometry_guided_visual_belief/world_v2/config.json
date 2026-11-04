@@ -1,0 +1,30 @@
+{
+  "seed": 0,
+  "epochs": 12,
+  "batch": 16,
+  "lr": 0.001,
+  "steps_per_epoch": 96,
+  "distillation_domain": "784-world-grid conditional KL + global G-to-GV preservation",
+  "dev_role": "reused TRAIN development regression, not fresh confirmation",
+  "confirmation_evaluation": false,
+  "fit_samples": 1533,
+  "fit_names": 352,
+  "multi_view_names": 278,
+  "trainable_parameters": 139649,
+  "loss_weights": {
+    "region": 1,
+    "distill": 0.25,
+    "contrast": 0.1
+  },
+  "source_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/landmark_data_augmented_v1/manifest.json": "8a92557651a966ead8234f90441765c362ce4eeaeb5a5c85701aaeb364732845",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/geometry_guided_visual_belief/teacher_v1/manifest.json": "5b28770c9e04cb9af608fec74e91c46d1c837573bdfbabd3ba8cda159604aa00",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_world_aligned_landmark_visual.py": "c4ae1864f2008acd39ad623e3eb9bed2e30cb64fe108735c2926619f8ef88da6",
+    "graphnav/geometry_guided_visual.py": "1372d421db7a4447163bc91bb95f81a062a03367b55b45f5c7b88cbb47fbd8cb",
+    "graphnav/geometry_guided_data.py": "9169fb693d1180f0670a4a6585a8134ba2bf144acfea7ee67ed1370554b33545",
+    "graphnav/world_aligned_landmark_loss.py": "2ef98945b252d846e62090f47ce4109e2c47cb07d65f8f02ea86e56365b639cd"
+  },
+  "no_formal_val_or_test": true,
+  "backbone_frozen": true
+}
