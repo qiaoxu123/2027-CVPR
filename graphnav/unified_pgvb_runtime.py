@@ -17,6 +17,8 @@ from .pgvb_navigation_runtime import (
 )
 from .stage1_runtime import GraphNavStage1Policy
 from .unified_pgvb import UnifiedPGVB
+from .unified_instruction import parse_unified_instruction
+from .landmark_alias import canonical_name
 
 
 class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
@@ -65,6 +67,35 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
         self.pgvb_seconds = 0.0
         self.audit_callback = None
         self._landmark = None
+
+    def set_episode(self, episode, transform, catalog):
+        """Reject target-vs-reference confusion BEFORE constructing geometry."""
+        public_objects = catalog.objects[episode.map_name]
+        spec = parse_unified_instruction(
+            episode.instruction, episode.map_name, public_objects,
+        )
+        named = spec.get("landmark")
+        references = tuple(episode.reference_names)
+        if (not spec["approved_for_inference"]
+                or spec["intent"] != "navigate_to_landmark"
+                or named is None):
+            raise ValueError(
+                "UnifiedPGVB named-goal pilot refuses non-landmark instruction: "
+                + spec["reason"]
+            )
+        if (len(references) != 1
+                or canonical_name(references[0]) != canonical_name(named["name"])):
+            raise ValueError("The named goal and supplied public reference differ")
+        super().set_episode(episode, transform, catalog)
+        if self._landmark is None:
+            raise ValueError("No valid public Polygon for named goal")
+        self.instruction_spec = spec
+
+    def _pgvb_forward(self, **kwargs):
+        """One shared PGVB vision network, driven by parsed instruction."""
+        return self.unified.forward_structured(
+            self.instruction_spec, **kwargs
+        )["landmark_scores"]
 
     @torch.no_grad()
     def _initialize_geometry(self):
@@ -122,6 +153,7 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
             self.audit_callback(self.base, field, evidence)
         prediction = A3TrajectoryPolicy.predict_field(self, state, field)
         self.pgvb_calls += int(audit["active"])
+        language = getattr(self, "instruction_spec", {})
         prediction.diagnostics.update(
             policy="UnifiedPGVB single visual path + frozen A3/control",
             pgvb_enabled=True,
@@ -136,5 +168,11 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
             siglip2_rgb_forward=(evidence is not None),
             direction_head_ready=self.unified.direction_ready,
             target_head_ready=False,
+            language_parser=language.get("version", "not_initialized"),
+            language_intent=language.get("intent", "unknown"),
+            named_public_parts=len(
+                language.get("landmark", {}).get("public_ids", [])
+            ) if language.get("landmark") else 0,
+            language_target_gt_used=False,
         )
         return prediction
