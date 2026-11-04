@@ -1,0 +1,87 @@
+{
+  "summary": {
+    "real_reencoded": {
+      "all": {
+        "n": 64,
+        "correct": 56,
+        "R20": 0.875,
+        "NE": 6.242075955495238,
+        "polygon_mass": 0.46126212908654907,
+        "proxy_top1_hits": 29,
+        "proxy_top1_unknown": 15,
+        "proxy_top5_hits": 54,
+        "maps": 8,
+        "named_groups": 49
+      },
+      "Building": {
+        "n": 32,
+        "correct": 30,
+        "R20": 0.9375,
+        "NE": 4.283393932506442,
+        "polygon_mass": 0.48708898498443887,
+        "proxy_top1_hits": 16,
+        "proxy_top1_unknown": 5,
+        "proxy_top5_hits": 30,
+        "maps": 7,
+        "named_groups": 17
+      },
+      "Road": {
+        "n": 32,
+        "correct": 26,
+        "R20": 0.8125,
+        "NE": 8.200757978484035,
+        "polygon_mass": 0.43543527318865927,
+        "proxy_top1_hits": 13,
+        "proxy_top1_unknown": 10,
+        "proxy_top5_hits": 24,
+        "maps": 7,
+        "named_groups": 32
+      }
+    },
+    "constant_rgb_reencoded": {
+      "all": {
+        "n": 64,
+        "correct": 27,
+        "R20": 0.421875,
+        "NE": 40.57833781000227,
+        "polygon_mass": 0.13042438991442395,
+        "proxy_top1_hits": 11,
+        "proxy_top1_unknown": 2,
+        "proxy_top5_hits": 27,
+        "maps": 8,
+        "named_groups": 49
+      },
+      "Building": {
+        "n": 32,
+        "correct": 9,
+        "R20": 0.28125,
+        "NE": 39.561481174081564,
+        "polygon_mass": 0.08653669360592176,
+        "proxy_top1_hits": 3,
+        "proxy_top1_unknown": 0,
+        "proxy_top5_hits": 11,
+        "maps": 7,
+        "named_groups": 17
+      },
+      "Road": {
+        "n": 32,
+        "correct": 18,
+        "R20": 0.5625,
+        "NE": 41.59519444592297,
+        "polygon_mass": 0.17431208622292615,
+        "proxy_top1_hits": 8,
+        "proxy_top1_unknown": 2,
+        "proxy_top5_hits": 16,
+        "maps": 7,
+        "named_groups": 32
+      }
+    }
+  },
+  "real_cached_feature_MAE_max": 0.0007748175994493067,
+  "selection_sha256": "6e29ddb93856fb2638bfc6d59ca9fb91149ebcc2b53752536cbf9d67d3149924",
+  "checkpoint_sha256": "ba3073723703ce8188c7f74ae810a622342631bb150bd2597656ff0039f2cf56",
+  "seconds": 3.595445090904832,
+  "selection_used_labels": false,
+  "parameter_updates": 0,
+  "caveat": "Post-result frozen mechanism diagnostic, not a new independent validation set. Constant RGB preserves the original nonblack support layout and original ROI/depth masks. It removes semantic texture/color, not all positional/context signals."
+}
