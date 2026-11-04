@@ -153,10 +153,15 @@ class UnifiedPGVBNamedLandmarkPolicy:
         objects = {str(oid): obj for oid, obj in public_objects.items()}
         kinds = [objects[obj_id]["object_type"] for obj_id in matched["ids"]]
         typ = public_type(kinds)
-        if not matched["contours"] or typ not in ("Building", "Road"):
-            raise ValueError("No supported public Polygon for named goal")
-        self._landmark = dict(
-            name=landmark["name"], typ=typ, contours=matched["contours"],
+        if not matched["contours"]:
+            raise ValueError("No public Polygon for named goal")
+        # All named tasks stay in the evaluation denominator. A mixed-type
+        # public name is an ambiguous GEOMETRY-only goal (the legacy public
+        # union protocol); PGVB does not pretend to visually identify it.
+        self._landmark = (
+            dict(name=landmark["name"], typ=typ, contours=matched["contours"])
+            if typ in ("Building", "Road") and landmark["visual_supported"]
+            else None
         )
         self.record = public_static_record(
             episode, transform, catalog,
@@ -251,5 +256,6 @@ class UnifiedPGVBNamedLandmarkPolicy:
                 spec["landmark"].get("public_ids", []),
             ),
             language_target_gt_used=False,
+            landmark_visual_supported=self._landmark is not None,
         )
         return prediction
