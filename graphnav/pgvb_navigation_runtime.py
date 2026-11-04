@@ -169,3 +169,90 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
         self.pgvb_calls += int(result["pgvb_active"])
         prediction.diagnostics.update(result, pgvb_active_decisions_total=self.pgvb_calls)
         return prediction
+
+
+class PGVBStandaloneNamedPolicy(PGVBNamedLandmarkPolicy):
+    """PGVB conditional-visual Goal only; no A3 forward, no geometry logits.
+
+    When the landmark has no usable local RGB observation, the policy explicitly
+    abstains/holds position. No fabricated global Goal or geometry fallback.
+    """
+
+    def set_episode(self, episode, transform, catalog):
+        super().set_episode(episode, transform, catalog)
+        from .geometry import grid_centers
+        self.bounds = torch.tensor(self.record["world_bounds"], device=self.device,
+                                   dtype=torch.float32)[None]
+        self.uv = torch.as_tensor(grid_centers(self.args.grid_size),
+                                  device=self.device, dtype=torch.float32)[None]
+        self.world = self.bounds[:, None, :2] + self.uv * (
+            self.bounds[:, None, 2:] - self.bounds[:, None, :2])
+        self.observed_steps = 0
+        self.geometry_calls = 0
+
+    @torch.no_grad()
+    def predict(self, state, instruction):
+        from types import SimpleNamespace
+        from .a3_runtime import A3TrajectoryPolicy
+        from .landmark_visual_only import visual_only_world_belief
+
+        if instruction != self.record["instruction"]:
+            raise ValueError("Changed instruction during PGVB-only episode")
+        evidence, reason = self._observed_scores(state.current_observation)
+        if evidence is None:
+            # No search policy was trained. Explicit no-evidence abstention,
+            # NOT a spurious guess at a citywide target location.
+            return SimpleNamespace(
+                xyz=np.asarray(state.pose).copy(), should_stop=False,
+                diagnostics=dict(
+                    policy="PGVB-only observed-domain conditional Goal",
+                    selected_goal_xy=np.asarray(state.pose)[:2].tolist(),
+                    pgvb_enabled=True, pgvb_active=False,
+                    pgvb_reason=reason, geometry_branch_calls=0,
+                    candidate_context="neutral_zero",
+                    abstained_no_visual_goal=True,
+                    observed_steps=self.observed_steps))
+        local_uv, scores, valid = evidence
+        result = visual_only_world_belief(
+            local_uv=local_uv, scores=scores, valid=valid, grid_size=self.args.grid_size)
+        if not bool(result["has_view"].all()):
+            return SimpleNamespace(
+                xyz=np.asarray(state.pose).copy(), should_stop=False,
+                diagnostics=dict(
+                    policy="PGVB-only observed-domain conditional Goal",
+                    selected_goal_xy=np.asarray(state.pose)[:2].tolist(),
+                    pgvb_enabled=True, pgvb_active=False,
+                    pgvb_reason="no_world_grid_support",
+                    geometry_branch_calls=0, candidate_context="neutral_zero",
+                    abstained_no_visual_goal=True,
+                    observed_steps=self.observed_steps))
+        self.observed_steps += 1
+        # Unobserved cells are 'unknown', not semantic negatives. The softmax
+        # is explicitly conditioned on current observed support, so this
+        # diagnostic does not claim to produce a global normalized belief.
+        observed = result["covered"]
+        logits = torch.where(observed, result["logits"],
+                             torch.full_like(result["logits"], -100.))
+        k = min(self.model.a3.top_k, logits.shape[-1])
+        ids = logits.topk(k, dim=-1).indices
+        dense = torch.zeros(1, logits.shape[-1], self.model.a3.hidden,
+                            device=self.device, dtype=torch.float32)
+        field = GoalField(
+            belief_logits=logits,
+            candidate_ids=ids,
+            candidate_xy=self.uv.gather(1, ids[..., None].expand(-1, -1, 2)),
+            candidate_context=dense.gather(
+                1, ids[..., None].expand(-1, -1, dense.shape[-1])),
+            dense_context=dense,
+            visual_coverage=observed.float())
+        prediction = A3TrajectoryPolicy.predict_field(self, state, field)
+        prediction.diagnostics.update(
+            policy="PGVB-only observed-domain conditional Goal",
+            pgvb_enabled=True, pgvb_active=True,
+            pgvb_reason="observed_conditioned_belief",
+            geometry_branch_calls=0, candidate_context="neutral_zero",
+            abstained_no_visual_goal=False,
+            observed_steps=self.observed_steps,
+            pgvb_covered_cells=int(observed.sum()),
+            pgvb_top1_world_xy=self.world[0, ids[0, 0]].tolist())
+        return prediction
