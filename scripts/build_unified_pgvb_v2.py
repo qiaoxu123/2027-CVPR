@@ -73,6 +73,7 @@ def build_unified_checkpoint(stage1_path, pgvb_path, output, direction_path=None
             geometry_args=stage1["a3_args"],
             legacy_visual_residual_disabled=True,
             geometry_frozen_at_inference=True,
+            joint_fusion_ready=False,
             direction_ready=relation_ready,
             target_ready=False,
             jointly_trained=False,
