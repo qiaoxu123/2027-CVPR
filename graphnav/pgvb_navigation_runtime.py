@@ -7,20 +7,17 @@ No private target, oracle location or future observation enters the policy.
 from dataclasses import replace
 import time
 
-import cv2
 import numpy as np
 import torch
 
-from .appearance_matching import ObservedSigLIPMatchingEncoder
 from .full_localization import GoalField
 from .landmark_region_supervision import public_type
-from .local_landmark_anchor import local_anchor_tokens, local_landmark_anchor, named_public_polygons
-from .native_dense_regions import native_dense_regions, sparse_view
-from .observed_patch_scales import masked_native_pool
+from .local_landmark_anchor import named_public_polygons
 from .polygon_guided_visual import PolygonGuidedVisualBelief
 from .stage1 import preserved_proposal_order
 from .stage1_runtime import GraphNavStage1Policy
 from .world_likelihood_evidence import world_evidence_logits
+from .pgvb_observation import encode_landmark_observation
 
 
 def bounded_pgvb_field(field, grid_uv, local_uv, scores, valid, *, bound=0.5):
@@ -104,48 +101,10 @@ class PGVBNamedLandmarkPolicy(GraphNavStage1Policy):
 
     @torch.no_grad()
     def _observed_inputs(self, observation):
-        landmark = self._landmark
-        if landmark is None:
-            return None, "unsupported_or_unresolved_name"
-        anchor = local_landmark_anchor(landmark["contours"], observation)
-        if not anchor["pixel_usable"] or anchor["positive_patches"] < 2:
-            return None, "no_supported_local_anchor"
-        dense = native_dense_regions(observation)
-        sparse = sparse_view(dense)
-        valid = np.asarray(sparse["valid"], bool) & (np.asarray(sparse["quality"])[:, 0] >= 0.9)
-        world = np.asarray(sparse["world"], dtype=np.float32)
-        bounds = np.asarray(self.record["world_bounds"], dtype=np.float32)
-        local_uv = (world - bounds[:2]) / (bounds[2:] - bounds[:2])
-        valid &= np.isfinite(local_uv).all(-1) & (local_uv >= 0).all(-1) & (local_uv <= 1).all(-1)
-        if not valid.any():
-            return None, "no_valid_visual_patches"
-
-        bgr = np.asarray(observation["bgr"])
-        batch = self.native.processor(
-            images=[cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)],
-            return_tensors="pt").to(self.device)
-        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=self.device.type == "cuda"):
-            patches = self.native.model.vision_model(**batch).last_hidden_state[0]
-            masks = np.asarray(sparse["masks"], bool)
-            flat = masks.reshape(-1, masks.shape[-1])
-            nonempty = flat.any(-1)
-            pooled = torch.zeros((len(flat), self.native.dimension), device=self.device)
-            if nonempty.any():
-                pooled[torch.from_numpy(nonempty).to(self.device)] = torch.nn.functional.normalize(
-                    masked_native_pool(self.native.model.vision_model.head, patches,
-                                       torch.from_numpy(flat[nonempty]).to(self.device)).float(), dim=-1)
-            features = pooled.reshape(len(valid), 3, self.native.dimension)
-            name_text = self.native.texts([landmark["name"]]).detach()
-            type_text = self.native.texts([landmark["typ"]]).detach()
-            polygon = local_anchor_tokens(landmark["contours"], observation["footprint_world"])
-        return (dict(
-            local_uv=torch.from_numpy(local_uv)[None].to(self.device),
-            image_features=features[None],
-            name_text=name_text,
-            type_text=type_text,
-            polygon_tokens=torch.from_numpy(polygon)[None].to(self.device),
-            valid=torch.from_numpy(valid)[None].to(self.device),
-        ), "available")
+        return encode_landmark_observation(
+            observation, self._landmark, self.record,
+            self.native, self.device,
+        )
 
     @torch.no_grad()
     def _observed_scores(self, observation):
