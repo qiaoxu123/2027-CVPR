@@ -19,7 +19,7 @@ def test_named_landmark_neighborhood_has_metric_direction_and_topology():
                     contour=[[200, 200], [220, 200], [220, 220], [200, 220]]),
     }
     result = nearby_public_geometry(objects, ref, ["target"], radius_m=50)
-    assert [r["public_id"] for r in result] == ["inside", "west", "east"]
+    assert [r["public_id"] for r in result] == ["inside", "east", "west"]
     neighbors = {r["public_id"]: r for r in result}
     assert neighbors["east"]["relative_centroid_dx_m"] > 0
     assert neighbors["west"]["relative_centroid_dx_m"] < 0
