@@ -42,14 +42,40 @@ def test_unified_policy_does_not_call_legacy_visual_model(monkeypatch):
     obj = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
     obj.record = {"instruction": "Go to named landmark"}
     obj._initialize_geometry = lambda: None
-    obj._timed_scores = lambda observation: (None, "no_local_anchor")
+    obj._observed_inputs = lambda observation: (None, "no_local_anchor")
+    obj.inputs = {}
+    obj.tokens = None
+    obj.mask = None
+    obj.names = None
+    obj.device = torch.device("cpu")
     obj.base = object()
+    obj.bound = .5
     obj.audit_callback = None
     obj.pgvb_calls = 0
     obj.pgvb_seconds = 0.
-    obj.unified = SimpleNamespace(direction_ready=False)
-    monkeypatch.setattr(A3TrajectoryPolicy, "predict_field",
-                        lambda *args: SimpleNamespace(diagnostics={}))
-    result = obj.predict(SimpleNamespace(current_observation={}), obj.record["instruction"])
+    obj.instruction_spec = {
+        "version": "unified-instruction-v1",
+        "intent": "navigate_to_landmark",
+        "landmark": {},
+    }
+    obj.unified = SimpleNamespace(
+        direction_ready=False,
+        forward_structured=lambda spec, **kw: {
+            "geometry_field": obj.base, "field": obj.base,
+            "evidence": None,
+            "audit": dict(
+                active=False, covered_cells=0, max_abs_delta=0.,
+                changed_top1=False,
+            ),
+        },
+    )
+    monkeypatch.setattr(
+        A3TrajectoryPolicy, "predict_field",
+        lambda *args: SimpleNamespace(diagnostics={}),
+    )
+    result = obj.predict(
+        SimpleNamespace(current_observation={}), obj.record["instruction"],
+    )
     assert result.diagnostics["old_stage1_rgb_executed"] is False
     assert result.diagnostics["siglip2_rgb_forward"] is False
+    assert result.diagnostics["standalone_a3_forward"] is False
