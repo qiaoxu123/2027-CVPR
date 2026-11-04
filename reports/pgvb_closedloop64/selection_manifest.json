@@ -1,0 +1,28 @@
+{
+  "tasks": 64,
+  "categories": {
+    "Road": 24,
+    "Building": 32,
+    "Other": 8
+  },
+  "maps": 23,
+  "pool_categories": {
+    "Road": 154,
+    "Building": 183,
+    "Other": 14
+  },
+  "multi_polygon_tasks": 23,
+  "source_split": "val_seen",
+  "radius_m": 20.0,
+  "seed": 0,
+  "task_gt_is_public_name_union": true,
+  "inference_never_uses_original_target_position": true,
+  "selection": "Map-balanced deterministic public-name groups; begin outside20m; no SR/target coordinate selection",
+  "tasks_sha256": "e87557abc208849e610351e0dea263b5c2f6c434ddf141d623cbeaf92ef3dd63",
+  "inputs_sha256": {
+    "reports/direct_relation_navigation_val_seen/episodes.jsonl": "6877ac4595cf7f7c783dea6193f6b717831d8984177151af2780953e001b88ff",
+    "/home/20261024_1/Workspace/2027-CVPR/Ablations/GraphNav/visual-residual-20261013/full_resolution_384/val_seen/episodes.json": "245e5277c6167836af3425cb7f681d3968545a9b22d38f0b22ae8d168eda650a",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/prepare_named_landmark_navigation.py": "7b3202a1161631727c884846f0c90404c02bafd067ee963a9cae505d1eb5b3b5"
+  }
+}

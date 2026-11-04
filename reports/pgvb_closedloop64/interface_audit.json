@@ -1,0 +1,53 @@
+{
+  "stage1_shapes": {
+    "grid_size": 28,
+    "top_k": 20,
+    "hidden": 128
+  },
+  "stage1_protocol": {
+    "name": "graphnav-v1-stage1",
+    "backbone": "google/siglip2-large-patch16-384",
+    "backbone_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+    "stage": "C",
+    "use_history": true,
+    "active_observation": false,
+    "new_gat": false,
+    "relation_loss": false,
+    "residual_bound": 0.5,
+    "stop_threshold": 0.3,
+    "stop_positive_weight": 20.0,
+    "execution": "guarded-blend",
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "freeze_bert": true,
+    "freeze_siglip": true,
+    "observed_fraction_to_legacy_controller": 0.0,
+    "initialization": "Verified A3 Seed1 Epoch14 and original pretrained Trajectory/Stop; all later stages initialize from prior selected complete checkpoint",
+    "selection": "Seen128 SR then SPL, then internal Train Dev belief Recall; Unseen never used"
+  },
+  "pgvb": {
+    "image_features": [
+      1,
+      144,
+      3,
+      1024
+    ],
+    "polygon_tokens": [
+      1,
+      16,
+      4
+    ],
+    "hidden": 64,
+    "heads": 4
+  },
+  "input_boundary": "Current RGB/depth, current pose/Footprint, requested public name and public Polygon only. Original final-target GT and future trajectory not passed to PublicEpisode or PGVB.",
+  "fixes": [
+    "normalize runtime public object ID lookup int/str",
+    "abstention waypoint XYZ rather than XYZYaw"
+  ],
+  "baseline_exact_pose_metric_matches": 64,
+  "models_trained": false,
+  "source_sha_matches": true,
+  "checkpoint_sha_matches": true
+}

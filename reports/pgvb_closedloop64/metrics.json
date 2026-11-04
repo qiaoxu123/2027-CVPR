@@ -1,0 +1,41 @@
+{
+  "complete": true,
+  "summary": {
+    "E2_original": {
+      "episodes": 64,
+      "successes": 61.0,
+      "SR": 0.953125,
+      "OSR": 0.96875,
+      "NE": 4.7806245201551665,
+      "terminations": {
+        "policy_stop": 64
+      }
+    },
+    "E4_PGVB": {
+      "episodes": 64,
+      "successes": 62.0,
+      "SR": 0.96875,
+      "OSR": 0.984375,
+      "NE": 3.183040878215462,
+      "terminations": {
+        "policy_stop": 60,
+        "horizon": 4
+      }
+    },
+    "E5_PGVB_only": {
+      "episodes": 64,
+      "successes": 5.0,
+      "SR": 0.078125,
+      "OSR": 0.078125,
+      "NE": 166.04356855738683,
+      "terminations": {
+        "stagnation": 61,
+        "horizon": 3
+      }
+    }
+  },
+  "pgvb_checkpoint_sha256_after": "ba3073723703ce8188c7f74ae810a622342631bb150bd2597656ff0039f2cf56",
+  "seconds_current_session": 75.93763183616102,
+  "peak_gpu_allocated_gib": 7.4698405265808105,
+  "checkpoint_sha256_after": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a"
+}

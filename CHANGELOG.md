@@ -241,3 +241,11 @@
 - 分离整地标覆盖与当前有效视觉支持；不把未知区域作为负样本，保持既有网络参数结构。
 ### Notes & Caveats
 - 保留原权重及正常推理入口。评估为TRAIN公开Polygon弱监督代理，无人工像素Gold，无闭环导航成绩；单种子且不是新盲确认。
+
+## [PGVB-closedloop-audit] - 2026-11-04
+### Features
+- 在独立PGVB地标闭环入口中修复整数/字符串目录ID适配、无证据XYZ waypoint维度；新增逐决策RGB与世界Belief只读快照、按方法断点执行及64条配对报告。
+### Design Rationale
+- 保持原E2模型与控制器不变，以历史逐点轨迹复现核验，再固定比较PGVB增量和独立视觉Goal。诊断快照不回流推理。
+### Notes & Caveats
+- 公开具名地标Polygon区域任务，不等于原CityNav目标任务。E5无全局搜索、候选Context为零；SR按末位置评价，不能将超时/停滞成功称为正确Stop。不训练或自动部署。

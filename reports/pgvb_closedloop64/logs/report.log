@@ -1,0 +1,468 @@
+{
+  "summary": {
+    "E2_original": {
+      "episodes": 64,
+      "successes": 61,
+      "SR": 0.953125,
+      "OSR": 0.96875,
+      "NE": 4.7806245201551665,
+      "steps": 6.953125,
+      "path_length_m": 202.61142720077478,
+      "false_stop": 0.046875,
+      "terminations": {
+        "policy_stop": 64
+      },
+      "decisions": 509,
+      "active_decisions": 0,
+      "active_fraction": 0.0,
+      "active_episodes": 0,
+      "changed_top1_decisions": 0,
+      "abstained_decisions": 0,
+      "fallback_reasons": {
+        "baseline": 509
+      },
+      "latency_ms_mean": 60.923886633604354,
+      "latency_ms_p50": 51.930885296314955,
+      "warm_latency_ms_mean": 52.83654454593243,
+      "pgvb_ms_per_decision": 0.0,
+      "pgvb_ms_active": null,
+      "goal_jumps_over20": 0,
+      "goal_transition_count": 445,
+      "goal_jump_mean_m": 0.19266480863764046,
+      "correct_goal_losses": 0,
+      "initial_goal_correct": 61,
+      "final_goal_correct": 61,
+      "successes_without_policy_stop": 0
+    },
+    "E4_PGVB": {
+      "episodes": 64,
+      "successes": 62,
+      "SR": 0.96875,
+      "OSR": 0.984375,
+      "NE": 3.183040878215462,
+      "steps": 8.71875,
+      "path_length_m": 223.785991631996,
+      "false_stop": 0.03125,
+      "terminations": {
+        "policy_stop": 60,
+        "horizon": 4
+      },
+      "decisions": 618,
+      "active_decisions": 308,
+      "active_fraction": 0.49838187702265374,
+      "active_episodes": 45,
+      "changed_top1_decisions": 145,
+      "abstained_decisions": 0,
+      "fallback_reasons": {
+        "no_supported_local_anchor": 241,
+        "available": 308,
+        "unsupported_or_unresolved_name": 69
+      },
+      "latency_ms_mean": 87.87549265153996,
+      "latency_ms_p50": 98.31810463219881,
+      "warm_latency_ms_mean": 85.00019077628528,
+      "pgvb_ms_per_decision": 27.922574815741203,
+      "pgvb_ms_active": 50.385284497608225,
+      "goal_jumps_over20": 50,
+      "goal_transition_count": 554,
+      "goal_jump_mean_m": 4.376018958240591,
+      "correct_goal_losses": 2,
+      "initial_goal_correct": 61,
+      "final_goal_correct": 62,
+      "successes_without_policy_stop": 4
+    },
+    "E5_PGVB_only": {
+      "episodes": 64,
+      "successes": 5,
+      "SR": 0.078125,
+      "OSR": 0.078125,
+      "NE": 166.04356855738683,
+      "steps": 6.765625,
+      "path_length_m": 31.204572591364894,
+      "false_stop": 0.0,
+      "terminations": {
+        "stagnation": 61,
+        "horizon": 3
+      },
+      "decisions": 433,
+      "active_decisions": 81,
+      "active_fraction": 0.18706697459584296,
+      "active_episodes": 5,
+      "changed_top1_decisions": 0,
+      "abstained_decisions": 352,
+      "fallback_reasons": {
+        "no_supported_local_anchor": 311,
+        "observed_conditioned_belief": 81,
+        "unsupported_or_unresolved_name": 41
+      },
+      "latency_ms_mean": 20.892595846472656,
+      "latency_ms_p50": 11.309701949357986,
+      "warm_latency_ms_mean": 21.245727176730064,
+      "pgvb_ms_per_decision": 14.952241192522349,
+      "pgvb_ms_active": 49.202538342617544,
+      "goal_jumps_over20": 41,
+      "goal_transition_count": 369,
+      "goal_jump_mean_m": 5.405084009938167,
+      "correct_goal_losses": 0,
+      "initial_goal_correct": 4,
+      "final_goal_correct": 5,
+      "successes_without_policy_stop": 5
+    }
+  },
+  "stratified": {
+    "E2_original": {
+      "Building": {
+        "episodes": 32,
+        "successes": 30,
+        "SR": 0.9375,
+        "OSR": 0.96875,
+        "NE": 4.793808219417738,
+        "steps": 6.84375,
+        "path_length_m": 200.63421288706826,
+        "false_stop": 0.0625,
+        "terminations": {
+          "policy_stop": 32
+        },
+        "decisions": 251,
+        "active_decisions": 0,
+        "active_fraction": 0.0,
+        "active_episodes": 0,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 0,
+        "fallback_reasons": {
+          "baseline": 251
+        },
+        "latency_ms_mean": 61.1893804743886,
+        "latency_ms_p50": 52.801548037678,
+        "warm_latency_ms_mean": 53.36667745497469,
+        "pgvb_ms_per_decision": 0.0,
+        "pgvb_ms_active": null,
+        "goal_jumps_over20": 0,
+        "goal_transition_count": 219,
+        "goal_jump_mean_m": 0.0,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 30,
+        "final_goal_correct": 30,
+        "successes_without_policy_stop": 0
+      },
+      "Road": {
+        "episodes": 24,
+        "successes": 23,
+        "SR": 0.9583333333333334,
+        "OSR": 0.9583333333333334,
+        "NE": 5.1900449596426705,
+        "steps": 6.875,
+        "path_length_m": 196.52180209947974,
+        "false_stop": 0.041666666666666664,
+        "terminations": {
+          "policy_stop": 24
+        },
+        "decisions": 189,
+        "active_decisions": 0,
+        "active_fraction": 0.0,
+        "active_episodes": 0,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 0,
+        "fallback_reasons": {
+          "baseline": 189
+        },
+        "latency_ms_mean": 62.51465739120567,
+        "latency_ms_p50": 51.20202200487256,
+        "warm_latency_ms_mean": 53.05140960227811,
+        "pgvb_ms_per_decision": 0.0,
+        "pgvb_ms_active": null,
+        "goal_jumps_over20": 0,
+        "goal_transition_count": 165,
+        "goal_jump_mean_m": 0.4330092921401515,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 23,
+        "final_goal_correct": 23,
+        "successes_without_policy_stop": 0
+      },
+      "Other": {
+        "episodes": 8,
+        "successes": 8,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 3.4996284046423725,
+        "steps": 7.625,
+        "path_length_m": 228.78915975948598,
+        "false_stop": 0.0,
+        "terminations": {
+          "policy_stop": 8
+        },
+        "decisions": 69,
+        "active_decisions": 0,
+        "active_fraction": 0.0,
+        "active_episodes": 0,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 0,
+        "fallback_reasons": {
+          "baseline": 69
+        },
+        "latency_ms_mean": 55.600776094133444,
+        "latency_ms_p50": 51.01824179291725,
+        "warm_latency_ms_mean": 50.352088129911266,
+        "pgvb_ms_per_decision": 0.0,
+        "pgvb_ms_active": null,
+        "goal_jumps_over20": 0,
+        "goal_transition_count": 61,
+        "goal_jump_mean_m": 0.23425092853483606,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 8,
+        "final_goal_correct": 8,
+        "successes_without_policy_stop": 0
+      }
+    },
+    "E4_PGVB": {
+      "Building": {
+        "episodes": 32,
+        "successes": 31,
+        "SR": 0.96875,
+        "OSR": 1.0,
+        "NE": 2.713845156951947,
+        "steps": 8.40625,
+        "path_length_m": 229.03104929706092,
+        "false_stop": 0.03125,
+        "terminations": {
+          "policy_stop": 31,
+          "horizon": 1
+        },
+        "decisions": 300,
+        "active_decisions": 153,
+        "active_fraction": 0.51,
+        "active_episodes": 25,
+        "changed_top1_decisions": 60,
+        "abstained_decisions": 0,
+        "fallback_reasons": {
+          "no_supported_local_anchor": 147,
+          "available": 153
+        },
+        "latency_ms_mean": 91.18510343755284,
+        "latency_ms_p50": 98.28638285398483,
+        "warm_latency_ms_mean": 87.29460093178857,
+        "pgvb_ms_per_decision": 29.449005826997258,
+        "pgvb_ms_active": 50.91968418884219,
+        "goal_jumps_over20": 23,
+        "goal_transition_count": 268,
+        "goal_jump_mean_m": 4.4567941176569645,
+        "correct_goal_losses": 2,
+        "initial_goal_correct": 30,
+        "final_goal_correct": 31,
+        "successes_without_policy_stop": 1
+      },
+      "Road": {
+        "episodes": 24,
+        "successes": 23,
+        "SR": 0.9583333333333334,
+        "OSR": 0.9583333333333334,
+        "NE": 3.7031059977578438,
+        "steps": 9.5,
+        "path_length_m": 215.12485870274614,
+        "false_stop": 0.041666666666666664,
+        "terminations": {
+          "policy_stop": 21,
+          "horizon": 3
+        },
+        "decisions": 249,
+        "active_decisions": 155,
+        "active_fraction": 0.6224899598393574,
+        "active_episodes": 20,
+        "changed_top1_decisions": 85,
+        "abstained_decisions": 0,
+        "fallback_reasons": {
+          "no_supported_local_anchor": 94,
+          "available": 155
+        },
+        "latency_ms_mean": 93.20178075719728,
+        "latency_ms_p50": 101.21564380824566,
+        "warm_latency_ms_mean": 91.92979043142662,
+        "pgvb_ms_per_decision": 33.8170052764107,
+        "pgvb_ms_active": 49.85778028626115,
+        "goal_jumps_over20": 27,
+        "goal_transition_count": 225,
+        "goal_jump_mean_m": 5.402686100855983,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 23,
+        "final_goal_correct": 23,
+        "successes_without_policy_stop": 3
+      },
+      "Other": {
+        "episodes": 8,
+        "successes": 8,
+        "SR": 1.0,
+        "OSR": 1.0,
+        "NE": 3.4996284046423725,
+        "steps": 7.625,
+        "path_length_m": 228.78915975948598,
+        "false_stop": 0.0,
+        "terminations": {
+          "policy_stop": 8
+        },
+        "decisions": 69,
+        "active_decisions": 0,
+        "active_fraction": 0.0,
+        "active_episodes": 0,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 0,
+        "fallback_reasons": {
+          "unsupported_or_unresolved_name": 69
+        },
+        "latency_ms_mean": 54.26492780932914,
+        "latency_ms_p50": 49.65869290754199,
+        "warm_latency_ms_mean": 49.359832676585576,
+        "pgvb_ms_per_decision": 0.014712669603202654,
+        "pgvb_ms_active": null,
+        "goal_jumps_over20": 0,
+        "goal_transition_count": 61,
+        "goal_jump_mean_m": 0.23425092853483606,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 8,
+        "final_goal_correct": 8,
+        "successes_without_policy_stop": 0
+      }
+    },
+    "E5_PGVB_only": {
+      "Building": {
+        "episodes": 32,
+        "successes": 2,
+        "SR": 0.0625,
+        "OSR": 0.0625,
+        "NE": 177.70164878794236,
+        "steps": 6.59375,
+        "path_length_m": 25.091698926420868,
+        "false_stop": 0.0,
+        "terminations": {
+          "stagnation": 32
+        },
+        "decisions": 211,
+        "active_decisions": 23,
+        "active_fraction": 0.10900473933649289,
+        "active_episodes": 2,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 188,
+        "fallback_reasons": {
+          "no_supported_local_anchor": 188,
+          "observed_conditioned_belief": 23
+        },
+        "latency_ms_mean": 18.057655399638755,
+        "latency_ms_p50": 11.351271998137236,
+        "warm_latency_ms_mean": 16.876744975299477,
+        "pgvb_ms_per_decision": 12.878470795926466,
+        "pgvb_ms_active": 48.53745857658594,
+        "goal_jumps_over20": 18,
+        "goal_transition_count": 179,
+        "goal_jump_mean_m": 4.419492625686375,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 2,
+        "final_goal_correct": 2,
+        "successes_without_policy_stop": 2
+      },
+      "Road": {
+        "episodes": 24,
+        "successes": 3,
+        "SR": 0.125,
+        "OSR": 0.125,
+        "NE": 144.43306566552005,
+        "steps": 7.541666666666667,
+        "path_length_m": 49.756595008411885,
+        "false_stop": 0.0,
+        "terminations": {
+          "stagnation": 21,
+          "horizon": 3
+        },
+        "decisions": 181,
+        "active_decisions": 58,
+        "active_fraction": 0.32044198895027626,
+        "active_episodes": 3,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 123,
+        "fallback_reasons": {
+          "no_supported_local_anchor": 123,
+          "observed_conditioned_belief": 58
+        },
+        "latency_ms_mean": 27.921458842613585,
+        "latency_ms_p50": 11.745224241167307,
+        "warm_latency_ms_mean": 29.760389748937005,
+        "pgvb_ms_per_decision": 20.75318715313851,
+        "pgvb_ms_active": 49.466276870526634,
+        "goal_jumps_over20": 23,
+        "goal_transition_count": 157,
+        "goal_jump_mean_m": 7.66488420171543,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 2,
+        "final_goal_correct": 3,
+        "successes_without_policy_stop": 3
+      },
+      "Other": {
+        "episodes": 8,
+        "successes": 0,
+        "SR": 0.0,
+        "OSR": 0.0,
+        "NE": 184.24275631076497,
+        "steps": 5.125,
+        "path_length_m": 0.0,
+        "false_stop": 0.0,
+        "terminations": {
+          "stagnation": 8
+        },
+        "decisions": 41,
+        "active_decisions": 0,
+        "active_fraction": 0.0,
+        "active_episodes": 0,
+        "changed_top1_decisions": 0,
+        "abstained_decisions": 41,
+        "fallback_reasons": {
+          "unsupported_or_unresolved_name": 41
+        },
+        "latency_ms_mean": 4.452308821605473,
+        "latency_ms_p50": 4.826422780752182,
+        "warm_latency_ms_mean": 4.434993547020537,
+        "pgvb_ms_per_decision": 0.015517651307873607,
+        "pgvb_ms_active": null,
+        "goal_jumps_over20": 0,
+        "goal_transition_count": 33,
+        "goal_jump_mean_m": 0.0,
+        "correct_goal_losses": 0,
+        "initial_goal_correct": 0,
+        "final_goal_correct": 0,
+        "successes_without_policy_stop": 0
+      }
+    }
+  },
+  "paired": {
+    "E4_PGVB": {
+      "corrected": 1.0,
+      "damaged": 0.0,
+      "both_success": 61.0,
+      "both_failure": 2
+    },
+    "E5_PGVB_only": {
+      "corrected": 0.0,
+      "damaged": 56.0,
+      "both_success": 5.0,
+      "both_failure": 3
+    }
+  },
+  "within_E4_goal_changes": {
+    "active": 308,
+    "corrected_decisions": 13,
+    "damaged_decisions": 0,
+    "corrected_episodes": [
+      1,
+      39
+    ],
+    "damaged_episodes": [],
+    "changed_goal_decisions": 145
+  },
+  "uncertainty": {
+    "unit": "paired episode clustered by map; fixed diagnostic set, not model selection",
+    "maps": 23,
+    "E4_minus_E2_SR_ci95": [
+      0.0,
+      0.04838709677419355
+    ]
+  },
+  "historical_E2_exact": true,
+  "annotations": "public landmark Polygon region; no human pixel instance accuracy; Val-Seen sourced diagnostic tasks"
+}
