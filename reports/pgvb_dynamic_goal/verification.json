@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "run": "pgvb_dynamic_develop_v1",
+      "trajectories": 96,
+      "source_sha_matches": true,
+      "weight_sha_unchanged": true,
+      "horizon": 20
+    },
+    {
+      "run": "pgvb_dynamic_confirm_v1",
+      "trajectories": 192,
+      "source_sha_matches": true,
+      "weight_sha_unchanged": true,
+      "horizon": 20
+    },
+    {
+      "run": "pgvb_dynamic_strict_confirm_v1",
+      "trajectories": 96,
+      "source_sha_matches": true,
+      "weight_sha_unchanged": true,
+      "horizon": 20
+    }
+  ],
+  "total_real_rollouts": 384,
+  "finite_JSON": true,
+  "html_links_valid": true,
+  "original_runtime_and_controller_source_unchanged": true,
+  "all_frozen_policy_hashes_match": true,
+  "tests": "72 passed in 1.88s",
+  "historical_full_frame_counts": {
+    "1": 14,
+    "13": 20,
+    "34": 20,
+    "39": 9
+  }
+}

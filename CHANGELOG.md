@@ -249,3 +249,12 @@
 - 保持原E2模型与控制器不变，以历史逐点轨迹复现核验，再固定比较PGVB增量和独立视觉Goal。诊断快照不回流推理。
 ### Notes & Caveats
 - 公开具名地标Polygon区域任务，不等于原CityNav目标任务。E5无全局搜索、候选Context为零；SR按末位置评价，不能将超时/停滞成功称为正确Stop。不训练或自动部署。
+
+## [PGVB-dynamic-goal-interface] - 2026-11-04
+### Features
+- 新增独立动态Goal候选确认与网格量化到达接口的冻结权重2×2实验；保存历史50次跳变及TRAIN分组闭环诊断。
+- 新增跨Block同城同名地标保守分组检查，保留首轮隔离局限与未评分任务的额外确认记录。
+### Design Rationale
+- 候选稳定只重排现有候选并gather原context，不改变Belief logits；错误旧候选至多短暂延迟，不能永久锁定。到达接口仍依赖原学习式Stop，不使用GT或Polygon距离。
+### Notes & Caveats
+- 原默认策略、权重、Stop概率阈值及Horizon20不变。宽松到达存在错误Goal上的提前误停反例，不能据开发集结果直接部署。所有成绩为TRAIN具名地标诊断任务。
