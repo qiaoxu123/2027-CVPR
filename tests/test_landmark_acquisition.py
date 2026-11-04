@@ -158,3 +158,52 @@ def test_tracking_does_not_use_distance_or_gt():
     audit = tracker.observe(*_patches())
     assert not any("distance" in key or "ground_truth" in key for key in audit)
     assert audit["identity_independently_verified"] is False
+
+
+def test_nearby_public_geometry_is_reported_only_after_arrival(monkeypatch):
+    from types import SimpleNamespace
+    from shapely.geometry import box
+    from graphnav.a3_runtime import A3TrajectoryPolicy
+    from graphnav.unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
+
+    policy = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
+    policy.record = {"instruction": "Navigate to Alpha Hall."}
+    policy.mode = "geometry"
+    policy._initialize_geometry_inputs = lambda: None
+    policy._observed_inputs = lambda obs: (None, "geometry_only")
+    policy.inputs, policy.tokens, policy.mask, policy.names = {}, None, None, None
+    policy.device = torch.device("cpu")
+    policy.bound = .5
+    policy.pgvb_calls, policy.pgvb_seconds = 0, 0.
+    policy.audit_callback = None
+    policy.instruction_spec = {
+        "version": "unified-instruction-v1", "intent": "navigate_to_landmark",
+        "landmark": {"public_ids": ["alpha"]},
+    }
+    policy._public_region = box(0, 0, 10, 10)
+    policy._neighbor_geometry = [{"public_id": "parking", "type": "Parking"}]
+    policy.unified = type("FakeModel", (), {
+        "direction_ready": False,
+        "forward_structured": lambda self, spec, **kwargs: {
+            "geometry_field": None, "field": None, "evidence": None,
+            "audit": {"active": False, "covered_cells": 0,
+                      "max_abs_delta": 0., "changed_top1": False},
+        },
+    })()
+    monkeypatch.setattr(
+        A3TrajectoryPolicy, "predict_field",
+        lambda *args: type("Prediction", (), {"diagnostics": {}})(),
+    )
+    far = policy.predict(
+        SimpleNamespace(current_observation={}, pose=[100., 100., 30.]),
+        policy.record["instruction"],
+    )
+    assert not far.diagnostics["near_landmark_geometry"]["within_20m"]
+    assert far.diagnostics["near_landmark_geometry"]["nearby_object_count"] == 0
+    near = policy.predict(
+        SimpleNamespace(current_observation={}, pose=[5., 5., 30.]),
+        policy.record["instruction"],
+    )
+    assert near.diagnostics["near_landmark_geometry"]["within_20m"]
+    assert near.diagnostics["near_landmark_geometry"]["nearby_object_count"] == 1
+    assert near.diagnostics["landmark_visual_gain"] == 0
