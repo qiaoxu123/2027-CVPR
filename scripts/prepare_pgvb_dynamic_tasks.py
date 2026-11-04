@@ -9,21 +9,31 @@ from graphnav.landmark_region_supervision import public_type
 from scripts.analyze_instruction_landmark_association import iter_train
 
 
+def physical_name_key(map_name,name):
+ return map_name.split('_block_')[0],canonical_name(name)
+
+
 def main():
  p=argparse.ArgumentParser()
  for k in ['train','structured','catalog','old-tasks','pgvb-data','data-root','sbf-source','output']:p.add_argument('--'+k,type=Path,required=True)
+ p.add_argument('--strict-city-name',action='store_true');p.add_argument('--exclude-map-tasks',type=Path)
  a=p.parse_args();assert not a.output.exists();sys.path.insert(0,str(a.sbf_source))
  from sbfnav.dataset import _pose4
  from sbfnav.coordinates import MapTransform
  from sbfnav.mapdata import GROUND_LEVEL
  catalog=json.loads(a.catalog.read_text());old={(t['map_name'],canonical_name(t['landmark_name'])) for t in json.loads(a.old_tasks.read_text())};d=torch.load(a.pgvb_data,weights_only=True,map_location='cpu');used={tuple(k.split('::',1)) for k in d['queries']};del d
  with gzip.open(a.structured,'rt') as f:parsed=json.load(f)
+ if a.strict_city_name:
+  old={physical_name_key(mp,name) for mp,name in old};used={physical_name_key(mp,name) for mp,name in used}
+  excluded_maps={t['map_name'] for t in json.loads(a.exclude_map_tasks.read_text())}
+ else:excluded_maps=set()
  names={}
  for x in parsed:
   for lm in x['landmarks']:
    for name in lm['public_names']:
     key=(x['map_name'],canonical_name(name))
-    if key not in old|used:names[key]=name
+    physical=physical_name_key(*key) if a.strict_city_name else key
+    if key[0] not in excluded_maps and physical not in old|used:names[key]=name
  definitions={};transforms={};excluded=collections.Counter()
  for key,name in names.items():
   mp=key[0];group=[(oid,o) for oid,o in catalog[mp].items() if canonical_name(o.get('name',''))==key[1]];typ=public_type([o['object_type'] for _,o in group])
@@ -47,9 +57,15 @@ def main():
     priority=hashlib.sha256(f'pgvb-dynamic-v1:{i}:{key}'.encode()).hexdigest()
     if key not in candidates or priority<candidates[key][0]:
      candidates[key]=(priority,dict(task_id=mp+'::'+key[1],map_name=mp,source_train_index=i,landmark_name=q['name'],category=q['type'],instruction=f'Navigate to {q["name"]}.',start_pose=pose.tolist(),world_bounds=transforms[mp],public_polygons=[o['contour'] for _,o in q['group']],public_object_ids=[oid for oid,_ in q['group']],public_types=sorted({o['object_type'] for _,o in q['group']})))
- maps=sorted({key[0] for key in candidates},key=lambda mp:hashlib.sha256(('split:'+mp).encode()).hexdigest());assignment={mp:'develop' if j<len(maps)//3 else 'confirm' for j,mp in enumerate(maps)}
+ if a.strict_city_name:
+  merged={}
+  for key,value in sorted(candidates.items()):
+   physical=physical_name_key(*key)
+   if physical not in merged or value[0]<merged[physical][0]:merged[physical]=value
+  candidates=merged
+ maps=sorted({t['map_name'] for _,t in candidates.values()},key=lambda mp:hashlib.sha256(('split:'+mp).encode()).hexdigest());assignment={mp:('strict_confirm' if a.strict_city_name else 'develop' if j<len(maps)//3 else 'confirm') for j,mp in enumerate(maps)}
  a.output.mkdir(parents=True);proof={}
- for subset,quota in [('develop',12),('confirm',24)]:
+ for subset,quota in ([('strict_confirm',12)] if a.strict_city_name else [('develop',12),('confirm',24)]):
   chosen=[]
   for typ in ['Building','Road']:
    permap=collections.defaultdict(list)
@@ -64,7 +80,9 @@ def main():
    chosen.extend(selected)
   chosen.sort(key=lambda t:t['task_id'])
   for i,t in enumerate(chosen):t['index']=i
-  folder=a.output/subset;folder.mkdir();(folder/'tasks_public.json').write_text(json.dumps(chosen,indent=2));manifest=dict(tasks=len(chosen),source_split='TRAIN',subset=subset,categories=dict(collections.Counter(t['category'] for t in chosen)),maps=sorted({t['map_name'] for t in chosen}),tasks_sha256=file_sha256(folder/'tasks_public.json'),prior64_and_PGVB_cache_names_excluded=True,selection='Deterministic name/map balanced; real official TRAIN start only; no target GT or outcomes; public-region initial outside20m')
+  folder=a.output/subset;folder.mkdir();(folder/'tasks_public.json').write_text(json.dumps(chosen,indent=2));manifest=dict(tasks=len(chosen),source_split='TRAIN',subset=subset,categories=dict(collections.Counter(t['category'] for t in chosen)),maps=sorted({t['map_name'] for t in chosen}),tasks_sha256=file_sha256(folder/'tasks_public.json'),prior64_and_PGVB_cache_names_excluded=True,strict_city_name_groups=a.strict_city_name,selection='Deterministic name/map balanced; real official TRAIN start only; no target GT or outcomes; public-region initial outside20m')
   (folder/'manifest.json').write_text(json.dumps(manifest,indent=2));proof[subset]=manifest
+ proof['strict_city_name_groups']=a.strict_city_name
+ if a.exclude_map_tasks:proof['excluded_development_maps_sha256']=file_sha256(a.exclude_map_tasks)
  proof['map_assignment']=assignment;proof['input_sha256']={str(f):file_sha256(f) for f in [a.train,a.structured,a.catalog,a.old_tasks,a.pgvb_data,Path(__file__)]};proof['excluded']=dict(excluded);proof['candidate_groups']=len(candidates);(a.output/'selection_proof.json').write_text(json.dumps(proof,indent=2));print(json.dumps(proof,indent=2))
 if __name__=='__main__':main()

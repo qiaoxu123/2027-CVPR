@@ -1,0 +1,15 @@
+
+==================================== ERRORS ====================================
+______________ ERROR collecting tests/test_pgvb_task_isolation.py ______________
+ImportError while importing test module '/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/tests/test_pgvb_task_isolation.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../../miniconda3/envs/graphnav/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_pgvb_task_isolation.py:1: in <module>
+    from scripts.prepare_pgvb_dynamic_tasks import physical_name_key
+E   ImportError: cannot import name 'physical_name_key' from 'scripts.prepare_pgvb_dynamic_tasks' (/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/prepare_pgvb_dynamic_tasks.py)
+=========================== short test summary info ============================
+ERROR tests/test_pgvb_task_isolation.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.13s

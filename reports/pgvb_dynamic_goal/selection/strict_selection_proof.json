@@ -1,0 +1,48 @@
+{
+  "strict_confirm": {
+    "tasks": 24,
+    "source_split": "TRAIN",
+    "subset": "strict_confirm",
+    "categories": {
+      "Building": 12,
+      "Road": 12
+    },
+    "maps": [
+      "cambridge_block_13",
+      "cambridge_block_18",
+      "cambridge_block_21",
+      "cambridge_block_4",
+      "cambridge_block_7",
+      "cambridge_block_9"
+    ],
+    "tasks_sha256": "275124161e4207a7db484e6decee4765a6877e478292e648c0eed3c50ec084ad",
+    "prior64_and_PGVB_cache_names_excluded": true,
+    "strict_city_name_groups": true,
+    "selection": "Deterministic name/map balanced; real official TRAIN start only; no target GT or outcomes; public-region initial outside20m"
+  },
+  "strict_city_name_groups": true,
+  "excluded_development_maps_sha256": "a6d838ba5ef20bcca56acc45e6977d1b62c1674be17f98059b465c63116743c8",
+  "map_assignment": {
+    "cambridge_block_9": "strict_confirm",
+    "cambridge_block_18": "strict_confirm",
+    "cambridge_block_4": "strict_confirm",
+    "cambridge_block_21": "strict_confirm",
+    "cambridge_block_7": "strict_confirm",
+    "cambridge_block_13": "strict_confirm"
+  },
+  "input_sha256": {
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/original_citynav/citynav_train_seen.json": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245",
+    "reports/pgvb/language/structured_train.json.gz": "d0bfd09d485d1738a5ca0d29d9d7125687729a05e213f657ee25557859c1edea",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "reports/pgvb_dynamic_goal/selection/already_evaluated_tasks_for_exclusion.json": "ee472a706a7f8e6508be2c407ec5587eb15ade57c1f3ff2f1d1701398592f034",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/pgvb_local_anchor_v2/data/cache.pt": "45efdb638745f8b859533616ed2f99bf6624f8a627bc1faec2a5cea83760473d",
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/prepare_pgvb_dynamic_tasks.py": "ffe252eb88a0cbc647352f728a87e0a58f8229465af8b021dc71ffad87ad0fa5"
+  },
+  "excluded": {
+    "unsupported_type": 16,
+    "invalid_public_geometry": 1,
+    "illegal_start_height": 9223,
+    "already_within_public_region20": 6
+  },
+  "candidate_groups": 32
+}
