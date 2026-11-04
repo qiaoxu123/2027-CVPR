@@ -7,6 +7,7 @@
 - UnifiedPGVB.geometry：原GraphNav A3的完整语言+公共地图几何定位权重，输出28×28 logits、Top-K候选与128维稠密上下文。
 - UnifiedPGVB.pgvb：唯一RGB视觉Head。SigLIP2视觉/文本骨干冻结，当前真实384×384 RGB只编码一次；利用名称、类型和合法局部Polygon投影输出地标可见证据。
 - UnifiedPGVB.forward_field：内部完成几何前向、局部PGVB评分、世界网格有界融合、Top-K重排与候选上下文索引，直接返回一个完整GoalField。无可信图像证据时返回未修改的几何Belief。
+- UnifiedPGVB.joint_logits/joint_context：内部额外提供几何128维上下文与PGVB视觉证据联合条件化的可训练Belief/Context细化层。最终层零初始化，joint_fusion_ready=False默认禁用，确保未训练时与旧有界融合输出严格一致；未来需监督训练、独立验证后再开放。
 - UnifiedPGVB.direction：方向变换模块权重可选迁移，尚未在实际目标闭环启用。
 - UnifiedPGVB.target_text/target_score：预留目标外观Head，尚未训练，必须拒绝推理。
 - Trajectory/Stop：只保留原GraphNav冻结的轨迹与停止控制头，不再产生或修改GoalField。
