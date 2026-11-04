@@ -1,0 +1,2331 @@
+[
+  {
+    "index": 0,
+    "episode": 221,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of St. Teresa of the Child Jesus Catholic Church and to the left of Fill Circle Events & Exhibitions Ltd, this yellow car is in the far bottom right of the parking lot.",
+    "word": "north",
+    "landmark": "St. Teresa of the Child Jesus Catholic Church",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 1,
+    "episode": 398,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "South of Celine Grove and to the left of St Teresa's Court, it is a black car, second car left of a red car.",
+    "word": "south",
+    "landmark": "Celine Grove",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 2,
+    "episode": 438,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is the white car, this car is north of St Teresa's Court building and to the right of this car are the red and black cars.",
+    "word": "north",
+    "landmark": "St Teresa's Court",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 3,
+    "episode": 449,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "South of Celine Grove and to the left of St Teresa's Court,it is a white car, fifth car south of a tree.",
+    "word": "south",
+    "landmark": "Celine Grove",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 4,
+    "episode": 1096,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is a white car and it is in the parking lot of the One Stop building. this car is in the 9th park row west of The Food Warehouse and is the 7th car from the north. The parking spaces to the north and south of this car are empty.",
+    "word": "west",
+    "landmark": "The Food Warehouse",
+    "keep": false,
+    "reason": "目标→第9排停车位→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 5,
+    "episode": 1161,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is a black car and it is in the parking lot of the One Stop building. this car is in the 14th parking row west of The Food Warehouse and is the 1st car from the south. To the north of this car is another black car, to the south there is no car.",
+    "word": "west",
+    "landmark": "The Food Warehouse",
+    "keep": false,
+    "reason": "目标→第14排停车位→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 6,
+    "episode": 2443,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is a blue car and it is in the northwest corner of the construction site north of the Full Circle Events & Exhibitions Ltd building.",
+    "word": "north",
+    "landmark": "Full Circle Events & Exhibitions Ltd",
+    "keep": false,
+    "reason": "目标→工地→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 7,
+    "episode": 2985,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "this is one of the buildings south of Bragg Road. There is a blue and round object in the backyard of the building to the left of this building.",
+    "word": "south",
+    "landmark": "Bragg Road",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 8,
+    "episode": 3163,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "It is the leftmost building of the 3 buildings on the left side north of Birchfield road. There is a green and round object in the front garden of this building.",
+    "word": "north",
+    "landmark": "Birchfield Road",
+    "keep": false,
+    "reason": "left side/三栋建筑组与north的作用域不清",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 9,
+    "episode": 5410,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "this gray roofed building is north of Stoneleigh Road and on the corner of Bragg Road. There are two white and one blue cars in front of the building, and a red car on the left.",
+    "word": "north",
+    "landmark": "Stoneleigh Road",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 10,
+    "episode": 5474,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this is the white car and it is south of Aston Lane on the corner of Aston Lane/Wellhead Lane. south of this car another black car is partially visible.",
+    "word": "south",
+    "landmark": "Aston Lane",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 11,
+    "episode": 5522,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "White car to the right of the white rectangular building with green stripes on the roof, south of Aston Lane. There are two blue containers to the south of this car.",
+    "word": "south",
+    "landmark": "Aston Lane",
+    "keep": false,
+    "reason": "south可能修饰白色建筑或车辆，作用域不清",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 12,
+    "episode": 5533,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "This black car is the closest car to the road in the large building's parking lot, between two white-roofed buildings, one large and one small, south of Aston Lane.",
+    "word": "south",
+    "landmark": "Aston Lane",
+    "keep": false,
+    "reason": "停车场/两建筑/车辆的south作用域不清",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 13,
+    "episode": 5672,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "North of Aston Manor Close, this white roofed building is to the left of a green sport field.",
+    "word": "north",
+    "landmark": "Aston Manor Close",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 14,
+    "episode": 5717,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "This is the T-shaped red-roofed building and is north of Aldridge Road. To the right of this building is a similar building and to the left is a tree, parking area and triangular green area.",
+    "word": "north",
+    "landmark": "Aldridge Road",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 15,
+    "episode": 5747,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this is the building with the gray roof. this building is the building on the right at the far north of Aldridge road. In front of this building, there is a blue car on the road.",
+    "word": "north",
+    "landmark": "Aldridge Road",
+    "keep": false,
+    "reason": "道路far north端点语义与侧向关系混合",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 16,
+    "episode": 5836,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "The white car parked and facing the north side of Aldridge Road when viewing the road as a horizontal road. The white car is located between two similarly shaped buildings that have upside down 'T's.",
+    "word": "north",
+    "landmark": "Aldridge Road",
+    "keep": false,
+    "reason": "facing朝向且显式road-as-horizontal版面参考",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 17,
+    "episode": 5912,
+    "subset": "dev",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this white car is at the far north of Wellhead Lane. There is a large sand dune on the right side of this road.",
+    "word": "north",
+    "landmark": "Wellhead Lane",
+    "keep": false,
+    "reason": "道路far north端点位置，不是明确侧向关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 18,
+    "episode": 6047,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is the white car and it is the second car from the right in the parking lot north of the Perry Barr Bus Depot building. This car has white cars to the north, gray to the right, and gray and black cars to the left.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": false,
+    "reason": "目标→停车场→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 19,
+    "episode": 6099,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is the white car and it is the 4th car from the right in the parking lot north of the Perry Barr Bus Depot building. This car has a blue car to its left, a white car to its right and an adjacent white car, the parking spot to the north is vacant.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": false,
+    "reason": "目标→停车场→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 20,
+    "episode": 6103,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the north of Perry Barr Bus Depot, this white car is fourth car from the right on the northmost row of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 21,
+    "episode": 6108,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the north of Perry Barr Bus Depot, this dark blue car is the car closest to three orange cubes in the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 22,
+    "episode": 6186,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is the white car and it is on Holford Drive. To the north of this car is the West Midlands Police Custody Suite and to the south is a building with an invisible roof and partially visible walls.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 23,
+    "episode": 6215,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "In the row of nine cars parked to the south of West Midlands Police Custody Suite, this white car is first from the right.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "keep": false,
+    "reason": "目标→九车排→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 24,
+    "episode": 6245,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "In the row of nine cars parked to the south of West Midlands Police Custody Suite, this bluish gray car is second from the right.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "keep": false,
+    "reason": "目标→九车排→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 25,
+    "episode": 6250,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "In the row of nine cars parked to the south of West Midlands Police Custody Suite, this gray car is third from the left.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "keep": false,
+    "reason": "目标→九车排→地标，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 26,
+    "episode": 6517,
+    "subset": "dev",
+    "public_types": [
+      "Building",
+      "TrafficRoad"
+    ],
+    "instruction": "To the south of The Coppice, this white car is parked north of the Perry Barr footpath, between a tree and a dark blue car.",
+    "word": "south",
+    "landmark": "The Coppice",
+    "keep": false,
+    "reason": "同名The Coppice混合Building和TrafficRoad，绑定未消歧",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 27,
+    "episode": 6517,
+    "subset": "dev",
+    "public_types": [
+      "Footpath"
+    ],
+    "instruction": "To the south of The Coppice, this white car is parked north of the Perry Barr footpath, between a tree and a dark blue car.",
+    "word": "north",
+    "landmark": "Perry Barr",
+    "keep": false,
+    "reason": "Perry Barr footpath词组边界与目录名称需核验",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 28,
+    "episode": 6524,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the north of Perry Barr Bus Depot, this dark blue car is first car from the bottom on the leftmost row of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 29,
+    "episode": 6526,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the north of Perry Barr Bus Depot, this dark gray car is third car from the top on the third row from the left of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 30,
+    "episode": 6528,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "o the north of Perry Barr Bus Depot, this dark blue car is between a white car and an empty parking space,second car from the bottom on the rightmost row of cars facing right in the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 31,
+    "episode": 6533,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the north of Perry Barr Bus Depot, this blue car is second car from the top on the middle row of the parking lot.",
+    "word": "north",
+    "landmark": "Perry Barr Bus Depot",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 32,
+    "episode": 6574,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the south of West Midlands Police Custody Suite, this blue car is near the building, facing a white car.",
+    "word": "south",
+    "landmark": "West Midlands Police Custody Suite",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 33,
+    "episode": 6678,
+    "subset": "dev",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "South of Weighbridge Offices, this gray roofed building has several cars, two green, parked next to it.",
+    "word": "south",
+    "landmark": "Weighbridge Offices",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 34,
+    "episode": 7902,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Haymarket Road , this gray roofed building is the farthest left one and is south of Pound Hill House.",
+    "word": "south",
+    "landmark": "Pound Hill House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 35,
+    "episode": 8210,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "the red car is south of the Fitzwilliam Museum building and the Grove Lodge Cottage is to the left of the building. to the right of it are gray and blue cars.",
+    "word": "south",
+    "landmark": "Grove Lodge Cottage",
+    "keep": false,
+    "reason": "south参照Fitzwilliam Museum而非当前绑定Grove Lodge Cottage",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 36,
+    "episode": 8344,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Pembroke Street on Trumpington Street, this gray roofed building is directly left of Pembroke College Chapel.",
+    "word": "south",
+    "landmark": "Pembroke Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 37,
+    "episode": 8431,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Between all the 17 Mill Lane buildings on Trumpington street, this dark blue roofed building is directly north of the Pitt Building.",
+    "word": "north",
+    "landmark": "Pitt Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 38,
+    "episode": 8531,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Pembroke Street on Trumpington Street, this gray and brown building is directly north of and connected to Old Brew House.",
+    "word": "south",
+    "landmark": "Pembroke Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 39,
+    "episode": 8625,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On Pembroke Street to the left of the Conservation building, this blue and gray roofed building is directly north of Free School Lane.",
+    "word": "north",
+    "landmark": "Free School Lane",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 40,
+    "episode": 8943,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On Trumpington Street north of Peterhouse Car Park and a dark blue car, this dark blue car is parked directly to the left of The Hostel.",
+    "word": "north",
+    "landmark": "Peterhouse Car Park",
+    "keep": false,
+    "reason": "道路/车/Car Park并列导致north作用域不清",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 41,
+    "episode": 9075,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Silver Street to the right of the blue roofed 17 Mill Lane building, this red car is to directly south of Master's Lodge.",
+    "word": "south",
+    "landmark": "Master's Lodge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 42,
+    "episode": 9078,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Silver Street this dark red car is is directly south of he Master's Lodge building.",
+    "word": "south",
+    "landmark": "Master's Lodge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 43,
+    "episode": 9163,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath"
+    ],
+    "instruction": "this ground is partially visible at the edge of the map. It is north of The Avenue footpath, south of the Peterhouse Car Park building. Next to this area, there is another large and rectangular green grass ground.",
+    "word": "north",
+    "landmark": "The Avenue",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 44,
+    "episode": 9163,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this ground is partially visible at the edge of the map. It is north of The Avenue footpath, south of the Peterhouse Car Park building. Next to this area, there is another large and rectangular green grass ground.",
+    "word": "south",
+    "landmark": "Peterhouse Car Park",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 45,
+    "episode": 9279,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Porter's Lodge (Queens' College), this patch of dark ground is between two blue roofed buildings.",
+    "word": "north",
+    "landmark": "Porter's Lodge (Queens' College)",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 46,
+    "episode": 9488,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the left side of Pembroke Street, this brown roofed building is directly south of The Old Library.",
+    "word": "south",
+    "landmark": "The Old Library",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 47,
+    "episode": 9493,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this building is adjacent to and north of the Hall and Buttery building. North of this building is Trumpington Street, and the building is perpendicular to it.",
+    "word": "north",
+    "landmark": "Hall and Buttery",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 48,
+    "episode": 9493,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this building is adjacent to and north of the Hall and Buttery building. North of this building is Trumpington Street, and the building is perpendicular to it.",
+    "word": "south",
+    "landmark": "Trumpington Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 49,
+    "episode": 9562,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Erasmus Building, this dark blue roofed building is directly connected to the Bodley's building, to its left and near trees.",
+    "word": "north",
+    "landmark": "Erasmus Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 50,
+    "episode": 9924,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the south side of Magdalene Street, this brown and blue roofed building is to the north and right of Magdalene College Chapel.",
+    "word": "north",
+    "landmark": "Magdalene College Chapel",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 51,
+    "episode": 9960,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad"
+    ],
+    "instruction": "The L-shaped brown-roofed building is south of Magdalene Street, across from the Benson Hall building. In the inner courtyard behind the building there is one round tree and many small black objects.",
+    "word": "south",
+    "landmark": "Magdalene Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 52,
+    "episode": 9979,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Magdalene Street, this three color roofed building is south of Mallory Court and near a big tree.",
+    "word": "south",
+    "landmark": "Mallory Court",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 53,
+    "episode": 10010,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "A building on Magdalene street with two sloped brown roofs immediatly south of the square-shaped O Block building",
+    "word": "south",
+    "landmark": "O Block",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 54,
+    "episode": 10083,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the south of the St John's College Chapel and St John's College Library buildings is an H-shaped building with bright blue skylights on its roof. this part is the middle part of the building.",
+    "word": "south",
+    "landmark": "St John's College Chapel",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 55,
+    "episode": 10177,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On Portugal Street, this blue roofed building is directly north of the Portugal Place footpath near the Maypole building.",
+    "word": "north",
+    "landmark": "Portugal Place",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 56,
+    "episode": 10399,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of the Blue Boar common Room this white roofed building is directly left of the Wolfson Building.",
+    "word": "north",
+    "landmark": "Blue Boar common Room",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 57,
+    "episode": 10496,
+    "subset": "fit",
+    "public_types": [
+      "Bridge",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "North of Bridge Street, this light gray car is directly south of St John's College Chapel",
+    "word": "north",
+    "landmark": "Bridge Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Bridge,Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 58,
+    "episode": 10496,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Bridge Street, this light gray car is directly south of St John's College Chapel",
+    "word": "south",
+    "landmark": "St John's College Chapel",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 59,
+    "episode": 10859,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this green ground is in the northeast corner of the 4 green spaces to the north of the Hall building and to the right of the Buttery and Kitchen building.",
+    "word": "north",
+    "landmark": "The Hall",
+    "keep": false,
+    "reason": "目标→四块绿地集合→Hall，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 60,
+    "episode": 10941,
+    "subset": "fit",
+    "public_types": [
+      "Bridge"
+    ],
+    "instruction": "This patch of grassy ground is to the north and right of Wren Bridge, next to three large trees.",
+    "word": "north",
+    "landmark": "Wren Bridge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 61,
+    "episode": 11112,
+    "subset": "fit",
+    "public_types": [
+      "Bridge",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "The white-roofed, beige-walled building is north of Bridge Street, across from the big round tree. There are two red objects on the road, to the right of the entrance of the building.",
+    "word": "north",
+    "landmark": "Bridge Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Bridge,Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 62,
+    "episode": 11301,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On the far south of Lensfield Road, this house with a brown roof is first from the bottom and has a tree in front of it.",
+    "word": "south",
+    "landmark": "Lensfield Road",
+    "keep": false,
+    "reason": "道路far south端点语义",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 63,
+    "episode": 11359,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "The large building that is south of the Inglis building. It surrounds the Mechanics Research Laboratory.",
+    "word": "south",
+    "landmark": "Inglis Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 64,
+    "episode": 11411,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Trumpington Road, this light brown roofed building is south of Headmaster's House and left of The Fen Causeway.",
+    "word": "south",
+    "landmark": "Headmaster's House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 65,
+    "episode": 11483,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Between Lensfield Road and Saxon Street, this gray roofed building is directly south of The Snug.",
+    "word": "south",
+    "landmark": "The Snug",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 66,
+    "episode": 11486,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this is a gray roofed building and is south of Lensfield Road. To the left of this building is The Snug building. The section behind this building is in 3 parts. Of these, the left one has a brown car and the right one has a black car.",
+    "word": "south",
+    "landmark": "Lensfield Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 67,
+    "episode": 11593,
+    "subset": "fit",
+    "public_types": [
+      "Building",
+      "Building"
+    ],
+    "instruction": "On the south side of Trumpington Street near Fitzwilliam Museum, this gray roofed building is directly to the north of the Department of History of Art building.",
+    "word": "north",
+    "landmark": "Department of History of Art",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 68,
+    "episode": 11642,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Panton Street, this gray roofed building is south of Panton Hall and is next to a tree.",
+    "word": "south",
+    "landmark": "Panton Hall",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 69,
+    "episode": 11677,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Between Trumpington Road and The Fen Causeway,this large blue roofed Building is north of Royal Cambridge Hotel and South of Baker Building.",
+    "word": "north",
+    "landmark": "Royal Cambridge Hotel",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 70,
+    "episode": 11682,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "this building is on the corner of Pemberton Terrace road and Trumpington Road. this building is on the south side of Pemberton Terrace road. south of this building is a red L-shaped building.",
+    "word": "south",
+    "landmark": "Pemberton Terrace",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 71,
+    "episode": 11688,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "The building on the easternmost end of Panton Street and to the north of Union Road.",
+    "word": "north",
+    "landmark": "Union Road",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 72,
+    "episode": 11801,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On Brookside, this white car is parked directly north of the HRT Recruitment building to the right of a white car.",
+    "word": "north",
+    "landmark": "HRT Recruitment",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 73,
+    "episode": 11904,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Panton Hall and to the left of The Snug, this white car is parked on the bottom left row of cars, fourth from the left.",
+    "word": "north",
+    "landmark": "Panton Hall",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 74,
+    "episode": 12073,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On the right side of Pemberton Terrace, this white car is south of Brookside and North of a dark blue car.",
+    "word": "south",
+    "landmark": "Brookside",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 75,
+    "episode": 12185,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On the far south of Lensfield Road, this white car is in front of the upper part of the first house from the bottom, near a tree.",
+    "word": "south",
+    "landmark": "Lensfield Road",
+    "keep": false,
+    "reason": "道路far south端点并附房屋参照，非明确侧向关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 76,
+    "episode": 12316,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "North of The Fen Causeway, on the Leys School road, this white car is parked between two white cars, third from the top.",
+    "word": "north",
+    "landmark": "The Fen Causeway",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 77,
+    "episode": 12333,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Cambridge Judge Business School and to the right of the Browns - Cambridge building, this ground is to the left of some trees.",
+    "word": "north",
+    "landmark": "Cambridge Judge Business School",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 78,
+    "episode": 12343,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Cambridge Judge Business School and to the right of the Browns - Cambridge building, this ground is in the middle of some trees, south of a white car.",
+    "word": "north",
+    "landmark": "Cambridge Judge Business School",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 79,
+    "episode": 12353,
+    "subset": "fit",
+    "public_types": [
+      "Ground"
+    ],
+    "instruction": "South of The Paddock, this ground goes from part of the tennis court to part of the tree on the right.",
+    "word": "south",
+    "landmark": "The Paddock",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 80,
+    "episode": 12399,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad",
+      "Building"
+    ],
+    "instruction": "North of St Peter's Terrace and to the left of Grove Lodge, this ground is near two gray structures near Grove Lane.",
+    "word": "north",
+    "landmark": "St Peter's Terrace",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Building,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 81,
+    "episode": 12403,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad",
+      "Building"
+    ],
+    "instruction": "North of St Peter's Terrace and to the left of Grove Lodge, this ground is near two gray structures.",
+    "word": "north",
+    "landmark": "St Peter's Terrace",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Building,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 82,
+    "episode": 12478,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Lensfield Medical Practice on Lensfield Road, this dark blue roofed building is across from Panton Street.",
+    "word": "north",
+    "landmark": "Lensfield Medical Practice",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 83,
+    "episode": 12546,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "South of the James Dyson Building, this white car is parked nearest to Royal Cambridge Hotel.",
+    "word": "south",
+    "landmark": "James Dyson Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 84,
+    "episode": 12640,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "A small grey-roofed building. It is just south of the Offices and Howard Theatre, and to the right of Howard Lodge.",
+    "word": "south",
+    "landmark": "Offices",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 85,
+    "episode": 12640,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "A small grey-roofed building. It is just south of the Offices and Howard Theatre, and to the right of Howard Lodge.",
+    "word": "south",
+    "landmark": "Howard Theatre",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 86,
+    "episode": 12696,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is a building with a gray roof and white ventilation installations on the roof. this building is south of the sir William Hardy building and north of the Psychology Workshop building. and it is adjacent to a building.",
+    "word": "south",
+    "landmark": "Sir William Hardy Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 87,
+    "episode": 12740,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Between Hilton Cambridge City Centre and Courtyard Building, this gray roofed L shaped building is directly south of Haddon Library.",
+    "word": "south",
+    "landmark": "Haddon Library",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 88,
+    "episode": 12744,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Downing Street, this gray roofed building is south of the Zoology Building and across from the Sedgewick Building.",
+    "word": "south",
+    "landmark": "Zoology Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 89,
+    "episode": 12813,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Downing Street, this gray roofed building is north of Hilton Cambridge City Centre and next to David Attenborough Building.",
+    "word": "north",
+    "landmark": "Hilton Cambridge City Centre",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 90,
+    "episode": 12887,
+    "subset": "fit",
+    "public_types": [
+      "Ground",
+      "Ground"
+    ],
+    "instruction": "North of The Paddock, this gray roofed building is directly to the left of the Office building.",
+    "word": "north",
+    "landmark": "The Paddock",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 91,
+    "episode": 12927,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Regent Street near Downing College, this blue roofed building is first one from the left.",
+    "word": "south",
+    "landmark": "Regent Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 92,
+    "episode": 12942,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Saint Andrew's Street, north of Cambridge Tap, this gray roofed building is right next to Language Centre.",
+    "word": "north",
+    "landmark": "Cambridge Tap",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 93,
+    "episode": 12973,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Fitzwilliam Street, this gray roofed building is across from the building directly north of The Henry Wellcome Building.",
+    "word": "north",
+    "landmark": "The Henry Wellcome Building",
+    "keep": false,
+    "reason": "目标→对面建筑→Henry Wellcome，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 94,
+    "episode": 12987,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of FitzWilliam Street, between Union Hut and Cosin Court, this dark blue roofed building is one building south of the FitzWilliam House, which is below the FitzWilliam Pharmacy.",
+    "word": "south",
+    "landmark": "Fitzwilliam House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 95,
+    "episode": 12994,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Fitzwilliam Street, this gray roofed building is directly south of Fitzwilliam House and left of Cosin Court.",
+    "word": "south",
+    "landmark": "Fitzwilliam House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 96,
+    "episode": 13058,
+    "subset": "fit",
+    "public_types": [
+      "Building",
+      "Building"
+    ],
+    "instruction": "South and left of master's Lodge, this small building is near a tree north of Downing College Road.",
+    "word": "south",
+    "landmark": "Master's Lodge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 97,
+    "episode": 13116,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Regent Street near Downing College, this blue roofed building is second one from the left.",
+    "word": "south",
+    "landmark": "Regent Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 98,
+    "episode": 13192,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Sir William Hardy Building and next to the Anatomy Building, this white car is to the right of a blue car.",
+    "word": "north",
+    "landmark": "Sir William Hardy Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 99,
+    "episode": 13205,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Between the Molteno Building and Microbiology Building, this white car is directly south of Microbiology Building, north of a white car.",
+    "word": "south",
+    "landmark": "Microbiology Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 100,
+    "episode": 13308,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "A white van is parked at the north side of the Butterfield Café building when viewed aerially with Geography building at the right side.",
+    "word": "north",
+    "landmark": "Butterfield Café",
+    "keep": false,
+    "reason": "when viewed aerially with Geography...指定版面参考，方向未知",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 101,
+    "episode": 13405,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this is the red car, this car is south of Tennis Court road and north of Kenny B building. There is a blue car to the right of this car.",
+    "word": "south",
+    "landmark": "Tennis Court Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 102,
+    "episode": 13487,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Tennis Court Road to the left of the New Court building, this black car is the rightmost one south of the Orchard Building.",
+    "word": "south",
+    "landmark": "Orchard Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 103,
+    "episode": 13675,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this is a white car, this car is south of the Genetics building, to the far right of the 3 white cars in the middle of the adjacent parking row. There are two white cars on the left of this car and a black car on the right.",
+    "word": "south",
+    "landmark": "Genetics Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 104,
+    "episode": 13741,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "this black car is the 3rd car from the right on the north side of the Hopkins building and in a parking lot adjacent to the building. To the north of these cars is the Anatomy building.",
+    "word": "south",
+    "landmark": "Anatomy Building",
+    "keep": false,
+    "reason": "这些车辆集合/当前车辆作用域需核验",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 105,
+    "episode": 13793,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Geography Building and Combined Facility,this white car is first from the bottom next to The Psychology Laboratory / Psychology Library.",
+    "word": "north",
+    "landmark": "Geography Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 106,
+    "episode": 13793,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Geography Building and Combined Facility,this white car is first from the bottom next to The Psychology Laboratory / Psychology Library.",
+    "word": "north",
+    "landmark": "Combined Facility",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 107,
+    "episode": 13808,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Between Combined Facility and St Andrew's Street Baptist Church, this white car is directly south of Combined Facility.",
+    "word": "south",
+    "landmark": "Combined Facility",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 108,
+    "episode": 14218,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the left side of Fitzwilliam Street, this gray roofed building is directly north of The Henry Wellcome Building.",
+    "word": "north",
+    "landmark": "The Henry Wellcome Building",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 109,
+    "episode": 14238,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this is a gray building with a flat roof. this building is south of Saint Andrew's Street and to the left of 55 St Andrew's.",
+    "word": "south",
+    "landmark": "Saint Andrew's Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 110,
+    "episode": 14278,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "North of Saint Andrew's Street, between Hobson House and Combined Facility, this building has a blue triangular roof.",
+    "word": "north",
+    "landmark": "Saint Andrew's Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 111,
+    "episode": 14451,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad",
+      "Footpath"
+    ],
+    "instruction": "this is a white-walled and black-roofed high-rise building south of Corona Road, with a small street to its right and a brown-roofed building to its left.",
+    "word": "south",
+    "landmark": "Corona Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 112,
+    "episode": 14588,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Milton Road, this white and gray roofed building is third from the left, south of Student Castle Cambridge.",
+    "word": "south",
+    "landmark": "Student Castle Cambridge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 113,
+    "episode": 14591,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Milton Road, this white roofed building is second from the left, south of Student Castle Cambridge.",
+    "word": "south",
+    "landmark": "Student Castle Cambridge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 114,
+    "episode": 14751,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "Building",
+      "Footpath"
+    ],
+    "instruction": "this white-roofed and black-walled building is south of Victoria Road, with the Portland Arms building to its left. There are 5 more similar buildings to the south of this building.",
+    "word": "south",
+    "landmark": "Victoria Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Building,Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 115,
+    "episode": 14851,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad"
+    ],
+    "instruction": "this is a red roofed building and is partially visible. this building is north of Gresham Road and on the other side of the road is the Cobwebs building.",
+    "word": "north",
+    "landmark": "Gresham Road",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 116,
+    "episode": 15132,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "this is a black car, on the left side of this car there are two white and orange cars. To the south of these cars is an L-shaped red building. these cars and the building are south of Hills Road.",
+    "word": "south",
+    "landmark": "Hills Road",
+    "keep": false,
+    "reason": "车辆集合和建筑的共同south关系，严格组暂不纳入",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 117,
+    "episode": 15142,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "Directly north of Catholic Church of Our Lady and the English Martyrs, this red car is fourth from the right.",
+    "word": "north",
+    "landmark": "Catholic Church of Our Lady and the English Martyrs",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 118,
+    "episode": 15270,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On Lensfield Road, to the north of Catholic Church of Our Lady and the English Martyrs, this blue car is parked in the bottom row of the parking lot, first car from the left.",
+    "word": "north",
+    "landmark": "Catholic Church of Our Lady and the English Martyrs",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 119,
+    "episode": 15272,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On Lensfield Road, to the north of Catholic Church of Our Lady and the English Martyrs, this red car is parked in the bottom row of the parking lot, fourth car from the right.",
+    "word": "north",
+    "landmark": "Catholic Church of Our Lady and the English Martyrs",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 120,
+    "episode": 15658,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the road Parkside, this dark blue car is south of the Parkside Police Station under a tree.",
+    "word": "south",
+    "landmark": "Parkside Police Station",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 121,
+    "episode": 15668,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Cambridge & Peterborough Probation Trust, this building is right next to Cambridge County Court and has a white roof.",
+    "word": "north",
+    "landmark": "Cambridge & Peterborough Probation Trust",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 122,
+    "episode": 15798,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On Warkworth Terrace, this white roofed building is north of Parkside Police Station and south of some trees.",
+    "word": "north",
+    "landmark": "Parkside Police Station",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 123,
+    "episode": 15994,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the road Parkside, this building with a gray roof is north of York House and two other houses and to the left of Parkside Gym.",
+    "word": "north",
+    "landmark": "York House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 124,
+    "episode": 16007,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the left side of Emmanuel Road,  this gray building is directly north of the Angel & Blume building and to the right of a yellowing tree.",
+    "word": "north",
+    "landmark": "Angel & Blume",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 125,
+    "episode": 16010,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the left side of Emmanuel Road,  this gray building is directly north of the Angel & Blume building.",
+    "word": "north",
+    "landmark": "Angel & Blume",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 126,
+    "episode": 16197,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On New Square, this long dark gray roof building is directly north of New Square Dental & Chiropody.",
+    "word": "north",
+    "landmark": "New Square Dental & Chiropody",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 127,
+    "episode": 16525,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Park Lodge, on the road Park Terrace, this red car the southmost car to the right of a tree.",
+    "word": "north",
+    "landmark": "Park Lodge",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 128,
+    "episode": 16554,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On Warkworth Terrace, north of Warkworth House, this white car is parked on the right side of the road between two dark blue cars and is fourth from the top.",
+    "word": "north",
+    "landmark": "Warkworth House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 129,
+    "episode": 16966,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad"
+    ],
+    "instruction": "North of Jesus Terrace and between Orchard Street and Elm Street, this light blue car is to the right of a tree.",
+    "word": "north",
+    "landmark": "Jesus Terrace",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 130,
+    "episode": 17062,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad"
+    ],
+    "instruction": "On the far south on the left side of Paradise Street, this dark blue car is south of a red car.",
+    "word": "south",
+    "landmark": "Paradise Street",
+    "keep": false,
+    "reason": "far south on the left side，缺乏明确target south of地标谓词",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 131,
+    "episode": 17073,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of City Road, on the right side of Paradise Street, this red car is south of a blue car.",
+    "word": "south",
+    "landmark": "City Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 132,
+    "episode": 17512,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Grafton Street, on the north side of Paradise Street, this dark red car is furthest to the right.",
+    "word": "south",
+    "landmark": "Grafton Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 133,
+    "episode": 17628,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "North of Cambridge Community Kitchen, this small blue roofed building is on the left side of Willow Walk, next to the L shaped building.",
+    "word": "north",
+    "landmark": "Cambridge Community Kitchen",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 134,
+    "episode": 17827,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Fitzroy Lane and north of James Street, this gray roofed building is the one on the far left.",
+    "word": "south",
+    "landmark": "Fitzroy Lane",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 135,
+    "episode": 19011,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "The last part of the large building on the north side of Four Lamps Roundabout, where Jesus lane starts.",
+    "word": "north",
+    "landmark": "Four Lamps Roundabout",
+    "keep": false,
+    "reason": "目标→大建筑局部→路口north side，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 136,
+    "episode": 19107,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Fitzroy Lane, on James Street, this white car is first from the right and to the left of a green tree.",
+    "word": "south",
+    "landmark": "Fitzroy Lane",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 137,
+    "episode": 19208,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On Parsonage Street, this dark blue car is parked directly south of Stanway Close and is farthest car to the right.",
+    "word": "south",
+    "landmark": "Stanway Close",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 138,
+    "episode": 19667,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "To the left of Pentlands Close on Cutter Ferry Lane, this brown roofed building is south of Clare Boat Club.",
+    "word": "south",
+    "landmark": "Clare Boat Club",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 139,
+    "episode": 19775,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "South of Mariner's Way, this brown roofed building is first to the south of a gray roofed building.",
+    "word": "south",
+    "landmark": "Mariner's Way",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 140,
+    "episode": 19825,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad"
+    ],
+    "instruction": "this is one of the buildings to the north of Belvoir Road. To the left of this building are small buildings with gray roofs and large buildings with red roofs, and to the right are buildings with gray roofs. There is a yellow/beige colored car in front of this building.",
+    "word": "north",
+    "landmark": "Belvoir Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 141,
+    "episode": 19915,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad"
+    ],
+    "instruction": "On the right side of Belvoir Road, this gray roofed building is directly north of Aylestone Road.",
+    "word": "north",
+    "landmark": "Aylestone Road",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 142,
+    "episode": 20381,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On the road Woodvale Lodge, this dark gray car is directly south of Midsummer Meadows.",
+    "word": "south",
+    "landmark": "Midsummer Meadows",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 143,
+    "episode": 21083,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the road Eights Marina near Elizabeth Way, this blue car is parked far south of Downing College Boat Club.",
+    "word": "south",
+    "landmark": "Downing College Boat Club",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 144,
+    "episode": 21170,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "It is a black-roofed building on the north of Abbey Street. To the right of this building is a smaller building with a gray roof. On the south side of the building, on the road, are two red cars.",
+    "word": "north",
+    "landmark": "Abbey Street",
+    "keep": false,
+    "reason": "同名公开片段类型混合，未消歧：Footpath,TrafficRoad",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 145,
+    "episode": 21267,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the south side of Priory Road, this gray roofed building is north of Ace Day Nursery and to the right of a tree.",
+    "word": "north",
+    "landmark": "Ace Day Nursery",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 146,
+    "episode": 21287,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the left of Priory Road, this house with a gray roof is directly south of the Ace Day Nursery building.",
+    "word": "south",
+    "landmark": "Ace Day Nursery",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 147,
+    "episode": 21373,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Priory Road, this gray roofed building is directly south of Cellarer's Chequer.",
+    "word": "south",
+    "landmark": "Cellarer's Chequer",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 148,
+    "episode": 21430,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On New Street, this brown and gray roofed building is north of Mallory House right next to Varsity House.",
+    "word": "north",
+    "landmark": "Mallory House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 149,
+    "episode": 21513,
+    "subset": "fit",
+    "public_types": [
+      "Footpath",
+      "TrafficRoad",
+      "Building"
+    ],
+    "instruction": "There are buildings north of Beche Road and west of Priory Road that are not adjacent to either road. There is a cross-shaped space in the middle of these buildings. this building is in the northwest corner of the cross-shaped space. The wall of this building facing the empty space is beige.",
+    "word": "north",
+    "landmark": "Beche Road",
+    "keep": false,
+    "reason": "目标→建筑集合/十字空地→道路，间接链",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 150,
+    "episode": 21570,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the right side of Priory Road, this red car is south of the Ace Day Nursery building and is sixth car from the bottom.",
+    "word": "south",
+    "landmark": "Ace Day Nursery",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 151,
+    "episode": 21661,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Priory Road, this red car is third car from the left and is south of the Cellarer's Chequer building.",
+    "word": "south",
+    "landmark": "Cellarer's Chequer",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 152,
+    "episode": 21667,
+    "subset": "fit",
+    "public_types": [
+      "TrafficRoad",
+      "TrafficRoad"
+    ],
+    "instruction": "On the left side of Abbey Street north of Harvest Way, this blue car is north of a red car and is second from the top.",
+    "word": "north",
+    "landmark": "Harvest Way",
+    "keep": false,
+    "reason": "north of可能修饰Abbey Street而非目标，作用域不清",
+    "reviewer": "current assistant textual review; not human gold"
+  },
+  {
+    "index": 153,
+    "episode": 21824,
+    "subset": "fit",
+    "public_types": [
+      "Building"
+    ],
+    "instruction": "On the north side of Occupation Road, this gray car is south of Varsity House and to the right of a blue car.",
+    "word": "south",
+    "landmark": "Varsity House",
+    "keep": true,
+    "reason": "逐条原文核验：目标主语/明确回指或前置位置短语直接连接具名地标；无中间关系",
+    "reviewer": "current assistant textual review; not human gold"
+  }
+]
