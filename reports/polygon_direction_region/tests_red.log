@@ -1,0 +1,15 @@
+
+==================================== ERRORS ====================================
+___________ ERROR collecting tests/test_polygon_direction_region.py ____________
+ImportError while importing test module '/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/tests/test_polygon_direction_region.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../../miniconda3/envs/graphnav/lib/python3.10/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_polygon_direction_region.py:3: in <module>
+    from graphnav.polygon_direction_region import polygon_direction_region,validate_public_record
+E   ModuleNotFoundError: No module named 'graphnav.polygon_direction_region'
+=========================== short test summary info ============================
+ERROR tests/test_polygon_direction_region.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 1.01s

@@ -1,0 +1,92 @@
+{
+  "predeclared_gate": "On NEW dev only: GT20 mass > original32 AND R20 >= original32 AND NE <= original32; otherwise no new training",
+  "tests": {
+    "GT20_mass_improved": false,
+    "R20_not_worse": false,
+    "NE_not_worse": false
+  },
+  "proceed_training": false,
+  "final_strategy_frozen": true,
+  "new_model_status": "not trained: predeclared baseline gate failed",
+  "confirmation_GT_scored": false,
+  "development_metrics_sha256": "0a77e41b05058ab0e827f132ae39f2347031a4d73c460dfbeb241d460b7fab4c",
+  "prediction_sha256": "bf576e25610b1e3fd79e3b145bf11f8c2518b0285d62c9e551346d274e3abe93"
+}
+{
+  "dev": {
+    "anchor": {
+      "n": 20,
+      "R20": 0.2,
+      "NE": 47.79357104225377,
+      "GT20_mass": 0.24744813144207
+    },
+    "centroid32": {
+      "n": 20,
+      "R20": 0.3,
+      "NE": 37.393438894287954,
+      "GT20_mass": 0.1967960000038147
+    },
+    "no_direction": {
+      "n": 20,
+      "R20": 0.35,
+      "NE": 35.645289334380486,
+      "GT20_mass": 0.14133208990097046
+    },
+    "original32": {
+      "n": 20,
+      "R20": 0.3,
+      "NE": 39.12812743406037,
+      "GT20_mass": 0.18068192899227142
+    },
+    "polygon_ray": {
+      "n": 20,
+      "R20": 0.15,
+      "NE": 53.43604215518432,
+      "GT20_mass": 0.0853073000907898
+    },
+    "polygon_cone": {
+      "n": 20,
+      "R20": 0.2,
+      "NE": 49.142108977282376,
+      "GT20_mass": 0.10138634592294693
+    }
+  },
+  "fit": {
+    "anchor": {
+      "n": 215,
+      "R20": 0.2,
+      "NE": 45.180965338547644,
+      "GT20_mass": 0.19261501729488373
+    },
+    "centroid32": {
+      "n": 215,
+      "R20": 0.19534883720930232,
+      "NE": 40.698431482357975,
+      "GT20_mass": 0.15386956930160522
+    },
+    "no_direction": {
+      "n": 215,
+      "R20": 0.2372093023255814,
+      "NE": 39.471149810425786,
+      "GT20_mass": 0.11146725714206696
+    },
+    "original32": {
+      "n": 215,
+      "R20": 0.2372093023255814,
+      "NE": 41.71352013660057,
+      "GT20_mass": 0.14290723204612732
+    },
+    "polygon_ray": {
+      "n": 215,
+      "R20": 0.09767441860465116,
+      "NE": 52.166729154168486,
+      "GT20_mass": 0.050461869686841965
+    },
+    "polygon_cone": {
+      "n": 215,
+      "R20": 0.09302325581395349,
+      "NE": 56.155339428009434,
+      "GT20_mass": 0.03655938059091568
+    }
+  }
+}

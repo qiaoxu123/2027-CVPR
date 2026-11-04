@@ -1,0 +1,76 @@
+{
+  "total_pairs": 265,
+  "groups": 130,
+  "fresh_groups": 44,
+  "previously_exposed_groups": 86,
+  "counts": {
+    "fit": {
+      "north": 114,
+      "south": 99,
+      "west": 1,
+      "east": 1
+    },
+    "dev": {
+      "north": 13,
+      "south": 7
+    },
+    "confirm": {
+      "north": 12,
+      "south": 18
+    }
+  },
+  "maps": {
+    "fit": [
+      "birmingham_block_1",
+      "birmingham_block_10",
+      "birmingham_block_12",
+      "birmingham_block_3",
+      "birmingham_block_4",
+      "birmingham_block_7",
+      "birmingham_block_9",
+      "cambridge_block_12",
+      "cambridge_block_13",
+      "cambridge_block_17",
+      "cambridge_block_18",
+      "cambridge_block_19",
+      "cambridge_block_20",
+      "cambridge_block_21",
+      "cambridge_block_28",
+      "cambridge_block_33",
+      "cambridge_block_4",
+      "cambridge_block_7",
+      "cambridge_block_9"
+    ],
+    "dev": [
+      "cambridge_block_12",
+      "cambridge_block_13",
+      "cambridge_block_17",
+      "cambridge_block_20",
+      "cambridge_block_21",
+      "cambridge_block_28",
+      "cambridge_block_6",
+      "cambridge_block_7",
+      "cambridge_block_9"
+    ],
+    "confirm": [
+      "birmingham_block_1",
+      "birmingham_block_3",
+      "birmingham_block_9",
+      "cambridge_block_20",
+      "cambridge_block_21",
+      "cambridge_block_28",
+      "cambridge_block_33",
+      "cambridge_block_4",
+      "cambridge_block_7"
+    ]
+  },
+  "group_split": "Connected components of city-qualified public landmark names, Episode and map-qualified official target IDs. New groups SHA256 sorted; first floor(n/3) confirm, next floor(n/3) dev; rest fit. Previously exposed components forced fit.",
+  "independence": "No landmark/Episode/official-instance identity overlap; dev/confirm exclude all previous154 pair exposure. Maps may overlap and are reported.",
+  "target_coordinates_used": false,
+  "annotations_used_fields": [
+    "descriptions",
+    "area",
+    "block",
+    "object_ids (split metadata only)"
+  ]
+}

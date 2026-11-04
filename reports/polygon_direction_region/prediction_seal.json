@@ -1,0 +1,39 @@
+{
+  "public_sha256": "5225b871ac694e71ff126baa2da1944fa1821e2fee1dd2f347146ad09148b9ba",
+  "prediction_sha256": "bf576e25610b1e3fd79e3b145bf11f8c2518b0285d62c9e551346d274e3abe93",
+  "model_sha256": {
+    "direction_real": "eed5ed21af969c1a1039321ed32db19bcae284bf1f1be39d698afebb8de34478",
+    "nodirection_real": "68c6cf0828f6f74f5d539f8e0dd13a023516a4e0b72e002703c1458e2acbdf3d"
+  },
+  "target_coordinates_used": false,
+  "target_labels_loaded": false,
+  "device": "cpu",
+  "torch_threads": 4,
+  "mean_ms_per_state": {
+    "original32": 0.29929911647483987,
+    "no_direction": 0.2727464263169271,
+    "polygon_ray": 1.0619240795385163,
+    "polygon_cone": 4.053648181681363
+  },
+  "total_prediction_seconds": 1.6394271408207715,
+  "code_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/evaluate_polygon_direction.py": "18bed2d7710515551b63e452cf69acf9c4f76637a31dd03ce480f4fc1dc03af1",
+    "graphnav/polygon_direction_region.py": "6dc3ad055ab71960f9c8b8fd6a17bee8a03f0c8cb27ac661269a8f6cd86dc7b1"
+  },
+  "primary_method": "polygon_cone",
+  "primary_training_gate": "On NEW dev only: GT20 mass > original32 AND R20 >= original32 AND NE <= original32; otherwise no new training",
+  "configuration": {
+    "grid": 28,
+    "cone_half_angle_degrees": 45,
+    "front_samples_per_fragment": 64,
+    "distance_weight": "cosine(angle)^2 / (1 + distance^2 / scale^2)",
+    "scale": "max(20, sqrt(public clipped union area)/2) meters",
+    "combine": "maximum front-envelope kernel; all fragments; map clip",
+    "normal_inputs": [
+      "public Polygon",
+      "public map bounds",
+      "cardinal direction"
+    ],
+    "centroid_control": "Existing original32 applied to point at Polygon grid mass mean; diagnostic only"
+  }
+}
