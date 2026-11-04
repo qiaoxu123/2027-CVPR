@@ -24,17 +24,19 @@ def encode_landmark_observation(
     if landmark is None:
         return pack(None, "unsupported_or_unresolved_name")
     anchor = local_landmark_anchor(landmark["contours"], observation)
-    metadata = dict(
-        anchor_labels=torch.as_tensor(anchor["labels"], device=device,
-                                      dtype=torch.int8)[None],
-        positive_patches=int(anchor["positive_patches"]),
-        negative_patches=int(anchor["negative_patches"]),
-        polygon_view_fraction=float(anchor["view_fraction"]),
-        polygon_whole_fraction=float(anchor["whole_fraction"]),
-        source_support=float(anchor["local_source_support"]),
-        visible_pixels=int(anchor["stable_valid_pixels"]),
-        registration_only=True,
-        actual_visibility=anchor["actual_visibility"],
+    metadata = None
+    if return_metadata:
+        metadata = dict(
+            anchor_labels=torch.as_tensor(anchor["labels"], device=device,
+                                          dtype=torch.int8)[None],
+            positive_patches=int(anchor["positive_patches"]),
+            negative_patches=int(anchor["negative_patches"]),
+            polygon_view_fraction=float(anchor["view_fraction"]),
+            polygon_whole_fraction=float(anchor["whole_fraction"]),
+            source_support=float(anchor["local_source_support"]),
+            visible_pixels=int(anchor["stable_valid_pixels"]),
+            registration_only=True,
+            actual_visibility=anchor["actual_visibility"],
     )
     if not anchor["pixel_usable"] or anchor["positive_patches"] < 2:
         return pack(None, "no_supported_local_anchor", metadata)
