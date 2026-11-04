@@ -1,5 +1,17 @@
 # Changelog
 
+## [polygon-rgb-projection-audit] - 2026-11-04
+### Features
+- 新增48例TRAIN具名Building/Road Polygon原生384投影审查，覆盖8种Yaw、15–100m高度、部分/完整/超视野/画外情况。
+- 保存原RGB、源片段及完整同名Polygon并集、几何/有效源Mask、数值变换与ROI/patch阈值诊断及HTML核验记录。
+### Design Rationale
+- 分开检查连续Footprint的可逆性与实际整数栅格warp，并区分整物体入镜比例和视野占比。
+- 不把单个道路片段的画外状态当作整个具名道路不可见；无人工Mask只给几何覆盖和定性意见。
+### Notes & Caveats
+- 12个超视野样本有足够有效源支持，却被整物体50%/90%阈值全部拒绝；压力样本计数不代表全TRAIN比例。
+- 像素中心约定下取整偏差最大0.851px；这不是人工视觉配准精度。建筑边界语义仍需核验。
+- 未加载/训练模型、未运行关系推理或导航，未改生产投影、渲染、Yaw、阈值及原Checkpoint；18项相关测试通过。
+
 ## [pgvb-structured-landmark-pilot] - 2026-11-04
 ### Features
 - 全量22,002条官方TRAIN指令导出无目标GT参与的结构化JSON，保留实体/span、方向/参考系、完整最短关系链及歧义；增加60条人工核验工具与24条AI诊断记录。
