@@ -21,6 +21,7 @@ from .checkpointing import file_sha256
 from .full_experiment import _batch_inputs, new_model
 from .landmark_alias import canonical_name
 from .landmark_acquisition import LandmarkAcquisition
+from .stable_navigation_goal import StableNavigationGoal
 from .landmark_neighborhood import nearby_public_geometry
 from .landmark_region_supervision import named_union
 from .landmark_region_supervision import public_type
@@ -121,10 +122,11 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.bound = float(bound)
         if not 0 < self.bound <= 1:
             raise ValueError("PGVB evidence bound must be in (0, 1]")
-        if mode not in ("geometry", "legacy", "tracked"):
-            raise ValueError("Mode must be geometry, legacy or tracked")
+        if mode not in ("geometry", "legacy", "tracked", "tracked-stable"):
+            raise ValueError("Mode must be geometry, legacy, tracked or tracked-stable")
         self.mode = mode
         self.acquisition = LandmarkAcquisition()
+        self.stable_goal = StableNavigationGoal()
         self._last_observation_metadata = None
         self._public_region = None
         self._neighbor_geometry = []
@@ -189,6 +191,8 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.pgvb_calls = 0
         if getattr(self, "acquisition", None) is not None:
             self.acquisition.reset()
+        if getattr(self, "stable_goal", None) is not None:
+            self.stable_goal.reset()
         self._last_observation_metadata = None
         self.unified.reset_episode()
 
@@ -239,7 +243,7 @@ class UnifiedPGVBNamedLandmarkPolicy:
         start = time.perf_counter()
         observed, reason = self._observed_inputs(state.current_observation)
         mode = getattr(self, "mode", "legacy")
-        tracker = getattr(self, "acquisition", None) if mode == "tracked" else None
+        tracker = getattr(self, "acquisition", None) if mode in ("tracked", "tracked-stable") else None
         metadata = getattr(self, "_last_observation_metadata", None)
         labels = metadata["anchor_labels"] if metadata and observed is not None else None
         with torch.autocast(
@@ -262,6 +266,16 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.pgvb_seconds = time.perf_counter() - start
         base, field = result["geometry_field"], result["field"]
         evidence, audit = result["evidence"], result["audit"]
+        # Keep full RGB-conditioned logits updated every frame. Only the
+        # controller candidate order is stabilized; no new neural branch,
+        # oracle/public target-distance input or Stop threshold change.
+        goal_audit = None
+        if mode == "tracked-stable":
+            field, goal_audit = self.stable_goal.select(
+                field, self.inputs["grid_xy"],
+                tracking=audit.get("acquisition"),
+                visual_active=bool(audit["active"]),
+            )
         if self.audit_callback is not None:
             self.audit_callback(base, field, evidence)
         prediction = A3TrajectoryPolicy.predict_field(self, state, field)
@@ -309,6 +323,7 @@ class UnifiedPGVBNamedLandmarkPolicy:
         )
         prediction.diagnostics.update(
             positioning_mode=mode,
+            stable_navigation_goal=goal_audit,
             landmark_acquisition=tracking,
             landmark_visual_gain=float(tracking.get("visual_gain", 1. if mode == "legacy" else 0.)),
             landmark_tracking_state=tracking.get("state", "geometry"),
