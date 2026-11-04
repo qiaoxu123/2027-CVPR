@@ -73,7 +73,7 @@ class UnifiedPGVB(nn.Module):
 
     def forward_field(
         self, *, static_inputs, tokens, token_mask, node_emb,
-        observed=None, bound=0.5,
+        observed=None, bound=0.5, acquisition=None, anchor_labels=None,
     ):
         """ONE integrated geometry + PGVB field generator.
 
@@ -93,6 +93,8 @@ class UnifiedPGVB(nn.Module):
             changed_top1=False,
         )
         if observed is None:
+            if acquisition is not None:
+                empty_audit["acquisition"] = acquisition.observe()
             return dict(
                 field=base, geometry_field=base,
                 landmark_scores=None, evidence=None, audit=empty_audit,
@@ -114,7 +116,34 @@ class UnifiedPGVB(nn.Module):
         if scores.shape != valid.shape or uv.shape != (*scores.shape, 2):
             raise ValueError("Observed world projection does not match patch scores")
         evidence = (uv, scores, valid)
-        if not valid.any() or scores[valid].float().std(unbiased=False) < 1e-6:
+        gain = 1.0  # legacy compatibility; no tracker means historical fusion
+        if acquisition is not None:
+            if self.training:
+                raise RuntimeError("Stateful landmark tracking is inference-only")
+            if anchor_labels is None:
+                raise ValueError("Acquisition needs public-ROI weak patch labels")
+            # Contrast with the SAME RGB frame's patches displaced in space.
+            # Only another tiny PGVB head forward, NOT another SigLIP2 encode.
+            with torch.no_grad():
+                shifted = observed["image_features"].roll(
+                    shifts=max(1, scores.shape[1] // 2), dims=1,
+                )
+                shuffled = self.pgvb(
+                    image_features=shifted,
+                    name_text=observed["name_text"],
+                    type_text=observed["type_text"],
+                    polygon_tokens=observed["polygon_tokens"],
+                    valid=valid,
+                ).float()
+                tracked = acquisition.observe(
+                    scores.detach(), shuffled.detach(),
+                    anchor_labels.detach(), valid.detach(),
+                )
+            gain = float(tracked["visual_gain"])
+            empty_audit["acquisition"] = tracked
+        if (not valid.any()
+                or scores[valid].float().std(unbiased=False) < 1e-6
+                or gain <= 0):
             return dict(
                 field=base, geometry_field=base,
                 landmark_scores=scores, evidence=evidence, audit=empty_audit,
@@ -134,7 +163,7 @@ class UnifiedPGVB(nn.Module):
             zeros, uv, torch.ones_like(centered), valid,
         ) - neutral
         covered = coverage > 0.5
-        delta = bound * torch.tanh(visual / 5.) * covered
+        delta = (bound * gain) * torch.tanh(visual / 5.) * covered
         if not covered.any() or delta.abs().max() <= 1e-8:
             return dict(
                 field=base, geometry_field=base,
@@ -183,6 +212,8 @@ class UnifiedPGVB(nn.Module):
                 changed_top1=bool(
                     (ids[:, 0] != base.candidate_ids[:, 0]).any()
                 ),
+                **({"acquisition": empty_audit["acquisition"]}
+                   if "acquisition" in empty_audit else {}),
             ),
         )
 
