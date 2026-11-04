@@ -41,7 +41,7 @@ def test_relation_and_target_heads_refuse_untrained_use():
 def test_unified_policy_does_not_call_legacy_visual_model(monkeypatch):
     obj = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
     obj.record = {"instruction": "Go to named landmark"}
-    obj._initialize_geometry = lambda: None
+    obj._initialize_geometry_inputs = lambda: None
     obj._observed_inputs = lambda observation: (None, "no_local_anchor")
     obj.inputs = {}
     obj.tokens = None
