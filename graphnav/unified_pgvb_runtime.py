@@ -31,6 +31,16 @@ class UnifiedPGVBNamedLandmarkPolicy(PGVBNamedLandmarkPolicy):
         GraphNavStage1Policy.__init__(
             self, checkpoint, directory, device=device,
         )
+        # Strictly load the historical checkpoint first, then remove its
+        # dormant legacy RGB heads from THIS new policy instance. The source
+        # checkpoint and historical E2/E4 runners remain untouched.
+        del self.model.matcher
+        del self.model.history
+        del self.model.visual_gain
+        del self.model.a3.vision_proj
+        del self.model.a3.visual_score
+        del self.visual
+        self.use_history = False
         bundle = torch.load(
             unified_checkpoint, map_location="cpu", weights_only=True,
         )
