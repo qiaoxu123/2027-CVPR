@@ -1,4 +1,4 @@
-"""Real closed-loop named-landmark smoke using ONLY the unified PGVB visual path."""
+"""Named-landmark rollout with UnifiedPGVB-v2 owning geometry and the sole RGB head."""
 import argparse
 from collections import Counter
 from dataclasses import asdict
@@ -50,10 +50,10 @@ def main():
     fingerprint=dict(checkpoint_sha256=checkpoint_sha,unified_checkpoint_sha256=unified_sha,pgvb_bound=a.pgvb_bound,selection_sha256=file_sha256(a.selection/'manifest.json'),
         tasks_sha256=selected['tasks_sha256'],protocol=asdict(protocol),camera_yaw='original per-pose native yaw; no rotation override',
         methods=['UnifiedPGVB'],goal_definition='Public named polygon union clipped to map; SR final distance<=20m, OSR ever<=20m',
-        PGVB='only PGVB reads current RGB; A3 geometry remains visual-free fallback',
+        PGVB='ONE integrated geometry+visual GoalField network; controller-only downstream',
         runner_sha256=file_sha256(__file__),source_sha256={k:file_sha256(Path(k)) for k in [
             'graphnav/landmark_navigation_diagnostic.py','graphnav/stage1_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py',
-            'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/pgvb_navigation_runtime.py',
+            'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/pgvb_navigation_runtime.py','graphnav/full_localization.py','graphnav/candidate_geometry.py','graphnav/unified_instruction.py',
             'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/pgvb_closedloop_audit.py',
             'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
         public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),
@@ -77,7 +77,10 @@ def main():
     runtime=UnifiedPGVBNamedLandmarkPolicy(a.checkpoint,a.unified_checkpoint,a.output/'public_inputs',bound=a.pgvb_bound)
     if (runtime.stop_threshold,runtime.execution,runtime.explore_candidates,runtime.stop_positive_weight)!=(.3,'guarded-blend',0,20.):
         raise ValueError('Original learned controller/Stop changed')
-    assert all(not p.requires_grad for p in runtime.model.parameters())
+    assert not hasattr(runtime, 'model'), 'Legacy Stage1 must not remain live'
+    assert runtime.unified.geometry is not None
+    assert all(not p.requires_grad for p in runtime.unified.parameters())
+    assert all(not p.requires_grad for p in runtime.head.parameters())
     torch.cuda.reset_peak_memory_stats();started=time.perf_counter();new_tasks=0
     with path.open('a') as stream:
         for task in tasks:
