@@ -51,3 +51,54 @@ Smoke之后通过同一命令加 `--resume` 执行剩余64条。该入口仍是*
 5. 仅用原始目标GT训练监督及离线评测；闭环前先验证不同方向、目标可见性与视觉增益。
 
 **当前完成的是架构整理、权重打包和具名地标单视觉运行路径；未完成Target Head的监督训练与原始CityNav闭环实验。**
+
+
+## 统一语言解析接入（新增）
+
+当前统一语言接口在 graphnav/unified_instruction.py，复用仓库已有
+graphnav/structured_navigation.py 的复杂关系解析输出，不新增LLM或视觉骨干。
+
+### 两种指令的不同处理
+
+- 具名目标：Navigate to The Food Warehouse.
+  - 无需加载spaCy，按完整指令识别 navigate_to_landmark；
+  - 仅依据公共地图作精确或带类型后缀的地标名称绑定，保留所有同名合法Polygon片段；
+  - 验证解析出的目标和episode.reference_names指向同一个具名地标；
+  - 统一网络直接通过 UnifiedPGVB.forward_structured 接受结构化任务，并使用唯一PGVB视觉Head给出地标证据。
+- 目标相对地标：Find the white building north of The Food Warehouse.
+  - 可选加载已有spaCy/structured_navigation解析器，保留目标类型、颜色、原文span、直接/间接关系、方向、作用域和参考系歧义；
+  - 语义/地理方向、实体绑定和目标视觉识别尚未确认，解析结果 approved_for_inference=false；**不得直接导航到The Food Warehouse作为替代**；
+  - 原始指令保留，分析时可以查看解析失败原因；不把自动解析当作人类Gold。
+
+### 批量审查语言结果
+
+输入JSONL，每行只提供 map_name、instruction，可选 episode、instruction_index。
+公共Catalog为CityRefer objects.json结构。
+
+~~~bash
+python -m scripts.audit_unified_language \
+  --instructions /path/to/public_instructions.jsonl \
+  --catalog /path/to/cityrefer/objects.json \
+  --output GraphNav/runs/unified_language_audit.jsonl
+
+# 对复杂关系使用已有spaCy解析器（需要en_core_web_sm）
+python -m scripts.audit_unified_language \
+  --instructions /path/to/public_instructions.jsonl \
+  --catalog /path/to/cityrefer/objects.json \
+  --output GraphNav/runs/unified_language_rich_audit.jsonl \
+  --rich
+
+python -m pytest -q \
+  tests/test_unified_instruction.py \
+  tests/test_unified_pgvb.py \
+  tests/test_pgvb_navigation_runtime.py \
+  tests/test_structured_navigation.py
+~~~
+
+普通PGVB具名任务运行仍使用 scripts.run_unified_pgvb_landmark_closedloop
+现有入口；它现在显式拒绝复杂/不可靠指令和错误的reference_names，防止
+把参考地标误作真正目标；已验证的简单指令继续使用之前的PGVB权重。
+
+此分支实现的是**语言解析到统一视觉网络的可靠接线和边界保护**，
+不是已训练的复杂Target Belief；方向、目标属性和关系融合必须在
+人工核验语义标签与监督训练后再打开。
