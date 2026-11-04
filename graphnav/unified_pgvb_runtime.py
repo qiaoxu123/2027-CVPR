@@ -38,7 +38,7 @@ class UnifiedPGVBNamedLandmarkPolicy:
 
     def __init__(
         self, checkpoint, unified_checkpoint, directory,
-        *, device="cuda", bound=0.5, mode="tracked",
+        *, device="cuda", bound=0.5, mode="tracked-stable",
     ):
         self.device = torch.device(device)
         self.directory = Path(directory)
