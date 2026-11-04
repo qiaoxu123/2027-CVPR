@@ -1,0 +1,22 @@
+{
+  "base_commit": "ce2c6dae",
+  "seed": 42,
+  "precision": "CUDA BF16 forward; FP32 losses",
+  "trainable": ["UnifiedPGVB.pgvb"],
+  "frozen": ["UnifiedPGVB.geometry", "SigLIP2", "BERT", "Trajectory/Stop", "joint fusion", "direction", "target appearance"],
+  "lr": 0.0001,
+  "weight_decay": 0.001,
+  "gradient_clip_norm": 5.0,
+  "batch_frames": 4,
+  "num_workers": 0,
+  "loss": {"weak_region": 1.0, "balanced_bce": 0.2, "same_frame_same_type_reliable_pair": 0.3},
+  "stages": [
+    {"name": "A200", "updates": 200, "dataset": "all existing cached TRAIN fit queries"},
+    {"name": "B1000", "updates": 1000, "resume": "A200 optimizer, epoch, frame offset, RNG"},
+    {"name": "Cepoch", "updates": 512, "purpose": "finish partial epoch and one full existing-cache epoch; stop after four cached epochs total"},
+    {"name": "Dfull_epoch", "updates": 489, "dataset": "all valid original TRAIN t0 references, Cambridge fit", "initial_weights": "Cepoch final", "optimizer": "fresh due changed data fingerprint", "epochs": 1}
+  ],
+  "no_automatic_10_epoch_training": true,
+  "checkpoint_selection": "final last.pt for all comparisons; best.pt tracks lowest recent100 TRAIN loss, never validation-selected",
+  "data_protocol": "Original TRAIN t0 only for new full cache; public non-generic names and Polygon weak supervision; original yaw; no target GT, future images or teacher path input"
+}
