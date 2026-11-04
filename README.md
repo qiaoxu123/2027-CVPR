@@ -6,11 +6,36 @@
 
 GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程：利用**具名地标及其轮廓几何**，从语言指令推断全局目标位置，再通过有界控制器执行导航。项目包含在真实可见范围内提取 RGB/Depth 证据、累积历史记忆和更新目标信念的实验实现。
 
-> **当前正式主模型：GraphNav-V1 C Epoch1。** 已完成全量 Val-Seen / Val-Unseen 和冻结 Test-Unseen 评估。验证集 Seen SR/SPL **47.61% / 46.00%**；Val-Unseen **22.54% / 21.82%**；Test-Unseen **37.15% / 35.81%**。强 A3 Geometry 单独保留作为静态几何基线（Seen 48.50%/47.02%；Unseen 21.25%/20.64%）。V1 的 RGB/History 消融尚未证明稳定的独立净增益，不宣称此点。代码与结果已发布，权重 **不包含在 Git 仓库中**，必须核验 SHA-256 `00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a`。详见 [V1 最终报告](reports/graphnav_v1_stage1/GRAPHNAV_V1_STAGE1_REPORT.md) 与 [Test-Unseen 结果](reports/graphnav_v1_stage1/GRAPHNAV_V1_RESULTS.md)。
+> **当前主方案：UnifiedPGVB-v2（集成几何+单视觉目标Belief）**。主定位网络为 `graphnav/unified_pgvb.py`：内部集成原A3几何定位、唯一SigLIP2/PGVB视觉评分和统一GoalField输出；训练前的联合融合层默认关闭。原Trajectory/Stop作为独立冻结控制器。**目前已完成架构与CPU专项测试，但尚未取得V2的完整训练或真实闭环SR结果**。请从 [V2架构说明](reports/unified_pgvb/README_zh.md) 和 [V2测试计划](docs/UNIFIED_PGVB_V2_TEST_PLAN_zh.md) 开始。
+
+> **GraphNav-V1为历史正式基线，不再是主方案。** 已完成Val-Seen、Val-Unseen、Test-Unseen的完整评测：Seen SR/SPL 47.61%/46.00%，Val-Unseen 22.54%/21.82%，Test-Unseen 37.15%/35.81%。 完整准确数值以原始[基线报告](reports/graphnav_v1_stage1/GRAPHNAV_V1_STAGE1_REPORT.md)为准。原始代码完整冻结于 [archive/graphnav-v1-pre-unified-20261104](https://github.com/qiaoxu123/2027-CVPR/tree/archive/graphnav-v1-pre-unified-20261104)（`9098e254`），权重仍需外部按SHA核验。
 
 [快速开始](#快速开始) · [已验证结果](#已验证结果) · [评估与复现](docs/REPRODUCIBILITY.md) · [代码导航](docs/CODE_MAP.md) · [研究报告索引](#研究报告与局限)
 
-## 方法概览
+## 当前主方案：UnifiedPGVB-v2
+
+```text
+原始导航指令 + 公开地标Polygon + 当前RGB
+                 |
+      GT-free结构化指令解析
+                 |
+          UnifiedPGVB-v2
+       +---------+---------+
+       |                   |
+  A3 Geometry        单次SigLIP2 RGB
+ (网络内部子模块)     PGVB视觉地标证据
+       |                   |
+       +----- 内部Belief融合 +
+                 |
+      28×28统一GoalField
+   Top-K + 128维候选上下文
+                 |
+       冻结Trajectory / Stop
+                 |
+         无人机动作与新观测
+```
+
+**当前可实际运行的任务**是具名地标导航；真实关系指令、完整Target Head及联合融合训练仍处于后续阶段。训练或评测前先运行 [V2测试计划](docs/UNIFIED_PGVB_V2_TEST_PLAN_zh.md)。旧GraphNav-V1架构图仅作为历史基线：
 
 ```text
 语言指令 + 公共地图（具名地标、真实 Polygon）
@@ -35,6 +60,8 @@ GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程�
                    |
           执行一步、重新观测、重规划
 ```
+
+**以下为原GraphNav-V1的历史说明，并非V2当前默认前向。**
 
 **区别与边界**
 
