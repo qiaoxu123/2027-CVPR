@@ -189,6 +189,7 @@ def test_mixed_type_named_goal_runtime_uses_geometry_only(monkeypatch):
     policy = object.__new__(runtime.UnifiedPGVBNamedLandmarkPolicy)
     policy.args = SimpleNamespace(max_landmarks=16)
     policy.native = SimpleNamespace()
+    policy.device = torch.device("cpu")
     policy.unified = SimpleNamespace(reset_episode=lambda: None)
     episode = SimpleNamespace(
         instruction="Navigate to Victoria Street.",
