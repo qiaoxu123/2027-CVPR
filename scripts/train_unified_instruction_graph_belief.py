@@ -258,6 +258,12 @@ def main():
                     flush=True)
         if not a.max_batches and seen!=len(base):
             raise RuntimeError(f"TRAIN query coverage {seen}!={len(base)}")
+        if used==0:
+            raise RuntimeError(
+                "No target-to-public-Polygon graph path was grounded in this run. "
+                "Check parser coverage and source public-ID alignment; "
+                "do not report a no-op adapter as trained."
+            )
         history.append(dict(epoch=epoch+1,train_seen=seen,
                             supported_steps=used,mean_loss=sum_loss/max(1,seen)))
         atomic_save(dict(format=GRAPH_FORMAT,epoch=epoch+1,adapter=head.state_dict(),
