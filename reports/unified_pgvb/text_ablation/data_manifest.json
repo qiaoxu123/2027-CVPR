@@ -1,0 +1,46 @@
+{
+  "protocol": "unified-v2-public-landmark-geometry-phrase-paired-v1",
+  "source_sha256": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "all_queries": 21878,
+  "counts": {
+    "name_only": 8199,
+    "paired_words": 12458,
+    "no_public_anchor": 1221,
+    "invalid_public_polygon_shape": 532,
+    "all_public_polygons_exceed_capacity": 234
+  },
+  "files": {
+    "full_text": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_text_ablation_s42_20261105/paired_inputs/full_text.jsonl",
+      "sha256": "1c7aa5406c35008b2125d61b6ec568f9f80f876392f2291119a3a97375e62c2d",
+      "records": 21878
+    },
+    "landmark_relation": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_text_ablation_s42_20261105/paired_inputs/landmark_relation.jsonl",
+      "sha256": "4d9370ea6da932e9646496b3e64ee32960d8b3b876e24d3f6462c007c3c69d37",
+      "records": 21878
+    },
+    "relation_only": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_text_ablation_s42_20261105/paired_inputs/relation_only.jsonl",
+      "sha256": "74ab0b1cbf5d40a74d1d0cbecf16751a26ccf23aa7f5b745355869d7a2028d22",
+      "records": 21878
+    }
+  },
+  "controls": [
+    "full_text",
+    "landmark_relation",
+    "relation_only"
+  ],
+  "same_public_catalog_matched_polygon_for_all_arms": true,
+  "label_only_fields_unchanged": true,
+  "empty_text_uses_bert_unk_not_target_fallback": true,
+  "target_GT_used_to_select_polygon": false,
+  "parser_scope_accuracy_unverified": true,
+  "model_architecture_unchanged": true,
+  "full_text_is_frozen_existing_checkpoint_evaluation_only": true,
+  "new_training_arms": [
+    "landmark_relation"
+  ],
+  "relation_only_input": "geometry words to instruction BERT; public node-name embeddings and Polygon still available"
+}

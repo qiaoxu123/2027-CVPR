@@ -1,3 +1,16 @@
+## [PR23 Unified V2 text ablation execution] - 2026-11-05
+
+### Features
+- Add public-name/phrase binding parity, manual-rule interventions, counterfactual fields and opt-in full-navigation text adaptation.
+- Train only landmark+relation after user cancellation of relation-only; reuse full-text weights.
+
+### Design Rationale
+- Separate learned text response, handcrafted rules and public-reference input shift without changing Unified V2 architecture or controller.
+
+### Notes & Caveats
+- All21878 TRAIN includes Birmingham; its7619 episodes are resubstitution diagnostics. Val-Seen is fixed evaluation after freezing, never tuning.
+- Local raster has no CRS; directional counters are engine-axis responses, not geographic validation.
+
 ## [Privileged complete-landmark RGB experiment] - 2026-11-05
 
 ### Features

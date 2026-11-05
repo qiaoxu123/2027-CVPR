@@ -111,3 +111,13 @@ def test_missing_or_partial_data_and_overwrite_fail(tmp_path):
     prepare(input_file,obj,tmp_path/"out",expected=1)
     with pytest.raises(FileExistsError):
         prepare(input_file,obj,tmp_path/"out",expected=1)
+
+
+def test_visible_public_alias_is_retained_for_all_text_derived_rule_paths(tmp_path):
+    catalog=_catalog();catalog['cambridge_block_1']['1']['name']='The One Stop';catalog['cambridge_block_1']['2']['name']='The One Stop'
+    obj=tmp_path/'objects.json';obj.write_text(json.dumps(catalog));src=tmp_path/'src.jsonl';src.write_text(json.dumps(_row('A blue car north of One Stop.','cambridge_block_1'))+'\n')
+    out=tmp_path/'prepared';prepare(src,obj,out,expected=1)
+    data=FullCandidateDataset(out/'landmark_relation.jsonl',deduplicate_queries=False)
+    item=data[0]
+    assert item['relation_count']==1
+    assert item['rules'].abs().sum()>0

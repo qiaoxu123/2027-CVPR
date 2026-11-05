@@ -1,0 +1,10 @@
+# PR23 execution with latest user steering
+
+- Preserve unrelated untracked files; PR23 headf8f21b3. Follow original Unified V2 architecture/weights, seed42,5epochs, batch8, original LR/loss. Only train landmark_relation; cancel relation_only and never retrain full_text/name_only.
+- Prepare all21878 TRAIN rows with public-catalog-only original-text name binding, shared all legal same-name Polygons across arms and capacity fallback. Replace entire instruction so tokens, Rules and graph nodes are regenerated. GT labels only after forward.
+- Existing full_text core/last.pt trained on all TRAIN; original initialization pilot full_training/last.pt; source/controller hashes verified. All21878 (including Birmingham) fitted, so Birmingham7619 is explicitly TRAIN resubstitution diagnostic, not independent holdout/generalization.
+- CPU tests, parser audit, real3-update GPU Smoke then only one full5epoch training with tmux and resumable atomic checkpoints. Source checkpoint, architecture and controller unchanged.
+- Compare existing full_text native references vs public rebound references (input-shift control); new landmark_relation uses shared public references. Report all Birmingham7619 metrics, paired fixes/damage, TopK, grouping and Belief heatmaps. No relation_only training.
+- Isolate direct additive rule weight removal vs complete manual relation-input removal (rules/relation_fields/synthetic relation nodes/links). Anchor-only public geometry remains. Counterfactual north/south/east/west rebuild all text-derived fields; geometric World-XY response only, no unverified geographic-north claim.
+- Latest user authorizes full navigation: after final checkpoint freeze run matched full2470 Val-Seen full_text/new landmark_relation with same public-name binding, original start/trajectory-stop/horizon/success definitions. Native-reference historical result separate. No Val tuning or Test, no 128 subset replacing full denominator.
+- Commit/push PR23 and update report/PR. Do not merge main or modify original weights.

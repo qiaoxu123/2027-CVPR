@@ -1,3 +1,5 @@
+> 执行更新（用户最新指令）：取消relation_only训练，只新训练landmark_relation，full_text复用现有Checkpoint。训练完成后冻结配置，追加全部2470条Val-Seen真实闭环对照；不运行Test、不用Val调参。Birmingham包含在全21878条训练中，只作TRAIN内拟合诊断，不是独立Dev泛化。
+
 # UnifiedPGVB V2 主模型语言消融：只新训练两组
 
 ## 不再做的事
@@ -80,7 +82,7 @@ EXISTING_FULL="$MAIN/core/last.pt"
 
 # 全文组只用于下方已有checkpoint的evaluation，绝对不重新训练。
 # 新两组各先做3 batch smoke，再完整训练5轮。
-for ARM in landmark_relation relation_only; do
+for ARM in landmark_relation; do
   "$PY" -u -m scripts.train_unified_full_relation \
     --train-jsonl "$OUT/paired_inputs/$ARM.jsonl" \
     --stage1 "$STAGE1" \
@@ -89,7 +91,7 @@ for ARM in landmark_relation relation_only; do
     --epochs 1 --batch-size 8 --seed 42 --max-batches 3
 done
 
-for ARM in landmark_relation relation_only; do
+for ARM in landmark_relation; do
   "$PY" -u -m scripts.train_unified_full_relation \
     --train-jsonl "$OUT/paired_inputs/$ARM.jsonl" \
     --stage1 "$STAGE1" \
@@ -102,7 +104,6 @@ done
   --prepared-dir "$OUT/paired_inputs" \
   --existing-full-checkpoint "$EXISTING_FULL" \
   --checkpoint-landmark-relation "$OUT/train_landmark_relation/last.pt" \
-  --checkpoint-relation-only "$OUT/train_relation_only/last.pt" \
   --output "$OUT/dev_report" --batch-size 8
 ~~~
 
@@ -125,3 +126,14 @@ done
 6. 不跑 Val/Test/闭环，不改 Stop/main；完成 TRAIN-Dev 后先出报告。
 
 无需重新训练 full_text，也无需仅地标模型。
+
+
+## 执行核查
+
+公开名称省略The或标点时，实际可见匹配片段作为公开别名同步保留，避免BERT文本已变化而Rule绑不到名字。无效片段不参与输入，超容量不按GT挑选；所有任务保留。
+
+Rule诊断分三层：full、additive_off（仅取消直接Rule加分，规则特征仍在）、manual_off（规则图/字段全部清除，保留公共Anchor几何和神经网络）。后两者是冻结输入干预，不是另外训练的模型。
+
+本地正射栅格CRS为空，无地理朝向配准证明；north→+Y是原工程Rule约定，只报告工程轴反事实响应，不称真实地理方向准确率。behind/left/right不作绝对世界方向正确性判定。
+
+新增导航适配仅通过显式--instruction-mode/--public-objects启用，默认native不变；新两组导航共享公开精确绑定，GT不参与。原Stable Goal/Trajectory/Stop和20m/20步/50m宏动作协议不改。

@@ -101,7 +101,7 @@ def public_references(map_name, bounds, mentions, catalog, max_landmarks):
             contours=normalize_xy(polygon,bounds)
             refs.append(dict(id=oid,name=str(public["name"]),
                              object_type=public.get("object_type","Other"),
-                             aliases=list(public.get("aliases",[])),
+                             aliases=list(dict.fromkeys([*public.get("aliases",[]),mention["text"]])),
                              contour=contours.tolist()))
     if len(refs)>max_landmarks:
         failures.append("all_public_polygons_exceed_capacity")
@@ -155,8 +155,8 @@ def prepare(source_path,catalog_path,out_dir,*,expected=21878,
         refs,fail=public_references(map_name,row["world_bounds"],mentions,catalog,max_landmarks)
         # If invalid public geometry, NEVER pretend name-only text can bind
         # some different polygon; all arms get same explicit empty refs.
-        if not refs:
-            pairs=[]
+        legal_ids={r["id"] for r in refs}
+        pairs=[dict(p,public_ids=[i for i in p["public_ids"] if str(i) in legal_ids]) for p in pairs if any(str(i) in legal_ids for i in p["public_ids"])]
         compact=normalized_instruction(pairs,"landmark_relation")
         relations=normalized_instruction(pairs,"relation_only")
         status=("no_public_anchor" if not refs else
@@ -206,7 +206,7 @@ def prepare(source_path,catalog_path,out_dir,*,expected=21878,
         parser_scope_accuracy_unverified=True,
         model_architecture_unchanged=True,
         full_text_is_frozen_existing_checkpoint_evaluation_only=True,
-        new_training_arms=["landmark_relation","relation_only"],
+        new_training_arms=["landmark_relation"],
         relation_only_input="geometry words to instruction BERT; public node-name embeddings and Polygon still available",
     )
     (out_dir/"manifest.json").write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n")
