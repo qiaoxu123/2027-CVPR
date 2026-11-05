@@ -19,9 +19,16 @@ from .unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
 
 
 class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
-    def __init__(self, stage1, original_v2, trained, directory, *, device="cuda"):
+    def __init__(self, stage1, original_v2, trained, directory, *, device="cuda",
+                 relation_control="full", visual_control="tracked"):
+        if relation_control not in ("full", "off"):
+            raise ValueError("Invalid learned relation ablation")
+        if visual_control not in ("tracked", "off"):
+            raise ValueError("Invalid PGVB visual ablation")
         super().__init__(stage1, original_v2, directory, device=device,
-                         mode="tracked-stable")
+                         mode="tracked-stable" if visual_control == "tracked" else "geometry")
+        self.relation_control = relation_control
+        self.visual_control = visual_control
         state = torch.load(trained, map_location="cpu", weights_only=True)
         if state.get("format") != "unified-pgvb-full-relation-v1":
             raise ValueError("A trained full-instruction checkpoint is required")
@@ -96,6 +103,7 @@ class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
                 token_mask=self.mask, node_emb=self.names.float(),
                 observed=observed, acquisition=self.acquisition,
                 anchor_labels=labels,
+                relation_enabled=self.relation_control == "full",
             )
         audit = result["audit"]
         field, stable = self.stable_goal.select(
@@ -108,6 +116,8 @@ class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
         self.pgvb_seconds += time.perf_counter() - start
         prediction.diagnostics.update(
             relation_module="aerialvg_inspired_full",
+            relation_control=self.relation_control,
+            visual_control=self.visual_control,
             input_coverage="all_citynav_instructions",
             geometry_top1=int(result["geometry_field"].belief_logits[0].argmax()),
             relation_top1=int(result["relation_field"].belief_logits[0].argmax()),
