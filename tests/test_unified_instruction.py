@@ -190,6 +190,7 @@ def test_mixed_type_named_goal_runtime_uses_geometry_only(monkeypatch):
     policy.args = SimpleNamespace(max_landmarks=16)
     policy.native = SimpleNamespace()
     policy.device = torch.device("cpu")
+    policy.mode = "legacy"
     policy.unified = SimpleNamespace(reset_episode=lambda: None)
     # Production initializes both trackers; bypassing __init__ in this unit test
     # must explicitly provide their episode-reset interfaces.

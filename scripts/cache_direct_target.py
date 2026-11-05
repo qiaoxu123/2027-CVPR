@@ -18,6 +18,7 @@ from graphnav.token_language import FrozenBERTTokens
 from graphnav.appearance_matching import ObservedSigLIPMatchingEncoder
 from graphnav.renderer import CityNavObservedViewRenderer
 from graphnav.pgvb_observation import encode_landmark_observation
+from graphnav.landmark_alias import resolve_references
 
 
 def main():
@@ -25,6 +26,8 @@ def main():
     for k in ('inventory', 'checkpoint', 'stage1', 'data-root', 'sbf-source', 'output'):
         p.add_argument('--'+k, type=Path, required=True)
     p.add_argument('--limit', type=int)
+    p.add_argument('--reuse-visual-cache', type=Path,
+                   help='Rebuild public geometry/BERT only; preserve exact observed visual tensors')
     a = p.parse_args(); sys.path.insert(0, str(a.sbf_source))
     from sbfnav.mapdata import GROUND_LEVEL
     torch.set_num_threads(4)
@@ -39,16 +42,20 @@ def main():
                           'graphnav/direct_target_data.py', 'graphnav/pgvb_observation.py']},
                        observation_protocol='TRAIN start/middle/last actual pose; no GT-based pose selection',
                        labels_separate=True, foundation_encoders_frozen=True)
+    if a.reuse_visual_cache:
+        fingerprint['visual_reuse_manifest_sha256'] = file_sha256(a.reuse_visual_cache/'manifest.json')
     mp = a.output/'manifest.json'
     if mp.exists() and json.loads(mp.read_text()) != fingerprint:
         raise ValueError('Cache inputs/code changed; use new directory')
     mp.write_text(json.dumps(fingerprint, indent=2))
     records = []
+    catalog = json.loads((a.data_root/'cityrefer/objects.json').read_text())
     for task in tasks:
         bounds = np.array(task['world_bounds']); span = bounds[2:]-bounds[:2]
-        landmarks = [dict(name=q['landmark']['name'], object_type=q['landmark']['type'],
-                          contour=((np.asarray(c)-bounds[:2])/span).tolist())
-                     for q in task['anchors'] for c in q['contours']]
+        resolved = resolve_references([q['landmark']['name'] for q in task['anchors']],
+            catalog[task['map_name']], max_landmarks=config.max_landmarks, match_mode='fuzzy')
+        landmarks = [dict(name=q['name'], object_type=q['object_type'], aliases=q['aliases'],
+                          contour=((np.asarray(q['contour'])-bounds[:2])/span).tolist()) for q in resolved]
         records.append(dict(map_name=task['map_name'], instruction=task['instruction'],
                             episode_id=str(task['episode']), landmarks=landmarks,
                             target_xy=[0., 0.], world_bounds=bounds.tolist(),
@@ -79,6 +86,22 @@ def main():
             nodes=nodes[0].cpu().clone(), target_text=target_text,
             relation_geometry=relation_geometry(task, static['grid_xy'][0].cpu().numpy()),
             relation_ids=torch.tensor([x['predicate_id'] for x in task['anchors']]))
+        if a.reuse_visual_cache:
+            old_manifest = json.loads((a.reuse_visual_cache/'manifest.json').read_text())
+            for key in ('public_tasks_sha256', 'checkpoint_sha256'):
+                if old_manifest[key] != fingerprint[key]:
+                    raise ValueError('Visual reuse input/checkpoint mismatch')
+            old = torch.load(a.reuse_visual_cache/f"{task['index']:05d}.pt", map_location='cpu', weights_only=True)
+            if old['index'] != task['index'] or old['subset'] != task['subset']:
+                raise ValueError('Visual reuse query mismatch')
+            observations = old['observations']
+            for row in observations:
+                if row.get('RGB'):
+                    os.link(a.reuse_visual_cache/row['RGB'], a.output/row['RGB'])
+            atomic_save(dict(index=task['index'],subset=task['subset'],query=query,observations=observations),out)
+            if task['index'] % 50 == 0:
+                print(json.dumps(dict(query=task['index'],mode='geometry_corrected_exact_visual_reuse',seconds=time.perf_counter()-start)),flush=True)
+            continue
         observations = []
         anchor = task['anchors'][0]
         landmark = dict(name=anchor['landmark']['name'], typ=anchor['landmark']['type'], contours=anchor['contours'])

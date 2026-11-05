@@ -35,6 +35,7 @@ def evaluate(model, rows, batch_size=8):
     model.eval(); result=[]
     for start in range(0,len(rows),batch_size):
         batch=rows[start:start+batch_size]; inputs=batch_inputs(batch)
+        model.reset_episode()  # a new independent query batch is not one episode
         with torch.autocast('cuda',dtype=torch.bfloat16): out=model.forward_direct_target(**inputs)
         d=coordinates(batch,inputs)
         for i,s in enumerate(batch):
