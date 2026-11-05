@@ -78,7 +78,7 @@ def extract_landmark_geometry(instruction, landmarks, *, max_anchors=16,
     accepted=[]
     for item,ref in mentions:
         if any(item["start"]<prev["end"] and item["end"]>prev["start"]
-               and item["public_id"]!=prev["public_id"]
+               and (item["start"],item["end"])!=(prev["start"],prev["end"])
                for prev,_ in accepted):
             continue
         # Exact same physical source ID repeated as an alias should not
