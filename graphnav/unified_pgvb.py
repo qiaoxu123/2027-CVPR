@@ -91,6 +91,7 @@ class UnifiedPGVB(nn.Module):
         delta = (self.full_relation(
             base.dense_context, tokens, token_mask,
             references, predicates, valid,
+            anchor_semantics=node_emb,
         ) if relation_enabled else torch.zeros_like(base.belief_logits, dtype=torch.float32))
         logits = visual.belief_logits.float() + delta.float()
         relation_logits = base.belief_logits.float() + delta.float()
