@@ -1,0 +1,38 @@
+{
+  "seed": 42,
+  "epochs": 6,
+  "precision": "FP32, TF32 off",
+  "trainable_parameters": 85377,
+  "fit_counterfactual_counts": {
+    "inside": 388,
+    "outside": 388,
+    "near": 412
+  },
+  "dev_counterfactual_counts": {
+    "inside": 49,
+    "outside": 49,
+    "near": 55
+  },
+  "fit_original_queries": 397,
+  "natural_queries": 573,
+  "fit_groups": 209,
+  "dev_groups": 23,
+  "group_overlap": 0,
+  "cache_seconds": 31.322144540026784,
+  "train_seconds": 13.431768885813653,
+  "peak_GPU_GiB": 0.5219635963439941,
+  "max_gradient_norm": 10.693325996398926,
+  "source_checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_direct_target_s42_20261105/training_aligned/best.pt",
+  "source_sha256": "aa359894a172c38b024aa5ef4e89caeecc8a496d723320cea14862f0eaaf61e9",
+  "checkpoint_sha256": "9b63dfe6316cb9fc196a90bdcf78de3c1efd5539bce3cdaacb5635be19528dcb",
+  "validation_used_for_selection": false,
+  "epochs_and_mixture_fixed_before_validation": true,
+  "near_radius_m": 30.0,
+  "region_margin": 0.2,
+  "preservation_KL_weight": 0.2,
+  "mixture": 0.5,
+  "geography_verified": false,
+  "directions_abstained": true,
+  "Val_Test_accessed": false,
+  "normal_runtime_changed": false
+}
