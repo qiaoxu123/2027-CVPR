@@ -16,7 +16,7 @@ from .stage1 import preserved_proposal_order
 
 
 class UnifiedPGVB(nn.Module):
-    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None):
+    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None, direct_target=False):
         super().__init__()
         self.geometry = geometry
         self._geometry_cache = None
@@ -49,6 +49,37 @@ class UnifiedPGVB(nn.Module):
         self.joint_ready = False
         self.direction_ready = False
         self.target_ready = False
+        if direct_target:
+            from .direct_target import DirectTargetHead
+            self.direct_target = DirectTargetHead(hidden=geometry_hidden, visual_dim=dimension)
+        self.direct_target_ready = False
+
+    def forward_direct_target(self, *, static_inputs, tokens, token_mask, node_emb,
+                              relation_geometry, relation_ids, relation_valid,
+                              observed=None, target_text=None):
+        """Explicit trained target path. The named-landmark path is unchanged."""
+        if not hasattr(self, 'direct_target'):
+            raise RuntimeError('No direct-target head installed')
+        if not self.training and not self.direct_target_ready:
+            raise RuntimeError('Untrained direct-target head cannot run inference')
+        base = self._geometry_field(static_inputs, tokens, token_mask, node_emb)
+        head = self.direct_target
+        context = head.relation_context(relation_geometry, relation_ids, relation_valid)
+        delta = head.relation(base.dense_context, tokens, token_mask,
+                              relation_geometry, relation_ids, relation_valid)
+        related = base.belief_logits.float()+delta.float()
+        full, coverage = head.visual(related, observed, self.pgvb, target_text,
+                                     head.language(tokens, token_mask), context)
+        def field(logits, support=None):
+            # Unlike the historical preserved proposal list, this target path
+            # must admit newly corrected target cells into the candidate set.
+            ids = logits.topk(base.candidate_ids.shape[-1], dim=-1).indices
+            return GoalField(belief_logits=logits, candidate_ids=ids,
+                candidate_xy=static_inputs['grid_xy'].gather(1, ids[..., None].expand(-1,-1,2)),
+                candidate_context=base.dense_context.gather(1, ids[...,None].expand(-1,-1,base.dense_context.shape[-1])),
+                dense_context=base.dense_context, visual_coverage=support)
+        return dict(geometry_field=base, relation_field=field(related),
+                    field=field(full, coverage), coverage=coverage)
 
     def reset_episode(self):
         """Never reuse cached map/word geometry across different episodes."""
@@ -73,7 +104,7 @@ class UnifiedPGVB(nn.Module):
 
     def forward_field(
         self, *, static_inputs, tokens, token_mask, node_emb,
-        observed=None, bound=0.5,
+        observed=None, bound=0.5, acquisition=None, anchor_labels=None,
     ):
         """ONE integrated geometry + PGVB field generator.
 
@@ -93,6 +124,8 @@ class UnifiedPGVB(nn.Module):
             changed_top1=False,
         )
         if observed is None:
+            if acquisition is not None:
+                empty_audit["acquisition"] = acquisition.observe()
             return dict(
                 field=base, geometry_field=base,
                 landmark_scores=None, evidence=None, audit=empty_audit,
@@ -114,7 +147,34 @@ class UnifiedPGVB(nn.Module):
         if scores.shape != valid.shape or uv.shape != (*scores.shape, 2):
             raise ValueError("Observed world projection does not match patch scores")
         evidence = (uv, scores, valid)
-        if not valid.any() or scores[valid].float().std(unbiased=False) < 1e-6:
+        gain = 1.0  # legacy compatibility; no tracker means historical fusion
+        if acquisition is not None:
+            if self.training:
+                raise RuntimeError("Stateful landmark tracking is inference-only")
+            if anchor_labels is None:
+                raise ValueError("Acquisition needs public-ROI weak patch labels")
+            # Contrast with the SAME RGB frame's patches displaced in space.
+            # Only another tiny PGVB head forward, NOT another SigLIP2 encode.
+            with torch.no_grad():
+                shifted = observed["image_features"].roll(
+                    shifts=max(1, scores.shape[1] // 2), dims=1,
+                )
+                shuffled = self.pgvb(
+                    image_features=shifted,
+                    name_text=observed["name_text"],
+                    type_text=observed["type_text"],
+                    polygon_tokens=observed["polygon_tokens"],
+                    valid=valid,
+                ).float()
+                tracked = acquisition.observe(
+                    scores.detach(), shuffled.detach(),
+                    anchor_labels.detach(), valid.detach(),
+                )
+            gain = float(tracked["visual_gain"])
+            empty_audit["acquisition"] = tracked
+        if (not valid.any()
+                or scores[valid].float().std(unbiased=False) < 1e-6
+                or gain <= 0):
             return dict(
                 field=base, geometry_field=base,
                 landmark_scores=scores, evidence=evidence, audit=empty_audit,
@@ -134,7 +194,7 @@ class UnifiedPGVB(nn.Module):
             zeros, uv, torch.ones_like(centered), valid,
         ) - neutral
         covered = coverage > 0.5
-        delta = bound * torch.tanh(visual / 5.) * covered
+        delta = (bound * gain) * torch.tanh(visual / 5.) * covered
         if not covered.any() or delta.abs().max() <= 1e-8:
             return dict(
                 field=base, geometry_field=base,
@@ -183,6 +243,8 @@ class UnifiedPGVB(nn.Module):
                 changed_top1=bool(
                     (ids[:, 0] != base.candidate_ids[:, 0]).any()
                 ),
+                **({"acquisition": empty_audit["acquisition"]}
+                   if "acquisition" in empty_audit else {}),
             ),
         )
 

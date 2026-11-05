@@ -1,0 +1,50 @@
+{
+  "original_instructions": 22002,
+  "revised_TRAIN_records": 21878,
+  "qualified_queries": 573,
+  "split": {
+    "dev": 80,
+    "fit": 493
+  },
+  "target_category": {
+    "Building": 441,
+    "Car": 103,
+    "Ground": 28,
+    "Parking": 1
+  },
+  "relations": {
+    "near": 418,
+    "along": 64,
+    "north": 26,
+    "south": 40,
+    "inside": 25
+  },
+  "landmark_type": {
+    "Building": 437,
+    "Road": 117,
+    "Other": 19
+  },
+  "rejection": {
+    "unsupported_or_unresolved_reference_frame": 10970,
+    "no_direct_relation": 7252,
+    "global_scope_ambiguity": 5123,
+    "intermediate_entity_in_relation_scope": 392,
+    "relation_role_or_traversal_uncertain": 113,
+    "predicate_not_immediately_bound_to_public_name": 65,
+    "fronted_relation_scope_requires_review": 63,
+    "possessive_intermediate_region": 1,
+    "mention_binding_not_unique": 50,
+    "invalid_public_polygon": 5,
+    "anchor_exceeds_geometry_capacity": 1
+  },
+  "grouped_public_ID_overlap": 0,
+  "eligibility_uses_GT": false,
+  "pixel_annotations": "none; map weak supervision only",
+  "cardinal_geography": "current engineering convention retained; geographic meaning unverified",
+  "source_sha256": {
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/processed_citynav/citynav_train_seen.json": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/pgvb_structured_v1/language_direction_audit/structured_train.json.gz": "a06c265d904b33b1b3ebb36517dbd18132eed6c8c8d7de9be79a3f95f2d5f963",
+    "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer/objects.json": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "graphnav/direct_target_language.py": "d40def4f03445c213bc0b64c058076916fdee46dd885969c23b6f351d9531d0c"
+  }
+}

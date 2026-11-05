@@ -1,0 +1,142 @@
+{
+  "all_64_initial_pose_rgb_footprint_identical": true,
+  "baseline_reproduction": {
+    "Geometry": {
+      "episodes": 64,
+      "exact_pose_metric_termination_mismatch_ids": []
+    },
+    "TrackedPGVB": {
+      "episodes": 64,
+      "exact_pose_metric_termination_mismatch_ids": []
+    }
+  },
+  "previous_horizon_ids": [
+    10,
+    13,
+    18,
+    21,
+    24,
+    27,
+    33,
+    43,
+    49
+  ],
+  "horizon_recovery": [
+    {
+      "index": 10,
+      "name": "Penhurst Avenue",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 2.8531901068064713,
+      "new_steps": 8,
+      "correct_stop": true
+    },
+    {
+      "index": 13,
+      "name": "NT Wholesale Cash & Carry",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 0.0,
+      "new_steps": 9,
+      "correct_stop": true
+    },
+    {
+      "index": 18,
+      "name": "West Midlands Police Custody Suite",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 4.253379334841732,
+      "new_steps": 9,
+      "correct_stop": true
+    },
+    {
+      "index": 21,
+      "name": "Panton Street",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 0.0,
+      "new_steps": 8,
+      "correct_stop": true
+    },
+    {
+      "index": 24,
+      "name": "Maitland Robinson Library",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 2.7052808605494505,
+      "new_steps": 5,
+      "correct_stop": true
+    },
+    {
+      "index": 27,
+      "name": "Chesterton Road",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 9.460206844983796,
+      "new_steps": 10,
+      "correct_stop": true
+    },
+    {
+      "index": 33,
+      "name": "Essex House",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 0.0,
+      "new_steps": 11,
+      "correct_stop": true
+    },
+    {
+      "index": 43,
+      "name": "Ferry Path",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 0.5304600130411287,
+      "new_steps": 4,
+      "correct_stop": true
+    },
+    {
+      "index": 49,
+      "name": "Belvoir Road",
+      "old_termination": "horizon",
+      "new_termination": "policy_stop",
+      "old_SR": 1.0,
+      "new_SR": 1.0,
+      "new_NE": 0.691275500654212,
+      "new_steps": 9,
+      "correct_stop": true
+    }
+  ],
+  "recovered_correct_stops": 9,
+  "stable_events": {
+    "initialized": 64,
+    "kept": 426,
+    "pending": 22,
+    "replanned": 5
+  },
+  "held_differs_frames": 58,
+  "held_despite_updated_visual_frames": 57,
+  "active_visual_frames": 140,
+  "unchanged_visual_logits_on_active_frames": 0,
+  "candidate_context_comparisons": 9946,
+  "max_normalized_xy_error": 2.5544847792602354e-08,
+  "raw_correct_but_held_wrong_frames": 4,
+  "raw_wrong_but_held_correct_frames": 0,
+  "candidate_alignment_passed": true,
+  "hold_change_only_on_replan": true
+}

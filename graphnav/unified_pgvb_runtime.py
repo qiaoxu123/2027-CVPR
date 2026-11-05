@@ -12,6 +12,7 @@ import time
 
 import numpy as np
 import torch
+from shapely.geometry import Point
 
 from .a3_runtime import A3TrajectoryPolicy, public_static_record
 from .appearance_matching import ObservedSigLIPMatchingEncoder
@@ -19,6 +20,10 @@ from .candidate_geometry import FullCandidateDataset, collate_full
 from .checkpointing import file_sha256
 from .full_experiment import _batch_inputs, new_model
 from .landmark_alias import canonical_name
+from .landmark_acquisition import LandmarkAcquisition
+from .stable_navigation_goal import StableNavigationGoal
+from .landmark_neighborhood import nearby_public_geometry
+from .landmark_region_supervision import named_union
 from .landmark_region_supervision import public_type
 from .local_landmark_anchor import named_public_polygons
 from .pgvb_observation import encode_landmark_observation
@@ -33,7 +38,7 @@ class UnifiedPGVBNamedLandmarkPolicy:
 
     def __init__(
         self, checkpoint, unified_checkpoint, directory,
-        *, device="cuda", bound=0.5,
+        *, device="cuda", bound=0.5, mode="tracked-stable",
     ):
         self.device = torch.device(device)
         self.directory = Path(directory)
@@ -117,6 +122,14 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.bound = float(bound)
         if not 0 < self.bound <= 1:
             raise ValueError("PGVB evidence bound must be in (0, 1]")
+        if mode not in ("geometry", "legacy", "tracked", "tracked-stable"):
+            raise ValueError("Mode must be geometry, legacy, tracked or tracked-stable")
+        self.mode = mode
+        self.acquisition = LandmarkAcquisition()
+        self.stable_goal = StableNavigationGoal()
+        self._last_observation_metadata = None
+        self._public_region = None
+        self._neighbor_geometry = []
         self.record = None
         self.inputs = None
         self.instruction_spec = None
@@ -163,6 +176,11 @@ class UnifiedPGVBNamedLandmarkPolicy:
             if typ in ("Building", "Road") and landmark["visual_supported"]
             else None
         )
+        self._public_region = named_union(matched["contours"])
+        self._neighbor_geometry = nearby_public_geometry(
+            public_objects, self._public_region, matched["ids"],
+            radius_m=100., limit=12,
+        )
         self.record = public_static_record(
             episode, transform, catalog,
             max_landmarks=self.args.max_landmarks,
@@ -171,13 +189,21 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.inputs = None
         self.visited_goal_cells = set()
         self.pgvb_calls = 0
+        self.acquisition.reset()
+        self.stable_goal.reset()
+        self._last_observation_metadata = None
         self.unified.reset_episode()
 
     def _observed_inputs(self, observation):
-        return encode_landmark_observation(
+        if self.mode == "geometry":
+            self._last_observation_metadata = None
+            return None, "geometry_only"
+        inputs, reason, metadata = encode_landmark_observation(
             observation, self._landmark, self.record,
-            self.native, self.device,
+            self.native, self.device, return_metadata=True,
         )
+        self._last_observation_metadata = metadata
+        return inputs, reason
 
     @torch.no_grad()
     def _initialize_geometry_inputs(self):
@@ -214,6 +240,10 @@ class UnifiedPGVBNamedLandmarkPolicy:
             torch.cuda.synchronize(self.device)
         start = time.perf_counter()
         observed, reason = self._observed_inputs(state.current_observation)
+        mode = self.mode
+        tracker = getattr(self, "acquisition", None) if mode in ("tracked", "tracked-stable") else None
+        metadata = self._last_observation_metadata
+        labels = metadata["anchor_labels"] if metadata and observed is not None else None
         with torch.autocast(
             "cuda", dtype=torch.bfloat16,
             enabled=self.device.type == "cuda",
@@ -226,20 +256,75 @@ class UnifiedPGVBNamedLandmarkPolicy:
                 node_emb=self.names,
                 observed=observed,
                 bound=self.bound,
+                acquisition=tracker,
+                anchor_labels=labels,
             )
         if self.device.type == "cuda":
             torch.cuda.synchronize(self.device)
         self.pgvb_seconds = time.perf_counter() - start
         base, field = result["geometry_field"], result["field"]
         evidence, audit = result["evidence"], result["audit"]
+        # Keep full RGB-conditioned logits updated every frame. Only the
+        # controller candidate order is stabilized; no new neural branch,
+        # oracle/public target-distance input or Stop threshold change.
+        goal_audit = None
+        if mode == "tracked-stable":
+            field, goal_audit = self.stable_goal.select(
+                field, self.inputs["grid_xy"],
+                tracking=audit.get("acquisition"),
+                visual_active=bool(audit["active"]),
+            )
         if self.audit_callback is not None:
             self.audit_callback(base, field, evidence)
         prediction = A3TrajectoryPolicy.predict_field(self, state, field)
         self.pgvb_calls += int(audit["active"])
         spec = self.instruction_spec
+        tracking = audit.get("acquisition") or {}
+        region = self._public_region
+        pose = state.pose
+        public_distance = (
+            float(region.distance(Point(float(pose[0]), float(pose[1]))))
+            if region is not None else None
+        )
+        nearby = (
+            self._neighbor_geometry
+            if public_distance is not None and public_distance <= 20.
+            else []
+        )
+        near_geometry = dict(
+            public_polygon_distance_m=public_distance,
+            within_20m=(public_distance <= 20.) if public_distance is not None else None,
+            within_50m=(public_distance <= 50.) if public_distance is not None else None,
+            projected_view_fraction=(
+                metadata.get("polygon_view_fraction") if metadata else None
+            ),
+            projected_whole_fraction=(
+                metadata.get("polygon_whole_fraction") if metadata else None
+            ),
+            reliable_positive_patches=(
+                metadata.get("positive_patches") if metadata else 0
+            ),
+            reliable_negative_patches=(
+                metadata.get("negative_patches") if metadata else 0
+            ),
+            projected_RGB_source_support=(
+                metadata.get("source_support") if metadata else None
+            ),
+            projection_is_not_identity_proof=True,
+            # Diagnostic-only public geometry. No neighboring object alters
+            # the named-goal policy, gate or Stop.
+            nearby_objects_after_arrival=nearby,
+            nearby_object_count=len(nearby),
+        )
         prediction.diagnostics.update(
+            positioning_mode=mode,
+            stable_navigation_goal=goal_audit,
+            landmark_acquisition=tracking,
+            landmark_visual_gain=float(tracking.get("visual_gain", 1. if mode == "legacy" else 0.)),
+            landmark_tracking_state=tracking.get("state", "geometry"),
+            near_landmark_geometry=near_geometry,
             policy="UnifiedPGVB-v2 owned geometry+single RGB; frozen controller",
-            pgvb_enabled=True, pgvb_active=audit["active"],
+            pgvb_enabled=(mode != "geometry"), pgvb_active=audit["active"],
             pgvb_reason=reason, pgvb_seconds=self.pgvb_seconds,
             pgvb_delta_max_abs=audit["max_abs_delta"],
             pgvb_covered_cells=audit["covered_cells"],
@@ -253,9 +338,9 @@ class UnifiedPGVBNamedLandmarkPolicy:
             target_head_ready=False,
             language_parser=spec["version"], language_intent=spec["intent"],
             named_public_parts=len(
-                spec["landmark"].get("public_ids", []),
+                spec["landmark"]["public_ids"],
             ),
             language_target_gt_used=False,
-            landmark_visual_supported=getattr(self, "_landmark", None) is not None,
+            landmark_visual_supported=self._landmark is not None,
         )
         return prediction

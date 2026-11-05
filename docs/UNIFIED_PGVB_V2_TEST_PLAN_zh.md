@@ -16,7 +16,7 @@ git fetch origin
 git switch main
 git pull --ff-only origin main
 python -m pip install -e '.[dev,data]' pyyaml
-python -m pytest -q tests/test_unified_instruction.py tests/test_unified_pgvb.py tests/test_unified_pgvb_v2.py tests/test_pgvb_navigation_runtime.py
+python -m pytest -q tests/test_unified_instruction.py tests/test_unified_pgvb.py tests/test_unified_pgvb_v2.py tests/test_pgvb_closedloop_audit.py
 python -m compileall -q graphnav scripts
 ```
 

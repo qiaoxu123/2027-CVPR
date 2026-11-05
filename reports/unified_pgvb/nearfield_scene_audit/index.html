@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>PGVB近场场景与关系审查</title>
+<style>body{font:15px system-ui;margin:20px;background:#f5f6f7}button,select{font:inherit;margin:5px}canvas{width:31%;max-width:500px;background:#222;border:1px solid #bbb}table{border-collapse:collapse;font-size:12px}td,th{border:1px solid #ccc;padding:4px}pre{white-space:pre-wrap;max-height:350px;overflow:auto}#map{width:48%}</style>
+<h1>冻结轨迹近场场景审查</h1><p>地图标签、Polygon投影和弱RGB响应不能等同真实实例识别。未独立核验的准确率均为代理或未知。<a href="REPORT_zh.md">中文报告</a></p>
+<button onclick="move(-1)">上一帧</button><select id="samples" onchange="show(this.selectedIndex)"></select><button onclick="move(1)">下一帧</button>
+<label><input id="overlays" type="checkbox" checked onchange="show(current)">显示公开Polygon</label>
+<h2 id="title"></h2><p id="info"></p>
+<canvas id="raw" width="384" height="384"></canvas><canvas id="projected" width="384" height="384"></canvas><canvas id="scores" width="384" height="384"></canvas>
+<p>左：原始384px RGB；中：公开Polygon投影（青色为指定地标）；右：PGVB原始Patch评分（独立色标，并非实例分割）。</p>
+<canvas id="map" width="600" height="600"></canvas><div id="objectTable"></div>
+<details><summary>公开地图直接与间接关系（不是视觉关系预测）</summary><pre id="relations"></pre></details>
+<details><summary>视觉反事实及证据状态</summary><pre id="evidence"></pre></details>
+<h3>独立核验（本地浏览器保存，不自动当作GT）</h3><select id="review" onchange="saveReview()"><option>unreviewed</option><option>visual_identity_supported</option><option>geometry_only</option><option>insufficient_evidence</option><option>wrong_identity</option><option>unknown</option></select><input id="note" style="width:60%" placeholder="依据、疑点及配准问题" oninput="saveReview()"><button onclick="exportReview()">导出核验JSON</button>
+<script src="atlas_data.js"></script><script>
+let current=0;const colors={Building:'#d55e00',Road:'#f0df20',TrafficRoad:'#f0df20',Footpath:'#f0df20',Bridge:'#f0df20',Parking:'#ff00ee',Car:'#ffffff',HighVegetation:'#35cd45',Ground:'#b4a37f'};
+const sel=document.getElementById('samples');ATLAS.forEach(r=>{let o=document.createElement('option');o.textContent=r.key+' '+r.name;sel.append(o)});
+function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')}
+function line(ctx,points,color,width=1){ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();ctx.strokeStyle=color;ctx.lineWidth=width;ctx.stroke()}
+function move(d){show(Math.max(0,Math.min(ATLAS.length-1,current+d)))}
+function show(i){current=i;sel.selectedIndex=i;const r=ATLAS[i];r.map=MAPS[r.map_index];document.getElementById('title').textContent=r.key+' '+r.name;document.getElementById('info').textContent='World pose '+JSON.stringify(r.pose)+' | AGL '+r.height.toFixed(1)+'m | '+r.tracking+' | '+r.status;
+let image=new Image();image.onload=()=>{if(i!==current)return;['raw','projected','scores'].forEach(id=>{let ctx=document.getElementById(id).getContext('2d');ctx.clearRect(0,0,384,384);ctx.drawImage(image,0,0,384,384)});let c=document.getElementById('projected').getContext('2d');if(document.getElementById('overlays').checked)r.projections.forEach(p=>line(c,p.px,p.id==='__anchor__'?'cyan':(colors[p.type]||'#999'),p.id==='__anchor__'?2:1));
+let sc=document.getElementById('scores').getContext('2d');let values=r.scores.map(p=>p[2]);let lo=Math.min(...values),hi=Math.max(...values);r.scores.forEach(p=>{let q=(p[2]-lo)/(hi-lo||1);sc.fillStyle=`rgba(${Math.round(255*q)},0,${Math.round(255*(1-q))},.55)`;sc.fillRect(p[0]-4,p[1]-4,8,8)})};image.src='frames/'+r.key+'.png';
+let map=document.getElementById('map').getContext('2d');map.clearRect(0,0,600,600);map.fillStyle='#222';map.fillRect(0,0,600,600);let all=r.map.anchor_contours.flat();let minx=Math.min(...all.map(p=>p[0])),maxx=Math.max(...all.map(p=>p[0])),miny=Math.min(...all.map(p=>p[1])),maxy=Math.max(...all.map(p=>p[1]));let span=Math.max(maxx-minx,maxy-miny)+200;let cx=(minx+maxx)/2,cy=(miny+maxy)/2;let tr=p=>[(p[0]-cx)/span*600+300,300-(p[1]-cy)/span*600];r.map.neighbors.forEach(o=>line(map,o.contour.map(tr),colors[o.type]||'#777'));r.map.anchor_contours.forEach(c=>line(map,c.map(tr),'cyan',3));line(map,r.footprint.map(tr),'white',2);let pos=tr(r.pose);map.fillStyle='red';map.beginPath();map.arc(...pos,4,0,2*Math.PI);map.fill();
+let objects=r.objects.filter(o=>o.polygon_pixels>0);document.getElementById('objectTable').innerHTML='<h3>投影进入当前RGB的对象（'+objects.length+'）</h3><table><tr><th>ID/名称</th><th>地图类别</th><th>RGB零样本类别</th><th>有效像素/Patch</th><th>到Anchor距离(m)</th></tr>'+objects.map(o=>'<tr><td>'+esc(o.public_id+' '+o.name)+'</td><td>'+esc(o.map_type)+'</td><td>'+esc(o.predicted_class||'unknown: '+o.status)+'</td><td>'+o.supported_pixels+'/'+o.native_patch_count+'</td><td>'+o.anchor_distance_m.toFixed(2)+'</td></tr>').join('')+'</table>';
+document.getElementById('relations').textContent=JSON.stringify({building_nearest_road:r.map.building_nearest_road,car_inside_parking:r.map.car_inside_parking_chains,road_enclosures:r.map.road_enclosures},null,2);document.getElementById('evidence').textContent=JSON.stringify(r.anchor_audit,null,2);let rev=JSON.parse(localStorage.getItem('nearfield:'+r.key)||'{}');document.getElementById('review').value=rev.status||'unreviewed';document.getElementById('note').value=rev.note||'';
+}
+function saveReview(){localStorage.setItem('nearfield:'+ATLAS[current].key,JSON.stringify({key:ATLAS[current].key,status:document.getElementById('review').value,note:document.getElementById('note').value,time:new Date().toISOString(),source:'browser_review_not_automatically_verified_GT'}))}
+function exportReview(){let data=ATLAS.map(r=>JSON.parse(localStorage.getItem('nearfield:'+r.key)||JSON.stringify({key:r.key,status:'unreviewed'})));let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='nearfield_reviews.json';a.click()}
+show(0);
+</script>

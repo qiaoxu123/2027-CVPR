@@ -1,0 +1,44 @@
+{
+  "state_metrics": {
+    "Geometry": {
+      "NE": 37.814847899973394,
+      "R20": 0.4625,
+      "mass20": 0.24640604797750712
+    },
+    "Relation": {
+      "NE": 40.79290673732758,
+      "R20": 0.425,
+      "mass20": 0.2464654139446793,
+      "corrected_vs_Geometry": 6,
+      "damaged_vs_Geometry": 15
+    },
+    "RGB": {
+      "NE": 40.453232601781686,
+      "R20": 0.42916666666666664,
+      "mass20": 0.2478085136273876,
+      "corrected_vs_Relation": 5,
+      "damaged_vs_Relation": 4
+    }
+  },
+  "original_geometry": {
+    "R20": 0.4625,
+    "NE": 43.48679003119469
+  },
+  "RGB_controls": {
+    "zero": {
+      "R20": 0.4083333333333333,
+      "NE": 41.56920301715533
+    },
+    "shuffled": {
+      "R20": 0.44166666666666665,
+      "NE": 40.84629931797584
+    }
+  },
+  "queries": 80,
+  "states": 240,
+  "actual_RGB_states": 221,
+  "head_inference_ms_per_state": 0.8058684811814977,
+  "foundation_encoder_cost_included": false,
+  "checkpoint_sha256": "aa359894a172c38b024aa5ef4e89caeecc8a496d723320cea14862f0eaaf61e9",
+  "evaluation_scope": "TRAIN-map-held-out for new fitting; historical Geometry already pretrained on TRAIN"
+}

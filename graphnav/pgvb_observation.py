@@ -14,13 +14,34 @@ from .observed_patch_scales import masked_native_pool
 
 @torch.no_grad()
 def encode_landmark_observation(
-    observation, landmark, record, native, device,
+    observation, landmark, record, native, device, *, return_metadata=False,
+    allow_offscreen_anchor=False,
 ):
+    # Existing legacy clients continue to receive two values. UnifiedPGVB
+    # optionally receives public projection metadata for monitoring/tracking.
+    def pack(inputs, reason, metadata=None):
+        return (inputs, reason, metadata) if return_metadata else (inputs, reason)
+
     if landmark is None:
-        return None, "unsupported_or_unresolved_name"
+        return pack(None, "unsupported_or_unresolved_name")
     anchor = local_landmark_anchor(landmark["contours"], observation)
-    if not anchor["pixel_usable"] or anchor["positive_patches"] < 2:
-        return None, "no_supported_local_anchor"
+    metadata = None
+    if return_metadata:
+        metadata = dict(
+            anchor_labels=torch.as_tensor(anchor["labels"], device=device,
+                                          dtype=torch.int8)[None],
+            positive_patches=int(anchor["positive_patches"]),
+            negative_patches=int(anchor["negative_patches"]),
+            polygon_view_fraction=float(anchor["view_fraction"]),
+            polygon_whole_fraction=float(anchor["whole_fraction"]),
+            source_support=float(anchor["local_source_support"]),
+            visible_pixels=int(anchor["stable_valid_pixels"]),
+            registration_only=True,
+            actual_visibility=anchor["actual_visibility"],
+    )
+    if (not allow_offscreen_anchor and
+            (not anchor["pixel_usable"] or anchor["positive_patches"] < 2)):
+        return pack(None, "no_supported_local_anchor", metadata)
     dense = native_dense_regions(observation)
     sparse = sparse_view(dense)
     valid = (
@@ -39,7 +60,7 @@ def encode_landmark_observation(
         & (local_uv <= 1).all(-1)
     )
     if not valid.any():
-        return None, "no_valid_visual_patches"
+        return pack(None, "no_valid_visual_patches", metadata)
     bgr = np.asarray(observation["bgr"])
     batch = native.processor(
         images=[cv2.cvtColor(bgr, cv2.COLOR_BGR2RGB)],
@@ -70,10 +91,14 @@ def encode_landmark_observation(
         features = pooled.reshape(len(valid), 3, native.dimension)
         name_text = native.texts([landmark["name"]]).detach()
         type_text = native.texts([landmark["typ"]]).detach()
-        polygon = local_anchor_tokens(
-            landmark["contours"], observation["footprint_world"],
-        )
-    return (
+        if allow_offscreen_anchor and anchor['local_geometry'].is_empty:
+            from .polygon_guided_visual import polygon_shape_tokens
+            polygon = polygon_shape_tokens(landmark['contours'], observation['footprint_world'])
+        else:
+            polygon = local_anchor_tokens(
+                landmark["contours"], observation["footprint_world"],
+            )
+    return pack(
         dict(
             local_uv=torch.from_numpy(local_uv)[None].to(device),
             image_features=features[None],
@@ -82,5 +107,5 @@ def encode_landmark_observation(
             polygon_tokens=torch.from_numpy(polygon)[None].to(device),
             valid=torch.from_numpy(valid)[None].to(device),
         ),
-        "available",
+        "available", metadata,
     )

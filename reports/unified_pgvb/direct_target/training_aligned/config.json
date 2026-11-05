@@ -1,0 +1,30 @@
+{
+  "seed": 42,
+  "epochs": 5,
+  "batch_size": 8,
+  "fit_queries": 493,
+  "fit_states": 1477,
+  "dev_queries": 80,
+  "dev_states": 240,
+  "source_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "inventory_sha256": "ef279cb21be8c62641697ca678ad0eefb05ece0edd0ffedfd6561f07995dd7a9",
+  "label_sha256": "687c7366324dc4975d4990f1efb0dc9a38df746ddbe8e16101ab69be3cdc958b",
+  "cache_manifest_sha256": "aa0a71ef547f0a4301df4c8fe67ce45ff137eda283e0464f057b4aa99a42336d",
+  "code_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/train_direct_target.py": "d6fcfa61dd7af46b36c5e8a292f932dbab16be7f79cbbb3dcf24a1c5e7d02bb1",
+    "graphnav/direct_target.py": "9cdb519ae03955bfb34f03ecfd4ca46757a9a6bffbaf0847d8711e5f00c2d134",
+    "graphnav/direct_target_data.py": "36035a4326f853a5b49209b4aa40a89006c2768e6a2e395ac78b4157d73ce4d6",
+    "graphnav/unified_pgvb.py": "211e5a5018fa785e2682c0082bc6ed614fbe6bb29aba0c07ffca124682408989"
+  },
+  "trainable_parameters": 1005778,
+  "foundation_encoders": "frozen cached BERT/SigLIP2",
+  "trainable_core": [
+    "integrated Geometry",
+    "PGVB",
+    "DirectTargetHead"
+  ],
+  "controller": "frozen historical Stage1",
+  "losses": "CE15m(Geometry)+CE15m(Relation)+CE15m(RGB); no pixel GT",
+  "precision": "CUDA BF16 with FP32 losses",
+  "gradient_clip": 5.0
+}

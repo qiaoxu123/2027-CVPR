@@ -152,10 +152,8 @@ def test_runtime_refuses_target_reference_confusion_before_geometry(monkeypatch)
 
 
 def test_runtime_has_no_legacy_stage1_or_parallel_pgvb_inheritance():
-    from graphnav.stage1_runtime import GraphNavStage1Policy
-    from graphnav.pgvb_navigation_runtime import PGVBNamedLandmarkPolicy
-    assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, GraphNavStage1Policy)
-    assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, PGVBNamedLandmarkPolicy)
+    # Unified runtime uses no legacy policy inheritance or external PGVB hooks.
+    assert UnifiedPGVBNamedLandmarkPolicy.__bases__ == (object,)
     assert "_pgvb_forward" not in UnifiedPGVBNamedLandmarkPolicy.__dict__
     assert "_observed_inputs" in UnifiedPGVBNamedLandmarkPolicy.__dict__
 
@@ -188,9 +186,15 @@ def test_mixed_type_named_goal_runtime_uses_geometry_only(monkeypatch):
     )
     policy = object.__new__(runtime.UnifiedPGVBNamedLandmarkPolicy)
     policy.args = SimpleNamespace(max_landmarks=16)
+    policy.mode = "tracked-stable"
     policy.native = SimpleNamespace()
     policy.device = torch.device("cpu")
+    policy.mode = "legacy"
     policy.unified = SimpleNamespace(reset_episode=lambda: None)
+    # Production initializes both trackers; bypassing __init__ in this unit test
+    # must explicitly provide their episode-reset interfaces.
+    policy.acquisition = SimpleNamespace(reset=lambda: None)
+    policy.stable_goal = SimpleNamespace(reset=lambda: None)
     episode = SimpleNamespace(
         instruction="Navigate to Victoria Street.",
         map_name="toy",
