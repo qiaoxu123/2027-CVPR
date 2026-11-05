@@ -70,7 +70,7 @@ def test_gradients_flow_to_relation_weights():
     assert head.score.weight.grad.abs().sum() > 0
 
 
-def test_zero_or_missing_text_or_anchor_rejected():
+def test_missing_text_rejected_but_empty_public_anchors_are_supported():
     head = _head()
     data = list(_inputs())
     data[2] = torch.zeros_like(data[2])
@@ -78,8 +78,11 @@ def test_zero_or_missing_text_or_anchor_rejected():
         head(*data)
     data = list(_inputs())
     data[5] = torch.zeros_like(data[5])
-    with pytest.raises(ValueError, match="at least one"):
-        head(*data)
+    assert torch.equal(head(*data), torch.zeros(2, 9))
+    data[3] = data[3][:, :0]
+    data[4] = data[4][:, :0]
+    data[5] = data[5][:, :0]
+    assert torch.equal(head(*data), torch.zeros(2, 9))
 
 
 def test_geometry_shape_guard():
