@@ -87,13 +87,6 @@ def main():
     torch.backends.cuda.matmul.allow_tf32 = False
 
     a.output.mkdir(parents=True, exist_ok=True)
-    dataset, loader = full_loader(a.train_jsonl, None if False else
-        argparse.Namespace(**dict(
-            max_landmarks=16, max_roads=0, max_relations=8,
-            prior_sigma_m=25.0, rule_sigma_m=25.0,
-            batch_size=a.batch_size
-        )), shuffle=True)
-
     source_sha = dict(
         stage1=file_sha256(a.stage1),
         original_v2=file_sha256(a.original_v2),
@@ -116,9 +109,7 @@ def main():
         prior_sigma_m=float(geometry_args["prior_sigma_m"]),
         rule_sigma_m=float(geometry_args["rule_sigma_m"]),
     )
-    if (actual.max_landmarks, actual.max_roads, actual.max_relations,
-            actual.prior_sigma_m, actual.rule_sigma_m) != (16, 0, 8, 25.0, 25.0):
-        dataset, loader = full_loader(a.train_jsonl, actual, shuffle=True)
+    dataset, loader = full_loader(a.train_jsonl, actual, shuffle=True)
     if len(dataset) < 1:
         raise ValueError("Empty full CityNav TRAIN dataset")
     # Every source row stays in the denominator; no direct-relation parser.
@@ -163,7 +154,9 @@ def main():
         torch.set_rng_state(previous["torch_rng"])
         torch.cuda.set_rng_state_all(previous["cuda_rng"])
         random.setstate(previous["python_rng"])
-        np.random.set_state(previous["numpy_rng"])
+        n = previous["numpy_rng"]
+        np.random.set_state((n[0], np.asarray(n[1], dtype=np.uint32),
+                             n[2], n[3], n[4]))
     bert = FrozenBERTTokens(
         geometry_args["text_backbone"], device="cuda",
         max_length=int(geometry_args["max_text_length"]),
@@ -219,7 +212,12 @@ def main():
             completed_epochs=epoch+1, optimizer=optimizer.state_dict(),
             torch_rng=torch.get_rng_state(),
             cuda_rng=torch.cuda.get_rng_state_all(),
-            python_rng=random.getstate(), numpy_rng=np.random.get_state(),
+            python_rng=random.getstate(),
+            numpy_rng=(
+                np.random.get_state()[0],
+                np.random.get_state()[1].tolist(),
+                *np.random.get_state()[2:],
+            ),
             history=history, smoke=bool(a.max_batches),
         )
         atomic_save(ckpt, a.output/"last.pt")
