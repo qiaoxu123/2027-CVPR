@@ -170,6 +170,7 @@ def main():
             format=FORMAT,model=model.state_dict(),
             config=source["config"],source_sha256=source["source_sha256"],
             completed_epochs=source["completed_epochs"],
+            planned_epochs=source["planned_epochs"],
             visual_epochs=epoch+1,visual_history=history,
             visual_optimizer=optimizer.state_dict(),
             torch_rng=torch.get_rng_state(),
