@@ -85,3 +85,60 @@ def test_public_language_selection_rejects_indirect_and_relative():
     assert not select_direct_relations(p,obj)['relations']
     p['target_GT_used']=True
     with pytest.raises(ValueError): select_direct_relations(p,obj)
+
+
+def test_rgb_admission_requires_current_confirmed_discrimination():
+    from graphnav.direct_target_runtime import admissible_target_rgb
+
+    observed = {"valid": torch.ones((1, 4), dtype=torch.bool)}
+    metadata = {"registration_only": True}
+    good = dict(state="tracking", reason="rgb_discriminative",
+                positive_patches=3, negative_patches=3, visual_gain=1.0)
+    assert admissible_target_rgb(good, metadata, observed)[0]
+    for change in (
+        {"state": "candidate"},
+        {"state": "coasting"},
+        {"visual_gain": 0.0},
+        {"positive_patches": 1},
+        {"reason": "weak_rgb_discrimination"},
+    ):
+        assert not admissible_target_rgb({**good, **change}, metadata, observed)[0]
+    assert not admissible_target_rgb(good, metadata, None)[0]
+    assert not admissible_target_rgb(good, None, observed)[0]
+    with pytest.raises(ValueError, match="provenance"):
+        admissible_target_rgb(good, {"registration_only": False}, observed)
+
+
+def test_direct_runtime_never_silently_selects_first_of_multiple_anchors():
+    from graphnav.direct_target_runtime import UnifiedPGVBDirectTargetPolicy
+
+    # Lightweight instance bypasses checkpoint/GPU setup and exercises the
+    # public episode binding contract.
+    from types import SimpleNamespace
+    policy = object.__new__(UnifiedPGVBDirectTargetPolicy)
+    policy.args = SimpleNamespace(max_landmarks=16)
+    policy.acquisition = SimpleNamespace(reset=lambda: None)
+    policy.stable_goal = SimpleNamespace(reset=lambda: None)
+    policy.unified = SimpleNamespace(reset_episode=lambda: None)
+
+    import graphnav.direct_target_runtime as runtime
+    original = runtime.public_static_record
+    runtime.public_static_record = lambda *args, **kwargs: {"instruction": "Go"}
+    try:
+        episode = SimpleNamespace(instruction="Go", map_name="A")
+        def anchor(ids):
+            return dict(landmark=dict(name="One", type="Building", public_ids=ids),
+                        contours=[[[0,0],[1,0],[1,1],[0,1]]])
+        base = dict(instruction="Go", map_name="A", target_GT_used=False,
+                    structured={}, world_bounds=[0,0,2,2], start_pose=[0,0,0,0])
+        policy.set_direct_episode(episode, None, None, dict(base, anchors=[anchor(["1"])]))
+        assert policy._landmark is not None
+        policy.set_direct_episode(episode, None, None,
+                                  dict(base, anchors=[anchor(["1"]), anchor(["2"])]))
+        assert policy._landmark is None
+        assert policy._visual_anchor_reason == "ambiguous_multi_anchor_or_polygon"
+        policy.set_direct_episode(episode, None, None,
+                                  dict(base, anchors=[anchor(["1", "2"])]))
+        assert policy._landmark is None
+    finally:
+        runtime.public_static_record = original
