@@ -288,6 +288,7 @@ def main():
         print(json.dumps(summary),flush=True)
         torch.save(dict(epoch=epoch+1,model=model.state_dict(),
                         optimizer=optimizer.state_dict(),manifest=manifest,
+                        bert_direction_embeddings=bert_vectors.detach().cpu(),
                         history=history),args.output/"last.pt.tmp")
         (args.output/"last.pt.tmp").replace(args.output/"last.pt")
         (args.output/"history.json").write_text(json.dumps(history,indent=2))
