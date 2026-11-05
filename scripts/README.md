@@ -1,8 +1,18 @@
-# GraphNav 脚本入口（main）
+# GraphNav / UnifiedPGVB 脚本入口
 
 日常使用优先从本文件列出的入口开始。其余 `audit_*`、`diagnose_*`、`run_*_queue` 等脚本属于历史实验或专项诊断；不是默认模型配置。
 
-## 推荐主线
+## 当前主线：UnifiedPGVB-v2（实验中）
+
+| 任务 | 入口 | 说明 |
+|---|---|---|
+| 统一模型迁移 | `scripts/build_unified_pgvb_v2.py` | 集成已验证Geometry/PGVB权重；不等于已完成联合训练 |
+| 具名地标闭环代理评测 | `scripts/run_unified_pgvb_landmark_closedloop.py` | 四模式配对对照；**不等于CityNav真实目标SR** |
+| 语言解析审计 | `scripts/audit_unified_language.py` | 直接关系仅为诊断，未经训练的目标Head禁止正式推理 |
+
+具名地标闭环默认只保留逐步指标和JSONL，不写每步PNG/NPZ。需要RGB、Belief和轨迹可视化时，显式添加 `--capture-decisions`；采集模式进入实验指纹，同一输出目录不能混用两种模式。原64任务集合、Stop及成功半径约定不变。
+
+## GraphNav-V1基线及历史复现
 
 | 任务 | 入口 | 说明 |
 |---|---|---|

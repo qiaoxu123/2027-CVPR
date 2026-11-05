@@ -1,6 +1,6 @@
 # UnifiedPGVB-v2：几何、语言与单视觉Belief统一网络
 
-此文档记录V2真实代码。当前完成结构整合和权重迁移工具，不代表已重新训练或取得新SR。
+此文档记录V2架构与权重迁移。实验分支已产生**具名Polygon导航代理**的真实闭环报告，但尚未完成针对CityNav原始直接关系目标的完整联合训练及目标SR验证。代理成绩不能混同于真实目标SR。
 
 ## 架构：只有一个负责GoalField的网络
 
@@ -50,12 +50,12 @@ python -m scripts.run_unified_pgvb_landmark_closedloop \
   --max-new-tasks 2
 ~~~
 
-Smoke通过后追加--resume完成同一64条固定诊断。需要记录单次编码次数、端到端每决策耗时、Geometry与最终Belief差、Goal跳变、Stop以及任务SR/OSR/NE。64条是公开地标Polygon任务，不等于CityNav原始Target SR。不得复制历史E4的成绩作为新版本测试结果。
+Smoke通过后追加--resume完成同一64条固定诊断。默认仅记录逐步统计和JSONL，**不逐帧保存RGB及Belief数组**；如需详细可视化与证据回放，请在新输出目录的命令中显式加`--capture-decisions`。采集模式写入指纹，禁止在同一输出目录混合续跑。需要记录单次编码次数、端到端每决策耗时、Geometry与最终Belief差、Goal跳变、Stop以及任务SR/OSR/NE。64条是公开地标Polygon任务，不等于CityNav原始Target SR。不得复制历史E4的成绩作为新版本测试结果。
 
 ## 语言与训练边界
 
 现有GT-free结构化Parser支持简单具名地标导航（如Navigate to The Food Warehouse.）及复杂指令的离线关系分析；复杂指令尚不可进入未训练目标Head，不能将参考地标偷换成目标。
 
-当前未完成：完整TRAIN复训、所有地标的完整SR、真实方向关系Belief导航与目标外观特征训练。建议随后基于统一V2网络训练PGVB，冻结Geometry和控制器以加快训练，确认地标和方向关系后再按需联合微调Geometry。始终禁止真实目标GT、未来观察或私有实例身份进入推理。
+当前未完成：完整TRAIN目标任务复训、真实方向关系Belief导航、目标外观Head训练与全量真实目标SR。下一阶段应先审查直接关系语言解析及关系监督，确认数据与Loss无GT泄漏后，以seed=42进行Geometry、关系Belief和PGVB核心网络的联合训练（不冻结核心网络）；冻结原Trajectory/Stop仅用于保持本轮对照一致。不得仅修改`target_ready`开关就启用未经训练的Head。始终禁止真实目标GT、未来观察或私有实例身份进入推理。
 
 历史E2/E4代码及Checkpoint保持不变，V2独立入口不直接改main。
