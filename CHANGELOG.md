@@ -1,3 +1,16 @@
+## [Privileged complete-landmark RGB experiment] - 2026-11-05
+
+### Features
+- Add isolated all-TRAIN public-Polygon crop inventory, frozen SigLIP2 feature cache and multiscale PGVB visual training/evaluation.
+- Separate privileged checkpoints, held-out city predictions, RGB controls and target labels from ordinary navigation.
+
+### Design Rationale
+- Distinguish coverage and sampling density from visual evidence; average repeated orthophoto features on the existing world grid.
+
+### Notes & Caveats
+- Source orthophoto crops stay on the server pending data-license confirmation. Position metrics are not instance recognition accuracy.
+- Frozen Geometry/Relation already saw TRAIN; held-out maps isolate only new visual fitting. No controller or Stop changes.
+
 ## [Full-relation TRAIN execution and evaluation] - 2026-11-05
 
 ### Features

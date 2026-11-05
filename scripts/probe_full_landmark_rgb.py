@@ -77,7 +77,7 @@ def model_field(runtime, observed=None):
         point = runtime.world[0, top].detach().cpu().numpy().astype(float)
         return dict(
             top1_cell=top, xy=[float(point[0]), float(point[1])],
-            margin_top2=float(scores.topk(2, -1).values.diff(-1)[0, 0].abs()),
+            margin_top2=float(scores.topk(2, -1).values.diff(dim=-1)[0, 0].abs()),
             max_logit=float(scores.max()),
         )
 
@@ -132,7 +132,7 @@ def main():
     for item in ("sbf-source","config","data-root","checkpoint","unified-v2",
                  "relation-checkpoint","output"):
         p.add_argument("--"+item, type=Path, required=True)
-    p.add_argument("--split", choices=("val_seen",), default="val_seen")
+    p.add_argument("--split", choices=("train_seen","val_seen"), default="train_seen")
     p.add_argument("--max-episodes", type=int, default=None,
                    help="Optional smoke ONLY; omit for full 2470 episodes")
     p.add_argument("--resume", action="store_true")
@@ -201,8 +201,8 @@ def main():
             public=PublicEpisode(map_name=e.map_name,
                                  instruction=e.instruction,
                                  start_pose=e.start_pose.copy(),
-                                 references=tuple(e.references),
-                                 reference_names=tuple(e.reference_names))
+                                 references=tuple(catalog.referenced_landmarks(e)),
+                                 reference_names=tuple(catalog.referenced_landmark_names(e)))
             runtime.set_episode(public,builder.transform(e.map_name),catalog)
             runtime._initialize_geometry_inputs()
             # Static field: no source map RGB access.
