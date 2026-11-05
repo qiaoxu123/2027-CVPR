@@ -21,9 +21,10 @@ def test_pack_field_is_detached_from_live_goalfield():
         ),
         dense_context=dense,
     )
+    before = field.belief_logits.clone()
     packed = pack_field(field)
     packed["logits"][0] = 99.
-    assert torch.equal(field.belief_logits, logits)
+    assert torch.equal(field.belief_logits, before)
     assert packed["candidate_context"].shape == (2, 2)
 
 
