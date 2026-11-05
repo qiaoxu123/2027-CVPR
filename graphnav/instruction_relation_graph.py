@@ -160,8 +160,8 @@ def compile_relation_graph(parsed: dict, public_objects: dict,
         ids = list(dict.fromkeys(ids))
         geo, geovalid = _public_geometry(ids, public_objects, world_bounds)
         role = ("target" if item["id"] == target
-                else "public_landmark" if ids or item.get("role")=="landmark"
-                else "intermediate" if item.get("role")=="reference_object"
+                else "public_landmark" if ids or item.get("role") in ("landmark","public_landmark")
+                else "intermediate" if item.get("role") in ("reference_object","intermediate")
                 else "reference_object")
         target_info = parsed.get("target") or {}
         attrs = list(item.get("attributes", []))
