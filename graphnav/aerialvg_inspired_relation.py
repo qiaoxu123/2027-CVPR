@@ -66,8 +66,16 @@ class CandidateAnchorRelation(nn.Module):
                 or dense_context.shape[0] != tokens.shape[0]
                 or token_mask.shape != tokens.shape[:2]):
             raise ValueError("Misaligned CityNav candidate/anchor/text tensors")
-        if not token_mask.any(-1).all() or not anchor_valid.any(-1).all():
-            raise ValueError("At least one text token and one public anchor required")
+        if not token_mask.any(-1).all():
+            raise ValueError("At least one text token required")
+        # Empty public references are legal CityNav examples. Their relation
+        # residual stays exactly zero; they remain in training/eval denominator.
+        no_anchor = ~anchor_valid.bool().any(-1)
+        if anchor_valid.shape[1] == 0:
+            return dense_context.new_zeros(dense_context.shape[:2], dtype=torch.float32)
+        if no_anchor.any():
+            anchor_valid = anchor_valid.clone()
+            anchor_valid[no_anchor, 0] = True
         if (not torch.isfinite(dense_context).all()
                 or not torch.isfinite(anchor_geom).all()
                 or not torch.isfinite(tokens).all()):
@@ -124,7 +132,8 @@ class CandidateAnchorRelation(nn.Module):
             scores = self.score(pairs).squeeze(-1)
             delta = (weights * scores).sum(-1).reshape(batch, n)
             deltas.append(delta)
-        return self.max_logit_delta * torch.tanh(torch.cat(deltas, -1))
+        residual = self.max_logit_delta * torch.tanh(torch.cat(deltas, -1))
+        return residual.masked_fill(no_anchor[:, None], 0.0)
 
 
 def apply_relation_residual(geometry_logits, relation_delta):
