@@ -11,7 +11,7 @@ from graphnav.unified_instruction_graph_runtime import (
 
 
 def test_public_ids_restored_only_in_graph_sidecar():
-    raw=dict("cambridge_block_1")
+    raw={}
     raw["42"]=dict(name="One Stop",object_type="Building",
                    contour=[[0,0],[20,0],[20,20],[0,20]])
     catalog=SimpleNamespace(objects={"cambridge_block_1":raw})
