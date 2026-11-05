@@ -61,7 +61,8 @@ class UnifiedPGVB(nn.Module):
         self.full_relation_ready = False
 
     def forward_full_relation(self, *, static_inputs, tokens, token_mask, node_emb,
-                              observed=None, acquisition=None, anchor_labels=None):
+                              observed=None, acquisition=None, anchor_labels=None,
+                              relation_enabled=True):
         """GT-free path for ALL CityNav instructions; parsed one-hop links optional.
 
         Every instruction already has full BERT tokens and every public entity
@@ -87,10 +88,10 @@ class UnifiedPGVB(nn.Module):
         # The whole original BERT instruction supplies relation semantics.
         # Predicate IDs are an optional cue, not an eligibility filter.
         predicates = torch.zeros_like(valid, dtype=torch.long)
-        delta = self.full_relation(
+        delta = (self.full_relation(
             base.dense_context, tokens, token_mask,
             references, predicates, valid,
-        )
+        ) if relation_enabled else torch.zeros_like(base.belief_logits, dtype=torch.float32))
         logits = visual.belief_logits.float() + delta.float()
         relation_logits = base.belief_logits.float() + delta.float()
         def make_field(scores, support=None):
