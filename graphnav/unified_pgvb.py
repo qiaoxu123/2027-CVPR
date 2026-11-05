@@ -16,7 +16,7 @@ from .stage1 import preserved_proposal_order
 
 
 class UnifiedPGVB(nn.Module):
-    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None):
+    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None, direct_target=False):
         super().__init__()
         self.geometry = geometry
         self._geometry_cache = None
@@ -49,6 +49,37 @@ class UnifiedPGVB(nn.Module):
         self.joint_ready = False
         self.direction_ready = False
         self.target_ready = False
+        if direct_target:
+            from .direct_target import DirectTargetHead
+            self.direct_target = DirectTargetHead(hidden=geometry_hidden, visual_dim=dimension)
+        self.direct_target_ready = False
+
+    def forward_direct_target(self, *, static_inputs, tokens, token_mask, node_emb,
+                              relation_geometry, relation_ids, relation_valid,
+                              observed=None, target_text=None):
+        """Explicit trained target path. The named-landmark path is unchanged."""
+        if not hasattr(self, 'direct_target'):
+            raise RuntimeError('No direct-target head installed')
+        if not self.training and not self.direct_target_ready:
+            raise RuntimeError('Untrained direct-target head cannot run inference')
+        base = self._geometry_field(static_inputs, tokens, token_mask, node_emb)
+        head = self.direct_target
+        context = head.relation_context(relation_geometry, relation_ids, relation_valid)
+        delta = head.relation(base.dense_context, tokens, token_mask,
+                              relation_geometry, relation_ids, relation_valid)
+        related = base.belief_logits.float()+delta.float()
+        full, coverage = head.visual(related, observed, self.pgvb, target_text,
+                                     head.language(tokens, token_mask), context)
+        def field(logits, support=None):
+            # Unlike the historical preserved proposal list, this target path
+            # must admit newly corrected target cells into the candidate set.
+            ids = logits.topk(base.candidate_ids.shape[-1], dim=-1).indices
+            return GoalField(belief_logits=logits, candidate_ids=ids,
+                candidate_xy=static_inputs['grid_xy'].gather(1, ids[..., None].expand(-1,-1,2)),
+                candidate_context=base.dense_context.gather(1, ids[...,None].expand(-1,-1,base.dense_context.shape[-1])),
+                dense_context=base.dense_context, visual_coverage=support)
+        return dict(geometry_field=base, relation_field=field(related),
+                    field=field(full, coverage), coverage=coverage)
 
     def reset_episode(self):
         """Never reuse cached map/word geometry across different episodes."""
