@@ -128,7 +128,7 @@ def main():
         model.geometry.eval()
         model.full_relation.eval()
         model.pgvb.train()
-        total = used = 0
+        total = used = optimized = inactive = 0
         for off in range(0,len(rows),a.batch_size):
             group = rows[off:off+a.batch_size]
             inp = batch_inputs(group,device="cuda",visual=True)
@@ -137,9 +137,10 @@ def main():
                 token_mask=inp["token_mask"], node_emb=inp["node_emb"],
             )
             with torch.autocast("cuda",enabled=False):
-                visual = model.forward_full_relation(
+                visual_result = model.forward_full_relation(
                     **inputs,observed=inp["observed"],
-                )["field"].belief_logits.float()
+                )
+                visual = visual_result["field"].belief_logits.float()
                 with torch.no_grad():
                     static = model.forward_full_relation(**inputs)["field"].belief_logits.float()
                 targets = target_norm(group,"cuda")
@@ -147,15 +148,23 @@ def main():
                 loss = cross_entropy_goal(visual,targets) + 0.1 * F.kl_div(
                     F.log_softmax(visual,-1),F.softmax(static,-1),
                     reduction="batchmean")
+            used += len(group)
+            if not visual_result["audit"]["active"] or not loss.requires_grad:
+                inactive += len(group)
+                continue
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.pgvb.parameters(),5.)
             optimizer.step()
-            used+=len(group);total+=float(loss.detach())*len(group)
+            optimized += len(group)
+            total += float(loss.detach())*len(group)
         if used != len(rows):
             raise RuntimeError("RGB cache sample coverage incomplete")
+        if not optimized:
+            raise RuntimeError("No active differentiable RGB evidence; stop visual fine-tuning")
         report=dict(epoch=epoch+1,train_rgb_frames=used,
-                    loss=total/used,seconds=time.perf_counter()-start)
+                    optimized_rgb_frames=optimized, inactive_rgb_frames=inactive,
+                    loss=total/optimized,seconds=time.perf_counter()-start)
         history.append(report)
         output=dict(
             format=FORMAT,model=model.state_dict(),
