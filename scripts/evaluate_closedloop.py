@@ -68,6 +68,7 @@ def main():
     parser.add_argument('--split', choices=['val_seen', 'val_unseen','test_unseen'], required=True)
     parser.add_argument('--frozen-final-candidate',help='Completed Seen-selected frozen candidate, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
+    parser.add_argument('--diagnostic-pilot',action='store_true',help='Explicit Val-Seen subset diagnostic; never an official full SR result')
     parser.add_argument('--output', required=True)
     parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1','unified-relation'], default='sbfnav')
     parser.add_argument('--stage1-visual-control',choices=['real','zero','shuffle','no-belief'],default='real')
@@ -119,9 +120,11 @@ def main():
             raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
     if args.instruction_mode!='native' and (args.model!='unified-relation' or not args.public_objects or args.relation_visual_control!='off'):
         raise ValueError('PR23 text adaptation requires unified-relation, public catalog and visual off')
+    if args.diagnostic_pilot and args.model!='unified-relation':
+        raise ValueError('Diagnostic pilot scope is defined for unified-relation only')
     if args.model == 'unified-relation':
-        if args.split != 'val_seen' or args.max_episodes is not None:
-            raise ValueError('Unified-relation requires unfiltered FULL val_seen')
+        from graphnav.evaluation_scope import validate_unified_scope
+        validate_unified_scope(args.split,args.max_episodes,args.diagnostic_pilot)
     if args.active_observation and args.model != 'target-evidence':
         raise ValueError('active observation requires the target-evidence policy')
     if args.joint_active_observation and args.model!='joint-active':
@@ -159,6 +162,7 @@ def main():
                        relation_runtime_code=sha(Path('graphnav/unified_full_relation_runtime.py')),
                        config=sha(args.config))
         if args.instruction_mode!='native':sources.update(instruction_mode=args.instruction_mode,public_catalog=sha(args.public_objects),text_adapter=sha(Path('graphnav/unified_text_ablation_runtime.py')),text_inputs=sha(Path('graphnav/unified_text_ablation.py')),text_parser=sha(Path('scripts/prepare_unified_v2_landmark_relation_ablation.py')))
+        if args.diagnostic_pilot:sources.update(diagnostic_pilot=True,max_episodes=args.max_episodes,selection='deterministic evenly spaced dataset indices')
         lock = output/'full_relation_manifest.json'
         if lock.exists() and json.loads(lock.read_text()) != sources:
             raise ValueError('Resume source changed')
@@ -373,8 +377,8 @@ def main():
                 metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics,error=failure))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
-    if args.model == 'unified-relation' and len(rows) != len(dataset):
-        raise RuntimeError(f'Full evaluation incomplete: {len(rows)}/{len(dataset)}')
+    if args.model == 'unified-relation' and len(rows) != len(episodes):
+        raise RuntimeError(f'Evaluation scope incomplete: {len(rows)}/{len(episodes)}')
     report = dict(model=('Joint A3 + observed appearance/history + trained trajectory/Stop; active sensing opt-in' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
                         else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
                               else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))))),split=args.split,
@@ -408,9 +412,10 @@ def main():
         report['relation_control']=args.relation_control
         report['relation_visual_control']=args.relation_visual_control
         report['geometry_source']=args.relation_geometry_source
-        report['coverage']=dict(expected=len(dataset), completed=len(rows),
+        report['diagnostic_pilot']=args.diagnostic_pilot
+        report['coverage']=dict(expected=len(episodes), dataset_total=len(dataset), completed=len(rows),
                                  inference_errors=terminations.get('inference_error',0),
-                                 selection_filter='none',
+                                 selection_filter=('deterministic evenly spaced pilot; not official full evaluation' if args.diagnostic_pilot else 'none'),
                                  empty_references_in_denominator=True)
     if args.model=='static-transfer':
         report['model']='Compatible static A3/GAT + transferred unchanged original Trajectory/Stop; guarded-blend'

@@ -1,3 +1,17 @@
+## [Content-preserving text training and diagnostic Pilot] - 2026-11-06
+
+### Features
+- Add complete TRAIN content-preservation checks and public-binding multiplicity audit.
+- Add explicit Val-Seen diagnostic subset scope; full evaluation remains the default.
+- Train Geometry/Relation on full target descriptions with unchanged architecture, plus paired128 report and cached-baseline checks.
+
+### Design Rationale
+- Restore target identity and relation scope omitted by the previous landmark-only phrases; keep public Polygon binding identical to isolate content preservation.
+
+### Notes & Caveats
+- TRAIN strings are unchanged: this is binding-matched complete-text training, not a new semantic parser or visual appearance network.
+- PGVB/BERT/controller are frozen and RGB update is off in the text-control navigation; Pilot results are not full SR. No Test or new full Val run.
+
 ## [PR23 Unified V2 text ablation execution] - 2026-11-05
 
 ### Features

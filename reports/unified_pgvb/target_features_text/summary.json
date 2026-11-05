@@ -1,0 +1,116 @@
+{
+  "N": 128,
+  "diagnostic_only": true,
+  "selection": "evenly spaced indices across all2470 Val-Seen, before scoring",
+  "metrics": {
+    "old_full": {
+      "SR": 0.4375,
+      "OSR": 0.4921875,
+      "SPL": 0.4281574807791325,
+      "NE": 35.95334237522153,
+      "nDTW": 0.2895075289412933,
+      "steps": 7.09375,
+      "path_length": 211.18593569537921,
+      "inference_ms": 24.514165111449472
+    },
+    "compact": {
+      "SR": 0.328125,
+      "OSR": 0.3984375,
+      "SPL": 0.323253896148357,
+      "NE": 40.65127813591264,
+      "nDTW": 0.27029118474651315,
+      "steps": 7.0,
+      "path_length": 203.23676683151572,
+      "inference_ms": 24.264479055598592
+    },
+    "target_features": {
+      "SR": 0.4296875,
+      "OSR": 0.4921875,
+      "SPL": 0.41881293956358706,
+      "NE": 32.98981193546652,
+      "nDTW": 0.29234567870641104,
+      "steps": 7.046875,
+      "path_length": 208.35913038920967,
+      "inference_ms": 26.032196155402957
+    }
+  },
+  "paired": {
+    "old_full": {
+      "fixes": 3,
+      "damage": 4,
+      "net": -1
+    },
+    "compact": {
+      "fixes": 24,
+      "damage": 11,
+      "net": 13
+    }
+  },
+  "physical_target_groups": 126,
+  "group_bootstrap_delta95CI": {
+    "old_full": [
+      -0.047244094488188976,
+      0.03125
+    ],
+    "compact": [
+      0.007874015748031496,
+      0.18604651162790697
+    ]
+  },
+  "single_seed": true,
+  "checkpoint_sha256": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+  "frozen_modules_bitwise_unchanged": true,
+  "training_seconds": 1115.4602062432095,
+  "training_updates": 13675,
+  "training_history": [
+    {
+      "epoch": 1,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.651749862047902,
+      "train_fixes": 119,
+      "train_breaks": 89,
+      "wall_seconds": 430.404283314012
+    },
+    {
+      "epoch": 2,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.6251851700921307,
+      "train_fixes": 279,
+      "train_breaks": 273,
+      "wall_seconds": 601.2126715132035
+    },
+    {
+      "epoch": 3,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.6065875951022615,
+      "train_fixes": 396,
+      "train_breaks": 340,
+      "wall_seconds": 771.7989221159369
+    },
+    {
+      "epoch": 4,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.5950044540984503,
+      "train_fixes": 491,
+      "train_breaks": 435,
+      "wall_seconds": 944.3093116790988
+    },
+    {
+      "epoch": 5,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.580057309591222,
+      "train_fixes": 544,
+      "train_breaks": 467,
+      "wall_seconds": 1115.4598227022216
+    }
+  ],
+  "inference_errors": 0,
+  "RGB_active": false,
+  "baseline_cache_reused": true,
+  "latency_caveat": "Cached baseline timing collected previously; not a controlled contemporaneous speed comparison"
+}
