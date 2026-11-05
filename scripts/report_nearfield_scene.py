@@ -30,7 +30,7 @@ def main():
         '|同一批可比较帧的PGVB正负区域AUC代理|平均AUC|样本帧|','|---|---:|---:|']
     for name,key in [('真实RGB/正确名称','real_auc_proxy'),('同图错位Patch特征','shuffled_auc_proxy'),('视觉特征置零','zero_features_auc_proxy'),('同类型错误地标名称','wrong_name_auc_proxy')]:
         lines.append(f'|{name}|{c[key]["mean"]:.4f}|{c[key]["n"]}|')
-    lines += ['', f'正负区域来自公开Polygon弱标签，不是人工分割。错误名称AUC有{s["same_type_wrong_name_auc_within_005"]}/93帧与正确名称差≤0.05，{s["same_type_wrong_name_auc_not_worse"]}/93帧不差于正确名。真实RGB有贡献，但专名身份区分证据很弱。PGVB原生打分包含`name + 3×type`的文本项，类别信息占较大权重；本轮未改公式。',
+    lines += ['', f'正负区域来自公开Polygon弱标签，不是人工分割。错误名称AUC有{s["same_type_wrong_name_auc_within_005"]}/93帧与正确名称差≤0.05，{s["same_type_wrong_name_auc_not_worse"]}/93帧不差于正确名。真实RGB有贡献；此对照只说明名称敏感性，不能用于判断实例区分能力。PGVB原生打分包含`name + 3×type`的文本项，类别信息占较大权重；本轮未改公式。',
         f'有分数帧的最高分Patch落在Polygon可靠正区域{ s["top_scored_patch_label_proxy"].get("1",0)}帧、可靠负区域{s["top_scored_patch_label_proxy"].get("0",0)}帧、边界未知区{s["top_scored_patch_label_proxy"].get("-1",0)}帧；这是投影重合代理，不是实例匹配准确率。',
         '结论不是“必须从屋顶读出地标名字”。真正缺少的是：在给定地图Anchor时，区分同图多个同类对象、确认对应视觉实例并跨帧保持关联的独立证据。','',
         '## 2. 地标周围100m的场景','',
@@ -69,7 +69,7 @@ def main():
         '2. **缺乏干净对象Mask和关系节点绑定。** 现有对象ROI由粗Polygon提出，可能混合屋顶、地面、树木及邻近车辆；原模型没有场景分割或目标实例关系读出。几何距离/包含可计算，但不能替代视觉实体关联和指令关系作用域理解。',
         '没有证据指向全局World→RGB数值变换是主要错误；然而粗地图轮廓与真实视觉边界偏差仍是监督/ROI质量问题。不能给每个“代理冲突”强行归唯一真实失败原因。','',
         '## 三个最终问题与下一步','',
-        '1. **PGVB真正识别并追踪指定地标了吗？** 证明了真实RGB参与、已知ROI的区域和类别支持；尚未证明专属实例身份和真实追踪准确率。错误同类名称对照依然接近正确名，不能过度宣称。',
+        '1. **PGVB真正识别并追踪指定地标了吗？** 证明了真实RGB参与、已知ROI的区域和类别支持；尚未证明专属实例身份和真实追踪准确率。错误同类名称对照仅能说明名称敏感性，不能证明实例区分失败。',
         '2. **能找到停车场、道路及中间场景吗？** 地图侧可以完整检索、计算几何关系；部分可观测ROI有RGB支持，但覆盖和语义纯度有限，尤其小车及多道路完整场景。',
         '3. **足以支持复杂CityNav目标定位吗？** 目前不足以直接进入复杂关系联合训练。需要先获得少量可靠ROI/实例核验、量化地图边界不确定性、建立同图同类对象的身份对应和可观测性管理，再用已验证节点构建局部关系图。应先验证这些能力，而不是继续调整Stop或叠加大型关系网络。','',
         '## 复现与交付','',
@@ -80,6 +80,8 @@ def main():
         '- [16案例总览](contact_sheet.png) · [类别代理混淆图](scene_proxy_confusion.png) · [逐对象视图CSV](object_view_predictions.csv) · [数据集JSONL](dataset.jsonl) · [关系视图](relation_views.json)。全部141帧原始RGB、逐帧元数据及64份公共几何关系文件随报告提交。',
         '- GPU提取时使用的几何辅助源码快照在`source_at_extraction/nearfield_geometry.py`，SHA与提取manifest相符；之后新增的道路名称分组仅用于离线分析，不改变提取或策略。',
         f'- 原始NPZ/Depth及中间缓存保存在服务器 `{a.run_root}/dataset_v2`。`reproduce_gpu.sh`使用新目录复现，保留现有结果；`reproduce_analysis.sh`记录离线分析命令。阶段日志及初次工具device参数错误修复记录保留在服务器，没有影响原模型或旧实验。','']
+    if (out/'CORRECTION_polygon_controls_zh.md').exists():
+        lines.insert(2, '> **解释更正：** 只换名称的对照不能用于判断实例区分能力或Polygon作用；见[更正说明](CORRECTION_polygon_controls_zh.md)及[完整Polygon对照](../polygon_rgb_matching/REPORT_zh.md)。原统计数值保留。')
     (out/'REPORT_zh.md').write_text('\n'.join(lines))
     command=(a.run_root/'run.sh').read_text().replace('/dataset_v2 ', '/dataset_reproduction ')
     (out/'reproduce_gpu.sh').write_text(command)

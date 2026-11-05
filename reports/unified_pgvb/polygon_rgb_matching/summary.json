@@ -1,0 +1,760 @@
+{
+  "total_frames": 141,
+  "eligibility": {
+    "insufficient_anchor_RGB_or_positive_negative_support": 32,
+    "eligible": 93,
+    "unsupported_PGVB_type": 16
+  },
+  "eligible_tasks": 43,
+  "true_pixel_IoU": null,
+  "true_instance_accuracy": null,
+  "true_crossview_identity_accuracy": null,
+  "base_rankings": {
+    "real_other_instance": {
+      "n": 34,
+      "tasks": 21,
+      "mean_candidates": 2.676470588235294,
+      "metrics": {
+        "geometry": {
+          "top1": 0.5269607843137254,
+          "mean_rank": 1.6176470588235294,
+          "mean_margin": 0.015034144213695049
+        },
+        "pgvb": {
+          "top1": 0.5294117647058824,
+          "mean_rank": 1.5588235294117647,
+          "mean_margin": 1.8195685568977804
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.38235294117647056,
+          "mean_rank": 1.8823529411764706,
+          "mean_margin": -3.4014529366703594
+        },
+        "explicit": {
+          "top1": 0.4117647058823529,
+          "mean_rank": 1.911764705882353,
+          "mean_margin": -0.02346221212167287
+        }
+      }
+    },
+    "position_shift": {
+      "n": 93,
+      "tasks": 43,
+      "mean_candidates": 8.376344086021506,
+      "metrics": {
+        "geometry": {
+          "top1": 0.07031916709336064,
+          "mean_rank": 4.365591397849462,
+          "mean_margin": -0.02332064572609741
+        },
+        "pgvb": {
+          "top1": 0.17204301075268819,
+          "mean_rank": 3.3870967741935485,
+          "mean_margin": -0.6975450079928163
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.11290322580645161,
+          "mean_rank": 4.198924731182796,
+          "mean_margin": -1.2264967765859378
+        },
+        "explicit": {
+          "top1": 0.2903225806451613,
+          "mean_rank": 3.2795698924731185,
+          "mean_margin": -0.03685482387971837
+        }
+      }
+    },
+    "shape_rotation": {
+      "n": 85,
+      "tasks": 41,
+      "mean_candidates": 2.8941176470588235,
+      "metrics": {
+        "geometry": {
+          "top1": 0.3784313725490196,
+          "mean_rank": 1.8764705882352941,
+          "mean_margin": -0.0052404253140091485
+        },
+        "pgvb": {
+          "top1": 0.5647058823529412,
+          "mean_rank": 1.576470588235294,
+          "mean_margin": 1.5318628830068253
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.47450980392156855,
+          "mean_rank": 1.6941176470588235,
+          "mean_margin": 0.8342510654645807
+        },
+        "explicit": {
+          "top1": 0.7294117647058823,
+          "mean_rank": 1.3411764705882352,
+          "mean_margin": 0.03826163969844272
+        }
+      }
+    },
+    "shape_scale": {
+      "n": 92,
+      "tasks": 43,
+      "mean_candidates": 2.9239130434782608,
+      "metrics": {
+        "geometry": {
+          "top1": 0.2789855072463768,
+          "mean_rank": 1.8478260869565217,
+          "mean_margin": -0.017368398242042938
+        },
+        "pgvb": {
+          "top1": 0.45652173913043476,
+          "mean_rank": 1.6521739130434783,
+          "mean_margin": 0.31587155357651087
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.29347826086956524,
+          "mean_rank": 1.8641304347826086,
+          "mean_margin": -0.009528329838877138
+        },
+        "explicit": {
+          "top1": 0.5760869565217391,
+          "mean_rank": 1.565217391304348,
+          "mean_margin": 0.017629217908822197
+        }
+      }
+    }
+  },
+  "common_reference_rankings": {
+    "real_other_instance": {
+      "n": 25,
+      "tasks": 18,
+      "mean_candidates": 2.6,
+      "metrics": {
+        "geometry": {
+          "top1": 0.53,
+          "mean_rank": 1.58,
+          "mean_margin": 0.017923792648259985
+        },
+        "pgvb": {
+          "top1": 0.52,
+          "mean_rank": 1.56,
+          "mean_margin": 1.58311598777771
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.32,
+          "mean_rank": 1.92,
+          "mean_margin": -4.467283405065537
+        },
+        "explicit": {
+          "top1": 0.4,
+          "mean_rank": 1.92,
+          "mean_margin": -0.015305094247564726
+        },
+        "appearance": {
+          "top1": 0.84,
+          "mean_rank": 1.16,
+          "mean_margin": 0.12210855007171631
+        },
+        "explicit_reference": {
+          "top1": 0.84,
+          "mean_rank": 1.16,
+          "mean_margin": 0.09794713697630074
+        }
+      }
+    },
+    "position_shift": {
+      "n": 79,
+      "tasks": 41,
+      "mean_candidates": 8.50632911392405,
+      "metrics": {
+        "geometry": {
+          "top1": 0.06435603777375928,
+          "mean_rank": 4.386075949367089,
+          "mean_margin": -0.022820474338226027
+        },
+        "pgvb": {
+          "top1": 0.189873417721519,
+          "mean_rank": 3.4430379746835444,
+          "mean_margin": -0.6000965969471992
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.12025316455696203,
+          "mean_rank": 4.322784810126582,
+          "mean_margin": -1.1308163668535933
+        },
+        "explicit": {
+          "top1": 0.25316455696202533,
+          "mean_rank": 3.4050632911392404,
+          "mean_margin": -0.041769622044386154
+        },
+        "appearance": {
+          "top1": 0.21518987341772153,
+          "mean_rank": 3.7721518987341773,
+          "mean_margin": -0.01568803002562704
+        },
+        "explicit_reference": {
+          "top1": 0.22784810126582278,
+          "mean_rank": 3.4556962025316458,
+          "mean_margin": -0.01370049159556339
+        }
+      }
+    },
+    "shape_rotation": {
+      "n": 71,
+      "tasks": 39,
+      "mean_candidates": 2.915492957746479,
+      "metrics": {
+        "geometry": {
+          "top1": 0.3615023474178403,
+          "mean_rank": 1.9014084507042253,
+          "mean_margin": -0.005449716683286139
+        },
+        "pgvb": {
+          "top1": 0.6056338028169014,
+          "mean_rank": 1.5633802816901408,
+          "mean_margin": 1.7858786935537634
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.4507042253521127,
+          "mean_rank": 1.7112676056338028,
+          "mean_margin": 0.7367166310129031
+        },
+        "explicit": {
+          "top1": 0.704225352112676,
+          "mean_rank": 1.3661971830985915,
+          "mean_margin": 0.03932127208901223
+        },
+        "appearance": {
+          "top1": 0.528169014084507,
+          "mean_rank": 1.5845070422535212,
+          "mean_margin": 0.005887234714669241
+        },
+        "explicit_reference": {
+          "top1": 0.676056338028169,
+          "mean_rank": 1.3943661971830985,
+          "mean_margin": 0.01492215496635232
+        }
+      }
+    },
+    "shape_scale": {
+      "n": 78,
+      "tasks": 41,
+      "mean_candidates": 2.948717948717949,
+      "metrics": {
+        "geometry": {
+          "top1": 0.26709401709401703,
+          "mean_rank": 1.8525641025641026,
+          "mean_margin": -0.01877349112476399
+        },
+        "pgvb": {
+          "top1": 0.46153846153846156,
+          "mean_rank": 1.641025641025641,
+          "mean_margin": 0.4571545597834465
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.28846153846153844,
+          "mean_rank": 1.858974358974359,
+          "mean_margin": 0.01454384663166144
+        },
+        "explicit": {
+          "top1": 0.5769230769230769,
+          "mean_rank": 1.5769230769230769,
+          "mean_margin": 0.0165960653132202
+        },
+        "appearance": {
+          "top1": 0.4358974358974359,
+          "mean_rank": 1.6153846153846154,
+          "mean_margin": -0.005478691596251268
+        },
+        "explicit_reference": {
+          "top1": 0.5256410256410257,
+          "mean_rank": 1.5512820512820513,
+          "mean_margin": 0.0013848648917300444
+        }
+      }
+    }
+  },
+  "fully_visible_common_reference": {
+    "n": 8,
+    "tasks": 7,
+    "mean_candidates": 2.375,
+    "metrics": {
+      "geometry": {
+        "top1": 0.44791666666666663,
+        "mean_rank": 1.6875,
+        "mean_margin": -8.326672684688674e-17
+      },
+      "pgvb": {
+        "top1": 0.625,
+        "mean_rank": 1.375,
+        "mean_margin": 3.137758046388626
+      },
+      "pgvb_zero_shape_tokens": {
+        "top1": 0.5,
+        "mean_rank": 1.75,
+        "mean_margin": -1.3574163541197777
+      },
+      "explicit": {
+        "top1": 0.25,
+        "mean_rank": 2.0,
+        "mean_margin": -0.010811184135036157
+      },
+      "appearance": {
+        "top1": 0.75,
+        "mean_rank": 1.25,
+        "mean_margin": 0.09154081344604492
+      },
+      "explicit_reference": {
+        "top1": 0.75,
+        "mean_rank": 1.25,
+        "mean_margin": 0.07425681742200683
+      }
+    }
+  },
+  "strata": {
+    "Building": {
+      "n": 19,
+      "tasks": 13,
+      "mean_candidates": 2.6315789473684212,
+      "metrics": {
+        "geometry": {
+          "top1": 0.5657894736842105,
+          "mean_rank": 1.5263157894736843,
+          "mean_margin": 0.027777313097835616
+        },
+        "pgvb": {
+          "top1": 0.5789473684210527,
+          "mean_rank": 1.5263157894736843,
+          "mean_margin": 1.8381902669605457
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.2631578947368421,
+          "mean_rank": 2.0526315789473686,
+          "mean_margin": -5.088889854518991
+        },
+        "explicit": {
+          "top1": 0.3157894736842105,
+          "mean_rank": 2.1052631578947367,
+          "mean_margin": -0.02723502208712238
+        },
+        "appearance": {
+          "top1": 0.8421052631578947,
+          "mean_rank": 1.1578947368421053,
+          "mean_margin": 0.128766982178939
+        },
+        "explicit_reference": {
+          "top1": 0.7894736842105263,
+          "mean_rank": 1.2105263157894737,
+          "mean_margin": 0.10109828187023344
+        }
+      }
+    },
+    "Road": {
+      "n": 6,
+      "tasks": 5,
+      "mean_candidates": 2.5,
+      "metrics": {
+        "geometry": {
+          "top1": 0.4166666666666667,
+          "mean_rank": 1.75,
+          "mean_margin": -0.013279022108729518
+        },
+        "pgvb": {
+          "top1": 0.3333333333333333,
+          "mean_rank": 1.6666666666666667,
+          "mean_margin": 0.7753807703653971
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.5,
+          "mean_rank": 1.5,
+          "mean_margin": -2.4988629817962646
+        },
+        "explicit": {
+          "top1": 0.6666666666666666,
+          "mean_rank": 1.3333333333333333,
+          "mean_margin": 0.02247301057770118
+        },
+        "appearance": {
+          "top1": 0.8333333333333334,
+          "mean_rank": 1.1666666666666667,
+          "mean_margin": 0.10102351506551106
+        },
+        "explicit_reference": {
+          "top1": 1.0,
+          "mean_rank": 1.0,
+          "mean_margin": 0.08796851147884721
+        }
+      }
+    },
+    "height_0_20": {
+      "n": 2,
+      "tasks": 2,
+      "mean_candidates": 2.5,
+      "metrics": {
+        "geometry": {
+          "top1": 1.0,
+          "mean_rank": 1.0,
+          "mean_margin": 0.10112245359314903
+        },
+        "pgvb": {
+          "top1": 0.0,
+          "mean_rank": 2.5,
+          "mean_margin": -3.2646790742874146
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.0,
+          "mean_rank": 2.0,
+          "mean_margin": -9.597447872161865
+        },
+        "explicit": {
+          "top1": 0.5,
+          "mean_rank": 2.0,
+          "mean_margin": -0.001565162965586786
+        },
+        "appearance": {
+          "top1": 1.0,
+          "mean_rank": 1.0,
+          "mean_margin": 0.10039275884628296
+        },
+        "explicit_reference": {
+          "top1": 1.0,
+          "mean_rank": 1.0,
+          "mean_margin": 0.08294269033604346
+        }
+      }
+    },
+    "height_20_40": {
+      "n": 8,
+      "tasks": 8,
+      "mean_candidates": 2.25,
+      "metrics": {
+        "geometry": {
+          "top1": 0.40625,
+          "mean_rank": 1.6875,
+          "mean_margin": 0.013599549794888309
+        },
+        "pgvb": {
+          "top1": 0.375,
+          "mean_rank": 1.625,
+          "mean_margin": -0.2331981658935547
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.25,
+          "mean_rank": 2.0,
+          "mean_margin": -4.046237427741289
+        },
+        "explicit": {
+          "top1": 0.375,
+          "mean_rank": 1.75,
+          "mean_margin": 0.013300389590688966
+        },
+        "appearance": {
+          "top1": 0.75,
+          "mean_rank": 1.25,
+          "mean_margin": 0.11559739708900452
+        },
+        "explicit_reference": {
+          "top1": 0.75,
+          "mean_rank": 1.25,
+          "mean_margin": 0.09736809546586363
+        }
+      }
+    },
+    "height_40_plus": {
+      "n": 15,
+      "tasks": 12,
+      "mean_candidates": 2.8,
+      "metrics": {
+        "geometry": {
+          "top1": 0.5333333333333333,
+          "mean_rank": 1.6,
+          "mean_margin": 0.00913690071073967
+        },
+        "pgvb": {
+          "top1": 0.6666666666666666,
+          "mean_rank": 1.4,
+          "mean_margin": 3.198189544677734
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.4,
+          "mean_rank": 1.8666666666666667,
+          "mean_margin": -4.007819330692291
+        },
+        "explicit": {
+          "top1": 0.4,
+          "mean_rank": 2.0,
+          "mean_margin": -0.03239334313223042
+        },
+        "appearance": {
+          "top1": 0.8666666666666667,
+          "mean_rank": 1.1333333333333333,
+          "mean_margin": 0.12847660382588705
+        },
+        "explicit_reference": {
+          "top1": 0.8666666666666667,
+          "mean_rank": 1.1333333333333333,
+          "mean_margin": 0.10025655200056818
+        }
+      }
+    },
+    "partial_visible": {
+      "n": 3,
+      "tasks": 2,
+      "mean_candidates": 2.6666666666666665,
+      "metrics": {
+        "geometry": {
+          "top1": 0.3333333333333333,
+          "mean_rank": 2.0,
+          "mean_margin": -0.007020174056668882
+        },
+        "pgvb": {
+          "top1": 0.0,
+          "mean_rank": 2.0,
+          "mean_margin": -1.848957618077596
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.3333333333333333,
+          "mean_rank": 1.6666666666666667,
+          "mean_margin": -5.7628177007039385
+        },
+        "explicit": {
+          "top1": 0.6666666666666666,
+          "mean_rank": 1.3333333333333333,
+          "mean_margin": 0.02436041751435018
+        },
+        "appearance": {
+          "top1": 0.6666666666666666,
+          "mean_rank": 1.3333333333333333,
+          "mean_margin": 0.08197838068008423
+        },
+        "explicit_reference": {
+          "top1": 1.0,
+          "mean_rank": 1.0,
+          "mean_margin": 0.07576498266873362
+        }
+      }
+    },
+    "mostly_visible": {
+      "n": 22,
+      "tasks": 16,
+      "mean_candidates": 2.590909090909091,
+      "metrics": {
+        "geometry": {
+          "top1": 0.5568181818181818,
+          "mean_rank": 1.5227272727272727,
+          "mean_margin": 0.021325242653477558
+        },
+        "pgvb": {
+          "top1": 0.5909090909090909,
+          "mean_rank": 1.5,
+          "mean_margin": 2.0511260249397973
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.3181818181818182,
+          "mean_rank": 1.9545454545454546,
+          "mean_margin": -4.290619637478482
+        },
+        "explicit": {
+          "top1": 0.36363636363636365,
+          "mean_rank": 2.0,
+          "mean_margin": -0.020714027669644027
+        },
+        "appearance": {
+          "top1": 0.8636363636363636,
+          "mean_rank": 1.1363636363636365,
+          "mean_margin": 0.12758084589784796
+        },
+        "explicit_reference": {
+          "top1": 0.8181818181818182,
+          "mean_rank": 1.1818181818181819,
+          "mean_margin": 0.1009719762000599
+        }
+      }
+    },
+    "small_ROI": {
+      "n": 0,
+      "tasks": 0,
+      "mean_candidates": null,
+      "metrics": {}
+    },
+    "medium_ROI": {
+      "n": 11,
+      "tasks": 9,
+      "mean_candidates": 2.909090909090909,
+      "metrics": {
+        "geometry": {
+          "top1": 0.5227272727272727,
+          "mean_rank": 1.6363636363636365,
+          "mean_margin": 0.0272415804021501
+        },
+        "pgvb": {
+          "top1": 0.6363636363636364,
+          "mean_rank": 1.4545454545454546,
+          "mean_margin": 1.9594281369989568
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.2727272727272727,
+          "mean_rank": 2.272727272727273,
+          "mean_margin": -7.352248018438166
+        },
+        "explicit": {
+          "top1": 0.2727272727272727,
+          "mean_rank": 2.3636363636363638,
+          "mean_margin": -0.06404105023228554
+        },
+        "appearance": {
+          "top1": 0.9090909090909091,
+          "mean_rank": 1.0909090909090908,
+          "mean_margin": 0.1161214059049433
+        },
+        "explicit_reference": {
+          "top1": 0.8181818181818182,
+          "mean_rank": 1.1818181818181819,
+          "mean_margin": 0.08565430364489374
+        }
+      }
+    },
+    "large_ROI": {
+      "n": 14,
+      "tasks": 12,
+      "mean_candidates": 2.357142857142857,
+      "metrics": {
+        "geometry": {
+          "top1": 0.5357142857142857,
+          "mean_rank": 1.5357142857142858,
+          "mean_margin": 0.010602673698774894
+        },
+        "pgvb": {
+          "top1": 0.42857142857142855,
+          "mean_rank": 1.6428571428571428,
+          "mean_margin": 1.2874421562467302
+        },
+        "pgvb_zero_shape_tokens": {
+          "top1": 0.35714285714285715,
+          "mean_rank": 1.6428571428571428,
+          "mean_margin": -2.2005254945584705
+        },
+        "explicit": {
+          "top1": 0.5,
+          "mean_rank": 1.5714285714285714,
+          "mean_margin": 0.02298744259757305
+        },
+        "appearance": {
+          "top1": 0.7857142857142857,
+          "mean_rank": 1.2142857142857142,
+          "mean_margin": 0.1268127347741808
+        },
+        "explicit_reference": {
+          "top1": 0.8571428571428571,
+          "mean_rank": 1.1428571428571428,
+          "mean_margin": 0.10760579173669195
+        }
+      }
+    }
+  },
+  "perturbation_pairwise": {
+    "position_shift": {
+      "pairs": 686,
+      "methods": {
+        "geometry": {
+          "mean_score_delta": 0.002657033837524765,
+          "pair_win_fraction": 0.543731778425656
+        },
+        "pgvb": {
+          "mean_score_delta": 0.8863278632174428,
+          "pair_win_fraction": 0.6763848396501457
+        },
+        "pgvb_zero_shape_tokens": {
+          "mean_score_delta": 0.5807906609278378,
+          "pair_win_fraction": 0.5663265306122449
+        },
+        "explicit": {
+          "mean_score_delta": 0.03748791132297166,
+          "pair_win_fraction": 0.6909620991253644
+        }
+      }
+    },
+    "shape_rotation": {
+      "pairs": 161,
+      "methods": {
+        "geometry": {
+          "mean_score_delta": 0.003216384866949821,
+          "pair_win_fraction": 0.5372670807453416
+        },
+        "pgvb": {
+          "mean_score_delta": 1.9800070511258168,
+          "pair_win_fraction": 0.6956521739130435
+        },
+        "pgvb_zero_shape_tokens": {
+          "mean_score_delta": 1.3297638891276367,
+          "pair_win_fraction": 0.6335403726708074
+        },
+        "explicit": {
+          "mean_score_delta": 0.053529889059667185,
+          "pair_win_fraction": 0.8198757763975155
+        }
+      }
+    },
+    "shape_scale": {
+      "pairs": 177,
+      "methods": {
+        "geometry": {
+          "mean_score_delta": 0.01024883817948188,
+          "pair_win_fraction": 0.559322033898305
+        },
+        "pgvb": {
+          "mean_score_delta": 0.9228222413925128,
+          "pair_win_fraction": 0.6610169491525424
+        },
+        "pgvb_zero_shape_tokens": {
+          "mean_score_delta": 0.6619397179555084,
+          "pair_win_fraction": 0.5508474576271186
+        },
+        "explicit": {
+          "mean_score_delta": 0.039366460093198434,
+          "pair_win_fraction": 0.7062146892655368
+        }
+      }
+    }
+  },
+  "task_group_bootstrap": {
+    "geometry": {
+      "task_groups": 18,
+      "task_balanced_top1_difference": 0.24305555555555555,
+      "CI95": [
+        0.08564814814814815,
+        0.40515046296296214
+      ]
+    },
+    "pgvb": {
+      "task_groups": 18,
+      "task_balanced_top1_difference": 0.3055555555555556,
+      "CI95": [
+        0.08333333333333333,
+        0.5277777777777778
+      ]
+    },
+    "explicit": {
+      "task_groups": 18,
+      "task_balanced_top1_difference": 0.3611111111111111,
+      "CI95": [
+        0.16666666666666666,
+        0.5555555555555556
+      ]
+    }
+  },
+  "shape_token_sensitivity": {
+    "candidate_evaluations": 1174,
+    "mean_patch_score_MAE": 3.6019421921474972,
+    "max_patch_score_MAE": 8.724992752075195,
+    "note": "zero Polygon shape tokens keeps current ROI and RGB fixed; this single-factor ablation is NOT the full-swap negative"
+  },
+  "causal_references": {
+    "n": 79,
+    "tasks": 41,
+    "mean_same_ID_cosine": 0.874449307405496,
+    "median_pose_translation_m": 0.19867160168942857,
+    "median_yaw_change_degrees": 19.92401128343774,
+    "identical_RGB_sha_pairs": 0,
+    "median_common_observed_fraction": 0.9999999999999998,
+    "orthophoto_caveat": "Same orthophoto textures may recur; this is not real 3D cross-view generalization"
+  },
+  "excluded_perturbations": 92,
+  "no_observable_ROI_change_controls": 0,
+  "method_policy": "All comparisons are public-map weak proxies; paired methods share candidate sets and query frames; fractional Top1 under ties"
+}

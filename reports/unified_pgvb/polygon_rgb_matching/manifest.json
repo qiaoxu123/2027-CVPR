@@ -1,0 +1,51 @@
+{
+  "config": {
+    "min_positive_patches": 2,
+    "min_negative_patches": 2,
+    "min_visible_pixels": 256,
+    "local_area_ratio": [
+      0.5,
+      2.0
+    ],
+    "visible_fraction_difference": 0.2,
+    "max_real_negatives": 3,
+    "pixel_shifts": [
+      16,
+      32
+    ],
+    "rotation_degrees": [
+      -30,
+      30
+    ],
+    "scale_factors": [
+      0.75,
+      1.25
+    ],
+    "explicit_weights": [
+      0.5,
+      0.3,
+      0.2
+    ],
+    "appearance_fusion": [
+      0.8,
+      0.2
+    ],
+    "boundary_tolerance_px": 3,
+    "reference_min_translation_m": 1.0,
+    "reference_min_yaw_degrees": 5.0
+  },
+  "checkpoint_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "stage1_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "dataset_sha256": "b5b204ddb0f79315bb07df02dc0168cac49628175784e6c0ba4170f869398d89",
+  "rollout_sha256": "6b0a9af6a96b969a9312194add73e51b251f62632dd5311f66d9efdd81a4b527",
+  "source_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_polygon_rgb_matching.py": "1e9248cd9eb490d1e82500f7d10b95a1aa2ef1f24f34f70d0dd685fc764218ee",
+    "scripts/polygon_rgb_matching.py": "8e0f2f811180289518c87b893413439924a97ffc7c2835dfbe7892061bf7acee",
+    "graphnav/local_landmark_anchor.py": "ef1276b09403c0841a98fbefcbfdedd80855cb220e04fe2d05403fe561ab5918",
+    "graphnav/polygon_guided_visual.py": "e905e4d3cf245e1306b36cc20910d3a31e9f6e9aac4a352de1884220c148cd3a"
+  },
+  "label_policy": "Public-map instance IDs and synthetic perturbations are weak proxies, no independent masks",
+  "query_name": "fixed A; each candidate swaps full Polygon, tokens, ROI labels and pooled visual region",
+  "negative_caveat": "another real Polygon B may genuinely align with RGB; identity retrieval is distinct from alignment",
+  "reference": "strictly earlier visited frame, minimum 1m XY change or 5deg yaw; no future RGB"
+}
