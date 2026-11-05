@@ -76,6 +76,7 @@ class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
         self._neighbor_geometry = []
         self.instruction_spec = None
         self.inputs = None
+        self.visited_goal_cells = set()
         self.acquisition.reset()
         self.stable_goal.reset()
         self.pgvb_calls = 0
