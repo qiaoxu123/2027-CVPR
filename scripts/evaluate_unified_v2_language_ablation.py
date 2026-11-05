@@ -1,8 +1,9 @@
 """Paired, post-training TRAIN-Dev evaluation for original UnifiedPGVB-v2.
 
-Three *independently fully trained* models start from the SAME original
-UnifiedPGVB-v2 source checkpoint, use SAME goal grid/Controller and SAME
-public map Polygons; only source instruction text differs. All source
+EXISTING fully trained full-text baseline is EVALUATED but NOT retrained.
+Only two NEW text arms are independently trained from original Unified V2:
+landmark+relation phrase and relation phrase only. All use the SAME public
+Polygons and complete original query order. All source
 questions remain in denominator.
 
 No observed RGB is passed in this comparison; this isolates the main
@@ -23,7 +24,7 @@ from graphnav.checkpointing import atomic_json,file_sha256
 from graphnav.full_relation_training import FORMAT,load_full_relation_model,full_relation_inputs
 from graphnav.token_language import FrozenBERTTokens
 
-ARM_NAMES=("full_text","landmark_relation","landmark_only")
+ARM_NAMES=("full_text","landmark_relation","relation_only")
 
 
 def load_data(path,conf,batch_size):
@@ -121,9 +122,9 @@ def paired_stats(a,b):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--prepared-dir",type=Path,required=True)
-    p.add_argument("--checkpoint-full-text",type=Path,required=True)
+    p.add_argument("--existing-full-checkpoint",type=Path,required=True)
     p.add_argument("--checkpoint-landmark-relation",type=Path,required=True)
-    p.add_argument("--checkpoint-landmark-only",type=Path,required=True)
+    p.add_argument("--checkpoint-relation-only",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--batch-size",type=int,default=8)
     p.add_argument("--expected",type=int,default=21878)
@@ -134,9 +135,9 @@ def main():
     prepared=json.loads((args.prepared_dir/"manifest.json").read_text())
     if prepared["all_queries"]!=args.expected:raise ValueError("Unexpected prepared denominator")
     checkpoints=dict(
-        full_text=args.checkpoint_full_text,
+        full_text=args.existing_full_checkpoint,
         landmark_relation=args.checkpoint_landmark_relation,
-        landmark_only=args.checkpoint_landmark_only)
+        relation_only=args.checkpoint_relation_only)
     # Audit: equal map, normalized GT labels, and identical reference polygons
     # across all arm inputs. Target GT is used ONLY to compare after inference.
     records={};loaded={};dev_ids={}
@@ -145,8 +146,13 @@ def main():
         state=torch.load(checkpoints[name],map_location="cpu",weights_only=True)
         if state.get("format")!=FORMAT or state.get("smoke"):
             raise ValueError("Invalid full training checkpoint")
-        if file_sha256(args.prepared_dir/(name+".jsonl")) != state["source_sha256"]["train_jsonl"]:
-            raise ValueError(f"{name} checkpoint not trained on corresponding prepared text")
+        if name=="full_text":
+            # Original model was trained ONCE before this experiment, using
+            # the original source. Do NOT require a new full-text checkpoint.
+            if prepared["source_sha256"]!=state["source_sha256"]["train_jsonl"]:
+                raise ValueError("Existing baseline was not trained on original source queries")
+        elif file_sha256(args.prepared_dir/(name+".jsonl")) != state["source_sha256"]["train_jsonl"]:
+            raise ValueError(f"{name} was not trained on its prepared language variant")
         if state["completed_epochs"]!=state["planned_epochs"]:
             raise ValueError("Checkpoint training incomplete")
         conf=state["config"]["geometry_args"]
@@ -176,10 +182,15 @@ def main():
         birmingham_train_dev_queries=len(dev_ids["full_text"]),
         arms={n:describe(outputs[n]) for n in ARM_NAMES},
         paired={
-            "full_vs_relation":paired_stats(outputs["full_text"],outputs["landmark_relation"]),
-            "name_vs_relation":paired_stats(outputs["landmark_only"],outputs["landmark_relation"]),
+            "existing_full_vs_landmark_relation":paired_stats(outputs["full_text"],outputs["landmark_relation"]),
+            "existing_full_vs_relation_only":paired_stats(outputs["full_text"],outputs["relation_only"]),
+            "relation_only_vs_landmark_relation":paired_stats(outputs["relation_only"],outputs["landmark_relation"]),
         },
-        note="Same original Unified V2 architecture, public Polygons, and frozen pretrained BERT. No RGB, Val/Test, or closed-loop; compare TRAIN-Dev only.",
+        note=("Original full-text checkpoint reused without retraining; two newly trained compact-language variants. "
+              "Same Unified V2 architecture, public Polygons, and frozen pretrained BERT. No RGB/Val/Test/closed-loop."),
+        baseline_evaluation_input_shift=("Frozen original full-text checkpoint was trained with its original processed public reference binding; "
+              "for paired comparison it is evaluated with newly catalog-matched polygons. Treat as input-shift baseline, "
+              "not a retrained matched-distribution control."),
         warning="Spatial rule map is recomputed from respective text: a correct direction change may arise from deterministic rules, not necessarily learned language understanding.",
     )
     args.output.mkdir(parents=True)
