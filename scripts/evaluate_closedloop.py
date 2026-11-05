@@ -77,6 +77,7 @@ def main():
     parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
     parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
+    parser.add_argument('--graph-head-checkpoint',help='Opt-in completed two-layer graph residual on existing Unified full relation')
     parser.add_argument('--relation-control', choices=['full','off'], default='full')
     parser.add_argument('--relation-visual-control', choices=['tracked','off'], default='tracked')
     parser.add_argument('--instruction-mode',choices=['native','full_text','landmark_relation'],default='native',help='Opt-in PR23 public-catalog text ablation; original path is unchanged')
@@ -119,6 +120,10 @@ def main():
             raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
     if args.instruction_mode!='native' and (args.model!='unified-relation' or not args.public_objects or args.relation_visual_control!='off'):
         raise ValueError('PR23 text adaptation requires unified-relation, public catalog and visual off')
+    if args.graph_head_checkpoint and (args.model!='unified-relation' or args.instruction_mode!='native' or
+            args.relation_control!='full' or args.relation_visual_control!='off' or
+            args.relation_geometry_source!='trained'):
+        raise ValueError('Graph head requires native full Unified V2, trained Geometry+Relation, RGB off')
     if args.model == 'unified-relation':
         if args.split != 'val_seen' or args.max_episodes is not None:
             raise ValueError('Unified-relation requires unfiltered FULL val_seen')
@@ -159,6 +164,13 @@ def main():
                        relation_runtime_code=sha(Path('graphnav/unified_full_relation_runtime.py')),
                        config=sha(args.config))
         if args.instruction_mode!='native':sources.update(instruction_mode=args.instruction_mode,public_catalog=sha(args.public_objects),text_adapter=sha(Path('graphnav/unified_text_ablation_runtime.py')),text_inputs=sha(Path('graphnav/unified_text_ablation.py')),text_parser=sha(Path('scripts/prepare_unified_v2_landmark_relation_ablation.py')))
+        if args.graph_head_checkpoint:
+            sources.update(graph_head=sha(args.graph_head_checkpoint),
+                graph_runtime=sha(Path('graphnav/unified_instruction_graph_runtime.py')),
+                graph_model=sha(Path('graphnav/unified_instruction_graph_belief.py')),
+                graph_data=sha(Path('graphnav/unified_instruction_graph_data.py')),
+                graph_parser=sha(Path('graphnav/instruction_relation_graph.py')),
+                graph_encoder=sha(Path('graphnav/instruction_relation_encoder.py')))
         lock = output/'full_relation_manifest.json'
         if lock.exists() and json.loads(lock.read_text()) != sources:
             raise ValueError('Resume source changed')
@@ -212,6 +224,10 @@ def main():
             from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             policy_class=UnifiedPGVBFullRelationPolicy;extra={}
+            if args.graph_head_checkpoint:
+                from graphnav.unified_instruction_graph_runtime import UnifiedGraphBeliefPolicy
+                policy_class=UnifiedGraphBeliefPolicy
+                extra=dict(graph_head_checkpoint=args.graph_head_checkpoint)
             if args.instruction_mode!='native':
                 from graphnav.unified_text_ablation_runtime import UnifiedTextAblationPolicy
                 policy_class=UnifiedTextAblationPolicy;extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)
