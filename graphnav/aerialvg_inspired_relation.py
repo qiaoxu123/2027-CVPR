@@ -67,7 +67,7 @@ class CandidateAnchorRelation(nn.Module):
                 or token_mask.shape != tokens.shape[:2]):
             raise ValueError("Misaligned CityNav candidate/anchor/text tensors")
         if not token_mask.any(-1).all():
-            raise ValueError("At least one text token required")
+            raise ValueError("at least one text token required")
         # Empty public references are legal CityNav examples. Their relation
         # residual stays exactly zero; they remain in training/eval denominator.
         no_anchor = ~anchor_valid.bool().any(-1)
