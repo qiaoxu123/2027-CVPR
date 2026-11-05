@@ -1,3 +1,16 @@
+## [PR22 minimal landmark/geometric-word execution] - 2026-11-05
+
+### Features
+- Audit all Revised TRAIN input phrases and run three-epoch, map-disjoint minimal-language training with checkpoint recovery and held-out predictions.
+- Add global same-name-consistent phrase shuffling and Chinese paired-result/Belief visualizations.
+
+### Design Rationale
+- Isolate geometric phrase content from full-instruction, RGB and pretrained Geometry shortcuts.
+
+### Notes & Caveats
+- Lexical adjacency does not establish target relation scope. Name-only and shuffle are same-model input ablations.
+- Correct phrases did not outperform shuffled phrases. No Val/Test/navigation or original model modification.
+
 ## [Privileged complete-landmark RGB experiment] - 2026-11-05
 
 ### Features

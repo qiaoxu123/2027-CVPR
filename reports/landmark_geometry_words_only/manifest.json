@@ -1,0 +1,66 @@
+{
+  "protocol": "landmark-and-geometric-words-only-v1",
+  "input_fields": [
+    "public_landmark_name",
+    "adjacent_geometric_words",
+    "public_polygon"
+  ],
+  "forbidden": [
+    "original_instruction_embedding",
+    "target_appearance",
+    "target_class",
+    "intermediate_objects",
+    "RGB",
+    "GT_as_input",
+    "old_pretrained_Geometry"
+  ],
+  "data_sha256": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+  "public_catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "model_sha256": "c0ef142677b048004e518cbc92e1b9c66298af9e7121ebc3b06fe9364b513393",
+  "extractor_sha256": "642dad23f3fefa160dfd2a15c1d901875af148fc7009992255c8d365c9ac2e3a",
+  "training_sha256": "07f5549d28a391942b0e3d70464150e0af446d230f8ea289f3beec523769b01b",
+  "seed": 42,
+  "epochs": 3,
+  "batch_size": 16,
+  "lr": 0.0002,
+  "n_train_all": 21878,
+  "expected_train_records": 21878,
+  "fit_queries": 14259,
+  "dev_queries": 7619,
+  "fit_maps": [
+    "cambridge_block_12",
+    "cambridge_block_13",
+    "cambridge_block_17",
+    "cambridge_block_18",
+    "cambridge_block_19",
+    "cambridge_block_20",
+    "cambridge_block_21",
+    "cambridge_block_23",
+    "cambridge_block_25",
+    "cambridge_block_28",
+    "cambridge_block_33",
+    "cambridge_block_4",
+    "cambridge_block_6",
+    "cambridge_block_7",
+    "cambridge_block_9"
+  ],
+  "dev_maps": [
+    "birmingham_block_1",
+    "birmingham_block_10",
+    "birmingham_block_11",
+    "birmingham_block_12",
+    "birmingham_block_13",
+    "birmingham_block_3",
+    "birmingham_block_4",
+    "birmingham_block_7",
+    "birmingham_block_9"
+  ],
+  "extraction_distribution": {
+    "name_only": 8290,
+    "paired": 12367,
+    "no_public_name": 987,
+    "rejected_Public landmark mentions exceed capacity": 234
+  },
+  "smoke": false,
+  "benchmark_claims": "TRAIN-Dev goal localization only; no Val/Test/SR"
+}

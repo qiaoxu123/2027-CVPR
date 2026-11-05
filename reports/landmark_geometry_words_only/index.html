@@ -1,0 +1,148 @@
+<meta charset="utf-8"><style>body{max-width:1300px;margin:auto;font:16px sans-serif}img{max-width:100%}pre{white-space:pre-wrap}</style><h1>PR22：仅地标名称＋几何词组</h1><p>全部Birmingham TRAIN-Dev，非Val/Test，不是导航SR。红星GT、白叉预测、青线公开Polygon。</p><pre>{
+  &quot;name_only&quot;: {
+    &quot;N&quot;: 7619,
+    &quot;R20&quot;: 0.09148182176138601,
+    &quot;NE_m&quot;: 81.78094482421875,
+    &quot;corrections&quot;: 0,
+    &quot;damage&quot;: 0,
+    &quot;net&quot;: 0,
+    &quot;GT20_mass&quot;: 0.06908894468821879,
+    &quot;changed_goals&quot;: 0
+  },
+  &quot;real&quot;: {
+    &quot;N&quot;: 7619,
+    &quot;R20&quot;: 0.09765061031631447,
+    &quot;NE_m&quot;: 81.08026123046875,
+    &quot;corrections&quot;: 101,
+    &quot;damage&quot;: 54,
+    &quot;net&quot;: 47,
+    &quot;GT20_mass&quot;: 0.07319531121040135,
+    &quot;changed_goals&quot;: 1013
+  },
+  &quot;scrambled_words&quot;: {
+    &quot;N&quot;: 7619,
+    &quot;R20&quot;: 0.09896311851949074,
+    &quot;NE_m&quot;: 80.15819549560547,
+    &quot;corrections&quot;: 109,
+    &quot;damage&quot;: 52,
+    &quot;net&quot;: 57,
+    &quot;GT20_mass&quot;: 0.07158533536111833,
+    &quot;changed_goals&quot;: 1656
+  }
+}</pre><img src="training_curve.png"><h2>TRAIN 263</h2><p>A gray car parked between a gray car and a black car behind the trees on Wellington Rd / Grosvenor Rd.</p><pre>[
+  {
+    &quot;name&quot;: &quot;Wellington Rd / Grosvenor Rd&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Wellington Rd / Grosvenor Rd&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  }
+]</pre><a href="belief_00263.png"><img src="belief_00263.png"></a><h2>TRAIN 340</h2><p>The gray car in front of the St. Teresa of the Child Jesus Catholic Church and beside small building.</p><pre>[
+  {
+    &quot;name&quot;: &quot;St. Teresa of the Child Jesus Catholic Church&quot;,
+    &quot;geometry_words&quot;: &quot;in front of&quot;
+  }
+]</pre><a href="belief_00340.png"><img src="belief_00340.png"></a><h2>TRAIN 341</h2><p>The gray car parked in front of the St. Teresa of the Child Jesus Catholic Church building.</p><pre>[
+  {
+    &quot;name&quot;: &quot;St. Teresa of the Child Jesus Catholic Church&quot;,
+    &quot;geometry_words&quot;: &quot;in front of&quot;
+  }
+]</pre><a href="belief_00341.png"><img src="belief_00341.png"></a><h2>TRAIN 342</h2><p>The gray car parked in front of the St. Teresa of the Child Jesus Catholic Church.</p><pre>[
+  {
+    &quot;name&quot;: &quot;St. Teresa of the Child Jesus Catholic Church&quot;,
+    &quot;geometry_words&quot;: &quot;in front of&quot;
+  }
+]</pre><a href="belief_00342.png"><img src="belief_00342.png"></a><h2>TRAIN 31</h2><p>The row of gray houses on Wellington Road, bordered by Leslie Road and Willmore Road.</p><pre>[
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Leslie Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Willmore Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  }
+]</pre><a href="belief_00031.png"><img src="belief_00031.png"></a><h2>TRAIN 32</h2><p>The row of gray houses on Wellington Road between Leslie Road and Willmore Road.</p><pre>[
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Leslie Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Willmore Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  }
+]</pre><a href="belief_00032.png"><img src="belief_00032.png"></a><h2>TRAIN 33</h2><p>The gray houses on Wellington Road between Willmore Road and Leslie Road.</p><pre>[
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;on&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Willmore Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Leslie Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  }
+]</pre><a href="belief_00033.png"><img src="belief_00033.png"></a><h2>TRAIN 205</h2><p>A white car parked in the square shaped parking area at the left side of the St Teresa of the child Jesus catholic church along the road named Wellington Road.</p><pre>[
+  {
+    &quot;name&quot;: &quot;St. Teresa of the Child Jesus Catholic Church&quot;,
+    &quot;geometry_words&quot;: &quot;the left side of&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Wellington Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  }
+]</pre><a href="belief_00205.png"><img src="belief_00205.png"></a><h2>TRAIN 2</h2><p>A big building with grey roof situated behind the St Teresa of the Child Jesus Catholic Church. A blue car and a grey car is parked close to the building. The railway track is behind the building.</p><pre>[
+  {
+    &quot;name&quot;: &quot;St. Teresa of the Child Jesus Catholic Church&quot;,
+    &quot;geometry_words&quot;: &quot;behind&quot;
+  }
+]</pre><a href="belief_00002.png"><img src="belief_00002.png"></a><h2>TRAIN 3</h2><p>This is a building with a gray roof located behind St. Teresa of the Child Jesus Catholic Church. There are a couple of cars parked nearby this building. One is blue and one is white.</p><pre>[
+  {
+    &quot;name&quot;: &quot;St. Teresa of the Child Jesus Catholic Church&quot;,
+    &quot;geometry_words&quot;: &quot;behind&quot;
+  }
+]</pre><a href="belief_00003.png"><img src="belief_00003.png"></a><h2>TRAIN 0</h2><p>The large blue and white building that goes around the huge parking lot with the The Gym, Nike Factory Store and The Food Warehouse.</p><pre>[
+  {
+    &quot;name&quot;: &quot;The Gym&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  },
+  {
+    &quot;name&quot;: &quot;Nike Factory Store&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  },
+  {
+    &quot;name&quot;: &quot;The Food Warehouse&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  }
+]</pre><a href="belief_00000.png"><img src="belief_00000.png"></a><h2>TRAIN 1</h2><p>A beige and brown house with a dark gray roof cut off by the edge of the map with a white car in front of it off Grosvenor Road</p><pre>[
+  {
+    &quot;name&quot;: &quot;Grosvenor Road&quot;,
+    &quot;geometry_words&quot;: &quot;&quot;
+  }
+]</pre><a href="belief_00001.png"><img src="belief_00001.png"></a><h2>TRAIN 30</h2><p>The whole section of buildings beside the and including the bright orange buildings on Wellington street between Leslie and Willmore.</p><pre>[]</pre><a href="belief_00030.png"><img src="belief_00030.png"></a><h2>TRAIN 54</h2><p>Two-story brown house with a gray roof that is second from the edge of the map of Wilmore Road, that has one white car and one black car in front of it and a green pool in the backyard</p><pre>[]</pre><a href="belief_00054.png"><img src="belief_00054.png"></a>
