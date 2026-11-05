@@ -58,22 +58,34 @@ class StableNavigationGoal:
             raise ValueError("Out-of-bounds Goal candidate")
         self.decisions += 1
         event = "kept"
+        replan_block_reason = "none"
+        visual_ready = bool(
+            visual_active and tracking is not None
+            and tracking.get("state") == "tracking"
+            and float(tracking.get("visual_gain", 0.0)) > 0
+        )
+        advantage = 0.0
         if self.goal_id is None:
             self.goal_id = best_id
             event = "initialized"
         else:
-            strong_visual = bool(
-                visual_active
-                and tracking is not None
-                and tracking.get("state") == "tracking"
-                and float(tracking.get("visual_gain", 0.0)) > 0
-                and field.visual_coverage is not None
-                and bool(field.visual_coverage[0, best_id] > 0)
+            candidate_covered = bool(
+                field.visual_coverage is not None
+                and field.visual_coverage[0, best_id] > 0
             )
+            strong_visual = visual_ready and candidate_covered
             advantage = float(
                 (field.belief_logits[0, best_id]
                  - field.belief_logits[0, self.goal_id]).detach()
             )
+            if best_id == self.goal_id:
+                replan_block_reason = "same_goal"
+            elif not visual_ready:
+                replan_block_reason = "no_current_confirmed_visual_evidence"
+            elif not candidate_covered:
+                replan_block_reason = "new_goal_outside_observed_support"
+            elif advantage < self.config.replan_logit_margin:
+                replan_block_reason = "insufficient_logit_advantage"
             if (best_id != self.goal_id and strong_visual
                     and advantage >= self.config.replan_logit_margin):
                 if self.pending_id == best_id:
@@ -82,12 +94,14 @@ class StableNavigationGoal:
                     self.pending_id = best_id
                     self.pending_count = 1
                 event = "pending"
+                replan_block_reason = "awaiting_repeated_confirmation"
                 if self.pending_count >= self.config.replan_confirmations:
                     self.goal_id = best_id
                     self.replans += 1
                     self.pending_id = None
                     self.pending_count = 0
                     event = "replanned"
+                    replan_block_reason = "none"
             else:
                 self.pending_id = None
                 self.pending_count = 0
@@ -122,4 +136,7 @@ class StableNavigationGoal:
             decisions=self.decisions,
             preserves_dense_visual_belief=True,
             stop_guard_unchanged=True,
+            replan_block_reason=replan_block_reason,
+            replan_logit_advantage=advantage,
+            confirmed_visual_evidence=visual_ready,
         )
