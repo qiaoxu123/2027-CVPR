@@ -18,6 +18,8 @@ def main():
     for k in ('selection','stage1','original-v2','checkpoint','sbf-source','config','data-root','output'):
         p.add_argument('--'+k,type=Path,required=True)
     p.add_argument('--pilot',action='store_true');p.add_argument('--resume',action='store_true')
+    p.add_argument('--keep-going-on-error',action='store_true',
+                   help='Formal diagnostic: retain failed episodes in denominator and finish all tasks')
     a=p.parse_args();sys.path.insert(0,str(a.sbf_source))
     from sbfnav.config import load_config, apply_overrides, validate_config
     from sbfnav.dataset import CityReferCatalog
@@ -41,6 +43,7 @@ def main():
     manifest=dict(checkpoint_sha256=file_sha256(a.checkpoint),stage1_sha256=file_sha256(a.stage1),
         original_v2_sha256=file_sha256(a.original_v2),selection_sha256=file_sha256(a.selection/'tasks_public.json'),
         protocol=asdict(protocol),methods=['Geometry','Relation','RGB'],eligible_tasks=len(tasks),
+        keep_going_on_error=a.keep_going_on_error,
         pilot_indices=selection['pilot_indices'],GT_online=False,RGB_yaw='unchanged actual pose',
         code_sha256={k:file_sha256(k) for k in [__file__,'graphnav/direct_target_runtime.py',
             'graphnav/direct_target.py','graphnav/unified_pgvb.py','graphnav/pgvb_observation.py',
@@ -104,7 +107,7 @@ def main():
                     peak_gpu_GiB=torch.cuda.max_memory_allocated()/2**30)
                 stream.write(json.dumps(row)+'\n');stream.flush();rows.append(row);completed.add((index,method))
                 print(json.dumps(dict(index=index,method=method,termination=termination,**metrics)),flush=True)
-                if error:
+                if error and not a.keep_going_on_error:
                     # Stop on the first interface failure. It is retained as a
                     # failure; fix evidence before spending GPU on the full set.
                     raise RuntimeError(error)
