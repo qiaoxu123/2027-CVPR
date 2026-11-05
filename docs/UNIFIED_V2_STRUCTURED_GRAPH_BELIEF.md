@@ -41,9 +41,9 @@
   但只有存在可信可绑定解析路径的任务会有新增头梯度。
 - Birmingham 属于这 21,878 条 TRAIN 中的一部分，
   此处报告 R@20m、NE 是训练内诊断，不是独立验证。
-- 暂不运行 Val/Test/2470 闭环；先检查图解析覆盖、模型是否使用关系边、
-  node order invariance 和基础定位变化。需要增益后再实现正确的
-  UnifiedPGVBFullRelationPolicy runtime 融合并跑全量 Val-Seen。
+- 先检查图解析覆盖、模型是否使用关系边、node order invariance 和基础定位变化。
+  新增 opt-in UnifiedGraphBeliefPolicy 供通过这些测试后进行全量
+  Val-Seen 真实闭环；Val/Test 不是本地训练的输入。
 
 ### 本地命令
 
@@ -59,7 +59,7 @@ OBJECTS=/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.j
 OUT=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_graph_belief_s42_20261106
 
 # 0. 验证 PR24 两层图模型 CPU 测试，不运行旧 PR19 需要人工确认标签的训练脚本
-"$PY" -m pytest -q tests/test_unified_instruction_graph_belief.py
+"$PY" -m pytest -q tests/test_unified_instruction_graph_belief.py tests/test_unified_instruction_graph_runtime.py
 
 # 1. 一次性生成全部弱图提案（原始完整指令 + PUBLIC map catalog）
 # 首次执行前检查：本地 python 可 import spacy / en_core_web_sm
@@ -106,10 +106,10 @@ manifest SHA 检查原训练文件、图文件、代码和基线权重。
 6. 对全 Birmingham TRAIN 诊断报告基础/图增强 R@20m、NE、
    修复/破坏，并分直接、间接、无路径分组；若图引入较多破坏，
    先检查解析准确性，不以更多 Epoch/更大模型掩盖问题。
-7. 当前第一阶段没有 Graph 的在线 runtime 闭环接入代码，
-   不能直接用原 Unified Policy 声称新图模型的导航 SR。
-   需要先对齐实际在线 catalog/Polygon/episode 信息，再实现
-   残差注入 GoalField 的 Top-K、context 和 Stop 链路。
+7. 新增在线 UnifiedGraphBeliefPolicy 和 --graph-head-checkpoint，
+   但必须先通过本地 GPU/在线原始协议 Smoke 验证 ID 绑定、
+   关系路径激活比例、无路径严格回退、GoalField Top-K/context 同步重排、
+   Stop 完全未改动。然后才可以跑全量2470 Val-Seen，不能先声称SR。
 
 ## 已知风险
 
@@ -122,3 +122,43 @@ manifest SHA 检查原训练文件、图文件、代码和基线权重。
 - 两层图消息传递可编码目标 -> 区域 -> 地标的两跳，但
   不能自动推导未知 intermediate 的物理坐标；
   这需要后续几何弱监督或可靠视觉观测，不应从最终 Goal Loss 猜。
+
+
+## 可选后续：在线真实 Val-Seen（先检查离线报告）
+
+如果 full/report.json 无重大退化并且本地在线接口 Smoke 通过，
+可通过新 flag 加载图头。flag 不设置时仍然是原 Unity V2 Policy，
+不改变既有实验。新 wrapper 用原始 PublicEpisode/Catalog，
+只为图支路恢复 public ID 的边侧映射，不修改原静态输入；
+图修正之后重排 logits、TopK、候选坐标和128维上下文，
+原 StableGoal/Trajectory/Stop 继续原样运行。
+
+注意：现有 evaluate_closedloop 的 unified-relation 模式
+严格要求全量 Val-Seen，不支持 --max-episodes 的小样本。
+CPU 合成 Smoke 应先通过上述两个 test，再进行下面完整评测。
+
+~~~bash
+STAGE=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt
+V2=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_pgvb_v2_pilot_s42/full_training/last.pt
+SBF=/home/20261024_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source
+DATA=/home/20261024_1/Workspace/DATA/sbfnav-data
+
+"$PY" -u -m scripts.evaluate_closedloop \
+  --model unified-relation \
+  --split val_seen \
+  --sbf-source "$SBF" \
+  --config "$SBF/configs/sbfnav/main.yaml" \
+  --data-root "$DATA" \
+  --checkpoint "$STAGE" \
+  --unified-v2 "$V2" \
+  --relation-checkpoint "$RUN/core/last.pt" \
+  --relation-control full \
+  --relation-visual-control off \
+  --relation-geometry-source trained \
+  --graph-head-checkpoint "$OUT/full/last.pt" \
+  --output "$OUT/val_seen_graph"
+~~~
+
+报告最终2470条相同任务 SR、OSR、SPL、NE、纠正/破坏，
+以及 graph_supported 覆盖率、未能绑定Polygon的任务、Goal错误
+与Stop错误。复用已完成全文指令Val-Seen结果作基线，无需重训。
