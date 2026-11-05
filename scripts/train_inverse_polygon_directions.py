@@ -191,7 +191,7 @@ def save_figures(model,group,bert_vectors,output,device,max_pairs=4):
             for i,ax in enumerate(axes.flat):
                 z=p[i].reshape(28,28)
                 extent=batch["bounds"][i]
-                ax.imshow(z,origin="lower",extent=extent,interpolation="nearest",
+                ax.imshow(z,origin="lower",extent=[extent[0],extent[2],extent[1],extent[3]],interpolation="nearest",
                           cmap="inferno",aspect="auto")
                 anchor=np.asarray(g["outline"][i,0,:,:2])
                 # Outline tokens are normalized to map frame; recover physical XY.
