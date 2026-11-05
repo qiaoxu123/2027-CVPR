@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import time
 from collections import Counter
 from pathlib import Path
 
@@ -25,7 +26,7 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader,Dataset,Subset
 
-from graphnav.checkpointing import atomic_json,atomic_save,file_sha256
+from graphnav.checkpointing import atomic_json,atomic_save,file_sha256,rng_state,restore_rng
 from graphnav.geometry import grid_centers,normalize_xy
 from graphnav.landmark_geometry_words import extract_landmark_geometry
 from graphnav.landmark_geometry_only_model import LandmarkGeometryWordsOnly
@@ -42,6 +43,7 @@ class LandmarkWordsDataset(Dataset):
     def __init__(self,train_jsonl,public_objects_path,*,max_anchors=M):
         self.records=[]
         self.counter=Counter()
+        self.scrambled_words={}
         catalog=json.loads(Path(public_objects_path).read_text())
         public_names=PublicNames(catalog)
         source=[json.loads(s) for s in Path(train_jsonl).read_text().splitlines() if s.strip()]
@@ -83,6 +85,19 @@ class LandmarkWordsDataset(Dataset):
         if len(self.records)!=len(source):
             raise AssertionError("TRAIN query coverage changed")
 
+    def set_scrambled_words(self,ids,seed=42):
+        # Permute distinct query/name phrases globally, keeping same-name Polygon
+        # parts tied together. Never change which slots originally carried words.
+        units={}
+        for i in ids:
+            for a in self.records[i]['anchors']:
+                if a['geometry_words']:units[(i,a['name'],a['geometry_words'])]=a['geometry_words']
+        keys=sorted(units);values=[units[k] for k in keys];random.Random(seed).shuffle(values)
+        mapping=dict(zip(keys,values));self.scrambled_words={}
+        for i in ids:
+            self.scrambled_words[i]=[mapping[(i,a['name'],a['geometry_words'])] if a['geometry_words'] else '' for a in self.records[i]['anchors']]
+        return dict(units=len(keys),changed=sum(units[k]!=mapping[k] for k in keys),seed=seed)
+
     def __len__(self):return len(self.records)
 
     def __getitem__(self,idx):
@@ -95,8 +110,10 @@ class LandmarkWordsDataset(Dataset):
             contours[i]=np.asarray(anchor["contour"],np.float32)
             valid[i]=True;word_valid[i]=bool(anchor["geometry_words"])
         # Labels are explicitly NOT part of the input dictionary.
+        extra={}
+        if idx in self.scrambled_words:extra['scrambled_geometry_words']=self.scrambled_words[idx]+['']*(M-len(row['anchors']))
         return dict(
-            model_inputs=dict(name_text=names,geometry_words=words,
+            model_inputs=dict(**extra,name_text=names,geometry_words=words,
                               contours=torch.from_numpy(contours),
                               anchor_mask=torch.from_numpy(valid),
                               word_mask=torch.from_numpy(word_valid)),
@@ -107,8 +124,10 @@ class LandmarkWordsDataset(Dataset):
 
 def collate(items):
     inp=[row["model_inputs"] for row in items]
+    extra={}
+    if all('scrambled_geometry_words' in s for s in inp):extra['scrambled_geometry_words']=[s['scrambled_geometry_words'] for s in inp]
     return dict(
-        model_inputs=dict(
+        model_inputs=dict(**extra,
             name_text=[s["name_text"] for s in inp],
             geometry_words=[s["geometry_words"] for s in inp],
             contours=torch.stack([s["contours"] for s in inp]),
@@ -131,15 +150,16 @@ def encode_model_inputs(batch,bert,device,*,control="real"):
     words=torch.zeros_like(name)
     name_entries=[(i,j,s) for i,group in enumerate(inputs["name_text"])
                   for j,s in enumerate(group) if mask[i,j]]
-    phrase_entries=[(i,j,s) for i,group in enumerate(inputs["geometry_words"])
+    if control=='scrambled_words' and 'scrambled_geometry_words' not in inputs:
+        raise ValueError('Scrambled control requires a frozen dataset-level permutation')
+    phrase_text=inputs['scrambled_geometry_words'] if control=='scrambled_words' else inputs['geometry_words']
+    phrase_entries=[(i,j,s) for i,group in enumerate(phrase_text)
                     for j,s in enumerate(group) if word_mask[i,j]]
     if name_entries:
         encoded=bert.encode([s for _,_,s in name_entries]).detach().clone().float()
         for k,(i,j,_) in enumerate(name_entries):name[i,j]=encoded[k]
     if phrase_entries and control!="name_only":
         encoded=bert.encode([s for _,_,s in phrase_entries]).detach().clone().float()
-        if control=="scrambled_words" and len(phrase_entries)>1:
-            encoded=encoded.roll(1,0)  # preserves number of word-bearing nodes
         for k,(i,j,_) in enumerate(phrase_entries):words[i,j]=encoded[k]
     if control=="name_only":
         word_mask=torch.zeros_like(word_mask)
@@ -182,10 +202,13 @@ def report_stat(stats):
 
 
 @torch.no_grad()
-def evaluate(model,bert,dataset,ids,device,batch_size,max_batches=0):
+def evaluate(model,bert,dataset,ids,device,batch_size,max_batches=0,prediction_output=None):
     model.eval()
+    shuffle_audit=dataset.set_scrambled_words(ids)
     loader=DataLoader(Subset(dataset,ids),batch_size=batch_size,
                       collate_fn=collate,shuffle=False,num_workers=0)
+    predictions={arm:[] for arm in ("name_only","real","scrambled_words")}
+    evaluated_ids=[]
     stats={cat:{arm:_empty_stat() for arm in ("name_only","real","scrambled_words")}
            for cat in ("all","paired","name_only_input","no_public_name")}
     for num,batch in enumerate(loader):
@@ -194,6 +217,8 @@ def evaluate(model,bert,dataset,ids,device,batch_size,max_batches=0):
         for arm in ("name_only","real","scrambled_words"):
             x=encode_model_inputs(batch,bert,device,control=arm)
             outputs[arm]=model(**x)
+        for arm,output in outputs.items():predictions[arm].append(output.cpu())
+        evaluated_ids.extend(ids[num*batch_size:num*batch_size+len(batch["status"])])
         base=outputs["name_only"]
         target=batch["label_xy"].to(device)
         scale=batch["map_sizes"].to(device)
@@ -210,8 +235,11 @@ def evaluate(model,bert,dataset,ids,device,batch_size,max_batches=0):
                 if keep.any():
                     add_metric(stats[label][arm],base[keep],pred[keep],
                                target[keep],scale[keep])
-    return {cat:{arm:report_stat(data) for arm,data in group.items()}
-            for cat,group in stats.items()}
+    if prediction_output:
+        atomic_save(dict(ids=evaluated_ids,logits={k:torch.cat(v) for k,v in predictions.items()},shuffle=shuffle_audit,model_inputs='public names, adjacent phrases and Polygons only'),prediction_output)
+    result={cat:{arm:report_stat(data) for arm,data in group.items()} for cat,group in stats.items()}
+    result['shuffle_audit']=shuffle_audit
+    return result
 
 
 def main():
@@ -254,8 +282,13 @@ def main():
     model=LandmarkGeometryWordsOnly().to(device)
     optimizer=torch.optim.AdamW(model.parameters(),lr=a.lr,weight_decay=.01)
     bert=FrozenBERTTokens(device=device)
+    allowed_texts=sorted({s for row in dataset.records for anchor in row['anchors'] for s in (anchor['name'],anchor['geometry_words']) if s})
     cached=a.output/"bert_cache.pt"
     if a.resume and cached.exists():bert.load_cache(cached)
+    # Warm only the exact allowed public names/phrases, never the source sentence.
+    bert.encode(allowed_texts)
+    if set(bert.cache)!=set(allowed_texts):raise ValueError('Forbidden or stale text in minimal BERT cache')
+    atomic_json(dict(texts=allowed_texts,token_lengths={s:len(bert.cache[s][0]) for s in allowed_texts},pooling='one 768d CLS per name / phrase',full_instruction_encoded=False),a.output/'text_input_audit.json')
     manifest=dict(protocol=FORMAT,
         input_fields=["public_landmark_name","adjacent_geometric_words","public_polygon"],
         forbidden=["original_instruction_embedding","target_appearance","target_class",
@@ -280,6 +313,7 @@ def main():
         state=torch.load(a.output/"last.pt",map_location="cpu",weights_only=True)
         model.load_state_dict(state["model"])
         optimizer.load_state_dict(state["optimizer"])
+        restore_rng(state["rng"])
         start=int(state["epoch"]);history=state["history"]
     else:
         atomic_json(manifest,a.output/"manifest.json")
@@ -296,6 +330,7 @@ def main():
         start=0;history=[]
     print(json.dumps(dict(n_total=len(dataset),fit=len(fit),dev=len(dev),
                           extraction=dict(dataset.counter))),flush=True)
+    started=time.perf_counter()
     for epoch in range(start,a.epochs):
         order=np.random.default_rng(a.seed+epoch).permutation(fit).tolist()
         loader=DataLoader(Subset(dataset,order),batch_size=a.batch_size,
@@ -315,20 +350,24 @@ def main():
             seen+=len(label);loss_total+=float(loss.detach())*len(label);steps+=1
             if step%200==0:
                 print(json.dumps(dict(epoch=epoch+1,step=step+1,seen=seen,
-                                      loss=float(loss.detach()),grad_norm=float(grad))),flush=True)
+                                      loss=float(loss.detach()),grad_norm=float(grad),
+                                      words_grad=sum(float(x.grad.norm()) for x in model.words.parameters() if x.grad is not None),
+                                      seconds=time.perf_counter()-started,peak_GPU_GiB=torch.cuda.max_memory_allocated()/2**30)),flush=True)
         if not a.max_train_batches and seen!=len(fit):
             raise RuntimeError(f"TRAIN-Fit incomplete {seen}/{len(fit)}")
         history.append(dict(epoch=epoch+1,fit_seen=seen,steps=steps,
-                            train_loss=loss_total/max(1,seen)))
+                            train_loss=loss_total/max(1,seen),seconds=time.perf_counter()-started))
         atomic_save(dict(format=FORMAT,epoch=epoch+1,model=model.state_dict(),
                          optimizer=optimizer.state_dict(),manifest=manifest,
-                         history=history),a.output/"last.pt")
+                         history=history,rng=rng_state()),a.output/"last.pt")
         atomic_json(history,a.output/"history.json")
         bert.save_cache(cached)
         print(json.dumps(history[-1]),flush=True)
+    train_seconds=time.perf_counter()-started
     report=dict(manifest=manifest,completed_epochs=a.epochs,
                 dev=evaluate(model,bert,dataset,dev,device,a.batch_size,
-                             max_batches=a.max_dev_batches))
+                             max_batches=a.max_dev_batches,prediction_output=a.output/"dev_predictions.pt"),
+                training_seconds=train_seconds,total_training_eval_seconds=time.perf_counter()-started,peak_GPU_GiB=torch.cuda.max_memory_allocated()/2**30)
     atomic_json(report,a.output/"report.json")
     bert.save_cache(cached)
     print(json.dumps(report["dev"],indent=2),flush=True)

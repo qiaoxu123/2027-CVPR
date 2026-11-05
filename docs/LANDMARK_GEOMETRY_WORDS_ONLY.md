@@ -80,3 +80,22 @@ High R20 is not expected for instructions where many target objects share
 the exact same public landmark and geometric phrase; this input deliberately
 discards the target identity. Historical Geometry+Relation results are
 not apples-to-apples (they used full instruction and pretrained models).
+
+
+## Executed experiment (2026-11-05)
+
+See `reports/landmark_geometry_words_only/REPORT_zh.md` and `index.html`.
+All 21,878 rows accounted: 14,259 Cambridge fitting, 7,619 Birmingham held out.
+Seed42, three complete epochs, newly initialized 177,601-parameter model;
+no original Geometry/Relation/RGB checkpoint loaded. All comparisons are
+same-final-model input ablations, not separately trained best models.
+
+- Geometry phrases are globally permuted within held-out data at query/name
+  level, preserving same-name Polygon-part agreement and the original word
+  mask. Results do not depend on evaluation batch size.
+- Raw invalid/zero-area polygons are rejected; compound cardinal phrases and
+  directly attached `not` retain their exact relation text.
+- Epoch checkpoint saves optimizer/model/RNG; restore was tested without
+  changing any original experiment output.
+- Correct words R20 9.765%, name-only 9.148%, shuffled words 9.896%: no
+  demonstrated semantic advantage over shuffled phrases; no navigation claim.

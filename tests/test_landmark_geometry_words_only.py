@@ -137,3 +137,29 @@ def test_model_unknown_public_name_returns_uniform_no_target_hallucination():
     assert model.merge[-1].weight.grad.abs().sum()>0
     with pytest.raises(TypeError):
         model(**x,target_xy=torch.tensor([[.5,.5],[.5,.5]]))
+
+
+def test_self_crossing_and_zero_area_polygons_are_rejected():
+    refs=[_ref('a','One Stop',[[0,0],[1,1],[0,1],[1,0]]),_ref('b','One Stop',[[0,0],[.2,.2],[.8,.8]])]
+    data=extract_landmark_geometry('A car near One Stop.',refs)
+    assert data['anchors']==[]
+    assert data['invalid_public_contours']==2
+
+
+def test_global_scrambled_phrases_do_not_depend_on_evaluation_batch_size():
+    class Bert:
+        def encode(self,texts):
+            return torch.tensor([{'One Stop':3.,'north of':1.,'south of':2.}[s] for s in texts])[:,None].repeat(1,768)
+    def sample(word,swapped):
+        return dict(model_inputs=dict(name_text=['One Stop'],geometry_words=[word],scrambled_geometry_words=[swapped],contours=torch.zeros(1,16,2),anchor_mask=torch.ones(1,dtype=torch.bool),word_mask=torch.ones(1,dtype=torch.bool)),label_xy=torch.zeros(2),map_sizes=torch.ones(2),status='paired')
+    samples=[sample('north of','south of'),sample('south of','north of')]
+    whole=encode_model_inputs(collate(samples),Bert(),'cpu',control='scrambled_words')
+    single=torch.cat([encode_model_inputs(collate([s]),Bert(),'cpu',control='scrambled_words')['words_embedding'] for s in samples])
+    torch.testing.assert_close(whole['words_embedding'],single)
+    assert whole['words_embedding'][0,0,0]==2
+
+
+def test_compound_directions_and_direct_negation_are_not_partially_truncated():
+    for phrase in ('north-east of','north east of','southwest of','not north of'):
+        result=extract_landmark_geometry('The blue car '+phrase+' One Stop.',[_ref('a','One Stop')])
+        assert result['anchors'][0]['geometry_words']==phrase

@@ -16,13 +16,15 @@ from __future__ import annotations
 import re
 
 import numpy as np
+import shapely
 
 from .geometry import resample_contour
 
 # Store literal geometric phrase from the instruction; no rewriting it into
 # east/west/positive world XY for unknown reference frames.
+_COMPASS = r"(?:north(?:[-\s]+)?east|north(?:[-\s]+)?west|south(?:[-\s]+)?east|south(?:[-\s]+)?west|north|south|east|west)"
 _PREFIX = (
-    r"(?:to\s+the\s+)?(?:north|south|east|west|northeast|northwest|southeast|southwest)\s+of",
+    rf"(?:to\s+the\s+)?{_COMPASS}\s+of",
     r"(?:on\s+)?the\s+(?:north|south|east|west|left|right)\s+(?:hand\s+)?side\s+of",
     r"(?:to\s+the\s+)?(?:left|right)\s+of",
     r"(?:in\s+front\s+of|ahead\s+of|at\s+the\s+front\s+of)",
@@ -32,7 +34,7 @@ _PREFIX = (
     r"(?:opposite(?:\s+to)?|across\s+from|across\s+the\s+road\s+from)",
 )
 _PREFIX = re.compile(
-    r"(?<!\w)(" + "|".join(_PREFIX) + r")\s+(?:the\s+)?$", re.I
+    r"(?<!\w)((?:not\s+)?(?:" + "|".join(_PREFIX) + r"))\s+(?:the\s+)?$", re.I
 )
 _SUFFIX = re.compile(
     r"^\s*(?:'s|’s)\s+((?:north|south|east|west|left|right)\s+side)\b",re.I
@@ -92,6 +94,8 @@ def extract_landmark_geometry(instruction, landmarks, *, max_anchors=16,
         poly=np.asarray(ref.get("contour",[]),np.float32)
         if (poly.ndim!=2 or poly.shape[1]!=2 or len(poly)<3 or
                 not np.isfinite(poly).all()):
+            invalid+=1;continue
+        if not shapely.Polygon(poly).is_valid or shapely.Polygon(poly).area<=0:
             invalid+=1;continue
         try:
             contour=resample_contour(poly,contour_vertices)
