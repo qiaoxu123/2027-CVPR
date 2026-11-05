@@ -1,5 +1,10 @@
 # AerialVG-inspired CityNav relation experiment (independent implementation)
 
+> **Superseded for full experiments:** the 573-query standalone pilot below
+> remains a diagnostic. The integrated all-instruction UnifiedPGVB pipeline,
+> full TRAIN and complete Val-Seen commands are in
+> [UNIFIED_FULL_RELATION_TRAIN.md](UNIFIED_FULL_RELATION_TRAIN.md).
+
 **Status:** experimental, TRAIN-only. Not an implementation or port of the
 AerialVG authors' pretrained model, and not yet integrated into normal CityNav
 inference/Stop. Preserves the parent PR #16 behavior.
