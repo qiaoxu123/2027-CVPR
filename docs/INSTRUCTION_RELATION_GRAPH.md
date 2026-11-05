@@ -54,7 +54,8 @@ Target blue car -->right_of--> black car -->inside--> parking lot
    an external proposer/teacher, so it is **not fully end-to-end span
    detection from arbitrary raw text**.
 3. **graphnav/instruction_relation_encoder.py**: trainable text+geometry
-   graph message passing with target-node readout (2 layers default).
+   graph message passing with target-node readout (4 layers default),
+   allowing information from a four-hop reference path to reach the target.
    Accepts separately encoded node phrases and edge predicates, not a
    single mixed sentence embedding. Predicates and relation frames are
    distinct embeddings; unknown physical locations have masked geometry.
