@@ -15,7 +15,7 @@ from graphnav.renderer import CityNavObservedViewRenderer
 from graphnav.privileged_landmark_rgb import privileged_whole_landmark_rgb
 from graphnav.native_dense_regions import native_dense_regions,sparse_view
 from graphnav.observed_patch_scales import masked_native_pool
-from graphnav.polygon_guided_visual import polygon_shape_tokens
+from graphnav.complete_landmark_rgb import registered_shape_tokens,sparse_native_regions
 from graphnav.local_landmark_anchor import local_anchor_tokens,local_landmark_anchor
 
 
@@ -38,12 +38,12 @@ def encode_views(native,observations,contours,names,types,bounds):
         chunk=observations[start:start+8];batch=native.processor(images=[cv2.cvtColor(x['bgr'],cv2.COLOR_BGR2RGB) for x in chunk],return_tensors='pt').to(native.device)
         with torch.autocast('cuda',dtype=torch.bfloat16):patches=native.model.vision_model(**batch).last_hidden_state
         for obs,patch in zip(chunk,patches):
-            dense=sparse_view(native_dense_regions(obs));valid=np.array(dense['valid'])&(dense['quality'][:,0]>=.9);uv=(dense['world']-b[:2])/(b[2:]-b[:2]);valid&=(uv>=0).all(-1)&(uv<=1).all(-1)
+            dense=sparse_native_regions(obs);valid=np.array(dense['valid'])&(dense['quality'][:,0]>=.9);uv=(dense['world']-b[:2])/(b[2:]-b[:2]);valid&=(uv>=0).all(-1)&(uv<=1).all(-1)
             masks=dense['masks'].reshape(-1,576);keep=masks.any(-1);features=torch.zeros(len(masks),native.dimension,device=native.device)
             with torch.autocast('cuda',dtype=torch.bfloat16):
                 if keep.any():features[torch.from_numpy(keep).to(native.device)]=F.normalize(masked_native_pool(native.model.vision_model.head,patch,torch.from_numpy(masks[keep]).to(native.device)).float(),dim=-1)
             anchor=local_landmark_anchor(contours,obs)
-            shape=polygon_shape_tokens(contours,obs['footprint_world']) if anchor['local_geometry'].is_empty else local_anchor_tokens(contours,obs['footprint_world'])
+            shape=registered_shape_tokens(contours,obs['footprint_world'])
             result.append(dict(image_features=features.reshape(144,3,-1).cpu().half().clone(),valid=torch.from_numpy(valid),local_uv=torch.from_numpy(uv).float(),name_text=name,type_text=typ,polygon_tokens=torch.from_numpy(shape)))
             side=float(np.linalg.norm(np.array(obs['footprint_world'])[1]-np.array(obs['footprint_world'])[0]))
             stats.append(dict(source_valid_fraction=float(obs['depth_valid'].mean()),valid_patches=int(valid.sum()),positive_anchor_patches=anchor['positive_patches'],polygon_in_view_fraction=anchor['whole_fraction'],side_m=side,meters_per_pixel=side/384,meters_per_patch=side/24,image_SHA256=hashlib.sha256(obs['bgr'].tobytes()).hexdigest()))

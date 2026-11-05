@@ -68,3 +68,31 @@ def refine_views(model,base,dense,packs,*,joint=False,control='real'):
     update=evidence/5
     if joint:update=update+model.joint_logits(torch.cat((dense.float(),evidence[...,None],covered.float()[...,None]),-1)).squeeze(-1)
     return base+.5*torch.tanh(update)*covered,covered
+
+
+def registered_shape_tokens(contours,footprint):
+    """A line/point contact is not a local visual area; retain global shape."""
+    from .polygon_guided_visual import polygon_shape_tokens
+    from .local_landmark_anchor import local_anchor_tokens
+    local=named_union(contours).intersection(shapely.Polygon(footprint))
+    if local.is_empty or local.area<=0:return polygon_shape_tokens(contours,footprint)
+    return local_anchor_tokens(contours,footprint)
+
+
+def sparse_native_regions(observation):
+    """Exact sparse_view(native_dense_regions), without 576 Python ROI loops."""
+    from .landmark_projection import frame_to_world
+    from .native_dense_regions import SPARSE_IDS
+    rgb=np.asarray(observation['bgr']);depth=np.asarray(observation['depth_valid'],bool)
+    if rgb.shape!=(384,384,3) or depth.shape!=(384,384):raise ValueError('Native384 RGB validity required')
+    support=(rgb.max(-1)>0)&depth;patch=support.reshape(24,16,24,16).mean((1,3))>=.9
+    flat=patch.ravel();ids=SPARSE_IDS;x=ids%24;y=ids//24
+    yy,xx=np.meshgrid(np.arange(24),np.arange(24),indexing='ij')
+    radius=np.array([0,1,3])[None,:,None,None]
+    windows=(abs(xx[None,None]-x[:,None,None,None])<=radius)&(abs(yy[None,None]-y[:,None,None,None])<=radius)
+    valid=flat[ids].copy();masks=(windows&patch[None,None]&valid[:,None,None,None]).reshape(len(ids),3,576)
+    quality=np.zeros((len(ids),6),np.float32);quality[:,:3]=(windows&patch[None,None]).sum((2,3))/windows.sum((2,3))
+    span=float(np.linalg.norm(np.asarray(observation['footprint_world'])[1]-np.asarray(observation['footprint_world'])[0]))
+    quality[:,3]=span/24/100;quality[:,4]=support.mean();quality[:,5]=span/200
+    pixels=(np.stack((x,y),-1)+.5)*16-.5;world=frame_to_world(pixels,observation['footprint_world'],rgb.shape)
+    return dict(world=np.asarray(world,np.float32),pixels=pixels.astype(np.float32),masks=masks,quality=quality,valid=valid)

@@ -50,14 +50,14 @@ def main():
     initial_frozen=state_digest({k:v for k,v in model.state_dict().items() if not k.startswith(('pgvb.','joint_logits.'))})
     initial_train=state_digest({k:v for k,v in model.state_dict().items() if k.startswith(('pgvb.','joint_logits.'))})
     optimizer=torch.optim.AdamW([dict(params=model.pgvb.parameters(),lr=3e-5),dict(params=model.joint_logits.parameters(),lr=1e-4)],weight_decay=.01)
-    epoch=cursor=step=0;history=[];start=time.perf_counter();last=a.output/'last.pt'
+    epoch=cursor=step=effective_updates=supported_examples=0;history=[];start=time.perf_counter();last=a.output/'last.pt'
     if a.resume and last.exists():
         s=torch.load(last,map_location='cpu',weights_only=True);assert s['fingerprint']==fingerprint and s['config']==config
-        model.load_state_dict(s['model']);optimizer.load_state_dict(s['optimizer']);restore_rng(s['rng']);epoch=s['epoch'];cursor=s['cursor'];step=s['step'];history=s['history']
+        model.load_state_dict(s['model']);optimizer.load_state_dict(s['optimizer']);restore_rng(s['rng']);epoch=s['epoch'];cursor=s['cursor'];step=s['step'];history=s['history'];effective_updates=s['effective_updates'];supported_examples=s['supported_examples']
     cache=Cache(a.cache);grid=(torch.stack(torch.meshgrid(torch.arange(28),torch.arange(28),indexing='ij'),-1)[...,[1,0]].reshape(-1,2).cuda()+.5)/28
     atomic_json(dict(config=config,fingerprint=fingerprint,trainable_parameters=sum(x.numel() for x in model.parameters() if x.requires_grad),frozen_SHA256=initial_frozen,fit_queries=len(ids),Dev_used_for_selection=False),a.output/'config.json')
     def save(e,c):
-        atomic_save(dict(format=FORMAT,privileged=True,normal_navigation_allowed=False,model=model.state_dict(),optimizer=optimizer.state_dict(),rng=rng_state(),epoch=e,cursor=c,step=step,history=history,fingerprint=fingerprint,config=config),last)
+        atomic_save(dict(format=FORMAT,privileged=True,normal_navigation_allowed=False,model=model.state_dict(),optimizer=optimizer.state_dict(),rng=rng_state(),epoch=e,cursor=c,step=step,effective_updates=effective_updates,supported_examples=supported_examples,history=history,fingerprint=fingerprint,config=config),last)
     for e in range(epoch,a.epochs):
         order=ids.copy();random.Random(42+e).shuffle(order);model.train();model.geometry.eval();model.full_relation.eval()
         for c in range(cursor if e==epoch else 0,len(order),a.batch_size):
@@ -72,17 +72,17 @@ def main():
             if covered.any() and loss.requires_grad:
                 loss.backward();gn=torch.nn.utils.clip_grad_norm_([x for x in model.parameters() if x.requires_grad],1.)
                 pg=sum(float(x.grad.norm()) for x in model.pgvb.parameters() if x.grad is not None);jg=sum(float(x.grad.norm()) for x in model.joint_logits.parameters() if x.grad is not None)
-                optimizer.step()
+                optimizer.step();effective_updates+=1
             else:gn=pg=jg=0.
-            step+=1
+            step+=1;supported_examples+=int(supported.sum())
             if step==1 or step%100==0:
-                torch.cuda.synchronize();row=dict(epoch=e+1,step=step,loss=float(loss),target_CE=float(fit),KL=float(kl),supported=int(supported.sum()),gradient=float(gn),pgvb_gradient=pg,joint_gradient=jg,seconds=time.perf_counter()-start,peak_GPU_GiB=torch.cuda.max_memory_allocated()/2**30);history.append(row);print(json.dumps(row),flush=True)
+                torch.cuda.synchronize();row=dict(epoch=e+1,step=step,loss=float(loss.detach()),target_CE=float(fit.detach()),KL=float(kl.detach()),supported=int(supported.sum()),gradient=float(gn),pgvb_gradient=pg,joint_gradient=jg,seconds=time.perf_counter()-start,peak_GPU_GiB=torch.cuda.max_memory_allocated()/2**30);history.append(row);print(json.dumps(row),flush=True)
             if step%500==0:save(e,c+len(chosen))
             if a.smoke_updates and step>=a.smoke_updates:save(e,c+len(chosen));atomic_json(dict(smoke=True,step=step,history=history),a.output/'complete.json');return
         save(e+1,0);cursor=0
     assert initial_frozen==state_digest({k:v for k,v in model.state_dict().items() if not k.startswith(('pgvb.','joint_logits.'))}), 'Frozen modules changed'
     changed=initial_train!=state_digest({k:v for k,v in model.state_dict().items() if k.startswith(('pgvb.','joint_logits.'))})
     assert changed and step>0,'No parameter update; refuse training success'
-    atomic_json(dict(complete=True,step=step,epochs=a.epochs,seconds=time.perf_counter()-start,weights_changed=changed,frozen_SHA256=initial_frozen,checkpoint_SHA256=file_sha256(last),history=history),a.output/'complete.json')
+    atomic_json(dict(complete=True,step=step,effective_updates=effective_updates,supported_examples=supported_examples,epochs=a.epochs,seconds=time.perf_counter()-start,weights_changed=changed,frozen_SHA256=initial_frozen,checkpoint_SHA256=file_sha256(last),history=history),a.output/'complete.json')
 
 if __name__=='__main__':main()

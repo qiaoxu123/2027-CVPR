@@ -49,3 +49,37 @@ def test_multiview_gradient_controls_and_privileged_checkpoint_rejected():
     for c in ('zero','shuffle'):assert torch.isfinite(refine_views(model,base,dense,[p,None],control=c)[0]).all()
     torch.testing.assert_close(before,p['image_features'])
     with pytest.raises(ValueError,match='Unsupported'):load_full_relation_model(dict(format='unified-pgvb-privileged-visual-train-v1'),device='cpu')
+
+
+def test_polygon_boundary_touch_has_no_area_and_uses_shape_fallback():
+    from graphnav.complete_landmark_rgb import registered_shape_tokens
+    from graphnav.polygon_guided_visual import polygon_shape_tokens
+    from graphnav.local_landmark_anchor import local_anchor_tokens
+    poly=[[[0,0],[1,0],[1,1],[0,1]]]
+    touch=np.array([[1,0],[2,0],[2,1],[1,1]],float)
+    actual=registered_shape_tokens(poly,touch)
+    np.testing.assert_allclose(actual,polygon_shape_tokens(poly,touch))
+    overlap=np.array([[.5,0],[1.5,0],[1.5,1],[.5,1]],float)
+    np.testing.assert_allclose(registered_shape_tokens(poly,overlap),local_anchor_tokens(poly,overlap))
+
+
+def test_vectorized_sparse_regions_exactly_preserve_native_masks_and_quality():
+    from graphnav.complete_landmark_rgb import sparse_native_regions
+    from graphnav.native_dense_regions import native_dense_regions,sparse_view
+    rng=np.random.default_rng(42)
+    for angle in (0.,.5,1.57):
+        xy=np.array([[-50,-50],[50,-50],[50,50],[-50,50]],float)
+        rot=np.array([[np.cos(angle),-np.sin(angle)],[np.sin(angle),np.cos(angle)]])
+        obs=dict(bgr=rng.integers(0,256,(384,384,3),dtype=np.uint8),depth_valid=rng.random((384,384))>.05,footprint_world=xy@rot+np.array([100,200]))
+        old=sparse_view(native_dense_regions(obs));new=sparse_native_regions(obs)
+        for key in old:np.testing.assert_array_equal(old[key],new[key],err_msg=key)
+
+
+def test_complete_same_name_parts_never_uses_nearest_target_or_other_types():
+    from scripts.prepare_complete_landmark_rgb import complete_public_parts
+    original=[dict(id='1',name='Example Road',object_type='TrafficRoad',contour=[[0,0],[.2,0],[.2,.2],[0,.2]])]
+    objects={'1':dict(name='Example Road',object_type='TrafficRoad',contour=[[0,0],[2,0],[2,2],[0,2]]),'2':dict(name='Example Road',object_type='TrafficRoad',contour=[[8,8],[9,8],[9,9],[8,9]]),'3':dict(name='Example Road',object_type='Building',contour=[[0,0],[2,0],[2,2],[0,2]])}
+    out=complete_public_parts(original,objects,[0,0,10,10])
+    assert [x['id'] for x in out]==['1','2']
+    assert out[0]==original[0]
+    with pytest.raises(TypeError):complete_public_parts(original,objects,[0,0,10,10],target_xy=[0,0])

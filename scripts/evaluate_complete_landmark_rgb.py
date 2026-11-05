@@ -11,12 +11,12 @@ from scripts.train_complete_landmark_rgb import Cache,FORMAT
 
 def predict(a):
     torch.set_num_threads(4);a.output.mkdir(parents=True,exist_ok=True)
-    assert json.load(open(a.cache/'complete.json'))['complete']
     qs=json.load(open(a.inventory/'queries_public.json'));ids=[q['index'] for q in qs if q['subset']=='dev']
+    assert all((a.cache/'queries'/f'{i:05d}.pt').exists() for i in ids),'Every held-out query must be cached; no sampling'
     model=load_full_relation_model(torch.load(a.checkpoint,map_location='cpu',weights_only=True)).eval().requires_grad_(False);cache=Cache(a.cache)
     if a.trained:
         bundle=torch.load(a.trained,map_location='cpu',weights_only=True);assert bundle['format']==FORMAT and bundle['privileged'];model.load_state_dict(bundle['model'])
-        arms=[('new_current','current',True,'real'),('new_whole','whole',True,'real'),('new_multi','multi',True,'real'),('new_multi_PGVB_only','multi',False,'real'),('new_multi_zero','multi',True,'zero'),('new_multi_shuffle','multi',True,'shuffle')]
+        arms=[('new_current','current',True,'real'),('new_current_zero','current',True,'zero'),('new_current_shuffle','current',True,'shuffle'),('new_whole','whole',True,'real'),('new_multi','multi',True,'real'),('new_multi_PGVB_only','multi',False,'real'),('new_multi_zero','multi',True,'zero'),('new_multi_shuffle','multi',True,'shuffle')]
     else:arms=[('geometry_relation','current',False,'static'),('old_current','current',False,'real'),('old_whole','whole',False,'real'),('old_multi','multi',False,'real')]
     for name,arm,joint,control in arms:
         target=a.output/f'{name}.pt'
@@ -35,7 +35,7 @@ def predict(a):
 
 def score(a):
     # Run only after BOTH frozen and trained predictions are immutable on disk.
-    required=['geometry_relation','old_current','old_whole','old_multi','new_current','new_whole','new_multi','new_multi_PGVB_only','new_multi_zero','new_multi_shuffle']
+    required=['geometry_relation','old_current','old_whole','old_multi','new_current','new_whole','new_multi','new_multi_PGVB_only','new_multi_zero','new_multi_shuffle','new_current_zero','new_current_shuffle']
     for name in required:assert (a.output/f'{name}_SEALED.json').exists()
     raw=json.load(open(a.data_root/'processed_citynav/citynav_train_seen.json'));objects=json.load(open(a.data_root/'cityrefer/objects.json'))
     qs=json.load(open(a.inventory/'queries_public.json'));labels=json.load(open(a.inventory/'labels_private.json'));groups=json.load(open(a.inventory/'groups.json'))

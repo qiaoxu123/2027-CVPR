@@ -5,16 +5,28 @@ from collections import Counter
 import numpy as np
 import shapely
 from graphnav.complete_landmark_rgb import tile_plan
+from graphnav.landmark_alias import canonical_name
 from graphnav.checkpointing import atomic_json,file_sha256
 
 
+def complete_public_parts(original,objects,bounds):
+    refs=list(original);ids={str(x['id']) for x in original};keys={(canonical_name(x['name']),x['object_type']) for x in original}
+    b=np.asarray(bounds)
+    for oid,obj in sorted(objects.items(),key=lambda x:str(x[0])):
+        if str(oid) in ids or (canonical_name(obj.get('name','')),obj['object_type']) not in keys:continue
+        poly=shapely.Polygon(obj['contour'])
+        if not poly.is_valid or poly.area<=0:continue
+        refs.append(dict(id=str(oid),name=obj['name'],object_type=obj['object_type'],contour=((np.asarray(obj['contour'])-b[:2])/(b[2:]-b[:2])).tolist()))
+    return refs
+
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--source',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--public-objects',type=Path,required=True);a=p.parse_args()
     if a.output.exists():raise FileExistsError('Keep previous dataset inventory')
-    a.output.mkdir(parents=True);records=[json.loads(x) for x in a.source.read_text().splitlines()];groups={};queries=[];labels=[];invalid=0
+    a.output.mkdir(parents=True);objects=json.load(open(a.public_objects));records=[json.loads(x) for x in a.source.read_text().splitlines()];groups={};queries=[];labels=[];invalid=0
     for idx,record in enumerate(records):
-        b=np.array(record['world_bounds']);names=[];types=[];contours=[];bad=[]
-        for lm in record['landmarks']:
+        b=np.array(record['world_bounds']);extra=complete_public_parts(record['landmarks'],objects[record['map_name']],b);names=[];types=[];contours=[];bad=[]
+        for lm in extra:
             c=b[:2]+np.asarray(lm['contour'])*(b[2:]-b[:2]);poly=shapely.Polygon(c)
             if not poly.is_valid or poly.area<=0:bad.append(lm['name']);invalid+=1;continue
             names.append(lm['name']);types.append(lm['object_type']);contours.append(c.tolist())
@@ -33,7 +45,7 @@ def main():
     for k,v in [('groups.json',groups),('queries_public.json',queries),('labels_private.json',labels)]:atomic_json(v,a.output/k)
     atomic_json([x for x in labels if queries[x['index']]['subset']=='fit'],a.output/'fit_labels_private.json')
     counts=Counter(q['subset'] for q in queries);tiles=[len(x['plan']['tiles']) for x in groups.values()]
-    report=dict(source_SHA256=file_sha256(a.source),source=str(a.source),all_queries=len(queries),split=dict(counts),maps=maps,unique_reference_sets=len(groups),
+    report=dict(public_objects_SHA256=file_sha256(a.public_objects),reference_expansion='All same-map canonical-name and same-type public pieces, never GT selected',source_SHA256=file_sha256(a.source),source=str(a.source),all_queries=len(queries),split=dict(counts),maps=maps,unique_reference_sets=len(groups),
         unique_raster_views=sum(1+n for n in tiles),max_tiles=max(tiles),median_tiles=float(np.median(tiles)),no_public_polygon=sum(q['group'] is None for q in queries),invalid_public_parts=invalid,
         split_protocol='Cambridge fit / Birmingham Dev: map and city-name physical references disjoint; frozen core has trained on all TRAIN',GT_selects_crops=False,
         scales_m=[128,64],local_context_m=32.,margin_fraction=.25,all_inputs_privileged=True,normal_navigation_allowed=False)
