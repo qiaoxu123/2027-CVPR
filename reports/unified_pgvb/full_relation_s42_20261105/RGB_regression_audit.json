@@ -1,0 +1,841 @@
+{
+  "summary": {
+    "corrections": 2,
+    "damage": 8,
+    "damage_entered20m": 8,
+    "damage_with_replan": 8,
+    "GT_posthoc_only": true
+  },
+  "tasks": [
+    {
+      "index": 351,
+      "change": "correction",
+      "instruction": "The building on Bragg Road that has a small white car on the street in front of it and a large tree across the street.",
+      "map_name": "birmingham_block_3",
+      "before": {
+        "SR": 0.0,
+        "OSR": 0.0,
+        "SPL": 0.0,
+        "NE": 31.192007284175165,
+        "nDTW": 0.12731498751587894,
+        "sDTW": 0.0,
+        "steps": 8,
+        "path_length": 237.23632992109958,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 23.207904305309057
+      },
+      "after": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 1.0,
+        "NE": 16.968221054567405,
+        "nDTW": 0.16104601388653594,
+        "sDTW": 0.16104601388653594,
+        "steps": 8,
+        "path_length": 251.67975972819528,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 66.46426337667639
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 5,
+          "old_goal": [
+            592.857177734375,
+            321.4285583496094
+          ],
+          "new_goal": [
+            592.857177734375,
+            335.71429443359375
+          ],
+          "old_GT_distance_m": 31.192007284175165,
+          "new_GT_distance_m": 16.96842525948167,
+          "stop_probability": 0.5632266402244568,
+          "predicted_goal_distance_m": 16.242788314819336,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 20,
+            "negative_patches": 66,
+            "visual_auc": 0.9954544901847839,
+            "visual_margin": 7.543249130249023,
+            "counterfactual_auc": 0.3905302882194519,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.9196875095367432,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 657,
+            "held_goal_id": 657,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 6,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.6180419921875,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 690,
+      "change": "damage",
+      "instruction": "A white car is parked at the right side parking area of Perry Barr Bus Depot, no car parked at its left, right and back side.",
+      "map_name": "birmingham_block_9",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.9538624871948861,
+        "NE": 12.107392859512615,
+        "nDTW": 0.296753762007674,
+        "sDTW": 0.296753762007674,
+        "steps": 7,
+        "path_length": 201.34925848172628,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 23.560285102576017
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 27.992686177327833,
+        "nDTW": 0.27680272844343984,
+        "sDTW": 0.0,
+        "steps": 9,
+        "path_length": 221.6050578649012,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 63.6752522084862
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 6,
+          "old_goal": [
+            950.0,
+            821.4285888671875
+          ],
+          "new_goal": [
+            964.2857055664062,
+            807.1428833007812
+          ],
+          "old_GT_distance_m": 12.107392859512615,
+          "new_GT_distance_m": 27.992456512718263,
+          "stop_probability": 0.2822693884372711,
+          "predicted_goal_distance_m": 20.20170021057129,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 15,
+            "negative_patches": 44,
+            "visual_auc": 0.9969696402549744,
+            "visual_margin": 8.36788272857666,
+            "counterfactual_auc": 0.5522727370262146,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.9497573375701904,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 11,
+            "held_goal_id": 11,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 7,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.6483713388442993,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 999,
+      "change": "damage",
+      "instruction": "The white car between a black car and a white car parked against the building behind the Master's Lodge.",
+      "map_name": "cambridge_block_7",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 1.0,
+        "NE": 10.80875565938723,
+        "nDTW": 0.5028010379418527,
+        "sDTW": 0.5028010379418527,
+        "steps": 9,
+        "path_length": 323.882795164987,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 22.522401390597224
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 23.043713628331147,
+        "nDTW": 0.4924061115415079,
+        "sDTW": 0.0,
+        "steps": 11,
+        "path_length": 355.86771148598694,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 56.0894487813736
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 8,
+          "old_goal": [
+            550.0374755859375,
+            692.9302978515625
+          ],
+          "new_goal": [
+            578.6160888671875,
+            707.2196044921875
+          ],
+          "old_GT_distance_m": 10.808531061672431,
+          "new_GT_distance_m": 23.04445233623633,
+          "stop_probability": 0.12214261293411255,
+          "predicted_goal_distance_m": 32.00033950805664,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 3,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 8,
+            "negative_patches": 101,
+            "visual_auc": 0.9702970385551453,
+            "visual_margin": 7.023272514343262,
+            "counterfactual_auc": 0.4981435537338257,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.8923683166503906,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 600,
+            "held_goal_id": 600,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 9,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.8444433212280273,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 1016,
+      "change": "damage",
+      "instruction": "A blue car parked next to the trash bins in the Master's Lodge parking lot. It is the first car from the entrance after the trash bins and a red car is parked on the other side.",
+      "map_name": "cambridge_block_7",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 1.0,
+        "NE": 10.558283135152847,
+        "nDTW": 0.5825557551084729,
+        "sDTW": 0.5825557551084729,
+        "steps": 8,
+        "path_length": 244.9511597255931,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 22.974066332810455
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 42.36690836095572,
+        "nDTW": 0.5365217098839556,
+        "sDTW": 0.0,
+        "steps": 10,
+        "path_length": 277.0523614304501,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 61.99952934614637
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 6,
+          "old_goal": [
+            550.0374755859375,
+            692.9302978515625
+          ],
+          "new_goal": [
+            578.6160888671875,
+            678.6410522460938
+          ],
+          "old_GT_distance_m": 10.558294464905142,
+          "new_GT_distance_m": 42.36690836095572,
+          "stop_probability": 0.08213387429714203,
+          "predicted_goal_distance_m": 31.976320266723633,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 3,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 8,
+            "negative_patches": 101,
+            "visual_auc": 0.9950494766235352,
+            "visual_margin": 11.585988998413086,
+            "counterfactual_auc": 0.40470296144485474,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.9710884690284729,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 544,
+            "held_goal_id": 544,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 7,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 1.1779561042785645,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 1037,
+      "change": "damage",
+      "instruction": "The smaller of the two green lawns enclosed by the Bodley's building.",
+      "map_name": "cambridge_block_7",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 1.0,
+        "NE": 11.780885078784186,
+        "nDTW": 0.002553771704821749,
+        "sDTW": 0.002553771704821749,
+        "steps": 9,
+        "path_length": 297.602716934297,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 23.446472128853202
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 30.651216346582743,
+        "nDTW": 0.002451155974249093,
+        "sDTW": 0.0,
+        "steps": 12,
+        "path_length": 318.1117032290836,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 58.80926087355384
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 8,
+          "old_goal": [
+            407.1446533203125,
+            778.666015625
+          ],
+          "new_goal": [
+            421.4339294433594,
+            764.3767700195312
+          ],
+          "old_GT_distance_m": 11.780841729883802,
+          "new_GT_distance_m": 30.651232708841274,
+          "stop_probability": 0.46596336364746094,
+          "predicted_goal_distance_m": 20.209144592285156,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 18,
+            "negative_patches": 32,
+            "visual_auc": 0.953125,
+            "visual_margin": 7.624983787536621,
+            "counterfactual_auc": 0.538194477558136,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.8778355121612549,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 701,
+            "held_goal_id": 701,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 9,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.6002657413482666,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 1095,
+      "change": "correction",
+      "instruction": "The gray house that is 4th from the left in the row of 6 houses on Park Parade.",
+      "map_name": "cambridge_block_9",
+      "before": {
+        "SR": 0.0,
+        "OSR": 0.0,
+        "SPL": 0.0,
+        "NE": 26.674279945347358,
+        "nDTW": 0.21989429439081837,
+        "sDTW": 0.0,
+        "steps": 12,
+        "path_length": 420.6293038578878,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 22.622805805160446
+      },
+      "after": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.9669762790291264,
+        "NE": 17.5686712725033,
+        "nDTW": 0.2319617992585256,
+        "sDTW": 0.2319617992585256,
+        "steps": 16,
+        "path_length": 434.94529560187993,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 53.05033675668871
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 12,
+          "old_goal": [
+            778.666015625,
+            1535.7982177734375
+          ],
+          "new_goal": [
+            778.666015625,
+            1550.08740234375
+          ],
+          "old_GT_distance_m": 26.674035061677856,
+          "new_GT_distance_m": 17.56861521866978,
+          "stop_probability": 0.6868680715560913,
+          "predicted_goal_distance_m": 14.289306640625,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 7,
+            "negative_patches": 101,
+            "visual_auc": 0.9900990128517151,
+            "visual_margin": 7.973885536193848,
+            "counterfactual_auc": 0.7411598563194275,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.7674679160118103,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 698,
+            "held_goal_id": 698,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 13,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.552678108215332,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 1210,
+      "change": "damage",
+      "instruction": "This is a Green Ground .. This area is one of the 4 green areas in the inner courtyard behind the Buttiry and Kitchen building. Two of the B 4 area is large and two are small. This area is one of the big areas and is on the side of the Buttery and Kitchen building.",
+      "map_name": "cambridge_block_9",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.8687003112266254,
+        "NE": 17.326636121544272,
+        "nDTW": 0.5071315228886867,
+        "sDTW": 0.5071315228886867,
+        "steps": 6,
+        "path_length": 130.3762318295629,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 24.029291900140898
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 35.8776685859983,
+        "nDTW": 0.4573877077818069,
+        "sDTW": 0.0,
+        "steps": 10,
+        "path_length": 159.06631243063163,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 75.8437320420688
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 6,
+          "old_goal": [
+            550.0374755859375,
+            1307.169677734375
+          ],
+          "new_goal": [
+            550.0374755859375,
+            1278.591064453125
+          ],
+          "old_GT_distance_m": 17.326696247967867,
+          "new_GT_distance_m": 35.87769762328222,
+          "stop_probability": 0.1343630850315094,
+          "predicted_goal_distance_m": 28.57861328125,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 6,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 17,
+            "negative_patches": 114,
+            "visual_auc": 0.9535604119300842,
+            "visual_margin": 8.674102783203125,
+            "counterfactual_auc": 0.4478844404220581,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.9015911221504211,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 150,
+            "held_goal_id": 150,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 7,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.6417319774627686,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 1213,
+      "change": "damage",
+      "instruction": "The lawn in the top left corner of the courtyard enclosed by the Buttery and Kitchen, when viewed aerially with Buttery and Kitchen to the left.",
+      "map_name": "cambridge_block_9",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.9258547218513887,
+        "NE": 17.3264948829099,
+        "nDTW": 0.24072582176290488,
+        "sDTW": 0.24072582176290488,
+        "steps": 6,
+        "path_length": 149.65017725421882,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 23.240757640451193
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 35.877523400783716,
+        "nDTW": 0.23412992739096058,
+        "sDTW": 0.0,
+        "steps": 8,
+        "path_length": 178.27161251181082,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 101.27181627063288
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 5,
+          "old_goal": [
+            550.0374755859375,
+            1307.169677734375
+          ],
+          "new_goal": [
+            550.0374755859375,
+            1278.591064453125
+          ],
+          "old_GT_distance_m": 17.326696247967867,
+          "new_GT_distance_m": 35.87769762328222,
+          "stop_probability": 0.23307213187217712,
+          "predicted_goal_distance_m": 28.575929641723633,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 17,
+            "negative_patches": 112,
+            "visual_auc": 0.9894958734512329,
+            "visual_margin": 9.731993675231934,
+            "counterfactual_auc": 0.48371851444244385,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.9467349052429199,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 150,
+            "held_goal_id": 150,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 6,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 1.125734567642212,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 1766,
+      "change": "damage",
+      "instruction": "The white building with a red door across from the Unitarian Hall with a yellow car and white car in front of it.",
+      "map_name": "cambridge_block_20",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.9716014887048725,
+        "NE": 12.382533602326456,
+        "nDTW": 0.07109119845477153,
+        "sDTW": 0.07109119845477153,
+        "steps": 10,
+        "path_length": 343.64910694739075,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 23.220856885679744
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 26.632408396955366,
+        "nDTW": 0.08287654539181366,
+        "sDTW": 0.0,
+        "steps": 13,
+        "path_length": 372.86755534701564,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 55.334789611931356
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 10,
+          "old_goal": [
+            1207.1446533203125,
+            1007.1946411132812
+          ],
+          "new_goal": [
+            1207.1446533203125,
+            978.6160888671875
+          ],
+          "old_GT_distance_m": 12.382533602326456,
+          "new_GT_distance_m": 26.6330597598302,
+          "stop_probability": 0.16836003959178925,
+          "predicted_goal_distance_m": 28.57855224609375,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 6,
+            "negative_patches": 68,
+            "visual_auc": 0.936274528503418,
+            "visual_margin": 6.670868873596191,
+            "counterfactual_auc": 0.6936274766921997,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.8717091083526611,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 336,
+            "held_goal_id": 336,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 11,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.7976264953613281,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    },
+    {
+      "index": 2089,
+      "change": "damage",
+      "instruction": "A blue car, the fiftth vehicle from the entrance building of Grifton West, in the rightmost row of cars in the middle section of parking in the raised parking area.",
+      "map_name": "cambridge_block_21",
+      "before": {
+        "SR": 1.0,
+        "OSR": 1.0,
+        "SPL": 0.9677821812859468,
+        "NE": 15.828261034984399,
+        "nDTW": 0.4443003925844619,
+        "sDTW": 0.4443003925844619,
+        "steps": 12,
+        "path_length": 442.4151454272506,
+        "policy_stop": 1.0,
+        "false_stop": 0.0,
+        "inference_ms": 22.5377706452631
+      },
+      "after": {
+        "SR": 0.0,
+        "OSR": 1.0,
+        "SPL": 0.0,
+        "NE": 29.935913433380065,
+        "nDTW": 0.41810118247474787,
+        "sDTW": 0.0,
+        "steps": 16,
+        "path_length": 456.80424266633804,
+        "policy_stop": 1.0,
+        "false_stop": 1.0,
+        "inference_ms": 51.69162469203858
+      },
+      "termination": "policy_stop",
+      "events": [
+        {
+          "step": 12,
+          "old_goal": [
+            1521.5089111328125,
+            1250.012451171875
+          ],
+          "new_goal": [
+            1535.7982177734375,
+            1250.012451171875
+          ],
+          "old_GT_distance_m": 15.828380159484803,
+          "new_GT_distance_m": 29.935913433380065,
+          "stop_probability": 0.7498884797096252,
+          "predicted_goal_distance_m": 14.2894287109375,
+          "tracking": {
+            "state": "tracking",
+            "reason": "rgb_discriminative",
+            "visual_gain": 2.0,
+            "consecutive_confirmations": 4,
+            "consecutive_misses": 0,
+            "acquisition_events": 1,
+            "positive_patches": 5,
+            "negative_patches": 100,
+            "visual_auc": 1.0,
+            "visual_margin": 14.863138198852539,
+            "counterfactual_auc": 0.41600000858306885,
+            "identity_independently_verified": false,
+            "method": "public_ROI_plus_RGB_contrast_and_temporal_consistency"
+          },
+          "visual_delta_max": 0.9856265187263489,
+          "stable": {
+            "event": "replanned",
+            "visual_top1_id": 107,
+            "held_goal_id": 107,
+            "held_goal_present_in_visual_topk": true,
+            "pending_goal_id": null,
+            "pending_count": 0,
+            "replan_count": 1,
+            "decisions": 13,
+            "preserves_dense_visual_belief": true,
+            "stop_guard_unchanged": true,
+            "replan_block_reason": "none",
+            "replan_logit_advantage": 0.4247112274169922,
+            "confirmed_visual_evidence": true
+          }
+        }
+      ],
+      "independently_verified_target_RGB_identity": false,
+      "public_polygon_error": "unknown: no independent reference-instance or pixel mask truth"
+    }
+  ]
+}

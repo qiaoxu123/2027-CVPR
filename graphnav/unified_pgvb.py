@@ -16,7 +16,7 @@ from .stage1 import preserved_proposal_order
 
 
 class UnifiedPGVB(nn.Module):
-    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None, direct_target=False):
+    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None, direct_target=False, full_relation=False):
         super().__init__()
         self.geometry = geometry
         self._geometry_cache = None
@@ -53,6 +53,64 @@ class UnifiedPGVB(nn.Module):
             from .direct_target import DirectTargetHead
             self.direct_target = DirectTargetHead(hidden=geometry_hidden, visual_dim=dimension)
         self.direct_target_ready = False
+        if full_relation:
+            from .aerialvg_inspired_relation import CandidateAnchorRelation
+            self.full_relation = CandidateAnchorRelation(
+                context_dim=geometry_hidden, text_dim=768,
+            )
+        self.full_relation_ready = False
+
+    def forward_full_relation(self, *, static_inputs, tokens, token_mask, node_emb,
+                              observed=None, acquisition=None, anchor_labels=None,
+                              relation_enabled=True):
+        """GT-free path for ALL CityNav instructions; parsed one-hop links optional.
+
+        Every instruction already has full BERT tokens and every public entity
+        already has candidate-to-contour geometry. The null-anchor rows retain
+        Geometry. Conditional PGVB still consumes only the current observed RGB.
+        """
+        if not hasattr(self, "full_relation"):
+            raise RuntimeError("Full relation model was not installed")
+        if not self.training and not self.full_relation_ready:
+            raise RuntimeError("Untrained full relation model cannot run")
+        evidence = self.forward_field(
+            static_inputs=static_inputs, tokens=tokens, token_mask=token_mask,
+            node_emb=node_emb, observed=observed, acquisition=acquisition,
+            anchor_labels=anchor_labels,
+        )
+        base = evidence["geometry_field"]
+        visual = evidence["field"]
+        pair_geometry = static_inputs["pair_geometry"].float()
+        # [B,Q,N,10] -> [B,N,Q,10]; N includes public named surface
+        # candidates and optional mapped roads, never target-labelled anchors.
+        references = pair_geometry.transpose(1, 2).contiguous()
+        valid = static_inputs["entity_valid"].bool()
+        # The whole original BERT instruction supplies relation semantics.
+        # Predicate IDs are an optional cue, not an eligibility filter.
+        predicates = torch.zeros_like(valid, dtype=torch.long)
+        delta = (self.full_relation(
+            base.dense_context, tokens, token_mask,
+            references, predicates, valid,
+            anchor_semantics=node_emb,
+        ) if relation_enabled else torch.zeros_like(base.belief_logits, dtype=torch.float32))
+        logits = visual.belief_logits.float() + delta.float()
+        relation_logits = base.belief_logits.float() + delta.float()
+        def make_field(scores, support=None):
+            top = scores.topk(base.candidate_ids.shape[1], -1).indices
+            context = visual.dense_context
+            return GoalField(
+                belief_logits=scores, candidate_ids=top,
+                candidate_xy=static_inputs["grid_xy"].gather(
+                    1, top[..., None].expand(-1, -1, 2)),
+                candidate_context=context.gather(
+                    1, top[..., None].expand(-1, -1, context.shape[-1])),
+                dense_context=context, visual_coverage=support,
+            )
+        return dict(geometry_field=base,
+                    relation_field=make_field(relation_logits),
+                    field=make_field(logits, visual.visual_coverage),
+                    relation_delta=delta, evidence=evidence.get("evidence"),
+                    audit=evidence["audit"])
 
     def forward_direct_target(self, *, static_inputs, tokens, token_mask, node_emb,
                               relation_geometry, relation_ids, relation_valid,

@@ -1,0 +1,73 @@
+{
+  "source_sha256": {
+    "stage1": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "original_v2": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "train_jsonl": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf"
+  },
+  "records": 21878,
+  "no_public_anchor_rows": 91,
+  "source": "complete revised CityNav TRAIN",
+  "converter_skipped_episodes": 0,
+  "converter_expected_records": 21878,
+  "eligibility_filter": null,
+  "checkpoint_format": "unified-pgvb-full-relation-v1",
+  "epochs": 5,
+  "batch_size": 8,
+  "seed": 42,
+  "min_train_records": 20000,
+  "smoke": false,
+  "max_batches": 0,
+  "lr_geometry": 1e-05,
+  "lr_relation": 0.0001,
+  "training_code_sha256": "f86c22e04298c8af6db2670d8824ef7b1d3238393c97c4b3effaec44493dc873",
+  "relation_code_sha256": "33967eb72662622f132d72c3158c8e8f206d9da91f1c32756d5122bec2af30c0",
+  "completed_epochs": 5,
+  "history": [
+    {
+      "epoch": 1,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.4524116734066093,
+      "train_fixes": 9,
+      "train_breaks": 11,
+      "wall_seconds": 465.49261541385204
+    },
+    {
+      "epoch": 2,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.4448373487503745,
+      "train_fixes": 0,
+      "train_breaks": 1,
+      "wall_seconds": 640.0084230150096
+    },
+    {
+      "epoch": 3,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.4367068829315435,
+      "train_fixes": 0,
+      "train_breaks": 0,
+      "wall_seconds": 816.8959397235885
+    },
+    {
+      "epoch": 4,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.431570435150067,
+      "train_fixes": 0,
+      "train_breaks": 0,
+      "wall_seconds": 990.473218342755
+    },
+    {
+      "epoch": 5,
+      "observed": 21878,
+      "expected": 21878,
+      "train_loss": 3.4245442201389626,
+      "train_fixes": 1,
+      "train_breaks": 0,
+      "wall_seconds": 1166.0659860176966
+    }
+  ],
+  "complete": true
+}
