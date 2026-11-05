@@ -49,6 +49,13 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
                             'anchors','structured','target_GT_used','world_bounds','start_pose'}:
             raise ValueError('Unexpected metadata in online task')
         self.direct_spec=public_task
+        # Cardinal world axes were not calibrated to geographic directions;
+        # the 80-query north/south probe failed. Keep these queries in the
+        # evaluation denominator but refuse unvalidated semantic displacement.
+        self._direction_unverified = any(
+            a["predicate"] in ("north", "south", "east", "west")
+            for a in public_task["anchors"]
+        )
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
         self.inputs=None;self.visited_goal_cells=set();self.acquisition.reset();self.stable_goal.reset();self.unified.reset_episode()
         # Several references may be valid for the *relation* head, but the
@@ -77,7 +84,7 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         start = time.perf_counter()
         observed = meta = tracking = None
         reason = "ablation_no_RGB"
-        if self.method == "RGB":
+        if self.method == "RGB" and not self._direction_unverified:
             if self._landmark is None:
                 reason = self._visual_anchor_reason
             else:
@@ -134,8 +141,10 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
             )
         key = {"Geometry": "geometry_field",
                "Relation": "relation_field", "RGB": "field"}[self.method]
-        field = result[key]
-        active = bool(admitted and result["coverage"].any())
+        field = (result["geometry_field"] if self._direction_unverified
+                 else result[key])
+        active = bool(not self._direction_unverified and admitted
+                      and result["coverage"].any())
         field, goal_audit = self.stable_goal.select(
             field, self.inputs["grid_xy"],
             tracking=tracking, visual_active=active,
@@ -144,7 +153,10 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         torch.cuda.synchronize()
         prediction.diagnostics.update(
             method=self.method, RGB_reason=reason,
-            RGB_admitted=admitted, RGB_admission_reason=admission_reason,
+            uncalibrated_direction_fallback=self._direction_unverified,
+            RGB_admitted=bool(active), RGB_admission_reason=(
+                "uncalibrated_direction" if self._direction_unverified
+                else admission_reason),
             target_identity_independently_verified=False,
             visual_active=active, tracking=tracking,
             stable_goal=goal_audit,
