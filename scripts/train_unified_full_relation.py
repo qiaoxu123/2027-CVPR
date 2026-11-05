@@ -112,11 +112,25 @@ def main():
     dataset, loader = full_loader(a.train_jsonl, actual, shuffle=True)
     if len(dataset) < 1:
         raise ValueError("Empty full CityNav TRAIN dataset")
-    # Every source row stays in the denominator; no direct-relation parser.
+    # Verify converter provenance: no silent strict-relation eligibility
+    # filtering, and explicitly surface any malformed upstream episodes.
+    provenance_path = Path(str(a.train_jsonl) + ".provenance.json")
+    converter = json.loads(provenance_path.read_text()) if provenance_path.exists() else None
+    if converter is not None:
+        if (converter.get("output_sha256") != source_sha["train_jsonl"]
+                or converter.get("static_only") is not True
+                or converter.get("dataset_version_declared") != "revised"):
+            raise ValueError("TRAIN converter provenance does not match source")
+        if converter.get("records_generated") != len(dataset.records):
+            raise ValueError("TRAIN records changed after conversion")
+    # Every successfully converted source row stays in the denominator; no
+    # direct-relation parser or GT-guided source selection.
     count = len(dataset.records)
     missing_anchor = sum(not row.get("landmarks") for row in dataset.records)
     manifest = dict(source_sha256=source_sha, records=count,
         no_public_anchor_rows=missing_anchor, source="complete revised CityNav TRAIN",
+        converter_skipped_episodes=converter.get("episodes_skipped") if converter else None,
+        converter_expected_records=converter.get("records_generated") if converter else None,
         eligibility_filter=None, checkpoint_format=FORMAT,
         epochs=a.epochs, batch_size=a.batch_size, seed=a.seed,
         smoke=bool(a.max_batches), max_batches=a.max_batches)
