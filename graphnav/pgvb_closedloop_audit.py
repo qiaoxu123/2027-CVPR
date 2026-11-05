@@ -15,9 +15,17 @@ def pack_field(field):
 
 class DecisionRecorder:
     """Called after/alongside forward; detached snapshots cannot change actions."""
-    def __init__(self,policy,output):
-        self.policy=policy;self.output=Path(output);self.output.mkdir(parents=True,exist_ok=True)
-        self.snapshot={};self.evidence=None;self.policy.audit_callback=self.capture
+    def __init__(self, policy, output, *, save_artifacts=True):
+        self.policy = policy
+        self.save_artifacts = bool(save_artifacts)
+        self.output = Path(output) if output is not None else None
+        if self.save_artifacts:
+            if self.output is None:
+                raise ValueError("Decision capture requires an output directory")
+            self.output.mkdir(parents=True, exist_ok=True)
+        self.snapshot = {}
+        # Clear any callback retained from a preceding full-capture episode.
+        self.policy.audit_callback = self.capture if self.save_artifacts else None
 
     def capture(self,original,final,evidence):
         self.snapshot={}
@@ -31,6 +39,9 @@ class DecisionRecorder:
                                  local_uv=uv[0].cpu().numpy().copy(),scores=scores[0].cpu().numpy().copy(),valid=valid[0].cpu().numpy().copy())
 
     def predict(self,state,instruction):
+        if not self.save_artifacts:
+            # Skip all per-step GPU->CPU copies, image encoding and disk I/O.
+            return self.policy.predict(state,instruction)
         self.snapshot={}
         prediction=self.policy.predict(state,instruction)
         obs=state.current_observation;stem=f'step_{state.step:02d}'

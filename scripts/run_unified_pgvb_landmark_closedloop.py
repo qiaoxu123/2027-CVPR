@@ -20,6 +20,8 @@ def main():
     for k in ('selection','checkpoint','unified-checkpoint','sbf-source','config','data-root','output'):
         p.add_argument('--'+k,type=Path,required=True)
     p.add_argument('--resume',action='store_true')
+    p.add_argument('--capture-decisions',action='store_true',
+                   help='Opt in to per-step PNG/NPZ snapshots (high disk I/O)')
     p.add_argument('--pgvb-bound',type=float,default=0.5)
     p.add_argument('--max-new-tasks',type=int)
     p.add_argument('--goal-task-index',type=int,help='One task from frozen64; no change to task selection')
@@ -66,7 +68,10 @@ def main():
             'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
         public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),
         sbf_source_sha256={str(p.relative_to(a.sbf_source)):file_sha256(p) for p in sorted(a.sbf_source.rglob('*.py'))},
-        diagnostic_capture='detached every-decision RGB/Footprint/PGVB/original/final fields; no diagnostic feedback')
+        diagnostic_capture=(
+             'full per-step PNG/NPZ snapshots; detached and read-only'
+             if a.capture_decisions else 'summary only; no per-step PNG/NPZ snapshots'
+         ))
     if a.output.exists():
         if not a.resume or json.loads((a.output/'run_manifest.json').read_text())!=fingerprint:
             raise ValueError('Refuse overwrite or resume under changed inference inputs')
@@ -105,7 +110,11 @@ def main():
                 policy_runtime.set_episode(episode,transform,catalog)
                 region=public_region(task['public_polygons'],task['world_bounds'])
                 from graphnav.pgvb_closedloop_audit import DecisionRecorder
-                recorder=DecisionRecorder(policy_runtime,a.output/'decisions'/f'{task["index"]:02d}_{method}')
+                recorder=DecisionRecorder(
+                    policy_runtime,
+                    a.output/'decisions'/f'{task["index"]:02d}_{method}',
+                    save_artifacts=a.capture_decisions,
+                )
                 poses,termination,timings,diagnostics=rollout(episode,builder,controller,recorder.predict,
                     GROUND_LEVEL[episode.map_name],protocol,synchronize=torch.cuda.synchronize)
                 metrics=polygon_trace_metrics(poses,region,termination)
