@@ -106,3 +106,20 @@ def test_not_using_noisy_direction_words():
     assert all(x["input"]["relation_phrase"] in INVERSE for x in q)
     assert not any("front" in x["input"]["instruction"] or
                    "north" in x["input"]["instruction"] for x in q)
+
+
+def test_same_polygon_four_word_sweep_does_not_read_target_label():
+    from scripts.visualize_inverse_direction_belief import run_sweep
+    target=entry(65,41,75,51)
+    anchor=entry(30,40,40,50,"One Stop")
+    records=create_pair("m","m:1:0:0","1",target,"2",anchor,[0,0,100,100])
+    row=dict(records[0])
+    row.pop("label")  # forbidden field is absent
+    model=DirectionalPolygonBelief(hidden=32,text_dim=16)
+    bert=torch.randn(4,16)
+    scores=run_sweep(model,bert,row,device="cpu")
+    assert set(scores)=={"map-right","map-left","map-up","map-down"}
+    for word,info in scores.items():
+        assert info["probability"].shape==(28,28)
+        assert info["probability"].sum()==pytest.approx(1,abs=1e-5)
+        assert len(info["centroid_xy"])==2
