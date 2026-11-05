@@ -1,0 +1,28 @@
+{
+  "config": {
+    "seed": 42,
+    "epochs": 3,
+    "batch_size": 4,
+    "arm": "multi",
+    "pgvb_lr": 3e-05,
+    "joint_lr": 0.0001,
+    "weight_decay": 0.01,
+    "clip": 1.0,
+    "preservation_KL": 0.2,
+    "target_sigma_m": 15.0,
+    "supervision_support_radius_m": 20.0,
+    "selection": "final epoch, no Dev selection",
+    "total_logit_cap": 0.5
+  },
+  "fingerprint": {
+    "cache": "cb10b90689c6001ab85de06b757d79dfd3f8018016a24a6b772a68616cf08267",
+    "source": "a552f7fd85b3648ae0694d31ebcb4ab1c46236c2bca96af3136a933888000d30",
+    "inventory": "a83d75e173346279bcdbcf4fde444b0ee5cc0975ee775b95bde0ae16e172a2ec",
+    "code": "1042726dd2675eb9af2408171dbea955a2ed7093e5d4f3f4329fbf114ef3429b",
+    "refine": "a414c435d772c149581d1a978ed47551e86b3d8b23d4964b64e22232f20989b7"
+  },
+  "trainable_parameters": 243463,
+  "frozen_SHA256": "8058bd921e4ca48367e5a6e27e01cf2d6581a5b489959009fd95eb839d4abcbe",
+  "fit_queries": 14259,
+  "Dev_used_for_selection": false
+}
