@@ -189,15 +189,13 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.inputs = None
         self.visited_goal_cells = set()
         self.pgvb_calls = 0
-        if getattr(self, "acquisition", None) is not None:
-            self.acquisition.reset()
-        if getattr(self, "stable_goal", None) is not None:
-            self.stable_goal.reset()
+        self.acquisition.reset()
+        self.stable_goal.reset()
         self._last_observation_metadata = None
         self.unified.reset_episode()
 
     def _observed_inputs(self, observation):
-        if getattr(self, "mode", "legacy") == "geometry":
+        if self.mode == "geometry":
             self._last_observation_metadata = None
             return None, "geometry_only"
         inputs, reason, metadata = encode_landmark_observation(
@@ -242,9 +240,9 @@ class UnifiedPGVBNamedLandmarkPolicy:
             torch.cuda.synchronize(self.device)
         start = time.perf_counter()
         observed, reason = self._observed_inputs(state.current_observation)
-        mode = getattr(self, "mode", "legacy")
+        mode = self.mode
         tracker = getattr(self, "acquisition", None) if mode in ("tracked", "tracked-stable") else None
-        metadata = getattr(self, "_last_observation_metadata", None)
+        metadata = self._last_observation_metadata
         labels = metadata["anchor_labels"] if metadata and observed is not None else None
         with torch.autocast(
             "cuda", dtype=torch.bfloat16,
@@ -282,11 +280,16 @@ class UnifiedPGVBNamedLandmarkPolicy:
         self.pgvb_calls += int(audit["active"])
         spec = self.instruction_spec
         tracking = audit.get("acquisition") or {}
-        region = getattr(self, "_public_region", None)
-        pose = getattr(state, "pose", None)
+        region = self._public_region
+        pose = state.pose
         public_distance = (
             float(region.distance(Point(float(pose[0]), float(pose[1]))))
-            if region is not None and pose is not None else None
+            if region is not None else None
+        )
+        nearby = (
+            self._neighbor_geometry
+            if public_distance is not None and public_distance <= 20.
+            else []
         )
         near_geometry = dict(
             public_polygon_distance_m=public_distance,
@@ -310,16 +313,8 @@ class UnifiedPGVBNamedLandmarkPolicy:
             projection_is_not_identity_proof=True,
             # Diagnostic-only public geometry. No neighboring object alters
             # the named-goal policy, gate or Stop.
-            nearby_objects_after_arrival=(
-                getattr(self, "_neighbor_geometry", [])
-                if public_distance is not None and public_distance <= 20.
-                else []
-            ),
-            nearby_object_count=(
-                len(getattr(self, "_neighbor_geometry", []))
-                if public_distance is not None and public_distance <= 20.
-                else 0
-            ),
+            nearby_objects_after_arrival=nearby,
+            nearby_object_count=len(nearby),
         )
         prediction.diagnostics.update(
             positioning_mode=mode,
@@ -343,9 +338,9 @@ class UnifiedPGVBNamedLandmarkPolicy:
             target_head_ready=False,
             language_parser=spec["version"], language_intent=spec["intent"],
             named_public_parts=len(
-                spec["landmark"].get("public_ids", []),
+                spec["landmark"]["public_ids"],
             ),
             language_target_gt_used=False,
-            landmark_visual_supported=getattr(self, "_landmark", None) is not None,
+            landmark_visual_supported=self._landmark is not None,
         )
         return prediction

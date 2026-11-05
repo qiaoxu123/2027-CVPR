@@ -191,6 +191,10 @@ def test_mixed_type_named_goal_runtime_uses_geometry_only(monkeypatch):
     policy.native = SimpleNamespace()
     policy.device = torch.device("cpu")
     policy.unified = SimpleNamespace(reset_episode=lambda: None)
+    # Production initializes both trackers; bypassing __init__ in this unit test
+    # must explicitly provide their episode-reset interfaces.
+    policy.acquisition = SimpleNamespace(reset=lambda: None)
+    policy.stable_goal = SimpleNamespace(reset=lambda: None)
     episode = SimpleNamespace(
         instruction="Navigate to Victoria Street.",
         map_name="toy",

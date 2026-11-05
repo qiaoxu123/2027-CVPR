@@ -41,6 +41,11 @@ def test_relation_and_target_heads_refuse_untrained_use():
 def test_unified_policy_does_not_call_legacy_visual_model(monkeypatch):
     obj = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
     obj.record = {"instruction": "Go to named landmark"}
+    obj.mode = "geometry"
+    obj._last_observation_metadata = None
+    obj._public_region = None
+    obj._neighbor_geometry = []
+    obj._landmark = None
     obj._initialize_geometry_inputs = lambda: None
     obj._observed_inputs = lambda observation: (None, "no_local_anchor")
     obj.inputs = {}
@@ -56,7 +61,7 @@ def test_unified_policy_does_not_call_legacy_visual_model(monkeypatch):
     obj.instruction_spec = {
         "version": "unified-instruction-v1",
         "intent": "navigate_to_landmark",
-        "landmark": {},
+        "landmark": {"public_ids": []},
     }
     obj.unified = SimpleNamespace(
         direction_ready=False,
@@ -74,7 +79,8 @@ def test_unified_policy_does_not_call_legacy_visual_model(monkeypatch):
         lambda *args: SimpleNamespace(diagnostics={}),
     )
     result = obj.predict(
-        SimpleNamespace(current_observation={}), obj.record["instruction"],
+        SimpleNamespace(current_observation={}, pose=[0., 0., 30.]),
+        obj.record["instruction"],
     )
     assert result.diagnostics["old_stage1_rgb_executed"] is False
     assert result.diagnostics["siglip2_rgb_forward"] is False

@@ -202,6 +202,8 @@ def test_real_runtime_wires_stabilized_candidate_into_frozen_controller(monkeypa
         "intent": "navigate_to_landmark", "landmark": {"public_ids": ["a"]},
     }
     obj._public_region = None
+    obj._neighbor_geometry = []
+    obj._landmark = None
 
     def check_controller(self, state, field):
         # The original frozen head receives the held Goal and fully aligned
