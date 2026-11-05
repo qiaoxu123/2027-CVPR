@@ -1,3 +1,22 @@
+## [Direct-target evidence safety] - 2026-11-05
+
+### Features
+- Rebind direct-target anchors to the current public Catalog, handling integer
+  runtime IDs and string JSON IDs without destination-dependent selection.
+- Separate effective Geometry fallback fields from rejected directional proposals
+  in rollout logs and Belief visualizations.
+- Add TRAIN synchronized direction probes, identity ambiguity audits and
+  action-equivalent Stable Goal checks. Stop/Goal thresholds unchanged.
+
+### Design Rationale
+- Anchor RGB discrimination is provisional evidence, not target-instance identity.
+- Public names/map objects are binding authority; retain homonymous union geometry
+  while abstaining from ambiguous visual identity. Keep all evaluation tasks.
+
+### Notes & Caveats
+- Direction head remains unverified; no geographic axis flip from target labels.
+- Preserve original Checkpoint/reports. Fixed56 is not full CityNav SR.
+
 ## [UnifiedPGVB direct-target pilot] - 2026-11-05
 
 ### Features

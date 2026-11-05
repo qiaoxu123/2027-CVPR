@@ -7,8 +7,37 @@ from .unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
 from .direct_target_data import load_model, relation_geometry
 from .a3_runtime import public_static_record, A3TrajectoryPolicy
 from .pgvb_observation import encode_landmark_observation
-from .local_landmark_anchor import named_public_polygons
 from .checkpointing import file_sha256
+from .unified_instruction import _public_landmark
+from .direct_target_language import PREDICATES
+from .landmark_alias import canonical_name
+
+
+def bind_public_anchors(anchors, public_objects):
+    """One authoritative public map binding for both relation and RGB branches.
+
+    Repair stale/mismatched task-file contours from the referenced PUBLIC name,
+    never from proximity to a private destination. Retain all homonymous parts.
+    """
+    if not anchors:
+        raise ValueError('A direct-target query needs a public anchor')
+    # JSON inventories use strings; the actual CityReferCatalog exposes ints.
+    public_objects = {str(key): value for key, value in public_objects.items()}
+    bound, audit = [], []
+    for anchor in anchors:
+        predicate = anchor['predicate']
+        if predicate not in PREDICATES or anchor['predicate_id'] != PREDICATES.index(predicate):
+            raise ValueError('Unsupported or inconsistent direct relation/reference frame')
+        landmark, error = _public_landmark(anchor['landmark']['name'], public_objects)
+        if error:
+            raise ValueError('Public catalog binding failed: '+error)
+        contours = [public_objects[str(oid)]['contour'] for oid in landmark['public_ids']]
+        audit.append(dict(name=landmark['name'],
+            public_IDs_changed=list(anchor['landmark']['public_ids']) != landmark['public_ids'],
+            contours_changed=anchor['contours'] != contours,
+            bound_public_ids=landmark['public_ids'], source='current_map_public_catalog'))
+        bound.append(dict(anchor, landmark=landmark, contours=contours))
+    return bound, audit
 
 
 def admissible_target_rgb(tracking, metadata, observed):
@@ -48,28 +77,33 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         if set(public_task)-{'index','episode','instruction_index','map_name','instruction',
                             'anchors','structured','target_GT_used','world_bounds','start_pose'}:
             raise ValueError('Unexpected metadata in online task')
-        self.direct_spec=public_task
+        anchors, self._binding_audit = bind_public_anchors(
+            public_task['anchors'], catalog.objects[episode.map_name])
+        if ({canonical_name(x) for x in episode.reference_names}
+                != {canonical_name(a['landmark']['name']) for a in anchors}):
+            raise ValueError('Geometry references and direct-target anchors differ')
+        self.direct_spec=dict(public_task, anchors=anchors)
         # Cardinal world axes were not calibrated to geographic directions;
         # the 80-query north/south probe failed. Keep these queries in the
         # evaluation denominator but refuse unvalidated semantic displacement.
         self._direction_unverified = any(
             a["predicate"] in ("north", "south", "east", "west")
-            for a in public_task["anchors"]
+            for a in anchors
         )
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
+        self.direct_spec['world_bounds'] = self.record['world_bounds']
         self.inputs=None;self.visited_goal_cells=set();self.acquisition.reset();self.stable_goal.reset();self.unified.reset_episode()
         # Several references may be valid for the *relation* head, but the
         # current visual head has no anchor-specific cross-attention over them.
         # Never silently pretend the first polygon is the correct RGB identity.
-        anchors = public_task["anchors"]
-        if not anchors:
-            raise ValueError("A direct-target query needs at least one public anchor")
         public_ids = anchors[0]["landmark"].get("public_ids", ())
         unique_anchor = len(anchors) == 1 and len(public_ids) == 1
-        self._visual_anchor_reason = (None if unique_anchor
-                                      else "ambiguous_multi_anchor_or_polygon")
+        supported = anchors[0]['landmark']['type'] in ('Building', 'Road')
+        self._visual_anchor_reason = (
+            'unsupported_visual_anchor_type' if not supported else
+            None if unique_anchor else 'ambiguous_multi_anchor_or_polygon')
         self._landmark = None
-        if unique_anchor:
+        if unique_anchor and supported:
             first = anchors[0]
             self._landmark = dict(name=first["landmark"]["name"],
                                   typ=first["landmark"]["type"],
@@ -139,6 +173,14 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
                 observed=observed if admitted else None,
                 target_text=self.native.texts([semantic]) if admitted else None,
             )
+        raw_relation_top1 = int(result['relation_field'].belief_logits.argmax())
+        raw_full_top1 = int(result['field'].belief_logits.argmax())
+        if self._direction_unverified:
+            # Record the effective distributions that actually reach navigation.
+            # Preserve raw outputs separately as rejected diagnostic proposals.
+            result = dict(result, rejected_relation_field=result['relation_field'],
+                          rejected_visual_field=result['field'],
+                          relation_field=result['geometry_field'], field=result['geometry_field'])
         key = {"Geometry": "geometry_field",
                "Relation": "relation_field", "RGB": "field"}[self.method]
         field = (result["geometry_field"] if self._direction_unverified
@@ -153,7 +195,9 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         torch.cuda.synchronize()
         prediction.diagnostics.update(
             method=self.method, RGB_reason=reason,
+            public_binding_audit=self._binding_audit,
             uncalibrated_direction_fallback=self._direction_unverified,
+            raw_relation_top1=raw_relation_top1, raw_full_top1=raw_full_top1,
             RGB_admitted=bool(active), RGB_admission_reason=(
                 "uncalibrated_direction" if self._direction_unverified
                 else admission_reason),

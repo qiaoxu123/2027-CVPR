@@ -123,22 +123,62 @@ def test_direct_runtime_never_silently_selects_first_of_multiple_anchors():
 
     import graphnav.direct_target_runtime as runtime
     original = runtime.public_static_record
-    runtime.public_static_record = lambda *args, **kwargs: {"instruction": "Go"}
+    original_binding = runtime.bind_public_anchors
+    runtime.public_static_record = lambda *args, **kwargs: {"instruction": "Go", "world_bounds": [0,0,2,2]}
+    runtime.bind_public_anchors = lambda anchors, objects: (anchors, [])
     try:
-        episode = SimpleNamespace(instruction="Go", map_name="A")
+        episode = SimpleNamespace(instruction="Go", map_name="A", reference_names=("One",))
         def anchor(ids):
-            return dict(landmark=dict(name="One", type="Building", public_ids=ids),
+            return dict(predicate="near", predicate_id=4,
+                        landmark=dict(name="One", type="Building", public_ids=ids),
                         contours=[[[0,0],[1,0],[1,1],[0,1]]])
         base = dict(instruction="Go", map_name="A", target_GT_used=False,
                     structured={}, world_bounds=[0,0,2,2], start_pose=[0,0,0,0])
-        policy.set_direct_episode(episode, None, None, dict(base, anchors=[anchor(["1"])]))
+        catalog = SimpleNamespace(objects={"A": {}})
+        policy.set_direct_episode(episode, None, catalog, dict(base, anchors=[anchor(["1"])]))
         assert policy._landmark is not None
-        policy.set_direct_episode(episode, None, None,
+        policy.set_direct_episode(episode, None, catalog,
                                   dict(base, anchors=[anchor(["1"]), anchor(["2"])]))
         assert policy._landmark is None
         assert policy._visual_anchor_reason == "ambiguous_multi_anchor_or_polygon"
-        policy.set_direct_episode(episode, None, None,
+        policy.set_direct_episode(episode, None, catalog,
                                   dict(base, anchors=[anchor(["1", "2"])]))
         assert policy._landmark is None
     finally:
         runtime.public_static_record = original
+        runtime.bind_public_anchors = original_binding
+
+
+def test_anchor_binding_uses_current_map_catalog_not_supplied_polygon_or_ID():
+    from graphnav.direct_target_runtime import bind_public_anchors
+    obj = {
+        '1': dict(name='Hall',object_type='Building',contour=[[0,0],[4,0],[4,4],[0,4]]),
+        '2': dict(name='Library',object_type='Building',contour=[[10,0],[14,0],[14,4],[10,4]]),
+    }
+    bad=dict(predicate='near',predicate_id=4,
+             landmark=dict(name='Hall',type='Building',public_ids=['2']),
+             contours=[obj['2']['contour']])
+    bound,audit=bind_public_anchors([bad],obj)
+    assert bound[0]['landmark']['public_ids']==['1']
+    assert bound[0]['contours']==[obj['1']['contour']]
+    assert audit[0]['public_IDs_changed'] and audit[0]['contours_changed']
+    bound_int,_=bind_public_anchors([bad],{int(k):v for k,v in obj.items()})
+    assert bound_int==bound  # real CityReferCatalog uses integer keys
+    assert bad['landmark']['public_ids']==['2']  # do not rewrite immutable input
+    with pytest.raises(ValueError,match='relation'):
+        bind_public_anchors([{**bad,'predicate':'behind'}],obj)
+    with pytest.raises(ValueError,match='relation'):
+        bind_public_anchors([{**bad,'predicate_id':0}],obj)
+
+
+def test_name_binding_keeps_every_public_polygon_and_cannot_use_another_block():
+    from graphnav.direct_target_runtime import bind_public_anchors
+    obj={str(i):dict(name='Road',object_type='TrafficRoad',
+        contour=[[i*10,0],[i*10+4,0],[i*10+4,4],[i*10,4]]) for i in (1,2)}
+    anchor=dict(predicate='along',predicate_id=7,
+        landmark=dict(name='Road',type='Road',public_ids=['1']),contours=[obj['1']['contour']])
+    bound,_=bind_public_anchors([anchor],obj)
+    assert bound[0]['landmark']['public_ids']==['1','2']
+    assert len(bound[0]['contours'])==2
+    with pytest.raises(ValueError,match='catalog'):
+        bind_public_anchors([anchor],{})

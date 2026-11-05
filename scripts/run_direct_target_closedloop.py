@@ -74,11 +74,15 @@ def main():
                 runtime.method=method;captures=[];directory=a.output/'decisions'/f'{index:04d}_{method}';directory.mkdir(parents=True,exist_ok=True)
                 def capture(state,result,field):
                     step=len(captures);file=directory/f'{step:02d}.npz'
-                    np.savez_compressed(file,pose=state.pose,footprint=state.current_observation['footprint_world'],
+                    payload=dict(pose=state.pose,footprint=state.current_observation['footprint_world'],
                         geometry=result['geometry_field'].belief_logits[0].float().cpu().numpy(),
                         relation=result['relation_field'].belief_logits[0].float().cpu().numpy(),
                         full=result['field'].belief_logits[0].float().cpu().numpy(),
                         selected_ids=field.candidate_ids[0].cpu().numpy(),coverage=result['coverage'][0].cpu().numpy())
+                    for key in ('rejected_relation_field','rejected_visual_field'):
+                        if key in result:
+                            payload[key]=result[key].belief_logits[0].float().cpu().numpy()
+                    np.savez_compressed(file,**payload)
                     cv2.imwrite(str(directory/f'{step:02d}.png'),state.current_observation['bgr'])
                     captures.append(str(file))
                 runtime.direct_audit_callback=capture

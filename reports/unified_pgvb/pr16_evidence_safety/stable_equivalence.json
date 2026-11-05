@@ -1,0 +1,23 @@
+{
+  "frames": 200,
+  "all_fields_and_state_exactly_equal": true,
+  "thresholds": {
+    "replan_logit_margin": 0.35,
+    "replan_confirmations": 2
+  },
+  "events": {
+    "initialized": 1,
+    "pending": 57,
+    "kept": 132,
+    "replanned": 10
+  },
+  "diagnostic_reasons": {
+    "none": 11,
+    "awaiting_repeated_confirmation": 57,
+    "no_current_confirmed_visual_evidence": 99,
+    "same_goal": 18,
+    "new_goal_outside_observed_support": 12,
+    "insufficient_logit_advantage": 3
+  },
+  "legacy_source_sha256": "d8664d8c5c60ab36d41f1846f4ed541ea25b7a408f784c023143c6d48151d5e0"
+}
