@@ -63,7 +63,7 @@ def main():
         PGVB='ONE integrated geometry+visual GoalField network; controller-only downstream',
         runner_sha256=file_sha256(__file__),source_sha256={k:file_sha256(Path(k)) for k in [
             'graphnav/landmark_navigation_diagnostic.py','graphnav/stage1_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py',
-            'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/pgvb_navigation_runtime.py','graphnav/full_localization.py','graphnav/candidate_geometry.py','graphnav/unified_instruction.py','graphnav/pgvb_observation.py','scripts/build_unified_pgvb_v2.py',
+            'graphnav/renderer.py','graphnav/stage1.py','graphnav/unified_pgvb_runtime.py','graphnav/unified_pgvb.py','graphnav/full_localization.py','graphnav/candidate_geometry.py','graphnav/unified_instruction.py','graphnav/pgvb_observation.py','scripts/build_unified_pgvb_v2.py',
             'graphnav/polygon_guided_visual.py','graphnav/local_landmark_anchor.py','graphnav/landmark_acquisition.py','graphnav/stable_navigation_goal.py','graphnav/landmark_neighborhood.py','graphnav/pgvb_closedloop_audit.py',
             'graphnav/native_dense_regions.py','graphnav/observed_patch_scales.py','graphnav/appearance_matching.py','graphnav/world_likelihood_evidence.py']},
         public_catalog_sha256=file_sha256(a.data_root/'cityrefer/objects.json'),config_sha256=file_sha256(a.config),

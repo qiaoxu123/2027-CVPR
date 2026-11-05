@@ -152,10 +152,8 @@ def test_runtime_refuses_target_reference_confusion_before_geometry(monkeypatch)
 
 
 def test_runtime_has_no_legacy_stage1_or_parallel_pgvb_inheritance():
-    from graphnav.stage1_runtime import GraphNavStage1Policy
-    from graphnav.pgvb_navigation_runtime import PGVBNamedLandmarkPolicy
-    assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, GraphNavStage1Policy)
-    assert not issubclass(UnifiedPGVBNamedLandmarkPolicy, PGVBNamedLandmarkPolicy)
+    # Unified runtime uses no legacy policy inheritance or external PGVB hooks.
+    assert UnifiedPGVBNamedLandmarkPolicy.__bases__ == (object,)
     assert "_pgvb_forward" not in UnifiedPGVBNamedLandmarkPolicy.__dict__
     assert "_observed_inputs" in UnifiedPGVBNamedLandmarkPolicy.__dict__
 

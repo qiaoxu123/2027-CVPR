@@ -8,7 +8,7 @@ from torch import nn
 from graphnav.full_localization import GoalField
 from graphnav.full_experiment import new_model
 from graphnav.polygon_guided_visual import PolygonGuidedVisualBelief
-from graphnav.pgvb_navigation_runtime import bounded_pgvb_field
+from graphnav.world_likelihood_evidence import world_evidence_logits
 from graphnav.unified_pgvb import UnifiedPGVB
 from scripts.build_unified_pgvb_v2 import build_unified_checkpoint
 
@@ -89,27 +89,51 @@ def test_unified_field_owns_geometry_and_preserves_controller_contract():
     assert geometry.calls == 2
 
 
-def test_integrated_visual_fusion_matches_legacy_without_external_a3():
+def test_integrated_visual_fusion_matches_frozen_bounded_equation():
+    """Independent mathematical baseline; no historical external PGVB policy."""
     torch.manual_seed(20261104)
     model = UnifiedPGVB(geometry=TinyGeometry()).eval().requires_grad_(False)
     inputs = _inputs()
     observed = _observed()
     result = model.forward_field(**inputs, observed=observed)
-    raw = model.pgvb(**{
+    scores = model.pgvb(**{
         k: v for k, v in observed.items() if k != "local_uv"
     }).float()
-    legacy, legacy_audit = bounded_pgvb_field(
-        result["geometry_field"], inputs["static_inputs"]["grid_xy"],
-        observed["local_uv"], raw, observed["valid"],
+    valid = observed["valid"]
+    centered = scores - scores[valid].mean()
+    zeros = torch.zeros_like(
+        result["geometry_field"].belief_logits, dtype=torch.float32,
+    )
+    neutral = zeros.log_softmax(-1)
+    visual = world_evidence_logits(
+        zeros, observed["local_uv"], centered, valid,
+    ) - neutral
+    covered = (
+        world_evidence_logits(
+            zeros, observed["local_uv"], torch.ones_like(centered), valid,
+        ) - neutral
+    ) > 0.5
+    expected = (
+        result["geometry_field"].belief_logits.float()
+        + 0.5 * torch.tanh(visual / 5.0) * covered
     )
     torch.testing.assert_close(
-        result["field"].belief_logits, legacy.belief_logits, atol=0, rtol=0,
+        result["field"].belief_logits, expected, rtol=0, atol=0,
+    )
+    assert result["field"].dense_context.data_ptr() == (
+        result["geometry_field"].dense_context.data_ptr()
+    )
+    ids = result["field"].candidate_ids
+    expected_xy = inputs["static_inputs"]["grid_xy"].gather(
+        1, ids[..., None].expand(-1, -1, 2),
+    )
+    torch.testing.assert_close(result["field"].candidate_xy, expected_xy, rtol=0, atol=0)
+    expected_context = result["field"].dense_context.gather(
+        1, ids[..., None].expand(-1, -1, result["field"].dense_context.shape[-1]),
     )
     torch.testing.assert_close(
-        result["field"].candidate_context, legacy.candidate_context,
-        atol=0, rtol=0,
+        result["field"].candidate_context, expected_context, rtol=0, atol=0,
     )
-    assert result["audit"]["active"] == legacy_audit["active"]
     assert model.geometry.calls == 1
 
 

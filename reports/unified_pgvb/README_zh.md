@@ -37,7 +37,7 @@ python -m pytest -q \
   tests/test_unified_instruction.py \
   tests/test_unified_pgvb.py \
   tests/test_unified_pgvb_v2.py \
-  tests/test_pgvb_navigation_runtime.py
+  tests/test_pgvb_closedloop_audit.py
 
 python -m scripts.run_unified_pgvb_landmark_closedloop \
   --selection /actual/path/to/frozen64_selection \
@@ -58,4 +58,4 @@ Smoke通过后追加--resume完成同一64条固定诊断。默认仅记录逐�
 
 当前未完成：完整TRAIN目标任务复训、真实方向关系Belief导航、目标外观Head训练与全量真实目标SR。下一阶段应先审查直接关系语言解析及关系监督，确认数据与Loss无GT泄漏后，以seed=42进行Geometry、关系Belief和PGVB核心网络的联合训练（不冻结核心网络）；冻结原Trajectory/Stop仅用于保持本轮对照一致。不得仅修改`target_ready`开关就启用未经训练的Head。始终禁止真实目标GT、未来观察或私有实例身份进入推理。
 
-历史E2/E4代码及Checkpoint保持不变，V2独立入口不直接改main。
+旧`graphnav/pgvb_navigation_runtime.py`独立策略已从当前实验分支删除。它通过旧GraphNav的forward hook进行网络外融合，现由`UnifiedPGVB.forward_field`取代。共享`polygon_guided_visual.py`、`pgvb_observation.py`和`pgvb_closedloop_audit.py`仍被现行流程使用，必须保留。历史代码可从`archive/graphnav-v1-pre-unified-20261104`或删除前提交读取。旧Run Manifest的source SHA与删除后的新运行不同，不能在同一目录续跑；请新建输出目录，不应更改旧结果。

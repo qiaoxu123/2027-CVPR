@@ -17,7 +17,7 @@
 
 **当前统一推理调用链：**`unified_instruction → unified_pgvb_runtime → UnifiedPGVB(geometry + PGVB) → StableNavigationGoal → 冻结Trajectory/Stop`。其中直接/间接目标关系Head尚未训练验收，不能把具名Polygon代理SR作为真实CityNav目标SR。
 
-`graphnav/pgvb_navigation_runtime.py`为旧版独立PGVB对照，`graphnav/stage1_runtime.py`等属于V1基线依赖；它们不再负责当前UnifiedPGVB的独立GoalField生成，但保留用于历史复现和回归测试。不要把文件存在理解为正式运行时创建了多套网络。
+旧独立PGVB策略`graphnav/pgvb_navigation_runtime.py`已从当前实验分支删除，统一使用`UnifiedPGVB.forward_field`融合视觉残差。四种Geometry/LegacyPGVB/TrackedPGVB/StableTrackedPGVB都是**统一网络的消融运行模式**，不再加载旧GraphNav+PGVB双网络。保留仍在使用的`polygon_guided_visual.py`、`pgvb_observation.py`、`pgvb_closedloop_audit.py`；`graphnav/stage1_runtime.py`继续供V1历史基线复现。旧PGVB独立策略及测试可从归档分支或删除前Commit获取。
 
 ## 历史GraphNav-V1研究主线
 

@@ -3,7 +3,28 @@ from types import SimpleNamespace
 
 import numpy as np
 
-from graphnav.pgvb_closedloop_audit import DecisionRecorder
+import torch
+
+from graphnav.full_localization import GoalField
+from graphnav.pgvb_closedloop_audit import DecisionRecorder, pack_field
+
+
+def test_pack_field_is_detached_from_live_goalfield():
+    logits = torch.tensor([[0., 1., 2., 3.]])
+    dense = torch.arange(8, dtype=torch.float32).reshape(1, 4, 2)
+    ids = torch.tensor([[3, 2]])
+    xy = torch.tensor([[[.1, .2], [.3, .4]]])
+    field = GoalField(
+        belief_logits=logits, candidate_ids=ids, candidate_xy=xy,
+        candidate_context=dense.gather(
+            1, ids[..., None].expand(-1, -1, dense.shape[-1]),
+        ),
+        dense_context=dense,
+    )
+    packed = pack_field(field)
+    packed["logits"][0] = 99.
+    assert torch.equal(field.belief_logits, logits)
+    assert packed["candidate_context"].shape == (2, 2)
 
 
 class FakePolicy:
