@@ -24,6 +24,7 @@ from graphnav.token_language import FrozenBERTTokens
 def main():
     p=argparse.ArgumentParser()
     for key in ('source','data-root','output'):p.add_argument('--'+key,type=Path,required=True)
+    p.add_argument('--belief-precision',choices=['fp32','bf16'],default='fp32')
     a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True);torch.set_num_threads(4)
     tasks=json.loads((a.source/'inventory_validated/public_tasks.json').read_text())
     labels=json.loads((a.source/'inventory_validated/private_labels.json').read_text())
@@ -70,7 +71,7 @@ def main():
                 else:tracking=tracker.observe()
                 admitted,reason=admissible_target_rgb(tracking,{'registration_only':True} if roi else None,
                                                      observed if eligible and roi else None)
-                with torch.autocast('cuda',dtype=torch.bfloat16):raw=model.forward_direct_target(**inputs)
+                with torch.autocast('cuda',dtype=torch.bfloat16,enabled=a.belief_precision=='bf16'):raw=model.forward_direct_target(**inputs)
                 fields={'Geometry':raw['geometry_field'], 'RawRelation':raw['relation_field'], 'RawRGB':raw['field']}
                 fields['SafeRelation']=fields['Geometry'] if unverified else fields['RawRelation']
                 fields['SafeRGB']=fields['Geometry'] if unverified else fields['RawRGB'] if admitted else fields['RawRelation']
@@ -109,7 +110,7 @@ def main():
                 inputs.update(static_inputs=static,tokens=tokens,token_mask=mask,node_emb=nodes,
                     relation_ids=torch.full_like(inputs['relation_ids'],word_id))
                 model.reset_episode()
-                with torch.autocast('cuda',dtype=torch.bfloat16):out=model.forward_direct_target(**inputs)
+                with torch.autocast('cuda',dtype=torch.bfloat16,enabled=a.belief_precision=='bf16'):out=model.forward_direct_target(**inputs)
                 bounds=torch.tensor(task['world_bounds'],device='cuda');world=bounds[:2]+static['grid_xy'][0]*(bounds[2:]-bounds[:2])
                 means[word]={}
                 for method,key in [('Geometry','geometry_field'),('Relation','relation_field')]:
@@ -122,6 +123,12 @@ def main():
     metrics={m:dict(R20=float(np.mean([q[m]['R20'] for q in rows])),NE=float(np.mean([q[m]['NE'] for q in rows])))
              for m in ('Geometry','RawRelation','RawRGB','SafeRelation','SafeRGB')}
     summary=dict(counts=dict(counts),cached_states=len(rows),raw_and_safe_state_metrics=metrics,
+        belief_precision=a.belief_precision,
+        state_metrics_by_subset={subset:dict(queries=len({q['index'] for q in rows if q['subset']==subset}),
+            states=sum(q['subset']==subset for q in rows),
+            **{m:dict(R20=float(np.mean([q[m]['R20'] for q in rows if q['subset']==subset])),
+                       NE=float(np.mean([q[m]['NE'] for q in rows if q['subset']==subset])))
+               for m in ('Geometry','RawRelation','RawRGB','SafeRelation','SafeRGB')}) for subset in ('fit','dev')},
         gate_accepts=sum(q['admitted'] for q in rows),probe_queries=len(probes),
         synchronized_north_above_south={m:float(np.mean([q['north_minus_south_Y'][m]>0 for q in probes]))
             for m in ('Geometry','Relation')},

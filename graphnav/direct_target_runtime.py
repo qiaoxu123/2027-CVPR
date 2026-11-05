@@ -57,7 +57,7 @@ def admissible_target_rgb(tracking, metadata, observed):
 
 
 class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
-    def __init__(self, stage1, original_v2, trained, directory, *, method='RGB'):
+    def __init__(self, stage1, original_v2, trained, directory, *, method='RGB', belief_precision='fp32'):
         super().__init__(stage1, original_v2, directory, mode='tracked-stable')
         payload=torch.load(trained,map_location='cpu',weights_only=True)
         if payload.get('format')!='unified-pgvb-direct-target-v1' or payload.get('direct_target_ready') is not True:
@@ -67,6 +67,9 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         self.unified=load_model(payload).eval().requires_grad_(False)
         if method not in ('Geometry','Relation','RGB'):raise ValueError('Unknown direct-target ablation')
         self.method=method
+        if belief_precision not in ('fp32','bf16'):
+            raise ValueError('Belief precision must be fp32 or bf16')
+        self.belief_precision=belief_precision
 
     def set_direct_episode(self, episode, transform, catalog, public_task):
         if public_task['instruction']!=episode.instruction or public_task['map_name']!=episode.map_name:
@@ -165,14 +168,19 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
             admitted, admission_reason = admissible_target_rgb(
                 tracking, meta, observed,
             )
-            result = self.unified.forward_direct_target(
+            # BF16 changed discrete grid argmax under batch-size changes on
+            # TRAIN. Only the small Geometry/target core uses FP32 by default;
+            # frozen RGB encoding and the historical controller are unchanged.
+            with torch.autocast('cuda', dtype=torch.bfloat16,
+                                enabled=self.belief_precision=='bf16'):
+                result = self.unified.forward_direct_target(
                 static_inputs=self.inputs, tokens=self.tokens,
                 token_mask=self.mask, node_emb=self.names,
                 relation_geometry=geometry, relation_ids=ids,
                 relation_valid=torch.ones_like(ids, dtype=torch.bool),
                 observed=observed if admitted else None,
                 target_text=self.native.texts([semantic]) if admitted else None,
-            )
+                )
         raw_relation_top1 = int(result['relation_field'].belief_logits.argmax())
         raw_full_top1 = int(result['field'].belief_logits.argmax())
         if self._direction_unverified:
@@ -195,6 +203,7 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         torch.cuda.synchronize()
         prediction.diagnostics.update(
             method=self.method, RGB_reason=reason,
+            belief_precision=self.belief_precision,
             public_binding_audit=self._binding_audit,
             uncalibrated_direction_fallback=self._direction_unverified,
             raw_relation_top1=raw_relation_top1, raw_full_top1=raw_full_top1,

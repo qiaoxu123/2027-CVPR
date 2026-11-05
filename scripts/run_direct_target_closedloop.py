@@ -20,6 +20,7 @@ def main():
     p.add_argument('--pilot',action='store_true');p.add_argument('--resume',action='store_true')
     p.add_argument('--keep-going-on-error',action='store_true',
                    help='Formal diagnostic: retain failed episodes in denominator and finish all tasks')
+    p.add_argument('--belief-precision',choices=['fp32','bf16'],default='fp32')
     a=p.parse_args();sys.path.insert(0,str(a.sbf_source))
     from sbfnav.config import load_config, apply_overrides, validate_config
     from sbfnav.dataset import CityReferCatalog
@@ -44,6 +45,7 @@ def main():
         original_v2_sha256=file_sha256(a.original_v2),selection_sha256=file_sha256(a.selection/'tasks_public.json'),
         protocol=asdict(protocol),methods=['Geometry','Relation','RGB'],eligible_tasks=len(tasks),
         keep_going_on_error=a.keep_going_on_error,
+        belief_precision=a.belief_precision,
         pilot_indices=selection['pilot_indices'],GT_online=False,RGB_yaw='unchanged actual pose',
         code_sha256={k:file_sha256(k) for k in [__file__,'graphnav/direct_target_runtime.py',
             'graphnav/direct_target.py','graphnav/unified_pgvb.py','graphnav/pgvb_observation.py',
@@ -63,7 +65,7 @@ def main():
     builder=NativeObservationBuilder(builder,a.data_root/'rgbd',a.output/'observations')
     controller=BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,vertical_step_m=protocol.vertical_step_m,
         minimum_above_ground_m=protocol.min_altitude_m,maximum_above_ground_m=protocol.max_altitude_m)
-    runtime=UnifiedPGVBDirectTargetPolicy(a.stage1,a.original_v2,a.checkpoint,a.output/'public_inputs')
+    runtime=UnifiedPGVBDirectTargetPolicy(a.stage1,a.original_v2,a.checkpoint,a.output/'public_inputs',belief_precision=a.belief_precision)
     assert (runtime.stop_threshold,runtime.execution,runtime.explore_candidates,runtime.stop_positive_weight)==(.3,'guarded-blend',0,20.)
     torch.cuda.reset_peak_memory_stats();started=time.perf_counter()
     with path.open('a') as stream:
