@@ -105,14 +105,15 @@ def quartet_loss(model,pack,bert_vectors,*,gap=.3):
     # than an oracle position for the counterfactual target.
     kl=(F.kl_div(logits[:2].log_softmax(-1),
                  logits[2:].softmax(-1).detach(),reduction="none").sum(-1).mean())
-    return positive+1.5*margin-0.01*kl,dict(positive=float(positive.detach()),
+    separation=F.relu(0.1-kl)
+    return positive+1.5*margin+0.1*separation,dict(positive=float(positive.detach()),
                                              ranking=float(margin.detach()),
                                              divergence=float(kl.detach()))
 
 
 def metrics(model,groups,bert_vectors,device):
     model.eval()
-    vals=[];cases=[];policies={}
+    vals=[]
     with torch.no_grad():
         for group in groups:
             q=to_device(group,device)
@@ -128,7 +129,6 @@ def metrics(model,groups,bert_vectors,device):
             d1=(cf_inv-inv)@axes[3]
             target_xy=[]
             for i in range(2):
-                poly=Polygon(q["soft_target"][i].new_tensor([]).cpu().numpy()) if False else None
                 label=q["soft_target"][i]
                 k=int(prob[i].argmax())
                 # Expected metric error relative to label-weighted polygon
