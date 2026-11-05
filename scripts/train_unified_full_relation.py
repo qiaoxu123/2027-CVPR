@@ -72,6 +72,8 @@ def main():
     p.add_argument("--lr-relation", type=float, default=1e-4)
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--resume", action="store_true")
+    p.add_argument("--min-train-records", type=int, default=20000,
+                   help="Reject accidentally selected partial TRAIN JSONL")
     p.add_argument("--max-batches", type=int, default=0,
                    help="Smoke-only; any value > 0 invalidates full training claim")
     a = p.parse_args()
@@ -126,6 +128,8 @@ def main():
     # Every successfully converted source row stays in the denominator; no
     # direct-relation parser or GT-guided source selection.
     count = len(dataset.records)
+    if not a.max_batches and count < a.min_train_records:
+        raise ValueError(f"TRAIN source has only {count} records; expected full CityNav TRAIN")
     missing_anchor = sum(not row.get("landmarks") for row in dataset.records)
     manifest = dict(source_sha256=source_sha, records=count,
         no_public_anchor_rows=missing_anchor, source="complete revised CityNav TRAIN",
@@ -133,6 +137,7 @@ def main():
         converter_expected_records=converter.get("records_generated") if converter else None,
         eligibility_filter=None, checkpoint_format=FORMAT,
         epochs=a.epochs, batch_size=a.batch_size, seed=a.seed,
+        min_train_records=a.min_train_records,
         smoke=bool(a.max_batches), max_batches=a.max_batches)
     manifest_path = a.output/"manifest.json"
     if manifest_path.exists() and json.loads(manifest_path.read_text()) != manifest:
