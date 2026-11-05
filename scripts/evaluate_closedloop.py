@@ -54,12 +54,15 @@ def main():
     parser.add_argument('--frozen-final-candidate',help='Completed Seen-selected frozen candidate, required for Test Unseen')
     parser.add_argument('--max-episodes', type=int)
     parser.add_argument('--output', required=True)
-    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1'], default='sbfnav')
+    parser.add_argument('--model', choices=['sbfnav','a3','a3-trajectory','dynamic','target-evidence','joint-active','static-transfer','graphnav-v1','unified-relation'], default='sbfnav')
     parser.add_argument('--stage1-visual-control',choices=['real','zero','shuffle','no-belief'],default='real')
     parser.add_argument('--stage1-history-control',choices=['checkpoint','current','history'],default='checkpoint')
     parser.add_argument('--disable-joint-active',action='store_true')
     parser.add_argument('--joint-execution',choices=['checkpoint','guarded-blend'],default='checkpoint')
     parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
+    parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
+    parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
+    parser.add_argument('--resume', action='store_true', help='Resume unified-relation full evaluation')
     parser.add_argument('--dynamic-checkpoint')
     parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
     parser.add_argument('--active-observation',action='store_true',help='Opt-in bounded XY/Z sensing actions')
@@ -111,8 +114,25 @@ def main():
     started_diff=subprocess.check_output(['git','diff','HEAD','--binary'])
     evaluator_sha256=sha(__file__)
     output = Path(args.output)
-    if output.exists(): raise ValueError('refusing to overwrite evaluation')
-    output.mkdir(parents=True)
+    if output.exists() and not (args.resume and args.model == 'unified-relation'):
+        raise ValueError('refusing to overwrite evaluation')
+    if args.resume and args.model != 'unified-relation':
+        raise ValueError('--resume only supports unified-relation')
+    output.mkdir(parents=True, exist_ok=True)
+    if args.model == 'unified-relation':
+        if not args.unified_v2 or not args.relation_checkpoint:
+            raise ValueError('--unified-v2 and --relation-checkpoint are required')
+        sources = dict(stage1=sha(args.checkpoint),
+                       original_v2=sha(args.unified_v2),
+                       trained_relation=sha(args.relation_checkpoint),
+                       split=args.split, data_root=str(Path(args.data_root).resolve()))
+        lock = output/'full_relation_manifest.json'
+        if lock.exists() and json.loads(lock.read_text()) != sources:
+            raise ValueError('Resume source changed')
+        if args.resume and not lock.exists():
+            raise ValueError('Missing frozen evaluation manifest')
+        if not lock.exists():
+            lock.write_text(json.dumps(sources, indent=2))
     sys.path.insert(0, str(Path(args.sbf_source).resolve()))
     from sbfnav.config import load_config, apply_overrides, validate_config
     from sbfnav.dataset import CityNavDataset, CityReferCatalog
@@ -153,7 +173,15 @@ def main():
         runtime = SBFNavRuntime(model,backbone,config,torch.device('cuda'))
     else:
         from graphnav.a3_runtime import A3WaypointPolicy,A3TrajectoryPolicy
-        if args.model=='graphnav-v1':
+        if args.model=='unified-relation':
+            from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
+            from graphnav.dynamic_runtime import NativeObservationBuilder
+            runtime=UnifiedPGVBFullRelationPolicy(
+                args.checkpoint,args.unified_v2,args.relation_checkpoint,
+                output/'public_inputs')
+            builder=NativeObservationBuilder(
+                builder,Path(args.data_root)/'rgbd',output/'observations')
+        elif args.model=='graphnav-v1':
             from graphnav.stage1_runtime import GraphNavStage1Policy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             runtime=GraphNavStage1Policy(args.checkpoint,output/'public_inputs',
@@ -207,18 +235,48 @@ def main():
     rows, maps, terminations = [], defaultdict(list), Counter()
     retrieval_queries=set();retrieval_rows=[];active_counts=Counter();stop_gate_counts=Counter()
     started = time.perf_counter()
-    with (output/'predictions.jsonl').open('w') as stream:
+    predictions = output/'predictions.jsonl'
+    existing = []
+    if args.model == 'unified-relation' and args.resume and predictions.exists():
+        existing = [json.loads(line) for line in predictions.read_text().splitlines() if line.strip()]
+        if len({r['index'] for r in existing}) != len(existing):
+            raise ValueError('Duplicate resumed episode index')
+        for old in existing:
+            rows.append(old['metrics'])
+            maps[old['map_name']].append(old['metrics'])
+            terminations[old['termination']] += 1
+    complete_indices = {r['index'] for r in existing}
+    with predictions.open('a' if args.resume else 'w') as stream:
         for position,record in enumerate(episodes):
+            if args.model == 'unified-relation' and record.index in complete_indices:
+                continue
             # IDs are used only to prepare supplied CityRefer language bindings and output labels.
             # Neither record, target, IDs, nor expert future enters the policy or rollout.
             public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
                                    tuple(catalog.referenced_landmarks(record)),
                                    tuple(catalog.referenced_landmark_names(record)))
-            if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
-            poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
-                GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
+            failure = None
+            if args.model == 'unified-relation':
+                try:
+                    runtime.set_episode(public,builder.transform(public.map_name),catalog)
+                    poses, termination, timings, diagnostics = rollout(
+                        public,builder,controller,runtime.predict,
+                        GROUND_LEVEL[record.map_name],protocol,
+                        synchronize=torch.cuda.synchronize)
+                except Exception:
+                    import traceback
+                    failure = traceback.format_exc()
+                    poses = public.start_pose[None].copy()
+                    termination, timings, diagnostics = 'inference_error', [], []
+            else:
+                if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
+                poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
+                    GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
+            # Ground truth enters only post-rollout scorer.
             metrics = score_trace(poses,record.target_position,record.trajectory,termination,
                 radius=protocol.success_radius_m,decision_seconds=timings)
+            if failure is not None:
+                metrics.update(SR=0., SPL=0., sDTW=0.)
             if args.model=='graphnav-v1':
                 query=(record.map_name,record.instruction)
                 if query not in retrieval_queries:
@@ -253,9 +311,11 @@ def main():
             rows.append(metrics); maps[record.map_name].append(metrics); terminations[termination]+=1
             stream.write(json.dumps(dict(index=record.index,episode_id=record.episode_id,
                 map_name=record.map_name,poses=poses.tolist(),termination=termination,
-                metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics))+'\n'); stream.flush()
+                metrics=metrics,decision_seconds=timings,step_diagnostics=diagnostics,error=failure))+'\n'); stream.flush()
             if (position+1)%16==0:
                 print(json.dumps(dict(completed=position+1,total=len(episodes),elapsed=time.perf_counter()-started)),flush=True)
+    if args.model == 'unified-relation' and len(rows) != len(dataset):
+        raise RuntimeError(f'Full evaluation incomplete: {len(rows)}/{len(dataset)}')
     report = dict(model=('Joint A3 + observed appearance/history + trained trajectory/Stop; active sensing opt-in' if args.model=='joint-active' else ('SBFNav local paper-based reproduction' if args.model=='sbfnav'
                         else ('A3 + causal dynamic visual/graph residual belief' if args.model=='dynamic' else ('A3 + target-conditioned observed RGB evidence + optional active sensing' if args.model=='target-evidence' else ('A3 + trained trajectory/rank/Stop; geometry/pose only' if args.model=='a3-trajectory'
                               else 'A3 + bounded Top1 waypoint; no trained trajectory or stop'))))),split=args.split,
@@ -278,6 +338,14 @@ def main():
         warning=('Legacy SBF checkpoint selected by Val Unseen proxy; no new selection by Unseen.'
                  if args.model=='sbfnav' else
                  'Shared macro-action benchmark with orthophoto/vertical-depth observations; no swept 3D collision or perspective-camera claim.'))
+    if args.model=='unified-relation':
+        report['model']='UnifiedPGVB-v2 + all-instruction AerialVG-inspired relation'
+        report['full_relation_checkpoint_sha256']=sha(args.relation_checkpoint)
+        report['original_unified_v2_sha256']=sha(args.unified_v2)
+        report['coverage']=dict(expected=len(dataset), completed=len(rows),
+                                 inference_errors=terminations.get('inference_error',0),
+                                 selection_filter='none',
+                                 empty_references_in_denominator=True)
     if args.model=='static-transfer':
         report['model']='Compatible static A3/GAT + transferred unchanged original Trajectory/Stop; guarded-blend'
         report['reference_a3_checkpoint_sha256']=sha(args.reference_a3_checkpoint)
