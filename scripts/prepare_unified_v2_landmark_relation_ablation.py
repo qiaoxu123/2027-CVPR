@@ -11,10 +11,10 @@ All language paths agree:
 Inputs per query are public-name-matched CityRefer Polygon(s) from the public
 objects catalog, not target-selected "landmarks" in the processed source.
 
-Generate paired files for three INDEPENDENT fully-trained Unified-v2 arms:
-  full_text:         original instruction
+Generate three ALIGNED evaluation datasets, but train only TWO NEW arms:
+  full_text:         original instruction (EVALUATION ONLY, existing checkpoint)
   landmark_relation: only <geometric phrase> <public landmark name>
-  landmark_only:     only <public landmark name>
+  relation_only:     only <geometric phrase>, with Polygon/name graph unchanged
 
 Preserve target_xy ONLY as a training label. No GT-selected name/reference.
 All 21,878 tasks remain in exact input order, including no-name tasks.
@@ -49,7 +49,7 @@ _PHRASES=[
 ]
 _ATTACHED=re.compile(r"(?<!\w)("+ "|".join(_PHRASES) + r")\s+(?:the\s+)?$",re.I)
 _NEGATED=re.compile(r"(?:\bnot\b|\bneither\b|\bexcept\b)\s*$",re.I)
-_VALID_MODES=("full_text","landmark_relation","landmark_only")
+_VALID_MODES=("full_text","landmark_relation","relation_only")
 
 
 def clean_phrase(phrase):
@@ -116,7 +116,13 @@ def normalized_instruction(pairs,mode):
     for pair in pairs:
         # Ignore duplicated exact name+predicate when the text repeats the
         # same landmark. Do not merge distinct predicates.
-        s=(pair["phrase"]+" " if pair["phrase"] and mode=="landmark_relation" else "") +pair["name"]
+        if mode=="relation_only":
+            if not pair["phrase"]:continue
+            s=pair["phrase"]
+        elif mode=="landmark_relation":
+            s=(pair["phrase"]+" " if pair["phrase"] else "")+pair["name"]
+        else:
+            raise ValueError("Unsupported language ablation mode")
         key=s.casefold()
         if key not in seen:
             segments.append(s);seen.add(key)
@@ -151,8 +157,8 @@ def prepare(source_path,catalog_path,out_dir,*,expected=21878,
         # some different polygon; all arms get same explicit empty refs.
         if not refs:
             pairs=[]
-        names_only=normalized_instruction(pairs,"landmark_only")
         compact=normalized_instruction(pairs,"landmark_relation")
+        relations=normalized_instruction(pairs,"relation_only")
         status=("no_public_anchor" if not refs else
                 "paired_words" if any(p["phrase"] for p in pairs) else "name_only")
         if fail:
@@ -165,7 +171,7 @@ def prepare(source_path,catalog_path,out_dir,*,expected=21878,
         for mode,instruction in (
             ("full_text",text),
             ("landmark_relation",compact),
-            ("landmark_only",names_only),
+            ("relation_only",relations),
         ):
             # This is the SAME row & target position in all arms. Only text
             # and independently public-catalog-matched reference Polygons
@@ -199,6 +205,9 @@ def prepare(source_path,catalog_path,out_dir,*,expected=21878,
         target_GT_used_to_select_polygon=False,
         parser_scope_accuracy_unverified=True,
         model_architecture_unchanged=True,
+        full_text_is_frozen_existing_checkpoint_evaluation_only=True,
+        new_training_arms=["landmark_relation","relation_only"],
+        relation_only_input="geometry words to instruction BERT; public node-name embeddings and Polygon still available",
     )
     (out_dir/"manifest.json").write_text(json.dumps(manifest,indent=2,ensure_ascii=False)+"\n")
     return manifest
