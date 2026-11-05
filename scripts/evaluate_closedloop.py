@@ -62,6 +62,8 @@ def main():
     parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
     parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
+    parser.add_argument('--relation-control', choices=['full','off'], default='full')
+    parser.add_argument('--relation-visual-control', choices=['tracked','off'], default='tracked')
     parser.add_argument('--resume', action='store_true', help='Resume unified-relation full evaluation')
     parser.add_argument('--dynamic-checkpoint')
     parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
@@ -97,6 +99,9 @@ def main():
         frozen=json.loads(Path(args.frozen_final_candidate).read_text())
         if frozen.get('completed_training_epochs')!=20 or not 1<=frozen.get('epoch',0)<=20 or frozen.get('checkpoint_sha256')!=sha(args.checkpoint):
             raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
+    if args.model == 'unified-relation':
+        if args.split != 'val_seen' or args.max_episodes is not None:
+            raise ValueError('Unified-relation requires unfiltered FULL val_seen')
     if args.active_observation and args.model != 'target-evidence':
         raise ValueError('active observation requires the target-evidence policy')
     if args.joint_active_observation and args.model!='joint-active':
@@ -125,7 +130,13 @@ def main():
         sources = dict(stage1=sha(args.checkpoint),
                        original_v2=sha(args.unified_v2),
                        trained_relation=sha(args.relation_checkpoint),
-                       split=args.split, data_root=str(Path(args.data_root).resolve()))
+                       split=args.split, data_root=str(Path(args.data_root).resolve()),
+                       relation_control=args.relation_control,
+                       relation_visual_control=args.relation_visual_control,
+                       evaluation_code=sha(__file__),
+                       model_code=sha(Path('graphnav/unified_pgvb.py')),
+                       relation_runtime_code=sha(Path('graphnav/unified_full_relation_runtime.py')),
+                       config=sha(args.config))
         lock = output/'full_relation_manifest.json'
         if lock.exists() and json.loads(lock.read_text()) != sources:
             raise ValueError('Resume source changed')
@@ -178,7 +189,9 @@ def main():
             from graphnav.dynamic_runtime import NativeObservationBuilder
             runtime=UnifiedPGVBFullRelationPolicy(
                 args.checkpoint,args.unified_v2,args.relation_checkpoint,
-                output/'public_inputs')
+                output/'public_inputs',
+                relation_control=args.relation_control,
+                visual_control=args.relation_visual_control)
             builder=NativeObservationBuilder(
                 builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='graphnav-v1':
@@ -342,6 +355,8 @@ def main():
         report['model']='UnifiedPGVB-v2 + all-instruction AerialVG-inspired relation'
         report['full_relation_checkpoint_sha256']=sha(args.relation_checkpoint)
         report['original_unified_v2_sha256']=sha(args.unified_v2)
+        report['relation_control']=args.relation_control
+        report['relation_visual_control']=args.relation_visual_control
         report['coverage']=dict(expected=len(dataset), completed=len(rows),
                                  inference_errors=terminations.get('inference_error',0),
                                  selection_filter='none',
