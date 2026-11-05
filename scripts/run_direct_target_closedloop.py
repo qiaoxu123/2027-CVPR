@@ -18,6 +18,9 @@ def main():
     for k in ('selection','stage1','original-v2','checkpoint','sbf-source','config','data-root','output'):
         p.add_argument('--'+k,type=Path,required=True)
     p.add_argument('--pilot',action='store_true');p.add_argument('--resume',action='store_true')
+    p.add_argument('--keep-going-on-error',action='store_true',
+                   help='Formal diagnostic: retain failed episodes in denominator and finish all tasks')
+    p.add_argument('--belief-precision',choices=['fp32','bf16'],default='fp32')
     a=p.parse_args();sys.path.insert(0,str(a.sbf_source))
     from sbfnav.config import load_config, apply_overrides, validate_config
     from sbfnav.dataset import CityReferCatalog
@@ -41,6 +44,8 @@ def main():
     manifest=dict(checkpoint_sha256=file_sha256(a.checkpoint),stage1_sha256=file_sha256(a.stage1),
         original_v2_sha256=file_sha256(a.original_v2),selection_sha256=file_sha256(a.selection/'tasks_public.json'),
         protocol=asdict(protocol),methods=['Geometry','Relation','RGB'],eligible_tasks=len(tasks),
+        keep_going_on_error=a.keep_going_on_error,
+        belief_precision=a.belief_precision,
         pilot_indices=selection['pilot_indices'],GT_online=False,RGB_yaw='unchanged actual pose',
         code_sha256={k:file_sha256(k) for k in [__file__,'graphnav/direct_target_runtime.py',
             'graphnav/direct_target.py','graphnav/unified_pgvb.py','graphnav/pgvb_observation.py',
@@ -60,7 +65,7 @@ def main():
     builder=NativeObservationBuilder(builder,a.data_root/'rgbd',a.output/'observations')
     controller=BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,vertical_step_m=protocol.vertical_step_m,
         minimum_above_ground_m=protocol.min_altitude_m,maximum_above_ground_m=protocol.max_altitude_m)
-    runtime=UnifiedPGVBDirectTargetPolicy(a.stage1,a.original_v2,a.checkpoint,a.output/'public_inputs')
+    runtime=UnifiedPGVBDirectTargetPolicy(a.stage1,a.original_v2,a.checkpoint,a.output/'public_inputs',belief_precision=a.belief_precision)
     assert (runtime.stop_threshold,runtime.execution,runtime.explore_candidates,runtime.stop_positive_weight)==(.3,'guarded-blend',0,20.)
     torch.cuda.reset_peak_memory_stats();started=time.perf_counter()
     with path.open('a') as stream:
@@ -74,11 +79,15 @@ def main():
                 runtime.method=method;captures=[];directory=a.output/'decisions'/f'{index:04d}_{method}';directory.mkdir(parents=True,exist_ok=True)
                 def capture(state,result,field):
                     step=len(captures);file=directory/f'{step:02d}.npz'
-                    np.savez_compressed(file,pose=state.pose,footprint=state.current_observation['footprint_world'],
+                    payload=dict(pose=state.pose,footprint=state.current_observation['footprint_world'],
                         geometry=result['geometry_field'].belief_logits[0].float().cpu().numpy(),
                         relation=result['relation_field'].belief_logits[0].float().cpu().numpy(),
                         full=result['field'].belief_logits[0].float().cpu().numpy(),
                         selected_ids=field.candidate_ids[0].cpu().numpy(),coverage=result['coverage'][0].cpu().numpy())
+                    for key in ('rejected_relation_field','rejected_visual_field'):
+                        if key in result:
+                            payload[key]=result[key].belief_logits[0].float().cpu().numpy()
+                    np.savez_compressed(file,**payload)
                     cv2.imwrite(str(directory/f'{step:02d}.png'),state.current_observation['bgr'])
                     captures.append(str(file))
                 runtime.direct_audit_callback=capture
@@ -100,7 +109,7 @@ def main():
                     peak_gpu_GiB=torch.cuda.max_memory_allocated()/2**30)
                 stream.write(json.dumps(row)+'\n');stream.flush();rows.append(row);completed.add((index,method))
                 print(json.dumps(dict(index=index,method=method,termination=termination,**metrics)),flush=True)
-                if error:
+                if error and not a.keep_going_on_error:
                     # Stop on the first interface failure. It is retained as a
                     # failure; fix evidence before spending GPU on the full set.
                     raise RuntimeError(error)

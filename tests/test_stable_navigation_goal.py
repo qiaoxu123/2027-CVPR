@@ -221,3 +221,19 @@ def test_real_runtime_wires_stabilized_candidate_into_frozen_controller(monkeypa
     assert second.diagnostics["stable_navigation_goal"]["held_goal_id"] == 2
     assert second.diagnostics["stable_navigation_goal"]["visual_top1_id"] == 3
     assert second.diagnostics["stable_navigation_goal"]["event"] == "pending"
+
+
+def test_replan_block_reasons_are_diagnostic_not_policy_changes():
+    tracker = StableNavigationGoal()
+    base, xy = _field([0, 0, 4, 2, 0, 0], [2, 3, 4])
+    _, init = tracker.select(base, xy)
+    assert init["event"] == "initialized"
+    other, _ = _field([0, 0, 1, 5, 0, 0], [3, 2, 4], covered=[3])
+    _, unconfirmed = tracker.select(other, xy, visual_active=False)
+    assert unconfirmed["replan_block_reason"] == "no_current_confirmed_visual_evidence"
+    assert unconfirmed["held_goal_id"] == 2
+    _, pending = tracker.select(other, xy, tracking=_tracking(), visual_active=True)
+    assert pending["replan_block_reason"] == "awaiting_repeated_confirmation"
+    _, replanned = tracker.select(other, xy, tracking=_tracking(), visual_active=True)
+    assert replanned["replan_block_reason"] == "none"
+    assert replanned["event"] == "replanned"

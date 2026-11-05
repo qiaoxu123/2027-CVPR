@@ -1,0 +1,72 @@
+{
+  "changed_parameter_maxabs": {
+    "direct_target.word.weight": 0.02477813884615898,
+    "direct_target.word.bias": 0.018085192888975143,
+    "direct_target.predicate.weight": 0.04888415336608887,
+    "direct_target.relative.0.weight": 0.052168428897857666,
+    "direct_target.relative.0.bias": 0.03073469176888466,
+    "direct_target.relative.2.weight": 0.043466389179229736,
+    "direct_target.relative.2.bias": 0.01648583449423313,
+    "direct_target.relation_score.0.weight": 0.04628733545541763,
+    "direct_target.relation_score.0.bias": 0.01876344345510006,
+    "direct_target.relation_score.2.weight": 0.04352150112390518,
+    "direct_target.relation_score.2.bias": 0.012058310210704803
+  },
+  "frozen_modules_unchanged": true,
+  "source_sha256": "aa359894a172c38b024aa5ef4e89caeecc8a496d723320cea14862f0eaaf61e9",
+  "checkpoint_SHA256": "9b63dfe6316cb9fc196a90bdcf78de3c1efd5539bce3cdaacb5635be19528dcb",
+  "relation_GT_compatibility": {
+    "fit": {
+      "inside": {
+        "n": 9,
+        "GT_in_relation": 1,
+        "empty_grid_region": 0,
+        "median_polygon_distance_m": 18.211427981700275
+      },
+      "near": {
+        "n": 388,
+        "GT_in_relation": 365,
+        "empty_grid_region": 0,
+        "median_polygon_distance_m": 8.598112356002133
+      }
+    },
+    "dev": {
+      "inside": {
+        "n": 16,
+        "GT_in_relation": 0,
+        "empty_grid_region": 1,
+        "median_polygon_distance_m": 7.72626951115242
+      },
+      "near": {
+        "n": 30,
+        "GT_in_relation": 23,
+        "empty_grid_region": 0,
+        "median_polygon_distance_m": 10.622806479686957
+      }
+    }
+  },
+  "near_common_n": 49,
+  "near_response": {
+    "Geometry": {
+      "rate_vs_outside": 0.40816326530612246,
+      "mean_mass_delta_vs_outside": -0.013613481302650608,
+      "mean_mass_delta_vs_inside": -0.008610278063890885
+    },
+    "Explicit": {
+      "rate_vs_outside": 1.0,
+      "mean_mass_delta_vs_outside": 0.5965388639620981,
+      "mean_mass_delta_vs_inside": -0.3221936712459642
+    },
+    "Relation": {
+      "rate_vs_outside": 1.0,
+      "mean_mass_delta_vs_outside": 0.4984532341602192,
+      "mean_mass_delta_vs_inside": -0.12200861074486558
+    },
+    "Fusion": {
+      "rate_vs_outside": 1.0,
+      "mean_mass_delta_vs_outside": 0.5474960589591338,
+      "mean_mass_delta_vs_inside": -0.22210111788340978
+    }
+  },
+  "caution": "near overlaps inside/outside; comparison is distribution response, not antonym correctness"
+}

@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><title>Relation counterfactuals</title><style>body{font:16px sans-serif;max-width:1400px;margin:auto}img{max-width:100%}pre{white-space:pre-wrap}</style><h1>几何验证→关系反事实（FP32，不训练）</h1><p><a href="REPORT_zh.md">中文报告</a> · <a href="summary.json">完整统计/聚类区间</a> · <a href="pairs.json">全部逐对文本和指标</a></p><p>真实地图地理北/东未独立标定；图中只有公开Polygon与概率质心，没有GT目标。所有图片为模型真实输出。</p><img src="synthetic_control.png"><img src="summary.png"><h2>NS / TRAIN 0</h2><pre>{
+  &quot;north&quot;: &quot;This is a residential building with a brown roof north of St. Teresa of the Child Jesus Catholic Church.&quot;,
+  &quot;south&quot;: &quot;This is a residential building with a brown roof south of St. Teresa of the Child Jesus Catholic Church.&quot;
+}</pre><a href="case_NS_0000.png"><img loading="lazy" src="case_NS_0000.png"></a><h2>NS / TRAIN 12</h2><pre>{
+  &quot;north&quot;: &quot;The building north of Bragg road with gray roof is second left from the building named Perry Barr Carpets&quot;,
+  &quot;south&quot;: &quot;The building south of Bragg road with gray roof is second left from the building named Perry Barr Carpets&quot;
+}</pre><a href="case_NS_0012.png"><img loading="lazy" src="case_NS_0012.png"></a><h2>NS / TRAIN 3</h2><pre>{
+  &quot;north&quot;: &quot;The building north of the Nike Factory Store that is beside the The Gym and the One Stop building.&quot;,
+  &quot;south&quot;: &quot;The building south of the Nike Factory Store that is beside the The Gym and the One Stop building.&quot;
+}</pre><a href="case_NS_0003.png"><img loading="lazy" src="case_NS_0003.png"></a><h2>EW / TRAIN 0</h2><pre>{
+  &quot;east&quot;: &quot;This is a residential building with a brown roof east of St. Teresa of the Child Jesus Catholic Church.&quot;,
+  &quot;west&quot;: &quot;This is a residential building with a brown roof west of St. Teresa of the Child Jesus Catholic Church.&quot;
+}</pre><a href="case_EW_0000.png"><img loading="lazy" src="case_EW_0000.png"></a><h2>EW / TRAIN 1</h2><pre>{
+  &quot;east&quot;: &quot;A rectangular white building east of St Teresa’s court building along wellington road. It is opposite Willmore road.&quot;,
+  &quot;west&quot;: &quot;A rectangular white building west of St Teresa’s court building along wellington road. It is opposite Willmore road.&quot;
+}</pre><a href="case_EW_0001.png"><img loading="lazy" src="case_EW_0001.png"></a><h2>EW / TRAIN 3</h2><pre>{
+  &quot;east&quot;: &quot;The building east of the Nike Factory Store that is beside the The Gym and the One Stop building.&quot;,
+  &quot;west&quot;: &quot;The building west of the Nike Factory Store that is beside the The Gym and the One Stop building.&quot;
+}</pre><a href="case_EW_0003.png"><img loading="lazy" src="case_EW_0003.png"></a><h2>IO / TRAIN 15</h2><pre>{
+  &quot;inside&quot;: &quot;A white building with a brown wall inside Bragg road. It has a black and a white car in front. The sixth house from the perry barr carpets.&quot;,
+  &quot;outside&quot;: &quot;A white building with a brown wall outside Bragg road. It has a black and a white car in front. The sixth house from the perry barr carpets.&quot;
+}</pre><a href="case_IO_0015.png"><img loading="lazy" src="case_IO_0015.png"></a><h2>IO / TRAIN 0</h2><pre>{
+  &quot;inside&quot;: &quot;This is a residential building with a brown roof inside St. Teresa of the Child Jesus Catholic Church.&quot;,
+  &quot;outside&quot;: &quot;This is a residential building with a brown roof outside St. Teresa of the Child Jesus Catholic Church.&quot;
+}</pre><a href="case_IO_0000.png"><img loading="lazy" src="case_IO_0000.png"></a><h2>IO / TRAIN 1</h2><pre>{
+  &quot;inside&quot;: &quot;A rectangular white building inside St Teresa’s court building along wellington road. It is opposite Willmore road.&quot;,
+  &quot;outside&quot;: &quot;A rectangular white building outside St Teresa’s court building along wellington road. It is opposite Willmore road.&quot;
+}</pre><a href="case_IO_0001.png"><img loading="lazy" src="case_IO_0001.png"></a>

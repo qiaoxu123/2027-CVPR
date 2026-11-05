@@ -1,0 +1,117 @@
+{
+  "fixed_tasks": 56,
+  "real_rollouts": 168,
+  "closedloop": {
+    "Geometry": {
+      "episodes": 56,
+      "expected": 56,
+      "SR": 0.4642857142857143,
+      "OSR": 0.5178571428571429,
+      "SPL": 0.4516393158132699,
+      "NE": 28.20580372555799,
+      "nDTW": 0.264733079878925,
+      "steps": 7.035714285714286,
+      "inference_ms": 19.581125319300664,
+      "errors": 0,
+      "policy_stop": 56,
+      "horizon": 0
+    },
+    "Relation": {
+      "episodes": 56,
+      "expected": 56,
+      "SR": 0.44642857142857145,
+      "OSR": 0.5178571428571429,
+      "SPL": 0.4313843755381705,
+      "NE": 28.58433968190845,
+      "nDTW": 0.25929433326240253,
+      "steps": 7.0,
+      "inference_ms": 16.622759689429106,
+      "errors": 0,
+      "policy_stop": 56,
+      "horizon": 0
+    },
+    "RGB": {
+      "episodes": 56,
+      "expected": 56,
+      "SR": 0.44642857142857145,
+      "OSR": 0.5178571428571429,
+      "SPL": 0.43138533324290407,
+      "NE": 28.584312772299224,
+      "nDTW": 0.2592940543911083,
+      "steps": 7.0,
+      "inference_ms": 43.400246954558945,
+      "errors": 0,
+      "policy_stop": 56,
+      "horizon": 0
+    }
+  },
+  "paired_changes": {
+    "Geometry -> Relation": {
+      "corrected": 1,
+      "damaged": 2,
+      "net": -1
+    },
+    "Relation -> RGB": {
+      "corrected": 0,
+      "damaged": 0,
+      "net": 0
+    },
+    "Geometry -> RGB": {
+      "corrected": 1,
+      "damaged": 2,
+      "net": -1
+    }
+  },
+  "versus_previous_frozen_run": {
+    "Geometry": {
+      "corrected": 0,
+      "damaged": 1,
+      "net": -1,
+      "max_abs_final_NE_difference_m": 9.847551360201379
+    },
+    "Relation": {
+      "corrected": 0,
+      "damaged": 0,
+      "net": 0,
+      "max_abs_final_NE_difference_m": 10.859104269499788
+    },
+    "RGB": {
+      "corrected": 1,
+      "damaged": 2,
+      "net": -1,
+      "max_abs_final_NE_difference_m": 15.119177962357785
+    }
+  },
+  "RGB_decisions": 448,
+  "RGB_admitted": 116,
+  "admission_reasons": {
+    "no_supported_anchor_rgb": 239,
+    "anchor_tracking_unconfirmed": 52,
+    "provisional_anchor_rgb_not_target_identity": 116,
+    "uncalibrated_direction": 41
+  },
+  "replan_block_reasons": {
+    "none": 56,
+    "same_goal": 373,
+    "insufficient_logit_advantage": 19
+  },
+  "replan_events": 0,
+  "raw_RGB_top1_changes": 19,
+  "raw_location_proxy_corrections": 1,
+  "raw_location_proxy_damages": 2,
+  "max_confirmed_visual_logit_advantage": 0.20084285736083984,
+  "binding_mismatches": [],
+  "failure_causes": {
+    "Geometry::stopped_or_ended_at_wrong_predicted_Goal": 30,
+    "Relation::stopped_or_ended_at_wrong_predicted_Goal": 31,
+    "RGB::stopped_or_ended_at_wrong_predicted_Goal": 31
+  },
+  "proxy_warning": "20m position success is not independent target-instance identification",
+  "GPU_peak_GiB": 3.7557973861694336,
+  "RGB_source_reasons": {
+    "available": 168,
+    "no_supported_local_anchor": 186,
+    "ambiguous_multi_anchor_or_polygon": 53,
+    "ablation_no_RGB": 41
+  }
+}

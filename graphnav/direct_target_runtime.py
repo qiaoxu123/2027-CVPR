@@ -7,12 +7,57 @@ from .unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
 from .direct_target_data import load_model, relation_geometry
 from .a3_runtime import public_static_record, A3TrajectoryPolicy
 from .pgvb_observation import encode_landmark_observation
-from .local_landmark_anchor import named_public_polygons
 from .checkpointing import file_sha256
+from .unified_instruction import _public_landmark
+from .direct_target_language import PREDICATES
+from .landmark_alias import canonical_name
+
+
+def bind_public_anchors(anchors, public_objects):
+    """One authoritative public map binding for both relation and RGB branches.
+
+    Repair stale/mismatched task-file contours from the referenced PUBLIC name,
+    never from proximity to a private destination. Retain all homonymous parts.
+    """
+    if not anchors:
+        raise ValueError('A direct-target query needs a public anchor')
+    # JSON inventories use strings; the actual CityReferCatalog exposes ints.
+    public_objects = {str(key): value for key, value in public_objects.items()}
+    bound, audit = [], []
+    for anchor in anchors:
+        predicate = anchor['predicate']
+        if predicate not in PREDICATES or anchor['predicate_id'] != PREDICATES.index(predicate):
+            raise ValueError('Unsupported or inconsistent direct relation/reference frame')
+        landmark, error = _public_landmark(anchor['landmark']['name'], public_objects)
+        if error:
+            raise ValueError('Public catalog binding failed: '+error)
+        contours = [public_objects[str(oid)]['contour'] for oid in landmark['public_ids']]
+        audit.append(dict(name=landmark['name'],
+            public_IDs_changed=list(anchor['landmark']['public_ids']) != landmark['public_ids'],
+            contours_changed=anchor['contours'] != contours,
+            bound_public_ids=landmark['public_ids'], source='current_map_public_catalog'))
+        bound.append(dict(anchor, landmark=landmark, contours=contours))
+    return bound, audit
+
+
+def admissible_target_rgb(tracking, metadata, observed):
+    """Provisional anchor evidence gate, NOT a target-instance identity proof."""
+    if observed is None or metadata is None:
+        return False, "no_supported_anchor_rgb"
+    if metadata.get("registration_only") is not True:
+        raise ValueError("Unexpected landmark evidence provenance")
+    if tracking is None or tracking.get("state") != "tracking":
+        return False, "anchor_tracking_unconfirmed"
+    if (tracking.get("reason") != "rgb_discriminative"
+            or tracking.get("positive_patches", 0) < 2
+            or tracking.get("negative_patches", 0) < 2
+            or float(tracking.get("visual_gain", 0.0)) <= 0):
+        return False, "anchor_rgb_not_discriminative_this_frame"
+    return True, "provisional_anchor_rgb_not_target_identity"
 
 
 class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
-    def __init__(self, stage1, original_v2, trained, directory, *, method='RGB'):
+    def __init__(self, stage1, original_v2, trained, directory, *, method='RGB', belief_precision='fp32'):
         super().__init__(stage1, original_v2, directory, mode='tracked-stable')
         payload=torch.load(trained,map_location='cpu',weights_only=True)
         if payload.get('format')!='unified-pgvb-direct-target-v1' or payload.get('direct_target_ready') is not True:
@@ -22,6 +67,9 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         self.unified=load_model(payload).eval().requires_grad_(False)
         if method not in ('Geometry','Relation','RGB'):raise ValueError('Unknown direct-target ablation')
         self.method=method
+        if belief_precision not in ('fp32','bf16'):
+            raise ValueError('Belief precision must be fp32 or bf16')
+        self.belief_precision=belief_precision
 
     def set_direct_episode(self, episode, transform, catalog, public_task):
         if public_task['instruction']!=episode.instruction or public_task['map_name']!=episode.map_name:
@@ -32,48 +80,145 @@ class UnifiedPGVBDirectTargetPolicy(UnifiedPGVBNamedLandmarkPolicy):
         if set(public_task)-{'index','episode','instruction_index','map_name','instruction',
                             'anchors','structured','target_GT_used','world_bounds','start_pose'}:
             raise ValueError('Unexpected metadata in online task')
-        self.direct_spec=public_task
+        anchors, self._binding_audit = bind_public_anchors(
+            public_task['anchors'], catalog.objects[episode.map_name])
+        if ({canonical_name(x) for x in episode.reference_names}
+                != {canonical_name(a['landmark']['name']) for a in anchors}):
+            raise ValueError('Geometry references and direct-target anchors differ')
+        self.direct_spec=dict(public_task, anchors=anchors)
+        # Cardinal world axes were not calibrated to geographic directions;
+        # the 80-query north/south probe failed. Keep these queries in the
+        # evaluation denominator but refuse unvalidated semantic displacement.
+        self._direction_unverified = any(
+            a["predicate"] in ("north", "south", "east", "west")
+            for a in anchors
+        )
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
+        self.direct_spec['world_bounds'] = self.record['world_bounds']
         self.inputs=None;self.visited_goal_cells=set();self.acquisition.reset();self.stable_goal.reset();self.unified.reset_episode()
-        a=public_task['anchors'][0]
-        self._landmark=dict(name=a['landmark']['name'],typ=a['landmark']['type'],contours=a['contours'])
+        # Several references may be valid for the *relation* head, but the
+        # current visual head has no anchor-specific cross-attention over them.
+        # Never silently pretend the first polygon is the correct RGB identity.
+        public_ids = anchors[0]["landmark"].get("public_ids", ())
+        unique_anchor = len(anchors) == 1 and len(public_ids) == 1
+        supported = anchors[0]['landmark']['type'] in ('Building', 'Road')
+        self._visual_anchor_reason = (
+            'unsupported_visual_anchor_type' if not supported else
+            None if unique_anchor else 'ambiguous_multi_anchor_or_polygon')
+        self._landmark = None
+        if unique_anchor and supported:
+            first = anchors[0]
+            self._landmark = dict(name=first["landmark"]["name"],
+                                  typ=first["landmark"]["type"],
+                                  contours=first["contours"])
         self.instruction_spec=None
 
     @torch.no_grad()
-    def predict(self,state,instruction):
-        if instruction!=self.record['instruction']:raise ValueError('Instruction changed')
+    def predict(self, state, instruction):
+        if instruction != self.record["instruction"]:
+            raise ValueError("Instruction changed")
         self._initialize_geometry_inputs()
-        start=time.perf_counter();observed=None;meta=None;tracking=None;reason='ablation_no_RGB'
-        if self.method=='RGB':
-            observed,reason,meta=encode_landmark_observation(state.current_observation,self._landmark,
-                self.record,self.native,self.device,return_metadata=True,allow_offscreen_anchor=True)
-        geometry=relation_geometry(self.direct_spec,self.inputs['grid_xy'][0].cpu().numpy())[None].to(self.device)
-        ids=torch.tensor([[a['predicate_id'] for a in self.direct_spec['anchors']]],device=self.device)
-        category=self.direct_spec['structured']['target']['category']
-        semantic=' '.join([category]+[a['value'] for a in self.direct_spec['structured']['target']['attributes']])
-        with torch.autocast('cuda',dtype=torch.bfloat16):
-            result=self.unified.forward_direct_target(static_inputs=self.inputs,tokens=self.tokens,
-                token_mask=self.mask,node_emb=self.names,relation_geometry=geometry,relation_ids=ids,
-                relation_valid=torch.ones_like(ids,dtype=torch.bool),observed=observed,
-                target_text=self.native.texts([semantic]))
-            if observed is not None:
-                kwargs={k:v for k,v in observed.items() if k!='local_uv'}
-                scores=self.unified.pgvb(**kwargs)
-                shifted=dict(kwargs,image_features=kwargs['image_features'].roll(shifts=scores.shape[1]//2,dims=1))
-                counter=self.unified.pgvb(**shifted)
-                tracking=self.acquisition.observe(scores.float(),counter.float(),meta['anchor_labels'],kwargs['valid'])
-        key={'Geometry':'geometry_field','Relation':'relation_field','RGB':'field'}[self.method]
-        field=result[key]
-        active=bool(self.method=='RGB' and observed is not None and result['coverage'].any())
-        field,goal_audit=self.stable_goal.select(field,self.inputs['grid_xy'],tracking=tracking,visual_active=active)
-        prediction=A3TrajectoryPolicy.predict_field(self,state,field)
+        start = time.perf_counter()
+        observed = meta = tracking = None
+        reason = "ablation_no_RGB"
+        if self.method == "RGB" and not self._direction_unverified:
+            if self._landmark is None:
+                reason = self._visual_anchor_reason
+            else:
+                # The anchor must have a supported current-frame ROI; projected
+                # offscreen polygons are not RGB evidence of a named object.
+                observed, reason, meta = encode_landmark_observation(
+                    state.current_observation, self._landmark, self.record,
+                    self.native, self.device, return_metadata=True,
+                    allow_offscreen_anchor=False,
+                )
+        geometry = relation_geometry(
+            self.direct_spec, self.inputs["grid_xy"][0].cpu().numpy(),
+        )[None].to(self.device)
+        ids = torch.tensor(
+            [[a["predicate_id"] for a in self.direct_spec["anchors"]]],
+            device=self.device,
+        )
+        category = self.direct_spec["structured"]["target"]["category"]
+        semantic = " ".join(
+            [category] + [a["value"] for a in
+                          self.direct_spec["structured"]["target"]["attributes"]]
+        )
+        with torch.autocast("cuda", dtype=torch.bfloat16):
+            # Confirm RGB *before* allowing the target residual to modify the
+            # belief. This reuses the already encoded current image patches;
+            # only the inexpensive PGVB scoring head runs for counterfactuals.
+            if self.method == "RGB":
+                if observed is not None:
+                    kwargs = {k: v for k, v in observed.items() if k != "local_uv"}
+                    scores = self.unified.pgvb(**kwargs)
+                    shifted = dict(
+                        kwargs,
+                        image_features=kwargs["image_features"].roll(
+                            shifts=scores.shape[1] // 2, dims=1,
+                        ),
+                    )
+                    counter = self.unified.pgvb(**shifted)
+                    tracking = self.acquisition.observe(
+                        scores.float(), counter.float(),
+                        meta["anchor_labels"], kwargs["valid"],
+                    )
+                else:
+                    tracking = self.acquisition.observe()
+            admitted, admission_reason = admissible_target_rgb(
+                tracking, meta, observed,
+            )
+            # BF16 changed discrete grid argmax under batch-size changes on
+            # TRAIN. Only the small Geometry/target core uses FP32 by default;
+            # frozen RGB encoding and the historical controller are unchanged.
+            with torch.autocast('cuda', dtype=torch.bfloat16,
+                                enabled=self.belief_precision=='bf16'):
+                result = self.unified.forward_direct_target(
+                static_inputs=self.inputs, tokens=self.tokens,
+                token_mask=self.mask, node_emb=self.names,
+                relation_geometry=geometry, relation_ids=ids,
+                relation_valid=torch.ones_like(ids, dtype=torch.bool),
+                observed=observed if admitted else None,
+                target_text=self.native.texts([semantic]) if admitted else None,
+                )
+        raw_relation_top1 = int(result['relation_field'].belief_logits.argmax())
+        raw_full_top1 = int(result['field'].belief_logits.argmax())
+        if self._direction_unverified:
+            # Record the effective distributions that actually reach navigation.
+            # Preserve raw outputs separately as rejected diagnostic proposals.
+            result = dict(result, rejected_relation_field=result['relation_field'],
+                          rejected_visual_field=result['field'],
+                          relation_field=result['geometry_field'], field=result['geometry_field'])
+        key = {"Geometry": "geometry_field",
+               "Relation": "relation_field", "RGB": "field"}[self.method]
+        field = (result["geometry_field"] if self._direction_unverified
+                 else result[key])
+        active = bool(not self._direction_unverified and admitted
+                      and result["coverage"].any())
+        field, goal_audit = self.stable_goal.select(
+            field, self.inputs["grid_xy"],
+            tracking=tracking, visual_active=active,
+        )
+        prediction = A3TrajectoryPolicy.predict_field(self, state, field)
         torch.cuda.synchronize()
-        prediction.diagnostics.update(method=self.method,RGB_reason=reason,visual_active=active,
-            tracking=tracking,stable_goal=goal_audit,decision_seconds=time.perf_counter()-start,
-            geometry_top1=int(result['geometry_field'].belief_logits.argmax()),
-            relation_top1=int(result['relation_field'].belief_logits.argmax()),
-            full_top1=int(result['field'].belief_logits.argmax()),
-            belief_top1=int(field.belief_logits.argmax()))
-        if getattr(self,'direct_audit_callback',None):
-            self.direct_audit_callback(state,result,field)
+        prediction.diagnostics.update(
+            method=self.method, RGB_reason=reason,
+            belief_precision=self.belief_precision,
+            public_binding_audit=self._binding_audit,
+            uncalibrated_direction_fallback=self._direction_unverified,
+            raw_relation_top1=raw_relation_top1, raw_full_top1=raw_full_top1,
+            RGB_admitted=bool(active), RGB_admission_reason=(
+                "uncalibrated_direction" if self._direction_unverified
+                else admission_reason),
+            target_identity_independently_verified=False,
+            visual_active=active, tracking=tracking,
+            stable_goal=goal_audit,
+            decision_seconds=time.perf_counter()-start,
+            geometry_top1=int(result["geometry_field"].belief_logits.argmax()),
+            relation_top1=int(result["relation_field"].belief_logits.argmax()),
+            full_top1=int(result["field"].belief_logits.argmax()),
+            belief_top1=int(field.belief_logits.argmax()),
+        )
+        if getattr(self, "direct_audit_callback", None):
+            self.direct_audit_callback(state, result, field)
         return prediction
