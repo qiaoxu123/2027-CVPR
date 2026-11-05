@@ -20,7 +20,7 @@ from .instruction_relation_graph import (
 def decode_span_graph(output, instruction: str, spans, public_bindings,
                       public_objects, world_bounds, *,
                       min_probability=0.5, max_hops=4,
-                      world_north_verified=False):
+                      world_north_verified=False, map_name=None):
     """Decode ONE sentence.
 
     spans: [(start_char,end_char), ...], aligned with output model indices.
@@ -107,7 +107,7 @@ def decode_span_graph(output, instruction: str, spans, public_bindings,
                 if next_node not in chain:
                     todo.append((next_node,chain+[next_node],edge_ids+[relation_id]))
     parsed=dict(
-        original_text=instruction,map_name=None,target_GT_used=False,
+        original_text=instruction,map_name=map_name,target_GT_used=False,
         target=dict(entity=f"e{target_idx}" if target_idx is not None else None,
                     category=None,attributes=[]),
         entities=entities,relations=edges,landmarks=landmarks,
