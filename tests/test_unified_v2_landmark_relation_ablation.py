@@ -57,6 +57,7 @@ def test_cardinal_direction_compound_and_negation_are_conservative():
     bb=extract_pairs(b,names.match("cambridge_block_1",b))
     assert normalized_instruction(aa,"landmark_relation")=="northeast of One Stop"
     assert normalized_instruction(bb,"landmark_relation")=="One Stop"
+    assert normalized_instruction(bb,"relation_only")=="[UNK]"
 
 
 def test_paired_v2_datasets_replace_all_language_paths_and_gt_anchors(tmp_path):
@@ -74,10 +75,11 @@ def test_paired_v2_datasets_replace_all_language_paths_and_gt_anchors(tmp_path):
     assert report["all_queries"]==3
     files={mode:[json.loads(line) for line in
                  (out/(mode+".jsonl")).read_text().splitlines()]
-           for mode in ("full_text","landmark_relation","landmark_only")}
+           for mode in ("full_text","landmark_relation","relation_only")}
     assert files["landmark_relation"][0]["instruction"]=="north of One Stop"
-    assert files["landmark_only"][0]["instruction"]=="One Stop"
+    assert files["relation_only"][0]["instruction"]=="north of"
     assert files["landmark_relation"][2]["instruction"]=="[UNK]"
+    assert files["relation_only"][2]["instruction"]=="[UNK]"
     for mode,records in files.items():
         assert len(records)==3
         assert all(r["landmarks"][0]["name"]=="One Stop"
@@ -88,6 +90,8 @@ def test_paired_v2_datasets_replace_all_language_paths_and_gt_anchors(tmp_path):
         assert len(records[0]["landmarks"])==2 # ALL homonymous public parts
         assert records[2]["landmarks"]==[]
     assert files["landmark_relation"][0]["landmarks"]==files["full_text"][0]["landmarks"]
+    assert files["relation_only"][0]["landmarks"]==files["full_text"][0]["landmarks"]
+    assert "One Stop" not in files["relation_only"][0]["instruction"]
     # Model-facing candidate geometry and graph parser both use the new
     # instruction. Old target descriptions cannot leak via graph relations.
     data=FullCandidateDataset(out/"landmark_relation.jsonl",
