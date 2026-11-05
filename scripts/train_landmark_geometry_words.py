@@ -46,6 +46,10 @@ class LandmarkWordsDataset(Dataset):
         public_names=PublicNames(catalog)
         source=[json.loads(s) for s in Path(train_jsonl).read_text().splitlines() if s.strip()]
         if not source:raise ValueError("Empty TRAIN JSONL")
+        if {r.get("dataset_version") for r in source}!={"revised"}:
+            raise ValueError("Only Revised TRAIN JSONL is allowed")
+        if {r.get("match_mode") for r in source}!={"fuzzy"}:
+            raise ValueError("Only full Revised/fuzzy records are allowed")
         for row in source:
             map_name=row["map_name"]
             if map_name not in catalog:raise ValueError(f"Missing public map catalog {map_name}")
@@ -216,6 +220,8 @@ def main():
     p.add_argument("--public-objects",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--epochs",type=int,default=3)
+    p.add_argument("--expected-train-records",type=int,default=21878,
+                   help="Refuse partial TRAIN by default")
     p.add_argument("--batch-size",type=int,default=16)
     p.add_argument("--seed",type=int,default=42)
     p.add_argument("--lr",type=float,default=2e-4)
@@ -237,6 +243,10 @@ def main():
     torch.cuda.manual_seed_all(a.seed)
     device=torch.device("cuda")
     dataset=LandmarkWordsDataset(a.train_jsonl,a.public_objects)
+    if len(dataset)!=a.expected_train_records:
+        raise ValueError(
+            f"Full TRAIN requires {a.expected_train_records} tasks, got {len(dataset)}"
+        )
     fit=[i for i,r in enumerate(dataset.records) if r["map_name"].lower().startswith("cambridge_")]
     dev=[i for i,r in enumerate(dataset.records) if r["map_name"].lower().startswith("birmingham_")]
     if len(fit)+len(dev)!=len(dataset) or not fit or not dev:
@@ -256,7 +266,8 @@ def main():
         extractor_sha256=file_sha256("graphnav/landmark_geometry_words.py"),
         training_sha256=file_sha256(__file__),
         seed=42,epochs=a.epochs,batch_size=a.batch_size,lr=a.lr,
-        n_train_all=len(dataset),fit_queries=len(fit),dev_queries=len(dev),
+        n_train_all=len(dataset),expected_train_records=a.expected_train_records,
+        fit_queries=len(fit),dev_queries=len(dev),
         fit_maps=sorted({dataset.records[i]["map_name"] for i in fit}),
         dev_maps=sorted({dataset.records[i]["map_name"] for i in dev}),
         extraction_distribution=dict(dataset.counter),
@@ -272,6 +283,16 @@ def main():
         start=int(state["epoch"]);history=state["history"]
     else:
         atomic_json(manifest,a.output/"manifest.json")
+        # Public auditing of what reaches the network: ONLY pairs of mapped
+        # landmark names, adjacency words and Polygon geometry validity.
+        with (a.output/"extraction_audit.jsonl").open("w") as stream:
+            for row in dataset.records:
+                stream.write(json.dumps(dict(
+                    map_name=row["map_name"],status=row["status"],
+                    pairs=[dict(name=x["name"],geometric_words=x["geometry_words"],
+                                public_id=x["public_id"])
+                           for x in row["anchors"]]
+                ),ensure_ascii=False)+"\n")
         start=0;history=[]
     print(json.dumps(dict(n_total=len(dataset),fit=len(fit),dev=len(dev),
                           extraction=dict(dataset.counter))),flush=True)
