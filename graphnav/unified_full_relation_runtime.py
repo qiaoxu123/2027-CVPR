@@ -36,8 +36,10 @@ class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
         if (sources.get("original_v2") != file_sha256(original_v2)
                 or sources.get("stage1") != file_sha256(stage1)):
             raise ValueError("Relation checkpoint/source controller mismatch")
-        if state.get("completed_epochs", 0) < 1:
-            raise ValueError("Incomplete full relation training")
+        if (state.get("smoke")
+                or state.get("planned_epochs", 0) < 1
+                or state.get("completed_epochs", 0) < state["planned_epochs"]):
+            raise ValueError("Full relation TRAIN must finish all planned epochs; smoke is invalid")
         self.unified = load_full_relation_model(state, self.device).eval().requires_grad_(False)
         self.unified.full_relation_ready = True
         self.full_relation_checkpoint = Path(trained)
