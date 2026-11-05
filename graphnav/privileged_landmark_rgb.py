@@ -74,10 +74,12 @@ def privileged_whole_landmark_rgb(renderer, map_name, contours, *,
 
     # This is source validity, NOT range/depth visibility. Raster valid bits
     # prevent invalid height pixels from becoming falsely usable patches.
-    height = raster.read(1)
-    source_valid = (
-        np.isfinite(height) & (height >= 0) & (raster.read_masks(1) > 0)
-    ).astype(np.float32)
+    if renderer._height_valid is None:
+        height = raster.read(1)
+        renderer._height_valid = (
+            np.isfinite(height) & (height >= 0) & (raster.read_masks(1) > 0)
+        ).astype(np.float32)
+    source_valid = renderer._height_valid
     support = cv2.warpPerspective(
         source_valid, matrix, (n, n), flags=cv2.INTER_LINEAR
     ) >= 0.999
