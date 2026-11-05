@@ -1,0 +1,148 @@
+{
+  "protocol": "unified-v2-trained-language-input-ablation-v1",
+  "source_manifest_sha": "1f08b8eef43e967db4f2a8e3c0113b5558a16c6e9fe5d6e3db26da7888613f02",
+  "checkpoints": {
+    "full_text": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b",
+    "landmark_relation": "0c441e20922c3e75914022cf85bf0131917c4ea7f57d964e09401bf80540cc1d"
+  },
+  "all_train_queries": 21878,
+  "birmingham_train_dev_queries": 7619,
+  "arms": {
+    "full_text": {
+      "N": 7619,
+      "R20": 0.6419477462768555,
+      "R5_20m": 0.8199238777160645,
+      "R15_20m": 0.9010368585586548,
+      "NE_m": 33.840309143066406,
+      "mass20": 0.354431688785553,
+      "Geometry_R20": 0.6419477462768555,
+      "Geometry_NE_m": 33.840309143066406,
+      "Relation_R20": 0.6419477462768555,
+      "Relation_NE_m": 33.840309143066406
+    },
+    "landmark_relation": {
+      "N": 7619,
+      "R20": 0.3273395597934723,
+      "R5_20m": 0.5365533828735352,
+      "R15_20m": 0.712823212146759,
+      "NE_m": 46.742008209228516,
+      "mass20": 0.1665579229593277,
+      "Geometry_R20": 0.3134269714355469,
+      "Geometry_NE_m": 49.116920471191406,
+      "Relation_R20": 0.3273395597934723,
+      "Relation_NE_m": 46.742008209228516
+    }
+  },
+  "paired": {
+    "existing_full_vs_landmark_relation": {
+      "fixes": 355,
+      "breaks": 2752,
+      "net": -2397,
+      "changed_top1": 6178,
+      "mean_NE_improvement_m": -12.901694297790527
+    }
+  },
+  "rule_interventions": {
+    "full_text": {
+      "additive_off": {
+        "N": 7619,
+        "R20": 0.629478931427002,
+        "R5_20m": 0.8116550445556641,
+        "R15_20m": 0.8956555724143982,
+        "NE_m": 34.643775939941406,
+        "mass20": 0.3491346538066864,
+        "Geometry_R20": 0.629478931427002,
+        "Geometry_NE_m": 34.643775939941406,
+        "Relation_R20": 0.629478931427002,
+        "Relation_NE_m": 34.643775939941406
+      },
+      "manual_off": {
+        "N": 7619,
+        "R20": 0.6365664601325989,
+        "R5_20m": 0.8175613880157471,
+        "R15_20m": 0.9003806114196777,
+        "NE_m": 34.08807373046875,
+        "mass20": 0.3534243702888489,
+        "Geometry_R20": 0.6365664601325989,
+        "Geometry_NE_m": 34.087501525878906,
+        "Relation_R20": 0.6365664601325989,
+        "Relation_NE_m": 34.08807373046875
+      }
+    },
+    "landmark_relation": {
+      "additive_off": {
+        "N": 7619,
+        "R20": 0.3222207725048065,
+        "R5_20m": 0.5284157991409302,
+        "R15_20m": 0.7024543881416321,
+        "NE_m": 47.41948699951172,
+        "mass20": 0.1631259322166443,
+        "Geometry_R20": 0.31053945422172546,
+        "Geometry_NE_m": 49.54822540283203,
+        "Relation_R20": 0.3222207725048065,
+        "Relation_NE_m": 47.41948699951172
+      },
+      "manual_off": {
+        "N": 7619,
+        "R20": 0.3273395597934723,
+        "R5_20m": 0.5365533828735352,
+        "R15_20m": 0.7126919627189636,
+        "NE_m": 46.888729095458984,
+        "mass20": 0.16577833890914917,
+        "Geometry_R20": 0.31316444277763367,
+        "Geometry_NE_m": 49.18327713012695,
+        "Relation_R20": 0.3273395597934723,
+        "Relation_NE_m": 46.888729095458984
+      }
+    }
+  },
+  "native_full_text": {
+    "N": 7619,
+    "R20": 0.7008793950080872,
+    "R5_20m": 0.8867305517196655,
+    "R15_20m": 0.9603622555732727,
+    "NE_m": 20.378795623779297,
+    "mass20": 0.38662922382354736,
+    "Geometry_R20": 0.7008793950080872,
+    "Geometry_NE_m": 20.378795623779297,
+    "Relation_R20": 0.7008793950080872,
+    "Relation_NE_m": 20.378795623779297
+  },
+  "native_to_rebound": {
+    "fixes": 28,
+    "breaks": 477,
+    "net": -449,
+    "changed_top1": 879,
+    "mean_NE_improvement_m": -13.46151351928711
+  },
+  "train_dev_is_independent": false,
+  "frozen_full_on_compact_text": {
+    "N": 7619,
+    "R20": 0.1943824589252472,
+    "R5_20m": 0.33206456899642944,
+    "R15_20m": 0.4780154824256897,
+    "NE_m": 76.8334732055664,
+    "mass20": 0.11952444165945053,
+    "Geometry_R20": 0.1943824589252472,
+    "Geometry_NE_m": 76.83293914794922,
+    "Relation_R20": 0.1943824589252472,
+    "Relation_NE_m": 76.8334732055664
+  },
+  "compact_text_frozen_effect": {
+    "fixes": 258,
+    "breaks": 3668,
+    "net": -3410,
+    "changed_top1": 6969,
+    "mean_NE_improvement_m": -42.9931640625
+  },
+  "compact_training_adaptation": {
+    "fixes": 1447,
+    "breaks": 434,
+    "net": 1013,
+    "changed_top1": 6659,
+    "mean_NE_improvement_m": 30.091466903686523
+  },
+  "note": "Original full-text checkpoint reused without retraining; Only requested compact-language checkpoints are evaluated; current protocol trains landmark_relation only. Same Unified V2 architecture, public Polygons, and frozen pretrained BERT. No RGB/Val/Test/closed-loop.",
+  "baseline_evaluation_input_shift": "Frozen original full-text checkpoint was trained with its original processed public reference binding; for paired comparison it is evaluated with newly catalog-matched polygons. Treat as input-shift baseline, not a retrained matched-distribution control.",
+  "warning": "Spatial rule map is recomputed from respective text: a correct direction change may arise from deterministic rules, not necessarily learned language understanding."
+}

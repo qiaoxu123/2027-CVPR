@@ -1,0 +1,63 @@
+{
+  "Val_Seen": {
+    "full_text": {
+      "SR": 0.4574898785425101,
+      "OSR": 0.5327935222672064,
+      "SPL": 0.44399223687097605,
+      "NE": 37.95964865662928,
+      "nDTW": 0.2888095812411536,
+      "sDTW": 0.16142163018787203,
+      "steps": 6.840485829959515,
+      "path_length": 197.9748305816652,
+      "policy_stop": 1.0,
+      "inference_ms": 24.21280496261511,
+      "episodes": 2470,
+      "False_Stop_Rate": 0.5425101214574899,
+      "false_stop_episode_fraction": 0.5425101214574899,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "landmark_relation": {
+      "SR": 0.3408906882591093,
+      "OSR": 0.4153846153846154,
+      "SPL": 0.329653600830395,
+      "NE": 41.41968839465217,
+      "nDTW": 0.2765574007330606,
+      "sDTW": 0.11933786296220691,
+      "steps": 6.893522267206477,
+      "path_length": 197.08883552795382,
+      "policy_stop": 1.0,
+      "inference_ms": 23.713504255963553,
+      "episodes": 2470,
+      "False_Stop_Rate": 0.6591093117408907,
+      "false_stop_episode_fraction": 0.6591093117408907,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    }
+  },
+  "paired": {
+    "fixes": 166,
+    "damage": 454,
+    "net": -288
+  },
+  "physical_target_group_bootstrap_SR_delta_95CI": [
+    -0.14484367153908922,
+    -0.08950630355838195
+  ],
+  "physical_target_groups": 449,
+  "single_seed": true,
+  "navigation_failure_attribution": {
+    "full_text": {
+      "goal_wrong_navigation_failed": 1340,
+      "OSR_success_SR_failed": 186,
+      "goal_jumps_over20m": 0,
+      "correct_policy_stop": 1130,
+      "policy_stop": 2470
+    },
+    "landmark_relation": {
+      "goal_wrong_navigation_failed": 1628,
+      "OSR_success_SR_failed": 184,
+      "goal_jumps_over20m": 0,
+      "correct_policy_stop": 842,
+      "policy_stop": 2470
+    }
+  }
+}

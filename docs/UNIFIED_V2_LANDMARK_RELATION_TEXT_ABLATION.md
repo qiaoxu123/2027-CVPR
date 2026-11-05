@@ -1,6 +1,6 @@
 > 执行更新（用户最新指令）：取消relation_only训练，只新训练landmark_relation，full_text复用现有Checkpoint。训练完成后冻结配置，追加全部2470条Val-Seen真实闭环对照；不运行Test、不用Val调参。Birmingham包含在全21878条训练中，只作TRAIN内拟合诊断，不是独立Dev泛化。
 
-# UnifiedPGVB V2 主模型语言消融：只新训练两组
+# UnifiedPGVB V2 主模型语言消融：只新训练地标名称＋关系词
 
 ## 不再做的事
 
@@ -9,17 +9,17 @@
 - **不训练仅地标名称版。** 旧 PR #22 的独立小网络也不使用。
 - 不训练 RGB，不重新处理 Stop/Controller，不修改主模型网络结构。
 
-## 两组新增实验与现有基线
+## 一组新增训练与现有全文基线
 
 | 组 | 送入原始指令 BERT Token 通道的文本 | 是否重新训练 |
 |---|---|---|
 | full_text | 原始完整指令 | **否**；只加载已有完整指令 Checkpoint 来评测 |
 | landmark_relation | 紧贴具名地标的空间词组＋对应地标名称 | **是** |
-| relation_only | 只保留提取出的空间关系词组（不含地标名） | **是** |
+| relation_only | 历史兼容模式：仅关系词 | **已取消，不训练、不评测** |
 
 所有组都使用 UnifiedPGVB-v2 原 Architecture、原始 V2 初始化
-（新增两组）、28×28 Goal Belief、GAT、Relation Head 和
-candidate-to-PUBLIC-Polygon 10D 几何。各组固定 seed42、训练5轮
+（新增地标关系组）、28×28 Goal Belief、GAT、Relation Head 和
+candidate-to-PUBLIC-Polygon 10D 几何。新增组固定 seed42、训练5轮
 且沿用原脚本超参数。
 
 **重要：relation_only 只指「指令文本 Token 只包含关系词」。**
@@ -54,7 +54,7 @@ CityRefer catalog 名称匹配，不根据 GT/目标ID选择。
 
 **已有 full_text Checkpoint 的来源差异：**
 旧完整指令模型是在原始 preprocessed reference 条件下训练的；
-这里为了可比性，把它冻结后直接放在与两组新模型相同的
+这里为了可比性，把它冻结后直接放在与新模型相同的
 公开 catalog Polygon 输入上评测。这构成输入分布变化，
 **不能称为完全匹配的三组重新训练对照**。保留旧主实验的
 原生评测指标作为历史参考，并明确区分这两种基线。
@@ -81,7 +81,7 @@ EXISTING_FULL="$MAIN/core/last.pt"
   --output "$OUT/paired_inputs"
 
 # 全文组只用于下方已有checkpoint的evaluation，绝对不重新训练。
-# 新两组各先做3 batch smoke，再完整训练5轮。
+# 地标关系组先做3 batch smoke，再完整训练5轮。
 for ARM in landmark_relation; do
   "$PY" -u -m scripts.train_unified_full_relation \
     --train-jsonl "$OUT/paired_inputs/$ARM.jsonl" \
@@ -123,7 +123,7 @@ done
    使用了关系词。behind/left/right 参考系未知，不用任意世界方位判定。
 5. 不使用 GT 选择 Polygon、输入 token 或候选区域；
    GT 只能作为最终 Goal 监督/评测。
-6. 不跑 Val/Test/闭环，不改 Stop/main；完成 TRAIN-Dev 后先出报告。
+6. 不跑Test、不改Stop/main；最终5轮Checkpoint冻结后运行完整2470条Val-Seen真实闭环，不用Val调参。
 
 无需重新训练 full_text，也无需仅地标模型。
 
@@ -136,4 +136,4 @@ Rule诊断分三层：full、additive_off（仅取消直接Rule加分，规则�
 
 本地正射栅格CRS为空，无地理朝向配准证明；north→+Y是原工程Rule约定，只报告工程轴反事实响应，不称真实地理方向准确率。behind/left/right不作绝对世界方向正确性判定。
 
-新增导航适配仅通过显式--instruction-mode/--public-objects启用，默认native不变；新两组导航共享公开精确绑定，GT不参与。原Stable Goal/Trajectory/Stop和20m/20步/50m宏动作协议不改。
+新增导航适配仅通过显式--instruction-mode/--public-objects启用，默认native不变；全文/精简两个导航方法共享公开精确绑定，GT不参与。原Stable Goal/Trajectory/Stop和20m/20步/50m宏动作协议不改。

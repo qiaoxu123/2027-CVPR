@@ -1,0 +1,69 @@
+{
+  "sources": {
+    "stage1": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/best.pt",
+      "SHA256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a"
+    },
+    "original_v2": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_pgvb_v2_pilot_s42/full_training/last.pt",
+      "SHA256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812"
+    },
+    "existing_full": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_full_relation_s42_20261105/core/last.pt",
+      "SHA256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b"
+    },
+    "trained_landmark_relation": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_text_ablation_s42_20261105/train_landmark_relation/last.pt",
+      "SHA256": "0c441e20922c3e75914022cf85bf0131917c4ea7f57d964e09401bf80540cc1d"
+    },
+    "config": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/Baselines/SBFNav/runs/sbfnav_main_e20_bs16_s0_20260929/source/configs/sbfnav/main.yaml",
+      "SHA256": "425621ad137d6d3e123c6a96a7ea614128e09e9753dc39cf0492d6d0bd81b27f"
+    },
+    "public_objects": {
+      "path": "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json",
+      "SHA256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+    }
+  },
+  "code": {
+    "graphnav/unified_pgvb.py": "ed4cbf5a464bc027c25a5e9bdc93d20f185e1f02f9fe3c56fdeafd1ce21b701a",
+    "graphnav/full_localization.py": "273a07f7b71d73f06de4b342236b8b558ec2e3cb3556a41af94e56cc6b0a3b1b",
+    "graphnav/aerialvg_inspired_relation.py": "33967eb72662622f132d72c3158c8e8f206d9da91f1c32756d5122bec2af30c0",
+    "graphnav/unified_full_relation_runtime.py": "d6a3029538f9cc203a2ed3b526b188bc6a17068d84792519d6f09b2d8bc1ce9a",
+    "graphnav/unified_text_ablation.py": "52dc9907b1169012ed9461657633082c199ad10464d1145dc43e9cd26d40bbd1",
+    "graphnav/unified_text_ablation_runtime.py": "f5fffa6e2b066e888f56c63f24e703bc90ccc117b0850e5ca03de9dda9779de4",
+    "graphnav/a3_runtime.py": "2c0f9be782416b23b3215887e0381460eca10043858999f9b27163d631b0a27c",
+    "graphnav/stable_navigation_goal.py": "bb6b74aef169ab1513cc8abf71dda023d1ec553a586d7751592d00d0f5238efd",
+    "graphnav/trajectory_policy.py": "953a7eae80c00508a6cce03dbb62eec8243ac1198603f41378c527bfdd6180f2",
+    "scripts/prepare_unified_v2_landmark_relation_ablation.py": "b7edcfd3e3394baa37254b18875f269b43e632cae1f687a346748fea0cfff316",
+    "scripts/evaluate_closedloop.py": "5f0c1433c1e7a7d0a35abeea6087634e1287351f0c060e407689ce678c8ccd62"
+  },
+  "provenance": {
+    "commit": "7899428ee5d690d25fdd2191741f33e6636b6e65",
+    "working_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "training": {
+    "seed": 42,
+    "epochs": 5,
+    "records_per_epoch": 21878,
+    "checkpoint_selection": "fixed final epoch; no Val/Dev selection",
+    "cancelled_relation_only": true,
+    "retrained_full_text": false
+  },
+  "evaluation": {
+    "split": "val_seen",
+    "expected": 2470,
+    "methods": [
+      "full_text",
+      "landmark_relation"
+    ],
+    "visual_control": "off",
+    "public_reference_binding": "same full public catalog and exact text matching",
+    "horizon": 20,
+    "success_radius_m": 20.0,
+    "horizontal_step_m": 50.0,
+    "stop_threshold": 0.3,
+    "arrival_guard_m": 0.001
+  },
+  "Test_authorized": false
+}
