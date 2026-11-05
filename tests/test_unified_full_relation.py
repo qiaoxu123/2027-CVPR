@@ -90,3 +90,18 @@ def test_evaluation_requires_trained_explicit_checkpoint_flag():
         model.forward_full_relation(**_inputs())
     model.full_relation_ready = True
     assert model.forward_full_relation(**_inputs())["field"].candidate_ids.shape == (2, 3)
+
+
+def test_public_landmark_name_embeddings_are_actually_used():
+    model = UnifiedPGVB(geometry=FakeGeometry(), full_relation=True).train()
+    inputs = _inputs()
+    with torch.no_grad():
+        model.full_relation.score.weight.fill_(0.12)
+    original = model.forward_full_relation(**inputs)["relation_delta"]
+    changed = dict(inputs)
+    changed["node_emb"] = inputs["node_emb"].clone()
+    changed["node_emb"][0, 0] += 5.0
+    new = model.forward_full_relation(**changed)["relation_delta"]
+    assert not torch.allclose(original[0], new[0])
+    # No valid public references: original name changes cannot alter Belief.
+    assert torch.equal(original[1], new[1])
