@@ -43,6 +43,11 @@ def visual_rows(inventory, cache):
             raise ValueError("Mismatched TRAIN visual cache")
         for obs in item["observations"]:
             if obs.get("observed") is not None:
+                patch_labels = obs.get('anchor_labels')
+                valid = obs['observed']['valid'].bool()
+                if patch_labels is None or int(((patch_labels==1)&valid).sum())<2:
+                    ledger.append(dict(index=task['index'],reason='no_runtime_supported_anchor_ROI'))
+                    continue
                 kept.append(dict(query=item["query"], task=task,
                                  observed=obs["observed"],
                                  label=labels[task["index"]]["target_world"]))
@@ -120,8 +125,9 @@ def main():
     start_epoch = int(previous.get("visual_epochs",0)) if previous else 0
     history = list(previous.get("visual_history",[])) if previous else []
     start=time.perf_counter()
+    original_frozen={k:v.detach().cpu().clone() for k,v in model.state_dict().items() if not k.startswith('pgvb.')}
     for epoch in range(start_epoch,a.epochs):
-        random.shuffle(rows)
+        order=np.random.default_rng(a.seed+epoch).permutation(len(rows)).tolist()
         # Keep the top-level model in train mode to forbid the static
         # cross-query cache, while frozen core dropout is disabled.
         model.train()
@@ -130,7 +136,7 @@ def main():
         model.pgvb.train()
         total = used = optimized = inactive = 0
         for off in range(0,len(rows),a.batch_size):
-            group = rows[off:off+a.batch_size]
+            group = [rows[i] for i in order[off:off+a.batch_size]]
             inp = batch_inputs(group,device="cuda",visual=True)
             inputs = dict(
                 static_inputs=inp["static_inputs"], tokens=inp["tokens"],
@@ -154,7 +160,10 @@ def main():
                 continue
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.pgvb.parameters(),5.)
+            if not torch.isfinite(loss):raise FloatingPointError('Nonfinite PGVB loss')
+            grad=sum(float(p.grad.abs().sum()) for p in model.pgvb.parameters() if p.grad is not None)
+            if not np.isfinite(grad):raise FloatingPointError('Nonfinite PGVB gradients')
+            torch.nn.utils.clip_grad_norm_(model.pgvb.parameters(),5.,error_if_nonfinite=True)
             optimizer.step()
             optimized += len(group)
             total += float(loss.detach())*len(group)
@@ -162,9 +171,11 @@ def main():
             raise RuntimeError("RGB cache sample coverage incomplete")
         if not optimized:
             raise RuntimeError("No active differentiable RGB evidence; stop visual fine-tuning")
+        assert all(torch.equal(model.state_dict()[k].cpu(),v) for k,v in original_frozen.items())
         report=dict(epoch=epoch+1,train_rgb_frames=used,
                     optimized_rgb_frames=optimized, inactive_rgb_frames=inactive,
-                    loss=total/optimized,seconds=time.perf_counter()-start)
+                    loss=total/optimized,seconds=time.perf_counter()-start,
+                    frozen_geometry_relation_unchanged=True,last_gradient_L1=grad)
         history.append(report)
         output=dict(
             format=FORMAT,model=model.state_dict(),

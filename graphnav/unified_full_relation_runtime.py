@@ -20,11 +20,15 @@ from .unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
 
 class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
     def __init__(self, stage1, original_v2, trained, directory, *, device="cuda",
-                 relation_control="full", visual_control="tracked"):
+                 relation_control="full", visual_control="tracked", geometry_source="trained"):
         if relation_control not in ("full", "off"):
             raise ValueError("Invalid learned relation ablation")
         if visual_control not in ("tracked", "off"):
             raise ValueError("Invalid PGVB visual ablation")
+        if geometry_source not in ('trained','original'):
+            raise ValueError('Invalid Geometry source')
+        if geometry_source=='original' and (relation_control!='off' or visual_control!='off'):
+            raise ValueError('Original Geometry is an isolated frozen baseline only')
         super().__init__(stage1, original_v2, directory, device=device,
                          mode="tracked-stable" if visual_control == "tracked" else "geometry")
         self.relation_control = relation_control
@@ -41,6 +45,11 @@ class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
                 or state.get("completed_epochs", 0) < state["planned_epochs"]):
             raise ValueError("Full relation TRAIN must finish all planned epochs; smoke is invalid")
         self.unified = load_full_relation_model(state, self.device).eval().requires_grad_(False)
+        if geometry_source=='original':
+            original=torch.load(original_v2,map_location='cpu',weights_only=True)
+            weights={k[len('geometry.'):]:v for k,v in original['model'].items() if k.startswith('geometry.')}
+            self.unified.geometry.load_state_dict(weights,strict=True)
+        self.geometry_source=geometry_source
         self.unified.full_relation_ready = True
         self.full_relation_checkpoint = Path(trained)
         self.relation_coverage = None
@@ -132,4 +141,6 @@ class UnifiedPGVBFullRelationPolicy(UnifiedPGVBNamedLandmarkPolicy):
             stable_navigation_goal=stable,
             decision_seconds=time.perf_counter()-start,
         )
+        if getattr(self,'full_relation_audit_callback',None) is not None:
+            self.full_relation_audit_callback(state,result,field)
         return prediction

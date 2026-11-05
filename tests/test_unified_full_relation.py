@@ -105,3 +105,11 @@ def test_public_landmark_name_embeddings_are_actually_used():
     assert not torch.allclose(original[0], new[0])
     # No valid public references: original name changes cannot alter Belief.
     assert torch.equal(original[1], new[1])
+
+
+def test_original_geometry_baseline_cannot_mix_trained_relation_or_rgb():
+    from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
+    with pytest.raises(ValueError,match='isolated frozen baseline'):
+        UnifiedPGVBFullRelationPolicy(None,None,None,None,geometry_source='original',relation_control='full',visual_control='off')
+    with pytest.raises(ValueError,match='isolated frozen baseline'):
+        UnifiedPGVBFullRelationPolicy(None,None,None,None,geometry_source='original',relation_control='off',visual_control='tracked')

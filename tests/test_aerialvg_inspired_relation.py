@@ -91,3 +91,15 @@ def test_geometry_shape_guard():
     data[3] = data[3][:, :, :-1]
     with pytest.raises(ValueError, match="Misaligned"):
         head(*data)
+
+
+def test_padding_columns_do_not_affect_nonzero_relation_scores():
+    head = _head()
+    with torch.no_grad():head.score.weight.normal_(std=.1)
+    dense,text,mask,geometry,ids,valid=_inputs()
+    compact=head(dense,text,mask,geometry,ids,valid)
+    padded=head(dense,text,mask,
+        torch.cat([geometry,torch.randn(2,12,9,10)],1),
+        torch.cat([ids,torch.zeros(2,12,dtype=torch.long)],1),
+        torch.cat([valid,torch.zeros(2,12,dtype=torch.bool)],1))
+    torch.testing.assert_close(compact,padded,atol=1e-6,rtol=1e-6)

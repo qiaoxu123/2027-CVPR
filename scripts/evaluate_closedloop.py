@@ -64,6 +64,7 @@ def main():
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
     parser.add_argument('--relation-control', choices=['full','off'], default='full')
     parser.add_argument('--relation-visual-control', choices=['tracked','off'], default='tracked')
+    parser.add_argument('--relation-geometry-source', choices=['trained','original'], default='trained')
     parser.add_argument('--resume', action='store_true', help='Resume unified-relation full evaluation')
     parser.add_argument('--dynamic-checkpoint')
     parser.add_argument('--evidence-checkpoint',help='Required for opt-in target evidence evaluation')
@@ -133,6 +134,7 @@ def main():
                        split=args.split, data_root=str(Path(args.data_root).resolve()),
                        relation_control=args.relation_control,
                        relation_visual_control=args.relation_visual_control,
+                       geometry_source=args.relation_geometry_source,
                        evaluation_code=sha(__file__),
                        model_code=sha(Path('graphnav/unified_pgvb.py')),
                        relation_runtime_code=sha(Path('graphnav/unified_full_relation_runtime.py')),
@@ -165,6 +167,8 @@ def main():
         vertical_step_m=nav['vertical_step_m'],min_altitude_m=altitude['min_above_ground_m'],
         max_altitude_m=altitude['max_above_ground_m'],stagnation_steps=nav['stagnation_steps'],
         success_radius_m=nav['success_distance_m'])
+    if args.model=='unified-relation' and protocol!=ClosedLoopProtocol():
+        raise ValueError('Frozen original navigation protocol changed')
     dataset = CityNavDataset(args.data_root,args.split,version=config['data']['version'],
                              allow_test_unseen=args.split=='test_unseen')
     catalog = CityReferCatalog(Path(args.data_root)/'cityrefer')
@@ -191,7 +195,8 @@ def main():
                 args.checkpoint,args.unified_v2,args.relation_checkpoint,
                 output/'public_inputs',
                 relation_control=args.relation_control,
-                visual_control=args.relation_visual_control)
+                visual_control=args.relation_visual_control,
+                geometry_source=args.relation_geometry_source)
             builder=NativeObservationBuilder(
                 builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='graphnav-v1':
@@ -265,13 +270,29 @@ def main():
                 continue
             # IDs are used only to prepare supplied CityRefer language bindings and output labels.
             # Neither record, target, IDs, nor expert future enters the policy or rollout.
-            public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
-                                   tuple(catalog.referenced_landmarks(record)),
-                                   tuple(catalog.referenced_landmark_names(record)))
+            public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),(),())
             failure = None
             if args.model == 'unified-relation':
+                captures=[]
+                capture_dir=output/'belief_steps'/f'{record.index:05d}'
+                capture_dir.mkdir(parents=True,exist_ok=True)
+                def capture_relation(state,result,field):
+                    step=len(captures)
+                    payload=dict(pose=state.pose,footprint=state.current_observation['footprint_world'],
+                        geometry=result['geometry_field'].belief_logits[0].float().cpu().numpy(),
+                        relation=result['relation_field'].belief_logits[0].float().cpu().numpy(),
+                        full=result['field'].belief_logits[0].float().cpu().numpy(),
+                        selected_ids=field.candidate_ids[0].cpu().numpy(),
+                        grid=runtime.inputs['grid_xy'][0].cpu().numpy())
+                    np.savez_compressed(capture_dir/f'{step:02d}.npz',**payload)
+                    captures.append(step)
+                runtime.full_relation_audit_callback=capture_relation
                 try:
+                    public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
+                        tuple(catalog.referenced_landmarks(record)),
+                        tuple(catalog.referenced_landmark_names(record)))
                     runtime.set_episode(public,builder.transform(public.map_name),catalog)
+                    (capture_dir/'public_record.json').write_text(json.dumps(runtime.record))
                     poses, termination, timings, diagnostics = rollout(
                         public,builder,controller,runtime.predict,
                         GROUND_LEVEL[record.map_name],protocol,
@@ -282,6 +303,8 @@ def main():
                     poses = public.start_pose[None].copy()
                     termination, timings, diagnostics = 'inference_error', [], []
             else:
+                public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
+                    tuple(catalog.referenced_landmarks(record)),tuple(catalog.referenced_landmark_names(record)))
                 if args.model!='sbfnav': runtime.set_episode(public,builder.transform(public.map_name),catalog)
                 poses, termination, timings, diagnostics = rollout(public,builder,controller,runtime.predict,
                     GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
@@ -357,6 +380,7 @@ def main():
         report['original_unified_v2_sha256']=sha(args.unified_v2)
         report['relation_control']=args.relation_control
         report['relation_visual_control']=args.relation_visual_control
+        report['geometry_source']=args.relation_geometry_source
         report['coverage']=dict(expected=len(dataset), completed=len(rows),
                                  inference_errors=terminations.get('inference_error',0),
                                  selection_filter='none',

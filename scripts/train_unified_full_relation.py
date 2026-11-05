@@ -138,7 +138,10 @@ def main():
         eligibility_filter=None, checkpoint_format=FORMAT,
         epochs=a.epochs, batch_size=a.batch_size, seed=a.seed,
         min_train_records=a.min_train_records,
-        smoke=bool(a.max_batches), max_batches=a.max_batches)
+        smoke=bool(a.max_batches), max_batches=a.max_batches,
+        lr_geometry=a.lr_geometry, lr_relation=a.lr_relation,
+        training_code_sha256=file_sha256(__file__),
+        relation_code_sha256=file_sha256('graphnav/aerialvg_inspired_relation.py'))
     manifest_path = a.output/"manifest.json"
     if manifest_path.exists() and json.loads(manifest_path.read_text()) != manifest:
         raise ValueError("Resume inputs/configuration changed")
@@ -170,26 +173,50 @@ def main():
     ], weight_decay=0.001)
     if previous is not None:
         optimizer.load_state_dict(previous["optimizer"])
+    bert = FrozenBERTTokens(
+        geometry_args["text_backbone"], device="cuda",
+        max_length=int(geometry_args["max_text_length"]),
+    )
+    bert_path = a.output/'bert_cache.pt'
+    if bert_path.exists():bert.load_cache(bert_path)
+    if previous is not None:
         torch.set_rng_state(previous["torch_rng"])
         torch.cuda.set_rng_state_all(previous["cuda_rng"])
         random.setstate(previous["python_rng"])
         n = previous["numpy_rng"]
         np.random.set_state((n[0], np.asarray(n[1], dtype=np.uint32),
                              n[2], n[3], n[4]))
-    bert = FrozenBERTTokens(
-        geometry_args["text_backbone"], device="cuda",
-        max_length=int(geometry_args["max_text_length"]),
-    )
     history = previous["history"] if previous is not None else []
     started = time.perf_counter()
+    prior_seconds = float(previous.get('elapsed_seconds', 0)) if previous else 0.
+    updates = int(previous.get('updates', 0)) if previous else 0
+    torch.cuda.reset_peak_memory_stats()
+    def save(completed, offset, seen, loss_total, corrected, damaged):
+        ckpt = dict(format=FORMAT, model=model.state_dict(), config=original['config'],
+            source_sha256=source_sha, completed_epochs=completed, planned_epochs=a.epochs,
+            epoch_offset=offset, epoch_seen=seen, epoch_loss_total=loss_total,
+            epoch_corrected=corrected, epoch_damaged=damaged, updates=updates,
+            elapsed_seconds=prior_seconds+time.perf_counter()-started,
+            optimizer=optimizer.state_dict(),torch_rng=torch.get_rng_state(),
+            cuda_rng=torch.cuda.get_rng_state_all(),python_rng=random.getstate(),
+            numpy_rng=(np.random.get_state()[0],np.random.get_state()[1].tolist(),*np.random.get_state()[2:]),
+            history=history,smoke=bool(a.max_batches))
+        atomic_save(ckpt,a.output/'last.pt')
     for epoch in range(start_epoch, a.epochs):
         model.train()
-        loss_total = 0.0
-        seen = 0
-        corrected = damaged = 0
+        continuing = previous is not None and epoch == start_epoch
+        offset = int(previous.get('epoch_offset',0)) if continuing else 0
+        loss_total = float(previous.get('epoch_loss_total',0)) if continuing else 0.
+        seen = int(previous.get('epoch_seen',0)) if continuing else 0
+        corrected = int(previous.get('epoch_corrected',0)) if continuing else 0
+        damaged = int(previous.get('epoch_damaged',0)) if continuing else 0
+        order = np.random.default_rng(a.seed+epoch).permutation(count).tolist()[offset:]
+        loader = DataLoader(dataset,batch_size=a.batch_size,sampler=order,num_workers=0,
+                            collate_fn=collate_full,generator=torch.Generator().manual_seed(a.seed+epoch))
         for index, batch in enumerate(loader):
             if a.max_batches and index >= a.max_batches:
                 break
+            torch.cuda.synchronize(); step_started=time.perf_counter()
             inputs = full_relation_inputs(batch, bert, "cuda")
             with torch.autocast("cuda", enabled=False):
                 result = model.forward_full_relation(**inputs)
@@ -201,10 +228,16 @@ def main():
                     F.softmax(base.detach(), -1), reduction="batchmean")
                 loss = location + 0.05 * preserve
             optimizer.zero_grad(set_to_none=True)
+            if not torch.isfinite(loss):raise FloatingPointError('Nonfinite full TRAIN loss')
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(
+            if updates < 3:
+                audit={name:sum(float(p.grad.abs().sum()) for p in module.parameters() if p.grad is not None)
+                       for name,module in [('Geometry',model.geometry),('Relation',model.full_relation)]}
+                if not all(np.isfinite(v) and v>0 for v in audit.values()):raise RuntimeError('Missing/nonfinite core gradients')
+                atomic_json(audit,a.output/'gradient_audit.json')
+            norm=torch.nn.utils.clip_grad_norm_(
                 list(model.geometry.parameters()) +
-                list(model.full_relation.parameters()), 5.0)
+                list(model.full_relation.parameters()), 5.0,error_if_nonfinite=True)
             optimizer.step()
             size = len(batch["text"])
             seen += size
@@ -214,6 +247,14 @@ def main():
                               (distances[:, 1] <= 20)).sum())
             damaged += int(((distances[:, 0] <= 20) &
                             (distances[:, 1] > 20)).sum())
+            updates+=1;offset+=size;torch.cuda.synchronize()
+            step=dict(update=updates,epoch=epoch+1,seen=seen,loss=float(loss.detach()),
+                wall_ms=(time.perf_counter()-step_started)*1000,gradient_norm=float(norm),
+                peak_gpu_GiB=torch.cuda.max_memory_allocated()/2**30,
+                relation_delta_max=float(result['relation_delta'].detach().abs().max()))
+            with (a.output/'steps.jsonl').open('a') as stream:stream.write(json.dumps(step)+'\n')
+            if updates%200==0:
+                save(epoch,offset,seen,loss_total,corrected,damaged)
             if index % 100 == 0:
                 print(json.dumps(dict(epoch=epoch+1,batch=index,seen=seen,
                                       expected=count,loss=float(loss.detach()))),
@@ -225,22 +266,8 @@ def main():
                    train_fixes=corrected, train_breaks=damaged,
                    wall_seconds=time.perf_counter()-started)
         history.append(row)
-        ckpt = dict(
-            format=FORMAT, model=model.state_dict(),
-            config=original["config"], source_sha256=source_sha,
-            completed_epochs=epoch+1, planned_epochs=a.epochs,
-            optimizer=optimizer.state_dict(),
-            torch_rng=torch.get_rng_state(),
-            cuda_rng=torch.cuda.get_rng_state_all(),
-            python_rng=random.getstate(),
-            numpy_rng=(
-                np.random.get_state()[0],
-                np.random.get_state()[1].tolist(),
-                *np.random.get_state()[2:],
-            ),
-            history=history, smoke=bool(a.max_batches),
-        )
-        atomic_save(ckpt, a.output/"last.pt")
+        save(epoch+1,0,0,0.,0,0)
+        bert.save_cache(bert_path)
         atomic_json(dict(**manifest, completed_epochs=epoch+1,
                          history=history, complete=(
                             epoch+1 == a.epochs and not a.max_batches)),

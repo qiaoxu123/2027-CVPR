@@ -81,6 +81,17 @@ class CandidateAnchorRelation(nn.Module):
         no_anchor = ~anchor_valid.bool().any(-1)
         if anchor_valid.shape[1] == 0:
             return dense_context.new_zeros(dense_context.shape[:2], dtype=torch.float32)
+        # Padding is not a public reference. Removing columns absent from the
+        # whole batch preserves the masked attention computation and avoids
+        # repeating expensive pair/text attention over 24 padded entities.
+        used = anchor_valid.bool().any(0)
+        if not used.any():
+            return dense_context.new_zeros(dense_context.shape[:2], dtype=torch.float32)
+        anchor_geom = anchor_geom[:, used]
+        predicate_ids = predicate_ids[:, used]
+        anchor_valid = anchor_valid[:, used]
+        if anchor_semantics is not None:
+            anchor_semantics = anchor_semantics[:, used]
         if no_anchor.any():
             anchor_valid = anchor_valid.clone()
             anchor_valid[no_anchor, 0] = True
