@@ -93,7 +93,7 @@ def main():
     for name,value in [('summary.json',summary),('paired_tasks.json',paired),('Belief_shifts.json',shift),('blocked_RGB_changes.json',changes)]:atomic_json(value,o/name)
     shutil.copy2(r/a.run/'predictions.jsonl',o/'all_168_trajectories.jsonl')
     shutil.copy2(r/a.run/'freeze_manifest.json',o/'freeze_manifest.json')
-    shutil.copy2(r/'cpu_final.txt',o/'cpu_tests.txt')
+    shutil.copy2(r/'cpu_tracked_only.txt',o/'cpu_tests.txt')
     # Six tasks include changed/blocked proposals plus representative failures
     # and successes. Selection affects only visualization, never evaluation.
     selected=sorted(case_priority)[:5]
