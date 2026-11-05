@@ -23,7 +23,7 @@ class InstructionRelationGraphEncoder(nn.Module):
     retaining predicate direction and native endpoint ordering.
     """
 
-    def __init__(self, text_dim=768, hidden=128, layers=2, dropout=0.1):
+    def __init__(self, text_dim=768, hidden=128, layers=4, dropout=0.1):
         super().__init__()
         if hidden < 8 or layers < 1:
             raise ValueError("Hidden>=8 and at least one graph layer required")
