@@ -1,56 +1,64 @@
-# UnifiedPGVB-v2 主实验：只替换语言为「具名地标 + 邻接几何词组」
+# UnifiedPGVB V2 主模型语言消融：只新训练两组
 
-## 目标与 PR #22 的关键区别
+## 不再做的事
 
-**禁止再训练上一轮 PR #22 的独立 LandmarkGeometryWordsOnly 小模型。**
-本实验使用原论文 UnifiedPGVB-v2 Geometry + 完整 BERT Token
-Attention + candidate-to-Polygon 10D geometry + 原
-CandidateAnchorRelation Head + 原 PGVB（本轮无 RGB）。
-模型架构、28×28 网格、Optimizer、训练轮数、初始 Unified V2
-Checkpoint、Stop/Controller 均沿用原 scripts/train_unified_full_relation.py。
-仅更换三个输入变体的语言，
-且每个变体分别进行完整的主干+Relation训练。
+- **不重新训练完整原始指令版。** 使用已经完成的 UnifiedPGVB V2
+  Full Relation Checkpoint（先前 main 主实验结果保留）。
+- **不训练仅地标名称版。** 旧 PR #22 的独立小网络也不使用。
+- 不训练 RGB，不重新处理 Stop/Controller，不修改主模型网络结构。
 
-- full_text：完整原始指令。
-- landmark_relation：只含「地标名称＋直接紧贴该地标的几何词组」。
-- landmark_only：只含具名地标名称，不含几何词。
+## 两组新增实验与现有基线
 
-| 原句（仅数据准备器可读） | landmark_relation | landmark_only |
+| 组 | 送入原始指令 BERT Token 通道的文本 | 是否重新训练 |
 |---|---|---|
-| The blue car north of One Stop | north of One Stop | One Stop |
-| The blue car in the parking lot behind One Stop | behind One Stop | One Stop |
-| The car next to Blackwell Street | next to Blackwell Street | Blackwell Street |
-| The car without public named anchor | [UNK] | [UNK] |
+| full_text | 原始完整指令 | **否**；只加载已有完整指令 Checkpoint 来评测 |
+| landmark_relation | 紧贴具名地标的空间词组＋对应地标名称 | **是** |
+| relation_only | 只保留提取出的空间关系词组（不含地标名） | **是** |
 
-注意：behind One Stop 的词法邻接不保证 car 直接 behind One Stop，
-可能是停车场 behind One Stop。
-不将 behind / left / right 硬编码为世界 X/Y 方向。
-静态规则解析器只支持自己原有的部分空间词（north/south/near/along 等）。
-需要将手工规则产生的变化与学到的几何关系能力严格区分。
+所有组都使用 UnifiedPGVB-v2 原 Architecture、原始 V2 初始化
+（新增两组）、28×28 Goal Belief、GAT、Relation Head 和
+candidate-to-PUBLIC-Polygon 10D 几何。各组固定 seed42、训练5轮
+且沿用原脚本超参数。
 
-## 为什么要先从公开对象目录重新绑定 Polygon？
+**重要：relation_only 只指「指令文本 Token 只包含关系词」。**
+地图流仍保留相同具名地标节点、公共名字嵌入和对应 Polygon，
+这是让关系词能够关联某个地图对象的必要条件。
+该组不是删除地图地标信息，而是删除导航指令文本中的地标名。
+多地标时无直接指令身份绑定，解码有可能退化，必须单独分析。
 
-原 Revised TRAIN 的 landmarks 来自 processed target-reference
-记录，与目标标注有关。若简单照搬，则所谓“只输入地标”仍可能
-隐含地获得答案相关的地标 ID。
+示例：
 
-本实验使用完整公开 CityRefer objects.json，
-按照原始文本中实际出现的公开名称匹配地标，不用 GT 坐标选
-Polygon；同一名称的多个物理 Polygon 全部保留，
-超过 16 个容量则三组统一空地标并记录原因。
-每条任务 original GT 坐标只作为网络 forward 之后的训练标签。
+| 原始指令 | landmark_relation | relation_only |
+|---|---|---|
+| blue car north of One Stop | north of One Stop | north of |
+| car in parking lot behind One Stop | behind One Stop | behind |
+| car next to Blackwell Street | next to Blackwell Street | next to |
+| no explicit public landmark | [UNK] | [UNK] |
 
-数据准备器同时替换 instruction 和 landmarks：
-这意味着 BERT Token、静态规则/关系字段、GAT 关系节点、Node Name
-以及可用 Polygon 均从当前同一变体的输入构造，
-不会残留原文目标颜色、类别或位置词。
-这是从 Unified V2 同一模型、同一初始化权重进行的
-真实语言输入消融，而非单纯换 BERT 文本引入泄漏。
+此处 behind One Stop 只是词法邻接，不证明 car 与地标直接关系，
+仍须检查错误作用域。不能把 behind/left/right 自动转换成世界方向。
 
-## 本地运行
+## 输入链路检查
 
-训练前确认下列路径存在，尤其是官方 stage1 和 original-v2；
-路径采用项目先前复现脚本中的值，如服务器已迁移请按实际位置更新。
+原 Unified V2 不止把语言送进 BERT：指令还决定候选地标关系图、
+规则字段、Relation Head 的输入等。
+
+准备器必须直接替换 paired JSONL 的 instruction 字段，
+而不是仅替换 BERT embedding。所有文字相关的动态输入
+（tokens、rules、relation_fields、GAT 关系）
+必须从同一精简指令再计算。地标/Polygon 一律来自公开
+CityRefer catalog 名称匹配，不根据 GT/目标ID选择。
+三组输入除 instruction 外，参考 Polygon、查询次序及训练目标一致。
+
+**已有 full_text Checkpoint 的来源差异：**
+旧完整指令模型是在原始 preprocessed reference 条件下训练的；
+这里为了可比性，把它冻结后直接放在与两组新模型相同的
+公开 catalog Polygon 输入上评测。这构成输入分布变化，
+**不能称为完全匹配的三组重新训练对照**。保留旧主实验的
+原生评测指标作为历史参考，并明确区分这两种基线。
+若现有模型在新 Polygon 绑定下性能下降，不应直接归因于删词。
+
+## 本地运行（先核对真实路径）
 
 ~~~bash
 cd /home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain
@@ -61,6 +69,7 @@ STAGE1=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/graphnav_v1_stage1/bes
 ORIGINAL=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_pgvb_v2_pilot_s42/full_training/last.pt
 OBJECTS=/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json
 OUT=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_landmark_words_only_s42
+EXISTING_FULL="$MAIN/core/last.pt"
 
 "$PY" -m pytest -q tests/test_unified_v2_landmark_relation_ablation.py
 
@@ -69,8 +78,9 @@ OUT=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_landmark_words
   --public-objects "$OBJECTS" \
   --output "$OUT/paired_inputs"
 
-# 每组只跑3个batch先做CUDA梯度Smoke。不要用smoke作正式结果。
-for ARM in full_text landmark_relation landmark_only; do
+# 全文组只用于下方已有checkpoint的evaluation，绝对不重新训练。
+# 新两组各先做3 batch smoke，再完整训练5轮。
+for ARM in landmark_relation relation_only; do
   "$PY" -u -m scripts.train_unified_full_relation \
     --train-jsonl "$OUT/paired_inputs/$ARM.jsonl" \
     --stage1 "$STAGE1" \
@@ -79,8 +89,7 @@ for ARM in full_text landmark_relation landmark_only; do
     --epochs 1 --batch-size 8 --seed 42 --max-batches 3
 done
 
-# 同一原始Unified V2模型初始化，分别完整训练3组。
-for ARM in full_text landmark_relation landmark_only; do
+for ARM in landmark_relation relation_only; do
   "$PY" -u -m scripts.train_unified_full_relation \
     --train-jsonl "$OUT/paired_inputs/$ARM.jsonl" \
     --stage1 "$STAGE1" \
@@ -89,45 +98,30 @@ for ARM in full_text landmark_relation landmark_only; do
     --epochs 5 --batch-size 8 --seed 42
 done
 
-# 三组都完成5轮后，统一在相同Birmingham TRAIN-Dev查询上测。
 "$PY" -u -m scripts.evaluate_unified_v2_language_ablation \
   --prepared-dir "$OUT/paired_inputs" \
-  --checkpoint-full-text "$OUT/train_full_text/last.pt" \
+  --existing-full-checkpoint "$EXISTING_FULL" \
   --checkpoint-landmark-relation "$OUT/train_landmark_relation/last.pt" \
-  --checkpoint-landmark-only "$OUT/train_landmark_only/last.pt" \
+  --checkpoint-relation-only "$OUT/train_relation_only/last.pt" \
   --output "$OUT/dev_report" --batch-size 8
 ~~~
 
-原 scripts.train_unified_full_relation 是 TRAIN 入口，它同时更新
-Geometry 和 Relation，但没有当前因果 RGB 帧可监督，因此
-不会重新训练 PGVB 视觉分支。本实验先检验静态
-Goal Belief，而不是声称完整导航 SR 提升。
+路径采用之前实验的候选路径；本地应从现存复现脚本核对真实文件，
+特别是 STAGE1/ORIGINAL。禁止覆盖已有模型。
 
-若训练中止，只能按原脚本 --resume 断点继续；
-新目录必须保持和原 manifest 一致。切勿覆盖官方主实验权重。
+## 验收指标
 
-## 验收
+1. 所有 21,878 TRAIN 记录均保留；对比只在完整
+   Birmingham TRAIN-Dev 7,619 条上做 R@20m、Top-5、Top-15、NE。
+2. 同一任务、同一公共 Polygon、同一模型架构下比较
+   现存完整指令模型与两个新模型，以及两新模型之间的纠正/破坏数。
+3. 结果分组报告：有明确几何词、仅地标无词、无公开地标、
+   多个地标，同名多个 Polygon。不要只报告可解析子集。
+4. 对同一地标 Polygon 做 north/south、east/west 反事实；
+   分开关闭手工 rule 贡献与保留 rule 的结果，判别网络是否真正
+   使用了关系词。behind/left/right 参考系未知，不用任意世界方位判定。
+5. 不使用 GT 选择 Polygon、输入 token 或候选区域；
+   GT 只能作为最终 Goal 监督/评测。
+6. 不跑 Val/Test/闭环，不改 Stop/main；完成 TRAIN-Dev 后先出报告。
 
-1. 所有组都是 21,878 条 Revised TRAIN 源，数据顺序一致；
-   Cambridge/Birmingham 使用相同地图分割；无地标样本不能被丢掉。
-2. 三组同源 original-v2、stage1、seed=42、5轮、
-   相同学习率/损失，且 Polygon 输入逐样本完全一致。
-3. 对抽样前向输入审计 BERT、node_names、
-   static_rules、relation_fields、GAT 图，确认为
-   每组重新由该组文本计算，不含被删的原始描述词。
-4. Birmingham TRAIN-Dev 全量 R@20m、Top-5、Top-15、NE、
-   20m 概率质量，以及相同任务的纠正/破坏；
-   分“仅名称”“有关系词”“无公开地标”统计。
-5. 重要机制核验：相同 Polygon 输入 north/south
-   或 east/west，热图是否朝正确相对方向移动；
-   若变化完全由现有显式规则 rules 驱动，
-   必须如实区分模型学习与手工规则，不能称为网络理解几何。
-   复杂 left/right/behind 参考坐标系仍保持未知。
-6. 先 TRAIN-Dev；若精简版没有明确增益，不再运行2470条
-   Val-Seen闭环。若有增益，再以同一 parser 接入
-   UnifiedPGVBFullRelationPolicy 推理路径，并确认预测前
-   不使用原始完整指令的隐式额外词汇、原 Controller/Stop 不变。
-
-不要使用上一轮PR22的9.765%作为 Unified V2 主模型基准。
-该数字来自另一个不共享参数的17.8万参数小网络，
-只能作为独立弱基线。
+无需重新训练 full_text，也无需仅地标模型。
