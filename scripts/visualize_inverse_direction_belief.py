@@ -91,7 +91,7 @@ def main():
     fig,axes=plt.subplots(2,2,figsize=(10,9))
     vmax=max(float(x["probability"].max()) for x in result.values())
     for ax,(word,r) in zip(axes.flat,result.items()):
-        image=ax.imshow(r["probability"],origin="lower",extent=bounds,
+        image=ax.imshow(r["probability"],origin="lower",extent=[bounds[0],bounds[2],bounds[1],bounds[3]],
                         cmap="inferno",vmin=0,vmax=vmax,aspect="auto")
         ring=np.vstack((anchor,anchor[0]))
         ax.plot(ring[:,0],ring[:,1],color="cyan",linewidth=1.5,label="input Polygon")
