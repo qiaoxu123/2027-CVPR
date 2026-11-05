@@ -1,0 +1,28 @@
+{
+  "external_sources": [
+    {
+      "url": "https://arxiv.org/html/2310.18773",
+      "use": "annotation interface and manual georeferencing methodology; no numeric experiment outcomes imported"
+    },
+    {
+      "url": "https://github.com/QingyongHu/SensatUrban/issues/63",
+      "use": "coordinate reference-system clarification remains unresolved; not a calibration source"
+    },
+    {
+      "url": "https://github.com/ATR-DBI/CityRefer",
+      "use": "original dataset attribution"
+    },
+    {
+      "url": "https://github.com/water-cookie/citynav",
+      "use": "original CityNav attribution"
+    }
+  ],
+  "local_protocol_sources": [
+    "/home/20261024_1/Workspace/third_party/citynav_protocol_reference/rasterize.py",
+    "/home/20261024_1/Workspace/third_party/citynav_protocol_reference/gsamllavanav/space.py",
+    "/home/20261024_1/Workspace/third_party/citynav_protocol_reference/gsamllavanav/cityreferobject.py",
+    "/home/20261024_1/Workspace/2027-CVPR/GraphNav/scripts/prepare_citynav.py"
+  ],
+  "calibration": "TIF affine independently verifies image-right=+X, image-up=+Y. Missing CRS/geodetic controls prevents geographic-north calibration. No GT fitted north.",
+  "license": "Source CityRefer/CityNav English annotations and derivative map crops retained with original dataset attribution; no synthetic results."
+}
