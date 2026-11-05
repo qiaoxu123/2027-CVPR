@@ -65,6 +65,14 @@ def _observed():
     )
 
 
+def test_runtime_requires_initialized_mode_instead_of_legacy_fallback():
+    from graphnav.unified_pgvb_runtime import UnifiedPGVBNamedLandmarkPolicy
+
+    runtime = object.__new__(UnifiedPGVBNamedLandmarkPolicy)
+    with pytest.raises(AttributeError, match="mode"):
+        runtime._observed_inputs({})
+
+
 def test_unified_field_owns_geometry_and_preserves_controller_contract():
     geometry = TinyGeometry()
     model = UnifiedPGVB(geometry=geometry).eval().requires_grad_(False)

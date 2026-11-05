@@ -182,6 +182,8 @@ def test_nearby_public_geometry_is_reported_only_after_arrival(monkeypatch):
     }
     policy._public_region = box(0, 0, 10, 10)
     policy._neighbor_geometry = [{"public_id": "parking", "type": "Parking"}]
+    policy._last_observation_metadata = None
+    policy._landmark = None
     policy.unified = type("FakeModel", (), {
         "direction_ready": False,
         "forward_structured": lambda self, spec, **kwargs: {
