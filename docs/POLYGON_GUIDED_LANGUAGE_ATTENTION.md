@@ -18,7 +18,7 @@ For each candidate cell on the 28x28 map, compute:
    Geometry+Relation checkpoint**. No RGB, graph parser, new labels or GT
    inputs during forward.
 
-\`delta = .5 * tanh(MLP(geometry_context, BERT_word_context, base_dense))\`.
+`delta = .5 * tanh(MLP(geometry_context, BERT_word_context, base_dense))`.
 Final layer is zero-initialized so initial prediction equals the baseline.
 No public anchor => exact zero delta. This is a lightweight candidate
 reranker, not a learned world direction system.
@@ -32,14 +32,14 @@ automatically world east/west/north/south.
 
 ## Reuse
 
-- \`graphnav.polygon_language_attention.PolygonGuidedLanguageAttention\`
+- `graphnav.polygon_language_attention.PolygonGuidedLanguageAttention`
   standalone trainable residual, no changes to existing model weights.
-- \`graphnav.candidate_geometry.FullCandidateDataset\` 28x28 world grid,
+- `graphnav.candidate_geometry.FullCandidateDataset` 28x28 world grid,
   public polygons and per-candidate 10d metric geometry.
-- \`graphnav.full_relation_training.load_full_relation_model\`, completed
+- `graphnav.full_relation_training.load_full_relation_model`, completed
   full-relation checkpoint; freeze Geometry and Relation.
-- \`graphnav.token_language.FrozenBERTTokens\` full wordpieces + public names.
-- \`scripts.train_polygon_language_attention\` deterministic seed=42,
+- `graphnav.token_language.FrozenBERTTokens` full wordpieces + public names.
+- `scripts.train_polygon_language_attention` deterministic seed=42,
   3 epochs by default, Cambridge TRAIN-Fit, Birmingham TRAIN-Dev. Frozen
   base itself previously trained on full TRAIN, so this is a probe of the
   NEW head's fit/dev transfer, NOT an independent unseen-scene proof.
@@ -47,9 +47,9 @@ automatically world east/west/north/south.
 ## Commands (run on local CityNav GPU server)
 
 Use the existing full-relation source and checkpoint from
-\`reports/unified_pgvb/full_relation_s42_20261105/final_evaluation.sh\`.
+`reports/unified_pgvb/full_relation_s42_20261105/final_evaluation.sh`.
 
-\`\`\`bash
+```bash
 cd /home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain
 export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 PY=/home/20261024_1/Workspace/third_party/aerialvg_env/bin/python
@@ -71,24 +71,32 @@ RUN=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_full_relation_s42
   --relation-checkpoint "$RUN/core/last.pt" \
   --output "$RUN/polygon_language_full_s42" \
   --epochs 3 --batch-size 8 --seed 42
-\`\`\`
 
-\`--resume\` restarts only at a completed-epoch boundary; does NOT restart
+# Direction phrase swap: fixed Polygon and base, only BERT tokens change.
+"$PY" -u -m scripts.probe_polygon_language_words \
+  --train-jsonl "$RUN/train_revised.jsonl" \
+  --relation-checkpoint "$RUN/core/last.pt" \
+  --adapter-checkpoint "$RUN/polygon_language_full_s42/last.pt" \
+  --output "$RUN/polygon_language_full_s42/word_swap_probe" \
+  --max-pairs 100
+```
+
+`--resume` restarts only at a completed-epoch boundary; does NOT restart
 a partially completed epoch. Any changed source data or model code makes
 resume refuse the existing checkpoint manifest.
 
 ## Required checks
 
-Read \`report.json\` with:
-- Frozen \`static\` Geometry+Relation baseline;
-- \`real\` actual instruction tokens;
-- \`zero_text\` same geometry/Polygon/name features but instruction tokens 0;
-- \`swapped_text\` identical geometry, token features from a *different*
+Read `report.json` with:
+- Frozen `static` Geometry+Relation baseline;
+- `real` actual instruction tokens;
+- `zero_text` same geometry/Polygon/name features but instruction tokens 0;
+- `swapped_text` identical geometry, token features from a *different*
   instruction in batch. Do NOT shuffle token order within the SAME sentence:
   standard attention is permutation invariant over keys/values, so that
   would NOT test text relevance.
 - TRAIN-Dev R20, NE, corrected/broken and Top1 changes for all tasks;
-  \`example_token_attention\` only qualitative, not an explanation proof.
+  `example_token_attention` only qualitative, not an explanation proof.
 - Never use target GT as a mask, pseudo key-word label, candidate crop or
   selector during forward.
 - Keep zero/invalid anchors in original denominator.
@@ -110,3 +118,8 @@ that the word was meaningfully learned.
 
 The new head is NOT loaded by the old closed-loop checkpoint loader.
 Keep this separate experiment branch until trained and validated.
+
+The word-swap probe outputs `summary.json` and `pairs.jsonl`. These
+measure language-head sensitivity, not automatically correct direction.
+Do NOT set `--verify-world-north` without independent CityNav map CRS
+orientation verification. Ambiguous behind/left/right are skipped.
