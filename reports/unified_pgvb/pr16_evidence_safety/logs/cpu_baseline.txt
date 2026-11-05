@@ -1,0 +1,56 @@
+........................................................................ [ 21%]
+..................................................F..................... [ 42%]
+........................................................................ [ 63%]
+........................................................................ [ 84%]
+....................................................                     [100%]
+=================================== FAILURES ===================================
+_____ test_direct_runtime_never_silently_selects_first_of_multiple_anchors _____
+
+    def test_direct_runtime_never_silently_selects_first_of_multiple_anchors():
+        from graphnav.direct_target_runtime import UnifiedPGVBDirectTargetPolicy
+
+        # Lightweight instance bypasses checkpoint/GPU setup and exercises the
+        # public episode binding contract.
+        from types import SimpleNamespace
+        policy = object.__new__(UnifiedPGVBDirectTargetPolicy)
+        policy.args = SimpleNamespace(max_landmarks=16)
+        policy.acquisition = SimpleNamespace(reset=lambda: None)
+        policy.stable_goal = SimpleNamespace(reset=lambda: None)
+        policy.unified = SimpleNamespace(reset_episode=lambda: None)
+
+        import graphnav.direct_target_runtime as runtime
+        original = runtime.public_static_record
+        runtime.public_static_record = lambda *args, **kwargs: {"instruction": "Go"}
+        try:
+            episode = SimpleNamespace(instruction="Go", map_name="A")
+            def anchor(ids):
+                return dict(landmark=dict(name="One", type="Building", public_ids=ids),
+                            contours=[[[0,0],[1,0],[1,1],[0,1]]])
+            base = dict(instruction="Go", map_name="A", target_GT_used=False,
+                        structured={}, world_bounds=[0,0,2,2], start_pose=[0,0,0,0])
+>           policy.set_direct_episode(episode, None, None, dict(base, anchors=[anchor(["1"])]))
+
+tests/test_direct_target.py:134:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+graphnav/direct_target_runtime.py:55: in set_direct_episode
+    self._direction_unverified = any(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = <list_iterator object at 0x7d00c0bc9840>
+
+    self._direction_unverified = any(
+>       a["predicate"] in ("north", "south", "east", "west")
+        for a in public_task["anchors"]
+    )
+E   KeyError: 'predicate'
+
+graphnav/direct_target_runtime.py:56: KeyError
+=============================== warnings summary ===============================
+tests/test_current_rgbd.py::test_rgbd_current_pose_exactly_matches_existing_native_rgb
+  /home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/site-packages/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+    return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_direct_target.py::test_direct_runtime_never_silently_selects_first_of_multiple_anchors
+1 failed, 339 passed, 1 warning in 6.05s

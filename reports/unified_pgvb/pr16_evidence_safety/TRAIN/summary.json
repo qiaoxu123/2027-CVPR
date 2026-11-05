@@ -52,5 +52,55 @@
   "pixel_instance_accuracy": null,
   "visibility": "unknown; public Polygon registration is weak support only",
   "replay": "TRAIN start/middle/last cached causal sparse replay; NOT contiguous closed-loop tracking",
-  "geometry_geography": "TIF CRS absent; keep existing axes and do not flip from GT scores"
+  "geometry_geography": "TIF CRS absent; keep existing axes and do not flip from GT scores",
+  "state_metrics_by_subset": {
+    "fit": {
+      "queries": 493,
+      "states": 1477,
+      "Geometry": {
+        "R20": 0.6736628300609343,
+        "NE": 19.511391269378727
+      },
+      "RawRelation": {
+        "R20": 0.6919431279620853,
+        "NE": 18.67473937880678
+      },
+      "RawRGB": {
+        "R20": 0.7109004739336493,
+        "NE": 18.4247373018557
+      },
+      "SafeRelation": {
+        "R20": 0.6858496953283684,
+        "NE": 18.923236277775924
+      },
+      "SafeRGB": {
+        "R20": 0.6858496953283684,
+        "NE": 18.910153714930644
+      }
+    },
+    "dev": {
+      "queries": 80,
+      "states": 240,
+      "Geometry": {
+        "R20": 0.45,
+        "NE": 37.842883077990855
+      },
+      "RawRelation": {
+        "R20": 0.3875,
+        "NE": 41.25015799834153
+      },
+      "RawRGB": {
+        "R20": 0.4083333333333333,
+        "NE": 40.74746004126853
+      },
+      "SafeRelation": {
+        "R20": 0.4375,
+        "NE": 39.84326539145112
+      },
+      "SafeRGB": {
+        "R20": 0.4375,
+        "NE": 39.84326539145112
+      }
+    }
+  }
 }

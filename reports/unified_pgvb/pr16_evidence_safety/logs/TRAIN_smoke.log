@@ -1,0 +1,21 @@
+{"index": 0, "method": "Geometry", "termination": "inference_error", "SR": 0.0, "OSR": 0.0, "SPL": 0.0, "NE": 94.84110354850303, "nDTW": 0.06861570853153769, "sDTW": 0.0, "steps": 0, "path_length": 0.0, "policy_stop": 0.0, "false_stop": 0.0, "inference_ms": 0.0}
+Traceback (most recent call last):
+  File "/home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/20261024_1/miniconda3/envs/graphnav/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_direct_target_closedloop.py", line 126, in <module>
+    if __name__=='__main__':main()
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_direct_target_closedloop.py", line 110, in main
+    raise RuntimeError(error)
+RuntimeError: Traceback (most recent call last):
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/run_direct_target_closedloop.py", line 91, in main
+    runtime.set_direct_episode(episode,builder.transform(episode.map_name),catalog,task)
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/graphnav/direct_target_runtime.py", line 78, in set_direct_episode
+    anchors, self._binding_audit = bind_public_anchors(
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/graphnav/direct_target_runtime.py", line 32, in bind_public_anchors
+    contours = [public_objects[str(oid)]['contour'] for oid in landmark['public_ids']]
+  File "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/graphnav/direct_target_runtime.py", line 32, in <listcomp>
+    contours = [public_objects[str(oid)]['contour'] for oid in landmark['public_ids']]
+KeyError: '4'
+
