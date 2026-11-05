@@ -228,7 +228,8 @@ def main():
         ckpt = dict(
             format=FORMAT, model=model.state_dict(),
             config=original["config"], source_sha256=source_sha,
-            completed_epochs=epoch+1, optimizer=optimizer.state_dict(),
+            completed_epochs=epoch+1, planned_epochs=a.epochs,
+            optimizer=optimizer.state_dict(),
             torch_rng=torch.get_rng_state(),
             cuda_rng=torch.cuda.get_rng_state_all(),
             python_rng=random.getstate(),
