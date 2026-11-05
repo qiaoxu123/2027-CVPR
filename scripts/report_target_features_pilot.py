@@ -19,8 +19,16 @@ def main():
     metric=json.loads((navdir/'metrics.json').read_text());assert metric['coverage']['completed']==metric['coverage']['expected']==N
     assert metric['diagnostic_pilot'] is is_pilot
     new={x['index']:x for x in map(json.loads,(navdir/'predictions.jsonl').read_text().splitlines())};assert len(new)==N
+    current_manifest=json.loads((navdir/'full_relation_manifest.json').read_text())
+    if not is_pilot:
+        full_freeze=json.loads((r/'FROZEN_BEFORE_FULL.json').read_text())
+        assert full_freeze['checkpoint_SHA256']==metric['full_relation_checkpoint_sha256']
+        assert full_freeze['evaluator_sha256']==file_sha256('scripts/evaluate_closedloop.py')
     ids=sorted(new);arms={'old_full':{},'compact':{},'target_features':new}
     for name,folder in [('old_full','eval_full_text'),('compact','eval_landmark_relation')]:
+        old_manifest=json.loads((a.previous/folder/'full_relation_manifest.json').read_text())
+        for key in ('stage1','original_v2','split','data_root','relation_control','relation_visual_control','geometry_source','model_code','relation_runtime_code','config','public_catalog','text_adapter','text_inputs','text_parser'):
+            assert old_manifest[key]==current_manifest[key],f'Baseline protocol mismatch: {key}'
         rows={x['index']:x for x in map(json.loads,(a.previous/folder/'predictions.jsonl').read_text().splitlines())}
         for idx in ids:
             b=rows[idx];n=new[idx];assert b['episode_id']==n['episode_id'] and b['poses'][0]==n['poses'][0]
@@ -60,6 +68,21 @@ def main():
     same=all(torch.equal(v,orig['model'][k]) for k,v in s['model'].items() if not k.startswith(('geometry.','full_relation.')))
     assert same,'Frozen PGVB module changed'
     report=dict(N=N,diagnostic_only=is_pilot,selection=('evenly spaced indices across all2470 Val-Seen, before scoring' if is_pilot else 'all2470 Val-Seen episodes; no filtering'),metrics=summary,paired=paired,physical_target_groups=len(groups),group_bootstrap_delta95CI=delta,single_seed=True,checkpoint_sha256=frozen['checkpoint_SHA256'],frozen_modules_bitwise_unchanged=same,training_seconds=s['elapsed_seconds'],training_updates=s['updates'],training_history=s['history'],inference_errors=metric['coverage']['inference_errors'],RGB_active=False,baseline_cache_reused=True,latency_caveat='Cached baseline timing collected previously; not a controlled contemporaneous speed comparison')
+    raw_val=json.loads((Path(metric['args']['data_root'])/'processed_citynav/citynav_val_seen.json').read_text())
+    failure_counts={}
+    for name,rows in arms.items():
+        counts=defaultdict(int)
+        for idx,row in rows.items():
+            target=np.asarray(raw_val[idx]['target_positions'][-1][:2])
+            goals=np.asarray([d['selected_goal_xy'] for d in row['step_diagnostics']])
+            correct_goal=bool(len(goals) and np.linalg.norm(goals[-1]-target)<=20)
+            counts['failed_with_correct_final_goal' if correct_goal else 'failed_with_wrong_final_goal']+=int(not row['metrics']['SR'])
+            counts['OSR_success_SR_failed']+=int(row['metrics']['OSR'] and not row['metrics']['SR'])
+            counts['correct_policy_stop']+=int(row['termination']=='policy_stop' and row['metrics']['SR'])
+            counts['goal_jumps_over20m']+=int((np.linalg.norm(np.diff(goals,axis=0),axis=-1)>20).sum()) if len(goals)>1 else 0
+            counts[row['termination']]+=1
+        failure_counts[name]=dict(counts)
+    report['failure_attribution']=failure_counts
     atomic_json(report,out/'summary.json')
     for src,dest in [(r/'FROZEN_BEFORE_PILOT.json','FROZEN_BEFORE_PILOT.json'),(r/'inputs/manifest.json','data_manifest.json'),(r/'train/gradient_audit.json','gradient_audit.json'),(navdir/'episodes.json',f'episodes{N}.json'),(navdir/'metrics.json','new_navigation_metrics.json')]:shutil.copyfile(src,out/dest)
     fig,ax=plt.subplots(figsize=(6,3));ax.plot([x['epoch'] for x in s['history']],[x['train_loss'] for x in s['history']],'o-');ax.set(xlabel='Epoch',ylabel='TRAIN CE + 0.05 KL');fig.tight_layout();fig.savefig(out/'training_curve.png',dpi=150);plt.close(fig)
@@ -77,6 +100,7 @@ def main():
             z=np.load(folder/f'belief_steps/{i:05d}/00.npz')['full'];prob=torch.as_tensor(z).softmax(-1).reshape(28,28).numpy();ax.imshow(prob,origin='lower',extent=extent)
             for lm in rec['landmarks']:
                 c=np.asarray(lm['contour'])*(np.asarray(bounds[2:])-bounds[:2])+bounds[:2];ax.plot(*np.vstack((c,c[0])).T,'c-',lw=.5)
+            target=np.asarray(raw_val[i]['target_positions'][-1][:2]);ax.plot(*target,'r*',markersize=10)
             xy=np.asarray(rows[i]['poses'])[:,:2];ax.plot(xy[:,0],xy[:,1],'w.-',lw=.8);ax.plot(*xy[0],'go');ax.plot(*xy[-1],'rx');ax.set_title(f'{name}: SR={rows[i]["metrics"]["SR"]:.0f}, NE={rows[i]["metrics"]["NE"]:.1f}m',fontsize=8)
         fig.suptitle(rec['instruction'][:160],fontsize=8);fig.tight_layout();file=f'case_{i:05d}.png';fig.savefig(out/file,dpi=140);plt.close(fig);cases.append(dict(index=i,instruction=rec['instruction'],image=file))
     atomic_json(cases,out/'cases.json')
@@ -106,16 +130,18 @@ def main():
 
 相对旧完整指令：{paired['old_full']}；相对精简：{paired['compact']}。物理目标组bootstrap95% SR差值：{delta}。一个训练种子；{'小样本Pilot不能作为全量SR。' if is_pilot else '本次全量Seen结果不能替代Unseen泛化。'}不能作为多种子泛化结论。
 
+导航失败归因（GT仅事后使用）：{failure_counts}。
+
 新增推理错误：{report['inference_errors']}。新模型平均单步推理{summary['target_features']['inference_ms']:.3f}ms；旧模型为历史缓存耗时，不是同一时段速度对照。
 
 Checkpoint: {r/'train/last.pt'}
 SHA256: {frozen['checkpoint_SHA256']}
 
-原始训练日志、Checkpoint和逐步Belief/轨迹保留服务器{r}；GitHub包含配对CSV、固定任务清单、曲线及典型成功/失败热图轨迹。世界目标20m指标不证明真实实例匹配。公开地图同名Polygon统计另见homonymous_polygons.json；道路分段不能直接解释为不同实例。
+原始训练日志、Checkpoint和逐步Belief/轨迹保留服务器{r}；GitHub包含配对CSV、固定任务清单、曲线及典型成功/失败热图轨迹。世界目标20m指标不证明真实实例匹配。公开地图同名Polygon统计见上级实验目录homonymous_polygons.json；道路分段不能直接解释为不同实例。
 '''
     (out/'REPORT_zh.md').write_text(text)
     items=''.join(f'<article><h3>Episode index {x["index"]}</h3><p>{html.escape(x["instruction"])}</p><a href="{x["image"]}"><img width="100%" src="{x["image"]}"></a></article>' for x in cases)
-    (out/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Paired navigation comparison</title><body style="max-width:1400px;margin:auto"><h1>配对导航对照</h1><p>任务数量及范围见中文报告；RGB关闭、目标描述完整保留。白线为真实闭环轨迹，青色为公开Polygon。</p><a href="REPORT_zh.md">中文报告</a><img width="100%" src="navigation_comparison.png">'+items+'</body>')
+    (out/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Paired navigation comparison</title><body style="max-width:1400px;margin:auto"><h1>配对导航对照</h1><p>任务数量及范围见中文报告；RGB关闭、目标描述完整保留。白线为真实闭环轨迹，青色为公开Polygon，红星为事后评价GT。</p><a href="REPORT_zh.md">中文报告</a><img width="100%" src="navigation_comparison.png">'+items+'</body>')
     print(json.dumps(report,indent=2))
 
 if __name__=='__main__':main()

@@ -38,3 +38,5 @@ SHA256: 9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387
 当前判断：相较丢失目标描述的精简输入，完整内容恢复13次净成功（+10.16个百分点）；相较旧完整指令少1次成功（−0.78个百分点），NE下降约2.96m。尚不能证明超过旧全文模型，不继续根据这128条调参或自动扩大评测。
 
 后续执行状态：用户查看Pilot后授权继续全量2470条Val-Seen，使用同一Checkpoint、不调参。完整结果将独立保存在[full_val_seen/REPORT_zh.md](full_val_seen/REPORT_zh.md)，本文件保留原128条结果，禁止混用分母。保持原BERT max_length96；原始11条TRAIN长指令仍受相同截断约束，未宣称所有长指令Token均完整进入模型。
+
+独立adversarial-review已实际调用，但服务返回workspace routing discovery timed out，未取得有效审查结果，不计为审查通过。
