@@ -79,6 +79,8 @@ def main():
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
     parser.add_argument('--relation-control', choices=['full','off'], default='full')
     parser.add_argument('--relation-visual-control', choices=['tracked','off'], default='tracked')
+    parser.add_argument('--instruction-mode',choices=['native','full_text','landmark_relation'],default='native',help='Opt-in PR23 public-catalog text ablation; original path is unchanged')
+    parser.add_argument('--public-objects',help='Same public catalog used by PR23 TRAIN preparation')
     parser.add_argument('--relation-geometry-source', choices=['trained','original'], default='trained')
     parser.add_argument('--resume', action='store_true', help='Resume unified-relation full evaluation')
     parser.add_argument('--dynamic-checkpoint')
@@ -115,6 +117,8 @@ def main():
         frozen=json.loads(Path(args.frozen_final_candidate).read_text())
         if frozen.get('completed_training_epochs')!=20 or not 1<=frozen.get('epoch',0)<=20 or frozen.get('checkpoint_sha256')!=sha(args.checkpoint):
             raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
+    if args.instruction_mode!='native' and (args.model!='unified-relation' or not args.public_objects or args.relation_visual_control!='off'):
+        raise ValueError('PR23 text adaptation requires unified-relation, public catalog and visual off')
     if args.model == 'unified-relation':
         if args.split != 'val_seen' or args.max_episodes is not None:
             raise ValueError('Unified-relation requires unfiltered FULL val_seen')
@@ -154,6 +158,7 @@ def main():
                        model_code=sha(Path('graphnav/unified_pgvb.py')),
                        relation_runtime_code=sha(Path('graphnav/unified_full_relation_runtime.py')),
                        config=sha(args.config))
+        if args.instruction_mode!='native':sources.update(instruction_mode=args.instruction_mode,public_catalog=sha(args.public_objects),text_adapter=sha(Path('graphnav/unified_text_ablation_runtime.py')),text_inputs=sha(Path('graphnav/unified_text_ablation.py')),text_parser=sha(Path('scripts/prepare_unified_v2_landmark_relation_ablation.py')))
         lock = output/'full_relation_manifest.json'
         if lock.exists() and json.loads(lock.read_text()) != sources:
             raise ValueError('Resume source changed')
@@ -206,12 +211,16 @@ def main():
         if args.model=='unified-relation':
             from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
-            runtime=UnifiedPGVBFullRelationPolicy(
+            policy_class=UnifiedPGVBFullRelationPolicy;extra={}
+            if args.instruction_mode!='native':
+                from graphnav.unified_text_ablation_runtime import UnifiedTextAblationPolicy
+                policy_class=UnifiedTextAblationPolicy;extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)
+            runtime=policy_class(
                 args.checkpoint,args.unified_v2,args.relation_checkpoint,
                 output/'public_inputs',
                 relation_control=args.relation_control,
                 visual_control=args.relation_visual_control,
-                geometry_source=args.relation_geometry_source)
+                geometry_source=args.relation_geometry_source,**extra)
             builder=NativeObservationBuilder(
                 builder,Path(args.data_root)/'rgbd',output/'observations')
         elif args.model=='graphnav-v1':
@@ -304,9 +313,7 @@ def main():
                     captures.append(step)
                 runtime.full_relation_audit_callback=capture_relation
                 try:
-                    public = PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),
-                        tuple(catalog.referenced_landmarks(record)),
-                        tuple(catalog.referenced_landmark_names(record)))
+                    public = (PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),(),()) if args.instruction_mode!='native' else PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),tuple(catalog.referenced_landmarks(record)),tuple(catalog.referenced_landmark_names(record))))
                     runtime.set_episode(public,builder.transform(public.map_name),catalog)
                     (capture_dir/'public_record.json').write_text(json.dumps(runtime.record))
                     poses, termination, timings, diagnostics = rollout(
@@ -394,6 +401,10 @@ def main():
         report['model']='UnifiedPGVB-v2 + all-instruction AerialVG-inspired relation'
         report['full_relation_checkpoint_sha256']=sha(args.relation_checkpoint)
         report['original_unified_v2_sha256']=sha(args.unified_v2)
+        report['runtime_stop_threshold']=runtime.stop_threshold
+        report['runtime_execution']=runtime.execution
+        report['runtime_arrival_guard_m']=1e-3
+        report['instruction_mode']=args.instruction_mode
         report['relation_control']=args.relation_control
         report['relation_visual_control']=args.relation_visual_control
         report['geometry_source']=args.relation_geometry_source
