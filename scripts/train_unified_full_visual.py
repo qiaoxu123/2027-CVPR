@@ -122,7 +122,12 @@ def main():
     start=time.perf_counter()
     for epoch in range(start_epoch,a.epochs):
         random.shuffle(rows)
+        # Keep the top-level model in train mode to forbid the static
+        # cross-query cache, while frozen core dropout is disabled.
         model.train()
+        model.geometry.eval()
+        model.full_relation.eval()
+        model.pgvb.train()
         total = used = 0
         for off in range(0,len(rows),a.batch_size):
             group = rows[off:off+a.batch_size]
