@@ -99,7 +99,7 @@ def _public_geometry(identifiers, public_objects, world_bounds):
     high = np.array(geometry.bounds[2:], dtype=np.float64)
     center = (low + high)/2.
     wh = high - low
-    area = sum(p.area for p in segments)
+    area = float(geometry.area)  # no double-count for overlapping public parts
     v = [
         *((center-lo)/span), *(wh/span),
         np.log1p(max(area, 0.))/np.log1p(max(float(np.prod(span)), 1.)),
@@ -163,9 +163,14 @@ def compile_relation_graph(parsed: dict, public_objects: dict,
                 else "public_landmark" if ids or item.get("role")=="landmark"
                 else "intermediate" if item.get("role")=="reference_object"
                 else "reference_object")
+        target_info = parsed.get("target") or {}
+        attrs = list(item.get("attributes", []))
+        if item["id"] == target:
+            attrs += list(target_info.get("attributes", []))
         nodes.append(dict(
             id=item["id"], role=role, phrase=item["text"], span=[int(a),int(b)],
-            attributes=item.get("attributes", []),
+            category=target_info.get("category") if item["id"] == target else None,
+            attributes=attrs,
             public_names=item.get("public_names", []),
             public_ids=ids, geometry=geo, geometry_valid=geovalid,
         ))
