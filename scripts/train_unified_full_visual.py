@@ -35,7 +35,7 @@ def visual_rows(inventory, cache):
         # semantics stay active in Geometry/Relation but do not impersonate
         # a visually verified target identity in this RGB training phase.
         if len(anchors) != 1 or len(anchors[0]["landmark"].get("public_ids", [])) != 1:
-            ledger.append(dict(index=task["index"], reason="ambiguous_visual_anchor"))
+            ledger.append(dict(index=task["index"], reason="ambiguous_visual_anchor",unit='query'))
             continue
         item = torch.load(cache/f"{task['index']:05d}.pt",
                           map_location="cpu", weights_only=True)
@@ -46,13 +46,13 @@ def visual_rows(inventory, cache):
                 patch_labels = obs.get('anchor_labels')
                 valid = obs['observed']['valid'].bool()
                 if patch_labels is None or int(((patch_labels==1)&valid).sum())<2:
-                    ledger.append(dict(index=task['index'],reason='no_runtime_supported_anchor_ROI'))
+                    ledger.append(dict(index=task['index'],reason='no_runtime_supported_anchor_ROI',unit='frame',step=obs['step']))
                     continue
                 kept.append(dict(query=item["query"], task=task,
                                  observed=obs["observed"],
                                  label=labels[task["index"]]["target_world"]))
             else:
-                ledger.append(dict(index=task["index"], reason="no_causal_rgb"))
+                ledger.append(dict(index=task["index"], reason="no_causal_rgb",unit='frame',step=obs['step']))
     if not kept:
         raise ValueError("No validated causal TRAIN RGB observations available")
     return kept, ledger
@@ -96,6 +96,10 @@ def main():
         private_train_label_sha256=file_sha256(a.inventory/"private_labels.json"),
         visual_cache_manifest_sha256=file_sha256(a.cache/"manifest.json"),
         visual_rows=len(rows), ineligible_visual_rows=len(rejected),
+        visual_queries=len({r['task']['index'] for r in rows}),
+        ineligible_query_entries=sum(r['unit']=='query' for r in rejected),
+        ineligible_frame_entries=sum(r['unit']=='frame' for r in rejected),
+        rejection_units='legacy ineligible_visual_rows counts ledger entries; query/frame counts separately',
         geometry_relation_frozen=True, PGVB_trainable=True, seed=a.seed,
         epochs=a.epochs, batch_size=a.batch_size, lr=a.lr,
         train_only=True, Val_Test_used=False,

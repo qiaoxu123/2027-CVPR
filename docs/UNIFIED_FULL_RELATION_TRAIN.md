@@ -129,3 +129,21 @@ reason to drop an episode.
 3. Three full Val-Seen ablations are completed on the **same episodes**.
 4. Report both gains and damage, with seed 42 and no Val/Test tuning.
 5. Only then consider replacing the official main experiment.
+
+## Server execution notes (2026-11-05)
+
+- Available Revised source is `processed_citynav/citynav_train_seen.json`:
+  **21,878 records converted, zero skipped**. Do not substitute a missing
+  `citynav_train_seenall.json` path or a 573-query selection.
+- Public bounds were read from the corresponding TRAIN raster transforms;
+  no private destination was used to derive map bounds.
+- `--resume` now restores deterministic within-epoch order, optimizer and RNG
+  from periodic 200-update checkpoints. BERT feature cache is reused.
+- Phase-2 entries require the same supported local Polygon ROI as runtime.
+  Rejection statistics explicitly distinguish query exclusions from frame
+  exclusions; they are not all independently sampled images.
+- All-episode evaluator stores step Beliefs/RGB SHA and retains torn final
+  JSONL bytes for recovery. Stop and Goal constants are unchanged.
+- Optional `--relation-geometry-source original` is legal only with relation
+  and visual controls both off. This adds a full frozen baseline; the three
+  main ablations continue to share the trained Geometry weights.

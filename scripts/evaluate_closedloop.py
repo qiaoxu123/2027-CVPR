@@ -23,6 +23,21 @@ def sha(path):
     return h.hexdigest()
 
 
+def resume_jsonl_rows(path):
+    """Recover a torn final append only; retain its bytes and reject other corruption."""
+    path=Path(path);data=path.read_bytes();lines=data.splitlines(keepends=True);rows=[];used=0
+    for index,line in enumerate(lines):
+        if not line.strip():used+=len(line);continue
+        try:rows.append(json.loads(line))
+        except json.JSONDecodeError:
+            if index!=len(lines)-1 or line.endswith(b'\n'):raise
+            tail=path.with_name(path.name+'.incomplete_tail')
+            if tail.exists():raise ValueError('Previous incomplete tail needs inspection')
+            tail.write_bytes(line);path.write_bytes(data[:used]);break
+        used+=len(line)
+    return rows
+
+
 def validate_stage1_frozen_evaluation(args):
     """Require completed Seen selection and unchanged controls for held-out splits."""
     if args.split not in ('val_unseen', 'test_unseen'):
@@ -256,7 +271,7 @@ def main():
     predictions = output/'predictions.jsonl'
     existing = []
     if args.model == 'unified-relation' and args.resume and predictions.exists():
-        existing = [json.loads(line) for line in predictions.read_text().splitlines() if line.strip()]
+        existing = resume_jsonl_rows(predictions)
         if len({r['index'] for r in existing}) != len(existing):
             raise ValueError('Duplicate resumed episode index')
         for old in existing:
@@ -279,6 +294,7 @@ def main():
                 def capture_relation(state,result,field):
                     step=len(captures)
                     payload=dict(pose=state.pose,footprint=state.current_observation['footprint_world'],
+                        rgb_SHA256=np.asarray(hashlib.sha256(state.current_observation['bgr'].tobytes()).hexdigest()),
                         geometry=result['geometry_field'].belief_logits[0].float().cpu().numpy(),
                         relation=result['relation_field'].belief_logits[0].float().cpu().numpy(),
                         full=result['field'].belief_logits[0].float().cpu().numpy(),

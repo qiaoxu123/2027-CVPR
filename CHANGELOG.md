@@ -1,3 +1,18 @@
+## [Full-relation TRAIN execution and evaluation] - 2026-11-05
+
+### Features
+- Add deterministic within-epoch recovery, periodic optimizer/RNG checkpoints and full TRAIN coverage logs for PR17.
+- Record complete Val-Seen step Beliefs, actual RGB SHA, candidate/Goal and Stop diagnostics; retain failures and no-reference tasks.
+- Add an isolated original-Geometry baseline and recover interrupted JSONL writes without dropping complete episodes.
+
+### Design Rationale
+- Separate changes in jointly trained Geometry, learned relation and observed PGVB evidence using matched full episodes.
+- Eliminate globally padded reference columns without changing the masked attention model.
+
+### Notes & Caveats
+- BERT/SigLIP2 stay frozen per PR17; PGVB uses the available biased TRAIN RGB subset, not all-instruction visual training.
+- No Stop/Goal threshold changes, no Val/Test training, no new explicit geometric rules.
+
 ## [Direct-target evidence safety] - 2026-11-05
 
 ### Features
