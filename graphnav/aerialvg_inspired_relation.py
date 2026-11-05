@@ -40,6 +40,7 @@ class CandidateAnchorRelation(nn.Module):
         self.max_logit_delta = float(max_logit_delta)
         self.target = nn.Linear(context_dim, hidden)
         self.anchor = nn.Linear(context_dim, hidden)
+        self.anchor_name = nn.Linear(text_dim, hidden)
         self.text = nn.Linear(text_dim, hidden)
         self.predicate = nn.Embedding(predicate_count, 24)
         self.pair = nn.Sequential(
@@ -56,7 +57,8 @@ class CandidateAnchorRelation(nn.Module):
         nn.init.zeros_(self.score.bias)
 
     def forward(self, dense_context, tokens, token_mask,
-                anchor_geom, predicate_ids, anchor_valid):
+                anchor_geom, predicate_ids, anchor_valid,
+                anchor_semantics=None):
         if (dense_context.ndim != 3 or tokens.ndim != 3
                 or anchor_geom.ndim != 4
                 or anchor_geom.shape[:2] != predicate_ids.shape
@@ -66,6 +68,12 @@ class CandidateAnchorRelation(nn.Module):
                 or dense_context.shape[0] != tokens.shape[0]
                 or token_mask.shape != tokens.shape[:2]):
             raise ValueError("Misaligned CityNav candidate/anchor/text tensors")
+        if anchor_semantics is not None and (
+                anchor_semantics.shape != (
+                    dense_context.shape[0], anchor_valid.shape[1],
+                    self.anchor_name.in_features)
+                or not torch.isfinite(anchor_semantics).all()):
+            raise ValueError("Public entity-name embeddings must align with map anchors")
         if not token_mask.any(-1).all():
             raise ValueError("at least one text token required")
         # Empty public references are legal CityNav examples. Their relation
@@ -100,6 +108,10 @@ class CandidateAnchorRelation(nn.Module):
             1, centers[..., None].expand(-1, -1, dense_context.shape[-1])
         )
         anchor_features = self.anchor(anchor_context)
+        if anchor_semantics is not None:
+            # Explicit public entity identity; a building near two differently
+            # named streets must be able to bind the correct language reference.
+            anchor_features = anchor_features + self.anchor_name(anchor_semantics.float())
         target_features = self.target(dense_context)
         text_features = self.text(tokens)
         pred_features = self.predicate(predicate_ids)
