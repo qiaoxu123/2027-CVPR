@@ -100,6 +100,23 @@ python -m scripts.train_inverse_polygon_directions \
   --device cuda --seed 42 --epochs 5
 \`\`\`
 
+Visualize the SAME held-out public anchor using all four changed direction
+phrases (only word varies; the same Polygon and world map stay fixed):
+
+\`\`\`bash
+python -m scripts.visualize_inverse_direction_belief \
+  --checkpoint runs/inverse_polygon_direction_s42/model/last.pt \
+  --dev-jsonl runs/inverse_polygon_direction_s42/data/dev.jsonl \
+  --output runs/inverse_polygon_direction_s42/word_sweep \
+  --device cpu
+\`\`\`
+
+Generated \`word_sweep/four_direction_beliefs.png\` displays the four
+28x28 heatmaps with matching color scale, outline and centroid marker.
+\`four_direction_beliefs.json\` gives each direction's Top-1 and
+probability-weighted centroid. This is a synthetic word-sensitivity check,
+not proof that BERT parses unconstrained directions in actual CityNav.
+
 Outputs:
 - data/fit.jsonl, dev.jsonl, inventory.json
 - model/last.pt, manifest.json, history.json
