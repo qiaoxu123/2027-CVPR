@@ -76,7 +76,10 @@ def graph_input_batch(graphs,source_records,bert,device,*,
     """Public path-endpoint ID binding to existing static Polygon slots.
 
     Polygon order is the original FullCandidateDataset record landmarks order.
-    It is never selected, ranked, cropped or corrected using a target label.
+    The graph branch does not newly select, rank, crop or correct those
+    pre-existing source references using a target label. The original
+    processed CityNav source may itself contain annotation-selected refs;
+    that inherited benchmark limitation must be disclosed in reports.
     """
     if not graphs or len(graphs)!=len(source_records):
         raise ValueError("Invalid graph/source pairing")
