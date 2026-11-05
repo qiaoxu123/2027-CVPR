@@ -1,0 +1,205 @@
+{
+  "physical_tasks": 64,
+  "maps": 23,
+  "frames": 141,
+  "near_frames": 140,
+  "near_tasks": 63,
+  "independent_human_instance_labels": 0,
+  "true_landmark_identity_accuracy": null,
+  "true_tracking_accuracy": null,
+  "true_scene_type_accuracy": null,
+  "pixel_mask_IoU": null,
+  "true_direct_relation_accuracy": null,
+  "true_indirect_relation_accuracy": null,
+  "status_proxy_frames": {
+    "RGB_supported_proxy": 48,
+    "conflicting_RGB_proxy": 22,
+    "geometry_only": 65,
+    "insufficient_visual_evidence": 5
+  },
+  "tracking_frames_in_sample": 70,
+  "tracked_near_tasks": 40,
+  "top_scored_patch_label_proxy": {
+    "1": 76,
+    "0": 7,
+    "-1": 10
+  },
+  "RGB_supported_tracking_frames": 48,
+  "anchor_controls": {
+    "real_auc_proxy": {
+      "n": 93,
+      "mean": 0.9420956427244315
+    },
+    "shuffled_auc_proxy": {
+      "n": 93,
+      "mean": 0.44601520550285445
+    },
+    "zero_features_auc_proxy": {
+      "n": 93,
+      "mean": 0.5
+    },
+    "wrong_name_auc_proxy": {
+      "n": 93,
+      "mean": 0.929527272489844
+    }
+  },
+  "same_type_wrong_name_auc_not_worse": 41,
+  "same_type_wrong_name_auc_within_005": 76,
+  "logged_score_mae_max": 0,
+  "neighbor_object_views": 45180,
+  "unique_neighbor_objects": 13344,
+  "out_of_view_views": 30914,
+  "insufficient_patch_views": 9527,
+  "neighborhood_visual_class_proxy": {
+    "n": 4739,
+    "top1_map_proxy": 0.4298375184638109,
+    "top3_map_proxy": 0.8170500105507491,
+    "shuffled_map_proxy": 0.1831610044313146,
+    "zero_rgb_map_proxy": 0.10867271576281916
+  },
+  "by_type": {
+    "Building": {
+      "n": 967,
+      "top1_map_proxy": 0.5760082730093071,
+      "top3_map_proxy": 0.9234746639089969,
+      "shuffled_map_proxy": 0.2450879007238883,
+      "zero_rgb_map_proxy": 0.03205791106514995
+    },
+    "Road": {
+      "n": 1050,
+      "top1_map_proxy": 0.5295238095238095,
+      "top3_map_proxy": 0.7961904761904762,
+      "shuffled_map_proxy": 0.13523809523809524,
+      "zero_rgb_map_proxy": 0.16952380952380952
+    },
+    "Parking": {
+      "n": 168,
+      "top1_map_proxy": 0.4583333333333333,
+      "top3_map_proxy": 0.6488095238095238,
+      "shuffled_map_proxy": 0.08333333333333333,
+      "zero_rgb_map_proxy": 0.07142857142857142
+    },
+    "Vegetation": {
+      "n": 221,
+      "top1_map_proxy": 0.497737556561086,
+      "top3_map_proxy": 0.7420814479638009,
+      "shuffled_map_proxy": 0.09049773755656108,
+      "zero_rgb_map_proxy": 0.013574660633484163
+    },
+    "Car": {
+      "n": 1082,
+      "top1_map_proxy": 0.33733826247689463,
+      "top3_map_proxy": 0.9722735674676525,
+      "shuffled_map_proxy": 0.16913123844731978,
+      "zero_rgb_map_proxy": 0.027726432532347505
+    },
+    "Ground": {
+      "n": 91,
+      "top1_map_proxy": 0.46153846153846156,
+      "top3_map_proxy": 0.8791208791208791,
+      "shuffled_map_proxy": 0.08791208791208792,
+      "zero_rgb_map_proxy": 0.42857142857142855
+    },
+    "Water": {
+      "n": 2,
+      "top1_map_proxy": 0.0,
+      "top3_map_proxy": 0.5,
+      "shuffled_map_proxy": 0.0,
+      "zero_rgb_map_proxy": 0.5
+    },
+    "Other": {
+      "n": 1158,
+      "top1_map_proxy": 0.2849740932642487,
+      "top3_map_proxy": 0.6364421416234888,
+      "shuffled_map_proxy": 0.22797927461139897,
+      "zero_rgb_map_proxy": 0.19084628670120898
+    }
+  },
+  "by_distance": {
+    "0-20": {
+      "n": 2954,
+      "top1_map_proxy": 0.44414353419092756,
+      "top3_map_proxy": 0.8127962085308057,
+      "shuffled_map_proxy": 0.18449559918754233,
+      "zero_rgb_map_proxy": 0.1069735951252539
+    },
+    "20-50": {
+      "n": 1383,
+      "top1_map_proxy": 0.3969631236442516,
+      "top3_map_proxy": 0.8322487346348517,
+      "shuffled_map_proxy": 0.1735357917570499,
+      "zero_rgb_map_proxy": 0.10629067245119306
+    },
+    "50-100.00001": {
+      "n": 402,
+      "top1_map_proxy": 0.43781094527363185,
+      "top3_map_proxy": 0.7960199004975125,
+      "shuffled_map_proxy": 0.2064676616915423,
+      "zero_rgb_map_proxy": 0.12935323383084577
+    }
+  },
+  "by_uav_distance": {
+    "0-20": {
+      "n": 1616,
+      "top1_map_proxy": 0.4474009900990099,
+      "top3_map_proxy": 0.8038366336633663,
+      "shuffled_map_proxy": 0.2073019801980198,
+      "zero_rgb_map_proxy": 0.11200495049504951
+    },
+    "20-50": {
+      "n": 2375,
+      "top1_map_proxy": 0.4206315789473684,
+      "top3_map_proxy": 0.8303157894736842,
+      "shuffled_map_proxy": 0.1734736842105263,
+      "zero_rgb_map_proxy": 0.1031578947368421
+    },
+    "50-inf": {
+      "n": 748,
+      "top1_map_proxy": 0.42112299465240643,
+      "top3_map_proxy": 0.803475935828877,
+      "shuffled_map_proxy": 0.16176470588235295,
+      "zero_rgb_map_proxy": 0.11898395721925134
+    }
+  },
+  "by_height": {
+    "0-20": {
+      "n": 228,
+      "top1_map_proxy": 0.32894736842105265,
+      "top3_map_proxy": 0.6578947368421053,
+      "shuffled_map_proxy": 0.19736842105263158,
+      "zero_rgb_map_proxy": 0.14912280701754385
+    },
+    "20-40": {
+      "n": 1265,
+      "top1_map_proxy": 0.4150197628458498,
+      "top3_map_proxy": 0.8015810276679842,
+      "shuffled_map_proxy": 0.22687747035573122,
+      "zero_rgb_map_proxy": 0.11778656126482213
+    },
+    "40-inf": {
+      "n": 3246,
+      "top1_map_proxy": 0.44269870609981515,
+      "top3_map_proxy": 0.8342575477510783,
+      "shuffled_map_proxy": 0.16512630930375846,
+      "zero_rgb_map_proxy": 0.10227972889710413
+    }
+  },
+  "geometric_mask_support": {
+    "roi_with_pixels": 14266,
+    "mean_supported_fraction_on_projected_ROIs": 0.8265124528565531,
+    "caveat": "Coverage and valid depth are geometric/source support, not semantic mask IoU or real visibility"
+  },
+  "relation_proxies": {
+    "map_car_parking_chains": 1235,
+    "car_parking_chain_views": 2732,
+    "both_RGB_rois_available": 437,
+    "both_node_types_match_map": 80,
+    "qualified_named_multi_road_holes": 5,
+    "exact_road_union_holes": 122,
+    "qualified_multi_road_hole_views": 10,
+    "all_road_ROIs_available": 0,
+    "all_road_types_match_map": 0,
+    "map_building_nearest_road_queries": 2024
+  },
+  "source": "Frozen64 rollout derived analysis; exploratory, not an independent navigation/generalization evaluation"
+}

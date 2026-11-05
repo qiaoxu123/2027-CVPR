@@ -1,0 +1,34 @@
+{
+  "checkpoint_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "stage1_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "rollout_sha256": "6b0a9af6a96b969a9312194add73e51b251f62632dd5311f66d9efdd81a4b527",
+  "tasks_sha256": "e87557abc208849e610351e0dea263b5c2f6c434ddf141d623cbeaf92ef3dd63",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "source_commit": "97c705581104fcdfd58ac806bc3b442fa1cce6ea",
+  "class_prompts": [
+    "an aerial photograph of a building roof",
+    "an aerial photograph of a road",
+    "an aerial photograph of a parking lot",
+    "an aerial photograph of trees and vegetation",
+    "an aerial photograph of a car",
+    "an aerial photograph of open ground",
+    "an aerial photograph of water",
+    "an aerial photograph of other structures"
+  ],
+  "near_radius_m": 100,
+  "near_pose_distance_m": 20,
+  "weak_roi_min_pixels": 64,
+  "weak_roi_min_native_patches": 2,
+  "visibility": "geometric_projection_and_source_support_only; actual_visibility_unknown",
+  "annotation_policy": "No independent human masks or identity labels; every accuracy is proxy or unavailable",
+  "inference_inputs": "visited RGB, pose, footprint, public map only; no original CityNav target GT",
+  "source_sha256": {
+    "/home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain/scripts/build_nearfield_scene_dataset.py": "54c096f0f8729d5142759b4cd14735b6b87b05c77f0aac78de28e2b1abc102e8",
+    "scripts/nearfield_geometry.py": "1f2c98b9502476f57409e4923bad83f5ae21ba6fa474d3711f2f9925469fdb0b",
+    "graphnav/pgvb_observation.py": "3ffb4123a692f0f24554fddf9107f42bfe6373e4464cf765cf40e24bcb246a2d",
+    "graphnav/polygon_guided_visual.py": "e905e4d3cf245e1306b36cc20910d3a31e9f6e9aac4a352de1884220c148cd3a",
+    "graphnav/observed_patch_scales.py": "e0ababf3158f9f14d0c322a67e5c9dbcf063162768684cbbe472d090d4acafdc",
+    "graphnav/local_landmark_anchor.py": "ef1276b09403c0841a98fbefcbfdedd80855cb220e04fe2d05403fe561ab5918",
+    "graphnav/renderer.py": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747"
+  }
+}
