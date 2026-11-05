@@ -65,7 +65,11 @@ Target blue car -->right_of--> black car -->inside--> parking lot
 5. **scripts/train_instruction_relation_parser.py**: frozen BERT + trainable
    supervised span graph parser head, reviewed JSONL fit/dev, 5 epochs
    default, seed42, map-disjoint, loss and edge-triple F1 reporting.
-6. CPU test modules: \`tests/test_instruction_relation_graph.py\`,
+6. **graphnav/instruction_graph_decode.py**: convert *trained* role and
+   directed edge probabilities to graph paths by forward-only breadth-first
+   search, with public map binding, confidence threshold and bounded hops;
+   no uncertain model prediction is marked as verified geometry.
+7. CPU test modules: \`tests/test_instruction_relation_graph.py\`,
    \`tests/test_instruction_graph_parser_head.py\`.
 
 ## Representation
