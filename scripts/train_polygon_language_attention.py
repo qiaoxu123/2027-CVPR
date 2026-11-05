@@ -53,6 +53,9 @@ def make_dataset(path,geometry_args):
 
 
 def frozen_features(model,batched,bert,device):
+    # UnifiedPGVB caches frozen Geometry PER EPISODE. Different TRAIN rows
+    # must never accidentally reuse the previous batch's spatial Belief.
+    model.reset_episode()
     with torch.no_grad():
         inputs=full_relation_inputs(batched,bert,device)
         result=model.forward_full_relation(**inputs,relation_enabled=True)
@@ -102,7 +105,6 @@ def accumulate(stats,ne,changed):
 @torch.no_grad()
 def evaluate(model,adapter,dataset,indices,bert,device,batch_size,max_batches=0):
     model.eval();adapter.eval()
-    rng=np.random.default_rng(42)
     loader=DataLoader(Subset(dataset,indices),batch_size=batch_size,
                       shuffle=False,num_workers=0,collate_fn=collate_full)
     names=("static","real","zero_text","swapped_text")
