@@ -1,0 +1,47 @@
+{
+  "seed": 42,
+  "partition": "train",
+  "weights_sha256": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+  "queue_sha256": "e75e396a5a6646de11f87dd0b991b764a7797d62fe96d3c398cc1f0ea7880db5",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "ultralytics": "8.4.176",
+  "python": "3.10.22",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "config": {
+    "imgsz": 640,
+    "tile": 640,
+    "overlap": 0.2,
+    "confidence": 0.25,
+    "iou": 0.5,
+    "max_det": 1000,
+    "half": false,
+    "banks": {
+      "base": [
+        "car",
+        "van",
+        "truck",
+        "parking lot",
+        "parking space",
+        "building",
+        "road"
+      ],
+      "color": [
+        "car",
+        "van",
+        "truck",
+        "red car",
+        "white car",
+        "black car"
+      ],
+      "parking": [
+        "parking lot",
+        "parking area",
+        "parking space"
+      ]
+    }
+  },
+  "samples": 120,
+  "smoke": false
+}

@@ -1,3 +1,15 @@
+## [CityNav zero-shot YOLO-World diagnostic] - 2026-11-06
+
+### Features
+- Add frozen TRAIN-only YOLO-World-V2-S whole-frame/tiled GPU experiment, public-Polygon proxy metrics, per-frame world mapping and 120-image HTML atlas.
+- Preserve raw stitched proposals, input/weight hashes, prompt-bank controls and resumable output integrity checks.
+
+### Design Rationale
+- Separate tight-box IoU disagreement from coarse map-contour center association; neither is independent human instance accuracy.
+
+### Notes & Caveats
+- No training, GeomBelief/navigation/Stop changes or Val/Test use. Color prompts amplify nonvehicle detections; parking detection is ineffective in this experiment.
+
 ## [PR26 main angular consistency execution] - 2026-11-06
 
 ### Features
