@@ -1,0 +1,2356 @@
+[
+  {
+    "i": 2722,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "the black car",
+        "object"
+      ],
+      "cars": [
+        "two white cars",
+        "group"
+      ],
+      "area": [
+        "the parking area",
+        "region"
+      ],
+      "b": [
+        "the Long building with black roof",
+        "named_landmark"
+      ],
+      "g": [
+        "the Staffordshire Gardens road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "next_to",
+        "t",
+        "next to it has two white cars",
+        "N",
+        "medium"
+      ],
+      [
+        "cars",
+        "in",
+        "area",
+        "These cars are located in the parking area",
+        "N",
+        "high"
+      ],
+      [
+        "area",
+        "in_front_of",
+        "b",
+        "in front of the Long building with black roof",
+        "I",
+        "medium"
+      ],
+      [
+        "area",
+        "at_end_of",
+        "g",
+        "at the end of the Staffordshire Gardens road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“next to it has” is ungrammatical; likely two cars beside target black car, but attachment tentative."
+    ]
+  },
+  {
+    "i": 2723,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Black car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "b": [
+        "the rectangular building",
+        "object"
+      ],
+      "g": [
+        "Staffordshire gardens road",
+        "named_landmark"
+      ],
+      "lane": [
+        "the first lane",
+        "region"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "in_front_of",
+        "b",
+        "in front of the rectangular building",
+        "I",
+        "medium"
+      ],
+      [
+        "lot",
+        "at",
+        "g",
+        "at Staffordshire gardens road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lane",
+        "in the first lane",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "right_of",
+        "t",
+        "a white car to the right",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_car_left",
+        [],
+        "no car to the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "first lane comparison set unclear; left/right frame unknown."
+    ]
+  },
+  {
+    "i": 2724,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "cars": [
+        "two cars",
+        "group"
+      ],
+      "lot": [
+        "a spacious parking lot",
+        "region"
+      ],
+      "b": [
+        "a building",
+        "object"
+      ],
+      "g": [
+        "staffordshire gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "with_left",
+        "cars",
+        "parked with two cars on it’s left side",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in a spacious parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "in_front_of",
+        "b",
+        "in front of a building",
+        "I",
+        "medium"
+      ],
+      [
+        "lot",
+        "at",
+        "g",
+        "at staffordshire gardens",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Possessive left is likely target-relative but frame unknown."
+    ]
+  },
+  {
+    "i": 2725,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "h": [
+        "the gray house",
+        "object"
+      ],
+      "g": [
+        "Staffordshire Gardens",
+        "named_landmark"
+      ],
+      "s": [
+        "the Shenstone House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_against",
+        "h",
+        "parked against the gray house",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "on",
+        "g",
+        "on Staffordshire Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "seven_houses_left_of",
+        "s",
+        "7 houses to the left of the Shenstone House",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“left” orientation and sequence are unspecified."
+    ]
+  },
+  {
+    "i": 2726,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A silver/light gray four door vehicle",
+        "object"
+      ],
+      "s": [
+        "the Shenstone House",
+        "named_landmark"
+      ],
+      "row": [
+        "row of cars",
+        "group"
+      ],
+      "building": [
+        "the building",
+        "object"
+      ],
+      "w": [
+        "a white vehicle",
+        "object"
+      ],
+      "spot": [
+        "the spot next to it",
+        "region"
+      ],
+      "we": [
+        "the Weaton House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "s",
+        "parked behind the Shenstone House",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "last_in",
+        "row",
+        "the last car in row of cars running along the building",
+        "N",
+        "high"
+      ],
+      [
+        "row",
+        "along",
+        "building",
+        "running along the building",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "in",
+        "spot",
+        "There is a white vehicle in the spot next to it",
+        "N",
+        "high"
+      ],
+      [
+        "we",
+        "on_other_side_of",
+        "t",
+        "and the Weaton House on the other side",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "last sequence endpoint unspecified; “other side” reference/frame ambiguous."
+    ]
+  },
+  {
+    "i": 2727,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "s": [
+        "the Shenstone house",
+        "named_landmark"
+      ],
+      "lane": [
+        "the left lane",
+        "region"
+      ],
+      "e": [
+        "East road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "in_front_of",
+        "s",
+        "in front of the Shenstone house",
+        "I",
+        "medium"
+      ],
+      [
+        "lot",
+        "left_lane_of",
+        "e",
+        "on the left lane along East road",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "left_of",
+        "t",
+        "a white car to the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left frame unknown."
+    ]
+  },
+  {
+    "i": 2728,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "s": [
+        "the Shenstone House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "rightmost_in",
+        "row",
+        "furthest to the right in the row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "parked_against",
+        "s",
+        "parked against the Shenstone House",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right frame unspecified."
+    ]
+  },
+  {
+    "i": 2729,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "s": [
+        "the Shenstone House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "rightmost_in",
+        "row",
+        "1st from the right in the row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "parked_against",
+        "s",
+        "parked against the Shenstone House",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right frame unspecified."
+    ]
+  },
+  {
+    "i": 2730,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "Two white cars",
+        "group"
+      ],
+      "blue": [
+        "a dark blue car",
+        "object"
+      ],
+      "rw": [
+        "a pair of red and white cars",
+        "group"
+      ],
+      "s": [
+        "the shenstone house",
+        "named_landmark"
+      ],
+      "e": [
+        "East Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "beside",
+        "blue",
+        "beside each other next to a dark blue car",
+        "N",
+        "high"
+      ],
+      [
+        "rw",
+        "behind",
+        "blue",
+        "with a pair of red and white cars behind it",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "in_front_of",
+        "s",
+        "parked in front of the shenstone house",
+        "I",
+        "medium"
+      ],
+      [
+        "s",
+        "off",
+        "e",
+        "off East Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“it” in behind likely dark blue car, but could refer to the pair of white cars; low confidence."
+    ]
+  },
+  {
+    "i": 2731,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "s": [
+        "the shenstone house",
+        "named_landmark"
+      ],
+      "tree": [
+        "a large tree",
+        "object"
+      ],
+      "cars": [
+        "the Cars",
+        "group"
+      ],
+      "e": [
+        "East Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "r",
+          "w"
+        ],
+        "in between another red car and a white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "s",
+        "parked in front of the shenstone house",
+        "I",
+        "medium"
+      ],
+      [
+        "tree",
+        "behind",
+        "cars",
+        "a large tree behind the Cars",
+        "U",
+        "medium"
+      ],
+      [
+        "cars",
+        "off",
+        "e",
+        "off East Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2732,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "s": [
+        "the building named Shenstone house",
+        "named_landmark"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "s",
+        "parked in front of the building named Shenstone house",
+        "I",
+        "medium"
+      ],
+      [
+        "r",
+        "left_side_of",
+        "t",
+        "parked at its left side",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "right_side_of",
+        "t",
+        "parked at its right side",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left/right frame not stated."
+    ]
+  },
+  {
+    "i": 2733,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "spot": [
+        "an angled parking spot",
+        "region"
+      ],
+      "s": [
+        "Shenstone House",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "spot",
+        "parked in an angled parking spot",
+        "N",
+        "high"
+      ],
+      [
+        "spot",
+        "behind",
+        "s",
+        "behind Shenstone House",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "right_of",
+        "t",
+        "On its right is a white car",
+        "U",
+        "low"
+      ],
+      [
+        "r",
+        "left_of",
+        "t",
+        "on its left is another red car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left/right frame unknown."
+    ]
+  },
+  {
+    "i": 2734,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ],
+      "w": [
+        "the white car",
+        "object"
+      ],
+      "lot": [
+        "a narrow parking lot",
+        "region"
+      ],
+      "s": [
+        "The shenstone house",
+        "named_landmark"
+      ],
+      "tree": [
+        "a large tree",
+        "object"
+      ],
+      "e": [
+        "East Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "r",
+          "w"
+        ],
+        "in between another red car and the white car",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "s",
+        "in a narrow parking lot behind The shenstone house",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "beside",
+        "tree",
+        "beside a large tree",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "e",
+        "off East Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2735,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ],
+      "s": [
+        "a silver car",
+        "object"
+      ],
+      "h": [
+        "the Shenstone House",
+        "named_landmark"
+      ],
+      "tree": [
+        "a large tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "r",
+          "s"
+        ],
+        "parked between another red car and a silver car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "h",
+          "tree"
+        ],
+        "in between the Shenstone House and a large tree",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2736,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "s": [
+        "Shenstone House building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "r"
+        ],
+        "between a white car and another red car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot next to Shenstone House building",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "next_to",
+        "s",
+        "next to Shenstone House building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2737,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white four door vehicle",
+        "object"
+      ],
+      "edge": [
+        "the lot edge",
+        "region"
+      ],
+      "grass": [
+        "grass area",
+        "region"
+      ],
+      "s": [
+        "Shenstone House",
+        "named_landmark"
+      ],
+      "w": [
+        "Weaton House",
+        "named_landmark"
+      ],
+      "red": [
+        "a red vehicle",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "edge",
+        "parked on the lot edge",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near_side_to",
+        "grass",
+        "near side to grass area",
+        "U",
+        "low"
+      ],
+      [
+        "grass",
+        "between",
+        [
+          "s",
+          "w"
+        ],
+        "between Shenstone House and Weaton House",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "closest_to",
+        "w",
+        "closest to Wheaton",
+        "N",
+        "low"
+      ],
+      [
+        "red",
+        "between",
+        [
+          "t",
+          "grass"
+        ],
+        "parked between it and the grass area",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Weaton/Wheaton spelling mismatch retained; nearest reference likely Wheaton House. “near side to grass” unclear."
+    ]
+  },
+  {
+    "i": 2738,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "grass": [
+        "the grass",
+        "region"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "s": [
+        "Shenstone House",
+        "named_landmark"
+      ],
+      "w": [
+        "Wheaton House",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "by",
+        "grass",
+        "parked by the grass",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "row",
+        "behind the row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "directly_behind",
+        "s",
+        "directly behind Shenstone House",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "r"
+        ],
+        "parked bwtween Wheaton House and a red car",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2739,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "r": [
+        "the red car",
+        "object"
+      ],
+      "w": [
+        "that Wheaton House",
+        "named_landmark"
+      ],
+      "park": [
+        "the park",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "r",
+        "next to the red car",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "behind",
+        "w",
+        "parked behind that Wheaton House",
+        "U",
+        "medium"
+      ],
+      [
+        "r",
+        "at",
+        "park",
+        "at the park",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“that” may be demonstrative rather than relative; behind relation kept to Wheaton House."
+    ]
+  },
+  {
+    "i": 2740,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "w": [
+        "the Wheaton House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "above",
+        "r",
+        "parked above a red car",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "w",
+        "in front of the Wheaton House",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "above frame unknown."
+    ]
+  },
+  {
+    "i": 2741,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "w": [
+        "the Wheaton House building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_diagonally",
+        [],
+        "parked diagonally",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "w",
+        "in front of the Wheaton House building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2742,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "space": [
+        "a parking space",
+        "region"
+      ],
+      "d": [
+        "Donegal",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "grass": [
+        "a patch of grassy land with a tree",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in a parking space",
+        "N",
+        "high"
+      ],
+      [
+        "space",
+        "in_front_of",
+        "d",
+        "in front of Donegal",
+        "I",
+        "medium"
+      ],
+      [
+        "space",
+        "on",
+        "s",
+        "on Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "right_of",
+        "t",
+        "On its right there is a white car",
+        "U",
+        "low"
+      ],
+      [
+        "grass",
+        "left_of",
+        "t",
+        "on its left there is a patch of grassy land with a tree",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left/right frame ambiguous."
+    ]
+  },
+  {
+    "i": 2743,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car with a black and white roof",
+        "object"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "w": [
+        "white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "in front of the Donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "in_front_of",
+        "t",
+        "There is a black car and white car parked in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "in_front_of",
+        "t",
+        "and white car parked in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front relation among vehicles has unknown reference frame."
+    ]
+  },
+  {
+    "i": 2744,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car with white top",
+        "object"
+      ],
+      "tree": [
+        "the small tree",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "d": [
+        "the Donegal Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        [
+          "tree",
+          "w"
+        ],
+        "next to the small tree and a white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "in front of the Donegal Building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2745,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Reddish car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_from_left",
+        "row",
+        "third from the left in the row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "directly_in_front_of",
+        "d",
+        "parked directly in front of the Donegal building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left orientation unspecified."
+    ]
+  },
+  {
+    "i": 2746,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red car with a black and white roof",
+        "object"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "b": [
+        "a bush",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "parked in front of the Donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to a bush",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2747,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "b": [
+        "a bush",
+        "object"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "beside",
+        "b",
+        "parked beside a bush",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "in front of the Donegal building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2748,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is the blue car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot next to it",
+        "region"
+      ],
+      "cars": [
+        "two silver and two red cars",
+        "group"
+      ],
+      "order": [
+        "in order",
+        "group"
+      ],
+      "s": [
+        "the shenstone house building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "empty",
+        [],
+        "the parking lot next to it is empty",
+        "N",
+        "medium"
+      ],
+      [
+        "cars",
+        "on_other_side",
+        "t",
+        "On the other side are two silver and two red cars",
+        "U",
+        "medium"
+      ],
+      [
+        "cars",
+        "in_order",
+        [],
+        "in order",
+        "N",
+        "medium"
+      ],
+      [
+        "cars",
+        "parked_side_by_side",
+        "lot",
+        "parked side by side in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "in_front_of",
+        "s",
+        "in front of the shenstone house building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“in order” lacks an ordering rule/reference; preserve as unqualified ordering statement."
+    ]
+  },
+  {
+    "i": 2749,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a dark blue car",
+        "object"
+      ],
+      "spot": [
+        "an angled parking spot",
+        "region"
+      ],
+      "lot": [
+        "behind Shenstone House",
+        "region"
+      ],
+      "s": [
+        "Shenstone House",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "empty": [
+        "an empty spot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "spot",
+        "parked in an angled parking spot",
+        "N",
+        "high"
+      ],
+      [
+        "spot",
+        "in",
+        "lot",
+        "behind Shenstone House",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "s",
+        "behind Shenstone House",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "left_of",
+        "t",
+        "white car",
+        "U",
+        "low"
+      ],
+      [
+        "empty",
+        "right_of",
+        "t",
+        "empty spot",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left/right frame not stated."
+    ]
+  },
+  {
+    "i": 2750,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a dark blue car",
+        "object"
+      ],
+      "spot": [
+        "an angled parking spot",
+        "region"
+      ],
+      "lot": [
+        "behind Shenstone House",
+        "region"
+      ],
+      "s": [
+        "Shenstone House",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "empty": [
+        "an empty spot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "spot",
+        "parked in an angled parking spot",
+        "N",
+        "high"
+      ],
+      [
+        "spot",
+        "in",
+        "lot",
+        "behind Shenstone House",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "s",
+        "behind Shenstone House",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "left_of",
+        "t",
+        "white car",
+        "U",
+        "low"
+      ],
+      [
+        "empty",
+        "right_of",
+        "t",
+        "empty spot",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left/right frame not stated."
+    ]
+  },
+  {
+    "i": 2751,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "w": [
+        "white two cars",
+        "group"
+      ],
+      "bay": [
+        "a free parking bay",
+        "region"
+      ],
+      "s": [
+        "Shenstone house",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "left_of",
+        "t",
+        "white two cars on it’s left",
+        "U",
+        "low"
+      ],
+      [
+        "bay",
+        "right_of",
+        "t",
+        "a free parking bay on it’s right",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "at",
+        "s",
+        "at Shenstone house",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“white two cars” is malformed, kept as plural group; possessive left/right frame uncertain."
+    ]
+  },
+  {
+    "i": 2752,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "s": [
+        "the Shenstone House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fifth_from_left",
+        "row",
+        "5th from the left in the row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "parked_against",
+        "s",
+        "parked against the Shenstone House",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left frame unspecified."
+    ]
+  },
+  {
+    "i": 2753,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A multi-colored white and red car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "grass": [
+        "a grass section with one tree on it",
+        "region"
+      ],
+      "lot": [
+        "the parking lot of the Donegal building",
+        "region"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "grass"
+        ],
+        "in between a black car and a grass section with one tree on it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of the Donegal building",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "of",
+        "d",
+        "of the Donegal building",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "s",
+        "off Staffordshire Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2754,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car with a red top",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "lot": [
+        "free parking lot",
+        "region"
+      ],
+      "d": [
+        "Donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire street road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "with_left",
+        "b",
+        "with a black car on the left",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "right_of",
+        "t",
+        "free parking lot on it’s right",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "at",
+        "d",
+        "at Donegal building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "s",
+        "along Staffordshire street road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left/right referent is target car but orientation unknown."
+    ]
+  },
+  {
+    "i": 2755,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car with a red roof",
+        "object"
+      ],
+      "bush": [
+        "a bush",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "d": [
+        "the building called Dongal",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "bush",
+          "b"
+        ],
+        "parked between a bush and a black car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "in front of the building called Dongal",
+        "I",
+        "medium"
+      ],
+      [
+        "d",
+        "on",
+        "s",
+        "on Staffordshire Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Source spelling “Dongal” retained."
+    ]
+  },
+  {
+    "i": 2756,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red and white car",
+        "object"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "b": [
+        "a bush",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "parked in front of the Donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "beside",
+        "b",
+        "beside a bush",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2757,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "parked on Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "in front of the Donegal building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2758,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "cars": [
+        "Two cars red-lined",
+        "group"
+      ],
+      "t": [
+        "one multi-colored red and white car",
+        "object"
+      ],
+      "b": [
+        "one black car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "includes",
+        [
+          "t",
+          "b"
+        ],
+        "one multi-colored red and white car and one black car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "parked next to each other",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "next_to",
+        "tree",
+        "next to a tree",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "in_front_of",
+        "d",
+        "parked in front of the Donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "d",
+        "off",
+        "s",
+        "off Staffordshire Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“red-lined” unclear modifier; group membership interpreted from appositional continuation."
+    ]
+  },
+  {
+    "i": 2759,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white sedan",
+        "object"
+      ],
+      "row": [
+        "a row of five cars",
+        "group"
+      ],
+      "reds": [
+        "two red cars",
+        "group"
+      ],
+      "w": [
+        "a white then blue car",
+        "group"
+      ],
+      "s": [
+        "the building called Shenstone House",
+        "named_landmark"
+      ],
+      "tree": [
+        "a large tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "middle_of",
+        "row",
+        "parked in the middle of a row of five cars",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "reds",
+          "w"
+        ],
+        "inbetween two red cars on the left and a white then blue car on the right",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "behind",
+        "s",
+        "parked behind the building called Shenstone House",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "behind",
+        "t",
+        "there is a large tree behind the car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left/right arrangement frame unknown; “white then blue” may refer two cars."
+    ]
+  },
+  {
+    "i": 2760,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "space": [
+        "the parking space of Shenstone House",
+        "region"
+      ],
+      "s": [
+        "Shenstone House",
+        "named_landmark"
+      ],
+      "w": [
+        "another white car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in the parking space of Shenstone House",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "right_of",
+        "t",
+        "On its right is another white car",
+        "U",
+        "low"
+      ],
+      [
+        "r",
+        "left_of",
+        "t",
+        "on its left is a red car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Left/right frame unknown."
+    ]
+  },
+  {
+    "i": 2761,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "s": [
+        "the Shenstone House",
+        "named_landmark"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "r": [
+        "A red car",
+        "object"
+      ],
+      "w": [
+        "white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "s",
+          "tree"
+        ],
+        "parked between the Shenstone House and a tree",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "on_side_of",
+        "t",
+        "A red car and white car are on the side of it",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "on_side_of",
+        "t",
+        "A red car and white car are on the side of it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“the side” is unspecified and the coordination does not identify each car’s exact side."
+    ]
+  }
+]

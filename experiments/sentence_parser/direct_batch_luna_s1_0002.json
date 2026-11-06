@@ -1,0 +1,2213 @@
+[
+ {
+  "i": 1611,
+  "e": {
+   "t": [
+    "a house",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Broad Street",
+    "named_landmark"
+   ],
+   "m": [
+    "the Mellish Clark building",
+    "named_landmark"
+   ],
+   "g": [
+    "the grassy area",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on_part_of",
+    "s",
+    "on the part of Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "s",
+    "parallel_to",
+    "b",
+    "runs parallel to Broad Street",
+    "N",
+    "high"
+   ],
+   [
+    "s",
+    "parallel_to",
+    "m",
+    "and the Mellish Clark building",
+    "N",
+    "medium"
+   ],
+   [
+    "t",
+    "second_from_right_in_view",
+    "g",
+    "it is the second house from the right",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "second-from-right的比较集合及观察者朝向不明确"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1612,
+  "e": {
+   "t": [
+    "The first building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "a small square roofed building",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "first_without_left_neighbor",
+    "b",
+    "does not have a small square roofed building to the left of it",
+    "U",
+    "medium"
+   ],
+   [
+    "t",
+    "at_bottom_end_of",
+    "s",
+    "at the bottom end of Flower Street",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "vertically viewing sets visual bottom, but no calibrated ground direction; first的比较集合未言明"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1613,
+  "e": {
+   "t": [
+    "The gray house",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "h": [
+    "the house at the corner of Flower Street",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "2_houses_to_left_of",
+    "h",
+    "2 houses to the left of the house at the corner of Flower Street",
+    "U",
+    "high"
+   ],
+   [
+    "h",
+    "at_corner_of",
+    "s",
+    "at the corner of Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "left参照方向不明；数量2 houses保留在predicate"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1614,
+  "e": {
+   "t": [
+    "Center section",
+    "object"
+   ],
+   "g": [
+    "a multi housing unit",
+    "group"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "center_section_of",
+    "g",
+    "Center section of a multi housing unit",
+    "N",
+    "high"
+   ],
+   [
+    "g",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "g",
+    "missing_front_walls",
+    "g",
+    "missing its front walls",
+    "I",
+    "medium"
+   ]
+  ],
+  "u": [
+   "red-lined作为dark gray roofs属性修饰，front walls内禀朝向未知"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1615,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "p": [
+    "the playground",
+    "region"
+   ],
+   "c": [
+    "a black car",
+    "object"
+   ],
+   "b": [
+    "a small building",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "across_street_from",
+    "p",
+    "across the street from the playground",
+    "N",
+    "high"
+   ],
+   [
+    "c",
+    "next_to",
+    "b",
+    "a black car next to a small building",
+    "N",
+    "high"
+   ],
+   [
+    "c",
+    "behind",
+    "t",
+    "a black car next to a small building behind it",
+    "I",
+    "medium"
+   ]
+  ],
+  "u": [
+   "it在behind it中指目标building；汽车和小建筑相邻，小建筑在目标后方"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1616,
+  "e": {
+   "t": [
+    "The gray house",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "h": [
+    "the gray house at the corner of Flower Street",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "5_houses_to_left_of",
+    "h",
+    "5 houses to the left of the gray house at the corner of Flower Street",
+    "U",
+    "high"
+   ],
+   [
+    "h",
+    "at_corner_of",
+    "s",
+    "at the corner of Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "left方向未定，数量5 houses保留在predicate"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1617,
+  "e": {
+   "t": [
+    "the middle unit",
+    "object"
+   ],
+   "b": [
+    "the third building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "o": [
+    "Office/Reception",
+    "named_landmark"
+   ],
+   "g": [
+    "a grill",
+    "object"
+   ],
+   "y": [
+    "the backyard",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "middle_unit_of",
+    "b",
+    "middle unit of the third building",
+    "N",
+    "high"
+   ],
+   [
+    "b",
+    "third_from",
+    "o",
+    "third building on Flower Street from Office/Reception",
+    "U",
+    "medium"
+   ],
+   [
+    "b",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "has_in_backyard",
+    "g",
+    "There is a grill in the backyard",
+    "N",
+    "medium"
+   ],
+   [
+    "t",
+    "has",
+    "y",
+    "in the backyard",
+    "N",
+    "medium"
+   ]
+  ],
+  "u": [
+   "third from未给计数方向；backyard的所有者可能是middle unit所在住宅"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1618,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "the building",
+    "object"
+   ],
+   "g": [
+    "a bright green box",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "left_of",
+    "s",
+    "building left of Flower Street",
+    "U",
+    "medium"
+   ],
+   [
+    "t",
+    "section_of",
+    "b",
+    "it is the section of building",
+    "N",
+    "medium"
+   ],
+   [
+    "t",
+    "above",
+    "b",
+    "section of building above the building",
+    "U",
+    "medium"
+   ],
+   [
+    "g",
+    "left_of",
+    "b",
+    "bright green box to the left of it",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "left/above是未校准视觉方向，两个building的共指关系不确定"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1619,
+  "e": {
+   "t": [
+    "The gray house",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "h": [
+    "the gray house at the corner of Flower Street",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "2_houses_to_left_of",
+    "h",
+    "2 houses to the left of the gray house at the corner of Flower Street",
+    "U",
+    "high"
+   ],
+   [
+    "h",
+    "at_corner_of",
+    "s",
+    "at the corner of Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "left方向未定，数量2 houses保留在predicate"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1620,
+  "e": {
+   "t": [
+    "A building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "two similar buildings",
+    "group"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "has_roof",
+    "t",
+    "with a gray roof",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "attached_to",
+    "b",
+    "attached to two similar buildings on either side",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "either side为两侧而未显式界定为道路侧别"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1621,
+  "e": {
+   "t": [
+    "A building",
+    "object"
+   ],
+   "t1": [
+    "a yellow and brown tree",
+    "object"
+   ],
+   "y": [
+    "the backyard",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "has_in_backyard",
+    "t1",
+    "a yellow and brown tree in the backyard",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "has",
+    "y",
+    "in the backyard",
+    "N",
+    "medium"
+   ]
+  ],
+  "u": [
+   "backyard所属building依语法为目标"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1622,
+  "e": {
+   "t": [
+    "Beige color home",
+    "object"
+   ],
+   "s": [
+    "flower streets",
+    "named_landmark"
+   ],
+   "o": [
+    "the office / reception building",
+    "named_landmark"
+   ],
+   "w": [
+    "a white building with a white roof",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "all flower streets",
+    "N",
+    "low"
+   ],
+   [
+    "t",
+    "next_to",
+    "o",
+    "next to the office / reception building",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "across_from",
+    "w",
+    "across from a white building with a white roof",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "has_roof",
+    "t",
+    "with a gray roof",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "all flower streets为原文非常规表达，on Flower Street仅低置信度解释"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1623,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Broad Street",
+    "named_landmark"
+   ],
+   "c": [
+    "the turn",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on_short_section_of",
+    "s",
+    "on the short section of Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "s",
+    "coming_from",
+    "b",
+    "coming from Broad Street",
+    "R",
+    "high"
+   ],
+   [
+    "t",
+    "before",
+    "c",
+    "right before the turn",
+    "R",
+    "medium"
+   ],
+   [
+    "t",
+    "has_color_roof",
+    "t",
+    "It's white with a gray roof",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "coming from表路线起点但不提供数值方向；before turn依该路程序列"
+  ],
+  "f": {
+   "1": {
+    "type": "road",
+    "status": "multiple",
+    "origin": "b",
+    "forward_to": "s",
+    "evidence": "coming from Broad Street"
+   }
+  },
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1624,
+  "e": {
+   "t": [
+    "The small grey roof building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "o": [
+    "the Office/Reception Building",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "between",
+    [
+     "s",
+     "o"
+    ],
+    "between the Flower Street and the Office/Reception Building",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1625,
+  "e": {
+   "t": [
+    "The tiny gray building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Broad Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "at_part_of",
+    "s",
+    "at the part of Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "s",
+    "intersects",
+    "b",
+    "intersects with Broad Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1626,
+  "e": {
+   "t": [
+    "The gray house",
+    "object"
+   ],
+   "s": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "h": [
+    "the gray house at the intersection with Flower Street",
+    "object"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "s",
+    "on Blossom Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "left_of",
+    "h",
+    "to the left of the gray house at the intersection with Flower Street",
+    "U",
+    "high"
+   ],
+   [
+    "h",
+    "at_intersection",
+    [
+     "s",
+     "f"
+    ],
+    "at the intersection with Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "left参照方向不明"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1627,
+  "e": {
+   "t": [
+    "Right section",
+    "object"
+   ],
+   "r": [
+    "a floating dark gray roof",
+    "object"
+   ],
+   "h": [
+    "the house",
+    "object"
+   ],
+   "m": [
+    "the edge of the map",
+    "region"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "section_of",
+    "r",
+    "section of a floating dark gray roof",
+    "N",
+    "high"
+   ],
+   [
+    "r",
+    "has_missing",
+    "h",
+    "with the house missing off of its walls",
+    "N",
+    "medium"
+   ],
+   [
+    "r",
+    "on_edge",
+    "m",
+    "on the edge of the map",
+    "N",
+    "high"
+   ],
+   [
+    "r",
+    "at_corner",
+    [
+     "b",
+     "f"
+    ],
+    "on the corner of Blossom Street and Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "right section不提供左右参照对象"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1628,
+  "e": {
+   "t": [
+    "The left most dark grey roof building",
+    "object"
+   ],
+   "b": [
+    "Blossom Street road",
+    "named_landmark"
+   ],
+   "v": [
+    "the void",
+    "region"
+   ],
+   "f": [
+    "Flower Street road",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "leftmost_of",
+    [],
+    "The left most dark grey roof building",
+    "U",
+    "medium"
+   ],
+   [
+    "t",
+    "left_of",
+    "b",
+    "to the left of Blossom Street road",
+    "U",
+    "medium"
+   ],
+   [
+    "v",
+    "left_of",
+    "t",
+    "the void on its left",
+    "U",
+    "medium"
+   ],
+   [
+    "v",
+    "below",
+    "t",
+    "and below",
+    "U",
+    "medium"
+   ],
+   [
+    "f",
+    "above",
+    "t",
+    "above it is Flower Street road",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "leftmost比较集合未列明；left/right/above/below未校准地图坐标"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1629,
+  "e": {
+   "t": [
+    "a house",
+    "object"
+   ],
+   "s": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "m": [
+    "the edge of the map",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "right_side_of",
+    "t",
+    "Right side of a house",
+    "I",
+    "medium"
+   ],
+   [
+    "t",
+    "has_roof",
+    "t",
+    "with a gray roof",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "cut_off_by",
+    "m",
+    "cut off by the edge of the map",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_corner",
+    [
+     "s",
+     "f"
+    ],
+    "on the corner of Blossom Street and Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "Right side of house是目标部位，不能推断道路侧；right内部参照候选未知"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1630,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "s": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "leading_down_from",
+    "s",
+    "building with a dark grey roof leading down from Flower Street",
+    "U",
+    "medium"
+   ],
+   [
+    "t",
+    "left_of",
+    "b",
+    "to the left of Blossom Street",
+    "U",
+    "medium"
+   ],
+   [
+    "t",
+    "has_roof",
+    "t",
+    "with a dark grey roof",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "down/left未说明参照方向或地图校准"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1631,
+  "e": {
+   "t": [
+    "A dark building",
+    "object"
+   ],
+   "f": [
+    "Flower street road",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom street road",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "behind",
+    "f",
+    "behind Flower street road",
+    "U",
+    "medium"
+   ],
+   [
+    "t",
+    "has_to_right",
+    "b",
+    "Blossom street road to the right",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "behind及right参照系未指定"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1632,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "y": [
+    "Its backyard",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "at_corner",
+    [
+     "f",
+     "b"
+    ],
+    "on the corner of Flower Street and Blossom Street",
+    "N",
+    "high"
+   ],
+   [
+    "y",
+    "along",
+    "f",
+    "backyard is along the short part of Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "y",
+    "backyard_of",
+    "t",
+    "Its backyard",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "short part of Flower Street作为后院沿线，不添加匿名街段实体"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1633,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "has_roof",
+    "t",
+    "with a grey roof",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_corner",
+    [
+     "f",
+     "b"
+    ],
+    "on the corner of Flower Street and Blossom Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1634,
+  "e": {
+   "t": [
+    "The narrow building",
+    "object"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "t2": [
+    "The building beside it",
+    "object"
+   ],
+   "y": [
+    "a yellow front",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "between",
+    [
+     "f",
+     "b"
+    ],
+    "between Flower Street and Blossom Street",
+    "N",
+    "high"
+   ],
+   [
+    "t2",
+    "beside",
+    "t",
+    "The building beside it",
+    "N",
+    "high"
+   ],
+   [
+    "t2",
+    "has_front_color",
+    "y",
+    "has a yellow front",
+    "I",
+    "medium"
+   ]
+  ],
+  "u": [
+   "yellow front仅描述相邻建筑，front本征部位"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1635,
+  "e": {
+   "t": [
+    "The dark gray building",
+    "object"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "f",
+    "on Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_intersection",
+    [
+     "f",
+     "b"
+    ],
+    "at the intersection with Blossom Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1636,
+  "e": {
+   "t": [
+    "This is a building",
+    "object"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "p": [
+    "a small park",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "b",
+    "on Blossom Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "on",
+    "f",
+    "and Flower Street",
+    "N",
+    "medium"
+   ],
+   [
+    "p",
+    "across_from",
+    "t",
+    "across Flower Street from this building",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "on Blossom Street and Flower Street解析为临街两者"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1637,
+  "e": {
+   "t": [
+    "this dark blue roofed building",
+    "object"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "b",
+    "On Blossom Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "near",
+    "f",
+    "near Flower Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "near",
+    "n",
+    "and Norfolk Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "southmost",
+    [],
+    "this dark blue roofed building is the southmost building",
+    "W",
+    "medium"
+   ]
+  ],
+  "u": [
+   "southmost比较集合未明确，保留空reference；地理south不映射XY"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1638,
+  "e": {
+   "t": [
+    "The building",
+    "object"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "h": [
+    "the one",
+    "object"
+   ],
+   "n": [
+    "the corner of Norfolk Street",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "b",
+    "on Blossom Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "next_to",
+    "h",
+    "next to the one on the corner",
+    "N",
+    "high"
+   ],
+   [
+    "h",
+    "at_corner_of",
+    "n",
+    "on the corner of Norfolk Street",
+    "N",
+    "medium"
+   ]
+  ],
+  "u": [
+   "the one的landmark及交叉口未完整写出"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1639,
+  "e": {
+   "t": [
+    "A building",
+    "object"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "at_corner",
+    [
+     "n",
+     "b"
+    ],
+    "on the corner of Norfolk Street and Blossom Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1640,
+  "e": {
+   "t": [
+    "The dark gray building",
+    "object"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "n",
+    "on Norfolk Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_intersection",
+    [
+     "n",
+     "b"
+    ],
+    "at the intersection with Blossom Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1641,
+  "e": {
+   "t": [
+    "A small part",
+    "object"
+   ],
+   "g": [
+    "a larger building",
+    "object"
+   ],
+   "b": [
+    "Blossom Street",
+    "named_landmark"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "part_of",
+    "g",
+    "part of a larger building",
+    "N",
+    "high"
+   ],
+   [
+    "g",
+    "at_corner",
+    [
+     "b",
+     "n"
+    ],
+    "at the corner of Blossom Street and Norfolk Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1642,
+  "e": {
+   "t": [
+    "This is a triangular building",
+    "object"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ],
+   "c": [
+    "Caroline Place Road",
+    "named_landmark"
+   ],
+   "w": [
+    "two windows",
+    "object"
+   ],
+   "v": [
+    "two vehicles",
+    "group"
+   ],
+   "r1": [
+    "one red",
+    "object"
+   ],
+   "w1": [
+    "the other white",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "n",
+    "on Norfolk Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_corner",
+    [
+     "n",
+     "c"
+    ],
+    "on the corner of Caroline Place Road",
+    "N",
+    "medium"
+   ],
+   [
+    "t",
+    "has_roof",
+    "w",
+    "two windows on the roof",
+    "N",
+    "high"
+   ],
+   [
+    "v",
+    "on_road_side_of",
+    "t",
+    "There are two vehicles",
+    "N",
+    "medium"
+   ],
+   [
+    "r1",
+    "one_of",
+    "v",
+    "one red",
+    "N",
+    "high"
+   ],
+   [
+    "w1",
+    "one_of",
+    "v",
+    "the other white",
+    "N",
+    "high"
+   ],
+   [
+    "v",
+    "on_road_side_of",
+    "t",
+    "on the road side of this building",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "vehicles appear on roadside; relation red/white assignment follows one...other syntax"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1643,
+  "e": {
+   "t": [
+    "A house",
+    "object"
+   ],
+   "b": [
+    "a blue and a red car",
+    "object"
+   ],
+   "r": [
+    "a red car",
+    "object"
+   ],
+   "p": [
+    "a parking lot",
+    "region"
+   ],
+   "c": [
+    "cars",
+    "group"
+   ],
+   "n": [
+    "Norfolk street road",
+    "named_landmark"
+   ],
+   "e": [
+    "East road",
+    "named_landmark"
+   ],
+   "h": [
+    "the trees",
+    "group"
+   ]
+  },
+  "r": [
+   [
+    "b",
+    "in_front_of",
+    "t",
+    "a blue and a red car in front of it",
+    "I",
+    "medium"
+   ],
+   [
+    "r",
+    "in_front_of",
+    "t",
+    "a blue and a red car in front of it",
+    "I",
+    "medium"
+   ],
+   [
+    "c",
+    "behind",
+    "t",
+    "cars behind it",
+    "I",
+    "medium"
+   ],
+   [
+    "t",
+    "first_house_next_to",
+    "h",
+    "first house next to the trees",
+    "N",
+    "medium"
+   ],
+   [
+    "t",
+    "on",
+    "n",
+    "along Norfolk street road",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "towards",
+    "e",
+    "towards East road",
+    "R",
+    "medium"
+   ]
+  ],
+  "u": [
+   "front/behind为目标本征候选；towards East road是路线/方向描述但未给角度"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1644,
+  "e": {
+   "t": [
+    "The leftmost house",
+    "object"
+   ],
+   "g": [
+    "the cluster of gray houses",
+    "group"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ],
+   "c": [
+    "the Caroline Place intersection",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "leftmost_in",
+    "g",
+    "leftmost house in the cluster of gray houses",
+    "U",
+    "medium"
+   ],
+   [
+    "g",
+    "on",
+    "n",
+    "on Norfolk Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "to_right_of",
+    "c",
+    "to the right of the Caroline Place intersection",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "leftmost及right未校准参照系"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1645,
+  "e": {
+   "t": [
+    "The gray house",
+    "object"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ],
+   "c": [
+    "the crosswalk",
+    "region"
+   ],
+   "p": [
+    "Caroline Place",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "n",
+    "on Norfolk Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "to_right_of",
+    "c",
+    "to the right of the crosswalk",
+    "U",
+    "medium"
+   ],
+   [
+    "c",
+    "at",
+    "p",
+    "at Caroline Place",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "right参照系不明"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1646,
+  "e": {
+   "t": [
+    "a multi-colored brown and beige house",
+    "object"
+   ],
+   "r": [
+    "a gray roof",
+    "object"
+   ],
+   "c": [
+    "one white car",
+    "object"
+   ],
+   "v": [
+    "one red truck",
+    "object"
+   ],
+   "n": [
+    "Norfolk Street",
+    "named_landmark"
+   ],
+   "w": [
+    "the white car",
+    "object"
+   ],
+   "s": [
+    "its back section",
+    "region"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "has_roof",
+    "r",
+    "with a gray roof",
+    "N",
+    "high"
+   ],
+   [
+    "c",
+    "in_front_of",
+    "t",
+    "one white car and one red truck in front of it",
+    "I",
+    "medium"
+   ],
+   [
+    "v",
+    "in_front_of",
+    "t",
+    "one white car and one red truck in front of it",
+    "I",
+    "medium"
+   ],
+   [
+    "t",
+    "off",
+    "n",
+    "off Norfolk Street",
+    "N",
+    "high"
+   ],
+   [
+    "w",
+    "parked_in",
+    "s",
+    "in the white car parked in its back section",
+    "N",
+    "medium"
+   ],
+   [
+    "s",
+    "back_section_of",
+    "t",
+    "its back section",
+    "I",
+    "high"
+   ]
+  ],
+  "u": [
+   "backside house是目标整体部位描述；最后从句的语法指向与前置关系有歧义"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1647,
+  "e": {
+   "t": [
+    "the second vertical building",
+    "object"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "h": [
+    "the horizontal building",
+    "object"
+   ],
+   "b": [
+    "the bottom of the street",
+    "region"
+   ],
+   "tree": [
+    "a brown-aging yellow tree",
+    "object"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "second_vertical_to_right_of",
+    "h",
+    "it is the second vertical building to the right of the horizontal building",
+    "U",
+    "medium"
+   ],
+   [
+    "h",
+    "at_bottom_of",
+    "b",
+    "at the bottom of the street",
+    "U",
+    "medium"
+   ],
+   [
+    "tree",
+    "to_right_of",
+    "t",
+    "tree to its right",
+    "U",
+    "medium"
+   ]
+  ],
+  "u": [
+   "Flower Street viewed vertically是视觉参考但未校准地图方向；right参照不明"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1648,
+  "e": {
+   "t": [
+    "A building",
+    "object"
+   ],
+   "b": [
+    "Broad Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "d": [
+    "three roofed back door sections",
+    "group"
+   ],
+   "y": [
+    "three backyards",
+    "group"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "at_end_of",
+    "b",
+    "at the end of Broad Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_corner",
+    [
+     "f",
+     "b"
+    ],
+    "on the corner of Flower Street",
+    "N",
+    "medium"
+   ],
+   [
+    "t",
+    "has_back_door_sections",
+    "d",
+    "has three roofed back door sections",
+    "N",
+    "high"
+   ],
+   [
+    "d",
+    "lead_into",
+    "y",
+    "leading into three backyards",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "corner phrase只写Flower Street，Broad Street的并列关联仅由句首at end支持"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1649,
+  "e": {
+   "t": [
+    "This is a building",
+    "object"
+   ],
+   "b": [
+    "Broad Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ],
+   "m": [
+    "Mellish Clark",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "on",
+    "b",
+    "located on Broad Street",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "on",
+    "f",
+    "and Flower Street",
+    "N",
+    "medium"
+   ],
+   [
+    "m",
+    "across",
+    "b",
+    "Across Broad Street from this building, there is Mellish Clark",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [
+   "Across Broad Street from building关系主语为Mellish Clark"
+  ],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ },
+ {
+  "i": 1650,
+  "e": {
+   "t": [
+    "The gray house",
+    "object"
+   ],
+   "y": [
+    "a backyard",
+    "region"
+   ],
+   "b": [
+    "Broad Street",
+    "named_landmark"
+   ],
+   "f": [
+    "Flower Street",
+    "named_landmark"
+   ]
+  },
+  "r": [
+   [
+    "t",
+    "has",
+    "y",
+    "with a backyard",
+    "N",
+    "high"
+   ],
+   [
+    "t",
+    "at_intersection",
+    [
+     "b",
+     "f"
+    ],
+    "at the intersection of Broad Street and Flower Street",
+    "N",
+    "high"
+   ]
+  ],
+  "u": [],
+  "author_model": "gpt-6-luna",
+  "author_reasoning_effort": "low"
+ }
+]

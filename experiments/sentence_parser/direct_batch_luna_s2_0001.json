@@ -27,16 +27,30 @@
         "high"
       ],
       [
-        "t",
+        "g",
         "beside",
         "b",
         "beside the Farran building",
         "N",
-        "high"
+        "medium"
       ]
     ],
-    "u": [],
-    "text_id": "3e397486eface487a78b20ea3ce0a2bc19339d523b2aa827cc1ee8597cd5bbbd"
+    "u": [
+      "“beside the Farran building”可修饰gray-car组或blue car；主候选取gray-car组，目标车为备选。"
+    ],
+    "text_id": "3e397486eface487a78b20ea3ce0a2bc19339d523b2aa827cc1ee8597cd5bbbd",
+    "alternatives": {
+      "1": [
+        {
+          "subject": "t",
+          "predicate": "beside",
+          "reference": [
+            "b"
+          ],
+          "note": "Alternative attachment: blue car itself is beside Farran."
+        }
+      ]
+    }
   },
   {
     "i": 2503,
@@ -49,7 +63,8 @@
       ],
       "w1": [
         "a white car",
-        "object"
+        "object",
+        0
       ],
       "d": [
         "a dark blue car",
@@ -57,7 +72,8 @@
       ],
       "w2": [
         "a white car",
-        "object"
+        "object",
+        1
       ],
       "s": [
         "St Matthew Street",
@@ -89,26 +105,31 @@
         "high"
       ],
       [
-        "t",
-        "on",
+        "w2",
+        "across_side_of",
         "s",
-        "opposite side of St Matthew Street",
+        "on the opposite side of St Matthew Street",
         "N",
-        "high"
-      ],
-      [
-        "t",
-        "next_to",
-        "b",
-        "next to the Farran building",
-        "N",
-        "high"
+        "medium"
       ]
     ],
     "u": [
-      "“it” in across from resolves to the gray car from local syntax."
+      "“it” in across from resolves to the gray car from local syntax.",
+      "末尾“next to the Farran building”与之前的道路短语附着存在歧义；没有足够依据将目标车直接标为on该街。"
     ],
-    "text_id": "d5b0bded314348677a6f5404980017d18f905c46e789fc87fe45f245a03f1835"
+    "text_id": "d5b0bded314348677a6f5404980017d18f905c46e789fc87fe45f245a03f1835",
+    "alternatives": {
+      "3": [
+        {
+          "subject": "t",
+          "predicate": "next_to",
+          "reference": [
+            "b"
+          ],
+          "note": "“next to the Farran building” may attach to the gray-car target rather than the final white-car phrase."
+        }
+      ]
+    }
   },
   {
     "i": 2504,
@@ -158,7 +179,7 @@
         "behind",
         "t",
         "Behind it is a white car",
-        "R",
+        "U",
         "medium"
       ],
       [
@@ -166,7 +187,7 @@
         "in_front_of",
         "t",
         "in front of it is a blue car",
-        "R",
+        "U",
         "medium"
       ]
     ],
@@ -762,7 +783,7 @@
         "behind",
         "e",
         "it is behind the building on the East Road",
-        "N",
+        "U",
         "medium"
       ]
     ],
@@ -863,7 +884,7 @@
         "behind",
         "h",
         "parked behind the gray house",
-        "N",
+        "U",
         "medium"
       ],
       [

@@ -1,0 +1,2232 @@
+[
+  {
+    "i": 2562,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "drive": [
+        "a driveway",
+        "region"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ],
+      "h": [
+        "Gibson House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "against",
+        "tree",
+        "parked against a tree",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "in_front_of",
+        "t",
+        "a white car in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "beside",
+        "t",
+        "a tree beside it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "drive",
+        "in a driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "on",
+        "p",
+        "on Paradise Street",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "near_back_of",
+        "h",
+        "near the back of Gibson House",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2563,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Red car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "h": [
+        "the house next to the Gibson house",
+        "object"
+      ],
+      "g": [
+        "the Gibson house",
+        "named_landmark"
+      ],
+      "p": [
+        "Parade street road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "h",
+        "behind the house next to the Gibson house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "next_to",
+        "g",
+        "next to the Gibson house",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "along",
+        "p",
+        "along Parade street road",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "in_front_of",
+        "t",
+        "a white, and a blue car in front",
+        "U",
+        "low"
+      ],
+      [
+        "b",
+        "in_front_of",
+        "t",
+        "a white, and a blue car in front",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "car/color coordination in “a white, and a blue car” is malformed; retain two possible front objects."
+    ]
+  },
+  {
+    "i": 2564,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Red car",
+        "object"
+      ],
+      "lot": [
+        "a narrow parking lot",
+        "region"
+      ],
+      "h": [
+        "Gibson House",
+        "named_landmark"
+      ],
+      "p": [
+        "Paradise street",
+        "named_landmark"
+      ],
+      "w": [
+        "a white",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a narrow parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "h",
+        "behind Gibson House",
+        "U",
+        "high"
+      ],
+      [
+        "lot",
+        "along",
+        "p",
+        "along Paradise street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "b"
+        ],
+        "in between a white and a blue car",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2565,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Red car",
+        "object"
+      ],
+      "lot": [
+        "a narrow parking lot",
+        "region"
+      ],
+      "p": [
+        "Paradise street road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a narrow parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "left_lane_of",
+        "p",
+        "on the left lane along Paradise street road",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "in_front_of",
+        "t",
+        "a white car in front",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left lane and front direction lack observer/road orientation."
+    ]
+  },
+  {
+    "i": 2566,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "alley": [
+        "an alleyway",
+        "region"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "alley",
+        "parked in an alleyway",
+        "N",
+        "high"
+      ],
+      [
+        "alley",
+        "off",
+        "p",
+        "off of the middle of Paradise Street",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "middle沿街区段无具体端点参照。"
+    ]
+  },
+  {
+    "i": 2567,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "t": [
+        "the black car",
+        "object"
+      ],
+      "w1": [
+        "two white cars",
+        "group"
+      ],
+      "w2": [
+        "another parked white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_right_lane",
+        "s",
+        "on the right lane",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "at_top_of",
+        "s",
+        "at the very top",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "no_immediate_car_above",
+        [],
+        "no cars immediately above",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "no_immediate_car_below",
+        [],
+        "or below it",
+        "W",
+        "medium"
+      ],
+      [
+        "w1",
+        "below",
+        "t",
+        "two white cars below",
+        "W",
+        "high"
+      ],
+      [
+        "w2",
+        "left_of",
+        "t",
+        "to the left of the black car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Viewing street vertically sets a visual orientation, but image/top and lateral directions do not establish world axes or road travel."
+    ]
+  },
+  {
+    "i": 2568,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_immediate_car_front_back",
+        [],
+        "no car immediately in front of or behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "across_street_from",
+        "t",
+        "On the other side of the street, there is a white car",
+        "R",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2569,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "w": [
+        "the white car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "g": [
+        "the gray car closest to the intersection with Adam and Eve Street",
+        "object"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "w",
+        "across from the white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "five_cars_behind",
+        "g",
+        "5 cars behind the gray car closest to the intersection with Adam and Eve Street",
+        "R",
+        "low"
+      ],
+      [
+        "g",
+        "closest_to_intersection",
+        "a",
+        "closest to the intersection with Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“five cars behind” road sequence direction is unstated."
+    ]
+  },
+  {
+    "i": 2570,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "line": [
+        "the yellow line",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "line",
+        "parked on the yellow line",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "w",
+        "across the street from a white car",
+        "R",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2571,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "the intersection with Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "furthest_from",
+        "a",
+        "furthest away from the intersection with Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2572,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_lead",
+        [],
+        "on the lead",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "left_pavement_of",
+        "s",
+        "on the left pavement along Grafton Street",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“on the lead” unclear; left side frame unspecified."
+    ]
+  },
+  {
+    "i": 2573,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This white car",
+        "object"
+      ],
+      "g": [
+        "gray and black cars",
+        "group"
+      ],
+      "s": [
+        "grafton street",
+        "named_landmark"
+      ],
+      "other": [
+        "another black car",
+        "object"
+      ],
+      "w": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "g",
+        "behind",
+        "t",
+        "has gray and black cars behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "g",
+        "on",
+        "s",
+        "these cars are on grafton street",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "near_end_of",
+        "s",
+        "near the end of the road",
+        "N",
+        "high"
+      ],
+      [
+        "other",
+        "other_side_of",
+        "s",
+        "on the other side of the road",
+        "R",
+        "medium"
+      ],
+      [
+        "w",
+        "behind",
+        "other",
+        "two white cars behind this car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“this car” in last clause may refer to white target or other black car; reference resolution uncertain."
+    ]
+  },
+  {
+    "i": 2574,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car, with a sunroof",
+        "object"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ],
+      "b": [
+        "the third building down from the corner of Grafton Street and Adam and Eve Street",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parallel_parked_on",
+        "street",
+        "parallel parked on the left side of the street",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "left_side_of",
+        "street",
+        "on the left side of the street",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the third building down from the corner of Grafton Street and Adam and Eve Street",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "down_from_corner",
+        [
+          "s",
+          "a"
+        ],
+        "down from the corner of Grafton Street and Adam and Eve Street",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left/down reference axes are not specified."
+    ]
+  },
+  {
+    "i": 2575,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "behind",
+        "t",
+        "a black car behind it",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "b",
+        "a black car across from it on the opposite side of Grafton Street",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "edge",
+        "next to the edge of the map",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2576,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "b",
+        "across the street from a black car",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "g",
+        "in front of a gray car",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2577,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end_of",
+        "s",
+        "at the end of Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "b",
+        "with a black car across the street from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2578,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end_of",
+        "s",
+        "at the end of Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "b",
+        "has a black car across the street from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2579,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "row": [
+        "the row of parked cars",
+        "group"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "parked on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "second_in_row_from",
+        "row",
+        "the second car in the row of parked cars on the right starting from Adam and Eve Street",
+        "N",
+        "medium"
+      ],
+      [
+        "row",
+        "on_right_of",
+        "s",
+        "on the right starting from Adam and Eve Street",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "w"
+        ],
+        "It is between a blue car and a white car",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "row order uses the stated starting landmark; right-side reference is under-specified."
+    ]
+  },
+  {
+    "i": 2580,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "b": [
+        "the black car",
+        "object"
+      ],
+      "g": [
+        "the gray car closest to the intersection with Adam and Eve Street",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "b",
+        "across from the black car that is 3 cars behind the gray car closest to the intersection with Adam and Eve Street",
+        "R",
+        "medium"
+      ],
+      [
+        "b",
+        "three_cars_behind",
+        "g",
+        "3 cars behind the gray car closest to the intersection with Adam and Eve Street",
+        "R",
+        "low"
+      ],
+      [
+        "g",
+        "closest_to_intersection",
+        "a",
+        "closest to the intersection with Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Two mentions of “the black car” denote distinct roles; first is target, second is reference."
+    ]
+  },
+  {
+    "i": 2581,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The second black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "w": [
+        "two white cars",
+        "group"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_from_top",
+        "s",
+        "second black car from the top",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "right_side_of",
+        "s",
+        "on the right side of Grafton Street",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "above",
+        "t",
+        "two white cars above it",
+        "W",
+        "high"
+      ],
+      [
+        "b",
+        "below",
+        "t",
+        "a blue car below it",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "top/right visual frame not geographically calibrated."
+    ]
+  },
+  {
+    "i": 2582,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "g": [
+        "the gray car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "r": [
+        "the gray car closest to the intersection with Adam and Eve Street",
+        "object"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "g",
+        "across from the gray car on Grafton Street",
+        "R",
+        "medium"
+      ],
+      [
+        "g",
+        "two_cars_behind",
+        "r",
+        "2 cars behind the gray car closest to the intersection with Adam and Eve Street",
+        "R",
+        "low"
+      ],
+      [
+        "r",
+        "closest_to_intersection",
+        "a",
+        "closest to the intersection with Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Antecedent of “that is 2 cars behind” is likely gray car; direction remains unknown."
+    ]
+  },
+  {
+    "i": 2583,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Black car",
+        "object"
+      ],
+      "pav": [
+        "the pavement",
+        "region"
+      ],
+      "s": [
+        "Grafton street road",
+        "named_landmark"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "pav",
+        "on the pavement",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_lane_of",
+        "s",
+        "on the left lane along Grafton street road",
+        "U",
+        "low"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "a blue car behind",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "in_front_of",
+        "t",
+        "a white car in front",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Lane side and vehicle front/back reference are not grounded to a known road direction."
+    ]
+  },
+  {
+    "i": 2584,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "b": [
+        "the only bright blue car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "b",
+        "parked behind the only bright blue car",
+        "R",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind has no stated travel direction."
+    ]
+  },
+  {
+    "i": 2585,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "cars": [
+        "three other cars",
+        "group"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ],
+      "pr": [
+        "the Primark building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "cars",
+        "next to three other cars",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on_edge",
+        "edge",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "p",
+        "off Paradise Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "closest_to",
+        "edge",
+        "the car being closest to the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "pr",
+        "parked in front of the Primark building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front may be intrinsic or layout-based; no explicit frame for building front."
+    ]
+  },
+  {
+    "i": 2586,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "cars": [
+        "two other black cars",
+        "group"
+      ],
+      "o": [
+        "an orange car",
+        "object"
+      ],
+      "lot": [
+        "a lot",
+        "region"
+      ],
+      "edge": [
+        "the map",
+        "region"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ],
+      "pr": [
+        "the Primark building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        [
+          "cars",
+          "o"
+        ],
+        "next to two other black cars and an orange car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in a lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "cut_off_from",
+        "edge",
+        "cut off my dad to the map",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "p",
+        "off Paradise Street",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "next_to",
+        "pr",
+        "next to the Primark building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“cut off my dad to the map” is garbled; only lot/map cutoff relation is tentatively retained."
+    ]
+  },
+  {
+    "i": 2587,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The last black car",
+        "object"
+      ],
+      "b": [
+        "the another black car",
+        "object"
+      ],
+      "pr": [
+        "the Primark Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_of",
+        [],
+        "The last black car",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to the another black car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "parked_behind",
+        "pr",
+        "parked behind the Primark Building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“last” comparison set and direction are unstated."
+    ]
+  },
+  {
+    "i": 2588,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "end": [
+        "the end of the parking lot",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "pr": [
+        "the Primark building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "end",
+        "on the end of the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "pr",
+        "behind the Primark building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2589,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "pr": [
+        "the Primark building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_of",
+        "lot",
+        "at the left of the parking lot",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "for",
+        "pr",
+        "for the Primark building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left reference orientation unknown."
+    ]
+  },
+  {
+    "i": 2590,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a black car",
+        "object"
+      ],
+      "space": [
+        "the parking space",
+        "region"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ],
+      "cars": [
+        "three more cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in the parking space",
+        "N",
+        "high"
+      ],
+      [
+        "space",
+        "on",
+        "p",
+        "located on Paradise Street",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "right_of",
+        "t",
+        "On its right there are three more cars",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“its” refers to parking space or car; left/right frame unclear."
+    ]
+  },
+  {
+    "i": 2591,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black truck",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "h": [
+        "a multicolored white and beige house with a gray roof that has a line of solar panels on it",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "r",
+        "in_front_of",
+        "t",
+        "with a red car in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "across_from",
+        "t",
+        "with a blue car across from it on the opposite side of Grafton Street",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "diagonally_across_from",
+        "h",
+        "diagonally across from a multicolored white and beige house with a gray roof that has a line of solar panels on it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Diagonally across is stated but reference axes are not specified."
+    ]
+  },
+  {
+    "i": 2592,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A dark grey car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Adam And Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "viewing_vertical",
+        [],
+        "when viewing it vertically",
+        "U",
+        "medium"
+      ],
+      [
+        "a",
+        "below",
+        "t",
+        "Adam And Eve Street going horizontally just below it",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Viewing frame is described but is not calibrated to geographic north/south."
+    ]
+  },
+  {
+    "i": 2593,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The first grey car",
+        "object"
+      ],
+      "s": [
+        "the Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "the Adam & Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_from_left",
+        "s",
+        "first grey car on the left on the Grafton Street",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "from_direction",
+        "a",
+        "when coming from the Adam & Eve Street",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "first/left has unclear comparison set; route origin is explicit."
+    ]
+  },
+  {
+    "i": 2594,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The light blue car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "c": [
+        "the car closest to Adam and Eve Street",
+        "object"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "c",
+        "is behind the car closest to Adam and Eve Street",
+        "R",
+        "medium"
+      ],
+      [
+        "c",
+        "closest_to",
+        "a",
+        "closest to Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“behind” frame unspecified."
+    ]
+  },
+  {
+    "i": 2595,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The only blue car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "r",
+        "parked behind a red car",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "behind direction not determined."
+    ]
+  },
+  {
+    "i": 2596,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "closest_to",
+        "a",
+        "closest to Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2597,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "row": [
+        "a row by itself",
+        "group"
+      ],
+      "group": [
+        "a group of four cars",
+        "group"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ],
+      "g": [
+        "the Guthrie court building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "row",
+        "parked in a row by itself",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "group",
+        "next to a group of four cars",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "on_edge",
+        "edge",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "p",
+        "off Paradise Street",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "across_from",
+        "g",
+        "across from the Guthrie court building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2598,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "space": [
+        "the parking space of Gibson House",
+        "region"
+      ],
+      "lot": [
+        "The parking lot",
+        "region"
+      ],
+      "g": [
+        "Gibson House",
+        "named_landmark"
+      ],
+      "c": [
+        "a teal car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in the parking space of Gibson House",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "almost_empty",
+        [],
+        "The parking lot is almost empty except for this car and a teal car nearby",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "near",
+        "t",
+        "a teal car nearby",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2599,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "g": [
+        "the Gibson house",
+        "named_landmark"
+      ],
+      "s": [
+        "Burleigh street road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "g",
+        "behind the Gibson house",
+        "U",
+        "high"
+      ],
+      [
+        "lot",
+        "right_side_of",
+        "s",
+        "on the right side along Burleigh street road",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_other_car_near",
+        [],
+        "It has no other car near it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "road-side right frame unclear."
+    ]
+  },
+  {
+    "i": 2600,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "lot": [
+        "the back parking lot of the Gibson House",
+        "region"
+      ],
+      "g": [
+        "the Gibson House",
+        "named_landmark"
+      ],
+      "o": [
+        "an orange car",
+        "object"
+      ],
+      "next": [
+        "the next parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the back parking lot of the Gibson House",
+        "N",
+        "high"
+      ],
+      [
+        "o",
+        "behind",
+        "t",
+        "with an orange car behind it in the next parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "o",
+        "in",
+        "next",
+        "in the next parking lot",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“behind it” may be interpreted as spatial relation between cars but next parking lot creates ambiguous frame."
+    ]
+  },
+  {
+    "i": 2601,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "tree": [
+        "the tree",
+        "object"
+      ],
+      "lot": [
+        "the Gibson House parking lot",
+        "region"
+      ],
+      "g": [
+        "the Gibson House",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "tree",
+        "behind the tree",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the Gibson House parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_cars_next_to",
+        [],
+        "it has no cars parked next to it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind tree reference frame unspecified."
+    ]
+  }
+]

@@ -75,12 +75,18 @@ def compile_records():
             for index, item in enumerate(authored["r"]):
                 sub, predicate, ref, quote, code, confidence = item
                 refs = ref if isinstance(ref, list) else [ref]
-                assert sub in authored["e"] and all(r in authored["e"] for r in refs)
+                assert sub in authored["e"] and all(r in authored["e"] for r in refs), f"{batch.name} i={authored['i']} relation={index}: undefined entity ID"
                 assert confidence in {"high", "medium", "low"}
+                directional = {"behind", "front", "in_front_of", "left", "right",
+                               "left_of", "right_of", "above", "below", "north",
+                               "south", "east", "west", "at_back"}
+                assert not (predicate in directional and code == "N"), f"{batch.name} i={authored['i']} relation={index}: directional predicate cannot use frame N"
                 evidence = span(text, quote)
                 f = frame(code, index, sub, refs, evidence)
                 override = authored.get("f", {}).get(str(index), {})
                 f.update(override)
+                if isinstance(f.get("evidence"), str):
+                    f["evidence"] = span(text, f["evidence"])
                 if "view_evidence" in f:
                     f["view_evidence"] = span(text, f["view_evidence"])
                 frames.append(f)
