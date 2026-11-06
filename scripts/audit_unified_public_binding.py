@@ -27,7 +27,6 @@ import hashlib
 import json
 from pathlib import Path
 
-import numpy as np
 
 from graphnav.unified_direct_bearing_loss import predicate_ids_for_record
 from scripts.analyze_instruction_landmark_association import PublicNames
@@ -44,11 +43,11 @@ def _ids(refs):
 
 def _category(before, after):
     a,b=set(before),set(after)
+    if not a and not b:return "both_empty"
     if before==after:return "identical_ids_and_order"
     if a==b:return "same_ids_different_order"
     if not a and b:return "blind_only"
     if a and not b:return "preprocessed_only"
-    if not a and not b:return "both_empty"
     if a<=b:return "preprocessed_subset"
     if b<=a:return "blind_subset"
     if not a.isdisjoint(b):return "partial_overlap"
