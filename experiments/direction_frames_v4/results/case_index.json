@@ -1,0 +1,305 @@
+[
+  {
+    "occurrence_id": "cambridge_block_28:8:2:142",
+    "figure": "case_00_known_boathouse_range.png",
+    "instruction": "This is a building located on Cutter Ferry Lane. If you stand at Pembroke College Boat Club facing the stream, this building would be on your right.",
+    "frame_type": "observer",
+    "state": "multiple",
+    "geometry_result": "not_evaluable",
+    "reason": "observer_or_aim_region_leaves_direction_range",
+    "reference_ids": [
+      "9"
+    ],
+    "source_evidence": [
+      {
+        "rule": "stand_at_facing",
+        "span": [
+          56,
+          148
+        ],
+        "text": "stand at Pembroke College Boat Club facing the stream, this building would be on your right.",
+        "geometry_ids": [
+          "9",
+          "367"
+        ],
+        "note": "A and B are regions, not known observer/aim points; full extent retained"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": true
+  },
+  {
+    "occurrence_id": "birmingham_block_3:19:2:128",
+    "figure": "case_01_new_Bragg_road_entry.png",
+    "instruction": "This is a building on Bragg Road, if you turn onto Bragg Road coming from Birchfield Road it's the 3rd to last building on your right.",
+    "frame_type": "road",
+    "state": "unique_field",
+    "geometry_result": "consistent",
+    "reason": "full_contour_directed_side",
+    "reference_ids": [
+      "468"
+    ],
+    "source_evidence": [
+      {
+        "rule": "travel_road_A_anchor",
+        "span": [
+          22,
+          32
+        ],
+        "text": "Bragg Road",
+        "geometry_ids": [
+          "468"
+        ],
+        "note": "named road being entered / relation road, not nearest landmark"
+      },
+      {
+        "rule": "road_A_entered_from_B",
+        "span": [
+          62,
+          89
+        ],
+        "text": "coming from Birchfield Road",
+        "geometry_ids": [
+          "468",
+          "467",
+          "476",
+          "477",
+          "484",
+          "497",
+          "498"
+        ],
+        "note": "positive direction points away from independent source junction; complete directed centerline frozen"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  },
+  {
+    "occurrence_id": "cambridge_block_4:14:4:92",
+    "figure": "case_02_new_St_Peters_entry.png",
+    "instruction": "If you turn onto St Peter's Street coming from Pound Hill, this is the 3rd building on your right.",
+    "frame_type": "road",
+    "state": "unique_field",
+    "geometry_result": "consistent",
+    "reason": "full_contour_directed_side",
+    "reference_ids": [
+      "84",
+      "87"
+    ],
+    "source_evidence": [
+      {
+        "rule": "travel_road_A_anchor",
+        "span": [
+          17,
+          34
+        ],
+        "text": "St Peter's Street",
+        "geometry_ids": [
+          "84",
+          "87"
+        ],
+        "note": "named road being entered / relation road, not nearest landmark"
+      },
+      {
+        "rule": "road_A_entered_from_B",
+        "span": [
+          35,
+          57
+        ],
+        "text": "coming from Pound Hill",
+        "geometry_ids": [
+          "84",
+          "87",
+          "74",
+          "89"
+        ],
+        "note": "positive direction points away from independent source junction; complete directed centerline frozen"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  },
+  {
+    "occurrence_id": "cambridge_block_28:84:0:91",
+    "figure": "case_03_new_Aylestone_entry.png",
+    "instruction": "If you turn onto Aylestone Road coming from Belvoir Road this is the first building on the right.",
+    "frame_type": "road",
+    "state": "unique_field",
+    "geometry_result": "consistent",
+    "reason": "full_contour_directed_side",
+    "reference_ids": [
+      "377"
+    ],
+    "source_evidence": [
+      {
+        "rule": "travel_road_A_anchor",
+        "span": [
+          17,
+          31
+        ],
+        "text": "Aylestone Road",
+        "geometry_ids": [
+          "377"
+        ],
+        "note": "named road being entered / relation road, not nearest landmark"
+      },
+      {
+        "rule": "road_A_entered_from_B",
+        "span": [
+          32,
+          56
+        ],
+        "text": "coming from Belvoir Road",
+        "geometry_ids": [
+          "377",
+          "379"
+        ],
+        "note": "positive direction points away from independent source junction; complete directed centerline frozen"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  },
+  {
+    "occurrence_id": "cambridge_block_28:17:3:26",
+    "figure": "case_04_Abbey_conflict.png",
+    "instruction": "The third building on the right of the Abbey Road when coming from the Walnut Tree Avenue.",
+    "frame_type": "road",
+    "state": "unique_field",
+    "geometry_result": "conflict",
+    "reason": "full_contour_directed_side",
+    "reference_ids": [
+      "369"
+    ],
+    "source_evidence": [
+      {
+        "rule": "travel_road_A_anchor",
+        "span": [
+          39,
+          49
+        ],
+        "text": "Abbey Road",
+        "geometry_ids": [
+          "369"
+        ],
+        "note": "named road being entered / relation road, not nearest landmark"
+      },
+      {
+        "rule": "road_A_entered_from_B",
+        "span": [
+          55,
+          89
+        ],
+        "text": "coming from the Walnut Tree Avenue",
+        "geometry_ids": [
+          "369",
+          "372",
+          "398",
+          "400",
+          "416"
+        ],
+        "note": "positive direction points away from independent source junction; complete directed centerline frozen"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  },
+  {
+    "occurrence_id": "birmingham_block_1:130:4:109",
+    "figure": "case_05_car_contour_ambiguous.png",
+    "instruction": "If you turn onto Willmore Road coming from Wellington Road, this is the first car parked on the road to your left.",
+    "frame_type": "road",
+    "state": "unique_field",
+    "geometry_result": "ambiguous",
+    "reason": "target_contour_touches_centerline_tolerance",
+    "reference_ids": [
+      "658"
+    ],
+    "source_evidence": [
+      {
+        "rule": "travel_road_A_anchor",
+        "span": [
+          17,
+          30
+        ],
+        "text": "Willmore Road",
+        "geometry_ids": [
+          "658"
+        ],
+        "note": "named road being entered / relation road, not nearest landmark"
+      },
+      {
+        "rule": "road_A_entered_from_B",
+        "span": [
+          31,
+          58
+        ],
+        "text": "coming from Wellington Road",
+        "geometry_ids": [
+          "658",
+          "667",
+          "668"
+        ],
+        "note": "positive direction points away from independent source junction; complete directed centerline frozen"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  },
+  {
+    "occurrence_id": "cambridge_block_13:258:1:183",
+    "figure": "case_06_facing_without_origin.png",
+    "instruction": "A black car parked at a parking lot in between the blue/white Hopkins building and blue/white Anatomy building.It is in between a green yellow item and a white blue car. It is on the right side of the Hopkins building when facing the Anatomy building.",
+    "frame_type": "observer",
+    "state": "unknown",
+    "geometry_result": "not_evaluable",
+    "reason": "observation_origin_or_anaphoric_destination_unknown",
+    "reference_ids": [
+      "14"
+    ],
+    "source_evidence": [
+      {
+        "rule": "view_without_resolved_origin",
+        "span": [
+          170,
+          251
+        ],
+        "text": "It is on the right side of the Hopkins building when facing the Anatomy building.",
+        "geometry_ids": [
+          "14"
+        ],
+        "note": "facing a landmark alone does not locate the observer"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  },
+  {
+    "occurrence_id": "birmingham_block_10:46:2:22",
+    "figure": "case_07_intrinsic_unsigned.png",
+    "instruction": "A white van parked in front of the Weighbridge Offices againnst the buiklding. There is a black car with a green sticker in the window in front of it.",
+    "frame_type": "intrinsic",
+    "state": "multiple",
+    "geometry_result": "not_evaluable",
+    "reason": "no_independent_entrance_or_directed_facade",
+    "reference_ids": [
+      "17"
+    ],
+    "source_evidence": [
+      {
+        "rule": "intrinsic_front_not_verified",
+        "span": [
+          22,
+          54
+        ],
+        "text": "front of the Weighbridge Offices",
+        "geometry_ids": [
+          "17"
+        ],
+        "note": "PCA is unsigned and does not identify facade, entrance, or author view"
+      }
+    ],
+    "case_selection_for_illustration_only": true,
+    "known_development_example": false
+  }
+]

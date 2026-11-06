@@ -1,5 +1,18 @@
 # Changelog
 
+## [direction-frames-v4] - 2026-11-06
+### Features
+- Add per-relation semantic frame evidence, full-TRAIN explicit-role search, conservative target-to-named-road travel anchors and scope repairs.
+- Freeze region-valued observation headings and complete directed road-centerline fields before GT evaluation; validate road topology/tangents across map resolutions.
+- Add full-contour road-side checks, unknown/coverage accounting, held-out-map breakdowns, matched baselines, wrong-binding/role-swap/rotation controls and real-map failure cases.
+### Design Rationale
+- Separate a computable proxy from a uniquely identified scalar heading or directed spatial field; retain ambiguity of broad viewpoints, unsigned axes and missing facades.
+- Treat language-to-frame composition as a testable partial mechanism; do not infer author conventions from target-optimal angles or low world-axis agreement.
+### Notes & Caveats
+- No model training or navigation experiments; TRAIN only. Prior v1/v2/v3 data and all old bound inputs preserved.
+- Geometry-model uniqueness does not verify the annotator camera pose. High conditional road-side rates have limited coverage; matched overall-gain confidence intervals still include zero.
+- External review status is logged separately from local reproducibility checks.
+
 ## [direction-frames-v3] - 2026-11-06
 ### Features
 - Preserve all v2 bindings and expand named-road binding by independent ontology constraints; retain unresolved subjects and reference frames.

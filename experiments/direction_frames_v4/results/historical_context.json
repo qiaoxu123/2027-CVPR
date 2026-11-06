@@ -1,0 +1,759 @@
+{
+  "v1": {
+    "report": "../direction_frames/REPORT_ZH.md",
+    "valid_all_direction_pairs": 212,
+    "scope": "different conservative target-headed population, not matched to v4; opposite examples later qualified by v2"
+  },
+  "v2_matched_baselines": [
+    {
+      "n": 344,
+      "clusters": 273,
+      "consistency": 0.25290697674418605,
+      "cluster95": [
+        0.2054380664652568,
+        0.30115105799373043
+      ],
+      "mean_abs_error_deg": 87.91672359503443,
+      "median_abs_error_deg": 88.63487220808045,
+      "halfplane_consistency": 0.5,
+      "polygon_evaluable": 110,
+      "polygon_ambiguous": 234,
+      "polygon_consistency": 0.5636363636363636,
+      "polygon_cluster95": [
+        0.46846846846846846,
+        0.6545534995977473
+      ],
+      "subset": "all_effective",
+      "hypothesis": "B_reference_to_start",
+      "comparison": "paired_against_joint_D4_crossfit",
+      "A_consistency_on_same_support": 0.3023255813953488,
+      "delta_consistency": -0.04941860465116279,
+      "delta_cluster95": [
+        -0.12166365630241259,
+        0.01994444444444444
+      ],
+      "future": false,
+      "target_conditioned": false
+    },
+    {
+      "n": 344,
+      "clusters": 273,
+      "consistency": 0.20348837209302326,
+      "cluster95": [
+        0.16222995835502343,
+        0.24527641267678732
+      ],
+      "mean_abs_error_deg": 92.08327640496559,
+      "median_abs_error_deg": 91.36512779191955,
+      "halfplane_consistency": 0.47093023255813954,
+      "polygon_evaluable": 110,
+      "polygon_ambiguous": 234,
+      "polygon_consistency": 0.43636363636363634,
+      "polygon_cluster95": [
+        0.3454465004022526,
+        0.5315315315315315
+      ],
+      "subset": "all_effective",
+      "hypothesis": "B_start_to_reference",
+      "comparison": "paired_against_joint_D4_crossfit",
+      "A_consistency_on_same_support": 0.3023255813953488,
+      "delta_consistency": -0.09883720930232558,
+      "delta_cluster95": [
+        -0.16413702337885303,
+        -0.032539592760181
+      ],
+      "future": false,
+      "target_conditioned": false
+    },
+    {
+      "n": 344,
+      "clusters": 273,
+      "consistency": 0.22965116279069767,
+      "cluster95": [
+        0.18653538859960878,
+        0.2732316779170685
+      ],
+      "mean_abs_error_deg": 87.88172351311957,
+      "median_abs_error_deg": 88.66056187238755,
+      "halfplane_consistency": 0.49709302325581395,
+      "polygon_evaluable": 107,
+      "polygon_ambiguous": 237,
+      "polygon_consistency": 0.4766355140186916,
+      "polygon_cluster95": [
+        0.394488796753705,
+        0.5701268357810413
+      ],
+      "subset": "all_effective",
+      "hypothesis": "C_initial_actual_motion",
+      "comparison": "paired_against_joint_D4_crossfit",
+      "A_consistency_on_same_support": 0.3023255813953488,
+      "delta_consistency": -0.07267441860465117,
+      "delta_cluster95": [
+        -0.1428675856307435,
+        -0.005344016582954692
+      ],
+      "future": true,
+      "target_conditioned": false
+    },
+    {
+      "n": 344,
+      "clusters": 273,
+      "consistency": 0.23546511627906977,
+      "cluster95": [
+        0.1899045840581193,
+        0.27976190476190477
+      ],
+      "mean_abs_error_deg": 87.91737310292667,
+      "median_abs_error_deg": 85.74929264248034,
+      "halfplane_consistency": 0.5203488372093024,
+      "polygon_evaluable": 107,
+      "polygon_ambiguous": 237,
+      "polygon_consistency": 0.5327102803738317,
+      "polygon_cluster95": [
+        0.43630360205831903,
+        0.6238532110091743
+      ],
+      "subset": "all_effective",
+      "hypothesis": "C_initial_yaw",
+      "comparison": "paired_against_joint_D4_crossfit",
+      "A_consistency_on_same_support": 0.3023255813953488,
+      "delta_consistency": -0.06686046511627906,
+      "delta_cluster95": [
+        -0.13485050466577794,
+        -0.005847953216374269
+      ],
+      "future": false,
+      "target_conditioned": false
+    },
+    {
+      "n": 344,
+      "clusters": 273,
+      "consistency": 0.27325581395348836,
+      "cluster95": [
+        0.22839359251202107,
+        0.31952662721893493
+      ],
+      "mean_abs_error_deg": 88.4887919253866,
+      "median_abs_error_deg": 87.80430078238653,
+      "halfplane_consistency": 0.502906976744186,
+      "polygon_evaluable": 131,
+      "polygon_ambiguous": 213,
+      "polygon_consistency": 0.5801526717557252,
+      "polygon_cluster95": [
+        0.4923046875,
+        0.6641857506361323
+      ],
+      "subset": "all_effective",
+      "hypothesis": "C_motion_approaching_target",
+      "comparison": "paired_against_joint_D4_crossfit",
+      "A_consistency_on_same_support": 0.3023255813953488,
+      "delta_consistency": -0.029069767441860465,
+      "delta_cluster95": [
+        -0.09822161513859275,
+        0.03217567286167941
+      ],
+      "future": true,
+      "target_conditioned": true
+    }
+  ],
+  "v3": [
+    {
+      "n": 344,
+      "covered": 1,
+      "coverage": 0.0029069767441860465,
+      "unknown_fraction": 0.997093023255814,
+      "consistency": 1.0,
+      "cluster95": [
+        1.0,
+        1.0
+      ],
+      "mean_angle_error_deg": 2.833439066401752,
+      "coverage_adjusted_success": 0.0029069767441860465,
+      "baseline_consistency_on_covered": 0.0,
+      "baseline_consistency_all": 0.3023255813953488,
+      "net_improvement_all": 0.0029069767441860465,
+      "net_cluster95": [
+        0.0,
+        0.009039598762020555
+      ],
+      "explicit_heading_coverage": 0.0029069767441860465,
+      "unknown_fraction_explicit_heading": 0.997093023255814,
+      "unknown_fraction_no_candidate_support": 0.997093023255814,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 1.0,
+      "baseline_halfplane_all": 0.5901162790697675,
+      "hybrid_halfplane_all": 0.5930232558139535,
+      "net_halfplane_improvement": 0.0029069767441860465,
+      "net_halfplane_cluster95": [
+        0.0,
+        0.009039598762020555
+      ],
+      "conditional_reference_cluster95": [
+        1.0,
+        1.0
+      ],
+      "conditional_map_cluster95": [
+        1.0,
+        1.0
+      ],
+      "wilson95_if_binary": [
+        0.20654931437724644,
+        0.9999999999999999
+      ],
+      "scheme": "object_5fold",
+      "cohort": "v2_all",
+      "model": "strict_rules",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.08825038481272447,
+      "end_to_end_supported_fraction": 0.0002565418163160595
+    },
+    {
+      "n": 344,
+      "covered": 122,
+      "coverage": 0.3546511627906977,
+      "unknown_fraction": 0.6453488372093024,
+      "consistency": 0.4016393442622951,
+      "cluster95": [
+        0.33971103691920684,
+        0.46473174283154123
+      ],
+      "mean_angle_error_deg": 74.36610884195406,
+      "coverage_adjusted_success": 0.14244186046511628,
+      "baseline_consistency_on_covered": 0.14754098360655737,
+      "baseline_consistency_all": 0.3023255813953488,
+      "net_improvement_all": 0.09011627906976744,
+      "net_cluster95": [
+        0.057448855847305705,
+        0.12570657084941142
+      ],
+      "explicit_heading_coverage": 0.0029069767441860465,
+      "unknown_fraction_explicit_heading": 0.997093023255814,
+      "unknown_fraction_no_candidate_support": 0.6453488372093024,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.5942622950819673,
+      "baseline_halfplane_all": 0.5901162790697675,
+      "hybrid_halfplane_all": 0.6380813953488372,
+      "net_halfplane_improvement": 0.04796511627906977,
+      "net_halfplane_cluster95": [
+        0.005794219367588933,
+        0.08951606237601938
+      ],
+      "conditional_reference_cluster95": [
+        0.33951827385037747,
+        0.47332866915422883
+      ],
+      "conditional_map_cluster95": [
+        0.3537723303894018,
+        0.45764477401129944
+      ],
+      "scheme": "object_5fold",
+      "cohort": "v2_all",
+      "model": "semantic_candidates",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.08825038481272447,
+      "end_to_end_supported_fraction": 0.03129810159055926
+    },
+    {
+      "n": 344,
+      "covered": 120,
+      "coverage": 0.3488372093023256,
+      "unknown_fraction": 0.6511627906976745,
+      "consistency": 0.39479166666666665,
+      "cluster95": [
+        0.33582050025297244,
+        0.4559515777022524
+      ],
+      "mean_angle_error_deg": 75.0323601136362,
+      "coverage_adjusted_success": 0.13771802325581395,
+      "baseline_consistency_on_covered": 0.15833333333333333,
+      "baseline_consistency_all": 0.3023255813953488,
+      "net_improvement_all": 0.08248546511627906,
+      "net_cluster95": [
+        0.04781830027968472,
+        0.11938892490156534
+      ],
+      "explicit_heading_coverage": 0.0,
+      "unknown_fraction_explicit_heading": 1.0,
+      "unknown_fraction_no_candidate_support": 0.6511627906976745,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.5895833333333333,
+      "baseline_halfplane_all": 0.5901162790697675,
+      "hybrid_halfplane_all": 0.6300872093023255,
+      "net_halfplane_improvement": 0.03997093023255814,
+      "net_halfplane_cluster95": [
+        -0.0029544526143790843,
+        0.08335798816568045
+      ],
+      "conditional_reference_cluster95": [
+        0.3312486645299145,
+        0.4642989417989418
+      ],
+      "conditional_map_cluster95": [
+        0.3453917281771502,
+        0.45112423780487804
+      ],
+      "scheme": "object_5fold",
+      "cohort": "v2_all",
+      "model": "bert_router",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.08825038481272447,
+      "end_to_end_supported_fraction": 0.03078501795792714
+    },
+    {
+      "n": 207,
+      "covered": 1,
+      "coverage": 0.004830917874396135,
+      "unknown_fraction": 0.9951690821256038,
+      "consistency": 1.0,
+      "cluster95": [
+        1.0,
+        1.0
+      ],
+      "mean_angle_error_deg": 2.833439066401752,
+      "coverage_adjusted_success": 0.004830917874396135,
+      "baseline_consistency_on_covered": 1.0,
+      "baseline_consistency_all": 0.2753623188405797,
+      "net_improvement_all": 0.0,
+      "net_cluster95": [
+        0.0,
+        0.0
+      ],
+      "explicit_heading_coverage": 0.004830917874396135,
+      "unknown_fraction_explicit_heading": 0.9951690821256038,
+      "unknown_fraction_no_candidate_support": 0.9951690821256038,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 1.0,
+      "baseline_halfplane_all": 0.6038647342995169,
+      "hybrid_halfplane_all": 0.6038647342995169,
+      "net_halfplane_improvement": 0.0,
+      "net_halfplane_cluster95": [
+        0.0,
+        0.0
+      ],
+      "conditional_reference_cluster95": [
+        1.0,
+        1.0
+      ],
+      "conditional_map_cluster95": [
+        1.0,
+        1.0
+      ],
+      "wilson95_if_binary": [
+        0.20654931437724644,
+        0.9999999999999999
+      ],
+      "scheme": "object_5fold",
+      "cohort": "v2_high",
+      "model": "strict_rules",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.05310415597742432,
+      "end_to_end_supported_fraction": 0.0002565418163160595
+    },
+    {
+      "n": 207,
+      "covered": 92,
+      "coverage": 0.4444444444444444,
+      "unknown_fraction": 0.5555555555555556,
+      "consistency": 0.3845108695652174,
+      "cluster95": [
+        0.3131524725274725,
+        0.4617443568336425
+      ],
+      "mean_angle_error_deg": 76.0105698180636,
+      "coverage_adjusted_success": 0.1708937198067633,
+      "baseline_consistency_on_covered": 0.2608695652173913,
+      "baseline_consistency_all": 0.2753623188405797,
+      "net_improvement_all": 0.05495169082125604,
+      "net_cluster95": [
+        0.0,
+        0.10768665952416136
+      ],
+      "explicit_heading_coverage": 0.004830917874396135,
+      "unknown_fraction_explicit_heading": 0.9951690821256038,
+      "unknown_fraction_no_candidate_support": 0.5555555555555556,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.5869565217391305,
+      "baseline_halfplane_all": 0.6038647342995169,
+      "hybrid_halfplane_all": 0.6135265700483091,
+      "net_halfplane_improvement": 0.00966183574879227,
+      "net_halfplane_cluster95": [
+        -0.0402020774604731,
+        0.06311912441244125
+      ],
+      "conditional_reference_cluster95": [
+        0.3154365079365079,
+        0.46876905487804876
+      ],
+      "conditional_map_cluster95": [
+        0.32461835488505747,
+        0.464790107834507
+      ],
+      "scheme": "object_5fold",
+      "cohort": "v2_high",
+      "model": "semantic_candidates",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.05310415597742432,
+      "end_to_end_supported_fraction": 0.023601847101077475
+    },
+    {
+      "n": 207,
+      "covered": 90,
+      "coverage": 0.43478260869565216,
+      "unknown_fraction": 0.5652173913043479,
+      "consistency": 0.3819444444444444,
+      "cluster95": [
+        0.31325256909992916,
+        0.4639035087719298
+      ],
+      "mean_angle_error_deg": 76.04314473974054,
+      "coverage_adjusted_success": 0.16606280193236714,
+      "baseline_consistency_on_covered": 0.25555555555555554,
+      "baseline_consistency_all": 0.2753623188405797,
+      "net_improvement_all": 0.05495169082125604,
+      "net_cluster95": [
+        0.0,
+        0.10768665952416136
+      ],
+      "explicit_heading_coverage": 0.0,
+      "unknown_fraction_explicit_heading": 1.0,
+      "unknown_fraction_no_candidate_support": 0.5652173913043479,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.5888888888888889,
+      "baseline_halfplane_all": 0.6038647342995169,
+      "hybrid_halfplane_all": 0.6135265700483091,
+      "net_halfplane_improvement": 0.00966183574879227,
+      "net_halfplane_cluster95": [
+        -0.0402020774604731,
+        0.06311912441244125
+      ],
+      "conditional_reference_cluster95": [
+        0.3090640048154093,
+        0.46102374551971326
+      ],
+      "conditional_map_cluster95": [
+        0.3224600251527129,
+        0.4573573606271777
+      ],
+      "scheme": "object_5fold",
+      "cohort": "v2_high",
+      "model": "bert_router",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.05310415597742432,
+      "end_to_end_supported_fraction": 0.023088763468445357
+    },
+    {
+      "n": 425,
+      "covered": 6,
+      "coverage": 0.01411764705882353,
+      "unknown_fraction": 0.9858823529411764,
+      "consistency": 0.5,
+      "cluster95": [
+        0.16666666666666666,
+        0.8333333333333334
+      ],
+      "mean_angle_error_deg": 50.683518013891806,
+      "coverage_adjusted_success": 0.007058823529411765,
+      "baseline_consistency_on_covered": 0.0,
+      "baseline_consistency_all": 0.31529411764705884,
+      "net_improvement_all": 0.007058823529411765,
+      "net_cluster95": [
+        0.0,
+        0.016243192229271113
+      ],
+      "explicit_heading_coverage": 0.01411764705882353,
+      "unknown_fraction_explicit_heading": 0.9858823529411764,
+      "unknown_fraction_no_candidate_support": 0.9858823529411764,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.8333333333333334,
+      "baseline_halfplane_all": 0.5976470588235294,
+      "hybrid_halfplane_all": 0.6070588235294118,
+      "net_halfplane_improvement": 0.009411764705882352,
+      "net_halfplane_cluster95": [
+        -0.0022993839507160574,
+        0.02103174821330401
+      ],
+      "conditional_reference_cluster95": [
+        0.0,
+        1.0
+      ],
+      "conditional_map_cluster95": [
+        0.5,
+        0.5
+      ],
+      "wilson95_if_binary": [
+        0.18761630648265576,
+        0.8123836935173443
+      ],
+      "scheme": "object_5fold",
+      "cohort": "expanded_all",
+      "model": "strict_rules",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.1090302719343253,
+      "end_to_end_supported_fraction": 0.0015392508978963571
+    },
+    {
+      "n": 425,
+      "covered": 135,
+      "coverage": 0.3176470588235294,
+      "unknown_fraction": 0.6823529411764706,
+      "consistency": 0.39814814814814814,
+      "cluster95": [
+        0.3380611337612769,
+        0.4631864284501782
+      ],
+      "mean_angle_error_deg": 74.76987368692848,
+      "coverage_adjusted_success": 0.1264705882352941,
+      "baseline_consistency_on_covered": 0.15555555555555556,
+      "baseline_consistency_all": 0.31529411764705884,
+      "net_improvement_all": 0.07705882352941176,
+      "net_cluster95": [
+        0.049571595574817516,
+        0.10705852127694841
+      ],
+      "explicit_heading_coverage": 0.01411764705882353,
+      "unknown_fraction_explicit_heading": 0.9858823529411764,
+      "unknown_fraction_no_candidate_support": 0.6823529411764706,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.5962962962962963,
+      "baseline_halfplane_all": 0.5976470588235294,
+      "hybrid_halfplane_all": 0.6411764705882353,
+      "net_halfplane_improvement": 0.04352941176470588,
+      "net_halfplane_cluster95": [
+        0.009990963855421687,
+        0.08074773401172586
+      ],
+      "conditional_reference_cluster95": [
+        0.3405364546051062,
+        0.4631549411633484
+      ],
+      "conditional_map_cluster95": [
+        0.35226220538720543,
+        0.4494081749672346
+      ],
+      "scheme": "object_5fold",
+      "cohort": "expanded_all",
+      "model": "semantic_candidates",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.1090302719343253,
+      "end_to_end_supported_fraction": 0.03463314520266803
+    },
+    {
+      "n": 425,
+      "covered": 133,
+      "coverage": 0.3129411764705882,
+      "unknown_fraction": 0.6870588235294117,
+      "consistency": 0.3919172932330827,
+      "cluster95": [
+        0.3336255995203837,
+        0.45399819099872774
+      ],
+      "mean_angle_error_deg": 75.37707430566385,
+      "coverage_adjusted_success": 0.12264705882352941,
+      "baseline_consistency_on_covered": 0.16541353383458646,
+      "baseline_consistency_all": 0.31529411764705884,
+      "net_improvement_all": 0.07088235294117647,
+      "net_cluster95": [
+        0.04265561691735583,
+        0.10107219907751822
+      ],
+      "explicit_heading_coverage": 0.011764705882352941,
+      "unknown_fraction_explicit_heading": 0.9882352941176471,
+      "unknown_fraction_no_candidate_support": 0.6870588235294117,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.5921052631578947,
+      "baseline_halfplane_all": 0.5976470588235294,
+      "hybrid_halfplane_all": 0.6347058823529412,
+      "net_halfplane_improvement": 0.03705882352941176,
+      "net_halfplane_cluster95": [
+        0.00422480470757529,
+        0.07465343601895733
+      ],
+      "conditional_reference_cluster95": [
+        0.3342640241986172,
+        0.4574180506993007
+      ],
+      "conditional_map_cluster95": [
+        0.34905334818844774,
+        0.4413021934460888
+      ],
+      "scheme": "object_5fold",
+      "cohort": "expanded_all",
+      "model": "bert_router",
+      "mode": "conditional_local",
+      "metric": "90deg_sector",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.1090302719343253,
+      "end_to_end_supported_fraction": 0.034120061570035914
+    },
+    {
+      "n": 116,
+      "covered": 9,
+      "coverage": 0.07758620689655173,
+      "unknown_fraction": 0.9224137931034483,
+      "consistency": 0.8888888888888888,
+      "cluster95": [
+        0.6666666666666666,
+        1.0
+      ],
+      "mean_angle_error_deg": 56.380099407246895,
+      "coverage_adjusted_success": 0.06896551724137931,
+      "baseline_consistency_on_covered": 0.3333333333333333,
+      "baseline_consistency_all": 0.41379310344827586,
+      "net_improvement_all": 0.04310344827586207,
+      "net_cluster95": [
+        0.008771929824561403,
+        0.0840514171770403
+      ],
+      "explicit_heading_coverage": 0.07758620689655173,
+      "unknown_fraction_explicit_heading": 0.9224137931034483,
+      "unknown_fraction_no_candidate_support": 0.9224137931034483,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.8888888888888888,
+      "baseline_halfplane_all": 0.41379310344827586,
+      "hybrid_halfplane_all": 0.45689655172413796,
+      "net_halfplane_improvement": 0.04310344827586207,
+      "net_halfplane_cluster95": [
+        0.008771929824561403,
+        0.0840514171770403
+      ],
+      "conditional_reference_cluster95": [
+        0.5696428571428572,
+        1.0
+      ],
+      "conditional_map_cluster95": [
+        0.8,
+        1.0
+      ],
+      "wilson95_if_binary": [
+        0.5650002944233536,
+        0.9801091123614543
+      ],
+      "scheme": "object_5fold",
+      "cohort": "roadside_secondary",
+      "model": "strict_rules",
+      "mode": "conditional_local",
+      "metric": "signed_roadside_halfplane",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.029758850692662903,
+      "end_to_end_supported_fraction": 0.002308876346844536
+    },
+    {
+      "n": 116,
+      "covered": 14,
+      "coverage": 0.1206896551724138,
+      "unknown_fraction": 0.8793103448275862,
+      "consistency": 0.75,
+      "cluster95": [
+        0.5714285714285714,
+        0.8928571428571429
+      ],
+      "mean_angle_error_deg": 68.38720676180158,
+      "coverage_adjusted_success": 0.09051724137931035,
+      "baseline_consistency_on_covered": 0.21428571428571427,
+      "baseline_consistency_all": 0.41379310344827586,
+      "net_improvement_all": 0.06465517241379311,
+      "net_cluster95": [
+        0.026542850489054495,
+        0.10527988403211416
+      ],
+      "explicit_heading_coverage": 0.07758620689655173,
+      "unknown_fraction_explicit_heading": 0.9224137931034483,
+      "unknown_fraction_no_candidate_support": 0.8793103448275862,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.75,
+      "baseline_halfplane_all": 0.41379310344827586,
+      "hybrid_halfplane_all": 0.47844827586206895,
+      "net_halfplane_improvement": 0.06465517241379311,
+      "net_halfplane_cluster95": [
+        0.026542850489054495,
+        0.10527988403211416
+      ],
+      "conditional_reference_cluster95": [
+        0.5,
+        0.9047619047619048
+      ],
+      "conditional_map_cluster95": [
+        0.7142857142857143,
+        0.8333333333333334
+      ],
+      "scheme": "object_5fold",
+      "cohort": "roadside_secondary",
+      "model": "semantic_candidates",
+      "mode": "conditional_local",
+      "metric": "signed_roadside_halfplane",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.029758850692662903,
+      "end_to_end_supported_fraction": 0.0035915854284248334
+    },
+    {
+      "n": 116,
+      "covered": 13,
+      "coverage": 0.11206896551724138,
+      "unknown_fraction": 0.8879310344827587,
+      "consistency": 0.7307692307692307,
+      "cluster95": [
+        0.5384615384615384,
+        0.8846153846153846
+      ],
+      "mean_angle_error_deg": 72.99585553471613,
+      "coverage_adjusted_success": 0.08189655172413793,
+      "baseline_consistency_on_covered": 0.23076923076923078,
+      "baseline_consistency_all": 0.41379310344827586,
+      "net_improvement_all": 0.05603448275862069,
+      "net_cluster95": [
+        0.022123893805309734,
+        0.09649122807017543
+      ],
+      "explicit_heading_coverage": 0.06896551724137931,
+      "unknown_fraction_explicit_heading": 0.9310344827586207,
+      "unknown_fraction_no_candidate_support": 0.8879310344827587,
+      "conditional_score_interpretation": "candidate-weighted compatibility; a hard directional success rate ONLY when exactly one licensed heading is emitted",
+      "conditional_halfplane_compatibility": 0.7307692307692307,
+      "baseline_halfplane_all": 0.41379310344827586,
+      "hybrid_halfplane_all": 0.4698275862068966,
+      "net_halfplane_improvement": 0.05603448275862069,
+      "net_halfplane_cluster95": [
+        0.022123893805309734,
+        0.09649122807017543
+      ],
+      "conditional_reference_cluster95": [
+        0.4989583333333334,
+        0.8846153846153846
+      ],
+      "conditional_map_cluster95": [
+        0.6666666666666666,
+        0.8333333333333334
+      ],
+      "scheme": "object_5fold",
+      "cohort": "roadside_secondary",
+      "model": "bert_router",
+      "mode": "conditional_local",
+      "metric": "signed_roadside_halfplane",
+      "all_landmark_core_candidates": 3898,
+      "cohort_fraction_of_all_core": 0.029758850692662903,
+      "end_to_end_supported_fraction": 0.0033350436121087736
+    }
+  ],
+  "historical_files_sha256": {
+    "direction_frames_v2/results/matched_comparisons.json": "054525e24f62b364d2c69c74210ad4c81a261d2ecbc9d5a57a863791c7a65f08",
+    "direction_frames_v3/results/summary.json": "cc56f884c16fc344b48b4c357b28cbdf43e8529878585c4b9a47cb237cf63ec8",
+    "direction_frames/results/manifest.json": "cea7af6058244ce2e6447df427927b89f6ef7cb1d9b31cebd8bf402be332ee15"
+  },
+  "cross_version_rate_subtraction_valid": false
+}
