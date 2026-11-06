@@ -78,6 +78,8 @@ def main():
     parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
     parser.add_argument('--angle-head-checkpoint',help='Completed predicted ANGLE-ONLY 8-bin head; explicitly NOT oracle')
+    parser.add_argument('--public-binding-repair',choices=('none','geometry','capacity','both'),default='none',
+                        help='Opt-in frozen full-text public Polygon repair, only originally unbound tasks; no GT')
     parser.add_argument('--polygon-group-predicate',action='store_true',
                         help='Matched public-blind full-text main model with same-name polygon group IDs (no oracle)')
     parser.add_argument('--angular-main-predicate',action='store_true',
@@ -128,6 +130,11 @@ def main():
             args.relation_control!='full' or args.relation_visual_control!='off' or
             args.relation_geometry_source!='trained'):
         raise ValueError('Angle-only mode requires public-bound full-text Unified V2, trained Geometry+Relation and RGB off')
+    if args.public_binding_repair!='none' and (args.polygon_group_predicate or args.angular_main_predicate or args.angle_head_checkpoint or
+            args.model!='unified-relation' or args.instruction_mode!='full_text' or not args.public_objects or
+            args.relation_control!='full' or args.relation_visual_control!='off' or
+            args.relation_geometry_source!='trained'):
+        raise ValueError('Frozen public-binding repair requires original full text and original complete Geometry+Relation, RGB off')
     if args.polygon_group_predicate and (args.angular_main_predicate or args.angle_head_checkpoint or args.model!='unified-relation' or
             args.instruction_mode!='full_text' or not args.public_objects or
             args.relation_control!='full' or args.relation_visual_control!='off' or
@@ -182,6 +189,10 @@ def main():
             sources.update(angle_checkpoint=sha(args.angle_head_checkpoint),
                 angle_runtime=sha(Path('graphnav/unified_angle_only_runtime.py')),
                 angle_model=sha(Path('graphnav/unified_angle_only_belief.py')))
+        if args.public_binding_repair!='none':
+            sources.update(public_binding_repair=args.public_binding_repair,
+                repair_runtime=sha(Path('graphnav/public_anchor_repair_runtime.py')),
+                repair_model=sha(Path('graphnav/public_anchor_repair.py')))
         if args.polygon_group_predicate:
             sources.update(polygon_group_predicate=True,
                 polygon_group_runtime=sha(Path('graphnav/unified_polygon_group_runtime.py')),
@@ -243,7 +254,12 @@ def main():
             from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             policy_class=UnifiedPGVBFullRelationPolicy;extra={}
-            if args.polygon_group_predicate:
+            if args.public_binding_repair!='none':
+                from graphnav.public_anchor_repair_runtime import UnifiedPublicAnchorRepairPolicy
+                policy_class=UnifiedPublicAnchorRepairPolicy
+                extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects,
+                           repair_mode=args.public_binding_repair)
+            elif args.polygon_group_predicate:
                 from graphnav.unified_polygon_group_runtime import UnifiedPublicPolygonGroupPolicy
                 policy_class=UnifiedPublicPolygonGroupPolicy
                 extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)
@@ -361,6 +377,9 @@ def main():
                     public = (PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),(),()) if args.instruction_mode!='native' else PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),tuple(catalog.referenced_landmarks(record)),tuple(catalog.referenced_landmark_names(record))))
                     runtime.set_episode(public,builder.transform(public.map_name),catalog)
                     (capture_dir/'public_record.json').write_text(json.dumps(runtime.record))
+                    if args.public_binding_repair!='none':
+                        (capture_dir/'binding_repair_audit.json').write_text(
+                            json.dumps(runtime.repair_audit,ensure_ascii=False,indent=2))
                     poses, termination, timings, diagnostics = rollout(
                         public,builder,controller,runtime.predict,
                         GROUND_LEVEL[record.map_name],protocol,
