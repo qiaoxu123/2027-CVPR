@@ -27,3 +27,11 @@ def test_no_landmark_no_forced_chain(parser):
     variants,tags=build_variants('Find a blue car.','test_map',parser,names,'car; Car')
     assert tags['chain']==[]
     assert variants['restore_chain']=='car; Car'
+
+def test_empty_deletion_keeps_exact_source(parser):
+    names=PublicNames({'test_map':{}})
+    text='Find a blue car.'
+    variants,tags=build_variants(text,'test_map',parser,names,'car; Car')
+    assert tags['quantities']==[]
+    assert variants['full_drop_quantities']==text
+    assert variants['full_drop_chain']==text

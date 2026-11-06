@@ -41,7 +41,10 @@ def build_variants(text,map_name,nlp,names,minimal):
   if chunk.root.i in middle:chain.update(t.i for t in chunk)
  chain-=named|({ti} if ti is not None else set());chain-=attr|quant
  def words(ids):return ' '.join(t.text for t in doc if t.i in ids)
- def drop(ids):return ' '.join(t.text for t in doc if t.i not in ids)
+ def drop(ids):
+  output=text
+  for start,end in sorted([(t.idx,t.idx+len(t.text)) for t in doc if t.i in ids],reverse=True):output=output[:start]+output[end:]
+  return output
  def add(ids):return minimal+(' ; '+words(ids) if ids else '')
  # Restore exact source tokens, including duplicates where already present; no invented facts.
  variants={'restore_attributes':add(attr),'restore_quantities':add(quant),'restore_chain':add(chain),'restore_all':add(attr|quant|chain),'reorder_minimal':'; '.join(reversed(minimal.split('; '))),'full_drop_attributes':drop(attr),'full_drop_quantities':drop(quant),'full_drop_chain':drop(chain)}

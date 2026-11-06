@@ -1,3 +1,5 @@
+> 第一阶段快照；全部实验已完成，最终结论见[REPORT_zh.md](REPORT_zh.md)。
+
 # 原文与精简文本差距：第一阶段归因
 
 同一冻结UnifiedPGVB-V2（9ac51ee…）、7619条Birmingham TRAIN样本，固定公开Polygon/784网格。GT只用于forward之后评分。这些样本参与过训练，结果为拟合诊断，不是独立验证或SR。
