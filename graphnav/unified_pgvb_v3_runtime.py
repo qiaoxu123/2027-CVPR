@@ -81,3 +81,43 @@ class V3CausalBelief:
                               (xy*2-1)[:,None],align_corners=False,padding_mode='border')[:,:,0].transpose(1,2)
         return GoalField(belief_logits=logits,candidate_ids=ids,candidate_xy=xy,candidate_context=context,
                          visual_coverage=output.observed_mask.flatten(1).float())
+
+class V3NavigationPolicy:
+    """Unchanged original Trajectory/Stop applied to V3's aligned dense GoalField."""
+    def __init__(self,source_v2,checkpoint,stage1,directory,*,geometry_only=False):
+        from .trajectory_policy import CandidateTrajectoryStop
+        self.belief=V3CausalBelief(source_v2,checkpoint,directory)
+        self.device=self.belief.device;self.geometry_only=geometry_only
+        source=torch.load(source_v2,map_location='cpu',weights_only=True)
+        stage=torch.load(stage1,map_location='cpu',weights_only=True)
+        if source['config']['source']['stage1_sha256']!=file_sha256(stage1):
+            raise ValueError('Original frozen controller/source provenance mismatch')
+        if stage['protocol']['name']!='graphnav-v1-stage1' or stage['protocol'].get('active_observation'):
+            raise ValueError('Expected original non-active controller protocol')
+        weights={k[len('trajectory.'):]:v for k,v in stage['model'].items() if k.startswith('trajectory.')}
+        self.head=CandidateTrajectoryStop(hidden=self.belief.cfg.hidden).to(self.device).eval().requires_grad_(False)
+        self.head.load_state_dict(weights,strict=True)
+        self.stop_threshold=.3;self.stop_positive_weight=20.;self.execution='guarded-blend';self.explore_candidates=0
+        self.record=None;self.visited_goal_cells=set()
+
+    def set_episode(self,episode,transform,catalog):
+        bounds=[transform.x_min,transform.y_min,transform.x_max,transform.y_max]
+        # Ignore annotation-linked reference IDs; blind public-name binding is identical to V3 TRAIN.
+        objects=catalog.objects[episode.map_name]
+        self.belief.start(map_name=episode.map_name,instruction=episode.instruction,world_bounds=bounds,
+                          public_objects={str(k):v for k,v in objects.items()})
+        self.record=self.belief.record;self.visited_goal_cells=set()
+
+    @torch.no_grad()
+    def predict(self,state,instruction):
+        from .a3_runtime import A3TrajectoryPolicy
+        if instruction!=self.record['instruction']:raise ValueError('Instruction changed within episode')
+        output=self.belief.observe(observation=state.current_observation,pose=state.pose)
+        field=self.belief.controller_field(output,geometry_only=self.geometry_only)
+        prediction=A3TrajectoryPolicy.predict_field(self,state,field)
+        prediction.diagnostics.update(policy='UnifiedPGVB-V3 + unchanged original Trajectory/Stop',
+            geometry_only=self.geometry_only,observed_cells=int(output.observed_mask.sum()),
+            causal_history_frames=len(self.belief.frames),raw_yaw=float(state.pose[3]),
+            goal_top1_world=(self.belief.bounds[0,:2]+field.candidate_xy[0,0]*(self.belief.bounds[0,2:]-self.belief.bounds[0,:2])).cpu().tolist(),
+            visual_delta_max=float((output.fused_logits-output.geometry_global).abs().max()))
+        return prediction

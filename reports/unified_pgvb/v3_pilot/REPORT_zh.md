@@ -66,3 +66,6 @@
 本机Revised数据目录是processed_citynav；不能把语义版本直接作为磁盘目录revised。公开记录必须由世界bounds计算physical_map_sizes。两条TRAIN GPU接口Smoke已通过，无Val样本推理。专项测试新增384网格候选坐标/logits/插值Context的一致性测试，目前11项通过。
 
 全量评测命令已排队等待完整训练结束：tmux unified_v3_full_evaluation_wait。固定评测2470/2470，错误及无候选任务计入Top1分母，NE缺失单独报告，存在推理错误不得触发导航门槛。完整Top1达到55%且零运行错误才符合后续导航条件；尚未启动Val评分，尚未完成真实导航接口验证或SR评测。
+
+
+Controller单步TRAIN GPU接口Smoke已通过：原Stage1权重来源SHA校验、原Stop=0.3、guarded-blend、1mm守卫均保留。384候选Context取自同一28网格的双线性插值，不伪造已训练384原生Controller。此处存在分辨率分布变化，需真实闭环检验；尚未报告SR。全量评测后达到固定55%门槛且无推理错误，等待任务才会继续Geometry/Fused两组2470条闭环；否则停止导航并分析TRAIN问题。

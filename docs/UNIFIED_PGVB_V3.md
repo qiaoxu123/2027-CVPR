@@ -1,6 +1,20 @@
 # UnifiedPGVB-V3: Decoupled Geometry and RGB-D Global Belief
 
-Status: **code committed for LOCAL testing; no GPU fitting or measured gains.**
+Status: **128/1000-row real GPU pilots completed; full TRAIN preparation/training active.**
+
+The 1000-row pilot uses 767 fit / 233 heldout TRAIN queries, not full Val-Seen.
+Full TRAIN runs use four cumulative training hours maximum and TRAIN-loss
+plateau stopping (min 3 epochs, <0.5% improvement for 2 consecutive epochs).
+See `reports/unified_pgvb/v3_pilot/REPORT_zh.md` for measured pilot results.
+
+Causal initial-Goal evaluation is now available via
+`scripts.evaluate_unified_pgvb_v3_initial` on all 2470 Val-Seen episodes.
+It uses only the real start image, original yaw and public text/map binding,
+not the offline landmark-view planner. The experimental navigation adapter
+and `scripts.evaluate_unified_pgvb_v3_navigation` require the same checkpoint
+and full zero-error initial Top1 >=55% before navigation; navigation results
+are not yet measured. Controller weights, 0.3 Stop threshold and 1mm arrival
+guard are unchanged. No Test evaluation is enabled here.
 
 ## Exact V3 architecture
 
@@ -148,6 +162,6 @@ without checking available SSD space.
    visibility, SigLIP text truncation and geometric co-registration
    before tuning large ViT or changing network depth.
 
-This first pilot intentionally includes **no navigation controller,
+The offline training pilot intentionally includes **no navigation controller,
 no collision-aware flight-planning, no learned viewpoint selection, no
 3D point cloud and no additional visual backbone**.
