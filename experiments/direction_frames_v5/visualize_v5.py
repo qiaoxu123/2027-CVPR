@@ -3,6 +3,7 @@ from v5core import *
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection
 from PIL import Image
 import rasterio,textwrap
 from shapely.geometry import Polygon
@@ -58,7 +59,7 @@ def run():
    for z in parts:draw(z.exterior.coords,'#0072B2','Whole named road A')
    draw(tp,'#D55E00','Whole target polygon');ax.scatter(*gt,c='#D55E00',marker='x',s=65,label='GT: offline check only')
    if f and f.get('points_xy'):
-    xy=np.array(f['points_xy']);d=np.array(f['distance_from_source_m']);order=np.argsort(d);ax.plot(*xy[order].T,color='#009E73',lw=1.5,label='Frozen v4 centerline')
+    xy=np.array(f['points_xy']);d=np.array(f['distance_from_source_m']);order=np.argsort(d);ax.add_collection(LineCollection(xy[np.array(f['edges'])],colors='#009E73',linewidths=1.5,label='Frozen v4 centerline'))
     if p['state']=='unique_field':
      ix=order[::max(1,len(order)//16)];h=np.deg2rad(np.array(f['heading_deg'])[ix]);ax.quiver(xy[ix,0],xy[ix,1],5*np.cos(h),5*np.sin(h),angles='xy',scale_units='xy',scale=1,color='#009E73',width=.006,label='Independent positive travel')
     b=region(x,f['source_ids'])

@@ -29,3 +29,8 @@ def test_mask_is_shared_by_every_orientation():
  f={'points_xy':[[0,0],[5,0],[10,0]],'edges':[[0,1],[1,2]],'heading_deg':[0,0,0]};p=projection(f,[[3,-2],[4,-2],[4,2],[3,2]]);assert all(orientation_score(p,'left',heading=h)['result']=='ambiguous' for h in [0,90,180,270])
 def test_zero_length_smoothing_edges_do_not_create_nan_or_change_side():
  f={'points_xy':[[0,0],[5,0],[5,0],[10,0]],'edges':[[0,1],[1,2],[2,3]],'heading_deg':[0,0,0,0]};p=projection(f,[[3,4],[4,4],[4,6],[3,6]]);assert orientation_score(p,'left')['result']=='consistent'
+
+def test_retrieval_is_superset_of_supported_role_connectives():
+ from language_v5 import SEARCH
+ for t in ["If you take a left onto Long Road from First Street this is the building on your right.","Go down Long Road from First Street, the house is left.","Enter Long Road via First Street, the house is left."]:
+  assert SEARCH.search(t) and role_pairs(t,catalog())[0]

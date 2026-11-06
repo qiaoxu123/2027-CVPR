@@ -2,7 +2,7 @@
 from v5core import *
 from road_language import extract as frozen_extract
 import difflib
-SEARCH=re.compile(r'\b(?:coming\s+from|turn(?:ing)?|enter(?:ing)?|approach(?:ing)?|along|facing|proceeds?|travell?ing|via)\b',re.I)
+SEARCH=re.compile(r'\b(?:from|coming\s+from|take|down|faces?|turn(?:ing)?|enter(?:ing)?|approach(?:ing)?|along|facing|proceeds?|travell?ing|via)\b',re.I)
 
 def role_pairs(text,catalog):
  hits=catalog.spans(text);roads=[]
@@ -23,7 +23,7 @@ def role_pairs(text,catalog):
      if re.search(r'\b(?:turn(?:\s+(?:left|right))?\s+(?:onto|into)|take\s+a\s+(?:left|right)\s+onto)\s+(?:the\s+)?$',preA,re.I):kind='turn_onto_from'
      elif re.search(r'\bapproaching\s+(?:the\s+)?$',preA,re.I):kind='approaching_from_UNDERSPECIFIED'
      elif re.search(r'\b(?:along|down)\s+(?:the\s+)?$',preA,re.I):
-      kind='along_from' if re.search(r'\b(?:proceeds?|proceeding|travel|travelling|traveling|drive|driving)\b',preA+middle,re.I) or re.fullmatch(r'\s*from\s+(?:the\s+)?',middle,re.I) else 'implicit_order_origin_UNDERSPECIFIED'
+      kind='faces_down_OBSERVER' if re.search(r'\bfaces?\b|\bfacing\b',preA,re.I) else 'along_from' if re.search(r'\b(?:proceeds?|proceeding|travel|travelling|traveling|drive|driving)\b',preA+middle,re.I) or re.fullmatch(r'\s*from\s+(?:the\s+)?',middle,re.I) else 'implicit_order_origin_UNDERSPECIFIED'
      elif re.search(r'\bfacing\s+(?:the\s+)?$',preA,re.I):kind='facing_from_OBSERVER'
     elif re.search(r'\bvia\s+(?:the\s+)?$',preB,re.I) and re.search(r'\benter(?:ing)?\s+(?:the\s+)?$',preA,re.I):kind='enter_via'
    elif b['end']<=a['start'] and a['start']-b['end']<180:

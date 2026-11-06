@@ -20,9 +20,9 @@ def run():
  check('Inference and evaluation source fingerprints match',sha(HERE/'language_v5.py')==M['parser_code_sha256'] and sha(HERE/'prepare_v5.py')==M['prepare_code_sha256'] and sha(HERE/'explore_v5.py')==M['exploration_code_sha256'] and sha(HERE/'score_v5.py')==EM['score_code_sha256'] and sha(HERE/'geometry_v5.py')==EM['geometry_predicate_sha256'])
  check('GT evaluator linked to completed current freeze',EM['frozen_phase1_manifest_sha256']==sha(RESULT/'phase1_manifest.json') and EM['GT_sha256']==sha(RESULT/'evaluation_gt.jsonl.gz'))
  oldX=readlines(V4/'results/public_inputs.jsonl.gz');check('All original1398 public inputs preserved exactly',all(X[x['occurrence_id']]==x for x in oldX))
- oldR=readlines(V4/'results/relations.jsonl.gz');oldids={r['occurrence_id'] for r in oldR};ids={r['occurrence_id'] for r in Q};newids={r['occurrence_id'] for r in N};check('All4701 original candidates plus36 new IDs, no duplication',oldids<=ids and len(Q)==len(ids)==4737 and len(newids-oldids)==36)
+ oldR=readlines(V4/'results/relations.jsonl.gz');oldids={r['occurrence_id'] for r in oldR};ids={r['occurrence_id'] for r in Q};newids={r['occurrence_id'] for r in N};check('All4701 original candidates plus39 new IDs, no duplication',oldids<=ids and len(Q)==len(ids)==4740 and len(newids-oldids)==39)
  check('All candidates retain explicit final unknown/failure outputs',len(readlines(RESULT/'all_relation_outputs.jsonl.gz'))==len(Q))
- check('GT and public bound inputs have identical1411 IDs',set(E)==set(X) and len(X)==1411)
+ check('GT and public bound inputs have identical1413 IDs',set(E)==set(X) and len(X)==1413)
  check('Private target geometry and future/yaw absent from public inference inputs',all(not(set(x)&{'target_positions','subject_xy','target_xy','target_polygon','GT','yaw','future_trajectory','trajectory'}) and not set(x['subject_ids'])&set(x['scene']) for x in X.values()))
  tree=ast.parse((HERE/'prepare_v5.py').read_text());keys={n.value for n in ast.walk(tree) if isinstance(n,ast.Constant) and isinstance(n.value,str)};check('New role preparation never requests target_positions', 'target_positions' not in keys)
  O=readj(DATA/'cityrefer_original/objects.json');newby={r['occurrence_id']:r for r in N};cache={}
@@ -31,7 +31,7 @@ def run():
   key=p['road_field_key']
   if key not in cache:cache[key]=directed_field(x,p['reference_ids'],p['source_ids'])
   assert cache[key]=={k:v for k,v in F[key].items() if k!='key'} and p['state']==cache[key]['state']
- check('All13 new bindings independently re-parsed and annotations aligned',len(NP)==13)
+ check('All15 new bindings independently re-parsed and annotations aligned',len(NP)==15)
  check('Every new A/B field reconstructed with unchanged v4 algorithm, no GT',True)
  original={r['occurrence_id']:r for r in readlines(V4/'results/geometry_checks.jsonl.gz') if r['state']=='unique_field'};byQ={r['occurrence_id']:r for r in Q};check('All44 original results21/1/22 preserved',len(original)==44 and all(byQ[k]['result']==r['result'] for k,r in original.items()) and collections.Counter(byQ[k]['result'] for k in original)=={'consistent':21,'conflict':1,'ambiguous':22})
  pp={p['occurrence_id']:p for p in readlines(V4/'results/frozen_frames.jsonl.gz')};pp.update({p['occurrence_id']:p for p in NP});active=[q for q in Q if q['state']=='unique_field'];prcache={}
@@ -60,7 +60,7 @@ def run():
  geo=readj(RESULT/'road_geometry_features.json');check('Width/curvature descriptors are public-geometry-only, never used to tune primary predictions',bool(geo) and all(not r['GT_used_for_feature'] and r['subgroups_postfreeze_descriptive_only'] for r in geo))
  figs=list((HERE/'figures').glob('*.png'));check('15 true-data high-resolution PNG/PDF pairs',len(figs)==15 and all(f.with_suffix('.pdf').exists() and min(Image.open(f).info['dpi'])>=319 for f in figs))
  text=(HERE/'REPORT.md').read_text();check('Report local links exist',all((HERE/t).exists() for t in re.findall(r'\]\(([^)]+)\)',text) if not t.startswith('http')))
- check('All13 mechanism/scope tests passed','13 passed' in (RESULT/'test_results.txt').read_text())
+ check('All14 mechanism/scope tests passed','14 passed' in (RESULT/'test_results.txt').read_text())
  writej(RESULT/'verification.json',{'status':'passed','n_checks':len(checks),'checks':checks,'TRAIN_only':True,'Val_Test_read':False,'new_bindings_recomputed':len(NP),'primary_predicates_recomputed':len(active),'candidate_outputs':len(Q),'report_sha256':sha(HERE/'REPORT.md'),'limitations':'Retrospective TRAIN evidence and local invariants; not author-reference-frame labels or blind external validation'})
  print('PASS',len(checks),'checks;',len(Q),'candidate outputs;',len(active),'matched primary fields')
 if __name__=='__main__':run()

@@ -1226,6 +1226,116 @@
     "GT_used_for_binding": false
   },
   {
+    "occurrence_id": "cambridge_block_7:40:1:29",
+    "episode": 8446,
+    "map": "cambridge_block_7",
+    "target_id": "40",
+    "ann_id": 1,
+    "target_category": "Building",
+    "cluster": "cambridge_block_7:40",
+    "instruction": "The third brown house on the left from the corner of Laundress Lane and Silver Street as one faces down Laundress Lane from Silver Street.",
+    "word": "left",
+    "semantic_word": "left",
+    "span_start": 29,
+    "span_end": 33,
+    "subject_ids": [],
+    "subject_role": "unresolved",
+    "reference_ids": [
+      "439",
+      "526",
+      "527"
+    ],
+    "reference_span": [
+      104,
+      118
+    ],
+    "reference_text": "Laundress Lane",
+    "source_ids": [
+      "444",
+      "476",
+      "483",
+      "530"
+    ],
+    "source_span": [
+      124,
+      137
+    ],
+    "scope": "unknown",
+    "status": "excluded",
+    "reason": "approach_or_observer_not_directed_road_entry",
+    "parse_confidence": 0.0,
+    "confidence_tier": "excluded",
+    "origin": "v5_language_extension",
+    "binding_rule": "approach_or_observer_not_directed_road_entry",
+    "template": "faces_down_OBSERVER",
+    "novelty": "previously_uncovered_expression",
+    "similarity_to_v4_unique_max": 0.44776119402985076,
+    "masked_template": "the # brown house on the left from the corner of road and road as one faces down road from road",
+    "new_map_vs_v4_unique": true,
+    "new_road_vs_v4_unique": true,
+    "new_road_pair_vs_v4_unique": true,
+    "new_subject_vs_v4_unique": true,
+    "road_field_key": "cambridge_block_7:439,526,527<-444,476,483,530",
+    "old_relation_candidate": false,
+    "GT_used_for_binding": false
+  },
+  {
+    "occurrence_id": "cambridge_block_7:84:4:103",
+    "episode": 8612,
+    "map": "cambridge_block_7",
+    "target_id": "84",
+    "ann_id": 4,
+    "target_category": "Building",
+    "cluster": "cambridge_block_7:84",
+    "instruction": "If you take a left onto Trumpington Street from Silver Street this is the 2nd to last building on your right.",
+    "word": "right",
+    "semantic_word": "right",
+    "span_start": 103,
+    "span_end": 108,
+    "subject_ids": [
+      "84"
+    ],
+    "subject_role": "annotated_target",
+    "reference_ids": [
+      "437",
+      "442",
+      "446"
+    ],
+    "reference_span": [
+      24,
+      42
+    ],
+    "reference_text": "Trumpington Street",
+    "source_ids": [
+      "444",
+      "476",
+      "483",
+      "530"
+    ],
+    "source_span": [
+      48,
+      61
+    ],
+    "scope": "road_travel_relative",
+    "status": "bound",
+    "reason": "",
+    "parse_confidence": 0.85,
+    "confidence_tier": "medium",
+    "origin": "v5_language_extension",
+    "binding_rule": "deictic_target_clause",
+    "template": "turn_onto_from",
+    "novelty": "previously_uncovered_expression",
+    "similarity_to_v4_unique_max": 0.8705882352941177,
+    "masked_template": "if you take a left onto road from road this is the nd to # building on your right",
+    "new_map_vs_v4_unique": true,
+    "new_road_vs_v4_unique": true,
+    "new_road_pair_vs_v4_unique": true,
+    "new_subject_vs_v4_unique": true,
+    "road_field_key": "cambridge_block_7:437,442,446<-444,476,483,530",
+    "old_relation_candidate": false,
+    "GT_used_for_binding": false
+  },
+  {
     "occurrence_id": "cambridge_block_12:164:2:149",
     "episode": 11890,
     "map": "cambridge_block_12",
@@ -1536,6 +1646,57 @@
     "new_road_pair_vs_v4_unique": true,
     "new_subject_vs_v4_unique": true,
     "road_field_key": "cambridge_block_19:212,222,253,257<-201,221,233,246,247,252,255",
+    "old_relation_candidate": false,
+    "GT_used_for_binding": false
+  },
+  {
+    "occurrence_id": "cambridge_block_20:195:3:93",
+    "episode": 16416,
+    "map": "cambridge_block_20",
+    "target_id": "195",
+    "ann_id": 3,
+    "target_category": "Car",
+    "cluster": "cambridge_block_20:195",
+    "instruction": "If you take a left onto Warkworth Street from Warkworth Terrace this is the grey car to your right, parked in front of a blue car.",
+    "word": "right",
+    "semantic_word": "right",
+    "span_start": 93,
+    "span_end": 98,
+    "subject_ids": [
+      "195"
+    ],
+    "subject_role": "annotated_target",
+    "reference_ids": [
+      "577"
+    ],
+    "reference_span": [
+      24,
+      40
+    ],
+    "reference_text": "Warkworth Street",
+    "source_ids": [
+      "578"
+    ],
+    "source_span": [
+      46,
+      63
+    ],
+    "scope": "road_travel_relative",
+    "status": "bound",
+    "reason": "",
+    "parse_confidence": 0.95,
+    "confidence_tier": "high",
+    "origin": "v5_language_extension",
+    "binding_rule": "deictic_target_clause",
+    "template": "turn_onto_from",
+    "novelty": "previously_uncovered_expression",
+    "similarity_to_v4_unique_max": 0.78,
+    "masked_template": "if you take a left onto road from road this is the grey car to your right parked in front of a blue car",
+    "new_map_vs_v4_unique": false,
+    "new_road_vs_v4_unique": true,
+    "new_road_pair_vs_v4_unique": true,
+    "new_subject_vs_v4_unique": true,
+    "road_field_key": "cambridge_block_20:577<-578",
     "old_relation_candidate": false,
     "GT_used_for_binding": false
   },
