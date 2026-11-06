@@ -1,0 +1,618 @@
+{
+  "scope": "Saved prior Val artifacts only. No new Val inference, labels or parameter selection.",
+  "groups": {
+    "no_support": {
+      "n": 1011,
+      "unique_physical_targets": 383,
+      "geometry_gap_quantiles": [
+        0.0,
+        0.04827690124511719,
+        0.6675758361816406,
+        4.093326568603516,
+        13.43851089477539
+      ],
+      "actual_delta_quantiles": [
+        0.0,
+        1.0,
+        1.0000009536743164
+      ],
+      "geometry_NE": 57.42909341655546,
+      "fused_NE": 57.48200308462986,
+      "anchor_zero": 152,
+      "visual_only_region_hit": 0,
+      "examples": [
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            11,
+            1
+          ],
+          "instruction": "The row of grayish brown houses on Leslie Road to the left of the gray house at the intersection with Wellington Road.",
+          "geometry_NE": 138.7593994140625,
+          "fused_NE": 138.7593994140625,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": false,
+            "wrong_minus_correct_geometry_peak": 3.555415153503418,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": -3.555415153503418,
+            "bound_insufficient": true,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": false,
+            "actual_delta_max": 1.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            11,
+            2
+          ],
+          "instruction": "The long row of gray houses with cars parked in front of them along Leslie Road.",
+          "geometry_NE": 304.9870910644531,
+          "fused_NE": 304.9870910644531,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": null,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": false,
+            "wrong_minus_correct_geometry_peak": 0.30388879776000977,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": -0.30388879776000977,
+            "bound_insufficient": true,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": false,
+            "actual_delta_max": 0.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            11,
+            3
+          ],
+          "instruction": "the row of brown houses along Leslie Road, across the street from a gray building.",
+          "geometry_NE": 36.864532470703125,
+          "fused_NE": 36.864532470703125,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": null,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": false,
+            "wrong_minus_correct_geometry_peak": 0.27347564697265625,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": -0.27347564697265625,
+            "bound_insufficient": true,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": false,
+            "actual_delta_max": 0.0
+          }
+        }
+      ]
+    },
+    "bound_insufficient": {
+      "n": 181,
+      "unique_physical_targets": 136,
+      "geometry_gap_quantiles": [
+        0.000881195068359375,
+        0.2806529998779297,
+        1.8770065307617188,
+        4.855991363525391,
+        8.629316329956055
+      ],
+      "actual_delta_quantiles": [
+        0.9998863339424133,
+        1.0,
+        1.0000004768371582
+      ],
+      "geometry_NE": 56.36610179711442,
+      "fused_NE": 56.263319890143464,
+      "anchor_zero": 0,
+      "visual_only_region_hit": 30,
+      "examples": [
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            26,
+            4
+          ],
+          "instruction": "Between section of two houses, both colored white and brown with brown roofs, with the house on the right having a yellow rectangular object in the driveway off Wellington Road",
+          "geometry_NE": 83.45256042480469,
+          "fused_NE": 85.36893463134766,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 1.9332151412963867,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": -0.8165931701660156,
+            "bound_insufficient": true,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": false,
+            "actual_delta_max": 1.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            27,
+            2
+          ],
+          "instruction": "L shaped white and a grey roofed building with a car park along wellington road. It is opposite the St Theresa\u2019s court building.",
+          "geometry_NE": 69.22145080566406,
+          "fused_NE": 66.82781982421875,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": true,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 2.2122507095336914,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": -1.2122507095336914,
+            "bound_insufficient": true,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": false,
+            "actual_delta_max": 0.9999980926513672
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            42,
+            2
+          ],
+          "instruction": "The second brown house from the trees along Wellington/Grosvenor road. It has a white and a blue car at the front.",
+          "geometry_NE": 65.64671325683594,
+          "fused_NE": 65.64671325683594,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": true,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 5.025668144226074,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": -4.025668144226074,
+            "bound_insufficient": true,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": false,
+            "actual_delta_max": 1.0
+          }
+        }
+      ]
+    },
+    "sufficient_failure": {
+      "n": 122,
+      "unique_physical_targets": 102,
+      "geometry_gap_quantiles": [
+        0.0,
+        0.028251743316650417,
+        0.3035001754760742,
+        0.8080778121948242,
+        1.7614688873291016
+      ],
+      "actual_delta_quantiles": [
+        0.9990940093994141,
+        1.0,
+        1.0000004768371582
+      ],
+      "geometry_NE": 33.599959138964046,
+      "fused_NE": 34.54581038678279,
+      "anchor_zero": 0,
+      "visual_only_region_hit": 20,
+      "examples": [
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            16,
+            2
+          ],
+          "instruction": "The second housing unit from the bottom on the right side of Celine Grove.",
+          "geometry_NE": 27.13863754272461,
+          "fused_NE": 27.13863754272461,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": true,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 0.30444908142089844,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 0.42983055114746094,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 1.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            26,
+            5
+          ],
+          "instruction": "This is a house with a brown roof on Wellington Road. This is the fourth house on the street from St. Teresa of the Child Jesus Catholic Church.",
+          "geometry_NE": 33.58256149291992,
+          "fused_NE": 34.563209533691406,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 0.9653892517089844,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 0.0665283203125,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 1.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            85,
+            2
+          ],
+          "instruction": "The gray car that is 11th from the left in the front row of cars in the parking lot behind the row of trees along Wellington Road, in front of red houses.",
+          "geometry_NE": 22.760108947753906,
+          "fused_NE": 22.760108947753906,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": true,
+            "geometry_correct": false,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 0.26418304443359375,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 0.2439422607421875,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 0.9999964237213135
+          }
+        }
+      ]
+    },
+    "corrected": {
+      "n": 30,
+      "unique_physical_targets": 26,
+      "geometry_gap_quantiles": [
+        0.00131988525390625,
+        0.010505104064941406,
+        0.08742141723632812,
+        0.30293579101562534,
+        0.8771686553955078
+      ],
+      "actual_delta_quantiles": [
+        0.9999555945396423,
+        1.0,
+        1.0000004768371582
+      ],
+      "geometry_NE": 33.615492566426596,
+      "fused_NE": 12.566746896505355,
+      "anchor_zero": 0,
+      "visual_only_region_hit": 6,
+      "examples": [
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            85,
+            4
+          ],
+          "instruction": "White car in a parking area in front of three brown houses along Wellington road. It is in between the two white cars facing the middle house.",
+          "geometry_NE": 23.515134811401367,
+          "fused_NE": 17.161518096923828,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": true,
+            "geometry_correct": false,
+            "fused_correct": true,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 0.13642311096191406,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 0.9265918731689453,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 0.9999818801879883
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            623,
+            1
+          ],
+          "instruction": "Black car parked in between two white vans, in the outside parking lot of a blue and white striped building facing the railroad across from the St Teresa's Court building",
+          "geometry_NE": 28.26634979248047,
+          "fused_NE": 19.79938316345215,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": false,
+            "fused_correct": true,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 0.2380828857421875,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 0.8110122680664062,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 0.9999980926513672
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_1",
+            1003,
+            1
+          ],
+          "instruction": "Parking lot that is a front of a six multi-unit building with gray roofs that's connected to a longer four multi-unit building with white and gray roofs off Wellington Road",
+          "geometry_NE": 20.8341121673584,
+          "fused_NE": 19.879192352294922,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": false,
+            "fused_correct": true,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": 0.0172576904296875,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 1.0336408615112305,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 0.9999994039535522
+          }
+        }
+      ]
+    },
+    "damaged": {
+      "n": 30,
+      "unique_physical_targets": 27,
+      "geometry_gap_quantiles": [
+        -0.5963191986083984,
+        -0.34146480560302733,
+        -0.10934162139892578,
+        -0.011083984374999994,
+        -0.003879547119140625
+      ],
+      "actual_delta_quantiles": [
+        0.9999675750732422,
+        1.0,
+        1.000000238418579
+      ],
+      "geometry_NE": 14.904039454460143,
+      "fused_NE": 32.86141834259033,
+      "anchor_zero": 0,
+      "visual_only_region_hit": 0,
+      "examples": [
+        {
+          "episode_id": [
+            "birmingham_block_3",
+            37,
+            1
+          ],
+          "instruction": "A multicolored white, gray and brown house with a gray roof, but they dark gray car in its driveway, that is directly across from a house that has a blue car in its driveway off Bragg Road",
+          "geometry_NE": 18.244075775146484,
+          "fused_NE": 23.449783325195312,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": true,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": -0.34059715270996094,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 1.89031982421875,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 1.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_3",
+            311,
+            1
+          ],
+          "instruction": "A black car in front of a gray car on the corner of birchfield Road and the Broadway Road, next to a multicolored Brown and white building for the gray roof",
+          "geometry_NE": 17.25054931640625,
+          "fused_NE": 27.049875259399414,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": true,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": -0.003879547119140625,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 1.9811687469482422,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 1.0
+          }
+        },
+        {
+          "episode_id": [
+            "birmingham_block_9",
+            87,
+            1
+          ],
+          "instruction": "A silver car parked underneath a large tree in the parking lot of the Perry Barr Bus Depot with a silver car on one side and three empty spaces on the other side.",
+          "geometry_NE": 18.874082565307617,
+          "fused_NE": 22.25884437561035,
+          "capacity": {
+            "GT_POSTHOC_ONLY": true,
+            "region_defined": true,
+            "visual_only_top1_correct_region_proxy": false,
+            "geometry_correct": true,
+            "fused_correct": false,
+            "correct_region_observed": true,
+            "wrong_minus_correct_geometry_peak": -0.05561256408691406,
+            "amplitude_bound": 1.0,
+            "theoretical_optimistic_margin": 0.5949115753173828,
+            "bound_insufficient": false,
+            "capacity_tie_undetermined": false,
+            "can_flip_under_independent_bounded_updates": true,
+            "actual_delta_max": 0.999985933303833
+          }
+        }
+      ]
+    }
+  },
+  "TRAIN_label_conflicts": {
+    "summary": {
+      "queries": 21878,
+      "point_outside_contour_1mm": 1112,
+      "point_contour_distance_gt20m": 19,
+      "point_registration_offset_gt1m": 0,
+      "point_registration_offset_gt20m": 0,
+      "invalid_polygon": 17
+    },
+    "n": 19,
+    "unique_physical_targets": 5,
+    "rows": [
+      {
+        "episode_id": "birmingham_block_3:197:1:0",
+        "category": "Car",
+        "point_to_contour_m": 21.538504205062136,
+        "point_vs_registered_position_m": 3.337860107421875e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:197:2:0",
+        "category": "Car",
+        "point_to_contour_m": 21.538504205062136,
+        "point_vs_registered_position_m": 3.337860107421875e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:197:3:0",
+        "category": "Car",
+        "point_to_contour_m": 21.538504205062136,
+        "point_vs_registered_position_m": 3.337860107421875e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:197:4:0",
+        "category": "Car",
+        "point_to_contour_m": 21.538504205062136,
+        "point_vs_registered_position_m": 3.337860107421875e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:197:5:0",
+        "category": "Car",
+        "point_to_contour_m": 21.538504205062136,
+        "point_vs_registered_position_m": 3.337860107421875e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:204:0:0",
+        "category": "Car",
+        "point_to_contour_m": 21.410231566807457,
+        "point_vs_registered_position_m": 1.9073486328125e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:204:1:0",
+        "category": "Car",
+        "point_to_contour_m": 21.410231566807457,
+        "point_vs_registered_position_m": 1.9073486328125e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:204:2:0",
+        "category": "Car",
+        "point_to_contour_m": 21.410231566807457,
+        "point_vs_registered_position_m": 1.9073486328125e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:204:4:0",
+        "category": "Car",
+        "point_to_contour_m": 21.410231566807457,
+        "point_vs_registered_position_m": 1.9073486328125e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:204:5:0",
+        "category": "Car",
+        "point_to_contour_m": 21.410231566807457,
+        "point_vs_registered_position_m": 1.9073486328125e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:232:0:0",
+        "category": "Car",
+        "point_to_contour_m": 26.996753739673476,
+        "point_vs_registered_position_m": 5.331201499700045e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:232:1:0",
+        "category": "Car",
+        "point_to_contour_m": 26.996753739673476,
+        "point_vs_registered_position_m": 5.331201499700045e-06
+      },
+      {
+        "episode_id": "birmingham_block_3:197:0:0",
+        "category": "Car",
+        "point_to_contour_m": 21.538504205062136,
+        "point_vs_registered_position_m": 3.337860107421875e-06
+      },
+      {
+        "episode_id": "birmingham_block_4:40:2:0",
+        "category": "Car",
+        "point_to_contour_m": 41.49248106309156,
+        "point_vs_registered_position_m": 6.67572021484375e-06
+      },
+      {
+        "episode_id": "cambridge_block_13:225:0:0",
+        "category": "Car",
+        "point_to_contour_m": 23.73128976542541,
+        "point_vs_registered_position_m": 2.8058390849922822e-05
+      },
+      {
+        "episode_id": "cambridge_block_13:225:1:0",
+        "category": "Car",
+        "point_to_contour_m": 23.73128976542541,
+        "point_vs_registered_position_m": 2.8058390849922822e-05
+      },
+      {
+        "episode_id": "cambridge_block_13:225:2:0",
+        "category": "Car",
+        "point_to_contour_m": 23.73128976542541,
+        "point_vs_registered_position_m": 2.8058390849922822e-05
+      },
+      {
+        "episode_id": "cambridge_block_13:225:3:0",
+        "category": "Car",
+        "point_to_contour_m": 23.73128976542541,
+        "point_vs_registered_position_m": 2.8058390849922822e-05
+      },
+      {
+        "episode_id": "cambridge_block_13:225:4:0",
+        "category": "Car",
+        "point_to_contour_m": 23.73128976542541,
+        "point_vs_registered_position_m": 2.8058390849922822e-05
+      }
+    ]
+  }
+}

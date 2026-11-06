@@ -1,0 +1,4 @@
+# Findings
+Runtime observe zeroes patch validity if no blind public-name landmarks; cache also pads zero observations when no landmarks. Loss: Geometry CE + .2 Geo Polygon + Fused CE + .25 Fused Polygon + .2 TextVisual + .02 teacher InfoNCE (teacher inner weight .1). Weak positives use center-to-Polygon distance <= patch half diagonal, not actual area overlap. No native candidate rank loss or preservation constraint.
+19 point–Contour >20m labels are all Car, only 5 physical targets (repeated instructions); point equals registered position within numerical error, so label-side conflict cannot be resolved by flipping coordinates or GT selecting a different object. No pixel GT to decide which is correct.
+Six TRAIN paired conditions and six fixed frozen fusion rules are predetermined; shared cached language/static inputs and checkpoint, public poses only. Raw depth masks retained separately from zeroed landmark gate. Full run is immutable SHA-manifested.
