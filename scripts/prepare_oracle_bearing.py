@@ -36,7 +36,7 @@ def main():
         t=[]
         if valid and len(anchors):
             delta=gt[None,:]-anchors
-            if (np.linalg.norm(delta,axis=1)<1.).any():group='undefined_angle_abstain'
+            if (np.linalg.norm(delta,axis=1)<1e-9).any():group='undefined_angle_abstain'
             else:t=np.arctan2(delta[:,1],delta[:,0]).tolist()
         # PRIVATE coordinate discarded before runtime artifact creation. All
         # fixed bound anchors retained, including same-name multiple polygons.
