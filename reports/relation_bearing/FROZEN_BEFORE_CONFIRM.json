@@ -1,0 +1,113 @@
+{
+  "commit": "efcbdb33d3fbcfff4cd01d6cec62fdb8adcf5d5c",
+  "models": {
+    "old": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/relation_bearing_s42_20261106/old/best.pt",
+      "SHA256": "e2e3525b12075aacad6ab3a3b6ba7dd464309003d52992830d81a13d83370dcd",
+      "model_arm": "old",
+      "epoch": 1,
+      "dev": {
+        "queries": 5530,
+        "anchor_pairs": 22005,
+        "macro_Top1": 0.13754659495617902,
+        "Top1": 0.15055669166098615,
+        "Top2": 0.2966598500340832,
+        "MAE": 89.71910040942606,
+        "median": 90.72859191894531,
+        "NLL": 2.187170569076237
+      },
+      "supervision": "angle_only",
+      "parameters": 382216
+    },
+    "matching_angle": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/relation_bearing_s42_20261106/angle_only/matching/best.pt",
+      "SHA256": "7ae1e514e52941bdc3ed313ba93e7095786fd810aeaaf8adbf75d13c0287911f",
+      "model_arm": "matching",
+      "epoch": 6,
+      "dev": {
+        "queries": 5530,
+        "anchor_pairs": 22005,
+        "macro_Top1": 0.45632357696552994,
+        "Top1": 0.45053396955237446,
+        "Top2": 0.6696659850034083,
+        "MAE": 47.89195762078244,
+        "median": 26.629377365112305,
+        "NLL": 1.5983527573400724
+      },
+      "supervision": "angle_only",
+      "parameters": 716426
+    },
+    "relations_angle": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/relation_bearing_s42_20261106/angle_only/relations/best.pt",
+      "SHA256": "48547c574e34e2ae8780c781c0b65fdff83cf6f0f635bb2718d30c170c2b37fe",
+      "model_arm": "relations",
+      "epoch": 5,
+      "dev": {
+        "queries": 5530,
+        "anchor_pairs": 22005,
+        "macro_Top1": 0.45236234832075706,
+        "Top1": 0.4591229266075892,
+        "Top2": 0.6885707793683253,
+        "MAE": 47.386896120732,
+        "median": 26.07592010498047,
+        "NLL": 1.5282213360782213
+      },
+      "supervision": "angle_only",
+      "parameters": 716426
+    },
+    "matching_instance": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/relation_bearing_s42_20261106/matching/best.pt",
+      "SHA256": "c7e67b3c1c511132b3633a78363c347cc00ed751208e519372cf596faf31c5fc",
+      "model_arm": "matching",
+      "epoch": 10,
+      "dev": {
+        "queries": 5530,
+        "anchor_pairs": 22005,
+        "macro_Top1": 0.47179862131037537,
+        "Top1": 0.46984776187230176,
+        "Top2": 0.6865257895932743,
+        "MAE": 47.140529260463026,
+        "median": 25.037723541259766,
+        "NLL": 1.555039664050634
+      },
+      "supervision": "angle+TRAIN_instance_ID",
+      "parameters": 716426
+    },
+    "relations_instance": {
+      "path": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/relation_bearing_s42_20261106/relations/best.pt",
+      "SHA256": "d24bd521d6300e6d60333e17846fc5fc7769a0ca1f78f0104f9231062d7b9d81",
+      "model_arm": "relations",
+      "epoch": 5,
+      "dev": {
+        "queries": 5530,
+        "anchor_pairs": 22005,
+        "macro_Top1": 0.41848020173517464,
+        "Top1": 0.44758009543285615,
+        "Top2": 0.6832992501704158,
+        "MAE": 48.88691658424275,
+        "median": 27.07819938659668,
+        "NLL": 1.5314112165392162
+      },
+      "supervision": "angle+TRAIN_instance_ID",
+      "parameters": 716426
+    }
+  },
+  "code": {
+    "graphnav/relation_bearing_network.py": "4baba717735d550af1ec3b1e667c8e002736572ffd35286bcb232229ab6e7bd9",
+    "graphnav/relation_bearing_scene.py": "43d50cac4f5f89abd46e68fd7f9ad368d4e7d1052f3b1a3a921794fb4d57ce3f",
+    "graphnav/role_relation_language.py": "6efe5ffff0efd201d923d6fd435286ed6bd3f00b81c5ae03af8aa54db0f91ba4",
+    "scripts/train_role_polygon_bearing.py": "7d947dd478864180a4faae1c1da6ce5e6812b44f37f8e810e3a826aed95252cb",
+    "scripts/train_role_polygon_angles_only.py": "5b33d0d9cb32ee0d9a63edfc9d27a18ff374e352664bdfd0a235157ae40fa0d2",
+    "scripts/relation_bearing_strata.py": "019cc2350cc94f06e03b24e6f052217346cdf616b64ae28e17003c4453dcd16c",
+    "graphnav/polygon_neighborhood_bearing.py": "2e627cfacbcb41e80c5d01c0d6cb88c94104daf5f024ca49fe97355fb4546ec0",
+    "scripts/evaluate_role_polygon_bearing.py": "238380714225dbf7d4cf1329b8178842e8c1e1c8a5eaa1c3f24319c66a74a833",
+    "scripts/role_bearing_evaluation.py": "4b50a81098bb68b505647a04ede734f4e92dae7c9b16c21ac8b78a97ce60256c",
+    "scripts/role_bearing_controls.py": "d70244afe9b5e5a8be06e21634aa6b0c2310fe5166f6e518b6ca6afd51acb383",
+    "scripts/evaluate_role_controls.py": "9c52754280bd0a8866574d932dde2bfec440cc80c7d4cf2d69ff14ecff40dcdd"
+  },
+  "primary": "relations_angle versus old, query-macroTop1",
+  "angle_only_objective_SHA": "f760de43356c8897be679dbe3d3e26144f09ca1c63a48a489011897d56b8b1ed",
+  "parser_grouping": "per-anchor trustworthy directed path, not verified semantic truth",
+  "no_RGB_no_navigation": true,
+  "confirmation_results_read": false
+}

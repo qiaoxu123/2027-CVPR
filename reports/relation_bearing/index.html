@@ -1,0 +1,833 @@
+<meta charset="utf-8"><title>Language–Polygon bearing</title><h1>Frozen TRAIN map-heldout confirmation</h1><h2>Frozen confirmation</h2><p>4117 tasks; 3599 with defined public anchor bearing. Query-macro Top-1; no navigation SR.</p><table border="1"><tr><th>Model</th><th>Top-1</th><th>Angular MAE</th></tr><tr><td>old</td><td>13.72%</td><td>87.90 degrees</td></tr><tr><td>matching_angle</td><td>38.37%</td><td>50.73 degrees</td></tr><tr><td>relations_angle</td><td>39.49%</td><td>51.12 degrees</td></tr><tr><td>matching_instance</td><td>38.18%</td><td>51.77 degrees</td></tr><tr><td>relations_instance</td><td>40.54%</td><td>47.91 degrees</td></tr></table><p>Role chains versus matching: +1.13pp, CI includes zero. Whole-polygon topology benefit is not established.</p><p><a href="REPORT_zh.md">中文报告</a> · <a href="results.json">All statistics</a> · <a href="confirmation_predictions.csv">All predictions</a></p><img width="1100" src="confusion_matrices.png"><img width="800" src="relation_strata.png"><p>No RGB, no navigation; map GT overlays are posthoc.</p><img width="1000" src="training_and_confirmation.png"><article><h3>gain: 6791</h3><p>The white car on Nobel Way that is the only car seen on that road.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The white car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 13,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 4,
+        &quot;text&quot;: &quot;Nobel Way&quot;,
+        &quot;start&quot;: 17,
+        &quot;end&quot;: 26,
+        &quot;public_ids&quot;: [
+          &quot;9&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The white car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 13,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 4,
+          &quot;text&quot;: &quot;Nobel Way&quot;,
+          &quot;start&quot;: 17,
+          &quot;end&quot;: 26,
+          &quot;public_ids&quot;: [
+            &quot;9&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;on&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;on&quot;,
+        &quot;evidence&quot;: &quot;car -&gt; on -&gt; Nobel Way&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;9&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Nobel Way&quot;
+    ]
+  }
+]</pre><a href="case_00.png"><img width="900" src="case_00.png"></a></article><article><h3>gain: 6801</h3><p>A triangular shaped parking lot with five rows that&#x27;s been cut off at the edge of the map next to Nobel way</p><pre>[]</pre><a href="case_01.png"><img width="900" src="case_01.png"></a></article><article><h3>gain: 6820</h3><p>White car in the parking area near the Holford road in the 3rd lane from the West Midlands police custody suite. It has a grey car to the left and a black car to the right.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 1,
+        &quot;text&quot;: &quot;White car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 9,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 5,
+        &quot;text&quot;: &quot;the parking area&quot;,
+        &quot;start&quot;: 13,
+        &quot;end&quot;: 29,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 13,
+        &quot;text&quot;: &quot;the 3rd lane&quot;,
+        &quot;start&quot;: 55,
+        &quot;end&quot;: 67,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 16,
+        &quot;text&quot;: &quot;West Midlands police custody suite&quot;,
+        &quot;start&quot;: 77,
+        &quot;end&quot;: 111,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 1,
+          &quot;text&quot;: &quot;White car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 9,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 5,
+          &quot;text&quot;: &quot;the parking area&quot;,
+          &quot;start&quot;: 13,
+          &quot;end&quot;: 29,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;in&quot;,
+        &quot;evidence&quot;: &quot;car -&gt; in -&gt; area&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 5,
+          &quot;text&quot;: &quot;the parking area&quot;,
+          &quot;start&quot;: 13,
+          &quot;end&quot;: 29,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 13,
+          &quot;text&quot;: &quot;the 3rd lane&quot;,
+          &quot;start&quot;: 55,
+          &quot;end&quot;: 67,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;in&quot;,
+        &quot;evidence&quot;: &quot;car -&gt; in -&gt; lane&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 13,
+          &quot;text&quot;: &quot;the 3rd lane&quot;,
+          &quot;start&quot;: 55,
+          &quot;end&quot;: 67,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 16,
+          &quot;text&quot;: &quot;West Midlands police custody suite&quot;,
+          &quot;start&quot;: 77,
+          &quot;end&quot;: 111,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;from&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;from&quot;,
+        &quot;evidence&quot;: &quot;lane -&gt; from -&gt; West Midlands police custody suite&quot;
+      }
+    ],
+    &quot;hops&quot;: 3,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_02.png"><img width="900" src="case_02.png"></a></article><article><h3>loss: 6826</h3><p>The white car that at the top of the rightmost column of cars in the massive parking lot for the West Midlands Police Custody Suite, when viewed aerially with Holford Drive to the right.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The white car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 13,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 17,
+        &quot;text&quot;: &quot;the massive parking lot&quot;,
+        &quot;start&quot;: 65,
+        &quot;end&quot;: 88,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 20,
+        &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+        &quot;start&quot;: 97,
+        &quot;end&quot;: 131,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The white car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 13,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 17,
+          &quot;text&quot;: &quot;the massive parking lot&quot;,
+          &quot;start&quot;: 65,
+          &quot;end&quot;: 88,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;top in&quot;,
+        &quot;evidence&quot;: &quot;top -&gt; in -&gt; lot&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 17,
+          &quot;text&quot;: &quot;the massive parking lot&quot;,
+          &quot;start&quot;: 65,
+          &quot;end&quot;: 88,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 20,
+          &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+          &quot;start&quot;: 97,
+          &quot;end&quot;: 131,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;for&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;for&quot;,
+        &quot;evidence&quot;: &quot;lot -&gt; for -&gt; West Midlands Police Custody Suite&quot;
+      }
+    ],
+    &quot;hops&quot;: 2,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_03.png"><img width="900" src="case_03.png"></a></article><article><h3>loss: 6859</h3><p>A black car is parked in a row in between another black car and a white car perpendicular to a white van in the West Midlands Police Custody Suite&#x27;s parking lot.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: false,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;A black car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 11,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 21,
+        &quot;text&quot;: &quot;a white van&quot;,
+        &quot;start&quot;: 93,
+        &quot;end&quot;: 104,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 27,
+        &quot;text&quot;: &quot;the West Midlands Police Custody Suite&#x27;s parking lot&quot;,
+        &quot;start&quot;: 108,
+        &quot;end&quot;: 160,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 24,
+        &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+        &quot;start&quot;: 112,
+        &quot;end&quot;: 146,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;A black car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 11,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 21,
+          &quot;text&quot;: &quot;a white van&quot;,
+          &quot;start&quot;: 93,
+          &quot;end&quot;: 104,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;to&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;to&quot;,
+        &quot;evidence&quot;: &quot;parked -&gt; to -&gt; van&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 21,
+          &quot;text&quot;: &quot;a white van&quot;,
+          &quot;start&quot;: 93,
+          &quot;end&quot;: 104,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 27,
+          &quot;text&quot;: &quot;the West Midlands Police Custody Suite&#x27;s parking lot&quot;,
+          &quot;start&quot;: 108,
+          &quot;end&quot;: 160,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;in&quot;,
+        &quot;evidence&quot;: &quot;van -&gt; in -&gt; lot&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 27,
+          &quot;text&quot;: &quot;the West Midlands Police Custody Suite&#x27;s parking lot&quot;,
+          &quot;start&quot;: 108,
+          &quot;end&quot;: 160,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 24,
+          &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+          &quot;start&quot;: 112,
+          &quot;end&quot;: 146,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;possessive region association&quot;,
+        &quot;evidence&quot;: &quot;West Midlands Police Custody Suite owns lot&quot;
+      }
+    ],
+    &quot;hops&quot;: 3,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_04.png"><img width="900" src="case_04.png"></a></article><article><h3>loss: 6890</h3><p>The black car that is on the end of an aisle of cars to the right of the West Midlands Police Custody Suite. It has a white car, blue car and then black car beside it and a dark blue car behind it.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The black car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 13,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 18,
+        &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+        &quot;start&quot;: 73,
+        &quot;end&quot;: 107,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The black car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 13,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 18,
+          &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+          &quot;start&quot;: 73,
+          &quot;end&quot;: 107,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;to the right of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;unresolved_relative&quot;,
+        &quot;original_relation&quot;: &quot;right of&quot;,
+        &quot;evidence&quot;: &quot;right -&gt; of -&gt; West Midlands Police Custody Suite&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_05.png"><img width="900" src="case_05.png"></a></article><article><h3>both_wrong: 6794</h3><p>The tiny white car that is also the only car parked on Nobel Way.</p><pre>[]</pre><a href="case_06.png"><img width="900" src="case_06.png"></a></article><article><h3>both_wrong: 6798</h3><p>Parking lot in between a multi-colored Gray and white building with a large light gray roof and Nobel way</p><pre>[]</pre><a href="case_07.png"><img width="900" src="case_07.png"></a></article><article><h3>both_wrong: 6808</h3><p>The building that is in front of the large parking lot off Holford Drive, between the Drive anf the Footpath of Manchester-Bourenmouth. There are three large utility boxes beside it with large white grate tops.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 1,
+        &quot;text&quot;: &quot;The building&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 12,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 12,
+        &quot;text&quot;: &quot;Holford Drive&quot;,
+        &quot;start&quot;: 59,
+        &quot;end&quot;: 72,
+        &quot;public_ids&quot;: [
+          &quot;160&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 1,
+          &quot;text&quot;: &quot;The building&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 12,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 12,
+          &quot;text&quot;: &quot;Holford Drive&quot;,
+          &quot;start&quot;: 59,
+          &quot;end&quot;: 72,
+          &quot;public_ids&quot;: [
+            &quot;160&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;off&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;off&quot;,
+        &quot;evidence&quot;: &quot;is -&gt; off -&gt; Holford Drive&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;160&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Holford Drive&quot;
+    ]
+  }
+]</pre><a href="case_08.png"><img width="900" src="case_08.png"></a></article><article><h3>both_correct: 6824</h3><p>The white car in the middle of the longest row of cars in the West Midlands Police Custody Suite parking lot that is between a black car and gray car.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The white car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 13,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 9,
+        &quot;text&quot;: &quot;the longest row&quot;,
+        &quot;start&quot;: 31,
+        &quot;end&quot;: 46,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 16,
+        &quot;text&quot;: &quot;the West Midlands Police Custody Suite parking lot&quot;,
+        &quot;start&quot;: 58,
+        &quot;end&quot;: 108,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 14,
+        &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+        &quot;start&quot;: 62,
+        &quot;end&quot;: 96,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The white car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 13,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 9,
+          &quot;text&quot;: &quot;the longest row&quot;,
+          &quot;start&quot;: 31,
+          &quot;end&quot;: 46,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;middle of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;middle of&quot;,
+        &quot;evidence&quot;: &quot;middle -&gt; of -&gt; row&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 9,
+          &quot;text&quot;: &quot;the longest row&quot;,
+          &quot;start&quot;: 31,
+          &quot;end&quot;: 46,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 16,
+          &quot;text&quot;: &quot;the West Midlands Police Custody Suite parking lot&quot;,
+          &quot;start&quot;: 58,
+          &quot;end&quot;: 108,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;in&quot;,
+        &quot;evidence&quot;: &quot;row -&gt; in -&gt; lot&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 16,
+          &quot;text&quot;: &quot;the West Midlands Police Custody Suite parking lot&quot;,
+          &quot;start&quot;: 58,
+          &quot;end&quot;: 108,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 14,
+          &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+          &quot;start&quot;: 62,
+          &quot;end&quot;: 96,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;associated region&quot;,
+        &quot;evidence&quot;: &quot;West Midlands Police Custody Suite -&gt; lot&quot;
+      }
+    ],
+    &quot;hops&quot;: 3,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_09.png"><img width="900" src="case_09.png"></a></article><article><h3>both_correct: 6855</h3><p>The gray car that is to the left of the small green building to the right of the middle row of cars in the West Midlands Police Custody Suite parking lot.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The gray car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 12,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 19,
+        &quot;text&quot;: &quot;the middle row&quot;,
+        &quot;start&quot;: 77,
+        &quot;end&quot;: 91,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 26,
+        &quot;text&quot;: &quot;the West Midlands Police Custody Suite parking lot&quot;,
+        &quot;start&quot;: 103,
+        &quot;end&quot;: 153,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 24,
+        &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+        &quot;start&quot;: 107,
+        &quot;end&quot;: 141,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The gray car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 12,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 19,
+          &quot;text&quot;: &quot;the middle row&quot;,
+          &quot;start&quot;: 77,
+          &quot;end&quot;: 91,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;to the right of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;unresolved_relative&quot;,
+        &quot;original_relation&quot;: &quot;right of&quot;,
+        &quot;evidence&quot;: &quot;right -&gt; of -&gt; row&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 19,
+          &quot;text&quot;: &quot;the middle row&quot;,
+          &quot;start&quot;: 77,
+          &quot;end&quot;: 91,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 26,
+          &quot;text&quot;: &quot;the West Midlands Police Custody Suite parking lot&quot;,
+          &quot;start&quot;: 103,
+          &quot;end&quot;: 153,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;in&quot;,
+        &quot;evidence&quot;: &quot;row -&gt; in -&gt; lot&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 26,
+          &quot;text&quot;: &quot;the West Midlands Police Custody Suite parking lot&quot;,
+          &quot;start&quot;: 103,
+          &quot;end&quot;: 153,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 24,
+          &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+          &quot;start&quot;: 107,
+          &quot;end&quot;: 141,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;in&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;associated region&quot;,
+        &quot;evidence&quot;: &quot;West Midlands Police Custody Suite -&gt; lot&quot;
+      }
+    ],
+    &quot;hops&quot;: 3,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_10.png"><img width="900" src="case_10.png"></a></article><article><h3>both_correct: 6965</h3><p>In the parking lot of West Midlands Police Custody Suite, this light gray car is in the massive bottom row, twelfth from the right.</p><pre>[
+  {
+    &quot;semantic_confident&quot;: false,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 10,
+        &quot;text&quot;: &quot;this light gray car&quot;,
+        &quot;start&quot;: 58,
+        &quot;end&quot;: 77,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 3,
+        &quot;text&quot;: &quot;the parking lot&quot;,
+        &quot;start&quot;: 3,
+        &quot;end&quot;: 18,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 5,
+        &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+        &quot;start&quot;: 22,
+        &quot;end&quot;: 56,
+        &quot;public_ids&quot;: [
+          &quot;1&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 10,
+          &quot;text&quot;: &quot;this light gray car&quot;,
+          &quot;start&quot;: 58,
+          &quot;end&quot;: 77,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 3,
+          &quot;text&quot;: &quot;the parking lot&quot;,
+          &quot;start&quot;: 3,
+          &quot;end&quot;: 18,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;In&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;in&quot;,
+        &quot;evidence&quot;: &quot;is -&gt; In -&gt; lot&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 3,
+          &quot;text&quot;: &quot;the parking lot&quot;,
+          &quot;start&quot;: 3,
+          &quot;end&quot;: 18,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 5,
+          &quot;text&quot;: &quot;West Midlands Police Custody Suite&quot;,
+          &quot;start&quot;: 22,
+          &quot;end&quot;: 56,
+          &quot;public_ids&quot;: [
+            &quot;1&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;of&quot;,
+        &quot;evidence&quot;: &quot;lot -&gt; of -&gt; West Midlands Police Custody Suite&quot;
+      }
+    ],
+    &quot;hops&quot;: 2,
+    &quot;public_ids&quot;: [
+      &quot;1&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;West Midlands Police Custody Suite&quot;
+    ]
+  }
+]</pre><a href="case_11.png"><img width="900" src="case_11.png"></a></article>

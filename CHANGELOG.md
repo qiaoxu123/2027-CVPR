@@ -133,3 +133,5 @@
 - Preserve entity identities and relation scope instead of anonymous nearest-object pooling; uncertainty covers missing mapped targets.
 ### Notes & Caveats
 - No RGB, navigation or geographic reference-frame rules. Confirmation remains sealed until development models are fixed; synthetic/Smoke results do not establish research success.
+- Frozen four-map confirmation: angle-only relation model query-macro Top-1 39.49% versus old head 13.72%; target-group bootstrap supports the gain. Explicit path contribution over matched new architecture remains inconclusive (+1.13pp; CI includes zero).
+- Public object-angle projection and target language are the supported mechanism; shape/topology and multi-hop benefits are not established. No RGB/navigation added.

@@ -1,0 +1,683 @@
+{
+  "results": {
+    "old": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.1371541096673078,
+      "Top1": 0.15692278250885083,
+      "Top2": 0.2973878097789685,
+      "MAE": 87.90214937073915,
+      "median": 87.70196533203125,
+      "NLL": 2.1646860747140693
+    },
+    "matching_angle": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.3836782764332084,
+      "Top1": 0.42216055879820114,
+      "Top2": 0.6571619940675534,
+      "MAE": 50.72912867698831,
+      "median": 27.861371994018555,
+      "NLL": 1.5176176122516185
+    },
+    "relations_angle": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.39493886990413807,
+      "Top1": 0.4317290211463018,
+      "Top2": 0.6506554396708449,
+      "MAE": 51.11577036594848,
+      "median": 27.471994400024414,
+      "NLL": 1.4992798638322709
+    },
+    "matching_instance": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.38178200654582983,
+      "Top1": 0.41249641182661945,
+      "Top2": 0.6372595923835039,
+      "MAE": 51.77085530842312,
+      "median": 29.437789916992188,
+      "NLL": 1.5689434441764118
+    },
+    "relations_instance": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.40542526844277327,
+      "Top1": 0.44292412209357956,
+      "Top2": 0.6647210793225529,
+      "MAE": 47.91050691459771,
+      "median": 26.001449584960938,
+      "NLL": 1.510839651612423
+    }
+  },
+  "controls": {
+    "language_roles_shuffle": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.26463940801256725,
+      "Top1": 0.3050425796574491,
+      "Top2": 0.5161228590565496,
+      "MAE": 62.6272872908729,
+      "median": 43.94440460205078,
+      "NLL": 2.04075894987209
+    },
+    "path_sentences_shuffle": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.388495170816649,
+      "Top1": 0.42522246674959335,
+      "Top2": 0.6443402545210984,
+      "MAE": 51.751210328812995,
+      "median": 27.897851943969727,
+      "NLL": 1.5077278552591693
+    },
+    "target_only": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.397031161854724,
+      "Top1": 0.4375657831786432,
+      "Top2": 0.6567792555736294,
+      "MAE": 50.29579145481719,
+      "median": 27.18594741821289,
+      "NLL": 1.4797789912245602
+    },
+    "shape_topology_off": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.40181820587488826,
+      "Top1": 0.4395751602717443,
+      "Top2": 0.6687398335087551,
+      "MAE": 48.93425464909381,
+      "median": 27.174358367919922,
+      "NLL": 1.4785436886687016
+    },
+    "angle_projection_off": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.137662688489307,
+      "Top1": 0.1318534111568271,
+      "Top2": 0.2708831690747297,
+      "MAE": 88.41440547235972,
+      "median": 87.93435668945312,
+      "NLL": 2.080404124748375
+    },
+    "public_type_prior": {
+      "queries": 3599,
+      "anchor_pairs": 10451,
+      "macro_Top1": 0.36096075669568306,
+      "Top1": 0.4160367428954167,
+      "Top2": 0.6591713711606545,
+      "MAE": 50.594992612347504,
+      "median": 29.423770904541016,
+      "NLL": 1.5195754954215157
+    }
+  },
+  "paired": {
+    "relations_angle minus old": {
+      "delta_pp": 25.778476023683023,
+      "query_improved": 1827,
+      "query_harmed": 413,
+      "query_equal": 1359,
+      "bootstrap": {
+        "physical_target": {
+          "groups": 712,
+          "CI95_pp": [
+            23.117102806985525,
+            28.461782255861966
+          ]
+        },
+        "map": {
+          "groups": 4,
+          "CI95_pp": [
+            10.405643738977071,
+            30.96122837055479
+          ]
+        }
+      }
+    },
+    "relations_angle minus matching_angle": {
+      "delta_pp": 1.1260593470929676,
+      "query_improved": 670,
+      "query_harmed": 587,
+      "query_equal": 2342,
+      "bootstrap": {
+        "physical_target": {
+          "groups": 712,
+          "CI95_pp": [
+            -0.4383683433635618,
+            2.746907027419751
+          ]
+        },
+        "map": {
+          "groups": 4,
+          "CI95_pp": [
+            -1.5394030196911177,
+            3.243039823350706
+          ]
+        }
+      }
+    },
+    "relations_angle minus public_type_prior": {
+      "delta_pp": 3.3978113208454968,
+      "query_improved": 848,
+      "query_harmed": 694,
+      "query_equal": 2057,
+      "bootstrap": {
+        "physical_target": {
+          "groups": 712,
+          "CI95_pp": [
+            1.0401292741853967,
+            5.730385277276188
+          ]
+        },
+        "map": {
+          "groups": 4,
+          "CI95_pp": [
+            1.6754850088183422,
+            3.7844310214129555
+          ]
+        }
+      }
+    }
+  },
+  "strata": {
+    "old": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.15619177872997908,
+        "Top1": 0.1691588785046729,
+        "MAE": 86.39070145366279
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.1323371060711389,
+        "Top1": 0.15344235816676763,
+        "MAE": 88.64365313384458
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.11291583660004711,
+        "Top1": 0.12807881773399016,
+        "MAE": 90.19798594415921
+      }
+    },
+    "matching_angle": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.40152756443079024,
+        "Top1": 0.4264018691588785,
+        "MAE": 48.91959744218876
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.35335617975900824,
+        "Top1": 0.4138905713708863,
+        "MAE": 52.634869980282275
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.3820625281151597,
+        "Top1": 0.4408866995073892,
+        "MAE": 49.33804247807788
+      }
+    },
+    "relations_angle": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.3982536987630366,
+        "Top1": 0.43411214953271027,
+        "MAE": 49.67281408389665
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.38166076497508983,
+        "Top1": 0.4258025439127801,
+        "MAE": 52.41264499718364
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.3934285500074973,
+        "Top1": 0.44745484400656815,
+        "MAE": 50.91251325484347
+      }
+    },
+    "matching_instance": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.4039574743309888,
+        "Top1": 0.42593457943925234,
+        "MAE": 51.26475615000709
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.3471465502259298,
+        "Top1": 0.3971330506763578,
+        "MAE": 52.5025872154725
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.3763987961356382,
+        "Top1": 0.4277504105090312,
+        "MAE": 50.57367654192477
+      }
+    },
+    "relations_instance": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.4196449906127326,
+        "Top1": 0.4504672897196262,
+        "MAE": 48.66472138946301
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.39118910033599813,
+        "Top1": 0.43953159701191197,
+        "MAE": 45.94527631931424
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.37245838956365274,
+        "Top1": 0.4302134646962233,
+        "MAE": 53.251844505743506
+      }
+    },
+    "language_roles_shuffle": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.26641312061515793,
+        "Top1": 0.29836448598130844,
+        "MAE": 63.32628496051461
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.25890141640597847,
+        "Top1": 0.3141530385624874,
+        "MAE": 62.20381617677892
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.26482927403980033,
+        "Top1": 0.2914614121510673,
+        "MAE": 61.89308565051245
+      }
+    },
+    "path_sentences_shuffle": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.39851106260274344,
+        "Top1": 0.4383177570093458,
+        "MAE": 49.13070540584136
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.36248117251766887,
+        "Top1": 0.4104583080961034,
+        "MAE": 54.50770249708625
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.38606077158708735,
+        "Top1": 0.43924466338259444,
+        "MAE": 49.75027055940507
+      }
+    },
+    "target_only": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.4012255100115881,
+        "Top1": 0.44953271028037384,
+        "MAE": 48.01074437260906
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.3833107041478392,
+        "Top1": 0.4270139309509388,
+        "MAE": 52.42987374702513
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.3822162243214875,
+        "Top1": 0.43842364532019706,
+        "MAE": 49.6470984486964
+      }
+    },
+    "shape_topology_off": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.37227162889302107,
+        "Top1": 0.43037383177570093,
+        "MAE": 49.466347380701414
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.4400306670721817,
+        "Top1": 0.44841510195840906,
+        "MAE": 48.77473128653063
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.3769225413962256,
+        "Top1": 0.43596059113300495,
+        "MAE": 47.7132056536052
+      }
+    },
+    "angle_projection_off": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.13266432209556148,
+        "Top1": 0.12967289719626168,
+        "MAE": 88.53793936696634
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.12500887064071367,
+        "Top1": 0.1280032303654351,
+        "MAE": 89.47796926868814
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.17392091339459764,
+        "Top1": 0.15517241379310345,
+        "MAE": 83.6553278433523
+      }
+    },
+    "public_type_prior": {
+      "direct": {
+        "anchor_pairs": 4280,
+        "queries": 1767,
+        "macro_Top1": 0.3721862900980049,
+        "Top1": 0.42733644859813086,
+        "MAE": 50.50142690988832
+      },
+      "unknown": {
+        "anchor_pairs": 4953,
+        "queries": 2192,
+        "macro_Top1": 0.35880963242961417,
+        "Top1": 0.4138905713708863,
+        "MAE": 49.80967608610476
+      },
+      "indirect": {
+        "anchor_pairs": 1218,
+        "queries": 741,
+        "macro_Top1": 0.3143215945847525,
+        "Top1": 0.3850574712643678,
+        "MAE": 54.11727008443748
+      }
+    }
+  },
+  "maps": {
+    "old": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.0
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.1063063063063063
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.15302130497233787
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.13601089570654787
+      }
+    },
+    "matching_angle": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.5416666666666666
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.1873873873873874
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.42905461876387657
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.41135288704853923
+      }
+    },
+    "relations_angle": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.6666666666666666
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.1981981981981982
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.41237158446416294
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.443139322834975
+      }
+    },
+    "matching_instance": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.4583333333333333
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.17117117117117117
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.40193325759507864
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.43374299935169497
+      }
+    },
+    "relations_instance": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.5833333333333334
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.2126126126126126
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.4345400667512374
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.44416328920676745
+      }
+    },
+    "language_roles_shuffle": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.25
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.16576576576576577
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.28869015877432097
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.27832996632996637
+      }
+    },
+    "path_sentences_shuffle": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.75
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.19099099099099098
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.4122971986782239
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.43149082962126434
+      }
+    },
+    "target_only": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.6666666666666666
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.2036036036036036
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.4218741409062755
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.4385655938264634
+      }
+    },
+    "shape_topology_off": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.6666666666666666
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.3855855855855856
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.38924458819256064
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.41472524416002676
+      }
+    },
+    "angle_projection_off": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.041666666666666664
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.14954954954954955
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.13644903511009096
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.13542558086036346
+      }
+    },
+    "public_type_prior": {
+      "birmingham_block_11": {
+        "queries": 12,
+        "macro_Top1": 0.75
+      },
+      "birmingham_block_12": {
+        "queries": 555,
+        "macro_Top1": 0.17927927927927928
+      },
+      "cambridge_block_9": {
+        "queries": 1307,
+        "macro_Top1": 0.37377872064176576
+      },
+      "cambridge_block_13": {
+        "queries": 1725,
+        "macro_Top1": 0.4069965075182466
+      }
+    }
+  },
+  "uncertainty": {
+    "old": {
+      "ECE": 0.07723566575941658,
+      "Brier": 0.8968920248022775,
+      "mean_entropy": 1.956438076917024
+    },
+    "matching_angle": {
+      "ECE": 0.015905825467374738,
+      "Brier": 0.7097178537293267,
+      "mean_entropy": 1.4377458033271069
+    },
+    "relations_angle": {
+      "ECE": 0.025092455167004327,
+      "Brier": 0.7032984188898357,
+      "mean_entropy": 1.4998652654656406
+    },
+    "matching_instance": {
+      "ECE": 0.029626607169159172,
+      "Brier": 0.7227494473793724,
+      "mean_entropy": 1.4411993655231328
+    },
+    "relations_instance": {
+      "ECE": 0.06077755548779261,
+      "Brier": 0.704534611749292,
+      "mean_entropy": 1.578706809110407
+    }
+  },
+  "instance_ID_spatial_audit": {
+    "counts": {
+      "outside1m": 819,
+      "within1m": 21042,
+      "invalid": 17
+    },
+    "max_distance_m": 41.49248106309156,
+    "percentiles_m": [
+      0.0,
+      0.0,
+      7.410109848009307
+    ],
+    "interpretation": "Coordinate/ID disagreement is uncertain weak supervision; it does not establish which field is wrong. Primary angle-only training never uses instance-ID loss."
+  },
+  "confirmation_queries_total": 4117,
+  "scorable_queries": 3599,
+  "unscorable_no_defined_anchor": 518
+}
