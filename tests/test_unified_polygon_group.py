@@ -162,3 +162,41 @@ def test_audit_detects_source_annotation_reference_shift():
     assert blind[0]["target_xy"]==row["target_xy"]
     assert blind[0]["instruction"]==row["instruction"]
     assert len(blind[0]["landmarks"])==2
+
+
+def test_offline_public_blind_binder_matches_REAL_online_full_text_adapter():
+    from graphnav.unified_text_ablation import public_text_record
+    catalog=_public()
+    row=_record()
+    _,_,_,blind=inspect_rows([row],catalog,16)
+    online,audit=public_text_record(
+        row["map_name"],row["instruction"],row["world_bounds"],
+        catalog,PublicNames(catalog),mode="full_text",max_landmarks=16)
+    assert [x["id"] for x in blind[0]["landmarks"]] == [
+        x["id"] for x in online["landmarks"]
+    ]
+    assert [x["contour"] for x in blind[0]["landmarks"]] == [
+        x["contour"] for x in online["landmarks"]
+    ]
+    assert online["instruction"]==row["instruction"]
+    assert not audit["GT_input"]
+
+
+def test_public_overcapacity_retains_query_but_refuses_partial_group():
+    from graphnav.unified_text_ablation import public_text_record
+    catalog=_public()
+    for i in range(20,38):
+        catalog["city_block_1"][str(i)]=dict(
+            name="One Stop",object_type="Building",
+            contour=[[i,50],[i+.4,50],[i+.4,51],[i,51]],
+        )
+    row=_record()
+    online,audit=public_text_record(
+        row["map_name"],row["instruction"],row["world_bounds"],
+        catalog,PublicNames(catalog),mode="full_text",max_landmarks=16)
+    assert len(online["landmarks"])==0
+    assert "all_public_polygons_exceed_capacity" in audit["warnings"]
+    ids,mask,status=public_cardinal_group(
+        online,PublicNames(catalog),catalog,36)
+    assert status=="no_public_anchor"
+    assert not mask.any() and ids.sum()==0
