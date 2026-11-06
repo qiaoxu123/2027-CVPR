@@ -207,7 +207,6 @@ def _cache_one(index, record, sample, encoder, native, renderer,
                    else torch.zeros(native.dimension, dtype=torch.float16))
 
     public = dict(
-        episode_id=record["episode_id"],
         map_name=record["map_name"],
         static={key:static[key][0].detach().cpu().clone() for key in STATIC_KEYS},
         bert_tokens=bert[0].detach().cpu().half().clone(),
@@ -221,6 +220,7 @@ def _cache_one(index, record, sample, encoder, native, renderer,
         observation_available=bool(genuine and any(m.any() for m in masks)),
     )
     private = dict(
+        episode_id=record["episode_id"],
         target_xy=sample["target_xy"].cpu().float(),
         target_polygon=polygon,
         teacher_image=teacher,
@@ -367,8 +367,8 @@ def fit_dev_partition(ds, seed=42, fraction=.8):
     """Physical-target split; no overlap of object ID between TRAIN fit/dev."""
     fit, dev = [], []
     for i in range(len(ds)):
-        p, _ = ds[i]
-        group = _physical_id(p["episode_id"])
+        _, labels = ds[i]
+        group = _physical_id(labels["episode_id"])
         r = int(hashlib.sha256(f"{seed}/{group}".encode()).hexdigest()[:8], 16)
         (fit if r % 1000 < fraction*1000 else dev).append(i)
     if not fit or not dev:
@@ -392,7 +392,7 @@ def evaluate(model, ds, indices, device, batch_size):
                              kwargs["world_bounds"], branch="fused")
         for i, (p, _) in enumerate(pairs):
             records.append(dict(
-                episode_id=p["episode_id"],
+                episode_id=pairs[i][1]["episode_id"],
                 geometry_NE_m=geo["Top1_NE_m"][i],
                 fused_NE_m=fused["Top1_NE_m"][i],
                 geometry_R={str(k):bool(geo["hit_flags"][str(k)][i])
