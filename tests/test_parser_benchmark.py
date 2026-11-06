@@ -31,3 +31,15 @@ def test_correct_direction_control_requires_all_anchors_correct():
  from scripts.prepare_parser_benchmark import direction_pools
  rows=[dict(index=1,anchor=0,top1=1,error=5,target_index_offline=1),dict(index=1,anchor=1,top1=0,error=150,target_index_offline=1),dict(index=2,anchor=0,top1=1,error=10,target_index_offline=1)]
  pools=direction_pools(rows);assert {x['index'] for x in pools['correct_direction']}=={2};assert {x['index'] for x in pools['large_error_context_present']}=={1}
+
+def test_gliner_relation_endpoints_use_model_offsets_for_repeated_words():
+ from scripts.run_parser_benchmark import gliner_graph
+ text='car near the lot; car near Library.';second=text.index('car',1);library=text.index('Library')
+ raw={'entities':{'navigation target':[dict(text='car',start=0,end=3)],'intermediate reference object':[dict(text='car',start=second,end=second+3)],'named landmark':[dict(text='Library',start=library,end=library+7)]},'relation_extraction':{'near':[dict(head=dict(text='car',start=second,end=second+3),tail=dict(text='Library',start=library,end=library+7))]}}
+ graph=gliner_graph(raw,text,['Library']);entities={e['id']:e for e in graph['entities']};assert entities[graph['relations'][0]['subject']]['start']==second
+
+def test_case_only_alignment_is_unique_and_does_not_choose_ambiguous_mentions():
+ from scripts.run_parser_benchmark import aligned_entity
+ entity,note=aligned_entity('The white car near Library.',dict(id='t',text='the white car',role='target'),0)
+ assert entity and entity['text']=='The white car' and entity['start']==0;assert 'case' in note
+ entity,note=aligned_entity('The car beside the car.',dict(id='t',text='THE CAR',role='target'),0);assert entity is None

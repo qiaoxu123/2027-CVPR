@@ -16,13 +16,17 @@ def infer_type(text):
  return 'other'
 
 def aligned_entity(text,e,number):
- value=e.get('text','');start=e.get('start');end=e.get('end');changed=False
+ value=e.get('text','');start=e.get('start');end=e.get('end');changed=False;case_only=False
  if not isinstance(value,str) or not value:return None,'empty entity'
  if not isinstance(start,int) or not isinstance(end,int) or text[start:end]!=value:
   hits=[m.start() for m in re.finditer(re.escape(value),text)]
-  if len(hits)!=1:return None,'nonunique/nonliteral entity: '+value
-  start=hits[0];end=start+len(value);changed=True
- return dict(id=str(e.get('id',f'e{number}')),text=value,start=start,end=end,role=e.get('role','reference'),type=e.get('type','unknown')),'span_aligned_from_unique_literal' if changed else None
+  if len(hits)!=1:
+   case_hits=list(re.finditer(re.escape(value),text,flags=re.IGNORECASE)) if not hits else []
+   if len(case_hits)!=1:return None,'nonunique/nonliteral entity: '+value
+   start,end=case_hits[0].span();value=text[start:end];case_only=True
+  else:start=hits[0];end=start+len(value)
+  changed=True
+ return dict(id=str(e.get('id',f'e{number}')),text=value,start=start,end=end,role=e.get('role','reference'),type=e.get('type','unknown')),'span_aligned_from_unique_case_only_literal' if case_only else 'span_aligned_from_unique_literal' if changed else None
 
 def convert_spacy(parsed,mentions):
  target=parsed['target_span'];tid=target['node'] if target else None;es={}
@@ -57,6 +61,13 @@ def gliner_graph(raw,text,names):
  def endpoint(item):
   value=item.get('text','') if isinstance(item,dict) else item
   if not isinstance(value,str):return None
+  # Prefer model-provided character offsets to avoid merging repeated words.
+  exact=[]
+  if isinstance(item,dict) and isinstance(item.get('start'),int) and isinstance(item.get('end'),int):
+   exact=[e for e in entities if e['start']==item['start'] and e['end']==item['end'] and e['text']==value]
+  if exact:
+   if len(exact)>1:warnings.append('multiple_role_predictions_for_endpoint: '+value)
+   return exact[0]['id']
   hits=[e for e in entities if e['text']==value]
   if hits:
    if len(hits)>1:warnings.append('multiple_role_predictions_for_endpoint: '+value)
