@@ -182,3 +182,36 @@ class PublicPolygonGroupDataset(FullCandidateDataset):
         item["angular_anchor_index"]=torch.tensor(
             int(found[0]) if len(found)==1 else -1,dtype=torch.long)
         return item
+
+
+
+@torch.no_grad()
+def audit_group_direction_vs_train_gt(target_xy,nodes,map_sizes_m,
+                                      reference_mask,predicate_ids, *,
+                                      tolerance_deg=45.,min_radius_m=1.):
+    """Diagnostic ONLY: do target GT positions agree with ANY literal direction?
+
+    GT is *never used to choose a Polygon, skip a sample, or generate model
+    inputs*. For a group of multiple polygons report OR-consistency of the
+    public map axes vs the literal instruction cardinal. Low agreement warns
+    that maps lack a reliable world-frame convention.
+    """
+    if (target_xy.ndim!=2 or target_xy.shape[-1]!=2 or nodes.ndim!=3 or
+            nodes.shape[0]!=len(target_xy) or map_sizes_m.shape!=target_xy.shape or
+            reference_mask.shape!=(len(target_xy),predicate_ids.shape[1]) or
+            nodes.shape[1]<reference_mask.shape[1] or
+            predicate_ids.shape!=reference_mask.shape):
+        raise ValueError("GT-frame audit dimension mismatch")
+    m=reference_mask.shape[1]
+    delta=(target_xy[:,None,:].float()-nodes[:,:m,:2].float())*map_sizes_m[:,None,:].float()
+    length=delta.norm(dim=-1)
+    theta=torch.atan2(delta[...,1],delta[...,0])
+    directions=torch.tensor([0.,0.,math.pi,math.pi/2,3*math.pi/2],
+                            device=target_xy.device)
+    d=directions[predicate_ids.long().clamp(0,4)]
+    valid_polygon=reference_mask.bool() & (length>min_radius_m)
+    consistent=(torch.cos(theta-d)>=math.cos(math.radians(tolerance_deg))) & valid_polygon
+    eligible=valid_polygon.any(-1)
+    return dict(eligible=eligible,matched_any=consistent.any(-1),
+                matched_count=int((eligible & consistent.any(-1)).sum()),
+                eligible_count=int(eligible.sum()))
