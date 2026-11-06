@@ -13,6 +13,7 @@ import torch
 
 from .unified_text_ablation_runtime import UnifiedTextAblationPolicy
 from .unified_direct_bearing_loss import predicate_ids_for_record
+from .checkpointing import file_sha256
 
 
 class UnifiedDirectBearingPolicy(UnifiedTextAblationPolicy):
@@ -31,6 +32,8 @@ class UnifiedDirectBearingPolicy(UnifiedTextAblationPolicy):
         exp=bundle.get("angular_experiment")
         if not isinstance(exp,dict) or not exp.get("explicit_predicates"):
             raise ValueError("Angular main runtime requires a completed explicit-predicate checkpoint")
+        if bundle.get("source_sha256",{}).get("public_objects")!=file_sha256(public_objects):
+            raise ValueError("Runtime PUBLIC Polygon catalog differs from the full TRAIN catalog")
         self.angular_training_weight=float(exp["weight"])
         self._explicit_predicate_ids=None
         self.angular_reference_index=-1
