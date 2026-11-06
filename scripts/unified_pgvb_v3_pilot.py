@@ -539,6 +539,8 @@ def train(args):
     start_epoch = 0
     start_offset = 0
     partial_total = 0.0
+    partial_components = {}
+    partial_component_samples = 0
     stop_reason = "max_epochs"
     previous_training_s = 0.0
     if args.resume:
@@ -555,6 +557,8 @@ def train(args):
         start_epoch = saved["epoch"]
         start_offset = saved.get("next_offset", 0)
         partial_total = saved.get("partial_total", 0.0)
+        partial_components = saved.get("component_totals", {})
+        partial_component_samples = saved.get("component_samples", 0)
         previous_training_s = saved.get("elapsed_training_s", 0.0)
         torch.set_rng_state(saved["rng_cpu"])
         if torch.cuda.is_available():
@@ -565,6 +569,7 @@ def train(args):
     def save_resume(epoch, offset, total):
         atomic_save(dict(model=model.state_dict(), optimizer=opt.state_dict(),
                          epoch=epoch, next_offset=offset, partial_total=total,
+                         component_totals=component_totals if offset else {},component_samples=component_samples if offset else 0,
                          losses=steps, seed=args.seed, fit=fit, dev=dev,
                          elapsed_training_s=previous_training_s+time.perf_counter()-training_started,
                          cache_sha256=file_sha256(args.cache/"manifest.json"),
@@ -581,6 +586,8 @@ def train(args):
         order = np.random.default_rng(args.seed+epoch).permutation(fit).tolist()
         offset = start_offset if epoch == start_epoch else 0
         total = partial_total if epoch == start_epoch else 0.0
+        component_totals = dict(partial_components) if epoch == start_epoch else {}
+        component_samples = partial_component_samples if epoch == start_epoch else 0
         budget_hit = False
         for at in range(offset, len(order), args.batch_size):
             if previous_training_s+time.perf_counter()-training_started >= args.max_training_hours*3600:
@@ -604,17 +611,26 @@ def train(args):
                 model.parameters(), 5.0, error_if_nonfinite=True)
             opt.step()
             total += float(loss["total"].detach()) * len(batch)
+            component_keys=("geo_ce","geo_polygon","fused_ce","fused_polygon","text_visual","gt_image_visual")
+            component_values=torch.stack([loss[k].detach() for k in component_keys]).cpu().tolist()
+            for key,value in zip(component_keys,component_values):
+                component_totals[key]=component_totals.get(key,0.0)+value*len(batch)
+            for key in ("visual_eligible","target_polygon_valid"):
+                component_totals[key]=component_totals.get(key,0.0)+int(loss[key])
+            component_samples+=len(batch)
             update = at//args.batch_size+1
             if update % args.checkpoint_updates == 0:
                 save_resume(epoch, at+len(batch), total)
                 print(json.dumps(dict(epoch=epoch+1,update=update,
                                       seen=at+len(batch),mean_loss=total/(at+len(batch)),
-                                      grad_norm=float(grad_norm),elapsed_total_s=time.perf_counter()-training_started)),flush=True)
+                                      grad_norm=float(grad_norm),components_mean={k:v/max(component_samples,1) for k,v in component_totals.items()},elapsed_total_s=time.perf_counter()-training_started)),flush=True)
         if budget_hit:
             break
         if args.device.startswith("cuda"):
             torch.cuda.synchronize()
         report = dict(epoch=epoch+1,fit=len(fit),
+                      components_mean={k:v/max(component_samples,1) for k,v in component_totals.items()},
+                      component_samples=component_samples,
                       mean_train_loss=total/len(fit),
                       elapsed_s=time.perf_counter()-epoch_start,
                       updates=math.ceil(len(fit)/args.batch_size),
