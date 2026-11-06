@@ -1,0 +1,367 @@
+{
+  "case": {
+    "occurrence_id": "cambridge_block_28:17:3:26",
+    "map": "cambridge_block_28",
+    "object_category": "Building",
+    "word": "right",
+    "frozen_result": "conflict",
+    "verified_geometric_trigger": "none",
+    "attribution_status": "not_ambiguous",
+    "centerline_error_confirmed_by_independent_lane_annotation": false,
+    "GT_point_side": "conflict",
+    "GT_point_margin_m": -19.539454900973777,
+    "centroid_side": "conflict",
+    "GT_inside_target_polygon_1m": true,
+    "GT_to_polygon_m": 0.0,
+    "polygon_area_m2": 161.80387807242636,
+    "distance_polygon_centerline_m": 10.603999918100435,
+    "tolerance_diagnostics": [
+      {
+        "tol_m": 0.0,
+        "result": "conflict"
+      },
+      {
+        "tol_m": 0.5,
+        "result": "conflict"
+      },
+      {
+        "tol_m": 1.0,
+        "result": "conflict"
+      },
+      {
+        "tol_m": 2.0,
+        "result": "conflict"
+      }
+    ],
+    "resolution_diagnostics": [
+      {
+        "resolution_m": 0.5,
+        "state": "unique_field",
+        "result": "conflict"
+      },
+      {
+        "resolution_m": 0.75,
+        "state": "unique_field",
+        "result": "conflict"
+      },
+      {
+        "resolution_m": 1.25,
+        "state": "unique_field",
+        "result": "conflict"
+      },
+      {
+        "resolution_m": 2.0,
+        "state": "unique_field",
+        "result": "conflict"
+      }
+    ],
+    "all_resolution_results_stable": true,
+    "F_exploration_result": "conflict",
+    "strict_polygon_predicate_retained": true,
+    "instruction": "The third building on the right of the Abbey Road when coming from the Walnut Tree Avenue."
+  },
+  "reference_ids": [
+    "369"
+  ],
+  "source_ids": [
+    "372",
+    "398",
+    "400",
+    "416"
+  ],
+  "source_components": [
+    {
+      "id": "372",
+      "name": "Walnut Tree Avenue",
+      "category": "TrafficRoad",
+      "distance_to_A_m": 52.17855594193539
+    },
+    {
+      "id": "398",
+      "name": "Walnut Tree Avenue",
+      "category": "TrafficRoad",
+      "distance_to_A_m": 0.0
+    },
+    {
+      "id": "400",
+      "name": "Walnut Tree Avenue",
+      "category": "TrafficRoad",
+      "distance_to_A_m": 50.30200798031094
+    },
+    {
+      "id": "416",
+      "name": "Walnut Tree Avenue",
+      "category": "TrafficRoad",
+      "distance_to_A_m": 16.42473441728549
+    }
+  ],
+  "topology": {
+    "key": "cambridge_block_28:369<-372,398,400,416",
+    "base_state": "unique_field",
+    "source_segments": [
+      "372",
+      "398",
+      "400",
+      "416"
+    ],
+    "road_ids": [
+      "369"
+    ],
+    "endpoint_source_distances_m": [
+      0.0,
+      48.56060264726871
+    ],
+    "contact_geodesic_range_m": [
+      0.0,
+      5.414213562373095
+    ],
+    "road_length_m": 62.627416997969505,
+    "source_gap_m": 0.0,
+    "source_intersection_area_m2": 32.17036477356478,
+    "one_endpoint_in_source_buffer_1m": true,
+    "independent_source_contacts_both_ends": false,
+    "geometry_sensitivity": [
+      {
+        "resolution_m": 0.75,
+        "state": "unique_field",
+        "heading_error_p90_deg": 5.244614911763142
+      },
+      {
+        "resolution_m": 1.25,
+        "state": "unique_field",
+        "heading_error_p90_deg": 6.685124915360552
+      }
+    ],
+    "GT_used": false
+  },
+  "original_scope": [
+    0,
+    90
+  ],
+  "language_evidence": [
+    {
+      "rule": "travel_road_A_anchor",
+      "span": [
+        39,
+        49
+      ],
+      "text": "Abbey Road",
+      "geometry_ids": [
+        "369"
+      ],
+      "note": "named road being entered / relation road, not nearest landmark"
+    },
+    {
+      "rule": "road_A_entered_from_B",
+      "span": [
+        55,
+        89
+      ],
+      "text": "coming from the Walnut Tree Avenue",
+      "geometry_ids": [
+        "369",
+        "372",
+        "398",
+        "400",
+        "416"
+      ],
+      "note": "positive direction points away from independent source junction; complete directed centerline frozen"
+    }
+  ],
+  "all_object_descriptions": [
+    "The gray house on Abbey Road that is 2 houses to the right of the brown house at the intersection with Walnut Tree Avenue.",
+    "The gray house on Abbey Road that is 2 houses to the right of the brown house at the intersection with Walnut Tree Avenue.",
+    "The building on Abbey Road that has a gray car and a blue car with a black roof in front of it.",
+    "The third building on the right of the Abbey Road when coming from the Walnut Tree Avenue.",
+    "This is a residential building located on Abbey Road. There is a white car parked on the street and a blue car on the opposite side of the street in front of the buildings.",
+    "The first grey roof building found left of the brown roofed rectangular building, all found below Abbey Road. The building has three silver cars above it in a row."
+  ],
+  "same_road_entry_cases": [
+    {
+      "occurrence_id": "cambridge_block_28:261:4:35",
+      "map": "cambridge_block_28",
+      "object_category": "Car",
+      "word": "right",
+      "frozen_result": "ambiguous",
+      "verified_geometric_trigger": "polygon_intersects_centerline",
+      "attribution_status": "full_contour_side_indeterminate_under_all_tested_centerlines",
+      "centerline_error_confirmed_by_independent_lane_annotation": false,
+      "GT_point_side": "consistent",
+      "GT_point_margin_m": 2.686300050719822,
+      "centroid_side": "consistent",
+      "GT_inside_target_polygon_1m": true,
+      "GT_to_polygon_m": 0.0,
+      "polygon_area_m2": 55.818805099221535,
+      "distance_polygon_centerline_m": 0.0,
+      "tolerance_diagnostics": [
+        {
+          "tol_m": 0.0,
+          "result": "ambiguous"
+        },
+        {
+          "tol_m": 0.5,
+          "result": "ambiguous"
+        },
+        {
+          "tol_m": 1.0,
+          "result": "ambiguous"
+        },
+        {
+          "tol_m": 2.0,
+          "result": "ambiguous"
+        }
+      ],
+      "resolution_diagnostics": [
+        {
+          "resolution_m": 0.5,
+          "state": "unique_field",
+          "result": "ambiguous"
+        },
+        {
+          "resolution_m": 0.75,
+          "state": "unique_field",
+          "result": "ambiguous"
+        },
+        {
+          "resolution_m": 1.25,
+          "state": "unique_field",
+          "result": "ambiguous"
+        },
+        {
+          "resolution_m": 2.0,
+          "state": "unique_field",
+          "result": "ambiguous"
+        }
+      ],
+      "all_resolution_results_stable": true,
+      "F_exploration_result": "ambiguous",
+      "strict_polygon_predicate_retained": true,
+      "instruction": "The first white car that is on the right of the Abbey Road when coming from the Walnut Tree Avenue Road."
+    },
+    {
+      "occurrence_id": "cambridge_block_28:17:3:26",
+      "map": "cambridge_block_28",
+      "object_category": "Building",
+      "word": "right",
+      "frozen_result": "conflict",
+      "verified_geometric_trigger": "none",
+      "attribution_status": "not_ambiguous",
+      "centerline_error_confirmed_by_independent_lane_annotation": false,
+      "GT_point_side": "conflict",
+      "GT_point_margin_m": -19.539454900973777,
+      "centroid_side": "conflict",
+      "GT_inside_target_polygon_1m": true,
+      "GT_to_polygon_m": 0.0,
+      "polygon_area_m2": 161.80387807242636,
+      "distance_polygon_centerline_m": 10.603999918100435,
+      "tolerance_diagnostics": [
+        {
+          "tol_m": 0.0,
+          "result": "conflict"
+        },
+        {
+          "tol_m": 0.5,
+          "result": "conflict"
+        },
+        {
+          "tol_m": 1.0,
+          "result": "conflict"
+        },
+        {
+          "tol_m": 2.0,
+          "result": "conflict"
+        }
+      ],
+      "resolution_diagnostics": [
+        {
+          "resolution_m": 0.5,
+          "state": "unique_field",
+          "result": "conflict"
+        },
+        {
+          "resolution_m": 0.75,
+          "state": "unique_field",
+          "result": "conflict"
+        },
+        {
+          "resolution_m": 1.25,
+          "state": "unique_field",
+          "result": "conflict"
+        },
+        {
+          "resolution_m": 2.0,
+          "state": "unique_field",
+          "result": "conflict"
+        }
+      ],
+      "all_resolution_results_stable": true,
+      "F_exploration_result": "conflict",
+      "strict_polygon_predicate_retained": true,
+      "instruction": "The third building on the right of the Abbey Road when coming from the Walnut Tree Avenue."
+    },
+    {
+      "occurrence_id": "cambridge_block_28:180:4:93",
+      "map": "cambridge_block_28",
+      "object_category": "Building",
+      "word": "right",
+      "frozen_result": "consistent",
+      "verified_geometric_trigger": "none",
+      "attribution_status": "not_ambiguous",
+      "centerline_error_confirmed_by_independent_lane_annotation": false,
+      "GT_point_side": "consistent",
+      "GT_point_margin_m": 8.852004944198761,
+      "centroid_side": "consistent",
+      "GT_inside_target_polygon_1m": true,
+      "GT_to_polygon_m": 0.0,
+      "polygon_area_m2": 80.56775186918205,
+      "distance_polygon_centerline_m": 4.329675040685736,
+      "tolerance_diagnostics": [
+        {
+          "tol_m": 0.0,
+          "result": "consistent"
+        },
+        {
+          "tol_m": 0.5,
+          "result": "consistent"
+        },
+        {
+          "tol_m": 1.0,
+          "result": "consistent"
+        },
+        {
+          "tol_m": 2.0,
+          "result": "consistent"
+        }
+      ],
+      "resolution_diagnostics": [
+        {
+          "resolution_m": 0.5,
+          "state": "unique_field",
+          "result": "consistent"
+        },
+        {
+          "resolution_m": 0.75,
+          "state": "unique_field",
+          "result": "consistent"
+        },
+        {
+          "resolution_m": 1.25,
+          "state": "unique_field",
+          "result": "consistent"
+        },
+        {
+          "resolution_m": 2.0,
+          "state": "unique_field",
+          "result": "consistent"
+        }
+      ],
+      "all_resolution_results_stable": true,
+      "F_exploration_result": "consistent",
+      "strict_polygon_predicate_retained": true,
+      "instruction": "If you turn onto Abbey Road coming from Walnut Tree Avenue this is the first building to the right."
+    }
+  ],
+  "target_binding_original_annotation_exact": true,
+  "direction_reversed_to_fit_GT": false,
+  "conclusion": "独立名称/作用域、单端接触和多分辨率方向一致；字面进入道路的侧别规则仍冲突。不能归咎于已证实拓扑错误，也缺少作者视角/意图金标准来确认真实标注错误。保留语义约定/标注不一致未决，不翻转方向。"
+}

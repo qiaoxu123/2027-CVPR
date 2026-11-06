@@ -1,5 +1,18 @@
 # Changelog
 
+## [direction-frames-v5] - 2026-11-06
+### Features
+- Pin the complete v4 experiment and reproduce its 44 directed-road cases; audit Abbey conflict and classify all 22 ambiguous contours without GT-based sign changes.
+- Add full-TRAIN text-role retrieval and conservative new syntax/scope checks, with explicit new-expression, missed-rule, near-duplicate and development-map/road/object strata.
+- Compare frozen local fields, world axes, start bearing, yaw and unsigned PCA on identical contour projections/support; isolate exploratory geometry smoothing and retain failed controls.
+### Design Rationale
+- Keep geometry parameters frozen while testing language adaptation; a newly parsed role is not evidence that the original end-to-end parser generalized.
+- Separate retrospective evidence from blind external validation, and conditional consistency from overall coverage or true author-frame recognition.
+### Notes & Caveats
+- TRAIN only; no Val/Test, graph/navigation/GeomBelief training or navigation SR experiments. No existing model or v4 artifact changed.
+- New geometry-scorable evidence remains small and includes repeated development objects; no new-map unique-field success is established.
+- Public contour and strict-road-side ambiguity persists; exploratory smoothing has no independent lane-centerline ground truth. External review execution status is logged separately.
+
 ## [direction-frames-v4] - 2026-11-06
 ### Features
 - Add per-relation semantic frame evidence, full-TRAIN explicit-role search, conservative target-to-named-road travel anchors and scope repairs.
