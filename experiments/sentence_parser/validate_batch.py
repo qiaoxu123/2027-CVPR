@@ -2,13 +2,16 @@
 import json
 import sys
 from pathlib import Path
-from cache import ROOT, lines, span
+try:
+    from .cache import ROOT, lines, span
+except ImportError:
+    from cache import ROOT, lines, span
 
 DIRECTIONAL = {"behind", "front", "in_front_of", "left", "right", "left_of", "right_of",
                "above", "below", "north", "south", "east", "west", "at_back"}
 
 
-def validate(path):
+def validate(path, expected_input=None):
     source = lines(ROOT / "inputs/instructions.jsonl")
     records = json.loads(path.read_text())
     errors, indices = [], set()
@@ -42,10 +45,16 @@ def validate(path):
                     span(text, frame["view_evidence"])
         except Exception as exc:
             errors.append({"i": index, "error": str(exc)})
+    if expected_input is not None:
+        expected = lines(expected_input)
+        wanted = [row["i"] for row in expected]
+        got = [row.get("i") for row in records]
+        if sorted(wanted) != sorted(got):
+            errors.append({"error": "assignment indices mismatch", "missing": sorted(set(wanted) - set(got)), "unexpected": sorted(set(got) - set(wanted))})
     return {"file": str(path), "records": len(records), "valid": not errors, "errors": errors}
 
 
 if __name__ == "__main__":
-    result = validate(Path(sys.argv[1]))
+    result = validate(Path(sys.argv[1]), Path(sys.argv[2]) if len(sys.argv) > 2 else None)
     print(json.dumps(result, ensure_ascii=False, indent=2))
     raise SystemExit(0 if result["valid"] else 1)

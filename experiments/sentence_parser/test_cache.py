@@ -1,8 +1,11 @@
 """Contract checks for direct annotations and strict lookup behavior."""
 import json
 import unittest
+import tempfile
+from pathlib import Path
 
 from .cache import ROOT, build, compile_records, lookup, span
+from .validate_batch import validate
 
 
 class CacheContract(unittest.TestCase):
@@ -24,6 +27,22 @@ class CacheContract(unittest.TestCase):
         for record in self.records:
             if record["provenance"]["batch"].startswith("direct_batch_luna_"):
                 self.assertEqual(record["provenance"]["model_requested"], "gpt-6-luna")
+
+    def test_rejected_records_return_to_pending(self):
+        audit = self.status["semantic_rejection_history"]
+        self.assertEqual(audit["rejected_unique"], audit["restored_unique"] + audit["pending_unique"])
+        self.assertLessEqual(audit["pending_unique"], self.status["pending_unique"])
+
+    def test_batch_must_match_assigned_instruction_set(self):
+        batch = next(ROOT.glob("direct_batch_luna_*.json"))
+        authored = json.loads(batch.read_text())
+        expected = [{"i": row["i"], **self.source[row["i"]]} for row in authored]
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "assigned.jsonl"
+            path.write_text("".join(json.dumps(row) + "\n" for row in expected))
+            self.assertTrue(validate(batch, path)["valid"])
+            path.write_text("".join(json.dumps(row) + "\n" for row in expected[:-1]))
+            self.assertFalse(validate(batch, path)["valid"])
 
     def test_evidence_roundtrip(self):
         for row in self.records:

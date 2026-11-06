@@ -119,12 +119,21 @@ def build():
     pending = [r["text_id"] for r in source if r["text_id"] not in parsed]
     (out / "pending_ids.json").write_text(json.dumps(pending, indent=2))
     aliases = lines(ROOT / "inputs/aliases.jsonl")
+    rejected_ids = set()
+    for manifest in (ROOT / "rejected").glob("*/manifest.json"):
+        history = json.loads(manifest.read_text())
+        for batch in history.get("batches", []):
+            rejected_ids.update(source[i]["text_id"] for i in batch.get("indices", []))
     coverage = Counter(a["split_file"] for a in aliases if a["text_id"] in parsed)
     totals = Counter(a["split_file"] for a in aliases)
     status = {"unique_instructions": len(source), "parsed_unique": len(parsed),
               "pending_unique": len(pending), "complete": not pending,
               "relations": sum(len(r["relations"]) for r in records),
               "parsed_by_requested_model": dict(Counter(r["provenance"]["model_requested"] for r in records)),
+              "semantic_rejection_history": {
+                  "rejected_unique": len(rejected_ids),
+                  "restored_unique": len(rejected_ids & parsed),
+                  "pending_unique": len(rejected_ids - parsed)},
               "split_lookup_coverage": {k: {"parsed": coverage[k], "total": totals[k]} for k in sorted(totals)},
               "protocol_sha256": hashlib.sha256((ROOT / "PROTOCOL.md").read_bytes()).hexdigest(),
               "schema_not_a_claim_of_perfect_annotation": True}

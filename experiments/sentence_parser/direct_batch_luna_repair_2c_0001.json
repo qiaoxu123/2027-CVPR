@@ -1,0 +1,1269 @@
+[
+  {
+    "i": 8800,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "h1": [
+        "the brown house in Chesterwood Gardens",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "h2": [
+        "the brown house in the corner",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h1",
+        "parked in front of the brown house",
+        "U",
+        "high"
+      ],
+      [
+        "h1",
+        "in",
+        "road",
+        "in Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "h1",
+        "left_of",
+        "h2",
+        "3 houses to the left of the brown house",
+        "U",
+        "medium"
+      ],
+      [
+        "h2",
+        "at_corner",
+        "road",
+        "the brown house in the corner",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "parked_against",
+        "h2",
+        "with a blue car parked against it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘3 houses to the left’ lacks an explicit observer/travel direction; left frame unresolved."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8801,
+    "e": {
+      "t": [
+        "a car",
+        "object"
+      ],
+      "road": [
+        "T shaped road called Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "c": [
+        "a shared parking area",
+        "region"
+      ],
+      "top": [
+        "the top of the T",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "road",
+        "t_shaped",
+        "road",
+        "T shaped road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on T shaped road called Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "right_of",
+        "top",
+        "just to the right of the top of the T",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘top’ and rightward reference point are the T's unnamed geometry; no separate named entity or orientation supplied."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "alternatives": {
+      "2": [
+        {
+          "subject": "t",
+          "predicate": "right_of",
+          "reference": [
+            "top"
+          ],
+          "reason": "Possible attachment of “just to the right” to the car rather than shared parking area."
+        }
+      ]
+    }
+  },
+  {
+    "i": 8802,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "h": [
+        "a brown house",
+        "object"
+      ],
+      "roof": [
+        "a dark gray roof",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "d",
+        "in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "of",
+        "h",
+        "the driveway of a brown house",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "has_roof",
+        "roof",
+        "with a dark gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "across_from",
+        "t",
+        "a black car across from it",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "off",
+        "road",
+        "off Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "alternatives": {
+      "3": [
+        {
+          "subject": "h",
+          "predicate": "across_from",
+          "reference": [
+            "b"
+          ],
+          "reason": "“across from it” may refer to house or driveway; primary target-car attachment retained."
+        }
+      ],
+      "4": [
+        {
+          "subject": "d",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road attachment may apply to driveway/house rather than black car."
+        },
+        {
+          "subject": "h",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road attachment may apply to house."
+        }
+      ]
+    }
+  },
+  {
+    "i": 8803,
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood gardens",
+        "named_landmark"
+      ],
+      "area": [
+        "the lower left area",
+        "region"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "road",
+        "In Chesterwood gardens",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "area",
+        "parked in the lower left area",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_of",
+        "b",
+        "to the right of a blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘lower left’ is area wording without a specified frame or defined region boundaries."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8804,
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "h1": [
+        "the brown house on Chesterwood Gardens",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "h2": [
+        "the brown house",
+        "object",
+        1
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h1",
+        "parked in front of the brown house",
+        "U",
+        "high"
+      ],
+      [
+        "h1",
+        "on",
+        "road",
+        "house on Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "h1",
+        "right_of",
+        "h2",
+        "8 houses to the right of the brown house",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "parked_against_side_of",
+        "h2",
+        "with a black car parked against its side",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Right-of relation uses unspecified perspective; ‘8 houses’ indicates an ordinal/count displacement, not metric distance."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8805,
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "h1": [
+        "the brown house on Chesterwood Gardens",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "h2": [
+        "the brown house",
+        "object",
+        1
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h1",
+        "in front of the brown house",
+        "U",
+        "high"
+      ],
+      [
+        "h1",
+        "on",
+        "road",
+        "house on Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "h1",
+        "right_of",
+        "h2",
+        "8 houses to the right of the brown house",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "parked_against_side_of",
+        "h2",
+        "with a black car parked against its side",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Right-of perspective unspecified; 8-house relation is linguistic count offset."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8806,
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "complex": [
+        "a multi housing complex",
+        "group"
+      ],
+      "houses": [
+        "multiple brown houses",
+        "group"
+      ],
+      "roofs": [
+        "gray roofs",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to a black car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "complex",
+        "parked in front of a multi housing complex",
+        "U",
+        "high"
+      ],
+      [
+        "complex",
+        "made_up_of",
+        "houses",
+        "complex made up of multiple brown houses",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "have",
+        "roofs",
+        "brown houses with gray roofs",
+        "N",
+        "high"
+      ],
+      [
+        "complex",
+        "off",
+        "road",
+        "off Chesterwood Gardens",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8807,
+    "e": {
+      "t": [
+        "Dark blue car",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "group": [
+        "a group of 13 Brown homes with gray roofs",
+        "group"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "edge",
+        "next to the edge of the map",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "group",
+        "parked in front of a group of 13 Brown homes",
+        "U",
+        "high"
+      ],
+      [
+        "group",
+        "has_roofs",
+        "group",
+        "with gray roofs",
+        "N",
+        "high"
+      ],
+      [
+        "group",
+        "off",
+        "road",
+        "off Chesterwood Gardens",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8808,
+    "e": {
+      "t": [
+        "The only blue care",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens road",
+        "named_landmark"
+      ],
+      "h": [
+        "a house",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "parked on Chesterwood Gardens road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of a house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "next_to",
+        "b",
+        "house next to a black car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘only’ is a uniqueness claim over blue cars; it does not add a spatial relation.",
+      "‘care’ appears to be source typo for car; mention retained verbatim."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "alternatives": {
+      "2": [
+        {
+          "subject": "t",
+          "predicate": "next_to",
+          "reference": [
+            "b"
+          ],
+          "reason": "“next to a black car” may attach to the target car or house."
+        }
+      ]
+    }
+  },
+  {
+    "i": 8809,
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "h": [
+        "a brown house",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "parked in front of a brown house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at_end_of",
+        "road",
+        "a brown house at the end of Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘end’ identifies an unspecified terminus; no direction or endpoint entity is named."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8810,
+    "e": {
+      "red": [
+        "A red car",
+        "object"
+      ],
+      "h": [
+        "a building",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Garden Road",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "in_front_of",
+        "h",
+        "parked in front of a building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "along",
+        "road",
+        "a building along the road named Chesterwood Garden Road",
+        "R",
+        "medium"
+      ],
+      [
+        "white",
+        "at_left_side_of",
+        "red",
+        "a white car parked at its left side",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left-side perspective is unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "alternatives": {
+      "2": [
+        {
+          "subject": "white",
+          "predicate": "at_left_side_of",
+          "reference": [
+            "h"
+          ],
+          "reason": "“its” may refer to the building rather than red car."
+        }
+      ]
+    }
+  },
+  {
+    "i": 8811,
+    "e": {
+      "red": [
+        "A red car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "h": [
+        "a house",
+        "object"
+      ],
+      "roadarea": [
+        "the Chesterwood Gardens traffic road cul-de-sac",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "beside",
+        "white",
+        "parked beside a white car",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "in",
+        "d",
+        "in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "of",
+        "h",
+        "driveway of a house",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "located_in",
+        "roadarea",
+        "house located in the Chesterwood Gardens traffic road cul-de-sac",
+        "N",
+        "high"
+      ],
+      [
+        "roadarea",
+        "on",
+        "road",
+        "Chesterwood Gardens traffic road cul-de-sac",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8812,
+    "e": {
+      "red": [
+        "A red car",
+        "object"
+      ],
+      "h": [
+        "the right side building",
+        "object"
+      ],
+      "road": [
+        "Chesterwood gardens",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "in_front_of",
+        "h",
+        "parked in front of the right side building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at",
+        "road",
+        "building at Chesterwood gardens",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "left_of",
+        "red",
+        "It has a white car on the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘right side’ modifies the building but no comparison anchor/frame is stated; white car left relation has unspecified perspective."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8813,
+    "e": {
+      "red": [
+        "The red car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ],
+      "h": [
+        "a building",
+        "object"
+      ],
+      "corner": [
+        "the corner",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "next_to",
+        "white",
+        "next to a white car",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "in",
+        "d",
+        "in a driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "of",
+        "h",
+        "driveway of a building",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "at",
+        "corner",
+        "building on the corner",
+        "N",
+        "high"
+      ],
+      [
+        "corner",
+        "on",
+        "road",
+        "corner on Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8814,
+    "e": {
+      "red": [
+        "The red car",
+        "object"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "in",
+        "d",
+        "in a driveway",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "with",
+        "white",
+        "with a white car",
+        "U",
+        "medium"
+      ],
+      [
+        "d",
+        "on",
+        "road",
+        "on Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘with’ does not specify an exact spatial relation between cars."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "alternatives": {
+      "2": [
+        {
+          "subject": "red",
+          "predicate": "on",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road phrase may attach to target car rather than driveway."
+        }
+      ]
+    }
+  },
+  {
+    "i": 8815,
+    "e": {
+      "red": [
+        "The only red car",
+        "object"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "in",
+        "d",
+        "in a driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "on",
+        "road",
+        "driveway on Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘only’ is a uniqueness qualifier, not a spatial relation."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "alternatives": {
+      "1": [
+        {
+          "subject": "red",
+          "predicate": "on",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road phrase may attach to target car rather than driveway."
+        }
+      ]
+    }
+  },
+  {
+    "i": 8816,
+    "e": {
+      "t": [
+        "This is a black colored car",
+        "object"
+      ],
+      "h": [
+        "the building on the dead end corner of Chesterwood Gardens road",
+        "object"
+      ],
+      "corner": [
+        "the dead end corner",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens road",
+        "named_landmark"
+      ],
+      "group": [
+        "two white cars",
+        "group"
+      ],
+      "h2": [
+        "the building next to this building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "car is in front of the building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at",
+        "corner",
+        "building on the dead end corner",
+        "N",
+        "high"
+      ],
+      [
+        "corner",
+        "of",
+        "road",
+        "corner of Chesterwood Gardens road",
+        "N",
+        "high"
+      ],
+      [
+        "group",
+        "in_front_of",
+        "h2",
+        "two white cars in front of the building next to this building",
+        "U",
+        "high"
+      ],
+      [
+        "h2",
+        "next_to",
+        "h",
+        "building next to this building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘There are’ clause establishes two white cars; singular ‘the building next to this building’ is linked to first building, but building reference may be ambiguous."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8817,
+    "e": {
+      "junction": [
+        "a T junction",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "t": [
+        "this black car",
+        "object"
+      ],
+      "pavement": [
+        "the pavement",
+        "region"
+      ],
+      "h": [
+        "one of the houses at the junction",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "junction",
+        "in",
+        "road",
+        "T junction in Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "pavement",
+        "parked on the pavement",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "by_side_of",
+        "h",
+        "by the side one of the houses at the junction",
+        "U",
+        "medium"
+      ],
+      [
+        "h",
+        "at",
+        "junction",
+        "houses at the junction",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘side one’ is grammatically malformed; interpreted as ‘side of one of the houses’, confidence medium."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8818,
+    "e": {
+      "t": [
+        "this black car",
+        "object"
+      ],
+      "area": [
+        "northern left part of Chesterwood Gardens",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_right_side_of",
+        "area",
+        "On the right side of northern left part of Chesterwood Gardens",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "first_from_top",
+        "area",
+        "this black car is first from the top",
+        "U",
+        "medium"
+      ],
+      [
+        "area",
+        "part_of",
+        "road",
+        "part of Chesterwood Gardens",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘northern’ may be geographic cardinal or a subdivision label; ‘left’ and ‘top’ lack a defined observer/map orientation. Parsing preserves the compound region description without XY calibration."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8819,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "h": [
+        "a brown house",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_against_side_of",
+        "h",
+        "parked against the side of a brown house",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "at_end_of",
+        "road",
+        "a brown house at the end of Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "End location has no specified endpoint or direction."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

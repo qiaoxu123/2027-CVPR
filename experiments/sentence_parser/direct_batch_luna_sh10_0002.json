@@ -1,0 +1,2651 @@
+[
+  {
+    "i": 10160,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "road": [
+        "the station bridge",
+        "named_landmark"
+      ],
+      "lane": [
+        "the first lane from the White rectangular building",
+        "region"
+      ],
+      "building": [
+        "the White rectangular building",
+        "named_landmark"
+      ],
+      "whiteother": [
+        "a white car to the left",
+        "object"
+      ],
+      "redbehind": [
+        "red car behind it",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "near",
+        "road",
+        "near the station bridge",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lane",
+        "in the first lane from the White rectangular building",
+        "U",
+        "medium"
+      ],
+      [
+        "whiteother",
+        "left_of",
+        "t",
+        "It has a white car to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "redbehind",
+        "behind",
+        "t",
+        "red car behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Lane/side/behind unresolved."
+    ]
+  },
+  {
+    "i": 10161,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The seventh car (white)",
+        "object"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ],
+      "semicircle": [
+        "the semi-circle of parked cars",
+        "group"
+      ],
+      "wellington": [
+        "Wellington",
+        "named_landmark"
+      ],
+      "station": [
+        "Station Bridge",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "seventh_from_right_in",
+        "semicircle",
+        "seventh car (white) from the right in the semi-circle of parked cars",
+        "U",
+        "medium"
+      ],
+      [
+        "semicircle",
+        "off",
+        [
+          "wellington",
+          "station"
+        ],
+        "off Wellington and Station Bridge",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right reference unresolved."
+    ]
+  },
+  {
+    "i": 10162,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "bottom": [
+        "the bottom of the parking lot",
+        "region"
+      ],
+      "leftlot": [
+        "the parking lot to the left",
+        "region"
+      ],
+      "lotbehind": [
+        "the parking lot behind the brown building",
+        "region"
+      ],
+      "building": [
+        "the brown building",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "bottom",
+        "at the bottom of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "bottom",
+        "left_of",
+        "lotbehind",
+        "to the left of the parking lot behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "lotbehind",
+        "behind",
+        "building",
+        "behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "at the intersection of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Birchfield Road to the right"
+      }
+    },
+    "u": [
+      "Left/bottom/right view frame unresolved."
+    ]
+  },
+  {
+    "i": 10163,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "entrance": [
+        "the entrance",
+        "region"
+      ],
+      "leftlot": [
+        "the parking lot to the left",
+        "region"
+      ],
+      "lotbehind": [
+        "the parking lot behind the brown building",
+        "region"
+      ],
+      "building": [
+        "the brown building",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "entrance",
+        "at the entrance to the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "entrance",
+        "of",
+        "leftlot",
+        "to the parking lot to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "leftlot",
+        "left_of",
+        "lotbehind",
+        "to the left of the parking lot behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "lotbehind",
+        "behind",
+        "building",
+        "behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "at the intersection of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Birchfield Road to the right"
+      }
+    },
+    "u": [
+      "Left/right frame unresolved."
+    ]
+  },
+  {
+    "i": 10164,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "road1": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "road2": [
+        "Station Bridge",
+        "named_landmark"
+      ],
+      "t": [
+        "this purplish car",
+        "object"
+      ],
+      "row": [
+        "the top row",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "road1",
+          "road2"
+        ],
+        "Between Wellington Road and Station Bridge",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "parked in the top row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "of the parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "second_from_left_in",
+        "row",
+        "second car from the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Top/left frame unresolved."
+    ]
+  },
+  {
+    "i": 10165,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "van": [
+        "a white van",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "edge": [
+        "the grass Edge of the parking lot",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "house": [
+        "the brown building with the gray roof",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "roundabout": [
+        "the roundabout",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "van",
+          "white"
+        ],
+        "in between a white van and a white car",
+        "N",
+        "medium"
+      ],
+      [
+        "white",
+        "on",
+        "edge",
+        "parked on the grass Edge of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "of",
+        "house",
+        "of the brown building with the gray roof",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "on the corner of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "near",
+        "roundabout",
+        "near the roundabout",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Edge/near frame unresolved."
+    ]
+  },
+  {
+    "i": 10166,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "grass": [
+        "the grass",
+        "region"
+      ],
+      "whitecars": [
+        "two white cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "road": [
+        "Station Bridge road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "grass",
+        "parked in the grass",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "whitecars"
+        ],
+        "between two white cars",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on the corner of Station Bridge road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Corner placement uncertain."
+    ]
+  },
+  {
+    "i": 10167,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "others": [
+        "two other black cars",
+        "group"
+      ],
+      "grass": [
+        "the grass section",
+        "region"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "road": [
+        "the road",
+        "region"
+      ],
+      "house": [
+        "a multi-colored brown and beige house with a gray roof",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "others"
+        ],
+        "in between two other black cars",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "grass",
+        "in the grass section of a parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "grass",
+        "near",
+        "road",
+        "near the road",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "of",
+        "house",
+        "of a multi-colored brown and beige house with a gray roof",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "off",
+        [
+          "birch",
+          "wellington"
+        ],
+        "off Birchfield Road and Wellington Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Near/off frame unclear."
+    ]
+  },
+  {
+    "i": 10168,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "others": [
+        "two other white cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "row": [
+        "the row farthest from the building the lot serves",
+        "region"
+      ],
+      "building": [
+        "the building the lot serves",
+        "named_landmark"
+      ],
+      "spot": [
+        "the last spot in the corner closest to Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "others"
+        ],
+        "parked between two other white cars",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the large parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "at the corner of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the row farthest from the building the lot serves",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "farthest_from",
+        "building",
+        "row farthest from the building the lot serves",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "spot",
+        "in the last spot in the corner closest to Birchfield Road",
+        "U",
+        "medium"
+      ],
+      [
+        "spot",
+        "closest_to",
+        "birch",
+        "corner closest to Birchfield Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Farthest/last/corner direction uncalibrated."
+    ]
+  },
+  {
+    "i": 10169,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "otherwhite": [
+        "two white cars",
+        "group"
+      ],
+      "entrance": [
+        "the entrance of the parking lot",
+        "region"
+      ],
+      "lotbehind": [
+        "the parking lot behind the brown building",
+        "region"
+      ],
+      "building": [
+        "the brown building",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "otherwhite"
+        ],
+        "between two white cars",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "at",
+        "entrance",
+        "at the entrance of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "entrance",
+        "of",
+        "lotbehind",
+        "of the parking lot behind the brown building",
+        "N",
+        "medium"
+      ],
+      [
+        "lotbehind",
+        "behind",
+        "building",
+        "behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "at the intersection of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Birchfield Road to the right"
+      }
+    },
+    "u": [
+      "Right viewpoint-relative."
+    ]
+  },
+  {
+    "i": 10170,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "others": [
+        "two other white cars",
+        "group"
+      ],
+      "spots": [
+        "the four parking spots",
+        "region"
+      ],
+      "building": [
+        "the building on the corner",
+        "named_landmark"
+      ],
+      "road1": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "road2": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "paint": [
+        "VALET behind it in white paint",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "others"
+        ],
+        "between two other white cars",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "spots",
+        "in the four parking spots",
+        "N",
+        "medium"
+      ],
+      [
+        "spots",
+        "at",
+        "building",
+        "at the building on the corner of Wellington Road and Birchfield Road",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "road1",
+          "road2"
+        ],
+        "on the corner of Wellington Road and Birchfield Road",
+        "N",
+        "medium"
+      ],
+      [
+        "paint",
+        "behind",
+        "t",
+        "It says VALET behind it in white paint",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind relation is text marking; spatial frame not calibrated."
+    ]
+  },
+  {
+    "i": 10171,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "road1": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "road2": [
+        "Station Bridge",
+        "named_landmark"
+      ],
+      "t": [
+        "this blue car",
+        "object"
+      ],
+      "row": [
+        "the rightmost row",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "top": [
+        "the top",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "road1",
+          "road2"
+        ],
+        "Between Wellington Road and Station Bridge",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the rightmost row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "of the parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "first_from_top_in",
+        "row",
+        "first car from the top",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right/top frame unresolved."
+    ]
+  },
+  {
+    "i": 10172,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 3rd row of cars",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "building": [
+        "the brown building",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_from_right_in",
+        "row",
+        "1st from the right in the 3rd row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "behind",
+        "building",
+        "in the parking lot behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "at the intersection of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Birchfield Road to the right"
+      }
+    },
+    "u": [
+      "Right viewpoint-relative."
+    ]
+  },
+  {
+    "i": 10173,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The White car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "building": [
+        "the corner building",
+        "named_landmark"
+      ],
+      "road1": [
+        "Station Bridge Road",
+        "named_landmark"
+      ],
+      "road2": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "view": [
+        "on your right when coming from the Wellington Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "no_cars_beside",
+        "t",
+        "parked with no car beside",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "at the parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "of",
+        "building",
+        "of the corner building",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "located_on",
+        [
+          "road1",
+          "road2"
+        ],
+        "located on the Station Bridge Road and Wellington Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "right_of",
+        "road2",
+        "It is on your right when coming from the Wellington Road",
+        "R",
+        "medium"
+      ]
+    ],
+    "f": {
+      "4": {
+        "type": "road",
+        "status": "unknown",
+        "view_evidence": "when coming from the Wellington Road"
+      }
+    },
+    "u": [
+      "Road-side right direction not calibrated."
+    ]
+  },
+  {
+    "i": 10174,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "entrance": [
+        "the entrance of the driveway",
+        "region"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "leftlot": [
+        "the parking lot to the left",
+        "region"
+      ],
+      "lotbehind": [
+        "the parking lot behind the brown building",
+        "region"
+      ],
+      "building": [
+        "the brown building",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "entrance",
+        "at the entrance of the driveway",
+        "U",
+        "medium"
+      ],
+      [
+        "entrance",
+        "of",
+        "driveway",
+        "of the driveway",
+        "N",
+        "medium"
+      ],
+      [
+        "driveway",
+        "to",
+        "leftlot",
+        "to the left of the parking lot behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "leftlot",
+        "left_of",
+        "lotbehind",
+        "to the left of the parking lot behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "lotbehind",
+        "behind",
+        "building",
+        "behind the brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "birch",
+          "wellington"
+        ],
+        "at the intersection of Birchfield Road and Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "f": {
+      "3": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Birchfield Road to the right"
+      }
+    },
+    "u": [
+      "Left frame unresolved."
+    ]
+  },
+  {
+    "i": 10175,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "lot": [
+        "a small parking area",
+        "region"
+      ],
+      "tracks": [
+        "the train tracks",
+        "region"
+      ],
+      "cars": [
+        "five cars parked facing the tracks",
+        "group"
+      ],
+      "warehouse": [
+        "a warehouse",
+        "named_landmark"
+      ],
+      "bridge": [
+        "the bridge",
+        "region"
+      ],
+      "nt": [
+        "NT Wholesale Cash & Carry",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a small parking area",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "facing",
+        "tracks",
+        "facing the train tracks",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "among",
+        [
+          "cars"
+        ],
+        "Of the five cars parked facing the tracks this one",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "closest_to",
+        "warehouse",
+        "this one is closes to a warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "opposite_side_of",
+        "bridge",
+        "on the opposite side of the bridge to NT Wholesale Cash & Carry",
+        "U",
+        "medium"
+      ],
+      [
+        "nt",
+        "opposite_side_of",
+        "bridge",
+        "opposite side of the bridge to NT Wholesale Cash & Carry",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "'closes' interpreted as closest; bridge reference attachment ambiguous."
+    ]
+  },
+  {
+    "i": 10176,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "building": [
+        "the blue orange building with grey roof",
+        "named_landmark"
+      ],
+      "railroad": [
+        "the railroad",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "building",
+        "parked in front of the blue orange building with grey roof",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "by",
+        "railroad",
+        "by the railroad",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front/by direction unresolved."
+    ]
+  },
+  {
+    "i": 10177,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "One red car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "whitebehind": [
+        "a white car behind it",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "house": [
+        "a brown building with a gray roof",
+        "named_landmark"
+      ],
+      "wellington": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "roundabout": [
+        "the roundabout",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "white",
+          "black"
+        ],
+        "in between a white car and a black car",
+        "N",
+        "medium"
+      ],
+      [
+        "whitebehind",
+        "behind",
+        "t",
+        "that has a white car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of a brown building with a gray roof",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "at_intersection",
+        [
+          "wellington",
+          "birch"
+        ],
+        "off Wellington Road and Birchfield Road",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "near",
+        "roundabout",
+        "near the roundabout",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Off-road/near-frame uncertain."
+    ]
+  },
+  {
+    "i": 10178,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The gray parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ],
+      "road": [
+        "Walsall Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "of",
+        "one",
+        "of the One Stop Building",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "along",
+        "road",
+        "that is along Walsall Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Along relation undirected."
+    ]
+  },
+  {
+    "i": 10179,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The rectangular gray parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop building",
+        "named_landmark"
+      ],
+      "road": [
+        "Walsall Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "of",
+        "one",
+        "of the One Stop building",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on Walsall Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 10180,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ],
+      "road": [
+        "the Walsall Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "of",
+        "one",
+        "of the One Stop Building",
+        "N",
+        "medium"
+      ],
+      [
+        "one",
+        "on",
+        "road",
+        "on the Walsall Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 10181,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "a building with grey roof and white wall",
+        "named_landmark"
+      ],
+      "lawn": [
+        "lawn around the building",
+        "region"
+      ],
+      "aston": [
+        "Aston lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey road",
+        "named_landmark"
+      ],
+      "car": [
+        "a silver car",
+        "object"
+      ],
+      "roadfront": [
+        "the road in front of the building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has",
+        "lawn",
+        "with lawn around the building",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection",
+        [
+          "aston",
+          "davey"
+        ],
+        "at the intersection point of two road named Aston lane and Davey road",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "on",
+        "roadfront",
+        "parked on the road in front of the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front is observer-dependent."
+    ]
+  },
+  {
+    "i": 10182,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A small, irregularly rectangular shaped building",
+        "named_landmark"
+      ],
+      "lawns": [
+        "three rectangular patches of lawn",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "two": [
+        "Two of the small lawns",
+        "group"
+      ],
+      "longbuilding": [
+        "a long rectangular building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has",
+        "lawns",
+        "with three rectangular patches of lawn",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "at_corner_of",
+        [
+          "aston",
+          "davey"
+        ],
+        "at the corner of Aston Lane and Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "two",
+        "adjacent_to",
+        "longbuilding",
+        "Two of the small lawns are adjacent to a long rectangular building",
+        "U",
+        "medium"
+      ],
+      [
+        "longbuilding",
+        "on",
+        "davey",
+        "on Davey Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "At-corner exact geometry uncalibrated."
+    ]
+  },
+  {
+    "i": 10183,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "this building",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey road",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane road",
+        "named_landmark"
+      ],
+      "station": [
+        "a white-roofed gas station",
+        "named_landmark"
+      ],
+      "south": [
+        "the south side",
+        "region"
+      ],
+      "garden": [
+        "a garden",
+        "region"
+      ],
+      "north": [
+        "the north side",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "at_corner_of",
+        [
+          "davey",
+          "aston"
+        ],
+        "at the corner of Davey road and Aston Lane road",
+        "N",
+        "medium"
+      ],
+      [
+        "station",
+        "south_of",
+        "building",
+        "on the south side of this building",
+        "W",
+        "medium"
+      ],
+      [
+        "garden",
+        "north_of",
+        "building",
+        "a garden on the north side",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "North/south map calibration not stated."
+    ]
+  },
+  {
+    "i": 10184,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "This is a residential building",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "road": [
+        "On Aston Lane",
+        "named_landmark"
+      ],
+      "t": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "near",
+        [
+          "davey",
+          "aston"
+        ],
+        "located near where Davey Road and Aston Lane meet",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "On Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "building",
+        "parked on the street in front of this building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Near/front frame unspecified."
+    ]
+  },
+  {
+    "i": 10185,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A building",
+        "named_landmark"
+      ],
+      "lawn": [
+        "a green lawn around it",
+        "region"
+      ],
+      "dovey": [
+        "Dovey road",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has",
+        "lawn",
+        "with a green lawn around it",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "at_corner_of",
+        [
+          "dovey",
+          "aston"
+        ],
+        "in the corner junction between Dovey road and Aston Lane Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 10186,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A long narrow building with grey roof and brown wall",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "leftside": [
+        "the left side",
+        "region"
+      ],
+      "parking": [
+        "a big square shaped parking area",
+        "region"
+      ],
+      "backright": [
+        "the back right side of the building",
+        "region"
+      ],
+      "whitebuilding": [
+        "a big white roofed building",
+        "named_landmark"
+      ],
+      "road": [
+        "the road",
+        "region"
+      ],
+      "opposite": [
+        "the opposite side of the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "leftside",
+        "at the left side of the road named Aston Lane and Davey Road at its left side",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "on",
+        [
+          "aston",
+          "davey"
+        ],
+        "road named Aston Lane and Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "parking",
+        "at",
+        "backright",
+        "at the back right side of the building",
+        "U",
+        "medium"
+      ],
+      [
+        "whitebuilding",
+        "diagonally_in_front_of",
+        "building",
+        "situated diagonally in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "whitebuilding",
+        "across",
+        [
+          "road",
+          "opposite"
+        ],
+        "at the opposite side of the road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/back-right/diagonal frame unresolved."
+    ]
+  },
+  {
+    "i": 10187,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "houses": [
+        "The group of five house with brown roof",
+        "group"
+      ],
+      "aston": [
+        "Aston lane",
+        "named_landmark"
+      ],
+      "trees": [
+        "three tree",
+        "group"
+      ],
+      "building": [
+        "the building",
+        "named_landmark"
+      ],
+      "parking": [
+        "a big parking area",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "houses",
+        "adjacent_to",
+        "houses",
+        "adjacent to each other",
+        "U",
+        "medium"
+      ],
+      [
+        "houses",
+        "along",
+        "aston",
+        "along the road named Aston lane",
+        "U",
+        "medium"
+      ],
+      [
+        "trees",
+        "in_front_of",
+        "building",
+        "There is three tree in front of the building",
+        "U",
+        "medium"
+      ],
+      [
+        "parking",
+        "behind",
+        "building",
+        "a big parking area behind the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Along/front/behind unresolved."
+    ]
+  },
+  {
+    "i": 10188,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "buildings": [
+        "5 buildings",
+        "group"
+      ],
+      "edge": [
+        "the edge of the Aston Lane road",
+        "region"
+      ],
+      "aston": [
+        "Aston Lane road",
+        "named_landmark"
+      ],
+      "corner": [
+        "the corner of Davey Road",
+        "region"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "buildings",
+        "same_as",
+        "buildings",
+        "These 5 buildings are the same",
+        "N",
+        "medium"
+      ],
+      [
+        "buildings",
+        "on",
+        "edge",
+        "on the edge of the Aston Lane road",
+        "U",
+        "medium"
+      ],
+      [
+        "buildings",
+        "at",
+        "corner",
+        "on the corner of Davey Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Edge/corner position not calibrated."
+    ]
+  },
+  {
+    "i": 10189,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "houses": [
+        "The long row of brown houses",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "intersection": [
+        "the intersection between Aston and Davey Road",
+        "region"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "houses",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "houses",
+        "closest_to",
+        "intersection",
+        "closest to the intersection between Aston and Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "intersection",
+        "between",
+        [
+          "aston",
+          "davey"
+        ],
+        "intersection between Aston and Davey Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Closest relation lacks direction."
+    ]
+  },
+  {
+    "i": 10190,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "houses": [
+        "The row of brown houses",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "houses",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "houses",
+        "right_of",
+        "davey",
+        "to the right of Davey Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right frame unresolved."
+    ]
+  },
+  {
+    "i": 10191,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The large white-roofed building",
+        "named_landmark"
+      ],
+      "parking": [
+        "a parking area",
+        "region"
+      ],
+      "pavilion": [
+        "a small white pavilion",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "wellhead": [
+        "Wellhead Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "parking",
+        "next_to",
+        "building",
+        "with a parking area next to it",
+        "U",
+        "medium"
+      ],
+      [
+        "pavilion",
+        "in",
+        "parking",
+        "with a small white pavilion in it",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "between",
+        [
+          "wellhead",
+          "davey"
+        ],
+        "between Wellhead Lane and Davey Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Along relation context preserved."
+    ]
+  },
+  {
+    "i": 10192,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A big building with white roof",
+        "named_landmark"
+      ],
+      "parking": [
+        "car parking area",
+        "region"
+      ],
+      "sides": [
+        "both left and right side",
+        "region"
+      ],
+      "aston": [
+        "Aston lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "parking",
+        "at_both_sides_of",
+        "building",
+        "car parking area at both left and right side",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "along",
+        "aston",
+        "alone the road named Aston lane",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/right sides not calibrated."
+    ]
+  },
+  {
+    "i": 10193,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "Large white building",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "lot": [
+        "a huge parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "aston",
+        "on the side of Aston Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "building",
+        "with a huge parking lot next to it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Side/next-to frame unresolved."
+    ]
+  },
+  {
+    "i": 10194,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The large white building",
+        "named_landmark"
+      ],
+      "rectangles": [
+        "small gray rectangles",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has",
+        "rectangles",
+        "with small gray rectangles on it",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 10195,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The large gray rectangular building",
+        "named_landmark"
+      ],
+      "stripes": [
+        "dark gray stripes",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has",
+        "stripes",
+        "with dark gray stripes",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 10196,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The massive rectangular light gray and dark gray building",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 10197,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "this is a building on Aston Lane",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "corner": [
+        "the corner of Davey Road",
+        "region"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "roof": [
+        "a flat roof",
+        "region"
+      ],
+      "parking": [
+        "the parking area of the building",
+        "region"
+      ],
+      "orange": [
+        "an orange colored round object",
+        "object"
+      ],
+      "white": [
+        "a white object at the entrance",
+        "object"
+      ],
+      "entrance": [
+        "the entrance",
+        "region"
+      ],
+      "side": [
+        "the side of the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "aston",
+        "building on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "beyond",
+        "corner",
+        "a little beyond the corner of Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "has a flat roof",
+        "N",
+        "medium"
+      ],
+      [
+        "orange",
+        "on",
+        "side",
+        "on the side of the road",
+        "U",
+        "medium"
+      ],
+      [
+        "orange",
+        "at",
+        "entrance",
+        "At the entrance of the parking area of the building",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "at",
+        "entrance",
+        "a white object at the entrance",
+        "U",
+        "medium"
+      ],
+      [
+        "entrance",
+        "of",
+        "parking",
+        "of the building",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Beyond/side relations lack calibrated direction."
+    ]
+  },
+  {
+    "i": 10198,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The building with white and grey colored square shaped roof",
+        "named_landmark"
+      ],
+      "road": [
+        "Aston lane",
+        "named_landmark"
+      ],
+      "rightside": [
+        "the right side of the road",
+        "region"
+      ],
+      "parking": [
+        "car parking area around the building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "right_of",
+        "road",
+        "situated at the right side of the road named Aston lane",
+        "U",
+        "medium"
+      ],
+      [
+        "parking",
+        "around",
+        "building",
+        "there is car parking area around the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right frame unresolved."
+    ]
+  },
+  {
+    "i": 10199,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The white roofed building",
+        "named_landmark"
+      ],
+      "left": [
+        "the far left",
+        "region"
+      ],
+      "aston": [
+        "Aston Road",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "at",
+        "left",
+        "on the far left of Aston Road",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "below_and_left_of",
+        "davey",
+        "below and left of Davey Road as well",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/below orientation unresolved."
+    ]
+  }
+]
