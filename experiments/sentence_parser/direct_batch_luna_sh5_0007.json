@@ -1,0 +1,2237 @@
+[
+  {
+    "i": 5360,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A first orange building",
+        "object"
+      ],
+      "w": [
+        "the Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the child Jesus Catholic church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first",
+        [],
+        "A first orange building",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "on",
+        "w",
+        "on the Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "c",
+        "next to the St. Teresa of the child Jesus Catholic church",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“first” comparison set unspecified."
+    ]
+  },
+  {
+    "i": 5361,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The reddish orange house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "three_houses_right_of",
+        "c",
+        "3 houses to the right of the St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "right frame/house sequence orientation unknown."
+    ]
+  },
+  {
+    "i": 5362,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The building on Wellington Road",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "duplex": [
+        "the side of the duplex",
+        "region"
+      ],
+      "car": [
+        "a blue car",
+        "object"
+      ],
+      "yard": [
+        "the backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "three_buildings_away",
+        [],
+        "three buildings away from",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "side_of",
+        "duplex",
+        "it is the side of the duplex that doesn't have a blue car in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "duplex",
+        "no_car_backyard",
+        "car",
+        "that doesn't have a blue car in the backyard",
+        "N",
+        "low"
+      ]
+    ],
+    "u": [
+      "“three buildings away from” lacks its reference object; side-of-duplex attachment is also unclear."
+    ]
+  },
+  {
+    "i": 5363,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "side": [
+        "The left side of the house with the brown roof",
+        "region"
+      ],
+      "house": [
+        "the house with the brown roof",
+        "object"
+      ],
+      "c": [
+        "St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "side",
+        "part_of",
+        "house",
+        "The left side of the house with the brown roof",
+        "U",
+        "low"
+      ],
+      [
+        "house",
+        "three_houses_left_of",
+        "c",
+        "that is three houses to the left of St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "low"
+      ],
+      [
+        "house",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left-side frame unspecified."
+    ]
+  },
+  {
+    "i": 5364,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "It",
+        "object"
+      ],
+      "w": [
+        "the Wellington Road",
+        "named_landmark"
+      ],
+      "lot": [
+        "a lot of containers",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "building on the Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "second_orange_roof",
+        [],
+        "it is the second orange roof",
+        "N",
+        "low"
+      ],
+      [
+        "lot",
+        "across_from",
+        "t",
+        "Across the building is a lot of containers",
+        "N",
+        "low"
+      ]
+    ],
+    "u": [
+      "“second” comparison set and container relation reference ambiguous."
+    ]
+  },
+  {
+    "i": 5365,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the brown building facing the intersection with Willmore Road",
+        "object"
+      ],
+      "i": [
+        "the intersection with Willmore Road",
+        "region"
+      ],
+      "will": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "ten_houses_left_of",
+        "b",
+        "10 houses to the left of the brown building facing the intersection with Willmore Road",
+        "U",
+        "low"
+      ],
+      [
+        "b",
+        "facing",
+        "i",
+        "facing the intersection with Willmore Road",
+        "F",
+        "medium"
+      ],
+      [
+        "i",
+        "with",
+        "will",
+        "intersection with Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left house-sequence direction unknown."
+    ]
+  },
+  {
+    "i": 5366,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "section": [
+        "In between section of two white houses with brown roofs",
+        "region"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "section",
+        "between",
+        [],
+        "In between section of two white houses with brown roofs",
+        "N",
+        "low"
+      ],
+      [
+        "section",
+        "no_cars_driveway",
+        [],
+        "and no cars in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "section",
+        "across_from",
+        "lot",
+        "across the street from a parking lot",
+        "R",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "w",
+        "off Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "The target could be the intervening space or the houses’ shared section; unresolved."
+    ]
+  },
+  {
+    "i": 5367,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "houses": [
+        "Two multi-colored white and brown houses with brown roofs",
+        "group"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "houses",
+        "redlined",
+        [],
+        "red-lined",
+        "N",
+        "low"
+      ],
+      [
+        "houses",
+        "off",
+        "w",
+        "off Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "across_from",
+        "lot",
+        "across the street from a parking lot",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "“red-lined” is unclear segmentation; group is explicitly two houses."
+    ]
+  },
+  {
+    "i": 5368,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white and brown house with a brown roof",
+        "object"
+      ],
+      "lawn": [
+        "a lawn split in two",
+        "region"
+      ],
+      "grass": [
+        "the right side",
+        "region"
+      ],
+      "cement": [
+        "the left side and nothing but cement",
+        "region"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "car": [
+        "a red car the black top",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "lawn",
+        "that has a lawn split in two",
+        "N",
+        "high"
+      ],
+      [
+        "grass",
+        "right_side_of",
+        "lawn",
+        "the right side having grass on it",
+        "U",
+        "low"
+      ],
+      [
+        "cement",
+        "left_side_of",
+        "lawn",
+        "the left side and nothing but cement",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "facing",
+        "lot",
+        "facing a parking lot",
+        "F",
+        "medium"
+      ],
+      [
+        "car",
+        "in",
+        "lot",
+        "that has a red car the black top in it",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "w",
+        "off Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“red car the black top” is malformed; preserve literal entity without supplying missing preposition."
+    ]
+  },
+  {
+    "i": 5369,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a half of the third duplex",
+        "object"
+      ],
+      "c": [
+        "St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "yard": [
+        "the front yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_from",
+        "c",
+        "third duplex from St. Teresa of the Child Jesus Catholic Church",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_lawn_front",
+        [],
+        "This half of the duplex does not have a lawn in the front yard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5370,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The fourth building",
+        "object"
+      ],
+      "c": [
+        "St. Teresa of the child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "side": [
+        "the same side",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from",
+        "c",
+        "fourth building down from St. Teresa of the child Jesus Catholic Church",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "same_side_of",
+        "w",
+        "on the same side on Wellington Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "down sequence direction is unstated."
+    ]
+  },
+  {
+    "i": 5371,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white building with orange roof",
+        "object"
+      ],
+      "c": [
+        "the Celine Road",
+        "named_landmark"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "container": [
+        "one white container",
+        "object"
+      ],
+      "extension": [
+        "extension of orange roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "c",
+          "w"
+        ],
+        "between the Celine Road and Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "container",
+        "in_front_of",
+        "t",
+        "look like one white container in front of the building",
+        "U",
+        "medium"
+      ],
+      [
+        "extension",
+        "at_back_of",
+        "t",
+        "the back has extension of orange roof",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“look like” indicates uncertainty about container identity; back frame is not calibrated."
+    ]
+  },
+  {
+    "i": 5372,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The building on Wellington Road",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "van": [
+        "a white and yellow van",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "porch": [
+        "a orange porch",
+        "region"
+      ],
+      "back": [
+        "the back of the house",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "driveway",
+        "with a white and yellow van in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "porch",
+        "on_back_of",
+        "t",
+        "a orange porch on the back of the house",
+        "U",
+        "low"
+      ],
+      [
+        "back",
+        "of",
+        "t",
+        "back of the house",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5373,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "eight_houses_right_of",
+        "c",
+        "8 houses to the right of the St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "right frame/sequence orientation unknown."
+    ]
+  },
+  {
+    "i": 5374,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The fifth building",
+        "object"
+      ],
+      "left": [
+        "the left side of St Teresa of the child Jesus Catholic Church",
+        "region"
+      ],
+      "c": [
+        "St Teresa of the child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "w": [
+        "the road named Wellington road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fifth_from_left_side",
+        "c",
+        "fifth building from the left side of St Teresa of the child Jesus Catholic Church",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "along",
+        "w",
+        "along the road named Wellington road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left side reference is church-relative but orientation unspecified."
+    ]
+  },
+  {
+    "i": 5375,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The building on Wellington Road",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "lot": [
+        "a parking lot and store",
+        "region"
+      ],
+      "porch": [
+        "an orange back porch",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "lot",
+        "across the street from a parking lot and store",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "porch",
+        "with an orange back porch",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5376,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The fourth building ion Wellington Road",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Celine Grove",
+        "named_landmark"
+      ],
+      "row": [
+        "a row of other similar homes",
+        "group"
+      ],
+      "container": [
+        "a round blue container",
+        "object"
+      ],
+      "yard": [
+        "the back yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_on",
+        "w",
+        "fourth building ion Wellington Road",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "near",
+        "c",
+        "near Celine Grove",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "that are in a row of other similar homes",
+        "N",
+        "high"
+      ],
+      [
+        "container",
+        "in",
+        "yard",
+        "It has a round blue container in the back yard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“fourth” comparison sequence unspecified."
+    ]
+  },
+  {
+    "i": 5377,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Brown house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "n": [
+        "7 buildings",
+        "group"
+      ],
+      "bluegray": [
+        "the blue and gray building at the intersection of Wellington Road and Celine Grove",
+        "object"
+      ],
+      "c": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "seven_buildings_left_of",
+        "bluegray",
+        "7 buildings to the left of the blue and gray building at the intersection of Wellington Road and Celine Grove",
+        "U",
+        "low"
+      ],
+      [
+        "bluegray",
+        "at_intersection",
+        [
+          "w",
+          "c"
+        ],
+        "at the intersection of Wellington Road and Celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left frame unknown."
+    ]
+  },
+  {
+    "i": 5378,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the brown building facing the intersection with Willmore Road",
+        "object"
+      ],
+      "will": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "i": [
+        "the intersection with Willmore Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "four_houses_left_of",
+        "b",
+        "4 houses to the left of the brown building facing the intersection with Willmore Road",
+        "U",
+        "low"
+      ],
+      [
+        "b",
+        "facing",
+        "i",
+        "facing the intersection with Willmore Road",
+        "F",
+        "medium"
+      ],
+      [
+        "i",
+        "with",
+        "will",
+        "intersection with Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left house ordering direction unspecified."
+    ]
+  },
+  {
+    "i": 5379,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "eleven_houses_right_of",
+        "c",
+        "11 houses to the right of the St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "right frame unknown."
+    ]
+  },
+  {
+    "i": 5380,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white building with grey roof",
+        "object"
+      ],
+      "b": [
+        "the building with red car in front",
+        "object"
+      ],
+      "car": [
+        "red car",
+        "object"
+      ],
+      "s": [
+        "the Celine Grove Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "b",
+        "that next to the building with red car in front",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "b",
+        "building with red car in front",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "s",
+        "it is on the Celine Grove Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "relative pronoun attachment in “that next to” is elliptical."
+    ]
+  },
+  {
+    "i": 5381,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "c": [
+        "Celine Grove Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the building that has a red car parked in front of it",
+        "object"
+      ],
+      "car": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "c",
+        "A building on Celine Grove Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_of",
+        "b",
+        "to the right of the building that has a red car parked in front of it",
+        "U",
+        "low"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "b",
+        "has a red car parked in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right frame unknown."
+    ]
+  },
+  {
+    "i": 5382,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ],
+      "w": [
+        "the Wellington road",
+        "named_landmark"
+      ],
+      "cross": [
+        "Willmore Road crossing",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_from_left",
+        "left",
+        "third from the left",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "along",
+        "w",
+        "along the Wellington road",
+        "N",
+        "high"
+      ],
+      [
+        "cross",
+        "in_front_of",
+        "t",
+        "Willmore Road crossing is in front of the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "third-from-left comparison set and front frame unknown."
+    ]
+  },
+  {
+    "i": 5383,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The building on Wellington",
+        "object"
+      ],
+      "will": [
+        "Willmore",
+        "named_landmark"
+      ],
+      "car": [
+        "the red car",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "will",
+        "across from Willmore",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "left_of",
+        "car",
+        "to the left of the red car in the driveway",
+        "U",
+        "low"
+      ],
+      [
+        "car",
+        "in",
+        "driveway",
+        "in the driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Willmore may refer to road; left frame unspecified."
+    ]
+  },
+  {
+    "i": 5384,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "side": [
+        "Right side of a multicolored brown and white building but they gray roof",
+        "region"
+      ],
+      "building": [
+        "a multicolored brown and white building",
+        "object"
+      ],
+      "drive": [
+        "a cement driveway",
+        "region"
+      ],
+      "marking": [
+        "a street marking that reads slow",
+        "object"
+      ],
+      "house": [
+        "a house on the right of it",
+        "object"
+      ],
+      "car": [
+        "a red car",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "side",
+        "part_of",
+        "building",
+        "Right side of a multicolored brown and white building but they gray roof",
+        "U",
+        "low"
+      ],
+      [
+        "side",
+        "beside",
+        "marking",
+        "that's beside a street marking that reads slow",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "right_of",
+        "side",
+        "with a house on the right of it",
+        "U",
+        "low"
+      ],
+      [
+        "car",
+        "in",
+        "drive",
+        "that has a red car in its driveway",
+        "N",
+        "high"
+      ],
+      [
+        "side",
+        "off",
+        "w",
+        "off Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Input is fragmentary and contains apparent transcription errors; preserve ambiguity."
+    ]
+  },
+  {
+    "i": 5385,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "it is the brown roof building that has its upper half in a grey color",
+        "object"
+      ],
+      "will": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "wall": [
+        "the left wall of the building",
+        "region"
+      ],
+      "square": [
+        "the grey square",
+        "region"
+      ],
+      "car": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "will",
+        "horizontal",
+        [],
+        "With Willmore Road going horizontally to the left",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "no_cars_left",
+        [],
+        "There's no cars to the left wall of the building",
+        "U",
+        "low"
+      ],
+      [
+        "car",
+        "above",
+        "square",
+        "just above on the grey square is a red car",
+        "W",
+        "low"
+      ]
+    ],
+    "u": [
+      "Viewing orientation sentence is incomplete; left/above visual frame not fully established."
+    ]
+  },
+  {
+    "i": 5386,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The third bottom-most brown house",
+        "object"
+      ],
+      "lane": [
+        "the top lane",
+        "region"
+      ],
+      "right": [
+        "the right side along Wellington road",
+        "region"
+      ],
+      "w": [
+        "Wellington road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_bottom_most",
+        [],
+        "third bottom-most brown house",
+        "W",
+        "low"
+      ],
+      [
+        "t",
+        "from_top_lane",
+        "lane",
+        "from the top lane",
+        "W",
+        "low"
+      ],
+      [
+        "t",
+        "on",
+        "right",
+        "on the right side along Wellington road",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_car_front",
+        [],
+        "It has no car in front",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "top/bottom/right frames are not calibrated."
+    ]
+  },
+  {
+    "i": 5387,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A house",
+        "object"
+      ],
+      "white": [
+        "the white rectangular house",
+        "object"
+      ],
+      "w": [
+        "the Wellington road",
+        "named_landmark"
+      ],
+      "will": [
+        "Wilmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_after",
+        "white",
+        "in the third place after the white rectangular house",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "along",
+        "w",
+        "along the Wellington road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "will",
+        "The house facing Wilmore Road",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "third place sequence direction/starting point ambiguous."
+    ]
+  },
+  {
+    "i": 5388,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "the gray house with a red car in its driveway",
+        "object"
+      ],
+      "car": [
+        "a red car",
+        "object"
+      ],
+      "drive": [
+        "its driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_of",
+        "gray",
+        "to the right of the gray house with a red car in its driveway",
+        "U",
+        "low"
+      ],
+      [
+        "car",
+        "in",
+        "drive",
+        "with a red car in its driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right frame unspecified."
+    ]
+  },
+  {
+    "i": 5389,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "It is the second house",
+        "object"
+      ],
+      "long": [
+        "the long white roofed house",
+        "object"
+      ],
+      "c": [
+        "celine Grove road",
+        "named_landmark"
+      ],
+      "will": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "yard": [
+        "it's backyard",
+        "region"
+      ],
+      "car": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_nearest_to",
+        "long",
+        "second house nearest to the long white roofed house",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "c",
+        "along celine Grove road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "will",
+        "facing Willmore road",
+        "F",
+        "high"
+      ],
+      [
+        "tree",
+        "in",
+        "yard",
+        "It has a tree on it's backyard",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "t",
+        "There is a black car parked in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“it” first clause refers to house; second “it” in tree clause also likely house."
+    ]
+  },
+  {
+    "i": 5390,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a house on Wellington Road with a brown roof",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "block": [
+        "the same block as St Teresa's Court",
+        "region"
+      ],
+      "court": [
+        "St Teresa's Court",
+        "named_landmark"
+      ],
+      "c": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "same_block_as",
+        "court",
+        "on the same block as St Teresa's Court",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "closest_to",
+        "c",
+        "It is the closest house to Celine Grove on the block",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5391,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The last brown roofed house",
+        "object"
+      ],
+      "lane": [
+        "the lane from St Teresa of the child Jesus catholic church down Wellington road",
+        "region"
+      ],
+      "church": [
+        "St Teresa of the child Jesus catholic church",
+        "named_landmark"
+      ],
+      "w": [
+        "Wellington road",
+        "named_landmark"
+      ],
+      "car": [
+        "a car",
+        "object"
+      ],
+      "whiteblue": [
+        "a long white /blue house",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_on",
+        "lane",
+        "last brown roofed house on the lane from St Teresa of the child Jesus catholic church down Wellington road",
+        "N",
+        "low"
+      ],
+      [
+        "lane",
+        "from_to",
+        [
+          "church",
+          "w"
+        ],
+        "from St Teresa of the child Jesus catholic church down Wellington road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "t",
+        "It has a car in front",
+        "U",
+        "medium"
+      ],
+      [
+        "whiteblue",
+        "right_of",
+        "t",
+        "a long white /blue house to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "last sequence endpoint not explicit; right frame unknown."
+    ]
+  },
+  {
+    "i": 5392,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brick building",
+        "object"
+      ],
+      "end": [
+        "the end of Willmore Road",
+        "region"
+      ],
+      "will": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "car": [
+        "a gray car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "end",
+        "across from the end of Willmore Road",
+        "N",
+        "medium"
+      ],
+      [
+        "end",
+        "of",
+        "will",
+        "end of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in",
+        "drive",
+        "It has a gray car in the driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5393,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red house",
+        "object"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "car": [
+        "a gray silver car",
+        "object"
+      ],
+      "space": [
+        "its parking space",
+        "region"
+      ],
+      "will": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "w",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in",
+        "space",
+        "with a gray silver car in its parking space",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "will",
+        "directly across from Willmore Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5394,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A multi-colored brown and beige building, missing its walls with a large gray roof",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "plot": [
+        "a large dirt plot",
+        "region"
+      ],
+      "rail": [
+        "the railroad",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "partially_cut_off_by",
+        "edge",
+        "partially cut off by the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "plot",
+        "on a large dirt plot",
+        "N",
+        "high"
+      ],
+      [
+        "plot",
+        "beside",
+        "rail",
+        "beside the railroad",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5395,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The large white warehouse with a gray roof",
+        "object"
+      ],
+      "rail": [
+        "the railroad tracks",
+        "named_landmark"
+      ],
+      "lot": [
+        "a large dirt lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "beside",
+        "rail",
+        "beside the railroad tracks",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in a large dirt lot",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5396,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "warehouse": [
+        "a large warehouse",
+        "object"
+      ],
+      "lot": [
+        "a dirt lot",
+        "region"
+      ],
+      "end": [
+        "the end of Wellington Road",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "is",
+        "warehouse",
+        "building is a large warehouse",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in a dirt lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at",
+        "end",
+        "at the end of Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "end",
+        "of",
+        "w",
+        "end of Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5397,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The store",
+        "object"
+      ],
+      "gym": [
+        "The Gym",
+        "named_landmark"
+      ],
+      "food": [
+        "The Food Warehouse",
+        "named_landmark"
+      ],
+      "one": [
+        "the One Stop building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "gym",
+          "food"
+        ],
+        "between between The Gym and The Food Warehouse",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "by",
+        "one",
+        "by the One Stop building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Repeated “between” is preserved in evidence; relation normalized once."
+    ]
+  },
+  {
+    "i": 5398,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Center right section, of a blue and white striped building with a gray roof",
+        "object"
+      ],
+      "gym": [
+        "the gym",
+        "named_landmark"
+      ],
+      "food": [
+        "the Food Warehouse",
+        "named_landmark"
+      ],
+      "one": [
+        "the one stop building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "center_right_section",
+        [],
+        "Center right section",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "next_to",
+        "gym",
+        "that is next to the gym",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "food",
+          "one"
+        ],
+        "in between the Food Warehouse and the one stop building",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "center/right frame ambiguous; section’s relation to whole building is implicit."
+    ]
+  },
+  {
+    "i": 5399,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "section": [
+        "This is part of the building",
+        "object"
+      ],
+      "t": [
+        "this building section",
+        "object"
+      ],
+      "nike": [
+        "the Nike Factory Store building",
+        "named_landmark"
+      ],
+      "one": [
+        "the One Stop building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "section",
+        "part_of",
+        "t",
+        "This is part of the building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "part_of",
+        "nike",
+        "this building section is the part of the Nike Factory Store building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "close_to",
+        "one",
+        "that is close to the One Stop building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  }
+]
