@@ -41,6 +41,16 @@ def test_parser_conservative_and_indirect():
     assert relation_mode("The red car near One Stop") == 1
     assert relation_mode("The white building behind the cafe") == 0
     assert relation_mode("A triangular parking lot next to One Stop") == 1
+    assert relation_mode("A building inside Trinity College") == 3
+
+
+def test_direct_inside_keeps_node_probability_normalized():
+    inp = _inputs()
+    inp["relation_mode"][0] = 3
+    out = _model()(**inp)
+    assert out["direct_active"][0]
+    assert not out["indirect_active"][0]
+    torch.testing.assert_close(out["probabilities"].sum(1), torch.ones(3))
 
 
 def test_missing_intermediary_or_anchors_must_abstain():
