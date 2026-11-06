@@ -89,3 +89,48 @@ done
 如果数据目录、source哈希不一致或TRAIN/在线ID顺序不一致，
 先修复后运行，不要以增加loss或更多epoch掩盖。
 不跑Test、不修改main。
+
+
+## 追加：2470条Val-Seen中无地标绑定与导航失败的配对统计
+
+注意：TRAIN内1,221条无地标不是Val-Seen的无地标数量。
+GitHub已经归档了完整2470条终点NE/SR（PR25 paired2470.csv），
+但无锚点状态需从本地闭环日志的每条public_record.json查询，
+才能和同一个 Episode ID 真实关联，不能估算外推。
+
+新脚本：scripts/analyze_val_seen_binding_failures.py。
+每个Episode重新执行同样的PublicNames + public_text_record盲绑定，
+严格校验实际网络收到的Polygon ID顺序及全部Polygon轮廓。
+缺失原始记录、绑定不一致、Episode ID错位、SR/NE阈值不一致均拒绝统计。
+不需要重新导航，不看GT选择Polygon。
+
+~~~bash
+cd /home/20261024_1/Workspace/2027-CVPR/Experiments/GeomBeliefLandmarkChain
+PY=/home/20261024_1/Workspace/third_party/aerialvg_env/bin/python
+BASE=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs
+DATA=/home/20261024_1/Workspace/DATA/sbfnav-data
+"$PY" -m pytest -q tests/test_val_seen_binding_failures.py
+"$PY" -u -m scripts.analyze_val_seen_binding_failures \
+  --paired reports/unified_pgvb/angle_only/paired2470.csv \
+  --episodes reports/unified_pgvb/angle_only/episodes2470.json \
+  --public-records-root "$BASE/unified_angle_only_s42_20261106/val_seen_predicted_angles/belief_steps" \
+  --public-objects "$DATA/cityrefer_original/objects.json" \
+  --output "$BASE/unified_public_polygon_group_20261106/val_seen_binding_failure_audit"
+~~~
+
+输出summary.json与per_episode.csv：全部2470条的公开地标绑定状态、
+无公开名称匹配/容量超16/有名称但所有Polygon无效、
+对应SR/失败数/NE分位数/最大误差/距离区间、
+及全部失败中无地标的比例。
+
+核查已完成的原全文基线：SR1130/2470，失败1340/2470，
+平均NE 37.9596m，最大NE 385.8116m；
+失败任务NE P50为38.3528m，P95为214.0615m，
+152条失败任务终点大于或等于100m。
+若本地日志与归档逐任务不一致，必须停止而非推测。
+
+因果边界：“无地标且失败”只叫统计相关，不能直接声称
+“因为绑定失败而失败”。下一阶段固定其余输入/模型/起点，
+对本应可以匹配却未匹配成功的指令修复公开名称/几何绑定，
+做配对真实闭环，才能估计可恢复的导航失败数量。
+未具名的指令不能用目标GT偷偷添加地标。
