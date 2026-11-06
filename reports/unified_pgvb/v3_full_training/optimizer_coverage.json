@@ -1,0 +1,593 @@
+{
+  "epoch_index": 6,
+  "next_offset": 13000,
+  "resume_sha256": "b6b0b30fa2ba7dc1f2de8d4fb43a2f767c9ed4e61c9d96ea7f4b5f578ee16992",
+  "groups": {
+    "geometry": {
+      "tensors": 70,
+      "with_optimizer_state": 50,
+      "with_nonzero_moment": 49,
+      "moment_l2": 1.0304620648785252,
+      "weight_delta_l2": 3.1134111676873855
+    },
+    "scale": {
+      "tensors": 1,
+      "with_optimizer_state": 1,
+      "with_nonzero_moment": 1,
+      "moment_l2": 0.005431937053799629,
+      "weight_delta_l2": 1.0894887475898398
+    },
+    "visual_gain": {
+      "tensors": 1,
+      "with_optimizer_state": 1,
+      "with_nonzero_moment": 1,
+      "moment_l2": 2.9618720986945846e-07,
+      "weight_delta_l2": 5.63145872823702
+    },
+    "vision_proj": {
+      "tensors": 4,
+      "with_optimizer_state": 4,
+      "with_nonzero_moment": 4,
+      "moment_l2": 0.21037063343802748,
+      "weight_delta_l2": 12.258527127007032
+    },
+    "depth_proj": {
+      "tensors": 4,
+      "with_optimizer_state": 4,
+      "with_nonzero_moment": 4,
+      "moment_l2": 0.029967578764457152,
+      "weight_delta_l2": 7.2961406418643175
+    },
+    "pose_proj": {
+      "tensors": 2,
+      "with_optimizer_state": 2,
+      "with_nonzero_moment": 2,
+      "moment_l2": 0.014182912970194693,
+      "weight_delta_l2": 0.5824003953126197
+    },
+    "bert_to_visual": {
+      "tensors": 2,
+      "with_optimizer_state": 2,
+      "with_nonzero_moment": 2,
+      "moment_l2": 0.062425393904151846,
+      "weight_delta_l2": 9.821054862917748
+    },
+    "cross_attention": {
+      "tensors": 4,
+      "with_optimizer_state": 4,
+      "with_nonzero_moment": 4,
+      "moment_l2": 0.06934544530305686,
+      "weight_delta_l2": 6.9619824134167185
+    },
+    "visual_text": {
+      "tensors": 4,
+      "with_optimizer_state": 4,
+      "with_nonzero_moment": 4,
+      "moment_l2": 0.1764628908754674,
+      "weight_delta_l2": 13.494830217711877
+    },
+    "visual_head": {
+      "tensors": 4,
+      "with_optimizer_state": 4,
+      "with_nonzero_moment": 4,
+      "moment_l2": 0.134700268873892,
+      "weight_delta_l2": 3.6170426328375225
+    },
+    "teacher_head": {
+      "tensors": 2,
+      "with_optimizer_state": 2,
+      "with_nonzero_moment": 2,
+      "moment_l2": 0.006530769527777357,
+      "weight_delta_l2": 13.147462397545866
+    }
+  },
+  "pose_projection": {
+    "columns": [
+      "normalized_x",
+      "normalized_y",
+      "world_z_over100",
+      "sin_yaw",
+      "cos_yaw"
+    ],
+    "first_moment_column_norms": [
+      0.00316658616065979,
+      0.0036664209328591824,
+      0.007837362587451935,
+      0.0,
+      0.00762433186173439
+    ]
+  },
+  "parameters": [
+    {
+      "name": "geometry.null_anchor",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.008166433311998844
+    },
+    {
+      "name": "geometry.token_gain",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.007138181943446398
+    },
+    {
+      "name": "geometry.geometry_gain",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.019677240401506424
+    },
+    {
+      "name": "geometry.gnn.node_geometry.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.007895590737462044
+    },
+    {
+      "name": "geometry.gnn.node_geometry.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.0039049137849360704
+    },
+    {
+      "name": "geometry.gnn.node_geometry.2.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.018684865906834602
+    },
+    {
+      "name": "geometry.gnn.node_geometry.2.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.008557179942727089
+    },
+    {
+      "name": "geometry.gnn.name_projection.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.4232081472873688
+    },
+    {
+      "name": "geometry.gnn.name_projection.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.02848481759428978
+    },
+    {
+      "name": "geometry.gnn.name_projection.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.009701727889478207
+    },
+    {
+      "name": "geometry.gnn.name_projection.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.008557179011404514
+    },
+    {
+      "name": "geometry.gnn.type_embedding.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.009724186733365059
+    },
+    {
+      "name": "geometry.gnn.layer1.score",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.src.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.dst.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.edge.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.value.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.edge_value.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.out.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.out.bias",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.norm.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer1.norm.bias",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.score",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.src.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.dst.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.edge.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.value.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.edge_value.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.out.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.out.bias",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.norm.weight",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.gnn.layer2.norm.bias",
+      "has_optimizer_state": false,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.pos.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.07038629800081253
+    },
+    {
+      "name": "geometry.pos.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.031883880496025085
+    },
+    {
+      "name": "geometry.pos.2.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.13753542304039001
+    },
+    {
+      "name": "geometry.pos.2.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.039647698402404785
+    },
+    {
+      "name": "geometry.lang.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.8057933449745178
+    },
+    {
+      "name": "geometry.lang.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.0459391288459301
+    },
+    {
+      "name": "geometry.lang.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.020393580198287964
+    },
+    {
+      "name": "geometry.lang.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.01428369339555502
+    },
+    {
+      "name": "geometry.token_attn.in_proj_weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.2489868700504303
+    },
+    {
+      "name": "geometry.token_attn.in_proj_bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.024761270731687546
+    },
+    {
+      "name": "geometry.token_attn.out_proj.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.1738177388906479
+    },
+    {
+      "name": "geometry.token_attn.out_proj.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.019566932693123817
+    },
+    {
+      "name": "geometry.rule_map.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.0
+    },
+    {
+      "name": "geometry.rule_map.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.012511043809354305
+    },
+    {
+      "name": "geometry.rule_map.2.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.039519961923360825
+    },
+    {
+      "name": "geometry.rule_map.2.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.039647698402404785
+    },
+    {
+      "name": "geometry.token_head.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.00910591147840023
+    },
+    {
+      "name": "geometry.token_head.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.006619581487029791
+    },
+    {
+      "name": "geometry.token_head.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.08570336550474167
+    },
+    {
+      "name": "geometry.token_head.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.003669340629130602
+    },
+    {
+      "name": "geometry.token_head.3.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.033849846571683884
+    },
+    {
+      "name": "geometry.token_head.3.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 7.686681291474429e-10
+    },
+    {
+      "name": "geometry.geometry_proj.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.1658727377653122
+    },
+    {
+      "name": "geometry.geometry_proj.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.03628399968147278
+    },
+    {
+      "name": "geometry.geometry_proj.2.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.08617556095123291
+    },
+    {
+      "name": "geometry.geometry_proj.2.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.012571628205478191
+    },
+    {
+      "name": "geometry.pair_query.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.08711790293455124
+    },
+    {
+      "name": "geometry.pair_query.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.011514679528772831
+    },
+    {
+      "name": "geometry.pair_key.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.15261845290660858
+    },
+    {
+      "name": "geometry.pair_key.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.011514679528772831
+    },
+    {
+      "name": "geometry.pair_logits.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.12829133868217468
+    },
+    {
+      "name": "geometry.pair_logits.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.005890135187655687
+    },
+    {
+      "name": "geometry.geometry_head.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.012422788888216019
+    },
+    {
+      "name": "geometry.geometry_head.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.004914451390504837
+    },
+    {
+      "name": "geometry.geometry_head.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.10430654138326645
+    },
+    {
+      "name": "geometry.geometry_head.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.003155742073431611
+    },
+    {
+      "name": "geometry.geometry_head.3.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.043921902775764465
+    },
+    {
+      "name": "geometry.geometry_head.3.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 6.935095275828473e-10
+    },
+    {
+      "name": "scale",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.005431937053799629
+    },
+    {
+      "name": "visual_gain",
+      "has_optimizer_state": true,
+      "first_moment_norm": 2.9618720986945846e-07
+    },
+    {
+      "name": "vision_proj.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.2100115716457367
+    },
+    {
+      "name": "vision_proj.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.004067604895681143
+    },
+    {
+      "name": "vision_proj.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.008733117952942848
+    },
+    {
+      "name": "vision_proj.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.007624331396073103
+    },
+    {
+      "name": "depth_proj.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.012211883440613747
+    },
+    {
+      "name": "depth_proj.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.00936953816562891
+    },
+    {
+      "name": "depth_proj.2.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.024556200951337814
+    },
+    {
+      "name": "depth_proj.2.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.007624331396073103
+    },
+    {
+      "name": "pose_proj.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.011959289200603962
+    },
+    {
+      "name": "pose_proj.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.007624330930411816
+    },
+    {
+      "name": "bert_to_visual.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.062283724546432495
+    },
+    {
+      "name": "bert_to_visual.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.004203267861157656
+    },
+    {
+      "name": "cross_attention.in_proj_weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.05403845012187958
+    },
+    {
+      "name": "cross_attention.in_proj_bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.006287718191742897
+    },
+    {
+      "name": "cross_attention.out_proj.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.04243645817041397
+    },
+    {
+      "name": "cross_attention.out_proj.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.006946100387722254
+    },
+    {
+      "name": "visual_text.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.12330310046672821
+    },
+    {
+      "name": "visual_text.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.1255767047405243
+    },
+    {
+      "name": "visual_text.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.00903593935072422
+    },
+    {
+      "name": "visual_text.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.009183697402477264
+    },
+    {
+      "name": "visual_head.0.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.008670257404446602
+    },
+    {
+      "name": "visual_head.0.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.007825041189789772
+    },
+    {
+      "name": "visual_head.1.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.13378757238388062
+    },
+    {
+      "name": "visual_head.1.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.010423208586871624
+    },
+    {
+      "name": "teacher_head.weight",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.0046448055654764175
+    },
+    {
+      "name": "teacher_head.bias",
+      "has_optimizer_state": true,
+      "first_moment_norm": 0.004590940196067095
+    }
+  ],
+  "scope": "Read-only training state audit; first moments measure recent gradient history, weight delta alone may include decay; no forward or quality evaluation"
+}

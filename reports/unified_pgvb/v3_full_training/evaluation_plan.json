@@ -1,0 +1,37 @@
+{
+  "recorded_before_Val_prediction": true,
+  "recorded_time": "2026-11-07T00:50:44.465478+08:00",
+  "training_seed": 42,
+  "max_training_hours": 4,
+  "min_epochs": 3,
+  "plateau_relative": 0.005,
+  "plateau_patience": 2,
+  "checkpoint_selection": "final last.pt after TRAIN stopping criterion, not Val checkpoint selection",
+  "initial_evaluation": {
+    "split": "Val-Seen",
+    "expected": 2470,
+    "observation": "real original start pose and raw yaw; no offline landmark-center sampling",
+    "sensor_RGB": 384,
+    "goal_grid": 384,
+    "top1_radius_m": 20
+  },
+  "navigation": {
+    "required_initial_Top1": 0.55,
+    "require_zero_initial_errors": true,
+    "expected_each": 2470,
+    "methods": [
+      "Geometry-only",
+      "Fused"
+    ],
+    "stop_threshold": 0.3,
+    "arrival_guard_m": 0.001,
+    "controller": "unchanged Stage1 guarded-blend",
+    "Test": false
+  },
+  "confidence": {
+    "physical_target_cluster_bootstrap": 2000,
+    "seed": 42,
+    "single_training_seed": true
+  },
+  "no_GT_inference": true
+}

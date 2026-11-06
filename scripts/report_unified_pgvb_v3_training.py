@@ -71,6 +71,16 @@ def main():
         for name,values in lengths['encoders'].items():
             report.append(f"{name}: 上限{values['configured_token_limit']} tokens，截断{values['truncated_queries']}/{lengths['N']}（{values['truncated_fraction']*100:.2f}%）。")
         report+=['这仅说明大范围文本截断不成立，不代表关系理解正确。本轮不改变token上限。']
+    coverage=r/'optimizer_coverage.json'
+    if coverage.exists():
+        gradients=json.loads(coverage.read_text());shutil.copyfile(coverage,o/'optimizer_coverage.json')
+        report+=['','## 实际更新覆盖','', '优化器一阶动量和初始权重差异已核验；这不是每个历史batch都收到梯度的保证。Geometry未使用的旧GNN分支及零规则输入不应当宣称已训练。','', '|模块|非零动量参数张量/总数|','|---|---:|']
+        for name,values in gradients['groups'].items():report.append(f"|{name}|{values['with_nonzero_moment']}/{values['tensors']}|")
+        report+=['','固定yaw=0的TRAIN视点使视觉Pose投影sin(yaw)列没有训练梯度；原Controller并非此列，未改动。部署保留原始yaw，此分布差异需要在TRAIN检验，不能因维度匹配就宣称跨yaw泛化已验证。']
+    archive=r/'train/epochs/index.json'
+    if archive.exists():
+        shutil.copyfile(archive,o/'archived_epochs.json')
+        report+=['','实际轮末快照见archived_epochs.json。归档从第三轮开始；最终全量评测仍用last.pt，不根据Val选择最低分/最高分Checkpoint。']
     geometry_audit=r/'label_geometry_audit.json'
     if geometry_audit.exists():
         labels=json.loads(geometry_audit.read_text());shutil.copyfile(geometry_audit,o/'label_geometry_audit.json')
