@@ -1,0 +1,1778 @@
+[
+  {
+    "i": 9260,
+    "e": {
+      "lightblue": [
+        "A light blue car",
+        "object"
+      ],
+      "darkblue": [
+        "a dark blue car",
+        "object"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "brownbuilding": [
+        "a brown building with a gray roof",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "van": [
+        "a yellow van",
+        "object"
+      ],
+      "lot": [
+        "its parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "lightblue",
+        "between",
+        [
+          "darkblue",
+          "gray"
+        ],
+        "light blue car in between a dark blue car and a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "lightblue",
+        "on",
+        "road",
+        "on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "lightblue",
+        "across_from",
+        "brownbuilding",
+        "across from a brown building",
+        "U",
+        "high"
+      ],
+      [
+        "brownbuilding",
+        "has_roof",
+        "roof",
+        "brown building with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "lot",
+        "a yellow van in its parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "of",
+        "brownbuilding",
+        "its parking lot",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘Between’ axis unspecified. ‘its’ refers to the brown building; ‘across from’ frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9261,
+    "e": {
+      "car": [
+        "The blue car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "houses": [
+        "the houses",
+        "group"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "lot",
+        "car in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "houses",
+        "parking lot behind the houses",
+        "U",
+        "high"
+      ],
+      [
+        "houses",
+        "on",
+        "road",
+        "houses on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "tree",
+        "It is in front of a tree",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘It’ refers to the blue car. ‘Behind’ and ‘in front of’ frames unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9262,
+    "e": {
+      "red": [
+        "One red car",
+        "object"
+      ],
+      "van": [
+        "a light blue van",
+        "object"
+      ],
+      "space": [
+        "a empty space",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "brownbuilding": [
+        "the Brown building",
+        "object"
+      ],
+      "truck": [
+        "a white truck",
+        "object"
+      ],
+      "bed": [
+        "a green cargo bed",
+        "object"
+      ],
+      "yellowtruck": [
+        "a yellow truck",
+        "object"
+      ],
+      "lot": [
+        "his parking lot",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "between",
+        [
+          "van",
+          "space",
+          "white"
+        ],
+        "red car in between a light blue van, a empty space and a white car",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "near",
+        "edge",
+        "near the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "closest_to",
+        "brownbuilding",
+        "closest to the Brown building",
+        "N",
+        "high"
+      ],
+      [
+        "truck",
+        "with",
+        "brownbuilding",
+        "Brown building with a white truck",
+        "N",
+        "high"
+      ],
+      [
+        "truck",
+        "has_cargo_bed",
+        "bed",
+        "white truck and a green cargo bed",
+        "N",
+        "high"
+      ],
+      [
+        "brownbuilding",
+        "has_vehicle_in_lot",
+        "yellowtruck",
+        "that also has a yellow truck in his parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "of",
+        "brownbuilding",
+        "his parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "birchfield",
+        "parking lot off Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "The attachment of ‘that also has a yellow truck’ is most likely the Brown building, but its pronoun ‘his’ is unclear. ‘Between’ includes an empty-space region as one member; axis unspecified. ‘with a white truck and a green cargo bed’ could describe the Brown building or the closest building/car set."
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": [
+            "brownbuilding"
+          ],
+          "reference": [
+            "truck"
+          ],
+          "reason": "‘with a white truck’ may modify the Brown building."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9263,
+    "e": {
+      "car": [
+        "A maroon car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "wall": [
+        "a wall",
+        "object"
+      ],
+      "buildings": [
+        "the buildings",
+        "group"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "gardens": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "lot",
+        "car parked in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "wall",
+        "parking lot back behind a wall",
+        "U",
+        "high"
+      ],
+      [
+        "wall",
+        "behind",
+        "buildings",
+        "wall behind the buildings",
+        "U",
+        "high"
+      ],
+      [
+        "buildings",
+        "on",
+        "road",
+        "buildings on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "close_to",
+        "gardens",
+        "close the Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘close the’ is grammatically malformed; interpreted as ‘close to’ Chesterwood Gardens. ‘back behind’ reinforces but does not resolve direction frame."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9264,
+    "e": {
+      "red": [
+        "The red car",
+        "object"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "area": [
+        "the parking area",
+        "region"
+      ],
+      "buildings": [
+        "the buildings",
+        "group"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "next_to",
+        "gray",
+        "red car next to a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "next_to",
+        "tree",
+        "red car next to a gray car and a tree",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "in",
+        "area",
+        "in the parking area",
+        "N",
+        "high"
+      ],
+      [
+        "area",
+        "behind",
+        "buildings",
+        "parking area behind the buildings",
+        "U",
+        "high"
+      ],
+      [
+        "buildings",
+        "on",
+        "road",
+        "buildings on Bragg Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘next to’ applies to the gray car and tree as coordinated neighbors of the red car. Behind frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9265,
+    "e": {
+      "car": [
+        "A white car",
+        "object"
+      ],
+      "corner": [
+        "the far right corner",
+        "region"
+      ],
+      "lot": [
+        "his parking lot",
+        "region"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "othercar": [
+        "another white car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "building": [
+        "the Brown building with a gray roof",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "band": [
+        "a yellow band",
+        "object"
+      ],
+      "bragg": [
+        "Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "at",
+        "corner",
+        "white car on the far right corner of a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "corner",
+        "in",
+        "lot",
+        "corner of a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "cut_off_by",
+        "edge",
+        "parking lot that has been cut off by the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "next_to",
+        "othercar",
+        "next to another white car",
+        "U",
+        "high"
+      ],
+      [
+        "othercar",
+        "in",
+        "tree",
+        "another white car in a tree",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "nearest_to",
+        "building",
+        "nearest to the Brown building",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "Brown building with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has",
+        "band",
+        "that has a yellow band in his parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "off",
+        "bragg",
+        "parking lot off Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "has_feature",
+        "band",
+        "yellow band in his parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "has_lot",
+        "lot",
+        "his parking lot",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘in a tree’ may mean the second white car is near/in a tree, or is a malformed attachment; preserved literally with low confidence. ‘his’ parking lot antecedent unclear, likely the Brown building. The text says a yellow band in the lot; it does not identify a van."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9266,
+    "e": {
+      "car": [
+        "a white car",
+        "object"
+      ],
+      "space": [
+        "the parking space",
+        "region"
+      ],
+      "area": [
+        "the residential area",
+        "region"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "wall": [
+        "a wall",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "space",
+        "white car parked in the parking space",
+        "N",
+        "high"
+      ],
+      [
+        "space",
+        "behind",
+        "area",
+        "parking space located behind the residential area",
+        "U",
+        "high"
+      ],
+      [
+        "area",
+        "on",
+        "road",
+        "residential area on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "other",
+        "right_of",
+        "car",
+        "On its right is another white car",
+        "U",
+        "high"
+      ],
+      [
+        "wall",
+        "left_of",
+        "car",
+        "on its left is a wall",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘its’ refers to the white car. Left/right observer frame not specified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9267,
+    "e": {
+      "car": [
+        "The white car",
+        "object"
+      ],
+      "house": [
+        "the gray house",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "house",
+        "white car parked in front of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "gray house on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "six_houses_right_of",
+        "building",
+        "6 houses to the right of the large gray building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘Right’ frame for ordinal house count unspecified; ‘in front of’ frame also unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9268,
+    "e": {
+      "car": [
+        "a white car",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "house": [
+        "the third house from the top",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "on",
+        "road",
+        "On Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "house",
+        "in front of the third house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "third_from_top",
+        [],
+        "third house from the top",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on_right_hand_side_of",
+        "road",
+        "on the right hand side",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "The target car is introduced by ‘it’; no explicit antecedent appears in this fragment. Top/right frames unspecified; right-hand-side may apply to the house or the car's location."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9269,
+    "e": {
+      "car": [
+        "A white car",
+        "object"
+      ],
+      "building": [
+        "a building",
+        "object"
+      ],
+      "roof": [
+        "a reddish brown roof",
+        "object"
+      ],
+      "blackroof": [
+        "a black roof",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "building",
+        "white car in front of a building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "has_roof",
+        [
+          "roof",
+          "blackroof"
+        ],
+        "building that half a reddish brown roof and half a black roof",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "on Bragg Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘that half a reddish brown roof’ is malformed; interpreted as the building having a roof split half reddish brown and half black. ‘on Bragg Road’ may modify the building or the car/building description."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": [
+            "car"
+          ],
+          "reference": [
+            "road"
+          ],
+          "reason": "The final road PP may locate the car rather than the building."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9270,
+    "e": {
+      "car": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "backyards": [
+        "the backyards",
+        "group"
+      ],
+      "houses": [
+        "the houses",
+        "group"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "sixth_from_left",
+        "row",
+        "6th from the left in the row of cars",
+        "U",
+        "high"
+      ],
+      [
+        "row",
+        "behind",
+        "backyards",
+        "row of cars parked behind the backyards",
+        "U",
+        "high"
+      ],
+      [
+        "backyards",
+        "of",
+        "houses",
+        "backyards of the houses",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "on",
+        "road",
+        "houses on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "row",
+        "right_of",
+        "building",
+        "to the right of the large gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘left’ ordering frame for the car row unspecified. ‘to the right’ most likely locates the houses/row relative to the large building, but may modify Bragg Road; retained as row-relative with medium confidence."
+    ],
+    "alternatives": {
+      "4": [
+        {
+          "subject": [
+            "houses"
+          ],
+          "reference": [
+            "building"
+          ],
+          "reason": "Right-of phrase may attach to houses rather than row of cars."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9271,
+    "e": {
+      "car": [
+        "A black car",
+        "object"
+      ],
+      "tree": [
+        "the tree",
+        "object"
+      ],
+      "building": [
+        "a building",
+        "object"
+      ],
+      "road": [
+        "Bragg road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "under",
+        "tree",
+        "black car parked under the tree",
+        "U",
+        "high"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "building",
+        "in front of a building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "left_side_of",
+        "road",
+        "building at the left side of the Bragg road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "The car is described as under the tree and in front of a building; the tree is not explicitly the subject of the in-front relation. Left-side frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9272,
+    "e": {
+      "car": [
+        "White car",
+        "object"
+      ],
+      "group": [
+        "a group of three other white cars",
+        "group"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "building": [
+        "a brown building",
+        "object"
+      ],
+      "garage": [
+        "an open garage",
+        "object"
+      ],
+      "van": [
+        "a yellow van",
+        "object"
+      ],
+      "lot": [
+        "this parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "group",
+        "White car parked in a group of three other white cars",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "at",
+        "edge",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "next_to",
+        "building",
+        "next to a brown building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "has",
+        "garage",
+        "building with an open garage",
+        "N",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "lot",
+        "yellow van in this parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "of",
+        "building",
+        "this parking lot",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘this parking lot’ most likely belongs to the brown building/open garage, but the antecedent is not explicit; group count states three other white cars in addition to the described car."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9273,
+    "e": {
+      "car": [
+        "a car",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "building": [
+        "the 10th building",
+        "object"
+      ],
+      "bluecar": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "driveway",
+        "car parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "of",
+        "building",
+        "driveway of the 10th building",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "tenth_left_of_observer_route",
+        [],
+        "10th building to your left",
+        "R",
+        "high"
+      ],
+      [
+        "road",
+        "turn_onto_from",
+        "birchfield",
+        "turn onto Bragg Road coming from Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "right_of",
+        "bluecar",
+        "it's the car to the right",
+        "U",
+        "high"
+      ],
+      [
+        "car",
+        "next_to",
+        "bluecar",
+        "next to a blue car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "The route-based ‘your left’ is tied to turning onto Bragg from Birchfield, but exact heading is not stated. ‘it's the car to the right’ likely identifies the target car among driveway vehicles; ‘to the right’ reference frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9274,
+    "e": {
+      "car": [
+        "The blue car",
+        "object"
+      ],
+      "house": [
+        "the gray house",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "house",
+        "blue car parked in front of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "gray house on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "eighteen_houses_right_of",
+        "building",
+        "18 houses to the right of the large gray building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘right’ frame for ordinal house count unspecified; ‘in front of’ frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9275,
+    "e": {
+      "car": [
+        "One light blue car",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "home": [
+        "a two-story multicolored Brown, beige and white home",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "van": [
+        "a white van",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "driveway",
+        "car parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "of",
+        "home",
+        "driveway of a two-story multicolored Brown, beige and white home",
+        "N",
+        "high"
+      ],
+      [
+        "home",
+        "has_roof",
+        "roof",
+        "home with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "home",
+        "part_next_to",
+        "van",
+        "part next to a white van",
+        "U",
+        "medium"
+      ],
+      [
+        "home",
+        "off",
+        "road",
+        "off Bragg Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘part next to a white van’ has unclear attachment: likely the home is partly next to the van, but it may describe the driveway/car. ‘off Bragg Road’ may locate the home or the preceding scene."
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": [
+            "driveway"
+          ],
+          "reference": [
+            "van"
+          ],
+          "reason": "‘part next to’ could refer to the driveway rather than the home."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9276,
+    "e": {
+      "car": [
+        "The bright blue car",
+        "object"
+      ],
+      "building": [
+        "the orange building with grey roof",
+        "object"
+      ],
+      "roof": [
+        "grey roof",
+        "object"
+      ],
+      "road": [
+        "the Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "building",
+        "bright blue car that is parked in front of the orange building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "orange building with grey roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "on the Bragg Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘on the Bragg Road’ may modify the building or the car/building configuration; retained as building location with attachment ambiguity."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": [
+            "car"
+          ],
+          "reference": [
+            "road"
+          ],
+          "reason": "Final road PP may locate the car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9277,
+    "e": {
+      "car": [
+        "Gray car",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "white": [
+        "one white car",
+        "object"
+      ],
+      "black": [
+        "one black car",
+        "object"
+      ],
+      "building": [
+        "the Brown building",
+        "object"
+      ],
+      "van": [
+        "a yellow van",
+        "object"
+      ],
+      "lot": [
+        "his parking lot",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "at",
+        "edge",
+        "Gray car on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "car",
+        "across_from",
+        [
+          "white",
+          "black"
+        ],
+        "across from one white car and one black car",
+        "U",
+        "high"
+      ],
+      [
+        "car",
+        "closest_to",
+        "building",
+        "closest to the Brown building",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_vehicle",
+        "van",
+        "building that has a yellow van",
+        "N",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "lot",
+        "yellow van in his parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "off",
+        "birchfield",
+        "parking lot off Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "of",
+        "building",
+        "his parking lot",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘Across from one white car and one black car’ can mean across from each separately or from the pair as a group. ‘his’ parking lot antecedent unclear; likely the Brown building."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9278,
+    "e": {
+      "car": [
+        "The gray car",
+        "object"
+      ],
+      "back": [
+        "the back of the parking lot",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "backyards": [
+        "the backyards",
+        "group"
+      ],
+      "houses": [
+        "the houses",
+        "group"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "at",
+        "back",
+        "gray car at the back of the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "back",
+        "of",
+        "lot",
+        "back of the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "backyards",
+        "parking lot behind the backyards",
+        "U",
+        "high"
+      ],
+      [
+        "backyards",
+        "of",
+        "houses",
+        "backyards of the houses",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "on",
+        "road",
+        "houses on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "right_of",
+        "building",
+        "to the right of the large gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘to the right’ may locate the houses or the parking-lot/car grouping relative to the building. Right frame unspecified."
+    ],
+    "alternatives": {
+      "5": [
+        {
+          "subject": [
+            "lot"
+          ],
+          "reference": [
+            "building"
+          ],
+          "reason": "Final right-of PP may modify the parking lot/car location rather than the houses."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9279,
+    "e": {
+      "car": [
+        "The gray",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "backyards": [
+        "the backyards",
+        "group"
+      ],
+      "houses": [
+        "the houses",
+        "group"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "behind",
+        "row",
+        "gray parked behind the row of cars",
+        "U",
+        "high"
+      ],
+      [
+        "row",
+        "behind",
+        "backyards",
+        "row of cars parked behind the backyards",
+        "U",
+        "high"
+      ],
+      [
+        "backyards",
+        "of",
+        "houses",
+        "backyards of the houses",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "on",
+        "road",
+        "houses on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "houses",
+        "right_of",
+        "building",
+        "to the right of the large gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘The gray’ omits the noun; inferred as a gray car only from ‘parked’. ‘to the right’ may attach to the houses or the row/gray car location; frame unspecified."
+    ],
+    "alternatives": {
+      "4": [
+        {
+          "subject": [
+            "row"
+          ],
+          "reference": [
+            "building"
+          ],
+          "reason": "Final right-of PP may describe the row/car location rather than houses."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

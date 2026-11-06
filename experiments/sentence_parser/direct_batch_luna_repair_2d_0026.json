@@ -1,0 +1,1725 @@
+[
+  {
+    "i": 9300,
+    "e": {
+      "vehicle": [
+        "A white vehicle",
+        "object"
+      ],
+      "space": [
+        "a front parking space",
+        "region"
+      ],
+      "building": [
+        "a brick building",
+        "object"
+      ],
+      "door": [
+        "a black door",
+        "object"
+      ],
+      "road": [
+        "Chesterfield Garden",
+        "named_landmark"
+      ],
+      "whitecar": [
+        "a white car",
+        "object"
+      ],
+      "empties": [
+        "two empty spaces",
+        "group"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "light": [
+        "a white light",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "vehicle",
+        "in",
+        "space",
+        "white vehicle parked in a front parking space",
+        "N",
+        "high"
+      ],
+      [
+        "space",
+        "of",
+        "building",
+        "parking space of a brick building",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has",
+        "door",
+        "building with a black door",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "on Chesterfield Garden",
+        "N",
+        "medium"
+      ],
+      [
+        "whitecar",
+        "right_of",
+        "vehicle",
+        "a white car and then two empty spaces to the right of this vehicle",
+        "U",
+        "high"
+      ],
+      [
+        "empties",
+        "right_of",
+        "whitecar",
+        "then two empty spaces to the right",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "left_of",
+        "vehicle",
+        "a tree with a white light sticking out of it to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "light",
+        "protrudes_from",
+        "tree",
+        "a white light sticking out of it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘front’ parking space may mean a space at the building front, with no explicit reference object. The right-of sequence is from the target vehicle: first a white car, then two empty spaces; exact spatial layout/frame uncertain. ‘it’ in the light clause refers to the tree."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9301,
+    "e": {
+      "car": [
+        "The white car",
+        "object"
+      ],
+      "house": [
+        "the brown house",
+        "object"
+      ],
+      "gardens": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "cornerhouse": [
+        "the brown house in the corner",
+        "object"
+      ],
+      "bluecar": [
+        "a blue car",
+        "object"
+      ],
+      "corner": [
+        "the corner",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "against",
+        "house",
+        "white car parked against the brown house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "gardens",
+        "brown house in Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "six_houses_left_of",
+        "cornerhouse",
+        "6 houses to the left of the brown house in the corner",
+        "U",
+        "high"
+      ],
+      [
+        "cornerhouse",
+        "at",
+        "corner",
+        "brown house in the corner",
+        "N",
+        "high"
+      ],
+      [
+        "bluecar",
+        "against",
+        "cornerhouse",
+        "blue car parked against it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "The relative clause ‘that is 6 houses to the left’ most likely modifies the first brown house, while ‘in the corner’ introduces another brown house; the attachment is somewhat ambiguous. ‘it’ refers to the corner house. Leftward count frame unspecified."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": [
+            "car"
+          ],
+          "reference": [
+            "cornerhouse"
+          ],
+          "reason": "The relative clause could modify the white car / full car-house description, though it most directly follows ‘the brown house’."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9302,
+    "e": {
+      "car": [
+        "The white car",
+        "object"
+      ],
+      "driveway": [
+        "the second driveway",
+        "region"
+      ],
+      "broadway": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "building": [
+        "the building on the corner",
+        "object"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in",
+        "driveway",
+        "white car in the second driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "second_from",
+        "building",
+        "second driveway on The Broadway from the building",
+        "R",
+        "medium"
+      ],
+      [
+        "building",
+        "at_corner_of",
+        "birchfield",
+        "building on the corner with Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "on",
+        "broadway",
+        "second driveway on The Broadway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘from the building’ does not specify a direction or whether the building is the ordinal origin; sequence frame unresolved. The corner is with Birchfield Road; its other intersecting road is not stated."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9303,
+    "e": {
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "broadway": [
+        "the Broadway",
+        "named_landmark"
+      ],
+      "house": [
+        "a residential house",
+        "object"
+      ],
+      "otherblack": [
+        "a black car",
+        "object",
+        1
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "on",
+        "broadway",
+        "black car parked on the Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "in front of a residential house",
+        "U",
+        "high"
+      ],
+      [
+        "otherblack",
+        "at_angle",
+        "otherblack",
+        "black car parked at an angle",
+        "I",
+        "high"
+      ],
+      [
+        "house",
+        "has_vehicle",
+        "otherblack",
+        "house with a black car parked at an angle",
+        "N",
+        "medium"
+      ],
+      [
+        "red",
+        "in_front_of",
+        "otherblack",
+        "In front of this black car there is a red car",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "faces_opposite",
+        "otherblack",
+        "red car facing the opposite direction",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘this black car’ in the second sentence may refer to the target black car or the house-associated black car; nearest antecedent is the latter. ‘facing the opposite direction’ does not specify a precise orientation reference; preserved as a facing relation."
+    ],
+    "f": {
+      "5": {
+        "type": "intrinsic",
+        "status": "unknown",
+        "view_evidence": "facing the opposite direction"
+      }
+    },
+    "alternatives": {
+      "4": [
+        {
+          "subject": [
+            "red"
+          ],
+          "reference": [
+            "black"
+          ],
+          "reason": "‘this black car’ could refer to the initially introduced target black car rather than the house-associated black car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9304,
+    "e": {
+      "black": [
+        "Black car",
+        "object"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "broadway": [
+        "The Broadway road",
+        "named_landmark"
+      ],
+      "house": [
+        "a house",
+        "object"
+      ],
+      "van": [
+        "a dark blue van",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "backyard": [
+        "his backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in_front_of",
+        "red",
+        "Black car in front of a red car",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "off",
+        "broadway",
+        "off The Broadway road",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "in front of a house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "has_vehicle",
+        "van",
+        "house that has a dark blue van",
+        "N",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "driveway",
+        "dark blue van in in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "backyard",
+        "of",
+        "house",
+        "his backyard",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "least_vegetation_in",
+        "backyard",
+        "least vegetation in his backyard",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "The phrase ‘in in the driveway’ contains a repetition; the van is interpreted as being in the driveway. ‘that has the least vegetation’ most likely modifies the house; ‘his’ antecedent unclear."
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": [
+            "red"
+          ],
+          "reference": [
+            "broadway"
+          ],
+          "reason": "The road PP may locate the red car or the whole scene rather than the black car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9305,
+    "e": {
+      "black": [
+        "A black car",
+        "object"
+      ],
+      "building": [
+        "a building",
+        "object"
+      ],
+      "roof": [
+        "brown and grey roof",
+        "object"
+      ],
+      "wall": [
+        "white wall",
+        "object"
+      ],
+      "broadway": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "otherblack": [
+        "another black car",
+        "object"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in_front_of",
+        "building",
+        "black car parked in front of a building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "building with brown and grey roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_wall",
+        "wall",
+        "white wall",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "right_side_of",
+        "broadway",
+        "situated at the right side of the road named The Broadway",
+        "U",
+        "high"
+      ],
+      [
+        "otherblack",
+        "parallel_to",
+        "broadway",
+        "another black car parked parallelly on the road",
+        "R",
+        "high"
+      ],
+      [
+        "otherblack",
+        "left_side_of",
+        "broadway",
+        "at its left side",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "diagonal_to",
+        "broadway",
+        "red car parked diagonally on the road",
+        "R",
+        "high"
+      ],
+      [
+        "red",
+        "next_to",
+        "otherblack",
+        "red car parked diagonally on the road next to it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "The first car's ‘in front of’ frame is unspecified. Road right/left side frames are unspecified; ‘parallelly’ and diagonal parking describe orientation relative to road but direction along it is unknown. ‘its’ refers to the road/car context, most likely the road for left-side relation."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9306,
+    "e": {
+      "blue": [
+        "A dark blue car",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "house": [
+        "a White House",
+        "object"
+      ],
+      "roof": [
+        "a multi-colored gray and brown roof",
+        "object"
+      ],
+      "black": [
+        "another black car",
+        "object"
+      ],
+      "orange": [
+        "an orange car",
+        "object"
+      ],
+      "broadway": [
+        "the Broadway Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "in",
+        "driveway",
+        "dark blue car in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "of",
+        "house",
+        "driveway of a White House",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "White House with a multi-colored gray and brown roof",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "across_from",
+        "black",
+        "that is across from another black car",
+        "U",
+        "medium"
+      ],
+      [
+        "orange",
+        "in_front_of",
+        "black",
+        "orange car in front of it",
+        "U",
+        "high"
+      ],
+      [
+        "orange",
+        "off",
+        "broadway",
+        "orange car in front of it off the Broadway Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘that is across from another black car’ most likely modifies the White House, but may modify the driveway/car description. ‘off the Broadway Road’ may locate the orange car, black car, or whole configuration; likely the black-car/orange-car pair."
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": [
+            "blue"
+          ],
+          "reference": [
+            "black"
+          ],
+          "reason": "Relative clause may describe the target blue car/driveway configuration rather than the house."
+        }
+      ],
+      "5": [
+        {
+          "subject": [
+            "black"
+          ],
+          "reference": [
+            "broadway"
+          ],
+          "reason": "Road PP may locate the black car (and its orange car) rather than the orange car alone."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9307,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "building": [
+        "the orange roof building",
+        "object"
+      ],
+      "road": [
+        "The Broadway Road",
+        "named_landmark"
+      ],
+      "orange": [
+        "orange car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "diagonal_in_front_of",
+        "building",
+        "black car that is parked diagonal in front of the orange roof building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "building that is on The Broadway Road",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "near",
+        "orange",
+        "black car and orange car is nearby",
+        "N",
+        "high"
+      ],
+      [
+        "orange",
+        "near",
+        "black",
+        "orange car is nearby",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘parked diagonal’ expresses diagonal placement; orientation relative to the building is not further specified. ‘black car and orange car is nearby’ states proximity but does not specify which entity is near which beyond the pair."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9308,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "the Broadway road",
+        "named_landmark"
+      ],
+      "otherwhite": [
+        "the white car",
+        "object"
+      ],
+      "tree": [
+        "the tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "on",
+        "road",
+        "white car that is parked on the Broadway road",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "across_from",
+        "otherwhite",
+        "across is the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "otherwhite",
+        "behind",
+        "tree",
+        "white car that parked behind the tree",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘across is the white car’ is malformed; interpreted as the first white car being across from a distinct second white car. Road-side/line orientation is unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9309,
+    "e": {
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "house": [
+        "a house",
+        "object"
+      ],
+      "road": [
+        "The Broadway road",
+        "named_landmark"
+      ],
+      "pad": [
+        "a brown pad",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "black car parked in front of a house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on The Broadway road",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "at_angle",
+        "pad",
+        "car is parked at an angle on a brown pad",
+        "I",
+        "high"
+      ],
+      [
+        "black",
+        "on",
+        "pad",
+        "on a brown pad",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "in front of the house",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘The car’ refers to the black car. The second sentence repeats the in-front relation and adds a brown pad and angled parking; facing direction is not specified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9310,
+    "e": {
+      "black": [
+        "A black car",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "house": [
+        "a brown and white house",
+        "object"
+      ],
+      "roof": [
+        "a brown roof",
+        "object"
+      ],
+      "orange": [
+        "an orange car",
+        "object"
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in",
+        "driveway",
+        "black car that is in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "of",
+        "house",
+        "driveway of a brown and white house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "house with a brown roof",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "across_from",
+        "orange",
+        "that is across from an orange car",
+        "U",
+        "medium"
+      ],
+      [
+        "orange",
+        "on",
+        "road",
+        "orange car on the Broadway Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘that is across from an orange car’ most directly modifies the house, but could modify the car/house description as a whole. Across-road frame unspecified."
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": [
+            "black"
+          ],
+          "reference": [
+            "orange"
+          ],
+          "reason": "The across-from clause may describe the black target car rather than its house."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9311,
+    "e": {
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "white": [
+        "white",
+        "object"
+      ],
+      "darkgray": [
+        "dark gray and orange cars",
+        "group"
+      ],
+      "orange": [
+        "orange cars",
+        "group"
+      ],
+      "broadway": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "building": [
+        "the 5th building",
+        "object"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "cars": [
+        "these cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "in_front_of",
+        "black",
+        "with white in front",
+        "U",
+        "medium"
+      ],
+      [
+        "darkgray",
+        "behind",
+        "black",
+        "dark gray and orange cars in the back",
+        "U",
+        "medium"
+      ],
+      [
+        "orange",
+        "behind",
+        "black",
+        "orange cars in the back",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "on",
+        "broadway",
+        "these cars are on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "on",
+        "broadway",
+        "these cars are on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "darkgray",
+        "on",
+        "broadway",
+        "these cars are on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "orange",
+        "on",
+        "broadway",
+        "these cars are on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "next_to",
+        "building",
+        "they are next to the 5th building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "fifth_after_turn_from",
+        "birchfield",
+        "5th building after turning this road from Birchfield Road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘with white in front and dark gray and orange cars in the back’ gives relative positions around the black car, but front/back frame unspecified. ‘these cars’ likely refers to all four mentioned vehicles. ‘cars’ in relation 7 denotes this group; road-turn ordinal direction/heading is route-relative and underspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9312,
+    "e": {
+      "white": [
+        "One white car",
+        "object"
+      ],
+      "blacks": [
+        "two black cars",
+        "group"
+      ],
+      "blackcar": [
+        "black car",
+        "object"
+      ],
+      "orange": [
+        "an orange car",
+        "object"
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "between",
+        "blacks",
+        "white car in between two black cars",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "across_from",
+        "blackcar",
+        "that is across me black car",
+        "U",
+        "low"
+      ],
+      [
+        "blackcar",
+        "faces_toward",
+        "orange",
+        "black car facing an orange car",
+        "F",
+        "high"
+      ],
+      [
+        "blackcar",
+        "on_opposite_side_of",
+        "road",
+        "on the opposite side of the Broadway Road",
+        "U",
+        "high"
+      ],
+      [
+        "orange",
+        "on_opposite_side_of",
+        "road",
+        "on the opposite side of the Broadway Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘across me black car’ is malformed; likely ‘across from a black car’, but the white car's relation to that black car is uncertain. ‘facing an orange car on the opposite side’ could place the orange car opposite the black car across the road; the final PP attachment is ambiguous. ‘between’ axis unspecified."
+    ],
+    "f": {
+      "2": {
+        "type": "intrinsic",
+        "status": "unknown",
+        "view_evidence": "black car facing an orange car"
+      }
+    },
+    "alternatives": {
+      "1": [
+        {
+          "subject": [
+            "white"
+          ],
+          "reference": [
+            "orange"
+          ],
+          "reason": "The malformed phrase may intend the white car across from the black car/orange-car configuration."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9313,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "house": [
+        "a house",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "in_front_of",
+        "house",
+        "white car parked in front of a house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "left_of",
+        "white",
+        "red car parked to the left of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘It’ refers to the white car. Left frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9314,
+    "e": {
+      "van": [
+        "A white van",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "house": [
+        "a multicolored white and gray house",
+        "object"
+      ],
+      "roof": [
+        "a multicolored Brown and gray roof",
+        "object"
+      ],
+      "pattern": [
+        "a gray and brown striped pattern",
+        "object"
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "van",
+        "in",
+        "driveway",
+        "white van in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "of",
+        "house",
+        "driveway of a multicolored white and gray house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "house, with a multicolored Brown and gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "has_pattern",
+        "pattern",
+        "driveway having a gray and brown striped pattern",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "off",
+        "road",
+        "off the Broadway Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘off the Broadway Road’ may locate the driveway/house or the whole description; recorded against the house with medium confidence."
+    ],
+    "alternatives": {
+      "4": [
+        {
+          "subject": [
+            "driveway"
+          ],
+          "reference": [
+            "road"
+          ],
+          "reason": "Final road PP may attach to the driveway rather than the house."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9315,
+    "e": {
+      "black": [
+        "One black car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ],
+      "home": [
+        "a multi-colored beige and white home",
+        "object"
+      ],
+      "roof": [
+        "a multicolored gray and brown roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "between",
+        [
+          "white",
+          "gray"
+        ],
+        "black car in between a white car and a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "off",
+        "road",
+        "off the Broadway Road",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "home",
+        "off the Broadway Road that is a front of a multi-colored beige and white home",
+        "U",
+        "medium"
+      ],
+      [
+        "home",
+        "has_roof",
+        "roof",
+        "home that has a multicolored gray and brown roof",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘that is a front of’ is malformed; likely means the target car is in front of the home, but the exact scope may instead place the road relative to the home. ‘between’ axis unspecified; ‘off the Broadway Road’ attachment ambiguous."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": [
+            "road"
+          ],
+          "reference": [
+            "home"
+          ],
+          "reason": "The clause ‘that is a front of a ... home’ may describe the road's relation to the home, though grammatically malformed."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9316,
+    "e": {
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ],
+      "house": [
+        "a duplex house",
+        "object"
+      ],
+      "grayroof": [
+        "half gray roof",
+        "object"
+      ],
+      "brownroof": [
+        "half brown roof",
+        "object"
+      ],
+      "broadway": [
+        "the Broadway",
+        "named_landmark"
+      ],
+      "otherblack": [
+        "another black car",
+        "object"
+      ],
+      "yard": [
+        "the neighbor's front yard",
+        "region"
+      ],
+      "streetblack": [
+        "another black car",
+        "object",
+        1
+      ],
+      "street": [
+        "the street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in",
+        "driveway",
+        "black car parked on the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "driveway",
+        "of",
+        "house",
+        "driveway of a duplex house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        [
+          "grayroof",
+          "brownroof"
+        ],
+        "house with a half gray roof and a half brown roof",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "broadway",
+        "on the Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "otherblack",
+        "in",
+        "yard",
+        "black car parked in the neighbor's front yard",
+        "N",
+        "high"
+      ],
+      [
+        "streetblack",
+        "on",
+        "street",
+        "black car parked on the street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘There is another black car parked in the neighbor's front yard’ may be spatially associated with the duplex house as its neighbor, but the neighbor house is not otherwise identified. The two other black cars are distinct from the target."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9317,
+    "e": {
+      "car": [
+        "The black car",
+        "object"
+      ],
+      "house": [
+        "the gray house",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "building": [
+        "the gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "against",
+        "house",
+        "black car parked against the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "gray house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "fourteen_houses_right_of",
+        "building",
+        "14 houses to the right of the gray building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Rightward ordinal frame unspecified; ‘against’ indicates contact/adjacency without a stated side."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9318,
+    "e": {
+      "car": [
+        "The blue car",
+        "object"
+      ],
+      "house": [
+        "the gray house",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "building": [
+        "the gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "house",
+        "blue car parked in front of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "gray house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "thirteen_houses_right_of",
+        "building",
+        "13 houses to the right of the gray building",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "meets",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Rightward ordinal frame unspecified; ‘in front of’ frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9319,
+    "e": {
+      "blue": [
+        "A blue car",
+        "object"
+      ],
+      "road": [
+        "traffic road Broadway",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "left_side_of",
+        "road",
+        "blue car parked at the left side of the traffic road Broadway",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "blue",
+        "black car parked in front of it",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "at_opposite_side_of",
+        "road",
+        "white car parked at the opposite side of the road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘left’ side frame unspecified. ‘opposite side’ likely means opposite side of the road from the blue/black car(s); exact attachment to blue or black car is unclear."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": [
+            "white"
+          ],
+          "reference": [
+            "blue"
+          ],
+          "reason": "White car may be across the road from the target blue car."
+        },
+        {
+          "subject": [
+            "white"
+          ],
+          "reference": [
+            "black"
+          ],
+          "reason": "White car may be across the road from the black car positioned in front."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

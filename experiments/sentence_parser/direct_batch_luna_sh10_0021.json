@@ -1,0 +1,2679 @@
+[
+  {
+    "i": 10920,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "black": [
+        "the black car",
+        "object",
+        0
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "lane": [
+        "the Wellhead Lane",
+        "named_landmark"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "black",
+        "parked between the black car, next to the blue car, and the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "blue",
+        "next to the blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "white",
+        "between the black car, next to the blue car, and the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "between",
+        "lane",
+        "parking lot that is between the Wellhead Lane and Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "between",
+        "depot",
+        "parking lot that is between the Wellhead Lane and Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10921,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this dark gray car",
+        "object"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ],
+      "row": [
+        "the third row from the top",
+        "group"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_of",
+        "depot",
+        "To the right of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the third row from the top",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "3rd_from_left",
+        "row",
+        "third car from the left",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "south_of",
+        "red",
+        "south of a red car",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right, row top and south rely on uncalibrated map orientation."
+    ]
+  },
+  {
+    "i": 10922,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot building",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "middle_of",
+        "lot",
+        "in the middle of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "above",
+        "depot",
+        "parking lot above the Perry Barr Bus Depot building",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "above",
+        "t",
+        "has a white car above it",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "below",
+        "t",
+        "a black car below it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Above/below are map-relative."
+    ]
+  },
+  {
+    "i": 10923,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ],
+      "spaces": [
+        "two open spaces",
+        "region"
+      ],
+      "black": [
+        "another black car",
+        "object"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "right",
+        "on the right half of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "above",
+        "depot",
+        "parking lot above the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "above",
+        "white",
+        "the white car is above another white car",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "pointed_away_from",
+        "t",
+        "pointed away from it",
+        "F",
+        "medium"
+      ],
+      [
+        "spaces",
+        "before",
+        "black",
+        "two open spaces before another black car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "right_of",
+        "t",
+        "another black car on the right of the white car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right/above/row direction are uncalibrated; “pointed away” intrinsic."
+    ]
+  },
+  {
+    "i": 10924,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "spots": [
+        "two empty spots",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry barr bus depot",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "spots",
+        "in between two empty spots",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "behind",
+        "t",
+        "with a white car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "3_spots_away_from",
+        "t",
+        "a black car that is three spots away from it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of the Perry barr bus depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10925,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ],
+      "black": [
+        "the first black car",
+        "object"
+      ],
+      "row": [
+        "the second row from to the right of Perry Barr Bus Depot",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_of",
+        "depot",
+        "To the right of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "north_of",
+        "black",
+        "parked north of the first black car",
+        "W",
+        "medium"
+      ],
+      [
+        "black",
+        "in",
+        "row",
+        "first black car from the bottom of the second row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "right_of",
+        "depot",
+        "to the right of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "North and row order are uncalibrated."
+    ]
+  },
+  {
+    "i": 10926,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "truck": [
+        "a white truck",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry barr bus depot",
+        "named_landmark"
+      ],
+      "row": [
+        "the row on the right from the center row",
+        "group"
+      ],
+      "center": [
+        "the center row",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "truck",
+        "behind",
+        "t",
+        "with a white truck behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of the Perry barr bus depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the row on the right from the center row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "right_of",
+        "center",
+        "on the right from the center row",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10927,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "white",
+        "The white car behind another white car",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "facing",
+        "depot",
+        "that is facing the Perry Barr Bus Depot",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "2_spaces_away_from",
+        "black",
+        "The car is two spaces away from a black car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10928,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_half_of",
+        "lot",
+        "on the left half of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "above",
+        "depot",
+        "parking lot above the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "below",
+        "t",
+        "a blue car right below it",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "left_of",
+        "t",
+        "and to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "left_of",
+        "blue",
+        "to the left and below the blue car is a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "below",
+        "blue",
+        "to the left and below the blue car is a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "no_car_immediately_right",
+        "t",
+        "does not have a car parked immediately to the right of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10929,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "area": [
+        "the right side parking area",
+        "region"
+      ],
+      "b": [
+        "the building named Perry Barr Bus depot",
+        "named_landmark"
+      ],
+      "blue": [
+        "A blue car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "left": [
+        "its left side",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "area",
+        "parked at the right side parking area",
+        "U",
+        "medium"
+      ],
+      [
+        "area",
+        "of",
+        "b",
+        "of the building named Perry Barr Bus depot",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "right_of",
+        "t",
+        "A blue car parked at its right side",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "a black car parked behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "no_car_at",
+        "left",
+        "no car parked at its left side",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10930,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "row": [
+        "the 2nd row of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "3rd_from_left",
+        "row",
+        "3rd from the left in the 2nd row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "row of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10931,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "space": [
+        "an empty spot",
+        "region"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr bus depot",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "blue",
+        "in between a blue car and an empty spot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "space",
+        "in between a blue car and an empty spot",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "a black car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of the Perry Barr bus depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10932,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "space": [
+        "empty space",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "depot",
+        "in the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "on_one_side_of",
+        "t",
+        "a blue car to one side of it",
+        "U",
+        "medium"
+      ],
+      [
+        "space",
+        "on_other_side_of",
+        "t",
+        "empty space on the other",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10933,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "row": [
+        "the middle row",
+        "group"
+      ],
+      "lot": [
+        "the Perry Barr Bus Depot parking lot",
+        "region"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "row",
+        "in the middle row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "of",
+        "lot",
+        "of the Perry Barr Bus Depot parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "blue",
+        "next to a blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10934,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "column": [
+        "the rightmost column of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "bottom": [
+        "the bottom of the parking lot",
+        "region"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_top",
+        "column",
+        "1st from the top in the rightmost column of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "column",
+        "towards",
+        "bottom",
+        "towards the bottom of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "column",
+        "in",
+        "lot",
+        "rightmost column of cars towards the bottom of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Top/right/bottom ranking requires map calibration."
+    ]
+  },
+  {
+    "i": 10935,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "column": [
+        "the lower right column of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_top",
+        "column",
+        "1st from the top in the lower right column of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "column",
+        "in",
+        "lot",
+        "column of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10936,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "great": [
+        "a great car with a black top",
+        "object"
+      ],
+      "gray": [
+        "another gray car",
+        "object"
+      ],
+      "grass": [
+        "the grass section",
+        "region"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr bus depot",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "great",
+        "next to a great car with a black top",
+        "U",
+        "medium"
+      ],
+      [
+        "great",
+        "next_to",
+        "gray",
+        "that is also next to another gray car",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "near",
+        "grass",
+        "near the grass section",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of the Perry Barr bus depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10937,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white vehicle",
+        "object"
+      ],
+      "lot": [
+        "the parking",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot building",
+        "named_landmark"
+      ],
+      "end": [
+        "the far end of the lot",
+        "region"
+      ],
+      "trees": [
+        "some trees",
+        "group"
+      ],
+      "gray": [
+        "two gray cars with black roofs",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "parked in the parking beside the Perry Barr Bus Depot building",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "at",
+        "end",
+        "at the far end of the lot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "trees",
+        "in front of some trees",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "beside",
+        "gray",
+        "beside two gray cars with black roofs",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10938,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this is the white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "north": [
+        "the north",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot building",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "adjacent": [
+        "an adjacent white car",
+        "object"
+      ],
+      "vacant": [
+        "the parking spot to the north",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "4th_from_right",
+        "lot",
+        "4th car from the right in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "north_of",
+        "depot",
+        "parking lot north of the Perry Barr Bus Depot building",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "left_of",
+        "t",
+        "a blue car to its left",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "right_of",
+        "t",
+        "a white car to its right",
+        "U",
+        "medium"
+      ],
+      [
+        "adjacent",
+        "adjacent_to",
+        "t",
+        "an adjacent white car",
+        "U",
+        "medium"
+      ],
+      [
+        "vacant",
+        "north_of",
+        "t",
+        "the parking spot to the north is vacant",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10939,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "row": [
+        "the 4th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_left",
+        "row",
+        "1st from the left in the 4th row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "row of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10940,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "lot": [
+        "the big parking lot",
+        "region"
+      ],
+      "lane": [
+        "the Wellhead Lane",
+        "named_landmark"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "red": [
+        "one red car",
+        "object"
+      ],
+      "row": [
+        "the same row",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "other",
+        "behind",
+        "t",
+        "has another white car behind",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "parked at the big parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "between",
+        "lane",
+        "between the Wellhead Lane and Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "between",
+        "depot",
+        "between the Wellhead Lane and Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "red",
+        "in",
+        "row",
+        "one red car parked at the same row",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10941,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "space": [
+        "the parking space",
+        "region"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "empty": [
+        "an empty spot",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in the parking space Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "empty",
+        "right_of",
+        "t",
+        "There is an empty spot on its right",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "behind",
+        "t",
+        "a white car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "facing_opposite_direction_of",
+        "t",
+        "facing the opposite direction",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10942,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "row": [
+        "the northmost row of the parking lot",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "north_of",
+        "depot",
+        "To the north of Perry Barr Bus Depot",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "4th_from_right",
+        "row",
+        "fourth car from the right on the northmost row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "of",
+        "lot",
+        "row of the parking lot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "North/northmost and right ranking require map calibration."
+    ]
+  },
+  {
+    "i": 10943,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "front": [
+        "the front of a row",
+        "region"
+      ],
+      "row": [
+        "a row",
+        "group"
+      ],
+      "lot": [
+        "the Perry Barr Bus Depot parking lot",
+        "region"
+      ],
+      "cars": [
+        "no cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_front_of",
+        "row",
+        "at the front of a row",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the Perry Barr Bus Depot parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "no_cars_beside",
+        "cars",
+        "that has no cars beside it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10944,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "column": [
+        "the leftmost column of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "bottom": [
+        "the bottom",
+        "region"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_bottom",
+        "column",
+        "1st from the bottom in the leftmost column of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "column",
+        "in",
+        "lot",
+        "column of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10945,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The silver car",
+        "object"
+      ],
+      "column": [
+        "the leftmost column of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "bottom": [
+        "the bottom",
+        "region"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_bottom_of",
+        "column",
+        "at the bottom of the leftmost column of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "column",
+        "in",
+        "lot",
+        "column of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10946,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "black": [
+        "a black",
+        "object"
+      ],
+      "white": [
+        "white car",
+        "object"
+      ],
+      "row": [
+        "the first open (not touching buildings) parking row",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "behind",
+        "black",
+        "behind and between a black and white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "black",
+        "between a black and white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "white",
+        "between a black and white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the first open (not touching buildings) parking row",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10947,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this dark blue car",
+        "object"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "cubes": [
+        "three orange cubes",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "north": [
+        "the north",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "north_of",
+        "depot",
+        "To the north of Perry Barr Bus Depot",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "closest_to",
+        "cubes",
+        "car closest to three orange cubes",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "North is uncalibrated."
+    ]
+  },
+  {
+    "i": 10948,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "cars": [
+        "no cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "no_cars_beside_or_behind",
+        "cars",
+        "with no cars beside it or right behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot of the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10949,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a blue car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "row": [
+        "the row closest to the depot",
+        "group"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "other": [
+        "another black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "parked in the parking lot of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "parked in the row closest to the depot",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "left_of",
+        "t",
+        "a black car on its left",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "behind",
+        "t",
+        "another black car behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10950,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "row": [
+        "the third row",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "other": [
+        "another black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "row",
+        "in the third row of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "third row of the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "with a black car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "on_far_side_from",
+        "t",
+        "another black car on the far side of it from the bus depot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10951,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "row": [
+        "a row of cars",
+        "group"
+      ],
+      "lot": [
+        "the Perry Barr Bus Depot parking lot",
+        "region"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_in",
+        "row",
+        "the first car in a row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the Perry Barr Bus Depot parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "a black car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "beside",
+        "t",
+        "and beside it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10952,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Blue car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Depot",
+        "named_landmark"
+      ],
+      "lane": [
+        "the middle lane",
+        "region"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "other": [
+        "another one",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot in front of the Perry Barr Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "in_front_of",
+        "depot",
+        "in front of the Perry Barr Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_lane",
+        "lane",
+        "in the middle lane",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "left_of",
+        "t",
+        "It has a black car to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "in_front_of",
+        "t",
+        "another one in front",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10953,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a blue car",
+        "object"
+      ],
+      "space": [
+        "the parking space",
+        "region"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "other": [
+        "another black car",
+        "object"
+      ],
+      "left": [
+        "its left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in the parking space of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "Behind it is a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "left_of",
+        "t",
+        "on its left is another black car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10954,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a blue car",
+        "object"
+      ],
+      "space": [
+        "the parking space",
+        "region"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "left": [
+        "its left side",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "parked in the parking space Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "left_of",
+        "t",
+        "On its left side of and behind the car, there is a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "and behind the car, there is a black car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10955,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "the white car",
+        "object"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "building": [
+        "the building",
+        "object"
+      ],
+      "row": [
+        "the row of seven cars",
+        "group"
+      ],
+      "spaces": [
+        "any spaces",
+        "region"
+      ],
+      "top": [
+        "the fourth from the top",
+        "region"
+      ],
+      "left": [
+        "the bottom left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "depot",
+        "in",
+        "left",
+        "With the Perry Barr Bus Depot in the bottom left",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "above",
+        "building",
+        "white car above the building",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_middle_of",
+        "row",
+        "in the middle of the row of seven cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "without",
+        "spaces",
+        "without any spaces between them",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "4th_from_top",
+        "row",
+        "the fourth from the top",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Bottom-left and fourth-from-top require explicit calibration."
+    ]
+  },
+  {
+    "i": 10956,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 3rd row of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "4th_from_left",
+        "row",
+        "4th from the left in the 3rd row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "row of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10957,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 3rd row of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "4th_from_right",
+        "row",
+        "4th from the right in the 3rd row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "row of cars in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "depot",
+        "parking lot next to the Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_aerially",
+        "lot",
+        "when viewed aerially with the Perry Barr Bus Depot to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Aerial view states depot-left orientation."
+    ]
+  },
+  {
+    "i": 10958,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "black": [
+        "two black cars",
+        "object"
+      ],
+      "space": [
+        "an empty space",
+        "region"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "depot": [
+        "the Perry Barr bus depot",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "black",
+        "in between two black cars",
+        "U",
+        "medium"
+      ],
+      [
+        "space",
+        "behind",
+        "t",
+        "with an empty space behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "of",
+        "depot",
+        "parking lot of the Perry Barr bus depot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "edge",
+        "on the edge of the map",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  },
+  {
+    "i": 10959,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "depot": [
+        "Perry Barr Bus Depot",
+        "named_landmark"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ],
+      "row": [
+        "the third row from the left",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "top": [
+        "fourth car from the top",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_of",
+        "depot",
+        "To the right of Perry Barr Bus Depot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the third row from the left in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "4th_from_top",
+        "lot",
+        "fourth car from the top",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative direction, row ordering, or attachment is ambiguous or uncalibrated."
+    ]
+  }
+]
