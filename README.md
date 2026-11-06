@@ -1,4 +1,4 @@
-# GraphNav
+# UnifiedPGVB-V2
 
 **Language-Grounded Goal Belief for Aerial Vision-and-Language Navigation**
 
@@ -6,20 +6,20 @@
 
 GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程：利用**具名地标及其轮廓几何**，从语言指令推断全局目标位置，再通过有界控制器执行导航。项目包含在真实可见范围内提取 RGB/Depth 证据、累积历史记忆和更新目标信念的实验实现。
 
-> **当前主方案：UnifiedPGVB-v2（集成几何+单视觉目标Belief）**。主定位网络为 `graphnav/unified_pgvb.py`：内部集成原A3几何定位、唯一SigLIP2/PGVB视觉评分和统一GoalField输出；训练前的联合融合层默认关闭。原Trajectory/Stop作为独立冻结控制器。**目前已完成架构与CPU专项测试，但尚未取得V2的完整训练或真实闭环SR结果**。请从 [V2架构说明](reports/unified_pgvb/README_zh.md) 和 [V2测试计划](docs/UNIFIED_PGVB_V2_TEST_PLAN_zh.md) 开始。
+> **当前主方案：UnifiedPGVB-V2（集成几何+单视觉目标Belief）**。主定位网络为 `graphnav/unified_pgvb.py`：内部集成原A3几何定位、唯一SigLIP2/PGVB视觉评分和统一GoalField输出；训练前的联合融合层默认关闭。原Trajectory/Stop作为独立冻结控制器。**已完成实验分支上的真实训练与完整Val-Seen闭环：完整RGB方案SR 50.00%，关闭RGB的匹配消融SR 50.24%（各2470条，seed=42）。main保留集成入口，实验权重、运行配置和结果来源见下方链接；这不表示本次文档提交重新评测或合入全部实验代码。**请从 [V2架构说明](reports/unified_pgvb/README_zh.md) 和 [V2测试计划](docs/UNIFIED_PGVB_V2_TEST_PLAN_zh.md) 开始。
 
 > **GraphNav-V1为历史正式基线，不再是主方案。** 已完成Val-Seen、Val-Unseen、Test-Unseen的完整评测：Seen SR/SPL 47.61%/46.00%，Val-Unseen 22.54%/21.82%，Test-Unseen 37.15%/35.81%。 完整准确数值以原始[基线报告](reports/graphnav_v1_stage1/GRAPHNAV_V1_STAGE1_REPORT.md)为准。原始代码完整冻结于 [archive/graphnav-v1-pre-unified-20261104](https://github.com/qiaoxu123/2027-CVPR/tree/archive/graphnav-v1-pre-unified-20261104)（`9098e254`），权重仍需外部按SHA核验。
 
 [快速开始](#快速开始) · [已验证结果](#已验证结果) · [评估与复现](docs/REPRODUCIBILITY.md) · [代码导航](docs/CODE_MAP.md) · [研究报告索引](#研究报告与局限)
 
-## 当前主方案：UnifiedPGVB-v2
+## 当前主方案：UnifiedPGVB-V2
 
 ```text
 原始导航指令 + 公开地标Polygon + 当前RGB
                  |
       GT-free结构化指令解析
                  |
-          UnifiedPGVB-v2
+          UnifiedPGVB-V2
        +---------+---------+
        |                   |
   A3 Geometry        单次SigLIP2 RGB
@@ -35,7 +35,7 @@ GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程�
          无人机动作与新观测
 ```
 
-**当前可实际运行的任务**是具名地标导航；真实关系指令、完整Target Head及联合融合训练仍处于后续阶段。训练或评测前先运行 [V2测试计划](docs/UNIFIED_PGVB_V2_TEST_PLAN_zh.md)。旧GraphNav-V1架构图仅作为历史基线：
+main的基础接入支持具名地标导航；后续实验分支已完成完整CityNav原始目标的Geometry、Relation及RGB匹配消融。Relation与RGB的额外收益尚未得到支持，不能将地标导航高SR代替完整CityNav成绩。训练或评测前先运行 [V2测试计划](docs/UNIFIED_PGVB_V2_TEST_PLAN_zh.md)。旧GraphNav-V1架构图仅作为历史基线：
 
 ```text
 语言指令 + 公共地图（具名地标、真实 Polygon）
@@ -71,6 +71,21 @@ GraphNav 是面向城市级无人机视觉语言导航（VLN）的研究工程�
 - **控制与指标**：逐步重规划、限制单步位移与高度；CityNav benchmark 的 SR 采用二维目标距离，不能宣称三维避障或真实第一视角相机能力。
 
 ## 已验证结果
+
+### 论文主方案：UnifiedPGVB-V2（完整Val-Seen）
+
+以下来自同一轮实验，各组均覆盖2470/2470条原始CityNav任务，seed=42；失败、无候选及回退任务均计入分母。Controller、Stop和成功阈值一致。后三组共享训练后的Geometry。
+
+| 方法 | SR | OSR | SPL | NE (m) | nDTW | 决策耗时 (ms/步) |
+|:--|--:|--:|--:|--:|--:|--:|
+| 训练前Geometry | 47.77% | 55.51% | 0.4633 | 29.198 | 0.3029 | 11.33 |
+| 训练后Geometry | **50.24%** | 57.33% | **0.4875** | 28.465 | **0.3051** | 11.09 |
+| Geometry + Relation（关闭视觉） | **50.24%** | 57.33% | **0.4875** | **28.463** | **0.3051** | 24.64 |
+| UnifiedPGVB-V2：Geometry + Relation + RGB | 50.00% | **57.41%** | 0.4848 | 28.522 | 0.3050 | 34.99 |
+
+视觉消融：RGB纠正2条、破坏8条，净−6条（SR −0.24个百分点）；Relation相对训练后Geometry纠正/破坏为0/0。当前最好SR来自关闭视觉的版本，不能据此声称视觉带来提升。耗时来自共享GPU，单seed结果不代表多种子稳定性；本轮未完成Val-Unseen/Test评估。
+
+结果固定来源：[中文实验报告](https://github.com/qiaoxu123/2027-CVPR/blob/4d195f841ba9c3a561555ca75bcf44bfea79b6cc/reports/unified_pgvb/full_relation_s42_20261105/REPORT_zh.md)、[逐组原始指标与分层](https://github.com/qiaoxu123/2027-CVPR/blob/4d195f841ba9c3a561555ca75bcf44bfea79b6cc/reports/unified_pgvb/full_relation_s42_20261105/metrics.json)。47.37%是另一轮全文公开绑定基线，不能与本表混作同一次消融；62/64是具名地标专项结果。
 
 ### 正式全量闭环结果（GraphNav-V1 C Epoch1）
 
