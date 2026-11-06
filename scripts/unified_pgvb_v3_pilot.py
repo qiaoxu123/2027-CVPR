@@ -60,6 +60,55 @@ def _load_base(path, device):
     return model.geometry, args
 
 
+def blind_public_landmarks(records, objects, max_landmarks):
+    """Re-bind ALL named polygons using whole text + full PUBLIC catalog only.
+
+    The original TRAIN JSONL may contain annotation-derived reference IDs.
+    This function NEVER reads episode_id, target_xy, target object ID or
+    original record.landmarks when choosing landmarks. Homonymous polygons
+    survive independently. No LLM parser or target-conditioned search.
+    """
+    from scripts.analyze_instruction_landmark_association import PublicNames
+    from graphnav.geometry import normalize_xy
+    from graphnav.semantic_geometry import valid_surface_polygon
+    matcher = PublicNames(objects)
+    bound = unmatched = 0
+    for record in records:
+        bounds = np.asarray(record["world_bounds"], np.float32)
+        seen = set()
+        selected = []
+        mentions = matcher.match(record["map_name"], record["instruction"])
+        for mention in mentions:
+            for object_id in mention["public_ids"]:
+                if object_id in seen:
+                    continue
+                obj = objects[record["map_name"]][object_id]
+                contour = np.asarray(obj.get("contour", []), np.float32)
+                if not valid_surface_polygon(contour):
+                    continue
+                normalized = normalize_xy(contour, bounds)
+                if not np.isfinite(normalized).all():
+                    continue
+                if (normalized < -1e-4).any() or (normalized > 1+1e-4).any():
+                    continue
+                selected.append(dict(
+                    id=str(object_id),
+                    name=obj.get("name", ""),
+                    object_type=obj.get("object_type", "Unknown"),
+                    contour=normalized.tolist(),
+                ))
+                seen.add(object_id)
+                if len(selected) == max_landmarks:
+                    break
+            if len(selected) == max_landmarks:
+                break
+        record["landmarks"] = selected
+        bound += int(bool(selected))
+        unmatched += int(not bool(selected))
+    return dict(bound=bound, no_public_name=unmatched,
+                binding="whole original text vs complete public map names")
+
+
 def fixed_yaw_public_poses(record, *, ground, altitude_m, yaw, offset_m, views):
     """Only public named reference Polygon & public bounds; never target_xy.
 
@@ -254,6 +303,8 @@ def cache(args):
     if any(r.get("dataset_version") != "revised" for r in dataset.records):
         raise ValueError("V3 pilot accepts Revised TRAIN only")
     objects = json.loads(args.objects.read_text(encoding="utf-8"))
+    binding_audit = blind_public_landmarks(
+        dataset.records, objects, int(cfg.max_landmarks))
     ground = json.loads(args.ground_levels.read_text(encoding="utf-8"))
     manifest = {
         "format": "unified-pgvb-v3-cache-v1",
@@ -264,7 +315,8 @@ def cache(args):
         "cache_scope": "Revised TRAIN only", "seed":42,
         "views":args.views, "fixed_yaw":args.fixed_yaw,
         "altitude_m":args.altitude_m, "offset_m":args.offset_m,
-        "selection": "first public named landmark, never target GT",
+        "selection": "first blind-bound public named landmark, never target GT",
+        "binding": "blind whole original text via all public map names",
         "no_future_frames": True, "gt_disjoint_from_forward": True,
         "is_true_perspective_depth": False,
     }
@@ -293,7 +345,8 @@ def cache(args):
         if index % 20 == 0:
             print(json.dumps({"cached":index+1, "limit":limit}), flush=True)
     atomic_json({"cached_files":len(list((root/"public").glob("*.pt"))),
-                 "requested":limit, "new":stats},root/"cache_summary.json")
+                 "requested":limit, "new":stats,
+                 "blind_binding_audit":binding_audit},root/"cache_summary.json")
     print(f"V3 TRAIN cache ready: {limit} requested; no Val/Test used")
 
 
