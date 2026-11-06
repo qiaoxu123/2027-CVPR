@@ -296,14 +296,21 @@ def visual_patch_supervision(
     for i, (poly, bound) in enumerate(zip(polygons, bounds)):
         if poly is None or not valid_surface_polygon(np.asarray(poly, np.float32)):
             continue
-        # Point-in-polygon is a *conservative* train-only patch label.
-        # Tiny objects that cannot cover a patch center are intentionally
-        # ineligible for positive-patch contrast, not fabricated as visible.
-        from .semantic_geometry import point_inside_polygon
-        good = point_inside_polygon(
-            output.patch_world_xy[i].detach().cpu().numpy(), np.asarray(poly))
-        positives[i] = torch.as_tensor(good, dtype=torch.bool,
-                                      device=positives.device)
+        # Patch-area weak occupancy, not just patch-center containment.
+        # Small cars can cover only a fraction of one native 16x16 ViT patch.
+        # This radius comes from OBSERVATION pixel footprints, not GT crops;
+        # it deliberately marks uncertain neighbors as possible positives.
+        from .semantic_geometry import geometry_distance
+        world = output.patch_world_xy[i].detach().cpu().numpy().reshape(
+            frames, PATCHES, PATCHES, 2)
+        dx = np.linalg.norm(world[:, 0, 1] - world[:, 0, 0], axis=-1)
+        dy = np.linalg.norm(world[:, 1, 0] - world[:, 0, 0], axis=-1)
+        patch_radius = .5 * np.sqrt(dx**2 + dy**2)
+        dist = geometry_distance(world.reshape(frames, n, 2),
+                                 np.asarray(poly, np.float32))
+        good = dist <= patch_radius[:, None]
+        positives[i] = torch.as_tensor(
+            good, dtype=torch.bool, device=positives.device)
     positive = positives & output.patch_valid
     negative = output.patch_valid & ~positive
     eligible = positive.any(dim=(1, 2)) & negative.any(dim=(1, 2))
@@ -368,12 +375,16 @@ def v3_losses(output, target_xy, target_polygons, world_bounds, teacher_features
 
 
 @torch.no_grad()
-def offline_topk(output, target_xy, world_bounds, *, k_values=(1,5,20), radius_m=20.):
+def offline_topk(output, target_xy, world_bounds, *, branch="fused",
+                 k_values=(1,5,20), radius_m=20.):
     """OFFLINE localization only. Never call it closed-loop SR/OSR."""
-    b, h, w = output.fused_logits.shape
+    if branch not in ("fused", "geometry"):
+        raise ValueError("unknown offline Belief branch")
+    source = output.fused_logits if branch == "fused" else output.geometry_global
+    b, h, w = source.shape
     if h != w or target_xy.shape != (b, 2) or world_bounds.shape != (b, 4):
         raise ValueError("offline metric shape mismatch")
-    logits = output.fused_logits.reshape(b, -1)
+    logits = source.reshape(b, -1)
     kmax = max(k_values)
     ids = logits.topk(kmax, -1).indices
     xy = torch.stack(((ids % w + .5) / w, (ids // w + .5) / h), -1).float()
@@ -382,6 +393,10 @@ def offline_topk(output, target_xy, world_bounds, *, k_values=(1,5,20), radius_m
     summary = {f"R@{k}/20m_count": int(
         (distances[:, :k].min(-1).values <= radius_m).sum()) for k in k_values}
     summary["n"] = b
+    summary["hit_flags"] = {str(k):
+        (distances[:, :k].min(-1).values <= radius_m).cpu().tolist()
+        for k in k_values}
+    summary["Top1_NE_m"] = distances[:, 0].cpu().tolist()
     summary["Top1_NE_m_sum"] = float(distances[:, 0].sum())
     summary["Top1_xy"] = xy[:, 0].cpu().tolist()
     return summary
