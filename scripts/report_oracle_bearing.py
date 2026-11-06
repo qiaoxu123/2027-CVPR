@@ -22,6 +22,9 @@ def main():
  folders={'A':a.baseline,**{x:r/f'nav_{x}' for x in ['B','C','D1']}};rows={};metrics={};groups=defaultdict(list)
  for name,folder in folders.items():
   d=json.loads((folder/'metrics.json').read_text());assert d['coverage']['completed']==d['coverage']['expected']==2470
+  refmeta=json.loads((a.baseline/'metrics.json').read_text())
+  for k in ['protocol','checkpoint_sha256','sbf_source_sha256','full_relation_checkpoint_sha256','original_unified_v2_sha256','runtime_stop_threshold','runtime_execution','runtime_arrival_guard_m','instruction_mode','relation_control','relation_visual_control','geometry_source']:
+   assert d[k]==refmeta[k], 'Frozen baseline mismatch: '+name+'/'+k
   rows[name]={v['index']:v for v in map(json.loads,(folder/'predictions.jsonl').read_text().splitlines())};assert len(rows[name])==2470;metrics[name]=d['metrics']
  for d in diag:
   i=d['index'];groups[d['group']].append(i)
@@ -56,6 +59,7 @@ def main():
  summary['grid_diagnosis']=dict(no_grid_within20=sum(not d['grid_support20'] for d in diag),A_top20_no20hit=sum(not d['A_top20_support'] for d in diag),nearest_grid_NE_mean=float(np.mean([d['grid_min_NE'] for d in diag])),nearest_grid_NE_max=float(max(d['grid_min_NE'] for d in diag)))
  summary['runtime_offline_top1_agreement']={name:dict(N=sum(bool(q['step_diagnostics']) for q in rows[name].values()),matched=sum(bool(q['step_diagnostics']) and q['step_diagnostics'][0]['final_top1']==diag[i][name]['top1'] for i,q in rows[name].items())) for name in ['B','C','D1']}
  summary['anchor_count_by_group']={g:dict(Counter(d['N_anchors'] for d in diag if d['group']==g)) for g in groups}
+ summary['terminations']={name:dict(Counter(q['termination'] for q in rs.values())) for name,rs in rows.items()}
  summary['nearest_grid_rank']={name:float(np.mean([d[name]['rank_nearest'] for d in diag])) for name in ['A','B','C','D0.5','D1','D2','D4']}
  (o/'summary.json').write_text(json.dumps(summary,indent=2));(o/'offline_rows.json').write_text(json.dumps(diag,indent=2))
  paired=[]
@@ -73,33 +77,36 @@ def main():
    candidates=[d['index'] for d in diag if d['group']==group and ((not d['A']['R20'] and d['D1']['R20']) if condition=='fix' else (d['A']['R20'] and not d['D1']['R20']))];chosen+=candidates[:2]
  for name in ['B','C','D1']:
   for condition in [True,False]:chosen += [i for i in rows['A'] if bool(rows[name][i]['metrics']['SR'])==condition and bool(rows['A'][i]['metrics']['SR'])!=condition][:2]
- chosen=list(dict.fromkeys(chosen));images=[]
+ chosen=list(dict.fromkeys([166,179,765,*chosen]));images=[]
  for i in chosen:
   f=fields[str(i)];d=diag[i];fig,axs=plt.subplots(1,4,figsize=(17,4.5));bounds=f['bounds'];xy=f['grid'];gt=f['target']
   for ax,name in zip(axs,folders):
-   z=f['scores'][name];prob=torch.tensor(z).softmax(-1).numpy();ax.imshow(prob.reshape(28,28),origin='lower',extent=[bounds[0],bounds[2],bounds[1],bounds[3]],cmap='magma')
+   captured=np.load(folders[name]/f'belief_steps/{i:05d}/00.npz');z=captured['full'];prob=torch.tensor(z).softmax(-1).numpy();ax.imshow(np.log(prob+1e-12).reshape(28,28),origin='lower',extent=[bounds[0],bounds[2],bounds[1],bounds[3]],cmap='magma',vmin=-20,vmax=0)
    for poly in f['polygons']:
     poly=np.asarray(poly);ax.plot(*np.vstack([poly,poly[0]]).T,color='cyan',lw=.7)
    for anchor,theta in zip(f['anchors'],f['angles']):
     end=anchor+np.array([np.cos(theta),np.sin(theta)])*np.linalg.norm(bounds[2:]-bounds[:2]);ax.plot([anchor[0],end[0]],[anchor[1],end[1]],'g--',lw=.6);ax.plot(*anchor,'go',ms=2)
-   top=np.argsort(-z,kind='stable')[:10];ax.scatter(*xy[top].T,marker='x',s=12,c='yellow');ax.plot(*gt,'r*',ms=8)
+   top=captured['selected_ids'][:10];ax.scatter(*xy[top].T,marker='x',s=12,c='yellow');ax.plot(*gt,'r*',ms=8)
    for method,color in [(name,'lime')]:
     path=np.asarray(rows[method][i]['poses']);ax.plot(path[:,0],path[:,1],color=color,lw=1);ax.plot(path[0,0],path[0,1],'wo',ms=3)
-   ax.set(xlim=(bounds[0],bounds[2]),ylim=(bounds[1],bounds[3]),title=f'{name} ORACLE' if name!='A' else 'A baseline');ax.set_aspect('equal');ax.text(.01,.01,f"GoalNE {d[name]['NE']:.1f}m; SR {rows[name][i]['metrics']['SR']:.0f}",transform=ax.transAxes,color='white',fontsize=7)
-  fig.suptitle(f"Val {i} [{d['group']}] "+d['instruction'][:140],fontsize=8);fig.tight_layout();fn=f'case_{i:05d}.png';fig.savefig(o/fn,dpi=140);plt.close(fig);images.append((i,fn,d['instruction']))
+   ax.set(xlim=(bounds[0],bounds[2]),ylim=(bounds[1],bounds[3]),title=f'{name} ORACLE' if name!='A' else 'A baseline');ax.set_aspect('equal');ax.text(.01,.01,f"OfflineNE {d[name]['NE']:.1f}m; SR {rows[name][i]['metrics']['SR']:.0f}",transform=ax.transAxes,color='white',fontsize=7)
+  fig.suptitle(f"Val {i} [{d['group']}] log(P), shared scale[-20,0] "+d['instruction'][:140],fontsize=8);fig.tight_layout();fn=f'case_{i:05d}.png';fig.savefig(o/fn,dpi=140);plt.close(fig);images.append((i,fn,d['instruction']))
  fig,axs=plt.subplots(1,2,figsize=(11,4));names=list(folders);axs[0].bar(names,[metrics[x]['SR']*100 for x in names]);axs[0].set(ylabel='SR (%)',title='Privileged ORACLE closed-loop, N=2470 each');axs[1].bar(names,[metrics[x]['NE'] for x in names]);axs[1].set(ylabel='NE (m)');fig.tight_layout();fig.savefig(o/'navigation.png',dpi=150);plt.close(fig)
  fig,axs=plt.subplots(1,2,figsize=(12,4));names=list(offline['all']);axs[0].bar(names,[offline['single_unique_polygon'][x]['R20']*100 for x in names]);axs[0].set(ylabel='Goal R20 (%)',title=f"Single unique Polygon N={offline['single_unique_polygon']['A']['N']}");axs[1].bar(names,[offline['all'][x]['R20']*100 for x in names]);axs[1].set(ylabel='Goal R20 (%)',title='All N=2470; multi-ray triangulation is privileged');fig.tight_layout();fig.savefig(o/'offline.png',dpi=150);plt.close(fig)
- report=['# Oracle方向角推理诊断','', '**所有B/C/D均使用目标GT方向，是特权诊断，不是可部署方法或泛化成绩。**','', '## 协议与隔离','', '冻结47.37%基线9ac51ee…，同一公开文本Polygon绑定、784网格、Controller、Stop=0.3、1mm到达守卫、Horizon20。未训练，未访问Test，未修改正常推理入口。GT仅预先生成每个既定Anchor的方位角；运行时接收角度而无GT坐标、距离或正确候选ID。无地标、无定义方向均回退原Belief。', '', 'Polygon Anchor沿用PR26的完整轮廓顶点均值，并非面积质心/目标最近边界。角度在工程World XY中计算，无需假定地理北。全部已绑定多Polygon等权使用，不用GT挑选。**多个GT方向可能三角定位，故多Polygon高分不能证明实例识别，更不能作为单角度能力。**', '', 'B=平均余弦，C=平均正向射线垂距/网格对角线并排除任何反向候选，无共同支持则回退；D=原logit+λ×4×平均余弦。λ=.5/1/2/4全部离线报告；闭环B/C/D1在看分数前固定，不依据Val选最佳。B/C固定≤1e-4原始排序微扰处理数值近似并列。', '', '## 离线定位','', '|分组/方法|N|R@20m|R@5|R@10|NE(m)|纠正/破坏|','|---|---:|---:|---:|---:|---:|---:|']
+ report=['# Oracle方向角推理诊断','', '**所有B/C/D均使用目标GT方向，是特权诊断，不是可部署方法或泛化成绩。**','', '## 协议与隔离','', '冻结47.37%基线9ac51ee…（其RGB视觉修正关闭，本轮忠实复用），同一公开文本Polygon绑定、784网格、Controller、Stop=0.3、1mm到达守卫、Horizon20。未训练，未访问Test，未修改正常推理入口。SR沿用最终XY≤20m口径，不要求必须PolicyStop；Stop和Horizon单独记录，不能仅因未Stop就判SR失败。GT仅预先生成每个既定Anchor的方位角；运行时接收角度而无GT坐标、距离或正确候选ID。无地标、无定义方向均回退原Belief。', '', 'Polygon Anchor沿用PR26的完整轮廓顶点均值，并非面积质心/目标最近边界。角度在工程World XY中计算，无需假定地理北。全部已绑定多Polygon等权使用，不用GT挑选。单一/同名分组依据原公开绑定列表和公开名称计数，未人工验证语言绑定正确性；同名组中9条只绑定一个Polygon，不能全部解释为多射线三角定位。**多个GT方向可能三角定位，故多Polygon高分不能证明实例识别，更不能作为单角度能力。**', '', 'B=平均余弦，C=平均正向射线垂距/网格对角线并排除任何反向候选，无共同支持则回退；D=原logit+λ×4×平均余弦。λ=.5/1/2/4全部离线报告；闭环B/C/D1在看分数前固定，不依据Val选最佳。B/C固定≤1e-4原始排序微扰处理数值近似并列。', '', '## 离线定位','', '|分组/方法|N|R@20m|R@5|R@10|NE(m)|纠正/破坏|','|---|---:|---:|---:|---:|---:|---:|']
  for group in ['all','single_unique_polygon','same_name_multi_polygon','multiple_distinct_names','no_anchor','undefined_angle_abstain']:
   if group not in offline:continue
   for name,m in offline[group].items():report.append(f"|{group}/{name}|{m['N']}|{m['R20']*100:.2f}%|{m['R5']*100:.2f}%|{m['R10']*100:.2f}%|{m['NE']:.3f}|{m['fixes']}/{m['damage']}|")
- report += ['', 'R@5/R@10表示前K个网格中有点位于目标20m内，非实例匹配准确率。逐任务最近GT网格排名和首个20m网格排名见offline_rows.json。', '', '网格支持：'+json.dumps(summary['grid_diagnosis'],ensure_ascii=False), '', '## 完整闭环','', '|方法|N|SR|OSR|SPL|NE(m)|nDTW|单步ms|纠正/破坏|','|---|---:|---:|---:|---:|---:|---:|---:|---:|']
+ report += ['', '纯余弦近似并列对FP32和Top-K并列处理敏感：B的166、179最高分有2个并列，765有微小计算差异，导致离线正确点与实际候选0不同。保留原选择器，不依据GT改规则；图中黄色候选来自实际闭环捕获，表中离线排名使用稳定排序。', '', 'R@5/R@10表示前K个网格中有点位于目标20m内，非实例匹配准确率。逐任务最近GT网格排名和首个20m网格排名见offline_rows.json。', '', '网格支持：'+json.dumps(summary['grid_diagnosis'],ensure_ascii=False), '', '## 完整闭环','', '|方法|N|SR|OSR|SPL|NE(m)|nDTW|单步ms|纠正/破坏|','|---|---:|---:|---:|---:|---:|---:|---:|---:|']
  for name,m in metrics.items():pa=summary['paired'].get(name,dict(fixes=0,damage=0));report.append(f"|{name}|2470|{m['SR']*100:.2f}%|{m['OSR']*100:.2f}%|{m['SPL']:.4f}|{m['NE']:.3f}|{m['nDTW']:.4f}|{m['inference_ms']:.2f}|{pa['fixes']}/{pa['damage']}|")
  report += ['', '闭环分组、配对物理目标bootstrap95%区间见summary.json。仅单种子，不能声称稳定泛化。Oracle评估最多两进程并行，时延受共享GPU负载影响，不能与历史单进程时延作严格效率差异推断。所有失败和无地标任务计入2470分母。', '', '## 机制结论与局限','', '1. 正确角度不能决定径向距离：单Anchor纯角度可能把同一射线上远处网格提到最前；射线垂距=r×sin(角偏差)，相近角偏差时可能偏好离Anchor更近的网格，同样不能知道目标半径。联合原Belief保留有价值的距离先验。', '2. 多Anchor Oracle方向提供额外三角定位信息。即使绑定的是语义不合适的地标，从它到GT的方向仍携带GT位置，因此高Oracle成绩不能证明Polygon绑定正确。', '3. 784网格离散上限与排序错误分开统计。世界坐标20m成功不是正确实例识别；道路/大地标的顶点均值会受形状采样影响，本轮未用GT改Anchor。', '4. 离线正确但闭环失败，检查failure_B/C/D1.json中的实际选Goal、轨迹是否曾入20m及终止。分类是观测事件代理，不能仅凭NE证明Stop或Controller内部根因。', '5. Oracle会同时改变候选XY、上下文、候选logit幅度，冻结Controller未必适配纯几何分数分布。全网格重排已同步IDs/XY/dense_context；实际首步Goal变化数量见summary。', '6. 本轮不依据Val增减权重或重训。后续应优先在TRAIN验证可学习方位预测及距离/多峰保真，再用独立数据确认；不能把Oracle方向上线。', '', '## 工程验证','', '完整CPU415项通过（含新增3项几何/回退/Context对齐测试）。最初输出目录所有权冲突发生在模型运行前，已隔离保留该目录并修复wrapper；有效闭环结果未覆盖。训练Loss的1m最小半径门控不符合本轮角度唯一干预要求，已撤除并保留未完成预检运行，不计入本报告。独立代码审查工具已实际调用，但workspace routing discovery超时，未完成外部审查；日志见adversarial_review_unavailable.txt。', '', '服务器原始轨迹、角度缓存和完整世界网格：`'+str(r)+'`。Checkpoint未写入；执行脚本、参数与SHA见运行清单。所有图使用真实模型输出与实际闭环轨迹，不含示意或生成RGB。']
  q8=summary.get('quantized8_angles_sensitivity',{}).get('single_unique_polygon',{})
  if q8:report += ['', '## 8方向量化敏感性（额外离线诊断）','',f"同一D1权重，单一明确Polygon连续Oracle角度R20={q8['continuous']['R20']*100:.2f}%，量化为8方向R20={q8['quantized8']['R20']*100:.2f}%。不是重新选择方案，也未用于调整闭环；说明连续角度与PR26八方向监督并非完全相同的精度设置。"]
+ report += ['', '## 单一Polygon闭环主结论（723条，不含多射线三角定位）','', '|方法|SR|NE(m)|相对A纠正/破坏|','|---|---:|---:|---:|']
+ for name,m in summary['groups']['single_unique_polygon'].items():report.append(f"|{name}|{m['SR']*100:.2f}%|{m['NE']:.3f}|{m['fixes']}/{m['damage']}|")
+ report += ['', '**结论：选择保留原Belief的联合角度约束，而不是纯角度/纯射线替换。** D1单Polygon SR53.67%→73.86%，纠正147/破坏1，净+146；全量SR47.37%→70.20%，纠正568/破坏4，净+564。纯B/C在单Polygon组明显退化；它们全量高分主要受多射线特权信息推动。', '', 'D1离线R20与闭环SR均为1734/2470，没有离线Goal正确却被控制器执行失败抵消的任务；本协议下定位收益已实际传递。其736条失败均有离线Goal错误，其中123条曾路过20m区域后离开，不能由此把所有失败归咎于Stop。B的3条离线/导航分歧主要是并列或FP32几何微差，而非导航器无法到达给定正确Goal。', '', 'C比B的全量SR高约1.05个百分点，但NE略差；两者单Polygon均远差于A，不能依据全量SR将C直接部署。候选网格全量20m支持充足；主要可修复空间在正确方位信息与原距离/多峰先验的结合。', '', '本轮没有测试模型能否预测这些角度。多个GT方向即使围绕语义绑定错误的Polygon，也可能定位GT，所以不能据此宣布绑定正确或网络理解north/south。下一步应只在TRAIN上验证完整指令条件下的地图平面方位分布学习、绑定可靠性与原Belief保真；保留径向信息，用独立留出确认，暂不改Controller/Stop。']
  (o/'REPORT_zh.md').write_text('\n'.join(report)+'\n')
- page='<!doctype html><meta charset="utf-8"><title>Oracle bearing diagnostic</title><style>body{font:16px sans-serif;max-width:1500px;margin:auto}img{width:100%}article{padding:20px;border-bottom:1px solid #aaa}</style><h1>Oracle方向角诊断：不可部署</h1><p>GT方向仅离线生成；多Polygon含三角定位特权。红星=GT，青线=Polygon，绿虚线=Oracle射线，黄叉=Top10，绿实线=实际轨迹。点击图片查看原尺寸。</p><a href="REPORT_zh.md">中文报告</a><img src="offline.png"><img src="navigation.png">'
+ page='<!doctype html><meta charset="utf-8"><title>Oracle bearing diagnostic</title><style>body{font:16px sans-serif;max-width:1500px;margin:auto}img{width:100%}article{padding:20px;border-bottom:1px solid #aaa}</style><h1>Oracle方向角诊断：不可部署</h1><p>GT方向仅离线生成；多Polygon含三角定位特权。红星=GT，青线=Polygon，绿虚线=Oracle射线，黄叉=Top10，绿实线=实际轨迹；热图为log(P)，统一色阶[-20,0]。点击图片查看原尺寸。</p><a href="REPORT_zh.md">中文报告</a> · <a href="paired2470.csv">逐任务闭环CSV</a> · <a href="offline_rows.json">逐任务排名JSON</a><img src="offline.png"><img src="navigation.png">'
  for i,fn,text in images:page+=f'<article><h2>任务{i}</h2><p>{html.escape(text)}</p><a href="{fn}"><img loading="lazy" src="{fn}"></a></article>'
  (o/'index.html').write_text(page)
  print(json.dumps({k:summary[k] for k in ['closedloop','paired','grid_diagnosis']},indent=2))
