@@ -109,7 +109,7 @@ def public_role_targets(parsed, scene, query, *, max_steps=4):
             elif entity.get("kind") == "ordinary_object":
                 type_id = role_type(entity.get("text", ""))
                 candidates = [n for n in range(len(ids))
-                              if valid[n] and types[n] == type_id] if type_id is not None else []
+                              if valid[n] and n != anchor_index and types[n] == type_id] if type_id is not None else []
                 kind = "typed_intermediate" if k > 0 else "typed_target"
                 weight = 0.25 if k > 0 else 0.10
             else:
