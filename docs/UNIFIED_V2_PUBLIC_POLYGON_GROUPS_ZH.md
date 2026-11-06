@@ -134,3 +134,21 @@ DATA=/home/20261024_1/Workspace/DATA/sbfnav-data
 对本应可以匹配却未匹配成功的指令修复公开名称/几何绑定，
 做配对真实闭环，才能估计可恢复的导航失败数量。
 未具名的指令不能用目标GT偷偷添加地标。
+
+## 本次已完成：2470条Val-Seen离线关联审计（2026-11-06）
+
+详见 [完整中文报告](../reports/unified_pgvb/val_seen_binding_failure_report/REPORT_ZH.md)、
+[逐任务CSV](../reports/unified_pgvb/val_seen_binding_failure_report/per_episode.csv) 与
+[离线案例图册](../reports/unified_pgvb/val_seen_binding_failure_report/cases.html)（下载后用浏览器打开）。
+
+- 2470/2470按Episode ID对齐，缺失/重复/错位均0；逐条原始指令、起点、原基线NE/SR与公开Polygon完整轮廓校验通过。
+- 有绑定2344，无绑定126：无公开名称匹配91、全无有效Polygon 8、超过16容量27。
+- 1340条失败中122条未绑定（9.10%）；无绑定失败率96.83%，有绑定51.96%。
+- 失败率差44.86个百分点，按449个物理目标组bootstrap 95%区间[40.27,49.03]个百分点。
+- ≥100米的152条失败中90条未绑定（59.21%）；全量最大NE 385.8116米。
+- 只支持统计关联；多数失败仍有绑定。报告提供后续配对干预设计，本次未运行。
+
+复现入口：`scripts/report_val_seen_binding_failures.py`，内部调用
+`scripts/analyze_val_seen_binding_failures.py`。正式分析额外提供
+`--baseline-predictions` 和 `--annotations`，防止仅按地图名校验遗漏同地图任务错位；
+完整命令见报告目录 `reproduce.sh`。没有重新训练、导航、Test或main合并。
