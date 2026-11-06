@@ -66,13 +66,13 @@ class UnifiedPublicAnchorRepairPolicy(UnifiedTextAblationPolicy):
             repair_overflow=self.repair_mode in ("capacity","both"),
             preverified_repaired_ids=ids)
         after_ids=tuple(str(x["id"]) for x in record["landmarks"])
-        self.repair_audit={**audit,"repair_mode":self.repair_mode,
+        self.repair_audit=dict(audit,repair_mode=self.repair_mode,
             original_bound=0,repaired_bound=len(after_ids),
             before_ids=[],after_ids=list(after_ids),
             applied=bool(after_ids),
             reason="recovered_from_public_catalog" if after_ids
                    else "unresolved_without_safe_public_polygon",
-            GT_used=False}
+            GT_used=False)
         if after_ids:
             self.record=record
             self.inputs=None
