@@ -15,6 +15,7 @@ import hashlib
 import json
 import math
 import random
+import time
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -306,6 +307,7 @@ def cache(args):
     binding_audit = blind_public_landmarks(
         dataset.records, objects, int(cfg.max_landmarks))
     ground = json.loads(args.ground_levels.read_text(encoding="utf-8"))
+    ground = ground.get("ground_levels", ground)
     manifest = {
         "format": "unified-pgvb-v3-cache-v1",
         "source": {key:file_sha256(getattr(args, key)) for key in (
@@ -510,10 +512,32 @@ def train(args):
                      if not n.startswith("geometry.")], lr=args.lr_visual),
     ], weight_decay=0.001)
     args.output.mkdir(parents=True, exist_ok=True)
-    if (args.output/"last.pt").exists():
+    if (args.output/"last.pt").exists() and not args.resume:
         raise FileExistsError("Do not silently overwrite V3 experimental weights")
     steps = []
-    for epoch in range(args.epochs):
+    start_epoch = 0
+    if args.resume:
+        saved = torch.load(args.resume, map_location="cpu", weights_only=True)
+        if saved.get("cache_sha256") != file_sha256(args.cache/"manifest.json"):
+            raise ValueError("Resume cache provenance mismatch")
+        if saved.get("source_sha256") != file_sha256(args.source_v2):
+            raise ValueError("Resume source provenance mismatch")
+        if saved.get("seed") != args.seed or saved.get("fit") != fit or saved.get("dev") != dev:
+            raise ValueError("Resume split mismatch")
+        model.load_state_dict(saved["model"], strict=True)
+        opt.load_state_dict(saved["optimizer"])
+        steps = saved["losses"]
+        start_epoch = saved["epoch"]
+        torch.set_rng_state(saved["rng_cpu"])
+        if torch.cuda.is_available():
+            torch.cuda.set_rng_state_all(saved["rng_cuda"])
+    if not args.resume:
+        before_metrics, before_cases = evaluate(model, ds, dev, args.device, args.batch_size)
+        atomic_json(dict(metrics=before_metrics, paired=before_cases), args.output/"before.json")
+    for epoch in range(start_epoch, args.epochs):
+        epoch_start = time.perf_counter()
+        if args.device.startswith("cuda"):
+            torch.cuda.reset_peak_memory_stats()
         model.train()
         order = np.random.default_rng(args.seed+epoch).permutation(fit).tolist()
         total = 0.0
@@ -533,10 +557,23 @@ def train(args):
                                            error_if_nonfinite=True)
             opt.step()
             total += float(loss["total"].detach()) * len(batch)
+        if args.device.startswith("cuda"):
+            torch.cuda.synchronize()
         report = dict(epoch=epoch+1,fit=len(fit),
-                      mean_train_loss=total/len(fit))
+                      mean_train_loss=total/len(fit),
+                      elapsed_s=time.perf_counter()-epoch_start,
+                      updates=math.ceil(len(fit)/args.batch_size),
+                      peak_cuda_GiB=torch.cuda.max_memory_allocated()/2**30 if args.device.startswith("cuda") else 0)
         steps.append(report)
         print(json.dumps(report), flush=True)
+        atomic_save(dict(model=model.state_dict(), optimizer=opt.state_dict(),
+                         epoch=epoch+1, losses=steps, seed=args.seed, fit=fit, dev=dev,
+                         cache_sha256=file_sha256(args.cache/"manifest.json"),
+                         source_sha256=file_sha256(args.source_v2),
+                         rng_cpu=torch.get_rng_state(),
+                         rng_cuda=torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []),
+                    args.output/"resume.pt")
+        atomic_json(steps, args.output/"losses.json")
     metrics, cases = evaluate(model, ds, dev, args.device, args.batch_size)
     manifest = dict(
         format=V3_FORMAT, source_v2_sha256=file_sha256(args.source_v2),
@@ -572,6 +609,7 @@ def main():
     b = sub.add_parser("train", help="TRAIN-only pilot with physical-target heldout dev")
     for name in ("cache", "source-v2", "output"):
         b.add_argument("--"+name, type=Path, required=True)
+    b.add_argument("--resume", type=Path, default=None)
     b.add_argument("--seed", type=int, default=42)
     b.add_argument("--max-queries", type=int, default=0)
     b.add_argument("--epochs", type=int, default=2)
