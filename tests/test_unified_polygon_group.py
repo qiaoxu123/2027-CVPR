@@ -200,3 +200,19 @@ def test_public_overcapacity_retains_query_but_refuses_partial_group():
         online,PublicNames(catalog),catalog,36)
     assert status=="no_public_anchor"
     assert not mask.any() and ids.sum()==0
+
+
+def test_train_GT_group_orientation_audit_is_OR_and_not_an_input():
+    from graphnav.unified_polygon_group import audit_group_direction_vs_train_gt
+    # Group center1 at (.2,.2), center2 at (.8,.8), target (.2,.4):
+    # north of center1, south of center2. OR is satisfied.
+    nodes=torch.zeros(2,2,10)
+    nodes[:,:,:2]=torch.tensor([[[.2,.2],[.8,.8]],[[.2,.2],[.8,.8]]])
+    target=torch.tensor([[.2,.4],[.2,.0]])
+    scale=torch.ones(2,2)*100
+    group=torch.tensor([[True,True],[True,True]])
+    ids=torch.tensor([[3,3],[3,3]])
+    result=audit_group_direction_vs_train_gt(target,nodes,scale,group,ids)
+    assert result["eligible_count"]==2
+    assert result["matched_any"].tolist()==[True,False]
+    assert result["matched_count"]==1
