@@ -1,0 +1,65 @@
+{
+  "arms": {
+    "predicate": {
+      "checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_full_angular_s42_20261106/predicate/last.pt",
+      "SHA256": "63a82324552975dbfab7124aec483318d76e2fd2d9f452df2c8b208876dffca9",
+      "alpha": 0.0,
+      "source": {
+        "stage1": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+        "original_v2": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+        "train_jsonl": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+        "public_objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+      },
+      "initialization_SHA256": "a0b1cc535a4d1ffd15eb85c3d7c89f1ef29c7929fea0b8f96d9ae0c5961deeb6",
+      "frozen_other_modules": true
+    },
+    "angle01": {
+      "checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_full_angular_s42_20261106/angle01/last.pt",
+      "SHA256": "c7289556dd7296895aaf88d3e8cc93aa5320437cdfd7ad76ef76ef13b7ce1770",
+      "alpha": 0.1,
+      "source": {
+        "stage1": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+        "original_v2": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+        "train_jsonl": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+        "public_objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+      },
+      "initialization_SHA256": "a0b1cc535a4d1ffd15eb85c3d7c89f1ef29c7929fea0b8f96d9ae0c5961deeb6",
+      "frozen_other_modules": true
+    },
+    "angle03": {
+      "checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_full_angular_s42_20261106/angle03/last.pt",
+      "SHA256": "fb3f03a3a905c929017968299277ab4604a86c8d2108a4d93eb48ae2b86d6f05",
+      "alpha": 0.3,
+      "source": {
+        "stage1": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+        "original_v2": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+        "train_jsonl": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+        "public_objects": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+      },
+      "initialization_SHA256": "a0b1cc535a4d1ffd15eb85c3d7c89f1ef29c7929fea0b8f96d9ae0c5961deeb6",
+      "frozen_other_modules": true
+    }
+  },
+  "code": {
+    "graphnav/unified_pgvb.py": "9104257d541244b48e9ccd8aa1b0f71a6766cc5eae628dd9dbb628e704a47c66",
+    "graphnav/full_experiment.py": "5ab8b8cd012a539c6da7dfd7be6bc1af41111e11b7a62dd386519b13f5d32727",
+    "graphnav/unified_direct_bearing_loss.py": "b38daec2822686a0049d0e530cb205c25f7d480626ffa18379aea38dce2d2277",
+    "graphnav/unified_direct_bearing_runtime.py": "c9dd0238630fa1f8321b53ec529af7ca9a725f39dec0b89248d45e9fe86da49c",
+    "graphnav/unified_full_relation_runtime.py": "d6a3029538f9cc203a2ed3b526b188bc6a17068d84792519d6f09b2d8bc1ce9a",
+    "graphnav/unified_text_ablation.py": "52dc9907b1169012ed9461657633082c199ad10464d1145dc43e9cd26d40bbd1",
+    "graphnav/unified_text_ablation_runtime.py": "f5fffa6e2b066e888f56c63f24e703bc90ccc117b0850e5ca03de9dda9779de4",
+    "graphnav/a3_runtime.py": "2c0f9be782416b23b3215887e0381460eca10043858999f9b27163d631b0a27c",
+    "graphnav/stable_navigation_goal.py": "bb6b74aef169ab1513cc8abf71dda023d1ec553a586d7751592d00d0f5238efd",
+    "graphnav/trajectory_policy.py": "953a7eae80c00508a6cce03dbb62eec8243ac1198603f41378c527bfdd6180f2",
+    "scripts/evaluate_closedloop.py": "76024b7d179dc8b4daf1a0afe243bbfebab00afaa9d858fef15ca1157d72d0a1"
+  },
+  "selection": "all fixed epoch5 arms, no Val checkpoint selection",
+  "scope": "3xall2470 Val-Seen; no Test; no thresholds changed",
+  "inference_GT_angle": false,
+  "concurrency_training": 3,
+  "concurrency_evaluation": 1,
+  "provenance": {
+    "commit": "6577c89240ae90f520d0a9001dd9270c171ce854",
+    "working_diff_sha256": "b14f64032585635ff4bfc6e0bbe365519a316fbe991b7e08c35062cbd5bd92bd"
+  }
+}
