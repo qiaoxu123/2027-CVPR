@@ -16,7 +16,8 @@ from .stage1 import preserved_proposal_order
 
 
 class UnifiedPGVB(nn.Module):
-    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None):
+    def __init__(self, dimension=1024, hidden=64, heads=4, geometry=None,
+                 dense_goal=False):
         super().__init__()
         self.geometry = geometry
         self._geometry_cache = None
@@ -49,6 +50,12 @@ class UnifiedPGVB(nn.Module):
         self.joint_ready = False
         self.direction_ready = False
         self.target_ready = False
+        # Opt-in V2 dense global Belief. Old strict checkpoints remain bitwise
+        # compatible because this module does not exist unless requested.
+        self.dense_goal_ready = False
+        if dense_goal:
+            from .unified_v2_dense_target import DenseBeliefDecoder
+            self.dense_goal = DenseBeliefDecoder(coarse_size=28, output_size=384)
 
     def reset_episode(self):
         """Never reuse cached map/word geometry across different episodes."""
@@ -186,6 +193,47 @@ class UnifiedPGVB(nn.Module):
             ),
         )
 
+    def forward_dense_field(self, *, static_inputs, tokens, token_mask, node_emb,
+                            observed=None, bound=0.5):
+        """384x384 WORLD Belief is primary; 28x28 is only a controller adapter.
+
+        GT images/Polygons/target coordinates are deliberately forbidden here.
+        This reuses the SAME PGVB visual encoder/patch evidence as forward_field.
+        It can run in training before dense_goal_ready becomes True. Normal
+        inference remains legacy until loading an explicitly trained dense head.
+        """
+        if not hasattr(self, "dense_goal"):
+            raise RuntimeError("UnifiedPGVB was not built with a dense head")
+        result = self.forward_field(
+            static_inputs=static_inputs, tokens=tokens, token_mask=token_mask,
+            node_emb=node_emb, observed=observed, bound=bound)
+        original = result["field"]
+        dense = self.dense_goal(original.belief_logits, result["evidence"])
+        from .unified_v2_dense_target import highres_to_controller
+        reduced = highres_to_controller(dense, coarse_size=28)
+        k = original.candidate_ids.shape[1]
+        ids = reduced.topk(k, -1).indices
+        context = original.dense_context
+        if context is None or context.shape[:2] != reduced.shape:
+            raise ValueError("Dense decoder requires a 28x28 controller context")
+        from .full_localization import GoalField
+        result["field"] = GoalField(
+            belief_logits=reduced, candidate_ids=ids,
+            candidate_xy=static_inputs["grid_xy"].gather(
+                1, ids[..., None].expand(-1, -1, 2)),
+            candidate_context=context.gather(
+                1, ids[..., None].expand(-1, -1, context.shape[-1])),
+            dense_context=context, visual_coverage=original.visual_coverage,
+        )
+        result["dense_belief_logits"] = dense
+        result["coarse_before_dense"] = original
+        result["audit"] = dict(result["audit"],
+                               dense_global_resolution=384,
+                               dense_controller_adapter=28,
+                               dense_changed_top1=bool(
+                                   (ids[:, 0] != original.candidate_ids[:, 0]).any()))
+        return result
+
     def forward_structured(self, instruction, **encoded_inputs):
         """Take the validated language adapter output without a second network.
 
@@ -198,6 +246,8 @@ class UnifiedPGVB(nn.Module):
                 or instruction.get("relations")):
             raise ValueError("Only validated named-landmark tasks are supported")
         if "static_inputs" in encoded_inputs:
+            if self.dense_goal_ready:
+                return self.forward_dense_field(**encoded_inputs)
             return self.forward_field(**encoded_inputs)
         return self(**encoded_inputs)
 
