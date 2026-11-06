@@ -108,3 +108,11 @@
   Partial-task SR is never a full-dataset SR claim. No Test or new Stop thresholds.
 - The direct-target head requires a separately trained checkpoint. Merely enabling
   a flag cannot turn the historical untrained target head into a validated model.
+
+## [Oracle bearing diagnosis] - 2026-11-06
+### Features
+- Add isolated, privileged angle-only reranking experiments over all784 Goal cells with frozen checkpoints and navigation controls.
+### Design Rationale
+- Separate cosine, forward-ray distance and fixed-weight joint scores; retain every original public Polygon binding and rebuild candidate context consistently.
+### Notes & Caveats
+- GT bearings are diagnostic-only. Multiple anchors may triangulate GT; results cannot establish deployable instance recognition or geographic direction calibration.
