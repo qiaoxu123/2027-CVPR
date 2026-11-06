@@ -1,0 +1,1955 @@
+[
+  {
+    "i": 4643,
+    "e": {
+      "t": [
+        "The large building with a dark gray roof",
+        "object"
+      ],
+      "p": [
+        "Petty Cury road",
+        "named_landmark"
+      ],
+      "h": [
+        "the Holy Trinity building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "p",
+          "h"
+        ],
+        "between Petty Cury road and the Holy Trinity building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4644,
+    "e": {
+      "t": [
+        "Very large section of a multi-building complex",
+        "region"
+      ],
+      "j": [
+        "the John Lewis building",
+        "named_landmark"
+      ],
+      "l": [
+        "the lion yard building",
+        "named_landmark"
+      ],
+      "s": [
+        "Saint Andrew Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "j",
+          "l"
+        ],
+        "in between the John Lewis building in the lion yard building",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "off",
+        "s",
+        "off Saint Andrew Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "source relation between John Lewis and Lion Yard uses 'in' where coordination scope may be malformed"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4645,
+    "e": {
+      "t": [
+        "A large building",
+        "object"
+      ],
+      "c": [
+        "cars",
+        "group"
+      ],
+      "g": [
+        "Grand Arcade building",
+        "named_landmark"
+      ],
+      "j": [
+        "John Lewis building",
+        "named_landmark"
+      ],
+      "l": [
+        "Lion yard building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_next_to",
+        "c",
+        "with cars parked next to it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "g",
+        "It is next to Grand Arcade building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "j",
+          "l"
+        ],
+        "in between John Lewis building and Lion yard building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4646,
+    "e": {
+      "t": [
+        "This is a small building",
+        "object"
+      ],
+      "l": [
+        "Lion Yard",
+        "named_landmark"
+      ],
+      "b": [
+        "an L-shaped building",
+        "object"
+      ],
+      "s": [
+        "St Andrew's Street",
+        "named_landmark"
+      ],
+      "p": [
+        "Post Office Terrace",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "l",
+        "located next to Lion Yard",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "b",
+        "Behind this building, there is an L-shaped building",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "accessible_from",
+        "s",
+        "can be accessed from St Andrew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "s",
+        "via",
+        "p",
+        "via Post Office Terrace",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "'this building' refers to target; behind is building-relative"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4647,
+    "e": {
+      "t": [
+        "A small square building",
+        "object"
+      ],
+      "s": [
+        "St. Andrew the Great building",
+        "named_landmark"
+      ],
+      "r": [
+        "St. Andrew's Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_of",
+        "s",
+        "to the left of St. Andrew the Great building",
+        "U",
+        "medium"
+      ],
+      [
+        "s",
+        "with_road_to_back",
+        "r",
+        "with St. Andrew's Street to your back",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left anchored to explicit viewer orientation: road behind observer, but left relative to target comparison unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "f": {
+      "1": {
+        "type": "observer",
+        "status": "unique",
+        "evidence": "with St. Andrew's Street to your back",
+        "view_evidence": "to your back"
+      }
+    }
+  },
+  {
+    "i": 4648,
+    "e": {
+      "t": [
+        "this small square gray roofed building",
+        "object"
+      ],
+      "s": [
+        "Saint Andrew's Street",
+        "named_landmark"
+      ],
+      "g": [
+        "Saint Andrew The Great building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "north_side_of",
+        "s",
+        "On the north side of Saint Andrew's Street",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "left_of",
+        "g",
+        "to the left of Saint Andrew The Great building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "north is geographic, not calibrated to XY; left reference frame unspecified"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4649,
+    "e": {
+      "t": [
+        "Small one floor Brown building",
+        "object"
+      ],
+      "g": [
+        "the St Andrew the Great building",
+        "named_landmark"
+      ],
+      "s": [
+        "St Andrews Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "closest_to",
+        "g",
+        "closest to the St Andrew the Great building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "s",
+        "off St Andrews Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "closest comparison set unspecified"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4650,
+    "e": {
+      "t": [
+        "The small. square building",
+        "object"
+      ],
+      "l": [
+        "the Lion Yard",
+        "named_landmark"
+      ],
+      "g": [
+        "Grand Arcade",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_corner_of",
+        [
+          "l",
+          "g"
+        ],
+        "in the corner of where the Lion Yard and Grand Arcade meet",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "source punctuation after small retained; named sites treated as meeting-location anchors"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4651,
+    "e": {
+      "t": [
+        "this is the building",
+        "object"
+      ],
+      "c": [
+        "the Central Telephone Exchange",
+        "named_landmark"
+      ],
+      "s": [
+        "St Andrew's Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "near",
+        "c",
+        "the building nearby",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "heading_toward",
+        "s",
+        "if you're heading towards St Andrew's Street",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "conditional heading route gives candidate destination, not a unique route/direction"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4652,
+    "e": {
+      "t": [
+        "This is a building",
+        "object"
+      ],
+      "g": [
+        "Grand Arcade",
+        "named_landmark"
+      ],
+      "l": [
+        "Lion Yard",
+        "named_landmark"
+      ],
+      "s": [
+        "St Andrew's Street",
+        "named_landmark"
+      ],
+      "p": [
+        "Post Office Terrace",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "g",
+        "directly in front of Grand Arcade",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "l",
+        "next to Lion Yard",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "accessible_from",
+        "s",
+        "accessed from St Andrew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "s",
+        "via",
+        "p",
+        "via Post Office Terrace",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "front relation reference frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4653,
+    "e": {
+      "t": [
+        "The gray rectangular building",
+        "object"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ],
+      "d": [
+        "the Drummer St. Bus Station",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "p",
+        "with a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "d",
+        "near the Drummer St. Bus Station",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4654,
+    "e": {
+      "t": [
+        "A multi-colored Brown beige and Gray Building",
+        "object"
+      ],
+      "c": [
+        "additional cylindrical light green structure",
+        "object"
+      ],
+      "s": [
+        "Sydney Street",
+        "named_landmark"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "c",
+        "that has and additional cylindrical light green structure on top of it",
+        "N",
+        "medium"
+      ],
+      [
+        "c",
+        "has_windows",
+        [],
+        "that has Windows on it",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "off",
+        "s",
+        "off Sydney Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "m",
+        "near the edge of the map",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "source typo 'and additional' retained; Windows is a described property, no separate object grounded"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4655,
+    "e": {
+      "t": [
+        "This is a building",
+        "object"
+      ],
+      "s": [
+        "Sidney Street",
+        "named_landmark"
+      ],
+      "n": [
+        "a building called Next",
+        "named_landmark"
+      ],
+      "c": [
+        "Central Cinema",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "located on Sidney Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "n",
+        "right next to this building",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "behind this building is Central Cinema",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "the second 'this building' refers to target; behind frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4656,
+    "e": {
+      "t": [
+        "This is a small building",
+        "object"
+      ],
+      "g": [
+        "the grassy land",
+        "region"
+      ],
+      "b": [
+        "the bus station",
+        "named_landmark"
+      ],
+      "d": [
+        "Drummer St Bus Station",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "g",
+        "located on the grassy land",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "behind",
+        "b",
+        "behind the bus station",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "d",
+        "on Drummer St Bus Station",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "repeated bus station mentions; possessive/location attachment not clear"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4657,
+    "e": {
+      "t": [
+        "The small building",
+        "object"
+      ],
+      "tr": [
+        "the trees",
+        "group"
+      ],
+      "c": [
+        "the car port",
+        "region"
+      ],
+      "e": [
+        "the corner of Emmanuel Street and Drummer Street",
+        "region"
+      ],
+      "m": [
+        "Emmanuel Street",
+        "named_landmark"
+      ],
+      "d": [
+        "Drummer Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "tr",
+          "c"
+        ],
+        "between the trees and the car port",
+        "N",
+        "high"
+      ],
+      [
+        "tr",
+        "at_corner_of",
+        "e",
+        "that are on the corner of Emmanuel Street and Drummer Street",
+        "N",
+        "medium"
+      ],
+      [
+        "c",
+        "at_corner_of",
+        "e",
+        "that are on the corner of Emmanuel Street and Drummer Street",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "relative clause 'that are' attaches to coordinated trees and car port"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4658,
+    "e": {
+      "t": [
+        "A small light brown building",
+        "object"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "d": [
+        "the Drummer St Bus Station",
+        "named_landmark"
+      ],
+      "tr": [
+        "trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end_of",
+        "p",
+        "at the end of the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "to",
+        "d",
+        "to the Drummer St Bus Station",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "under",
+        "tr",
+        "under trees",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4659,
+    "e": {
+      "t": [
+        "the white spacer",
+        "object"
+      ],
+      "c": [
+        "the Central Cinema building",
+        "named_landmark"
+      ],
+      "p": [
+        "a small parking lot",
+        "region"
+      ],
+      "h": [
+        "Hobson Street",
+        "named_landmark"
+      ],
+      "r": [
+        "a red object",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_of",
+        "c",
+        "to the left of the Central Cinema building",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "p",
+        "in a small parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "north_of",
+        "h",
+        "north of Hobson Street",
+        "W",
+        "high"
+      ],
+      [
+        "r",
+        "left_of",
+        "t",
+        "to the left is a red object",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "source typo 'spacer' retained; left reference frame unspecified; north geographic without XY calibration"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4660,
+    "e": {
+      "t": [
+        "The small gray object",
+        "object"
+      ],
+      "s": [
+        "Saint Andrew's Street",
+        "named_landmark"
+      ],
+      "c": [
+        "the crevice between the two Christ's Lane buildings",
+        "region"
+      ],
+      "b": [
+        "the two Christ's Lane buildings",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Saint Andrew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "c",
+        "across from the crevice between the two Christ's Lane buildings",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "crevice bounded by two buildings"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4661,
+    "e": {
+      "t": [
+        "The dark blue car",
+        "object"
+      ],
+      "l": [
+        "the light blue car",
+        "object"
+      ],
+      "b": [
+        "the Christ’s Lane Building",
+        "named_landmark"
+      ],
+      "c": [
+        "Cloister Block",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_behind",
+        "l",
+        "parked behind the light blue car",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "to_left_of",
+        "t",
+        "the blue car is to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "parked_at_corner_inside",
+        "b",
+        "parked at the corner inside of the Christ’s Lane Building",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "facing",
+        "c",
+        "facing to Cloister Block",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "'the blue car' likely refers to target dark blue car, but could refer to prior light-blue car; ambiguity preserved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4662,
+    "e": {
+      "t": [
+        "Two cars red-lined",
+        "group"
+      ],
+      "b": [
+        "one black car",
+        "object"
+      ],
+      "l": [
+        "one light blue car",
+        "object"
+      ],
+      "c": [
+        "the corner of the L-shaped Christ's Lane building",
+        "region"
+      ],
+      "s": [
+        "St Andrews street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "part_of",
+        "t",
+        "one black car",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "part_of",
+        "t",
+        "one light blue car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "parked_at",
+        "c",
+        "parked in the corner of the L-shaped Christ's Lane building",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "off",
+        "s",
+        "off St Andrews street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "red-lined pair treated as a group containing the two specified cars"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4663,
+    "e": {
+      "t": [
+        "The silver car",
+        "object"
+      ],
+      "n": [
+        "the bottom row of cars",
+        "group"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "g": [
+        "the Grand Arcade",
+        "named_landmark"
+      ],
+      "c": [
+        "Corn Exchange Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from_left",
+        "n",
+        "4th from the left in the bottom row of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "n",
+        "in",
+        "p",
+        "row of cars in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "on_top_of",
+        "g",
+        "parking lot on top of the Grand Arcade",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "viewed_aerially_with",
+        "c",
+        "when viewed aerially with Corn Exchange Street",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "ordinal row selection explicit but left frame and observer-to-road relation are unspecified"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "f": {
+      "3": {
+        "type": "observer",
+        "status": "multiple",
+        "evidence": "when viewed aerially with Corn Exchange Street",
+        "view_evidence": "viewed aerially"
+      }
+    }
+  },
+  {
+    "i": 4664,
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "e": [
+        "the corner of Emmanuel Street and St. Andrew's Street",
+        "region"
+      ],
+      "b": [
+        "the building with a green roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parallel_parked_at",
+        "e",
+        "parallel parked on the corner of Emmanuel Street and St. Andrew's Street",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the building with a green roof",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front reference frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4665,
+    "e": {
+      "t": [
+        "This is a car",
+        "object"
+      ],
+      "tr": [
+        "a tree",
+        "object"
+      ],
+      "e": [
+        "the Emmanuel College Chapel",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_under",
+        "tr",
+        "parked under a tree",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "e",
+        "next to the Emmanuel College Chapel",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4666,
+    "e": {
+      "t": [
+        "A gray car",
+        "object"
+      ],
+      "c": [
+        "the corner of the two brown building",
+        "region"
+      ],
+      "tr": [
+        "a tree",
+        "object"
+      ],
+      "h": [
+        "Christ's College Chapel",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_at",
+        "c",
+        "parked in the corner of the two brown building",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "under",
+        "tr",
+        "under a tree",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "h",
+        "next to the Christ's College Chapel",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "source has singular 'building' after two; retained"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4667,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "b": [
+        "the Christ's Lane building",
+        "named_landmark"
+      ],
+      "d": [
+        "Drummer St Bus Station road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "b",
+        "parked behind the Christ's Lane building",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "d",
+        "on Drummer St Bus Station road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind reference frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4668,
+    "e": {
+      "t": [
+        "White care",
+        "object"
+      ],
+      "b": [
+        "the end of the Christ's Lane Building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "alongside",
+        "b",
+        "parked alongside the end of the Christ's Lane Building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "source typo 'care' retained"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4669,
+    "e": {
+      "t": [
+        "The ground without a tree",
+        "region"
+      ],
+      "l": [
+        "the long L shaped building on Christ's Lane",
+        "named_landmark"
+      ],
+      "h": [
+        "the Hall building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "without",
+        [],
+        "ground without a tree",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "beside",
+        [
+          "l",
+          "h"
+        ],
+        "beside both the the long L shaped building on Christ's Lane and the Hall building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "duplicated 'the' retained; target is described as lacking a tree"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4670,
+    "e": {
+      "t": [
+        "The square green lawn",
+        "region"
+      ],
+      "tr": [
+        "the trees",
+        "group"
+      ],
+      "c": [
+        "the intersection of Drummer Street and Emmanuel Road",
+        "region"
+      ],
+      "d": [
+        "Drummer Street",
+        "named_landmark"
+      ],
+      "e": [
+        "Emmanuel Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "tr",
+        "behind the trees",
+        "I",
+        "medium"
+      ],
+      [
+        "tr",
+        "along",
+        "c",
+        "along the intersection of Drummer Street and Emmanuel Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "'along the intersection' relation scope ambiguous; intersection entities are retained"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4671,
+    "e": {
+      "t": [
+        "The middle green ground field",
+        "region"
+      ],
+      "b": [
+        "the small bridge",
+        "object"
+      ],
+      "h": [
+        "the Emmanuel House",
+        "named_landmark"
+      ],
+      "w": [
+        "the water",
+        "region"
+      ],
+      "s": [
+        "the Emmanuel Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "starts_from",
+        "b",
+        "starts from the small bridge",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "next_to",
+        "h",
+        "next to the Emmanuel House",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "t",
+        "walk along the field",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "to",
+        "w",
+        "to the water",
+        "N",
+        "medium"
+      ],
+      [
+        "w",
+        "next_to",
+        "s",
+        "that next to the Emmanuel Street",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "ungrammatical 'walk along' may be an instruction rather than field-location assertion; water clause attachment uncertain"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4672,
+    "e": {
+      "t": [
+        "The ground area",
+        "region"
+      ],
+      "tr": [
+        "the trees",
+        "group"
+      ],
+      "d": [
+        "Drummer Street",
+        "named_landmark"
+      ],
+      "r": [
+        "the River Cam",
+        "named_landmark"
+      ],
+      "m": [
+        "The Master's Lodge",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "tr",
+        "behind the trees",
+        "I",
+        "medium"
+      ],
+      [
+        "tr",
+        "on",
+        "d",
+        "on Drummer Street",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "r",
+        "next to the River Cam",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "before",
+        "m",
+        "before The Master's Lodge",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "before is preserved as ordering/location relation without route orientation"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4673,
+    "e": {
+      "t": [
+        "The curved green lawn",
+        "region"
+      ],
+      "tr": [
+        "trees",
+        "group"
+      ],
+      "q": [
+        "the Queen's Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "surrounded_by",
+        "tr",
+        "surrounded by trees",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_of",
+        "q",
+        "to the left of the Queen's Building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left reference frame unspecified"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4674,
+    "e": {
+      "t": [
+        "The paved playground area",
+        "region"
+      ],
+      "c": [
+        "the tennis courts",
+        "group"
+      ],
+      "m": [
+        "MIlton's Walk",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "c",
+          "m"
+        ],
+        "between the tennis courts and MIlton's Walk",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "source capitalization MIlton's retained"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4675,
+    "e": {
+      "t": [
+        "The small ground area",
+        "region"
+      ],
+      "m": [
+        "Milton's Mulberry tree",
+        "named_landmark"
+      ],
+      "w": [
+        "Milton's Walk",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "m",
+        "behind Milton's Mulberry tree",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "w",
+        "next to Milton's Walk",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4676,
+    "e": {
+      "t": [
+        "The blue ground",
+        "region"
+      ],
+      "p": [
+        "the playground",
+        "region"
+      ],
+      "m": [
+        "Miltons Walk",
+        "named_landmark"
+      ],
+      "tr": [
+        "the trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "p",
+        "across from the playground",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "m",
+        "on Miltons Walk",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "by",
+        "tr",
+        "by the trees",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "blue ground color description preserved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4677,
+    "e": {
+      "t": [
+        "This is a plot of grassy land",
+        "region"
+      ],
+      "f": [
+        "Fellows' Building",
+        "named_landmark"
+      ],
+      "b": [
+        "the Blyth Building",
+        "named_landmark"
+      ],
+      "y": [
+        "Yusuf Hamied Centre",
+        "named_landmark"
+      ],
+      "m": [
+        "Milton's mulberry tree",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        [
+          "f",
+          "b",
+          "y"
+        ],
+        "located behind Fellows' Building, the Blyth Building, and Yusuf Hamied Centre",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "near",
+        "m",
+        "Milton's mulberry tree is nearby",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind relation applies to a coordinated set; reference frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4678,
+    "e": {
+      "t": [
+        "this is a semicircular green ground",
+        "region"
+      ],
+      "s": [
+        "the side of the square green space",
+        "region"
+      ],
+      "c": [
+        "the inner courtyard",
+        "region"
+      ],
+      "h": [
+        "the hall building",
+        "named_landmark"
+      ],
+      "e": [
+        "the emmanuel college chapel buildings",
+        "named_landmark"
+      ],
+      "tr": [
+        "trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_side_of",
+        "s",
+        "this space is on the side of the square green space",
+        "N",
+        "high"
+      ],
+      [
+        "s",
+        "in",
+        "c",
+        "in the inner courtyard",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "between",
+        [
+          "h",
+          "e"
+        ],
+        "between the hall building and the emmanuel college chapel buildings",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "tr",
+        "There are trees on this area",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4679,
+    "e": {
+      "t": [
+        "The large green lawn",
+        "region"
+      ],
+      "r": [
+        "the River Cam",
+        "named_landmark"
+      ],
+      "e": [
+        "the Emmanuel College Library",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "r",
+          "e"
+        ],
+        "between the River Cam and the Emmanuel College Library",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4680,
+    "e": {
+      "t": [
+        "The ground area",
+        "region"
+      ],
+      "e": [
+        "Emmanuel College Chapel",
+        "named_landmark"
+      ],
+      "s": [
+        "St. Andrew's Street",
+        "named_landmark"
+      ],
+      "c": [
+        "Cambridge Tap",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "e",
+        "in front of Emmanuel College Chapel",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "s",
+        "next to St. Andrew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "c",
+        "across from Cambridge Tap",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "front reference frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4681,
+    "e": {
+      "t": [
+        "The small patch of ground",
+        "region"
+      ],
+      "s": [
+        "Saint Andrew's Street",
+        "named_landmark"
+      ],
+      "c": [
+        "the Cambridge Tap",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Saint Andrew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across",
+        "c",
+        "across the Cambridge Tap",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "across the Cambridge Tap relation retained as phrased"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 4682,
+    "e": {
+      "t": [
+        "The narrow lawn and ground area",
+        "region"
+      ],
+      "b": [
+        "the long side of the Upper Hall building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the long side of the Upper Hall building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front reference frame unresolved"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

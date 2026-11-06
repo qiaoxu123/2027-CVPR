@@ -1,0 +1,2778 @@
+[
+  {
+    "i": 5840,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a gray car",
+        "object"
+      ],
+      "row": [
+        "the third row of the parking lot from the Food Warehouse",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "food": [
+        "the Food Warehouse",
+        "named_landmark"
+      ],
+      "nike": [
+        "Nike Factory Store",
+        "named_landmark"
+      ],
+      "white": [
+        "a smaller white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "row",
+        "parked in the third row of the parking lot from the Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "third_from",
+        "food",
+        "third row of the parking lot from the Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the third row of the parking lot from the Food Warehouse",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "close_to",
+        "nike",
+        "parked very close to Nike Factory Store",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "left_of",
+        "t",
+        "On its left is a smaller white car",
+        "U",
+        "low"
+      ],
+      [
+        "black",
+        "right_of",
+        "t",
+        "on its right is a black car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Row ordering and lateral frames unknown."
+    ]
+  },
+  {
+    "i": 5841,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "black": [
+        "the black",
+        "object"
+      ],
+      "white": [
+        "white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot near Nike Factory Store",
+        "region"
+      ],
+      "nike": [
+        "Nike Factory Store",
+        "named_landmark"
+      ],
+      "lane": [
+        "the second lane from The Food Warehouse",
+        "region"
+      ],
+      "food": [
+        "The Food Warehouse",
+        "named_landmark"
+      ],
+      "cars": [
+        "black cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "black",
+          "white"
+        ],
+        "between the black and white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot near Nike Factory Store",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "near",
+        "nike",
+        "near Nike Factory Store",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lane",
+        "in the second lane from The Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "cars",
+        "in_back_of",
+        "t",
+        "with black cars parked in the back",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "second_black_in_row",
+        [],
+        "second black car of that row",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“the black car between the black and white car” has unclear identity; second-in-row reference set unresolved."
+    ]
+  },
+  {
+    "i": 5842,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "row": [
+        "the 16th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "2nd_from_right",
+        "row",
+        "2nd from the right in the 16th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "16th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5845,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 13th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_right",
+        "row",
+        "1st from the right in the 13th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "13th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5849,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 17th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "3rd_from_left",
+        "row",
+        "3rd from the left in the 17th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "17th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5851,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 13th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "8th_from_right",
+        "row",
+        "8th from the right in the 13th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "13th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5860,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 20th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_right",
+        "row",
+        "1st from the right in the 20th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "20th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5861,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The silver gray car",
+        "object"
+      ],
+      "row": [
+        "the 20th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "rightmost_in",
+        "row",
+        "rightmost car in the 20th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "20th row of cars in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5865,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The dark blue car",
+        "object"
+      ],
+      "row": [
+        "the 14th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "1st_from_left",
+        "row",
+        "1st from the left in the 14th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "14th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5871,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "row": [
+        "the 16th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "6th_from_left",
+        "row",
+        "6th from the left in the 16th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "16th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5872,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The dark blue car",
+        "object"
+      ],
+      "row": [
+        "the 19th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "4th_from_left",
+        "row",
+        "4th from the left in the 19th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "19th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5873,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "row": [
+        "the 19th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "4th_from_left",
+        "row",
+        "4th from the left in the 19th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "19th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5874,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "row": [
+        "the 19th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "6th_from_right",
+        "row",
+        "6th from the right in the 19th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "19th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5878,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 19th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "2nd_from_right",
+        "row",
+        "2nd from the right in the 19th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "19th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5879,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "row": [
+        "the 19th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "2nd_from_right",
+        "row",
+        "2nd from the right in the 19th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "19th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Ordinal ordering and building-side right are not calibrated to global frame."
+    ]
+  },
+  {
+    "i": 5843,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This dark gray car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot near the One Stop",
+        "region"
+      ],
+      "one": [
+        "the One Stop",
+        "named_landmark"
+      ],
+      "row": [
+        "the top half of the third row from the top",
+        "group"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot near the One Stop",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the top half of the third row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "next_to",
+        "white",
+        "next to a white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "second_from_left",
+        [],
+        "second car from the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Top/left order frames unspecified."
+    ]
+  },
+  {
+    "i": 5844,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "row": [
+        "the third aisle of the One Stop parking lot",
+        "region"
+      ],
+      "lot": [
+        "the One Stop parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_in",
+        "row",
+        "second car in the third aisle",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "third_in",
+        "lot",
+        "third aisle of the One Stop parking lot",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Third aisle and second-car reference direction unspecified."
+    ]
+  },
+  {
+    "i": 5846,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white van",
+        "object"
+      ],
+      "spots": [
+        "two empty spots",
+        "group"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "edge": [
+        "the building Edge",
+        "region"
+      ],
+      "row": [
+        "the fourth row from the top",
+        "group"
+      ],
+      "lot": [
+        "the parking lot of the One Stop building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "spots",
+          "spots"
+        ],
+        "in between two empty spots",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "in_front_of",
+        "t",
+        "with a gray car in front of it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "near",
+        "edge",
+        "near the building Edge",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the fourth row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot of the One Stop building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Front/row direction unresolved."
+    ]
+  },
+  {
+    "i": 5847,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The first car (white)",
+        "object"
+      ],
+      "row": [
+        "the bottom row",
+        "group"
+      ],
+      "section": [
+        "the fourth parking section",
+        "region"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_in",
+        "row",
+        "first car (white) parked in the bottom row",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "section",
+        "bottom row of the fourth parking section",
+        "N",
+        "high"
+      ],
+      [
+        "section",
+        "fourth_in",
+        "lot",
+        "fourth parking section in the large parking lot",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "First/bottom ordering reference and section boundaries unclear."
+    ]
+  },
+  {
+    "i": 5848,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "area": [
+        "the parking area of the building named One stop",
+        "region"
+      ],
+      "one": [
+        "the building named One stop",
+        "named_landmark"
+      ],
+      "lane": [
+        "the third lane",
+        "region"
+      ],
+      "black": [
+        "two black car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "area",
+        "parked in the parking area of the building named One stop",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_right_side_of",
+        "lane",
+        "parked at the right side of the third lane",
+        "U",
+        "low"
+      ],
+      [
+        "black",
+        "right_and_back_of",
+        "t",
+        "two black car parked at its right side and back side",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_car_left",
+        [],
+        "no car parked at the left side",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right/back/left frame unresolved; lane numbering reference unclear."
+    ]
+  },
+  {
+    "i": 5850,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "cars": [
+        "A black car and the white car",
+        "group"
+      ],
+      "black": [
+        "A black car",
+        "object"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "blue": [
+        "a dark blue car",
+        "object"
+      ],
+      "van": [
+        "a white van",
+        "object"
+      ],
+      "row": [
+        "the second row from the top",
+        "group"
+      ],
+      "lot": [
+        "the parking lot of the One Stop building",
+        "region"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "next_to",
+        [],
+        "A black car and the white car next to each other",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "between",
+        [
+          "blue",
+          "van"
+        ],
+        "in between a dark blue car and a white van",
+        "U",
+        "medium"
+      ],
+      [
+        "cars",
+        "in",
+        "row",
+        "the second row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot of the One Stop building",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "near",
+        "edge",
+        "near the edge of the map",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“second row” may describe the pair; exact target of group relations ambiguous."
+    ]
+  },
+  {
+    "i": 5852,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot near the One Stop",
+        "region"
+      ],
+      "one": [
+        "the One Stop",
+        "named_landmark"
+      ],
+      "row": [
+        "the bottom half of the fourth row from the top",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot near the One Stop",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the bottom half of the fourth row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "eighth_from_left",
+        [],
+        "eighth car from the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Top/bottom/left order frames unspecified."
+    ]
+  },
+  {
+    "i": 5853,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "aisle": [
+        "the fifth aisle of the One Stop parking lot",
+        "region"
+      ],
+      "lot": [
+        "the One Stop parking lot",
+        "region"
+      ],
+      "tree": [
+        "the center tree",
+        "object"
+      ],
+      "spaces": [
+        "an empty space on both sides of it",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "aisle",
+        "in the fifth aisle of the One Stop parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "close_to",
+        "tree",
+        "It has close to the center tree",
+        "U",
+        "low"
+      ],
+      [
+        "spaces",
+        "on_both_sides_of",
+        "t",
+        "has an empty space on both sides of it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“It has close to” is fragmentary; proximity attachment unclear."
+    ]
+  },
+  {
+    "i": 5854,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "it is the white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot near One Stop",
+        "region"
+      ],
+      "one": [
+        "One Stop",
+        "named_landmark"
+      ],
+      "row": [
+        "the bottom half of the fourth row from the bottom",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "In the parking lot near One Stop",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the bottom half of the fourth row from the bottom",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "eighth_from_left",
+        [],
+        "eighth car from the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Bottom/left order frames unspecified."
+    ]
+  },
+  {
+    "i": 5856,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a gray car",
+        "object"
+      ],
+      "row": [
+        "the second closest row of the parking space from the Food Warehouse",
+        "group"
+      ],
+      "food": [
+        "the Food Warehouse",
+        "named_landmark"
+      ],
+      "black1": [
+        "a black car",
+        "object"
+      ],
+      "black2": [
+        "another black car",
+        "object"
+      ],
+      "spot": [
+        "an empty spot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "row",
+        "parked in the second closest row of the parking space from the Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "second_closest_to",
+        "food",
+        "second closest row of the parking space from the Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "black1",
+        "right_of",
+        "t",
+        "On its right there is a black car",
+        "U",
+        "low"
+      ],
+      [
+        "black2",
+        "left_of",
+        "t",
+        "on its left there is another black car",
+        "U",
+        "low"
+      ],
+      [
+        "spot",
+        "behind",
+        "t",
+        "There is an empty spot behind this car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Second closest reference and lateral/back frame unresolved."
+    ]
+  },
+  {
+    "i": 5858,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A gray van",
+        "object"
+      ],
+      "black": [
+        "two black vehicles",
+        "group"
+      ],
+      "spot": [
+        "an empty spot",
+        "region"
+      ],
+      "row": [
+        "the second row from the top",
+        "group"
+      ],
+      "lot": [
+        "the parking lot of the One-Stop building",
+        "region"
+      ],
+      "center": [
+        "the center",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "black",
+          "black"
+        ],
+        "in between two black vehicles",
+        "U",
+        "medium"
+      ],
+      [
+        "spot",
+        "behind",
+        "t",
+        "with an empty spot behind it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the second row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot of the One-Stop building",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "at",
+        "center",
+        "in the center",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Top/behind ordering frame unspecified."
+    ]
+  },
+  {
+    "i": 5859,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "blackwhite": [
+        "a black and white car",
+        "object"
+      ],
+      "lot": [
+        "the very large parking lot",
+        "region"
+      ],
+      "one": [
+        "One Stop",
+        "named_landmark"
+      ],
+      "row": [
+        "the row closest to The Food Warehouse",
+        "group"
+      ],
+      "food": [
+        "The Food Warehouse",
+        "named_landmark"
+      ],
+      "spot": [
+        "the spot closest to the driveway",
+        "region"
+      ],
+      "drive": [
+        "the driveway that runs alongside One Stop",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "blackwhite",
+        "parked next to a black and white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in the very large parking lot behind One Stop",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "parking lot behind One Stop",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the row closest to The Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "closest_to",
+        "food",
+        "row closest to The Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "spot",
+        "in the spot closest to the driveway that runs alongside One Stop",
+        "U",
+        "low"
+      ],
+      [
+        "spot",
+        "closest_to",
+        "drive",
+        "spot closest to the driveway that runs alongside One Stop",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Closest comparisons use the named objects; row/spot attachment could differ."
+    ]
+  },
+  {
+    "i": 5862,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot near the One Stop",
+        "region"
+      ],
+      "one": [
+        "the One Stop",
+        "named_landmark"
+      ],
+      "row": [
+        "the top half of the first row from the top",
+        "region"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot near the One Stop",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the top half of the first row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "next_to",
+        "gray",
+        "next to a gray car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "first_from_left",
+        [],
+        "first car from the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Top/left order frames unspecified."
+    ]
+  },
+  {
+    "i": 5863,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot behind the food warehouse building",
+        "region"
+      ],
+      "food": [
+        "the food warehouse building",
+        "named_landmark"
+      ],
+      "lane": [
+        "the second lane",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot behind the food warehouse building",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "lane",
+        "on the second lane",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "left_of",
+        "t",
+        "It has a white car to the left and in front",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "t",
+        "a white car to the left and in front",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "first_in",
+        "lane",
+        "The first car on the lane",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "White-car phrase may describe same object in two positions; lane ordering unspecified."
+    ]
+  },
+  {
+    "i": 5864,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A gray car",
+        "object"
+      ],
+      "spot": [
+        "the first spot",
+        "region"
+      ],
+      "lane": [
+        "the first lane by the Food Warehouse",
+        "region"
+      ],
+      "food": [
+        "the Food Warehouse",
+        "named_landmark"
+      ],
+      "hooded": [
+        "a hooded car with a black roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "spot",
+        "parked in the first spot in the first lane by the Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "spot",
+        "first_in",
+        "lane",
+        "first spot in the first lane by the Food Warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "lane",
+        "by",
+        "food",
+        "by the Food Warehouse",
+        "N",
+        "high"
+      ],
+      [
+        "hooded",
+        "beside",
+        "t",
+        "There is a hooded car with a black roof beside it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "First spot/lane orientation unclear; hooded-car referent vague."
+    ]
+  },
+  {
+    "i": 5866,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "cars": [
+        "Two cars red-lined",
+        "group"
+      ],
+      "green": [
+        "one green car with the black top",
+        "object"
+      ],
+      "black": [
+        "one black car",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "row": [
+        "the 4th Row from the top",
+        "group"
+      ],
+      "lot": [
+        "the parking lot of the One Stop building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "includes",
+        [
+          "green",
+          "black"
+        ],
+        "one green car with the black top and one black car",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "partially_cut_off_by",
+        "edge",
+        "one black car that's partially cut off by the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "in",
+        "row",
+        "parked in the 4th Row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot of the One Stop building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“red-lined” is not interpreted; group relation may be rough."
+    ]
+  },
+  {
+    "i": 5867,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "aisle": [
+        "the fourth aisle of the One Stop parking lot",
+        "region"
+      ],
+      "lot": [
+        "the One Stop parking lot",
+        "region"
+      ],
+      "green": [
+        "a green car with a black roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_in",
+        "aisle",
+        "last car in the fourth aisle of the One Stop parking lot",
+        "U",
+        "low"
+      ],
+      [
+        "green",
+        "next_to",
+        "t",
+        "next to a green car with a black roof",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Last-in ordering unspecified."
+    ]
+  },
+  {
+    "i": 5868,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "the car park",
+        "region"
+      ],
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "row": [
+        "eight rows from the food warehouse",
+        "group"
+      ],
+      "food": [
+        "the food warehouse",
+        "named_landmark"
+      ],
+      "bottom": [
+        "the bottom of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "oriented_to_bottom_left",
+        [],
+        "car park orientated to the bottom left",
+        "W",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "eight rows from the food warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "eight_from",
+        "food",
+        "eight rows from the food warehouse",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "at",
+        "bottom",
+        "at the bottom of the map",
+        "W",
+        "low"
+      ]
+    ],
+    "u": [
+      "Bottom-left visual frame not calibrated."
+    ]
+  },
+  {
+    "i": 5869,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "One dark blue vehicle",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "green": [
+        "a green car with a black top",
+        "object"
+      ],
+      "row": [
+        "the fourth row from the top",
+        "group"
+      ],
+      "lot": [
+        "the parking lot of the One Stop building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "edge",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "green",
+        "next to a green car with a black top",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the fourth row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot of the One Stop building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Top row-order reference unspecified."
+    ]
+  },
+  {
+    "i": 5870,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this is the silver car",
+        "object"
+      ],
+      "white": [
+        "white",
+        "object"
+      ],
+      "blue": [
+        "blue",
+        "object"
+      ],
+      "gray": [
+        "dark gray",
+        "object"
+      ],
+      "black": [
+        "black cars",
+        "group"
+      ],
+      "white2": [
+        "white",
+        "object"
+      ],
+      "red": [
+        "red cars",
+        "group"
+      ],
+      "orange": [
+        "orange",
+        "object"
+      ],
+      "row": [
+        "the parking row",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot behind the one stop building",
+        "region"
+      ],
+      "one": [
+        "the one stop building",
+        "named_landmark"
+      ],
+      "food": [
+        "the food warehouse building",
+        "named_landmark"
+      ],
+      "cars": [
+        "These cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "on_one_side_of",
+        "t",
+        "on one side there are white, blue, dark gray and black cars",
+        "U",
+        "low"
+      ],
+      [
+        "blue",
+        "on_one_side_of",
+        "t",
+        "white, blue, dark gray and black cars",
+        "U",
+        "low"
+      ],
+      [
+        "gray",
+        "on_one_side_of",
+        "t",
+        "white, blue, dark gray and black cars",
+        "U",
+        "low"
+      ],
+      [
+        "black",
+        "on_one_side_of",
+        "t",
+        "white, blue, dark gray and black cars",
+        "U",
+        "low"
+      ],
+      [
+        "white2",
+        "on_other_side_of",
+        "t",
+        "on the other side there are white, red, black, orange and red cars",
+        "U",
+        "low"
+      ],
+      [
+        "red",
+        "on_other_side_of",
+        "t",
+        "white, red, black, orange and red cars",
+        "U",
+        "low"
+      ],
+      [
+        "orange",
+        "on_other_side_of",
+        "t",
+        "white, red, black, orange and red cars",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "at_beginning_of",
+        "row",
+        "the red car is at the beginning of the parking row",
+        "U",
+        "low"
+      ],
+      [
+        "cars",
+        "in",
+        "lot",
+        "These cars are in the large parking lot behind the one stop building",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "third_from",
+        "food",
+        "in the 3rd parking lot from the food warehouse building",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Side and beginning orientation unresolved; source shifts from row to lot; entities repeated within groups."
+    ]
+  },
+  {
+    "i": 5875,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "white": [
+        "a partially visible white car",
+        "object"
+      ],
+      "spot": [
+        "an empty space",
+        "region"
+      ],
+      "white2": [
+        "a white car",
+        "object"
+      ],
+      "row": [
+        "the first row from the top",
+        "group"
+      ],
+      "lot": [
+        "the parking lot of the One Stop building",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "white",
+          "spot"
+        ],
+        "in between a partially visible white car and an empty space",
+        "N",
+        "high"
+      ],
+      [
+        "white2",
+        "in_front_of",
+        "t",
+        "with a white car in front of it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the first row from the top",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "in the parking lot of the One Stop building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Top/front direction ungrounded."
+    ]
+  },
+  {
+    "i": 5876,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Black car",
+        "object"
+      ],
+      "lot": [
+        "the back parking lot at the food warehouse building",
+        "region"
+      ],
+      "food": [
+        "the food warehouse building",
+        "named_landmark"
+      ],
+      "lane": [
+        "the second lane",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the back parking lot at the food warehouse building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lane",
+        "in the second lane",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_car_left_right",
+        [],
+        "no car to the left or right",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "t",
+        "has a white car in front",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Left/right/front frame ungrounded."
+    ]
+  },
+  {
+    "i": 5877,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "aisle": [
+        "the second aisle",
+        "region"
+      ],
+      "food": [
+        "The Food Warehouse",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "aisle",
+        "in the second aisle",
+        "N",
+        "high"
+      ],
+      [
+        "aisle",
+        "in_front_of",
+        "food",
+        "second aisle in front of The Food Warehouse",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "no_cars_next_to",
+        [],
+        "has no cars next to it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5855,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "row": [
+        "the 12th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from_right",
+        "row",
+        "4th from the right in the 12th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "12th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "large parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Right ordinal frame unspecified."
+    ]
+  },
+  {
+    "i": 5857,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "row": [
+        "the 17th row of cars",
+        "group"
+      ],
+      "lot": [
+        "the large parking lot",
+        "region"
+      ],
+      "one": [
+        "the One Stop Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "sixth_from_left",
+        "row",
+        "6th from the left in the 17th row of cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in",
+        "lot",
+        "17th row of cars in the large parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "one",
+        "large parking lot behind the One Stop Building",
+        "U",
+        "low"
+      ],
+      [
+        "lot",
+        "when_viewed_aerially",
+        [],
+        "when viewed aerially",
+        "W",
+        "medium"
+      ],
+      [
+        "one",
+        "long_side_to_right",
+        [],
+        "with the long side of the One Stop Building to the right",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Left ordinal frame unspecified."
+    ]
+  }
+]

@@ -34,6 +34,8 @@ def validate(path):
                 span(text, quote)
             for rid, frame in record.get("f", {}).items():
                 assert 0 <= int(rid) < len(record["r"]), "frame points outside relation array"
+                assert frame.get("forward_angle_world_deg") is None, "text-only stage cannot invent a world heading"
+                assert not frame.get("geometry_evidence"), "no geometry has been supplied in this stage"
                 if isinstance(frame.get("evidence"), str):
                     span(text, frame["evidence"])
                 if frame.get("view_evidence"):

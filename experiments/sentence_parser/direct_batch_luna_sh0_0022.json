@@ -1,0 +1,448 @@
+[
+  {
+    "i": 1031,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The gray building",
+        "object"
+      ],
+      "street": [
+        "Hobson Street",
+        "named_landmark"
+      ],
+      "marks": [
+        "the Marks & Spencer",
+        "named_landmark"
+      ],
+      "cinema": [
+        "the Central Cinema",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "street",
+        "on Hobson Street",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "between",
+        [
+          "marks",
+          "cinema"
+        ],
+        "between the Marks & Spencer and the Central Cinema",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 1032,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "complex": [
+        "Multi-building complex",
+        "group"
+      ],
+      "darkroof": [
+        "a large dark gray roof",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "marks": [
+        "the marks and Spencer building",
+        "named_landmark"
+      ],
+      "cinema": [
+        "the central cinema",
+        "named_landmark"
+      ],
+      "street": [
+        "Sydney Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "complex",
+        "between",
+        [
+          "marks",
+          "cinema"
+        ],
+        "in between the marks and Spencer building and the central cinema",
+        "N",
+        "high"
+      ],
+      [
+        "complex",
+        "off_of",
+        "street",
+        "off Sydney Street",
+        "N",
+        "medium"
+      ],
+      [
+        "complex",
+        "has",
+        [
+          "darkroof",
+          "roof"
+        ],
+        "one with a large dark gray roof, and others with a gray roof",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Roof descriptions distribute over multiple buildings; exact member mapping unknown."
+    ]
+  },
+  {
+    "i": 1033,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The small orange building",
+        "object"
+      ],
+      "cinema": [
+        "the Central Cinema",
+        "named_landmark"
+      ],
+      "next": [
+        "the Next Building",
+        "named_landmark"
+      ],
+      "sidney": [
+        "the Sidney Street",
+        "named_landmark"
+      ],
+      "road": [
+        "the Christ’s College Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "between",
+        [
+          "cinema",
+          "next"
+        ],
+        "between the Central Cinema and the Next Building",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "between",
+        [
+          "sidney",
+          "road"
+        ],
+        "between the Sidney Street and the Christ’s College Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 1034,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The gray enclosed, boarded by brown building",
+        "object"
+      ],
+      "next": [
+        "the Next building",
+        "named_landmark"
+      ],
+      "cinema": [
+        "the Centra Cinema",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "between",
+        [
+          "next",
+          "cinema"
+        ],
+        "between the Next building and the Centra Cinema",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Source says 'Centra Cinema'; retained exactly."
+    ]
+  },
+  {
+    "i": 1035,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The small gray building",
+        "object"
+      ],
+      "next": [
+        "the Next building",
+        "named_landmark"
+      ],
+      "cinema": [
+        "the Central Cinema",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "between",
+        [
+          "next",
+          "cinema"
+        ],
+        "between the Next building and the Central Cinema",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 1036,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "buildings": [
+        "Multiple buildings of multiple floor levels",
+        "group"
+      ],
+      "street": [
+        "Sydney Street",
+        "named_landmark"
+      ],
+      "college": [
+        "Christ's College",
+        "named_landmark"
+      ],
+      "next": [
+        "the next building",
+        "named_landmark"
+      ],
+      "cinema": [
+        "the central cinema",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "buildings",
+        "extend_from_to",
+        [
+          "street",
+          "college"
+        ],
+        "extend from one end of the street to the other, from Sydney Street to Christ's College",
+        "N",
+        "medium"
+      ],
+      [
+        "buildings",
+        "between",
+        [
+          "next",
+          "cinema"
+        ],
+        "in between the next building and the central cinema",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 1037,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The building",
+        "object"
+      ],
+      "cinema": [
+        "the Central Cinema",
+        "named_landmark"
+      ],
+      "next": [
+        "the Next building",
+        "named_landmark"
+      ],
+      "parking": [
+        "the parking area",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "between",
+        [
+          "cinema",
+          "next"
+        ],
+        "between the Central Cinema and the Next building",
+        "N",
+        "high"
+      ],
+      [
+        "parking",
+        "between",
+        [],
+        "parking area between the buildings",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Between-buildings refers to two unspecified buildings; links to named pair are inferred from context."
+    ]
+  },
+  {
+    "i": 1038,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "A brown building with a light blue half cylindrical shaped windowed roof",
+        "object"
+      ],
+      "street": [
+        "Sidney Street",
+        "named_landmark"
+      ],
+      "cinema": [
+        "the Central Cinema building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "off_of",
+        "street",
+        "off Sidney Street",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "next_to",
+        "cinema",
+        "next to the Central Cinema building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 1039,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The gray and light blue building",
+        "object"
+      ],
+      "street": [
+        "Sidney Street",
+        "named_landmark"
+      ],
+      "next": [
+        "the Next building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "street",
+        "on Sidney Street",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "left_of",
+        "next",
+        "to the left of the Next building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left frame unspecified."
+    ]
+  },
+  {
+    "i": 1040,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The building",
+        "object"
+      ],
+      "cinema": [
+        "the Central Cinema building",
+        "named_landmark"
+      ],
+      "roof": [
+        "a rounded light blue roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "next_to",
+        "cinema",
+        "next to the Central Cinema building",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "has",
+        "roof",
+        "that has a rounded light blue roof",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  }
+]

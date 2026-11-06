@@ -17,7 +17,7 @@ class CacheContract(unittest.TestCase):
 
     def test_complete_accounting(self):
         self.assertEqual(self.status["parsed_unique"] + self.status["pending_unique"], len(self.source))
-        self.assertFalse(self.status["complete"])
+        self.assertEqual(self.status["complete"], self.status["pending_unique"] == 0)
 
     def test_requested_model_accounting(self):
         self.assertEqual(sum(self.status["parsed_by_requested_model"].values()), self.status["parsed_unique"])
@@ -49,7 +49,8 @@ class CacheContract(unittest.TestCase):
 
     def test_pending_lookup_raises(self):
         parsed = {row["text_id"] for row in self.records}
-        pending = next(row for row in self.source if row["text_id"] not in parsed)
+        pending = next((row for row in self.source if row["text_id"] not in parsed), {"text_id": "0" * 64})
+        self.assertNotIn(pending["text_id"], parsed)
         with self.assertRaisesRegex(KeyError, "Parsing missing"):
             lookup(text_id=pending["text_id"])
 
