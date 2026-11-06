@@ -16,7 +16,7 @@ def main():
     a,rest=p.parse_known_args();assert '--split' in rest and rest[rest.index('--split')+1]=='val_seen'
     assert '--instruction-mode' in rest and rest[rest.index('--instruction-mode')+1]=='full_text'
     assert '--relation-visual-control' in rest and rest[rest.index('--relation-visual-control')+1]=='off'
-    out=Path(rest[rest.index('--output')+1]);out.mkdir(parents=True,exist_ok=True)
+    out=Path(rest[rest.index('--output')+1]);out.parent.mkdir(parents=True,exist_ok=True)
     frozen=json.loads(a.oracle_angles.read_text());assert frozen['ORACLE'] and frozen['GT_range_supplied'] is False
     import graphnav.unified_text_ablation_runtime as adapter
     original=adapter.UnifiedTextAblationPolicy
@@ -46,7 +46,7 @@ def main():
     adapter.UnifiedTextAblationPolicy=OracleOnlyDiagnosticPolicy
     lock=dict(ORACLE=True,arm=a.oracle_arm,angles_SHA=file_sha256(a.oracle_angles),wrapper_SHA=file_sha256(__file__),geometry_SHA=file_sha256(Path('scripts/oracle_bearing_geometry.py')),baseline_checkpoint_required='9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387')
     ck=rest[rest.index('--relation-checkpoint')+1];assert file_sha256(ck)==lock['baseline_checkpoint_required']
-    f=out/'ORACLE_MANIFEST.json'
+    f=out.with_name(out.name+'_ORACLE_MANIFEST.json')
     if f.exists():assert json.loads(f.read_text())==lock
     else:f.write_text(json.dumps(lock,indent=2))
     from scripts import evaluate_closedloop
