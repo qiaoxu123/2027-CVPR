@@ -209,3 +209,20 @@ def test_dense_controller_candidate_coordinates_and_context_are_aligned():
     expected=field.candidate_xy.clamp(.5/28,1-.5/28)
     torch.testing.assert_close(field.candidate_context,expected,atol=1e-6,rtol=1e-6)
     assert field.belief_logits.gather(1,field.candidate_ids).tolist()==[[4.,3.]]
+
+
+def test_posthoc_correction_capacity_distinguishes_bound_and_evidence_failures():
+    from graphnav.v3_diagnostics import visual_correction_capacity
+    bounds=torch.tensor([[0.,0.,100.,100.]])
+    target=torch.tensor([[.25,.25]])
+    geom=torch.tensor([[[0.,3.],[0.,0.]]])
+    out=SimpleNamespace(geometry_global=geom,fused_logits=geom.clone(),observed_mask=torch.ones_like(geom,dtype=torch.bool))
+    row=visual_correction_capacity(out,target,bounds,.5,radius_m=1)[0]
+    assert not row['geometry_correct'] and row['correct_region_observed']
+    assert not row['can_flip_under_independent_bounded_updates']
+    geom[0,0,1]=.8
+    row=visual_correction_capacity(out,target,bounds,.5,radius_m=1)[0]
+    assert row['can_flip_under_independent_bounded_updates'] and not row['fused_correct']
+    out.observed_mask.zero_()
+    row=visual_correction_capacity(out,target,bounds,.5,radius_m=1)[0]
+    assert not row['can_flip_under_independent_bounded_updates'] and not row['correct_region_observed']
