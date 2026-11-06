@@ -2,7 +2,8 @@
 import argparse,json
 from pathlib import Path
 import torch
-from scripts.train_role_polygon_bearing import PublicBatch,evaluate
+from scripts.train_role_polygon_bearing import PublicBatch
+from scripts.role_bearing_evaluation import evaluate_cpu_metrics as evaluate
 from graphnav.polygon_neighborhood_bearing import NeighborhoodBearingHead
 from graphnav.relation_bearing_network import RolePolygonBearing
 from graphnav.checkpointing import file_sha256,atomic_json
