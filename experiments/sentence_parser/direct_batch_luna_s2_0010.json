@@ -1,0 +1,2061 @@
+[
+  {
+    "i": 2842,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "The white car",
+        "object"
+      ],
+      "b": [
+        "the black car",
+        "object"
+      ],
+      "s": [
+        "St Matthew building",
+        "named_landmark"
+      ],
+      "r": [
+        "the red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "in_front_of",
+        "s",
+        "in front of St Matthew building",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "in_front_of",
+        "s",
+        "in front of St Matthew building",
+        "I",
+        "medium"
+      ],
+      [
+        "w",
+        "right_behind",
+        "r",
+        "right behind the red car",
+        "U",
+        "low"
+      ],
+      [
+        "b",
+        "right_behind",
+        "r",
+        "right behind the red car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“right behind” attachment to both coordinated cars or only black car is unclear."
+    ]
+  },
+  {
+    "i": 2843,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "A white car",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "v": [
+        "a white van",
+        "object"
+      ],
+      "terrace": [
+        "vicarage terrace",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "s": [
+        "the St Matthews building",
+        "named_landmark"
+      ],
+      "c": [
+        "the Carlow building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "in_front_of",
+        "b",
+        "in front of a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "v",
+        "across_from",
+        "w",
+        "with a white van across from it on the opposite side of vicarage terrace",
+        "R",
+        "high"
+      ],
+      [
+        "w",
+        "near",
+        "edge",
+        "near the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "between",
+        [
+          "s",
+          "c"
+        ],
+        "in between the St Matthews building and the Carlow building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2844,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "A white car",
+        "object"
+      ],
+      "terrace": [
+        "the road named Vicarage terrace",
+        "named_landmark"
+      ],
+      "c": [
+        "the building named Carlow",
+        "named_landmark"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "right_side_of",
+        "terrace",
+        "parked at the right side of the road named Vicarage terrace",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "opposite",
+        "c",
+        "opposite to the building named Carlow",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "in_front_of",
+        "w",
+        "a blue car parked in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right-side reference and vehicle front/back frame unknown."
+    ]
+  },
+  {
+    "i": 2845,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "The white car",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "terrace": [
+        "Vicarage Terrace",
+        "named_landmark"
+      ],
+      "c": [
+        "Carlow",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "in_front_of",
+        "b",
+        "parked in front of a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "on",
+        "terrace",
+        "on Vicarage Terrace",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "across_street_from",
+        "c",
+        "across the street from Carlow",
+        "R",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2846,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "The white car",
+        "object"
+      ],
+      "c": [
+        "the Carlow building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "across_street_in_front_of",
+        "c",
+        "parked across the street in front of the Carlow building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across-street and building-front relations both stated; do not infer street name."
+    ]
+  },
+  {
+    "i": 2847,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "The white car",
+        "object"
+      ],
+      "c": [
+        "the Carlow building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "across_street_from",
+        "c",
+        "across the street from the Carlow building",
+        "R",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2848,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "w": [
+        "the white car",
+        "object"
+      ],
+      "shadows": [
+        "the shadows",
+        "region"
+      ],
+      "c": [
+        "the Carlow building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "w",
+        "in",
+        "shadows",
+        "in the shadows",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "across_from",
+        "c",
+        "across from the Carlow building",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2849,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A car",
+        "object"
+      ],
+      "s": [
+        "staffordshire Street",
+        "named_landmark"
+      ],
+      "n": [
+        "Norfolk Street",
+        "named_landmark"
+      ],
+      "db": [
+        "the corner",
+        "region"
+      ],
+      "b": [
+        "a dark blue car",
+        "object"
+      ],
+      "k": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "n",
+        "near Norfolk Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "fourth_from_corner",
+        "db",
+        "the fourth car from the corner",
+        "N",
+        "low"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "a dark blue car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "k",
+        "in_front_of",
+        "t",
+        "a black car in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "fourth car comparison sequence unspecified; front/back frame unknown."
+    ]
+  },
+  {
+    "i": 2850,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "s": [
+        "Staffordshire street road",
+        "named_landmark"
+      ],
+      "p": [
+        "triangle green park",
+        "named_landmark"
+      ],
+      "b": [
+        "a dark blue car",
+        "object"
+      ],
+      "k": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "along",
+        "s",
+        "along Staffordshire street road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "p",
+        "near triangle green park",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "a dark blue car behind",
+        "U",
+        "medium"
+      ],
+      [
+        "k",
+        "in_front_of",
+        "t",
+        "a black car in front",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2851,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "b": [
+        "the first grey building",
+        "object"
+      ],
+      "s": [
+        "Staffordshire street road",
+        "named_landmark"
+      ],
+      "n": [
+        "Norfolk street",
+        "named_landmark"
+      ],
+      "cars": [
+        "the two black cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the first grey building",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "along",
+        "s",
+        "along Staffordshire street road",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "first_from_direction",
+        "n",
+        "from Norfolk street",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "cars",
+        "in between the two black cars",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "first building ordering proceeds from Norfolk Street as stated."
+    ]
+  },
+  {
+    "i": 2852,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The silver car",
+        "object"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "g": [
+        "the dark gray car closest to the intersection with Norfolk Street",
+        "object"
+      ],
+      "n": [
+        "Norfolk Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "three_cars_behind",
+        "g",
+        "3 cars behind the dark gray car closest to the intersection with Norfolk Street",
+        "R",
+        "low"
+      ],
+      [
+        "g",
+        "closest_to_intersection",
+        "n",
+        "closest to the intersection with Norfolk Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind direction unstated."
+    ]
+  },
+  {
+    "i": 2853,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The silver car",
+        "object"
+      ],
+      "b": [
+        "the building on the corner of Staffordshire Street and Norfolk Street",
+        "object"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "n": [
+        "Norfolk Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "past",
+        "b",
+        "parked just past the building on the corner of Staffordshire Street and Norfolk Street",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "on_corner",
+        [
+          "s",
+          "n"
+        ],
+        "on the corner of Staffordshire Street and Norfolk Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2854,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "v": [
+        "Vicarage Terrace",
+        "named_landmark"
+      ],
+      "m": [
+        "St Matthew",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "v",
+        "on Vicarage Terrace",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "m",
+        "in front of St Matthew",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "Behind this car is a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "t",
+        "in front of this car is a blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2855,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "g": [
+        "the grey building",
+        "object"
+      ],
+      "v": [
+        "the Vicarage Terrace Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "blue",
+        "parked next to the blue car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "g",
+        "in front of the grey building",
+        "I",
+        "medium"
+      ],
+      [
+        "g",
+        "on",
+        "v",
+        "on the Vicarage Terrace Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2856,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "m": [
+        "St Matthew",
+        "named_landmark"
+      ],
+      "v": [
+        "Vicarage Terrace",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "m",
+        "parked in front of St Matthew",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "v",
+        "on Vicarage Terrace",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "behind",
+        "t",
+        "a blue car behind",
+        "U",
+        "low"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "t",
+        "and in front of this car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "One blue car described both behind and in front; retain both contradictory predicates without resolving."
+    ]
+  },
+  {
+    "i": 2857,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "r": [
+        "The red car",
+        "object"
+      ],
+      "blue": [
+        "blue car",
+        "object"
+      ],
+      "m": [
+        "the St Matthew building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "behind",
+        "r",
+        "blue car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "r",
+        "in_front_of",
+        "m",
+        "in front of the St Matthew building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2858,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "blue": [
+        "The blue car",
+        "object"
+      ],
+      "r": [
+        "red car",
+        "object"
+      ],
+      "m": [
+        "the St Matthew building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "in_front_of",
+        "m",
+        "parked in front of the St Matthew building",
+        "I",
+        "medium"
+      ],
+      [
+        "r",
+        "in_front_of",
+        "m",
+        "parked in front of the St Matthew building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2859,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "r": [
+        "A red car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "m": [
+        "St Matthew",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "r",
+        "next_to",
+        "blue",
+        "parked next to a blue car",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "in_front_of",
+        "m",
+        "in front of St Matthew",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2860,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The dark blue car",
+        "object"
+      ],
+      "row": [
+        "the row of parked cars",
+        "group"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "the Staffordshire Street road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_end_of",
+        "row",
+        "on the left end of the row of parked cars",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "above",
+        "d",
+        "above the Donegal building",
+        "W",
+        "medium"
+      ],
+      [
+        "s",
+        "above",
+        "row",
+        "going horizontally above",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left frame unknown; above is visual top, not calibrated geography."
+    ]
+  },
+  {
+    "i": 2861,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "light": [
+        "a lighter blue car",
+        "object"
+      ],
+      "row": [
+        "the row of parking",
+        "group"
+      ],
+      "d": [
+        "Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "tree",
+          "light"
+        ],
+        "parked between a tree and a lighter blue car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "row",
+        "in the row of parking",
+        "N",
+        "high"
+      ],
+      [
+        "row",
+        "in_front_of",
+        "d",
+        "in front of Donegal building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2862,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "rightmost_in",
+        "row",
+        "1st from the right",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "parked_against",
+        "d",
+        "parked against the Donegal building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right orientation unknown."
+    ]
+  },
+  {
+    "i": 2863,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The rightmost blue car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "rightmost_in",
+        "row",
+        "rightmost",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "parked_against",
+        "d",
+        "parked against the Donegal building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right orientation unknown."
+    ]
+  },
+  {
+    "i": 2864,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this is a light blue car",
+        "object"
+      ],
+      "dark": [
+        "a dark blue car",
+        "object"
+      ],
+      "cars": [
+        "black and white cars",
+        "group"
+      ],
+      "area": [
+        "the phark area",
+        "region"
+      ],
+      "d": [
+        "the donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "the staffordshire street road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "dark",
+        "on_one_side_of",
+        "t",
+        "on one side there is a dark blue car",
+        "U",
+        "low"
+      ],
+      [
+        "cars",
+        "on_other_side_of",
+        "t",
+        "on the other side there are black and white cars",
+        "U",
+        "low"
+      ],
+      [
+        "cars",
+        "in",
+        "area",
+        "These cars are in the phark area",
+        "N",
+        "high"
+      ],
+      [
+        "area",
+        "in_front_of",
+        "d",
+        "in front of the donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "area",
+        "on",
+        "s",
+        "on the staffordshire street road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“these cars” likely refers all described cars; sides are ambiguous and unframed."
+    ]
+  },
+  {
+    "i": 2865,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A light blue car",
+        "object"
+      ],
+      "dark": [
+        "a dark blue car",
+        "object"
+      ],
+      "partial": [
+        "a partially visible blue car",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "dark",
+          "partial"
+        ],
+        "in between a dark blue car and a partially visible blue car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "lot",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "in_front_of",
+        "d",
+        "in front of the Donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "lot",
+        "off",
+        "s",
+        "off Staffordshire Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2866,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The light blue car",
+        "object"
+      ],
+      "dark": [
+        "the darker blue car",
+        "object"
+      ],
+      "lot": [
+        "the empty lot",
+        "region"
+      ],
+      "d": [
+        "the Donedal Building",
+        "named_landmark"
+      ],
+      "s": [
+        "Staffordshine Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "dark",
+          "lot"
+        ],
+        "between the darker blue car and the empty lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "d",
+        "parked next to the Donedal Building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on Staffordshine Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2867,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "d",
+        "parked in front of the Donegal building",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "second_from_right_when_facing",
+        "d",
+        "second car from the right when looking toward the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "explicit view direction toward building fixes observer orientation, but whether right is observer-relative or row direction remains unclear."
+    ]
+  },
+  {
+    "i": 2868,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Light blue car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_from_right",
+        "row",
+        "2nd from the right",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "in_front_of",
+        "d",
+        "in front of the Donegal building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right frame unknown."
+    ]
+  },
+  {
+    "i": 2869,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The light blue car",
+        "object"
+      ],
+      "row": [
+        "the row of cars",
+        "group"
+      ],
+      "d": [
+        "the Donegal building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_from_right",
+        "row",
+        "2nd from the right",
+        "U",
+        "low"
+      ],
+      [
+        "row",
+        "parked_against",
+        "d",
+        "parked against the Donegal building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right frame unknown."
+    ]
+  },
+  {
+    "i": 2870,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a car",
+        "object"
+      ],
+      "s": [
+        "St. Matthews Street",
+        "named_landmark"
+      ],
+      "b": [
+        "the building called Carlow",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "parked on St. Matthews Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near_end_of",
+        "b",
+        "near the end of the building called Carlow",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "color_bright_blue",
+        [],
+        "It is a bright blue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "partially_visible",
+        [],
+        "is partially visible",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "last_on",
+        "s",
+        "the last car on the street",
+        "N",
+        "low"
+      ]
+    ],
+    "u": [
+      "last has no explicit comparison origin/direction."
+    ]
+  },
+  {
+    "i": 2871,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "b": [
+        "the Carlow building",
+        "named_landmark"
+      ],
+      "other": [
+        "another blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "below",
+        "b",
+        "below and to the bottom left corner of the Carlow building",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "no_cars_directly_beside",
+        [],
+        "there's no cars directly beside it",
+        "N",
+        "high"
+      ],
+      [
+        "other",
+        "further_right_of",
+        "t",
+        "to the further right is another blue car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "bottom-left/right visual frame uncalibrated."
+    ]
+  },
+  {
+    "i": 2872,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "b": [
+        "the Carlow building",
+        "named_landmark"
+      ],
+      "v": [
+        "Vicarage Terrace",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the Carlow building",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "v",
+        "on Vicarage Terrace",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_car_in_front",
+        [],
+        "with no cars in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front-of-building and no cars in front use potentially different frames."
+    ]
+  },
+  {
+    "i": 2873,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "v": [
+        "Vicarage Terrace",
+        "named_landmark"
+      ],
+      "b": [
+        "the Carlow building",
+        "named_landmark"
+      ],
+      "corner": [
+        "the corner",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "v",
+        "on Vicarage Terrace",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the Carlow building",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "corner",
+        "on the corner",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2874,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The bright blue building",
+        "object"
+      ],
+      "corner": [
+        "the left corner of the Carlow building",
+        "region"
+      ],
+      "b": [
+        "the Carlow building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "corner",
+        "in front of the left corner of the Carlow building",
+        "I",
+        "medium"
+      ],
+      [
+        "corner",
+        "left_of",
+        "b",
+        "the left corner of the Carlow building",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "left corner orientation unspecified."
+    ]
+  },
+  {
+    "i": 2875,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a light blue car",
+        "object"
+      ],
+      "c": [
+        "Carlow",
+        "named_landmark"
+      ],
+      "v": [
+        "Vicarage Terrace",
+        "named_landmark"
+      ],
+      "b": [
+        "another blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "c",
+        "found in front of Carlow",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "v",
+        "on Vicarage Terrace",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "near",
+        "t",
+        "another blue car parked nearby",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2876,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A silver four door vehicle",
+        "object"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "a": [
+        "the building Athlone",
+        "named_landmark"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "k": [
+        "a black vehicle",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "along",
+        "s",
+        "parked along Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "a",
+        "behind the building Athlone",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "in_front_of",
+        "t",
+        "the only thing in front of it a little ways is a tree",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "caddy_corner_from",
+        "t",
+        "a blue car cady corner from",
+        "U",
+        "low"
+      ],
+      [
+        "k",
+        "directly_behind",
+        "t",
+        "a black vehicle parked directly behind",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "caddy corner spelling preserved; tree and car front/back relations have unknown frames."
+    ]
+  },
+  {
+    "i": 2877,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white vehicle",
+        "object"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "a": [
+        "the building call Athlone",
+        "named_landmark"
+      ],
+      "spot": [
+        "a spot marked disabled",
+        "region"
+      ],
+      "dark": [
+        "a dark colored vehicle",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "along",
+        "s",
+        "parked along Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "a",
+        "in front of the building call Athlone",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "behind",
+        "spot",
+        "parked behind a spot marked disabled",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "dark",
+        "in front of a dark colored vehicle",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2878,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A gray car",
+        "object"
+      ],
+      "cars": [
+        "two black cars",
+        "group"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "a": [
+        "the athlone building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "cars",
+        "in front of two black cars",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "off",
+        "s",
+        "off Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "a",
+        "across from the athlone building",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2879,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "s": [
+        "the street",
+        "region"
+      ],
+      "a": [
+        "the Athlone building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "parked on the street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "a",
+        "in front of the Athlone building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2880,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this is a white car",
+        "object"
+      ],
+      "s": [
+        "Staffordshire Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Athlone building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Staffordshire Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "north_of",
+        "a",
+        "north of Athlone building",
+        "W",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 2881,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a black car",
+        "object"
+      ],
+      "car": [
+        "a black and white car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ],
+      "s": [
+        "staffordshire street",
+        "named_landmark"
+      ],
+      "a": [
+        "athlone building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "t",
+        "with a black and white car in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "behind",
+        "t",
+        "and a tree behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "these cars are on staffordshire street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "a",
+        "next to athlone building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“these cars” includes target and black/white car."
+    ]
+  }
+]
