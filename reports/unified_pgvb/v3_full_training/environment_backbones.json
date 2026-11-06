@@ -1,0 +1,22 @@
+{
+  "python": "3.10.22",
+  "torch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "GPU": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "GPU_total_GiB": 94.9600830078125,
+  "encoders": {
+    "bert": {
+      "model_id": "bert-base-uncased",
+      "cached_revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "expected_stage1_revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "matches_stage1": true
+    },
+    "siglip2": {
+      "model_id": "google/siglip2-large-patch16-384",
+      "cached_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+      "expected_stage1_revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+      "matches_stage1": true
+    }
+  },
+  "notes": "Current cached offline backbone revisions; no model fitting/evaluation in this check"
+}

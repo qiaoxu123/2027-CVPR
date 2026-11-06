@@ -28,16 +28,18 @@ def visual_correction_capacity(output,target_xy,world_bounds,visual_gain,radius_
         # Correct cells can be raised and wrong cells lowered only if observed.
         optimistic_good=(geom[i]+allowed[i]).masked_fill(~region,float('-inf')).max()
         optimistic_bad=(geom[i]-allowed[i]).masked_fill(~outside,float('-inf')).max()
-        idx=int(fused[i].argmax());old=int(geom[i].argmax())
+        idx=int(fused[i].flatten().topk(min(20,h*w)).indices[0]);old=int(geom[i].flatten().topk(min(20,h*w)).indices[0])
         visual=getattr(output,"visual_global",fused-geom)[i].masked_fill(~support[i],float('-inf'))
-        visual_hit=bool(region.flatten()[int(visual.argmax())]) if support[i].any() else None
+        visual_hit=bool(region.flatten()[int(visual.flatten().topk(min(20,h*w)).indices[0])]) if support[i].any() else None
+        margin=float(optimistic_good-optimistic_bad)
         rows.append(dict(GT_POSTHOC_ONLY=True,region_defined=True,
             visual_only_top1_correct_region_proxy=visual_hit,
             geometry_correct=bool(region.flatten()[old]),fused_correct=bool(region.flatten()[idx]),
             correct_region_observed=bool((region&support[i]).any()),
             wrong_minus_correct_geometry_peak=float(bad-good),
             amplitude_bound=amplitude,
-            theoretical_optimistic_margin=float(optimistic_good-optimistic_bad),
-            can_flip_under_independent_bounded_updates=bool(optimistic_good>=optimistic_bad),
+            theoretical_optimistic_margin=margin,
+            bound_insufficient=margin<0, capacity_tie_undetermined=margin==0,
+            can_flip_under_independent_bounded_updates=margin>0,
             actual_delta_max=float((fused[i]-geom[i]).abs().max())))
     return rows

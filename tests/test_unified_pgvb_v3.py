@@ -244,3 +244,15 @@ def test_physical_partition_does_not_load_rgb_tensors(tmp_path):
     fit,dev=fit_dev_partition(dataset,42)
     assert fit and dev and len(fit)+len(dev)==len(keys)
     assert not {i//2 for i in fit}&{i//2 for i in dev}
+
+
+def test_capacity_actual_goal_uses_formal_top20_tie_order():
+    from graphnav.v3_diagnostics import visual_correction_capacity
+    geom=torch.zeros(1,384,384)
+    idx=int(geom.flatten().topk(20).indices[0])
+    target=torch.tensor([[(idx%384+.5)/384,(idx//384+.5)/384]])
+    output=SimpleNamespace(geometry_global=geom,fused_logits=geom.clone(),observed_mask=torch.zeros_like(geom,dtype=torch.bool))
+    row=visual_correction_capacity(output,target,torch.tensor([[0.,0.,100.,100.]]),.5,radius_m=.01)[0]
+    assert row['geometry_correct'] and row['fused_correct']
+    assert row['capacity_tie_undetermined'] and not row['bound_insufficient']
+    assert not row['can_flip_under_independent_bounded_updates']

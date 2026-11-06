@@ -104,7 +104,7 @@ def main():
             if support.any() and not support.all():ax.contour(support,levels=[.5],extent=extent,origin='lower',colors='lime',linewidths=.4)
             for fp in public['footprints_world'].numpy():ax.plot(*np.vstack([fp,fp[0]]).T,'w-',lw=.4)
             if title!='Visual evidence':
-                y,x=np.unravel_index(z.argmax(),z.shape);pred=bounds[:2]+np.array([(x+.5)/384,(y+.5)/384])*(bounds[2:]-bounds[:2]);ax.plot(*pred,'bx',ms=7)
+                y,x=np.unravel_index(torch.from_numpy(z).flatten().topk(20).indices[0].item(),z.shape);pred=bounds[:2]+np.array([(x+.5)/384,(y+.5)/384])*(bounds[2:]-bounds[:2]);ax.plot(*pred,'bx',ms=7)
             ax.set_title(title);ax.set_xlim(bounds[0],bounds[2]);ax.set_ylim(bounds[1],bounds[3]);ax.set_aspect('equal')
         fig.suptitle(private['episode_id']+' | cyan GT, blue prediction, green support');fig.tight_layout();fn=f'case_{index:04d}.png';fig.savefig(a.output/fn,dpi=140);plt.close(fig);figlist.append(fn)
     atomic_json(dict(source_v2_sha256=file_sha256(a.source_v2),checkpoint_sha256=file_sha256(a.training/'last.pt'),fit=len(fit),dev=len(dev),before=before['metrics'],after={k:v['metrics'] for k,v in results.items()},figures=figlist,scope='TRAIN physical-target heldout in this new training; initial V2 trained on TRAIN; no navigation'),a.output/'summary.json')

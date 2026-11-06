@@ -47,11 +47,17 @@ def main():
     report=['# UnifiedPGVB-V3 完整TRAIN训练与评测','',f'完整TRAIN输入{fit["total"]}条；本阶段拟合{fit["fit"]}条、物理目标留出{fit["dev"]}条，物理分组重叠0。初始化V2曾使用TRAIN，内部留出不是完全未见泛化。','',f'当前已完成完整Epoch：{len(epochs)}；训练结束：{final is not None}。','', 'Geometry和轻量视觉模块训练，BERT/SigLIP2冻结并读取缓存；seed42，原权重保留。四小时累计训练预算，至少三轮后连续两轮相对Loss改善<0.5%提前停止。未修改Stop=0.3、1mm守卫或Horizon。','', '训练视点由公开地标选择，属于离线地图引导观测；不能作为无人机真实已看到的图像。导航/初始Goal评测使用真实起点及因果历史，保留原yaw，存在需检查的训练—部署分布差异。Polygon/Depth均是弱监督/2.5D代理，不是人工像素真值。','', '|Epoch|拟合样本|TRAIN Loss|本轮Wall秒|GPU峰值GiB|','|---|---:|---:|---:|---:|']
     for v in epochs:report.append(f'|{v["epoch"]}|{v["fit"]}|{v["mean_train_loss"]:.6f}|{v["elapsed_s"]:.2f}|{v["peak_cuda_GiB"]:.3f}|')
     report+=['','![训练Loss](training_loss.png)','![Loss分量](loss_components.png)','', '## 全量评测状态','', 'Top-K按384×384稠密世界网格原始排序，未做空间去重，不能直接与旧784网格的Top-K作横向比较；Top1/NE使用相同20m世界距离判据。','']
+    env=r/'environment_backbones.json'
+    if env.exists():
+        hardware=json.loads(env.read_text());shutil.copyfile(env,o/'environment_backbones.json')
+        report += [f"硬件：{hardware['GPU']}，PyTorch可见总显存{hardware['GPU_total_GiB']:.2f}GiB；Torch {hardware['torch']} / CUDA {hardware['cuda']}。上表显存是PyTorch张量峰值分配量，不含CUDA上下文或首次视觉编码阶段。BERT/SigLIP2缓存版本均与原Stage1记录一致。",'']
     if initial:
         assert initial['coverage']=={'completed':2470,'expected':2470}
         report += [f'全量初始定位覆盖2470/2470，推理错误{initial["errors"]}条。','', '|方法|Top1≤20m|Top5≤20m|Top20≤20m|NE(m)|','|---|---:|---:|---:|---:|']
         for name,m in initial['metrics'].items():report.append(f'|{name}|{m["Top1_20m"]*100:.2f}%|{m["Top5_20m"]*100:.2f}%|{m["Top20_20m"]*100:.2f}%|{m["NE"]}|')
         report += ['',f'55%导航门槛通过：{initial["navigation_gate_passed"]}。这是初始Goal指标，不是SR。']
+        if 'posthoc_capacity' in initial:
+            report += ['', 'GT事后幅度诊断（位置代理，非实例识别准确率）：', '', '```json',json.dumps(initial['posthoc_capacity'],ensure_ascii=False,indent=2),'```']
     else:report+=['尚无全部2470条Val-Seen定位结果；不报告子集作为正式效果。']
     if nav:
         report+=['','|方法|SR|OSR|SPL|NE|nDTW|','|---|---:|---:|---:|---:|---:|']
@@ -65,6 +71,10 @@ def main():
         for name,values in lengths['encoders'].items():
             report.append(f"{name}: 上限{values['configured_token_limit']} tokens，截断{values['truncated_queries']}/{lengths['N']}（{values['truncated_fraction']*100:.2f}%）。")
         report+=['这仅说明大范围文本截断不成立，不代表关系理解正确。本轮不改变token上限。']
+    geometry_audit=r/'label_geometry_audit.json'
+    if geometry_audit.exists():
+        labels=json.loads(geometry_audit.read_text());shutil.copyfile(geometry_audit,o/'label_geometry_audit.json')
+        report+=['','## TRAIN监督几何一致性','',json.dumps(labels['summary'],ensure_ascii=False), '这是监督侧的地图几何检查，不是像素GT或可见性准确率。未据此修改标签或删除任务。']
     report+=['','推理时延须区分policy逐步耗时和含Query初始化耗时；环境正射渲染不计入原policy计时口径。Geometry-only跳过不参与决策的SigLIP编码，已通过TRAIN GPU几何logits一致性核验。','', '训练原始日志/权重留在服务器：`'+str(r)+'`。本报告只汇总真实文件，不预测未完成结果。']
     (o/'REPORT_zh.md').write_text('\n'.join(report)+'\n');(o/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>V3 Training</title><h1>V3 TRAIN曲线；不是导航SR</h1><a href="REPORT_zh.md">中文报告</a><br><img src="training_loss.png"><img width="1200" src="loss_components.png">')
     print(json.dumps(dict(completed_epochs=len(epochs),train_finished=final is not None),indent=2))

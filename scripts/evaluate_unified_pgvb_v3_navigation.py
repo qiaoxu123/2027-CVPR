@@ -36,6 +36,7 @@ def main():
     a.output.mkdir(parents=True,exist_ok=True);(a.output/'rows').mkdir(exist_ok=True)
     builder=NativeObservationBuilder(original,a.data_root/'rgbd',a.output/'observations')
     runtime=V3NavigationPolicy(a.source_v2,a.checkpoint,a.stage1,a.output/'public_inputs',geometry_only=a.geometry_only)
+    torch.cuda.reset_peak_memory_stats()
     controller=BoundedWaypointController(horizontal_step_m=protocol.horizontal_step_m,vertical_step_m=protocol.vertical_step_m,minimum_above_ground_m=protocol.min_altitude_m,maximum_above_ground_m=protocol.max_altitude_m)
     manifest=dict(checkpoint_sha256=file_sha256(a.checkpoint),source_v2_sha256=file_sha256(a.source_v2),stage1_sha256=file_sha256(a.stage1),gate_manifest_sha256=file_sha256(a.initial_eval/'manifest.json'),protocol=asdict(protocol),geometry_only=a.geometry_only,stop_threshold=.3,arrival_guard_m=.001,execution='guarded-blend',n=2470,split='val_seen',annotations_sha256=file_sha256(ds.annotation_path),config_sha256=file_sha256(a.config),code_sha256={x:file_sha256(Path(x)) for x in ['scripts/evaluate_unified_pgvb_v3_navigation.py','graphnav/unified_pgvb_v3_runtime.py','graphnav/a3_runtime.py','graphnav/closedloop.py']})
     mp=a.output/'manifest.json'
@@ -57,6 +58,6 @@ def main():
         atomic_json(dict(index=i,episode_id=list(record.episode_id),poses=poses.tolist(),termination=termination,metrics=metrics,diagnostics=diagnostics),dest)
         if (i+1)%10==0:print(json.dumps(dict(completed=i+1,expected=len(ds))),flush=True)
     rows=[json.loads((a.output/'rows'/f'{i:05d}.json').read_text()) for i in range(len(ds))]
-    atomic_json(dict(coverage=dict(completed=len(rows),expected=2470),metrics=aggregate([r['metrics'] for r in rows]),manifest=manifest),a.output/'metrics.json')
+    atomic_json(dict(coverage=dict(completed=len(rows),expected=2470),metrics=aggregate([r['metrics'] for r in rows]),gpu_peak_allocated_GiB=torch.cuda.max_memory_allocated()/2**30,gpu_peak_reserved_GiB=torch.cuda.max_memory_reserved()/2**30,manifest=manifest),a.output/'metrics.json')
     print(json.dumps(json.loads((a.output/'metrics.json').read_text())['metrics'],indent=2))
 if __name__=='__main__':main()

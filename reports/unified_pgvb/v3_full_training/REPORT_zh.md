@@ -2,7 +2,7 @@
 
 完整TRAIN输入21878条；本阶段拟合17473条、物理目标留出4405条，物理分组重叠0。初始化V2曾使用TRAIN，内部留出不是完全未见泛化。
 
-当前已完成完整Epoch：5；训练结束：False。
+当前已完成完整Epoch：6；训练结束：False。
 
 Geometry和轻量视觉模块训练，BERT/SigLIP2冻结并读取缓存；seed42，原权重保留。四小时累计训练预算，至少三轮后连续两轮相对Loss改善<0.5%提前停止。未修改Stop=0.3、1mm守卫或Horizon。
 
@@ -15,6 +15,7 @@ Geometry和轻量视觉模块训练，BERT/SigLIP2冻结并读取缓存；seed42
 |3|17473|12.849371|768.52|0.144|
 |4|17473|12.709686|771.59|0.144|
 |5|17473|12.587823|771.58|0.144|
+|6|17473|12.479380|762.26|0.144|
 
 ![训练Loss](training_loss.png)
 ![Loss分量](loss_components.png)
@@ -22,6 +23,8 @@ Geometry和轻量视觉模块训练，BERT/SigLIP2冻结并读取缓存；seed42
 ## 全量评测状态
 
 Top-K按384×384稠密世界网格原始排序，未做空间去重，不能直接与旧784网格的Top-K作横向比较；Top1/NE使用相同20m世界距离判据。
+
+硬件：NVIDIA RTX PRO 6000 Blackwell Workstation Edition，PyTorch可见总显存94.96GiB；Torch 2.8.0+cu128 / CUDA 12.8。上表显存是PyTorch张量峰值分配量，不含CUDA上下文或首次视觉编码阶段。BERT/SigLIP2缓存版本均与原Stage1记录一致。
 
 尚无全部2470条Val-Seen定位结果；不报告子集作为正式效果。
 
@@ -32,6 +35,11 @@ Top-K按384×384稠密世界网格原始排序，未做空间去重，不能直�
 bert: 上限96 tokens，截断11/21878（0.05%）。
 siglip: 上限64 tokens，截断250/21878（1.14%）。
 这仅说明大范围文本截断不成立，不代表关系理解正确。本轮不改变token上限。
+
+## TRAIN监督几何一致性
+
+{"queries": 21878, "point_outside_contour_1mm": 1112, "point_contour_distance_gt20m": 19, "point_registration_offset_gt1m": 0, "point_registration_offset_gt20m": 0, "invalid_polygon": 17}
+这是监督侧的地图几何检查，不是像素GT或可见性准确率。未据此修改标签或删除任务。
 
 推理时延须区分policy逐步耗时和含Query初始化耗时；环境正射渲染不计入原policy计时口径。Geometry-only跳过不参与决策的SigLIP编码，已通过TRAIN GPU几何logits一致性核验。
 

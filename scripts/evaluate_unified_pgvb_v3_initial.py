@@ -58,9 +58,10 @@ def main():
         result['metrics'][branch]=dict(**{f'Top{k}_20m':sum(x[branch]['hits'][str(k)] for x in rows)/n for k in [1,5,20]},NE=float(np.mean(finite)) if finite else None,NE_valid_n=len(finite))
     wrong=[r['correction_capacity'] for r in rows if not r['error'] and r['correction_capacity'].get('region_defined') and not r['correction_capacity']['geometry_correct']]
     result['posthoc_capacity']=dict(geometry_wrong_n=len(wrong),no_correct_region_support=sum(not x['correct_region_observed'] for x in wrong),
-        supported_but_bound_insufficient=sum(x['correct_region_observed'] and not x['can_flip_under_independent_bounded_updates'] for x in wrong),
+        supported_but_bound_insufficient=sum(x['correct_region_observed'] and x['bound_insufficient'] for x in wrong),
+        capacity_tie_undetermined=sum(x['capacity_tie_undetermined'] for x in wrong),
         capacity_sufficient_but_fusion_failed=sum(x['can_flip_under_independent_bounded_updates'] and not x['fused_correct'] for x in wrong),
-        visual_region_top1_correct_but_bound_insufficient=sum(bool(x['visual_only_top1_correct_region_proxy']) and not x['can_flip_under_independent_bounded_updates'] for x in wrong),
+        visual_region_top1_correct_but_bound_insufficient=sum(bool(x['visual_only_top1_correct_region_proxy']) and x['bound_insufficient'] for x in wrong),
         note='GT posthoc spatial proxy; optimistic independent logit changes, not visual instance correctness')
     result.update(fixes=sum(not x['geometry']['hits']['1'] and x['fused']['hits']['1'] for x in rows),breaks=sum(x['geometry']['hits']['1'] and not x['fused']['hits']['1'] for x in rows),navigation_gate_passed=(not a.train_smoke and result['errors']==0 and result['metrics']['fused']['Top1_20m']>=.55),gate_threshold=.55,closed_loop_SR_not_measured=True)
     atomic_json(result,a.output/'summary.json');print(json.dumps(result,indent=2))

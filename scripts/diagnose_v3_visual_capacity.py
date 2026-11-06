@@ -21,8 +21,9 @@ def main():
     wrong=[x for x in rows if x['region_defined'] and not x['geometry_correct']]
     summary=dict(N=len(rows),geometry_wrong=len(wrong),amplitude=float(model.visual_gain.tanh().abs()),
         supported_wrong=sum(x['correct_region_observed'] for x in wrong),
-        supported_but_bound_insufficient=sum(x['correct_region_observed'] and not x['can_flip_under_independent_bounded_updates'] for x in wrong),
-        visual_region_top1_correct_but_bound_insufficient=sum(bool(x['visual_only_top1_correct_region_proxy']) and not x['can_flip_under_independent_bounded_updates'] for x in wrong),
+        supported_but_bound_insufficient=sum(x['correct_region_observed'] and x['bound_insufficient'] for x in wrong),
+        visual_region_top1_correct_but_bound_insufficient=sum(bool(x['visual_only_top1_correct_region_proxy']) and x['bound_insufficient'] for x in wrong),
+        capacity_tie_undetermined=sum(x['capacity_tie_undetermined'] for x in wrong),
         capacity_sufficient_but_fusion_failed=sum(x['can_flip_under_independent_bounded_updates'] and not x['fused_correct'] for x in wrong),
         corrected=sum(x['fused_correct'] for x in wrong),checkpoint_sha256=file_sha256(a.checkpoint),
         scope='TRAIN pilot heldout, already analysed; not independent confirmation; spatial proxy not instance accuracy')
