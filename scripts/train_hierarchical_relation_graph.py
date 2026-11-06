@@ -4,7 +4,7 @@ Example:
 python scripts/train_hierarchical_relation_graph.py \
   --train-jsonl data/unified_full_train_revised.jsonl \
   --objects /path/to/cityrefer/objects.json \
-  --original-v2 GraphNav/runs/unified_pgvb_v2_pilot_s42/full_training/last.pt \
+  --geometry-checkpoint GraphNav/runs/unified_full_relation_s42_20261105/core/last.pt \
   --output runs/hrgb_train_s42 --max-queries 2000
 
 Loads the original frozen Geometry from UnifiedPGVB; trains ONLY the new graph
@@ -157,8 +157,11 @@ def evaluate(geometry, graph, dataset, indices, bert, args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    for key in ("train-jsonl", "objects", "original-v2", "output"):
+    for key in ("train-jsonl", "objects", "output"):
         parser.add_argument("--" + key, type=Path, required=True)
+    parser.add_argument("--geometry-checkpoint", "--original-v2",
+                        dest="geometry_checkpoint", type=Path, required=True,
+                        help="Frozen original V2 or trained full-relation V1 bundle")
     parser.add_argument("--max-queries", type=int, default=2000,
                         help="TRAIN-only subset; 0 means all records")
     parser.add_argument("--epochs", type=int, default=4)
@@ -183,9 +186,11 @@ def main():
         torch.cuda.manual_seed_all(args.seed)
     torch.set_num_threads(4)
     device = torch.device(args.device)
-    original = torch.load(args.original_v2, map_location="cpu", weights_only=True)
-    if original.get("format") != "unified-pgvb-v2":
-        raise ValueError("Use the verified original UnifiedPGVB-v2 checkpoint")
+    original = torch.load(args.geometry_checkpoint, map_location="cpu", weights_only=True)
+    if original.get("format") not in (
+        "unified-pgvb-v2", "unified-pgvb-full-relation-v1"
+    ):
+        raise ValueError("Expected original-v2 or trained full-relation-v1 checkpoint")
     geoargs = original["config"]["geometry_args"]
     dataset = RegionAugmentedCandidateDataset(
         args.train_jsonl, objects_json=args.objects, max_regions=args.max_regions,
@@ -209,7 +214,7 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     expected = {
         "source_sha256": {name: file_sha256(getattr(args, name))
-                          for name in ("train_jsonl", "objects", "original_v2")},
+                          for name in ("train_jsonl", "objects", "geometry_checkpoint")},
         "fit_count": len(fit), "dev_count": len(dev),
         "seed": args.seed, "ablation": args.ablation,
         "epochs": args.epochs, "max_regions": args.max_regions,
@@ -248,7 +253,7 @@ def main():
     metrics, cases = evaluate(geometry, graph, dataset, dev, bert, args)
     metadata = dict(expected, metrics=metrics, loss_history=losses,
                     evaluation_done_on="TRAIN physical-object-heldout dev only",
-                    baseline="same frozen original Geometry checkpoint",
+                    baseline="same frozen source Geometry checkpoint",
                     validation_not_executed_by_code_author=True)
     torch.save({
         "format": "citynav-hierarchical-explicit-relation-v1",
