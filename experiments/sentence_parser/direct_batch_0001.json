@@ -1,0 +1,1889 @@
+[
+  {
+    "i": 0,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "j": [
+        "an unmarked intersection",
+        "region"
+      ],
+      "r": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "v": [
+        "trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_corner",
+        "j",
+        "at the corner of an unmarked intersection",
+        "N",
+        "high"
+      ],
+      [
+        "j",
+        "on",
+        "r",
+        "intersection on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "v",
+        "on_both_sides",
+        "t",
+        "It has trees on both sides",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "交叉口另一条道路未命名；both sides 的轴向未给出。"
+    ]
+  },
+  {
+    "i": 1,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "p": [
+        "a parking area",
+        "region"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a larger building",
+        "object"
+      ],
+      "j": [
+        "the intersection",
+        "region"
+      ],
+      "c": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "p",
+        "with a parking area",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "off",
+        "a",
+        "a parking area off Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "b",
+        "that is also behind a larger building",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "at",
+        "j",
+        "a larger building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "j",
+        "with",
+        "c",
+        "the intersection with Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "that 可回指 building 或 parking area；behind 的候选主语为 t/p，未强制唯一。交叉口另一条路可能为 Leslie Road，但文本未完全明确。"
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "p",
+          "reference": [
+            "b"
+          ],
+          "reason": "relative clause can attach to parking area"
+        }
+      ]
+    }
+  },
+  {
+    "i": 2,
+    "e": {
+      "t": [
+        "this gray roofed building",
+        "object"
+      ],
+      "r": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "g": [
+        "building",
+        "group"
+      ],
+      "v": [
+        "a tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left",
+        "r",
+        "On the left side of Leslie Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "leftmost",
+        "g",
+        "the leftmost and southmost building",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "southmost",
+        "g",
+        "southmost building",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "v",
+        "near a tree",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "比较集合未明确列举；southmost 给出地理南方但不能推导 leftmost 共享地理参考系；道路行进方向缺失。"
+    ]
+  },
+  {
+    "i": 3,
+    "e": {
+      "t": [
+        "The brick building",
+        "object"
+      ],
+      "r": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "p": [
+        "the parking area",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "r",
+        "building on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "back",
+        "p",
+        "at the back of the parking area",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "back 修饰停车区的相对位置，不是相对 Leslie Road；停车区正面未指定。"
+    ]
+  },
+  {
+    "i": 4,
+    "e": {
+      "t": [
+        "The gray building",
+        "object"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "r": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "back",
+        "p",
+        "at the back of the parking lot",
+        "I",
+        "high"
+      ],
+      [
+        "p",
+        "on",
+        "r",
+        "parking lot on Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "on Leslie Road 也可能修饰建筑；back 的参照物明确为停车场。"
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "t",
+          "reference": [
+            "r"
+          ],
+          "reason": "final road phrase can locate building rather than lot"
+        }
+      ]
+    }
+  },
+  {
+    "i": 5,
+    "e": {
+      "t": [
+        "a large building",
+        "object"
+      ],
+      "g": [
+        "several buildings",
+        "group"
+      ],
+      "b": [
+        "a two-story building",
+        "object"
+      ],
+      "r": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "v": [
+        "two trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "consists_of",
+        "g",
+        "consists of several buildings",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "on",
+        "r",
+        "On Livingstone Road is a two-story building",
+        "N",
+        "high"
+      ],
+      [
+        "v",
+        "front",
+        "b",
+        "with two trees in front",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "整体 large building 与 two-story building 可能同一对象或整体与部分；保留不同实体，不擅自合并。"
+    ]
+  },
+  {
+    "i": 6,
+    "e": {
+      "t": [
+        "A z-shaped building",
+        "object"
+      ],
+      "l": [
+        "a green lawn",
+        "region"
+      ],
+      "v": [
+        "trees",
+        "group"
+      ],
+      "p": [
+        "a car park",
+        "region"
+      ],
+      "r": [
+        "Livingstone road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "l",
+        "center",
+        "t",
+        "a green lawn at the center",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "v",
+        "and trees",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "behind",
+        "t",
+        "a car park behind and in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "p",
+        "front",
+        "t",
+        "a car park behind and in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "r",
+        "It is facing Livingstone road",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "car park 可能是跨前后两个区域的集合，不能据此宣称同一点前后矛盾。facing 指建筑朝向道路区域，不是观察者面向道路；可支持正面候选，但文本不能给出唯一数值朝向。"
+    ]
+  },
+  {
+    "i": 7,
+    "e": {
+      "t": [
+        "The large brown building",
+        "object"
+      ],
+      "l": [
+        "a green lawn",
+        "region"
+      ],
+      "r": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "s": [
+        "the Grand Square",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "encloses",
+        "l",
+        "enclosing a green lawn",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_road_from",
+        "s",
+        "across Livingstone Road from the Grand Square",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "across_road_from 的分隔道路为 r；不能简化为 left/right。"
+    ]
+  },
+  {
+    "i": 8,
+    "e": {
+      "t": [
+        "The windy angular brown building",
+        "object"
+      ],
+      "r": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "l": [
+        "green lawns",
+        "group"
+      ],
+      "c": [
+        "red cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "r",
+        "building on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "encloses",
+        "l",
+        "enclosing green lawns and red cars",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "encloses",
+        "c",
+        "enclosing green lawns and red cars",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 9,
+    "e": {
+      "t": [
+        "The large brown building",
+        "object"
+      ],
+      "l": [
+        "an enclosed green lawn area",
+        "region"
+      ],
+      "r": [
+        "Livingston Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "encloses",
+        "l",
+        "with an enclosed green lawn area",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "r",
+        "on Livingston Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "保留 Livingston 拼写，不自动纠正为 Livingstone；on Road 可修饰建筑或 lawn area。"
+    ]
+  },
+  {
+    "i": 10,
+    "e": {
+      "t": [
+        "a building with a gray roof and red walls",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the red, black and white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Willmore Road and Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "south",
+        "c",
+        "It's south of the red, black and white cars",
+        "W",
+        "high"
+      ],
+      [
+        "c",
+        "on",
+        "a",
+        "cars on Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "south 的直接参照为车辆集合，不是道路。"
+    ]
+  },
+  {
+    "i": 11,
+    "e": {
+      "t": [
+        "a collection of residential buildings",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a red car, a black car, and a white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_junction",
+        [
+          "a",
+          "b"
+        ],
+        "at the junction where Willmore Road and Leslie Road meet",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "In front of these buildings are a red car, a black car, and a white car",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "front 的主语为车辆而非建筑目标，道路只是定位约束。"
+    ]
+  },
+  {
+    "i": 12,
+    "e": {
+      "t": [
+        "a two-storey building with a gray roof and brown walls",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Leslie Road and Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 13,
+    "e": {
+      "t": [
+        "The row of gray houses",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "houses on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "b",
+        "to the right of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right 的参照为匿名灰屋，不能改为 Willmore/Leslie Road；交叉道路另一条由上下文推定。"
+    ]
+  },
+  {
+    "i": 14,
+    "e": {
+      "t": [
+        "The gray houses",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "houses on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "b",
+        "to the right of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right 参照匿名灰屋，参考视角缺失；不是 named-road 方向配对。"
+    ]
+  },
+  {
+    "i": 15,
+    "e": {
+      "t": [
+        "The long row of grayish brown houses",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Willmore Road and Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 16,
+    "e": {
+      "t": [
+        "The second long building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "s": [
+        "a black SUV",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "after",
+        "b",
+        "after Leslie Road",
+        "R",
+        "high"
+      ],
+      [
+        "w",
+        "at_beginning",
+        "t",
+        "a white car parallel parked at the beginning of the building",
+        "I",
+        "high"
+      ],
+      [
+        "s",
+        "at_end",
+        "t",
+        "a black SUV parked at the end of the building",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "second 的排列集合与起点未给出；after 给出沿道路顺序而未明确观察者行进方向；建筑 beginning/end 的有向定义未知。"
+    ]
+  },
+  {
+    "i": 17,
+    "e": {
+      "t": [
+        "A very long building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "x": [
+        "smaller building extensions",
+        "group"
+      ],
+      "b": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "on one end of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "back",
+        "t",
+        "smaller building extensions on the back of it",
+        "I",
+        "high"
+      ],
+      [
+        "x",
+        "closer_to",
+        "b",
+        "and closer to Graham Warren Way",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "closer 主语可能为 extensions 或整体建筑，比较对象省略；不能擅自认定建筑背面指向 Graham Warren Way。"
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "t",
+          "reference": [
+            "b"
+          ],
+          "reason": "coordination attachment ambiguous"
+        }
+      ]
+    }
+  },
+  {
+    "i": 18,
+    "e": {
+      "t": [
+        "The long building",
+        "object"
+      ],
+      "r": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "four black cars and one white car",
+        "group"
+      ],
+      "d": [
+        "many entrances",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "r",
+        "building on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "has many entrances",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "four black cars and one white car in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "入口存在但无独立地图位置，不能据目标或车辆真值推正面。"
+    ]
+  },
+  {
+    "i": 19,
+    "e": {
+      "t": [
+        "The long building block",
+        "object"
+      ],
+      "c": [
+        "cars",
+        "group"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "b": [
+        "Graham warren way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "cars parked in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "along",
+        "a",
+        "along Willmore road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "It has Graham warren way behind it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind 的主语是具名道路，参照物是建筑，不能倒置。道路分别位于建筑前后只约束候选正面，未给唯一地图角度。"
+    ]
+  },
+  {
+    "i": 20,
+    "e": {
+      "t": [
+        "The long building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "four black cars and a white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "four black cars and a white car in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 21,
+    "e": {
+      "t": [
+        "The row of buildings",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "two black cars, a gray car and a white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "buildings on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "opposite_side",
+        "b",
+        "on the opposite side as Leslie Road",
+        "U",
+        "medium"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "two black cars, a gray car and a white car in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "opposite side as 用法不规范，可能指 Willmore Road 另一侧相对于 Leslie Road 接入口；不改写为固定世界方向。"
+    ]
+  },
+  {
+    "i": 22,
+    "e": {
+      "t": [
+        "Two long rectangular buildings",
+        "group"
+      ],
+      "p": [
+        "a paved Square parking lot",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "p",
+        "front",
+        "t",
+        "with a paved Square parking lot in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "in",
+        "a",
+        "in Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "建筑两部分连接成 L 形；in Ashcroft Grove 可能定位建筑整体或停车场。"
+    ]
+  },
+  {
+    "i": 23,
+    "e": {
+      "t": [
+        "The L-shaped building with a brown wall",
+        "object"
+      ],
+      "p": [
+        "a car park",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "p",
+        "front",
+        "t",
+        "a car park in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "p",
+        "along",
+        "a",
+        "along Ashcroft Grove Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 24,
+    "e": {
+      "t": [
+        "The large L-shaped building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "seven cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "located on and bordering Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "borders",
+        "a",
+        "bordering Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "seven cars parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 25,
+    "e": {
+      "t": [
+        "The L shaped building",
+        "object"
+      ],
+      "c": [
+        "seven cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "seven cars parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "无具名地标。"
+    ]
+  },
+  {
+    "i": 26,
+    "e": {
+      "t": [
+        "The large brown L-shaped building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "borders_middle",
+        "a",
+        "bordering the middle of Ashcroft Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 27,
+    "e": {
+      "t": [
+        "a white car",
+        "object"
+      ],
+      "a": [
+        "Ashwood Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "c": [
+        "another blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Ashwood Grove there is a white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of the street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "b",
+        "parked behind a blue car",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "another blue car in front of it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "末尾 it 可回指白车或第一个蓝车，候选参考 t/b；蓝车自身朝向或道路行进方向未给出。保留 Ashwood 拼写。"
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "c",
+          "reference": [
+            "b"
+          ],
+          "reason": "it may denote the first blue car"
+        }
+      ]
+    }
+  },
+  {
+    "i": 28,
+    "e": {
+      "t": [
+        "A rectangular building with a white wall and a brown roof",
+        "object"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "a": [
+        "Graham warren way road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "right",
+        "t",
+        "a white car parked on it's right",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "along",
+        "a",
+        "along Graham warren way road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right 参照建筑，不是道路。"
+    ]
+  },
+  {
+    "i": 29,
+    "e": {
+      "t": [
+        "A brown-roofed building with a white wall",
+        "object"
+      ],
+      "a": [
+        "Ashcroft grove",
+        "named_landmark"
+      ],
+      "b": [
+        "Willmore road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "a",
+          "b"
+        ],
+        "in between Ashcroft grove and Willmore road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 30,
+    "e": {
+      "t": [
+        "The large white building with the red roof",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Graham Warren Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 31,
+    "e": {
+      "t": [
+        "The large reddish gray and white building",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Graham Warren Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 32,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ],
+      "c": [
+        "a white car and black car",
+        "group"
+      ],
+      "s": [
+        "two sheds",
+        "group"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "left",
+        "t",
+        "a driveway to the left of it",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a white car and black car parked in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "s",
+        "in",
+        "y",
+        "two sheds in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "y",
+        "back",
+        "t",
+        "It has two sheds in the backyard",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "backyard 的 back 为词汇语义推断，非独立方向词；left 与 front 不假定共享视角。"
+    ]
+  },
+  {
+    "i": 33,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "j": [
+        "the intersection",
+        "region"
+      ],
+      "c": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_one_house",
+        "b",
+        "1 house to the right of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "facing",
+        "j",
+        "the gray house facing the intersection",
+        "F",
+        "high"
+      ],
+      [
+        "j",
+        "with",
+        "c",
+        "the intersection with Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "两个 gray house 为不同实体、不同文本出现位置；b 面向交叉口不自动提供观察者左右定义。"
+    ]
+  },
+  {
+    "i": 34,
+    "e": {
+      "t": [
+        "The second house",
+        "object"
+      ],
+      "p": [
+        "passage ways",
+        "group"
+      ],
+      "c": [
+        "a white and black car",
+        "group"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "p",
+        "at_sides",
+        "t",
+        "passage ways on it's sides",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a white and black car in front it",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "along",
+        "a",
+        "along Willmore road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "second 的顺序起点未知；a white and black car 可能指两车或双色单车，保留原始组短语。"
+    ]
+  },
+  {
+    "i": 35,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the dark gray house",
+        "object"
+      ],
+      "c": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "b",
+        "to the right of the dark gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "facing",
+        "c",
+        "the dark gray house facing Leslie Road",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "facing 的主语是参照屋 b，不是观察者；能构造 intrinsic 候选但不能认定 right 使用该正面。"
+    ]
+  },
+  {
+    "i": 36,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "p": [
+        "a handicap parking space",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "b",
+        "facing the Leslie Road",
+        "F",
+        "high"
+      ],
+      [
+        "b",
+        "across_from",
+        "t",
+        "the Leslie Road that is across from it",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "on",
+        "a",
+        "a handicap parking space on the road",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "front",
+        "t",
+        "in front of the building",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "on the road 由上下文较可能指 Willmore Road，但不能排除 Leslie Road；建筑面对道路不等于观察者面向道路。"
+    ]
+  },
+  {
+    "i": 37,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "p": [
+        "a handicap parking space",
+        "region"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "front",
+        "t",
+        "a handicap parking space in front",
+        "I",
+        "high"
+      ],
+      [
+        "b",
+        "across_from",
+        "t",
+        "Leslie Road across from it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 38,
+    "e": {
+      "t": [
+        "a residential building with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing_down",
+        "b",
+        "It is directly facing down Leslie Road",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "down 指沿道路延伸方向，不是地理南方；道路主轴符号需要建筑与道路拓扑支持，本文本阶段不输出数值朝向。"
+    ]
+  },
+  {
+    "i": 39,
+    "e": {
+      "t": [
+        "The brownish gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "b",
+        "directly across form Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "form 保留原文拼写，按上下文解析为 from；不据此输出地理方位。"
+    ]
+  }
+]

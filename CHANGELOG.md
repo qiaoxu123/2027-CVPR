@@ -1,5 +1,18 @@
 # Changelog
 
+## [sentence-parser-cache-v1-in-progress] - 2026-11-06
+### Features
+- Export all CityNav split texts with exact-text deduplication and per-episode lookup aliases.
+- Start current-assistant-authored offline semantic graphs; retain relation scope, role alternatives, view evidence and unknown frames.
+- Add validated JSONL serialization and lookup-only SQLite cache with explicit missing-record errors.
+### Design Rationale
+- Follow the requested direct model parsing workflow without CLI/API parsing or heuristic substitute labels.
+- Keep text parsing separate from target GT, geometric binding, and v1–v5 scientific evaluation.
+### Notes & Caveats
+- Partial cache: 120 of 31,755 unique instructions directly parsed; no full-dataset performance claim.
+- All split texts are authorized for parsing; no target coordinates, future trajectories or navigation model training used.
+- Requested model/effort recorded as requested configuration, without claiming independent runtime attestation.
+
 ## [direction-frames-v5] - 2026-11-06
 ### Features
 - Pin the complete v4 experiment and reproduce its 44 directed-road cases; audit Abbey conflict and classify all 22 ambiguous contours without GT-based sign changes.

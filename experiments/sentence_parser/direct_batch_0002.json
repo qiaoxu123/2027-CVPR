@@ -1,0 +1,1872 @@
+[
+  {
+    "i": 186,
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "c": [
+        "the left column of cars",
+        "group"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "y": [
+        "the backyards of houses",
+        "region"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_from_top",
+        "c",
+        "parked 1st from the top in the left column of cars",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "left_column_in",
+        "p",
+        "the left column of cars in the parking lot",
+        "U",
+        "high"
+      ],
+      [
+        "p",
+        "behind",
+        "y",
+        "the parking lot behind the backyards of houses",
+        "I",
+        "high"
+      ],
+      [
+        "y",
+        "on",
+        "a",
+        "backyards of houses on Burton Wood Drive",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "left_in_view",
+        "p",
+        "when viewed aerially with Livingstone Road to the left",
+        "U",
+        "high"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "candidate_descriptions": [
+          "aerial view constrained to place Livingstone Road on image left; map geometry not yet supplied"
+        ],
+        "view_evidence": "when viewed aerially with Livingstone Road to the left"
+      },
+      "1": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Livingstone Road to the left"
+      },
+      "4": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Livingstone Road to the left"
+      }
+    },
+    "u": [
+      "explicit aerial view 约束不等于已知相机 yaw；to the left 的相对图像中心未明确，p 只是上下文区域；behind 是否共享该观察系不强制。"
+    ]
+  },
+  {
+    "i": 2038,
+    "e": {
+      "t": [
+        "The gray building",
+        "object"
+      ],
+      "a": [
+        "Palmers Walk",
+        "named_landmark"
+      ],
+      "b": [
+        "the Bradmore Court building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Palmers Walk",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "b",
+        "across from the Bradmore Court building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 3106,
+    "e": {
+      "t": [
+        "The parking lot",
+        "region"
+      ],
+      "a": [
+        "the Cambridge County Court",
+        "named_landmark"
+      ],
+      "b": [
+        "the Garden Court buildings",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "a",
+          "b"
+        ],
+        "between the Cambridge County Court and the Garden Court buildings",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5209,
+    "e": {
+      "t": [
+        "The large blue and white building",
+        "object"
+      ],
+      "p": [
+        "the huge parking lot",
+        "region"
+      ],
+      "a": [
+        "The Gym",
+        "named_landmark"
+      ],
+      "b": [
+        "Nike Factory Store",
+        "named_landmark"
+      ],
+      "c": [
+        "The Food Warehouse",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "surrounds",
+        "p",
+        "goes around the huge parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "contains_businesses",
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        "with the The Gym, Nike Factory Store and The Food Warehouse",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "with businesses 可修饰建筑整体或其环绕的停车场周边；不将店名自动合并为目标实体。"
+    ]
+  },
+  {
+    "i": 5210,
+    "e": {
+      "t": [
+        "A brown house with a gray roof",
+        "object"
+      ],
+      "c": [
+        "two chimneys",
+        "group"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "v": [
+        "a white van",
+        "object"
+      ],
+      "p": [
+        "a dirt plot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "on",
+        "t",
+        "with two chimneys on it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at",
+        "m",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "v",
+        "facing a white van",
+        "F",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "p",
+        "the house being on a dirt plot",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "无具名地标；建筑 facing 不是观察者 facing；地图边界未给方向。"
+    ]
+  },
+  {
+    "i": 5211,
+    "e": {
+      "t": [
+        "A beige and brown house with a dark gray roof",
+        "object"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "a": [
+        "Grosvenor Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "cut_off_by",
+        "m",
+        "cut off by the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a white car in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off Grosvenor Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "off Grosvenor Road 可能描述房屋整体或前方停车处。"
+    ]
+  },
+  {
+    "i": 5212,
+    "e": {
+      "t": [
+        "A big building with grey roof",
+        "object"
+      ],
+      "a": [
+        "the St Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "c": [
+        "A blue car and a grey car",
+        "group"
+      ],
+      "r": [
+        "The railway track",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "a",
+        "situated behind the St Teresa of the Child Jesus Catholic Church",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "near",
+        "t",
+        "A blue car and a grey car is parked close to the building",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "behind",
+        "t",
+        "The railway track is behind the building",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "两条 behind 分别参照教堂与目标建筑；不能从串联关系假定同一正前方。"
+    ]
+  },
+  {
+    "i": 5213,
+    "e": {
+      "t": [
+        "a building with a gray roof",
+        "object"
+      ],
+      "a": [
+        "St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "c": [
+        "a couple of cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "a",
+        "located behind St. Teresa of the Child Jesus Catholic Church",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "near",
+        "t",
+        "a couple of cars parked nearby this building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "One is blue and one is white 是车辆集合的属性，不用于确定 target/reference。"
+    ]
+  },
+  {
+    "i": 5214,
+    "e": {
+      "t": [
+        "The large building with a gray roof",
+        "object"
+      ],
+      "s": [
+        "the short street",
+        "region"
+      ],
+      "a": [
+        "the St Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on the short street",
+        "N",
+        "high"
+      ],
+      [
+        "s",
+        "behind",
+        "a",
+        "the short street behind the St Teresa of the Child Jesus Catholic Church",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [
+      "behind 主语优先为 short street，建筑只是位于该街；也存在建筑 behind 教堂的附着解释，不强制直接目标关系。looks like a warehouse 主语可能为建筑或教堂。"
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "t",
+          "reference": [
+            "a"
+          ],
+          "reason": "behind may attach to building rather than street"
+        }
+      ]
+    }
+  },
+  {
+    "i": 5215,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "r": [
+        "the train tracks",
+        "region"
+      ],
+      "s": [
+        "road",
+        "region"
+      ],
+      "g": [
+        "the gym",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_barriers_from",
+        "g",
+        "directly across the train tracks and road from the gym",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "分隔物为 r 与 s；the gym 未提供名字，不擅自绑定 The Gym 商业地标。"
+    ]
+  },
+  {
+    "i": 5216,
+    "e": {
+      "t": [
+        "The large gray rectangular building",
+        "object"
+      ],
+      "a": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "a",
+        "behind the St. Teresa of the Child Jesus Catholic Church",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "未提供教堂正面或观察位置。"
+    ]
+  },
+  {
+    "i": 5217,
+    "e": {
+      "t": [
+        "The large gray rectangular building",
+        "object"
+      ],
+      "a": [
+        "the One Stop building",
+        "named_landmark"
+      ],
+      "b": [
+        "the Gym",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        [
+          "a",
+          "b"
+        ],
+        "across from the One Stop building and the Gym",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Gym 大写作为名称候选，尚无地图绑定。"
+    ]
+  },
+  {
+    "i": 5218,
+    "e": {
+      "t": [
+        "The brick building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "d": [
+        "a gray garage door",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "has a gray roof and a gray garage door",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "道路哪个端点未明确，不能输出有向参考系。"
+    ]
+  },
+  {
+    "i": 5219,
+    "e": {
+      "t": [
+        "The dark gray building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "h": [
+        "the row of gray houses",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "h",
+        "across from the row of gray houses",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5220,
+    "e": {
+      "t": [
+        "Two buildings",
+        "group"
+      ],
+      "x": [
+        "a one floor Brown building with a gray roof",
+        "object"
+      ],
+      "y": [
+        "a taller brown and white building with a gray roof and a skylight",
+        "object"
+      ],
+      "m": [
+        "the corner of the map",
+        "region"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "includes",
+        "x",
+        "Two buildings, a one floor Brown building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "includes",
+        "y",
+        "next to a taller brown and white building",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "next_to",
+        "y",
+        "next to a taller brown and white building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at",
+        "m",
+        "on the corner of the map",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "末尾定位短语可能仅修饰 taller building 或整体，两种作用域保留。"
+    ]
+  },
+  {
+    "i": 5221,
+    "e": {
+      "t": [
+        "two brown buildings of varying heights",
+        "group"
+      ],
+      "m": [
+        "the corner of the map",
+        "region"
+      ],
+      "p": [
+        "a lot",
+        "region"
+      ],
+      "d": [
+        "three white and red painted dividers",
+        "group"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "m",
+        "on the corner of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "p",
+        "next to a lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "has",
+        "d",
+        "a lot with three white and red painted dividers",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "off",
+        "a",
+        "off Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "off Leslie Road 可修饰 lot 或建筑整体。"
+    ]
+  },
+  {
+    "i": 5222,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "the Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a black and blue car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on the Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "near",
+        "t",
+        "a black and blue car parked closed to it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "by itself 为建筑孤立属性；car 数量/双色歧义，保留集合短语。"
+    ]
+  },
+  {
+    "i": 5223,
+    "e": {
+      "t": [
+        "the first building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left",
+        "a",
+        "this is the first building off to your left",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "first_along",
+        "a",
+        "the first building",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "road",
+        "status": "unknown",
+        "origin": [
+          "a"
+        ],
+        "forward_to": null,
+        "source_road": "b",
+        "travel_road": "a",
+        "turn": "right",
+        "semantic_roles_unique": true,
+        "view_evidence": "take a right onto Leslie Road coming from Celine Grove",
+        "candidate_descriptions": [
+          "enter Leslie Road from Celine Grove after a right turn; direction requires independent road topology"
+        ]
+      },
+      "1": {
+        "type": "road",
+        "status": "unknown",
+        "source_road": "b",
+        "travel_road": "a",
+        "turn": "right",
+        "semantic_roles_unique": true,
+        "view_evidence": "take a right onto Leslie Road coming from Celine Grove",
+        "candidate_descriptions": [
+          "first building after entering Leslie Road from Celine Grove with a right turn"
+        ]
+      }
+    },
+    "u": [
+      "take a right 为动作，不是建筑 right 关系；建筑 left 参照进入后的 Leslie Road 有向行进场。本文本阶段已确定角色，但未读取道路拓扑，不宣称唯一数值方向。"
+    ]
+  },
+  {
+    "i": 5224,
+    "e": {
+      "t": [
+        "The white building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "with a driveway that has yellow crisscross painted on it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5225,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the only red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "c",
+        "across the street from the only red car",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "on",
+        "a",
+        "red car on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5226,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "g": [
+        "any other buildings",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "building on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "not_adjacent",
+        "g",
+        "not adjacent to any other buildings",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "否定关系保留，不转为 adjacent 正例。"
+    ]
+  },
+  {
+    "i": 5227,
+    "e": {
+      "t": [
+        "The corner of a white building",
+        "region"
+      ],
+      "b": [
+        "a white building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "r": [
+        "a road that has yellow paint on it",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "part_of",
+        "b",
+        "The corner of a white building",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "a white building on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_corner",
+        [
+          "a",
+          "r"
+        ],
+        "on a corner with a road that has yellow paint on it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "目标语言主语是建筑角部，不自动提升为整栋建筑 GT。"
+    ]
+  },
+  {
+    "i": 5228,
+    "e": {
+      "t": [
+        "The large building",
+        "object"
+      ],
+      "a": [
+        "Wellington Rd",
+        "named_landmark"
+      ],
+      "b": [
+        "Grosvenor Rd",
+        "named_landmark"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ],
+      "x": [
+        "a white box",
+        "object"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ],
+      "c": [
+        "the Full Circle Events & Exhibition Ltd building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        [
+          "a",
+          "b"
+        ],
+        "on Wellington Rd / Grosvenor Rd",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "beside",
+        "t",
+        "a parking lot beside it",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "in",
+        "y",
+        "a white box in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "front",
+        "c",
+        "in front of the Full Circle Events & Exhibition Ltd building",
+        "I",
+        "low"
+      ]
+    ],
+    "u": [
+      "front 主语可为 white box、backyard 或整体建筑，不强制目标直接 front。斜线道路可能为别名/相接路段，并不保证交叉口。"
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "y",
+          "reference": [
+            "c"
+          ],
+          "reason": "front phrase may locate backyard"
+        },
+        {
+          "subject": "t",
+          "reference": [
+            "c"
+          ],
+          "reason": "front phrase may locate whole building"
+        }
+      ]
+    }
+  },
+  {
+    "i": 5229,
+    "e": {
+      "t": [
+        "a large building with multiple sections",
+        "object"
+      ],
+      "a": [
+        "Wellington Rd",
+        "named_landmark"
+      ],
+      "b": [
+        "Grosvenor Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the Full Circle Events & Exhibitions Ltd building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        [
+          "a",
+          "b"
+        ],
+        "on Wellington Rd/ Grosvenor Road",
+        "N",
+        "medium"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "behind it is the Full Circle Events & Exhibitions Ltd building",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "具名建筑 c 为 behind 的主语，目标 t 是参照物；不反转关系。斜线道路别名/多路段含义待地图确认。"
+    ]
+  },
+  {
+    "i": 5230,
+    "e": {
+      "t": [
+        "a building",
+        "object"
+      ],
+      "a": [
+        "Wellington Rd",
+        "named_landmark"
+      ],
+      "b": [
+        "Grosvenor Rd",
+        "named_landmark"
+      ],
+      "p": [
+        "a parking space",
+        "region"
+      ],
+      "c": [
+        "about a dozen cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        [
+          "a",
+          "b"
+        ],
+        "located on Wellington Rd/ Grosvenor Rd",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "near",
+        "t",
+        "Near it is a parking space",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "p",
+        "about a dozen cars in it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "parking space 在此可能为停车区域而非单车位；斜线道路语义未唯一化。"
+    ],
+    "alternatives": {
+      "0": [
+        {
+          "subject": "t",
+          "reference": [
+            "a"
+          ],
+          "reason": "slash may indicate alternate road names"
+        },
+        {
+          "subject": "t",
+          "reference": [
+            "b"
+          ],
+          "reason": "slash may indicate alternate road names"
+        }
+      ]
+    }
+  },
+  {
+    "i": 5231,
+    "e": {
+      "t": [
+        "The large gray and reddish gray building",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Grosvenor Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Wellington Road and Grosvenor Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5232,
+    "e": {
+      "t": [
+        "Brown and white building with a light brown roof",
+        "object"
+      ],
+      "y": [
+        "its front yard",
+        "region"
+      ],
+      "p": [
+        "a brown and light brown diamond pattern",
+        "region"
+      ],
+      "c": [
+        "the St Teresa of the Child Jesus Catholic church building",
+        "named_landmark"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "y",
+        "its front yard",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "in",
+        "y",
+        "a brown and light brown diamond pattern in its front yard",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "c",
+        "next to the St Teresa of the Child Jesus Catholic church building",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "off",
+        "a",
+        "church building off Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front yard 是区域名的内部语义，不独立构造目标 front 关系；off Wellington Road 也可能定位整体场景。"
+    ]
+  },
+  {
+    "i": 5233,
+    "e": {
+      "t": [
+        "this smaller, square building",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "g": [
+        "a string of houses with red roofs",
+        "group"
+      ],
+      "c": [
+        "St Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "perpendicular_to",
+        "a",
+        "Perpendicular to Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_end",
+        "g",
+        "at the end of a string of houses with red roofs",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "adjacent",
+        "c",
+        "adjacent to St Teresa of the Child Jesus Catholic Church",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "perpendicular 给出无向主轴约束，不给建筑正面。"
+    ]
+  },
+  {
+    "i": 5234,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "c",
+        "to the right of the St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "未显式给观察视角或教堂正面，不默认 world 或 road。"
+    ]
+  },
+  {
+    "i": 5235,
+    "e": {
+      "t": [
+        "a residential building with a brown roof",
+        "object"
+      ],
+      "c": [
+        "St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "c",
+        "next to St. Teresa of the Child Jesus Catholic Church",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5236,
+    "e": {
+      "t": [
+        "The first building",
+        "object"
+      ],
+      "c": [
+        "the St. Teresa of the child Jesus Catholic Church",
+        "named_landmark"
+      ],
+      "a": [
+        "Wellington road",
+        "named_landmark"
+      ],
+      "b": [
+        "Grosvenor road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_from",
+        "c",
+        "The first building from the St. Teresa of the child Jesus Catholic Church",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        [
+          "a",
+          "b"
+        ],
+        "along Wellington road/Grosvenor road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "教堂提供顺序起点但未给沿道路哪个方向；不能按目标选择两种符号。"
+    ]
+  },
+  {
+    "i": 5237,
+    "e": {
+      "t": [
+        "The large gray, white, and reddish gray building",
+        "object"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "off",
+        "a",
+        "off of Celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5238,
+    "e": {
+      "t": [
+        "A building with white roof",
+        "object"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "along",
+        "a",
+        "along the road named Celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5239,
+    "e": {
+      "t": [
+        "The large blue, red, white, and gray building",
+        "object"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "a",
+        "at Celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5240,
+    "e": {
+      "t": [
+        "The whole section of buildings",
+        "group"
+      ],
+      "o": [
+        "the bright orange buildings",
+        "group"
+      ],
+      "a": [
+        "Wellington street",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie",
+        "named_landmark"
+      ],
+      "c": [
+        "Willmore",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "includes",
+        "o",
+        "including the bright orange buildings",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "beside",
+        "o",
+        "beside the and including the bright orange buildings",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Wellington street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "c"
+        ],
+        "between Leslie and Willmore",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "原文 beside the and 有语病；Leslie/Willmore 仅名称缩写，地图绑定前不自动补 Road。"
+    ]
+  },
+  {
+    "i": 5241,
+    "e": {
+      "t": [
+        "The row of gray houses",
+        "group"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "houses on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "bounded_by",
+        [
+          "b",
+          "c"
+        ],
+        "bordered by Leslie Road and Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5242,
+    "e": {
+      "t": [
+        "The row of gray houses",
+        "group"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "houses on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "c"
+        ],
+        "between Leslie Road and Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5243,
+    "e": {
+      "t": [
+        "The gray houses",
+        "group"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "houses on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "c"
+        ],
+        "between Willmore Road and Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5244,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_street_from",
+        "a",
+        "across the street from Celine Grove",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "b",
+        "on Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "道路本身作为 across from 的参照，通常为接入口，但不直接推断进入方向。"
+    ]
+  },
+  {
+    "i": 5245,
+    "e": {
+      "t": [
+        "The fourth brown building",
+        "object"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "j": [
+        "intersection",
+        "region"
+      ],
+      "c": [
+        "the blue circle",
+        "region"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "j",
+        "intersection_of",
+        [
+          "a",
+          "b"
+        ],
+        "Celine Grove and Wellington Road intersection",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "fourth_from",
+        "j",
+        "The fourth brown building from Celine Grove and Wellington Road intersection",
+        "R",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "y",
+        "the blue circle in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "y",
+        "The building with the blue circle in the backyard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "第四栋的行进道路和方向未明确；不能从目标反选道路分支。"
+    ]
+  }
+]
