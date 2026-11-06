@@ -99,9 +99,29 @@ def _cluster_bootstrap(rows,seed=42,iterations=2000):
 
 def summarize(baseline,arms,expected=2470):
     base_manifest,base=read_run(baseline,expected)
+    # All checkpoints, full public catalog and navigation controls must be
+    # identical. Evaluator-code hashes are allowed to differ only because
+    # the opt-in intervention was added; affected inputs are audited below.
+    canonical=Path(baseline)/"full_relation_manifest.json"
+    original_sources=json.loads(canonical.read_text()) if canonical.exists() else None
+    if expected==2470 and original_sources is None:
+        raise ValueError("Real paired evaluation requires baseline source SHA manifest")
+    fixed_keys=("stage1","original_v2","trained_relation","public_catalog",
+                "config","data_root","split","relation_control",
+                "relation_visual_control","geometry_source","instruction_mode")
     all_rows={}
     for mode,folder in arms.items():
         manifest,pred=read_run(folder,expected)
+        source_file=Path(folder)/"full_relation_manifest.json"
+        intervention_sources=json.loads(source_file.read_text()) if source_file.exists() else None
+        if expected==2470 and intervention_sources is None:
+            raise ValueError(f"{mode}: missing repaired source SHA manifest")
+        if original_sources and intervention_sources:
+            for key in fixed_keys:
+                if original_sources.get(key)!=intervention_sources.get(key):
+                    raise ValueError(f"{mode}: source/control changed for {key}")
+            if intervention_sources.get("public_binding_repair")!=mode:
+                raise ValueError(f"{mode}: missing binding repair source lock")
         if manifest!=base_manifest:
             raise ValueError(f"{mode}: episode/start-pose manifest changed")
         sample=[];seen_modes=Counter()
@@ -167,6 +187,11 @@ def summarize(baseline,arms,expected=2470):
                  "If their trajectories change, audit deterministic rollout before "
                  "claiming causal effects.",
         )
+        if expected==2470 and result["unaffected_trajectory_changed"]>0:
+            raise ValueError(
+                f"{mode}: trajectories changed on unchanged Polygon inputs; "
+                "audit deterministic runtime before claiming an effect"
+            )
         all_rows[mode]=sample
         yield mode,result,sample
 
