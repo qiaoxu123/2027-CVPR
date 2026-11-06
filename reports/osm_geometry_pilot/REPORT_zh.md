@@ -37,3 +37,5 @@ CityRefer官方README链接 https://github.com/ATR-DBI/CityRefer/blob/main/READM
 ## 下一步最小可执行入口
 
 先恢复官方CityRefer包访问，检索原始控制点/变换；无参数则对公开建筑角点与道路交点建立跨图对应，分别在Birmingham、Cambridge拟合并保留独立控制点。随后核验HETT清单，才能在已通过场景进行A/B/C小规模公平实验。局部网页地址服务器本机 `http://127.0.0.1:8792/`；公开访问、候选RGB-D ROI及OSM图层尚未完整接入。本阶段未训练、未执行导航或Val/Test推理。
+
+测试过程补记：首次测试在收集阶段因环境缺少pyproj失败；已改用现有Rasterio/GDAL坐标转换，重新运行3/3通过（1.02s）。未安装新依赖。

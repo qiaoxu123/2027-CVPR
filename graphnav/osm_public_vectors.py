@@ -1,7 +1,7 @@
 """Experimental public OSM vector preprocessing; never called by V2/V3 runtime."""
 import hashlib,json
 import numpy as np
-from pyproj import Transformer
+from rasterio.warp import transform as crs_transform
 from shapely.geometry import shape,mapping
 from shapely.ops import transform
 
@@ -15,9 +15,11 @@ def convert_public_osm(geojson,registration):
     mat=np.asarray(registration['matrix'],float)
     if mat.shape!=(2,3) or not np.isfinite(mat).all() or abs(np.linalg.det(mat[:,:2]))<1e-8:raise ValueError('Invalid transform')
     inverse=np.linalg.inv(mat[:,:2]);offset=mat[:,2]
-    projector=Transformer.from_crs('EPSG:4326',registration['projected_crs'],always_xy=True)
     def to_xy(x,y,z=None):
-        e,n=projector.transform(x,y);xy=inverse@(np.array([e,n])-offset[:,None] if np.ndim(e) else np.array([e,n])-offset)
+        scalar=np.ndim(x)==0
+        e,n=crs_transform('EPSG:4326',registration['projected_crs'],[x] if scalar else x,[y] if scalar else y)
+        if scalar:e,n=e[0],n[0]
+        xy=inverse@(np.array([e,n])-offset[:,None] if np.ndim(e) else np.array([e,n])-offset)
         return xy[0],xy[1]
     out=[]
     for f in geojson.get('features',[]):
