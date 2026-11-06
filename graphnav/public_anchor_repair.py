@@ -40,7 +40,10 @@ def conservative_repair_contour(values, *, max_area_change=0.03,
     A self-intersecting boundary that becomes MultiPolygon is not safely
     converted into one fake outline. No target position is used.
     """
-    raw = np.asarray(values, dtype=np.float64)
+    try:
+        raw = np.asarray(values, dtype=np.float64)
+    except (TypeError,ValueError):
+        return None
     if (raw.ndim != 2 or raw.shape[1] != 2 or len(raw) < 3
             or not np.isfinite(raw).all()):
         return None
@@ -75,7 +78,10 @@ def _public_catalog_with_safe_repairs(map_objects):
     edited=dict(map_objects)
     audited=[]
     for oid,item in map_objects.items():
-        polygon=np.asarray(item.get("contour",[]),dtype=np.float64)
+        try:
+            polygon=np.asarray(item.get("contour",[]),dtype=np.float64)
+        except (TypeError,ValueError):
+            polygon=np.empty((0,2),dtype=np.float64)
         legal=(polygon.ndim==2 and polygon.shape[1:]==(2,)
                and len(polygon)>=3 and np.isfinite(polygon).all())
         if legal:
