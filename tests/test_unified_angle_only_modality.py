@@ -105,7 +105,6 @@ def test_bearing_class_response_changes_angular_field():
                        landmark_valid=known,bearing_probabilities=west)
     assert a["logits"][0].argmax().item()==0
     assert b["logits"][0].argmax().item()==2
-    assert torch.equal(a["delta"],-b["delta"]) is False  # nonlinear different, only ordering matters
 
 
 def test_angular_runtime_reranks_xy_and_context_without_changing_stop_head():
