@@ -55,7 +55,7 @@ def main():
  for r in allrows:
   k=len(r['landmarks']);counts['with_public_anchor']=counts.get('with_public_anchor',0)+int(k>0);counts['no_public_anchor']=counts.get('no_public_anchor',0)+int(k==0);counts['anchor_queries']=counts.get('anchor_queries',0)+k
  # GT labels below are post-hoc ambiguity audit only; not a model input.
- conflict_rows=0;duplicate_rows=0;conflict_groups=0
+ conflict_rows=0;duplicate_rows=0;conflict_groups=0;hist_all=np.zeros(8,dtype=int);hist_birmingham=np.zeros(8,dtype=int)
  for row in allrows:
   groups=defaultdict(list);scale=np.asarray(row['physical_map_sizes']);target=np.asarray(row['target_xy'])
   for lm in row['landmarks']:
@@ -63,8 +63,10 @@ def main():
    if np.linalg.norm(v)<=1:continue
    k=int(np.round((np.arctan2(v[1],v[0])%(2*np.pi))*8/(2*np.pi)))%8
    groups[f"{lm.get('object_type','')} {lm['name']}"] .append(k)
+   hist_all[k]+=1
+   if row['map_name'].startswith('birmingham_'):hist_birmingham[k]+=1
   duplicate_rows+=any(len(x)>1 for x in groups.values())
   conflicts=sum(len(x)>1 and len(set(x))>1 for x in groups.values());conflict_rows+=conflicts>0;conflict_groups+=conflicts
- counts.update(queries_with_identical_name_inputs_multiple_anchors=int(duplicate_rows),queries_with_conflicting_GT_angle_bins_for_identical_head_inputs=int(conflict_rows),conflicting_name_groups=int(conflict_groups),conflict_audit_GT_offline_only=True)
+ counts.update(queries_with_identical_name_inputs_multiple_anchors=int(duplicate_rows),queries_with_conflicting_GT_angle_bins_for_identical_head_inputs=int(conflict_rows),conflicting_name_groups=int(conflict_groups),conflict_audit_GT_offline_only=True,TRAIN_angle_label_histogram=hist_all.tolist(),Birmingham_angle_label_histogram=hist_birmingham.tolist(),Birmingham_majority_class_baseline=float(hist_birmingham.max()/hist_birmingham.sum()))
  atomic_json(counts,a.output/'data_coverage.json')
 if __name__=='__main__':main()

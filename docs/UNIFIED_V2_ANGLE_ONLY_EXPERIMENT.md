@@ -41,7 +41,7 @@ P_match = sum_k P_pred(k) * softmax_k(4*cos(theta_candidate - theta_k))
 目标函数=Goal CE + 0.5 Direction CE + 0.05 KL-to-baseline。
 GT 仅在 forward 之后用于方向标签和 Goal 监督。
 Birmingham 是完整 TRAIN 内的拟合诊断，不是独立泛化评测。
-只在 Predicted 方向显示真实定位贡献时进入正式闭环。
+按本轮用户要求，在无GT泄漏及推理接口验收后执行完整闭环，不按TRAIN正负结果筛选是否报告；负结果同样保留。
 
 ## 本地命令
 
