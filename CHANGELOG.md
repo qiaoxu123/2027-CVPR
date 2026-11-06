@@ -116,3 +116,11 @@
 - Separate cosine, forward-ray distance and fixed-weight joint scores; retain every original public Polygon binding and rebuild candidate context consistently.
 ### Notes & Caveats
 - GT bearings are diagnostic-only. Multiple anchors may triangulate GT; results cannot establish deployable instance recognition or geographic direction calibration.
+
+## [Offline neighborhood bearing GPU validation] - 2026-11-06
+### Features
+- Execute matched text/name and public-Polygon-neighborhood direction-head training with map-disjoint TRAIN holdout, full-text BERT caching, optimizer/RNG checkpoints and language-shuffle diagnosis.
+### Design Rationale
+- Keep the existing head architecture; repair execution and isolation before measuring geometric information gains.
+### Notes & Caveats
+- No RGB, reference-frame rules or navigation. The small anchor-micro gain is not statistically reliable and query-macro accuracy worsens; preserve the negative result.

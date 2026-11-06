@@ -74,7 +74,7 @@ def test_direction_head_geometry_ablation_and_gradients():
     torch.manual_seed(42)
     head = NeighborhoodBearingHead(text_dim=8, hidden=16, bins=8)
     x = dict(tokens=torch.randn(2, 5, 8),
-             token_mask=torch.tensor([[True]*5, [True]*4+[False]),
+             token_mask=torch.tensor([[True]*5, [True]*4+[False]]),
              node_emb=torch.randn(2, 2, 8),
              landmark_valid=torch.tensor([[True, True], [True, False]]),
              anchor_geometry=torch.rand(2, 2, 5),
@@ -103,7 +103,7 @@ def test_equal_query_weight_and_no_label():
     label = torch.tensor([[0, 1, 2], [3, -100, -100]])
     loss, n, nq = angular_loss(logits, label)
     assert n == 4 and nq == 2
-    assert abs(float(loss) - np.log(8)) < 1e-6
+    assert abs(float(loss.detach()) - np.log(8)) < 1e-6
     loss.backward()
     assert logits.grad is not None
     zero, count, questions = angular_loss(logits, torch.full_like(label, -100))
@@ -126,3 +126,50 @@ def test_collate_preserves_reference_and_label_alignment():
     assert batch["neighbor_geometry"].shape == (2, 2, 3, 8)
     assert batch["labels"].tolist() == [[0, -100], [0, -100]]
     assert batch["n_refs"].tolist() == [1, 1]
+
+
+def test_invalid_self_intersection_and_near_anchor_supervision():
+    c=catalog();c['map_0']['bad']={'name':'bad','contour':[[0,0],[3,3],[0,2],[2,0]],'object_type':'Building'}
+    builder=PublicPolygonNeighborhood(c,max_refs=2)
+    assert not builder.for_references('map_0',[{'id':'bad'}])['landmark_valid'].any()
+    d=BearingExamples([record((.501,.5))],c,max_refs=2)
+    assert d[0]['labels'][0]==0  # no arbitrary1m GT-dependent cutoff
+
+
+def test_split_purges_repeated_text_and_physical_target():
+    from scripts.train_polygon_neighborhood_bearing import isolated_split
+    records=[dict(map_name='m'+str(i),instruction='unique '+str(i),episode_id=f'm{i}:a:0',landmarks=[]) for i in range(10)]
+    c={r['map_name']:{'a':{'contour':square(i*100,0)}} for i,r in enumerate(records)}
+    _,held,_=isolated_split(records,c)
+    other=next(i for i in range(10) if i not in held)
+    records[other]['instruction']=records[held[0]]['instruction']
+    fit,hold,audit=isolated_split(records,c)
+    assert other not in fit and audit['purged']
+    assert set(held)==set(hold)
+
+
+def test_split_purges_same_physical_contour_across_different_maps():
+    from scripts.train_polygon_neighborhood_bearing import isolated_split
+    records=[dict(map_name='m'+str(i),instruction='text '+str(i),episode_id=f'm{i}:a:0') for i in range(10)]
+    c={r['map_name']:{'a':{'contour':square(i*100,0)}} for i,r in enumerate(records)}
+    fit,held,_=isolated_split(records,c);i=fit[0];j=held[0]
+    c[records[i]['map_name']]['a']['contour']=list(reversed(c[records[j]['map_name']]['a']['contour']))
+    clean,hold,audit=isolated_split(records,c)
+    assert i not in clean and j in hold
+    assert any('same_public_target_contour' in x['reasons'] for x in audit['purged'])
+
+
+def test_circular_error_wrap_in_actual_evaluator():
+    from scripts.train_polygon_neighborhood_bearing import evaluate
+    class Bert:
+        def encode_tokens(self,text):return torch.zeros(len(text),2,8),torch.ones(len(text),2,dtype=torch.bool)
+        def encode(self,text):return torch.zeros(len(text),8)
+    class Fixed(torch.nn.Module):
+        bins=8
+        def forward(self,**x):
+            b,r=x['landmark_valid'].shape;y=torch.zeros(b,r,8);y[...,0]=10.;return y
+    ds=BearingExamples([record((.7,.4999))],catalog(),max_refs=2)
+    report,rows=evaluate(Fixed(),ds,[0],Bert(),'cpu',geometry_enabled=False,batch_size=1)
+    assert report['all']['top1']==1
+    assert report['all']['circular_MAE_deg']<.1
+    assert len(rows)==1

@@ -30,7 +30,8 @@ def _describe_polygon(contour, radius):
     box = xy.max(0) - xy.min(0)
     area = 0.5 * abs(float(np.dot(xy[:, 0], np.roll(xy[:, 1], -1)) -
                             np.dot(xy[:, 1], np.roll(xy[:, 0], -1))))
-    if area <= 0:
+    from shapely.geometry import Polygon
+    if area <= 0 or not Polygon(xy).is_valid:
         return None
     # Major axis is UNSIGNED: doubled angle removes any spurious forward sign.
     centered = xy - xy.mean(0)
@@ -102,7 +103,7 @@ class PublicPolygonNeighborhood:
             features[j] = geo
             types[j] = kind
             mask[j] = True
-        value = (origin.astype(np.float32), shape, features, types, mask)
+        value = (origin.copy(), shape, features, types, mask)
         self._neighbor_cache[key] = value
         return value
 
@@ -116,7 +117,7 @@ class PublicPolygonNeighborhood:
         kinds = np.zeros((r, k), np.int64)
         valid = np.zeros((r, k), bool)
         reference_valid = np.zeros(r, bool)
-        centers_world = np.zeros((r, 2), np.float32)
+        centers_world = np.zeros((r, 2), np.float64)
         for i, ref in enumerate(references):
             value = self._neighbors(map_name, str(ref["id"]))
             if value is None:

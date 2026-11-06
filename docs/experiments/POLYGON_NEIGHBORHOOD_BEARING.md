@@ -28,10 +28,10 @@ python -m scripts.train_polygon_neighborhood_bearing \
   --existing-full-checkpoint /path/to/unified_full_relation/last.pt \
   --public-objects /path/to/cityrefer_original/objects.json \
   --output /path/to/new_run_dir \
-  --epochs 3 --batch-size 8 --seed 42 --device cuda
+  --epochs 3 --batch-size 32 --seed 42 --device cuda
 ```
 
-Default data inventory is 21,878 Revised/fuzzy TRAIN tasks. About 20% of the maps are held out deterministically (seed 42); override with `--heldout-maps mapA mapB` only before evaluating. No Val/Test data is used. Smoke-only `--max-train-batches 3 --max-eval-batches 2` must not be presented as full experimental results.
+Default data inventory is 21,878 Revised/fuzzy TRAIN tasks. About 20% of the maps are held out deterministically (seed 42); the seed42 map list is fixed before fitting; repeated instruction and public target contour overlap is quarantined. No Val/Test data is used. Smoke-only `--max-train-batches 3 --max-eval-batches 2` must not be presented as full experimental results.
 
 Outputs: `REPORT.json`, each arm's heldout rows JSONL, training histories/checkpoints, and `protocol.json` with SHA-256 input provenance.
 
@@ -43,3 +43,13 @@ Metrics: Top-1/Top-2 of 8 bins, circular angular MAE and median, NLL, all/single
 2. Full catalog may naturally contain the target object as an unlabeled public polygon, but neighbor selection never uses its identity or GT position. The study remains a statistical target-bearing probe, not a clean intrinsic-frame ground truth dataset.
 3. If one anchor's direction is not semantically identifiable, the correct geometric GT label need not be linguistically predictable. A low score may reflect underdetermination rather than optimizer failure.
 4. The old head, runtime/controller and main GeomBelief files remain unchanged. This code does **not** yet produce measured accuracy until the local dataset and GPU run complete.
+
+
+## Actual execution (2026-11-06)
+
+- Original new test had a missing bracket and could not collect; fixed before GPU execution.
+- Full frozen BERT up to512Token, actual TRAIN maximum125; only untruncated old96Token entries reused, four fresh GPU checks agree within7e-6.
+- Invalid self-intersecting public shapes excluded without GT. No1m target-radius label gate. Same seed/initial tensor SHA and506 updates per epoch per arm,3epochs.
+- Checkpoints include optimizer and RNG, `--resume` verifies input/code protocol; no model selection on held-out maps.
+- Complete TRAIN inventory21878: fit16178/19maps, heldout5700/5maps; no duplicate normalized text or physical public target-contour overlap. All five heldout maps are Cambridge blocks, not whole-city holdout.
+- Results and caveats: `reports/polygon_neighborhood_bearing/REPORT_zh.md`. Actual results are negative; do not enter navigation based on this experiment.
