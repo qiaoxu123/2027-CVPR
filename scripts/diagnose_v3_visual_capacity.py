@@ -3,7 +3,7 @@ import argparse,json
 from pathlib import Path
 import torch
 from scripts.unified_pgvb_v3_pilot import V3CacheDataset,fit_dev_partition,_collate,_load_base
-from graphnav.unified_pgvb_v3 import UnifiedPGVBV3
+from graphnav.unified_pgvb_v3 import UnifiedPGVBV3,offline_topk
 from graphnav.v3_diagnostics import visual_correction_capacity
 from graphnav.checkpointing import atomic_json,file_sha256
 
@@ -17,7 +17,12 @@ def main():
     for i in dev:
         public,labels=ds[i];kw,private=_collate([(public,labels)],'cuda');out=model(**kw)
         r=visual_correction_capacity(out,private['target_xy'],kw['world_bounds'],model.visual_gain.tanh())[0]
-        rows.append(dict(index=i,episode_id=labels['episode_id'],**r))
+        metrics={}
+        for branch in ('geometry','fused'):
+            score=offline_topk(out,private['target_xy'],kw['world_bounds'],branch=branch)
+            metrics[branch+'_NE_m']=score['Top1_NE_m'][0]
+        rows.append(dict(index=i,episode_id=labels['episode_id'],**metrics,**r))
+        if len(rows)%100==0:print(json.dumps(dict(completed=len(rows),expected=len(dev))),flush=True)
     wrong=[x for x in rows if x['region_defined'] and not x['geometry_correct']]
     summary=dict(N=len(rows),geometry_wrong=len(wrong),amplitude=float(model.visual_gain.tanh().abs()),
         supported_wrong=sum(x['correct_region_observed'] for x in wrong),
@@ -26,6 +31,12 @@ def main():
         capacity_tie_undetermined=sum(x['capacity_tie_undetermined'] for x in wrong),
         capacity_sufficient_but_fusion_failed=sum(x['can_flip_under_independent_bounded_updates'] and not x['fused_correct'] for x in wrong),
         corrected=sum(x['fused_correct'] for x in wrong),checkpoint_sha256=file_sha256(a.checkpoint),
-        scope='TRAIN pilot heldout, already analysed; not independent confirmation; spatial proxy not instance accuracy')
+        geometry_R20=sum(x.get('geometry_correct',False) for x in rows)/len(rows),
+        fused_R20=sum(x.get('fused_correct',False) for x in rows)/len(rows),
+        geometry_NE_m=sum(x['geometry_NE_m'] for x in rows)/len(rows),
+        fused_NE_m=sum(x['fused_NE_m'] for x in rows)/len(rows),
+        breaks=sum(x.get('geometry_correct',False) and not x.get('fused_correct',False) for x in rows),
+        cache_manifest_sha256=file_sha256(a.cache/'manifest.json'),
+        scope='TRAIN physical-target heldout; V2 initialization previously used TRAIN; offline public-landmark planned views, not causal navigation; spatial proxy not instance accuracy')
     atomic_json(dict(summary=summary,rows=rows),a.output);print(json.dumps(summary,indent=2))
 if __name__=='__main__':main()

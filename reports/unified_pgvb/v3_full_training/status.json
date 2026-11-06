@@ -29,7 +29,44 @@
     "maps": 24,
     "scope": "All Revised TRAIN input rows; deterministic physical-target split for this V3 stage, seed42; initial V2 has used TRAIN"
   },
-  "initial_evaluation": null,
+  "initial_evaluation": {
+    "coverage": {
+      "completed": 2470,
+      "expected": 2470
+    },
+    "split": "val_seen",
+    "errors": 0,
+    "metrics": {
+      "geometry": {
+        "Top1_20m": 0.45587044534412957,
+        "Top5_20m": 0.48785425101214575,
+        "Top20_20m": 0.5319838056680162,
+        "NE": 34.67755998783266,
+        "NE_valid_n": 2470
+      },
+      "fused": {
+        "Top1_20m": 0.45587044534412957,
+        "Top5_20m": 0.48663967611336034,
+        "Top20_20m": 0.5319838056680162,
+        "NE": 34.64270297690683,
+        "NE_valid_n": 2470
+      }
+    },
+    "posthoc_capacity": {
+      "geometry_wrong_n": 1344,
+      "no_correct_region_support": 1011,
+      "supported_but_bound_insufficient": 181,
+      "capacity_tie_undetermined": 10,
+      "capacity_sufficient_but_fusion_failed": 125,
+      "visual_region_top1_correct_but_bound_insufficient": 30,
+      "note": "GT posthoc spatial proxy; optimistic independent logit changes, not visual instance correctness"
+    },
+    "fixes": 30,
+    "breaks": 30,
+    "navigation_gate_passed": false,
+    "gate_threshold": 0.55,
+    "closed_loop_SR_not_measured": true
+  },
   "navigation": {},
   "final_training_manifest": {
     "format": "unified-pgvb-v3-decoupled-rgbd-v1",

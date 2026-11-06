@@ -9,6 +9,13 @@ from graphnav.unified_pgvb_v3 import offline_topk
 from graphnav.renderer import CityNavObservedViewRenderer
 from graphnav.v3_diagnostics import visual_correction_capacity
 
+def failed_row(index,record,error):
+    """Count a failed episode without reusing any previous forward or GT."""
+    return dict(correction_capacity=None,index=index,episode_id=list(record.episode_id),
+                map_name=record.map_name,error=repr(error),
+                **{branch:dict(NE=None,hits={str(k):False for k in (1,5,20)})
+                   for branch in ('geometry','fused')})
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('--sbf-source',type=Path,required=True);p.add_argument('--data-root',type=Path,required=True);p.add_argument('--objects',type=Path,required=True);p.add_argument('--source-v2',type=Path,required=True);p.add_argument('--checkpoint',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--train-smoke',type=int,default=0);a=p.parse_args()
     if a.train_smoke<0:raise ValueError('Invalid smoke count')
@@ -47,8 +54,7 @@ def main():
                 result[branch]=dict(NE=met['Top1_NE_m'][0],hits={k:v[0] for k,v in met['hit_flags'].items()},top1_world=(np.asarray(bounds[:2])+np.asarray(met['Top1_xy'][0])*(np.asarray(bounds[2:])-np.asarray(bounds[:2]))).tolist())
         except Exception as e:
             if a.train_smoke:raise
-            capacity=visual_correction_capacity(output,target,runtime.bounds,runtime.model.visual_gain.tanh())[0]
-            result=dict(correction_capacity=capacity,index=i,episode_id=list(record.episode_id),map_name=record.map_name,error=repr(e),geometry=dict(NE=None,hits={str(k):False for k in [1,5,20]}),fused=dict(NE=None,hits={str(k):False for k in [1,5,20]}))
+            result=failed_row(i,record,e)
         atomic_json(result,dest)
         if (i+1)%25==0:print(json.dumps(dict(completed=i+1,expected=n)),flush=True)
     rows=[json.loads((a.output/'rows'/f'{i:05d}.json').read_text()) for i in range(n)]

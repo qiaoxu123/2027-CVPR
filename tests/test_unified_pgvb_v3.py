@@ -256,3 +256,14 @@ def test_capacity_actual_goal_uses_formal_top20_tie_order():
     assert row['geometry_correct'] and row['fused_correct']
     assert row['capacity_tie_undetermined'] and not row['bound_insufficient']
     assert not row['can_flip_under_independent_bounded_updates']
+
+
+def test_evaluation_failure_never_reuses_previous_prediction():
+    from scripts.evaluate_unified_pgvb_v3_initial import failed_row
+    record=SimpleNamespace(episode_id=('map',3,7),map_name='map')
+    row=failed_row(8,record,RuntimeError('forward failed'))
+    assert row['index']==8 and row['episode_id']==['map',3,7]
+    assert row['correction_capacity'] is None and 'forward failed' in row['error']
+    for branch in ('geometry','fused'):
+        assert row[branch]['NE'] is None
+        assert not any(row[branch]['hits'].values())

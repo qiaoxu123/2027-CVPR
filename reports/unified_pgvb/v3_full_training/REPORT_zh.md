@@ -38,7 +38,28 @@ Top-K按384×384稠密世界网格原始排序，未做空间去重，不能直�
 
 硬件：NVIDIA RTX PRO 6000 Blackwell Workstation Edition，PyTorch可见总显存94.96GiB；Torch 2.8.0+cu128 / CUDA 12.8。上表显存是PyTorch张量峰值分配量，不含CUDA上下文或首次视觉编码阶段。BERT/SigLIP2缓存版本均与原Stage1记录一致。
 
-尚无全部2470条Val-Seen定位结果；不报告子集作为正式效果。
+全量初始定位覆盖2470/2470，推理错误0条。
+
+|方法|Top1≤20m|Top5≤20m|Top20≤20m|NE(m)|
+|---|---:|---:|---:|---:|
+|geometry|45.59%|48.79%|53.20%|34.67755998783266|
+|fused|45.59%|48.66%|53.20%|34.64270297690683|
+
+55%导航门槛通过：False。这是初始Goal指标，不是SR。
+
+GT事后幅度诊断（位置代理，非实例识别准确率）：
+
+```json
+{
+  "geometry_wrong_n": 1344,
+  "no_correct_region_support": 1011,
+  "supported_but_bound_insufficient": 181,
+  "capacity_tie_undetermined": 10,
+  "capacity_sufficient_but_fusion_failed": 125,
+  "visual_region_top1_correct_but_bound_insufficient": 30,
+  "note": "GT posthoc spatial proxy; optimistic independent logit changes, not visual instance correctness"
+}
+```
 
 尚无完整闭环结果，不宣称SR提升。
 
@@ -78,3 +99,6 @@ siglip: 上限64 tokens，截断250/21878（1.14%）。
 推理时延须区分policy逐步耗时和含Query初始化耗时；环境正射渲染不计入原policy计时口径。Geometry-only跳过不参与决策的SigLIP编码，已通过TRAIN GPU几何logits一致性核验。
 
 训练原始日志/权重留在服务器：`/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v3_full_s42_20261106`。本报告只汇总真实文件，不预测未完成结果。
+
+
+最终失败归因、4,405条TRAIN留出冻结诊断、代码修复及下一步决策见[最终诊断](DIAGNOSIS_zh.md)。
