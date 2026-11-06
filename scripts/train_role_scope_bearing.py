@@ -1,6 +1,6 @@
-"""Matched GPU fit/dev ablation: angle-only vs angle + public weak role grounding.
+"""Matched GPU fit/dev ablation: angle-only / intermediate-only / all weak roles.
 
-Fits both arms FROM SCRATCH with identical model initialization, seeds,
+Fits all arms FROM SCRATCH with identical model initialization, seeds,
 optimizer, epoch count and original fit/dev task split. The ONLY difference is
 the GT-free intermediate-role auxiliary loss in the new arm.
 
@@ -56,7 +56,7 @@ def fit_arm(*, arm, run, outdir, cache, weak, split, labels,
     path.mkdir(parents=True, exist_ok=True)
     cfg = dict(format="role-scope-bearing-ablation-v1", arm=arm,
                seed=42, epochs=epochs, batch_size=batch_size, lr=lr,
-               role_weight=role_weight if arm == "weak_role" else 0.,
+               role_weight=role_weight if arm != "angle_only" else 0.,
                max_updates=max_updates, initial_digest=initial,
                public_sha256=file_sha256(run / "public_inputs.pt"),
                weak_sha256=file_sha256(outdir / "PUBLIC_weak_role_targets.pt"),
@@ -88,19 +88,22 @@ def fit_arm(*, arm, run, outdir, cache, weak, split, labels,
             indices = order[i:i+batch_size]
             batch, _ = cache.build(indices)
             output = model(**batch, use_relations=True,
-                           emit_steps=(arm == "weak_role"))
+                           emit_steps=(arm != "angle_only"))
             angular, _ = angle_only(
                 output, [labels["fit"][idx] for idx in indices], batch["anchor_valid"])
-            if arm == "weak_role":
+            if arm != "angle_only":
+                role_labels = [weak["targets"].get(idx, []) for idx in indices]
+                if arm == "weak_intermediate":
+                    role_labels = [[v for v in q if v["intermediate"]]
+                                   for q in role_labels]
                 role, matched = role_set_loss(
-                    output["step_object_probabilities"],
-                    [weak["targets"].get(idx, []) for idx in indices])
+                    output["step_object_probabilities"], role_labels)
                 if matched:
                     labeled += matched
                     labeled_batches += 1
             else:
                 role = angular * 0
-            loss = angular + (role_weight * role if arm == "weak_role" else 0.)
+            loss = angular + (role_weight * role if arm != "angle_only" else 0.)
             if not torch.isfinite(loss):
                 raise FloatingPointError("Nonfinite direction/role objective")
             opt.zero_grad(set_to_none=True)
@@ -120,7 +123,7 @@ def fit_arm(*, arm, run, outdir, cache, weak, split, labels,
                 break
         if not losses:
             raise RuntimeError("Training produced zero updates")
-        if max_updates == 0 and arm == "weak_role" and labeled == 0:
+        if max_updates == 0 and arm != "angle_only" and labeled == 0:
             raise RuntimeError("No public weak supervision actually applied")
         dev_indices = split["dev"] if max_updates == 0 else split["dev"][:64]
         dev_summary, dev_rows = evaluate(
@@ -192,14 +195,14 @@ def main():
               for name in ("fit", "dev")}
     cache = PublicBatch(args.run)
     results = {}
-    for arm in ("angle_only", "weak_role"):
+    for arm in ("angle_only", "weak_intermediate", "weak_role"):
         results[arm] = fit_arm(
             arm=arm, run=args.run, outdir=args.output, cache=cache,
             weak=weak, split=splits["indices"], labels=labels,
             epochs=args.epochs, batch_size=args.batch_size,
             lr=args.lr, role_weight=args.role_weight,
             max_updates=args.max_updates, resume=args.resume)
-    if results["angle_only"]["initial_digest"] != results["weak_role"]["initial_digest"]:
+    if len({v["initial_digest"] for v in results.values()}) != 1:
         raise AssertionError("A/B parameters were not identically initialized")
     if args.max_updates:
         print("SMOKE ONLY: dev metrics are not complete.", flush=True)
@@ -207,6 +210,8 @@ def main():
     a = [json.loads(line) for line in
          (args.output/"angle_only"/"best_dev_rows.jsonl").read_text().splitlines()]
     b = [json.loads(line) for line in
+         (args.output/"weak_intermediate"/"best_dev_rows.jsonl").read_text().splitlines()]
+    c = [json.loads(line) for line in
          (args.output/"weak_role"/"best_dev_rows.jsonl").read_text().splitlines()]
     summary = dict(
         format="role-scope-bearing-ablation-v1",
@@ -217,7 +222,9 @@ def main():
                                 (h["dev"]["macro_Top1"], -h["dev"]["NLL"]))["dev"],
                        initial_digest=r["initial_digest"])
             for name, r in results.items()},
-        paired_dev=paired_queries(a, b),
+        paired_dev=dict(intermediate_vs_angle=paired_queries(a, b),
+                        all_roles_vs_angle=paired_queries(a, c),
+                        all_roles_vs_intermediate=paired_queries(b, c)),
         no_confirmation_GT_read=True, old_confirm_maps_not_reused_for_validation=True,
         dev_is_for_model_selection_not_independent_confirmation=True,
         weak_scope_labels_are_not_human_truth=True,
