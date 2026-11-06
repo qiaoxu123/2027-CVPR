@@ -1,0 +1,71 @@
+{
+  "metrics": {
+    "full": {
+      "N": 7619,
+      "R1_20m": 0.6630791425704956,
+      "R5_20m": 0.8478803038597107,
+      "R10_20m": 0.9065493941307068,
+      "R20_20m": 0.9484184384346008,
+      "R50_20m": 0.9753248691558838,
+      "NE_mean": 26.60588836669922,
+      "NE_median": 14.020344734191895,
+      "mass20": 0.3594517111778259,
+      "grid_oracle20": 1.0,
+      "forward_ms_per_sample": 1.3735897737053424,
+      "wall_seconds": 71.85783529281616
+    },
+    "landmark_relation": {
+      "N": 7619,
+      "R1_20m": 0.19110119342803955,
+      "R5_20m": 0.328520804643631,
+      "R10_20m": 0.4152776002883911,
+      "R20_20m": 0.5331408381462097,
+      "R50_20m": 0.6861792802810669,
+      "NE_mean": 77.71953582763672,
+      "NE_median": 54.11444091796875,
+      "mass20": 0.11697213351726532,
+      "grid_oracle20": 1.0,
+      "forward_ms_per_sample": 1.3123774780183417,
+      "wall_seconds": 66.1282606124878
+    },
+    "target_type_relation": {
+      "N": 7619,
+      "R1_20m": 0.21393883228302002,
+      "R5_20m": 0.38180863857269287,
+      "R10_20m": 0.4723716974258423,
+      "R20_20m": 0.5683160424232483,
+      "R50_20m": 0.7268670201301575,
+      "NE_mean": 68.40327453613281,
+      "NE_median": 48.08222961425781,
+      "mass20": 0.13814584910869598,
+      "grid_oracle20": 1.0,
+      "forward_ms_per_sample": 1.3215642046060667,
+      "wall_seconds": 68.42179036140442
+    }
+  },
+  "paired_vs_full": {
+    "full": {
+      "fixes": 0,
+      "damage": 0
+    },
+    "landmark_relation": {
+      "fixes": 244,
+      "damage": 3840
+    },
+    "target_type_relation": {
+      "fixes": 253,
+      "damage": 3675
+    }
+  },
+  "parse_coverage": {
+    "target_name": 7598,
+    "target_type": 7465,
+    "named_relation": 3996
+  },
+  "checkpoint_sha": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+  "source_sha": "1c7aa5406c35008b2125d61b6ec568f9f80f876392f2291119a3a97375e62c2d",
+  "catalog_sha": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "seed": 42,
+  "scope": "Birmingham TRAIN fitting diagnostic, not independent validation; frozen text intervention, no training",
+  "checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_target_features_s42_20261106/train/last.pt"
+}
