@@ -1,3 +1,17 @@
+## [PR25 angle-only execution safety] - 2026-11-06
+
+### Features
+- Execute predicted8-bin bearing/fusion training on complete TRAIN with frozen Unified V2.
+- Align public text/Polygon binding between TRAIN and runtime; fix angular-policy selection and actual refined-field capture.
+- Add CUDA gradient/frozen-weight audits, runtime no-label smoke, frozen final checkpoint and separate TRAIN Oracle/Val predicted-only reports.
+
+### Design Rationale
+- An added angle head must not inherit target-indexed reference lookup or compare different Polygon protocols. Candidate/XY/context reranking and visualizations must reflect the field actually used for actions.
+
+### Notes & Caveats
+- Existing main-model geometry remains intact; the added branch receives angles only. Map axes are not independently verified geographic north.
+- Oracle is TRAIN offline only. No Stop/Goal threshold changes, Test access or main merge.
+
 ## [PR23 Unified V2 text ablation execution] - 2026-11-05
 
 ### Features

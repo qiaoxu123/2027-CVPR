@@ -1,0 +1,80 @@
+{
+  "TRAIN_only": {
+    "N": 7619,
+    "baseline": {
+      "R20": 0.6419477462768555,
+      "NE_m": 33.840309143066406
+    },
+    "predicted": {
+      "R20": 0.6415539979934692,
+      "NE_m": 33.835845947265625
+    },
+    "oracle_GT_direction_OFFLINE_ONLY": {
+      "R20": 0.6495603322982788,
+      "NE_m": 33.35906982421875
+    },
+    "fixes": 6,
+    "breaks": 9,
+    "net": -3,
+    "note": "Oracle reads target GT direction. Its R20 is a privileged diagnostic, not fair inference.",
+    "direction_class_accuracy": 0.4112536677981704,
+    "direction_labeled_anchors": 17381,
+    "angular_supported_queries": 7069,
+    "evaluated_queries": 7619
+  },
+  "Val_Seen": {
+    "baseline": {
+      "SR": 0.4574898785425101,
+      "OSR": 0.5327935222672064,
+      "SPL": 0.44399223687097605,
+      "NE": 37.95964865662928,
+      "nDTW": 0.2888095812411536,
+      "sDTW": 0.16142163018787203,
+      "steps": 6.840485829959515,
+      "path_length": 197.9748305816652,
+      "policy_stop": 1.0,
+      "inference_ms": 24.21280496261511,
+      "episodes": 2470,
+      "False_Stop_Rate": 0.5425101214574899,
+      "false_stop_episode_fraction": 0.5425101214574899,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "predicted_angle": {
+      "SR": 0.457085020242915,
+      "OSR": 0.5323886639676113,
+      "SPL": 0.443699601847967,
+      "NE": 37.939529523474185,
+      "nDTW": 0.2888604868784892,
+      "sDTW": 0.16126145146502524,
+      "steps": 6.839676113360324,
+      "path_length": 197.9810141106478,
+      "policy_stop": 1.0,
+      "inference_ms": 25.490039201973673,
+      "episodes": 2470,
+      "False_Stop_Rate": 0.542914979757085,
+      "false_stop_episode_fraction": 0.542914979757085,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    }
+  },
+  "paired": {
+    "fixes": 3,
+    "damage": 4,
+    "inference_error": 0,
+    "OSR_success_SR_failed": 186,
+    "policy_stop": 2470,
+    "angle_supported_episodes": 2344,
+    "angle_changed_initial_Top1": 24,
+    "net": -1
+  },
+  "SR_delta_physical_target_bootstrap95CI": [
+    -0.002849031849439016,
+    0.0020096463022508037
+  ],
+  "physical_target_groups": 449,
+  "single_seed": true,
+  "angle_delta_max": 0.0724133774638176,
+  "angle_delta_median": 0.014053099323064089,
+  "head_checkpoint_SHA256": "c30eb96ad408f07eb96bb5f02dd88ebcf4fcdd283c632a1542dfef190502182f",
+  "Oracle_navigation_executed": false,
+  "baseline_preangle_field_max_abs_difference": 0.0
+}

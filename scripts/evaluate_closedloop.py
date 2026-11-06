@@ -77,6 +77,7 @@ def main():
     parser.add_argument('--reference-a3-checkpoint',help='Original A3 provenance for legacy head migration')
     parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
+    parser.add_argument('--angle-head-checkpoint',help='Completed predicted ANGLE-ONLY 8-bin head; explicitly NOT oracle')
     parser.add_argument('--relation-control', choices=['full','off'], default='full')
     parser.add_argument('--relation-visual-control', choices=['tracked','off'], default='tracked')
     parser.add_argument('--instruction-mode',choices=['native','full_text','landmark_relation'],default='native',help='Opt-in PR23 public-catalog text ablation; original path is unchanged')
@@ -119,6 +120,10 @@ def main():
             raise ValueError('Test Unseen checkpoint must equal frozen Seen Best after20 completed epochs')
     if args.instruction_mode!='native' and (args.model!='unified-relation' or not args.public_objects or args.relation_visual_control!='off'):
         raise ValueError('PR23 text adaptation requires unified-relation, public catalog and visual off')
+    if args.angle_head_checkpoint and (args.model!='unified-relation' or args.instruction_mode!='full_text' or not args.public_objects or
+            args.relation_control!='full' or args.relation_visual_control!='off' or
+            args.relation_geometry_source!='trained'):
+        raise ValueError('Angle-only mode requires public-bound full-text Unified V2, trained Geometry+Relation and RGB off')
     if args.model == 'unified-relation':
         if args.split != 'val_seen' or args.max_episodes is not None:
             raise ValueError('Unified-relation requires unfiltered FULL val_seen')
@@ -159,6 +164,10 @@ def main():
                        relation_runtime_code=sha(Path('graphnav/unified_full_relation_runtime.py')),
                        config=sha(args.config))
         if args.instruction_mode!='native':sources.update(instruction_mode=args.instruction_mode,public_catalog=sha(args.public_objects),text_adapter=sha(Path('graphnav/unified_text_ablation_runtime.py')),text_inputs=sha(Path('graphnav/unified_text_ablation.py')),text_parser=sha(Path('scripts/prepare_unified_v2_landmark_relation_ablation.py')))
+        if args.angle_head_checkpoint:
+            sources.update(angle_checkpoint=sha(args.angle_head_checkpoint),
+                angle_runtime=sha(Path('graphnav/unified_angle_only_runtime.py')),
+                angle_model=sha(Path('graphnav/unified_angle_only_belief.py')))
         lock = output/'full_relation_manifest.json'
         if lock.exists() and json.loads(lock.read_text()) != sources:
             raise ValueError('Resume source changed')
@@ -212,7 +221,11 @@ def main():
             from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             policy_class=UnifiedPGVBFullRelationPolicy;extra={}
-            if args.instruction_mode!='native':
+            if args.angle_head_checkpoint:
+                from graphnav.unified_angle_only_runtime import UnifiedAngleOnlyPolicy
+                policy_class=UnifiedAngleOnlyPolicy
+                extra=dict(angle_head_checkpoint=args.angle_head_checkpoint,public_objects=args.public_objects)
+            elif args.instruction_mode!='native':
                 from graphnav.unified_text_ablation_runtime import UnifiedTextAblationPolicy
                 policy_class=UnifiedTextAblationPolicy;extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)
             runtime=policy_class(
@@ -309,6 +322,8 @@ def main():
                         full=result['field'].belief_logits[0].float().cpu().numpy(),
                         selected_ids=field.candidate_ids[0].cpu().numpy(),
                         grid=runtime.inputs['grid_xy'][0].cpu().numpy())
+                    if 'angle_probs' in result:
+                        payload.update(angle_probs=result['angle_probs'][0].float().cpu().numpy(),angle_delta=result['angle_delta'][0].float().cpu().numpy())
                     np.savez_compressed(capture_dir/f'{step:02d}.npz',**payload)
                     captures.append(step)
                 runtime.full_relation_audit_callback=capture_relation
