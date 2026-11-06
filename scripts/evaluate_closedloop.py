@@ -78,6 +78,8 @@ def main():
     parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
     parser.add_argument('--angle-head-checkpoint',help='Completed predicted ANGLE-ONLY 8-bin head; explicitly NOT oracle')
+    parser.add_argument('--angular-main-predicate',action='store_true',
+                        help='Use FULL main-model bearing-loss checkpoint with direct-cardinal predicate IDs; no oracle')
     parser.add_argument('--relation-control', choices=['full','off'], default='full')
     parser.add_argument('--relation-visual-control', choices=['tracked','off'], default='tracked')
     parser.add_argument('--instruction-mode',choices=['native','full_text','landmark_relation'],default='native',help='Opt-in PR23 public-catalog text ablation; original path is unchanged')
@@ -124,9 +126,17 @@ def main():
             args.relation_control!='full' or args.relation_visual_control!='off' or
             args.relation_geometry_source!='trained'):
         raise ValueError('Angle-only mode requires public-bound full-text Unified V2, trained Geometry+Relation and RGB off')
+    if args.angular_main_predicate and (args.angle_head_checkpoint or args.model!='unified-relation' or
+            args.instruction_mode!='full_text' or not args.public_objects or
+            args.relation_control!='full' or args.relation_visual_control!='off' or
+            args.relation_geometry_source!='trained'):
+        raise ValueError('Main angular-consistency experiment requires original full text/public binding, full relation, RGB off')
     if args.model == 'unified-relation':
         if args.split != 'val_seen' or args.max_episodes is not None:
             raise ValueError('Unified-relation requires unfiltered FULL val_seen')
+    if args.model=='unified-relation' and args.relation_checkpoint:
+        from graphnav.unified_direct_bearing_runtime import validate_main_predicate_checkpoint
+        validate_main_predicate_checkpoint(torch.load(args.relation_checkpoint,map_location='cpu',weights_only=True),args.angular_main_predicate)
     if args.active_observation and args.model != 'target-evidence':
         raise ValueError('active observation requires the target-evidence policy')
     if args.joint_active_observation and args.model!='joint-active':
@@ -168,6 +178,10 @@ def main():
             sources.update(angle_checkpoint=sha(args.angle_head_checkpoint),
                 angle_runtime=sha(Path('graphnav/unified_angle_only_runtime.py')),
                 angle_model=sha(Path('graphnav/unified_angle_only_belief.py')))
+        if args.angular_main_predicate:
+            sources.update(angular_main_predicate=True,
+                angular_runtime=sha(Path('graphnav/unified_direct_bearing_runtime.py')),
+                angular_model=sha(Path('graphnav/unified_direct_bearing_loss.py')))
         lock = output/'full_relation_manifest.json'
         if lock.exists() and json.loads(lock.read_text()) != sources:
             raise ValueError('Resume source changed')
@@ -221,7 +235,11 @@ def main():
             from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             policy_class=UnifiedPGVBFullRelationPolicy;extra={}
-            if args.angle_head_checkpoint:
+            if args.angular_main_predicate:
+                from graphnav.unified_direct_bearing_runtime import UnifiedDirectBearingPolicy
+                policy_class=UnifiedDirectBearingPolicy
+                extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)
+            elif args.angle_head_checkpoint:
                 from graphnav.unified_angle_only_runtime import UnifiedAngleOnlyPolicy
                 policy_class=UnifiedAngleOnlyPolicy
                 extra=dict(angle_head_checkpoint=args.angle_head_checkpoint,public_objects=args.public_objects)

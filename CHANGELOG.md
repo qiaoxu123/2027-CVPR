@@ -1,3 +1,16 @@
+## [PR26 main angular consistency execution] - 2026-11-06
+
+### Features
+- Align TRAIN/runtime public bindings and repair conservative direct-clause/alias eligibility; retain all TRAIN queries.
+- Audit pure angular gradients into Geometry/Relation and Predicate embedding, circular boundaries, empty angular support and checkpoint/runtime mode matching.
+- Preserve per-loss resume statistics and reuse checked frozen BERT cache across A/B/C with equal actual initialization.
+
+### Design Rationale
+- The original terminal-only parser yielded zero real angular labels. GT agreement is an audit, never an eligibility filter or coordinate calibration.
+
+### Notes & Caveats
+- Only21 automatic high-confidence N/S labels, no E/W word labels; map CRS unverified. Weak coverage limits interpretation; no architecture/Stop/main changes.
+
 ## [PR25 angle-only execution safety] - 2026-11-06
 
 ### Features

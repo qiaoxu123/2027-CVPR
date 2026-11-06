@@ -84,6 +84,10 @@ def _batch_inputs(batch, encoder, device, variant):
         "pair_geometry", "grid_xy",
     )
     observable = {k: batch[k].to(device, non_blocking=True) for k in keys}
+    # Optional experimental world-cardinal predicates. Plain Unified V2
+    # records omit this field and preserve the original all-zero behavior.
+    if "anchor_predicate_ids" in batch:
+        observable["anchor_predicate_ids"] = batch["anchor_predicate_ids"].to(device, non_blocking=True)
     if variant in BASELINES:
         return observable, None, None, None
     # Frozen BERT token sequence is never replaced by a CLS-only embedding.
