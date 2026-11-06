@@ -378,30 +378,49 @@ def fit_dev_partition(ds, seed=42, fraction=.8):
 
 @torch.no_grad()
 def evaluate(model, ds, indices, device, batch_size):
+    """Geometry-only vs V3 fused, same held-out TRAIN physical IDs."""
+    from statistics import mean
     model.eval()
     records = []
     for offset in range(0, len(indices), batch_size):
         pairs = [ds[i] for i in indices[offset:offset+batch_size]]
         kwargs, labels = _collate(pairs, device)
         result = model(**kwargs)
-        metric = offline_topk(result, labels["target_xy"],
-                              kwargs["world_bounds"])
+        geo = offline_topk(result, labels["target_xy"],
+                           kwargs["world_bounds"], branch="geometry")
+        fused = offline_topk(result, labels["target_xy"],
+                             kwargs["world_bounds"], branch="fused")
         for i, (p, _) in enumerate(pairs):
-            gt = labels["target_xy"][i]
-            pred = torch.tensor(metric["Top1_xy"][i], device=gt.device)
-            ne = ((pred-gt)*(kwargs["world_bounds"][i,2:]-
-                              kwargs["world_bounds"][i,:2])).norm().item()
             records.append(dict(
-                episode_id=p["episode_id"], NE_m=ne,
-                visible_pixels=int(result.observed_mask[i].sum()),
-                R20=ne <= 20.0,
-                top1_xy=metric["Top1_xy"][i],
+                episode_id=p["episode_id"],
+                geometry_NE_m=geo["Top1_NE_m"][i],
+                fused_NE_m=fused["Top1_NE_m"][i],
+                geometry_R={str(k):bool(geo["hit_flags"][str(k)][i])
+                            for k in (1,5,20)},
+                fused_R={str(k):bool(fused["hit_flags"][str(k)][i])
+                         for k in (1,5,20)},
+                geometry_top1_xy=geo["Top1_xy"][i],
+                fused_top1_xy=fused["Top1_xy"][i],
+                observed_pixels=int(result.observed_mask[i].sum()),
+                valid_rgb_patches=int(result.patch_valid[i].sum()),
             ))
-    from statistics import mean
-    return dict(n=len(records), R_at_1_20m=mean(x["R20"] for x in records),
-                NE_m=mean(x["NE_m"] for x in records),
-                observed_queries=sum(x["visible_pixels"]>0 for x in records)), records
-
+    if not records:
+        raise ValueError("No TRAIN heldout cases")
+    metrics = dict(
+        n=len(records),
+        Geometry_NE_m=mean(x["geometry_NE_m"] for x in records),
+        Fused_NE_m=mean(x["fused_NE_m"] for x in records),
+        observed_queries=sum(x["observed_pixels"] > 0 for x in records),
+        no_visual_queries=sum(x["observed_pixels"] == 0 for x in records),
+    )
+    for k in (1,5,20):
+        old = [x["geometry_R"][str(k)] for x in records]
+        new = [x["fused_R"][str(k)] for x in records]
+        metrics[f"Geometry_R@{k}/20m"] = mean(old)
+        metrics[f"Fused_R@{k}/20m"] = mean(new)
+        metrics[f"R@{k}_fixes"] = sum(not a and b for a,b in zip(old,new))
+        metrics[f"R@{k}_breaks"] = sum(a and not b for a,b in zip(old,new))
+    return metrics, records
 
 def train(args):
     if args.device.startswith("cuda") and not torch.cuda.is_available():
