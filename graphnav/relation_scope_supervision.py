@@ -123,7 +123,7 @@ def public_role_targets(parsed, scene, query, *, max_steps=4):
                 counts["uninformative_full_scene"] += 1
                 continue
             results.append(dict(anchor=j, step=t, candidates=candidates,
-                                kind=kind, weight=weight,
+                                kind=kind, weight=weight, intermediate=(k > 0),
                                 role_text=entity.get("text", "")))
             counts[kind] += 1
     return results, dict(counts)
