@@ -1,0 +1,2018 @@
+[
+  {
+    "i": 391,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "l": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "g": [
+        "the gray car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "l",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "adjacent_to",
+        "p",
+        "adjacent to the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "parallel_across_street_from",
+        "t",
+        "gray car parallel across the street from it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Final clause attachment and 'parallel across' relation are syntactically unclear."
+    ]
+  },
+  {
+    "i": 392,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "other": [
+        "a black car",
+        "object"
+      ],
+      "l": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "white",
+          "other"
+        ],
+        "between a white car and a black car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "l",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Two black-car mentions are preserved as distinct mentions; they may refer to same object class."
+    ]
+  },
+  {
+    "i": 393,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a blue van",
+        "object"
+      ],
+      "yard": [
+        "the front yard",
+        "region"
+      ],
+      "b": [
+        "a residential building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "car": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "yard",
+        "parked in the front yard",
+        "N",
+        "high"
+      ],
+      [
+        "yard",
+        "of",
+        "b",
+        "front yard of a residential building",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "located on Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "b",
+        "blue car parked on the street in front of this building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Street-car frontage frame unspecified."
+    ]
+  },
+  {
+    "i": 394,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Blue car",
+        "object"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ],
+      "h": [
+        "a house compound",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "p",
+        "in a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "in_front_of",
+        "h",
+        "parking lot in front of a house compound",
+        "U",
+        "medium"
+      ],
+      [
+        "h",
+        "along",
+        "a",
+        "along Ashcroft Grove Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "no_other_car_near",
+        "t",
+        "has no other car near to it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Front frame unspecified."
+    ]
+  },
+  {
+    "i": 395,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "b": [
+        "the orange building",
+        "named_landmark"
+      ],
+      "a": [
+        "the Ashcroft Grove Traffic Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "d",
+        "parked on the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "of",
+        "b",
+        "driveway of the orange building",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "on the Ashcroft Grove Traffic Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 396,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "c": [
+        "a very slim reddish brown crevice",
+        "region"
+      ],
+      "a": [
+        "the corner of Ashcroft Grove",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "c",
+        "parked in a very slim reddish brown crevice",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "at",
+        "a",
+        "at the corner of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 397,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "c": [
+        "a crevice",
+        "region"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "c",
+        "parked in a crevice",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "at_end_of",
+        "p",
+        "at the end of the parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "on",
+        "a",
+        "in Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 398,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "b": [
+        "a building",
+        "object"
+      ],
+      "a": [
+        "the end of Ashcroft Grove Road",
+        "region"
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "d": [
+        "the building's driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "white car is in front of a building",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "at_end_of",
+        "a",
+        "at the end of Ashcroft Grove Road",
+        "N",
+        "medium"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "t",
+        "with the blue car in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "in",
+        "d",
+        "another blue car in the building's driveway",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "It/its pronouns and building referent are ambiguous across clauses."
+    ]
+  },
+  {
+    "i": 399,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray/silver car",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "p": [
+        "a reddish tan parking space",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "in Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "behind",
+        "blue",
+        "directly behind the blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "near",
+        "red",
+        "near and perpendicular to a red car",
+        "N",
+        "low"
+      ],
+      [
+        "red",
+        "in",
+        "p",
+        "parked in a reddish tan parking space",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind frame unspecified; relation 'perpendicular to' car may describe heading or placement."
+    ]
+  },
+  {
+    "i": 400,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "it's a car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "blue",
+        "it's behind a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "parked_on",
+        "a",
+        "blue car parked on Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Repeated blue car mention may refer to same entity; target/car reference relation is maintained."
+    ]
+  },
+  {
+    "i": 401,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car with a black roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_on",
+        "a",
+        "parked on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "t",
+        "In front of it is a blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front frame unspecified."
+    ]
+  },
+  {
+    "i": 402,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "a": [
+        "the end of Ashcroft Grove",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "back_to_back_with",
+        "blue",
+        "parked back to back with a blue car",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "at_end_of",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Back-to-back indicates intrinsic opposing orientations without calibrated heading."
+    ]
+  },
+  {
+    "i": 403,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is the white car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "green": [
+        "a green car",
+        "object"
+      ],
+      "a": [
+        "ashcroft road",
+        "named_landmark"
+      ],
+      "b": [
+        "the L-shaped building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "white",
+          "white"
+        ],
+        "with a white car on either side",
+        "U",
+        "medium"
+      ],
+      [
+        "green",
+        "behind",
+        "t",
+        "a green car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on the ashcroft road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the L-shaped building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "The white-car references may be two separate cars but entity IDs are not distinguished; all front/back frames unknown."
+    ]
+  },
+  {
+    "i": 404,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "cars": [
+        "two white cars",
+        "group"
+      ],
+      "t": [
+        "this car",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "tree": [
+        "the tree",
+        "object"
+      ],
+      "green": [
+        "the green colored car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "parked_side_by_side_on",
+        "a",
+        "two white cars parked side by side on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "front_toward",
+        "tree",
+        "the front is towards the tree",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "member_of",
+        "cars",
+        "Of these cars",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "back_facing",
+        "green",
+        "The back of this car is facing the green colored car",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "It is unclear which of the two cars is selected; front/back is intrinsic orientation."
+    ]
+  },
+  {
+    "i": 405,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "green": [
+        "a light green car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "other",
+        "right_of",
+        "t",
+        "On the right side, there is another white car",
+        "U",
+        "medium"
+      ],
+      [
+        "green",
+        "distant_from",
+        "t",
+        "Further in a distance, there is a light green car",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right frame unspecified."
+    ]
+  },
+  {
+    "i": 406,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "b": [
+        "a brown L-shaped building",
+        "named_landmark"
+      ],
+      "a": [
+        "Ashcroft Grove road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "other",
+        "parked next to another white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of a brown L-shaped building",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "on Ashcroft Grove road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front frame unspecified."
+    ]
+  },
+  {
+    "i": 407,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "other": [
+        "the another white car",
+        "object"
+      ],
+      "a": [
+        "the traffic road Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "near",
+        "other",
+        "stand near the another white car",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "along",
+        "a",
+        "along the traffic road Ashcroft Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 408,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "cars": [
+        "two white cars",
+        "group"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "cars",
+        "parked between two white cars",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 409,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "h": [
+        "a tan house with a gray peaked roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "parked in front of a tan house",
+        "U",
+        "medium"
+      ],
+      [
+        "h",
+        "last_house_at_end_of",
+        "a",
+        "It is the last house at one end of Ashcroft Grove",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front frame and road-end direction unspecified."
+    ]
+  },
+  {
+    "i": 410,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "curb": [
+        "the curb",
+        "region"
+      ],
+      "b": [
+        "a a brown building with six long windows behind an outdoor balcony",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_on",
+        "curb",
+        "parked on the curb",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of a a brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "in Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front frame unspecified."
+    ]
+  },
+  {
+    "i": 411,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The dark blue car",
+        "object"
+      ],
+      "b": [
+        "the long gray building",
+        "object"
+      ],
+      "a": [
+        "the end of Ashcroft Grove",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "parked in front of the long gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "at_end_of",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front frame unspecified."
+    ]
+  },
+  {
+    "i": 412,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "b": [
+        "the long gray building",
+        "object"
+      ],
+      "a": [
+        "the very end of Ashcroft Grove",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "against",
+        "b",
+        "parked against the long gray building",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "at_end_of",
+        "a",
+        "at the very end of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 413,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The bright blue car",
+        "object"
+      ],
+      "h": [
+        "a house",
+        "object"
+      ],
+      "a": [
+        "the end of Ashcroft Grove",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "against",
+        "h",
+        "parked against a house",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "at_end_of",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 414,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A partial blue car",
+        "object"
+      ],
+      "d": [
+        "the front drive",
+        "region"
+      ],
+      "h": [
+        "a square house with a gray roof",
+        "object"
+      ],
+      "edge": [
+        "the edge",
+        "region"
+      ],
+      "g": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "d",
+        "in the front drive",
+        "N",
+        "medium"
+      ],
+      [
+        "d",
+        "of",
+        "h",
+        "front drive of a square house",
+        "N",
+        "medium"
+      ],
+      [
+        "edge",
+        "halfway_between",
+        [
+          "g",
+          "b"
+        ],
+        "the edge about half way between Graham Warren Way and Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Map-edge attachment to car/house is unclear."
+    ]
+  },
+  {
+    "i": 415,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this blue car",
+        "object"
+      ],
+      "b": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "h": [
+        "the third house from the bottom on the left",
+        "object"
+      ],
+      "g": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "south_of",
+        "b",
+        "South of Burton Wood Drive",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "left_of",
+        "h",
+        "to the left of the third house from the bottom on the left",
+        "U",
+        "medium"
+      ],
+      [
+        "h",
+        "north_of",
+        "g",
+        "north of Graham Warren Way",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/bottom frame unspecified; north/south geographic only."
+    ]
+  },
+  {
+    "i": 416,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The only blue car",
+        "object"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ],
+      "h": [
+        "a small gray house",
+        "object"
+      ],
+      "b": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "d",
+        "parked in a driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "of",
+        "h",
+        "driveway for a small gray house",
+        "N",
+        "medium"
+      ],
+      [
+        "h",
+        "on",
+        "b",
+        "on Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 417,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "b": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "d",
+        "parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "on",
+        "b",
+        "driveway of Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 418,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This blue car",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "h": [
+        "two semi-detached houses",
+        "group"
+      ],
+      "silver": [
+        "a silver car",
+        "object"
+      ],
+      "other": [
+        "another blue car",
+        "object"
+      ],
+      "drive": [
+        "the drive of one of those houses",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "parked on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of a two semi-detached houses",
+        "U",
+        "medium"
+      ],
+      [
+        "silver",
+        "behind",
+        "t",
+        "with a silver car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "in",
+        "drive",
+        "another blue car on the drive of one of those houses",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Driveway entity is implicit; behind/front frames unspecified."
+    ]
+  },
+  {
+    "i": 419,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a blue car",
+        "object"
+      ],
+      "h": [
+        "a house with an L-shaped roof",
+        "object"
+      ],
+      "a": [
+        "the end of Achcroft Grove",
+        "region"
+      ],
+      "silver": [
+        "another silver colored car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "parked in front of a house",
+        "U",
+        "medium"
+      ],
+      [
+        "h",
+        "at_end_of",
+        "a",
+        "at the end of Achcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "silver",
+        "behind",
+        "t",
+        "Behind this car is another silver colored car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front/behind frames unspecified."
+    ]
+  },
+  {
+    "i": 420,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "b": [
+        "a building",
+        "object"
+      ],
+      "a": [
+        "the end of Ashcroft Grove Road",
+        "region"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "drive": [
+        "the building's driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "blue car is in front of a building",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "at_end_of",
+        "a",
+        "at the end of Ashcroft Grove Road",
+        "N",
+        "medium"
+      ],
+      [
+        "white",
+        "behind",
+        "t",
+        "behind it is the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "drive",
+        "another blue car in the building's driveway",
+        "N",
+        "low"
+      ]
+    ],
+    "u": [
+      "Another blue car is mentioned but target relation is ambiguous; front/behind unresolved."
+    ]
+  },
+  {
+    "i": 421,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "g": [
+        "a gray/silver car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "p": [
+        "a reddish tan parking space",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_Ashcroft_Grove",
+        "a",
+        "in Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "g",
+        "directly in front of a gray/silver car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "perpendicular_to",
+        "r",
+        "perpendicular to a red car",
+        "N",
+        "low"
+      ],
+      [
+        "r",
+        "in",
+        "p",
+        "parked in a reddish tan parking space",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Perpendicular-to vehicle is unclear as a spatial vs heading relation; low confidence."
+    ]
+  },
+  {
+    "i": 422,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ],
+      "a": [
+        "the end of Ashcroft Grove",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "back_to_back_with",
+        "g",
+        "parked back to back with a gray car",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "at_end_of",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Back-to-back indicates intrinsic opposed facing; heading unspecified."
+    ]
+  },
+  {
+    "i": 423,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue van",
+        "object"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "g",
+        "behind a gray car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "parked_on_road",
+        "t",
+        "They are parked on the road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind frame unspecified."
+    ]
+  },
+  {
+    "i": 424,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white van",
+        "object"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ],
+      "other": [
+        "another white van",
+        "object"
+      ],
+      "g": [
+        "a bluish gray car",
+        "object"
+      ],
+      "b": [
+        "an L-shaped Brown building with a gray roof",
+        "named_landmark"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "diagonally_in_corner_of",
+        "p",
+        "parked diagonally in the corner of a parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "other",
+          "g"
+        ],
+        "between another white van and a bluish gray car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of an L-shaped Brown building",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "off_of",
+        "a",
+        "off Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Diagonal/front frame unspecified."
+    ]
+  },
+  {
+    "i": 425,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "l": [
+        "the L building",
+        "named_landmark"
+      ],
+      "land": [
+        "the middle of the land",
+        "region"
+      ],
+      "c": [
+        "the corner of Graham Warren Way and Ashcroft Grove Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "not_parking_straight",
+        "t",
+        "not parking straight",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "l",
+        "in front of the L building",
+        "U",
+        "medium"
+      ],
+      [
+        "l",
+        "in_middle_of",
+        "land",
+        "on the middle of the land",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "at_corner_of",
+        "c",
+        "It is the corner of Graham Warren Way and Ashcroft Grove Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Text has unclear antecedent for 'It' in final sentence."
+    ]
+  },
+  {
+    "i": 426,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "p": [
+        "a small parking area",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "l": [
+        "an L-shaped building with gray roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "p",
+        "parked in a small parking area",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in_corner_near",
+        "l",
+        "parked in one corner near an L-shaped building with gray roof",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 427,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "l": [
+        "the L shaped building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "faces",
+        "l",
+        "facing the L shaped building",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "no_immediate_car_on_sides",
+        "t",
+        "no immediate cars parked on it's sides",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "along",
+        "a",
+        "along Ashcroft Grove road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Facing is intrinsic; sides of parking position unspecified."
+    ]
+  },
+  {
+    "i": 428,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "p": [
+        "the corner of a parking lot",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_angle_in",
+        "p",
+        "parked at an angle in the corner of a parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "p",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Angle frame unspecified."
+    ]
+  },
+  {
+    "i": 429,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "p": [
+        "the corner of the parking lot",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "p",
+        "parked in the corner of the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 430,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A light green car",
+        "object"
+      ],
+      "cars": [
+        "seven other cars",
+        "group"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "a brown L-shaped building with a gray roof",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "p",
+        "in a parking lot with seven other cars",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "off_of",
+        "a",
+        "off Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to a brown L-shaped building with a gray roof",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  }
+]

@@ -1,0 +1,2377 @@
+[
+  {
+    "i": 5640,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_left_side_of",
+        "road",
+        "Parked on the left side of Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "first_from_bottom",
+        [],
+        "first car from the bottom",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "south_of",
+        "gray",
+        "south of a gray car",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left and bottom ordering frame unclear."
+    ]
+  },
+  {
+    "i": 5641,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "words": [
+        "the words no entry",
+        "object"
+      ],
+      "road2": [
+        "the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "black",
+        "behind a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "words",
+        "on",
+        "road2",
+        "the words no entry on the road",
+        "N",
+        "high"
+      ],
+      [
+        "road2",
+        "behind",
+        "t",
+        "the road behind it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Behind relations lack directional frame; road behind may refer to car or be a separate spatial description."
+    ]
+  },
+  {
+    "i": 5642,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "cars": [
+        "Two white cars",
+        "group"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "One Grey car",
+        "object"
+      ],
+      "front": [
+        "in front",
+        "region"
+      ],
+      "back": [
+        "the back",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "on_edge_of",
+        "road",
+        "parked on the edge of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "cars",
+        "no_car_in_front",
+        [],
+        "there is no car in front",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "in",
+        "back",
+        "in the back",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“back” has no explicit reference object; group/singular relations uncertain."
+    ]
+  },
+  {
+    "i": 5643,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "light": [
+        "the light gray car",
+        "object"
+      ],
+      "x": [
+        "the intersection with Wellington Road",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "six_cars_behind",
+        "light",
+        "6 cars behind the light gray car",
+        "U",
+        "low"
+      ],
+      [
+        "light",
+        "closest_to",
+        "x",
+        "light gray car closest to the intersection with Wellington Road",
+        "U",
+        "low"
+      ],
+      [
+        "x",
+        "with",
+        "w",
+        "intersection with Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind/count direction along road unspecified."
+    ]
+  },
+  {
+    "i": 5644,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "x": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "six_cars_behind",
+        "white",
+        "6 cars behind the white car",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "closest_to",
+        "x",
+        "white car closest to the intersection with Birchfield Road",
+        "U",
+        "low"
+      ],
+      [
+        "x",
+        "with",
+        "birch",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind/count direction along road unspecified."
+    ]
+  },
+  {
+    "i": 5645,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "cars": [
+        "Two white cars",
+        "group"
+      ],
+      "front": [
+        "one in front of the other",
+        "region"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "road": [
+        "Wilmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "cars",
+        "one_in_front_of_other",
+        [],
+        "one in front of the other",
+        "U",
+        "low"
+      ],
+      [
+        "cars",
+        "closest_to",
+        "edge",
+        "closest to the edge of the map",
+        "U",
+        "low"
+      ],
+      [
+        "cars",
+        "off",
+        "road",
+        "off Wilmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Front/back direction frame unspecified; nearest-to scope may choose one car or the pair."
+    ]
+  },
+  {
+    "i": 5646,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "road": [
+        "Wilmore Road",
+        "named_landmark"
+      ],
+      "side": [
+        "the side where a bright orange building is located",
+        "region"
+      ],
+      "building": [
+        "a bright orange building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "white car on Wilmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on_side_where",
+        "building",
+        "on the side where a bright orange building is located",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "closest_to",
+        "building",
+        "The car is the closest one to this orange building",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“side” attachment and closest comparison set uncertain."
+    ]
+  },
+  {
+    "i": 5647,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "corner": [
+        "the corner of willmore Road and celine Grove",
+        "region"
+      ],
+      "will": [
+        "willmore Road",
+        "named_landmark"
+      ],
+      "celine": [
+        "celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "other",
+        "further_along_from",
+        "t",
+        "another white car further along from it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "across_from",
+        "other",
+        "the white car across from it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "near",
+        "corner",
+        "near the corner of willmore Road and celine Grove",
+        "N",
+        "high"
+      ],
+      [
+        "corner",
+        "between",
+        [
+          "will",
+          "celine"
+        ],
+        "corner of willmore Road and celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“it” may refer to target or second car in across-from clause; further along direction unknown."
+    ]
+  },
+  {
+    "i": 5648,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "parked on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_car_behind",
+        [],
+        "There is no car behind this car",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "t",
+        "another white car in some distance in front of it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Behind/front directions lack a grounded frame."
+    ]
+  },
+  {
+    "i": 5649,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "side": [
+        "the left side of the Willmore road",
+        "region"
+      ],
+      "road": [
+        "the Willmore road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "side",
+        "parked at the left side of the Willmore road",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_car_front_back",
+        [],
+        "no car parked at the front and back side of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/front/back frame unknown; no-car relation scope is car."
+    ]
+  },
+  {
+    "i": 5650,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "t": [
+        "this is the first car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "road",
+        "turn_onto_from",
+        "w",
+        "turn onto Willmore Road coming from Wellington Road",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "first_on_left_of_route",
+        "road",
+        "first car parked on the road to your left",
+        "R",
+        "low"
+      ]
+    ],
+    "u": [
+      "“turn onto” and “your left” are route/observer-relative; no target left assertion."
+    ]
+  },
+  {
+    "i": 5651,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "building": [
+        "the second building from the corner of Wellington Road and Willmore Road",
+        "object"
+      ],
+      "corner": [
+        "the corner of Wellington Road and Willmore Road",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "will": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "building",
+        "in front of the second building from the corner of Wellington Road and Willmore Road",
+        "I",
+        "medium"
+      ],
+      [
+        "building",
+        "second_from",
+        "corner",
+        "second building from the corner of Wellington Road and Willmore Road",
+        "U",
+        "low"
+      ],
+      [
+        "corner",
+        "between",
+        [
+          "w",
+          "will"
+        ],
+        "corner of Wellington Road and Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Second-building order reference is underspecified."
+    ]
+  },
+  {
+    "i": 5652,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The last white car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "building": [
+        "the building",
+        "object"
+      ],
+      "black": [
+        "two black car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_on",
+        "road",
+        "last white car on the Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "building",
+        "parked in front of the building",
+        "I",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "two black car behind",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Last ordering frame unspecified; plural black-car relation is grammatically rough."
+    ]
+  },
+  {
+    "i": 5653,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "one_car_behind",
+        "purple",
+        "1 car behind the only purple car",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind/count orientation along road unknown."
+    ]
+  },
+  {
+    "i": 5654,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The silver car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "purple",
+        "behind the only purple car",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind frame not specified."
+    ]
+  },
+  {
+    "i": 5655,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "t": [
+        "the white car with spots on it",
+        "object"
+      ],
+      "half": [
+        "the upper half of the road",
+        "region"
+      ],
+      "first": [
+        "the first white car starting off the bottom half of the lane's cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "road",
+        "horizontal",
+        [],
+        "With Leslie Road horizonal",
+        "W",
+        "low"
+      ],
+      [
+        "t",
+        "on",
+        "half",
+        "on the upper half of the road",
+        "W",
+        "low"
+      ],
+      [
+        "first",
+        "below",
+        "t",
+        "first white car starting off the bottom half",
+        "W",
+        "low"
+      ],
+      [
+        "first",
+        "first_in_order",
+        [],
+        "the first white car starting off the bottom half",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Vertical upper/lower is stated relative to road orientation, but road geometry is not calibrated."
+    ]
+  },
+  {
+    "i": 5656,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "three_cars_ahead_of",
+        "purple",
+        "3 cars ahead of the only purple car on Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Ahead/count direction along road is unspecified."
+    ]
+  },
+  {
+    "i": 5657,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "three_cars_ahead_of",
+        "purple",
+        "3 cars ahead of the only purple car on Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Ahead/count direction along road is unspecified."
+    ]
+  },
+  {
+    "i": 5658,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "three_cars_ahead_of",
+        "purple",
+        "3 cars ahead of the only purple car on Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Ahead/count direction along road is unspecified."
+    ]
+  },
+  {
+    "i": 5659,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "whites": [
+        "two white cars",
+        "group"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "curb": [
+        "the curb",
+        "region"
+      ],
+      "corner": [
+        "the corner for a parking area",
+        "region"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "whites",
+          "whites"
+        ],
+        "between two white cars",
+        "U",
+        "medium"
+      ],
+      [
+        "whites",
+        "close_to",
+        "blue",
+        "They are close to the blue car",
+        "U",
+        "low"
+      ],
+      [
+        "blue",
+        "on",
+        "curb",
+        "parked on the curb at the corner for a parking area",
+        "N",
+        "high"
+      ],
+      [
+        "corner",
+        "at",
+        "road",
+        "at the corner for a parking area",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "across_from",
+        "t",
+        "Across the street is a black car",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“They” may refer to white cars; the corner relation is loosely attached."
+    ]
+  },
+  {
+    "i": 5660,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "white car",
+        "object"
+      ],
+      "whites": [
+        "two other white cars",
+        "group"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "corner": [
+        "the corner of the map",
+        "region"
+      ],
+      "lot": [
+        "a empty bordered parking lot",
+        "region"
+      ],
+      "building": [
+        "a brown building with a red door",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "whites",
+          "whites"
+        ],
+        "in between two other white cars",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "white cars on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "road",
+        "near",
+        "corner",
+        "near the corner of the map",
+        "N",
+        "high"
+      ],
+      [
+        "road",
+        "in_front_of",
+        "lot",
+        "in front of a empty bordered parking lot",
+        "I",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "building",
+        "next to a brown building with a red door",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Fragment starts “When”; relationship of white car to clause attachment uncertain."
+    ]
+  },
+  {
+    "i": 5661,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "whites": [
+        "two other white cars",
+        "group"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "x": [
+        "an intersection on Leslie Road",
+        "region"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "whites",
+          "whites"
+        ],
+        "in between two other white cars",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "black",
+        "with a black car across from it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "near",
+        "x",
+        "near an intersection on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "on",
+        "x",
+        "that has a blue car on the corner",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "“that” may refer to intersection; across-from frame unspecified."
+    ]
+  },
+  {
+    "i": 5662,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "black": [
+        "the black car",
+        "object"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "black",
+        "across from the black car",
+        "R",
+        "medium"
+      ],
+      [
+        "black",
+        "five_cars_ahead_of",
+        "purple",
+        "5 cars ahead of the only purple car on Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Ahead/count direction along road unclear."
+    ]
+  },
+  {
+    "i": 5663,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "area": [
+        "the left parking area",
+        "region"
+      ],
+      "road": [
+        "Leslie road",
+        "named_landmark"
+      ],
+      "whites": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "area",
+        "in the left parking area",
+        "U",
+        "low"
+      ],
+      [
+        "area",
+        "along",
+        "road",
+        "along Leslie road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "whites",
+          "whites"
+        ],
+        "in between two white cars",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left orientation unresolved."
+    ]
+  },
+  {
+    "i": 5664,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ],
+      "blue": [
+        "a light blue car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "side": [
+        "the opposite side of willmore Road",
+        "region"
+      ],
+      "road": [
+        "willmore Road",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "white",
+          "blue"
+        ],
+        "in between another white car and a light blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "across_from",
+        "t",
+        "that has a black car across from it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "on",
+        "side",
+        "on the opposite side of willmore Road",
+        "U",
+        "low"
+      ],
+      [
+        "side",
+        "of",
+        "road",
+        "opposite side of willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "edge",
+        "near the edge of the map",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Across/opposite frame is unspecified; “that” attachment ambiguous."
+    ]
+  },
+  {
+    "i": 5665,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ],
+      "blue": [
+        "the light blue car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "road": [
+        "willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "white",
+          "blue"
+        ],
+        "in between another white car and the light blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "across_from",
+        "t",
+        "with a black car across from it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "closest_to",
+        "edge",
+        "nearest to the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Across-from frame unknown; nearest reference set may be incomplete."
+    ]
+  },
+  {
+    "i": 5666,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "house": [
+        "the gray house",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "count": [
+        "10 houses",
+        "group"
+      ],
+      "house2": [
+        "the gray house at the intersection with Wellington Road",
+        "object"
+      ],
+      "x": [
+        "the intersection with Wellington Road",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "house",
+        "in front of the gray house",
+        "I",
+        "medium"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "gray house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "ten_houses_right_of",
+        "house2",
+        "10 houses to the right of the gray house at the intersection with Wellington Road",
+        "U",
+        "low"
+      ],
+      [
+        "house2",
+        "at",
+        "x",
+        "gray house at the intersection with Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "with",
+        "w",
+        "intersection with Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Right house-order reference is ungrounded."
+    ]
+  },
+  {
+    "i": 5667,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "side": [
+        "the left side of Willmore Road",
+        "region"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ],
+      "silver": [
+        "a silver car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "side",
+        "parked at the left side of Willmore Road",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "t",
+        "another white car parked in front of it",
+        "U",
+        "low"
+      ],
+      [
+        "silver",
+        "behind",
+        "t",
+        "a silver car at its back",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Left/front/back referential frame unknown."
+    ]
+  },
+  {
+    "i": 5668,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The light gray car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "black": [
+        "the black car",
+        "object"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "birch": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "x": [
+        "the intersection with Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "black",
+        "across from the black car",
+        "R",
+        "medium"
+      ],
+      [
+        "black",
+        "five_cars_behind",
+        "white",
+        "5 cars behind the white car",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "closest_to",
+        "x",
+        "white car closest to the intersection with Birchfield Road",
+        "U",
+        "low"
+      ],
+      [
+        "x",
+        "with",
+        "birch",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind/count direction unspecified."
+    ]
+  },
+  {
+    "i": 5669,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A light colored car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "celine": [
+        "Celine Grove road",
+        "named_landmark"
+      ],
+      "three": [
+        "three other light colored cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_side_of",
+        "road",
+        "on the right side of the road",
+        "R",
+        "low"
+      ],
+      [
+        "t",
+        "when_facing",
+        "celine",
+        "when you're facing Celine Grove road",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "pointed_opposite_direction_of",
+        "celine",
+        "pointed in the opposite direction of Celine Grove Road",
+        "F",
+        "medium"
+      ],
+      [
+        "t",
+        "behind",
+        "three",
+        "is behind three other light colored cars",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Observer facing phrase grounds route orientation but no global map calibration; behind ordering unclear."
+    ]
+  },
+  {
+    "i": 5670,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "blue": [
+        "a light blue car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "black2": [
+        "one black car",
+        "object"
+      ],
+      "white2": [
+        "one white car",
+        "object"
+      ],
+      "road": [
+        "willmore road",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "blue",
+          "white"
+        ],
+        "in between a light blue car and a white car",
+        "U",
+        "medium"
+      ],
+      [
+        "black2",
+        "across_from",
+        "t",
+        "one black car and one white car across from it",
+        "U",
+        "low"
+      ],
+      [
+        "white2",
+        "across_from",
+        "t",
+        "one white car across from it",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on willmore road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "towards",
+        "edge",
+        "towards the edge of the map",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Across reference/elliptical scope uncertain."
+    ]
+  },
+  {
+    "i": 5671,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "light": [
+        "the light gray car",
+        "object"
+      ],
+      "x": [
+        "the intersection with Wellington Road",
+        "region"
+      ],
+      "w": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "white",
+        "across from the white car",
+        "R",
+        "medium"
+      ],
+      [
+        "white",
+        "three_cars_behind",
+        "light",
+        "3 cars behind the light gray car closest to the intersection with Wellington Road",
+        "U",
+        "low"
+      ],
+      [
+        "light",
+        "closest_to",
+        "x",
+        "light gray car closest to the intersection with Wellington Road",
+        "U",
+        "low"
+      ],
+      [
+        "x",
+        "with",
+        "w",
+        "intersection with Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind/count order frame unspecified."
+    ]
+  },
+  {
+    "i": 5672,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "whites": [
+        "three white cars",
+        "group"
+      ],
+      "white": [
+        "one white car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "whites",
+        "in_front_of",
+        "t",
+        "has three white cars in front of it",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "behind",
+        "t",
+        "and one white car behind it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Front/back direction frame unspecified."
+    ]
+  },
+  {
+    "i": 5673,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "road": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "whites": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "whites",
+          "whites"
+        ],
+        "between two white cars",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5674,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "side": [
+        "the left side of the Willmore road",
+        "region"
+      ],
+      "road": [
+        "the Willmore road",
+        "named_landmark"
+      ],
+      "white2": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "white",
+        "parked in front of a white car",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "at",
+        "side",
+        "at the left side of the Willmore road",
+        "U",
+        "low"
+      ],
+      [
+        "white2",
+        "opposite_side_of",
+        "t",
+        "another white car parked at just opposite side of the road",
+        "R",
+        "low"
+      ]
+    ],
+    "u": [
+      "Left frame unknown; opposite-side relation is road-relative but endpoints fuzzy."
+    ]
+  },
+  {
+    "i": 5675,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "side": [
+        "the right side of the road named Leslie road",
+        "region"
+      ],
+      "road": [
+        "Leslie road",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "side",
+        "parked at the right side of the road named Leslie road",
+        "U",
+        "low"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "t",
+        "a black car parked in front of it",
+        "U",
+        "low"
+      ],
+      [
+        "white",
+        "behind",
+        "t",
+        "another white car parked behind it",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Right and front/back orientation unknown."
+    ]
+  },
+  {
+    "i": 5676,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "north": [
+        "the north side of Leslie Road",
+        "region"
+      ],
+      "row": [
+        "the north side of Leslie Road",
+        "group"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "north",
+        "Parked on the north side of Leslie Road",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "third_from_right",
+        "row",
+        "third car from the right",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "left_of",
+        "black",
+        "to the left of a black car",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "Right/left order frame unspecified."
+    ]
+  },
+  {
+    "i": 5677,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The grayish brown car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "x": [
+        "the intersection of Leslie Road and Celine Grove",
+        "region"
+      ],
+      "celine": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "black",
+        "behind a black car",
+        "U",
+        "low"
+      ],
+      [
+        "black",
+        "near",
+        "x",
+        "black car near the intersection of Leslie Road and Celine Grove",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "between",
+        [
+          "road",
+          "celine"
+        ],
+        "intersection of Leslie Road and Celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind frame unresolved."
+    ]
+  },
+  {
+    "i": 5678,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The silver car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "11_cars_ahead_of",
+        "purple",
+        "11 cars ahead of the only purple car on Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Ahead/count direction along road not specified."
+    ]
+  },
+  {
+    "i": 5679,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "road": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "purple": [
+        "the only purple car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "12_cars_ahead_of",
+        "purple",
+        "12 cars ahead of the only purple car on Leslie Road",
+        "U",
+        "low"
+      ],
+      [
+        "purple",
+        "on",
+        "road",
+        "on Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Ahead/count direction along road not specified."
+    ]
+  }
+]
