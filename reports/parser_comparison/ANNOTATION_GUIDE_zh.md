@@ -17,3 +17,9 @@
 评分只接受reviewed=true、independent=true、source=human_editor且审核人非空的记录。目标/地标/中间实体采用严格字符跨度及role；关系三元组保留主客体，少量表面同义词归一化（in/inside、beside/next to等）。完整链准确率仅对人工图确实含目标—地标路径的任务计算，不将空链算作成功。所有模型输出、模型共识与本Agent案例意见均不自动成为GT。
 
 A/B的实体类别在原解析器不输出类型时，使用相同的原文Span词典作type补全，标记type_source=shared_lexical_span_heuristic；它不是新训练的类别识别器。C同样补全unknown类型，D保留其原始类别。A/B原始置信路径过滤与通用图展示分别保留：图上存在路径不代表方向网络当时实际采用了该路径。
+
+最终采用V2清单：定向组的“方向正确”要求该指令全部有效Anchor方向分类正确，错误组依据明确记录的指定Anchor。随机100条先从全部TRAIN均匀抽取，再抽定向组。400条原文无规范化重复；旧V1已封存，仅用于工程记录。页面颜色只表示该关系图中的role，不表示实体或关系已被确认正确。
+
+正式评分文本规范：描述字符串仅忽略大小写及重复空白；不会删除属性。关系词仅移除is/are等助动词，并将is located in/in→inside、beside/adjacent to→next to、opposite→across from、to the right/left of→right/left of等表面变体归一。主客体不交换，不把相对方向变成地理方向，也不进行复杂语义等价推断。
+
+独立标注前请不要浏览cases.html、模型JSON或带模型判断的报告。那些是事后诊断资料。图中节点位置只用于排版，箭头表示关系主客体，不代表地图物理位置。

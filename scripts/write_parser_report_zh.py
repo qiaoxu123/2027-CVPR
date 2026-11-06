@@ -1,0 +1,113 @@
+"""Write Chinese preliminary report from measured outputs, never invented gold."""
+import argparse,json
+from pathlib import Path
+
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--report',type=Path,required=True);a=p.parse_args();o=a.report;s=json.load(open(o/'summary.json'));parsers=s['parsers'];assert set(parsers)==set('ABCD');assert all(v['descriptive']['ALL']['N']==400 for v in parsers.values());assert not s['accuracy_claim_allowed'],'This preliminary template is for the no-independent-gold phase'
+ table=[];groups=[]
+ names={'A':'spaCy sm + 原规则','B':'spaCy trf + 相同规则','C':'GLiNER2-base零样本schema','D':'Qwen3-14B本地BF16'}
+ for tag,v in parsers.items():
+  d=v['descriptive']['ALL'];r=v['runtime'];lat=r['wall_s']/400;mem=r['GPU_peak_allocated_bytes']/1024**3
+  table.append(f"| {tag} {names[tag]} | {d['raw_target_output_coverage']*100:.2f}% | {d['target_output_coverage']*100:.2f}% | {d['indirect_output_rate']*100:.2f}% | {lat*1000:.2f} ms | {mem:.2f} GiB |")
+  for group,x in v['descriptive'].items():
+   if group=='ALL':continue
+   groups.append(f"| {tag} | {group} | {x['N']} | {x['raw_target_output_coverage']*100:.1f}% | {x['target_output_coverage']*100:.1f}% | {x['indirect_output_rate']*100:.1f}% |")
+ A=parsers['A']['descriptive']['ALL'];B=parsers['B']['descriptive']['ALL'];D=parsers['D']['descriptive']['ALL'];delta=(B['target_output_coverage']-A['target_output_coverage'])*100;dwall=parsers['D']['runtime']['wall_s'];latratio=(dwall/400)/(parsers['B']['runtime']['wall_s']/400)
+ text=f'''# CityNav导航指令解析器对照：真实推理与待人工核验结果
+
+2026-11-06。独立分支`experiment/citynav-parser-comparison-20261106`，基于语言—Polygon及大角度错误报告7b513fe；初始远程main为ce2c6dae。**仅TRAIN；未训练方向网络、未修改GeomBelief、未加入RGB、未运行导航、未访问正式Val/Test。**
+
+## 结论与目前能回答的边界
+
+四种系统均已真实执行同一400条输入。**独立人工标准关系图为0条，因此目标/地标/中间实体P/R/F1、直接/间接准确率、三元组F1和完整链准确率全部为N/A，不是0，也没有所谓“人工核验提升”。** 模型共识、当前Agent文字意见和自动浏览器测试均没有充当GT。用户可使用已实际测试的盲核验页面补齐标准后评分。
+
+B相对A的可绑定目标Span输出覆盖增加**{delta:.2f}个百分点**，不是目标F1提升。Qwen通常输出更长描述，但可能把中间实体吞入目标短语，仍存在角色/作用域和字面绑定问题，且本配置耗时远高于小解析器。**当前不能给出真实质量第一名，也不能给出解析错误导致2370个大角度错误的因果百分比。**
+
+## 数据与统一输入
+
+正式V2：固定seed42，100条大误差且登记目标不在上下文、100条大误差且在上下文、100条全Anchor方向分类均正确的指令；各定向组34/33/33条当前自动direct/indirect/uncertain类别。另先从完整21,878条TRAIN均匀抽100条，定向组不与其重叠。400条规范化原文全部唯一，但物理目标可重复，不能假定400个独立实例。
+
+错误组依据选定Anchor；良性组要求同一指令全部有效Anchor正确，不混入“某Anchor正确、另一个大错”的指令。随机100仅适合有限样本描述，不把定向300条比例外推到全TRAIN。旧V1的混合良性控制及2条重复原文已修复，原数据/输出仍保存在服务器protocol_v1及Git b33c0ed，未用于最终比较。
+
+模型输入只有原始英文和对应TRAIN地图的公开名称目录。索引仅作结果关联，不作为LLM提示词；地图位置、GT实例ID/坐标、轨迹、原模型误差、候选是否含目标均不进入解析。PRIVATE_sampling只在采样/报告侧读取。
+
+## 实际系统及公平性限制
+
+- A：spaCy3.8.7/en_core_web_sm3.8.0，原GT-free规则与PublicNames。
+- B：spaCy3.8.7/en_core_web_trf3.8.0，**同一规则与PublicNames**。二者公开名称发现由共同词典完成，因此词典提及表现相同不证明Transformer的NER更好。
+- C：gliner2 1.2.4，官方fastino/gliner2-base-v1，span模型max_width=8；固定20类空间关系、threshold0.5，目标/地标/中间对象零样本schema。目录中实际字面出现的名称用于schema条件提示，不直接注入实体结果。**不是GLiREL、GLiNER2.5 JointIE或任务微调模型的结论**。固定标签和短span限制会影响完整描述和开放关系，不能将整个系列判为无效。
+- D：官方Qwen3-14B，BF16、greedy、非thinking、max1600新token。本地生成关系图，输入完整公开名称表，完全不调用外部LLM API。批量32正式推理；batch2/8/32 Smoke另存，不混作400条准确率。
+
+统一JSON保留实体文本/role/type、字符跨度、主客体关系、原文证据和歧义；路径可逆向遍历但保留原有关系主客体，最多展示4跳，原始三元组全部保留。没有将front/behind等强行变成世界方向。A/B普通节点依据原生目标—地标路径区分中间实体和其他reference，不把所有普通名词都算中间实体；保留原生解析不变。原模块不输出type时，使用相同原文span词典补全并记录type_source，不能称为新训练类别模型。
+
+这是实际系统比较，**不是统一网络容量或统一关系词表的编码器替换实验**。A/B是语法规则系统，C依赖预设关系schema，D为开放生成；其原始输出和标准化输出都保留。
+
+## 输出覆盖与效率（不是准确率）
+
+| 系统 | 原始输出target角色 | 可绑定原文目标Span | 输出间接链 | 全流程均摊/条 | PyTorch显存峰值 |
+|---|---:|---:|---:|---:|---:|
+'''+ '\n'.join(table)+f'''
+
+“原始输出target”只说明生成了该角色；“可绑定Span”要求能安全对应原文，不说明选对目标。输出间接链更多可能是恢复真链，也可能是错误作用域/伪链，**不能视为间接关系召回率**。
+
+GPU为RTX PRO6000 Blackwell96GB，Torch2.8.0+cu128；同服务器有其他任务，时间是实际测量而非独占基准。A为CPU，B/C实际batch1；D为batch32，均摊时间是吞吐成本，**不是在线单请求延迟**。显存为PyTorch allocator峰值，不包括全部CUDA上下文及B的CuPy额外分配。D正式400条约{dwall/60:.2f}分钟，按本次均摊成本约为B的{latratio:.0f}倍。模型加载和首次下载成本另行记录，不能混入热推理效果。
+
+| 系统 | 分组 | 条数 | 原始target输出 | 可绑定target Span | 间接链输出 |
+|---|---|---:|---:|---:|---:|
+'''+ '\n'.join(groups)+'''
+
+随机组与定向组分别公开。没有对这些输出率做“解析质量显著提升”的统计检验。
+
+## 真实精度指标与接口质量
+
+summary.json内各模型independent_human_metrics.reviewed_count=0；所要求的Precision/Recall/F1、描述完整匹配、关系分类和完整链准确率均明确为null。评分器仅接受source=human_editor、reviewed=true、independent=true且审核人非空的记录。链准确率仅在人工图有可评价路径的任务上计算，不把双方空链算成功。严格跨度/role和关系主客体评分，少量同义词归一化；正式人工评分前应固定边界及歧义裁决规范。
+
+模型原始运行错误、JSON失败、实体无法唯一对齐和残余关系端点问题分别保留。D的生成/标准化错误均计入400条分母，不删失败。仅大小写不同的唯一字面Span（the building与The building）可还原为原文；非唯一提及和真正改写不得强行绑定。
+
+C适配器的重复词形端点错误经红绿测试修复：直接采用模型给定start/end，5条图受影响；没有重新推理，也未读取GT。D唯一大小写Span修复同样只处理表示差异，原始生成、修复前图及补丁计数都保留。这些接口修复不是神经模型质量提升。
+
+D本配置有4条JSON解析失败；另67条输出仍有结构/端点问题，共127项，63个实体提及无法安全对齐。原始生成和失败均保留，不能删掉后只评成功输出。唯一大小写对齐修复影响85条图、86个实体，不修改任何原始生成或语义。A/B/C本轮无JSON运行失败。
+
+平均target_description词数：A2.81、B2.94、C0.51、D9.78。**描述长不等于描述正确**：D有时将关系从句及中间对象并入一个目标Span。13057中，目标描述包含between two dark blue cars，但未单独输出这组参考车辆，不能据更长描述宣称间接推理更强。
+
+## 典型问题与2370个大误差的关联
+
+[12例对照](cases.html)包含在D运行前固定的8条A/B分歧及4条随机案例；[盲核验页](review.html)可浏览全部400条。案例评论来自当前Agent的语言检查，**不是独立人工标准**。
+
+- 14114以`Grey roof building...`开头，A漏目标，B恢复名词短语，是可直接从文本检查的缺陷。
+- 10905多色建筑/棕屋顶指令中，A漏目标，B恢复完整短语；仅输出building会损失描述。
+- 13057明确为`The white car`，A保留而B缩为car；新增输出不能掩盖属性丢失。
+- 10469同时提到dark blue car和dirt parking lot，原文目标作用域有歧义，不能只因为某模型选择car就宣布解析正确。
+- D在Smoke中可恢复car→parking lot→West Midlands Police Custody Suite，但把Holford Drive标reference而非landmark；更多结构不等于角色完全正确，`for`关联也不自动成为几何约束。
+
+沿用全量大角度报告：2,370个错误Anchor对中，773个登记目标对象不在固定公开上下文，1,597个在上下文仍错；后者仅155个潜在对象Top-1为登记目标。这个模型没有精确实例ID监督，故这些是弱监督/潜在对象诊断，**不是已核实的实例识别失败数，更不是解析错误标签**。
+
+四类问题必须分开：
+1. 文本可核实的解析缺陷：漏主目标、丢颜色/形状、把地标当目标、错误关系作用域；上述案例提供证据，但没有独立标签来估计全2370比例。
+2. 解析看似合理但上下文缺失：固定集合没有登记目标时，改善对象匹配无法直接选中它；自由角度分支仍可能改善方位，不能把773当作总不可恢复上限。
+3. 上下文有目标但匹配失败：1597个错误包含此类风险；解析错误与几何/对象匹配可同时发生，不能凭共现强行互斥归因。
+4. 文本及公开名称不足以唯一确定方位：near、物体相对behind、相似车辆的颜色/排列等，不会仅因句法更好就变成唯一地图角度。该类本轮没有人工唯一性标签，数量未知。
+
+本轮没有将新图送入方向网络进行干预，也没有把已诊断确认集重新用于模型选择。因此不能声称“换解析器能修复X%的角度错误”。旧确认集今后仍仅作诊断。
+
+D与B可绑定目标Span输出仅差0.25个百分点；**不是F1差异**。在没有独立标准的情况下，没有证据证明D的真实质量足以抵偿其成本。当前更适合先核验B这个低成本候选，不直接将D替换为默认。
+
+## 决策
+
+1. **最佳解析器：暂不能真实排名。** B比A的覆盖略高且便宜，但存在描述缩短/作用域退化；C本配置的目标角色不足；D描述更长却未必完整恢复中间链，代价高且仍有对齐/角色错误。必须以独立关系图F1裁决。
+2. **相对spaCy提升：目前可报告的是覆盖和成本，不是准确率提升。** 不能用模型自评或输出更多三元组填补缺失的金标准。
+3. **错误归因：已展示明确语言缺陷，同时候选缺失和对象匹配问题仍存在；无法给出可信的互斥因果百分比。** 不应将全部2370归因语言。
+4. **下一步：优先把LLM用于离线候选标注，独立人工核验后训练/蒸馏轻量role/scope解析器。** 在未建立质量证据之前，不直接把高成本LLM替换成在线默认，也不将所有LLM生成图作为训练真值。先对固定小批盲标准比较A/B/D，再考虑冻结方向头的解析替换反事实，检验语义收益是否真的转化为方位改善。
+
+## 工程交付
+
+逐指令JSON在A/B/C/D目录；per_instruction.csv含原文、实体、关系、链和诊断分组。全部真实原始生成保留。review.html可独立下载后在浏览器打开，不需外部API；标注保存在本地浏览器，支持导出、导入、断点恢复。查看候选后保存会标为辅助审核，不混作独立盲标准。
+
+实际浏览器验证了：原文选字添加实体→有向关系→保存→切换→非零任务刷新恢复→JSON/CSV导出→查看候选后排除独立评分。自动测试没有创建真实人工GT。CPU测试及截图见本目录。
+
+源码/运行恢复见RECOVERY_zh.md，模型版本及官方SHA见model_provenance.json。原方向头SHA48547c574e34e2ae8780c781c0b65fdff83cf6f0f635bb2718d30c170c2b37fe未改变。外部adversarial-review实际调用但workspace路由超时，未宣称外审通过。
+
+参考官方接口：[spaCy模型](https://github.com/explosion/spacy-models/releases/tag/en_core_web_trf-3.8.0)、[GLiNER2](https://github.com/fastino-ai/GLiNER2)、[Qwen3-14B](https://huggingface.co/Qwen/Qwen3-14B)。本报告采用实际固定版本，不以最新版文档替代未运行能力。
+'''
+ (o/'REPORT_zh.md').write_text(text)
+if __name__=='__main__':main()

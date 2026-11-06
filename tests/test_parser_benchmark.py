@@ -43,3 +43,15 @@ def test_case_only_alignment_is_unique_and_does_not_choose_ambiguous_mentions():
  entity,note=aligned_entity('The white car near Library.',dict(id='t',text='the white car',role='target'),0)
  assert entity and entity['text']=='The white car' and entity['start']==0;assert 'case' in note
  entity,note=aligned_entity('The car beside the car.',dict(id='t',text='THE CAR',role='target'),0);assert entity is None
+
+def test_scoring_normalizes_auxiliary_relation_words_and_description_case():
+ import copy
+ goldgraph=graph();goldgraph['target_description']='The red car';predgraph=copy.deepcopy(goldgraph);predgraph['relations'][0]['relation']='is located in';predgraph['target_description']='the red car'
+ review=dict(index=1,text=sample()['text'],graph=goldgraph,reviewed=True,independent=True,reviewer='human',source='human_editor');result=score_reviewed([dict(index=1,graph=predgraph)],[review]);assert result['triples']['F1']==1;assert result['description_exact']==1
+
+def test_spacy_ordinary_reference_is_not_automatically_an_intermediate():
+ from scripts.run_parser_benchmark import convert_spacy
+ t=dict(node=0,text='car',start=0,end=3,kind='ordinary_object');l=dict(node=1,text='Library',start=9,end=16,kind='named_landmark');tree=dict(node=2,text='tree',start=22,end=26,kind='ordinary_object')
+ edge=dict(subject=t,object=l,relation='near',evidence='near',reference_frame='unspecified')
+ parsed=dict(target_span=t,entities=[t,l,tree],paths=[dict(nodes=[t,l],steps=[edge])],edges=[dict(a=0,b=1,relation='near'),dict(a=0,b=2,relation='near')],scope_uncertain=False)
+ g=convert_spacy(parsed,[]);assert next(e for e in g['entities'] if e['id']=='2')['role']=='reference'

@@ -1,0 +1,750 @@
+<meta charset="utf-8"><style>body{max-width:1400px;margin:25px auto;font:16px sans-serif}td{width:25%;vertical-align:top;border:1px solid #ccc}pre{white-space:pre-wrap}article{margin:25px 0;border-bottom:2px solid #aaa}</style><h1>Actual parser outputs: qualitative comparison</h1><p>These observations are not independent human gold. Examples selected before D inference; no coordinates or GT-assisted parsing.</p><article><h2>Query13057</h2><p>The white car that is parked between the two dark blue cars at the Downing College Chapel, across is Anatomy School.</p><p>原文目标为white car；A保留完整名词短语，B仅car会丢外观。C原始输出把Anatomy School当target。属于Agent语言观察，不是人工标准。</p><a href="comparison_00.png"><img width="1200" src="comparison_00.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;The white car&#x27;]</p><pre>[
+  [
+    &quot;The white car&quot;,
+    &quot;between&quot;,
+    &quot;the two dark blue cars&quot;
+  ],
+  [
+    &quot;the two dark blue cars&quot;,
+    &quot;at&quot;,
+    &quot;Downing College Chapel&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;car&#x27;]</p><pre>[
+  [
+    &quot;car&quot;,
+    &quot;between&quot;,
+    &quot;the two dark blue cars&quot;
+  ],
+  [
+    &quot;the two dark blue cars&quot;,
+    &quot;at&quot;,
+    &quot;Downing College Chapel&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;Anatomy School&#x27;]</p><pre>[
+  [
+    &quot;white car&quot;,
+    &quot;near&quot;,
+    &quot;Anatomy School&quot;
+  ],
+  [
+    &quot;white car&quot;,
+    &quot;next to&quot;,
+    &quot;dark blue cars&quot;
+  ],
+  [
+    &quot;white car&quot;,
+    &quot;inside&quot;,
+    &quot;Downing College Chapel&quot;
+  ],
+  [
+    &quot;white car&quot;,
+    &quot;outside&quot;,
+    &quot;Downing College Chapel&quot;
+  ],
+  [
+    &quot;white car&quot;,
+    &quot;between&quot;,
+    &quot;dark blue cars&quot;
+  ],
+  [
+    &quot;white car&quot;,
+    &quot;across from&quot;,
+    &quot;Anatomy School&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;The white car that is parked between the two dark blue cars&#x27;]</p><pre>[
+  [
+    &quot;The white car that is parked between the two dark blue cars&quot;,
+    &quot;across from&quot;,
+    &quot;Anatomy School&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query7434</h2><p>A light grey car in the West Midlands Police Custody Suite, with the map orientated with the playing fields to the top, the light grey car is fourth from the top left. (ignoring the white and blue cars separated from the main car park)</p><p>目标短语包含light grey car；只输出car会丢颜色。此处只检查目标角色，不评序数条件。</p><a href="comparison_01.png"><img width="1200" src="comparison_01.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;A light grey car&#x27;]</p><pre>[
+  [
+    &quot;A light grey car&quot;,
+    &quot;in&quot;,
+    &quot;West Midlands Police Custody Suite&quot;
+  ],
+  [
+    &quot;A light grey car&quot;,
+    &quot;with&quot;,
+    &quot;the map&quot;
+  ],
+  [
+    &quot;the white and blue cars&quot;,
+    &quot;from&quot;,
+    &quot;the main car park&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;car&#x27;]</p><pre>[
+  [
+    &quot;car&quot;,
+    &quot;in&quot;,
+    &quot;West Midlands Police Custody Suite&quot;
+  ],
+  [
+    &quot;the white and blue cars&quot;,
+    &quot;from&quot;,
+    &quot;the main car park&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;playing fields&#x27;]</p><pre>[
+  [
+    &quot;light grey car&quot;,
+    &quot;front of&quot;,
+    &quot;playing fields&quot;
+  ],
+  [
+    &quot;light grey car&quot;,
+    &quot;left of&quot;,
+    &quot;playing fields&quot;
+  ],
+  [
+    &quot;light grey car&quot;,
+    &quot;right of&quot;,
+    &quot;playing fields&quot;
+  ],
+  [
+    &quot;light grey car&quot;,
+    &quot;inside&quot;,
+    &quot;West Midlands Police Custody Suite&quot;
+  ],
+  [
+    &quot;white and blue cars&quot;,
+    &quot;outside&quot;,
+    &quot;main car park&quot;
+  ],
+  [
+    &quot;light grey car&quot;,
+    &quot;facing&quot;,
+    &quot;playing fields&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: []</p><pre>[]</pre></td></tr></table></article><article><h2>Query6822</h2><p>The white car that is 13th from the right in the bottom row of cars in the massive parking lot for the West Midlands Police Custody Suite, when viewed aerially with Holford Drive to the right.</p><p>A未输出目标，B输出white car；不据此判断其他关系链正确或方向一定可修复。</p><a href="comparison_02.png"><img width="1200" src="comparison_02.png"></a><table><tr><td><h3>A</h3><p>Target: []</p><pre>[
+  [
+    &quot;13th&quot;,
+    &quot;right in&quot;,
+    &quot;the bottom row&quot;
+  ],
+  [
+    &quot;the bottom row&quot;,
+    &quot;of&quot;,
+    &quot;cars&quot;
+  ],
+  [
+    &quot;13th&quot;,
+    &quot;right in&quot;,
+    &quot;the massive parking lot&quot;
+  ],
+  [
+    &quot;the massive parking lot&quot;,
+    &quot;for&quot;,
+    &quot;West Midlands Police Custody Suite&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;The white car&#x27;]</p><pre>[
+  [
+    &quot;The white car&quot;,
+    &quot;in&quot;,
+    &quot;the bottom row&quot;
+  ],
+  [
+    &quot;the bottom row&quot;,
+    &quot;in&quot;,
+    &quot;the massive parking lot&quot;
+  ],
+  [
+    &quot;the massive parking lot&quot;,
+    &quot;for&quot;,
+    &quot;West Midlands Police Custody Suite&quot;
+  ],
+  [
+    &quot;the bottom row&quot;,
+    &quot;of&quot;,
+    &quot;cars&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: []</p><pre>[
+  [
+    &quot;white car&quot;,
+    &quot;right of&quot;,
+    &quot;Holford Drive&quot;
+  ],
+  [
+    &quot;white car&quot;,
+    &quot;surrounded by&quot;,
+    &quot;parking lot&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;The white car that is 13th from the right in the bottom row of cars&#x27;]</p><pre>[
+  [
+    &quot;The white car that is 13th from the right in the bottom row of cars&quot;,
+    &quot;in&quot;,
+    &quot;massive parking lot for the West Midlands Police Custody Suite&quot;
+  ],
+  [
+    &quot;massive parking lot for the West Midlands Police Custody Suite&quot;,
+    &quot;for&quot;,
+    &quot;West Midlands Police Custody Suite&quot;
+  ],
+  [
+    &quot;Holford Drive&quot;,
+    &quot;to the right of&quot;,
+    &quot;massive parking lot for the West Midlands Police Custody Suite&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query10905</h2><p>A multicolored Brown, Gray and beige building with a brown roof near the edge of the map off Jesus Lane, that is next to the hall Court and across the street from the Pearce hostel</p><p>B恢复了带颜色/屋顶的目标短语；只输出building不足以保留实例特征。</p><a href="comparison_03.png"><img width="1200" src="comparison_03.png"></a><table><tr><td><h3>A</h3><p>Target: []</p><pre>[]</pre></td><td><h3>B</h3><p>Target: [&#x27;A multicolored Brown, Gray and beige building&#x27;]</p><pre>[
+  [
+    &quot;A multicolored Brown, Gray and beige building&quot;,
+    &quot;off&quot;,
+    &quot;Jesus Lane&quot;
+  ],
+  [
+    &quot;A multicolored Brown, Gray and beige building&quot;,
+    &quot;from&quot;,
+    &quot;Pearce hostel&quot;
+  ],
+  [
+    &quot;A multicolored Brown, Gray and beige building&quot;,
+    &quot;edge of&quot;,
+    &quot;the map&quot;
+  ],
+  [
+    &quot;A multicolored Brown, Gray and beige building&quot;,
+    &quot;to&quot;,
+    &quot;the hall Court&quot;
+  ],
+  [
+    &quot;A multicolored Brown, Gray and beige building&quot;,
+    &quot;across&quot;,
+    &quot;the street&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;building&#x27;]</p><pre>[
+  [
+    &quot;building&quot;,
+    &quot;near&quot;,
+    &quot;Jesus Lane&quot;
+  ],
+  [
+    &quot;building&quot;,
+    &quot;next to&quot;,
+    &quot;hall Court&quot;
+  ],
+  [
+    &quot;building&quot;,
+    &quot;front of&quot;,
+    &quot;map&quot;
+  ],
+  [
+    &quot;building&quot;,
+    &quot;between&quot;,
+    &quot;Pearce hostel&quot;
+  ],
+  [
+    &quot;building&quot;,
+    &quot;across from&quot;,
+    &quot;Pearce hostel&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;A multicolored Brown, Gray and beige building with a brown roof&#x27;]</p><pre>[
+  [
+    &quot;A multicolored Brown, Gray and beige building with a brown roof&quot;,
+    &quot;near the edge of the map off&quot;,
+    &quot;Jesus Lane&quot;
+  ],
+  [
+    &quot;A multicolored Brown, Gray and beige building with a brown roof&quot;,
+    &quot;next to&quot;,
+    &quot;hall Court&quot;
+  ],
+  [
+    &quot;A multicolored Brown, Gray and beige building with a brown roof&quot;,
+    &quot;across the street from&quot;,
+    &quot;Pearce hostel&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query14114</h2><p>Grey roof building on Regent street next to Downing college building on the edge of the map.</p><p>原文是以Grey roof building开头的片段；B恢复目标，A/C遗漏。</p><a href="comparison_04.png"><img width="1200" src="comparison_04.png"></a><table><tr><td><h3>A</h3><p>Target: []</p><pre>[]</pre></td><td><h3>B</h3><p>Target: [&#x27;Grey roof building&#x27;]</p><pre>[
+  [
+    &quot;Grey roof building&quot;,
+    &quot;on&quot;,
+    &quot;Regent street&quot;
+  ],
+  [
+    &quot;Grey roof building&quot;,
+    &quot;next to&quot;,
+    &quot;Downing college building&quot;
+  ],
+  [
+    &quot;Downing college building&quot;,
+    &quot;next to&quot;,
+    &quot;Downing college&quot;
+  ],
+  [
+    &quot;Grey roof building&quot;,
+    &quot;edge of&quot;,
+    &quot;the map&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: []</p><pre>[
+  [
+    &quot;Grey roof building&quot;,
+    &quot;near&quot;,
+    &quot;Downing college building&quot;
+  ],
+  [
+    &quot;Grey roof building&quot;,
+    &quot;next to&quot;,
+    &quot;Downing college building&quot;
+  ],
+  [
+    &quot;Grey roof building&quot;,
+    &quot;on&quot;,
+    &quot;Regent street&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;Grey roof building on Regent street&#x27;]</p><pre>[
+  [
+    &quot;Grey roof building on Regent street&quot;,
+    &quot;on&quot;,
+    &quot;Regent street&quot;
+  ],
+  [
+    &quot;Grey roof building on Regent street&quot;,
+    &quot;next to&quot;,
+    &quot;Downing college building&quot;
+  ],
+  [
+    &quot;Downing college building&quot;,
+    &quot;on the edge of&quot;,
+    &quot;edge of the map&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query10469</h2><p>One dark blue car and a dirt parking lot within the park parade, Portugal Street and lower Park Street blocks</p><p>原文同时列car和parking lot，目标作用域存在歧义；不能仅因模型输出car就判为正确。</p><a href="comparison_05.png"><img width="1200" src="comparison_05.png"></a><table><tr><td><h3>A</h3><p>Target: []</p><pre>[
+  [
+    &quot;a dirt parking lot&quot;,
+    &quot;within&quot;,
+    &quot;park parade&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;One dark blue car&#x27;]</p><pre>[
+  [
+    &quot;One dark blue car&quot;,
+    &quot;within&quot;,
+    &quot;park parade&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: []</p><pre>[
+  [
+    &quot;dirt parking lot&quot;,
+    &quot;inside&quot;,
+    &quot;park parade&quot;
+  ],
+  [
+    &quot;dirt parking lot&quot;,
+    &quot;outside&quot;,
+    &quot;park parade&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;One dark blue car&#x27;]</p><pre>[
+  [
+    &quot;One dark blue car&quot;,
+    &quot;within&quot;,
+    &quot;dirt parking lot&quot;
+  ],
+  [
+    &quot;dirt parking lot&quot;,
+    &quot;within&quot;,
+    &quot;park parade&quot;
+  ],
+  [
+    &quot;park parade&quot;,
+    &quot;and&quot;,
+    &quot;Portugal Street&quot;
+  ],
+  [
+    &quot;park parade&quot;,
+    &quot;and&quot;,
+    &quot;lower Park Street blocks&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query10099</h2><p>If you&#x27;re on Portugal Street this is a building directlya cross from The Hawk&#x27;s Club.</p><p>主目标为building；Portugal Street是前置条件，不能当导航目标。</p><a href="comparison_06.png"><img width="1200" src="comparison_06.png"></a><table><tr><td><h3>A</h3><p>Target: []</p><pre>[
+  [
+    &quot;a building directlya cross&quot;,
+    &quot;on&quot;,
+    &quot;Portugal Street&quot;
+  ],
+  [
+    &quot;a building directlya cross&quot;,
+    &quot;from&quot;,
+    &quot;The Hawk&#x27;s Club&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;a building&#x27;]</p><pre>[
+  [
+    &quot;a building&quot;,
+    &quot;on&quot;,
+    &quot;Portugal Street&quot;
+  ],
+  [
+    &quot;directlya cross&quot;,
+    &quot;from&quot;,
+    &quot;The Hawk&#x27;s Club&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;building&#x27;]</p><pre>[
+  [
+    &quot;building&quot;,
+    &quot;across from&quot;,
+    &quot;Hawk&#x27;s Club&quot;
+  ],
+  [
+    &quot;building&quot;,
+    &quot;on&quot;,
+    &quot;Portugal Street&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: []</p><pre>[]</pre></td></tr></table></article><article><h2>Query12798</h2><p>The L shaped building on the corner of Pembroke Street and Tennis Court Road across from the Shell Building.</p><p>L-shaped属于重要目标特征；仅building的跨度会丢形状信息。</p><a href="comparison_07.png"><img width="1200" src="comparison_07.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;building&#x27;]</p><pre>[
+  [
+    &quot;building&quot;,
+    &quot;corner of&quot;,
+    &quot;Tennis Court Road&quot;
+  ],
+  [
+    &quot;The L&quot;,
+    &quot;from&quot;,
+    &quot;Shell Building&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;The L shaped building&#x27;]</p><pre>[
+  [
+    &quot;The L shaped building&quot;,
+    &quot;corner of&quot;,
+    &quot;Pembroke Street&quot;
+  ],
+  [
+    &quot;The L shaped building&quot;,
+    &quot;across from&quot;,
+    &quot;Shell Building&quot;
+  ],
+  [
+    &quot;The L shaped building&quot;,
+    &quot;corner of&quot;,
+    &quot;Tennis Court Road&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;L shaped building&#x27;]</p><pre>[
+  [
+    &quot;L shaped building&quot;,
+    &quot;across from&quot;,
+    &quot;Shell Building&quot;
+  ],
+  [
+    &quot;L shaped building&quot;,
+    &quot;on&quot;,
+    &quot;Pembroke Street&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;The L shaped building on the corner of Pembroke Street and Tennis Court Road&#x27;]</p><pre>[
+  [
+    &quot;The L shaped building on the corner of Pembroke Street and Tennis Court Road&quot;,
+    &quot;across from&quot;,
+    &quot;Shell Building&quot;
+  ],
+  [
+    &quot;The L shaped building on the corner of Pembroke Street and Tennis Court Road&quot;,
+    &quot;on the corner of&quot;,
+    &quot;Pembroke Street&quot;
+  ],
+  [
+    &quot;The L shaped building on the corner of Pembroke Street and Tennis Court Road&quot;,
+    &quot;on the corner of&quot;,
+    &quot;Tennis Court Road&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query212</h2><p>The black car that is parked between two reddish brown houses behind the long row of green trees along Wellington Road.</p><p>随机TRAIN案例，不根据模型是否正确筛选。</p><a href="comparison_08.png"><img width="1200" src="comparison_08.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;The black car&#x27;]</p><pre>[
+  [
+    &quot;The black car&quot;,
+    &quot;behind&quot;,
+    &quot;the long row&quot;
+  ],
+  [
+    &quot;the long row&quot;,
+    &quot;of&quot;,
+    &quot;green trees&quot;
+  ],
+  [
+    &quot;green trees&quot;,
+    &quot;along&quot;,
+    &quot;Wellington Road&quot;
+  ],
+  [
+    &quot;The black car&quot;,
+    &quot;between&quot;,
+    &quot;two reddish brown houses&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;The black car&#x27;]</p><pre>[
+  [
+    &quot;The black car&quot;,
+    &quot;behind&quot;,
+    &quot;the long row&quot;
+  ],
+  [
+    &quot;the long row&quot;,
+    &quot;along&quot;,
+    &quot;Wellington Road&quot;
+  ],
+  [
+    &quot;The black car&quot;,
+    &quot;between&quot;,
+    &quot;two reddish brown houses&quot;
+  ],
+  [
+    &quot;the long row&quot;,
+    &quot;of&quot;,
+    &quot;green trees&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: []</p><pre>[
+  [
+    &quot;black car&quot;,
+    &quot;behind&quot;,
+    &quot;two reddish brown houses&quot;
+  ],
+  [
+    &quot;black car&quot;,
+    &quot;inside&quot;,
+    &quot;two reddish brown houses&quot;
+  ],
+  [
+    &quot;black car&quot;,
+    &quot;between&quot;,
+    &quot;two reddish brown houses&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;The black car&#x27;]</p><pre>[
+  [
+    &quot;The black car&quot;,
+    &quot;parked between&quot;,
+    &quot;two reddish brown houses&quot;
+  ],
+  [
+    &quot;two reddish brown houses&quot;,
+    &quot;behind&quot;,
+    &quot;the long row of green trees&quot;
+  ],
+  [
+    &quot;the long row of green trees&quot;,
+    &quot;along&quot;,
+    &quot;Wellington Road&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query819</h2><p>The black car that is 7th from the right in the 18th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.</p><p>随机TRAIN案例，不根据模型是否正确筛选。</p><a href="comparison_09.png"><img width="1200" src="comparison_09.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;The black car&#x27;]</p><pre>[
+  [
+    &quot;The black car&quot;,
+    &quot;right in&quot;,
+    &quot;the 18th row&quot;
+  ],
+  [
+    &quot;the 18th row&quot;,
+    &quot;of&quot;,
+    &quot;cars&quot;
+  ],
+  [
+    &quot;the 18th row&quot;,
+    &quot;in&quot;,
+    &quot;the large parking lot&quot;
+  ],
+  [
+    &quot;the large parking lot&quot;,
+    &quot;behind&quot;,
+    &quot;the One Stop Building&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;The black car&#x27;]</p><pre>[
+  [
+    &quot;The black car&quot;,
+    &quot;side of&quot;,
+    &quot;the One Stop Building&quot;
+  ],
+  [
+    &quot;the One Stop Building&quot;,
+    &quot;associated region&quot;,
+    &quot;One Stop&quot;
+  ],
+  [
+    &quot;The black car&quot;,
+    &quot;in&quot;,
+    &quot;the 18th row&quot;
+  ],
+  [
+    &quot;the 18th row&quot;,
+    &quot;in&quot;,
+    &quot;the large parking lot&quot;
+  ],
+  [
+    &quot;the large parking lot&quot;,
+    &quot;behind&quot;,
+    &quot;the One Stop Building&quot;
+  ],
+  [
+    &quot;the One Stop Building&quot;,
+    &quot;behind&quot;,
+    &quot;One Stop&quot;
+  ],
+  [
+    &quot;the 18th row&quot;,
+    &quot;of&quot;,
+    &quot;cars&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;right&#x27;]</p><pre>[
+  [
+    &quot;black car&quot;,
+    &quot;near&quot;,
+    &quot;One Stop Building&quot;
+  ],
+  [
+    &quot;parking lot&quot;,
+    &quot;behind&quot;,
+    &quot;One Stop Building&quot;
+  ],
+  [
+    &quot;black car&quot;,
+    &quot;left of&quot;,
+    &quot;One Stop Building&quot;
+  ],
+  [
+    &quot;black car&quot;,
+    &quot;inside&quot;,
+    &quot;parking lot&quot;
+  ],
+  [
+    &quot;black car&quot;,
+    &quot;surrounded by&quot;,
+    &quot;parking lot&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;The black car that is 7th from the right in the 18th row of cars&#x27;]</p><pre>[
+  [
+    &quot;The black car that is 7th from the right in the 18th row of cars&quot;,
+    &quot;in&quot;,
+    &quot;large parking lot&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query869</h2><p>This is a black car parked in the second row of the main parking space from the Food Warehouse. On its right is a gray car and in front of it is another black car.</p><p>随机TRAIN案例，不根据模型是否正确筛选。</p><a href="comparison_10.png"><img width="1200" src="comparison_10.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;a black car&#x27;]</p><pre>[
+  [
+    &quot;a black car&quot;,
+    &quot;in&quot;,
+    &quot;the second row&quot;
+  ],
+  [
+    &quot;the second row&quot;,
+    &quot;of&quot;,
+    &quot;the main parking space&quot;
+  ],
+  [
+    &quot;the main parking space&quot;,
+    &quot;from&quot;,
+    &quot;the Food Warehouse&quot;
+  ],
+  [
+    &quot;a gray car&quot;,
+    &quot;front of&quot;,
+    &quot;a black car&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;a black car&#x27;]</p><pre>[
+  [
+    &quot;a black car&quot;,
+    &quot;in&quot;,
+    &quot;the second row&quot;
+  ],
+  [
+    &quot;the second row&quot;,
+    &quot;of&quot;,
+    &quot;the main parking space&quot;
+  ],
+  [
+    &quot;the main parking space&quot;,
+    &quot;from&quot;,
+    &quot;the Food Warehouse&quot;
+  ],
+  [
+    &quot;another black car&quot;,
+    &quot;front of&quot;,
+    &quot;a gray car&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: []</p><pre>[
+  [
+    &quot;gray car&quot;,
+    &quot;right of&quot;,
+    &quot;black car&quot;
+  ],
+  [
+    &quot;black car&quot;,
+    &quot;inside&quot;,
+    &quot;main parking space&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: []</p><pre>[
+  [
+    &quot;main parking space&quot;,
+    &quot;from&quot;,
+    &quot;Food Warehouse&quot;
+  ]
+]</pre></td></tr></table></article><article><h2>Query976</h2><p>The blue car that is 7th from the right in the 15th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.</p><p>随机TRAIN案例，不根据模型是否正确筛选。</p><a href="comparison_11.png"><img width="1200" src="comparison_11.png"></a><table><tr><td><h3>A</h3><p>Target: [&#x27;The blue car&#x27;]</p><pre>[
+  [
+    &quot;The blue car&quot;,
+    &quot;right in&quot;,
+    &quot;the 15th row&quot;
+  ],
+  [
+    &quot;the 15th row&quot;,
+    &quot;of&quot;,
+    &quot;cars&quot;
+  ],
+  [
+    &quot;the 15th row&quot;,
+    &quot;in&quot;,
+    &quot;the large parking lot&quot;
+  ],
+  [
+    &quot;the large parking lot&quot;,
+    &quot;behind&quot;,
+    &quot;the One Stop Building&quot;
+  ]
+]</pre></td><td><h3>B</h3><p>Target: [&#x27;The blue car&#x27;]</p><pre>[
+  [
+    &quot;The blue car&quot;,
+    &quot;side of&quot;,
+    &quot;the One Stop Building&quot;
+  ],
+  [
+    &quot;the One Stop Building&quot;,
+    &quot;associated region&quot;,
+    &quot;One Stop&quot;
+  ],
+  [
+    &quot;The blue car&quot;,
+    &quot;in&quot;,
+    &quot;the 15th row&quot;
+  ],
+  [
+    &quot;the 15th row&quot;,
+    &quot;in&quot;,
+    &quot;the large parking lot&quot;
+  ],
+  [
+    &quot;the large parking lot&quot;,
+    &quot;behind&quot;,
+    &quot;the One Stop Building&quot;
+  ],
+  [
+    &quot;the One Stop Building&quot;,
+    &quot;behind&quot;,
+    &quot;One Stop&quot;
+  ],
+  [
+    &quot;the 15th row&quot;,
+    &quot;of&quot;,
+    &quot;cars&quot;
+  ]
+]</pre></td><td><h3>C</h3><p>Target: [&#x27;right&#x27;]</p><pre>[
+  [
+    &quot;blue car&quot;,
+    &quot;near&quot;,
+    &quot;One Stop Building&quot;
+  ],
+  [
+    &quot;parking lot&quot;,
+    &quot;behind&quot;,
+    &quot;One Stop Building&quot;
+  ],
+  [
+    &quot;blue car&quot;,
+    &quot;left of&quot;,
+    &quot;One Stop Building&quot;
+  ],
+  [
+    &quot;blue car&quot;,
+    &quot;inside&quot;,
+    &quot;parking lot&quot;
+  ],
+  [
+    &quot;blue car&quot;,
+    &quot;surrounded by&quot;,
+    &quot;parking lot&quot;
+  ]
+]</pre></td><td><h3>D</h3><p>Target: [&#x27;The blue car that is 7th from the right in the 15th row of cars&#x27;]</p><pre>[
+  [
+    &quot;The blue car that is 7th from the right in the 15th row of cars&quot;,
+    &quot;in&quot;,
+    &quot;the large parking lot&quot;
+  ]
+]</pre></td></tr></table></article>

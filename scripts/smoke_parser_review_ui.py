@@ -21,6 +21,6 @@ def main():
   page.click('#reveal');page.select_option('#parser','B');assert not page.locator('#candidates').is_hidden();page.click('#save')
   with page.expect_download() as info:page.click('#export')
   exported=json.loads(Path(info.value.path()).read_text());assert exported[0]['independent'] is False;checks.append('viewed candidates excluded from independent gold')
-  page.screenshot(path=str(a.output.with_suffix('.png')),full_page=False);assert not errors,errors;context.close();browser.close()
+  page.evaluate("(()=>{const d=document.createElement('div');d.textContent='自动化界面测试：测试输入，不是人工标注或模型结果';d.style='position:fixed;top:0;left:0;right:0;background:#fff0c0;color:#733;padding:8px;z-index:99999;text-align:center';document.body.append(d)})()");page.screenshot(path=str(a.output.with_suffix('.png')),full_page=False);assert not errors,errors;context.close();browser.close()
  a.output.write_text(json.dumps(dict(checks=checks,passed=True,automated_test_only=True,human_gold_records_created=0),indent=2));print(json.dumps(checks,ensure_ascii=False))
 if __name__=='__main__':main()

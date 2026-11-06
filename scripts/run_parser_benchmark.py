@@ -29,9 +29,9 @@ def aligned_entity(text,e,number):
  return dict(id=str(e.get('id',f'e{number}')),text=value,start=start,end=end,role=e.get('role','reference'),type=e.get('type','unknown')),'span_aligned_from_unique_case_only_literal' if case_only else 'span_aligned_from_unique_literal' if changed else None
 
 def convert_spacy(parsed,mentions):
- target=parsed['target_span'];tid=target['node'] if target else None;es={}
+ target=parsed['target_span'];tid=target['node'] if target else None;es={};middle_nodes={n['node'] for p in parsed['paths'] for n in p.get('nodes',[])[1:-1]}
  for entity in parsed['entities']+([target] if target else []):
-  x=entity.copy();role='target' if x['node']==tid else 'landmark' if x['kind']=='named_landmark' else 'intermediate';es[str(x['node'])]=dict(id=str(x['node']),text=x['text'],start=x['start'],end=x['end'],role=role,type='unknown')
+  x=entity.copy();role='target' if x['node']==tid else 'landmark' if x['kind']=='named_landmark' else 'intermediate' if x['node'] in middle_nodes else 'reference';es[str(x['node'])]=dict(id=str(x['node']),text=x['text'],start=x['start'],end=x['end'],role=role,type='unknown')
  # Preserve the current public gazetteer discovery even if no grammatical edge reaches it.
  for m in mentions:
   if not any(e['start']==m['start'] and e['end']==m['end'] for e in es.values()):

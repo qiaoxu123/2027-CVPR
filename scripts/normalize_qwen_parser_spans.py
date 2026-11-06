@@ -7,7 +7,7 @@ from graphnav.parser_benchmark import validate_graph,relation_paths
 def main():
  p=argparse.ArgumentParser();p.add_argument('--run',type=Path,required=True);p.add_argument('--tag',default='D');a=p.parse_args();folder=a.run/a.tag;assert (folder/'runtime.json').exists(),'Wait for completed inference before rewriting graph normalization';backup=a.run/(a.tag+'_before_case_only_alignment');assert not backup.exists();shutil.copytree(folder,backup);rows=[json.loads(s) for s in (folder/'predictions.jsonl').read_text().splitlines()];assert a.tag!='D' or len(rows)==400,'Final D needs all400 rows';public={r['index']:r for r in json.load(open(a.run/'data/public_inputs.json'))};tick=time.perf_counter();changed=0;case_repairs=0
  for row in rows:
-  if not isinstance(row['raw'],str):continue
+  if row.get('error') or not isinstance(row['raw'],str):continue
   try:
    raw=re.sub(r'^```(?:json)?\s*','',row['raw'].strip());raw=re.sub(r'\s*```$','',raw);obj=json.loads(raw)
   except Exception:continue

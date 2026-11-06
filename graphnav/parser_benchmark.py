@@ -8,7 +8,8 @@ def public_record(row):
 
 def relation_key(s):
  s=' '.join(str(s).lower().replace('_',' ').split())
- return {'beside':'next to','adjacent to':'next to','in':'inside','in front of':'front of','opposite':'across from'}.get(s,s)
+ s=re.sub(r'^(?:is|are|was|were)\s+','',s)
+ return {'located in':'inside','situated in':'inside','to the right of':'right of','to the left of':'left of','beside':'next to','adjacent to':'next to','in':'inside','in front of':'front of','opposite':'across from'}.get(s,s)
 
 def validate_graph(text,graph):
  errors=[];entities=[];ids=set()
@@ -51,7 +52,8 @@ def score_reviewed(predictions,reviews):
   a=pred.get(i,{}).get('graph',dict(entities=[],relations=[]));b=row['graph'];ea,ta=graph_sets(a);eb,tb=graph_sets(b)
   for key,sa,sb in [('entities',ea,eb),('triples',ta,tb)]+[(role,{x for x in ea if x[2]==role},{x for x in eb if x[2]==role}) for role in ['target','landmark','intermediate']]:
    counts[key][0]+=len(sa&sb);counts[key][1]+=len(sa);counts[key][2]+=len(sb)
-  desc+=bool(a.get('target_description')) and a.get('target_description')==b.get('target_description');ca=relation_paths(a);cb=relation_paths(b)
+  norm=lambda value:' '.join(str(value or '').casefold().split())
+  desc+=bool(a.get('target_description')) and norm(a.get('target_description'))==norm(b.get('target_description'));ca=relation_paths(a);cb=relation_paths(b)
   def canon_paths(paths,g):
    spans={e['id']:(e['start'],e['end']) for e in g['entities']}
    return {tuple((spans[s['subject']],relation_key(s['relation']),spans[s['object']],s['orientation']) for s in p['steps']) for p in paths}

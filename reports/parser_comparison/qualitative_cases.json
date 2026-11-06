@@ -1,0 +1,74 @@
+[
+  {
+    "index": 13057,
+    "instruction": "The white car that is parked between the two dark blue cars at the Downing College Chapel, across is Anatomy School.",
+    "Agent_language_comment_not_gold": "原文目标为white car；A保留完整名词短语，B仅car会丢外观。C原始输出把Anatomy School当target。属于Agent语言观察，不是人工标准。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 7434,
+    "instruction": "A light grey car in the West Midlands Police Custody Suite, with the map orientated with the playing fields to the top, the light grey car is fourth from the top left. (ignoring the white and blue cars separated from the main car park)",
+    "Agent_language_comment_not_gold": "目标短语包含light grey car；只输出car会丢颜色。此处只检查目标角色，不评序数条件。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 6822,
+    "instruction": "The white car that is 13th from the right in the bottom row of cars in the massive parking lot for the West Midlands Police Custody Suite, when viewed aerially with Holford Drive to the right.",
+    "Agent_language_comment_not_gold": "A未输出目标，B输出white car；不据此判断其他关系链正确或方向一定可修复。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 10905,
+    "instruction": "A multicolored Brown, Gray and beige building with a brown roof near the edge of the map off Jesus Lane, that is next to the hall Court and across the street from the Pearce hostel",
+    "Agent_language_comment_not_gold": "B恢复了带颜色/屋顶的目标短语；只输出building不足以保留实例特征。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 14114,
+    "instruction": "Grey roof building on Regent street next to Downing college building on the edge of the map.",
+    "Agent_language_comment_not_gold": "原文是以Grey roof building开头的片段；B恢复目标，A/C遗漏。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 10469,
+    "instruction": "One dark blue car and a dirt parking lot within the park parade, Portugal Street and lower Park Street blocks",
+    "Agent_language_comment_not_gold": "原文同时列car和parking lot，目标作用域存在歧义；不能仅因模型输出car就判为正确。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 10099,
+    "instruction": "If you're on Portugal Street this is a building directlya cross from The Hawk's Club.",
+    "Agent_language_comment_not_gold": "主目标为building；Portugal Street是前置条件，不能当导航目标。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 12798,
+    "instruction": "The L shaped building on the corner of Pembroke Street and Tennis Court Road across from the Shell Building.",
+    "Agent_language_comment_not_gold": "L-shaped属于重要目标特征；仅building的跨度会丢形状信息。",
+    "group": "large_error_context_absent"
+  },
+  {
+    "index": 212,
+    "instruction": "The black car that is parked between two reddish brown houses behind the long row of green trees along Wellington Road.",
+    "Agent_language_comment_not_gold": "随机TRAIN案例，不根据模型是否正确筛选。",
+    "group": "random_TRAIN_uniform"
+  },
+  {
+    "index": 819,
+    "instruction": "The black car that is 7th from the right in the 18th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.",
+    "Agent_language_comment_not_gold": "随机TRAIN案例，不根据模型是否正确筛选。",
+    "group": "random_TRAIN_uniform"
+  },
+  {
+    "index": 869,
+    "instruction": "This is a black car parked in the second row of the main parking space from the Food Warehouse. On its right is a gray car and in front of it is another black car.",
+    "Agent_language_comment_not_gold": "随机TRAIN案例，不根据模型是否正确筛选。",
+    "group": "random_TRAIN_uniform"
+  },
+  {
+    "index": 976,
+    "instruction": "The blue car that is 7th from the right in the 15th row of cars in the large parking lot behind the One Stop Building, when viewed aerially with the long side of the One Stop Building to the right.",
+    "Agent_language_comment_not_gold": "随机TRAIN案例，不根据模型是否正确筛选。",
+    "group": "random_TRAIN_uniform"
+  }
+]

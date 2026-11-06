@@ -25,3 +25,5 @@ V1清单及其A/B/C结果保留于`$RUN/protocol_v1`和Git b33c0ed。不要与V2
 D原始生成后增加唯一大小写字面Span规范化（例如the building→原文The building），不是根据GT改写语义，也不在多个重复提及中猜选。正式推理结束后执行`normalize_qwen_parser_spans --run <RUN>`；该脚本拒绝在推理未完成时覆盖JSONL。原始生成、修复前图和标记全部保留。未能唯一对齐的实体单独统计，不能与“模型完全没输出目标”混为一谈。
 
 C是span架构的GLiNER2-base-v1，max_width=8，固定20类空间关系schema、threshold=.5；不是GLiNER2.5 JointIE或GLiREL的性能结论。A/B提供完整公开名称表给PublicNames；C以同目录的字面出现名称作schema提示；D接收完整目录。因此这是三种实际系统的比较，不是只替换编码器的统一架构实验。
+
+A/B的统一角色映射还区分：原生路径内部普通节点为intermediate，其余普通名词为reference，避免人为抬高中间实体输出率。旧SOURCE.py生成后可执行`normalize_spacy_graph_roles --run <RUN>`；只重映射已保存的原生解析，不重跑spaCy、不读GT，原图保留在A/B_before_intermediate_role_mapping。
