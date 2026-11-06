@@ -1,16 +1,16 @@
 # CityNav 直接离线解析缓存（进行中）
 
-用户要求：当前模型直接解析，指定 gpt-6.1-sol low；不用模型 CLI、外部 API、在线解析或其他模型。解析结果提前保存，使用时查询文件。
+用户要求直接离线解析，初始指定 gpt-6.1-sol low，随后改为当前可用的 gpt-6-luna low。已有结果保留原模型标签；后续分开记录。正式缓存不用模型 CLI、外部 API 或在线解析，使用时仅查询文件。用户短暂要求的 DeepSeek 小测已经取消，结果未并入缓存。
 
 基于 v5 分支提交 `7193b0a9e435494bd36aab2297438e45def42a08` 开展独立工作。旧 v1–v5 实验与导航模型未修改。本任务获准读取所有 split 的指令文本，与旧实验 TRAIN-only 的统计结论分开。
 
 ## 当前实际进度
 
-- 共 31,755 条不同文本，43,272 条 split/难度子集查询别名。
-- 已直接解析 120 条、319 条空间/定位关系；剩余 31,635 条。
-- 缓存尚未全量完成，不能用于完整数据集的导航效果评测。
-- 首批顺序由文件名排序决定，首批为 40 条测试指令，后续 80 条具有 TRAIN 别名（其中 3 条也出现在测试文本中）。跨 split 的相同文本共享解析，不作为独立泛化证据。
-- 实际进度以 [parsed/progress.json](parsed/progress.json) 为准；所有未完成 ID 保存在 `parsed/pending_ids.json`。没有模型后台任务在自动补齐剩余解析。
+全量包含 31,755 条去重文本与 43,272 条 split/难度子集查询别名。初始 checkpoint 为 120 条；模型切换 checkpoint 为 1,780 条、4,854 条关系，均属于此前 gpt-6.1-sol 请求配置。后续 Luna 记录以每条 author_model 和展开后的 provenance.model_requested 独立统计。
+
+**实时完成数量及模型构成以 [parsed/progress.json](parsed/progress.json) 为准。** 尚未完成全量，不能用于完整数据集效果评测。所有未完成 ID 在 parsed/pending_ids.json。跨 split 相同文本只解析一次，不当作独立泛化证据。当前模型切换说明见 [MODEL_SWITCH.md](MODEL_SWITCH.md)。
+
+解析仅在当前执行会话/工作会话中推进；结束会话回复不表示仍有后台任务自动补齐。当前状态 complete=false 时绝不声称全量完成。
 
 模型直接撰写的语义记录在 `direct_batch_*.json`，`i` 为冻结 `inputs/instructions.jsonl` 的零起始行号。`cache.py` 仅将这些记录展开为具名字段、定位原文 Span、校验引用并建立缓存，不生成关系标签。`N/U/I/R/W/F` 仅为序列化简写，解释见代码与协议。每条展开结果保留来源批次。
 

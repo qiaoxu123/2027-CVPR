@@ -1,0 +1,2478 @@
+[
+  {
+    "i": 90,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "c": [
+        "three black cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "across_road_from",
+        "t",
+        "three black cars across the road beside it",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "beside it 修饰道路或车辆位置不明，保留across-road关系，不额外认定车辆与建筑同侧。"
+    ]
+  },
+  {
+    "i": 91,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "c": [
+        "the black cars",
+        "group"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across",
+        "p",
+        "across the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "p",
+        "the parking lot with the black cars",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "t",
+          "reference": [
+            "a"
+          ],
+          "reason": "road phrase may locate building"
+        },
+        {
+          "subject": "c",
+          "reference": [
+            "a"
+          ],
+          "reason": "road phrase may locate cars"
+        }
+      ]
+    },
+    "u": [
+      "across parking lot 的另一端观察位置未给，不生成有向坐标系。"
+    ]
+  },
+  {
+    "i": 92,
+    "e": {
+      "t": [
+        "A brick building with dark windows and two drives",
+        "object"
+      ],
+      "d": [
+        "the drive",
+        "region"
+      ],
+      "y": [
+        "the back yards",
+        "region"
+      ],
+      "l": [
+        "grass",
+        "region"
+      ],
+      "a": [
+        "the Ashcroft Grove area",
+        "named_landmark"
+      ],
+      "b": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "no_cars_in",
+        "d",
+        "there are not cars in the drive",
+        "N",
+        "high"
+      ],
+      [
+        "y",
+        "contains_only",
+        "l",
+        "the back yards just have grass in them",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_entrance",
+        "a",
+        "at the entrance of the Ashcroft Grove area",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "diagonal_from",
+        "b",
+        "diagonal from Graham Warren Way",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "diagonal 缺少象限；back yards 是区域名称，不单独当目标behind；否定车辆不创建真实车辆实体。"
+    ]
+  },
+  {
+    "i": 93,
+    "e": {
+      "t": [
+        "A building with grey roof and brown wall",
+        "object"
+      ],
+      "l": [
+        "a square shaped lawn",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "p": [
+        "a square shaped car parking area",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "l",
+        "behind",
+        "t",
+        "a square shaped lawn behind",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "left",
+        "a",
+        "at the left side of the road named Ashcroft Grove",
+        "R",
+        "high"
+      ],
+      [
+        "p",
+        "front_left",
+        "t",
+        "in the front left direction from the building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "front-left 是复合方向，不拆成两个互不关联角度；道路left与建筑front-left未证明同参考系。"
+    ]
+  },
+  {
+    "i": 94,
+    "e": {
+      "t": [
+        "The 'T' shaped building",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue and white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left",
+        "a",
+        "found left of Graham Warren Way",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "no_cars_on_right",
+        "t",
+        "no cars parked to the right of it",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "bottom_right",
+        "t",
+        "to the diagonal bottom right of the building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "no_cars_on_right 是以t为区域锚点的否定存在谓词，不是物体自方向；blue and white car 数量/双色歧义；bottom-right 候选图像语义。"
+    ]
+  },
+  {
+    "i": 95,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "d": [
+        "two red driveways",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "front",
+        "t",
+        "two red driveways in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 96,
+    "e": {
+      "t": [
+        "a two-story building with a gray T-shaped roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "over",
+        "a",
+        "over Ashcroft Grove",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "over 可能是一般道路定位、图像上方或垂直上方，原文不足以判定，不擅自改成on/above高度关系。"
+    ]
+  },
+  {
+    "i": 97,
+    "e": {
+      "t": [
+        "A multi-colored brown and white building with a gray roof",
+        "object"
+      ],
+      "g": [
+        "two buildings of similar color and size",
+        "group"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "g",
+        "in between two buildings of similar color and size",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "d",
+        "a blue car in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "cut_off_by",
+        "m",
+        "the driveway that has partially been cut off by the edge of the map",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "t",
+          "reference": [
+            "m"
+          ],
+          "reason": "cut-off phrase may attach to building"
+        },
+        {
+          "subject": "c",
+          "reference": [
+            "m"
+          ],
+          "reason": "cut-off phrase may attach to car"
+        }
+      ]
+    },
+    "u": [
+      "多重that附着不唯一，目标与两邻楼不合并。"
+    ]
+  },
+  {
+    "i": 98,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "h": [
+        "the large gray building",
+        "object"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_three_houses",
+        "h",
+        "3 houses to the right of the large gray building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Livingstone Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right直接参照匿名大灰楼；计数3。"
+    ]
+  },
+  {
+    "i": 99,
+    "e": {
+      "t": [
+        "The second house",
+        "object"
+      ],
+      "a": [
+        "Burton wood drive",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_on_right",
+        "a",
+        "The second house on the right along Burton wood drive",
+        "R",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a blue car distantly parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "second计数起点与道路正向均未给；distant 为距离修饰。"
+    ]
+  },
+  {
+    "i": 100,
+    "e": {
+      "t": [
+        "this gray roofed building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "south",
+        "a",
+        "South of Burton Wood Drive",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "third_from_bottom",
+        [],
+        "third building from the bottom",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "near",
+        "b",
+        "near Ashcroft Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "bottom 比较集合未给，道路仅上下文锚点；south地理语义不证明bottom共享地理南方。",
+      "排序/侧别比较集合省略，reference保留为空，不把道路上下文替成直接参照物。"
+    ]
+  },
+  {
+    "i": 101,
+    "e": {
+      "t": [
+        "A multicolored white and brown building with a gray roof",
+        "object"
+      ],
+      "c": [
+        "a partial section of a light blue car",
+        "region"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "h": [
+        "a brown building with a gray roof",
+        "object"
+      ],
+      "a": [
+        "the Graham Warren Way streets",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "a partial section of a light blue car in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "at",
+        "m",
+        "on the edge of the map",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "h",
+        "next to a brown building with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "closest_to",
+        "a",
+        "closest to the Graham Warren Way streets",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "c",
+          "reference": [
+            "m"
+          ],
+          "reason": "edge phrase may locate partial car"
+        }
+      ],
+      "3": [
+        {
+          "subject": "t",
+          "reference": [
+            "a"
+          ],
+          "reason": "closest may modify target building"
+        }
+      ]
+    },
+    "u": [
+      "地图截断车只记录可见部分；closest比较集合省略。"
+    ]
+  },
+  {
+    "i": 102,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "h": [
+        "the large gray building",
+        "object"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_five_houses",
+        "h",
+        "5 houses to the right of the large gray building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Livingstone Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "视角未知，计数5。"
+    ]
+  },
+  {
+    "i": 103,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "h": [
+        "the gray building",
+        "object"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_five_houses",
+        "h",
+        "5 houses to the right of the gray building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Livingstone Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "未将gray building自动等同上一条large gray building。"
+    ]
+  },
+  {
+    "i": 104,
+    "e": {
+      "t": [
+        "this dark blue roofed building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "south",
+        "a",
+        "South of Burton Wood Drive",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "second_from_bottom",
+        [],
+        "second from the bottom on the left",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "left",
+        [],
+        "on the left",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "north",
+        "b",
+        "north of Graham Warren Way",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "on the left 的参照区域/列未给，道路a仅上下文锚点；不作为高置信具名路left样本。",
+      "排序/侧别比较集合省略，reference保留为空，不把道路上下文替成直接参照物。"
+    ]
+  },
+  {
+    "i": 105,
+    "e": {
+      "t": [
+        "The building with a gray roof and red walls",
+        "object"
+      ],
+      "c": [
+        "white and blue cars",
+        "group"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "white and blue cars in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Graham Warren Way and Ashcroft Grove Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 106,
+    "e": {
+      "t": [
+        "the brick building with grey colored roof",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way Traffic Road",
+        "named_landmark"
+      ],
+      "c": [
+        "blue and white cars",
+        "group"
+      ],
+      "d": [
+        "its driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Graham Warren Way Traffic Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "d",
+        "blue and white cars parked on its driveway",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "its driveway",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "that has cars 通常回指building，也可能修饰道路，driveway所有者尚未地图绑定。"
+    ]
+  },
+  {
+    "i": 107,
+    "e": {
+      "t": [
+        "The brown and gray building",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a white and blue car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Graham Warren Way and Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "adjacent",
+        "t",
+        "a white and blue car parked adjacent to it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "white and blue car 单双色/两车歧义保留。"
+    ]
+  },
+  {
+    "i": 108,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "d": [
+        "It's driveway",
+        "region"
+      ],
+      "c": [
+        "Graham Warren Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "at the corner of Ashcroft Grove",
+        "N",
+        "medium"
+      ],
+      [
+        "d",
+        "belongs_to",
+        "t",
+        "It's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "across_from",
+        "c",
+        "It's driveway is across from Graham Warren Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "across 主语为driveway，不强制目标直接across。"
+    ]
+  },
+  {
+    "i": 109,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Ashcroft Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 110,
+    "e": {
+      "t": [
+        "A building with grey roof and brown wall",
+        "object"
+      ],
+      "a": [
+        "Livingstone road",
+        "named_landmark"
+      ],
+      "b": [
+        "Burton wood drive road",
+        "named_landmark"
+      ],
+      "c": [
+        "Four black car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "at the right side of the road named Livingstone road",
+        "R",
+        "high"
+      ],
+      [
+        "b",
+        "left",
+        "t",
+        "Burton wood drive road is a the left side of the building",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "Four black car is parked behind the building",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "b是left主语、t是参照物，不倒置以制造地标参照配对。"
+    ]
+  },
+  {
+    "i": 111,
+    "e": {
+      "t": [
+        "the mostly red/orange building with a grey roof",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Burton Wood Drive and Livingstone Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 112,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Livingstone Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 113,
+    "e": {
+      "t": [
+        "The L-shaped gray building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "right",
+        "t",
+        "a parking lot to its right",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "right 主语停车区、参照目标建筑。"
+    ]
+  },
+  {
+    "i": 114,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingston Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Burton Wood Drive and Livingston Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 115,
+    "e": {
+      "t": [
+        "The middle grey building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove road",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue and white car",
+        "group"
+      ],
+      "v": [
+        "a blue car on either side of it",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "to the right of Ashcroft Grove road",
+        "R",
+        "high"
+      ],
+      [
+        "c",
+        "below",
+        "t",
+        "a blue and white car parked horizontally below it",
+        "U",
+        "high"
+      ],
+      [
+        "v",
+        "either_side",
+        "t",
+        "a blue car on either side of it",
+        "U",
+        "high"
+      ]
+    ],
+    "f": {
+      "1": {
+        "type": "observer",
+        "status": "unknown",
+        "candidate_descriptions": [
+          "horizontal/vertical and below suggest aerial image axes; image rotation not supplied"
+        ]
+      }
+    },
+    "u": [
+      "middle比较集合省略；水平/垂直是车辆组排列或车体轴，无独立正向；either side指两侧蓝车集合，不强制单车同时两边。"
+    ]
+  },
+  {
+    "i": 116,
+    "e": {
+      "t": [
+        "a two-storey building with partially brown and partially white walls and black roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "two blue and one silver cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "two blue and one silver cars in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 117,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "g": [
+        "a blue car and gray car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "d",
+        "a blue car in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "front",
+        "t",
+        "a blue car and gray car in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "车道蓝车与前方组内蓝车是否同车未知，不合并。"
+    ]
+  },
+  {
+    "i": 118,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car and a gray car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a blue car and a gray car parked parallel in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "parallel仅表示相互平行或平行停车，不给有向朝向。"
+    ]
+  },
+  {
+    "i": 119,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ],
+      "l": [
+        "its lawn",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "side_by_side_with",
+        "l",
+        "a blue car parked side by side with its lawn",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "lawn默认房屋所有，原文its亦可能语法不清；side-by-side不提供左右符号。"
+    ]
+  },
+  {
+    "i": 120,
+    "e": {
+      "t": [
+        "a residential house with a gray steep roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "l": [
+        "a lawn",
+        "region"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ],
+      "c": [
+        "a green car, a white car and a red car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "behind",
+        "t",
+        "Behind it there is a lawn",
+        "I",
+        "high"
+      ],
+      [
+        "l",
+        "in",
+        "y",
+        "a lawn in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "near",
+        "t",
+        "a green car, a white car and a red car parked near this house",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 121,
+    "e": {
+      "t": [
+        "A rectangular building with a black roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a green car",
+        "object"
+      ],
+      "p": [
+        "the lot",
+        "region"
+      ],
+      "g": [
+        "a red and white car",
+        "group"
+      ],
+      "d": [
+        "the drive",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_curve",
+        "a",
+        "in the curve of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "p",
+        "a green car parked in the lot",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "beside",
+        "t",
+        "the lot beside the building",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "in",
+        "d",
+        "a red and white car in the drive",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "opposite_side",
+        "p",
+        "on the opposite side",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "opposite side 相对建筑另一侧或道路另一侧，参照p为候选；不把opposite side等同across named-road。"
+    ]
+  },
+  {
+    "i": 122,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a red car and a white care",
+        "group"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "off",
+        "a",
+        "off Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "a red car and a white care parked behind it",
+        "I",
+        "high"
+      ],
+      [
+        "p",
+        "across_from",
+        "t",
+        "a parking lot across from it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "care按语境为car候选但证据原样保留。"
+    ]
+  },
+  {
+    "i": 123,
+    "e": {
+      "t": [
+        "this gray roofed building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "g": [
+        "green car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "b",
+        "near Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "south",
+        "g",
+        "directly south of green car",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "north",
+        "r",
+        "north of a red car",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "地理南北直接参照车辆，不是具名道路方向关系。"
+    ]
+  },
+  {
+    "i": 124,
+    "e": {
+      "t": [
+        "this gray roofed building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a green car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_middle",
+        "a",
+        "On the middle part of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "north",
+        "t",
+        "a green car is parked directly north of it",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "north主语绿车，参照目标。"
+    ]
+  },
+  {
+    "i": 125,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "the only green car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "on",
+        "a",
+        "the only green car on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 126,
+    "e": {
+      "t": [
+        "a residential house with a gray steep roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "l": [
+        "a lawn",
+        "region"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ],
+      "c": [
+        "a white car and a red car",
+        "group"
+      ],
+      "w": [
+        "a white car",
+        "object",
+        1
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "behind",
+        "t",
+        "Behind it there is a lawn",
+        "I",
+        "high"
+      ],
+      [
+        "l",
+        "in",
+        "y",
+        "a lawn in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "near",
+        "t",
+        "a white car and a red car parked near this house",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "front",
+        "t",
+        "Directly in front of this house",
+        "I",
+        "high"
+      ],
+      [
+        "w",
+        "across_street_from",
+        "t",
+        "on the opposite side of the street is a white car",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "独立白车与near车辆组中的白车是否同一实例未知；mention w在原文有重复，需用后句关系证据确认其作用域。"
+    ]
+  },
+  {
+    "i": 127,
+    "e": {
+      "t": [
+        "A square building with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "w": [
+        "another white one",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "next_to",
+        "t",
+        "a white car parked next to it",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "across_street_from",
+        "t",
+        "another white one across the street from it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "another 明确两个不同车辆实体。"
+    ]
+  },
+  {
+    "i": 128,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a gray car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "across_street_from",
+        "t",
+        "a gray car across the street from it",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "at_side",
+        "t",
+        "a white car parked on the side of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "side未指定左右。"
+    ]
+  },
+  {
+    "i": 129,
+    "e": {
+      "t": [
+        "The large building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "d": [
+        "the drive way",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "in",
+        "d",
+        "a white car in the drive way",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "in",
+        "d",
+        "a red car in the same driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "same driveway跨句共指明确，保留同一区域实体d。"
+    ]
+  },
+  {
+    "i": 130,
+    "e": {
+      "t": [
+        "this dark blue roofed building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a white car and a red car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_southern_part",
+        "a",
+        "On the southern area of Ashcroft Grove",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "south",
+        "c",
+        "south of a white car and a red car",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "southern part为区域定位，不能当目标相对道路整体质心的严格south。"
+    ]
+  },
+  {
+    "i": 131,
+    "e": {
+      "t": [
+        "The square building",
+        "object"
+      ],
+      "c": [
+        "a white and red car",
+        "group"
+      ],
+      "d": [
+        "the driveway",
+        "region"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "in",
+        "d",
+        "a white and red car parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "d",
+          "reference": [
+            "a"
+          ],
+          "reason": "road phrase may locate driveway"
+        }
+      ]
+    },
+    "u": [
+      "white and red car可两车/双色单车，保留组文本。"
+    ]
+  },
+  {
+    "i": 132,
+    "e": {
+      "t": [
+        "A building with grey roof and brown wall",
+        "object"
+      ],
+      "a": [
+        "Ashcroft grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ],
+      "h": [
+        "a tall building with brown roof and white wall",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "along",
+        "a",
+        "situated along the road named Ashcroft grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a blue car is parked in front of the building",
+        "I",
+        "high"
+      ],
+      [
+        "h",
+        "behind",
+        "t",
+        "a tall building with brown roof and white wall behind it",
+        "I",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "h",
+          "reference": [
+            "c"
+          ],
+          "reason": "it could refer to blue car rather than building"
+        }
+      ]
+    },
+    "u": [
+      "behind优先参照建筑，但it跨短语回指仍有歧义。"
+    ]
+  },
+  {
+    "i": 133,
+    "e": {
+      "t": [
+        "the brick building with grey colored roof",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove Traffic Road",
+        "named_landmark"
+      ],
+      "c": [
+        "blue car",
+        "object"
+      ],
+      "h": [
+        "the white big building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Ashcroft Grove Traffic Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "blue car in front",
+        "I",
+        "high"
+      ],
+      [
+        "h",
+        "behind",
+        "t",
+        "the white big building behind",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "并列省略参照均指t，未将后方白楼等同具名道路。"
+    ]
+  },
+  {
+    "i": 134,
+    "e": {
+      "t": [
+        "The long gray building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a dark blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a dark blue car parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 135,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the very end of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a blue car parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 136,
+    "e": {
+      "t": [
+        "The gray building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "against",
+        "t",
+        "a blue car parked horizontally against it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "horizontally为图像/排列无向轴，不生成车头或建筑正向。"
+    ]
+  },
+  {
+    "i": 137,
+    "e": {
+      "t": [
+        "The gray rectangular building",
+        "object"
+      ],
+      "a": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "the Graham Warren Way building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "b",
+        "near the Graham Warren Way building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Graham Warren Way building为文本具名建筑候选，不假定道路本体或唯一地图建筑ID。"
+    ]
+  },
+  {
+    "i": 138,
+    "e": {
+      "t": [
+        "The white building with a gray roof",
+        "object"
+      ],
+      "d": [
+        "a driveway",
+        "region"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "d",
+        "has a driveway",
+        "N",
+        "high"
+      ],
+      [
+        "d",
+        "on",
+        "a",
+        "a driveway on Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "beside",
+        "t",
+        "beside it is Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "b",
+          "reference": [
+            "d"
+          ],
+          "reason": "it may refer to driveway"
+        }
+      ]
+    },
+    "u": [
+      "beside主语为道路b，不倒置以增加具名参照方向统计。"
+    ]
+  },
+  {
+    "i": 139,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ],
+      "p": [
+        "solar panels",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Graham Warren Way and Ashcroft Grove",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "at_side",
+        "t",
+        "solar panels on the side",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "side为建筑哪一侧未给，不擅自当屋顶或世界方向。"
+    ]
+  }
+]

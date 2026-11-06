@@ -9,7 +9,8 @@
 - Follow the requested direct model parsing workflow without CLI/API parsing or heuristic substitute labels.
 - Keep text parsing separate from target GT, geometric binding, and v1–v5 scientific evaluation.
 ### Notes & Caveats
-- Partial cache: 120 of 31,755 unique instructions directly parsed; no full-dataset performance claim.
+- Partial cache; live counts and model composition are in parsed/progress.json, with no full-dataset performance claim.
+- User changed subsequent parsing sessions from gpt-6.1-sol low to available gpt-6-luna low; preserve each record's original model attribution.
 - All split texts are authorized for parsing; no target coordinates, future trajectories or navigation model training used.
 - Requested model/effort recorded as requested configuration, without claiming independent runtime attestation.
 

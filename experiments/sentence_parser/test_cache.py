@@ -2,7 +2,7 @@
 import json
 import unittest
 
-from .cache import ROOT, build, compile_records, lookup
+from .cache import ROOT, build, compile_records, lookup, span
 
 
 class CacheContract(unittest.TestCase):
@@ -19,6 +19,12 @@ class CacheContract(unittest.TestCase):
         self.assertEqual(self.status["parsed_unique"] + self.status["pending_unique"], len(self.source))
         self.assertFalse(self.status["complete"])
 
+    def test_requested_model_accounting(self):
+        self.assertEqual(sum(self.status["parsed_by_requested_model"].values()), self.status["parsed_unique"])
+        for record in self.records:
+            if record["provenance"]["batch"].startswith("direct_batch_luna_"):
+                self.assertEqual(record["provenance"]["model_requested"], "gpt-6-luna")
+
     def test_evidence_roundtrip(self):
         for row in self.records:
             for item in row["entities"]:
@@ -27,6 +33,13 @@ class CacheContract(unittest.TestCase):
             for rel in row["relations"]:
                 evidence = rel["evidence"]
                 self.assertEqual(row["instruction"][evidence["start"]:evidence["end"]], evidence["text"])
+
+    def test_distinct_repeated_mention_occurrences(self):
+        text = "a white car near a white car"
+        first, second = span(text, "a white car"), span(text, "a white car", 1)
+        self.assertLess(first["end"], second["start"])
+        with self.assertRaises(ValueError):
+            span(text, "a white car", 2)
 
     def test_lookup_alias_and_text_id_agree(self):
         row = self.records[0]

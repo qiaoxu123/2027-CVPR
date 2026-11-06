@@ -1,0 +1,1215 @@
+[
+  {
+    "i": 2502,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "g": [
+        "two gray cars",
+        "group"
+      ],
+      "b": [
+        "the Farran building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "g",
+        "between two gray cars",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "beside",
+        "b",
+        "beside the Farran building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "text_id": "3e397486eface487a78b20ea3ce0a2bc19339d523b2aa827cc1ee8597cd5bbbd"
+  },
+  {
+    "i": 2503,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A gray car",
+        "object"
+      ],
+      "w1": [
+        "a white car",
+        "object"
+      ],
+      "d": [
+        "a dark blue car",
+        "object"
+      ],
+      "w2": [
+        "a white car",
+        "object"
+      ],
+      "s": [
+        "St Matthew Street",
+        "named_landmark"
+      ],
+      "b": [
+        "the Farran building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w1",
+          "d"
+        ],
+        "in between a white car and a dark blue car",
+        "N",
+        "high"
+      ],
+      [
+        "w2",
+        "across_from",
+        "t",
+        "with a white car across from it on the opposite side",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "opposite side of St Matthew Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to the Farran building",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“it” in across from resolves to the gray car from local syntax."
+    ],
+    "text_id": "d5b0bded314348677a6f5404980017d18f905c46e789fc87fe45f245a03f1835"
+  },
+  {
+    "i": 2504,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "a gray car",
+        "object"
+      ],
+      "b": [
+        "Inveran",
+        "named_landmark"
+      ],
+      "s": [
+        "St. Matthew's Street",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of Inveran",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on St. Matthew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "Behind it is a white car",
+        "R",
+        "medium"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "in front of it is a blue car",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "前/后按句内对象序关系保留；道路行进方向没有说明。"
+    ],
+    "text_id": "349175d9b17596a8895da80a637111f5f5f39c46b9e1dceea8df8a31fb9d67c8"
+  },
+  {
+    "i": 2505,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "bcar": [
+        "a blue car",
+        "object"
+      ],
+      "w": [
+        "white car",
+        "object"
+      ],
+      "s": [
+        "St Matthew's Street",
+        "named_landmark"
+      ],
+      "b": [
+        "the Inveran building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "bcar",
+          "w"
+        ],
+        "between a blue car and white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on St Matthew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the Inveran building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [],
+    "text_id": "b4c430fb3cdaa784a8cb942d66ca65e53c5364856b8f935a7e21e56a5a3706a4"
+  },
+  {
+    "i": 2506,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "bcar": [
+        "a blue car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "s": [
+        "St Matthew's Street",
+        "named_landmark"
+      ],
+      "b": [
+        "the Inveran building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "bcar",
+          "w"
+        ],
+        "between a blue car and a white car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on St Matthew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of the Inveran building",
+        "I",
+        "medium"
+      ]
+    ],
+    "u": [],
+    "text_id": "0831efa7a1284746473ce646862b0ed8935c7bf700c12c5d3f423eb246e943f0"
+  },
+  {
+    "i": 2507,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "w": [
+        "the white car",
+        "object"
+      ],
+      "bcar": [
+        "blue car",
+        "object"
+      ],
+      "s": [
+        "St Matthew's Street",
+        "named_landmark"
+      ],
+      "p": [
+        "Petworth Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "bcar"
+        ],
+        "between the white car and blue car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on St Matthew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "p",
+        "across from Petworth Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "text_id": "0e7f89d37d1bb96bc94ccecd4dd0fb1ad0e147ac1d1244781759a8ca7be8f7b5"
+  },
+  {
+    "i": 2508,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The grey car",
+        "object"
+      ],
+      "s": [
+        "St. Matthew's Street",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "along",
+        "s",
+        "along St. Matthew's Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "upper_side",
+        [],
+        "on the upper side",
+        "W",
+        "medium"
+      ],
+      [
+        "r",
+        "lower_side",
+        "t",
+        "on the lower side almost directly below it",
+        "W",
+        "medium"
+      ],
+      [
+        "b",
+        "right_of",
+        "t",
+        "to the right of the grey car",
+        "U",
+        "low"
+      ],
+      [
+        "t",
+        "no_car_left",
+        [],
+        "there's no cars to the left",
+        "U",
+        "low"
+      ]
+    ],
+    "u": [
+      "upper/lower及左右未给可确定参考框架。"
+    ],
+    "text_id": "020db6bc6b96f18507d1a79171d5350cc0368300017b90017b6ac618c0b91f99"
+  },
+  {
+    "i": 2509,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A dark gray car",
+        "object"
+      ],
+      "b": [
+        "a dark blue car",
+        "object"
+      ],
+      "s": [
+        "St Matthews Street",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "f": [
+        "the farran building",
+        "named_landmark"
+      ],
+      "h": [
+        "the St Matthews Church Hall",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of a dark blue car",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on St Matthews Street",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "across_from",
+        "t",
+        "across from a red car on the opposite side of the road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "f",
+          "h"
+        ],
+        "in between the farran building and the St Matthews Church Hall",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "text_id": "e58a7756580aad631954352ebc29a0ce6872a4878093ac7bb0711bc2579857cf"
+  },
+  {
+    "i": 2510,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A car",
+        "object"
+      ],
+      "f": [
+        "Farran",
+        "named_landmark"
+      ],
+      "i": [
+        "Inveran",
+        "named_landmark"
+      ],
+      "s": [
+        "St. Matthews Street",
+        "named_landmark"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "parked on St. Matthews Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "f",
+        "in front of the builiding called Farran",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "second_car_from",
+        "i",
+        "the second car in front of the building away from the building called Inveran",
+        "N",
+        "low"
+      ],
+      [
+        "t",
+        "color_gray",
+        [],
+        "It is gray",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "with a blue car behind it",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“second car”比较集合及其计数起点表述不清；保留原关系，不推定具体路向。"
+    ],
+    "text_id": "a8d03536038756bd2f4e973a3a070fe51ce2f0cb3169bc66c94aaae18d3abd9d"
+  },
+  {
+    "i": 2511,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A bluish gray car",
+        "object"
+      ],
+      "b": [
+        "a dark blue car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "s": [
+        "St Matthews Street",
+        "named_landmark"
+      ],
+      "f": [
+        "the Farran building",
+        "named_landmark"
+      ],
+      "h": [
+        "the St Matthew's Church Hall",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "color_bluish_gray",
+        [],
+        "A bluish gray car",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "a dark blue car behind it",
+        "R",
+        "medium"
+      ],
+      [
+        "r",
+        "across_from",
+        "t",
+        "across from a red car on the opposite side",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "opposite side of St Matthews Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "f",
+          "h"
+        ],
+        "in between the Farran building and the St Matthew's Church Hall",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "text_id": "f81150c14d3cd1267b064cc0045c7a90bc564ddd31cc976e18fe5bf07ba00a15"
+  },
+  {
+    "i": 2512,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "s": [
+        "St Matthew's Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "r",
+        "across the street from a red car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "on St Matthew's Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "text_id": "278695ef9f87114f7cd92746ed583bd7035e199d56e4b54b37b90cc883d1b547"
+  },
+  {
+    "i": 2513,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The blue car",
+        "object"
+      ],
+      "bin": [
+        "the blue bin",
+        "object"
+      ],
+      "b": [
+        "black car",
+        "object"
+      ],
+      "w": [
+        "white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "a": [
+        "Adam & Eve Street",
+        "named_landmark"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ],
+      "e": [
+        "the building on the East Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "bin",
+        "parked in front of the blue bin",
+        "I",
+        "medium"
+      ],
+      [
+        "b",
+        "right_of",
+        "t",
+        "black car to the right",
+        "U",
+        "low"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "white car is behind",
+        "R",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "a",
+        "the parking lot is on the Adam & Eve Street",
+        "N",
+        "high"
+      ],
+      [
+        "a",
+        "across_from",
+        "p",
+        "that across the Paradise Street",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "behind",
+        "e",
+        "it is behind the building on the East Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "末句it可能回指parking lot，按最近名词承接；将其作为低置信范围解释。"
+    ],
+    "text_id": "9a0abbb8b68e8a3ee943aa3adbec04bbd765d2cb8d377eb25393f495ef1a199f"
+  },
+  {
+    "i": 2514,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "v": [
+        "A white van",
+        "object"
+      ],
+      "b1": [
+        "a multi-colored beige, Gray and Green Building with a gray roof",
+        "object"
+      ],
+      "b2": [
+        "a larger multicolored beige, Gray and light green building with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "v",
+        "between",
+        [
+          "b1",
+          "b2"
+        ],
+        "A white van in between two buildings",
+        "N",
+        "high"
+      ],
+      [
+        "b1",
+        "off",
+        "a",
+        "off Adam and Eve Street",
+        "N",
+        "high"
+      ],
+      [
+        "b2",
+        "of",
+        "p",
+        "of Paradise Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "两个建筑各自对应哪条街由并列顺序暗示，置信度中。"
+    ],
+    "text_id": "387947a93aa395b9d5d006e26d3bf7cdb07c775c338dc92d62f411e0a627e4b9"
+  },
+  {
+    "i": 2515,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "h": [
+        "the gray house",
+        "object"
+      ],
+      "s": [
+        "Burleigh Street",
+        "named_landmark"
+      ],
+      "h2": [
+        "the gray house at the intersection with Adam and Eve Street",
+        "object"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "h",
+        "parked behind the gray house",
+        "N",
+        "medium"
+      ],
+      [
+        "h",
+        "on",
+        "s",
+        "on Burleigh Street",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "one_house_right_of",
+        "h2",
+        "that is 1 house to the right of the gray house at the intersection with Adam and Eve Street",
+        "U",
+        "low"
+      ],
+      [
+        "h2",
+        "at_intersection",
+        "a",
+        "at the intersection with Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "right的观察/行进参考框架未明。"
+    ],
+    "text_id": "fc53263e057c9054b86f3688147645a5b4af1d3c83c43ffaabb90aceecac8150"
+  },
+  {
+    "i": 2516,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "p": [
+        "Paradise street road",
+        "named_landmark"
+      ],
+      "h": [
+        "two houses",
+        "group"
+      ],
+      "park": [
+        "a narrow parking",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "park",
+        "in a narrow parking",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        "h",
+        "in between two houses",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "p",
+        "along Paradise street road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“a narrow parking”指停车空间；文本未提供可命名空间实体，关系用evidence保留且不创建虚构实体。"
+    ],
+    "text_id": "41c3dbfcbaa2b7957d22e6e95829e0d67fef4991117aa0860d9783c51c7fbc4b"
+  },
+  {
+    "i": 2517,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "v": [
+        "A white van",
+        "object"
+      ],
+      "a": [
+        "an alley",
+        "region"
+      ],
+      "h": [
+        "two beige houses with gray roofs",
+        "group"
+      ],
+      "p": [
+        "Paradise Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "v",
+        "and",
+        "a",
+        "A white van and an alley",
+        "N",
+        "high"
+      ],
+      [
+        "a",
+        "between",
+        "h",
+        "between two beige houses with gray roofs",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "off",
+        "p",
+        "off Paradise Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "并列短语未明确van与alley的关系；记录文本明示的并列，不补充空间关系。"
+    ],
+    "text_id": "fd7014306cdfb82d4a4a23f2de49c73e9ad7ee89acefb8ff5d90024d1b10c8fd"
+  },
+  {
+    "i": 2518,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "b": [
+        "another black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "r",
+        "behind",
+        "t",
+        "with a red car behind it",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "b",
+        "a cross from another black car on the opposite side",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "s",
+        "of Grafton Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "near edge of map是地图边缘描述，未提供参照实体。"
+    ],
+    "text_id": "dd989a9b07c43ef4d440e7f5c8c95b11f08cf20a0f387f0688078858d3bee79e"
+  },
+  {
+    "i": 2519,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The dark gray car",
+        "object"
+      ],
+      "g": [
+        "the gray car closest to the intersection with Adam and Eve Street",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "two_cars_behind",
+        "g",
+        "2 cars behind the gray car closest to the intersection with Adam and Eve Street",
+        "R",
+        "low"
+      ],
+      [
+        "g",
+        "closest_to_intersection",
+        "a",
+        "closest to the intersection with Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind的道路方向/计数具体参照序列不充分，方向仅记候选道路框架。"
+    ],
+    "text_id": "743be6a6c5ef056f68261d378e50122bec7095c81e8df560428c42a5f4a1007d"
+  },
+  {
+    "i": 2520,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "b": [
+        "another black car",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "parked on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "adjacent_to",
+        "r",
+        "adjacent to a red car",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "one_space_from",
+        "b",
+        "another black car parked a space away",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "text_id": "0bb94544c2f877a9b5520a4854ce599173021a12a42674bbe5e8f64640651148"
+  },
+  {
+    "i": 2521,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The dark car",
+        "object"
+      ],
+      "c": [
+        "the car closest to Adam and Eve Street",
+        "object"
+      ],
+      "s": [
+        "Grafton Street",
+        "named_landmark"
+      ],
+      "a": [
+        "Adam and Eve Street",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "s",
+        "on Grafton Street",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "two_cars_behind",
+        "c",
+        "2 cars behind the car closest to Adam and Eve Street",
+        "R",
+        "low"
+      ],
+      [
+        "c",
+        "closest_to",
+        "a",
+        "closest to Adam and Eve Street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind道路方向未给定；“car closest”比较集合由句子语境提供但不进一步绑定特定车辆。"
+    ],
+    "text_id": "dd89cd059ffbc11212d65924a089c45d447def9b361fc9595dc727ea7f92c413"
+  }
+]

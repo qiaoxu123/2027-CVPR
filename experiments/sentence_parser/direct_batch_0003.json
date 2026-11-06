@@ -1,42 +1,2191 @@
 [
- {"i":5246,"e":{"t":["The fourth housing unit","object"],"g":["the stip of housing units","group"],"a":["Celine Grove","named_landmark"]},"r":[["t","fourth_from_bottom","g","The fourth housing unit from the bottom of the stip of housing units","U","high"],["g","right","a","on the right side of Celine Grove","R","high"]],"u":["bottom 是排列端点或图像下方，参考视角未给；right 修饰整排 housing units，不能只按目标 GT 选道路方向。"]},
- {"i":5247,"e":{"t":["Gray building","object"],"g":["the row of buildings","group"],"a":["Willmore Road","named_landmark"],"b":["Wellington road","named_landmark"]},"r":[["t","second_from_right","g","second from the right on the row of buildings","U","high"],["g","above","a","the row of buildings above Willmore Road","U","high"],["b","right_in_view","g","when viewed aerially with Wellington road to the right","U","medium"]],"f":{"0":{"type":"observer","status":"unknown","view_evidence":"when viewed aerially with Wellington road to the right","candidate_descriptions":["aerial image view placing Wellington road on right; no numeric orientation without geometry"]},"1":{"type":"observer","status":"unknown","view_evidence":"when viewed aerially with Wellington road to the right"},"2":{"type":"observer","status":"unknown","view_evidence":"when viewed aerially with Wellington road to the right"}},"u":["above 由 aerially 语境支持图像平面而非高度；不能从 to the right 直接推出世界北方。图像中心未明，g 为上下文观察区域。"]},
- {"i":5248,"e":{"t":["The gray house","object"],"a":["Willmore Road","named_landmark"],"b":["the gray house","object"],"c":["Wellington Road","named_landmark"]},"r":[["t","on","a","house on Willmore Road","N","high"],["t","left_two_houses","b","2 houses to the left of the gray house","U","high"],["b","at_road_intersection",["a","c"],"the gray house at the intersection with Wellington Road","N","medium"]],"u":["left 直接参照匿名灰屋；比较数量为2栋，未给视角。"]},
- {"i":5249,"e":{"t":["a house","object"],"a":["Willmore Road","named_landmark"],"l":["a lawn","region"],"y":["the backyard","region"],"c":["a black car and a white car","group"],"b":["Wellington Road","named_landmark"]},"r":[["t","on","a","a house found on Willmore Road","N","high"],["l","in","y","a lawn in the backyard","N","high"],["t","has","y","It has a lawn in the backyard","N","high"],["c","front","t","In front of the house there are a black car and a white car passing","I","high"],["t","fourth_from","b","the fourth house on Willmore Road from Wellington Road","R","high"]],"f":{"4":{"source_road":"b","travel_road":"a","status":"unknown","semantic_roles_unique":true,"candidate_descriptions":["count along Willmore Road away from Wellington Road intersection; missing travel branch without topology"]}},"u":["from Wellington Road 为计数起点；未明确转弯/进入分支，需独立拓扑判断是否唯一。passing 不构成未来轨迹输入。"]},
- {"i":5250,"e":{"t":["A brown and white house with a gray roof","object"],"m":["the edge of the map","region"],"a":["willmore Road","named_landmark"],"c":["one white car and one black car","group"]},"r":[["t","third_from","m","third from the edge of the map","U","high"],["t","off","a","off willmore Road","N","high"],["c","front","t","one white car and one black car in front of it","I","high"]],"u":["地图哪一边未指定，third 的计数顺序不可唯一确定。"]},
- {"i":5251,"e":{"t":["The gray house","object"],"a":["Willmore Road","named_landmark"],"b":["the gray/brown building","object"],"c":["Wellington Road","named_landmark"]},"r":[["t","on","a","house on Willmore Road","N","high"],["t","left_six_houses","b","6 houses to the left of the gray/brown building","U","high"],["b","at_road_intersection",["a","c"],"the gray/brown building at the intersection with Wellington Road","N","medium"]],"u":["left 参照匿名建筑，不直接参照道路；数量6。"]},
- {"i":5252,"e":{"t":["The third building","object"],"g":["the right lane","region"],"a":["Willmore road","named_landmark"],"c":["a black and a white car","group"]},"r":[["t","third_from_top","g","The third building from top of the right lane","U","high"],["g","along","a","the right lane along Willmore road","N","high"],["c","front","t","a black and a white car in front","I","high"]],"u":["right lane 可能指建筑右列而非交通车道；top 未明确图像朝向；不把 lane 自动当道路中心线。"]},
- {"i":5253,"e":{"t":["The Fourth building","object"],"a":["Wellington road","named_landmark"],"b":["Willmore road","named_landmark"],"c":["a white and a black car","group"]},"r":[["t","fourth_from_towards",["a","b"],"The Fourth building from Wellington road towards Willmore road","R","high"],["c","front","t","a white and a black car at the front","I","high"]],"f":{"0":{"status":"unknown","source_road":"a","destination_road":"b","semantic_roles_unique":true,"candidate_descriptions":["count from Wellington road towards Willmore road; travel path not explicitly identified"]}},"u":["from/towards 指定源和目的但未必说明沿哪条道路，不擅自套用 coming-from-onto 规则。"]},
- {"i":5254,"e":{"t":["this building","object"],"a":["Willmore Road","named_landmark"]},"r":[["t","right","a","On the right side of Willmore Road","R","high"],["t","third_from_top","a","third one from the top","U","medium"]],"u":["third 的真实比较集合为道路旁建筑列，未独立命名；a 为沿道路排列的上下文锚点，不是道路 top 端点已知。"]},
- {"i":5255,"e":{"t":["a house with a gray roof","object"],"a":["Wellington Road","named_landmark"],"s":["the street","region"],"f":["the front yard","region"],"y":["The backyard","region"],"l":["the green lawn","region"],"v":["a tree","object"],"b":["Celine Grove","named_landmark"]},"r":[["t","on","a","on Wellington Road","N","high"],["t","no_car_in",["s","f"],"There is no car found on the street or in the front yard","N","high"],["y","contains","l","except for the green lawn and a tree","N","high"],["y","contains","v","except for the green lawn and a tree","N","high"],["t","third_from","b","the third house on the street from Celine Grove","R","high"]],"f":{"4":{"status":"unknown","source_road":"b","travel_road":"a","semantic_roles_unique":true,"candidate_descriptions":["count along Wellington Road from Celine Grove junction; topology not supplied"]}},"u":["no car 是否定存在条件，记录 t 仅为该断言所属对象，不生成实际车辆实体；street 与 Wellington Road 共指候选高但保留文本实体。"]},
- {"i":5256,"e":{"t":["The gray house","object"],"a":["Wellington Road","named_landmark"],"c":["the St. Teresa of the Child Jesus Catholic Church","named_landmark"]},"r":[["t","on","a","house on Wellington Road","N","high"],["t","right_twelve_houses","c","12 houses to the right of the St. Teresa of the Child Jesus Catholic Church","U","high"]],"u":["计数12，不因同教堂其他指令的 left/right 分布反推视角。"]},
- {"i":5257,"e":{"t":["Left side of a White House","region"],"h":["a White House with a gray roof and two cement driveways","object"],"b":["another White House with a multicolored gray and brown roof","object"],"c":["a red car","object"],"d":["his driveway","region"],"s":["a street marking that says slow","region"],"a":["Wellington Road","named_landmark"]},"r":[["t","left_part_of","h","Left side of a White House","U","high"],["h","next_door","b","next door to another White House","N","high"],["c","in","d","a red car in his driveway","N","high"],["c","front","s","in front of a street marking that says slow","U","medium"],["h","off","a","off Wellington Road","N","low"]],"u":["White House 在此是颜色描述，不是专名白宫；front 主语可能为 car 或 driveway；off 道路修饰范围不明；目标为房屋左部而非默认整屋。"]},
- {"i":5258,"e":{"t":["The last building","object"],"a":["Willmore Road","named_landmark"],"p":["a small gray porch","object"],"b":["the next building","object"],"x":["a green and black trampoline","object"]},"r":[["t","last_along","a","The last building on Willmore Road","R","high"],["p","back","t","a small gray porch on the back","I","high"],["b","next_in_sequence","t","the next building","R","medium"],["b","has","x","the next building has a green and black trampoline","N","high"]],"u":["last 和 next 的顺序参考未给出；last 可能限于道路段而 next 在道路外，不据此认定矛盾。"]},
- {"i":5259,"e":{"t":["The gray house","object"],"a":["Willmore Road","named_landmark"],"b":["the brownish gray house","object"],"c":["Wellington Road","named_landmark"]},"r":[["t","on","a","house on Willmore Road","N","high"],["t","left_eleven_houses","b","11 houses to the left of the brownish gray house","U","high"],["b","at_road_intersection",["a","c"],"the brownish gray house at the intersection with Wellington Road","N","medium"]],"u":["left 的直接参照为匿名房屋，数量11。"]},
- {"i":5260,"e":{"t":["The building","object"],"a":["Willmore Road","named_landmark"],"b":["the house","object"],"x":["the green and black trampoline","object"],"y":["the backyard","region"]},"r":[["t","at_end","a","at the end of Willmore Road","N","high"],["t","next_to","b","next to the house","N","high"],["b","has","x","the house with the green and black trampoline","N","high"],["x","in","y","the green and black trampoline in the backyard","N","high"]],"u":["不把邻屋 trampoline 当作目标建筑内部对象。"]},
- {"i":5261,"e":{"t":["The gray house","object"],"a":["Willmore Road","named_landmark"],"b":["the gray house","object"],"c":["Wellington Road","named_landmark"]},"r":[["t","on","a","house on Willmore Road","N","high"],["t","left_ten_houses","b","10 houses to the left of the gray house","U","high"],["b","at_road_intersection",["a","c"],"the gray house at the intersection with Wellington Road","N","medium"]],"u":["left 参照匿名房屋，数量10。"]},
- {"i":5262,"e":{"t":["Two-story brown house with a gray roof","object"],"m":["the edge of the map","region"],"a":["Wilmore Road","named_landmark"],"c":["one white car and one black car","group"],"p":["a green pool","region"],"y":["the backyard","region"]},"r":[["t","second_from","m","second from the edge of the map","U","high"],["t","on","a","of Wilmore Road","N","low"],["c","front","t","one white car and one black car in front of it","I","high"],["p","in","y","a green pool in the backyard","N","high"]],"u":["of Wilmore Road 语法不规范，保留疑似道路定位；不纠正名称为 Willmore；地图边与计数方向未知。"]},
- {"i":5263,"e":{"t":["The brick building with grey roof","object"],"a":["the Willmore Road","named_landmark"],"c":["one white car","object"],"s":["white shed","object"],"y":["the back yard","region"]},"r":[["t","on","a","on the Willmore Road","N","high"],["c","front","t","one white car at the front","I","high"],["s","in","y","white shed in the back yard","N","high"]],"u":[]},
- {"i":5264,"e":{"t":["The gray house","object"],"a":["Willmore Road","named_landmark"],"b":["the gray house","object"],"c":["Wellington Road","named_landmark"]},"r":[["t","on","a","house on Willmore Road","N","high"],["t","left_eight_houses","b","8 houses to the left of the gray house","U","high"],["b","at_road_intersection",["a","c"],"the gray house at the intersection with Wellington Road","N","medium"]],"u":["数量8，参照灰屋不能按目标GT从交叉口多栋房屋中反选。"]},
- {"i":5265,"e":{"t":["The gray house","object"],"a":["Willmore Road","named_landmark"],"b":["the gray house","object"],"c":["Leslie Road","named_landmark"]},"r":[["t","on","a","house on Willmore Road","N","high"],["t","left_eight_houses","b","8 houses to the left of the gray house","U","high"],["b","at_road_intersection",["a","c"],"the gray house at the intersection with Leslie Road","N","medium"]],"u":["参照交叉口为 Leslie 而非 Wellington，不与近似句式错误合并。"]},
- {"i":5266,"e":{"t":["Two gray houses","group"],"a":["Willmore Road","named_landmark"],"b":["the gray house","object"],"c":["Wellington Road","named_landmark"]},"r":[["t","on","a","houses on Willmore Road","N","high"],["t","left_eight_houses","b","8 houses to the left of the gray house","U","high"],["b","at_road_intersection",["a","c"],"the gray house at the intersection with Wellington Road","N","medium"]],"u":["目标是两屋集合，不因为单个目标ID而改写为一屋。"]},
- {"i":5267,"e":{"t":["A white and brown house with a gray roof","object"],"c":["one gray car and one white van","group"],"a":["Wellington Road","named_landmark"],"b":["willmore Road","named_landmark"]},"r":[["c","front","t","one gray car and one white van in front of it","I","high"],["t","at_road_corner",["a","b"],"on the corner of Wellington Road and willmore Road","N","high"]],"u":[]},
- {"i":5268,"e":{"t":["The first building","object"],"a":["Willmore road","named_landmark"],"c":["a grey and a white car","group"]},"r":[["t","first_at_start","a","The first building at the start of Willmore road","R","high"],["c","front","t","a grey and a white car parked in front of it","I","high"]],"u":["道路 start 未给独立端点定义。"]},
- {"i":5269,"e":{"t":["The building","object"],"a":["Willmore Road","named_landmark"],"b":["Wellington Road","named_landmark"],"c":["a gray car and white car","group"]},"r":[["t","at_road_corner",["a","b"],"on the corner of Willmore Road and Wellington Road","N","high"],["c","front","t","a gray car and white car in front of it","I","high"]],"u":[]},
- {"i":5270,"e":{"t":["Multicolored white and brown house with a gray roof","object"],"a":["Willmore Road","named_landmark"],"b":["Wellington Road","named_landmark"]},"r":[["t","at_road_corner",["a","b"],"on the corner of Willmore Road and Wellington Road","N","high"]],"u":[]},
- {"i":5271,"e":{"t":["The building","object"],"a":["Willmore Road","named_landmark"],"b":["Wellington Road","named_landmark"]},"r":[["t","at_road_corner",["a","b"],"on the corner of Willmore Road and Wellington Road","N","high"]],"u":[]},
- {"i":5272,"e":{"t":["a duplex house with a brown roof","object"],"a":["Wellington Road","named_landmark"],"l":["a lawn","region"],"y":["the backyard","region"],"c":["St. Teresa of the Child Jesus Catholic Church","named_landmark"]},"r":[["t","on","a","located on Wellington Road","N","high"],["l","in","y","a lawn in the backyard","N","high"],["t","second_closest","c","the second closest house from St. Teresa of the Child Jesus Catholic Church","N","high"]],"u":["second closest 是距离排序，不是道路有向第二栋；不混用计数谓词。"]},
- {"i":5273,"e":{"t":["The second house","object"],"c":["St Teresa of the child Jesus Catholic church","named_landmark"],"a":["Wellington drive","named_landmark"],"b":["a long green bin","object"],"d":["the back door","object"]},"r":[["t","second_away_from","c","The second house away from St Teresa of the child Jesus Catholic church","U","high"],["t","facing","a","facing Wellington drive","F","medium"],["b","by","d","a long green bin by the back door","N","high"]],"alternatives":{"1":[{"subject":"c","reference":["a"],"reason":"facing may attach to church rather than house"}]},"u":["facing 的附着有歧义，保留房屋/教堂两主语；Wellington drive 原样保留；后门不证明有独立地图朝向。"]},
- {"i":5274,"e":{"t":["a gray-roofed small house","object"],"a":["Wellington Road","named_landmark"],"b":["the gray building","object"],"c":["the Teresa of the Child Jesus Catholic Church","named_landmark"]},"r":[["t","on","a","On Wellington Road, there is a gray-roofed small house","N","high"],["t","next_to","b","next to the gray building","N","high"],["b","adjacent","c","the gray building which is directly adjacent to the Teresa of the Child Jesus Catholic Church","N","high"]],"u":["目标邻接灰楼，灰楼邻接教堂；不将传递链简化为目标直接 adjacent 教堂。"]},
- {"i":5275,"e":{"t":["The brown house","object"],"a":["Wellington Road","named_landmark"],"c":["the St. Teresa of the Child Jesus Catholic Church","named_landmark"]},"r":[["t","on","a","house on Wellington Road","N","high"],["t","right_two_houses","c","2 houses to the right of the St. Teresa of the Child Jesus Catholic Church","U","high"]],"u":["right 的正前方未知。"]},
- {"i":5276,"e":{"t":["Multi-unit and multi-colored Brown, White, gray and red housing complex","group"],"m":["the edge of the map","region"],"a":["Wilmore Road","named_landmark"]},"r":[["t","extends_from","m","extends from the edge of the map","N","high"],["t","encompasses_most","a","encompasses most of Wilmore Road","N","high"]],"u":["complex 是住房集合；未给地图边界方向，名称 Wilmore 不自动修正。"]},
- {"i":5277,"e":{"t":["A white and blue building with a light gray roof","object"],"c":["three cars","group"],"m":["the edge of the map","region"],"a":["willmore Road","named_landmark"],"b":["Celine Grove","named_landmark"],"j":["the corner","region"]},"r":[["t","next_to","c","next to three cars","N","high"],["c","at_side","t","three cars that are parked on the side of it","U","high"],["t","near","m","near the edge of the map","N","medium"],["t","facing","j","facing the corner of willmore Road and Celine Grove","F","medium"],["j","corner_of",["a","b"],"the corner of willmore Road and Celine Grove","N","high"]],"alternatives":{"2":[{"subject":"c","reference":["m"],"reason":"near may attach to cars"}],"3":[{"subject":"c","reference":["j"],"reason":"facing may attach to cars"}]},"u":["two white and one silver 为车辆组属性；facing 最可能建筑，但可附着车辆组；不能用车辆位置/目标GT解除作用域歧义。"]},
- {"i":5278,"e":{"t":["a building","object"],"a":["Leslie Road","named_landmark"],"b":["Celine Grove","named_landmark"]},"r":[["t","right","b","this is a building to your right","R","high"],["t","second_on_right","b","the second building to your right","R","high"]],"f":{"0":{"status":"unknown","source_road":"a","travel_road":"b","turn":"left","semantic_roles_unique":true,"view_evidence":"turn left off of Leslie Road onto Celine Grove","candidate_descriptions":["travel on Celine Grove after left turn from Leslie Road; topology needed"]},"1":{"status":"unknown","source_road":"a","travel_road":"b","turn":"left","semantic_roles_unique":true,"view_evidence":"turn left off of Leslie Road onto Celine Grove","candidate_descriptions":["second right-side building on Celine Grove after left turn from Leslie Road"]}},"u":["turn left 是动作，right 是建筑侧别，不能混淆；目标两次 building 共指同一对象。"]},
- {"i":5279,"e":{"t":["A multicolored blue and white long rectangular building with a light gray roof","object"],"a":["Celine Grove","named_landmark"],"b":["willmore Road","named_landmark"],"j":["the corner","region"]},"r":[["t","facing","j","facing the corner of Celine Grove and willmore Road","F","high"],["j","corner_of",["a","b"],"the corner of Celine Grove and willmore Road","N","high"]],"u":["建筑 facing 交叉口提供正面语义证据，不是已知观察者 yaw。"]},
- {"i":5280,"e":{"t":["A rectangular white building","object"],"c":["St Teresa’s court building","named_landmark"],"a":["wellington road","named_landmark"],"b":["Willmore road","named_landmark"]},"r":[["t","near","c","near St Teresa’s court building","N","high"],["t","along","a","along wellington road","N","medium"],["t","opposite","b","It is opposite Willmore road","N","high"]],"u":["along 也可修饰 court building；opposite 是对面关系，不自行转成方位角；不将 court building 自动替换教堂。"]},
- {"i":5281,"e":{"t":["The long white building","object"],"p":["a small parking lot","region"],"a":["Celine Grove road","named_landmark"]},"r":[["t","has","p","with a small parking lot","N","high"],["t","at_corner","a","on the corner of Celine Grove road","N","medium"]],"alternatives":{"1":[{"subject":"p","reference":["a"],"reason":"corner phrase can attach to parking lot"}]},"u":["corner 的另一道路未给，不能构造唯一交汇点。"]},
- {"i":5282,"e":{"t":["A brick building","object"],"g":["two residents","group"],"c":["a blue and gray trash bin","group"],"y":["the front yard area","region"],"a":["Willmore Road","named_landmark"],"b":["Wellington Road","named_landmark"],"j":["the corner","region"]},"r":[["t","has_residents","g","with two residents","N","high"],["g","each_has","c","each with a blue and gray trash bin","N","high"],["c","back_to_back","c","back to back with each other","I","high"],["c","in","y","in the front yard area","N","high"],["t","facing","a","The building is facing Willmore Road","F","high"],["t","third_from","j","the third building from the corner","R","high"]],"f":{"5":{"type":"observer","status":"unknown","source_road":"b","travel_road":"a","semantic_roles_unique":true,"view_evidence":"when looking down Willmore from Wellington Road","candidate_descriptions":["observer on Wellington Road looking along Willmore Road; topology needed for sign and branch"]}},"u":["trash bin 集合自关系意为组内成员背靠背，不是同一单物体背靠自己；two residents 可能原文误用为两户，保留语言。looking down 是观察者路径视角，不等于建筑 facing；缺少拓扑不生成角度。"]},
- {"i":5283,"e":{"t":["A multicolored brown and white building with a gray roof","object"],"m":["the edge of the map","region"],"a":["Willmore Road","named_landmark"],"c":["the outline of a car","region"],"w":["a white car","object"]},"r":[["t","fourth_from","m","fourth from the edge of the map","U","high"],["t","off","a","off Willmore Road","N","high"],["t","across_from","c","across from the outline of a car","N","high"],["c","next_to","w","that is next to a white car","N","medium"]],"alternatives":{"3":[{"subject":"t","reference":["w"],"reason":"last relative clause may attach to building"}]},"u":["outline 是车的轮廓/印迹，不直接当真实车辆；last that 主语有附着歧义；地图边计数方向未知。"]},
- {"i":5284,"e":{"t":["This building","object"],"a":["Willmore Road","named_landmark"],"g":["a row of grey and brown houses","group"],"c":["a car of undistinguishable color and a white car","group"]},"r":[["t","on","a","on Willmore Road","N","high"],["t","middle_of","g","in the middle of a row of grey and brown houses","N","high"],["c","outside","t","Outside the house is a car of undistinguishable color and a white car","N","high"]],"u":[]},
- {"i":5285,"e":{"t":["The third building with grey roof and brown wall","object"],"a":["Willmore road","named_landmark"]},"r":[["t","right","a","at the right side of the road named Willmore road","R","high"]],"u":["third 的计数起点未给；道路有向正向未知。"]}
+  {
+    "i": 5246,
+    "e": {
+      "t": [
+        "The fourth housing unit",
+        "object"
+      ],
+      "g": [
+        "the stip of housing units",
+        "group"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from_bottom",
+        "g",
+        "The fourth housing unit from the bottom of the stip of housing units",
+        "U",
+        "high"
+      ],
+      [
+        "g",
+        "right",
+        "a",
+        "on the right side of Celine Grove",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "bottom 是排列端点或图像下方，参考视角未给；right 修饰整排 housing units，不能只按目标 GT 选道路方向。"
+    ]
+  },
+  {
+    "i": 5247,
+    "e": {
+      "t": [
+        "Gray building",
+        "object"
+      ],
+      "g": [
+        "the row of buildings",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_from_right",
+        "g",
+        "second from the right on the row of buildings",
+        "U",
+        "high"
+      ],
+      [
+        "g",
+        "above",
+        "a",
+        "the row of buildings above Willmore Road",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "right_in_view",
+        "g",
+        "when viewed aerially with Wellington road to the right",
+        "U",
+        "medium"
+      ]
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Wellington road to the right",
+        "candidate_descriptions": [
+          "aerial image view placing Wellington road on right; no numeric orientation without geometry"
+        ]
+      },
+      "1": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Wellington road to the right"
+      },
+      "2": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "when viewed aerially with Wellington road to the right"
+      }
+    },
+    "u": [
+      "above 由 aerially 语境支持图像平面而非高度；不能从 to the right 直接推出世界北方。图像中心未明，g 为上下文观察区域。"
+    ]
+  },
+  {
+    "i": 5248,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_two_houses",
+        "b",
+        "2 houses to the left of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left 直接参照匿名灰屋；比较数量为2栋，未给视角。"
+    ]
+  },
+  {
+    "i": 5249,
+    "e": {
+      "t": [
+        "a house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "l": [
+        "a lawn",
+        "region"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ],
+      "c": [
+        "a black car and a white car",
+        "group"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "a house found on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "in",
+        "y",
+        "a lawn in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "y",
+        "It has a lawn in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "In front of the house there are a black car and a white car passing",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "fourth_from",
+        "b",
+        "the fourth house on Willmore Road from Wellington Road",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "4": {
+        "source_road": "b",
+        "travel_road": "a",
+        "status": "unknown",
+        "semantic_roles_unique": true,
+        "candidate_descriptions": [
+          "count along Willmore Road away from Wellington Road intersection; missing travel branch without topology"
+        ]
+      }
+    },
+    "u": [
+      "from Wellington Road 为计数起点；未明确转弯/进入分支，需独立拓扑判断是否唯一。passing 不构成未来轨迹输入。"
+    ]
+  },
+  {
+    "i": 5250,
+    "e": {
+      "t": [
+        "A brown and white house with a gray roof",
+        "object"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "one white car and one black car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_from",
+        "m",
+        "third from the edge of the map",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "one white car and one black car in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "地图哪一边未指定，third 的计数顺序不可唯一确定。"
+    ]
+  },
+  {
+    "i": 5251,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray/brown building",
+        "object"
+      ],
+      "c": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_six_houses",
+        "b",
+        "6 houses to the left of the gray/brown building",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray/brown building at the intersection with Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left 参照匿名建筑，不直接参照道路；数量6。"
+    ]
+  },
+  {
+    "i": 5252,
+    "e": {
+      "t": [
+        "The third building",
+        "object"
+      ],
+      "g": [
+        "the right lane",
+        "region"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "c": [
+        "a black and a white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "third_from_top",
+        "g",
+        "The third building from top of the right lane",
+        "U",
+        "high"
+      ],
+      [
+        "g",
+        "along",
+        "a",
+        "the right lane along Willmore road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a black and a white car in front",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "right lane 可能指建筑右列而非交通车道；top 未明确图像朝向；不把 lane 自动当道路中心线。"
+    ]
+  },
+  {
+    "i": 5253,
+    "e": {
+      "t": [
+        "The Fourth building",
+        "object"
+      ],
+      "a": [
+        "Wellington road",
+        "named_landmark"
+      ],
+      "b": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "c": [
+        "a white and a black car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from_towards",
+        [
+          "a",
+          "b"
+        ],
+        "The Fourth building from Wellington road towards Willmore road",
+        "R",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a white and a black car at the front",
+        "I",
+        "high"
+      ]
+    ],
+    "f": {
+      "0": {
+        "status": "unknown",
+        "source_road": "a",
+        "destination_road": "b",
+        "semantic_roles_unique": true,
+        "candidate_descriptions": [
+          "count from Wellington road towards Willmore road; travel path not explicitly identified"
+        ]
+      }
+    },
+    "u": [
+      "from/towards 指定源和目的但未必说明沿哪条道路，不擅自套用 coming-from-onto 规则。"
+    ]
+  },
+  {
+    "i": 5254,
+    "e": {
+      "t": [
+        "this building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "On the right side of Willmore Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "third_from_top",
+        [],
+        "third one from the top",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "third 的真实比较集合为道路旁建筑列，未独立命名；a 为沿道路排列的上下文锚点，不是道路 top 端点已知。",
+      "排序/侧别比较集合省略，reference保留为空，不把道路上下文替成直接参照物。"
+    ]
+  },
+  {
+    "i": 5255,
+    "e": {
+      "t": [
+        "a house with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "s": [
+        "the street",
+        "region"
+      ],
+      "f": [
+        "the front yard",
+        "region"
+      ],
+      "y": [
+        "The backyard",
+        "region"
+      ],
+      "l": [
+        "the green lawn",
+        "region"
+      ],
+      "v": [
+        "a tree",
+        "object"
+      ],
+      "b": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_car_in",
+        [
+          "s",
+          "f"
+        ],
+        "There is no car found on the street or in the front yard",
+        "N",
+        "high"
+      ],
+      [
+        "y",
+        "contains",
+        "l",
+        "except for the green lawn and a tree",
+        "N",
+        "high"
+      ],
+      [
+        "y",
+        "contains",
+        "v",
+        "except for the green lawn and a tree",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "third_from",
+        "b",
+        "the third house on the street from Celine Grove",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "4": {
+        "status": "unknown",
+        "source_road": "b",
+        "travel_road": "a",
+        "semantic_roles_unique": true,
+        "candidate_descriptions": [
+          "count along Wellington Road from Celine Grove junction; topology not supplied"
+        ]
+      }
+    },
+    "u": [
+      "no car 是否定存在条件，记录 t 仅为该断言所属对象，不生成实际车辆实体；street 与 Wellington Road 共指候选高但保留文本实体。"
+    ]
+  },
+  {
+    "i": 5256,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_twelve_houses",
+        "c",
+        "12 houses to the right of the St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "计数12，不因同教堂其他指令的 left/right 分布反推视角。"
+    ]
+  },
+  {
+    "i": 5257,
+    "e": {
+      "t": [
+        "Left side of a White House",
+        "region"
+      ],
+      "h": [
+        "a White House with a gray roof and two cement driveways",
+        "object"
+      ],
+      "b": [
+        "another White House with a multicolored gray and brown roof",
+        "object"
+      ],
+      "c": [
+        "a red car",
+        "object"
+      ],
+      "d": [
+        "his driveway",
+        "region"
+      ],
+      "s": [
+        "a street marking that says slow",
+        "region"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_part_of",
+        "h",
+        "Left side of a White House",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "next_door",
+        "b",
+        "next door to another White House",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "d",
+        "a red car in his driveway",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "s",
+        "in front of a street marking that says slow",
+        "U",
+        "medium"
+      ],
+      [
+        "h",
+        "off",
+        "a",
+        "off Wellington Road",
+        "N",
+        "low"
+      ]
+    ],
+    "u": [
+      "White House 在此是颜色描述，不是专名白宫；front 主语可能为 car 或 driveway；off 道路修饰范围不明；目标为房屋左部而非默认整屋。"
+    ]
+  },
+  {
+    "i": 5258,
+    "e": {
+      "t": [
+        "The last building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "p": [
+        "a small gray porch",
+        "object"
+      ],
+      "b": [
+        "the next building",
+        "object"
+      ],
+      "x": [
+        "a green and black trampoline",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_along",
+        "a",
+        "The last building on Willmore Road",
+        "R",
+        "high"
+      ],
+      [
+        "p",
+        "back",
+        "t",
+        "a small gray porch on the back",
+        "I",
+        "high"
+      ],
+      [
+        "b",
+        "next_in_sequence",
+        "t",
+        "the next building",
+        "R",
+        "medium"
+      ],
+      [
+        "b",
+        "has",
+        "x",
+        "the next building has a green and black trampoline",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "last 和 next 的顺序参考未给出；last 可能限于道路段而 next 在道路外，不据此认定矛盾。"
+    ]
+  },
+  {
+    "i": 5259,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the brownish gray house",
+        "object"
+      ],
+      "c": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_eleven_houses",
+        "b",
+        "11 houses to the left of the brownish gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the brownish gray house at the intersection with Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left 的直接参照为匿名房屋，数量11。"
+    ]
+  },
+  {
+    "i": 5260,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the house",
+        "object"
+      ],
+      "x": [
+        "the green and black trampoline",
+        "object"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to the house",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "has",
+        "x",
+        "the house with the green and black trampoline",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "in",
+        "y",
+        "the green and black trampoline in the backyard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "不把邻屋 trampoline 当作目标建筑内部对象。"
+    ]
+  },
+  {
+    "i": 5261,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_ten_houses",
+        "b",
+        "10 houses to the left of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "left 参照匿名房屋，数量10。"
+    ]
+  },
+  {
+    "i": 5262,
+    "e": {
+      "t": [
+        "Two-story brown house with a gray roof",
+        "object"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "Wilmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "one white car and one black car",
+        "group"
+      ],
+      "p": [
+        "a green pool",
+        "region"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_from",
+        "m",
+        "second from the edge of the map",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "of Wilmore Road",
+        "N",
+        "low"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "one white car and one black car in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "p",
+        "in",
+        "y",
+        "a green pool in the backyard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "of Wilmore Road 语法不规范，保留疑似道路定位；不纠正名称为 Willmore；地图边与计数方向未知。"
+    ]
+  },
+  {
+    "i": 5263,
+    "e": {
+      "t": [
+        "The brick building with grey roof",
+        "object"
+      ],
+      "a": [
+        "the Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "one white car",
+        "object"
+      ],
+      "s": [
+        "white shed",
+        "object"
+      ],
+      "y": [
+        "the back yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on the Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "one white car at the front",
+        "I",
+        "high"
+      ],
+      [
+        "s",
+        "in",
+        "y",
+        "white shed in the back yard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5264,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_eight_houses",
+        "b",
+        "8 houses to the left of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "数量8，参照灰屋不能按目标GT从交叉口多栋房屋中反选。"
+    ]
+  },
+  {
+    "i": 5265,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_eight_houses",
+        "b",
+        "8 houses to the left of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "参照交叉口为 Leslie 而非 Wellington，不与近似句式错误合并。"
+    ]
+  },
+  {
+    "i": 5266,
+    "e": {
+      "t": [
+        "Two gray houses",
+        "group"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray house",
+        "object"
+      ],
+      "c": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "houses on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_eight_houses",
+        "b",
+        "8 houses to the left of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "the gray house at the intersection with Wellington Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "目标是两屋集合，不因为单个目标ID而改写为一屋。"
+    ]
+  },
+  {
+    "i": 5267,
+    "e": {
+      "t": [
+        "A white and brown house with a gray roof",
+        "object"
+      ],
+      "c": [
+        "one gray car and one white van",
+        "group"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "one gray car and one white van in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Wellington Road and willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5268,
+    "e": {
+      "t": [
+        "The first building",
+        "object"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "c": [
+        "a grey and a white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_at_start",
+        "a",
+        "The first building at the start of Willmore road",
+        "R",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a grey and a white car parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "道路 start 未给独立端点定义。"
+    ]
+  },
+  {
+    "i": 5269,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a gray car and white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Willmore Road and Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a gray car and white car in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5270,
+    "e": {
+      "t": [
+        "Multicolored white and brown house with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Willmore Road and Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5271,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Willmore Road and Wellington Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5272,
+    "e": {
+      "t": [
+        "a duplex house with a brown roof",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "l": [
+        "a lawn",
+        "region"
+      ],
+      "y": [
+        "the backyard",
+        "region"
+      ],
+      "c": [
+        "St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "located on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "in",
+        "y",
+        "a lawn in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "second_closest",
+        "c",
+        "the second closest house from St. Teresa of the Child Jesus Catholic Church",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "second closest 是距离排序，不是道路有向第二栋；不混用计数谓词。"
+    ]
+  },
+  {
+    "i": 5273,
+    "e": {
+      "t": [
+        "The second house",
+        "object"
+      ],
+      "c": [
+        "St Teresa of the child Jesus Catholic church",
+        "named_landmark"
+      ],
+      "a": [
+        "Wellington drive",
+        "named_landmark"
+      ],
+      "b": [
+        "a long green bin",
+        "object"
+      ],
+      "d": [
+        "the back door",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "second_away_from",
+        "c",
+        "The second house away from St Teresa of the child Jesus Catholic church",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "a",
+        "facing Wellington drive",
+        "F",
+        "medium"
+      ],
+      [
+        "b",
+        "by",
+        "d",
+        "a long green bin by the back door",
+        "N",
+        "high"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "c",
+          "reference": [
+            "a"
+          ],
+          "reason": "facing may attach to church rather than house"
+        }
+      ]
+    },
+    "u": [
+      "facing 的附着有歧义，保留房屋/教堂两主语；Wellington drive 原样保留；后门不证明有独立地图朝向。"
+    ]
+  },
+  {
+    "i": 5274,
+    "e": {
+      "t": [
+        "a gray-roofed small house",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the gray building",
+        "object"
+      ],
+      "c": [
+        "the Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Wellington Road, there is a gray-roofed small house",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to the gray building",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "adjacent",
+        "c",
+        "the gray building which is directly adjacent to the Teresa of the Child Jesus Catholic Church",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "目标邻接灰楼，灰楼邻接教堂；不将传递链简化为目标直接 adjacent 教堂。"
+    ]
+  },
+  {
+    "i": 5275,
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "a": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the St. Teresa of the Child Jesus Catholic Church",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "house on Wellington Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_two_houses",
+        "c",
+        "2 houses to the right of the St. Teresa of the Child Jesus Catholic Church",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "right 的正前方未知。"
+    ]
+  },
+  {
+    "i": 5276,
+    "e": {
+      "t": [
+        "Multi-unit and multi-colored Brown, White, gray and red housing complex",
+        "group"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "Wilmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "extends_from",
+        "m",
+        "extends from the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "encompasses_most",
+        "a",
+        "encompasses most of Wilmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "complex 是住房集合；未给地图边界方向，名称 Wilmore 不自动修正。"
+    ]
+  },
+  {
+    "i": 5277,
+    "e": {
+      "t": [
+        "A white and blue building with a light gray roof",
+        "object"
+      ],
+      "c": [
+        "three cars",
+        "group"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Celine Grove",
+        "named_landmark"
+      ],
+      "j": [
+        "the corner",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "c",
+        "next to three cars",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "at_side",
+        "t",
+        "three cars that are parked on the side of it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "m",
+        "near the edge of the map",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "facing",
+        "j",
+        "facing the corner of willmore Road and Celine Grove",
+        "F",
+        "medium"
+      ],
+      [
+        "j",
+        "corner_of",
+        [
+          "a",
+          "b"
+        ],
+        "the corner of willmore Road and Celine Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "c",
+          "reference": [
+            "m"
+          ],
+          "reason": "near may attach to cars"
+        }
+      ],
+      "3": [
+        {
+          "subject": "c",
+          "reference": [
+            "j"
+          ],
+          "reason": "facing may attach to cars"
+        }
+      ]
+    },
+    "u": [
+      "two white and one silver 为车辆组属性；facing 最可能建筑，但可附着车辆组；不能用车辆位置/目标GT解除作用域歧义。"
+    ]
+  },
+  {
+    "i": 5278,
+    "e": {
+      "t": [
+        "a building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Celine Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "b",
+        "this is a building to your right",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "second_on_right",
+        "b",
+        "the second building to your right",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "0": {
+        "status": "unknown",
+        "source_road": "a",
+        "travel_road": "b",
+        "turn": "left",
+        "semantic_roles_unique": true,
+        "view_evidence": "turn left off of Leslie Road onto Celine Grove",
+        "candidate_descriptions": [
+          "travel on Celine Grove after left turn from Leslie Road; topology needed"
+        ]
+      },
+      "1": {
+        "status": "unknown",
+        "source_road": "a",
+        "travel_road": "b",
+        "turn": "left",
+        "semantic_roles_unique": true,
+        "view_evidence": "turn left off of Leslie Road onto Celine Grove",
+        "candidate_descriptions": [
+          "second right-side building on Celine Grove after left turn from Leslie Road"
+        ]
+      }
+    },
+    "u": [
+      "turn left 是动作，right 是建筑侧别，不能混淆；目标两次 building 共指同一对象。"
+    ]
+  },
+  {
+    "i": 5279,
+    "e": {
+      "t": [
+        "A multicolored blue and white long rectangular building with a light gray roof",
+        "object"
+      ],
+      "a": [
+        "Celine Grove",
+        "named_landmark"
+      ],
+      "b": [
+        "willmore Road",
+        "named_landmark"
+      ],
+      "j": [
+        "the corner",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "facing",
+        "j",
+        "facing the corner of Celine Grove and willmore Road",
+        "F",
+        "high"
+      ],
+      [
+        "j",
+        "corner_of",
+        [
+          "a",
+          "b"
+        ],
+        "the corner of Celine Grove and willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "建筑 facing 交叉口提供正面语义证据，不是已知观察者 yaw。"
+    ]
+  },
+  {
+    "i": 5280,
+    "e": {
+      "t": [
+        "A rectangular white building",
+        "object"
+      ],
+      "c": [
+        "St Teresa’s court building",
+        "named_landmark"
+      ],
+      "a": [
+        "wellington road",
+        "named_landmark"
+      ],
+      "b": [
+        "Willmore road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "near",
+        "c",
+        "near St Teresa’s court building",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "a",
+        "along wellington road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "opposite",
+        "b",
+        "It is opposite Willmore road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "along 也可修饰 court building；opposite 是对面关系，不自行转成方位角；不将 court building 自动替换教堂。"
+    ]
+  },
+  {
+    "i": 5281,
+    "e": {
+      "t": [
+        "The long white building",
+        "object"
+      ],
+      "p": [
+        "a small parking lot",
+        "region"
+      ],
+      "a": [
+        "Celine Grove road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "p",
+        "with a small parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_corner",
+        "a",
+        "on the corner of Celine Grove road",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "p",
+          "reference": [
+            "a"
+          ],
+          "reason": "corner phrase can attach to parking lot"
+        }
+      ]
+    },
+    "u": [
+      "corner 的另一道路未给，不能构造唯一交汇点。"
+    ]
+  },
+  {
+    "i": 5282,
+    "e": {
+      "t": [
+        "A brick building",
+        "object"
+      ],
+      "g": [
+        "two residents",
+        "group"
+      ],
+      "c": [
+        "a blue and gray trash bin",
+        "group"
+      ],
+      "y": [
+        "the front yard area",
+        "region"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Wellington Road",
+        "named_landmark"
+      ],
+      "j": [
+        "the corner",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_residents",
+        "g",
+        "with two residents",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "each_has",
+        "c",
+        "each with a blue and gray trash bin",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "back_to_back",
+        "c",
+        "back to back with each other",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "y",
+        "in the front yard area",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "a",
+        "The building is facing Willmore Road",
+        "F",
+        "high"
+      ],
+      [
+        "t",
+        "third_from",
+        "j",
+        "the third building from the corner",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "5": {
+        "type": "observer",
+        "status": "unknown",
+        "source_road": "b",
+        "travel_road": "a",
+        "semantic_roles_unique": true,
+        "view_evidence": "when looking down Willmore from Wellington Road",
+        "candidate_descriptions": [
+          "observer on Wellington Road looking along Willmore Road; topology needed for sign and branch"
+        ]
+      }
+    },
+    "u": [
+      "trash bin 集合自关系意为组内成员背靠背，不是同一单物体背靠自己；two residents 可能原文误用为两户，保留语言。looking down 是观察者路径视角，不等于建筑 facing；缺少拓扑不生成角度。"
+    ]
+  },
+  {
+    "i": 5283,
+    "e": {
+      "t": [
+        "A multicolored brown and white building with a gray roof",
+        "object"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "the outline of a car",
+        "region"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from",
+        "m",
+        "fourth from the edge of the map",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "c",
+        "across from the outline of a car",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "next_to",
+        "w",
+        "that is next to a white car",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "t",
+          "reference": [
+            "w"
+          ],
+          "reason": "last relative clause may attach to building"
+        }
+      ]
+    },
+    "u": [
+      "outline 是车的轮廓/印迹，不直接当真实车辆；last that 主语有附着歧义；地图边计数方向未知。"
+    ]
+  },
+  {
+    "i": 5284,
+    "e": {
+      "t": [
+        "This building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "g": [
+        "a row of grey and brown houses",
+        "group"
+      ],
+      "c": [
+        "a car of undistinguishable color and a white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "middle_of",
+        "g",
+        "in the middle of a row of grey and brown houses",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "outside",
+        "t",
+        "Outside the house is a car of undistinguishable color and a white car",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 5285,
+    "e": {
+      "t": [
+        "The third building with grey roof and brown wall",
+        "object"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "at the right side of the road named Willmore road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "third 的计数起点未给；道路有向正向未知。"
+    ]
+  }
 ]

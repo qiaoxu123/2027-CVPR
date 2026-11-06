@@ -1,0 +1,2532 @@
+[
+  {
+    "i": 40,
+    "e": {
+      "t": [
+        "The gray house",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "j": [
+        "the intersection",
+        "region"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "j",
+        "faces the intersection with Leslie Road",
+        "F",
+        "high"
+      ],
+      [
+        "j",
+        "intersection_of",
+        [
+          "a",
+          "b"
+        ],
+        "the intersection with Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "facing 主语是房屋；交叉口另一条路由上下文指向 Willmore，未读取拓扑。"
+    ]
+  },
+  {
+    "i": 41,
+    "e": {
+      "t": [
+        "The grayish brown building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "h": [
+        "the gray house",
+        "object"
+      ],
+      "b": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "h",
+        "to the right of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Willmore Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right 参照匿名灰屋，不直接参照道路。"
+    ]
+  },
+  {
+    "i": 42,
+    "e": {
+      "t": [
+        "A white building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "p": [
+        "a lot",
+        "region"
+      ],
+      "c": [
+        "a camper and a blue car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "p",
+        "across from a lot",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "p",
+        "a camper and a blue car in it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 43,
+    "e": {
+      "t": [
+        "A white building with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left",
+        "a",
+        "on the left after turning from Willmore Road",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "1": {
+        "status": "unknown",
+        "source_road": "b",
+        "travel_road": "a",
+        "semantic_roles_unique": true,
+        "view_evidence": "after turning from Willmore Road",
+        "candidate_descriptions": [
+          "Leslie Road travel direction after entering from Willmore Road; turning sign and road branch require independent topology"
+        ]
+      }
+    },
+    "u": [
+      "明确进入后视角，转弯左右未给出；不据目标位置选择进入分支。"
+    ]
+  },
+  {
+    "i": 44,
+    "e": {
+      "t": [
+        "The gray building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "p": [
+        "a large parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "p",
+        "across the street from a large parking lot",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 45,
+    "e": {
+      "t": [
+        "this gray roofed multifaceted building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a white and a dark blue car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "south",
+        "a",
+        "On the southern right side of Leslie Road",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "right",
+        "a",
+        "On the southern right side of Leslie Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "first_from_bottom",
+        [],
+        "first from the bottom",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "near",
+        "c",
+        "near a white and a dark blue car",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "southern 可指道路右侧部分的南段而非道路正南；保留地理词但不把 right 等同南方。first 比较集合省略，道路仅上下文锚点。",
+      "排序/侧别比较集合省略，reference保留为空，不把道路上下文替成直接参照物。"
+    ]
+  },
+  {
+    "i": 46,
+    "e": {
+      "t": [
+        "A large building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Willmore Road and Leslie Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left",
+        "b",
+        "on the left as one looks down Leslie Road from Willmore",
+        "R",
+        "high"
+      ]
+    ],
+    "f": {
+      "1": {
+        "type": "observer",
+        "status": "unknown",
+        "source_road": "a",
+        "travel_road": "b",
+        "view_evidence": "as one looks down Leslie Road from Willmore",
+        "semantic_roles_unique": true,
+        "candidate_descriptions": [
+          "observer at Willmore looking along Leslie Road; geometry required to resolve outgoing branch"
+        ]
+      }
+    },
+    "u": [
+      "Willmore 是句内 Willmore Road 缩写；不将 down 当世界负Y。"
+    ]
+  },
+  {
+    "i": 47,
+    "e": {
+      "t": [
+        "this gray roofed building",
+        "object"
+      ],
+      "a": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "On the right side of Leslie Road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "道路行进方向未指定。"
+    ]
+  },
+  {
+    "i": 48,
+    "e": {
+      "t": [
+        "A multicolored brick red, Brown and white multi housing complex with a gray roof",
+        "group"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "extends_from",
+        "m",
+        "extends from the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "extends_to_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "to the corner of Willmore Road in Leslie Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "in Leslie Road 语病，候选为两路交汇；不改变专名。"
+    ]
+  },
+  {
+    "i": 49,
+    "e": {
+      "t": [
+        "A multi-colored white and brown multi housing complex with a gray roof",
+        "group"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Leslie Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "extends_to",
+        "m",
+        "extends the edge of the map",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Willmore Road and Leslie Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "extends the edge 的起终含义不完全明确，地图边未定向。"
+    ]
+  },
+  {
+    "i": 50,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "w": [
+        "four lower level bay windows and one upper level bay window",
+        "group"
+      ],
+      "d": [
+        "two front doors",
+        "group"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ],
+      "k": [
+        "the curb",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "at the end of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "w",
+        "with four lower level bay windows and one upper level bay window",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "There are two front doors",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "at",
+        "k",
+        "two white cars parked at the curb",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "out front",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "building parked 为非字面语病，不生成建筑停车动作；upper/lower 指楼层高度而非地图方向。one of them 指车辆组一成员。"
+    ]
+  },
+  {
+    "i": 51,
+    "e": {
+      "t": [
+        "a building with white walls",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_side",
+        "a",
+        "on the side of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "two white cars in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "side 未指定左右。"
+    ]
+  },
+  {
+    "i": 52,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_end",
+        "a",
+        "on the end of Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "two white cars parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 53,
+    "e": {
+      "t": [
+        "a two-storey building with white walls",
+        "object"
+      ],
+      "c": [
+        "two cars",
+        "group"
+      ],
+      "a": [
+        "livingstone road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "two cars in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on livingstone road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "half gray/half brown 为屋顶属性，非方向关系。"
+    ]
+  },
+  {
+    "i": 54,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "on the right of Livingstone Road",
+        "R",
+        "high"
+      ],
+      [
+        "a",
+        "curves_towards",
+        "b",
+        "as it curves up left towards Havelock Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "up left 描述道路弯曲形态/图像位置，不是目标left；towards Havelock 可提供候选路径方向，但未指定观察者位置，不据此固定right。"
+    ]
+  },
+  {
+    "i": 55,
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "h": [
+        "the gray house",
+        "object"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_three_houses",
+        "h",
+        "3 houses to the right of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Havelock Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right 参照匿名灰屋，计数3。"
+    ]
+  },
+  {
+    "i": 56,
+    "e": {
+      "t": [
+        "The gray house and red house",
+        "group"
+      ],
+      "p": [
+        "farmland",
+        "region"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left",
+        "p",
+        "to the left of farmland",
+        "U",
+        "high"
+      ],
+      [
+        "p",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Livingstone Road and Havelock Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "t",
+          "reference": [
+            "a",
+            "b"
+          ],
+          "reason": "intersection phrase can locate target group rather than farmland"
+        }
+      ]
+    },
+    "u": [
+      "left 的直接参照是匿名 farmland，不能直接绑定到具名路。"
+    ]
+  },
+  {
+    "i": 57,
+    "e": {
+      "t": [
+        "The building with half grey and half ref shingles",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Grand Square",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "off",
+        "a",
+        "off Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "b",
+        "across from Grand Square",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "ref shingles 保留原文，不用于实体选择。"
+    ]
+  },
+  {
+    "i": 58,
+    "e": {
+      "t": [
+        "A multicolored white and beige house",
+        "object"
+      ],
+      "w": [
+        "its front wall",
+        "object"
+      ],
+      "x": [
+        "a multicolored pink, brown and blue object",
+        "object"
+      ],
+      "d": [
+        "its driveway",
+        "region"
+      ],
+      "c": [
+        "one black car and one white car",
+        "group"
+      ],
+      "a": [
+        "Havelock Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "partially_missing",
+        "w",
+        "partially missing its front wall",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "in",
+        "d",
+        "a multicolored pink, brown and blue object in its driveway",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "one black car and one white car in front of it",
+        "I",
+        "medium"
+      ],
+      [
+        "t",
+        "near_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "near the corner of Havelock Road and Livingstone Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "c",
+          "reference": [
+            "x"
+          ],
+          "reason": "it can denote the multicolored object"
+        }
+      ],
+      "3": [
+        {
+          "subject": "c",
+          "reference": [
+            "a",
+            "b"
+          ],
+          "reason": "corner phrase may locate cars rather than house"
+        }
+      ]
+    },
+    "u": [
+      "多层that附着不唯一，不利用目标几何解除歧义。"
+    ]
+  },
+  {
+    "i": 59,
+    "e": {
+      "t": [
+        "a house with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a black car and a white car",
+        "group"
+      ],
+      "v": [
+        "two trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "located on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a black car and a white car in front of the house",
+        "I",
+        "high"
+      ],
+      [
+        "v",
+        "across_street_from",
+        "t",
+        "On the other side of the street, there are two trees",
+        "N",
+        "medium"
+      ],
+      [
+        "v",
+        "on",
+        "a",
+        "two trees on the street",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "other side 相对当前房屋语境；不选择地图道路分段。"
+    ]
+  },
+  {
+    "i": 60,
+    "e": {
+      "t": [
+        "a residential house",
+        "object"
+      ],
+      "a": [
+        "Havelock Road",
+        "named_landmark"
+      ],
+      "y": [
+        "its front yard",
+        "region"
+      ],
+      "c": [
+        "one black car and one white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "located on Havelock Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "y",
+        "its front yard is almost empty",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "on",
+        "a",
+        "On the street, there are one black car and one white car",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "front yard 为区域属性，almost empty 不等于绝对无对象。"
+    ]
+  },
+  {
+    "i": 61,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "v": [
+        "a brown tree",
+        "object"
+      ],
+      "x": [
+        "different colored items",
+        "group"
+      ],
+      "y": [
+        "the front yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "v",
+        "across the street from a brown tree",
+        "N",
+        "high"
+      ],
+      [
+        "x",
+        "in",
+        "y",
+        "different colored items in the front yard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 62,
+    "e": {
+      "t": [
+        "a two-storey building a gray roof",
+        "object"
+      ],
+      "a": [
+        "livingstone road",
+        "named_landmark"
+      ],
+      "h": [
+        "the building at the corner",
+        "object"
+      ],
+      "b": [
+        "havelock road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on livingstone road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "h",
+        "next to the building at the corner",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "at the corner of livingstone road and havelock road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "目标与交叉口建筑是两对象，不合并。"
+    ]
+  },
+  {
+    "i": 63,
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ],
+      "a": [
+        "Livingston Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havalock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "front",
+        "t",
+        "a blue car parked in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Livingston Road and Havalock Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "c",
+          "reference": [
+            "a",
+            "b"
+          ],
+          "reason": "intersection phrase can modify car location"
+        }
+      ]
+    },
+    "u": [
+      "专名原拼写保留，后置交叉口短语有附着歧义。"
+    ]
+  },
+  {
+    "i": 64,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Havelock Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Havelock Road and Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "a blue car parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 65,
+    "e": {
+      "t": [
+        "The brown building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Havelock Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 66,
+    "e": {
+      "t": [
+        "A multi-colored beige and light Gray House with a gray roof",
+        "object"
+      ],
+      "c": [
+        "one black car",
+        "object"
+      ],
+      "d": [
+        "it's driveway",
+        "region"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "in",
+        "d",
+        "one black car parked in it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Livingstone Road and Havelock Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "末尾 corner 也可定位车辆停车位置；Gray House 为颜色描述非专名。"
+    ]
+  },
+  {
+    "i": 67,
+    "e": {
+      "t": [
+        "The large dark gray building",
+        "object"
+      ],
+      "p": [
+        "a parking lot",
+        "region"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has",
+        "p",
+        "with a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Livingstone Road and Havelock Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "p",
+          "reference": [
+            "a",
+            "b"
+          ],
+          "reason": "intersection may locate parking lot"
+        }
+      ]
+    },
+    "u": [
+      "交叉口短语附着未强制唯一。"
+    ]
+  },
+  {
+    "i": 68,
+    "e": {
+      "t": [
+        "a building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars and two black cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "located on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "t",
+        "In front of this building",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "on",
+        "a",
+        "on the street, there are two white cars and two black cars",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 69,
+    "e": {
+      "t": [
+        "a building with a brown roof",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Grand Square",
+        "named_landmark"
+      ],
+      "p": [
+        "a parking space",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "next_to",
+        "t",
+        "Next to this building is Grand Square",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "next_to",
+        "t",
+        "Next to it is a parking space",
+        "N",
+        "medium"
+      ],
+      [
+        "p",
+        "shared_with",
+        "b",
+        "shared with Grand Square",
+        "N",
+        "high"
+      ]
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "p",
+          "reference": [
+            "b"
+          ],
+          "reason": "it may refer to Grand Square"
+        }
+      ]
+    },
+    "u": [
+      "后句it 可指目标或 Grand Square；共享停车区不证明所有者唯一。"
+    ]
+  },
+  {
+    "i": 70,
+    "e": {
+      "t": [
+        "A building with brown roof and brown wall",
+        "object"
+      ],
+      "b": [
+        "Grand Square building",
+        "named_landmark"
+      ],
+      "a": [
+        "Livingstone road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "b",
+        "at the right side of Grand Square building",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "a",
+        "along the road named Livingstone road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "along 可定位目标或 Grand Square；right 参照具名建筑，但视角缺失。"
+    ]
+  },
+  {
+    "i": 71,
+    "e": {
+      "t": [
+        "a red roofed building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a large H-shaped white building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "north",
+        "a",
+        "located north of Livingstone Road",
+        "W",
+        "high"
+      ],
+      [
+        "h",
+        "left",
+        "t",
+        "To the left of this building is a large H-shaped white building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "north 有地理语义但未校准XY；left 主语是白楼、参照是目标红顶楼，不倒置。"
+    ]
+  },
+  {
+    "i": 72,
+    "e": {
+      "t": [
+        "The brown building with a brown roof",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a small red building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_bend",
+        "a",
+        "on the bend of Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "beside",
+        "t",
+        "a small red building beside it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 73,
+    "e": {
+      "t": [
+        "The large brown building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the Grand Square building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "b",
+        "to the right of the Grand Square building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "未独立指定观察视角。"
+    ]
+  },
+  {
+    "i": 74,
+    "e": {
+      "t": [
+        "The brown building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "h": [
+        "the gray house",
+        "object"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right",
+        "h",
+        "to the right of the gray house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "on",
+        "a",
+        "the gray house on Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "facing",
+        "b",
+        "facing Havelock Road",
+        "F",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "t",
+          "reference": [
+            "b"
+          ],
+          "reason": "final facing clause may attach to target building"
+        }
+      ]
+    },
+    "u": [
+      "facing 优先修饰最近灰屋，仍保留远附着；不因此把 right 视角定为房屋正面。"
+    ]
+  },
+  {
+    "i": 75,
+    "e": {
+      "t": [
+        "The first building",
+        "object"
+      ],
+      "l": [
+        "the left lane",
+        "region"
+      ],
+      "a": [
+        "Livingston road",
+        "named_landmark"
+      ],
+      "b": [
+        "the Havelock road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_in",
+        "l",
+        "The first building on the left lane",
+        "U",
+        "high"
+      ],
+      [
+        "l",
+        "along",
+        "a",
+        "the left lane along Livingston road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "b",
+        "It is facing the Havelock road",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "left lane 可能为建筑列而非交通车道；first 顺序起点未知；物体facing不等于观察者。"
+    ]
+  },
+  {
+    "i": 76,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "a": [
+        "Livingston Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Havelock Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Livingston Road and Havelock Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 77,
+    "e": {
+      "t": [
+        "A brick house with a black roof and solar panels",
+        "object"
+      ],
+      "a": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "b": [
+        "the Grand Square Building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_along",
+        "a",
+        "the last building on Bridgelands Way",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "past",
+        "b",
+        "past the Grand Square Building",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "past 指相对行进顺序，虽有地标锚点但缺少起点/行进方向；不按目标选择正向。"
+    ]
+  },
+  {
+    "i": 78,
+    "e": {
+      "t": [
+        "This building",
+        "object"
+      ],
+      "a": [
+        "Bridge Lands Way",
+        "named_landmark"
+      ],
+      "c": [
+        "A white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Bridge Lands Way",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "next_to",
+        "t",
+        "A white car parked next to it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "保留 Bridge Lands 分词拼写。"
+    ]
+  },
+  {
+    "i": 79,
+    "e": {
+      "t": [
+        "The left side of a brown house",
+        "region"
+      ],
+      "h": [
+        "a brown house with a gray roof",
+        "object"
+      ],
+      "n": [
+        "the house next door",
+        "object"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "d": [
+        "it's driveway",
+        "region"
+      ],
+      "m": [
+        "the corner of the map",
+        "region"
+      ],
+      "a": [
+        "bridgelands way",
+        "named_landmark"
+      ],
+      "b": [
+        "the grand square building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_part_of",
+        "h",
+        "The left side of a brown house",
+        "U",
+        "high"
+      ],
+      [
+        "n",
+        "next_door",
+        "h",
+        "the house next door",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "d",
+        "a white car in it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "n",
+        "has",
+        "d",
+        "the house next door having a white car in it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "at",
+        "m",
+        "on the corner of the map",
+        "N",
+        "low"
+      ],
+      [
+        "h",
+        "off",
+        "a",
+        "off bridgelands way",
+        "N",
+        "low"
+      ],
+      [
+        "h",
+        "across_from",
+        "b",
+        "across from the grand square building",
+        "N",
+        "low"
+      ]
+    ],
+    "alternatives": {
+      "4": [
+        {
+          "subject": "n",
+          "reference": [
+            "m"
+          ],
+          "reason": "final location may modify neighbor house"
+        }
+      ],
+      "5": [
+        {
+          "subject": "n",
+          "reference": [
+            "a"
+          ],
+          "reason": "final location may modify neighbor house"
+        }
+      ],
+      "6": [
+        {
+          "subject": "n",
+          "reference": [
+            "b"
+          ],
+          "reason": "final location may modify neighbor house"
+        }
+      ]
+    },
+    "u": [
+      "目标为房屋左部；后半多个定位短语对主屋/邻屋的附着不唯一。"
+    ]
+  },
+  {
+    "i": 80,
+    "e": {
+      "t": [
+        "Left side of a brown house",
+        "region"
+      ],
+      "h": [
+        "a brown house with a gray roof",
+        "object"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "k": [
+        "the corner of the map",
+        "region"
+      ],
+      "a": [
+        "bridgeland's way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_part_of",
+        "h",
+        "Left side of a brown house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "cut_off_by",
+        "m",
+        "partially Been cut off by the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "at",
+        "k",
+        "sitting on the corner of the map",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "off",
+        "a",
+        "off bridgeland's way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "保留道路拼写；目标为局部而不是直接整屋。"
+    ]
+  },
+  {
+    "i": 81,
+    "e": {
+      "t": [
+        "Left side of a brown building",
+        "region"
+      ],
+      "h": [
+        "a brown building with a gray roof",
+        "object"
+      ],
+      "m": [
+        "the corner of the map",
+        "region"
+      ],
+      "a": [
+        "bridgelands way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "left_part_of",
+        "h",
+        "Left side of a brown building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "at",
+        "m",
+        "on the corner of the map",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "off",
+        "a",
+        "off bridgelands way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "left-part 的观察视角未给。"
+    ]
+  },
+  {
+    "i": 82,
+    "e": {
+      "t": [
+        "the large white building",
+        "object"
+      ],
+      "a": [
+        "Livingston Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right",
+        "a",
+        "the large white building to your right",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "near_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "as you get closer to the intersection with Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "f": {
+      "0": {
+        "status": "unknown",
+        "travel_road": "a",
+        "destination_road": "b",
+        "semantic_roles_unique": true,
+        "view_evidence": "driving down Livingston Road heading towards Burton Wood Drive",
+        "candidate_descriptions": [
+          "travel along Livingston Road approaching Burton Wood Drive junction; independent topology required"
+        ]
+      }
+    },
+    "u": [
+      "明确观察者沿路接近交叉口，未提供来源位置；near 是接近过程中发现目标的语境，不等同精确距离断言。"
+    ]
+  },
+  {
+    "i": 83,
+    "e": {
+      "t": [
+        "this large white and gray roofed building",
+        "object"
+      ],
+      "a": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a blue car",
+        "object"
+      ],
+      "l": [
+        "some green grass",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "a",
+          "b"
+        ],
+        "Between Bridgelands Way and Livingstone Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "next_to",
+        "t",
+        "a blue car is parked next to it",
+        "N",
+        "high"
+      ],
+      [
+        "l",
+        "middle_of",
+        "t",
+        "some green grass in the middle",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "middle 可能为建筑包围庭院/地块中心，未创建虚假精确位置。"
+    ]
+  },
+  {
+    "i": 84,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "p": [
+        "the bigger side of the land",
+        "region"
+      ],
+      "a": [
+        "Living Stone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "p",
+        "only on the bigger side of the land",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "near",
+        [
+          "a",
+          "b"
+        ],
+        "the land that is closed to Living Stone Road and Bridgelands Way",
+        "N",
+        "medium"
+      ]
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "t",
+          "reference": [
+            "a",
+            "b"
+          ],
+          "reason": "relative clause may locate building rather than land"
+        }
+      ]
+    },
+    "u": [
+      "closed to 按语境候选close to，保留语病；bigger side 没有方向定义。"
+    ]
+  },
+  {
+    "i": 85,
+    "e": {
+      "t": [
+        "The large H shaped building",
+        "object"
+      ],
+      "a": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Bridgelands Way and Livingstone Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": []
+  },
+  {
+    "i": 86,
+    "e": {
+      "t": [
+        "Two large, long, white, rectangular buildings with flat roofs",
+        "group"
+      ],
+      "a": [
+        "Livingston Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Livingston Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "两栋集合，未推定地图实例ID。"
+    ]
+  },
+  {
+    "i": 87,
+    "e": {
+      "t": [
+        "The fourth house",
+        "object"
+      ],
+      "a": [
+        "Graham warren way",
+        "named_landmark"
+      ],
+      "p": [
+        "a rectangular compound",
+        "region"
+      ],
+      "c": [
+        "black cars",
+        "group"
+      ],
+      "b": [
+        "Burton wood drive road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "fourth_from",
+        "a",
+        "The fourth house from Graham warren way",
+        "R",
+        "high"
+      ],
+      [
+        "p",
+        "left",
+        "t",
+        "a rectangular compound on it's left side",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "p",
+        "black cars parked in it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "along",
+        "b",
+        "along Burton wood drive road",
+        "N",
+        "low"
+      ]
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "p",
+          "reference": [
+            "b"
+          ],
+          "reason": "ungrammatical final clause may locate compound"
+        }
+      ]
+    },
+    "u": [
+      "末尾is along主语省略，未唯一绑定。from道路起点未给方向。"
+    ]
+  },
+  {
+    "i": 88,
+    "e": {
+      "t": [
+        "A building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "h": [
+        "the orange building",
+        "object"
+      ],
+      "c": [
+        "four cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "near",
+        "a",
+        "closed to Burton Wood Drive",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "h",
+        "across to the orange building",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "front",
+        "h",
+        "four cars park in front of",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "front 修饰orange building而非目标；closed to 为close to候选语病。"
+    ]
+  },
+  {
+    "i": 89,
+    "e": {
+      "t": [
+        "The first building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "d": [
+        "a red driveway",
+        "region"
+      ],
+      "h": [
+        "the house",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "first_along",
+        "a",
+        "The first building on Burton Wood Drive",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "with a red driveway",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "connected_to",
+        "h",
+        "is connect to the house",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "right",
+        "t",
+        "the house on the right of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "目标连接右边邻屋；right 的主语为邻屋，不是目标。first起点缺失。"
+    ]
+  }
+]

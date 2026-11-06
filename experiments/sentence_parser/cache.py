@@ -17,8 +17,16 @@ def lines(path):
         return [json.loads(line) for line in handle if line.strip()]
 
 
-def span(text, quote):
-    start = text.find(quote)
+def span(text, quote, occurrence=0):
+    if not isinstance(quote, str) or not quote:
+        raise ValueError("Mention/evidence must be a nonempty source substring")
+    if not isinstance(occurrence, int) or occurrence < 0:
+        raise ValueError("Occurrence must be a nonnegative integer")
+    start = -1
+    for _ in range(occurrence + 1):
+        start = text.find(quote, start + 1)
+        if start < 0:
+            break
     if start < 0:
         raise ValueError(f"Evidence absent from instruction: {quote!r}")
     return {"text": quote, "start": start, "end": start + len(quote)}
@@ -52,12 +60,15 @@ def compile_records():
     seen = set()
     for batch in sorted(ROOT.glob("direct_batch_*.json")):
         for authored in json.loads(batch.read_text()):
+            if batch.name.startswith("direct_batch_luna_"):
+                assert authored.get("author_model") == "gpt-6-luna", "Luna source attribution missing"
+                assert authored.get("author_reasoning_effort") == "low", "Luna effort attribution missing"
             row = source[authored["i"]]
             text = row["instruction"]
             assert hashlib.sha256(text.encode()).hexdigest() == row["text_id"]
             assert row["text_id"] not in seen, "Duplicate parsing, resolve explicitly"
             seen.add(row["text_id"])
-            entities = [{"id": key, "mention": span(text, value[0]), "kind": value[1],
+            entities = [{"id": key, "mention": span(text, value[0], value[2] if len(value) > 2 else 0), "kind": value[1],
                          "map_object_ids": [], "geometry_binding_status": "not_attempted"}
                         for key, value in authored["e"].items()]
             relations, frames = [], []
@@ -84,8 +95,8 @@ def compile_records():
                             "relations": relations, "frames": frames,
                             "uncertainties": authored["u"],
                             "provenance": {"method": "direct_current_assistant_authored",
-                                           "model_requested": "gpt-6.1-sol",
-                                           "reasoning_effort_requested": "low",
+                                           "model_requested": authored.get("author_model", "gpt-6.1-sol"),
+                                           "reasoning_effort_requested": authored.get("author_reasoning_effort", "low"),
                                            "runtime_model_verified": False,
                                            "batch": batch.name,
                                            "target_GT_used": False,
@@ -107,6 +118,7 @@ def build():
     status = {"unique_instructions": len(source), "parsed_unique": len(parsed),
               "pending_unique": len(pending), "complete": not pending,
               "relations": sum(len(r["relations"]) for r in records),
+              "parsed_by_requested_model": dict(Counter(r["provenance"]["model_requested"] for r in records)),
               "split_lookup_coverage": {k: {"parsed": coverage[k], "total": totals[k]} for k in sorted(totals)},
               "protocol_sha256": hashlib.sha256((ROOT / "PROTOCOL.md").read_bytes()).hexdigest(),
               "schema_not_a_claim_of_perfect_annotation": True}
