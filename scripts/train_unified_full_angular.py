@@ -126,6 +126,7 @@ def main():
         prior_sigma_m=float(geometry_args["prior_sigma_m"]),
         rule_sigma_m=float(geometry_args["rule_sigma_m"]),
         public_objects=a.public_objects,
+        predicate_mode=a.predicate_mode,
     )
     dataset, loader = full_loader(a.train_jsonl, actual, shuffle=True)
     if len(dataset) < 1:
