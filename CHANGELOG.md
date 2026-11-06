@@ -3,6 +3,7 @@
 ## [sentence-parser-cache-v1-in-progress] - 2026-11-06
 ### Features
 - Retain semantically incomplete batches as rejected history, return them to pending, and count restored records only after full re-parsing.
+- Publish deterministic gzip JSONL with compressed/uncompressed SHA256; retain generated plain JSONL and SQLite locally.
 - Export all CityNav split texts with exact-text deduplication and per-episode lookup aliases.
 - Start current-assistant-authored offline semantic graphs; retain relation scope, role alternatives, view evidence and unknown frames.
 - Add validated JSONL serialization and lookup-only SQLite cache with explicit missing-record errors.

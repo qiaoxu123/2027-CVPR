@@ -1,0 +1,1364 @@
+[
+  {
+    "i": 9100,
+    "e": {
+      "black1": [
+        "A black car",
+        "object"
+      ],
+      "black2": [
+        "another black car",
+        "object"
+      ],
+      "bus": [
+        "a multicolored yellow and blue bus",
+        "object"
+      ],
+      "corner": [
+        "the corner of Thornbury Road and Birchfield Road",
+        "region"
+      ],
+      "thornbury": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "black1",
+        "next_to",
+        "black2",
+        "black car next to another black car",
+        "U",
+        "high"
+      ],
+      [
+        "black2",
+        "next_to",
+        "bus",
+        "another black car, that is next to a multicolored yellow and blue bus",
+        "U",
+        "medium"
+      ],
+      [
+        "black1",
+        "at_corner_of",
+        "thornbury",
+        "on the corner of Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "black1",
+        "at_corner_of",
+        "birchfield",
+        "and Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Relative ‘that is next to’ most likely modifies second black car; alternative target attachment retained."
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "black1",
+          "predicate": "next_to",
+          "reference": [
+            "bus"
+          ],
+          "reason": "Relative clause could attach to target car instead."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9101,
+    "e": {
+      "black": [
+        "A black car",
+        "object"
+      ],
+      "end": [
+        "the end of Thornbury Road",
+        "region"
+      ],
+      "road": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "bus": [
+        "a large blue and yellow bus",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "at_end_of",
+        "road",
+        "on the end of Thornbury Road",
+        "N",
+        "medium"
+      ],
+      [
+        "black",
+        "between",
+        "red",
+        "between a red car and a large blue and yellow bus",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "between",
+        "bus",
+        "between a red car and a large blue and yellow bus",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Road terminus unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9102,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "road": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "on",
+        "road",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "closest_to",
+        "intersection",
+        "closest to the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9103,
+    "e": {
+      "van": [
+        "This is a white van",
+        "object"
+      ],
+      "area": [
+        "a parking area",
+        "region"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "building": [
+        "a building with solar panels",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "van",
+        "in",
+        "area",
+        "parked in a parking area",
+        "N",
+        "high"
+      ],
+      [
+        "area",
+        "on",
+        "road",
+        "parking area on Bridgelands Way",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "left_of",
+        "van",
+        "On its left is a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "behind",
+        "van",
+        "Behind it is a building with solar panels",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "has",
+        "building",
+        "building with solar panels",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left/behind pronouns likely refer to van; frame unspecified."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "blue",
+          "predicate": "left_of",
+          "reference": [
+            "area"
+          ],
+          "reason": "Pronoun ‘its’ might refer to parking area."
+        },
+        {
+          "subject": "building",
+          "predicate": "behind",
+          "reference": [
+            "area"
+          ],
+          "reason": "‘it’ might refer to parking area."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9104,
+    "e": {
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "road",
+        "turn_onto_from",
+        "birchfield",
+        "turn onto Bridgelands Way coming from Birchfield Road",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "third_left_from",
+        "road",
+        "3rd car on your left",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "next_to",
+        "blue",
+        "white car parked next to a blue car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘your left’ is travel-observer-relative with approach origin given but exact direction calibration unknown."
+    ],
+    "f": {
+      "1": {
+        "type": "observer",
+        "status": "unknown",
+        "travel_road": "birchfield",
+        "view_evidence": "coming from Birchfield Road"
+      }
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9105,
+    "e": {
+      "white": [
+        "A white car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "house": [
+        "a house",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "solar": [
+        "solar panels",
+        "object"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "next_to",
+        "blue",
+        "white car parked next to a blue car",
+        "U",
+        "high"
+      ],
+      [
+        "blue",
+        "next_to",
+        "house",
+        "blue car next to a house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "house with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "roof",
+        "has",
+        "solar",
+        "roof with solar panels",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "on Bridgelands Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘with solar panels on Bridgelands Way’ syntactically could attach panels/roof or house; house location primary."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9106,
+    "e": {
+      "white": [
+        "This is a white car",
+        "object"
+      ],
+      "space": [
+        "a small parking space",
+        "region"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "in",
+        "space",
+        "parked in a small parking space",
+        "N",
+        "high"
+      ],
+      [
+        "space",
+        "on",
+        "road",
+        "parking space on Bridgelands Way",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "right_of",
+        "white",
+        "On its right there is a blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right-side pronoun likely target car, possibly parking space."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "blue",
+          "predicate": "right_of",
+          "reference": [
+            "space"
+          ],
+          "reason": "‘its’ might refer to parking space."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9107,
+    "e": {
+      "van": [
+        "The white van",
+        "object"
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "van",
+        "next_to",
+        "blue",
+        "parked next to the blue car",
+        "U",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "lot",
+        "in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "parking lot on Bridgelands Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9108,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "blue": [
+        "the blue car",
+        "object"
+      ],
+      "road": [
+        "the Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "next_to",
+        "blue",
+        "parked next to the blue car",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "on",
+        "road",
+        "in the Bridgelands Way",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘in the Bridgelands Way’ is source wording; retained without correcting to on."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9109,
+    "e": {
+      "blue": [
+        "The dark, dull blue car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "road": [
+        "Burton Wood Drive road",
+        "named_landmark"
+      ],
+      "building": [
+        "a building with solar panels on its roof",
+        "object"
+      ],
+      "solar": [
+        "solar panels",
+        "object"
+      ],
+      "livingstone": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "structures": [
+        "a series of four small rectangular buildings",
+        "group"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "in",
+        "lot",
+        "car in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "below",
+        "road",
+        "parking lot below Burton Wood Drive road",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "near",
+        "building",
+        "and has a building with solar panels",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "has",
+        "solar",
+        "building with solar panels on its roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "left_of",
+        "livingstone",
+        "Just left of the building is Livingstone Road",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "right_of",
+        "structures",
+        "to the right of the blue car is a series of four small rectangular buildings",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "above",
+        "blue",
+        "white car above it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Below/left/right/above are view-relative or map-layout terms; no XY calibration."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9110,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "building1": [
+        "the double orange brick building",
+        "object"
+      ],
+      "building2": [
+        "the four brick building",
+        "object"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "next_to",
+        "white",
+        "black car that is next to the white car",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "building1",
+        "parked in front of the double orange brick building",
+        "U",
+        "high"
+      ],
+      [
+        "building2",
+        "across_from",
+        "building1",
+        "Across is the four brick building",
+        "U",
+        "medium"
+      ],
+      [
+        "building2",
+        "on",
+        "road",
+        "on the Burton Wood Drive",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘that parked in front’ syntactically modifies white car; across clause subject/anchor unclear."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9111,
+    "e": {
+      "blue": [
+        "A blue car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "building": [
+        "a large brown and white apartment building",
+        "object"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "next_to",
+        "white",
+        "blue car parked next to a white car",
+        "U",
+        "high"
+      ],
+      [
+        "blue",
+        "in",
+        "lot",
+        "in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "of",
+        "building",
+        "parking lot of a large brown and white apartment building",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "building on Burton Wood Drive",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9112,
+    "e": {
+      "blue": [
+        "The dark blue car",
+        "object"
+      ],
+      "house": [
+        "a blue house",
+        "object"
+      ],
+      "junction": [
+        "the intersection of Burton Wood Drive and Livingstone Road",
+        "region"
+      ],
+      "burton": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "livingstone": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "in_front_of",
+        "house",
+        "parked in front of a blue house",
+        "U",
+        "high"
+      ],
+      [
+        "blue",
+        "at",
+        "junction",
+        "at the intersection of Burton Wood Drive and Livingstone Road",
+        "N",
+        "medium"
+      ],
+      [
+        "junction",
+        "of",
+        "burton",
+        "intersection of Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "junction",
+        "of",
+        "livingstone",
+        "and Livingstone Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘at the intersection’ may modify house rather than blue car; retained as car location with candidate."
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "house",
+          "predicate": "at",
+          "reference": [
+            "junction"
+          ],
+          "reason": "Intersection phrase may modify the blue house."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9113,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "white": [
+        "the white car",
+        "object"
+      ],
+      "space": [
+        "the handicap space",
+        "region"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "next_to",
+        "white",
+        "black car next to the white car",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "in",
+        "space",
+        "in the handicap space",
+        "N",
+        "high"
+      ],
+      [
+        "space",
+        "in",
+        "lot",
+        "handicap space of a parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "parking lot on Burton Wood Drive",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9114,
+    "e": {
+      "white1": [
+        "A white car",
+        "object"
+      ],
+      "white2": [
+        "another white car",
+        "object"
+      ],
+      "white3": [
+        "another white car",
+        "object",
+        1
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "house1": [
+        "a brown house with a gray roof",
+        "object"
+      ],
+      "house2": [
+        "a multicolored White, Brown and dark gray house",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object",
+        1
+      ],
+      "solar": [
+        "solar panels",
+        "object"
+      ],
+      "road": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white1",
+        "next_to",
+        "white2",
+        "white car next to another white car",
+        "U",
+        "high"
+      ],
+      [
+        "white2",
+        "across_from",
+        "white3",
+        "that is a cross from another white car and a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "white2",
+        "across_from",
+        "blue",
+        "a cross from another white car and a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "white1",
+        "between",
+        "house1",
+        "parked in between a brown house with a gray roof, and a multicolored White, Brown and dark gray house with a gray roof",
+        "U",
+        "high"
+      ],
+      [
+        "white1",
+        "between",
+        "house2",
+        "parked in between a brown house with a gray roof, and a multicolored White, Brown and dark gray house",
+        "U",
+        "high"
+      ],
+      [
+        "house1",
+        "has_roof",
+        "roof",
+        "house with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "house2",
+        "has_roof",
+        "roof",
+        "house with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "house2",
+        "has",
+        "solar",
+        "roof that is covered with solar panels",
+        "N",
+        "high"
+      ],
+      [
+        "house2",
+        "off",
+        "road",
+        "off Birchfield Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative clause ‘that is a cross from’ likely modifies second white car, but could attach to target. ‘parked in between’ may refer to target car or the across pair; target chosen."
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "white1",
+          "predicate": "across_from",
+          "reference": [
+            "white3"
+          ],
+          "reason": "Relative clause may attach to target car."
+        }
+      ],
+      "8": [
+        {
+          "subject": "white1",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "Off-road phrase may modify target car or lot rather than house."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9115,
+    "e": {
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "whites": [
+        "two white cars",
+        "group"
+      ],
+      "building": [
+        "a three story building",
+        "object"
+      ],
+      "white": [
+        "This is the white car",
+        "object"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "road",
+        "perpendicular_to",
+        "birchfield",
+        "Bridgelands Way which is perpendicular to Birchfield Road",
+        "U",
+        "high"
+      ],
+      [
+        "whites",
+        "in_front_of",
+        "building",
+        "two white cars parked in front of a three story building",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "between",
+        "whites",
+        "white car between the other one and a tree",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "between",
+        "tree",
+        "between the other one and a tree",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘This is the white car between the other one and a tree’ identifies one of two cars; other car is not separately lexicalized except ‘the other one’."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9116,
+    "e": {
+      "white1": [
+        "The white car",
+        "object"
+      ],
+      "white2": [
+        "the white car on Bridgelands Way",
+        "object"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white1",
+        "two_cars_away_from",
+        "white2",
+        "2 cars away from the white car",
+        "R",
+        "medium"
+      ],
+      [
+        "white2",
+        "on",
+        "road",
+        "white car on Bridgelands Way",
+        "N",
+        "high"
+      ],
+      [
+        "white2",
+        "closest_to",
+        "intersection",
+        "closest to the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Two cars away indicates ordinal sequence but does not specify direction or whether intervening cars are counted."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9117,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "building": [
+        "the orange and white brick building with grey roof",
+        "object"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "in",
+        "drive",
+        "parked on the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "building",
+        "driveway of the orange and white brick building",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "building with grey roof on Bridgelands Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9118,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "column": [
+        "the right column of cars",
+        "group"
+      ],
+      "entrance": [
+        "the entrance to Bridgelands Way",
+        "region"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "first_from_top_in",
+        "column",
+        "1st from the top in the right column of cars",
+        "U",
+        "medium"
+      ],
+      [
+        "column",
+        "at",
+        "entrance",
+        "column of cars at the entrance",
+        "N",
+        "high"
+      ],
+      [
+        "entrance",
+        "to",
+        "road",
+        "entrance to Bridgelands Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Top/right are view-relative; no viewing orientation specified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9119,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "white2": [
+        "a white car",
+        "object"
+      ],
+      "tree": [
+        "tree",
+        "object"
+      ],
+      "road": [
+        "Bridgelands Way",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "between",
+        "white2",
+        "between a white car and tree",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "between",
+        "tree",
+        "between a white car and tree",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "on",
+        "road",
+        "on Bridgelands Way",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Between relation keeps both comparison objects; explicit road location applies to target."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

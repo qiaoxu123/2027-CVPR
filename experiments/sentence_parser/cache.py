@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import sqlite3
+import gzip
 from collections import Counter
 from pathlib import Path
 
@@ -114,7 +115,16 @@ def build():
     source, records = compile_records()
     out = ROOT / "parsed"
     out.mkdir(exist_ok=True)
-    (out / "records.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records))
+    payload = "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in records).encode("utf-8")
+    (out / "records.jsonl").write_bytes(payload)
+    with (out / "records.jsonl.gz").open("wb") as raw:
+        with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as compressed:
+            compressed.write(payload)
+    (out / "artifact_manifest.json").write_text(json.dumps({
+        "records": len(records), "encoding": "UTF-8", "compression": "gzip",
+        "portable_file": "records.jsonl.gz",
+        "uncompressed_sha256": hashlib.sha256(payload).hexdigest(),
+        "compressed_sha256": hashlib.sha256((out / "records.jsonl.gz").read_bytes()).hexdigest()}, indent=2))
     parsed = {r["text_id"] for r in records}
     pending = [r["text_id"] for r in source if r["text_id"] not in parsed]
     (out / "pending_ids.json").write_text(json.dumps(pending, indent=2))

@@ -1,0 +1,2324 @@
+[
+  {
+    "i": 10480,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "front": [
+        "the white car in front of it",
+        "object"
+      ],
+      "blue": [
+        "the blue blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "found on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "separated_from",
+        "front",
+        "some space between this car and the white car in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "front",
+        "in_front_of",
+        "t",
+        "the white car in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "behind",
+        "t",
+        "the blue blue car behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“some space” is qualitative; front/behind frame is unspecified."
+    ]
+  },
+  {
+    "i": 10481,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Trafficeroad Davey Road",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "red": [
+        "a red vehicle",
+        "object"
+      ],
+      "lane": [
+        "the right lane",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_lane",
+        "lane",
+        "in the right lane",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "behind",
+        "t",
+        "a blue car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "red",
+        "behind",
+        "blue",
+        "a red vehicle behind the blue one",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Lane and front/behind depend on viewpoint or travel direction."
+    ]
+  },
+  {
+    "i": 10482,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "white": [
+        "the white car",
+        "object",
+        0
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "6_cars_behind",
+        "white",
+        "6 cars behind the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "white",
+        "closest_to",
+        "aston",
+        "closest to the intersection with Aston Lane",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“6 cars behind” requires an unstated counting direction."
+    ]
+  },
+  {
+    "i": 10483,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "right": [
+        "the right side of the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "On Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "red",
+        "parked between a red car and a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "blue",
+        "parked between a red car and a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on_side_of",
+        "right",
+        "on the right side of the road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right side lacks a stated observer frame."
+    ]
+  },
+  {
+    "i": 10484,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "white",
+        "between a white car and a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "blue",
+        "between a white car and a blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“between” does not specify the orientation of the two reference cars."
+    ]
+  },
+  {
+    "i": 10485,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "gray": [
+        "the gray car",
+        "object"
+      ],
+      "ref": [
+        "the white car",
+        "object",
+        0
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "gray",
+        "The white car that is across from the gray car",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "10_cars_behind",
+        "ref",
+        "10 cars behind the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "ref",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "ref",
+        "closest_to",
+        "aston",
+        "closest to the intersection with Aston Lane",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "The counting direction for “10 cars behind” is unstated."
+    ]
+  },
+  {
+    "i": 10486,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "road": [
+        "Davey road",
+        "named_landmark"
+      ],
+      "left": [
+        "the left side",
+        "region"
+      ],
+      "yellow": [
+        "a yellow car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_side_of",
+        "road",
+        "parked at the left side of Davey road",
+        "U",
+        "medium"
+      ],
+      [
+        "yellow",
+        "in_front_of",
+        "t",
+        "a yellow car parked in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "behind",
+        "t",
+        "another white car parked at its back",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left and front/back are viewpoint dependent."
+    ]
+  },
+  {
+    "i": 10487,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The left lane white car",
+        "object"
+      ],
+      "road": [
+        "Trafficeroad Davey Road",
+        "named_landmark"
+      ],
+      "yellow": [
+        "a yellow/brown vehicle",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_lane",
+        "t",
+        "The left lane white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "at_top_of",
+        "road",
+        "at the top of Trafficeroad Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "viewed_vertically",
+        "road",
+        "when looking at Davey Road vertically",
+        "U",
+        "medium"
+      ],
+      [
+        "yellow",
+        "behind",
+        "t",
+        "a yellow/brown vehicle behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Top and left depend on the stated vertical viewing frame."
+    ]
+  },
+  {
+    "i": 10488,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "brown": [
+        "a brown object",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "other",
+        "in between another white car and a brown object",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "brown",
+        "in between another white car and a brown object",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "toward",
+        "edge",
+        "towards the edge of the map",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Map edge direction is uncalibrated."
+    ]
+  },
+  {
+    "i": 10489,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "truck": [
+        "a tan truck or large dumpster",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "truck",
+        "parked in front of a tan truck or large dumpster",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "No direction frame specified for in front."
+    ]
+  },
+  {
+    "i": 10490,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Davey road",
+        "named_landmark"
+      ],
+      "brown": [
+        "a brown car",
+        "object"
+      ],
+      "other": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Davey road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "brown",
+        "between a brown car and a white car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "other",
+        "between a brown car and a white car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Between does not specify alignment."
+    ]
+  },
+  {
+    "i": 10491,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "house": [
+        "a reddish-brown house with a gray pitched roof",
+        "object"
+      ],
+      "row": [
+        "a row of houses",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "black",
+        "parked behind a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "with_empty_space_behind",
+        "t",
+        "with an empty space behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "house",
+        "parked in front of a reddish-brown house with a gray pitched roof",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "part_of",
+        "row",
+        "part of a row of houses",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "halfway_down",
+        "road",
+        "roughly halfway down Davey Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“behind” and “in front” frame is unspecified; halfway down has no calibrated origin."
+    ]
+  },
+  {
+    "i": 10492,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "road": [
+        "Davey road",
+        "named_landmark"
+      ],
+      "house": [
+        "a multi-colored brown and white house",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "behind",
+        "t",
+        "a black car behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "blue",
+        "across from a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "on_opposite_side_of",
+        "road",
+        "on the opposite side of Davey road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "house",
+        "in front of a multi-colored brown and white house",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind/across/in front lack an explicit direction frame."
+    ]
+  },
+  {
+    "i": 10493,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "left": [
+        "the left lane",
+        "region"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "right": [
+        "the right lane",
+        "region"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on the top half of Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_lane",
+        "left",
+        "on the left lane",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "above",
+        "t",
+        "a black car above it",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "right_of",
+        "t",
+        "there's a blue car to the right of it",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "in_lane",
+        "right",
+        "on the right lane",
+        "U",
+        "medium"
+      ],
+      [
+        "red",
+        "above",
+        "blue",
+        "a red car above the blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Top/above/right use an unstated map or observer frame."
+    ]
+  },
+  {
+    "i": 10494,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "a white car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "left": [
+        "the left hand side",
+        "region"
+      ],
+      "aston": [
+        "Ashton Lane",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "halfway_down",
+        "road",
+        "about half way down Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on_side_of",
+        "road",
+        "on the left hand side of the road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "viewed_from",
+        "aston",
+        "from Ashton Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "behind",
+        "t",
+        "a black car not far behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "in_front_of",
+        "t",
+        "another white car is a few houses down from it in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“from Ashton Lane” and front/back direction lack a defined route orientation."
+    ]
+  },
+  {
+    "i": 10495,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A tiny white car",
+        "object"
+      ],
+      "black": [
+        "a tiny black car",
+        "object"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "block": [
+        "the block",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "near_center_of",
+        "block",
+        "near the center of the block",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "black",
+        "in front of a tiny black car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "blue",
+        "across the street from a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Center is approximate; front/across frame unspecified."
+    ]
+  },
+  {
+    "i": 10496,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "pavement": [
+        "the left pavement",
+        "region"
+      ],
+      "road": [
+        "Dovey road",
+        "named_landmark"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "pavement",
+        "on the left pavement",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "along",
+        "road",
+        "along Dovey road",
+        "N",
+        "medium"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "t",
+        "a black car in front",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "no_car_behind",
+        "t",
+        "There is no car behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left pavement and front/back frame are unclear."
+    ]
+  },
+  {
+    "i": 10497,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The parking lane",
+        "region"
+      ],
+      "building": [
+        "the unmarked white roofed building",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "cars": [
+        "the blue cars",
+        "object"
+      ],
+      "grass": [
+        "the grass",
+        "region"
+      ],
+      "farbuilding": [
+        "the far left most building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "left_of",
+        "building",
+        "to the left of the unmarked white roofed building",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "viewed_from",
+        "aston",
+        "when viewed with Aston Lane as at the bottom",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "left_of",
+        "cars",
+        "It is left of the blue cars by the white roofed building",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "right_of",
+        "grass",
+        "and right of the grass on the far left most building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/right depends on the stated map view."
+    ]
+  },
+  {
+    "i": 10498,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "A parking lot",
+        "region"
+      ],
+      "building": [
+        "the thin white rectangular building",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane Road",
+        "named_landmark"
+      ],
+      "car": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "around",
+        "building",
+        "parking lot surrounding the thin white rectangular building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "along",
+        "aston",
+        "along Aston Lane Road",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "behind",
+        "lot",
+        "There is another white car behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind is relative; referent of “it” is ambiguous."
+    ]
+  },
+  {
+    "i": 10499,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "Rectangular parking",
+        "region"
+      ],
+      "house1": [
+        "two white houses",
+        "object"
+      ],
+      "lane": [
+        "Astone lane",
+        "named_landmark"
+      ],
+      "house": [
+        "a rectangular White House",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "between",
+        "house1",
+        "between two white houses",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "along",
+        "lane",
+        "along Astone lane",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "in_middle_of",
+        "lot",
+        "It has a rectangular White House in the middle",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“between” and “in the middle” are approximate."
+    ]
+  },
+  {
+    "i": 10500,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The large parking lot",
+        "region"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "building": [
+        "the large white and gray building",
+        "object"
+      ],
+      "right": [
+        "the right",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "right_of",
+        "building",
+        "to the right of the large white and gray building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right side has no explicit orientation frame."
+    ]
+  },
+  {
+    "i": 10501,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The parking lot",
+        "region"
+      ],
+      "building": [
+        "a white rectangular building with green trim",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "around",
+        "building",
+        "parking lot surrounding a white rectangular building with green trim",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Lot/building relation is clear but no spatial orientation beyond containment."
+    ]
+  },
+  {
+    "i": 10502,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "this is a parking lot",
+        "region"
+      ],
+      "aston": [
+        "Aston Lane road",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "entrance": [
+        "the entrance of the parking area",
+        "region"
+      ],
+      "white": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "on_side_of",
+        "aston",
+        "parking lot on the side of Aston Lane road",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "at",
+        "entrance",
+        "a blue car at the entrance of the parking area",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "in",
+        "lot",
+        "another white car in the parking lot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“side” and entrance location are underspecified."
+    ]
+  },
+  {
+    "i": 10503,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "A large parking lot",
+        "region"
+      ],
+      "buildings": [
+        "the buildings",
+        "object"
+      ],
+      "corner": [
+        "the corner of Ashton Lane and Davey Road",
+        "region"
+      ],
+      "aston": [
+        "Ashton Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "car": [
+        "The only car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "behind",
+        "buildings",
+        "parking lot behind the buildings",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "at",
+        "corner",
+        "at the corner of Ashton Lane and Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "near",
+        "aston",
+        "Ashton Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "near",
+        "davey",
+        "Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "in",
+        "lot",
+        "The only car in the parking lot is white",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind and corner proximity have no explicit direction frame."
+    ]
+  },
+  {
+    "i": 10504,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The large gray parking lot",
+        "region"
+      ],
+      "houses": [
+        "the rows of houses",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "corner": [
+        "the corner of Aston Lane and Davey Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "behind",
+        "houses",
+        "behind the rows of houses",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "along",
+        "corner",
+        "along the corner of Aston Lane and Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "near",
+        "aston",
+        "corner of Aston Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "near",
+        "davey",
+        "and Davey Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind and along-corner are approximate."
+    ]
+  },
+  {
+    "i": 10505,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "this parking lot",
+        "region"
+      ],
+      "aston": [
+        "Aston Manor Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "between",
+        "aston",
+        "Between Aston Manor Lane and Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "between",
+        "davey",
+        "Between Aston Manor Lane and Davey Road",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "in",
+        "lot",
+        "except for a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "in",
+        "lot",
+        "and a white car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "No location inside the lot is specified for the two cars."
+    ]
+  },
+  {
+    "i": 10506,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "An L-shaped marked car park",
+        "region"
+      ],
+      "building": [
+        "a grey building",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "behind",
+        "lot",
+        "with a grey building behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "extending_towards",
+        "aston",
+        "extending towards Aston Lane road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“behind” and “towards” lack calibrated orientation."
+    ]
+  },
+  {
+    "i": 10507,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "The very large parking",
+        "region"
+      ],
+      "houses": [
+        "the rows of houses",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "behind",
+        "houses",
+        "behind the rows of houses",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "davey",
+        "and Davey Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind and road relation lack a precise geometry."
+    ]
+  },
+  {
+    "i": 10508,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The building",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "davey": [
+        "Davey Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "across_from",
+        "davey",
+        "across from Davey Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across from depends on road orientation."
+    ]
+  },
+  {
+    "i": 10509,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The uppermost building",
+        "object"
+      ],
+      "lane": [
+        "the left lane",
+        "region"
+      ],
+      "road": [
+        "Dovey road",
+        "named_landmark"
+      ],
+      "cars": [
+        "no cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "uppermost_on",
+        "lane",
+        "uppermost building on the left lane",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "along",
+        "road",
+        "along Dovey road",
+        "N",
+        "medium"
+      ],
+      [
+        "building",
+        "no_cars_in_front",
+        "cars",
+        "It has no cars in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“uppermost” and “left lane” use an unstated frame."
+    ]
+  },
+  {
+    "i": 10510,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A building with three yards",
+        "object"
+      ],
+      "wellhead": [
+        "Wellhead Lane",
+        "named_landmark"
+      ],
+      "aston": [
+        "aston Manor",
+        "named_landmark"
+      ],
+      "side": [
+        "the side nearer to Aston Lane",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "at_corner_of",
+        "wellhead",
+        "on the corner of Wellhead Lane and aston Manor",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_corner_of",
+        "aston",
+        "on the corner of Wellhead Lane and aston Manor",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "on_side_nearer",
+        "side",
+        "on the side nearer to Aston Lane",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“side nearer” is relative and ambiguous."
+    ]
+  },
+  {
+    "i": 10511,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The building",
+        "object"
+      ],
+      "ashton": [
+        "Ashton Lane",
+        "named_landmark"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "shed": [
+        "a square brown shed",
+        "object"
+      ],
+      "yard": [
+        "the back yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "at_corner_of",
+        "ashton",
+        "on the corner of Ashton Lane and Aston Manor Close",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_corner_of",
+        "close",
+        "on the corner of Ashton Lane and Aston Manor Close",
+        "U",
+        "medium"
+      ],
+      [
+        "shed",
+        "in",
+        "yard",
+        "a square brown shed in the back yard",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Back yard depends on building orientation."
+    ]
+  },
+  {
+    "i": 10512,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The middle",
+        "object"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "car": [
+        "a single white car",
+        "object"
+      ],
+      "yards": [
+        "two green yards",
+        "region"
+      ],
+      "building": [
+        "the building",
+        "object"
+      ],
+      "black": [
+        "two black cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "close",
+        "on Aston Manor Close",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "left_of",
+        "t",
+        "a single white car to the left of it",
+        "U",
+        "medium"
+      ],
+      [
+        "yards",
+        "right_of",
+        "t",
+        "two green yards to the right of it",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "right_of",
+        "building",
+        "stacked right behind each other to the right of the building",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "between",
+        "building",
+        "between the building and the green yards",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "between",
+        "yards",
+        "between the building and the green yards",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/right/behind stack frame is unclear; attachment of “the middle” is ambiguous."
+    ]
+  },
+  {
+    "i": 10513,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "The building",
+        "object"
+      ],
+      "development": [
+        "the housing development",
+        "region"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "car": [
+        "a white car",
+        "object"
+      ],
+      "driveway": [
+        "the driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "in_middle_of",
+        "development",
+        "in the middle of the housing development",
+        "U",
+        "medium"
+      ],
+      [
+        "development",
+        "on",
+        "close",
+        "that Aston Manor Close is in",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "in",
+        "driveway",
+        "a white car in the driveway",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Driveway and development location are underspecified."
+    ]
+  },
+  {
+    "i": 10514,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "house": [
+        "A brown house with a dark gray roof",
+        "object"
+      ],
+      "larger": [
+        "a larger brown house with a dark gray roof",
+        "object"
+      ],
+      "car": [
+        "a white car",
+        "object"
+      ],
+      "close": [
+        "Aston Manor close",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "next_to",
+        "larger",
+        "next to a larger brown house with a dark gray roof",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "between",
+        "house",
+        "with a white car parked in between them",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "between",
+        "larger",
+        "with a white car parked in between them",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "off",
+        "close",
+        "off Aston Manor close",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Between the two houses has no alignment cue."
+    ]
+  },
+  {
+    "i": 10515,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "house": [
+        "this dark gray roofed house",
+        "object"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "van": [
+        "a white van",
+        "object"
+      ],
+      "cars": [
+        "three cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "on_part_of",
+        "close",
+        "On the upper middle part of Aston Manor Close",
+        "U",
+        "medium"
+      ],
+      [
+        "van",
+        "south_of",
+        "house",
+        "a white van and three cars parked directly south of it",
+        "W",
+        "medium"
+      ],
+      [
+        "cars",
+        "south_of",
+        "house",
+        "three cars parked directly south of it",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "South is world-directed but no map calibration is supplied."
+    ]
+  },
+  {
+    "i": 10516,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A building with grey roof",
+        "object"
+      ],
+      "lawn": [
+        "a square lawn",
+        "region"
+      ],
+      "aston": [
+        "Aston lane",
+        "named_landmark"
+      ],
+      "wellhead": [
+        "Wellhead lane",
+        "named_landmark"
+      ],
+      "car": [
+        "A black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lawn",
+        "behind",
+        "building",
+        "with a square lawn behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection_of",
+        "aston",
+        "at the intersection point of two road named Aston lane and Wellhead lane",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at_intersection_of",
+        "wellhead",
+        "at the intersection point of two road named Aston lane and Wellhead lane",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "building",
+        "A black car parked in front of the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind and in front lack an explicit direction frame."
+    ]
+  },
+  {
+    "i": 10517,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "houses": [
+        "The four gray houses",
+        "group"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "stone": [
+        "Stoneleigh Road",
+        "named_landmark"
+      ],
+      "inter": [
+        "the intersection with Stoneleigh Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "houses",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "houses",
+        "left_of",
+        "inter",
+        "to the left of the intersection with Stoneleigh Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left of intersection requires an unstated view direction."
+    ]
+  },
+  {
+    "i": 10518,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "the brown roof building with the multiple little peaks on them",
+        "object"
+      ],
+      "stone": [
+        "Stoneleigh Road",
+        "named_landmark"
+      ],
+      "smaller": [
+        "a smaller building",
+        "object"
+      ],
+      "bottom": [
+        "the bottom right of it",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "with_view_orientation",
+        "stone",
+        "With Stoneleigh Road on the left",
+        "U",
+        "medium"
+      ],
+      [
+        "smaller",
+        "bottom_right_of",
+        "building",
+        "with a smaller building to the bottom right of it",
+        "U",
+        "medium"
+      ],
+      [
+        "smaller",
+        "made_up_of",
+        "smaller",
+        "made up of smaller squares",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left/bottom-right depend on the stated view; attachment of the smaller structure is ambiguous."
+    ]
+  },
+  {
+    "i": 10519,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "building": [
+        "A square shaped building with grey roof and lawn",
+        "object"
+      ],
+      "rect": [
+        "a rectangular shaped building with grey roof",
+        "object"
+      ],
+      "stone": [
+        "Stoneleigh road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "behind",
+        "rect",
+        "situated behind a rectangular shaped building with grey roof",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "with_lawn_at_both_sides",
+        "building",
+        "lawn at its both side",
+        "U",
+        "medium"
+      ],
+      [
+        "rect",
+        "on",
+        "stone",
+        "The road in front of the building is named Stoneleigh road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind/front and both-side orientation are underspecified."
+    ]
+  }
+]

@@ -2,9 +2,11 @@
 import json
 import unittest
 import tempfile
+import gzip
+import hashlib
 from pathlib import Path
 
-from .cache import ROOT, build, compile_records, lookup, span
+from .cache import ROOT, build, lines, lookup, span
 from .validate_batch import validate
 
 
@@ -12,7 +14,9 @@ class CacheContract(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.status = build()
-        cls.source, cls.records = compile_records()
+        # Workers may publish more batches during export; test the exported snapshot.
+        cls.source = lines(ROOT / "inputs/instructions.jsonl")
+        cls.records = lines(ROOT / "parsed/records.jsonl")
         cls.by_text = {row["instruction"]: row for row in cls.records}
 
     def test_GT_free_model_inputs(self):
@@ -27,6 +31,13 @@ class CacheContract(unittest.TestCase):
         for record in self.records:
             if record["provenance"]["batch"].startswith("direct_batch_luna_"):
                 self.assertEqual(record["provenance"]["model_requested"], "gpt-6-luna")
+
+    def test_portable_compressed_artifact_roundtrip(self):
+        manifest = json.loads((ROOT / "parsed/artifact_manifest.json").read_text())
+        payload = gzip.decompress((ROOT / "parsed/records.jsonl.gz").read_bytes())
+        self.assertEqual(hashlib.sha256(payload).hexdigest(), manifest["uncompressed_sha256"])
+        rows = [json.loads(line) for line in payload.splitlines()]
+        self.assertEqual({r["text_id"] for r in rows}, {r["text_id"] for r in self.records})
 
     def test_rejected_records_return_to_pending(self):
         audit = self.status["semantic_rejection_history"]

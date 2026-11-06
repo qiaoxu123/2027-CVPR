@@ -1,0 +1,2310 @@
+[
+  {
+    "i": 10520,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "this white roofed building",
+        "object"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "field": [
+        "a green sport field",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "north_of",
+        "close",
+        "North of Aston Manor Close",
+        "W",
+        "medium"
+      ],
+      [
+        "b",
+        "left_of",
+        "field",
+        "to the left of a green sport field",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "North is uncalibrated to map geometry; left has no observer frame."
+    ]
+  },
+  {
+    "i": 10521,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The building",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "well": [
+        "Wellhead Lane",
+        "named_landmark"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "stop": [
+        "a bus stop",
+        "object"
+      ],
+      "car": [
+        "a white car",
+        "object"
+      ],
+      "spot": [
+        "the parking spot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "at_intersection_of",
+        "aston",
+        "at the intersection of Aston Lane / Wellhead Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "at_intersection_of",
+        "well",
+        "at the intersection of Aston Lane / Wellhead Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "near",
+        "close",
+        "and Aston Manor Close",
+        "U",
+        "medium"
+      ],
+      [
+        "stop",
+        "in_front_of",
+        "b",
+        "with a bus stop in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "in",
+        "spot",
+        "a white car in the parking spot in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "spot",
+        "in_front_of",
+        "b",
+        "the parking spot in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front location depends on building orientation; referent of “it” is ambiguous."
+    ]
+  },
+  {
+    "i": 10522,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The gray building",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "close": [
+        "Aston Manor Close",
+        "named_landmark"
+      ],
+      "inter": [
+        "the intersection with Aston Manor Close",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "aston",
+        "on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "facing",
+        "inter",
+        "faces the intersection with Aston Manor Close",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Facing expresses intrinsic building orientation; intersection boundary is unspecified."
+    ]
+  },
+  {
+    "i": 10523,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car with a black roof",
+        "object"
+      ],
+      "space": [
+        "a parking space",
+        "region"
+      ],
+      "buildings": [
+        "residential buildings",
+        "group"
+      ],
+      "road": [
+        "Stoneleigh Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "space",
+        "in a parking space",
+        "U",
+        "medium"
+      ],
+      [
+        "space",
+        "in_front_of",
+        "buildings",
+        "in front of residential buildings",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "road",
+        "on Stoneleigh Road",
+        "N",
+        "medium"
+      ],
+      [
+        "gray",
+        "left_of",
+        "t",
+        "On its left there is a gray car",
+        "U",
+        "medium"
+      ],
+      [
+        "other",
+        "behind",
+        "t",
+        "Behind it is another white car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left and behind lack a stated direction of travel."
+    ]
+  },
+  {
+    "i": 10524,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "house": [
+        "the fourth house unit",
+        "object"
+      ],
+      "corner": [
+        "the corner of Ashton Lane and Stoneleigh Road",
+        "region"
+      ],
+      "ashton": [
+        "Ashton Lane",
+        "named_landmark"
+      ],
+      "stone": [
+        "Stoneleigh Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "house",
+        "parked in front of the fourth house unit",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "at",
+        "corner",
+        "at the corner of Ashton Lane and Stoneleigh Road",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "at",
+        "ashton",
+        "at the corner of Ashton Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "at",
+        "stone",
+        "and Stoneleigh Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front of house and corner relation lack a viewing direction."
+    ]
+  },
+  {
+    "i": 10525,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "yard": [
+        "the front yard",
+        "region"
+      ],
+      "b": [
+        "a building with grey roof",
+        "object"
+      ],
+      "road": [
+        "Stoneleigh road",
+        "named_landmark"
+      ],
+      "white": [
+        "A white car",
+        "object"
+      ],
+      "left": [
+        "the left side",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "left",
+        "at the left side of the front yard",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "in",
+        "yard",
+        "of the front yard",
+        "U",
+        "medium"
+      ],
+      [
+        "yard",
+        "of",
+        "b",
+        "of a building with grey roof",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "on_side_of",
+        "road",
+        "at the right side of the road named Stoneleigh road",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "left_of",
+        "t",
+        "A white car parked at its left side",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left side and front yard depend on building orientation."
+    ]
+  },
+  {
+    "i": 10526,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "lot": [
+        "a small parking lot",
+        "region"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "black": [
+        "another black car",
+        "object"
+      ],
+      "blue": [
+        "a blue shack",
+        "object"
+      ],
+      "road": [
+        "the other side of the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "it's in a small parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "by",
+        "aston",
+        "by the side of Aston Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "in",
+        "lot",
+        "In this area, there is another black car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "t",
+        "In front of the white car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "on_other_side_of",
+        "road",
+        "on the other side of the road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front/across-road scope is ambiguous; another black car is only area-associated."
+    ]
+  },
+  {
+    "i": 10527,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a gray car",
+        "object"
+      ],
+      "b": [
+        "a large building with a flat roof painted in gray, and white",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "area": [
+        "a residential area",
+        "region"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "b",
+        "parked next to a large building with a flat roof painted in gray, and white",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "aston",
+        "located on Aston Lane",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "facing",
+        "area",
+        "is facing a residential area",
+        "F",
+        "medium"
+      ],
+      [
+        "area",
+        "across_from",
+        "b",
+        "across from the street",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across street and building facing lack observer/road orientation."
+    ]
+  },
+  {
+    "i": 10528,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "pavement": [
+        "the right pavement",
+        "region"
+      ],
+      "road": [
+        "Davey road",
+        "named_landmark"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_bottom_of",
+        "pavement",
+        "at the bottom of the right pavement",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "along",
+        "road",
+        "along Davey road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "facing",
+        "blue",
+        "It is facing a blue car in front",
+        "F",
+        "medium"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "t",
+        "a blue car in front",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Bottom/right/front are relative to an unstated view."
+    ]
+  },
+  {
+    "i": 10529,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "road": [
+        "Davey Road",
+        "named_landmark"
+      ],
+      "house": [
+        "the grayish brown house",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ],
+      "inter": [
+        "the intersection with Aston Lane",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on Davey Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "behind",
+        "house",
+        "that behind the grayish brown house",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "at",
+        "inter",
+        "at the intersection with Aston Lane",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "The clause “that behind” is grammatically incomplete; relation attachment uncertain."
+    ]
+  },
+  {
+    "i": 10530,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "lot": [
+        "Parking lot",
+        "region"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "b": [
+        "a Green Building with a white roof",
+        "object"
+      ],
+      "aston": [
+        "Aston Lane",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "at",
+        "edge",
+        "on the edge of the map",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "in_center_of",
+        "lot",
+        "in the center of it",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "off",
+        "aston",
+        "off Aston Lane",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Map edge direction is not calibrated; “off Aston Lane” is vague."
+    ]
+  },
+  {
+    "i": 10531,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The building",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "junction": [
+        "the junction with Holford Road",
+        "region"
+      ],
+      "holford": [
+        "Holford Road",
+        "named_landmark"
+      ],
+      "buildings": [
+        "2 large buildings",
+        "object"
+      ],
+      "res": [
+        "several residential buildings",
+        "group"
+      ],
+      "trampoline": [
+        "a trampoline",
+        "object"
+      ],
+      "garden": [
+        "the back garden",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "opposite",
+        "junction",
+        "On Aldridge Road opposite the junction with Holford Road",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "next_but_one_to",
+        "buildings",
+        "next but one to these several residential buildings",
+        "U",
+        "medium"
+      ],
+      [
+        "res",
+        "with",
+        "trampoline",
+        "with a trampoline in the back garden",
+        "U",
+        "medium"
+      ],
+      [
+        "trampoline",
+        "in",
+        "garden",
+        "in the back garden",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“opposite”, “next but one” and back garden are frame dependent; clause attachment is ambiguous."
+    ]
+  },
+  {
+    "i": 10532,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "this is the red roofed building",
+        "object"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ],
+      "left": [
+        "the left",
+        "region"
+      ],
+      "north": [
+        "the far north",
+        "region"
+      ],
+      "obj": [
+        "a round white/black object",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "road",
+        "of Aldridge road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "left_of",
+        "north",
+        "on the left at the far north of Aldridge road",
+        "U",
+        "medium"
+      ],
+      [
+        "obj",
+        "behind",
+        "b",
+        "Behind this building is a round white/black object",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Far north and left require map calibration."
+    ]
+  },
+  {
+    "i": 10533,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "the gray house",
+        "object"
+      ],
+      "holford": [
+        "Holford Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "5_houses_to_right_of",
+        "gray",
+        "5 houses to the right of the gray house",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "facing",
+        "holford",
+        "facing Holford Drive",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right-of count is relative to unspecified orientation; house facing is intrinsic."
+    ]
+  },
+  {
+    "i": 10534,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The last brown building",
+        "object"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ],
+      "right": [
+        "the right side",
+        "region"
+      ],
+      "structure": [
+        "a circular structure",
+        "object"
+      ],
+      "garden": [
+        "the garden",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "last_on_side_of",
+        "road",
+        "last brown building on the right side along Aldridge road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on_side_of",
+        "right",
+        "on the right side",
+        "U",
+        "medium"
+      ],
+      [
+        "structure",
+        "in",
+        "garden",
+        "a circular structure in the garden",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Last/right and garden location lack a stated viewing frame."
+    ]
+  },
+  {
+    "i": 10535,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The large building",
+        "object"
+      ],
+      "footpath": [
+        "the Perry Barr footpath",
+        "named_landmark"
+      ],
+      "buses": [
+        "buses",
+        "object"
+      ],
+      "lot": [
+        "a parking lot",
+        "region"
+      ],
+      "cars": [
+        "cars",
+        "object"
+      ],
+      "frontlot": [
+        "a parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "across_from",
+        "footpath",
+        "across the street from the Perry Barr footpath",
+        "U",
+        "medium"
+      ],
+      [
+        "buses",
+        "in",
+        "lot",
+        "buses in a parking lot behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "behind",
+        "b",
+        "parking lot behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "cars",
+        "in",
+        "frontlot",
+        "cars in a parking lot in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "frontlot",
+        "in_front_of",
+        "b",
+        "parking lot in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across street/front/behind depend on road/building orientation; pronoun attachment uncertain."
+    ]
+  },
+  {
+    "i": 10536,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The large building with the gray roof",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "footpath": [
+        "Perry Barr footpath",
+        "named_landmark"
+      ],
+      "buses": [
+        "busses",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "across_from",
+        "lot",
+        "across the street from the parking lot with Perry Barr footpath",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "with",
+        "footpath",
+        "parking lot with Perry Barr footpath",
+        "U",
+        "medium"
+      ],
+      [
+        "buses",
+        "on_side_of",
+        "b",
+        "busses on one side of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across street and “one side” lack an orientation."
+    ]
+  },
+  {
+    "i": 10537,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The building",
+        "object"
+      ],
+      "footpath": [
+        "the Perry Barr Footpath",
+        "named_landmark"
+      ],
+      "lot": [
+        "a large parking lot",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "across_from",
+        "footpath",
+        "directly across the street from the Perry Barr Footpath",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "with",
+        "lot",
+        "with a large parking lot",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across street depends on road orientation."
+    ]
+  },
+  {
+    "i": 10538,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "A brown u-shaped building with a gray roof",
+        "object"
+      ],
+      "mark": [
+        "a partial blue marking",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "coppice": [
+        "the Coppice building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "with",
+        "mark",
+        "has a partial blue marking on top of it",
+        "U",
+        "medium"
+      ],
+      [
+        "mark",
+        "cut_off_by",
+        "edge",
+        "cut off by the edge of the map",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "on",
+        "road",
+        "of Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "across_from",
+        "coppice",
+        "across from the Coppice building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across from and edge relation are uncalibrated."
+    ]
+  },
+  {
+    "i": 10539,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "A building",
+        "object"
+      ],
+      "objects": [
+        "blue objects",
+        "object"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ],
+      "junction": [
+        "the junction with Wellhead Lane",
+        "region"
+      ],
+      "well": [
+        "Wellhead Lane",
+        "named_landmark"
+      ],
+      "coppice": [
+        "The Coppice building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "road",
+        "on Aldridge road",
+        "N",
+        "medium"
+      ],
+      [
+        "objects",
+        "on_roof_of",
+        "b",
+        "blue objects on a grey roof",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "close_to",
+        "junction",
+        "close to the junction with Wellhead Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "junction",
+        "with",
+        "well",
+        "with Wellhead Lane",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "opposite",
+        "coppice",
+        "opposite The Coppice building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“close” and opposite do not specify exact alignment."
+    ]
+  },
+  {
+    "i": 10540,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The blue L-shaped building",
+        "object"
+      ],
+      "compound": [
+        "a rectangular compound",
+        "region"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "next_to",
+        "compound",
+        "with a rectangular compound next to it",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "along",
+        "road",
+        "along Aldridge road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Along and next-to are approximate."
+    ]
+  },
+  {
+    "i": 10541,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "A blue and grey building",
+        "object"
+      ],
+      "compounds": [
+        "two empty compounds",
+        "region"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "between",
+        "compounds",
+        "in between two empty compounds",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "along",
+        "road",
+        "along Aldridge road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Between empty compounds does not specify geometry."
+    ]
+  },
+  {
+    "i": 10542,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The grayish tan building",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "coppice": [
+        "the Coppice building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "across_from",
+        "coppice",
+        "across from the Coppice building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across from depends on road orientation."
+    ]
+  },
+  {
+    "i": 10543,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "this green roofed building",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "wdm": [
+        "W.D.M Cars",
+        "named_landmark"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "car": [
+        "a dark blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "lot",
+        "across_from",
+        "wdm",
+        "parking lot across from W.D.M Cars",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "in",
+        "lot",
+        "this green roofed building",
+        "U",
+        "medium"
+      ],
+      [
+        "car",
+        "next_to",
+        "b",
+        "a dark blue car parked next to it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "The parking lot/building attachment is ambiguous; next-to side unspecified."
+    ]
+  },
+  {
+    "i": 10544,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The green and gray building",
+        "object"
+      ],
+      "corner": [
+        "the corner of the triangular parking lot",
+        "region"
+      ],
+      "lot": [
+        "the triangular parking lot",
+        "region"
+      ],
+      "lawn": [
+        "a large triangular green lawn",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "at",
+        "corner",
+        "in the corner of the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "corner",
+        "of",
+        "lot",
+        "corner of the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "next_to",
+        "lawn",
+        "next to a large triangular green lawn",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Corner assignment and lawn adjacency are approximate."
+    ]
+  },
+  {
+    "i": 10545,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The green building",
+        "object"
+      ],
+      "corner": [
+        "the top left corner",
+        "region"
+      ],
+      "lot": [
+        "the triangular parking lot",
+        "region"
+      ],
+      "grass": [
+        "a green triangular patch of grass",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "at",
+        "corner",
+        "in the top left corner of the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "against",
+        "grass",
+        "against a green triangular patch of grass",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "in",
+        "lot",
+        "corner of the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Top-left is uncalibrated; attachment of triangular patch is ambiguous."
+    ]
+  },
+  {
+    "i": 10546,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The green building",
+        "object"
+      ],
+      "lot": [
+        "the triangular parking lot",
+        "region"
+      ],
+      "grass": [
+        "a green triangular patch of grass",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "at_corner_of",
+        "lot",
+        "in the corner of the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "against",
+        "grass",
+        "against a green triangular patch of grass",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Corner and against relations are approximate."
+    ]
+  },
+  {
+    "i": 10547,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The building",
+        "object"
+      ],
+      "lot": [
+        "the triangular car par",
+        "region"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ],
+      "wdm": [
+        "the WMD Cars building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "facing",
+        "lot",
+        "The building is facing the triangular car par",
+        "F",
+        "medium"
+      ],
+      [
+        "b",
+        "along",
+        "road",
+        "along Aldridge road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "opposite",
+        "wdm",
+        "It is opposite the WMD Cars building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Building facing is intrinsic; opposite lacks orientation."
+    ]
+  },
+  {
+    "i": 10548,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "Brown and white building with a green roof",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "lot": [
+        "a triangular parking lot",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "cut_off_by",
+        "edge",
+        "that's been cut off by the edge of the map",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "next_to",
+        "lot",
+        "next to a triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "off",
+        "road",
+        "off Aldridge Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Map edge and “off” location are uncalibrated."
+    ]
+  },
+  {
+    "i": 10549,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "Multi-colored Brown, White and blue building with a gray roof",
+        "object"
+      ],
+      "car": [
+        "a white car",
+        "object"
+      ],
+      "houses": [
+        "a set of three identical brown and white houses",
+        "group"
+      ],
+      "black": [
+        "one black car",
+        "object"
+      ],
+      "lot": [
+        "its shared parking lot",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "car",
+        "in_front_of",
+        "b",
+        "white car parked in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "next_to",
+        "houses",
+        "next to a set of three identical brown and white houses",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "in",
+        "lot",
+        "one black car in its shared parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lot",
+        "off",
+        "road",
+        "off Aldridge Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“in front” and next-to are frame dependent; shared-lot owner ambiguous."
+    ]
+  },
+  {
+    "i": 10550,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The gray square building",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ],
+      "entrance": [
+        "the entrance to the triangular parking lot",
+        "region"
+      ],
+      "lot": [
+        "the triangular parking lot",
+        "region"
+      ],
+      "lawn": [
+        "a large green lawn",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "across_from",
+        "entrance",
+        "across the street from the entrance to the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "entrance",
+        "of",
+        "lot",
+        "entrance to the triangular parking lot",
+        "U",
+        "medium"
+      ],
+      [
+        "lawn",
+        "in_front_of",
+        "lot",
+        "with a large green lawn in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Across street and lawn front are uncalibrated; pronoun reference ambiguous."
+    ]
+  },
+  {
+    "i": 10551,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The gray building",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "coppice": [
+        "the Coppice building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "b",
+        "7_houses_left_of",
+        "coppice",
+        "7 houses to the left of the Coppice building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Seven-house left count lacks travel/view direction."
+    ]
+  },
+  {
+    "i": 10552,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "The brown roof building",
+        "object"
+      ],
+      "bus": [
+        "the light blue bus",
+        "object"
+      ],
+      "coppice": [
+        "the Coppice road",
+        "named_landmark"
+      ],
+      "road": [
+        "Coppice road",
+        "named_landmark"
+      ],
+      "larger": [
+        "a larger, same colored building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "bottom_left_of",
+        "bus",
+        "found bottom left of the light blue bus",
+        "U",
+        "medium"
+      ],
+      [
+        "bus",
+        "beside",
+        "road",
+        "beside the Coppice road",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "perpendicular_to",
+        "larger",
+        "The building is perpendicular to a larger, same colored building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Bottom-left requires a map frame; attachment of “beside” is ambiguous."
+    ]
+  },
+  {
+    "i": 10553,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "This is a residential house",
+        "object"
+      ],
+      "coppice": [
+        "the Coppice",
+        "named_landmark"
+      ],
+      "rv": [
+        "a big blue RV",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "close_to",
+        "coppice",
+        "house close to the Coppice",
+        "U",
+        "medium"
+      ],
+      [
+        "rv",
+        "behind",
+        "t",
+        "There is a big blue RV parked behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind lacks an explicit travel direction."
+    ]
+  },
+  {
+    "i": 10554,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "One floor Brown building with a gray roof",
+        "object"
+      ],
+      "container": [
+        "a large Blue container",
+        "object"
+      ],
+      "road": [
+        "the Coppice road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "next_to",
+        "container",
+        "next to a large Blue container",
+        "U",
+        "medium"
+      ],
+      [
+        "b",
+        "off",
+        "road",
+        "off the Coppice road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Off-road proximity is vague."
+    ]
+  },
+  {
+    "i": 10555,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "b": [
+        "A building with brown roof and white wall",
+        "object"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ],
+      "car": [
+        "a black car",
+        "object"
+      ],
+      "lawn": [
+        "a small square shaped lawn",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "b",
+        "along",
+        "road",
+        "along the road named Aldridge road",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "b",
+        "a black car parked in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "lawn",
+        "in_front_of",
+        "b",
+        "a small square shaped lawn in front of the building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Front of building depends on its orientation."
+    ]
+  },
+  {
+    "i": 10556,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The red house",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "the gray building",
+        "object"
+      ],
+      "holford": [
+        "Holford Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "2_houses_right_of",
+        "gray",
+        "two houses to the right of the gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "faces",
+        "holford",
+        "directly faces Holford Drive",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right-house count requires direction; facing is intrinsic."
+    ]
+  },
+  {
+    "i": 10557,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ],
+      "gray": [
+        "the gray house",
+        "object"
+      ],
+      "holford": [
+        "Holford Drive",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Aldridge Road",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "4_houses_right_of",
+        "gray",
+        "4 houses to the right of the gray house",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "facing",
+        "holford",
+        "facing Holford Drive",
+        "F",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right-house count requires direction; facing is intrinsic."
+    ]
+  },
+  {
+    "i": 10558,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "The second last building",
+        "object"
+      ],
+      "road": [
+        "Aldridge road",
+        "named_landmark"
+      ],
+      "car": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "along",
+        "road",
+        "along Aldridge road",
+        "N",
+        "medium"
+      ],
+      [
+        "car",
+        "in_front_of",
+        "t",
+        "a black car parked in front of it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Second-last ordering direction is unstated; front of building is relative."
+    ]
+  },
+  {
+    "i": 10559,
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low",
+    "e": {
+      "t": [
+        "Right side of a two-story white home with a brown roof",
+        "object"
+      ],
+      "van": [
+        "a black van",
+        "object"
+      ],
+      "drive": [
+        "this driveway",
+        "region"
+      ],
+      "house": [
+        "a similar house with a brown roof",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "road": [
+        "Aldridge Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_side_of",
+        "t",
+        "Right side of a two-story white home",
+        "U",
+        "medium"
+      ],
+      [
+        "van",
+        "in",
+        "drive",
+        "a black van in this driveway",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "next_to",
+        "house",
+        "next to a similar house with a brown roof",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "cut_off_by",
+        "edge",
+        "cut off by the edge of the map",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "of Aldridge Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“right side of home” and driveway referent are ambiguous; edge cut-off side uncalibrated."
+    ]
+  }
+]

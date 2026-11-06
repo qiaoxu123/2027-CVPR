@@ -1,0 +1,1576 @@
+[
+  {
+    "i": 9040,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "black2": [
+        "black car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in_front_of",
+        "white",
+        "black car in front of a white car",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "on",
+        "road",
+        "on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "in",
+        "drive",
+        "red car and black car in the driveway",
+        "N",
+        "medium"
+      ],
+      [
+        "black2",
+        "in",
+        "drive",
+        "black car in the driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘There is a red car and black car in the driveway next to it’ may attach driveway to target car or nearby area; driveway entity is only implicit."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9041,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "drive": [
+        "a driveway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "on",
+        "road",
+        "on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "behind",
+        "black",
+        "white car behind it",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "beside",
+        "black",
+        "red car beside it",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "diagonally_in",
+        "drive",
+        "parked diagonally in a driveway",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘that is parked diagonally in a driveway’ most likely modifies red car, but attachment could be black car; syntax primary red."
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "black",
+          "predicate": "diagonally_in",
+          "reference": [
+            "drive"
+          ],
+          "reason": "Relative clause may modify black car instead of red car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9042,
+    "e": {
+      "black": [
+        "A black car",
+        "object"
+      ],
+      "pavement": [
+        "the left pavement",
+        "region"
+      ],
+      "house": [
+        "a grey house",
+        "object"
+      ],
+      "road": [
+        "Broadway road",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "on",
+        "pavement",
+        "on the left pavement",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "in front of a grey house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "along",
+        "road",
+        "house along Broadway road",
+        "R",
+        "high"
+      ],
+      [
+        "white",
+        "behind",
+        "black",
+        "white car behind it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left in ‘left pavement’ does not specify viewpoint; treated as part of pavement descriptor."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9043,
+    "e": {
+      "black1": [
+        "The black car",
+        "object"
+      ],
+      "black2": [
+        "another black car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "building1": [
+        "the white building with grey roof",
+        "object"
+      ],
+      "building2": [
+        "the white building with grey roof",
+        "object",
+        1
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ],
+      "whitecar": [
+        "no car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "black1",
+        "right_of",
+        "black2",
+        "another black car on the right",
+        "U",
+        "medium"
+      ],
+      [
+        "black1",
+        "in",
+        "drive",
+        "parked on the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "building1",
+        "driveway of the white building",
+        "N",
+        "high"
+      ],
+      [
+        "building1",
+        "across_from",
+        "building2",
+        "across the white building with grey roof",
+        "U",
+        "medium"
+      ],
+      [
+        "building1",
+        "on",
+        "road",
+        "on the Broadway Road",
+        "N",
+        "high"
+      ],
+      [
+        "whitecar",
+        "across_from",
+        "building1",
+        "across is no car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Two mentions of white building with grey roof are represented by occurrence; ‘across is no car’ is elliptical/negative and relation scope unclear."
+    ],
+    "alternatives": {
+      "3": [
+        {
+          "subject": "black1",
+          "predicate": "across_from",
+          "reference": [
+            "building2"
+          ],
+          "reason": "Across may relate target car to second building rather than building-to-building."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9044,
+    "e": {
+      "black": [
+        "This black car",
+        "object"
+      ],
+      "drive": [
+        "the drive",
+        "region"
+      ],
+      "house": [
+        "a semi-detached house",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "garden": [
+        "The garden of the house",
+        "region"
+      ],
+      "shed": [
+        "a shed with a white roof and blue sides",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "in",
+        "drive",
+        "parked on the drive",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "house",
+        "drive of a semi-detached house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "shed",
+        "in",
+        "garden",
+        "The garden of the house appears to have a shed with a white roof and blue sides",
+        "N",
+        "high"
+      ],
+      [
+        "garden",
+        "of",
+        "house",
+        "garden of the house",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9045,
+    "e": {
+      "graycar": [
+        "The dark gray car",
+        "object"
+      ],
+      "house": [
+        "the gray house on The Broadway",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "graybldg": [
+        "the gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "graycar",
+        "parked_against",
+        "house",
+        "parked against the gray house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "thirteen_houses_right_of",
+        "graybldg",
+        "13 houses to the right of the gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "graybldg",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Right frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9046,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "house": [
+        "the gray house on The Broadway",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "graybldg": [
+        "the gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "parked_against",
+        "house",
+        "parked against the gray house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "thirteen_houses_right_of",
+        "graybldg",
+        "13 houses to the right of the gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "graybldg",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Right frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9047,
+    "e": {
+      "white": [
+        "This is a white colored car",
+        "object"
+      ],
+      "trees": [
+        "the trees",
+        "group"
+      ],
+      "end": [
+        "the end of The Broadway",
+        "region"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "red": [
+        "two red cars",
+        "group"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "at_end_of",
+        "road",
+        "trees at the end of The Broadway",
+        "N",
+        "medium"
+      ],
+      [
+        "white",
+        "on_side_of",
+        "trees",
+        "on the side of the trees",
+        "U",
+        "medium"
+      ],
+      [
+        "red",
+        "on_other_side_of",
+        "road",
+        "two red cars on the other side of the road",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "not_on_side_of",
+        "red",
+        "this car is not on the side of the red cars",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "in_front_of",
+        "white",
+        "a gray car in front of this car",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "behind",
+        "gray",
+        "a black car behind the gray car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘side of trees’ and road-side descriptions lack a defined frame; relative clauses resolve target/car order linguistically."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9048,
+    "e": {
+      "white": [
+        "One white car",
+        "object"
+      ],
+      "blue": [
+        "a light blue car",
+        "object"
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "house": [
+        "a two-story home",
+        "object"
+      ],
+      "square": [
+        "a yellow Square",
+        "object"
+      ],
+      "yard": [
+        "this backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "blue",
+        "slightly_behind",
+        "white",
+        "light blue car slightly behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "on_other_side_of",
+        "road",
+        "on the other side of the road of the Broadway Road",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "near",
+        "edge",
+        "close to the edge of the map",
+        "U",
+        "high"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "house",
+        "in front of a two-story home",
+        "U",
+        "high"
+      ],
+      [
+        "square",
+        "in",
+        "yard",
+        "yellow Square in this backyard",
+        "N",
+        "high"
+      ],
+      [
+        "yard",
+        "of",
+        "house",
+        "this backyard",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘other side of the road’ is observer-relative; the home/backyard antecedent is likely but not explicit."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9049,
+    "e": {
+      "white": [
+        "This is a white car",
+        "object"
+      ],
+      "road": [
+        "the Broadway",
+        "named_landmark"
+      ],
+      "gray": [
+        "a gray car",
+        "object"
+      ],
+      "blue": [
+        "a light blue car",
+        "object"
+      ],
+      "space": [
+        "some distance",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "on",
+        "road",
+        "parked on the Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "no_immediate_front_or_back_car",
+        "white",
+        "no car immediately in front of or behind the car",
+        "U",
+        "high"
+      ],
+      [
+        "gray",
+        "in_front_of",
+        "white",
+        "In some distance in front of it there is a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "blue",
+        "behind",
+        "white",
+        "behind there is a light blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "some_distance_from",
+        "white",
+        "and behind there is a light blue car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Second ‘behind’ is elliptical; likely blue car behind target, but clause subject is omitted."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9050,
+    "e": {
+      "white": [
+        "A white vehicle",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "teal": [
+        "a light teal colored vehicle",
+        "object"
+      ],
+      "blue": [
+        "a small blue colored vehicel",
+        "object"
+      ],
+      "person": [
+        "a person",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "along",
+        "road",
+        "parked along The Broadway",
+        "R",
+        "high"
+      ],
+      [
+        "teal",
+        "behind",
+        "white",
+        "vehicle on the road behind it",
+        "U",
+        "high"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "white",
+        "in front of it is a small blue colored vehicel",
+        "U",
+        "high"
+      ],
+      [
+        "person",
+        "at_rear_of",
+        "blue",
+        "person standing at the rear of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘it’ in person clause refers to blue vehicle by nearest antecedent; spelling vehicel retained."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9051,
+    "e": {
+      "white": [
+        "this white car",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "trees": [
+        "the trees",
+        "group"
+      ],
+      "lower": [
+        "the lower part of the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "on",
+        "road",
+        "On The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "north_of",
+        "trees",
+        "north of the trees",
+        "W",
+        "high"
+      ],
+      [
+        "trees",
+        "toward",
+        "lower",
+        "toward the lower part of the road",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "second_from_bottom",
+        "road",
+        "second car from the bottom",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "North is geographic cardinal without XY calibration; ‘lower/bottom’ is view-relative and unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9052,
+    "e": {
+      "white": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "gray": [
+        "the light gray car",
+        "object"
+      ],
+      "intersection": [
+        "the intersection",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "white",
+        "on",
+        "road",
+        "on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "twenty_one_cars_behind",
+        "gray",
+        "21 cars behind the light gray car",
+        "R",
+        "medium"
+      ],
+      [
+        "gray",
+        "closest_to",
+        "intersection",
+        "closest to the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Behind gives road ordering; sequence direction unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9053,
+    "e": {
+      "red": [
+        "This is a red car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "road": [
+        "The Broadway traffic road",
+        "named_landmark"
+      ],
+      "maroon": [
+        "A maroon car",
+        "object"
+      ],
+      "home": [
+        "a home",
+        "object"
+      ],
+      "solar": [
+        "solar panels",
+        "object"
+      ],
+      "roof": [
+        "the roof",
+        "object"
+      ],
+      "dirt": [
+        "a large dirt space",
+        "region"
+      ],
+      "house": [
+        "the house",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "behind",
+        "black",
+        "red car parked behind a black car",
+        "U",
+        "high"
+      ],
+      [
+        "maroon",
+        "behind",
+        "red",
+        "A maroon car is parked behind it",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "spaced_from",
+        "maroon",
+        "with a lot of space between the cars",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "on",
+        "road",
+        "on The Broadway traffic road",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "in_front_of",
+        "home",
+        "red car is parked in front of a home",
+        "U",
+        "high"
+      ],
+      [
+        "home",
+        "has",
+        "solar",
+        "home with solar panels on the roof",
+        "N",
+        "high"
+      ],
+      [
+        "solar",
+        "on",
+        "roof",
+        "solar panels on the roof",
+        "N",
+        "high"
+      ],
+      [
+        "dirt",
+        "behind",
+        "house",
+        "large dirt space behind the house",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘the home’ and ‘the house’ likely same entity; backyard/dirt relation retained with lower confidence if reference coreference uncertain."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9054,
+    "e": {
+      "tinyred": [
+        "A tiny red car",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "red": [
+        "a larger red car",
+        "object"
+      ],
+      "black": [
+        "a tiny black car",
+        "object"
+      ],
+      "blue": [
+        "a tiny blue car",
+        "object"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ],
+      "black2": [
+        "a tiny black car parked across the street",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "tinyred",
+        "on",
+        "road",
+        "parked on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "behind",
+        "tinyred",
+        "a larger red car parked a cars length away behind it",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "behind",
+        "tinyred",
+        "a tiny black car, then a tiny blue car parked in a row right in front of it",
+        "U",
+        "medium"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "tinyred",
+        "tiny blue car parked in a row right in front of it",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "across_street_from",
+        "black2",
+        "tiny black car parked across the street",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "one_car_length_behind",
+        "tinyred",
+        "a cars length away behind it",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Sequence of vehicles in front of target is syntactically awkward; black then blue are retained as row members, with blue explicitly in front. ‘across street’ has no orientation."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9055,
+    "e": {
+      "red": [
+        "This is the red car",
+        "object"
+      ],
+      "blackblue": [
+        "a black and blue car",
+        "object"
+      ],
+      "burgundywhite": [
+        "a burgundy and white car",
+        "object"
+      ],
+      "road": [
+        "the broadway road",
+        "named_landmark"
+      ],
+      "trees": [
+        "two opposite trees",
+        "group"
+      ],
+      "end": [
+        "the end of the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "blackblue",
+        "in_front_of",
+        "red",
+        "black and blue car in front",
+        "U",
+        "high"
+      ],
+      [
+        "burgundywhite",
+        "behind",
+        "red",
+        "burgundy and white car behind it",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "on",
+        "road",
+        "located on the broadway road",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "near",
+        "trees",
+        "near the two opposite trees",
+        "U",
+        "medium"
+      ],
+      [
+        "trees",
+        "at_end_of",
+        "road",
+        "towards the end of the road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘two opposite trees’ does not specify which side; ‘towards end’ unspecified endpoint."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9056,
+    "e": {
+      "red": [
+        "One red car",
+        "object"
+      ],
+      "black1": [
+        "a black car",
+        "object"
+      ],
+      "darkred": [
+        "a dark red car",
+        "object"
+      ],
+      "black2": [
+        "a black car",
+        "object",
+        1
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "between",
+        "black1",
+        "in between a black car and a dark red car",
+        "U",
+        "high"
+      ],
+      [
+        "red",
+        "between",
+        "darkred",
+        "in between a black car and a dark red car",
+        "U",
+        "high"
+      ],
+      [
+        "darkred",
+        "across_from",
+        "black2",
+        "that's across from a black car",
+        "U",
+        "medium"
+      ],
+      [
+        "black2",
+        "on_opposite_end_of",
+        "road",
+        "on the opposite end of the Broadway Road",
+        "U",
+        "medium"
+      ],
+      [
+        "black2",
+        "toward",
+        "edge",
+        "toward the edge of the map",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Relative ‘that's across’ likely refers to dark red car, but may attach to whole pair. ‘opposite end’ is not necessarily opposite side of road."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "red",
+          "predicate": "across_from",
+          "reference": [
+            "black2"
+          ],
+          "reason": "Relative clause may modify whole red/black/dark-red arrangement."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9057,
+    "e": {
+      "red": [
+        "this is a red car",
+        "object"
+      ],
+      "row": [
+        "a row",
+        "group"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "red2": [
+        "two red cars",
+        "group"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "smaller_of",
+        "red2",
+        "smaller of two red cars",
+        "N",
+        "high"
+      ],
+      [
+        "red2",
+        "in_row_on",
+        "road",
+        "two red cars standing in a row on The Broadway",
+        "R",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "red",
+        "black car in front of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Row ordering direction unspecified. Extra period retained as punctuation, not relation."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9058,
+    "e": {
+      "red": [
+        "The red car",
+        "object"
+      ],
+      "house": [
+        "the brown house on The Broadway",
+        "object"
+      ],
+      "road": [
+        "The Broadway",
+        "named_landmark"
+      ],
+      "gray": [
+        "the gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Birchfield Road",
+        "region"
+      ],
+      "birchfield": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "red",
+        "in_front_of",
+        "house",
+        "in front of the brown house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on The Broadway",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "seventeen_houses_left_of",
+        "gray",
+        "17 houses to the left of the gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "birchfield",
+        "intersection with Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left-of frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9059,
+    "e": {
+      "black": [
+        "The black car",
+        "object"
+      ],
+      "road": [
+        "the Broadway road",
+        "named_landmark"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "space": [
+        "some space",
+        "region"
+      ],
+      "otherblack": [
+        "a black car",
+        "object"
+      ],
+      "darkred": [
+        "a darker red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "black",
+        "on",
+        "road",
+        "on the Broadway road",
+        "N",
+        "high"
+      ],
+      [
+        "black",
+        "toward_dead_end",
+        "road",
+        "towards the dead end",
+        "U",
+        "medium"
+      ],
+      [
+        "red",
+        "left_of",
+        "black",
+        "There's a red car to the left of it",
+        "U",
+        "medium"
+      ],
+      [
+        "red",
+        "spaced_from",
+        "black",
+        "some space between them",
+        "U",
+        "medium"
+      ],
+      [
+        "otherblack",
+        "below",
+        "black",
+        "black car below it",
+        "U",
+        "medium"
+      ],
+      [
+        "darkred",
+        "below",
+        "red",
+        "darker red car below it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Explicit vertical viewing frame; towards dead end, left/below are view-relative and not calibrated. Space may refer to red car and nearby cars collectively."
+    ],
+    "f": {
+      "1": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "When viewing it vertically"
+      },
+      "2": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "When viewing it vertically"
+      },
+      "4": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "When viewing it vertically"
+      },
+      "5": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "When viewing it vertically"
+      }
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

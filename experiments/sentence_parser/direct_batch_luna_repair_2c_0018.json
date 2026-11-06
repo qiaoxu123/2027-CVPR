@@ -1,0 +1,1443 @@
+[
+  {
+    "i": 9140,
+    "e": {
+      "house": [
+        "A house with a brown roof and a white wall",
+        "object"
+      ],
+      "roof": [
+        "a brown roof",
+        "object"
+      ],
+      "wall": [
+        "a white wall",
+        "object"
+      ],
+      "road": [
+        "Broadway road",
+        "named_landmark"
+      ],
+      "lane": [
+        "the right lane",
+        "region"
+      ],
+      "white": [
+        "a white",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ],
+      "birchfield": [
+        "Birchfield road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "along",
+        "road",
+        "along Broadway road",
+        "R",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "lane",
+        "on the right lane",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "house",
+        "white and a black car parked in front",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "a white and a black car parked in front",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "fifth_from",
+        "birchfield",
+        "fifth house from Birchfield road",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Right lane/side unspecified; fifth-from ordering direction unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9141,
+    "e": {
+      "house": [
+        "a multi-colored White, Gray and beige house",
+        "object"
+      ],
+      "roof": [
+        "a multi-colored Brown and gray roof",
+        "object"
+      ],
+      "red": [
+        "a red car",
+        "object"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "van": [
+        "a black van",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "road": [
+        "the Broadway Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "left_side_of",
+        "house",
+        "Left side of a multi-colored White, Gray and beige house",
+        "U",
+        "medium"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "house with a multi-colored Brown and gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "red",
+        "in",
+        "drive",
+        "with a red car, a white car and a black van parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "in",
+        "drive",
+        "with a red car, a white car and a black van parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "van",
+        "in",
+        "drive",
+        "with a red car, a white car and a black van parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "off",
+        "road",
+        "driveway off the Broadway Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Opening ‘Left side of a house’ is elliptical and may denote a location on the house's left side, not the house itself. Off-road PP may attach to driveway/house/vehicles."
+    ],
+    "alternatives": {
+      "5": [
+        {
+          "subject": "house",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "Off-road phrase may locate house."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9142,
+    "e": {
+      "building": [
+        "The second building",
+        "object"
+      ],
+      "perry": [
+        "the Perry Barr building",
+        "named_landmark"
+      ],
+      "road": [
+        "Birchfield road",
+        "named_landmark"
+      ],
+      "truck": [
+        "a white truck",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "second_from",
+        "perry",
+        "second building from the Perry Barr building",
+        "R",
+        "medium"
+      ],
+      [
+        "building",
+        "along",
+        "road",
+        "along Birchfield road",
+        "R",
+        "high"
+      ],
+      [
+        "truck",
+        "in_front_of",
+        "building",
+        "white truck in front",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Second-from ordering direction unspecified; ‘Perry Barr building’ is named as a landmark-like building phrase, not expanded."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9143,
+    "e": {
+      "building": [
+        "Large multi-unit Brown building",
+        "object"
+      ],
+      "roofs": [
+        "multicolored Brown, white and gray roofs",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "playground": [
+        "a playground",
+        "region"
+      ],
+      "thornbury": [
+        "the Thornbury Road",
+        "named_landmark"
+      ],
+      "canterbury": [
+        "the Canterbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has_roof",
+        "roofs",
+        "building with multicolored Brown, white and gray roofs",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "extending_from",
+        "edge",
+        "extending from the edge of the map",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "in_front_of",
+        "playground",
+        "with a playground in front of it",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "between",
+        "thornbury",
+        "in between the Thornbury Road and the Canterbury Road",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "between",
+        "canterbury",
+        "in between the Thornbury Road and the Canterbury Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Between-road topology does not specify exact polygon boundaries."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9144,
+    "e": {
+      "house": [
+        "A brown house with a white middle patch",
+        "object"
+      ],
+      "road": [
+        "Thornbury road",
+        "named_landmark"
+      ],
+      "canterbury": [
+        "Canterbury road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "along",
+        "road",
+        "along Thornbury road",
+        "R",
+        "high"
+      ],
+      [
+        "house",
+        "behind",
+        "canterbury",
+        "Canterbury road behind it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Behind-road frame unspecified; may describe road relative to house."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9145,
+    "e": {
+      "building": [
+        "The last building with a grey roof",
+        "object"
+      ],
+      "roof": [
+        "a grey roof",
+        "object"
+      ],
+      "gardens": [
+        "the Earlsburu gardens",
+        "named_landmark"
+      ],
+      "avenue": [
+        "Penshurst Avenue road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "last_in_sequence",
+        "building",
+        "The last building",
+        "R",
+        "medium"
+      ],
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "building with a grey roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "between",
+        "gardens",
+        "in between the Earlsburu gardens and Penshurst Avenue road",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "between",
+        "avenue",
+        "in between the Earlsburu gardens and Penshurst Avenue road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘last’ sequence reference is not specified; Earlsburu spelling preserved."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9146,
+    "e": {
+      "house": [
+        "This is a house on Bragg Road",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "roof": [
+        "a brown roof",
+        "object"
+      ],
+      "yard": [
+        "a backyard",
+        "region"
+      ],
+      "lawn": [
+        "a lawn",
+        "region"
+      ],
+      "tree": [
+        "no tree",
+        "object"
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ],
+      "black": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "on",
+        "road",
+        "house on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "with a brown roof",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has",
+        "lawn",
+        "backyard with a lawn",
+        "N",
+        "high"
+      ],
+      [
+        "yard",
+        "has_no",
+        "tree",
+        "no tree",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "house",
+        "In front of it are passing a blue car",
+        "U",
+        "medium"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "house",
+        "a blue car and a black car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘are passing’ indicates motion/traffic, not necessarily parked; subject car directions not stated."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9147,
+    "e": {
+      "building": [
+        "This is a residential building located on Bragg Road",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "blue": [
+        "One is blue",
+        "object"
+      ],
+      "black": [
+        "the other black",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "road",
+        "building located on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "in_front_of",
+        "building",
+        "In front of it, there are two cars parked, One is blue",
+        "U",
+        "high"
+      ],
+      [
+        "black",
+        "in_front_of",
+        "building",
+        "the other black",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Two cars are introduced, with colors distributed by ‘one ... the other’; entity class is implied by ‘cars parked’."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9148,
+    "e": {
+      "building": [
+        "A building with grey roof and white wall",
+        "object"
+      ],
+      "roof": [
+        "grey roof",
+        "object"
+      ],
+      "wall": [
+        "white wall",
+        "object"
+      ],
+      "road": [
+        "Bragg road",
+        "named_landmark"
+      ],
+      "whitecars": [
+        "Two white car",
+        "group"
+      ],
+      "tree": [
+        "a tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "with grey roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_wall",
+        "wall",
+        "white wall",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "left_side_of",
+        "road",
+        "situated at the left side of the road named Bragg road",
+        "U",
+        "medium"
+      ],
+      [
+        "whitecars",
+        "in_front_of",
+        "building",
+        "Two white car is parked in front of the building",
+        "U",
+        "high"
+      ],
+      [
+        "tree",
+        "behind",
+        "building",
+        "There is a tree behind the building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left-of-road frame unspecified; source plural agreement error retained."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9149,
+    "e": {
+      "building": [
+        "This is a residential building with a gray roof",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "yard": [
+        "its front yard",
+        "region"
+      ],
+      "white1": [
+        "a white car",
+        "object"
+      ],
+      "white2": [
+        "another white car",
+        "object"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "building with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "white1",
+        "in",
+        "yard",
+        "In its front yard",
+        "N",
+        "high"
+      ],
+      [
+        "yard",
+        "of",
+        "building",
+        "its front yard",
+        "N",
+        "high"
+      ],
+      [
+        "white2",
+        "on",
+        "street",
+        "another white car is parked on the street",
+        "N",
+        "high"
+      ],
+      [
+        "white2",
+        "in_front_of",
+        "building",
+        "another white car is parked on the street",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘another white car’ is distinct from yard car; no explicit in-front-of relation to house except street location."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9150,
+    "e": {
+      "building": [
+        "The building near the end of Bragg Road",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "porch": [
+        "a small square porch",
+        "region"
+      ],
+      "roof": [
+        "The roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "near_end_of",
+        "road",
+        "building near the end of Bragg Road",
+        "U",
+        "medium"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "building",
+        "white car parked in front of it",
+        "U",
+        "high"
+      ],
+      [
+        "building",
+        "has",
+        "porch",
+        "it has a small square porch",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_roof",
+        "roof",
+        "The roof is brown and white",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘end’ terminus unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9151,
+    "e": {
+      "house": [
+        "The gray house",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "carpets": [
+        "the Perry Barr Carpets building",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "on",
+        "road",
+        "house on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "twenty_five_houses_left_of",
+        "carpets",
+        "25 houses to the left of the Perry Barr Carpets building",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Left frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9152,
+    "e": {
+      "building": [
+        "The grey roofed building",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "view": [
+        "viewing the road vertically",
+        "region"
+      ],
+      "yard": [
+        "a bright green yard",
+        "region"
+      ],
+      "tree": [
+        "a small tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "left_side_of",
+        "road",
+        "found on the left side of Bragg Road",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "viewed_vertically",
+        "road",
+        "viewing the road vertically",
+        "U",
+        "medium"
+      ],
+      [
+        "yard",
+        "left_of",
+        "building",
+        "yard to its left",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "right_of",
+        "building",
+        "tree to the right of it",
+        "U",
+        "medium"
+      ],
+      [
+        "tree",
+        "on",
+        "road",
+        "on the road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Explicit vertical viewing frame; left/right are observer-relative and uncalibrated."
+    ],
+    "f": {
+      "0": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "viewing the road vertically"
+      },
+      "2": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "viewing the road vertically"
+      },
+      "3": {
+        "type": "observer",
+        "status": "unknown",
+        "view_evidence": "viewing the road vertically"
+      }
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9153,
+    "e": {
+      "house": [
+        "A multicolored house",
+        "object"
+      ],
+      "brownside": [
+        "left side Brown",
+        "region"
+      ],
+      "wall": [
+        "the right side is missing a portion of its front wall",
+        "region"
+      ],
+      "roof": [
+        "a multicolored light brown and brown roof",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "gray": [
+        "one gray car",
+        "object"
+      ],
+      "white": [
+        "one white car",
+        "object"
+      ],
+      "drive": [
+        "it's driveway",
+        "region"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "has_side_color",
+        "brownside",
+        "left side Brown",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "missing_wall",
+        "wall",
+        "right side is missing a portion of its front wall",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "has_roof",
+        "roof",
+        "with a multicolored light brown and brown roof",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "second_from_edge",
+        "edge",
+        "second from the edge of the map",
+        "U",
+        "medium"
+      ],
+      [
+        "gray",
+        "in",
+        "drive",
+        "one gray car in one white car parked in it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "in",
+        "drive",
+        "one white car parked in it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "off",
+        "road",
+        "driveway off Bragg Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Opening phrase is fragment and left/right side meanings are not compass-calibrated. ‘in one white car’ is malformed; interpreted as two cars in driveway."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9154,
+    "e": {
+      "building": [
+        "The building on Bragg Road",
+        "object"
+      ],
+      "road": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "white": [
+        "a white car with a black roof",
+        "object"
+      ],
+      "redroof": [
+        "a red roof",
+        "object"
+      ],
+      "graycar": [
+        "a gray car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "blackroof": [
+        "a black roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "road",
+        "building on Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "in",
+        "drive",
+        "white car with a black roof parked in the driveway",
+        "N",
+        "medium"
+      ],
+      [
+        "white",
+        "has_roof",
+        "blackroof",
+        "with a black roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_roof",
+        "redroof",
+        "It has a red roof",
+        "N",
+        "high"
+      ],
+      [
+        "graycar",
+        "in_front_of",
+        "building",
+        "gray car in the road in front of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Car is stated in a driveway, but driveway entity not lexicalized independently; it is a region mention. Roof attribution of ‘It’ may refer to building or car."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9155,
+    "e": {
+      "house": [
+        "A brown and white house with a gray roof",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "blackcars": [
+        "the black cars",
+        "group"
+      ],
+      "edge": [
+        "the edge of Chesterwood Gardens",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "sixth_from",
+        "edge",
+        "6th from the edge of Chesterwood Gardens",
+        "R",
+        "medium"
+      ],
+      [
+        "edge",
+        "where_black_cars_parked",
+        "blackcars",
+        "where the black cars parked",
+        "N",
+        "medium"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "house",
+        "white car parked in front of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘where the black cars parked’ is a clause fragment with unclear exact relation to edge; retained as location cue."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9156,
+    "e": {
+      "building1": [
+        "this is a red-walled building",
+        "object"
+      ],
+      "building2": [
+        "the building on the dead end corner of Chesterwood Gardens road",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens road",
+        "named_landmark"
+      ],
+      "corner": [
+        "the dead end corner",
+        "region"
+      ],
+      "whites": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "building1",
+        "next_to",
+        "building2",
+        "building is next to the building",
+        "U",
+        "high"
+      ],
+      [
+        "building2",
+        "at",
+        "corner",
+        "building on the dead end corner",
+        "N",
+        "high"
+      ],
+      [
+        "corner",
+        "of",
+        "road",
+        "corner of Chesterwood Gardens road",
+        "N",
+        "high"
+      ],
+      [
+        "whites",
+        "in_front_of",
+        "building1",
+        "two white cars in front of this building",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘this building’ in second sentence likely red-walled building; ‘the building on dead end corner’ is a separate reference."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9157,
+    "e": {
+      "building": [
+        "This is a residential building with a gray roof",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "yard1": [
+        "the front yard",
+        "region"
+      ],
+      "yard2": [
+        "the backyard",
+        "region"
+      ],
+      "white": [
+        "a white car",
+        "object"
+      ],
+      "street": [
+        "the street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "has_roof",
+        "building",
+        "building with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "on",
+        "road",
+        "located on Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has",
+        "yard1",
+        "lawn in the front yard",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has",
+        "yard2",
+        "in the backyard",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "on",
+        "street",
+        "white car parked on the street",
+        "N",
+        "high"
+      ],
+      [
+        "white",
+        "in_front_of",
+        "building",
+        "street in front of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "The street car is described in front of building; ‘it’ resolves to building by syntax."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9158,
+    "e": {
+      "house": [
+        "A small dark brown house with gray roof",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "row": [
+        "a row of similar houses",
+        "group"
+      ],
+      "blue": [
+        "A blue car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "nextdoor": [
+        "the house next door",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "house",
+        "on",
+        "road",
+        "on Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "part_of",
+        "row",
+        "part of a row of similar houses",
+        "N",
+        "high"
+      ],
+      [
+        "blue",
+        "in",
+        "drive",
+        "blue car is parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "nextdoor",
+        "driveway of the house next door",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘next door’ is relative house adjacency; connection to referenced small house is linguistically implied."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 9159,
+    "e": {
+      "building": [
+        "The building on Chesterwood Gardens",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "white": [
+        "one white car",
+        "object"
+      ],
+      "backyard1": [
+        "The backyard",
+        "region"
+      ],
+      "backyard2": [
+        "anther backyard",
+        "region"
+      ],
+      "trampoline": [
+        "a blue and black trampoline",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "building",
+        "on",
+        "road",
+        "building on Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "building",
+        "has_in_driveway",
+        "white",
+        "has one white car in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "backyard1",
+        "connects_to",
+        "backyard2",
+        "backyard connects to anther backyard",
+        "U",
+        "medium"
+      ],
+      [
+        "backyard2",
+        "has",
+        "trampoline",
+        "backyard that has a blue and black trampoline",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘anther’ source typo for another; two backyards may belong to adjacent buildings but that linkage isn't explicit."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

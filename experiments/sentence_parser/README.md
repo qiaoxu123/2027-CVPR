@@ -26,7 +26,7 @@ record = lookup(split_file="citynav_test_unseen.json", episode_index=0)
 record = lookup(text_id=record["text_id"])
 ```
 
-未完成 ID 抛出 `KeyError: Parsing missing`；不会自动降级到规则解析或返回伪造空结果。`records.jsonl` 是便携解析文件；`cache.sqlite` 是可重建的本地查询加速副本。实体地图对象 ID 暂未绑定，frame origin/forward_to 为句内符号角色，不是伪造地图朝向。
+未完成 ID 抛出 `KeyError: Parsing missing`；不会自动降级到规则解析或返回伪造空结果。`parsed/records.jsonl.gz` 是便携解析文件；其压缩前后 SHA256 在 `artifact_manifest.json`。为容纳全量输出，Git 保存 gzip；本地 build 同时生成未压缩 `records.jsonl` 和可重建的 `cache.sqlite`。实体地图对象 ID 暂未绑定，frame origin/forward_to 为句内符号角色，不是伪造地图朝向。
 
 ```bash
 /home/20261024_1/miniconda3/envs/graphnav/bin/python experiments/sentence_parser/cache.py build

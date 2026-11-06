@@ -1,0 +1,1385 @@
+[
+  {
+    "i": 8840,
+    "e": {
+      "t": [
+        "a car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "drive": [
+        "the first driveway",
+        "region"
+      ],
+      "cars": [
+        "two cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "drive",
+        "car in the first driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "first_left_from_end_of",
+        "road",
+        "in the first driveway to the left",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "second_of",
+        "cars",
+        "second of two cars in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "furthest_left_in",
+        "cars",
+        "furthest to the left",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "End-of-road travel direction and left frame unresolved."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8841,
+    "e": {
+      "t": [
+        "The leftmost white car",
+        "object"
+      ],
+      "h1": [
+        "the brown house in Chesterwood Gardens",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "h2": [
+        "brown house",
+        "object",
+        1
+      ],
+      "blue": [
+        "a blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_against",
+        "h1",
+        "parked against the brown house",
+        "N",
+        "high"
+      ],
+      [
+        "h1",
+        "in",
+        "road",
+        "house in Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "h1",
+        "six_houses_left_of",
+        "h2",
+        "6 houses to the left of the brown house",
+        "U",
+        "medium"
+      ],
+      [
+        "h2",
+        "at_corner_of",
+        "road",
+        "in the corner",
+        "N",
+        "medium"
+      ],
+      [
+        "blue",
+        "parked_against",
+        "h2",
+        "with a blue car parked against it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "leftmost",
+        "h1",
+        "leftmost white car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘leftmost’ has no stated comparison set/viewpoint; left relation unresolved."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8842,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "bush": [
+        "a green bush",
+        "object"
+      ],
+      "other": [
+        "another white car",
+        "object"
+      ],
+      "house": [
+        "a gray house",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "bush",
+        "parked between a green bush and another white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        "other",
+        "parked between a green bush and another white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "house",
+        "in front of a gray house",
+        "U",
+        "high"
+      ],
+      [
+        "house",
+        "in",
+        "road",
+        "gray house in Chesterwood Gardens",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8843,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "other": [
+        "three other white cars",
+        "group"
+      ],
+      "driveways": [
+        "the driveways",
+        "region"
+      ],
+      "complex": [
+        "a 13 house multi-unit complex",
+        "group"
+      ],
+      "houses": [
+        "13 house",
+        "group"
+      ],
+      "color": [
+        "brown with gray roofs",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "off",
+        "road",
+        "off Chesterwood Gardens",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        "other",
+        "in between three other white cars",
+        "U",
+        "high"
+      ],
+      [
+        "other",
+        "partly_in",
+        "driveways",
+        "part in the driveways",
+        "N",
+        "medium"
+      ],
+      [
+        "driveways",
+        "of",
+        "complex",
+        "driveways of a 13 house multi-unit complex",
+        "N",
+        "high"
+      ],
+      [
+        "complex",
+        "has_units",
+        "houses",
+        "13 house multi-unit complex",
+        "N",
+        "high"
+      ],
+      [
+        "complex",
+        "colored",
+        "color",
+        "colored brown with gray roofs",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘off Chesterwood Gardens’ may modify target, complex, or driveways; target attachment primary."
+    ],
+    "alternatives": {
+      "0": [
+        {
+          "subject": "complex",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road PP may modify complex."
+        },
+        {
+          "subject": "driveways",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road PP may modify driveways."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8844,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens road",
+        "named_landmark"
+      ],
+      "vehicles": [
+        "two white vehicles",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_of",
+        "road",
+        "on the right, vertical Chesterwood Gardens road",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "vertical_to",
+        "road",
+        "vertical Chesterwood Gardens road",
+        "U",
+        "medium"
+      ],
+      [
+        "vehicles",
+        "next_to",
+        "t",
+        "two white vehicles next to each other",
+        "U",
+        "high"
+      ],
+      [
+        "vehicles",
+        "bottom_left_of",
+        "t",
+        "to the bottom left of the car",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Road verticality and bottom-left are viewing-frame descriptions; orientation not calibrated."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8845,
+    "e": {
+      "t": [
+        "White car",
+        "object"
+      ],
+      "house1": [
+        "a brown house",
+        "object"
+      ],
+      "house2": [
+        "another house",
+        "object"
+      ],
+      "vehicles": [
+        "two white vehicles",
+        "group"
+      ],
+      "drive": [
+        "its driveway",
+        "region"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "house1",
+        "parked in front of a brown house",
+        "U",
+        "high"
+      ],
+      [
+        "house2",
+        "next_to",
+        "house1",
+        "next to another house",
+        "U",
+        "high"
+      ],
+      [
+        "vehicles",
+        "in",
+        "drive",
+        "two white vehicles in its driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "house2",
+        "its driveway",
+        "N",
+        "medium"
+      ],
+      [
+        "house1",
+        "off",
+        "road",
+        "off Chesterwood Gardens",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Off-road PP may locate target, first house, or second house; retained on house1 with alternatives."
+    ],
+    "alternatives": {
+      "4": [
+        {
+          "subject": "t",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "PP may locate target car."
+        },
+        {
+          "subject": "house2",
+          "predicate": "off",
+          "reference": [
+            "road"
+          ],
+          "reason": "PP may locate second house."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8846,
+    "e": {
+      "t": [
+        "This is a white car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "lawn": [
+        "a lawn",
+        "region"
+      ],
+      "path": [
+        "a footpath",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "car parked on Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "lawn",
+        "left_of",
+        "t",
+        "On its left, there is a lawn",
+        "U",
+        "medium"
+      ],
+      [
+        "lawn",
+        "divided_by",
+        "path",
+        "lawn parted in the middle by a footpath",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘its’ may refer to target car; left frame unspecified."
+    ],
+    "alternatives": {
+      "1": [
+        {
+          "subject": "lawn",
+          "predicate": "left_of",
+          "reference": [
+            "road"
+          ],
+          "reason": "Pronoun may refer to Chesterwood Gardens rather than car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8847,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "road": [
+        "Chesterwood Gardens",
+        "named_landmark"
+      ],
+      "drive": [
+        "the driveway behind it",
+        "region"
+      ],
+      "van": [
+        "a white van",
+        "object"
+      ],
+      "whitecar": [
+        "white car",
+        "object"
+      ],
+      "curb": [
+        "the curb",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "curb",
+        "on the curb of Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "curb",
+        "of",
+        "road",
+        "curb of Chesterwood Gardens",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "behind",
+        "t",
+        "driveway behind it",
+        "U",
+        "medium"
+      ],
+      [
+        "van",
+        "in",
+        "drive",
+        "a white van and white car in it",
+        "N",
+        "high"
+      ],
+      [
+        "whitecar",
+        "in",
+        "drive",
+        "white car in it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘behind it’ may refer to curbside car or driveway; recorded relative to target car."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "drive",
+          "predicate": "behind",
+          "reference": [
+            "curb"
+          ],
+          "reason": "‘it’ may refer to curb rather than target car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8848,
+    "e": {
+      "t": [
+        "a car",
+        "object"
+      ],
+      "road1": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "road2": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "house": [
+        "the first house in a set of four",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "drive",
+        "car in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "house",
+        "driveway of the first house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "first_of_set",
+        "house",
+        "first house in a set of four",
+        "N",
+        "medium"
+      ],
+      [
+        "house",
+        "right_of",
+        "road1",
+        "first house in a set of four to your right",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "silver",
+        "t",
+        "it's a silver car",
+        "N",
+        "high"
+      ],
+      [
+        "road1",
+        "turn_left_onto_from",
+        "road2",
+        "take a left onto Burton Wood Drive coming from Livingstone Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "A left turn provides observer travel context; ‘to your right’ remains uncalibrated. ‘observer’ is implicit and cannot be an entity without source span."
+    ],
+    "f": {
+      "3": {
+        "type": "observer",
+        "status": "unknown",
+        "travel_road": "road2",
+        "view_evidence": "coming from Livingstone Road"
+      }
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8849,
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "house": [
+        "the gray house on Burton Wood Drive",
+        "object"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Livingstone Road",
+        "region"
+      ],
+      "livingstone": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_against",
+        "house",
+        "parked against the gray house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "one_house_left_of",
+        "building",
+        "1 houses to the left of the large gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "livingstone",
+        "intersection with Livingstone Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left frame unspecified; ‘1 houses’ preserved as source ordinal wording."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8850,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "house": [
+        "the gray house on Burton Wood Drive",
+        "object"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "building": [
+        "the large gray building",
+        "object"
+      ],
+      "intersection": [
+        "the intersection with Livingstone Road",
+        "region"
+      ],
+      "livingstone": [
+        "Livingstone Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_against",
+        "house",
+        "parked against the gray house",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "on",
+        "road",
+        "house on Burton Wood Drive",
+        "N",
+        "high"
+      ],
+      [
+        "house",
+        "one_house_left_of",
+        "building",
+        "1 house to the left of the large gray building",
+        "U",
+        "medium"
+      ],
+      [
+        "building",
+        "at",
+        "intersection",
+        "building at the intersection",
+        "N",
+        "high"
+      ],
+      [
+        "intersection",
+        "with",
+        "livingstone",
+        "intersection with Livingstone Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "Left frame unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8851,
+    "e": {
+      "t": [
+        "A gray car",
+        "object"
+      ],
+      "drive": [
+        "the driveway",
+        "region"
+      ],
+      "home": [
+        "the first tall home",
+        "object"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "otherhomes": [
+        "The other three homes",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "drive",
+        "parked in the driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "of",
+        "home",
+        "driveway of the first tall home",
+        "N",
+        "high"
+      ],
+      [
+        "home",
+        "first_along",
+        "road",
+        "first tall home on Burton Wood Drive",
+        "R",
+        "medium"
+      ],
+      [
+        "otherhomes",
+        "connect_to",
+        "home",
+        "The other three homes connect to it",
+        "N",
+        "high"
+      ],
+      [
+        "otherhomes",
+        "look_alike",
+        "home",
+        "all look alike",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘connect to it’ may mean attached/adjacent; relation lexical meaning underspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8852,
+    "e": {
+      "t": [
+        "A gray car",
+        "object"
+      ],
+      "drive": [
+        "the drive",
+        "region"
+      ],
+      "buildings": [
+        "four identical buildings",
+        "group"
+      ],
+      "road": [
+        "Burtonwood Drive",
+        "named_landmark"
+      ],
+      "house": [
+        "the house",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "drive",
+        "parked in the drive",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "first_of",
+        "buildings",
+        "first of four identical buildings",
+        "N",
+        "medium"
+      ],
+      [
+        "buildings",
+        "on",
+        "road",
+        "buildings on Burtonwood Drive",
+        "N",
+        "medium"
+      ],
+      [
+        "t",
+        "behind",
+        "house",
+        "parked back beside the house",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "beside",
+        "house",
+        "parked back beside the house",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘back beside’ is ambiguous between rear-side location and merely ‘beside’; no heading inferred."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8853,
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "drive": [
+        "the second driveway",
+        "region"
+      ],
+      "road": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "buildings": [
+        "three building that are identical beside it",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "drive",
+        "in the second driveway",
+        "N",
+        "high"
+      ],
+      [
+        "drive",
+        "on",
+        "road",
+        "second driveway on Burton Wood Drive",
+        "N",
+        "medium"
+      ],
+      [
+        "buildings",
+        "identical",
+        "buildings",
+        "three building that are identical",
+        "N",
+        "high"
+      ],
+      [
+        "buildings",
+        "beside",
+        "t",
+        "identical beside it",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘with three building that are identical beside it’ may refer to buildings beside driveway or car; exact scope unclear."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8854,
+    "e": {
+      "t": [
+        "This is a black car",
+        "object"
+      ],
+      "road": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "other": [
+        "no other car",
+        "group"
+      ],
+      "junction": [
+        "where the road meets Ashcroft Grove",
+        "region"
+      ],
+      "ashcroft": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "black car parked on Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_other_nearby",
+        "other",
+        "There is no other car around it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "junction",
+        "near where the road meets Ashcroft Grove",
+        "U",
+        "high"
+      ],
+      [
+        "junction",
+        "meets",
+        "ashcroft",
+        "road meets Ashcroft Grove",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8855,
+    "e": {
+      "t": [
+        "One black car",
+        "object"
+      ],
+      "edge": [
+        "the edge of the map",
+        "region"
+      ],
+      "field": [
+        "a portion of a rectangular grass field",
+        "region"
+      ],
+      "road": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at",
+        "edge",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "field",
+        "next to a portion of a rectangular grass field",
+        "U",
+        "high"
+      ],
+      [
+        "field",
+        "on",
+        "road",
+        "grass field on Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "‘on Ashcroft Grove’ may modify car or field; field attachment chosen with car alternative."
+    ],
+    "alternatives": {
+      "2": [
+        {
+          "subject": "t",
+          "predicate": "on",
+          "reference": [
+            "road"
+          ],
+          "reason": "Road PP may attach directly to target car."
+        }
+      ]
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8856,
+    "e": {
+      "t": [
+        "a black car",
+        "object"
+      ],
+      "road": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "ashcroft": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "black car on Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_other_nearby",
+        "t",
+        "There is no other car nearby",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "facing",
+        "ashcroft",
+        "It is facing Ashcroft Grove",
+        "F",
+        "high"
+      ]
+    ],
+    "u": [
+      "‘no other car’ is a negative uniqueness/spatial assertion, no explicit reference object."
+    ],
+    "f": {
+      "2": {
+        "type": "intrinsic",
+        "status": "multiple",
+        "forward_to": [
+          "ashcroft"
+        ],
+        "view_evidence": "It is facing Ashcroft Grove"
+      }
+    },
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8857,
+    "e": {
+      "t": [
+        "A lone black car",
+        "object"
+      ],
+      "lot": [
+        "the parking lot",
+        "region"
+      ],
+      "road": [
+        "Graham warren way",
+        "named_landmark"
+      ],
+      "other": [
+        "no other car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "lot",
+        "in the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "lot",
+        "at",
+        "road",
+        "parking lot at Graham warren way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_other_nearby",
+        "other",
+        "It has no other car nearby",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8858,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "road": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "other": [
+        "no other cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "parked on Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "no_other_nearby",
+        "other",
+        "no other cars parked closeby",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8859,
+    "e": {
+      "t": [
+        "this black car",
+        "object"
+      ],
+      "road": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "junction": [
+        "the intersection of Ashcroft Grove",
+        "region"
+      ],
+      "ashcroft": [
+        "Ashcroft Grove",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "road",
+        "on Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "junction",
+        "near the intersection of Ashcroft Grove",
+        "U",
+        "high"
+      ],
+      [
+        "junction",
+        "of",
+        "ashcroft",
+        "intersection of Ashcroft Grove",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "Intersection is named only with Ashcroft Grove; the second road is not stated."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

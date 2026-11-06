@@ -18,6 +18,9 @@ def validate(path, expected_input=None):
     for record in records:
         index = record.get("i")
         try:
+            assert {"i", "e", "r", "u"} <= set(record), "required i/e/r/u fields missing"
+            assert isinstance(record["e"], dict) and isinstance(record["r"], list), "invalid graph containers"
+            assert isinstance(record["u"], list) and all(isinstance(x, str) for x in record["u"]), "uncertainties must be a string list"
             assert index not in indices, "duplicate instruction index"
             indices.add(index)
             text = source[index]["instruction"]
