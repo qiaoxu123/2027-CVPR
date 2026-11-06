@@ -1,0 +1,32 @@
+{
+  "protocol": "unified-v2-predicted-angle-only-v1",
+  "seed": 42,
+  "epochs": 3,
+  "batch_size": 8,
+  "lr": 0.0001,
+  "direction_weight": 0.5,
+  "kl_weight": 0.05,
+  "max_batches": 0,
+  "n": 21878,
+  "source_sha256": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+  "baseline_sha256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b",
+  "model_code_sha256": "7bc1e854d802d30c58ef2be380b3d143afe0d4e82b91c28d53051c0070fe1f95",
+  "train_code_sha256": "ca1afd3cd181df16b185f61556470df58ea384e159e8eff91644b59a46bd4ffa",
+  "public_catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "reference_binding": "original text to full public catalog; no target-indexed references",
+  "trainable_parameters": 231817,
+  "TF32": false,
+  "new_modality": [
+    "predicted_bearing_8_bins"
+  ],
+  "forbidden": [
+    "target_GT_at_runtime",
+    "dx_dy_modality",
+    "distance_bin",
+    "bearing_magnitude",
+    "target_position_feature"
+  ],
+  "geometry_and_full_BERT_frozen": true,
+  "GT_only_in_loss": true,
+  "oracle_only_in_offline_evaluation": true
+}

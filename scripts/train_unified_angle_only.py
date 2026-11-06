@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import random
+import time
 from pathlib import Path
 
 import numpy as np
@@ -41,7 +42,7 @@ class IndexedDataset(Dataset):
     def __getitem__(self,i):return dict(**self.base[i],source_index=int(i))
 
 
-def build_data(path,state,*,expected=21878):
+def build_data(path,state,*,expected=21878,public_objects):
     cfg=state["config"]["geometry_args"]
     ds=FullCandidateDataset(
         path,grid_size=int(cfg["grid_size"]),
@@ -55,6 +56,13 @@ def build_data(path,state,*,expected=21878):
         raise ValueError("Requires ALL expected Revised TRAIN queries")
     if {r.get("match_mode") for r in ds.records}!={"fuzzy"}:
         raise ValueError("Use matched complete TRAIN source")
+    from scripts.analyze_instruction_landmark_association import PublicNames
+    from graphnav.unified_text_ablation import public_text_record
+    catalog=json.loads(Path(public_objects).read_text());matcher=PublicNames(catalog)
+    for row in ds.records:
+        if any(k in row for k in ('teacher_future','uav_pose')):raise ValueError('Static TRAIN only')
+        public,_=public_text_record(row['map_name'],row['instruction'],row['world_bounds'],catalog,matcher,mode='full_text',max_landmarks=int(cfg['max_landmarks']))
+        row['landmarks']=public['landmarks']
     return ds
 
 
@@ -166,6 +174,7 @@ def main():
     p.add_argument("--train-jsonl",type=Path,required=True)
     p.add_argument("--existing-full-checkpoint",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
+    p.add_argument("--public-objects",type=Path,required=True)
     p.add_argument("--epochs",type=int,default=3)
     p.add_argument("--batch-size",type=int,default=8)
     p.add_argument("--lr",type=float,default=1e-4)
@@ -184,6 +193,8 @@ def main():
     a.output.mkdir(parents=True,exist_ok=True)
     random.seed(42);np.random.seed(42);torch.manual_seed(42)
     torch.cuda.manual_seed_all(42);torch.set_num_threads(4)
+    torch.backends.cuda.matmul.allow_tf32=False
+    started=time.perf_counter();torch.cuda.reset_peak_memory_stats()
     device=torch.device("cuda")
     source=torch.load(a.existing_full_checkpoint,map_location="cpu",weights_only=True)
     if (source.get("format")!=FORMAT or source.get("smoke") or
@@ -192,7 +203,7 @@ def main():
         raise ValueError("Use completed previously trained full-text Unified V2")
     if source["source_sha256"]["train_jsonl"]!=file_sha256(a.train_jsonl):
         raise ValueError("Full-text baseline checkpoint trained on a different TRAIN inventory")
-    ds=build_data(a.train_jsonl,source)
+    ds=build_data(a.train_jsonl,source,public_objects=a.public_objects)
     core=load_full_relation_model(source,device).eval().requires_grad_(False)
     head=AngleOnlyBelief(bins=8).to(device)
     opt=torch.optim.AdamW(head.parameters(),lr=a.lr,weight_decay=.01)
@@ -201,6 +212,7 @@ def main():
                           max_length=int(cfg["max_text_length"]))
     cache=a.output/"bert_cache.pt"
     if a.resume and cache.exists():bert.load_cache(cache)
+    elif (a.existing_full_checkpoint.parent/"bert_cache.pt").exists():bert.load_cache(a.existing_full_checkpoint.parent/"bert_cache.pt")
     manifest=dict(
         protocol=MODEL_FORMAT,seed=42,epochs=a.epochs,batch_size=a.batch_size,
         lr=a.lr,direction_weight=a.direction_weight,kl_weight=a.kl_weight,
@@ -209,6 +221,10 @@ def main():
         baseline_sha256=file_sha256(a.existing_full_checkpoint),
         model_code_sha256=file_sha256("graphnav/unified_angle_only_belief.py"),
         train_code_sha256=file_sha256(__file__),
+        public_catalog_sha256=file_sha256(a.public_objects),
+        reference_binding="original text to full public catalog; no target-indexed references",
+        trainable_parameters=sum(p.numel() for p in head.parameters()),
+        TF32=False,
         new_modality=["predicted_bearing_8_bins"],
         forbidden=["target_GT_at_runtime","dx_dy_modality","distance_bin",
                    "bearing_magnitude","target_position_feature"],
@@ -232,6 +248,7 @@ def main():
         head.train();seen=0;sampled_angles=0;total_loss=0.
         for j,batch in enumerate(loader):
             if a.max_batches and j>=a.max_batches:break
+            torch.cuda.synchronize();step_start=time.perf_counter()
             x,out=forward_frozen(core,head,bert,batch,ds.records,device)
             static=dict(nodes=batch["nodes"].to(device),
                         named_mask=x["landmark_valid"])
@@ -248,8 +265,14 @@ def main():
                 raise FloatingPointError("Nonfinite angular modality objective")
             opt.zero_grad(set_to_none=True)
             loss.backward()
+            if any(p.grad is not None for p in core.parameters()):raise RuntimeError('Frozen core received gradients')
+            if j<3:
+                grad=sum(float(p.grad.abs().sum()) for p in head.parameters() if p.grad is not None)
+                if not np.isfinite(grad) or grad<=0:raise RuntimeError('Missing angular-head gradients')
+                atomic_json(dict(head_gradient_L1=grad,fusion_gradient=float(head.fusion_gain.grad),core_has_grad=False),a.output/'gradient_audit.json')
             torch.nn.utils.clip_grad_norm_(head.parameters(),1.,error_if_nonfinite=True)
-            opt.step()
+            opt.step();torch.cuda.synchronize()
+            with (a.output/'steps.jsonl').open('a') as f:f.write(json.dumps(dict(epoch=epoch+1,batch=j,loss=float(loss.detach()),step_ms=(time.perf_counter()-step_start)*1000,peak_gpu_GiB=torch.cuda.max_memory_allocated()/2**30))+'\n')
             seen+=len(batch["text"]);sampled_angles+=int(valid.sum())
             total_loss+=float(loss.detach())*len(batch["text"])
             if j%200==0:
@@ -263,7 +286,8 @@ def main():
         history.append(dict(epoch=epoch+1,fit_seen=seen,
                             supervised_landmark_angles=sampled_angles,
                             loss=total_loss/max(1,seen),
-                            learned_gain=float(head.fusion_gain.detach())))
+                            learned_gain=float(head.fusion_gain.detach()),
+                            elapsed_seconds=time.perf_counter()-started))
         atomic_save(dict(format=MODEL_FORMAT,head=head.state_dict(),
                          epoch=epoch+1,optimizer=opt.state_dict(),
                          history=history,manifest=manifest,
@@ -274,7 +298,8 @@ def main():
         bert.save_cache(cache)
         print(json.dumps(history[-1]),flush=True)
     if not a.max_batches:
-        report=dict(manifest=manifest,completed_epochs=a.epochs,
+        assert all(torch.equal(v.cpu(),source['model'][k]) for k,v in core.state_dict().items()),'Frozen Unified weights changed'
+        report=dict(manifest=manifest,completed_epochs=a.epochs,frozen_core_bitwise_unchanged=True,peak_gpu_GiB=torch.cuda.max_memory_allocated()/2**30,
                     TRAIN_Birmingham_diagnostic=evaluate(core,head,bert,ds,device,
                                                           a.batch_size),
                     warning="Birmingham is part of TRAIN; Oracle is privileged; only predicted-bearing closedloop is fair.")

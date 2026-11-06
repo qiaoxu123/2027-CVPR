@@ -21,7 +21,7 @@ from .checkpointing import file_sha256
 from .unified_angle_only_belief import (
     AngleOnlyBelief,public_candidate_bearings,named_anchor_mask,
 )
-from .unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
+from .unified_text_ablation_runtime import UnifiedTextAblationPolicy
 
 
 def revised_field_with_angles(field,grid_xy,logits):
@@ -39,9 +39,9 @@ def revised_field_with_angles(field,grid_xy,logits):
                    candidate_xy=newxy,candidate_context=context)
 
 
-class UnifiedAngleOnlyPolicy(UnifiedPGVBFullRelationPolicy):
+class UnifiedAngleOnlyPolicy(UnifiedTextAblationPolicy):
     def __init__(self,stage1,original_v2,trained,directory,*,
-                 angle_head_checkpoint,device="cuda",
+                 angle_head_checkpoint,public_objects,device="cuda",
                  relation_control="full",visual_control="off",
                  geometry_source="trained"):
         if (relation_control!="full" or visual_control!="off" or
@@ -50,13 +50,14 @@ class UnifiedAngleOnlyPolicy(UnifiedPGVBFullRelationPolicy):
         super().__init__(stage1,original_v2,trained,directory,
                          device=device,relation_control=relation_control,
                          visual_control=visual_control,
-                         geometry_source=geometry_source)
+                         geometry_source=geometry_source,instruction_mode="full_text",public_objects=public_objects)
         state=torch.load(angle_head_checkpoint,map_location="cpu",weights_only=True)
         if (state.get("format")!="unified-v2-predicted-angle-only-v1" or
                 state.get("epoch")!=state.get("manifest",{}).get("epochs") or
                 state["manifest"].get("max_batches")!=0 or
                 state["manifest"].get("baseline_sha256")!=file_sha256(trained)):
             raise ValueError("Require completed predicted-bearing checkpoint from original Unified V2")
+        if state['manifest'].get('public_catalog_sha256')!=file_sha256(public_objects):raise ValueError('Public binding catalog changed')
         self.angle_head=AngleOnlyBelief(bins=8).to(self.device).eval().requires_grad_(False)
         self.angle_head.load_state_dict(state["head"],strict=True)
         self.angle_checkpoint=Path(angle_head_checkpoint)
@@ -101,6 +102,7 @@ class UnifiedAngleOnlyPolicy(UnifiedPGVBFullRelationPolicy):
             )
             refined=revised_field_with_angles(
                 field,self.inputs["grid_xy"],augmented["logits"])
+        angular_field=refined
         refined,stable=self.stable_goal.select(
             refined,self.inputs["grid_xy"],tracking=None,visual_active=False)
         prediction=A3TrajectoryPolicy.predict_field(self,state,refined)
@@ -108,6 +110,10 @@ class UnifiedAngleOnlyPolicy(UnifiedPGVBFullRelationPolicy):
             modality="predicted_angular_direction_only",
             angle_GT_used_at_inference=False,
             angle_bins=8,
+            angle_probabilities=augmented['angle_probs'][0].cpu().tolist(),
+            named_anchor_mask=self.cached_anchor_mask[0].cpu().tolist(),
+            rgb_active=False,
+            relation_delta_max=float(baseline['relation_delta'].abs().max()),
             angle_supported=bool(augmented["supported"][0]),
             angle_delta_abs_max=float(augmented["delta"].abs().max()),
             angle_fusion_gain=float(self.angle_head.fusion_gain),
@@ -118,5 +124,5 @@ class UnifiedAngleOnlyPolicy(UnifiedPGVBFullRelationPolicy):
             decision_seconds=time.perf_counter()-tic,
         )
         if getattr(self,"full_relation_audit_callback",None) is not None:
-            self.full_relation_audit_callback(state,baseline,refined)
+            self.full_relation_audit_callback(state,{**baseline,"field":angular_field,"angle_probs":augmented["angle_probs"],"angle_delta":augmented["delta"]},refined)
         return prediction

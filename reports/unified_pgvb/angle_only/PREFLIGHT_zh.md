@@ -1,0 +1,11 @@
+# PR25 方位角实验预检
+
+当前代码来自PR25 bc94e5d，不修改main或原Checkpoint。CPU392项通过，12次真实GPU更新Smoke通过，新增头梯度非零、原模型无梯度。正在按原要求训练全21878条、seed42、3轮。
+
+修复：原运行时按目标ID索引processed_descriptions提供参考名称；本轮改为原指令+完整公开地图盲绑定，TRAIN/闭环同一public_text_record，原标注参考列表不进入输入。保留原全文Checkpoint，全部目标监督只在forward之后使用。基线为同Checkpoint公开绑定的既有全2470条结果45.75%，逐任务核对后才能复用。
+
+只训练8方向预测及融合232k参数，新增头不输入dx/dy、距离或GT目标位置。候选方位角从公开Polygon和固定世界网格计算；GT8方向仅TRAIN损失与离线Oracle。map+X为0度，不冒充已核验地理北。
+
+修复public-text Policy覆盖角度Policy、角度后Belief保存错误，最终候选索引/坐标/128维Context同步。保留原Stop0.3、1mm到达守卫、Stable Goal、动作和Horizon。Oracle无闭环开关。
+
+预测方向和Oracle的真实指标尚待训练结束；不以代码通过代替性能结论。大型Checkpoint/逐步日志保留服务器unified_angle_only_s42_20261106目录。

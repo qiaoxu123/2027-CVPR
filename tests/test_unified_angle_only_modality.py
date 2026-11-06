@@ -120,3 +120,56 @@ def test_angular_runtime_reranks_xy_and_context_without_changing_stop_head():
     torch.testing.assert_close(newer.candidate_xy,grid[:,[3,1]])
     torch.testing.assert_close(newer.candidate_context,dense[:,[3,1]])
     assert old.candidate_ids.tolist()==[[0,1]]
+
+
+def test_public_binding_training_drops_target_indexed_landmarks(tmp_path):
+    import json
+    from types import SimpleNamespace
+    from scripts.train_unified_angle_only import build_data
+    obj={'birmingham_block_1':{'p':dict(name='One Stop',object_type='Building',contour=[[10,10],[20,10],[20,20]])}}
+    row=dict(map_name='birmingham_block_1',instruction='A white building north of One Stop',dataset_version='revised',match_mode='fuzzy',world_bounds=[0,0,100,100],physical_map_sizes=[100,100],target_xy=[.7,.8],landmarks=[dict(id='secret',name='Private Target Hint',object_type='Building',contour=[[.7,.7],[.8,.7],[.8,.8]])])
+    src=tmp_path/'train.jsonl';src.write_text(json.dumps(row)+'\n')
+    catalog=tmp_path/'objects.json';catalog.write_text(json.dumps(obj))
+    state={'config':{'geometry_args':dict(grid_size=28,max_landmarks=16,max_roads=12,max_relations=8,prior_sigma_m=30.,rule_sigma_m=30.)}}
+    data=build_data(src,state,expected=1,public_objects=catalog)
+    assert data.records[0]['landmarks'][0]['id']=='p'
+    assert data.records[0]['target_xy']==[.7,.8]
+    assert 'Private Target Hint' not in str(data[0]['node_names'])
+
+
+def test_uniform_angles_never_inject_spatial_preference():
+    x=batch();head=AngleOnlyBelief()
+    with torch.no_grad():head.fusion_gain.fill_(100.)
+    out=head.apply_angle(base_logits=x['base_logits'],candidate_bearings=x['candidate_bearings'],landmark_valid=x['landmark_valid'],bearing_probabilities=torch.full((2,3,8),1/8))
+    torch.testing.assert_close(out['logits'],x['base_logits'],atol=5e-6,rtol=1e-6)
+
+
+def test_rectangular_map_labels_use_physical_map_angle():
+    label,valid=bearing_supervision(torch.tensor([[.6,.75]]),torch.tensor([[[.5,.5]]]),torch.tensor([[400.,100.]]),torch.tensor([[True]]))
+    assert valid.item() and label.item()==1  # atan2(25m,40m), not atan2(.25,.1).
+
+
+def test_frozen_forward_ignores_gt_labels_and_private_record_fields():
+    from types import SimpleNamespace
+    from scripts.train_unified_angle_only import forward_frozen
+    class Bert:
+        def encode_tokens(self,text):return torch.ones(len(text),3,768),torch.ones(len(text),3,dtype=torch.bool)
+        def encode(self,names):return torch.ones(len(names),768)
+    class Core:
+        def reset_episode(self):pass
+        def forward_full_relation(self,**kw):
+            assert 'target_xy' not in kw and 'target_xy' not in kw['static_inputs']
+            return {'relation_field':SimpleNamespace(belief_logits=torch.zeros(1,4))}
+    class Record(dict):
+        def __getitem__(self,key):
+            assert key=='landmarks','GT/private record read during forward'
+            return super().__getitem__(key)
+    b={k:torch.zeros(1) for k in ('nodes','node_types','node_valid','adjacency','edges','prior','prior_buildings','rules','relation_fields','grid_xy')}
+    b.update(entity_valid=torch.tensor([[True,True]]),pair_geometry=torch.randn(1,4,2,10),text=['white building near Church'],node_names=[['Church','road']],source_index=torch.tensor([0]),target_xy=torch.tensor([[.1,.2]]))
+    h=AngleOnlyBelief();h.fusion_gain.data.fill_(2.)
+    x,a=forward_frozen(Core(),h,Bert(),b,[Record(landmarks=[{}])],'cpu')
+    b['target_xy']=torch.tensor([[.9,.8]])
+    xx,bb=forward_frozen(Core(),h,Bert(),b,[Record(landmarks=[{}])],'cpu')
+    assert set(x)=={'base_logits','candidate_bearings','landmark_valid','tokens','token_mask','node_emb'}
+    torch.testing.assert_close(a['logits'],bb['logits'])
+    torch.testing.assert_close(a['angle_probs'],bb['angle_probs'])
