@@ -1,23 +1,23 @@
 {
-  "train_finished": false,
+  "train_finished": true,
   "completed_epochs": 18,
   "last_logged_update": {
-    "epoch": 18,
-    "update": 17000,
-    "seen": 17000,
-    "mean_loss": 11.57908157974131,
-    "grad_norm": 191.42723083496094,
+    "epoch": 19,
+    "update": 10000,
+    "seen": 10000,
+    "mean_loss": 11.495664827919006,
+    "grad_norm": 29.897157669067383,
     "components_mean": {
-      "geo_ce": 3.6044986714264926,
-      "geo_polygon": 1.1731073155209621,
-      "fused_ce": 7.079014739064609,
-      "fused_polygon": 1.985929381584615,
-      "text_visual": 0.7098637965566972,
-      "gt_image_visual": 0.11245801150942605,
-      "visual_eligible": 0.7934117647058824,
-      "target_polygon_valid": 0.9992352941176471
+      "geo_ce": 3.5879249185800552,
+      "geo_polygon": 1.1592739352765378,
+      "fused_ce": 7.036883499240875,
+      "fused_polygon": 1.9536094324006998,
+      "text_visual": 0.6412974396109581,
+      "gt_image_visual": 0.11169890688154846,
+      "visual_eligible": 0.7965,
+      "target_polygon_valid": 0.9992
     },
-    "elapsed_total_s": 13916.154807243962
+    "elapsed_total_s": 14383.339832089841
   },
   "split": {
     "total": 21878,
@@ -30,5 +30,389 @@
     "scope": "All Revised TRAIN input rows; deterministic physical-target split for this V3 stage, seed42; initial V2 has used TRAIN"
   },
   "initial_evaluation": null,
-  "navigation": {}
+  "navigation": {},
+  "final_training_manifest": {
+    "format": "unified-pgvb-v3-decoupled-rgbd-v1",
+    "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "cache_manifest_sha256": "f2596917bb77983db6382f56a8bd10bf70ed10dbe7b0cc5f3c2b592c69f01992",
+    "train_split": "Revised TRAIN physical-ID fit/dev",
+    "seed": 42,
+    "fit": 17473,
+    "dev": 4405,
+    "epochs": 18,
+    "configured_max_epochs": 100,
+    "losses": [
+      {
+        "epoch": 1,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.8201125927415718,
+          "geo_polygon": 1.524077114554201,
+          "fused_ce": 8.061107490861353,
+          "fused_polygon": 2.7549898129329713,
+          "text_visual": 2.1935968938433557,
+          "gt_image_visual": 0.19228029067238644,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 13.35195839715483,
+        "elapsed_s": 756.0513006709516,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 2,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.808895728164155,
+          "geo_polygon": 1.4564438184243516,
+          "fused_ce": 7.86674998472833,
+          "fused_polygon": 2.5900963074365113,
+          "text_visual": 1.9412164136717072,
+          "gt_image_visual": 0.16551416433635746,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 13.035804675234372,
+        "elapsed_s": 754.3645807239227,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 3,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.7908747904166833,
+          "geo_polygon": 1.4195258289147314,
+          "fused_ce": 7.75912957460819,
+          "fused_polygon": 2.505776525041564,
+          "text_visual": 1.7926117631720875,
+          "gt_image_visual": 0.15247696940108219,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.849371417156991,
+        "elapsed_s": 768.5175622692332,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 4,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.7745377339816275,
+          "geo_polygon": 1.3925995233471018,
+          "fused_ce": 7.683681688809213,
+          "fused_polygon": 2.4428622886614297,
+          "text_visual": 1.6660986511284175,
+          "gt_image_visual": 0.14505595769075327,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.70968581506767,
+        "elapsed_s": 771.5885781040415,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 5,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.760709274335711,
+          "geo_polygon": 1.3682409091010777,
+          "fused_ce": 7.61683301896186,
+          "fused_polygon": 2.392655519663034,
+          "text_visual": 1.5530416219718726,
+          "gt_image_visual": 0.1393038287186991,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.587823448324151,
+        "elapsed_s": 771.576028643176,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 6,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.7443243173457774,
+          "geo_polygon": 1.3474885420770009,
+          "fused_ce": 7.560646016193993,
+          "fused_polygon": 2.3509623955879193,
+          "text_visual": 1.4508451315204067,
+          "gt_image_visual": 0.13500970670348325,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.479379601697715,
+        "elapsed_s": 762.2608254402876,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 7,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.7349927659464,
+          "geo_polygon": 1.330174267389222,
+          "fused_ce": 7.503537383914874,
+          "fused_polygon": 2.307809142799047,
+          "text_visual": 1.3764974775403296,
+          "gt_image_visual": 0.1314710100804459,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.383110998996727,
+        "elapsed_s": 757.3823233712465,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 8,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.7159223478128194,
+          "geo_polygon": 1.3100130164764383,
+          "fused_ce": 7.456304086787681,
+          "fused_polygon": 2.269728104730769,
+          "text_visual": 1.2942948412596378,
+          "gt_image_visual": 0.1292847100843742,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.28637697200964,
+        "elapsed_s": 766.426101104822,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 9,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.7059314473973095,
+          "geo_polygon": 1.2925580670084238,
+          "fused_ce": 7.4062161626822895,
+          "fused_polygon": 2.2316657810140557,
+          "text_visual": 1.2100481769021099,
+          "gt_image_visual": 0.1270169610320869,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.195988700282475,
+        "elapsed_s": 776.388836465776,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 10,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.690874899497311,
+          "geo_polygon": 1.2779884050366022,
+          "fused_ce": 7.360641746278661,
+          "fused_polygon": 2.197333732124772,
+          "text_visual": 1.1550848348135394,
+          "gt_image_visual": 0.12503180598873243,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.112471083883005,
+        "elapsed_s": 775.4953418741934,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 11,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.6807298454853283,
+          "geo_polygon": 1.2639065951181745,
+          "fused_ce": 7.322264252643392,
+          "fused_polygon": 2.1672958915079694,
+          "text_visual": 1.0848342105477633,
+          "gt_image_visual": 0.12381479570614984,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 12.039329184191205,
+        "elapsed_s": 765.3871996868402,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 12,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.668049121594815,
+          "geo_polygon": 1.2497894325448358,
+          "fused_ce": 7.280363176790433,
+          "fused_polygon": 2.1368259460916157,
+          "text_visual": 1.0465745005959373,
+          "gt_image_visual": 0.12202776786694229,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.966297124851646,
+        "elapsed_s": 761.6986402645707,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 13,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.6577163493633953,
+          "geo_polygon": 1.235481223545853,
+          "fused_ce": 7.24188370500795,
+          "fused_polygon": 2.10732330892222,
+          "text_visual": 0.9834170707722723,
+          "gt_image_visual": 0.12058580766204206,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.894327700134681,
+        "elapsed_s": 765.7515657581389,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 14,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.645629537546975,
+          "geo_polygon": 1.2228528404002377,
+          "fused_ce": 7.2080723620277025,
+          "fused_polygon": 2.0832425266223353,
+          "text_visual": 0.9251596111400654,
+          "gt_image_visual": 0.11877467076282851,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.827869959581099,
+        "elapsed_s": 772.6211797399446,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 15,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.6367920315450544,
+          "geo_polygon": 1.212418576774425,
+          "fused_ce": 7.177895629002767,
+          "fused_polygon": 2.059889054723883,
+          "text_visual": 0.8523541064729867,
+          "gt_image_visual": 0.11693269249899503,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.766001010837575,
+        "elapsed_s": 778.042976051569,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 16,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.6246875443401523,
+          "geo_polygon": 1.1981033117856998,
+          "fused_ce": 7.146948813546102,
+          "fused_polygon": 2.0349183609625845,
+          "text_visual": 0.8109047929470918,
+          "gt_image_visual": 0.11535310949632663,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.705238185913789,
+        "elapsed_s": 775.955231432803,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 17,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.6147435255344846,
+          "geo_polygon": 1.186086709092713,
+          "fused_ce": 7.109759847402695,
+          "fused_polygon": 2.00936950633599,
+          "text_visual": 0.7569259246240421,
+          "gt_image_visual": 0.11418155501872061,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.638284592979701,
+        "elapsed_s": 766.0323093831539,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      },
+      {
+        "epoch": 18,
+        "fit": 17473,
+        "components_mean": {
+          "geo_ce": 3.6066473967930914,
+          "geo_polygon": 1.1746576331326166,
+          "fused_ce": 7.079859811576197,
+          "fused_polygon": 1.9876939419550477,
+          "text_visual": 0.7114648183796324,
+          "gt_image_visual": 0.1126823156368845,
+          "visual_eligible": 0.7940822984032507,
+          "target_polygon_valid": 0.9992559949636582
+        },
+        "component_samples": 17473,
+        "mean_train_loss": 11.583191645245707,
+        "elapsed_s": 772.7306680679321,
+        "updates": 17473,
+        "peak_cuda_GiB": 0.1435990333557129
+      }
+    ],
+    "stop_reason": "time_budget",
+    "training_wall_s": 14400.083413816988,
+    "batch_size": 1,
+    "lr_geometry": 1e-05,
+    "lr_visual": 0.0001,
+    "training_code_sha256": {
+      "/home/20261024_1/Workspace/2027-CVPR-v3/scripts/unified_pgvb_v3_pilot.py": "ed3fcfe9eb70c6b5f4b0848f26e875f8bfe86d53fffa64f46db549868b672547",
+      "/home/20261024_1/Workspace/2027-CVPR-v3/graphnav/unified_pgvb_v3.py": "9438ad67ec2366d36456bc71bafcf5461c3a9b301419fb5f029a91f950a157b4",
+      "/home/20261024_1/Workspace/2027-CVPR-v3/graphnav/full_localization.py": "273a07f7b71d73f06de4b342236b8b558ec2e3cb3556a41af94e56cc6b0a3b1b"
+    },
+    "trainable_geometry_parameters": 595341,
+    "trainable_visual_parameters": 593026,
+    "max_training_hours": 4.0,
+    "plateau_relative": 0.005,
+    "plateau_patience": 2,
+    "min_epochs": 3,
+    "offline_metrics": null,
+    "evaluation_skipped": true,
+    "initialize_v3_sha256": "ad70ba1ab4d9e44d717f0d9ee7a187327856aa6cf757222ca5b6e043e9f28dca",
+    "next_training_position": {
+      "epoch": 18,
+      "next_offset": 10376
+    },
+    "visual_encoder_frozen": true,
+    "visual_backbone": "google/siglip2-large-patch16-384",
+    "policy_controller_used": false,
+    "val_test_access": false,
+    "closed_loop_SR_not_measured": true
+  },
+  "checkpoint_sha256": "ebacd5c6e35b736c949fcec72fbd4737817792a6669e7fa47784e147e6af060b"
 }
