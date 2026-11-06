@@ -1,0 +1,166 @@
+{
+  "model": "en_core_web_sm==3.7.1",
+  "source": "https://github.com/explosion/spacy-models/releases/tag/en_core_web_sm-3.7.1",
+  "trained_here": false,
+  "input": "landmark-related instruction text only",
+  "artifacts": [
+    {
+      "relative_path": "LICENSE",
+      "sha256": "3933c176979b68bc6d0bcc902c7d6c130f1d127f476f17ba5cdba8d99cfd0012"
+    },
+    {
+      "relative_path": "LICENSES_SOURCES",
+      "sha256": "20d9dfacd215112251f15341edd1a47b1f98bf393a212f10f194ffdc7ee98a90"
+    },
+    {
+      "relative_path": "README.md",
+      "sha256": "1a2282d8c0fc379ba37fc6e73492c6056f31a0d0a8667767aeed87768aea0ddf"
+    },
+    {
+      "relative_path": "accuracy.json",
+      "sha256": "6cee79068ec6655cf9c68e2cd8aa1d3f5648d382d16aa43f6b29b5f82ba612c4"
+    },
+    {
+      "relative_path": "attribute_ruler/patterns",
+      "sha256": "f8b97f7ebef9b8536bba5f0fc1e73af6183563e96e2325bcbb021b8c6dbc6683"
+    },
+    {
+      "relative_path": "config.cfg",
+      "sha256": "65c545ca2da5bd4b87b22d4917318605360b37dee6ed6b18516a036f87319f79"
+    },
+    {
+      "relative_path": "lemmatizer/lookups/lookups.bin",
+      "sha256": "eb64f40c0f8396d1762730c0ddf4dad2a52d138f5a389f71a1a1d088173b7737"
+    },
+    {
+      "relative_path": "meta.json",
+      "sha256": "5fc475fbe5bb0317249fd7e51c22d53052345bb23f13eaf149ff590223964d1c"
+    },
+    {
+      "relative_path": "ner/cfg",
+      "sha256": "a7172edadafba9f472e9ac0f2660eec04b6405e471be9e20267b79c67288d22d"
+    },
+    {
+      "relative_path": "ner/model",
+      "sha256": "6f47ca062eb419c8ffb7d3023e6fbc4b2eb21dab14c5d49aa5e5586228b87405"
+    },
+    {
+      "relative_path": "ner/moves",
+      "sha256": "d82b13473ebd33e0396004dd22f00c71fe3c1251742bf1f7c4554f23fd3b0af4"
+    },
+    {
+      "relative_path": "parser/cfg",
+      "sha256": "e2a240ef01f95e58f5dd4c9d6e90d61f597b8d998966570d3009dd81e8879780"
+    },
+    {
+      "relative_path": "parser/model",
+      "sha256": "a1836fbc02b3924b2fd5f65325c58ae852ff112db1090ca724e5a801e68b85fd"
+    },
+    {
+      "relative_path": "parser/moves",
+      "sha256": "ec41318c32eb7f9e4d8f050b2e8466ee67954d2d3455c1aec73abf46c82dd67f"
+    },
+    {
+      "relative_path": "senter/cfg",
+      "sha256": "2a4db4a729b6469da1f87d71cc7cd3ed2a73360cc85326821e850836c4671103"
+    },
+    {
+      "relative_path": "senter/model",
+      "sha256": "e62c2504dcdc66144b30c048100af05f12207f933f6d669982b947ae71ffdeef"
+    },
+    {
+      "relative_path": "tagger/cfg",
+      "sha256": "d484c3d9391f37bf9c727aa2eb4c477a24cb103020f95e52dc37842818b50118"
+    },
+    {
+      "relative_path": "tagger/model",
+      "sha256": "fb00ef592a2a464d95dd889ce424952ae7fd64e095153054c310345198cc0fc4"
+    },
+    {
+      "relative_path": "tok2vec/cfg",
+      "sha256": "f8a5a26e3056eb6fb06deeb3dbccfd88ae74900200c98c70b5966bbb7ec9d4de"
+    },
+    {
+      "relative_path": "tok2vec/model",
+      "sha256": "42d8414521eaf75f817bd1b351b26039a22a912bb2617f95ead305420f2ebffd"
+    },
+    {
+      "relative_path": "tokenizer",
+      "sha256": "b014e8bba4958b120af2d0c1c63eabb7c00379f2bacaf10df7c5325efd2ea467"
+    },
+    {
+      "relative_path": "vocab/key2row",
+      "sha256": "76be8b528d0075f7aae98d6fa57a6d3c83ae480a8469e668d7b0af968995ac71"
+    },
+    {
+      "relative_path": "vocab/lookups.bin",
+      "sha256": "fce9c883c56165f29573cc938c2a1c9d417ac61bd8f56b671dd5f7996de70682"
+    },
+    {
+      "relative_path": "vocab/strings.json",
+      "sha256": "b1966d1f07a05b68576df07f43f40203b4e11124ad82cc839e8312ad8d7fdae7"
+    },
+    {
+      "relative_path": "vocab/vectors",
+      "sha256": "14772b683e726436d5948ad3fff2b43d036ef2ebbe3458aafed6004e05a40706"
+    },
+    {
+      "relative_path": "vocab/vectors.cfg",
+      "sha256": "ff4359091952c8cd16f1f0482f5770fb82d1707368d5cca3c46aa501f552e3c5"
+    }
+  ],
+  "packages": {
+    "spacy": "3.7.5",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "shapely": "2.1.2",
+    "rasterio": "1.4.4",
+    "matplotlib": "3.10.9"
+  },
+  "code_files": [
+    {
+      "file": "analyze_frames.py",
+      "sha256": "49d1c34bb3eba69dae7b7598926ea97361afbec2fda354d51e4fe42db12fcc1b"
+    },
+    {
+      "file": "anchor_sensitivity.py",
+      "sha256": "c4e0f115d3f4eb98b15bf77b864153314d10858815b0affdbeef8961c122511a"
+    },
+    {
+      "file": "case_audit.py",
+      "sha256": "2e1672bcc7cb1fd43aac7e6f2f4e51ed3a038cf8bf7fe01a93a0b3d55ead35af"
+    },
+    {
+      "file": "extract.py",
+      "sha256": "09838e8dd76ba3a829e9c6c67582c2c43212af01d91abe9d9da031e48270bc26"
+    },
+    {
+      "file": "geometry_frames.py",
+      "sha256": "45247dc7e9114435cd24f38ebeeca5202c3a95e002b8c82989d0796117918ecb"
+    },
+    {
+      "file": "render.py",
+      "sha256": "3359913a01279c5f8c9e3018569bc6786a70cbd1d5c1bc16e250f42c3c862d2c"
+    },
+    {
+      "file": "report.py",
+      "sha256": "07cacd4b8b7e60b5749bdbc22902097fbad0b80881ceee1681ef1e656e34a213"
+    },
+    {
+      "file": "test_geometry_frames.py",
+      "sha256": "ea2a4e4a651f9b65ff3f89d80cddf364bfebcbcae8315b9e001e0a4a6c42da95"
+    },
+    {
+      "file": "test_text_relations.py",
+      "sha256": "8e4da9daadffef28d684a7ff3dace753f968c0cceded8e85fda0a3de30a25bd1"
+    },
+    {
+      "file": "text_relations.py",
+      "sha256": "03b4eb9babab1fb374502f8242e5ec9025bc45675f8a0cdd2a7964240e9e13f6"
+    },
+    {
+      "file": "verify.py",
+      "sha256": "61b11dd3f6240e9e73090c511ae6999381fb0be995c09453f0a0d56ee46d8e25"
+    }
+  ]
+}

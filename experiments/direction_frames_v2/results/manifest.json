@@ -1,0 +1,55 @@
+{
+  "base_commit": "e6ddb0986b03ac5402894e0f71ffb1f388e513d2",
+  "input_files": [
+    {
+      "path": "/home/20261024_1/Workspace/DATA/sbfnav-data/original_citynav/citynav_train_seen.json",
+      "sha256": "bfaabed32d56aad723dfeedf9a95a0db47b35d64264b4432c5cc37b8ad1cb245"
+    },
+    {
+      "path": "/home/20261024_1/Workspace/DATA/sbfnav-data/cityrefer_original/objects.json",
+      "sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74"
+    }
+  ],
+  "episodes": 22002,
+  "train_maps": [
+    "birmingham_block_1",
+    "birmingham_block_10",
+    "birmingham_block_11",
+    "birmingham_block_12",
+    "birmingham_block_13",
+    "birmingham_block_3",
+    "birmingham_block_4",
+    "birmingham_block_7",
+    "birmingham_block_9",
+    "cambridge_block_12",
+    "cambridge_block_13",
+    "cambridge_block_17",
+    "cambridge_block_18",
+    "cambridge_block_19",
+    "cambridge_block_20",
+    "cambridge_block_21",
+    "cambridge_block_23",
+    "cambridge_block_25",
+    "cambridge_block_28",
+    "cambridge_block_33",
+    "cambridge_block_4",
+    "cambridge_block_6",
+    "cambridge_block_7",
+    "cambridge_block_9"
+  ],
+  "landmark_relation_occurrences": 4659,
+  "out_of_scope_word_occurrences_not_analyzed": 23418,
+  "population": "direction relation whose actual reference NP is a named landmark; relation subject need not be navigation target",
+  "unique_landmark_related_instruction_texts": 4000,
+  "parser": {
+    "spacy_version": "3.7.5",
+    "model": "en_core_web_sm",
+    "model_version": "3.7.1",
+    "weights_trained_here": false,
+    "model_inputs": "instruction text only"
+  },
+  "text_binding_sha256": "284cb108a25680beb055f49335cf772a70ae58bd6ede2d6ca33566057e242971",
+  "confidence": "rule scores, not calibrated probabilities; high>=.95; medium>=.8; no GT/frame fit in score",
+  "same_name_roads": "preserve all segments as a composite entity; medium confidence; never choose segment by target GT",
+  "geography": "no new independent geographic calibration; XY/image affine only"
+}

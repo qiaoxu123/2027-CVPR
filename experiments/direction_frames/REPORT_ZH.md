@@ -1,3 +1,5 @@
+> **续验修正（2026-11-06）：** 本页为v1历史结果。四组正反描述已重新核查，不能确认共享描述参考系，故不应直接认定为真实标注矛盾或据此排除所有统一局部约定。最新实验只研究具名地标参照关系，见 [v2中文报告](../direction_frames_v2/REPORT_ZH.md)。
+
 # CityNav TRAIN 空间方向词参考系独立实验
 
 日期：2026-11-06。分支：`experiment/citynav-direction-frames-20261106`。版本：direction-frames v1。
