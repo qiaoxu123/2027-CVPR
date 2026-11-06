@@ -21,10 +21,11 @@ def main():
  for key in ('stage1','original_v2','trained_relation','split','data_root','relation_control','relation_visual_control','geometry_source','model_code','relation_runtime_code','config','public_catalog','text_adapter','text_inputs','text_parser'):assert current[key]==old[key],f'Baseline source mismatch {key}'
  assert current['angle_checkpoint']==frozen['angle_head_sha256'];assert current['trained_relation']==manifest['baseline_sha256']
  rows={x['index']:x for x in map(json.loads,(nav/'predictions.jsonl').read_text().splitlines())};baseline={x['index']:x for x in map(json.loads,(a.baseline_evaluation/'predictions.jsonl').read_text().splitlines())};assert len(rows)==len(baseline)==2470 and set(rows)==set(baseline)
- paired=[];stats=Counter();groups=defaultdict(list);delta_max=[]
+ paired=[];stats=Counter();groups=defaultdict(list);delta_max=[];baseline_field_max_diff=0.;logit_gaps=[];delta_ranges=[]
  for i in sorted(rows):
   b=baseline[i];n=rows[i];assert b['episode_id']==n['episode_id'] and b['poses'][0]==n['poses'][0]
   br=json.loads((a.baseline_evaluation/f'belief_steps/{i:05d}/public_record.json').read_text());nr=json.loads((nav/f'belief_steps/{i:05d}/public_record.json').read_text());assert br['landmarks']==nr['landmarks'] and br['instruction']==nr['instruction'] and br['world_bounds']==nr['world_bounds']
+  old_field=np.load(a.baseline_evaluation/f'belief_steps/{i:05d}/00.npz')['relation'];bundle=np.load(nav/f'belief_steps/{i:05d}/00.npz');new_base=bundle['relation'];tops=np.partition(new_base,-2)[-2:];logit_gaps.append(float(tops.max()-tops.min()));delta_ranges.append(float(bundle['angle_delta'].max()-bundle['angle_delta'].min()));baseline_field_max_diff=max(baseline_field_max_diff,float(np.abs(old_field-new_base).max()))
   diag=n['step_diagnostics'];assert all(d['angle_GT_used_at_inference'] is False and d['modality']=='predicted_angular_direction_only' for d in diag)
   stats['fixes']+=int(not b['metrics']['SR'] and n['metrics']['SR']);stats['damage']+=int(b['metrics']['SR'] and not n['metrics']['SR']);stats['inference_error']+=int(n['termination']=='inference_error');stats['OSR_success_SR_failed']+=int(n['metrics']['OSR'] and not n['metrics']['SR']);stats[n['termination']]+=1
   if diag:
@@ -34,7 +35,10 @@ def main():
  stats['net']=stats['fixes']-stats['damage'];rng=np.random.default_rng(42);g=list(groups.values());ci=[]
  for _ in range(2000):
   ix=[i for j in rng.integers(0,len(g),len(g)) for i in g[j]];ci.append(np.mean([rows[i]['metrics']['SR']-baseline[i]['metrics']['SR'] for i in ix]))
- summary=dict(TRAIN_only=train['TRAIN_Birmingham_diagnostic'],Val_Seen=dict(baseline=base_metric['metrics'],predicted_angle=metric['metrics']),paired=dict(stats),SR_delta_physical_target_bootstrap95CI=np.quantile(ci,[.025,.975]).tolist(),physical_target_groups=len(g),single_seed=True,angle_delta_max=max(delta_max) if delta_max else None,angle_delta_median=float(np.median(delta_max)) if delta_max else None,head_checkpoint_SHA256=frozen['angle_head_sha256'],Oracle_navigation_executed=False)
+ summary=dict(TRAIN_only=train['TRAIN_Birmingham_diagnostic'],Val_Seen=dict(baseline=base_metric['metrics'],predicted_angle=metric['metrics']),paired=dict(stats),SR_delta_physical_target_bootstrap95CI=np.quantile(ci,[.025,.975]).tolist(),physical_target_groups=len(g),single_seed=True,angle_delta_max=max(delta_max) if delta_max else None,angle_delta_median=float(np.median(delta_max)) if delta_max else None,head_checkpoint_SHA256=frozen['angle_head_sha256'],Oracle_navigation_executed=False,baseline_preangle_field_max_abs_difference=baseline_field_max_diff)
+ margin=dict(N=len(logit_gaps),baseline_Top1_Top2_gap_median=float(np.median(logit_gaps)),angle_delta_range_median=float(np.median(delta_ranges)),Top1_provably_cannot_change_by_global_delta_range=int((np.asarray(logit_gaps)>np.asarray(delta_ranges)).sum()),posthoc_only=True)
+ atomic_json(margin,out/'fusion_margin.json')
+ assert baseline_field_max_diff<1e-5,'Frozen baseline output changed before adding angles'
  atomic_json(summary,out/'summary.json')
  with (out/'paired2470.csv').open('w') as f:
   w=csv.DictWriter(f,fieldnames=list(paired[0]));w.writeheader();w.writerows(paired)
@@ -52,11 +56,11 @@ def main():
 
 ## 设置与输入安全
 
-全部21878条Revised TRAIN、seed42、3轮，冻结原Unified V2 Geometry/Relation/PGVB、BERT和原导航控制器；只训练{manifest['trainable_parameters']}个新增参数。Loss=Goal CE+0.5 Direction CE+0.05 KL，FP32且TF32关闭。3轮每轮覆盖21878条，实际最后训练记录耗时{hist[-1]['elapsed_seconds']:.2f}秒，训练内GPU步骤均值{stepmean:.3f}ms（不含DataLoader等待），峰值GPU分配{train['peak_gpu_GiB']:.3f}GiB。未修改原权重。
+全部21878条Revised TRAIN、seed42、3轮，冻结原Unified V2 Geometry/Relation/PGVB、BERT和原导航控制器；只训练{manifest['trainable_parameters']}个新增参数。Loss=Goal CE+0.5 Direction CE+0.05 KL，FP32且TF32关闭。3轮每轮覆盖21878条，实际最后训练记录耗时{hist[-1]['elapsed_seconds']:.2f}秒，训练内GPU步骤均值{stepmean:.3f}ms（不含DataLoader等待），峰值GPU分配{train['peak_gpu_GiB']:.3f}GiB。未修改原权重。本轮按PR25指定77cd5560旧全文Checkpoint为基座，并非上一轮SR47.37%的新全文权重，不能混用基线。
 
 新增头只接收冻结全文/公开名称嵌入、公开候选方位角、有效Anchor Mask和原Belief；无dx/dy、距离、距离桶或GT目标位置。atan2在候选公开几何预处理/训练标签中计算，坐标差和模长不进入新增头。原冻结主模型仍保留原几何输入，本实验不是全模型去除距离。方向为地图+X=0度、逆时针8类，未证明地理北；1m内重合Anchor没有有效方向标签。
 
-修复原PR按目标ID索引processed_descriptions读地标列表的路径：TRAIN及推理均从原文匹配完整公开目录，使用同一public_text_record/full_text，原私有目标ID和GT选锚不进入模型。GT只在forward后构造方向/Goal损失和TRAIN离线Oracle。无Anchor全部回退原Belief并入分母。Anchor采用原特征约定的完整Polygon顶点均值（不是面积质心或GT最近边界）；同名多Polygon独立保留并平均角度相容性，超容量不按GT选择。与已有45.75%基线核对同Checkpoint、公开绑定、起点及控制协议，复用其全部真实轨迹。
+修复原PR按目标ID索引processed_descriptions读地标列表的路径：TRAIN及推理均从原文匹配完整公开目录，使用同一public_text_record/full_text，原私有目标ID和GT选锚不进入模型。GT只在forward后构造方向/Goal损失和TRAIN离线Oracle。无Anchor全部回退原Belief并入分母。Anchor采用原特征约定的完整Polygon顶点均值（不是面积质心或GT最近边界）；同名多Polygon独立保留并平均角度相容性，超容量不按GT选择。与已有45.75%基线核对同Checkpoint、公开绑定、起点及控制协议，全部初始角度修正前logits最大差值{baseline_field_max_diff}，复用其全部真实轨迹。
 
 ## TRAIN内定位诊断（非独立Dev）
 
@@ -78,9 +82,13 @@ Birmingham7619条也参与训练，只能作为拟合诊断。Oracle无闭环开
 |---|---:|---:|---:|---:|---:|
 {nav_table}
 
-配对纠正{stats['fixes']}、破坏{stats['damage']}、净{stats['net']}。实际错误{stats['inference_error']}，初始Top1变化{stats['angle_changed_initial_Top1']}条，有角度支持{stats['angle_supported_episodes']}条；残差最大{summary['angle_delta_max']:.6f}、中位{summary['angle_delta_median']:.6f}logit。OSR成功而SR失败{stats['OSR_success_SR_failed']}条。SR差值物理目标组bootstrap95%区间{summary['SR_delta_physical_target_bootstrap95CI']}；一个训练种子，不宣称Unseen或多种子泛化提升。
+配对纠正{stats['fixes']}、破坏{stats['damage']}、净{stats['net']}。实际错误{stats['inference_error']}，初始Top1变化{stats['angle_changed_initial_Top1']}条，有角度支持{stats['angle_supported_episodes']}条；残差最大{summary['angle_delta_max']:.6f}、中位{summary['angle_delta_median']:.6f}logit。OSR成功而SR失败{stats['OSR_success_SR_failed']}条。SR差值物理目标组bootstrap95%区间（比例单位，乘100为百分点）{summary['SR_delta_physical_target_bootstrap95CI']}；一个训练种子，不宣称Unseen或多种子泛化提升。
 
 新增闭环推理平均{metric['metrics']['inference_ms']:.3f}ms、耗时{metric['seconds']:.2f}秒；旧基线是历史运行，不能作同一时段速度提升结论。
+
+## 角度到Belief转换的限制
+
+残差与原logit间隔：{margin}。满足gap大于delta整体范围的任务，角度残差在数学上不足以推翻原Top1；不据此修改Val上的融合系数。这仅诊断当前已训练有界融合，不证明真实角度信息没有潜力。
 
 ## 实现核查与局限
 
