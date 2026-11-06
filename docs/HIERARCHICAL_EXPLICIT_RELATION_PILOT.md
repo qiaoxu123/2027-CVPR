@@ -27,15 +27,18 @@ verified Geometry/PGVB/Trajectory/Stop runtime.
 This is a deliberately **narrow, falsifiable two-hop proof-of-concept**:
 it does **not** yet handle parking-row instances, unknown parking boundaries,
 free-form indirect relations, 3D view synthesis or target-object proposals.
-The parser leaves uncalibrated left/right/behind without a geometric direction.
+The parser leaves uncalibrated left/right/behind without a geometric direction;
+  direct near and inside are distinct conservative operators.
 As in earlier experiments, public CityRefer polygons are weak geometry, not
 independent instance detection ground truth.
 
 ## Frozen source and reproducibility
 
 - Base source commit: 4d195f841ba9c3a561555ca75bcf44bfea79b6cc.
-- Original unchanged checkpoint: verified UnifiedPGVB-v2
-  (bundle format unified-pgvb-v2).
+- Frozen checkpoint: preferably the trained Geometry checkpoint from the
+  Nov-05 full-relation run (bundle format unified-pgvb-full-relation-v1),
+  or the original verified UnifiedPGVB-v2. The existing Relation head is
+  intentionally disabled for this paired comparison.
 - All data rows are **Revised TRAIN static-only**, with 0 future RGB, GT crops,
   robot poses or teacher futures passed to the forward path.
 - TRAIN-only fit/dev partition is hashed by physical target ID so the same
@@ -59,7 +62,7 @@ Execute a first smoke using TRAIN data only (it still trains, not a dry-run):
     python scripts/train_hierarchical_relation_graph.py \
       --train-jsonl data/unified_full_train_revised.jsonl \
       --objects /path/to/CityNav/cityrefer/objects.json \
-      --original-v2 GraphNav/runs/unified_pgvb_v2_pilot_s42/full_training/last.pt \
+      --geometry-checkpoint GraphNav/runs/unified_full_relation_s42_20261105/core/last.pt \
       --output runs/hrgb_smoke_s42 \
       --max-queries 128 --epochs 1 --batch-size 4 --seed 42
 
@@ -69,7 +72,7 @@ specified output directory:
     python scripts/train_hierarchical_relation_graph.py \
       --train-jsonl data/unified_full_train_revised.jsonl \
       --objects /path/to/CityNav/cityrefer/objects.json \
-      --original-v2 GraphNav/runs/unified_pgvb_v2_pilot_s42/full_training/last.pt \
+      --geometry-checkpoint GraphNav/runs/unified_full_relation_s42_20261105/core/last.pt \
       --output runs/hrgb_full_s42 \
       --max-queries 2000 --epochs 4 --batch-size 4 --seed 42
 
