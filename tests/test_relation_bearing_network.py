@@ -24,3 +24,14 @@ def test_relational_inputs_have_effect_but_control_does_not_use_them():
     model=RolePolygonBearing(text_dim=8,shape_dim=39,hidden=16).eval();x=inputs();other=dict(x,relation_steps=x['relation_steps']+3.)
     assert not torch.allclose(model(**x,use_relations=True)['probabilities'],model(**other,use_relations=True)['probabilities'])
     torch.testing.assert_close(model(**x,use_relations=False)['probabilities'],model(**other,use_relations=False)['probabilities'])
+
+
+def test_angle_only_objective_cannot_read_instance_labels():
+    from scripts.train_role_polygon_angles_only import angle_only
+    class PrivateLabels(dict):
+        def __getitem__(self,key):
+            if key!='bins':raise AssertionError('Instance identity was accessed by angle-only loss')
+            return super().__getitem__(key)
+    p=torch.randn(2,2,8,requires_grad=True).softmax(-1)
+    loss,_=angle_only({'probabilities':p},[PrivateLabels(bins=torch.tensor([0,1])),PrivateLabels(bins=torch.tensor([2,-100]))],torch.ones(2,2,dtype=torch.bool))
+    assert torch.isfinite(loss);loss.backward()

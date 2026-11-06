@@ -124,3 +124,12 @@
 - Keep the existing head architecture; repair execution and isolation before measuring geometric information gains.
 ### Notes & Caveats
 - No RGB, reference-frame rules or navigation. The small anchor-micro gain is not statistically reliable and query-macro accuracy worsens; preserve the negative result.
+
+## [Role-linked Polygon bearing research] - 2026-11-06
+### Features
+- GT-free target/intermediate/landmark dependency paths, complete named Polygon context, whole-region topology and probabilistic object-to-angle reasoning.
+- New fit/dev/confirmation map isolation and matched8-direction-only/instance-supervision ablations.
+### Design Rationale
+- Preserve entity identities and relation scope instead of anonymous nearest-object pooling; uncertainty covers missing mapped targets.
+### Notes & Caveats
+- No RGB, navigation or geographic reference-frame rules. Confirmation remains sealed until development models are fixed; synthetic/Smoke results do not establish research success.

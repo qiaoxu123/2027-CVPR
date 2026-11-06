@@ -34,3 +34,10 @@ def test_initial_target_and_compound_relation_are_retained():
     q=parse_instruction(nlp,'This is a white car in the parking lot across from One Stop. There is another white car behind it.','m',matcher)
     assert q['target_span'] and 'white car' in q['target_span']['text']
     assert any('across from'==s['relation'] for p in q['paths'] for s in p['steps'])
+
+
+def test_trusted_anchor_stratum_does_not_use_weak_direct_shortcut():
+    from scripts.relation_bearing_strata import anchor_strata
+    p={'paths':[{'public_ids':['1'],'hops':1,'semantic_confident':False,'steps':[]},{'public_ids':['1'],'hops':2,'semantic_confident':True,'steps':[{'reference_frame':'unresolved_relative','original_relation':'in'}]}]}
+    assert anchor_strata(p,{'id':'1'})['group']=='indirect'
+    assert anchor_strata(p,{'id':'2'})['group']=='unknown'
