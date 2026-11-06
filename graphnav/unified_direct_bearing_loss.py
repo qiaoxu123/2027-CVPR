@@ -69,7 +69,7 @@ def direct_cardinal_reference(instruction: str, reference: dict, public_names: d
     return PREDICATE_IDS[match.group(1)]
 
 
-def predicate_ids_for_record(record, public_map, capacity,*, enabled=True):
+def predicate_ids_for_record(record, public_map, capacity,*, enabled=True, public_name_index=None):
     """Return (ids, reference_idx), where idx=-1 means NO angle label.
 
     Deliberately require one observed reference AND unique name/ID globally
@@ -82,7 +82,7 @@ def predicate_ids_for_record(record, public_map, capacity,*, enabled=True):
     refs=record.get("landmarks",[])
     if len(refs)!=1:
         return ids,-1
-    name_index=_unique_public_by_name(public_map)
+    name_index=public_name_index if public_name_index is not None else _unique_public_by_name(public_map)
     predicate=direct_cardinal_reference(record["instruction"],refs[0],name_index)
     if predicate:
         ids[0]=predicate
@@ -102,11 +102,17 @@ class DirectBearingDataset(FullCandidateDataset):
             if record["map_name"] not in public:
                 raise ValueError("Missing map from full public catalog: "+record["map_name"])
         self._predicates={}
+        # CityRefer catalog may contain thousands of polygons per map.
+        # Cache exact-name multiplicity once rather than rebuilding for each
+        # of the 21,878 TRAIN queries.
+        self._public_name_index={name:_unique_public_by_name(objects)
+                                 for name,objects in public.items()}
         self._counts=Counter()
         for i,r in enumerate(self.records):
             ids,index=predicate_ids_for_record(
                 r,public[r["map_name"]],self.capacity,
-                enabled=self.enable_explicit_predicates)
+                enabled=self.enable_explicit_predicates,
+                public_name_index=self._public_name_index[r["map_name"]])
             self._predicates[i]=(ids,index)
             self._counts["train_queries"]+=1
             self._counts["direct_cardinal_unique"]+=int(index>=0)
