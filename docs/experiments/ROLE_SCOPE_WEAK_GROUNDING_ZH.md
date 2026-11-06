@@ -42,6 +42,8 @@ OUT=/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/role_scope_weak_s42_20261
 python -m scripts.prepare_role_scope_supervision --run "$RUN" --output "$OUT"
 python -m scripts.train_role_scope_bearing --run "$RUN" --output "$OUT" \
   --epochs 12 --batch-size 16 --lr 3e-4 --role-weight 0.2
+
+python -m scripts.evaluate_role_scope_counterfactual --run "$RUN" --output "$OUT"
 ```
 
 在第一次正式训练前，也可在**新目录**用`--max-updates 3`做GPU smoke；不要把smoke数值当实验结果。正式训练输出各组 `best.pt`、`last.pt`、`history.json`，以及 `DEVELOPMENT_REPORT.json`，展示query-macro Top-1、anchor Top-1/Top-2、圆周MAE、NLL和逐query纠正/破坏。
@@ -60,3 +62,4 @@ python -m scripts.train_role_scope_bearing --run "$RUN" --output "$OUT" \
 - `scripts/prepare_role_scope_supervision.py`：只分析公开解析/场景和TRAIN fit/dev；
 - `scripts/train_role_scope_bearing.py`：同配置三组训练、开发集配对评价和Checkpoint；
 - `tests/test_role_scope_supervision.py`：作用域、候选集合、GT隔离、梯度与原模型一致性测试。
+- `scripts/evaluate_role_scope_counterfactual.py`：仅在TRAIN dev上错配中间关系词向量，检查关系链贡献；不是语法正确的语言反事实。
