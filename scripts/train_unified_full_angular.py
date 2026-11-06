@@ -227,6 +227,8 @@ def main():
         loss_total = float(previous.get('epoch_loss_total',0)) if continuing else 0.
         ang_count=0
         angle_total=0.
+        word_angle_matches=0
+        angle_gradient_checked=False
         seen = int(previous.get('epoch_seen',0)) if continuing else 0
         corrected = int(previous.get('epoch_corrected',0)) if continuing else 0
         damaged = int(previous.get('epoch_damaged',0)) if continuing else 0
@@ -252,6 +254,16 @@ def main():
                     batch["map_sizes"].cuda(), batch["angular_anchor_index"].cuda())
                 loss = location + a.kl_weight * preserve + a.angular_weight * angle["loss"]
             optimizer.zero_grad(set_to_none=True)
+            if a.angular_weight>0 and angle["eligible_count"] and not angle_gradient_checked:
+                angular_logit_gradient=torch.autograd.grad(
+                    angle["loss"],logits,retain_graph=True)[0]
+                norm_angular=float(angular_logit_gradient.abs().sum().detach())
+                if not np.isfinite(norm_angular) or norm_angular<=0:
+                    raise RuntimeError("Angular consistency does not backpropagate into main Belief")
+                angle_gradient_checked=True
+                atomic_json({"angular_logit_gradient_L1":norm_angular,
+                             "first_nonzero_update":updates},
+                            a.output/"angular_gradient_audit.json")
             if not torch.isfinite(loss):raise FloatingPointError('Nonfinite full TRAIN loss')
             loss.backward()
             if updates < 3:
@@ -268,6 +280,15 @@ def main():
             loss_total += float(loss.detach()) * size
             ang_count += angle["eligible_count"]
             angle_total += float(angle["loss"].detach()) * angle["eligible_count"]
+            if angle["eligible_count"]:
+                eligible=angle["valid"]
+                # Which fraction of explicit word directions matches observed
+                # GT in map +X/CCW axes? This is an audit, NOT eligibility.
+                # 1 east -> bin0, 2 west -> bin4, 3 north -> bin2, 4 south -> bin6.
+                lookup=torch.tensor([0,0,4,2,6],device=logits.device)
+                word_ids=batch["anchor_predicate_ids"].to(logits.device)[:,0].long()
+                word_angle_matches+=int((angle["gt_angle_bin"][eligible]
+                    == lookup[word_ids[eligible]]).sum().item())
             distances = paired_metrics(base.detach(), logits.detach(), batch)
             corrected += int(((distances[:, 0] > 20) &
                               (distances[:, 1] <= 20)).sum())
@@ -295,6 +316,9 @@ def main():
         row = dict(epoch=epoch+1, observed=seen, expected=count,
                    angular_supervised=ang_count,
                    mean_angular_loss=angle_total/max(1,ang_count),
+                   literal_8bin_GT_word_agreement=(word_angle_matches/max(1,ang_count)),
+                   literal_8bin_agreement_N=ang_count,
+                   angular_backprop_verified=bool(angle_gradient_checked) if a.angular_weight>0 else None,
                    train_loss=loss_total/max(seen,1),
                    train_fixes=corrected, train_breaks=damaged,
                    wall_seconds=time.perf_counter()-started)
