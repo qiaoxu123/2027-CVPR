@@ -33,6 +33,7 @@ def test_two_hop_role_order_and_weak_type_set():
     assert [(v["step"], v["kind"], v["candidates"]) for v in res] == [
         (0, "typed_intermediate", [1, 2]), (1, "typed_target", [3, 4])]
     assert stats["typed_intermediate"] == 1
+    assert [x["intermediate"] for x in res] == [True, False]
 
 
 def test_named_intermediate_uses_public_ids_not_nearest_gt():
