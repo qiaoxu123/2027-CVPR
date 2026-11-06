@@ -326,7 +326,8 @@ def main():
                 # GT in map +X/CCW axes? This is an audit, NOT eligibility.
                 # 1 east -> bin0, 2 west -> bin4, 3 north -> bin2, 4 south -> bin6.
                 lookup=torch.tensor([0,0,4,2,6],device=logits.device)
-                word_ids=batch["anchor_predicate_ids"].to(logits.device)[:,0].long()
+                label_slot=batch["angular_anchor_index"].to(logits.device).long().clamp_min(0)
+                word_ids=batch["anchor_predicate_ids"].to(logits.device).gather(1,label_slot[:,None]).squeeze(1).long()
                 word_angle_matches+=int((angle["gt_angle_bin"][eligible]
                     == lookup[word_ids[eligible]]).sum().item())
             distances = paired_metrics(base.detach(), logits.detach(), batch)
