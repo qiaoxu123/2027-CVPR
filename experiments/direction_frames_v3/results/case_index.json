@@ -1,0 +1,381 @@
+[
+  {
+    "occurrence_id": "cambridge_block_28:8:2:142",
+    "kind": "known_boathouse",
+    "figure": "case_00_known_boathouse.png",
+    "instruction": "This is a building located on Cutter Ferry Lane. If you stand at Pembroke College Boat Club facing the stream, this building would be on your right.",
+    "reference_ids": [
+      "9"
+    ],
+    "subject_ids": [
+      "8"
+    ],
+    "rule_state": "explicit_computable",
+    "selected_candidate": {
+      "candidate_id": "explicit_stand_face_water:3",
+      "type": "explicit_stand_face_water",
+      "heading_deg": 272.1534453285353,
+      "family": "observer",
+      "level": "explicit",
+      "evidence": "stand at named landmark facing unique water; nearest-bank proxy, not recovered camera yaw",
+      "source_ids": [
+        "9",
+        "367"
+      ],
+      "confidence_rule_score": 0.93,
+      "origin_xy": [
+        1705.0625,
+        1631.0078125
+      ],
+      "meta": {
+        "source_perturbation_spread_deg": 9.094947017729282e-13,
+        "water_boundary_point": [
+          1705.8502786512306,
+          1610.0576003326678
+        ]
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": 1.0,
+    "roadside_result": null,
+    "geometry_status": "disjoint",
+    "selection_for_visualization_only": true,
+    "known_development_example": true,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "cambridge_block_28:165:2:32",
+    "kind": "new_route_agreement",
+    "figure": "case_01_new_route_agreement.png",
+    "instruction": "The fourth grey building on the right of the Acrefield Drive when coming from the Manhattan Drive.",
+    "reference_ids": [
+      "385"
+    ],
+    "subject_ids": [
+      "165"
+    ],
+    "rule_state": "explicit_computable",
+    "selected_candidate": {
+      "candidate_id": "explicit_road_away_from_named_junction:6",
+      "type": "explicit_road_away_from_named_junction",
+      "heading_deg": 25.53978236426272,
+      "family": "road_travel",
+      "level": "explicit",
+      "evidence": "coming from named road; source junction in outer road quartile; directed PCA tangent points into reference road",
+      "source_ids": [
+        "385",
+        "380"
+      ],
+      "confidence_rule_score": 0.88,
+      "origin_xy": [
+        1763.28125,
+        1742.890625
+      ],
+      "meta": {
+        "axis_ratio": 17.617945103933216,
+        "source_gap_m": 0.0,
+        "junction_axis_fraction": 0.0547535784709944,
+        "junction_xy": [
+          1719.4014442573261,
+          1697.6096963290838
+        ],
+        "geometry_is_centerline_proxy": true
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": 1.0,
+    "roadside_result": 1.0,
+    "geometry_status": "disjoint",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "cambridge_block_28:174:5:26",
+    "kind": "sector_vs_roadside",
+    "figure": "case_02_sector_vs_roadside.png",
+    "instruction": "The first building on the right of the Acrefield Drive, when coming from the Manhattan Drive.",
+    "reference_ids": [
+      "385"
+    ],
+    "subject_ids": [
+      "174"
+    ],
+    "rule_state": "explicit_computable",
+    "selected_candidate": {
+      "candidate_id": "explicit_road_away_from_named_junction:6",
+      "type": "explicit_road_away_from_named_junction",
+      "heading_deg": 25.53978236426272,
+      "family": "road_travel",
+      "level": "explicit",
+      "evidence": "coming from named road; source junction in outer road quartile; directed PCA tangent points into reference road",
+      "source_ids": [
+        "385",
+        "380"
+      ],
+      "confidence_rule_score": 0.88,
+      "origin_xy": [
+        1763.28125,
+        1742.890625
+      ],
+      "meta": {
+        "axis_ratio": 17.617945103933216,
+        "source_gap_m": 0.0,
+        "junction_axis_fraction": 0.0547535784709944,
+        "junction_xy": [
+          1719.4014442573261,
+          1697.6096963290838
+        ],
+        "geometry_is_centerline_proxy": true
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": 0.0,
+    "roadside_result": 1.0,
+    "geometry_status": "disjoint",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "cambridge_block_33:53:3:54",
+    "kind": "new_map_roadside",
+    "figure": "case_03_new_map_roadside.png",
+    "instruction": "Coming from Beche Road this is the third house on the left of Priory Road.",
+    "reference_ids": [
+      "222"
+    ],
+    "subject_ids": [
+      "53"
+    ],
+    "rule_state": "explicit_computable",
+    "selected_candidate": {
+      "candidate_id": "explicit_road_away_from_named_junction:6",
+      "type": "explicit_road_away_from_named_junction",
+      "heading_deg": 105.38599983293703,
+      "family": "road_travel",
+      "level": "explicit",
+      "evidence": "coming from named road; source junction in outer road quartile; directed PCA tangent points into reference road",
+      "source_ids": [
+        "222",
+        "223"
+      ],
+      "confidence_rule_score": 0.88,
+      "origin_xy": [
+        2071.4375,
+        1550.9921875
+      ],
+      "meta": {
+        "axis_ratio": 29.807273098176573,
+        "source_gap_m": 0.0,
+        "junction_axis_fraction": 0.05119189982105598,
+        "junction_xy": [
+          2083.798470823805,
+          1509.003911139457
+        ],
+        "geometry_is_centerline_proxy": true
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": null,
+    "roadside_result": 1.0,
+    "geometry_status": "ambiguous_overlap_or_boundary",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "cambridge_block_21:95:3:42",
+    "kind": "new_junction_roadside",
+    "figure": "case_04_new_junction_roadside.png",
+    "instruction": "The third building that is located on the left of the Short Street when coming from the Four Lamps Roundabout Road.",
+    "reference_ids": [
+      "453",
+      "454",
+      "475",
+      "520"
+    ],
+    "subject_ids": [
+      "95"
+    ],
+    "rule_state": "explicit_computable",
+    "selected_candidate": {
+      "candidate_id": "explicit_road_away_from_named_junction:6",
+      "type": "explicit_road_away_from_named_junction",
+      "heading_deg": 278.26717358893717,
+      "family": "road_travel",
+      "level": "explicit",
+      "evidence": "coming from named road; source junction in outer road quartile; directed PCA tangent points into reference road",
+      "source_ids": [
+        "453",
+        "454",
+        "475",
+        "520",
+        "456",
+        "511",
+        "513",
+        "514",
+        "515"
+      ],
+      "confidence_rule_score": 0.88,
+      "origin_xy": [
+        1258.8754226912388,
+        1257.8017829559358
+      ],
+      "meta": {
+        "axis_ratio": 14.968648901758796,
+        "source_gap_m": 0.0,
+        "junction_axis_fraction": 0.9394022152712019,
+        "junction_xy": [
+          1255.0919540071345,
+          1292.6207178453167
+        ],
+        "geometry_is_centerline_proxy": true
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": null,
+    "roadside_result": 1.0,
+    "geometry_status": "ambiguous_overlap_or_boundary",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "cambridge_block_28:17:3:26",
+    "kind": "route_proxy_conflict",
+    "figure": "case_05_route_proxy_conflict.png",
+    "instruction": "The third building on the right of the Abbey Road when coming from the Walnut Tree Avenue.",
+    "reference_ids": [
+      "369"
+    ],
+    "subject_ids": [
+      "17"
+    ],
+    "rule_state": "explicit_computable",
+    "selected_candidate": {
+      "candidate_id": "explicit_road_away_from_named_junction:6",
+      "type": "explicit_road_away_from_named_junction",
+      "heading_deg": 281.7037745253207,
+      "family": "road_travel",
+      "level": "explicit",
+      "evidence": "coming from named road; source junction in outer road quartile; directed PCA tangent points into reference road",
+      "source_ids": [
+        "369",
+        "372",
+        "398",
+        "400",
+        "416"
+      ],
+      "confidence_rule_score": 0.88,
+      "origin_xy": [
+        1957.25,
+        1629.2578125
+      ],
+      "meta": {
+        "axis_ratio": 14.607585713990641,
+        "source_gap_m": 0.0,
+        "junction_axis_fraction": 0.92516778869307,
+        "junction_xy": [
+          1950.110025861943,
+          1654.108726768415
+        ],
+        "geometry_is_centerline_proxy": true
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": 0.0,
+    "roadside_result": 0.0,
+    "geometry_status": "disjoint",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "cambridge_block_13:20:3:24",
+    "kind": "observer_region_uncertainty",
+    "figure": "case_06_observer_region_uncertainty.png",
+    "instruction": "This building is to the right of Link Building when looking at them from Tennis Court Road",
+    "reference_ids": [
+      "46"
+    ],
+    "subject_ids": [
+      "20"
+    ],
+    "rule_state": "candidate_multiple",
+    "selected_candidate": {
+      "candidate_id": "explicit_view_from_named_region:4",
+      "type": "explicit_view_from_named_region",
+      "heading_deg": 21.862362420286576,
+      "family": "observer",
+      "level": "candidate",
+      "evidence": "language specifies observer source region; nearest point is a representative and region extent may leave heading ambiguous",
+      "source_ids": [
+        "564",
+        "566",
+        "631",
+        "46"
+      ],
+      "confidence_rule_score": 0.6,
+      "origin_xy": [
+        905.96875,
+        574.9921875
+      ],
+      "meta": {
+        "source_region_spread_deg": 88.0237558769577,
+        "observer_source_xy": [
+          889.045367978432,
+          568.2019416271486
+        ],
+        "group_gaze_approximation": true
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": null,
+    "roadside_result": null,
+    "geometry_status": "ambiguous_overlap_or_boundary",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  },
+  {
+    "occurrence_id": "birmingham_block_10:46:2:22",
+    "kind": "unsigned_building_unknown",
+    "figure": "case_07_unsigned_building_unknown.png",
+    "instruction": "A white van parked in front of the Weighbridge Offices againnst the buiklding. There is a black car with a green sticker in the window in front of it.",
+    "reference_ids": [
+      "17"
+    ],
+    "subject_ids": [
+      "46"
+    ],
+    "rule_state": "candidate_multiple",
+    "selected_candidate": {
+      "candidate_id": "building_PCA_axis:2",
+      "type": "building_PCA_axis",
+      "heading_deg": 96.08563792962408,
+      "family": "intrinsic_candidate",
+      "level": "candidate",
+      "evidence": "unsigned building axis/normal; no target-dependent sign choice",
+      "source_ids": [
+        "17"
+      ],
+      "confidence_rule_score": 0.3,
+      "origin_xy": [
+        1166.640625,
+        1229.78125
+      ],
+      "meta": {
+        "offset_deg": 0,
+        "axis_ratio": 9.622721853447201
+      },
+      "GT_used_to_construct_or_select": false
+    },
+    "sector_result": null,
+    "roadside_result": null,
+    "geometry_status": "disjoint",
+    "selection_for_visualization_only": true,
+    "known_development_example": false,
+    "used_to_select_direction_with_GT": false
+  }
+]

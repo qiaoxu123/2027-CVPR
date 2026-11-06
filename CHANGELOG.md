@@ -1,5 +1,17 @@
 # Changelog
 
+## [direction-frames-v3] - 2026-11-06
+### Features
+- Preserve all v2 bindings and expand named-road binding by independent ontology constraints; retain unresolved subjects and reference frames.
+- Add GT-free local-frame candidate construction, explicit observation/road-origin rules, frozen BERT silver-label routing, object/map crossfit, matched-support nulls and Chinese report with real-map figures.
+### Design Rationale
+- Separate a licensed single heading from an unresolved candidate mixture; score fixed mixture mass, never a target-GT per-sample best frame.
+- Evaluate signed road-side geometry separately from centroid angular sectors, and compare on matching world-baseline support.
+### Notes & Caveats
+- Silver-label prediction is not annotator-frame recognition. Known v2 boathouse is marked as development evidence and excluded in a sensitivity cohort.
+- Straight-road and water-bank headings are independent geometry proxies; intrinsic facade direction and author camera pose remain unverified.
+- No navigation network, BERT finetuning, full navigation training, Val or Test data involved. External review execution status is recorded separately from local checks.
+
 ## [direction-frames-v2] - 2026-11-06
 ### Features
 - Restrict the primary population to direction relations whose reference is a named landmark; retain the real relation subject and abstain on unlocalized context objects.

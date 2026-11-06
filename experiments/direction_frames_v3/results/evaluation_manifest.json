@@ -1,0 +1,17 @@
+{
+  "public_input_sha256": "03f46a9ccd39edcdb59907aa4208ed473b60f8c510dd708ee4dc091d73dc75ae",
+  "frozen_inference_sha256": "9ad2534783ca173072c50b6577c506bd2b0e479a0e12eefa8ecf8e579760a6fa",
+  "BERT_features_sha256": "e1b4ac4f2d4a074617865beb3bb7086f390e4fbb1fde952450b71685ed699e88",
+  "router_training_labels": "text-rule silver family only; NOT target-optimal orientations",
+  "BERT_fine_tuned": false,
+  "router": "StandardScaler + LogisticRegression C=1 class_weight=balanced, 600 iterations; probability gate .60 fixed before evaluation",
+  "split_schemes": [
+    "subject_object_5fold",
+    "leave_map_out"
+  ],
+  "raw_English_duplicate_train_rows_purged": true,
+  "GT_used_for_local_selection": false,
+  "GT_used_for_baseline": "shared global D4 dictionary fitted on OTHER groups only; v2 cohorts reuse exact frozen v2 baselines; roadside secondary independently fits its global world signed-halfplane dictionary on matching roadside training support",
+  "null_controls_B": 300,
+  "seed": 20261106
+}
