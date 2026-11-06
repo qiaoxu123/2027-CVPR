@@ -179,8 +179,8 @@ class UnifiedPGVBV3(nn.Module):
         attn, _ = self.cross_attention(
             query, keys, keys, key_padding_mask=~bert_mask, need_weights=False)
         features = F.normalize(
-            self.visual_head(query + attn).reshape(b, frames, n, -1), -1)
-        lang = F.normalize(self.visual_text(siglip_text.float()), -1)
+            self.visual_head(query + attn).reshape(b, frames, n, -1), dim=-1)
+        lang = F.normalize(self.visual_text(siglip_text.float()), dim=-1)
         scores = self.scale.exp().clamp(max=100.) * (
             features * lang[:, None, None]).sum(-1)
         scores = scores.masked_fill(~patch_valid, 0.)
