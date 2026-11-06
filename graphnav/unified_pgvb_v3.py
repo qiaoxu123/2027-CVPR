@@ -376,7 +376,7 @@ def v3_losses(output, target_xy, target_polygons, world_bounds, teacher_features
 
 @torch.no_grad()
 def offline_topk(output, target_xy, world_bounds, *, branch="fused",
-                 k_values=(1,5,20), radius_m=20.):
+                 k_values=(1,5,20), radius_m=20., target_polygons=None):
     """OFFLINE localization only. Never call it closed-loop SR/OSR."""
     if branch not in ("fused", "geometry"):
         raise ValueError("unknown offline Belief branch")
@@ -399,4 +399,14 @@ def offline_topk(output, target_xy, world_bounds, *, branch="fused",
     summary["Top1_NE_m"] = distances[:, 0].cpu().tolist()
     summary["Top1_NE_m_sum"] = float(distances[:, 0].sum())
     summary["Top1_xy"] = xy[:, 0].cpu().tolist()
+    if target_polygons is not None:
+        masks, valid = target_mask_batch(
+            target_polygons, world_bounds.detach().cpu().numpy(),
+            size=h, device=logits.device)
+        at_top = masks.flatten(1).gather(1, ids) > 0
+        summary["Polygon_valid"] = valid.cpu().tolist()
+        summary["Polygon_hit_flags"] = {
+            str(k): (at_top[:, :k].any(-1) & valid).cpu().tolist()
+            for k in k_values
+        }
     return summary
