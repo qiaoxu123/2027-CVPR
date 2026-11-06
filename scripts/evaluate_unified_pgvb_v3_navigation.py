@@ -26,6 +26,8 @@ def main():
     config=apply_overrides(load_config(a.config),['data.root='+str(a.data_root)]);validate_config(config)
     nav,altitude=config['navigation'],config['altitude'];protocol=ClosedLoopProtocol(horizon=nav['horizon'],horizontal_step_m=nav['horizontal_step_m'],vertical_step_m=nav['vertical_step_m'],min_altitude_m=altitude['min_above_ground_m'],max_altitude_m=altitude['max_above_ground_m'],stagnation_steps=nav['stagnation_steps'],success_radius_m=nav['success_distance_m'])
     ds=CityNavDataset(a.data_root,'val_seen',version=config['data']['version']);assert len(ds)==2470
+    if file_sha256(ds.annotation_path)!=gm['annotations_sha256']:
+        raise ValueError('Navigation episode list differs from full initial evaluation')
     catalog=CityReferCatalog(a.data_root/'cityrefer_original')
     if file_sha256(a.data_root/'cityrefer_original/objects.json')!=gm['objects_sha256']:
         raise ValueError('Navigation public catalog differs from fixed initial evaluation')
