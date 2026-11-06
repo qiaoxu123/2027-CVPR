@@ -135,3 +135,12 @@
 - No RGB, navigation or geographic reference-frame rules. Confirmation remains sealed until development models are fixed; synthetic/Smoke results do not establish research success.
 - Frozen four-map confirmation: angle-only relation model query-macro Top-1 39.49% versus old head 13.72%; target-group bootstrap supports the gain. Explicit path contribution over matched new architecture remains inconclusive (+1.13pp; CI includes zero).
 - Public object-angle projection and target language are the supported mechanism; shape/topology and multi-hop benefits are not established. No RGB/navigation added.
+
+## [CityNav parser comparison] - 2026-11-06
+### Features
+- Isolated TRAIN-only400-query parser benchmark with public-only inputs, matched spaCy rules, GLiNER2 and local Qwen3 inference adapters.
+- Exact-span directed graph schema, blind human graph review/export and independent-human-only metric gating.
+### Design Rationale
+- Separate parser differences and lexical catalog agreement from real accuracy; automated model outputs cannot act as human ground truth.
+### Notes & Caveats
+- No direction-network training, RGB, GeomBelief modification, navigation or Val/Test. Independent human graphs are not yet available; true parser F1 and causal attribution remain unmeasured.
