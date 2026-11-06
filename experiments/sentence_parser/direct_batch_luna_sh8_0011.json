@@ -1,0 +1,2409 @@
+[
+  {
+    "i": 8520,
+    "e": {
+      "t": [
+        "A large car",
+        "object"
+      ],
+      "b": [
+        "a Blacktop",
+        "object"
+      ],
+      "d": [
+        "a dark blue car",
+        "object"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a multi-colored white and brown building",
+        "object"
+      ],
+      "roofs": [
+        "three different colored roofs",
+        "group"
+      ],
+      "l": [
+        "left side dark gray",
+        "object"
+      ],
+      "ce": [
+        "Center White",
+        "object"
+      ],
+      "rr": [
+        "right side Gray",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "d",
+          "g"
+        ],
+        "Blacktop in between a dark blue car and a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "beside",
+        "h",
+        "beside a multi-colored white and brown building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "has_roofs",
+        "roofs",
+        "but three different colored roofs",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "has_roof_parts",
+        [
+          "l",
+          "ce",
+          "rr"
+        ],
+        "left side dark gray, Center White and right side Gray",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "Blacktop可能是车辆属性而非独立物体；三色屋顶分区描述内在分段。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8521,
+    "e": {
+      "t": [
+        "A red car with black roof",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a building with white windows with grey roof",
+        "object"
+      ],
+      "d": [
+        "a dark blue car",
+        "object"
+      ],
+      "s": [
+        "an empty parking spot",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "parked on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of a building with white windows with grey roof",
+        "U",
+        "high"
+      ],
+      [
+        "d",
+        "behind",
+        "t",
+        "a dark blue car parked behind it",
+        "U",
+        "high"
+      ],
+      [
+        "s",
+        "in_front_of",
+        "t",
+        "an empty parking spot in front of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8522,
+    "e": {
+      "t": [
+        "An orange colored car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a building",
+        "object"
+      ],
+      "c": [
+        "the corner",
+        "region"
+      ],
+      "b": [
+        "a black are",
+        "object"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ],
+      "w": [
+        "building with many white windows",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "car in front of a building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "on",
+        "a",
+        "building on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "c",
+        "near the corner",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "g"
+        ],
+        "It's between a black are and a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "w",
+        "in front of building with many white windows",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "“black are”原样保留为不确定实体短语。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8523,
+    "e": {
+      "t": [
+        "The orange car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "w": [
+        "the white car that is 5 cars behind the blue and yellow truck",
+        "object"
+      ],
+      "v": [
+        "the blue and yellow truck",
+        "object"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "orange car on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "w",
+        "The orange car on Thornbury Road that is across from the white car",
+        "R",
+        "high"
+      ],
+      [
+        "w",
+        "five_cars_behind",
+        "v",
+        "5 cars behind the blue and yellow truck",
+        "U",
+        "high"
+      ],
+      [
+        "v",
+        "at_intersection_with",
+        "b",
+        "to the intersection with Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "“at to the intersection”语病，卡车与路口的关系仅为弱推测。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8524,
+    "e": {
+      "t": [
+        "this car with orange on it",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a building with a black roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Thornbury Road, this car with orange on it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "h",
+        "near a building with a black roof",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8525,
+    "e": {
+      "t": [
+        "A multicolored black and white car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "v": [
+        "a multicolored yellow and blue truck",
+        "object"
+      ],
+      "h": [
+        "a multi-colored brown and white building",
+        "object"
+      ],
+      "roofs": [
+        "three different colored roofs",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "across_from",
+        "b",
+        "across from a black car on the opposite side of Thornbury Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "diagonal_from",
+        "v",
+        "diagonal from a multicolored yellow and blue truck",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "h",
+        "next to a multi-colored brown and white building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "has_roofs",
+        "roofs",
+        "three different colored roofs",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8526,
+    "e": {
+      "t": [
+        "A multicolored black and white car",
+        "object"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ],
+      "b": [
+        "a black car that's further behind it",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "v": [
+        "the multicolored blue and yellow van",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "g",
+          "b"
+        ],
+        "in between a gray car and a black car that's further behind it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "on the corner of Thornbury Road and Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "v",
+        "near the multicolored blue and yellow van",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8527,
+    "e": {
+      "t": [
+        "this is the first car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "s": [
+        "the sidewalk",
+        "region"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "onto Thornbury Road coming from Birchfield Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "first_to_right_of_observer",
+        [],
+        "first car to your right",
+        "R",
+        "high"
+      ],
+      [
+        "w",
+        "parked_on",
+        "s",
+        "a white car parked on the sidewalk",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "behind",
+        "c",
+        "behind a black car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "路线明确，right以行进者为参照；behind车辆序列方向未知。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8528,
+    "e": {
+      "t": [
+        "One black and white car",
+        "object"
+      ],
+      "b": [
+        "another black car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "v": [
+        "a blue van with a yellow top",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "b",
+        "One black and white car behind another black car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "on the corner of Thornbury Road and Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "v",
+        "near a blue van with a yellow top",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8529,
+    "e": {
+      "t": [
+        "White and black vehicle",
+        "object"
+      ],
+      "b": [
+        "two black vehicles",
+        "group"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "b",
+        "in between two black vehicles",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "c"
+        ],
+        "on the corner of Thornbury Road and Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8530,
+    "e": {
+      "t": [
+        "The front-most white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury road",
+        "named_landmark"
+      ],
+      "b": [
+        "the right lane",
+        "region"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "along Thornbury road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "frontmost_on",
+        "b",
+        "front-most white car on the right lane",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "a black car behind it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "front-most需依车流方向理解，但未给行进参照。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8531,
+    "e": {
+      "t": [
+        "The first Black car",
+        "object"
+      ],
+      "a": [
+        "the Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the Birchfield Road",
+        "named_landmark"
+      ],
+      "v": [
+        "the yellow blue van",
+        "object"
+      ],
+      "w": [
+        "White car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on the Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "first_seen_from",
+        "b",
+        "if you turn from the Birchfield Road",
+        "R",
+        "high"
+      ],
+      [
+        "v",
+        "in_front_of",
+        "t",
+        "Front is the yellow blue van",
+        "U",
+        "medium"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "White car in the back",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "Front/back省略关系对象，可能为车辆相对位置，置信度中。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8532,
+    "e": {
+      "t": [
+        "This is a car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "car on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "first_on_left_from",
+        "b",
+        "turn onto Thornbury Road coming from Birchfield, it is the first car parked on the left side of the road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "行进来源明示，left为观察者左侧。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8533,
+    "e": {
+      "t": [
+        "Black car",
+        "object"
+      ],
+      "a": [
+        "the pavement",
+        "region"
+      ],
+      "h": [
+        "the first house from Birchfield road towards Thornbury road",
+        "object"
+      ],
+      "b": [
+        "Birchfield road",
+        "named_landmark"
+      ],
+      "r": [
+        "Thornbury road",
+        "named_landmark"
+      ],
+      "c": [
+        "no car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "Black car on the pavement",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "first_from",
+        "b",
+        "first house from Birchfield road towards Thornbury road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of the first house",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "It has no car in front",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "or behind it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "原文有双句点；房屋前与车前可能为不同参照层级。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8534,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "w": [
+        "your white car",
+        "object"
+      ],
+      "v": [
+        "a multi-colored blue and yellow truck",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "v"
+        ],
+        "in between your white car and a multi-colored blue and yellow truck",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Thornbury Road and birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "your white car为文本明确参照，不推断其位置。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8535,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "v": [
+        "a multicolored yellow and blue truck",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "v"
+        ],
+        "in between a white car and a multicolored yellow and blue truck",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Thornbury Road and birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8536,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "v": [
+        "the yellow and blue truck closest to the intersection with Birchfield Road",
+        "object"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "one_car_behind",
+        "v",
+        "1 car behind the yellow and blue truck",
+        "U",
+        "high"
+      ],
+      [
+        "v",
+        "closest_to_intersection_with",
+        "b",
+        "closest to the intersection with Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind没有道路方向证据。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8537,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "w": [
+        "another white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a multi-colored white and brown building",
+        "object"
+      ],
+      "r": [
+        "a small red object on its back end",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "w",
+        "A white car in front of another white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "h",
+        "that was across the street from a multi-colored white and brown building",
+        "R",
+        "high"
+      ],
+      [
+        "r",
+        "on_back_end_of",
+        "h",
+        "that has a small red object on its back end",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "that从句的先行词可能building，保留低置信。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8538,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "w": [
+        "another white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "h": [
+        "a brown building with a flat roof",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "w",
+        "parked next to another white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection of Thornbury Road and Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "It is in front of a brown building with a flat roof",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8539,
+    "e": {
+      "t": [
+        "it is a white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "g": [
+        "a gray car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_right_side_of",
+        "a",
+        "on the right side of the road",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "g",
+        "near a gray car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "sixth_from_top",
+        [],
+        "sixth car from the top",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "道路右侧方向未知；top比较序列未定义。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8540,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "v": [
+        "the blue and yellow truck at to the intersection with Birchfield Road",
+        "object"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "six_cars_behind",
+        "v",
+        "6 cars behind the blue and yellow truck",
+        "U",
+        "high"
+      ],
+      [
+        "v",
+        "at_intersection_with",
+        "b",
+        "at to the intersection with Birchfield Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“at to”有语病，车流方向未提供。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8541,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the black car that is closest to the intersection with Birchfield Road",
+        "object"
+      ],
+      "r": [
+        "the intersection with Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "12_cars_behind",
+        "b",
+        "12 cars behind the black car",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "closest_to",
+        "r",
+        "closest to the intersection with Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind排序方向未知。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8542,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "p": [
+        "the rectangular compound",
+        "region"
+      ],
+      "a": [
+        "Thornbury road",
+        "named_landmark"
+      ],
+      "c": [
+        "no car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "p",
+        "parked in front of the rectangular compound",
+        "U",
+        "high"
+      ],
+      [
+        "p",
+        "along",
+        "a",
+        "compound along Thornbury road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "close_to",
+        "t",
+        "It has no car close to it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8543,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "p": [
+        "the black parking lot",
+        "region"
+      ],
+      "b": [
+        "a large brick building",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "p",
+        "black car in front of the black parking lot",
+        "U",
+        "high"
+      ],
+      [
+        "p",
+        "in_front_of",
+        "b",
+        "parking lot in front of a large brick building",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "large brick building on Thornbury Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8544,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "v": [
+        "another white car that's further behind it",
+        "object"
+      ],
+      "o": [
+        "one orange car with a black top",
+        "object"
+      ],
+      "g": [
+        "one gray car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a multi-colored brown and white building with three different colored roofs",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "v"
+        ],
+        "in between a white car and another white car that's further behind it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        [
+          "o",
+          "g"
+        ],
+        "across from one orange car with a black top and one gray car",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "on_opposite_side_of",
+        "a",
+        "on the opposite side of Thornbury Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "h",
+        "across from a multi-colored brown and white building",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8545,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "w": [
+        "two white cars",
+        "group"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a multicolored white and brown building",
+        "object"
+      ],
+      "roofs": [
+        "three different colored roofs",
+        "group"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        "w",
+        "in between two white cars on Thornbury Road",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "h",
+        "across from a multicolored white and brown building",
+        "R",
+        "high"
+      ],
+      [
+        "h",
+        "has_roofs",
+        "roofs",
+        "with three different colored roofs",
+        "I",
+        "high"
+      ],
+      [
+        "h",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Birchfield Road in Thornbury Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "道路corner短语不完整。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8546,
+    "e": {
+      "t": [
+        "A blue car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "v": [
+        "the minivan presently turning south onto Birchfield Road",
+        "object"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "r": [
+        "the right lane of traffic",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "traveling_west",
+        "a",
+        "A blue car traveling west in the right lane of traffic along Thornbury Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "fourth_in_lane_behind",
+        "v",
+        "fourth one in that lane behind the minivan presently turning south onto Birchfield Road",
+        "R",
+        "high"
+      ],
+      [
+        "v",
+        "turning_south_onto",
+        "b",
+        "turning south onto Birchfield Road",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "原文显式运动方向west与turning south，均为道路参照系；不推导坐标角度。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8547,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "a": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "w": [
+        "three white cars",
+        "group"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "near_corner_of",
+        [
+          "a",
+          "b"
+        ],
+        "near the corner of Birchfield Road and Thornbury Road",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "w",
+        "behind three white cars",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "following_behind",
+        "t",
+        "two white cars are following behind it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind/following暗示序列但道路行向未给。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8548,
+    "e": {
+      "t": [
+        "The dark gray car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "v": [
+        "the blue and yellow truck at to the intersection with Birchfield Road",
+        "object"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "four_cars_behind",
+        "v",
+        "4 cars behind the blue and yellow truck",
+        "U",
+        "high"
+      ],
+      [
+        "v",
+        "at_intersection_with",
+        "b",
+        "at to the intersection with Birchfield Road",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "at to原句语病，序列方向未明。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8549,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "w2": [
+        "another white car further up the road",
+        "object"
+      ],
+      "tr": [
+        "a brown tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "a white car behind it",
+        "U",
+        "high"
+      ],
+      [
+        "w2",
+        "further_up_road_from",
+        "t",
+        "another white car further up the road from it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "tr",
+        "a brown tree across the street from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind无道路行进方向依据。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8550,
+    "e": {
+      "t": [
+        "This is a black car",
+        "object"
+      ],
+      "a": [
+        "the Thornbury Road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "tr": [
+        "a big tree",
+        "object"
+      ],
+      "y": [
+        "a lawn",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_on",
+        "a",
+        "parked on the Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "Behind it is a white car",
+        "U",
+        "high"
+      ],
+      [
+        "tr",
+        "on",
+        "y",
+        "there is a big tree on a lawn",
+        "N",
+        "high"
+      ],
+      [
+        "tr",
+        "on_other_side_of_street_from",
+        "t",
+        "on the other side of the street there is a big tree",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8551,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "g": [
+        "a small rectangular Grassfield",
+        "region"
+      ],
+      "p": [
+        "a playground",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "w",
+        "black car with a white car behind it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "g",
+        "across the street from a small rectangular Grassfield",
+        "R",
+        "high"
+      ],
+      [
+        "g",
+        "part_of",
+        "p",
+        "Grassfield that is a part of a playground",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8552,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "g": [
+        "a rectangular grass field",
+        "region"
+      ],
+      "p": [
+        "the only playground",
+        "region"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "next_to",
+        "w",
+        "A black car next to a white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "g",
+        "across from a rectangular grass field",
+        "R",
+        "high"
+      ],
+      [
+        "g",
+        "only_playground",
+        "p",
+        "the only playground",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8553,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "tr": [
+        "a tall green tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "directly_behind",
+        "w",
+        "directly behind a white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "tr",
+        "across the street from a tall green tree",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8554,
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "a": [
+        "Thornbury Road",
+        "named_landmark"
+      ],
+      "tr": [
+        "black and green trees",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "w",
+        "gray car behind a white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "tr",
+        "across_street_from",
+        "t",
+        "trees across the street from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8555,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "the Thornbury Road",
+        "named_landmark"
+      ],
+      "o": [
+        "an orange car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "b": [
+        "a big grey building",
+        "object"
+      ],
+      "roof": [
+        "a white roof",
+        "object"
+      ],
+      "r": [
+        "the left lane",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_left_lane_of",
+        "a",
+        "black car on the left lane of the Thornbury Road, when viewing it vertically",
+        "W",
+        "high"
+      ],
+      [
+        "o",
+        "above",
+        "t",
+        "has an orange car above it",
+        "W",
+        "high"
+      ],
+      [
+        "w",
+        "below",
+        "t",
+        "a white car almost touching it below",
+        "W",
+        "high"
+      ],
+      [
+        "b",
+        "to_left_of",
+        "t",
+        "To the left of the cars is a big grey building",
+        "W",
+        "high"
+      ],
+      [
+        "b",
+        "has_upper_half_roof",
+        "roof",
+        "upper half of the building having a white roof",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "垂直俯视提供top/bottom/right map reference, not XY calibration."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8556,
+    "e": {
+      "t": [
+        "A dark blue car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "o": [
+        "an orange car with a black top",
+        "object"
+      ],
+      "h": [
+        "a multicolored brown and white building",
+        "object"
+      ],
+      "a": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Thornbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "o"
+        ],
+        "dark blue car in between a white car and an orange car with a black top",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "beside",
+        "h",
+        "beside a multicolored brown and white building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "near_road_corner",
+        [
+          "a",
+          "b"
+        ],
+        "near the corner of Birchfield Road and Thornbury Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8557,
+    "e": {
+      "t": [
+        "Dark blue car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "o": [
+        "an orange car the black top",
+        "object"
+      ],
+      "a": [
+        "thornbury Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a building with multicolored roofs",
+        "object"
+      ],
+      "l": [
+        "left side Gray",
+        "object"
+      ],
+      "ce": [
+        "Center White",
+        "object"
+      ],
+      "rr": [
+        "right side light gray",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "o"
+        ],
+        "Dark blue car in between a white car and an orange car the black top",
+        "U",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on thornbury Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "h",
+        "next to a building with multicolored roofs",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "has_roof_parts",
+        [
+          "l",
+          "ce",
+          "rr"
+        ],
+        "left side Gray, Center White, and right side light gray",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "orange car the black top为原文片段，可能缺with；颜色修饰歧义。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8558,
+    "e": {
+      "t": [
+        "Black car",
+        "object"
+      ],
+      "p": [
+        "the pavement",
+        "region"
+      ],
+      "a": [
+        "Thornbury road",
+        "named_landmark"
+      ],
+      "h": [
+        "the large grey and White House",
+        "object"
+      ],
+      "r": [
+        "a red and white car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "p",
+        "Black car on the pavement",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of the large grey and White House",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "along Thornbury road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        "r",
+        "It is in between a red and white car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8559,
+    "e": {
+      "t": [
+        "The Black car",
+        "object"
+      ],
+      "o": [
+        "the orange car",
+        "object"
+      ],
+      "w": [
+        "the white car",
+        "object"
+      ],
+      "a": [
+        "the Thornbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "o",
+          "w"
+        ],
+        "between the orange car and the white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on the Thornbury Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

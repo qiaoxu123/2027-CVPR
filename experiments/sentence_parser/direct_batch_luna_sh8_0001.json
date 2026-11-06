@@ -1,0 +1,2228 @@
+[
+  {
+    "i": 8120,
+    "e": {
+      "t": [
+        "A reddish brown four story building",
+        "object"
+      ],
+      "roof": [
+        "bluish gray peaked roof",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "tr": [
+        "A large tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_roof_color",
+        "roof",
+        "with a bluish gray peaked roof",
+        "N",
+        "high"
+      ],
+      [
+        "tr",
+        "next_to",
+        "t",
+        "A large tree is next to it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the corner of Livingstone Road and Burton Wood Drive",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8121,
+    "e": {
+      "t": [
+        "This is a building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Burton Wood Road",
+        "named_landmark"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "p": [
+        "an handicapped parking space",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        [
+          "a",
+          "b"
+        ],
+        "located on Livingstone Road and Burton Wood Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "Behind this building",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "parked_in",
+        "p",
+        "parked in an handicapped parking space",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“Behind”位置以建筑为参照，但文本未给出道路朝向，使用U。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8122,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the Livingstone Road and Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8123,
+    "e": {
+      "t": [
+        "a building",
+        "object"
+      ],
+      "a": [
+        "Burton Wood Drive",
+        "named_landmark"
+      ],
+      "b": [
+        "Livingstone Road",
+        "named_landmark"
+      ],
+      "c": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "t2": [
+        "the same building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_block_bounded_by",
+        [
+          "a",
+          "b",
+          "c"
+        ],
+        "on the block surrounded by Burton Wood Drive, Livingstone Road, and Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "t2",
+        "almost_same_as",
+        "t",
+        "almost the same building",
+        "N",
+        "high"
+      ],
+      [
+        "t2",
+        "across_street_from",
+        "t",
+        "across the street from this building",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8124,
+    "e": {
+      "t": [
+        "A multi-colored Brown and white house",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ],
+      "h": [
+        "the house next door",
+        "object"
+      ],
+      "v": [
+        "two white vehicles",
+        "group"
+      ],
+      "d": [
+        "it's driveway",
+        "region"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_map_edge",
+        "m",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "two white cars in front of it",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "v",
+        "in",
+        "d",
+        "two white vehicles in it's driveway",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "next_door_to",
+        "t",
+        "the house next door",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“in front”修饰车相对房屋，按房屋自身前部处理；车辆和房屋邻接未说明具体方位。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8125,
+    "e": {
+      "t": [
+        "A house",
+        "object"
+      ],
+      "pos": [
+        "the bottom left",
+        "region"
+      ],
+      "a": [
+        "Penshurst avenue",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_map_position",
+        "pos",
+        "at the bottom left of Penshurst avenue",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "of Penshurst avenue",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "two white cars in front",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "bottom left是文本地图描述，比较/朝向依据未定义。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8126,
+    "e": {
+      "t": [
+        "a small building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "parked_in_front_of",
+        "t",
+        "two white cars parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8127,
+    "e": {
+      "t": [
+        "The grey roof building",
+        "object"
+      ],
+      "a": [
+        "the Penhurst Avenue",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ],
+      "tr": [
+        "tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on the Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "at_front_of",
+        "t",
+        "two white cars at the front",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "no_nearby",
+        "tr",
+        "no tree closed by",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "原文“closed by”按“close by”理解为不邻近，关系置信度中。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8128,
+    "e": {
+      "t": [
+        "The gray building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "c": [
+        "two white cars",
+        "group"
+      ],
+      "s": [
+        "the street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "parked_on",
+        "s",
+        "two white cars parked on the street",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8129,
+    "e": {
+      "t": [
+        "The gray building",
+        "object"
+      ],
+      "l": [
+        "a tannish lot",
+        "region"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in",
+        "l",
+        "in a tannish lot",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_end_of",
+        "a",
+        "at the end of Penhurst Avenue",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "道路末端沿线排序方向未指明。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8130,
+    "e": {
+      "t": [
+        "A square home",
+        "object"
+      ],
+      "roof": [
+        "dark gray roof",
+        "object"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "v": [
+        "white van",
+        "object"
+      ],
+      "d": [
+        "the drive",
+        "region"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "x": [
+        "a small sqaured add on",
+        "object"
+      ],
+      "sk": [
+        "three skylight windows",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_roof",
+        "roof",
+        "with a dark gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has_backside_feature",
+        "sk",
+        "three skylight windows on th backside",
+        "I",
+        "medium"
+      ],
+      [
+        "x",
+        "at_front_of",
+        "t",
+        "a small sqaured add on at the front",
+        "I",
+        "high"
+      ],
+      [
+        "c",
+        "parked_in",
+        "d",
+        "a white car and white van parked in the drive",
+        "N",
+        "high"
+      ],
+      [
+        "v",
+        "parked_in",
+        "d",
+        "white van parked in the drive",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "at_curb_of",
+        "a",
+        "at the curb on Penhurst Avenue",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "句中drive并未明确由home拥有；保留停车关系到该车道。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8131,
+    "e": {
+      "t": [
+        "House",
+        "object"
+      ],
+      "c": [
+        "one white van",
+        "object"
+      ],
+      "c2": [
+        "one white car",
+        "object"
+      ],
+      "r": [
+        "one red car",
+        "object"
+      ],
+      "p": [
+        "this parking lot",
+        "region"
+      ],
+      "road": [
+        "the road",
+        "region"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "in",
+        "p",
+        "one white van in one white car",
+        "N",
+        "low"
+      ],
+      [
+        "c2",
+        "in",
+        "p",
+        "two vehicles in this parking lot",
+        "N",
+        "medium"
+      ],
+      [
+        "r",
+        "on",
+        "road",
+        "one red car on the road",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "in_front_of",
+        "t",
+        "in front of the house",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "of Penhurst Avenue",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“one white van in one white car”有语病，停车场关系可确定但两辆车各自所处区域表达不清；关系列表保守保留。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8132,
+    "e": {
+      "t": [
+        "A brick building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "d": [
+        "a drive",
+        "region"
+      ],
+      "roof": [
+        "gray roof",
+        "object"
+      ],
+      "c": [
+        "a white car",
+        "object"
+      ],
+      "v": [
+        "white van",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_roof",
+        "roof",
+        "with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "in",
+        "d",
+        "a drive with a white car and white van in it",
+        "N",
+        "high"
+      ],
+      [
+        "v",
+        "in",
+        "d",
+        "white car and white van in it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off of Penhurst Avenue",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8133,
+    "e": {
+      "t": [
+        "The brownish gray house",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "parked_in_front_of",
+        "t",
+        "a red car parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8134,
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "r",
+        "parked_in_front_of",
+        "t",
+        "a red car parked in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8135,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "the Penhurst Avenue",
+        "named_landmark"
+      ],
+      "r": [
+        "the only red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "r",
+        "at_front_of",
+        "t",
+        "the only red car at front",
+        "I",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on the Penhurst Avenue",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8136,
+    "e": {
+      "t": [
+        "The small building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "b": [
+        "a larger building",
+        "object"
+      ],
+      "roof": [
+        "black roof",
+        "object"
+      ],
+      "d": [
+        "it's driveway",
+        "region"
+      ],
+      "material": [
+        "brick",
+        "object"
+      ],
+      "w": [
+        "a wall",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "connected_to",
+        "b",
+        "connected to a larger building",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "made_of",
+        "material",
+        "that is brick",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "has_roof",
+        "roof",
+        "with a black roof",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "around",
+        "d",
+        "a wall around it's driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "从属从句“has a wall around its driveway”最直接修饰较大建筑。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8137,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "b": [
+        "Canterbury Road",
+        "named_landmark"
+      ],
+      "tr": [
+        "the green tree",
+        "object"
+      ],
+      "y": [
+        "the side yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "a",
+          "b"
+        ],
+        "between Penhurst Avenue and Canterbury Road",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "tr",
+          "y"
+        ],
+        "between the green tree and the side yard",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8138,
+    "e": {
+      "t": [
+        "The grayish brown house",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "g": [
+        "the largest green yard",
+        "region"
+      ],
+      "s": [
+        "that street",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "g",
+        "with the largest green yard",
+        "N",
+        "high"
+      ],
+      [
+        "g",
+        "on",
+        "s",
+        "on that street",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8139,
+    "e": {
+      "t": [
+        "The small brown house",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "g": [
+        "the largest yard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "g",
+        "that has the largest yard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8140,
+    "e": {
+      "t": [
+        "The brick building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield",
+        "named_landmark"
+      ],
+      "p": [
+        "a pathway",
+        "region"
+      ],
+      "d": [
+        "It's driveway",
+        "region"
+      ],
+      "w": [
+        "a wall",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "to",
+        "b",
+        "a pathway to the buildings on Birchfield",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "around",
+        "d",
+        "a wall around it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "d",
+        "It's driveway",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8141,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "g": [
+        "grass",
+        "region"
+      ],
+      "p": [
+        "a pathway",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "surrounded_by",
+        "g",
+        "surrounded by grass",
+        "N",
+        "high"
+      ],
+      [
+        "p",
+        "in_front_of",
+        "t",
+        "a pathway in front of it",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8142,
+    "e": {
+      "t": [
+        "The small brown house",
+        "object"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "g": [
+        "the largest backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "g",
+        "with the largest backyard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8143,
+    "e": {
+      "t": [
+        "Two brown conjoined homes",
+        "group"
+      ],
+      "a": [
+        "Penhurst Avenue",
+        "named_landmark"
+      ],
+      "h": [
+        "a house",
+        "object"
+      ],
+      "g": [
+        "a pile of garbage",
+        "object"
+      ],
+      "l": [
+        "its lawn",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "off",
+        "a",
+        "off Penhurst Avenue",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "h",
+        "across the street from a house",
+        "R",
+        "high"
+      ],
+      [
+        "g",
+        "on",
+        "l",
+        "a pile of garbage on its lawn",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "has",
+        "g",
+        "a house that has a pile of garbage on its lawn",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8144,
+    "e": {
+      "t": [
+        "Two brown and white houses",
+        "group"
+      ],
+      "h": [
+        "a brown and white L-shaped house",
+        "object"
+      ],
+      "a": [
+        "penhurst Avenue",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "joined_together",
+        "t",
+        "Two brown and white houses come join together",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "next_to",
+        "t",
+        "next to a brown and white L-shaped house",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off penhurst Avenue",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“one longer fen the other”有拼写/缺词问题，长短比较对象未明确，不补写关系。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8145,
+    "e": {
+      "t": [
+        "A multicolored brown and white house",
+        "object"
+      ],
+      "roof1": [
+        "gray roof",
+        "object"
+      ],
+      "roof2": [
+        "brown roof",
+        "object"
+      ],
+      "a": [
+        "Canterbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Bayswater Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_roof",
+        "roof1",
+        "with a gray roof on one side",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has_roof",
+        "roof2",
+        "and a brown roof on the other side",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Canterbury Road and Bayswater Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8146,
+    "e": {
+      "t": [
+        "a building",
+        "object"
+      ],
+      "roof": [
+        "grey roof",
+        "object"
+      ],
+      "wall": [
+        "brown wall",
+        "object"
+      ],
+      "a": [
+        "Bayswater road",
+        "named_landmark"
+      ],
+      "b": [
+        "Canterbury road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_roof",
+        "roof",
+        "with grey roof",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has_wall_color",
+        "wall",
+        "and brown wall",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection point of two road named Bayswater road and Canterbury road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8147,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "roof": [
+        "gray roof",
+        "object"
+      ],
+      "a": [
+        "Caterbury Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Bayswater Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Caterbury Road and Bayswater Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has_roof",
+        "roof",
+        "that has a gray roof",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8148,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Bayswater Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Canterbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Bayswater Road and Canterbury Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8149,
+    "e": {
+      "t": [
+        "The Right End section",
+        "object"
+      ],
+      "c": [
+        "a multi housing complex",
+        "group"
+      ],
+      "a": [
+        "Bayswater Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Canterbury Road",
+        "named_landmark"
+      ],
+      "s": [
+        "the red-lined section",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "part_of",
+        "c",
+        "section of a multi housing complex",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_side_of",
+        "c",
+        "Right End section",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "missing_front_walls",
+        "c",
+        "all missing their front walls",
+        "I",
+        "high"
+      ],
+      [
+        "s",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Bayswater Road and Canterbury Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“Right End”是文本描述的区段方位，缺乏明确观察者/地图轴；房屋正面朝向也未给出。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8150,
+    "e": {
+      "t": [
+        "The end section",
+        "object"
+      ],
+      "c": [
+        "a multi housing complex",
+        "group"
+      ],
+      "a": [
+        "Bayswater Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Canterbury Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "part_of",
+        "c",
+        "section of a multi housing complex",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "off",
+        "a",
+        "off Bayswater Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Bayswater Road in Canterbury Road",
+        "N",
+        "medium"
+      ]
+    ],
+    "u": [
+      "“on the corner”在前句道路交界上的附着不确定；保留道路交叉语义但置信度中。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8151,
+    "e": {
+      "t": [
+        "this brown roofed building",
+        "object"
+      ],
+      "a": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "h": [
+        "the huge building on the corner",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_northern_side_of",
+        "a",
+        "On the northern side of Bragg Road",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "h",
+        "is across from the huge building",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "near",
+        "a",
+        "the huge building on the corner",
+        "U",
+        "medium"
+      ]
+    ],
+    "u": [
+      "north为原文地理方位，未校准到地图坐标；across from未说明具体道路。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8152,
+    "e": {
+      "t": [
+        "this brown roofed building",
+        "object"
+      ],
+      "a": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Bragg Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "first_from_top",
+        [],
+        "first from the top",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "near",
+        "b",
+        "near Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "“first from the top”的比较集合未给出，参照物留空。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8153,
+    "e": {
+      "t": [
+        "The brown house",
+        "object"
+      ],
+      "a": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Bragg Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Birchfield Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "at the intersection with Bragg Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8154,
+    "e": {
+      "t": [
+        "Corner section of a long building",
+        "object"
+      ],
+      "roof2": [
+        "a brown roof",
+        "object"
+      ],
+      "a": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "v": [
+        "a white van",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "has_roof",
+        "roof2",
+        "with a brown roof",
+        "N",
+        "high"
+      ],
+      [
+        "v",
+        "parked_on_side_of",
+        "t",
+        "a white van parked on the side of it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "on the corner of Birchfield Road and Bragg Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8155,
+    "e": {
+      "t": [
+        "a residential building",
+        "object"
+      ],
+      "a": [
+        "Birchfield",
+        "named_landmark"
+      ],
+      "b": [
+        "Bragg Road",
+        "named_landmark"
+      ],
+      "v": [
+        "two white vans",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_road_intersection",
+        [
+          "a",
+          "b"
+        ],
+        "located on Birchfield and Bragg Road",
+        "N",
+        "medium"
+      ],
+      [
+        "v",
+        "near",
+        "t",
+        "two white vans parked nearby",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8156,
+    "e": {
+      "t": [
+        "The building",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "the large buildings",
+        "group"
+      ],
+      "p": [
+        "the parking lot",
+        "region"
+      ],
+      "s": [
+        "a small shed",
+        "object"
+      ],
+      "g": [
+        "the backyard",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "beside",
+        "b",
+        "is beside the large buildings",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "has",
+        "p",
+        "large buildings with the parking lot",
+        "N",
+        "high"
+      ],
+      [
+        "s",
+        "in",
+        "g",
+        "a small shed in the backyard",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8157,
+    "e": {
+      "t": [
+        "this blue roofed house",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "b": [
+        "the large building",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "right_above",
+        "b",
+        "is right above the large building",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right above是描述性地图上下位置，未说明道路/观察者坐标。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8158,
+    "e": {
+      "t": [
+        "Right section of a brown home",
+        "object"
+      ],
+      "roof": [
+        "a gray roof",
+        "object"
+      ],
+      "home": [
+        "a brown home",
+        "object"
+      ],
+      "h": [
+        "another identical looking house",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "tr": [
+        "a tree",
+        "object"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ],
+      "solar": [
+        "solar panels",
+        "object"
+      ],
+      "leaves": [
+        "brown leaves",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "part_of",
+        "h",
+        "Right section of a brown home",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has_roof",
+        "roof",
+        "with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "solar",
+        "that has solar panels on it",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "identical_looking_to",
+        "home",
+        "another identical looking house",
+        "N",
+        "medium"
+      ],
+      [
+        "h",
+        "on_map_edge",
+        "m",
+        "on the edge of the map",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "off",
+        "a",
+        "off Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "h",
+        "across_from",
+        "tr",
+        "across from a tree",
+        "U",
+        "high"
+      ],
+      [
+        "tr",
+        "has_leaf_color",
+        "leaves",
+        "with brown leaves on it",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“Right section”目标实体边界含混；不据此构造与其它建筑的左右拓扑。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8159,
+    "e": {
+      "t": [
+        "The right side of a brown house",
+        "object"
+      ],
+      "h1": [
+        "two other brown houses",
+        "group"
+      ],
+      "roof": [
+        "gray roof",
+        "object"
+      ],
+      "solar": [
+        "solar panels",
+        "object"
+      ],
+      "leaves": [
+        "brownish red leaves",
+        "object"
+      ],
+      "a": [
+        "Graham Warren Way",
+        "named_landmark"
+      ],
+      "tr": [
+        "a tree",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "part_of",
+        "h1",
+        "The right side of a brown house",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has_roof",
+        "roof",
+        "with a gray roof",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "has",
+        "solar",
+        "that has solar panels on it",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_between",
+        "h1",
+        "in between two other brown houses",
+        "U",
+        "high"
+      ],
+      [
+        "h1",
+        "off",
+        "a",
+        "off Graham Warren Way",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "tr",
+        "across from a tree",
+        "U",
+        "high"
+      ],
+      [
+        "tr",
+        "has_leaf_color",
+        "leaves",
+        "with brownish red leaves",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "“staff solar panels”语句残缺，不将其改写为可靠的独立属性；right side为房屋部分而非参照方向。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]

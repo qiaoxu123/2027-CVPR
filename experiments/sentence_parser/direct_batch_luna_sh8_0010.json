@@ -1,0 +1,2182 @@
+[
+  {
+    "i": 8480,
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "g": [
+        "a grayish blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_on",
+        "a",
+        "parked on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "b",
+        "in_front_of",
+        "t",
+        "In front of it is a black car",
+        "U",
+        "high"
+      ],
+      [
+        "g",
+        "behind",
+        "t",
+        "behind it is a grayish blue car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8481,
+    "e": {
+      "t": [
+        "this red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "two dark blue cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "On Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        "b",
+        "this red car is between two dark blue cars",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "fourth_from_bottom",
+        [],
+        "fourth car from the bottom",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "bottom排序集合未明确。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8482,
+    "e": {
+      "t": [
+        "a red car",
+        "object"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ],
+      "d": [
+        "a partially visible dark blue car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "y": [
+        "the backyard that has a black pool in it",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "smashed_together_with",
+        "b",
+        "a red car and a blue car smashed together",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "c",
+          "d"
+        ],
+        "in between a black car and a partially visible dark blue car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "nearest_to",
+        "y",
+        "nearest to the backyard that has a black pool in it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "red-lined修饰汽车标注状态；nearest的候选集未给出。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8483,
+    "e": {
+      "t": [
+        "This is a red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a black and a silver car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_on",
+        "a",
+        "This is a red car parked behind a black and a silver car on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "behind",
+        "b",
+        "parked behind a black and a silver car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "near_end_of",
+        "a",
+        "near the end of the street",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on_opposite_side_of_street_from",
+        "r",
+        "parked on the opposite side of the street and slightly ahead and to the left of another red car",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "slightly_ahead_and_left_of",
+        "r",
+        "slightly ahead and to the left of another red car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "车辆behind的队列方向未知；ahead/left缺少观测/行进方向。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8484,
+    "e": {
+      "t": [
+        "this is a red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "g": [
+        "4 red cars",
+        "group"
+      ],
+      "s": [
+        "3 of these cars",
+        "group"
+      ],
+      "o": [
+        "1 is on the other side",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "it is on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "among",
+        "g",
+        "There are 4 red cars on this road",
+        "N",
+        "high"
+      ],
+      [
+        "s",
+        "on_one_side_of",
+        "a",
+        "3 of these cars are on one side of the road",
+        "R",
+        "high"
+      ],
+      [
+        "o",
+        "on_other_side_of",
+        "a",
+        "1 is on the other side",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "only_one",
+        "s",
+        "this car is the only one",
+        "N",
+        "low"
+      ]
+    ],
+    "u": [
+      "“only one”可能指一侧仅一辆，而非红车唯一，作用域不确定。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8485,
+    "e": {
+      "t": [
+        "The last red car",
+        "object"
+      ],
+      "b": [
+        "the light orange brick building",
+        "object"
+      ],
+      "a": [
+        "the Willmore Road",
+        "named_landmark"
+      ],
+      "r": [
+        "the red car",
+        "object"
+      ],
+      "n": [
+        "no car",
+        "object"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_in_front_of",
+        "b",
+        "parked in front of the light orange brick building",
+        "I",
+        "high"
+      ],
+      [
+        "b",
+        "on",
+        "a",
+        "on the Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "last_of",
+        [],
+        "The last red car",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "across_from",
+        "r",
+        "across is the red car",
+        "R",
+        "low"
+      ],
+      [
+        "n",
+        "behind",
+        "t",
+        "behind is no car",
+        "U",
+        "low"
+      ],
+      [
+        "c",
+        "at_front_of",
+        "t",
+        "a black car is at front",
+        "I",
+        "high"
+      ]
+    ],
+    "u": [
+      "across/behind句子语序碎片，候选需保留低置信。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8486,
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "r": [
+        "The car behind it is red",
+        "object"
+      ],
+      "c": [
+        "the one in front of it is black",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "A red car on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "second_to_last_on_right_from",
+        "b",
+        "second to last car on the right side coming from Birchfield Road",
+        "R",
+        "medium"
+      ],
+      [
+        "r",
+        "behind",
+        "t",
+        "The car behind it is red",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "the one in front of it is black",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "来向明确，但汽车右侧路线的具体侧别未完全清楚。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8487,
+    "e": {
+      "t": [
+        "One red car",
+        "object"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ],
+      "r": [
+        "another red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "m": [
+        "the edge of the map",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "with a black car in front of it",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "r",
+        "across from another red car on the opposite side of Willmore Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "m",
+        "next to the edge of the map",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8488,
+    "e": {
+      "t": [
+        "The only red car",
+        "object"
+      ],
+      "a": [
+        "the side of Willmore Road with fewer cars",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on the side of Willmore Road with fewer cars",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "“only”在车少的一侧限定范围内。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8489,
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "b": [
+        "two road named Willmore road and Birchfield road",
+        "region"
+      ],
+      "w": [
+        "A white car",
+        "object"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "at_left_side_of",
+        "a",
+        "parked at the left side near the intersection point",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "at_road_intersection",
+        "b",
+        "near the intersection point of two road named Willmore road and Birchfield road",
+        "N",
+        "high"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "A white car parked behind it",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "a black car parked in front of it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "道路左侧参照方向未知；车辆前后排列不表示道路行向。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8490,
+    "e": {
+      "t": [
+        "A red car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "b": [
+        "a partially visible dark blue car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "i": [
+        "the corner of Willmore Road and Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "b"
+        ],
+        "in between a white car and a partially visible dark blue car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "i",
+        "near the corner of Willmore Road and Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8491,
+    "e": {
+      "t": [
+        "The red car",
+        "object"
+      ],
+      "w": [
+        "the white car parked at the corner of the Willmore Road and The Birchfield Road",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "w",
+        "red car that is behind the white car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind关系无道路方向证据。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8492,
+    "e": {
+      "t": [
+        "One red car",
+        "object"
+      ],
+      "w": [
+        "a white van",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "i": [
+        "the corner of Willmore Road and Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "b"
+        ],
+        "One red car in between a white van and a black car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "near",
+        "i",
+        "near the corner of Willmore Road and Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8493,
+    "e": {
+      "t": [
+        "Red car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "w": [
+        "a white van",
+        "object"
+      ],
+      "i": [
+        "the corner of Wilmore Road and Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "w"
+        ],
+        "in between a black car and a white van",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "i",
+        "on the corner of Wilmore Road and Birchfield Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8494,
+    "e": {
+      "t": [
+        "A red vehicle",
+        "object"
+      ],
+      "a": [
+        "Willmore",
+        "named_landmark"
+      ],
+      "b": [
+        "birchfield",
+        "named_landmark"
+      ],
+      "tr": [
+        "three trampolines",
+        "group"
+      ],
+      "y": [
+        "the yards to the left",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "A red vehicle on Willmore",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "just_off",
+        "b",
+        "just off of birchfield",
+        "U",
+        "high"
+      ],
+      [
+        "tr",
+        "in",
+        "y",
+        "three trampolines in the yards to the left",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "yards的左侧参考方向不明。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8495,
+    "e": {
+      "t": [
+        "This is a car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "car on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "left_turn_onto",
+        "a",
+        "take a left onto Willmore Road coming from Birchfield Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "to_left_of_observer",
+        "a",
+        "the car is to your left",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "seventh_to_left",
+        [],
+        "It's the 7th car to the left",
+        "R",
+        "medium"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "w",
+          "c"
+        ],
+        "parked between a white car and a black car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "来向明确约束“your left”；汽车序列范围仍未说明。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8496,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "v": [
+        "the large purplish blue van",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "v",
+        "white car behind the large purplish blue van",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "车辆behind关系参考系未知。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8497,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a blue car",
+        "object"
+      ],
+      "h": [
+        "the second house from the left",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "parked_on",
+        "a",
+        "parked on the left side of Willmore Road",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "next_to",
+        "b",
+        "next to a blue car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of the second house from the left",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "second_from_left",
+        [],
+        "second house from the left",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "road left侧未给出观察方向；house left比较集合也未明确。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8498,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "h": [
+        "a brown townhouse with a grey roof",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "f": [
+        "empty parking spots",
+        "group"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "A white car parked in front of a brown townhouse with a grey roof",
+        "I",
+        "high"
+      ],
+      [
+        "h",
+        "along",
+        "a",
+        "along Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "f",
+        "in_front_of",
+        "t",
+        "There are empty parking spots in front of and behind the car",
+        "U",
+        "high"
+      ],
+      [
+        "f",
+        "behind",
+        "t",
+        "There are empty parking spots in front of and behind the car",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "across_street_from",
+        "t",
+        "a black car parked across the street from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8499,
+    "e": {
+      "t": [
+        "A white car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "g": [
+        "a dark green car that's further away",
+        "object"
+      ],
+      "c": [
+        "a black car that's next to a multicolored dark blue and red bus",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "g"
+        ],
+        "in between a black car and a dark green car",
+        "U",
+        "high"
+      ],
+      [
+        "g",
+        "further_from",
+        "t",
+        "that's further away",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "c",
+        "across from a black car that's next to a multicolored dark blue and red bus",
+        "R",
+        "high"
+      ],
+      [
+        "c",
+        "on_opposite_side_of",
+        "a",
+        "on the opposite side of Willmore Road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8500,
+    "e": {
+      "t": [
+        "this white car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a dark blue car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_right_side_of",
+        "a",
+        "On the right side of Willmore Road",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "north_of",
+        "b",
+        "this white car is north of a dark blue car",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "third_from_bottom",
+        [],
+        "third from the bottom",
+        "W",
+        "medium"
+      ]
+    ],
+    "u": [
+      "right roadway side is uncalibrated; ordinal set unspecified."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8501,
+    "e": {
+      "t": [
+        "The what car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "c": [
+        "a black car",
+        "object"
+      ],
+      "v": [
+        "a blue bus",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "b",
+        "what car behind a black car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "c",
+        "beside",
+        "t",
+        "There is a black car and a blue bus beside it",
+        "U",
+        "high"
+      ],
+      [
+        "v",
+        "beside",
+        "t",
+        "and a blue bus beside it",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "“what car”保留原句指称异常；同一句black car可能既参照又并列。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8502,
+    "e": {
+      "t": [
+        "One white car",
+        "object"
+      ],
+      "a": [
+        "Wilmore Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a two-story brown house",
+        "object"
+      ],
+      "c": [
+        "a red and black car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "One white car on Wilmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of a two-story brown house",
+        "U",
+        "high"
+      ],
+      [
+        "h",
+        "closest_to",
+        "c",
+        "house closest to a red and black car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "closest附着对象可能为house相对cars。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8503,
+    "e": {
+      "t": [
+        "The white car",
+        "object"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "c": [
+        "a black car on Willmore Road",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "b",
+        "white car behind a black car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "c",
+        "across the street from a black car on Willmore Road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8504,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "g": [
+        "a dark green car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "c": [
+        "a gray car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "g",
+          "r"
+        ],
+        "between a dark green car and a red car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_street_from",
+        "c",
+        "a gray car across the street from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8505,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "r": [
+        "the only red car on the side of Willmore Road that has fewer cars",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "r",
+        "in front of the only red car on the side of Willmore Road that has fewer cars",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "in front of cars could be layout or travel order; U."
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8506,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "g": [
+        "the only green car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "behind",
+        "g",
+        "black car that is behind the only green car",
+        "U",
+        "high"
+      ],
+      [
+        "g",
+        "on",
+        "a",
+        "green car on Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind不编码道路方向。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8507,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "b": [
+        "another black car",
+        "object"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "h": [
+        "a brown house with a peaked roof and a chimney",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "r"
+        ],
+        "parked in between another black car and a red car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "It is in front of a brown house with a peaked roof and a chimney",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8508,
+    "e": {
+      "t": [
+        "this black car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "r": [
+        "a red car",
+        "object"
+      ],
+      "s": [
+        "the south side of Willmore Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on_south_side_of",
+        "a",
+        "On the south side of Willmore Road",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "fifth_from_left",
+        [],
+        "fifth car from the left",
+        "W",
+        "medium"
+      ],
+      [
+        "t",
+        "to_left_of",
+        "r",
+        "to the left of a red car",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "left侧车辆序列方向未给出。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8509,
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "h": [
+        "a building with a cream colored front with white windows",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "b",
+        "in front of a black car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "h",
+        "in front of a building with a cream colored front with white windows",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8510,
+    "e": {
+      "t": [
+        "The black car",
+        "object"
+      ],
+      "a": [
+        "the Willmore Road",
+        "named_landmark"
+      ],
+      "n": [
+        "No car",
+        "object"
+      ],
+      "b": [
+        "black and red cars",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on the Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "n",
+        "in_front_of",
+        "t",
+        "No car parked in front",
+        "I",
+        "high"
+      ],
+      [
+        "b",
+        "behind",
+        "t",
+        "behind is black and red cars",
+        "U",
+        "low"
+      ],
+      [
+        "b",
+        "across_from",
+        "t",
+        "across, behind is black and red cars",
+        "R",
+        "low"
+      ]
+    ],
+    "u": [
+      "across/behind协调语法不清，两种关系都低置信。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8511,
+    "e": {
+      "t": [
+        "The green-black car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "a black car",
+        "object"
+      ],
+      "w": [
+        "a smaller white car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_side_of",
+        "a",
+        "on the right side of Willmore Road when viewing it vertically",
+        "W",
+        "high"
+      ],
+      [
+        "b",
+        "above",
+        "t",
+        "it has a black car above",
+        "W",
+        "high"
+      ],
+      [
+        "w",
+        "below",
+        "t",
+        "a smaller white car below",
+        "W",
+        "high"
+      ],
+      [
+        "t",
+        "before",
+        "w",
+        "a lot of space before a smaller white car below",
+        "W",
+        "high"
+      ]
+    ],
+    "u": [
+      "明确垂直俯视比较方位；不校准地图XY。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8512,
+    "e": {
+      "t": [
+        "This is a grey car",
+        "object"
+      ],
+      "w": [
+        "a small part of a white car",
+        "object"
+      ],
+      "a": [
+        "the road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "grey car on Willmore Road",
+        "N",
+        "medium"
+      ],
+      [
+        "w",
+        "on_opposite_side_of_road_from",
+        "t",
+        "a small part of a white car on the opposite side of the road",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8513,
+    "e": {
+      "g": [
+        "one olive green car",
+        "object"
+      ],
+      "w": [
+        "the front section of a white car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "g",
+        "beside",
+        "w",
+        "one olive green car beside the front section of a white car",
+        "U",
+        "high"
+      ],
+      [
+        "w",
+        "on",
+        "a",
+        "front section of a white car on Willmore Road",
+        "N",
+        "high"
+      ]
+    ],
+    "u": [
+      "front section修饰白车的一部分，不解析为车前方的道路位置。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8514,
+    "e": {
+      "t": [
+        "One black car",
+        "object"
+      ],
+      "b": [
+        "another black car",
+        "object"
+      ],
+      "w": [
+        "the white car on Wilmore Road",
+        "object"
+      ],
+      "y": [
+        "a side yard with a black pool in it",
+        "region"
+      ],
+      "o": [
+        "an open area",
+        "region"
+      ],
+      "h": [
+        "a brown home with a gray roof",
+        "object"
+      ],
+      "h2": [
+        "a white home with a gray roof",
+        "object"
+      ],
+      "a": [
+        "Wilmore Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "w"
+        ],
+        "One black car in between another black car and the white car",
+        "U",
+        "high"
+      ],
+      [
+        "w",
+        "on",
+        "a",
+        "white car on Wilmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "between",
+        [
+          "y",
+          "o"
+        ],
+        "in between a side yard with a black pool in it and an open area",
+        "U",
+        "high"
+      ],
+      [
+        "o",
+        "between",
+        [
+          "h",
+          "h2"
+        ],
+        "between a brown home with a gray roof and a white home with a gray roof",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8515,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "b": [
+        "another black car",
+        "object"
+      ],
+      "w": [
+        "a white car",
+        "object"
+      ],
+      "d": [
+        "a partially visible dark blue car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "y": [
+        "a backyard with a black pool in it",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "between",
+        [
+          "b",
+          "w"
+        ],
+        "in between another black car and a white car",
+        "U",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "d",
+        "a partially visible dark blue car across from it on the opposite side of Willmore Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "across_from",
+        "y",
+        "across from a backyard with a black pool in it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "两个across参照物依原句并列。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8516,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "w": [
+        "A white car",
+        "object"
+      ],
+      "r": [
+        "two red car",
+        "group"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "right_side_of",
+        "a",
+        "parked at the right side of the road named Willmore road",
+        "U",
+        "high"
+      ],
+      [
+        "w",
+        "behind",
+        "t",
+        "A white car parked behind it",
+        "U",
+        "high"
+      ],
+      [
+        "r",
+        "on_opposite_side_of_road_from",
+        "t",
+        "two red car parked diagonally at the opposite side of the road from it",
+        "R",
+        "high"
+      ]
+    ],
+    "u": [
+      "right side roadway未给行进参照；车辆behind不是有向道路关系。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8517,
+    "e": {
+      "t": [
+        "A black car",
+        "object"
+      ],
+      "a": [
+        "Willmore road",
+        "named_landmark"
+      ],
+      "e": [
+        "the second empty area",
+        "region"
+      ],
+      "c": [
+        "no closer car",
+        "object"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "parked in front of the second empty area along Willmore road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "in_front_of",
+        "e",
+        "parked in front of the second empty area",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "behind",
+        "t",
+        "It has no closer car behind or in front",
+        "U",
+        "high"
+      ],
+      [
+        "c",
+        "in_front_of",
+        "t",
+        "It has no closer car behind or in front",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8518,
+    "e": {
+      "t": [
+        "The gray car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "the black car closest to the intersection with Birchfield Road",
+        "object"
+      ],
+      "r": [
+        "the intersection with Birchfield Road",
+        "region"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "on",
+        "a",
+        "on Willmore Road",
+        "N",
+        "high"
+      ],
+      [
+        "t",
+        "one_car_behind",
+        "b",
+        "1 car behind the black car",
+        "U",
+        "high"
+      ],
+      [
+        "b",
+        "closest_to",
+        "r",
+        "closest to the intersection with Birchfield Road",
+        "U",
+        "high"
+      ]
+    ],
+    "u": [
+      "behind车辆队列朝向未知。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  },
+  {
+    "i": 8519,
+    "e": {
+      "t": [
+        "this is the 2nd car",
+        "object"
+      ],
+      "a": [
+        "Willmore Road",
+        "named_landmark"
+      ],
+      "b": [
+        "Birchfield Road",
+        "named_landmark"
+      ]
+    },
+    "r": [
+      [
+        "t",
+        "turn_onto",
+        "a",
+        "turn onto Willmore Road coming from Birchfield Road",
+        "R",
+        "high"
+      ],
+      [
+        "t",
+        "second_to_right_of_observer",
+        [],
+        "this is the 2nd car on your right",
+        "R",
+        "medium"
+      ]
+    ],
+    "u": [
+      "转入路线给出观察者方位依据，序列范围不明。"
+    ],
+    "author_model": "gpt-6-luna",
+    "author_reasoning_effort": "low"
+  }
+]
