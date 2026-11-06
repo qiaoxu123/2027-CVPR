@@ -35,7 +35,12 @@ def relation_mode(instruction: str) -> int:
     inside = bool(re.search(r"\b(inside|within|in|parked in|parked at)\b", clean))
     if parking and vehicle and inside:
         return 2
-    return 1
+    # Unsupported reference frames (e.g. only behind/left/right) abstain.
+    direct = bool(re.search(
+        r"\b(near|next to|beside|adjacent|close to|along|within|inside|by|off)\b",
+        clean,
+    ))
+    return 1 if direct else 0
 
 
 class RegionAugmentedCandidateDataset(FullCandidateDataset):
@@ -191,7 +196,7 @@ class HierarchicalRelationGraph(nn.Module):
         anchor_any = anchor_valid.any(-1)
         indirect = ((mode == 2) & region_valid.any(-1) & anchor_any
                     & (ablation not in ("flat",)))
-        direct = (mode == 1) & anchor_any
+        direct = ((mode == 1) | ((mode == 2) & (ablation == "flat"))) & anchor_any
         active = direct | indirect
         text_mean = ((tokens * token_mask[..., None].float()).sum(1) /
                      token_mask.sum(1, keepdim=True).clamp_min(1))
@@ -218,7 +223,8 @@ class HierarchicalRelationGraph(nn.Module):
         # First pass: an intermediate public parking polygon attends to
         # named landmarks; second pass: each fine cell attends to intermediates.
         region_features = self.kind(region_types.long()) + self.region_seed(
-            region_anchor_geometry.float().mean(2)
+            region_anchor_geometry.float().mean(2) if use_geom
+            else torch.zeros(b, r, 10, device=query.device, dtype=query.dtype)
         )
         sa = self.score_ra(torch.tanh(
             region_features[:, :, None] + anchors[:, None] + gra +
