@@ -105,3 +105,46 @@ done
 保存原始predictions.jsonl/episodes.json/repair audit/paired per_episode.jsonl，
 生成失效案例可视化图册；Commit/Push到PR28，只做Val-Seen，
 不跑Test、不改变main。
+
+
+## 数据版本核对：Refined / Revised / Processed
+
+**已证实事实：**
+- Unified V2 原TRAIN配置指向 data/revised_static/graphnav_train_seen.jsonl，
+  dataset_version=revised、match_mode=fuzzy；21,878条。
+  原TRAIN参考地标由目标ID+标注ID检索processed_descriptions。
+- 2470闭环的annotation来自
+  DATA/sbfnav-data/processed_citynav/citynav_val_seen.json，
+  公共Polygon来自DATA/sbfnav-data/cityrefer_original/objects.json。
+- scripts/prepare_citynav.py明确写明dataset_version仅由操作者声明，
+  程序不会通过文件内容检查是否等于HETT Refined。
+- AAAI2026 HETT公开人工修订的Refined CityNav，覆盖缺失标注、
+  拼写与错误地标抽取及无法落地数据。
+  该术语与本地revised文件夹名称**不能直接等同**。
+- 尚未核对HETT官方Refined原始文件与本地processed_citynav和
+  processed_descriptions的逐Episode内容，因此既不能断言
+  Val-Seen完全使用了HETT Refined，也不能断言它没有使用。
+
+新增scripts/audit_hett_refined_data.py：
+从HETT作者官方Refined下载包拿到文件后，由本地提供真实路径；
+按map、object ID、annotation ID对齐指令和地标关系标注，
+计算SHA及缺失/新增/修订记录数，捕捉只更改参考地标
+而完全没修改指令文本的情形。不可仅凭路径或记录数判断。
+
+~~~bash
+# 变量由本地AI在下载HETT作者Refined后填入真实路径
+"$PY" -m scripts.audit_hett_refined_data \
+  --current-val "$DATA/processed_citynav/citynav_val_seen.json" \
+  --official-val "$OFFICIAL_HETT_REFINED_VAL" \
+  --current-processed "$DATA/cityrefer_original/processed_descriptions.json" \
+  --official-processed "$OFFICIAL_HETT_REFINED_PROCESSED" \
+  --output "$OUT/hett_refined_provenance.json"
+~~~
+
+即使使用了HETT Refined，公开Polygon无效和超过16个就整行清空
+仍然是当前本地绑定实现问题，并不会被补齐地标annotation自动修复。
+
+PR28的配对修复严格锁定当前2470例原数据版本；
+不要中途替换为官方Refined并与原45.75%直接比较。
+如果研究两个数据版本，应按共有Episode重新分层对比，
+报告增加/删除/变更的指令及其地标引用，保留公开数据SHA。
