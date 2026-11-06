@@ -150,3 +150,45 @@ def test_rejects_malformed_world_registration():
     args["world_bounds"][0,2]=0
     with pytest.raises(ValueError):
         UnifiedPGVBV3(TinyGeometry())(**args)
+
+
+def test_blind_public_polygon_binding_cannot_use_annotation_target_id():
+    from scripts.unified_pgvb_v3_pilot import blind_public_landmarks
+    records = [{
+        "map_name":"cambridge_block_0",
+        "world_bounds":[0.,0.,100.,100.],
+        "instruction":"The red car next to One Stop",
+        "landmarks":[dict(id="999",name="GT-picked wrong landmark")],
+        "target_xy":[.1,.9],
+        "episode_id":"cambridge_block_0:target42:0:0",
+    }]
+    catalog = {"cambridge_block_0":{
+        "1":dict(name="One Stop",object_type="Building",
+                 contour=[[10,10],[20,10],[20,20],[10,20]]),
+        "2":dict(name="One Stop",object_type="Building",
+                 contour=[[40,40],[50,40],[50,50],[40,50]]),
+        "target42":dict(name="Unnamed Car",object_type="Car",
+                        contour=[[80,80],[82,80],[82,82],[80,82]]),
+    }}
+    first=records[0]
+    counts=blind_public_landmarks(records,catalog,16)
+    assert counts["bound"]==1
+    assert {x["id"] for x in first["landmarks"]}=={"1","2"}
+    expected=[x["contour"] for x in first["landmarks"]]
+    first["target_xy"]=[.9,.1]
+    first["episode_id"]="cambridge_block_0:target999:0:0"
+    blind_public_landmarks(records,catalog,16)
+    assert [x["contour"] for x in first["landmarks"]]==expected
+
+
+def test_private_polygon_scoring_is_not_20m_radius_scoring():
+    torch.manual_seed(6)
+    model=UnifiedPGVBV3(TinyGeometry()).eval()
+    out=model(**_inputs(all_invalid=True))
+    poly=[[48,48],[52,48],[52,52],[48,52]]
+    r=offline_topk(out,torch.tensor([[.5,.5]]),
+                   torch.tensor([[0.,0.,100.,100.]]),
+                   branch="geometry",target_polygons=[poly])
+    assert r["Polygon_valid"]==[True]
+    assert "1" in r["Polygon_hit_flags"]
+    assert "5" in r["hit_flags"]
