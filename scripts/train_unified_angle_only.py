@@ -99,11 +99,10 @@ def target_error(logits,batch):
     chosen=grids.gather(1,ids[:,None,None].expand(-1,1,2)).squeeze(1)
     target=batch["target_xy"].to(logits.device).float()
     extent=batch["map_sizes"].to(logits.device).float()
-    return ((chosen-target)*extent).norm(-1)
+    return ((chosen-target)*extent).norm(dim=-1)
 
 
 def summarize_scores(storage):
-    n=len(storage["baseline"])
     def stat(key):
         e=torch.cat(storage[key])
         return dict(R20=float((e<=20.).float().mean()),NE_m=float(e.mean()))
