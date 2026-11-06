@@ -18,7 +18,8 @@ from torch.nn import functional as F
 from torch.utils.data import DataLoader
 
 from graphnav.candidate_geometry import collate_full
-from graphnav.unified_direct_bearing_loss import DirectBearingDataset, angular_consistency_loss
+from graphnav.unified_direct_bearing_loss import angular_consistency_loss
+from graphnav.unified_polygon_group import PublicPolygonGroupDataset,grouped_cardinal_loss,audit_group_direction_vs_train_gt
 from graphnav.checkpointing import atomic_json, atomic_save, file_sha256
 from graphnav.full_relation_training import (
     FORMAT, full_relation_inputs, load_full_relation_model,
@@ -28,8 +29,9 @@ from graphnav.token_language import FrozenBERTTokens
 
 
 def full_loader(path, args, *, shuffle):
-    dataset = DirectBearingDataset(
-        path, public_objects=args.public_objects, grid_size=28,
+    dataset = PublicPolygonGroupDataset(
+        path, public_objects=args.public_objects,
+        enable_predicates=args.predicate_mode=='group',grid_size=28,
         max_landmarks=args.max_landmarks,
         max_roads=args.max_roads,
         max_relations=args.max_relations,
@@ -74,6 +76,10 @@ def main():
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--public-objects", type=Path, required=True,
                    help="Full PUBLIC CityRefer objects.json for disambiguation, no GT")
+    p.add_argument('--angular-loss-mode',choices=('none','unique_gt','group_word'),default='group_word',
+                   help='none/control, original single-Polygon GT yaw, or new same-name Polygon OR relation')
+    p.add_argument('--predicate-mode',choices=('off','group'),default='group',
+                   help='Matched-public full-text control if off; multi-Polygon predicate signal if group')
     p.add_argument("--angular-weight", type=float, default=0.1,
                    help="0 enables predicate-only control; 0.1/0.3 angle ablations")
     p.add_argument("--kl-weight", type=float, default=0.05)
@@ -86,7 +92,9 @@ def main():
     if not torch.cuda.is_available():
         raise RuntimeError("This full-scale training protocol requires CUDA")
     if a.epochs < 1 or a.batch_size < 1 or a.max_batches < 0 or a.angular_weight < 0 or a.kl_weight < 0:
-        raise ValueError("Invalid training configuration")
+        raise ValueError('Invalid full training config')
+    if (a.angular_loss_mode=='none')!=(a.angular_weight==0) or (a.angular_weight>0 and a.predicate_mode=='off'):
+        raise ValueError('Angular loss needs positive weight + group predicate signal')
     torch.set_num_threads(4)
     random.seed(a.seed)
     np.random.seed(a.seed)
@@ -118,6 +126,7 @@ def main():
         prior_sigma_m=float(geometry_args["prior_sigma_m"]),
         rule_sigma_m=float(geometry_args["rule_sigma_m"]),
         public_objects=a.public_objects,
+        predicate_mode=a.predicate_mode,
     )
     dataset, loader = full_loader(a.train_jsonl, actual, shuffle=True)
     if len(dataset) < 1:
@@ -126,6 +135,10 @@ def main():
     # filtering, and explicitly surface any malformed upstream episodes.
     provenance_path = Path(str(a.train_jsonl) + ".provenance.json")
     converter = json.loads(provenance_path.read_text()) if provenance_path.exists() else None
+    if converter is None or converter.get('binding_algorithm') != 'instruction_public_blind_PR23':
+        raise ValueError('Use PR23 instruction-only PUBLIC-BLIND TRAIN: audit_unified_public_binding --emit-blind-train')
+    if converter.get('public_catalog_sha256')!=source_sha['public_objects']:
+        raise ValueError('TRAIN bind catalog does not equal current PUBLIC catalog SHA')
     if converter is not None:
         if (converter.get("output_sha256") != source_sha["train_jsonl"]
                 or converter.get("static_only") is not True
@@ -140,12 +153,16 @@ def main():
         raise ValueError(f"TRAIN source has only {count} records; expected full CityNav TRAIN")
     missing_anchor = sum(not row.get("landmarks") for row in dataset.records)
     manifest = dict(source_sha256=source_sha, records=count,
-        experiment="unified-v2-main-bearing-consistency-v1",
-        eligible_direct_predicate_audit=dataset.eligibility_audit,
+        experiment='unified-v2-public-polygon-set-v1',
+        eligible_direct_predicate_audit=dict(dataset.binding_audit),
+        public_binding_algorithm=converter['binding_algorithm'],
+        angular_loss_mode=a.angular_loss_mode,
+        predicate_mode=a.predicate_mode,
+        set_loss_module_sha256=file_sha256('graphnav/unified_polygon_group.py'),
         angle_supervision_weight=a.angular_weight,
         kl_weight=a.kl_weight,
         angular_module_sha256=file_sha256("graphnav/unified_direct_bearing_loss.py"),
-        explicit_predicates=True,
+        explicit_predicates=a.predicate_mode=='group',
         GT_only_in_training_loss=True,
         geographic_north_CRS_unverified=True,
         no_public_anchor_rows=missing_anchor, source="complete revised CityNav TRAIN",
@@ -218,7 +235,11 @@ def main():
             numpy_rng=(np.random.get_state()[0],np.random.get_state()[1].tolist(),*np.random.get_state()[2:]),
             history=history,smoke=bool(a.max_batches),
             angular_experiment=dict(weight=a.angular_weight,kl_weight=a.kl_weight,
-                explicit_predicates=True,protocol='direct-cardinal-unique-public-v1'))
+                explicit_predicates=a.predicate_mode=='group',
+                angular_loss_mode=a.angular_loss_mode,
+                predicate_mode=a.predicate_mode,
+                public_binding_algorithm='instruction_public_blind_PR23',
+                protocol='same-name-public-polygon-group-v1'))
         atomic_save(ckpt,a.output/'last.pt')
     for epoch in range(start_epoch, a.epochs):
         model.train()
@@ -228,6 +249,8 @@ def main():
         ang_count=0
         angle_total=0.
         word_angle_matches=0
+        literal_group_GT_matched=0
+        literal_group_GT_total=0
         angle_gradient_checked=False
         seen = int(previous.get('epoch_seen',0)) if continuing else 0
         corrected = int(previous.get('epoch_corrected',0)) if continuing else 0
@@ -248,10 +271,20 @@ def main():
                 preserve = F.kl_div(
                     F.log_softmax(logits, -1),
                     F.softmax(base.detach(), -1), reduction="batchmean")
-                angle = angular_consistency_loss(
-                    logits, inputs["static_inputs"]["pair_geometry"],
-                    batch["target_xy"].cuda(), inputs["static_inputs"]["nodes"],
-                    batch["map_sizes"].cuda(), batch["angular_anchor_index"].cuda())
+                if a.angular_loss_mode=='group_word':
+                    angle=grouped_cardinal_loss(
+                        logits,inputs['static_inputs']['pair_geometry'],
+                        batch['angular_group_mask'].cuda(),
+                        batch['anchor_predicate_ids'].cuda())
+                elif a.angular_loss_mode=='unique_gt':
+                    angle=angular_consistency_loss(
+                        logits,inputs['static_inputs']['pair_geometry'],
+                        batch['target_xy'].cuda(),inputs['static_inputs']['nodes'],
+                        batch['map_sizes'].cuda(),batch['angular_anchor_index'].cuda())
+                else:
+                    angle=dict(loss=logits.sum()*0.,eligible_count=0,
+                               angular_error_rad=logits.detach().sum()*0.,
+                               valid=torch.zeros(len(logits),device=logits.device,dtype=torch.bool))
                 loss = location + a.kl_weight * preserve + a.angular_weight * angle["loss"]
             optimizer.zero_grad(set_to_none=True)
             if a.angular_weight>0 and angle["eligible_count"] and not angle_gradient_checked:
@@ -280,13 +313,21 @@ def main():
             loss_total += float(loss.detach()) * size
             ang_count += angle["eligible_count"]
             angle_total += float(angle["loss"].detach()) * angle["eligible_count"]
-            if angle["eligible_count"]:
+            if a.predicate_mode=="group":
+                evidence=audit_group_direction_vs_train_gt(
+                    batch["target_xy"].cuda(),inputs["static_inputs"]["nodes"],
+                    batch["map_sizes"].cuda(),batch["angular_group_mask"].cuda(),
+                    batch["anchor_predicate_ids"].cuda())
+                literal_group_GT_matched+=evidence["matched_count"]
+                literal_group_GT_total+=evidence["eligible_count"]
+            if angle["eligible_count"] and a.angular_loss_mode=='unique_gt':
                 eligible=angle["valid"]
                 # Which fraction of explicit word directions matches observed
                 # GT in map +X/CCW axes? This is an audit, NOT eligibility.
                 # 1 east -> bin0, 2 west -> bin4, 3 north -> bin2, 4 south -> bin6.
                 lookup=torch.tensor([0,0,4,2,6],device=logits.device)
-                word_ids=batch["anchor_predicate_ids"].to(logits.device)[:,0].long()
+                label_slot=batch["angular_anchor_index"].to(logits.device).long().clamp_min(0)
+                word_ids=batch["anchor_predicate_ids"].to(logits.device).gather(1,label_slot[:,None]).squeeze(1).long()
                 word_angle_matches+=int((angle["gt_angle_bin"][eligible]
                     == lookup[word_ids[eligible]]).sum().item())
             distances = paired_metrics(base.detach(), logits.detach(), batch)
@@ -301,7 +342,8 @@ def main():
                 relation_delta_max=float(result['relation_delta'].detach().abs().max()),
                 angular_eligible=angle['eligible_count'],
                 angular_loss=float(angle['loss'].detach()),
-                angular_error_rad=float(angle['angular_error_rad']))
+                angular_error_rad=float(angle['angular_error_rad']) if a.angular_loss_mode=='unique_gt' else None,
+                angular_supported_mass_mean=(float(angle['supported_mass'].mean()) if a.angular_loss_mode=='group_word' else None))
             with (a.output/'steps.jsonl').open('a') as stream:stream.write(json.dumps(step)+'\n')
             if updates%200==0:
                 save(epoch,offset,seen,loss_total,corrected,damaged)
@@ -316,7 +358,11 @@ def main():
         row = dict(epoch=epoch+1, observed=seen, expected=count,
                    angular_supervised=ang_count,
                    mean_angular_loss=angle_total/max(1,ang_count),
-                   literal_8bin_GT_word_agreement=(word_angle_matches/max(1,ang_count)),
+                   literal_group_GT_any_polygon_agreement=(
+                       literal_group_GT_matched/max(1,literal_group_GT_total)
+                       if literal_group_GT_total else None),
+                   literal_group_GT_audited=literal_group_GT_total,
+                   literal_8bin_GT_word_agreement=(word_angle_matches/max(1,ang_count)) if a.angular_loss_mode=='unique_gt' else None,
                    literal_8bin_agreement_N=ang_count,
                    angular_backprop_verified=bool(angle_gradient_checked) if a.angular_weight>0 else None,
                    train_loss=loss_total/max(seen,1),

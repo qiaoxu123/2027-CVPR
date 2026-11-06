@@ -78,6 +78,8 @@ def main():
     parser.add_argument('--unified-v2', help='Source integrated PGVB-v2 for unified-relation')
     parser.add_argument('--relation-checkpoint', help='Full TRAIN relation checkpoint')
     parser.add_argument('--angle-head-checkpoint',help='Completed predicted ANGLE-ONLY 8-bin head; explicitly NOT oracle')
+    parser.add_argument('--polygon-group-predicate',action='store_true',
+                        help='Matched public-blind full-text main model with same-name polygon group IDs (no oracle)')
     parser.add_argument('--angular-main-predicate',action='store_true',
                         help='Use FULL main-model bearing-loss checkpoint with direct-cardinal predicate IDs; no oracle')
     parser.add_argument('--relation-control', choices=['full','off'], default='full')
@@ -126,6 +128,11 @@ def main():
             args.relation_control!='full' or args.relation_visual_control!='off' or
             args.relation_geometry_source!='trained'):
         raise ValueError('Angle-only mode requires public-bound full-text Unified V2, trained Geometry+Relation and RGB off')
+    if args.polygon_group_predicate and (args.angular_main_predicate or args.angle_head_checkpoint or args.model!='unified-relation' or
+            args.instruction_mode!='full_text' or not args.public_objects or
+            args.relation_control!='full' or args.relation_visual_control!='off' or
+            args.relation_geometry_source!='trained'):
+        raise ValueError('Polygon group experiment needs public-blind full text, full relation, RGB off')
     if args.angular_main_predicate and (args.angle_head_checkpoint or args.model!='unified-relation' or
             args.instruction_mode!='full_text' or not args.public_objects or
             args.relation_control!='full' or args.relation_visual_control!='off' or
@@ -175,6 +182,10 @@ def main():
             sources.update(angle_checkpoint=sha(args.angle_head_checkpoint),
                 angle_runtime=sha(Path('graphnav/unified_angle_only_runtime.py')),
                 angle_model=sha(Path('graphnav/unified_angle_only_belief.py')))
+        if args.polygon_group_predicate:
+            sources.update(polygon_group_predicate=True,
+                polygon_group_runtime=sha(Path('graphnav/unified_polygon_group_runtime.py')),
+                polygon_group_model=sha(Path('graphnav/unified_polygon_group.py')))
         if args.angular_main_predicate:
             sources.update(angular_main_predicate=True,
                 angular_runtime=sha(Path('graphnav/unified_direct_bearing_runtime.py')),
@@ -232,7 +243,11 @@ def main():
             from graphnav.unified_full_relation_runtime import UnifiedPGVBFullRelationPolicy
             from graphnav.dynamic_runtime import NativeObservationBuilder
             policy_class=UnifiedPGVBFullRelationPolicy;extra={}
-            if args.angular_main_predicate:
+            if args.polygon_group_predicate:
+                from graphnav.unified_polygon_group_runtime import UnifiedPublicPolygonGroupPolicy
+                policy_class=UnifiedPublicPolygonGroupPolicy
+                extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)
+            elif args.angular_main_predicate:
                 from graphnav.unified_direct_bearing_runtime import UnifiedDirectBearingPolicy
                 policy_class=UnifiedDirectBearingPolicy
                 extra=dict(instruction_mode=args.instruction_mode,public_objects=args.public_objects)

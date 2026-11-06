@@ -1,3 +1,17 @@
+## [PR27 Val-Seen binding failure audit] - 2026-11-06
+
+### Features
+- Analyze all 2470 archived Val-Seen baseline closed-loop records without rerunning navigation or training; archive Chinese report, per-episode CSV, plots, eight-case offline HTML gallery and verifiable evidence.
+- Validate unique Episode IDs, original instructions, baseline traces/start poses, final-position NE/SR and exact public Polygon order/contours; add physical-target cluster bootstrap and Fisher association analysis.
+
+### Design Rationale
+- Distinguish mutually exclusive empty-binding causes from overlapping geometry/multi-instance events. Use baseline outcomes with baseline trajectories; independently verify all 2470 angle-run public inputs are identical.
+- Report observational association and a future paired intervention design, without GT-selected Polygon references or causal attribution.
+
+### Notes & Caveats
+- Val-Seen empty binding is 126/2470, not the historical 1221 TRAIN count. Of 1340 failures, 122 lack anchors; 90 of 152 failures at NE >=100m lack anchors.
+- Repeated descriptions share physical targets; target-cluster bootstrap does not eliminate spatial/semantic confounding. No Test, retraining, rollout or main merge.
+
 ## [PR25 angle-only execution safety] - 2026-11-06
 
 ### Features
