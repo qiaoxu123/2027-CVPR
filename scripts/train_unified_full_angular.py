@@ -19,7 +19,7 @@ from torch.utils.data import DataLoader
 
 from graphnav.candidate_geometry import collate_full
 from graphnav.unified_direct_bearing_loss import angular_consistency_loss
-from graphnav.unified_polygon_group import PublicPolygonGroupDataset,grouped_cardinal_loss
+from graphnav.unified_polygon_group import PublicPolygonGroupDataset,grouped_cardinal_loss,audit_group_direction_vs_train_gt
 from graphnav.checkpointing import atomic_json, atomic_save, file_sha256
 from graphnav.full_relation_training import (
     FORMAT, full_relation_inputs, load_full_relation_model,
@@ -249,6 +249,8 @@ def main():
         ang_count=0
         angle_total=0.
         word_angle_matches=0
+        literal_group_GT_matched=0
+        literal_group_GT_total=0
         angle_gradient_checked=False
         seen = int(previous.get('epoch_seen',0)) if continuing else 0
         corrected = int(previous.get('epoch_corrected',0)) if continuing else 0
@@ -311,6 +313,13 @@ def main():
             loss_total += float(loss.detach()) * size
             ang_count += angle["eligible_count"]
             angle_total += float(angle["loss"].detach()) * angle["eligible_count"]
+            if a.predicate_mode=="group":
+                evidence=audit_group_direction_vs_train_gt(
+                    batch["target_xy"].cuda(),inputs["static_inputs"]["nodes"],
+                    batch["map_sizes"].cuda(),batch["angular_group_mask"].cuda(),
+                    batch["anchor_predicate_ids"].cuda())
+                literal_group_GT_matched+=evidence["matched_count"]
+                literal_group_GT_total+=evidence["eligible_count"]
             if angle["eligible_count"] and a.angular_loss_mode=='unique_gt':
                 eligible=angle["valid"]
                 # Which fraction of explicit word directions matches observed
@@ -348,6 +357,10 @@ def main():
         row = dict(epoch=epoch+1, observed=seen, expected=count,
                    angular_supervised=ang_count,
                    mean_angular_loss=angle_total/max(1,ang_count),
+                   literal_group_GT_any_polygon_agreement=(
+                       literal_group_GT_matched/max(1,literal_group_GT_total)
+                       if literal_group_GT_total else None),
+                   literal_group_GT_audited=literal_group_GT_total,
                    literal_8bin_GT_word_agreement=(word_angle_matches/max(1,ang_count)) if a.angular_loss_mode=='unique_gt' else None,
                    literal_8bin_agreement_N=ang_count,
                    angular_backprop_verified=bool(angle_gradient_checked) if a.angular_weight>0 else None,
