@@ -1,0 +1,8451 @@
+{
+  "manifest": {
+    "format": "unified-pgvb-v3-decoupled-rgbd-v1",
+    "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "cache_manifest_sha256": "fdecab15bcff8ff8698313c157ee7f47155ad23c37bb75c0b7d4bba22730b6be",
+    "train_split": "Revised TRAIN physical-ID fit/dev",
+    "seed": 42,
+    "fit": 767,
+    "dev": 233,
+    "epochs": 2,
+    "losses": [
+      {
+        "epoch": 1,
+        "fit": 767,
+        "mean_train_loss": 14.244838889916531,
+        "elapsed_s": 31.99780071200803,
+        "updates": 767,
+        "peak_cuda_GiB": 0.14306211471557617
+      },
+      {
+        "epoch": 2,
+        "fit": 767,
+        "mean_train_loss": 13.823043591973057,
+        "elapsed_s": 31.845015329308808,
+        "updates": 767,
+        "peak_cuda_GiB": 0.1431264877319336
+      }
+    ],
+    "offline_metrics": {
+      "n": 233,
+      "Geometry_NE_m": 33.14886256246608,
+      "Fused_NE_m": 33.10070919747516,
+      "observed_queries": 202,
+      "no_visual_queries": 31,
+      "polygon_valid_n": 232,
+      "Geometry_R@1/20m": 0.6051502145922747,
+      "Fused_R@1/20m": 0.6180257510729614,
+      "R@1_fixes": 10,
+      "R@1_breaks": 7,
+      "Geometry_PolygonHit@1": 0.16810344827586207,
+      "Fused_PolygonHit@1": 0.1939655172413793,
+      "Geometry_R@5/20m": 0.630901287553648,
+      "Fused_R@5/20m": 0.6394849785407726,
+      "R@5_fixes": 8,
+      "R@5_breaks": 6,
+      "Geometry_PolygonHit@5": 0.21120689655172414,
+      "Fused_PolygonHit@5": 0.24568965517241378,
+      "Geometry_R@20/20m": 0.6695278969957081,
+      "Fused_R@20/20m": 0.6738197424892703,
+      "R@20_fixes": 6,
+      "R@20_breaks": 5,
+      "Geometry_PolygonHit@20": 0.2672413793103448,
+      "Fused_PolygonHit@20": 0.3017241379310345
+    },
+    "visual_encoder_frozen": true,
+    "visual_backbone": "google/siglip2-large-patch16-384",
+    "policy_controller_used": false,
+    "val_test_access": false,
+    "closed_loop_SR_not_measured": true
+  },
+  "paired": [
+    {
+      "episode_id": "birmingham_block_1:155:4:0",
+      "geometry_NE_m": 183.61648559570312,
+      "fused_NE_m": 183.61648559570312,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.6236979365348816
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.6236979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_1:583:3:0",
+      "geometry_NE_m": 317.896240234375,
+      "fused_NE_m": 317.896240234375,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.3033854365348816,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_1:111:0:0",
+      "geometry_NE_m": 43.22566604614258,
+      "fused_NE_m": 40.72041320800781,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.8216146230697632,
+        0.2330729216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15838,
+      "valid_rgb_patches": 999
+    },
+    {
+      "episode_id": "birmingham_block_1:32:0:0",
+      "geometry_NE_m": 63.264583587646484,
+      "fused_NE_m": 63.264583587646484,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.26953125
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.26953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 21396,
+      "valid_rgb_patches": 1079
+    },
+    {
+      "episode_id": "birmingham_block_1:583:2:0",
+      "geometry_NE_m": 202.70993041992188,
+      "fused_NE_m": 202.70993041992188,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.83984375,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.83984375,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_1:372:1:0",
+      "geometry_NE_m": 11.279592514038086,
+      "fused_NE_m": 11.279592514038086,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.76953125,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.76953125,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_1:369:1:0",
+      "geometry_NE_m": 8.251863479614258,
+      "fused_NE_m": 8.251863479614258,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.76953125,
+        0.91015625
+      ],
+      "fused_top1_xy": [
+        0.76953125,
+        0.91015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_1:110:2:0",
+      "geometry_NE_m": 13.400532722473145,
+      "fused_NE_m": 13.400532722473145,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.41015625
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.41015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 26033,
+      "valid_rgb_patches": 1410
+    },
+    {
+      "episode_id": "birmingham_block_10:1:3:0",
+      "geometry_NE_m": 1.9780126810073853,
+      "fused_NE_m": 2.838573694229126,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.00911458395421505,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 22894,
+      "valid_rgb_patches": 387
+    },
+    {
+      "episode_id": "birmingham_block_10:35:5:0",
+      "geometry_NE_m": 37.22919464111328,
+      "fused_NE_m": 6.716355800628662,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.91015625
+      ],
+      "fused_top1_xy": [
+        0.1627604216337204,
+        0.4622395932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 34710,
+      "valid_rgb_patches": 491
+    },
+    {
+      "episode_id": "birmingham_block_10:367:1:0",
+      "geometry_NE_m": 6.364391326904297,
+      "fused_NE_m": 5.3430256843566895,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9908854365348816,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.98828125,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 32259,
+      "valid_rgb_patches": 517
+    },
+    {
+      "episode_id": "birmingham_block_10:367:2:0",
+      "geometry_NE_m": 7.36033296585083,
+      "fused_NE_m": 5.299927234649658,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9934896230697632,
+        0.0872395858168602
+      ],
+      "fused_top1_xy": [
+        0.98828125,
+        0.0872395858168602
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 32259,
+      "valid_rgb_patches": 517
+    },
+    {
+      "episode_id": "birmingham_block_10:21:4:0",
+      "geometry_NE_m": 52.78989791870117,
+      "fused_NE_m": 66.32794952392578,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.1966145932674408
+      ],
+      "fused_top1_xy": [
+        0.1940104216337204,
+        0.2174479216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 34710,
+      "valid_rgb_patches": 491
+    },
+    {
+      "episode_id": "birmingham_block_10:52:5:0",
+      "geometry_NE_m": 19.384063720703125,
+      "fused_NE_m": 13.90511703491211,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9934896230697632,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.9596354365348816,
+        0.33984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 32259,
+      "valid_rgb_patches": 517
+    },
+    {
+      "episode_id": "birmingham_block_12:131:5:0",
+      "geometry_NE_m": 236.14649963378906,
+      "fused_NE_m": 236.14649963378906,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.8033854365348816,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_12:147:5:0",
+      "geometry_NE_m": 67.30974578857422,
+      "fused_NE_m": 67.30974578857422,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4127604365348816,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.4127604365348816,
+        0.8736979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_12:113:4:0",
+      "geometry_NE_m": 253.26307678222656,
+      "fused_NE_m": 253.26307678222656,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.6966146230697632,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.6966146230697632,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_12:59:2:0",
+      "geometry_NE_m": 11.823007583618164,
+      "fused_NE_m": 7.576606273651123,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3763020932674408,
+        0.91015625
+      ],
+      "fused_top1_xy": [
+        0.3763020932674408,
+        0.8763021230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41935,
+      "valid_rgb_patches": 655
+    },
+    {
+      "episode_id": "birmingham_block_12:6:2:0",
+      "geometry_NE_m": 22.785680770874023,
+      "fused_NE_m": 22.785680770874023,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 62814,
+      "valid_rgb_patches": 959
+    },
+    {
+      "episode_id": "birmingham_block_12:19:0:0",
+      "geometry_NE_m": 10.603766441345215,
+      "fused_NE_m": 9.74917984008789,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.8372396230697632
+      ],
+      "fused_top1_xy": [
+        0.1966145932674408,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 62814,
+      "valid_rgb_patches": 959
+    },
+    {
+      "episode_id": "birmingham_block_12:110:0:0",
+      "geometry_NE_m": 50.70868682861328,
+      "fused_NE_m": 50.70868682861328,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9934896230697632,
+        0.9127604365348816
+      ],
+      "fused_top1_xy": [
+        0.9934896230697632,
+        0.9127604365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_12:84:3:0",
+      "geometry_NE_m": 9.203197479248047,
+      "fused_NE_m": 9.203197479248047,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.66015625,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.66015625,
+        0.8736979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_12:121:2:0",
+      "geometry_NE_m": 54.796791076660156,
+      "fused_NE_m": 54.796791076660156,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.08984375,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 62814,
+      "valid_rgb_patches": 959
+    },
+    {
+      "episode_id": "birmingham_block_12:141:3:0",
+      "geometry_NE_m": 69.70183563232422,
+      "fused_NE_m": 69.70183563232422,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.8763021230697632
+      ],
+      "fused_top1_xy": [
+        0.1966145932674408,
+        0.8763021230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:18:3:0",
+      "geometry_NE_m": 25.64202308654785,
+      "fused_NE_m": 25.64202308654785,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.6966146230697632,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.6966146230697632,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:1:5:0",
+      "geometry_NE_m": 4.869897842407227,
+      "fused_NE_m": 4.869897842407227,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.0533854179084301,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:18:5:0",
+      "geometry_NE_m": 28.51514434814453,
+      "fused_NE_m": 28.51514434814453,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.73046875,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.73046875,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:1:4:0",
+      "geometry_NE_m": 4.318759441375732,
+      "fused_NE_m": 4.318759441375732,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.1263020932674408
+      ],
+      "fused_top1_xy": [
+        0.0533854179084301,
+        0.1263020932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:1:1:0",
+      "geometry_NE_m": 7.9638776779174805,
+      "fused_NE_m": 7.9638776779174805,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.1263020932674408
+      ],
+      "fused_top1_xy": [
+        0.00390625,
+        0.1263020932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:18:4:0",
+      "geometry_NE_m": 45.664424896240234,
+      "fused_NE_m": 45.664424896240234,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.0533854179084301,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:1:0:0",
+      "geometry_NE_m": 65.56120300292969,
+      "fused_NE_m": 65.56120300292969,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.99609375,
+        0.006510416977107525
+      ],
+      "fused_top1_xy": [
+        0.99609375,
+        0.006510416977107525
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:18:0:0",
+      "geometry_NE_m": 28.51514434814453,
+      "fused_NE_m": 28.51514434814453,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.73046875,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.73046875,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:18:1:0",
+      "geometry_NE_m": 24.51302146911621,
+      "fused_NE_m": 24.51302146911621,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.7330729365348816,
+        0.1236979216337204
+      ],
+      "fused_top1_xy": [
+        0.7330729365348816,
+        0.1236979216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:18:2:0",
+      "geometry_NE_m": 30.483251571655273,
+      "fused_NE_m": 30.483251571655273,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.6966146230697632,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.6966146230697632,
+        0.00911458395421505
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:1:2:0",
+      "geometry_NE_m": 37.908809661865234,
+      "fused_NE_m": 37.908809661865234,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6263021230697632,
+        0.1263020932674408
+      ],
+      "fused_top1_xy": [
+        0.6263021230697632,
+        0.1263020932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_13:1:3:0",
+      "geometry_NE_m": 7.7233567237854,
+      "fused_NE_m": 7.7233567237854,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.01171875,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.01171875,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_3:287:1:0",
+      "geometry_NE_m": 13.559314727783203,
+      "fused_NE_m": 14.282649040222168,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6627604365348816,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.66015625,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25962,
+      "valid_rgb_patches": 1560
+    },
+    {
+      "episode_id": "birmingham_block_3:327:5:0",
+      "geometry_NE_m": 12.47363567352295,
+      "fused_NE_m": 8.343291282653809,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.66015625
+      ],
+      "fused_top1_xy": [
+        0.29296875,
+        0.66015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 32329,
+      "valid_rgb_patches": 1854
+    },
+    {
+      "episode_id": "birmingham_block_3:98:4:0",
+      "geometry_NE_m": 307.7711486816406,
+      "fused_NE_m": 307.7711486816406,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.2669270932674408,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.2669270932674408,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_3:23:1:0",
+      "geometry_NE_m": 202.24124145507812,
+      "fused_NE_m": 201.22500610351562,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.48046875,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.4830729365348816,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25962,
+      "valid_rgb_patches": 1560
+    },
+    {
+      "episode_id": "birmingham_block_3:278:1:0",
+      "geometry_NE_m": 16.411331176757812,
+      "fused_NE_m": 16.411331176757812,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.66015625,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.66015625,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25962,
+      "valid_rgb_patches": 1560
+    },
+    {
+      "episode_id": "birmingham_block_3:129:0:0",
+      "geometry_NE_m": 52.873043060302734,
+      "fused_NE_m": 48.69106674194336,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.5481771230697632,
+        0.4674479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 31655,
+      "valid_rgb_patches": 2025
+    },
+    {
+      "episode_id": "birmingham_block_3:89:5:0",
+      "geometry_NE_m": 13.213778495788574,
+      "fused_NE_m": 13.213778495788574,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.26953125,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.26953125,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 26643,
+      "valid_rgb_patches": 1621
+    },
+    {
+      "episode_id": "birmingham_block_3:344:4:0",
+      "geometry_NE_m": 20.6704044342041,
+      "fused_NE_m": 32.517333984375,
+      "geometry_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.66015625
+      ],
+      "fused_top1_xy": [
+        0.5065104365348816,
+        0.62890625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 32329,
+      "valid_rgb_patches": 1854
+    },
+    {
+      "episode_id": "birmingham_block_3:97:1:0",
+      "geometry_NE_m": 10.651071548461914,
+      "fused_NE_m": 9.872847557067871,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.76953125
+      ],
+      "fused_top1_xy": [
+        0.0872395858168602,
+        0.76953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 21936,
+      "valid_rgb_patches": 1455
+    },
+    {
+      "episode_id": "birmingham_block_4:173:0:0",
+      "geometry_NE_m": 17.695322036743164,
+      "fused_NE_m": 17.695322036743164,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.1966145932674408,
+        0.33984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 36125,
+      "valid_rgb_patches": 2096
+    },
+    {
+      "episode_id": "birmingham_block_4:161:0:0",
+      "geometry_NE_m": 13.154921531677246,
+      "fused_NE_m": 13.154921531677246,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.16015625,
+        0.33984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 24002,
+      "valid_rgb_patches": 1767
+    },
+    {
+      "episode_id": "birmingham_block_4:47:3:0",
+      "geometry_NE_m": 2.8020787239074707,
+      "fused_NE_m": 5.106929302215576,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7669271230697632,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.7486979365348816,
+        0.33984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 37912,
+      "valid_rgb_patches": 2429
+    },
+    {
+      "episode_id": "birmingham_block_4:71:0:0",
+      "geometry_NE_m": 3.7500603199005127,
+      "fused_NE_m": 3.7500603199005127,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.48046875,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.48046875,
+        0.00911458395421505
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 22977,
+      "valid_rgb_patches": 1537
+    },
+    {
+      "episode_id": "birmingham_block_4:190:4:0",
+      "geometry_NE_m": 3.1391472816467285,
+      "fused_NE_m": 3.1391472816467285,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1627604216337204,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.1627604216337204,
+        0.33984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 24002,
+      "valid_rgb_patches": 1767
+    },
+    {
+      "episode_id": "birmingham_block_4:47:1:0",
+      "geometry_NE_m": 12.32367992401123,
+      "fused_NE_m": 2.8424415588378906,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7669271230697632,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.75390625,
+        0.3424479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 37912,
+      "valid_rgb_patches": 2429
+    },
+    {
+      "episode_id": "birmingham_block_4:754:2:0",
+      "geometry_NE_m": 48.76890182495117,
+      "fused_NE_m": 41.90074157714844,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.9466146230697632
+      ],
+      "fused_top1_xy": [
+        0.2799479365348816,
+        0.93359375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 38036,
+      "valid_rgb_patches": 2583
+    },
+    {
+      "episode_id": "birmingham_block_4:169:3:0",
+      "geometry_NE_m": 4.237347602844238,
+      "fused_NE_m": 5.250611305236816,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.23046875,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.23046875,
+        0.3424479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 35219,
+      "valid_rgb_patches": 2069
+    },
+    {
+      "episode_id": "birmingham_block_4:165:4:0",
+      "geometry_NE_m": 11.155089378356934,
+      "fused_NE_m": 4.5393476486206055,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.01171875,
+        0.26953125
+      ],
+      "fused_top1_xy": [
+        0.01171875,
+        0.2877604365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 16938,
+      "valid_rgb_patches": 1284
+    },
+    {
+      "episode_id": "birmingham_block_4:89:3:0",
+      "geometry_NE_m": 15.982612609863281,
+      "fused_NE_m": 14.444172859191895,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6236979365348816,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.6184896230697632,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 37912,
+      "valid_rgb_patches": 2429
+    },
+    {
+      "episode_id": "birmingham_block_4:189:2:0",
+      "geometry_NE_m": 20.219831466674805,
+      "fused_NE_m": 12.289830207824707,
+      "geometry_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.23046875,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.2278645932674408,
+        0.3424479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35219,
+      "valid_rgb_patches": 2069
+    },
+    {
+      "episode_id": "birmingham_block_4:122:4:0",
+      "geometry_NE_m": 25.79366111755371,
+      "fused_NE_m": 16.001115798950195,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3372395932674408,
+        0.91015625
+      ],
+      "fused_top1_xy": [
+        0.3033854365348816,
+        0.90234375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 38036,
+      "valid_rgb_patches": 2583
+    },
+    {
+      "episode_id": "birmingham_block_4:70:3:0",
+      "geometry_NE_m": 6.213895797729492,
+      "fused_NE_m": 6.102894306182861,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.41015625,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.41015625,
+        0.15234375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 31949,
+      "valid_rgb_patches": 2157
+    },
+    {
+      "episode_id": "birmingham_block_4:163:4:0",
+      "geometry_NE_m": 26.62907600402832,
+      "fused_NE_m": 26.62907600402832,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.16015625,
+        0.33984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35219,
+      "valid_rgb_patches": 2069
+    },
+    {
+      "episode_id": "birmingham_block_7:37:3:0",
+      "geometry_NE_m": 11.0382080078125,
+      "fused_NE_m": 8.752153396606445,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.51953125
+      ],
+      "fused_top1_xy": [
+        0.08984375,
+        0.5533854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 26213,
+      "valid_rgb_patches": 466
+    },
+    {
+      "episode_id": "birmingham_block_7:64:2:0",
+      "geometry_NE_m": 7.225437164306641,
+      "fused_NE_m": 7.225437164306641,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7330729365348816,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.7330729365348816,
+        0.8736979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27758,
+      "valid_rgb_patches": 558
+    },
+    {
+      "episode_id": "birmingham_block_7:86:4:0",
+      "geometry_NE_m": 77.0786361694336,
+      "fused_NE_m": 77.0786361694336,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.7330729365348816,
+        0.7330729365348816
+      ],
+      "fused_top1_xy": [
+        0.7330729365348816,
+        0.7330729365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27758,
+      "valid_rgb_patches": 558
+    },
+    {
+      "episode_id": "birmingham_block_7:64:3:0",
+      "geometry_NE_m": 6.872809410095215,
+      "fused_NE_m": 6.872809410095215,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7330729365348816,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.7330729365348816,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27758,
+      "valid_rgb_patches": 558
+    },
+    {
+      "episode_id": "birmingham_block_7:88:4:0",
+      "geometry_NE_m": 30.936241149902344,
+      "fused_NE_m": 30.936241149902344,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.83984375,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.83984375,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_7:88:5:0",
+      "geometry_NE_m": 171.18312072753906,
+      "fused_NE_m": 171.18312072753906,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.2669270932674408,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.2669270932674408,
+        0.2330729216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "birmingham_block_7:359:4:0",
+      "geometry_NE_m": 78.25524139404297,
+      "fused_NE_m": 78.25524139404297,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.6236979365348816
+      ],
+      "fused_top1_xy": [
+        0.58984375,
+        0.6236979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27758,
+      "valid_rgb_patches": 558
+    },
+    {
+      "episode_id": "birmingham_block_7:64:1:0",
+      "geometry_NE_m": 18.35930061340332,
+      "fused_NE_m": 18.35930061340332,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6966146230697632,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.6966146230697632,
+        0.8736979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27758,
+      "valid_rgb_patches": 558
+    },
+    {
+      "episode_id": "birmingham_block_7:12:0:0",
+      "geometry_NE_m": 14.25430965423584,
+      "fused_NE_m": 2.202345371246338,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.33984375,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.3763020932674408,
+        0.5533854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 54386,
+      "valid_rgb_patches": 1278
+    },
+    {
+      "episode_id": "birmingham_block_9:120:2:0",
+      "geometry_NE_m": 5.082684516906738,
+      "fused_NE_m": 3.822838306427002,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.41015625,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.4049479365348816,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 21458,
+      "valid_rgb_patches": 1416
+    },
+    {
+      "episode_id": "birmingham_block_9:725:0:0",
+      "geometry_NE_m": 82.83415985107422,
+      "fused_NE_m": 82.83415985107422,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.91015625,
+        0.00911458395421505
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18923,
+      "valid_rgb_patches": 1070
+    },
+    {
+      "episode_id": "birmingham_block_9:125:4:0",
+      "geometry_NE_m": 19.96136474609375,
+      "fused_NE_m": 26.748886108398438,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4830729365348816,
+        0.2669270932674408
+      ],
+      "fused_top1_xy": [
+        0.46484375,
+        0.2721354365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35844,
+      "valid_rgb_patches": 2140
+    },
+    {
+      "episode_id": "birmingham_block_9:192:5:0",
+      "geometry_NE_m": 20.931249618530273,
+      "fused_NE_m": 20.931249618530273,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.01171875,
+        0.73046875
+      ],
+      "fused_top1_xy": [
+        0.01171875,
+        0.73046875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18551,
+      "valid_rgb_patches": 1352
+    },
+    {
+      "episode_id": "birmingham_block_9:50:1:0",
+      "geometry_NE_m": 29.77460479736328,
+      "fused_NE_m": 29.77460479736328,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.8763021230697632
+      ],
+      "fused_top1_xy": [
+        0.16015625,
+        0.8763021230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18551,
+      "valid_rgb_patches": 1352
+    },
+    {
+      "episode_id": "birmingham_block_9:201:2:0",
+      "geometry_NE_m": 19.87261390686035,
+      "fused_NE_m": 20.00213050842285,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9856771230697632,
+        0.6627604365348816
+      ],
+      "fused_top1_xy": [
+        0.98828125,
+        0.6783854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 20960,
+      "valid_rgb_patches": 1365
+    },
+    {
+      "episode_id": "cambridge_block_12:34:1:0",
+      "geometry_NE_m": 80.98145294189453,
+      "fused_NE_m": 78.33584594726562,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.6263021230697632
+      ],
+      "fused_top1_xy": [
+        0.8997396230697632,
+        0.6393229365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 22854,
+      "valid_rgb_patches": 1354
+    },
+    {
+      "episode_id": "cambridge_block_12:56:0:0",
+      "geometry_NE_m": 21.267026901245117,
+      "fused_NE_m": 19.855144500732422,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.0533854179084301,
+        0.0481770858168602
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 11431,
+      "valid_rgb_patches": 697
+    },
+    {
+      "episode_id": "cambridge_block_12:250:3:0",
+      "geometry_NE_m": 3.9218850135803223,
+      "fused_NE_m": 7.3471174240112305,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.2330729216337204,
+        0.3763020932674408
+      ],
+      "fused_top1_xy": [
+        0.2330729216337204,
+        0.3997395932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 34480,
+      "valid_rgb_patches": 2112
+    },
+    {
+      "episode_id": "cambridge_block_12:34:0:0",
+      "geometry_NE_m": 22.879192352294922,
+      "fused_NE_m": 22.879192352294922,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.66015625,
+        0.5533854365348816
+      ],
+      "fused_top1_xy": [
+        0.66015625,
+        0.5533854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 22854,
+      "valid_rgb_patches": 1354
+    },
+    {
+      "episode_id": "cambridge_block_12:165:3:0",
+      "geometry_NE_m": 16.630619049072266,
+      "fused_NE_m": 1.5777555704116821,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.51953125,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.51953125,
+        0.33203125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 33933,
+      "valid_rgb_patches": 1938
+    },
+    {
+      "episode_id": "cambridge_block_12:334:3:0",
+      "geometry_NE_m": 39.36429214477539,
+      "fused_NE_m": 40.76231384277344,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.9466146230697632
+      ],
+      "fused_top1_xy": [
+        0.04296875,
+        0.99609375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 13092,
+      "valid_rgb_patches": 872
+    },
+    {
+      "episode_id": "cambridge_block_12:194:0:0",
+      "geometry_NE_m": 11.29023551940918,
+      "fused_NE_m": 11.29023551940918,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.41015625
+      ],
+      "fused_top1_xy": [
+        0.8033854365348816,
+        0.41015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 16875,
+      "valid_rgb_patches": 991
+    },
+    {
+      "episode_id": "cambridge_block_12:158:4:0",
+      "geometry_NE_m": 55.81145477294922,
+      "fused_NE_m": 55.812007904052734,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.41015625,
+        0.2669270932674408
+      ],
+      "fused_top1_xy": [
+        0.4127604365348816,
+        0.24609375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35478,
+      "valid_rgb_patches": 2052
+    },
+    {
+      "episode_id": "cambridge_block_12:165:0:0",
+      "geometry_NE_m": 16.586790084838867,
+      "fused_NE_m": 10.001115798950195,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4830729365348816,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.5143229365348816,
+        0.3033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35478,
+      "valid_rgb_patches": 2052
+    },
+    {
+      "episode_id": "cambridge_block_12:830:4:0",
+      "geometry_NE_m": 21.457061767578125,
+      "fused_NE_m": 18.96588706970215,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.48046875
+      ],
+      "fused_top1_xy": [
+        0.1966145932674408,
+        0.4361979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 26943,
+      "valid_rgb_patches": 1640
+    },
+    {
+      "episode_id": "cambridge_block_12:87:4:0",
+      "geometry_NE_m": 58.225120544433594,
+      "fused_NE_m": 58.225120544433594,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4830729365348816,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.4830729365348816,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 13678,
+      "valid_rgb_patches": 560
+    },
+    {
+      "episode_id": "cambridge_block_12:181:3:0",
+      "geometry_NE_m": 15.0056734085083,
+      "fused_NE_m": 15.0056734085083,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.41015625
+      ],
+      "fused_top1_xy": [
+        0.8033854365348816,
+        0.41015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 16875,
+      "valid_rgb_patches": 991
+    },
+    {
+      "episode_id": "cambridge_block_12:53:1:0",
+      "geometry_NE_m": 17.689176559448242,
+      "fused_NE_m": 17.689176559448242,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.2330729216337204,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.2330729216337204,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35916,
+      "valid_rgb_patches": 2080
+    },
+    {
+      "episode_id": "cambridge_block_12:63:3:0",
+      "geometry_NE_m": 10.223759651184082,
+      "fused_NE_m": 10.422390937805176,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00911458395421505,
+        0.7330729365348816
+      ],
+      "fused_top1_xy": [
+        0.006510416977107525,
+        0.7330729365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 17434,
+      "valid_rgb_patches": 1033
+    },
+    {
+      "episode_id": "cambridge_block_13:308:4:0",
+      "geometry_NE_m": 8.061219215393066,
+      "fused_NE_m": 10.281888961791992,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.29296875,
+        0.58984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 37189,
+      "valid_rgb_patches": 2210
+    },
+    {
+      "episode_id": "cambridge_block_13:61:0:0",
+      "geometry_NE_m": 10.421815872192383,
+      "fused_NE_m": 14.782919883728027,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.2018229216337204,
+        0.1497395932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27073,
+      "valid_rgb_patches": 1863
+    },
+    {
+      "episode_id": "cambridge_block_13:78:4:0",
+      "geometry_NE_m": 15.620415687561035,
+      "fused_NE_m": 15.620415687561035,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.0533854179084301,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 28207,
+      "valid_rgb_patches": 1815
+    },
+    {
+      "episode_id": "cambridge_block_13:159:1:0",
+      "geometry_NE_m": 6.715583324432373,
+      "fused_NE_m": 9.15360164642334,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.3059895932674408,
+        0.41015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 36458,
+      "valid_rgb_patches": 2153
+    },
+    {
+      "episode_id": "cambridge_block_13:206:3:0",
+      "geometry_NE_m": 14.380834579467773,
+      "fused_NE_m": 9.650373458862305,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.1731770932674408,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 22549,
+      "valid_rgb_patches": 1529
+    },
+    {
+      "episode_id": "cambridge_block_13:314:3:0",
+      "geometry_NE_m": 22.827390670776367,
+      "fused_NE_m": 24.796537399291992,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.51953125
+      ],
+      "fused_top1_xy": [
+        0.2981770932674408,
+        0.51953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 38458,
+      "valid_rgb_patches": 2320
+    },
+    {
+      "episode_id": "cambridge_block_13:32:2:0",
+      "geometry_NE_m": 17.234561920166016,
+      "fused_NE_m": 17.234561920166016,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.41015625,
+        0.9466146230697632
+      ],
+      "fused_top1_xy": [
+        0.41015625,
+        0.9466146230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 24816,
+      "valid_rgb_patches": 1646
+    },
+    {
+      "episode_id": "cambridge_block_13:159:2:0",
+      "geometry_NE_m": 6.715583324432373,
+      "fused_NE_m": 8.20833969116211,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.3059895932674408,
+        0.4127604365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 36458,
+      "valid_rgb_patches": 2153
+    },
+    {
+      "episode_id": "cambridge_block_17:42:5:0",
+      "geometry_NE_m": 44.9371337890625,
+      "fused_NE_m": 38.12095642089844,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.91015625,
+        0.73828125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 29736,
+      "valid_rgb_patches": 680
+    },
+    {
+      "episode_id": "cambridge_block_17:26:4:0",
+      "geometry_NE_m": 71.59545135498047,
+      "fused_NE_m": 71.59545135498047,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.2669270932674408,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.2669270932674408,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "cambridge_block_17:6:3:0",
+      "geometry_NE_m": 15.644564628601074,
+      "fused_NE_m": 15.644564628601074,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1236979216337204,
+        0.51953125
+      ],
+      "fused_top1_xy": [
+        0.1236979216337204,
+        0.51953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 5932,
+      "valid_rgb_patches": 93
+    },
+    {
+      "episode_id": "cambridge_block_17:43:5:0",
+      "geometry_NE_m": 4.925876617431641,
+      "fused_NE_m": 4.925876617431641,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.7330729365348816
+      ],
+      "fused_top1_xy": [
+        0.91015625,
+        0.7330729365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 29736,
+      "valid_rgb_patches": 680
+    },
+    {
+      "episode_id": "cambridge_block_17:41:5:0",
+      "geometry_NE_m": 4.2422685623168945,
+      "fused_NE_m": 3.2112410068511963,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7330729365348816,
+        0.6966146230697632
+      ],
+      "fused_top1_xy": [
+        0.73046875,
+        0.6966146230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 43460,
+      "valid_rgb_patches": 1151
+    },
+    {
+      "episode_id": "cambridge_block_17:25:1:0",
+      "geometry_NE_m": 33.625244140625,
+      "fused_NE_m": 159.93893432617188,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.5169271230697632
+      ],
+      "fused_top1_xy": [
+        0.5065104365348816,
+        0.26953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 43957,
+      "valid_rgb_patches": 1154
+    },
+    {
+      "episode_id": "cambridge_block_17:6:2:0",
+      "geometry_NE_m": 5.373185634613037,
+      "fused_NE_m": 5.373185634613037,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.51953125
+      ],
+      "fused_top1_xy": [
+        0.08984375,
+        0.51953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 5932,
+      "valid_rgb_patches": 93
+    },
+    {
+      "episode_id": "cambridge_block_17:26:3:0",
+      "geometry_NE_m": 359.38885498046875,
+      "fused_NE_m": 359.38885498046875,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9856771230697632,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.9856771230697632,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "cambridge_block_17:22:2:0",
+      "geometry_NE_m": 6.952902793884277,
+      "fused_NE_m": 6.952902793884277,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1236979216337204,
+        0.5169271230697632
+      ],
+      "fused_top1_xy": [
+        0.1236979216337204,
+        0.5169271230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 43957,
+      "valid_rgb_patches": 1154
+    },
+    {
+      "episode_id": "cambridge_block_17:26:0:0",
+      "geometry_NE_m": 71.98223114013672,
+      "fused_NE_m": 71.98223114013672,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.2669270932674408,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.2669270932674408,
+        0.00911458395421505
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "cambridge_block_18:79:2:0",
+      "geometry_NE_m": 6.465096950531006,
+      "fused_NE_m": 6.465096950531006,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6236979365348816,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.6236979365348816,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25908,
+      "valid_rgb_patches": 608
+    },
+    {
+      "episode_id": "cambridge_block_18:23:4:0",
+      "geometry_NE_m": 10.812803268432617,
+      "fused_NE_m": 10.812803268432617,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.9934896230697632
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.9934896230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 7890,
+      "valid_rgb_patches": 161
+    },
+    {
+      "episode_id": "cambridge_block_18:77:3:0",
+      "geometry_NE_m": 19.847152709960938,
+      "fused_NE_m": 19.847152709960938,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.8372396230697632
+      ],
+      "fused_top1_xy": [
+        0.58984375,
+        0.8372396230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25908,
+      "valid_rgb_patches": 608
+    },
+    {
+      "episode_id": "cambridge_block_18:43:2:0",
+      "geometry_NE_m": 14.95147705078125,
+      "fused_NE_m": 14.95147705078125,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3763020932674408,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.3763020932674408,
+        0.4466145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 53750,
+      "valid_rgb_patches": 1699
+    },
+    {
+      "episode_id": "cambridge_block_18:37:4:0",
+      "geometry_NE_m": 16.052112579345703,
+      "fused_NE_m": 18.050107955932617,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.26953125,
+        0.6263021230697632
+      ],
+      "fused_top1_xy": [
+        0.2747395932674408,
+        0.62109375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 48076,
+      "valid_rgb_patches": 1572
+    },
+    {
+      "episode_id": "cambridge_block_18:77:5:0",
+      "geometry_NE_m": 14.483850479125977,
+      "fused_NE_m": 14.483850479125977,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6236979365348816,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.6236979365348816,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25921,
+      "valid_rgb_patches": 801
+    },
+    {
+      "episode_id": "cambridge_block_18:0:1:0",
+      "geometry_NE_m": 56.54523468017578,
+      "fused_NE_m": 56.2961311340332,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.0559895858168602,
+        0.58984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 48076,
+      "valid_rgb_patches": 1572
+    },
+    {
+      "episode_id": "cambridge_block_18:8:0:0",
+      "geometry_NE_m": 15.388874053955078,
+      "fused_NE_m": 21.5732421875,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.6263021230697632
+      ],
+      "fused_top1_xy": [
+        0.0325520858168602,
+        0.6158854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 48076,
+      "valid_rgb_patches": 1572
+    },
+    {
+      "episode_id": "cambridge_block_18:79:1:0",
+      "geometry_NE_m": 7.121904373168945,
+      "fused_NE_m": 7.121904373168945,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6263021230697632,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.6263021230697632,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25921,
+      "valid_rgb_patches": 801
+    },
+    {
+      "episode_id": "cambridge_block_18:23:5:0",
+      "geometry_NE_m": 11.80117130279541,
+      "fused_NE_m": 11.298491477966309,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.9986979365348816
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.99609375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 7890,
+      "valid_rgb_patches": 161
+    },
+    {
+      "episode_id": "cambridge_block_18:43:5:0",
+      "geometry_NE_m": 27.110090255737305,
+      "fused_NE_m": 27.110090255737305,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.3033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25908,
+      "valid_rgb_patches": 608
+    },
+    {
+      "episode_id": "cambridge_block_19:63:0:0",
+      "geometry_NE_m": 12.001444816589355,
+      "fused_NE_m": 11.124646186828613,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.3684895932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 15917,
+      "valid_rgb_patches": 1003
+    },
+    {
+      "episode_id": "cambridge_block_19:48:2:0",
+      "geometry_NE_m": 53.858856201171875,
+      "fused_NE_m": 46.108306884765625,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.16015625,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.16015625,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 21356,
+      "valid_rgb_patches": 1410
+    },
+    {
+      "episode_id": "cambridge_block_19:46:0:0",
+      "geometry_NE_m": 19.802593231201172,
+      "fused_NE_m": 35.697139739990234,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.1263020932674408,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.16015625,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 21356,
+      "valid_rgb_patches": 1410
+    },
+    {
+      "episode_id": "cambridge_block_19:14:0:0",
+      "geometry_NE_m": 23.414047241210938,
+      "fused_NE_m": 23.414047241210938,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 33914,
+      "valid_rgb_patches": 2441
+    },
+    {
+      "episode_id": "cambridge_block_19:58:2:0",
+      "geometry_NE_m": 362.351318359375,
+      "fused_NE_m": 362.351318359375,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.01171875,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.01171875,
+        0.2330729216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "cambridge_block_19:58:0:0",
+      "geometry_NE_m": 134.4019012451172,
+      "fused_NE_m": 134.4019012451172,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.5872396230697632,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.5872396230697632,
+        0.4466145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 37740,
+      "valid_rgb_patches": 2522
+    },
+    {
+      "episode_id": "cambridge_block_19:24:2:0",
+      "geometry_NE_m": 3.642271041870117,
+      "fused_NE_m": 2.8466084003448486,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.26953125
+      ],
+      "fused_top1_xy": [
+        0.04296875,
+        0.26953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 20605,
+      "valid_rgb_patches": 1320
+    },
+    {
+      "episode_id": "cambridge_block_19:14:1:0",
+      "geometry_NE_m": 14.103769302368164,
+      "fused_NE_m": 14.103769302368164,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.51953125,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.51953125,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 33914,
+      "valid_rgb_patches": 2441
+    },
+    {
+      "episode_id": "cambridge_block_19:33:3:0",
+      "geometry_NE_m": 12.354421615600586,
+      "fused_NE_m": 8.187719345092773,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.8763021230697632
+      ],
+      "fused_top1_xy": [
+        0.00390625,
+        0.88671875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 17392,
+      "valid_rgb_patches": 1232
+    },
+    {
+      "episode_id": "cambridge_block_19:4:4:0",
+      "geometry_NE_m": 20.705591201782227,
+      "fused_NE_m": 16.202306747436523,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.00911458395421505,
+        0.8294271230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 18223,
+      "valid_rgb_patches": 1348
+    },
+    {
+      "episode_id": "cambridge_block_19:8:0:0",
+      "geometry_NE_m": 13.892030715942383,
+      "fused_NE_m": 11.628965377807617,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.5846354365348816,
+        0.1627604216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 24370,
+      "valid_rgb_patches": 1535
+    },
+    {
+      "episode_id": "cambridge_block_20:11:1:0",
+      "geometry_NE_m": 42.99043655395508,
+      "fused_NE_m": 5.510753154754639,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3763020932674408,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.4908854365348816,
+        0.55078125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 30948,
+      "valid_rgb_patches": 1764
+    },
+    {
+      "episode_id": "cambridge_block_20:80:4:0",
+      "geometry_NE_m": 10.58675765991211,
+      "fused_NE_m": 3.7308897972106934,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7669271230697632,
+        0.5169271230697632
+      ],
+      "fused_top1_xy": [
+        0.7356771230697632,
+        0.51953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 27648,
+      "valid_rgb_patches": 1529
+    },
+    {
+      "episode_id": "cambridge_block_20:32:3:0",
+      "geometry_NE_m": 26.193145751953125,
+      "fused_NE_m": 24.980045318603516,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.02473958395421505,
+        0.23046875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 14747,
+      "valid_rgb_patches": 865
+    },
+    {
+      "episode_id": "cambridge_block_20:64:5:0",
+      "geometry_NE_m": 20.518924713134766,
+      "fused_NE_m": 20.579954147338867,
+      "geometry_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.4830729365348816
+      ],
+      "fused_top1_xy": [
+        0.9440104365348816,
+        0.48046875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18463,
+      "valid_rgb_patches": 1139
+    },
+    {
+      "episode_id": "cambridge_block_20:11:0:0",
+      "geometry_NE_m": 69.17096710205078,
+      "fused_NE_m": 70.01014709472656,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.33984375,
+        0.66015625
+      ],
+      "fused_top1_xy": [
+        0.3372395932674408,
+        0.66015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 31132,
+      "valid_rgb_patches": 1880
+    },
+    {
+      "episode_id": "cambridge_block_20:298:0:0",
+      "geometry_NE_m": 17.24724006652832,
+      "fused_NE_m": 17.24724006652832,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.83984375,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.83984375,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 27648,
+      "valid_rgb_patches": 1529
+    },
+    {
+      "episode_id": "cambridge_block_21:117:5:0",
+      "geometry_NE_m": 2.8722646236419678,
+      "fused_NE_m": 12.145434379577637,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.7330729365348816,
+        0.4830729365348816
+      ],
+      "fused_top1_xy": [
+        0.7356771230697632,
+        0.4596354365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 30597,
+      "valid_rgb_patches": 1514
+    },
+    {
+      "episode_id": "cambridge_block_21:328:2:0",
+      "geometry_NE_m": 6.279423236846924,
+      "fused_NE_m": 1.4103695154190063,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.7903646230697632,
+        0.5872396230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 28749,
+      "valid_rgb_patches": 1711
+    },
+    {
+      "episode_id": "cambridge_block_21:225:5:0",
+      "geometry_NE_m": 32.25463104248047,
+      "fused_NE_m": 32.63826370239258,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.7669271230697632,
+        0.1236979216337204
+      ],
+      "fused_top1_xy": [
+        0.7669271230697632,
+        0.09765625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 14078,
+      "valid_rgb_patches": 1004
+    },
+    {
+      "episode_id": "cambridge_block_21:328:3:0",
+      "geometry_NE_m": 6.279423236846924,
+      "fused_NE_m": 15.03963851928711,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.8033854365348816,
+        0.6236979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 28749,
+      "valid_rgb_patches": 1711
+    },
+    {
+      "episode_id": "cambridge_block_21:155:4:0",
+      "geometry_NE_m": 10.266489028930664,
+      "fused_NE_m": 4.425326824188232,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5169271230697632,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.4908854365348816,
+        0.0299479179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 21684,
+      "valid_rgb_patches": 1306
+    },
+    {
+      "episode_id": "cambridge_block_21:186:5:0",
+      "geometry_NE_m": 4.0705108642578125,
+      "fused_NE_m": 4.333641052246094,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6966146230697632,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.6966146230697632,
+        0.0924479216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 14078,
+      "valid_rgb_patches": 1004
+    },
+    {
+      "episode_id": "cambridge_block_21:301:2:0",
+      "geometry_NE_m": 25.95855140686035,
+      "fused_NE_m": 25.95855140686035,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.83984375,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.83984375,
+        0.3033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 35087,
+      "valid_rgb_patches": 2219
+    },
+    {
+      "episode_id": "cambridge_block_21:182:0:0",
+      "geometry_NE_m": 37.63437271118164,
+      "fused_NE_m": 37.783973693847656,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.7669271230697632,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.7669271230697632,
+        0.0950520858168602
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 14078,
+      "valid_rgb_patches": 1004
+    },
+    {
+      "episode_id": "cambridge_block_21:142:2:0",
+      "geometry_NE_m": 13.378157615661621,
+      "fused_NE_m": 0.7966259717941284,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.2669270932674408
+      ],
+      "fused_top1_xy": [
+        0.2018229216337204,
+        0.2330729216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 35087,
+      "valid_rgb_patches": 2219
+    },
+    {
+      "episode_id": "cambridge_block_21:294:4:0",
+      "geometry_NE_m": 2.5448644161224365,
+      "fused_NE_m": 0.6225021481513977,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9856771230697632,
+        0.1966145932674408
+      ],
+      "fused_top1_xy": [
+        0.9934896230697632,
+        0.1966145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 16398,
+      "valid_rgb_patches": 983
+    },
+    {
+      "episode_id": "cambridge_block_21:12:5:0",
+      "geometry_NE_m": 39.601959228515625,
+      "fused_NE_m": 33.070316314697266,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4830729365348816,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.4674479365348816,
+        0.2278645932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 29887,
+      "valid_rgb_patches": 1806
+    },
+    {
+      "episode_id": "cambridge_block_21:56:3:0",
+      "geometry_NE_m": 12.850116729736328,
+      "fused_NE_m": 7.768099308013916,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.5169271230697632
+      ],
+      "fused_top1_xy": [
+        0.91015625,
+        0.4934895932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 15890,
+      "valid_rgb_patches": 1008
+    },
+    {
+      "episode_id": "cambridge_block_21:109:1:0",
+      "geometry_NE_m": 5.750775337219238,
+      "fused_NE_m": 19.15480613708496,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.5533854365348816,
+        0.01171875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 16636,
+      "valid_rgb_patches": 1026
+    },
+    {
+      "episode_id": "cambridge_block_23:32:1:0",
+      "geometry_NE_m": 58.7951545715332,
+      "fused_NE_m": 57.57687759399414,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.1236979216337204,
+        0.7669271230697632
+      ],
+      "fused_top1_xy": [
+        0.1028645858168602,
+        0.76953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41076,
+      "valid_rgb_patches": 528
+    },
+    {
+      "episode_id": "cambridge_block_23:32:2:0",
+      "geometry_NE_m": 9.756363868713379,
+      "fused_NE_m": 9.756363868713379,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0872395858168602,
+        0.26953125
+      ],
+      "fused_top1_xy": [
+        0.0872395858168602,
+        0.26953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 43970,
+      "valid_rgb_patches": 555
+    },
+    {
+      "episode_id": "cambridge_block_23:33:4:0",
+      "geometry_NE_m": 49.12474060058594,
+      "fused_NE_m": 48.98390197753906,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0872395858168602,
+        0.7669271230697632
+      ],
+      "fused_top1_xy": [
+        0.0846354216337204,
+        0.7669271230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41076,
+      "valid_rgb_patches": 528
+    },
+    {
+      "episode_id": "cambridge_block_23:38:3:0",
+      "geometry_NE_m": 5.50982141494751,
+      "fused_NE_m": 3.7541773319244385,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.33984375,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.33203125,
+        0.01692708395421505
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 44790,
+      "valid_rgb_patches": 507
+    },
+    {
+      "episode_id": "cambridge_block_23:33:3:0",
+      "geometry_NE_m": 49.54719161987305,
+      "fused_NE_m": 48.98390197753906,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.76953125
+      ],
+      "fused_top1_xy": [
+        0.0846354216337204,
+        0.7669271230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41076,
+      "valid_rgb_patches": 528
+    },
+    {
+      "episode_id": "cambridge_block_23:28:1:0",
+      "geometry_NE_m": 8.967077255249023,
+      "fused_NE_m": 14.615389823913574,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.5299479365348816,
+        0.3059895932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41171,
+      "valid_rgb_patches": 528
+    },
+    {
+      "episode_id": "cambridge_block_23:51:1:0",
+      "geometry_NE_m": 6.337377548217773,
+      "fused_NE_m": 3.7902543544769287,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.48046875,
+        0.3763020932674408
+      ],
+      "fused_top1_xy": [
+        0.4518229365348816,
+        0.3841145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 41171,
+      "valid_rgb_patches": 528
+    },
+    {
+      "episode_id": "cambridge_block_23:24:0:0",
+      "geometry_NE_m": 13.246424674987793,
+      "fused_NE_m": 13.417521476745605,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.7669271230697632
+      ],
+      "fused_top1_xy": [
+        0.08984375,
+        0.75390625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 43970,
+      "valid_rgb_patches": 555
+    },
+    {
+      "episode_id": "cambridge_block_23:21:0:0",
+      "geometry_NE_m": 3.9120237827301025,
+      "fused_NE_m": 3.557436466217041,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.76953125
+      ],
+      "fused_top1_xy": [
+        0.0872395858168602,
+        0.76953125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 43814,
+      "valid_rgb_patches": 560
+    },
+    {
+      "episode_id": "cambridge_block_23:9:0:0",
+      "geometry_NE_m": 19.279027938842773,
+      "fused_NE_m": 17.6672420501709,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.23046875
+      ],
+      "fused_top1_xy": [
+        0.0924479216337204,
+        0.2513020932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41453,
+      "valid_rgb_patches": 533
+    },
+    {
+      "episode_id": "cambridge_block_23:29:4:0",
+      "geometry_NE_m": 11.774657249450684,
+      "fused_NE_m": 11.774657249450684,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.41015625
+      ],
+      "fused_top1_xy": [
+        0.58984375,
+        0.41015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 41171,
+      "valid_rgb_patches": 528
+    },
+    {
+      "episode_id": "cambridge_block_25:0:1:0",
+      "geometry_NE_m": 13.141018867492676,
+      "fused_NE_m": 13.141018867492676,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.014322916977107525,
+        0.006510416977107525
+      ],
+      "fused_top1_xy": [
+        0.014322916977107525,
+        0.006510416977107525
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 3980,
+      "valid_rgb_patches": 63
+    },
+    {
+      "episode_id": "cambridge_block_25:0:4:0",
+      "geometry_NE_m": 13.141018867492676,
+      "fused_NE_m": 13.141018867492676,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.014322916977107525,
+        0.006510416977107525
+      ],
+      "fused_top1_xy": [
+        0.014322916977107525,
+        0.006510416977107525
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 3980,
+      "valid_rgb_patches": 63
+    },
+    {
+      "episode_id": "cambridge_block_25:14:0:0",
+      "geometry_NE_m": 10.447193145751953,
+      "fused_NE_m": 3.4247419834136963,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.23046875
+      ],
+      "fused_top1_xy": [
+        0.0638020858168602,
+        0.26171875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 18260,
+      "valid_rgb_patches": 396
+    },
+    {
+      "episode_id": "cambridge_block_25:17:2:0",
+      "geometry_NE_m": 11.654717445373535,
+      "fused_NE_m": 12.711734771728516,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9856771230697632,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.9908854365348816,
+        0.8736979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 12225,
+      "valid_rgb_patches": 289
+    },
+    {
+      "episode_id": "cambridge_block_25:19:3:0",
+      "geometry_NE_m": 19.76410484313965,
+      "fused_NE_m": 19.76410484313965,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6966146230697632,
+        0.7330729365348816
+      ],
+      "fused_top1_xy": [
+        0.6966146230697632,
+        0.7330729365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 23607,
+      "valid_rgb_patches": 459
+    },
+    {
+      "episode_id": "cambridge_block_25:1:0:0",
+      "geometry_NE_m": 6.840523719787598,
+      "fused_NE_m": 5.793076515197754,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3763020932674408,
+        0.9908854365348816
+      ],
+      "fused_top1_xy": [
+        0.3736979365348816,
+        0.9856771230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 27481,
+      "valid_rgb_patches": 705
+    },
+    {
+      "episode_id": "cambridge_block_25:14:2:0",
+      "geometry_NE_m": 52.48877716064453,
+      "fused_NE_m": 52.3972053527832,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.00911458395421505,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.01171875,
+        0.4466145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18260,
+      "valid_rgb_patches": 396
+    },
+    {
+      "episode_id": "cambridge_block_25:8:4:0",
+      "geometry_NE_m": 8.551895141601562,
+      "fused_NE_m": 18.867630004882812,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.5169271230697632
+      ],
+      "fused_top1_xy": [
+        0.41015625,
+        0.55078125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 26626,
+      "valid_rgb_patches": 526
+    },
+    {
+      "episode_id": "cambridge_block_25:6:1:0",
+      "geometry_NE_m": 9.798730850219727,
+      "fused_NE_m": 9.798730850219727,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6263021230697632,
+        0.6966146230697632
+      ],
+      "fused_top1_xy": [
+        0.6263021230697632,
+        0.6966146230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 26626,
+      "valid_rgb_patches": 526
+    },
+    {
+      "episode_id": "cambridge_block_25:6:2:0",
+      "geometry_NE_m": 9.798730850219727,
+      "fused_NE_m": 8.91547679901123,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6263021230697632,
+        0.6966146230697632
+      ],
+      "fused_top1_xy": [
+        0.6158854365348816,
+        0.6966146230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 26626,
+      "valid_rgb_patches": 526
+    },
+    {
+      "episode_id": "cambridge_block_25:0:5:0",
+      "geometry_NE_m": 6.675374507904053,
+      "fused_NE_m": 6.675374507904053,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.00390625,
+        0.0533854179084301
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 3980,
+      "valid_rgb_patches": 63
+    },
+    {
+      "episode_id": "cambridge_block_28:174:4:0",
+      "geometry_NE_m": 13.67767333984375,
+      "fused_NE_m": 19.58641815185547,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.3294270932674408,
+        0.3268229365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 28635,
+      "valid_rgb_patches": 1292
+    },
+    {
+      "episode_id": "cambridge_block_28:141:2:0",
+      "geometry_NE_m": 3.042684555053711,
+      "fused_NE_m": 0.2963620126247406,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.41015625,
+        0.3763020932674408
+      ],
+      "fused_top1_xy": [
+        0.41015625,
+        0.38671875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 28635,
+      "valid_rgb_patches": 1292
+    },
+    {
+      "episode_id": "cambridge_block_28:176:1:0",
+      "geometry_NE_m": 101.92240142822266,
+      "fused_NE_m": 99.39436340332031,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.5455729365348816,
+        0.4466145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 28635,
+      "valid_rgb_patches": 1292
+    },
+    {
+      "episode_id": "cambridge_block_28:283:5:0",
+      "geometry_NE_m": 10.789263725280762,
+      "fused_NE_m": 10.789263725280762,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.26953125,
+        0.6966146230697632
+      ],
+      "fused_top1_xy": [
+        0.26953125,
+        0.6966146230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 19564,
+      "valid_rgb_patches": 847
+    },
+    {
+      "episode_id": "cambridge_block_28:109:5:0",
+      "geometry_NE_m": 26.509626388549805,
+      "fused_NE_m": 27.969331741333008,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.2330729216337204,
+        0.48046875
+      ],
+      "fused_top1_xy": [
+        0.26953125,
+        0.4596354365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 24967,
+      "valid_rgb_patches": 1137
+    },
+    {
+      "episode_id": "cambridge_block_28:200:4:0",
+      "geometry_NE_m": 7.746697425842285,
+      "fused_NE_m": 18.487045288085938,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.48046875,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.44921875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 28635,
+      "valid_rgb_patches": 1292
+    },
+    {
+      "episode_id": "cambridge_block_28:308:1:0",
+      "geometry_NE_m": 19.062101364135742,
+      "fused_NE_m": 9.114970207214355,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.11328125,
+        0.41015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 31007,
+      "valid_rgb_patches": 1423
+    },
+    {
+      "episode_id": "cambridge_block_28:77:2:0",
+      "geometry_NE_m": 15.692219734191895,
+      "fused_NE_m": 8.885580062866211,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6263021230697632,
+        0.3763020932674408
+      ],
+      "fused_top1_xy": [
+        0.6341146230697632,
+        0.4049479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 22830,
+      "valid_rgb_patches": 1154
+    },
+    {
+      "episode_id": "cambridge_block_28:115:4:0",
+      "geometry_NE_m": 4.085424900054932,
+      "fused_NE_m": 3.4608983993530273,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.3059895932674408,
+        0.3424479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 28635,
+      "valid_rgb_patches": 1292
+    },
+    {
+      "episode_id": "cambridge_block_28:99:0:0",
+      "geometry_NE_m": 37.750022888183594,
+      "fused_NE_m": 35.346405029296875,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.08984375,
+        0.48046875
+      ],
+      "fused_top1_xy": [
+        0.1028645858168602,
+        0.4830729365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 31007,
+      "valid_rgb_patches": 1423
+    },
+    {
+      "episode_id": "cambridge_block_28:176:3:0",
+      "geometry_NE_m": 36.73727035522461,
+      "fused_NE_m": 36.73727035522461,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.26953125,
+        0.1966145932674408
+      ],
+      "fused_top1_xy": [
+        0.26953125,
+        0.1966145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 0,
+      "valid_rgb_patches": 0
+    },
+    {
+      "episode_id": "cambridge_block_33:119:3:0",
+      "geometry_NE_m": 9.957974433898926,
+      "fused_NE_m": 14.571623802185059,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4127604365348816,
+        0.8763021230697632
+      ],
+      "fused_top1_xy": [
+        0.4127604365348816,
+        0.8893229365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 19920,
+      "valid_rgb_patches": 463
+    },
+    {
+      "episode_id": "cambridge_block_33:70:4:0",
+      "geometry_NE_m": 12.114289283752441,
+      "fused_NE_m": 9.402316093444824,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.16015625,
+        0.3033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 42509,
+      "valid_rgb_patches": 1207
+    },
+    {
+      "episode_id": "cambridge_block_33:43:5:0",
+      "geometry_NE_m": 7.798494815826416,
+      "fused_NE_m": 8.814961433410645,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.8763021230697632
+      ],
+      "fused_top1_xy": [
+        0.51953125,
+        0.91015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 19920,
+      "valid_rgb_patches": 463
+    },
+    {
+      "episode_id": "cambridge_block_33:79:0:0",
+      "geometry_NE_m": 70.90664672851562,
+      "fused_NE_m": 75.53897094726562,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.7669271230697632
+      ],
+      "fused_top1_xy": [
+        0.01692708395421505,
+        0.7799479365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 36341,
+      "valid_rgb_patches": 943
+    },
+    {
+      "episode_id": "cambridge_block_4:47:5:0",
+      "geometry_NE_m": 11.092669486999512,
+      "fused_NE_m": 23.8660831451416,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.83984375,
+        0.01692708395421505
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 17529,
+      "valid_rgb_patches": 444
+    },
+    {
+      "episode_id": "cambridge_block_4:30:0:0",
+      "geometry_NE_m": 11.482767105102539,
+      "fused_NE_m": 1.0154004096984863,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9830729365348816,
+        0.0533854179084301
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.0872395858168602
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 18176,
+      "valid_rgb_patches": 458
+    },
+    {
+      "episode_id": "cambridge_block_4:3:4:0",
+      "geometry_NE_m": 8.189188957214355,
+      "fused_NE_m": 7.672318935394287,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.94140625,
+        0.3763020932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 18081,
+      "valid_rgb_patches": 443
+    },
+    {
+      "episode_id": "cambridge_block_4:14:3:0",
+      "geometry_NE_m": 6.392499923706055,
+      "fused_NE_m": 3.6124606132507324,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.6236979365348816,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.58984375,
+        0.3502604365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 21383,
+      "valid_rgb_patches": 525
+    },
+    {
+      "episode_id": "cambridge_block_4:49:4:0",
+      "geometry_NE_m": 23.548473358154297,
+      "fused_NE_m": 18.459857940673828,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5169271230697632,
+        0.2669270932674408
+      ],
+      "fused_top1_xy": [
+        0.5091146230697632,
+        0.2434895932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15476,
+      "valid_rgb_patches": 311
+    },
+    {
+      "episode_id": "cambridge_block_4:1:0:0",
+      "geometry_NE_m": 10.8461275100708,
+      "fused_NE_m": 15.314508438110352,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.83984375,
+        0.41015625
+      ],
+      "fused_top1_xy": [
+        0.8450521230697632,
+        0.3893229365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18251,
+      "valid_rgb_patches": 454
+    },
+    {
+      "episode_id": "cambridge_block_4:47:3:0",
+      "geometry_NE_m": 11.169878959655762,
+      "fused_NE_m": 10.603230476379395,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.1236979216337204
+      ],
+      "fused_top1_xy": [
+        0.80859375,
+        0.0716145858168602
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 19052,
+      "valid_rgb_patches": 548
+    },
+    {
+      "episode_id": "cambridge_block_4:18:5:0",
+      "geometry_NE_m": 57.81712341308594,
+      "fused_NE_m": 62.84571838378906,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.5846354365348816,
+        0.35546875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15476,
+      "valid_rgb_patches": 311
+    },
+    {
+      "episode_id": "cambridge_block_4:1:1:0",
+      "geometry_NE_m": 22.675283432006836,
+      "fused_NE_m": 22.675283432006836,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.8763021230697632,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.8763021230697632,
+        0.3736979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18176,
+      "valid_rgb_patches": 458
+    },
+    {
+      "episode_id": "cambridge_block_4:30:2:0",
+      "geometry_NE_m": 1.405518651008606,
+      "fused_NE_m": 1.405518651008606,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 18176,
+      "valid_rgb_patches": 458
+    },
+    {
+      "episode_id": "cambridge_block_4:0:5:0",
+      "geometry_NE_m": 2.588481903076172,
+      "fused_NE_m": 2.7043755054473877,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9856771230697632,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.9856771230697632,
+        0.2591145932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 18176,
+      "valid_rgb_patches": 458
+    },
+    {
+      "episode_id": "cambridge_block_4:37:0:0",
+      "geometry_NE_m": 12.035043716430664,
+      "fused_NE_m": 11.556137084960938,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8736979365348816,
+        0.08984375
+      ],
+      "fused_top1_xy": [
+        0.8763021230697632,
+        0.08984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 17529,
+      "valid_rgb_patches": 444
+    },
+    {
+      "episode_id": "cambridge_block_4:116:4:0",
+      "geometry_NE_m": 21.048717498779297,
+      "fused_NE_m": 21.048717498779297,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.3033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15476,
+      "valid_rgb_patches": 311
+    },
+    {
+      "episode_id": "cambridge_block_4:27:1:0",
+      "geometry_NE_m": 15.673345565795898,
+      "fused_NE_m": 15.673345565795898,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.5533854365348816,
+        0.3033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15476,
+      "valid_rgb_patches": 311
+    },
+    {
+      "episode_id": "cambridge_block_4:116:5:0",
+      "geometry_NE_m": 18.920427322387695,
+      "fused_NE_m": 18.725494384765625,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.5533854365348816,
+        0.3815104365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15476,
+      "valid_rgb_patches": 311
+    },
+    {
+      "episode_id": "cambridge_block_4:18:2:0",
+      "geometry_NE_m": 57.296302795410156,
+      "fused_NE_m": 57.296302795410156,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.3372395932674408
+      ],
+      "fused_top1_xy": [
+        0.5533854365348816,
+        0.3372395932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 15476,
+      "valid_rgb_patches": 311
+    },
+    {
+      "episode_id": "cambridge_block_6:21:2:0",
+      "geometry_NE_m": 16.843589782714844,
+      "fused_NE_m": 22.962907791137695,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.51953125
+      ],
+      "fused_top1_xy": [
+        0.5690104365348816,
+        0.5169271230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 28662,
+      "valid_rgb_patches": 1628
+    },
+    {
+      "episode_id": "cambridge_block_6:106:0:0",
+      "geometry_NE_m": 25.07074737548828,
+      "fused_NE_m": 25.07074737548828,
+      "geometry_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.00390625,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.00390625,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 23276,
+      "valid_rgb_patches": 1306
+    },
+    {
+      "episode_id": "cambridge_block_6:38:1:0",
+      "geometry_NE_m": 9.426575660705566,
+      "fused_NE_m": 9.426575660705566,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.8372396230697632
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.8372396230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18506,
+      "valid_rgb_patches": 1147
+    },
+    {
+      "episode_id": "cambridge_block_6:38:0:0",
+      "geometry_NE_m": 14.923920631408691,
+      "fused_NE_m": 15.590970993041992,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.4440104365348816,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18506,
+      "valid_rgb_patches": 1147
+    },
+    {
+      "episode_id": "cambridge_block_6:6:3:0",
+      "geometry_NE_m": 57.98377990722656,
+      "fused_NE_m": 54.5623893737793,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9856771230697632,
+        0.76953125
+      ],
+      "fused_top1_xy": [
+        0.9908854365348816,
+        0.7799479365348816
+      ],
+      "polygon_valid": false,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 17479,
+      "valid_rgb_patches": 1167
+    },
+    {
+      "episode_id": "cambridge_block_6:53:4:0",
+      "geometry_NE_m": 27.149938583374023,
+      "fused_NE_m": 18.48086929321289,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.41015625,
+        0.91015625
+      ],
+      "fused_top1_xy": [
+        0.41015625,
+        0.8841146230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18506,
+      "valid_rgb_patches": 1147
+    },
+    {
+      "episode_id": "cambridge_block_6:18:1:0",
+      "geometry_NE_m": 86.12669372558594,
+      "fused_NE_m": 87.89961242675781,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.5533854365348816
+      ],
+      "fused_top1_xy": [
+        0.00390625,
+        0.54296875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 14936,
+      "valid_rgb_patches": 980
+    },
+    {
+      "episode_id": "cambridge_block_6:106:1:0",
+      "geometry_NE_m": 21.95064926147461,
+      "fused_NE_m": 21.95064926147461,
+      "geometry_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.01171875,
+        0.16015625
+      ],
+      "fused_top1_xy": [
+        0.01171875,
+        0.16015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 23276,
+      "valid_rgb_patches": 1306
+    },
+    {
+      "episode_id": "cambridge_block_6:109:0:0",
+      "geometry_NE_m": 14.48255443572998,
+      "fused_NE_m": 14.739277839660645,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8763021230697632,
+        0.9934896230697632
+      ],
+      "fused_top1_xy": [
+        0.8736979365348816,
+        0.9934896230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 23036,
+      "valid_rgb_patches": 1532
+    },
+    {
+      "episode_id": "cambridge_block_6:18:2:0",
+      "geometry_NE_m": 25.930696487426758,
+      "fused_NE_m": 22.83919334411621,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.8033854365348816
+      ],
+      "fused_top1_xy": [
+        0.04296875,
+        0.8033854365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 8056,
+      "valid_rgb_patches": 530
+    },
+    {
+      "episode_id": "cambridge_block_7:233:0:0",
+      "geometry_NE_m": 14.179675102233887,
+      "fused_NE_m": 9.529851913452148,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.7330729365348816
+      ],
+      "fused_top1_xy": [
+        0.8997396230697632,
+        0.7096354365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 19206,
+      "valid_rgb_patches": 1283
+    },
+    {
+      "episode_id": "cambridge_block_7:372:3:0",
+      "geometry_NE_m": 9.532367706298828,
+      "fused_NE_m": 3.452017307281494,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.26953125,
+        0.66015625
+      ],
+      "fused_top1_xy": [
+        0.2669270932674408,
+        0.6809896230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 33721,
+      "valid_rgb_patches": 2107
+    },
+    {
+      "episode_id": "cambridge_block_7:372:0:0",
+      "geometry_NE_m": 12.049358367919922,
+      "fused_NE_m": 12.482549667358398,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.6940104365348816
+      ],
+      "fused_top1_xy": [
+        0.30078125,
+        0.6653646230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 33721,
+      "valid_rgb_patches": 2107
+    },
+    {
+      "episode_id": "cambridge_block_7:216:5:0",
+      "geometry_NE_m": 35.16686248779297,
+      "fused_NE_m": 50.844520568847656,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.5169271230697632
+      ],
+      "fused_top1_xy": [
+        0.4856770932674408,
+        0.5247396230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 35764,
+      "valid_rgb_patches": 2276
+    },
+    {
+      "episode_id": "cambridge_block_7:74:2:0",
+      "geometry_NE_m": 22.899009704589844,
+      "fused_NE_m": 22.899009704589844,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.1966145932674408,
+        0.6236979365348816
+      ],
+      "fused_top1_xy": [
+        0.1966145932674408,
+        0.6236979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 38704,
+      "valid_rgb_patches": 2341
+    },
+    {
+      "episode_id": "cambridge_block_7:349:1:0",
+      "geometry_NE_m": 16.564693450927734,
+      "fused_NE_m": 11.757550239562988,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.4830729365348816
+      ],
+      "fused_top1_xy": [
+        0.9466146230697632,
+        0.5013021230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25399,
+      "valid_rgb_patches": 1480
+    },
+    {
+      "episode_id": "cambridge_block_7:33:5:0",
+      "geometry_NE_m": 3.018430471420288,
+      "fused_NE_m": 3.7055628299713135,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.3736979365348816
+      ],
+      "fused_top1_xy": [
+        0.5533854365348816,
+        0.3763020932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 36562,
+      "valid_rgb_patches": 2280
+    },
+    {
+      "episode_id": "cambridge_block_7:34:3:0",
+      "geometry_NE_m": 66.05960083007812,
+      "fused_NE_m": 73.17253875732422,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.3763020932674408,
+        0.4466145932674408
+      ],
+      "fused_top1_xy": [
+        0.3736979365348816,
+        0.42578125
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 32409,
+      "valid_rgb_patches": 2123
+    },
+    {
+      "episode_id": "cambridge_block_7:47:0:0",
+      "geometry_NE_m": 19.32758140563965,
+      "fused_NE_m": 20.65660285949707,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.58984375,
+        0.4830729365348816
+      ],
+      "fused_top1_xy": [
+        0.5872396230697632,
+        0.4934895932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 36791,
+      "valid_rgb_patches": 2377
+    },
+    {
+      "episode_id": "cambridge_block_7:395:3:0",
+      "geometry_NE_m": 12.712178230285645,
+      "fused_NE_m": 13.476753234863281,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.51953125,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.51953125,
+        0.8502604365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 36011,
+      "valid_rgb_patches": 2222
+    },
+    {
+      "episode_id": "cambridge_block_7:395:0:0",
+      "geometry_NE_m": 16.46883773803711,
+      "fused_NE_m": 16.46883773803711,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.4466145932674408,
+        0.83984375
+      ],
+      "fused_top1_xy": [
+        0.4466145932674408,
+        0.83984375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25646,
+      "valid_rgb_patches": 1695
+    },
+    {
+      "episode_id": "cambridge_block_9:21:5:0",
+      "geometry_NE_m": 20.801454544067383,
+      "fused_NE_m": 15.689077377319336,
+      "geometry_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8763021230697632,
+        0.6236979365348816
+      ],
+      "fused_top1_xy": [
+        0.89453125,
+        0.62109375
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 24757,
+      "valid_rgb_patches": 1568
+    },
+    {
+      "episode_id": "cambridge_block_9:180:0:0",
+      "geometry_NE_m": 80.73224639892578,
+      "fused_NE_m": 79.36637878417969,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9127604365348816,
+        0.2669270932674408
+      ],
+      "fused_top1_xy": [
+        0.9309896230697632,
+        0.2356770932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 18300,
+      "valid_rgb_patches": 1288
+    },
+    {
+      "episode_id": "cambridge_block_9:22:2:0",
+      "geometry_NE_m": 7.258307456970215,
+      "fused_NE_m": 10.14976692199707,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.58984375
+      ],
+      "fused_top1_xy": [
+        0.91015625,
+        0.59765625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 24757,
+      "valid_rgb_patches": 1568
+    },
+    {
+      "episode_id": "cambridge_block_9:88:0:0",
+      "geometry_NE_m": 30.241912841796875,
+      "fused_NE_m": 26.235614776611328,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9466146230697632,
+        0.33984375
+      ],
+      "fused_top1_xy": [
+        0.9440104365348816,
+        0.3528645932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 24757,
+      "valid_rgb_patches": 1568
+    },
+    {
+      "episode_id": "cambridge_block_9:187:0:0",
+      "geometry_NE_m": 4.728270530700684,
+      "fused_NE_m": 3.951019763946533,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.26953125,
+        0.6236979365348816
+      ],
+      "fused_top1_xy": [
+        0.2747395932674408,
+        0.6236979365348816
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 31921,
+      "valid_rgb_patches": 1815
+    },
+    {
+      "episode_id": "cambridge_block_9:395:2:0",
+      "geometry_NE_m": 40.93866729736328,
+      "fused_NE_m": 42.11661911010742,
+      "geometry_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "geometry_top1_xy": [
+        0.9934896230697632,
+        0.1627604216337204
+      ],
+      "fused_top1_xy": [
+        0.9986979365348816,
+        0.1627604216337204
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 17802,
+      "valid_rgb_patches": 1219
+    },
+    {
+      "episode_id": "cambridge_block_9:435:4:0",
+      "geometry_NE_m": 11.0227689743042,
+      "fused_NE_m": 10.094855308532715,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.0533854179084301,
+        0.2330729216337204
+      ],
+      "fused_top1_xy": [
+        0.0533854179084301,
+        0.23046875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 25124,
+      "valid_rgb_patches": 1692
+    },
+    {
+      "episode_id": "cambridge_block_9:243:1:0",
+      "geometry_NE_m": 4.6631646156311035,
+      "fused_NE_m": 2.445662021636963,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.91015625,
+        0.6966146230697632
+      ],
+      "fused_top1_xy": [
+        0.9049479365348816,
+        0.69921875
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 20239,
+      "valid_rgb_patches": 1427
+    },
+    {
+      "episode_id": "cambridge_block_9:190:1:0",
+      "geometry_NE_m": 3.071723461151123,
+      "fused_NE_m": 16.712684631347656,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8763021230697632,
+        0.3033854365348816
+      ],
+      "fused_top1_xy": [
+        0.8997396230697632,
+        0.2669270932674408
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": true
+      },
+      "observed_pixels": 24987,
+      "valid_rgb_patches": 1645
+    },
+    {
+      "episode_id": "cambridge_block_9:215:0:0",
+      "geometry_NE_m": 10.553983688354492,
+      "fused_NE_m": 11.53882884979248,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.5533854365348816,
+        0.8736979365348816
+      ],
+      "fused_top1_xy": [
+        0.55078125,
+        0.8763021230697632
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 25554,
+      "valid_rgb_patches": 1582
+    },
+    {
+      "episode_id": "cambridge_block_9:56:3:0",
+      "geometry_NE_m": 7.668086051940918,
+      "fused_NE_m": 2.952784776687622,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.8033854365348816,
+        0.00911458395421505
+      ],
+      "fused_top1_xy": [
+        0.82421875,
+        0.00390625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_polygon_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "observed_pixels": 17209,
+      "valid_rgb_patches": 1156
+    },
+    {
+      "episode_id": "cambridge_block_9:186:5:0",
+      "geometry_NE_m": 13.911613464355469,
+      "fused_NE_m": 16.904096603393555,
+      "geometry_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "fused_R": {
+        "1": true,
+        "5": true,
+        "20": true
+      },
+      "geometry_top1_xy": [
+        0.3033854365348816,
+        0.66015625
+      ],
+      "fused_top1_xy": [
+        0.3268229365348816,
+        0.66015625
+      ],
+      "polygon_valid": true,
+      "geometry_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "fused_polygon_R": {
+        "1": false,
+        "5": false,
+        "20": false
+      },
+      "observed_pixels": 31921,
+      "valid_rgb_patches": 1815
+    }
+  ]
+}

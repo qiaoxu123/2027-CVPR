@@ -81,6 +81,7 @@ class V3Output:
     patch_features: torch.Tensor      # [B,F,576,H] for GT teacher loss
     patch_valid: torch.Tensor         # [B,F,576]
     patch_world_xy: torch.Tensor      # [B,F,576,2] in world meters
+    geometry_context: Optional[torch.Tensor] = None  # [B,784,H], controller export only
 
 
 class UnifiedPGVBV3(nn.Module):
@@ -218,6 +219,7 @@ class UnifiedPGVBV3(nn.Module):
             fused_logits=fused, patch_scores=scores,
             patch_features=features, patch_valid=patch_valid,
             patch_world_xy=patch_world,
+            geometry_context=getattr(field, "dense_context", None),
         )
 
 

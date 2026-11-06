@@ -1,3 +1,12 @@
+## [UnifiedPGVB-V3 training runtime] - 2026-11-06
+### Features
+- Add source-checked V3 warm start, mid-epoch optimizer/RNG checkpoints, cumulative training time budget and TRAIN-loss plateau stopping.
+- Reuse frozen dense RGB features only for identical image SHA; support training without automatic subset evaluation.
+### Design Rationale
+- Bound training to four hours and preserve resumability; full Val-Seen evaluation follows frozen training rather than repeated subset selection.
+### Notes & Caveats
+- Pilot localization is not navigation SR. Initial V2 weights have seen TRAIN. Raster height is a depth proxy; map-guided planned views differ from causal navigation observations.
+
 ## [UnifiedPGVB-V2 paper identity and results documentation] - 2026-11-06
 
 ### Features

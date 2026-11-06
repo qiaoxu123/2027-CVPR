@@ -223,16 +223,29 @@ def _cache_one(index, record, sample, encoder, native, renderer,
             obs = renderer.current_rgbd(
                 record["map_name"], pose, ground)
             dp, valid = _depth_patch_tensor(obs)
-            rgb = native.processor(
-                images=[cv2.cvtColor(obs["bgr"], cv2.COLOR_BGR2RGB)],
-                return_tensors="pt").to(native.device)
-            with torch.inference_mode(), torch.autocast(
-                    "cuda", dtype=torch.bfloat16,
-                    enabled=native.device.type == "cuda"):
-                image = native.model.vision_model(**rgb).last_hidden_state[0]
-            if image.shape != (PATCHES*PATCHES, native.dimension):
-                raise ValueError("SigLIP2-Large/384 dense token grid mismatch")
-            features.append(image.detach().cpu().half().clone())
+            dense_cache = getattr(native, "_v3_dense_cache", None)
+            if dense_cache is None:
+                native._v3_dense_cache = dense_cache = {}
+                native._v3_dense_hits = 0
+            image_key = native.image_key(obs["bgr"])
+            if image_key in dense_cache:
+                native._v3_dense_hits += 1
+                features.append(dense_cache[image_key].clone())
+            else:
+                rgb = native.processor(
+                    images=[cv2.cvtColor(obs["bgr"], cv2.COLOR_BGR2RGB)],
+                    return_tensors="pt").to(native.device)
+                with torch.inference_mode(), torch.autocast(
+                        "cuda", dtype=torch.bfloat16,
+                        enabled=native.device.type == "cuda"):
+                    image = native.model.vision_model(**rgb).last_hidden_state[0]
+                if image.shape != (PATCHES*PATCHES, native.dimension):
+                    raise ValueError("SigLIP2-Large/384 dense token grid mismatch")
+                cached_image = image.detach().cpu().half().clone()
+                dense_cache[image_key] = cached_image
+                if len(dense_cache) > 256:
+                    del dense_cache[next(iter(dense_cache))]
+                features.append(cached_image.clone())
         else:
             dp = torch.zeros(PATCHES*PATCHES, 2)
             valid = torch.zeros(PATCHES*PATCHES, dtype=torch.bool)
@@ -348,6 +361,7 @@ def cache(args):
             print(json.dumps({"cached":index+1, "limit":limit}), flush=True)
     atomic_json({"cached_files":len(list((root/"public").glob("*.pt"))),
                  "requested":limit, "new":stats,
+                 "dense_rgb_cache_hits":getattr(native, "_v3_dense_hits", 0),
                  "blind_binding_audit":binding_audit},root/"cache_summary.json")
     print(f"V3 TRAIN cache ready: {limit} requested; no Val/Test used")
 
@@ -493,6 +507,7 @@ def evaluate(model, ds, indices, device, batch_size):
     return metrics, records
 
 def train(args):
+    training_started = time.perf_counter()
     if args.device.startswith("cuda") and not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable; use local GPU for this pilot")
     random.seed(args.seed)
@@ -506,6 +521,11 @@ def train(args):
     fit, dev = fit_dev_partition(ds, args.seed)
     geom, cfg = _load_base(args.source_v2, args.device)
     model = UnifiedPGVBV3(geom).to(args.device)
+    if args.initialize_v3:
+        initial = torch.load(args.initialize_v3, map_location="cpu", weights_only=True)
+        if initial.get("format") != V3_FORMAT or initial["manifest"]["source_v2_sha256"] != file_sha256(args.source_v2):
+            raise ValueError("V3 warm-start format/source mismatch")
+        model.load_state_dict(initial["model"], strict=True)
     opt = torch.optim.AdamW([
         dict(params=list(model.geometry.parameters()), lr=args.lr_geometry),
         dict(params=[p for n,p in model.named_parameters()
@@ -514,8 +534,13 @@ def train(args):
     args.output.mkdir(parents=True, exist_ok=True)
     if (args.output/"last.pt").exists() and not args.resume:
         raise FileExistsError("Do not silently overwrite V3 experimental weights")
+    atomic_json({k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},args.output/"invocation.json")
     steps = []
     start_epoch = 0
+    start_offset = 0
+    partial_total = 0.0
+    stop_reason = "max_epochs"
+    previous_training_s = 0.0
     if args.resume:
         saved = torch.load(args.resume, map_location="cpu", weights_only=True)
         if saved.get("cache_sha256") != file_sha256(args.cache/"manifest.json"):
@@ -528,20 +553,41 @@ def train(args):
         opt.load_state_dict(saved["optimizer"])
         steps = saved["losses"]
         start_epoch = saved["epoch"]
+        start_offset = saved.get("next_offset", 0)
+        partial_total = saved.get("partial_total", 0.0)
+        previous_training_s = saved.get("elapsed_training_s", 0.0)
         torch.set_rng_state(saved["rng_cpu"])
         if torch.cuda.is_available():
             torch.cuda.set_rng_state_all(saved["rng_cuda"])
-    if not args.resume:
+    if not args.resume and not args.skip_evaluation:
         before_metrics, before_cases = evaluate(model, ds, dev, args.device, args.batch_size)
         atomic_json(dict(metrics=before_metrics, paired=before_cases), args.output/"before.json")
+    def save_resume(epoch, offset, total):
+        atomic_save(dict(model=model.state_dict(), optimizer=opt.state_dict(),
+                         epoch=epoch, next_offset=offset, partial_total=total,
+                         losses=steps, seed=args.seed, fit=fit, dev=dev,
+                         elapsed_training_s=previous_training_s+time.perf_counter()-training_started,
+                         cache_sha256=file_sha256(args.cache/"manifest.json"),
+                         source_sha256=file_sha256(args.source_v2),
+                         rng_cpu=torch.get_rng_state(),
+                         rng_cuda=torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []),
+                    args.output/"resume.pt")
+
     for epoch in range(start_epoch, args.epochs):
         epoch_start = time.perf_counter()
         if args.device.startswith("cuda"):
             torch.cuda.reset_peak_memory_stats()
         model.train()
         order = np.random.default_rng(args.seed+epoch).permutation(fit).tolist()
-        total = 0.0
-        for at in range(0, len(order), args.batch_size):
+        offset = start_offset if epoch == start_epoch else 0
+        total = partial_total if epoch == start_epoch else 0.0
+        budget_hit = False
+        for at in range(offset, len(order), args.batch_size):
+            if previous_training_s+time.perf_counter()-training_started >= args.max_training_hours*3600:
+                save_resume(epoch, at, total)
+                stop_reason = "time_budget"
+                budget_hit = True
+                break
             batch = [ds[i] for i in order[at:at+args.batch_size]]
             kwargs, labels = _collate(batch, args.device)
             output = model(**kwargs)
@@ -550,13 +596,22 @@ def train(args):
                 kwargs["world_bounds"], labels["teacher_features"],
                 model.teacher_head)
             if not torch.isfinite(loss["total"]):
+                save_resume(epoch, at, total)
                 raise FloatingPointError("nonfinite V3 loss")
             opt.zero_grad(set_to_none=True)
             loss["total"].backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0,
-                                           error_if_nonfinite=True)
+            grad_norm = torch.nn.utils.clip_grad_norm_(
+                model.parameters(), 5.0, error_if_nonfinite=True)
             opt.step()
             total += float(loss["total"].detach()) * len(batch)
+            update = at//args.batch_size+1
+            if update % args.checkpoint_updates == 0:
+                save_resume(epoch, at+len(batch), total)
+                print(json.dumps(dict(epoch=epoch+1,update=update,
+                                      seen=at+len(batch),mean_loss=total/(at+len(batch)),
+                                      grad_norm=float(grad_norm),elapsed_total_s=time.perf_counter()-training_started)),flush=True)
+        if budget_hit:
+            break
         if args.device.startswith("cuda"):
             torch.cuda.synchronize()
         report = dict(epoch=epoch+1,fit=len(fit),
@@ -566,21 +621,28 @@ def train(args):
                       peak_cuda_GiB=torch.cuda.max_memory_allocated()/2**30 if args.device.startswith("cuda") else 0)
         steps.append(report)
         print(json.dumps(report), flush=True)
-        atomic_save(dict(model=model.state_dict(), optimizer=opt.state_dict(),
-                         epoch=epoch+1, losses=steps, seed=args.seed, fit=fit, dev=dev,
-                         cache_sha256=file_sha256(args.cache/"manifest.json"),
-                         source_sha256=file_sha256(args.source_v2),
-                         rng_cpu=torch.get_rng_state(),
-                         rng_cuda=torch.cuda.get_rng_state_all() if torch.cuda.is_available() else []),
-                    args.output/"resume.pt")
+        save_resume(epoch+1, 0, 0.0)
         atomic_json(steps, args.output/"losses.json")
-    metrics, cases = evaluate(model, ds, dev, args.device, args.batch_size)
+        if epoch+1 >= args.min_epochs and len(steps) > args.plateau_patience:
+            recent=steps[-(args.plateau_patience+1):]
+            improvements=[(a["mean_train_loss"]-b["mean_train_loss"])/max(abs(a["mean_train_loss"]),1e-9)
+                          for a,b in zip(recent,recent[1:])]
+            if all(v < args.plateau_relative for v in improvements):
+                stop_reason = "train_loss_plateau"
+                break
+    metrics, cases = (None, []) if args.skip_evaluation else evaluate(model, ds, dev, args.device, args.batch_size)
     manifest = dict(
         format=V3_FORMAT, source_v2_sha256=file_sha256(args.source_v2),
         cache_manifest_sha256=file_sha256(args.cache/"manifest.json"),
         train_split="Revised TRAIN physical-ID fit/dev", seed=args.seed,
-        fit=len(fit), dev=len(dev), epochs=args.epochs, losses=steps,
-        offline_metrics=metrics, visual_encoder_frozen=True,
+        fit=len(fit), dev=len(dev), epochs=len(steps), configured_max_epochs=args.epochs, losses=steps,
+        stop_reason=stop_reason, training_wall_s=previous_training_s+time.perf_counter()-training_started,
+        batch_size=args.batch_size,lr_geometry=args.lr_geometry,lr_visual=args.lr_visual,
+        max_training_hours=args.max_training_hours, plateau_relative=args.plateau_relative,
+        plateau_patience=args.plateau_patience, min_epochs=args.min_epochs,
+        offline_metrics=metrics, evaluation_skipped=args.skip_evaluation,
+        initialize_v3_sha256=file_sha256(args.initialize_v3) if args.initialize_v3 else None,
+        visual_encoder_frozen=True,
         visual_backbone="google/siglip2-large-patch16-384",
         policy_controller_used=False, val_test_access=False,
         closed_loop_SR_not_measured=True,
@@ -610,6 +672,13 @@ def main():
     for name in ("cache", "source-v2", "output"):
         b.add_argument("--"+name, type=Path, required=True)
     b.add_argument("--resume", type=Path, default=None)
+    b.add_argument("--initialize-v3", type=Path, default=None)
+    b.add_argument("--skip-evaluation", action="store_true")
+    b.add_argument("--max-training-hours",type=float,default=4.0)
+    b.add_argument("--min-epochs",type=int,default=3)
+    b.add_argument("--plateau-patience",type=int,default=2)
+    b.add_argument("--plateau-relative",type=float,default=.005)
+    b.add_argument("--checkpoint-updates",type=int,default=1000)
     b.add_argument("--seed", type=int, default=42)
     b.add_argument("--max-queries", type=int, default=0)
     b.add_argument("--epochs", type=int, default=2)
@@ -621,6 +690,10 @@ def main():
     if args.action == "cache":
         cache(args)
     else:
+        if args.max_training_hours <= 0 or args.checkpoint_updates < 1 or args.plateau_patience < 1 or args.min_epochs < 1 or args.plateau_relative < 0:
+            parser.error("Invalid time budget/plateau/checkpoint settings")
+        if args.resume and args.initialize_v3:
+            parser.error("Use resume OR V3 warm start, not both")
         if args.epochs < 1 or args.batch_size < 1 or args.max_queries < 0:
             parser.error("invalid training arguments")
         train(args)

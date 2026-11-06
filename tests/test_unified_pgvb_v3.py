@@ -192,3 +192,20 @@ def test_private_polygon_scoring_is_not_20m_radius_scoring():
     assert r["Polygon_valid"]==[True]
     assert "1" in r["Polygon_hit_flags"]
     assert "5" in r["hit_flags"]
+
+
+def test_dense_controller_candidate_coordinates_and_context_are_aligned():
+    from graphnav.unified_pgvb_v3_runtime import V3CausalBelief
+    coarse=(torch.arange(28)+.5)/28
+    yy,xx=torch.meshgrid(coarse,coarse,indexing='ij')
+    context=torch.stack((xx.flatten(),yy.flatten()),-1)[None]
+    logits=torch.zeros(1,384,384)
+    logits[0,100,200]=4.;logits[0,0,383]=3.
+    output=SimpleNamespace(geometry_global=logits,fused_logits=logits,
+                           geometry_context=context,observed_mask=torch.zeros_like(logits,dtype=torch.bool))
+    field=V3CausalBelief.controller_field(output,top_k=2)
+    assert field.candidate_ids.tolist()==[[100*384+200,383]]
+    torch.testing.assert_close(field.candidate_xy[0,0],torch.tensor([200.5/384,100.5/384]))
+    expected=field.candidate_xy.clamp(.5/28,1-.5/28)
+    torch.testing.assert_close(field.candidate_context,expected,atol=1e-6,rtol=1e-6)
+    assert field.belief_logits.gather(1,field.candidate_ids).tolist()==[[4.,3.]]
