@@ -1,0 +1,2325 @@
+[
+  {
+    "index": 12810,
+    "anchor": 5,
+    "true_bin": 7,
+    "pred": 3,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.98667907714844,
+    "NLL": 3.717653274536133,
+    "probabilities": [
+      0.0017476361244916916,
+      0.024258067831397057,
+      0.17600885033607483,
+      0.3261178135871887,
+      0.26629969477653503,
+      0.12737520039081573,
+      0.05390187352895737,
+      0.024290908128023148
+    ],
+    "confidence": 0.3261178135871887,
+    "entropy": 1.6350446939468384,
+    "object_pred": 17,
+    "target_index_offline": -1,
+    "category": "direct_geometry",
+    "n_refs": 7,
+    "physical_id": "cambridge_block_13:81",
+    "instruction": "South of Regent Street near Downing College, this blue roofed building is first one from the left.",
+    "episode_id": "cambridge_block_13:81:3:0",
+    "map_name": "cambridge_block_13",
+    "anchor_id": "580",
+    "anchor_name": "Regent Street",
+    "anchor_type": "TrafficRoad",
+    "anchor_polygon": [
+      [
+        1200.0,
+        503.66389838788473
+      ],
+      [
+        1188.4709330727894,
+        519.8827552515877
+      ],
+      [
+        1177.43038593063,
+        534.2452369320957
+      ],
+      [
+        1168.8324377137274,
+        552.2227650219834
+      ],
+      [
+        1159.9413776257938,
+        570.6888128969223
+      ],
+      [
+        1148.8031265266243,
+        587.2984855886664
+      ],
+      [
+        1138.9350268685882,
+        603.6150464093796
+      ],
+      [
+        1128.7738153395212,
+        621.2017586712261
+      ],
+      [
+        1140.8891060087933,
+        626.0869565217391
+      ],
+      [
+        1150.8549096238398,
+        608.304836345872
+      ],
+      [
+        1160.9184171958964,
+        590.6204201270151
+      ],
+      [
+        1171.1773326819737,
+        573.1314118221787
+      ],
+      [
+        1181.3385442110405,
+        555.5446995603322
+      ],
+      [
+        1191.7928676111383,
+        538.2510991695164
+      ]
+    ],
+    "anchor_vertex_mean": [
+      1164.8684486007398,
+      570.3398701933143
+    ],
+    "anchor_area_m2": 1506.1778541356782,
+    "anchor_extent_m": [
+      71.2261846604788,
+      122.4230581338544
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      1165.2683299210019,
+      570.5169718774886
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 0.595110585943587,
+    "GT_world_posthoc": [
+      1192.7500308334827,
+      542.4453204661608
+    ],
+    "GT_bearing_deg": 314.98667920020455,
+    "anchor_to_GT_m": 39.43968220310404,
+    "GT_to_anchor_polygon_m": 2.988948691275499,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "350",
+      "364",
+      "375",
+      "555",
+      "570",
+      "580"
+    ],
+    "same_name_ref_count": 6,
+    "bound_normalized_contour_max_error": 1.8948699076482e-07,
+    "relation_group": "direct",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "120",
+    "selected_public_name": "Starbucks",
+    "target_public_id_posthoc": "81",
+    "target_in_public_context": false,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 9,
+            "text": "this blue roofed building",
+            "start": 45,
+            "end": 70,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 2,
+            "text": "Regent Street",
+            "start": 9,
+            "end": 22,
+            "public_ids": [
+              "350",
+              "364",
+              "375",
+              "555",
+              "570",
+              "580"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 9,
+              "text": "this blue roofed building",
+              "start": 45,
+              "end": 70,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 2,
+              "text": "Regent Street",
+              "start": 9,
+              "end": 22,
+              "public_ids": [
+                "350",
+                "364",
+                "375",
+                "555",
+                "570",
+                "580"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "South of",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "south of",
+            "evidence": "South -> of -> Regent Street"
+          }
+        ],
+        "hops": 1,
+        "public_ids": [
+          "350",
+          "364",
+          "375",
+          "555",
+          "570",
+          "580"
+        ],
+        "public_names": [
+          "Regent Street"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 10272,
+    "anchor": 2,
+    "true_bin": 5,
+    "pred": 1,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.90158081054688,
+    "NLL": 2.4770781993865967,
+    "probabilities": [
+      0.2241191864013672,
+      0.47548404335975647,
+      0.046141576021909714,
+      0.02087734453380108,
+      0.03246891126036644,
+      0.08398827165365219,
+      0.08036278933286667,
+      0.03655786067247391
+    ],
+    "confidence": 0.47548404335975647,
+    "entropy": 1.5542901754379272,
+    "object_pred": 41,
+    "target_index_offline": 6,
+    "category": "uncertain",
+    "n_refs": 6,
+    "physical_id": "cambridge_block_9:180",
+    "instruction": "A large building with an inner court yard and a slightly taller square tower section on Sidney Street at the end of Jesus Lane.",
+    "episode_id": "cambridge_block_9:180:0:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "262",
+    "anchor_name": "Jesus Lane",
+    "anchor_type": "Footpath",
+    "anchor_polygon": [
+      [
+        735.3199804592086,
+        1273.7664875427454
+      ],
+      [
+        733.7567171470445,
+        1285.1001465559355
+      ],
+      [
+        727.8944797264289,
+        1289.2037127503663
+      ],
+      [
+        744.3087445041524,
+        1306.399609184172
+      ],
+      [
+        761.2115290669271,
+        1323.1069858329263
+      ],
+      [
+        778.4074255007328,
+        1339.5212506106498
+      ],
+      [
+        786.3214460185637,
+        1336.8832437713727
+      ],
+      [
+        768.9301416707376,
+        1320.6643869076697
+      ],
+      [
+        760.3321934538349,
+        1309.9169516365412
+      ],
+      [
+        776.0625305324866,
+        1326.6243282852956
+      ],
+      [
+        793.6492427943332,
+        1342.647777234978
+      ],
+      [
+        788.3732291157792,
+        1327.4059599413777
+      ],
+      [
+        771.3727405959942,
+        1310.7962872496337
+      ],
+      [
+        755.6424035173425,
+        1295.6521739130435
+      ],
+      [
+        738.837322911578,
+        1278.847093307279
+      ]
+    ],
+    "anchor_vertex_mean": [
+      761.3613418010098,
+      1311.1024263149327
+    ],
+    "anchor_area_m2": 1163.5791913959465,
+    "anchor_extent_m": [
+      65.75476306790426,
+      68.88128969223271
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      759.5430676688829,
+      1309.9607204699141
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 0.34542495538198636,
+    "GT_world_posthoc": [
+      704.0937628090383,
+      1254.0312508851289
+    ],
+    "GT_bearing_deg": 224.90158119018665,
+    "anchor_to_GT_m": 80.84982788195123,
+    "GT_to_anchor_polygon_m": 36.93990030668657,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "262",
+      "275",
+      "509",
+      "523"
+    ],
+    "same_name_ref_count": 4,
+    "bound_normalized_contour_max_error": 1.5480925119604194e-07,
+    "relation_group": "unknown",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "63",
+    "selected_public_name": "Squash Court",
+    "target_public_id_posthoc": "180",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": false,
+        "nodes": [
+          {
+            "node": 2,
+            "text": "A large building",
+            "start": 0,
+            "end": 16,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 14,
+            "text": "a slightly taller square tower section",
+            "start": 46,
+            "end": 84,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 21,
+            "text": "Jesus Lane",
+            "start": 116,
+            "end": 126,
+            "public_ids": [
+              "262",
+              "275",
+              "509",
+              "523"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 2,
+              "text": "A large building",
+              "start": 0,
+              "end": 16,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 14,
+              "text": "a slightly taller square tower section",
+              "start": 46,
+              "end": 84,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "relation": "with",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "with",
+            "evidence": "building -> with -> section"
+          },
+          {
+            "subject": {
+              "node": 14,
+              "text": "a slightly taller square tower section",
+              "start": 46,
+              "end": 84,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 21,
+              "text": "Jesus Lane",
+              "start": 116,
+              "end": 126,
+              "public_ids": [
+                "262",
+                "275",
+                "509",
+                "523"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "end of",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "end of",
+            "evidence": "end -> of -> Jesus Lane"
+          }
+        ],
+        "hops": 2,
+        "public_ids": [
+          "262",
+          "275",
+          "509",
+          "523"
+        ],
+        "public_names": [
+          "Jesus Lane"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 12583,
+    "anchor": 0,
+    "true_bin": 5,
+    "pred": 1,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.86424255371094,
+    "NLL": 2.916410207748413,
+    "probabilities": [
+      0.11240891367197037,
+      0.366371214389801,
+      0.25869596004486084,
+      0.09028089046478271,
+      0.07008673995733261,
+      0.05412764474749565,
+      0.02440417744219303,
+      0.02362438477575779
+    ],
+    "confidence": 0.366371214389801,
+    "entropy": 1.7036998271942139,
+    "object_pred": 12,
+    "target_index_offline": 2,
+    "category": "direct_geometry",
+    "n_refs": 2,
+    "physical_id": "cambridge_block_13:19",
+    "instruction": "This is a brown building with a gray rooftop next to Combined Facility. Behind this building is Psychology Workshop Building.",
+    "episode_id": "cambridge_block_13:19:5:0",
+    "map_name": "cambridge_block_13",
+    "anchor_id": "25",
+    "anchor_name": "Combined Facility",
+    "anchor_type": "Building",
+    "anchor_polygon": [
+      [
+        1024.914509037616,
+        640.8402540302882
+      ],
+      [
+        1013.971665852467,
+        644.9438202247192
+      ],
+      [
+        1005.0806057645335,
+        654.2256961406937
+      ],
+      [
+        999.0229604298975,
+        666.7318026380068
+      ],
+      [
+        997.4596971177333,
+        679.0425012212995
+      ],
+      [
+        1000.1954079140205,
+        689.789936492428
+      ],
+      [
+        998.5344406448461,
+        702.1983390327308
+      ],
+      [
+        1007.3277967757695,
+        693.9912066438691
+      ],
+      [
+        1020.4201270151441,
+        688.9106008793356
+      ],
+      [
+        1029.8974108451391,
+        679.8241328773815
+      ],
+      [
+        1039.3746946751344,
+        670.7376648754275
+      ],
+      [
+        1047.8749389350269,
+        660.6741573033707
+      ],
+      [
+        1039.2769907181241,
+        651.0991695163655
+      ],
+      [
+        1029.7997068881289,
+        642.7943331704935
+      ]
+    ],
+    "anchor_vertex_mean": [
+      1018.0822109009699,
+      668.9859725033149
+    ],
+    "anchor_area_m2": 1682.684562989576,
+    "anchor_extent_m": [
+      50.41524181729358,
+      61.358085002442635
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      1019.0749071707558,
+      667.573883594274
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 2.8681554000344534,
+    "GT_world_posthoc": [
+      993.9375060528516,
+      644.7265744864941
+    ],
+    "GT_bearing_deg": 225.1357616775913,
+    "anchor_to_GT_m": 34.22696545621998,
+    "GT_to_anchor_polygon_m": 14.642471901484688,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "25"
+    ],
+    "same_name_ref_count": 1,
+    "bound_normalized_contour_max_error": 1.6376906608606134e-07,
+    "relation_group": "direct",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "140",
+    "selected_public_name": "",
+    "target_public_id_posthoc": "19",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 4,
+            "text": "a brown building",
+            "start": 8,
+            "end": 24,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 11,
+            "text": "Combined Facility",
+            "start": 53,
+            "end": 70,
+            "public_ids": [
+              "25"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 4,
+              "text": "a brown building",
+              "start": 8,
+              "end": 24,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 11,
+              "text": "Combined Facility",
+              "start": 53,
+              "end": 70,
+              "public_ids": [
+                "25"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "next to",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "to",
+            "evidence": "next -> to -> Combined Facility"
+          }
+        ],
+        "hops": 1,
+        "public_ids": [
+          "25"
+        ],
+        "public_names": [
+          "Combined Facility"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 13299,
+    "anchor": 1,
+    "true_bin": 6,
+    "pred": 2,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.78973388671875,
+    "NLL": 2.030017614364624,
+    "probabilities": [
+      0.10105115175247192,
+      0.03325381502509117,
+      0.374790757894516,
+      0.3191552460193634,
+      0.0042298464104533195,
+      0.015094977803528309,
+      0.13133320212364197,
+      0.02109093777835369
+    ],
+    "confidence": 0.374790757894516,
+    "entropy": 1.5115340948104858,
+    "object_pred": 25,
+    "target_index_offline": 35,
+    "category": "direct_geometry",
+    "n_refs": 7,
+    "physical_id": "cambridge_block_13:215",
+    "instruction": "A black car next to a gray van, parked in between a multi-colored beige and white building, with a beige roof that has skylights on it and the central delivery building, on the edge of the map off Tennis Court Road, across from the Howard Lodge building",
+    "episode_id": "cambridge_block_13:215:0:0",
+    "map_name": "cambridge_block_13",
+    "anchor_id": "360",
+    "anchor_name": "Tennis Court Road",
+    "anchor_type": "Footpath",
+    "anchor_polygon": [
+      [
+        949.8778700537372,
+        419.247679531021
+      ],
+      [
+        942.256961406937,
+        427.2594040058622
+      ],
+      [
+        936.6878358573522,
+        437.3229115779189
+      ],
+      [
+        931.1187103077675,
+        447.38641914997555
+      ],
+      [
+        925.5495847581827,
+        457.4499267220322
+      ],
+      [
+        919.980459208598,
+        467.51343429408894
+      ],
+      [
+        914.6067415730337,
+        477.7723497801661
+      ],
+      [
+        921.0552027357107,
+        480.1172447484123
+      ],
+      [
+        926.5266243282853,
+        469.9560332193454
+      ],
+      [
+        932.1934538348803,
+        459.990229604299
+      ],
+      [
+        937.7625793844651,
+        449.9267220322423
+      ],
+      [
+        943.3317049340499,
+        439.86321446018565
+      ],
+      [
+        948.8031265266243,
+        429.7020029311187
+      ],
+      [
+        950.4640937957987,
+        419.4430874450415
+      ]
+    ],
+    "anchor_vertex_mean": [
+      934.3010677646729,
+      448.7821899644079
+    ],
+    "anchor_area_m2": 440.522179203949,
+    "anchor_extent_m": [
+      35.85735222276503,
+      60.86956521739131
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      933.059177050469,
+      451.10362982081494
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 1.714289519890258,
+    "GT_world_posthoc": [
+      934.156259983778,
+      409.3203131828457
+    ],
+    "GT_bearing_deg": 269.7897505612534,
+    "anchor_to_GT_m": 39.46214247119135,
+    "GT_to_anchor_polygon_m": 18.233296866193637,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "360",
+      "362",
+      "564",
+      "566",
+      "631"
+    ],
+    "same_name_ref_count": 5,
+    "bound_normalized_contour_max_error": 9.243094672983787e-08,
+    "relation_group": "indirect",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "347",
+    "selected_public_name": "",
+    "target_public_id_posthoc": "215",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 2,
+            "text": "A black car",
+            "start": 0,
+            "end": 11,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 39,
+            "text": "the map",
+            "start": 185,
+            "end": 192,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 41,
+            "text": "Tennis Court Road",
+            "start": 197,
+            "end": 214,
+            "public_ids": [
+              "360",
+              "362",
+              "564",
+              "566",
+              "631"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 2,
+              "text": "A black car",
+              "start": 0,
+              "end": 11,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 39,
+              "text": "the map",
+              "start": 185,
+              "end": 192,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "relation": "edge of",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "edge of",
+            "evidence": "edge -> of -> map"
+          },
+          {
+            "subject": {
+              "node": 39,
+              "text": "the map",
+              "start": 185,
+              "end": 192,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 41,
+              "text": "Tennis Court Road",
+              "start": 197,
+              "end": 214,
+              "public_ids": [
+                "360",
+                "362",
+                "564",
+                "566",
+                "631"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "off",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "off",
+            "evidence": "map -> off -> Tennis Court Road"
+          }
+        ],
+        "hops": 2,
+        "public_ids": [
+          "360",
+          "362",
+          "564",
+          "566",
+          "631"
+        ],
+        "public_names": [
+          "Tennis Court Road"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 10031,
+    "anchor": 0,
+    "true_bin": 3,
+    "pred": 7,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.7516326904297,
+    "NLL": 2.1343531608581543,
+    "probabilities": [
+      0.15705347061157227,
+      0.08626843988895416,
+      0.06771793216466904,
+      0.11832109093666077,
+      0.1491386890411377,
+      0.03646070882678032,
+      0.12926341593265533,
+      0.2557763457298279
+    ],
+    "confidence": 0.2557763457298279,
+    "entropy": 1.9547107219696045,
+    "object_pred": 6,
+    "target_index_offline": 1,
+    "category": "direct_geometry",
+    "n_refs": 1,
+    "physical_id": "cambridge_block_9:120",
+    "instruction": "The triangular building next to the Trinity College chapel has a rectangular lawn behind it.",
+    "episode_id": "cambridge_block_9:120:4:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "4",
+    "anchor_name": "Trinity College Chapel",
+    "anchor_type": "Building",
+    "anchor_polygon": [
+      [
+        571.1773326819737,
+        1232.5354176844162
+      ],
+      [
+        559.3551538837323,
+        1234.5872007816317
+      ],
+      [
+        556.8148510014655,
+        1245.5300439667806
+      ],
+      [
+        566.4875427454812,
+        1249.3404982901807
+      ],
+      [
+        580.3615046409379,
+        1249.3404982901807
+      ],
+      [
+        594.0400586223742,
+        1249.1450903761602
+      ],
+      [
+        607.132388861749,
+        1248.3634587200781
+      ],
+      [
+        616.609672691744,
+        1245.1392281387396
+      ],
+      [
+        625.5984367366879,
+        1242.208109428432
+      ],
+      [
+        621.2017586712261,
+        1232.7308255984367
+      ],
+      [
+        607.7186126038105,
+        1233.1216414264777
+      ],
+      [
+        594.4308744504152,
+        1233.7078651685392
+      ],
+      [
+        580.752320468979,
+        1233.9032730825597
+      ]
+    ],
+    "anchor_vertex_mean": [
+      590.8985006200444,
+      1240.742550073278
+    ],
+    "anchor_area_m2": 959.1884318896741,
+    "anchor_extent_m": [
+      68.78358573522235,
+      16.805080605764488
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      589.7630795727164,
+      1240.8854738745633
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 2.590170341778645,
+    "GT_world_posthoc": [
+      579.2812569230795,
+      1252.4609435886146
+    ],
+    "GT_bearing_deg": 134.75164931889307,
+    "anchor_to_GT_m": 16.50094232748405,
+    "GT_to_anchor_polygon_m": 3.1204452984338786,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "4"
+    ],
+    "same_name_ref_count": 1,
+    "bound_normalized_contour_max_error": 1.415264824500273e-07,
+    "relation_group": "direct",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "87",
+    "selected_public_name": "Great Court E, F, G, H, I and K",
+    "target_public_id_posthoc": "120",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 2,
+            "text": "The triangular building",
+            "start": 0,
+            "end": 23,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 6,
+            "text": "Trinity College chapel",
+            "start": 36,
+            "end": 58,
+            "public_ids": [
+              "4"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 2,
+              "text": "The triangular building",
+              "start": 0,
+              "end": 23,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 6,
+              "text": "Trinity College chapel",
+              "start": 36,
+              "end": 58,
+              "public_ids": [
+                "4"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "next to",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "to",
+            "evidence": "next -> to -> Trinity College chapel"
+          }
+        ],
+        "hops": 1,
+        "public_ids": [
+          "4"
+        ],
+        "public_names": [
+          "Trinity College Chapel"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 13714,
+    "anchor": 0,
+    "true_bin": 0,
+    "pred": 4,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.73619079589844,
+    "NLL": 2.3386995792388916,
+    "probabilities": [
+      0.0964529886841774,
+      0.09975265711545944,
+      0.12198435515165329,
+      0.24234335124492645,
+      0.30245622992515564,
+      0.1135854721069336,
+      0.013150540180504322,
+      0.010274264961481094
+    ],
+    "confidence": 0.30245622992515564,
+    "entropy": 1.7683956623077393,
+    "object_pred": 10,
+    "target_index_offline": 40,
+    "category": "direct_geometry",
+    "n_refs": 2,
+    "physical_id": "cambridge_block_13:330",
+    "instruction": "A car parked behind Butterfield Cafe near the Maitland Robinson Library. It is a red car with a tree to one side and two white cars on the other.",
+    "episode_id": "cambridge_block_13:330:0:0",
+    "map_name": "cambridge_block_13",
+    "anchor_id": "147",
+    "anchor_name": "Butterfield Café",
+    "anchor_type": "Building",
+    "anchor_polygon": [
+      [
+        1064.582315583781,
+        595.8964338055691
+      ],
+      [
+        1059.8925256472887,
+        599.0229604298975
+      ],
+      [
+        1058.817782120176,
+        604.9829018075231
+      ],
+      [
+        1063.409868099658,
+        608.2071323888617
+      ],
+      [
+        1068.0996580361505,
+        611.3336590131901
+      ],
+      [
+        1072.9848558866634,
+        614.2647777234978
+      ],
+      [
+        1078.2608695652175,
+        616.8050806057645
+      ],
+      [
+        1082.4621397166586,
+        613.190034196385
+      ],
+      [
+        1082.7552515876894,
+        607.4255007327797
+      ],
+      [
+        1077.9677576941867,
+        604.3966780654616
+      ],
+      [
+        1073.1802638006839,
+        601.3678553981437
+      ],
+      [
+        1068.4904738641915,
+        598.2413287738153
+      ]
+    ],
+    "anchor_vertex_mean": [
+      1070.9086468001954,
+      606.2611952450741
+    ],
+    "anchor_area_m2": 266.65972986073024,
+    "anchor_extent_m": [
+      23.937469467513438,
+      20.908646800195356
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      1070.9272363415257,
+      606.4151423435147
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 0.49203478261028977,
+    "GT_world_posthoc": [
+      1088.8437745451927,
+      606.3437731385231
+    ],
+    "GT_bearing_deg": 0.263802489157338,
+    "anchor_to_GT_m": 17.93531784881046,
+    "GT_to_anchor_polygon_m": 6.183869855698843,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "147"
+    ],
+    "same_name_ref_count": 1,
+    "bound_normalized_contour_max_error": 1.7229331072954324e-07,
+    "relation_group": "direct",
+    "relative_reference_unresolved": true,
+    "selected_public_id": "333",
+    "selected_public_name": "",
+    "target_public_id_posthoc": "330",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 1,
+            "text": "A car",
+            "start": 0,
+            "end": 5,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 4,
+            "text": "Butterfield Cafe",
+            "start": 20,
+            "end": 36,
+            "public_ids": [
+              "147"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 1,
+              "text": "A car",
+              "start": 0,
+              "end": 5,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 4,
+              "text": "Butterfield Cafe",
+              "start": 20,
+              "end": 36,
+              "public_ids": [
+                "147"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "behind",
+            "orientation": 1,
+            "reference_frame": "unresolved_relative",
+            "original_relation": "behind",
+            "evidence": "parked -> behind -> Butterfield Cafe"
+          }
+        ],
+        "hops": 1,
+        "public_ids": [
+          "147"
+        ],
+        "public_names": [
+          "Butterfield Café"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 10056,
+    "anchor": 0,
+    "true_bin": 4,
+    "pred": 0,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.7205047607422,
+    "NLL": 2.5605990886688232,
+    "probabilities": [
+      0.21698933839797974,
+      0.1948692947626114,
+      0.009684591554105282,
+      0.010286240838468075,
+      0.07725843787193298,
+      0.14299213886260986,
+      0.13780291378498077,
+      0.21011699736118317
+    ],
+    "confidence": 0.21698933839797974,
+    "entropy": 1.8190830945968628,
+    "object_pred": 2,
+    "target_index_offline": 3,
+    "category": "direct_geometry",
+    "n_refs": 3,
+    "physical_id": "cambridge_block_9:126",
+    "instruction": "The white and gray building on Round Church Street across from Cambridge Union Society.",
+    "episode_id": "cambridge_block_9:126:5:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "276",
+    "anchor_name": "Round Church Street",
+    "anchor_type": "Footpath",
+    "anchor_polygon": [
+      [
+        669.2721055202736,
+        1350.7572056668296
+      ],
+      [
+        663.3121641426478,
+        1363.5564240351734
+      ],
+      [
+        679.7264289203713,
+        1376.8441621885686
+      ],
+      [
+        694.7728382999512,
+        1391.4997557401075
+      ],
+      [
+        709.1353199804591,
+        1398.827552515877
+      ],
+      [
+        717.4401563263311,
+        1414.5578895945287
+      ],
+      [
+        736.1016121152907,
+        1425.5984367366877
+      ],
+      [
+        730.4347826086956,
+        1415.04640937958
+      ],
+      [
+        728.5784074255007,
+        1412.4084025403029
+      ],
+      [
+        749.5847581827063,
+        1413.6785539814364
+      ],
+      [
+        732.8773815339521,
+        1406.350757205667
+      ],
+      [
+        716.4631167562286,
+        1393.0630190522716
+      ],
+      [
+        699.9511480214949,
+        1379.8729848558867
+      ],
+      [
+        684.6116267708842,
+        1365.5105031753785
+      ],
+      [
+        669.4675134342941,
+        1350.95261358085
+      ]
+    ],
+    "anchor_vertex_mean": [
+      705.4486240026055,
+      1390.5683113499429
+    ],
+    "anchor_area_m2": 1144.181590942122,
+    "anchor_extent_m": [
+      86.2725940400585,
+      74.84123106985817
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      701.7136839091584,
+      1388.2908476733892
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 5.232054338738607,
+    "GT_world_posthoc": [
+      677.0312585175038,
+      1390.429694676399
+    ],
+    "GT_bearing_deg": 180.27948007277527,
+    "anchor_to_GT_m": 28.417703561266702,
+    "GT_to_anchor_polygon_m": 11.612514548920176,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "276",
+      "525"
+    ],
+    "same_name_ref_count": 2,
+    "bound_normalized_contour_max_error": 1.5394510510802206e-07,
+    "relation_group": "direct",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "60",
+    "selected_public_name": "Cambridge Union Society",
+    "target_public_id_posthoc": "126",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 4,
+            "text": "The white and gray building",
+            "start": 0,
+            "end": 27,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 6,
+            "text": "Round Church Street",
+            "start": 31,
+            "end": 50,
+            "public_ids": [
+              "276",
+              "525"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 4,
+              "text": "The white and gray building",
+              "start": 0,
+              "end": 27,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 6,
+              "text": "Round Church Street",
+              "start": 31,
+              "end": 50,
+              "public_ids": [
+                "276",
+                "525"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "on",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "on",
+            "evidence": "building -> on -> Round Church Street"
+          }
+        ],
+        "hops": 1,
+        "public_ids": [
+          "276",
+          "525"
+        ],
+        "public_names": [
+          "Round Church Street"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 10443,
+    "anchor": 2,
+    "true_bin": 5,
+    "pred": 1,
+    "top1": 0,
+    "top2": 1,
+    "error": 179.61843872070312,
+    "NLL": 1.3470020294189453,
+    "probabilities": [
+      0.0757078304886818,
+      0.30090537667274475,
+      0.12776139378547668,
+      0.036205798387527466,
+      0.1022736057639122,
+      0.26001861691474915,
+      0.08030637353658676,
+      0.016821062192320824
+    ],
+    "confidence": 0.30090537667274475,
+    "entropy": 1.7944798469543457,
+    "object_pred": 59,
+    "target_index_offline": 54,
+    "category": "direct_geometry",
+    "n_refs": 6,
+    "physical_id": "cambridge_block_9:228",
+    "instruction": "The black car on Portugal Street that is 2 cars behind the light gray car closest to the intersection with New Park Street.",
+    "episode_id": "cambridge_block_9:228:1:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "498",
+    "anchor_name": "Portugal Street",
+    "anchor_type": "TrafficRoad",
+    "anchor_polygon": [
+      [
+        704.2501221299462,
+        1526.6243282852956
+      ],
+      [
+        699.4626282364436,
+        1537.6648754274547
+      ],
+      [
+        707.3766487542746,
+        1547.923790913532
+      ],
+      [
+        715.095261358085,
+        1558.3781143136298
+      ],
+      [
+        722.9115779189058,
+        1568.343917928676
+      ],
+      [
+        726.3312164142649,
+        1581.533952125061
+      ],
+      [
+        733.561309233024,
+        1592.47679531021
+      ],
+      [
+        747.8260869565217,
+        1592.47679531021
+      ],
+      [
+        741.6707376648753,
+        1581.0454323400097
+      ],
+      [
+        734.8314606741574,
+        1569.7117733268196
+      ],
+      [
+        727.6013678553982,
+        1559.1597459697118
+      ],
+      [
+        721.152906692721,
+        1548.9985344406448
+      ],
+      [
+        713.8251099169516,
+        1538.544211040547
+      ],
+      [
+        707.5720566682951,
+        1527.4059599413777
+      ]
+    ],
+    "anchor_vertex_mean": [
+      721.6763207481333,
+      1559.3063019052267
+    ],
+    "anchor_area_m2": 813.8973497503324,
+    "anchor_extent_m": [
+      48.36345872007814,
+      65.8524670249144
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      722.985211514093,
+      1562.1736047821078
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 4.602414023648663,
+    "GT_world_posthoc": [
+      714.3125291347503,
+      1551.8437725841998
+    ],
+    "GT_bearing_deg": 225.3815626492835,
+    "anchor_to_GT_m": 10.48402455131221,
+    "GT_to_anchor_polygon_m": 0.0,
+    "GT_inside_anchor": true,
+    "same_name_public_ids": [
+      "254",
+      "267",
+      "498",
+      "514"
+    ],
+    "same_name_ref_count": 4,
+    "bound_normalized_contour_max_error": 1.9931095118774778e-07,
+    "relation_group": "direct",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "229",
+    "selected_public_name": "",
+    "target_public_id_posthoc": "228",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": true,
+        "nodes": [
+          {
+            "node": 2,
+            "text": "The black car",
+            "start": 0,
+            "end": 13,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 4,
+            "text": "Portugal Street",
+            "start": 17,
+            "end": 32,
+            "public_ids": [
+              "254",
+              "267",
+              "498",
+              "514"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 2,
+              "text": "The black car",
+              "start": 0,
+              "end": 13,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 4,
+              "text": "Portugal Street",
+              "start": 17,
+              "end": 32,
+              "public_ids": [
+                "254",
+                "267",
+                "498",
+                "514"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "on",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "on",
+            "evidence": "car -> on -> Portugal Street"
+          }
+        ],
+        "hops": 1,
+        "public_ids": [
+          "254",
+          "267",
+          "498",
+          "514"
+        ],
+        "public_names": [
+          "Portugal Street"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 10094,
+    "anchor": 2,
+    "true_bin": 6,
+    "pred": 2,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.6009063720703,
+    "NLL": 3.1257834434509277,
+    "probabilities": [
+      0.024566391482949257,
+      0.3678184151649475,
+      0.48279476165771484,
+      0.02730562910437584,
+      0.005045986734330654,
+      0.020537590608000755,
+      0.04390252009034157,
+      0.0280286967754364
+    ],
+    "confidence": 0.48279476165771484,
+    "entropy": 1.2527107000350952,
+    "object_pred": 55,
+    "target_index_offline": 20,
+    "category": "uncertain",
+    "n_refs": 5,
+    "physical_id": "cambridge_block_9:134",
+    "instruction": "The light grey roofed building found to the right of the Maypole building, with Portugal Street going vertically further right.",
+    "episode_id": "cambridge_block_9:134:3:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "267",
+    "anchor_name": "Portugal Street",
+    "anchor_type": "Footpath",
+    "anchor_polygon": [
+      [
+        683.9276990718124,
+        1491.0600879335614
+      ],
+      [
+        678.7493893502688,
+        1496.8246213971665
+      ],
+      [
+        682.266731802638,
+        1505.0317537860283
+      ],
+      [
+        686.76111382511,
+        1512.2618466047875
+      ],
+      [
+        693.6980947728383,
+        1516.267708842208
+      ],
+      [
+        694.9682462139717,
+        1523.5955056179776
+      ],
+      [
+        700.1465559355154,
+        1528.9692232535417
+      ],
+      [
+        707.4743527112848,
+        1524.57254518808
+      ],
+      [
+        701.8075232046898,
+        1520.6643869076697
+      ],
+      [
+        700.4396678065461,
+        1516.7562286272594
+      ],
+      [
+        696.8246213971665,
+        1508.6468001954079
+      ],
+      [
+        692.6233512457254,
+        1501.123595505618
+      ],
+      [
+        688.1289692232535,
+        1493.893502686859
+      ]
+    ],
+    "anchor_vertex_mean": [
+      692.9089474277554,
+      1510.7436774266282
+    ],
+    "anchor_area_m2": 352.63157517918296,
+    "anchor_extent_m": [
+      28.72496336101608,
+      37.90913531998035
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      691.6276860322752,
+      1509.301457263071
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 2.8146573815787974,
+    "GT_world_posthoc": [
+      692.7187588572502,
+      1483.4375218153
+    ],
+    "GT_bearing_deg": 269.60093883772555,
+    "anchor_to_GT_m": 27.306817939159856,
+    "GT_to_anchor_polygon_m": 11.23510495314089,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "254",
+      "267",
+      "498",
+      "514"
+    ],
+    "same_name_ref_count": 4,
+    "bound_normalized_contour_max_error": 1.780729337319542e-07,
+    "relation_group": "unknown",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "55",
+    "selected_public_name": "",
+    "target_public_id_posthoc": "134",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": []
+  },
+  {
+    "index": 10272,
+    "anchor": 4,
+    "true_bin": 5,
+    "pred": 1,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.55935668945312,
+    "NLL": 2.4981625080108643,
+    "probabilities": [
+      0.2306685447692871,
+      0.47201618552207947,
+      0.045352984219789505,
+      0.020174454897642136,
+      0.03015015833079815,
+      0.08223596960306168,
+      0.08007996529340744,
+      0.03932175040245056
+    ],
+    "confidence": 0.47201618552207947,
+    "entropy": 1.5521743297576904,
+    "object_pred": 41,
+    "target_index_offline": 6,
+    "category": "uncertain",
+    "n_refs": 6,
+    "physical_id": "cambridge_block_9:180",
+    "instruction": "A large building with an inner court yard and a slightly taller square tower section on Sidney Street at the end of Jesus Lane.",
+    "episode_id": "cambridge_block_9:180:0:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "509",
+    "anchor_name": "Jesus Lane",
+    "anchor_type": "TrafficRoad",
+    "anchor_polygon": [
+      [
+        732.1934538348803,
+        1274.5481191988276
+      ],
+      [
+        725.9404005862237,
+        1284.904738641915
+      ],
+      [
+        736.5901319003419,
+        1296.1406936980948
+      ],
+      [
+        747.14215925745,
+        1307.4743527112848
+      ],
+      [
+        758.3781143136298,
+        1318.1240840254031
+      ],
+      [
+        769.6140693698095,
+        1328.7738153395212
+      ],
+      [
+        780.8500244259892,
+        1339.4235466536395
+      ],
+      [
+        793.7469467513434,
+        1346.8490473864192
+      ],
+      [
+        793.2584269662921,
+        1335.0268685881779
+      ],
+      [
+        781.9247679531021,
+        1324.4748412310698
+      ],
+      [
+        770.200293111871,
+        1314.313629702003
+      ],
+      [
+        759.1597459697118,
+        1303.4684904738642
+      ],
+      [
+        747.923790913532,
+        1292.818759159746
+      ],
+      [
+        738.5442110405471,
+        1280.3126526624328
+      ]
+    ],
+    "anchor_vertex_mean": [
+      759.6761811710518,
+      1310.475259962314
+    ],
+    "anchor_area_m2": 999.1196143199527,
+    "anchor_extent_m": [
+      67.8065461651197,
+      72.30092818759158
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      759.9253533043237,
+      1311.2014442806171
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 0.2380349988714272,
+    "GT_world_posthoc": [
+      704.0937628090383,
+      1254.0312508851289
+    ],
+    "GT_bearing_deg": 225.44065083099144,
+    "anchor_to_GT_m": 79.21698928686489,
+    "GT_to_anchor_polygon_m": 34.79273661483735,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "262",
+      "275",
+      "509",
+      "523"
+    ],
+    "same_name_ref_count": 4,
+    "bound_normalized_contour_max_error": 1.427453366065201e-07,
+    "relation_group": "unknown",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "63",
+    "selected_public_name": "Squash Court",
+    "target_public_id_posthoc": "180",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": false,
+        "nodes": [
+          {
+            "node": 2,
+            "text": "A large building",
+            "start": 0,
+            "end": 16,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 14,
+            "text": "a slightly taller square tower section",
+            "start": 46,
+            "end": 84,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 21,
+            "text": "Jesus Lane",
+            "start": 116,
+            "end": 126,
+            "public_ids": [
+              "262",
+              "275",
+              "509",
+              "523"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 2,
+              "text": "A large building",
+              "start": 0,
+              "end": 16,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 14,
+              "text": "a slightly taller square tower section",
+              "start": 46,
+              "end": 84,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "relation": "with",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "with",
+            "evidence": "building -> with -> section"
+          },
+          {
+            "subject": {
+              "node": 14,
+              "text": "a slightly taller square tower section",
+              "start": 46,
+              "end": 84,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 21,
+              "text": "Jesus Lane",
+              "start": 116,
+              "end": 126,
+              "public_ids": [
+                "262",
+                "275",
+                "509",
+                "523"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "end of",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "end of",
+            "evidence": "end -> of -> Jesus Lane"
+          }
+        ],
+        "hops": 2,
+        "public_ids": [
+          "262",
+          "275",
+          "509",
+          "523"
+        ],
+        "public_names": [
+          "Jesus Lane"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 14215,
+    "anchor": 2,
+    "true_bin": 5,
+    "pred": 1,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.4115447998047,
+    "NLL": 3.035012722015381,
+    "probabilities": [
+      0.13807858526706696,
+      0.3741023540496826,
+      0.31891170144081116,
+      0.0701347142457962,
+      0.03713530674576759,
+      0.04807405173778534,
+      0.011777006089687347,
+      0.001786228851415217
+    ],
+    "confidence": 0.3741023540496826,
+    "entropy": 1.5238604545593262,
+    "object_pred": 6,
+    "target_index_offline": 16,
+    "category": "direct_geometry",
+    "n_refs": 3,
+    "physical_id": "cambridge_block_13:319",
+    "instruction": "This is a white van parked near University Arms on Park Terrace. Across the street there is a beige building with a brown roof.",
+    "episode_id": "cambridge_block_13:319:1:0",
+    "map_name": "cambridge_block_13",
+    "anchor_id": "558",
+    "anchor_name": "Park Terrace",
+    "anchor_type": "TrafficRoad",
+    "anchor_polygon": [
+      [
+        1200.0,
+        730.1416707376649
+      ],
+      [
+        1187.1030776746459,
+        718.0263800683928
+      ],
+      [
+        1173.61993160723,
+        706.4973131411822
+      ],
+      [
+        1160.039081582804,
+        695.065950170982
+      ],
+      [
+        1146.3605276013677,
+        683.7322911577919
+      ],
+      [
+        1132.5842696629213,
+        672.4963361016121
+      ],
+      [
+        1120.4689789936492,
+        659.599413776258
+      ],
+      [
+        1107.181240840254,
+        661.7489008304836
+      ],
+      [
+        1118.3194919394236,
+        675.6228627259404
+      ],
+      [
+        1132.6819736199316,
+        686.2725940400586
+      ],
+      [
+        1146.458231558378,
+        697.5085490962384
+      ],
+      [
+        1159.7459697117733,
+        708.8422081094284
+      ],
+      [
+        1173.3268197361992,
+        720.2735710796287
+      ],
+      [
+        1186.126038104543,
+        732.4865657059111
+      ]
+    ],
+    "anchor_vertex_mean": [
+      1153.1439737595088,
+      696.3081861958265
+    ],
+    "anchor_area_m2": 1171.7028911922987,
+    "anchor_extent_m": [
+      92.81875915974592,
+      72.8871519296531
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      1152.551401262777,
+      695.900346198627
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 0.23605184359823284,
+    "GT_world_posthoc": [
+      1131.2500128746033,
+      674.8593900024891
+    ],
+    "GT_bearing_deg": 224.41154732833755,
+    "anchor_to_GT_m": 30.649573918296046,
+    "GT_to_anchor_polygon_m": 0.0,
+    "GT_inside_anchor": true,
+    "same_name_public_ids": [
+      "354",
+      "558"
+    ],
+    "same_name_ref_count": 2,
+    "bound_normalized_contour_max_error": 2.3554275530024427e-07,
+    "relation_group": "unknown",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "230",
+    "selected_public_name": "",
+    "target_public_id_posthoc": "319",
+    "target_in_public_context": true,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": []
+  },
+  {
+    "index": 10361,
+    "anchor": 0,
+    "true_bin": 5,
+    "pred": 1,
+    "top1": 0,
+    "top2": 0,
+    "error": 179.37864685058594,
+    "NLL": 1.8859351873397827,
+    "probabilities": [
+      0.025772374123334885,
+      0.31479355692863464,
+      0.17225606739521027,
+      0.06320060044527054,
+      0.21091659367084503,
+      0.1516871452331543,
+      0.04479261487722397,
+      0.01658107340335846
+    ],
+    "confidence": 0.31479355692863464,
+    "entropy": 1.7570284605026245,
+    "object_pred": 25,
+    "target_index_offline": -1,
+    "category": "uncertain",
+    "n_refs": 5,
+    "physical_id": "cambridge_block_9:200",
+    "instruction": "A set of multiple Brown and gray buildings, one with a brown roof and another with a dark brown roof that is connected to the back end of the Cambridge systems Associates building off the Portugal place footpath",
+    "episode_id": "cambridge_block_9:200:4:0",
+    "map_name": "cambridge_block_9",
+    "anchor_id": "125",
+    "anchor_name": "Cambridge Systems Associates",
+    "anchor_type": "Building",
+    "anchor_polygon": [
+      [
+        666.3409868099658,
+        1415.828041035662
+      ],
+      [
+        661.3580850024426,
+        1418.6614557889595
+      ],
+      [
+        658.133854421104,
+        1423.2535417684417
+      ],
+      [
+        654.8119198827552,
+        1427.7479237909135
+      ],
+      [
+        655.5935515388373,
+        1433.0239374694675
+      ],
+      [
+        660.2833414753297,
+        1436.1504640937958
+      ],
+      [
+        665.7547630679043,
+        1438.495359062042
+      ],
+      [
+        670.2491450903761,
+        1435.1734245236933
+      ],
+      [
+        673.8641914997557,
+        1430.9721543722521
+      ],
+      [
+        677.381533952125,
+        1426.6731802638008
+      ],
+      [
+        676.0136785539814,
+        1421.3971665852466
+      ],
+      [
+        670.7376648754275,
+        1418.85686370298
+      ]
+    ],
+    "anchor_vertex_mean": [
+      665.8768930141672,
+      1427.1861260381045
+    ],
+    "anchor_area_m2": 323.12469378019097,
+    "anchor_extent_m": [
+      22.569614069369777,
+      22.667318026380144
+    ],
+    "anchor_valid": true,
+    "anchor_centroid": [
+      665.8261212958349,
+      1427.2630486491225
+    ],
+    "centroid_vs_vertex_bearing_difference_deg": 0.3806294439123121,
+    "GT_world_posthoc": [
+      656.4062581658363,
+      1417.507819288969
+    ],
+    "GT_bearing_deg": 225.6213532439389,
+    "anchor_to_GT_m": 13.541142712518102,
+    "GT_to_anchor_polygon_m": 4.715554206497359,
+    "GT_inside_anchor": false,
+    "same_name_public_ids": [
+      "125"
+    ],
+    "same_name_ref_count": 1,
+    "bound_normalized_contour_max_error": 1.623241602244363e-07,
+    "relation_group": "unknown",
+    "relative_reference_unresolved": false,
+    "selected_public_id": "130",
+    "selected_public_name": "St Clement's",
+    "target_public_id_posthoc": "200",
+    "target_in_public_context": false,
+    "target_ID_GT_distance_posthoc": 0.0,
+    "paths": [
+      {
+        "semantic_confident": false,
+        "nodes": [
+          {
+            "node": 7,
+            "text": "multiple Brown and gray buildings",
+            "start": 9,
+            "end": 42,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 1,
+            "text": "A set",
+            "start": 0,
+            "end": 5,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 13,
+            "text": "a brown roof",
+            "start": 53,
+            "end": 65,
+            "public_ids": [],
+            "kind": "ordinary_object"
+          },
+          {
+            "node": 30,
+            "text": "Cambridge systems Associates",
+            "start": 142,
+            "end": 170,
+            "public_ids": [
+              "125"
+            ],
+            "kind": "named_landmark"
+          }
+        ],
+        "steps": [
+          {
+            "subject": {
+              "node": 1,
+              "text": "A set",
+              "start": 0,
+              "end": 5,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 7,
+              "text": "multiple Brown and gray buildings",
+              "start": 9,
+              "end": 42,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "relation": "of",
+            "orientation": -1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "of",
+            "evidence": "set -> of -> buildings"
+          },
+          {
+            "subject": {
+              "node": 1,
+              "text": "A set",
+              "start": 0,
+              "end": 5,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 13,
+              "text": "a brown roof",
+              "start": 53,
+              "end": 65,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "relation": "with",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "with",
+            "evidence": "one -> with -> roof"
+          },
+          {
+            "subject": {
+              "node": 13,
+              "text": "a brown roof",
+              "start": 53,
+              "end": 65,
+              "public_ids": [],
+              "kind": "ordinary_object"
+            },
+            "object": {
+              "node": 30,
+              "text": "Cambridge systems Associates",
+              "start": 142,
+              "end": 170,
+              "public_ids": [
+                "125"
+              ],
+              "kind": "named_landmark"
+            },
+            "relation": "end of",
+            "orientation": 1,
+            "reference_frame": "lexical_not_geographically_calibrated",
+            "original_relation": "end of",
+            "evidence": "end -> of -> Cambridge systems Associates"
+          }
+        ],
+        "hops": 3,
+        "public_ids": [
+          "125"
+        ],
+        "public_names": [
+          "Cambridge Systems Associates"
+        ]
+      }
+    ]
+  }
+]

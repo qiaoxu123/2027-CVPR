@@ -1,0 +1,793 @@
+<meta charset="utf-8"><title>Large bearing error audit</title><h1>Sealed confirmation errors over 90°</h1><p><a href="REPORT_zh.md">中文报告</a> · <a href="summary.json">统计</a> · <a href="all_large_errors.jsonl">全部大误差指令与Polygon</a></p><p>Posthoc TRAIN diagnosis only. No predictions, binding or weights changed. No geographic north/east assertion.</p><article><h2>1. Query 12810; Regent Street; error 180.0°</h2><p>South of Regent Street near Downing College, this blue roofed building is first one from the left.</p><p>Group: direct; unresolved frame: False; same-name polygons: 6; extent: [71.2261846604788, 122.4230581338544]; GT-to-region: 3.0m.</p><a href="case_00.png"><img width="1100" src="case_00.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 9,
+        &quot;text&quot;: &quot;this blue roofed building&quot;,
+        &quot;start&quot;: 45,
+        &quot;end&quot;: 70,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;Regent Street&quot;,
+        &quot;start&quot;: 9,
+        &quot;end&quot;: 22,
+        &quot;public_ids&quot;: [
+          &quot;350&quot;,
+          &quot;364&quot;,
+          &quot;375&quot;,
+          &quot;555&quot;,
+          &quot;570&quot;,
+          &quot;580&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 9,
+          &quot;text&quot;: &quot;this blue roofed building&quot;,
+          &quot;start&quot;: 45,
+          &quot;end&quot;: 70,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;Regent Street&quot;,
+          &quot;start&quot;: 9,
+          &quot;end&quot;: 22,
+          &quot;public_ids&quot;: [
+            &quot;350&quot;,
+            &quot;364&quot;,
+            &quot;375&quot;,
+            &quot;555&quot;,
+            &quot;570&quot;,
+            &quot;580&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;South of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;south of&quot;,
+        &quot;evidence&quot;: &quot;South -&gt; of -&gt; Regent Street&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;350&quot;,
+      &quot;364&quot;,
+      &quot;375&quot;,
+      &quot;555&quot;,
+      &quot;570&quot;,
+      &quot;580&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Regent Street&quot;
+    ]
+  }
+]</pre></details></article><article><h2>2. Query 10272; Jesus Lane; error 179.9°</h2><p>A large building with an inner court yard and a slightly taller square tower section on Sidney Street at the end of Jesus Lane.</p><p>Group: unknown; unresolved frame: False; same-name polygons: 4; extent: [65.75476306790426, 68.88128969223271]; GT-to-region: 36.9m.</p><a href="case_01.png"><img width="1100" src="case_01.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: false,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;A large building&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 16,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 14,
+        &quot;text&quot;: &quot;a slightly taller square tower section&quot;,
+        &quot;start&quot;: 46,
+        &quot;end&quot;: 84,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 21,
+        &quot;text&quot;: &quot;Jesus Lane&quot;,
+        &quot;start&quot;: 116,
+        &quot;end&quot;: 126,
+        &quot;public_ids&quot;: [
+          &quot;262&quot;,
+          &quot;275&quot;,
+          &quot;509&quot;,
+          &quot;523&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;A large building&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 16,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 14,
+          &quot;text&quot;: &quot;a slightly taller square tower section&quot;,
+          &quot;start&quot;: 46,
+          &quot;end&quot;: 84,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;with&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;with&quot;,
+        &quot;evidence&quot;: &quot;building -&gt; with -&gt; section&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 14,
+          &quot;text&quot;: &quot;a slightly taller square tower section&quot;,
+          &quot;start&quot;: 46,
+          &quot;end&quot;: 84,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 21,
+          &quot;text&quot;: &quot;Jesus Lane&quot;,
+          &quot;start&quot;: 116,
+          &quot;end&quot;: 126,
+          &quot;public_ids&quot;: [
+            &quot;262&quot;,
+            &quot;275&quot;,
+            &quot;509&quot;,
+            &quot;523&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;end of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;end of&quot;,
+        &quot;evidence&quot;: &quot;end -&gt; of -&gt; Jesus Lane&quot;
+      }
+    ],
+    &quot;hops&quot;: 2,
+    &quot;public_ids&quot;: [
+      &quot;262&quot;,
+      &quot;275&quot;,
+      &quot;509&quot;,
+      &quot;523&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Jesus Lane&quot;
+    ]
+  }
+]</pre></details></article><article><h2>3. Query 12583; Combined Facility; error 179.9°</h2><p>This is a brown building with a gray rooftop next to Combined Facility. Behind this building is Psychology Workshop Building.</p><p>Group: direct; unresolved frame: False; same-name polygons: 1; extent: [50.41524181729358, 61.358085002442635]; GT-to-region: 14.6m.</p><a href="case_02.png"><img width="1100" src="case_02.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 4,
+        &quot;text&quot;: &quot;a brown building&quot;,
+        &quot;start&quot;: 8,
+        &quot;end&quot;: 24,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 11,
+        &quot;text&quot;: &quot;Combined Facility&quot;,
+        &quot;start&quot;: 53,
+        &quot;end&quot;: 70,
+        &quot;public_ids&quot;: [
+          &quot;25&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 4,
+          &quot;text&quot;: &quot;a brown building&quot;,
+          &quot;start&quot;: 8,
+          &quot;end&quot;: 24,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 11,
+          &quot;text&quot;: &quot;Combined Facility&quot;,
+          &quot;start&quot;: 53,
+          &quot;end&quot;: 70,
+          &quot;public_ids&quot;: [
+            &quot;25&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;next to&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;to&quot;,
+        &quot;evidence&quot;: &quot;next -&gt; to -&gt; Combined Facility&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;25&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Combined Facility&quot;
+    ]
+  }
+]</pre></details></article><article><h2>4. Query 13299; Tennis Court Road; error 179.8°</h2><p>A black car next to a gray van, parked in between a multi-colored beige and white building, with a beige roof that has skylights on it and the central delivery building, on the edge of the map off Tennis Court Road, across from the Howard Lodge building</p><p>Group: indirect; unresolved frame: False; same-name polygons: 5; extent: [35.85735222276503, 60.86956521739131]; GT-to-region: 18.2m.</p><a href="case_03.png"><img width="1100" src="case_03.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;A black car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 11,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 39,
+        &quot;text&quot;: &quot;the map&quot;,
+        &quot;start&quot;: 185,
+        &quot;end&quot;: 192,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 41,
+        &quot;text&quot;: &quot;Tennis Court Road&quot;,
+        &quot;start&quot;: 197,
+        &quot;end&quot;: 214,
+        &quot;public_ids&quot;: [
+          &quot;360&quot;,
+          &quot;362&quot;,
+          &quot;564&quot;,
+          &quot;566&quot;,
+          &quot;631&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;A black car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 11,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 39,
+          &quot;text&quot;: &quot;the map&quot;,
+          &quot;start&quot;: 185,
+          &quot;end&quot;: 192,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;edge of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;edge of&quot;,
+        &quot;evidence&quot;: &quot;edge -&gt; of -&gt; map&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 39,
+          &quot;text&quot;: &quot;the map&quot;,
+          &quot;start&quot;: 185,
+          &quot;end&quot;: 192,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 41,
+          &quot;text&quot;: &quot;Tennis Court Road&quot;,
+          &quot;start&quot;: 197,
+          &quot;end&quot;: 214,
+          &quot;public_ids&quot;: [
+            &quot;360&quot;,
+            &quot;362&quot;,
+            &quot;564&quot;,
+            &quot;566&quot;,
+            &quot;631&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;off&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;off&quot;,
+        &quot;evidence&quot;: &quot;map -&gt; off -&gt; Tennis Court Road&quot;
+      }
+    ],
+    &quot;hops&quot;: 2,
+    &quot;public_ids&quot;: [
+      &quot;360&quot;,
+      &quot;362&quot;,
+      &quot;564&quot;,
+      &quot;566&quot;,
+      &quot;631&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Tennis Court Road&quot;
+    ]
+  }
+]</pre></details></article><article><h2>5. Query 10031; Trinity College Chapel; error 179.8°</h2><p>The triangular building next to the Trinity College chapel has a rectangular lawn behind it.</p><p>Group: direct; unresolved frame: False; same-name polygons: 1; extent: [68.78358573522235, 16.805080605764488]; GT-to-region: 3.1m.</p><a href="case_04.png"><img width="1100" src="case_04.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The triangular building&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 23,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 6,
+        &quot;text&quot;: &quot;Trinity College chapel&quot;,
+        &quot;start&quot;: 36,
+        &quot;end&quot;: 58,
+        &quot;public_ids&quot;: [
+          &quot;4&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The triangular building&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 23,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 6,
+          &quot;text&quot;: &quot;Trinity College chapel&quot;,
+          &quot;start&quot;: 36,
+          &quot;end&quot;: 58,
+          &quot;public_ids&quot;: [
+            &quot;4&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;next to&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;to&quot;,
+        &quot;evidence&quot;: &quot;next -&gt; to -&gt; Trinity College chapel&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;4&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Trinity College Chapel&quot;
+    ]
+  }
+]</pre></details></article><article><h2>6. Query 13714; Butterfield Café; error 179.7°</h2><p>A car parked behind Butterfield Cafe near the Maitland Robinson Library. It is a red car with a tree to one side and two white cars on the other.</p><p>Group: direct; unresolved frame: True; same-name polygons: 1; extent: [23.937469467513438, 20.908646800195356]; GT-to-region: 6.2m.</p><a href="case_05.png"><img width="1100" src="case_05.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 1,
+        &quot;text&quot;: &quot;A car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 5,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 4,
+        &quot;text&quot;: &quot;Butterfield Cafe&quot;,
+        &quot;start&quot;: 20,
+        &quot;end&quot;: 36,
+        &quot;public_ids&quot;: [
+          &quot;147&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 1,
+          &quot;text&quot;: &quot;A car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 5,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 4,
+          &quot;text&quot;: &quot;Butterfield Cafe&quot;,
+          &quot;start&quot;: 20,
+          &quot;end&quot;: 36,
+          &quot;public_ids&quot;: [
+            &quot;147&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;behind&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;unresolved_relative&quot;,
+        &quot;original_relation&quot;: &quot;behind&quot;,
+        &quot;evidence&quot;: &quot;parked -&gt; behind -&gt; Butterfield Cafe&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;147&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Butterfield Café&quot;
+    ]
+  }
+]</pre></details></article><article><h2>7. Query 10056; Round Church Street; error 179.7°</h2><p>The white and gray building on Round Church Street across from Cambridge Union Society.</p><p>Group: direct; unresolved frame: False; same-name polygons: 2; extent: [86.2725940400585, 74.84123106985817]; GT-to-region: 11.6m.</p><a href="case_06.png"><img width="1100" src="case_06.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 4,
+        &quot;text&quot;: &quot;The white and gray building&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 27,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 6,
+        &quot;text&quot;: &quot;Round Church Street&quot;,
+        &quot;start&quot;: 31,
+        &quot;end&quot;: 50,
+        &quot;public_ids&quot;: [
+          &quot;276&quot;,
+          &quot;525&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 4,
+          &quot;text&quot;: &quot;The white and gray building&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 27,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 6,
+          &quot;text&quot;: &quot;Round Church Street&quot;,
+          &quot;start&quot;: 31,
+          &quot;end&quot;: 50,
+          &quot;public_ids&quot;: [
+            &quot;276&quot;,
+            &quot;525&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;on&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;on&quot;,
+        &quot;evidence&quot;: &quot;building -&gt; on -&gt; Round Church Street&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;276&quot;,
+      &quot;525&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Round Church Street&quot;
+    ]
+  }
+]</pre></details></article><article><h2>8. Query 10443; Portugal Street; error 179.6°</h2><p>The black car on Portugal Street that is 2 cars behind the light gray car closest to the intersection with New Park Street.</p><p>Group: direct; unresolved frame: False; same-name polygons: 4; extent: [48.36345872007814, 65.8524670249144]; GT-to-region: 0.0m.</p><a href="case_07.png"><img width="1100" src="case_07.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: true,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;The black car&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 13,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 4,
+        &quot;text&quot;: &quot;Portugal Street&quot;,
+        &quot;start&quot;: 17,
+        &quot;end&quot;: 32,
+        &quot;public_ids&quot;: [
+          &quot;254&quot;,
+          &quot;267&quot;,
+          &quot;498&quot;,
+          &quot;514&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;The black car&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 13,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 4,
+          &quot;text&quot;: &quot;Portugal Street&quot;,
+          &quot;start&quot;: 17,
+          &quot;end&quot;: 32,
+          &quot;public_ids&quot;: [
+            &quot;254&quot;,
+            &quot;267&quot;,
+            &quot;498&quot;,
+            &quot;514&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;on&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;on&quot;,
+        &quot;evidence&quot;: &quot;car -&gt; on -&gt; Portugal Street&quot;
+      }
+    ],
+    &quot;hops&quot;: 1,
+    &quot;public_ids&quot;: [
+      &quot;254&quot;,
+      &quot;267&quot;,
+      &quot;498&quot;,
+      &quot;514&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Portugal Street&quot;
+    ]
+  }
+]</pre></details></article><article><h2>9. Query 10094; Portugal Street; error 179.6°</h2><p>The light grey roofed building found to the right of the Maypole building, with Portugal Street going vertically further right.</p><p>Group: unknown; unresolved frame: False; same-name polygons: 4; extent: [28.72496336101608, 37.90913531998035]; GT-to-region: 11.2m.</p><a href="case_08.png"><img width="1100" src="case_08.png"></a><details><summary>Parsed chains and original spans</summary><pre>[]</pre></details></article><article><h2>10. Query 10272; Jesus Lane; error 179.6°</h2><p>A large building with an inner court yard and a slightly taller square tower section on Sidney Street at the end of Jesus Lane.</p><p>Group: unknown; unresolved frame: False; same-name polygons: 4; extent: [67.8065461651197, 72.30092818759158]; GT-to-region: 34.8m.</p><a href="case_09.png"><img width="1100" src="case_09.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: false,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 2,
+        &quot;text&quot;: &quot;A large building&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 16,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 14,
+        &quot;text&quot;: &quot;a slightly taller square tower section&quot;,
+        &quot;start&quot;: 46,
+        &quot;end&quot;: 84,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 21,
+        &quot;text&quot;: &quot;Jesus Lane&quot;,
+        &quot;start&quot;: 116,
+        &quot;end&quot;: 126,
+        &quot;public_ids&quot;: [
+          &quot;262&quot;,
+          &quot;275&quot;,
+          &quot;509&quot;,
+          &quot;523&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 2,
+          &quot;text&quot;: &quot;A large building&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 16,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 14,
+          &quot;text&quot;: &quot;a slightly taller square tower section&quot;,
+          &quot;start&quot;: 46,
+          &quot;end&quot;: 84,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;with&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;with&quot;,
+        &quot;evidence&quot;: &quot;building -&gt; with -&gt; section&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 14,
+          &quot;text&quot;: &quot;a slightly taller square tower section&quot;,
+          &quot;start&quot;: 46,
+          &quot;end&quot;: 84,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 21,
+          &quot;text&quot;: &quot;Jesus Lane&quot;,
+          &quot;start&quot;: 116,
+          &quot;end&quot;: 126,
+          &quot;public_ids&quot;: [
+            &quot;262&quot;,
+            &quot;275&quot;,
+            &quot;509&quot;,
+            &quot;523&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;end of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;end of&quot;,
+        &quot;evidence&quot;: &quot;end -&gt; of -&gt; Jesus Lane&quot;
+      }
+    ],
+    &quot;hops&quot;: 2,
+    &quot;public_ids&quot;: [
+      &quot;262&quot;,
+      &quot;275&quot;,
+      &quot;509&quot;,
+      &quot;523&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Jesus Lane&quot;
+    ]
+  }
+]</pre></details></article><article><h2>11. Query 14215; Park Terrace; error 179.4°</h2><p>This is a white van parked near University Arms on Park Terrace. Across the street there is a beige building with a brown roof.</p><p>Group: unknown; unresolved frame: False; same-name polygons: 2; extent: [92.81875915974592, 72.8871519296531]; GT-to-region: 0.0m.</p><a href="case_10.png"><img width="1100" src="case_10.png"></a><details><summary>Parsed chains and original spans</summary><pre>[]</pre></details></article><article><h2>12. Query 10361; Cambridge Systems Associates; error 179.4°</h2><p>A set of multiple Brown and gray buildings, one with a brown roof and another with a dark brown roof that is connected to the back end of the Cambridge systems Associates building off the Portugal place footpath</p><p>Group: unknown; unresolved frame: False; same-name polygons: 1; extent: [22.569614069369777, 22.667318026380144]; GT-to-region: 4.7m.</p><a href="case_11.png"><img width="1100" src="case_11.png"></a><details><summary>Parsed chains and original spans</summary><pre>[
+  {
+    &quot;semantic_confident&quot;: false,
+    &quot;nodes&quot;: [
+      {
+        &quot;node&quot;: 7,
+        &quot;text&quot;: &quot;multiple Brown and gray buildings&quot;,
+        &quot;start&quot;: 9,
+        &quot;end&quot;: 42,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 1,
+        &quot;text&quot;: &quot;A set&quot;,
+        &quot;start&quot;: 0,
+        &quot;end&quot;: 5,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 13,
+        &quot;text&quot;: &quot;a brown roof&quot;,
+        &quot;start&quot;: 53,
+        &quot;end&quot;: 65,
+        &quot;public_ids&quot;: [],
+        &quot;kind&quot;: &quot;ordinary_object&quot;
+      },
+      {
+        &quot;node&quot;: 30,
+        &quot;text&quot;: &quot;Cambridge systems Associates&quot;,
+        &quot;start&quot;: 142,
+        &quot;end&quot;: 170,
+        &quot;public_ids&quot;: [
+          &quot;125&quot;
+        ],
+        &quot;kind&quot;: &quot;named_landmark&quot;
+      }
+    ],
+    &quot;steps&quot;: [
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 1,
+          &quot;text&quot;: &quot;A set&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 5,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 7,
+          &quot;text&quot;: &quot;multiple Brown and gray buildings&quot;,
+          &quot;start&quot;: 9,
+          &quot;end&quot;: 42,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;of&quot;,
+        &quot;orientation&quot;: -1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;of&quot;,
+        &quot;evidence&quot;: &quot;set -&gt; of -&gt; buildings&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 1,
+          &quot;text&quot;: &quot;A set&quot;,
+          &quot;start&quot;: 0,
+          &quot;end&quot;: 5,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 13,
+          &quot;text&quot;: &quot;a brown roof&quot;,
+          &quot;start&quot;: 53,
+          &quot;end&quot;: 65,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;relation&quot;: &quot;with&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;with&quot;,
+        &quot;evidence&quot;: &quot;one -&gt; with -&gt; roof&quot;
+      },
+      {
+        &quot;subject&quot;: {
+          &quot;node&quot;: 13,
+          &quot;text&quot;: &quot;a brown roof&quot;,
+          &quot;start&quot;: 53,
+          &quot;end&quot;: 65,
+          &quot;public_ids&quot;: [],
+          &quot;kind&quot;: &quot;ordinary_object&quot;
+        },
+        &quot;object&quot;: {
+          &quot;node&quot;: 30,
+          &quot;text&quot;: &quot;Cambridge systems Associates&quot;,
+          &quot;start&quot;: 142,
+          &quot;end&quot;: 170,
+          &quot;public_ids&quot;: [
+            &quot;125&quot;
+          ],
+          &quot;kind&quot;: &quot;named_landmark&quot;
+        },
+        &quot;relation&quot;: &quot;end of&quot;,
+        &quot;orientation&quot;: 1,
+        &quot;reference_frame&quot;: &quot;lexical_not_geographically_calibrated&quot;,
+        &quot;original_relation&quot;: &quot;end of&quot;,
+        &quot;evidence&quot;: &quot;end -&gt; of -&gt; Cambridge systems Associates&quot;
+      }
+    ],
+    &quot;hops&quot;: 3,
+    &quot;public_ids&quot;: [
+      &quot;125&quot;
+    ],
+    &quot;public_names&quot;: [
+      &quot;Cambridge Systems Associates&quot;
+    ]
+  }
+]</pre></details></article>
