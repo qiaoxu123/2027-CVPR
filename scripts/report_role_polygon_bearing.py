@@ -40,7 +40,7 @@ def main():
  result=dict(results=models,controls=controls,paired=comparisons,strata=strata,maps=maps,uncertainty=uncertainty,instance_ID_spatial_audit=json.load(open(o/"target_identity_audit.json")),confirmation_queries_total=4117,scorable_queries=3599,unscorable_no_defined_anchor=518)
  (o/'results.json').write_text(json.dumps(result,indent=2));(o/'FROZEN_BEFORE_CONFIRM.json').write_text((r/'FROZEN_BEFORE_CONFIRM.json').read_text())
  with (o/'confirmation_predictions.csv').open('w') as f:
-  w=csv.writer(f);w.writerow(['method','index','map','anchor','true_bin','pred','top1','error','NLL','stratum'])
+  w=csv.writer(f,lineterminator="\n");w.writerow(['method','index','map','anchor','true_bin','pred','top1','error','NLL','stratum'])
   for name,rr in rows.items():
    for x in rr:
     i=x['index'];w.writerow([name,i,records[i]['map_name'],x['anchor'],x['true_bin'],x['pred'],x['top1'],x['error'],x['NLL'],anchor_strata(parsed[i],records[i]['landmarks'][x['anchor']])['group']])
