@@ -67,7 +67,7 @@ def forward_frozen(core,head,bert,batch,records,device):
     field=baseline["relation_field"]
     pair=encoded["static_inputs"]["pair_geometry"]
     counts=torch.tensor([len(records[i]["landmarks"])
-                         for i in batch["source_index"].tolist()],
+                         for i in batch["source_index"]],
                         device=device,dtype=torch.long)
     named=named_anchor_mask(encoded["static_inputs"]["entity_valid"],counts)
     candidate_angles=public_candidate_bearings(pair)
