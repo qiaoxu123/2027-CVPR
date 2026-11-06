@@ -58,7 +58,14 @@ def main():
         for name,m in nav.items():
             z=m['metrics'];report.append(f'|{name}|{z["SR"]*100:.2f}%|{z["OSR"]*100:.2f}%|{z["SPL"]:.4f}|{z["NE"]:.3f}|{z["nDTW"]:.4f}|')
     else:report+=['','尚无完整闭环结果，不宣称SR提升。']
-    report+=['','训练原始日志/权重留在服务器：`'+str(r)+'`。本报告只汇总真实文件，不预测未完成结果。']
+    audit=r/'text_length_audit.json'
+    if audit.exists():
+        lengths=json.loads(audit.read_text());shutil.copyfile(audit,o/'text_length_audit.json')
+        report+=['','## TRAIN输入长度核验','']
+        for name,values in lengths['encoders'].items():
+            report.append(f"{name}: 上限{values['configured_token_limit']} tokens，截断{values['truncated_queries']}/{lengths['N']}（{values['truncated_fraction']*100:.2f}%）。")
+        report+=['这仅说明大范围文本截断不成立，不代表关系理解正确。本轮不改变token上限。']
+    report+=['','推理时延须区分policy逐步耗时和含Query初始化耗时；环境正射渲染不计入原policy计时口径。Geometry-only跳过不参与决策的SigLIP编码，已通过TRAIN GPU几何logits一致性核验。','', '训练原始日志/权重留在服务器：`'+str(r)+'`。本报告只汇总真实文件，不预测未完成结果。']
     (o/'REPORT_zh.md').write_text('\n'.join(report)+'\n');(o/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>V3 Training</title><h1>V3 TRAIN曲线；不是导航SR</h1><a href="REPORT_zh.md">中文报告</a><br><img src="training_loss.png"><img width="1200" src="loss_components.png">')
     print(json.dumps(dict(completed_epochs=len(epochs),train_finished=final is not None),indent=2))
 if __name__=='__main__':main()

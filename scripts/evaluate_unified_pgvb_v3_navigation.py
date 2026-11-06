@@ -46,10 +46,14 @@ def main():
         if dest.exists():continue
         record=ds[i]
         public=PublicEpisode(record.map_name,record.instruction,record.start_pose.copy(),(),())
+        init_started=time.perf_counter()
         runtime.set_episode(public,builder.transform(record.map_name),catalog)
+        query_init_seconds=time.perf_counter()-init_started
         # Same original controller/Stop; teacher trajectory/target only enter score_trace AFTER rollout.
         poses,termination,timings,diagnostics=rollout(public,builder,controller,runtime.predict,GROUND_LEVEL[record.map_name],protocol,synchronize=torch.cuda.synchronize)
         metrics=score_trace(poses,record.target_position,record.trajectory,termination,radius=protocol.success_radius_m,decision_seconds=timings)
+        metrics["query_init_ms"]=query_init_seconds*1000
+        metrics["inference_including_query_init_ms"]=(sum(timings)+query_init_seconds)/max(len(timings),1)*1000
         atomic_json(dict(index=i,episode_id=list(record.episode_id),poses=poses.tolist(),termination=termination,metrics=metrics,diagnostics=diagnostics),dest)
         if (i+1)%10==0:print(json.dumps(dict(completed=i+1,expected=len(ds))),flush=True)
     rows=[json.loads((a.output/'rows'/f'{i:05d}.json').read_text()) for i in range(len(ds))]

@@ -1,0 +1,163 @@
+{
+  "N": 21878,
+  "source_sha256": "8a747e3cfa3e52c166009d09c34fe3f6c3947ff77685824433a84a840a5aebaf",
+  "uses_target_labels": false,
+  "encoders": {
+    "bert": {
+      "name": "bert-base-uncased",
+      "configured_token_limit": 96,
+      "truncated_queries": 11,
+      "truncated_fraction": 0.0005027881890483591,
+      "token_length_percentiles": {
+        "0": 13.0,
+        "25": 24.0,
+        "50": 31.0,
+        "75": 40.0,
+        "90": 47.0,
+        "95": 53.0,
+        "99": 67.0,
+        "100": 125.0
+      },
+      "longest_examples": [
+        {
+          "index": 6852,
+          "tokens": 125,
+          "map_name": "birmingham_block_12",
+          "instruction": "The target car is a grey car parked next to a small green-roofed building in the West Midlands Police Custody Suite building parking lot. The target car is the fourth car from the edge of the parking lot by Holford Drive. To the left of the car is the small green-roofed building which has a size of about one and a half car widths in both dimensions. To the right of the car are two white cars, a black car, then an empty parking stall. Behind the target car is a small square patch of grass. In front of the car is an access lane of the parking lot."
+        },
+        {
+          "index": 7475,
+          "tokens": 121,
+          "map_name": "birmingham_block_12",
+          "instruction": "This is a large white car parked in the West Midlands Police Custody Suite building parking lot near the lot's edge adjacent to the footpath named Cross Country: Manchester to Bournemouth (all stations). The car is in the second row of cars from the edge. In front of the car is a small white car. To the left is a black car, an empty parking stall, another black car, then a blue car parked in a perpendicular direction. To the right is a dark blue car and then a grey car. Behind the car is the empty space of the parking lot access lane."
+        },
+        {
+          "index": 7143,
+          "tokens": 112,
+          "map_name": "birmingham_block_12",
+          "instruction": "The target car is a dark brown car with a white roof parked in the West Midlands Police Custody Suite building parking lot. The car is in the third row of parked cars from the building, out of a total of four rows. To the left of the car is a red car followed by three blue cars. To the right is a larger grey car with a white roof, a grey car, then a white car, then a blue-grey car, then an empty parking stall. Behind the target car is an access lane of the parking lot."
+        },
+        {
+          "index": 5713,
+          "tokens": 110,
+          "map_name": "birmingham_block_9",
+          "instruction": "A light grey car on Aldridge Road is in the middle of crossing an intersection. The car is halfway across the intersection stop line painted on the ground. To the right of the car is a building whose roofs look like a series of staircases. Adjacent to this building, in the opposite direction that the car is travelling in, is the W. D. M. Cars building. Behind the car is a black car, then a red car. The two lanes to the left of the red car has large painted arrows on the ground."
+        },
+        {
+          "index": 18085,
+          "tokens": 107,
+          "map_name": "cambridge_block_21",
+          "instruction": "this is the white car, the parking space next to it is empty, next to this space is a red car. On the other side are two white cars. these cars are located in the parking row by the wall, in the ground section of the one-story car park. There are two red cars at the beginning of this row, and a dark gray car at the end. this white car is the 8th car from the dark gray car. this parking lot is next to the Grafton West building and Salmon Lane."
+        },
+        {
+          "index": 4891,
+          "tokens": 104,
+          "map_name": "birmingham_block_4",
+          "instruction": "this is a dark gray car and it is in the parking lot at the side of Birchfield Road. it is one of 4 cars standing perpendicular to the road in this parking lot, right on the side of the road. The first of the 4 cars standing perpendicular to the road is black, next to this black car is a silver car. Next to this silver car is this car, and next to this car is another black car. There is a green area on the other side of the black car."
+        },
+        {
+          "index": 18936,
+          "tokens": 102,
+          "map_name": "cambridge_block_21",
+          "instruction": "This is a building with a black gabled roof. this building is not on the side of the road, this building is reached by a footpath entered from a place near the corner of the brunswick terrace road on the footpath side of fitzroy lane. There is a rectangular empty space in front of this building, in the corner of this empty space there are two small shed/garbage bins with green roofs and on one side of this space there are 7 indoor parking spaces/warehouses side by side."
+        },
+        {
+          "index": 4767,
+          "tokens": 99,
+          "map_name": "birmingham_block_4",
+          "instruction": "This is a black colored car. this car is on the bridge and Walsall Road side at the back of the One Stop building. There is a semi-circle drawn with a red line at the place where the building is entered from the road between this bridge and the building. this car is in the parking row on the side of this semicircle from the building and the parking spaces to its left and right are empty, with a gray/blue colored car in front of it."
+        },
+        {
+          "index": 6085,
+          "tokens": 98,
+          "map_name": "birmingham_block_9",
+          "instruction": "This is a black color car, with white color cars on the side, front diagonal and back, there is an empty green space on the other side. these cars are on Holford Drive. In one of the green areas by the side of this road, there are two one-story buildings standing side by side, with green walls and two white cars in front of them. This black car and the cars around it are close to where these one-story buildings are. ."
+        },
+        {
+          "index": 2665,
+          "tokens": 97,
+          "map_name": "birmingham_block_1",
+          "instruction": "The light grey car with a blue end found at the very first section of two car rows, in the huge parking lot right of the One Stop building and counting from the bottom up. It is on the right side of the bottom row, with a full blue car above it and a light blueish car to its right and a grey car to its left. There's an empty space to the left of the blue car above the main silver car with a blue end."
+        }
+      ]
+    },
+    "siglip": {
+      "name": "google/siglip2-large-patch16-384",
+      "configured_token_limit": 64,
+      "truncated_queries": 250,
+      "truncated_fraction": 0.011427004296553616,
+      "token_length_percentiles": {
+        "0": 12.0,
+        "25": 23.0,
+        "50": 30.0,
+        "75": 39.0,
+        "90": 48.0,
+        "95": 51.0,
+        "99": 66.0,
+        "100": 125.0
+      },
+      "longest_examples": [
+        {
+          "index": 6852,
+          "tokens": 125,
+          "map_name": "birmingham_block_12",
+          "instruction": "The target car is a grey car parked next to a small green-roofed building in the West Midlands Police Custody Suite building parking lot. The target car is the fourth car from the edge of the parking lot by Holford Drive. To the left of the car is the small green-roofed building which has a size of about one and a half car widths in both dimensions. To the right of the car are two white cars, a black car, then an empty parking stall. Behind the target car is a small square patch of grass. In front of the car is an access lane of the parking lot."
+        },
+        {
+          "index": 7475,
+          "tokens": 118,
+          "map_name": "birmingham_block_12",
+          "instruction": "This is a large white car parked in the West Midlands Police Custody Suite building parking lot near the lot's edge adjacent to the footpath named Cross Country: Manchester to Bournemouth (all stations). The car is in the second row of cars from the edge. In front of the car is a small white car. To the left is a black car, an empty parking stall, another black car, then a blue car parked in a perpendicular direction. To the right is a dark blue car and then a grey car. Behind the car is the empty space of the parking lot access lane."
+        },
+        {
+          "index": 7143,
+          "tokens": 111,
+          "map_name": "birmingham_block_12",
+          "instruction": "The target car is a dark brown car with a white roof parked in the West Midlands Police Custody Suite building parking lot. The car is in the third row of parked cars from the building, out of a total of four rows. To the left of the car is a red car followed by three blue cars. To the right is a larger grey car with a white roof, a grey car, then a white car, then a blue-grey car, then an empty parking stall. Behind the target car is an access lane of the parking lot."
+        },
+        {
+          "index": 5713,
+          "tokens": 110,
+          "map_name": "birmingham_block_9",
+          "instruction": "A light grey car on Aldridge Road is in the middle of crossing an intersection. The car is halfway across the intersection stop line painted on the ground. To the right of the car is a building whose roofs look like a series of staircases. Adjacent to this building, in the opposite direction that the car is travelling in, is the W. D. M. Cars building. Behind the car is a black car, then a red car. The two lanes to the left of the red car has large painted arrows on the ground."
+        },
+        {
+          "index": 18085,
+          "tokens": 108,
+          "map_name": "cambridge_block_21",
+          "instruction": "this is the white car, the parking space next to it is empty, next to this space is a red car. On the other side are two white cars. these cars are located in the parking row by the wall, in the ground section of the one-story car park. There are two red cars at the beginning of this row, and a dark gray car at the end. this white car is the 8th car from the dark gray car. this parking lot is next to the Grafton West building and Salmon Lane."
+        },
+        {
+          "index": 4891,
+          "tokens": 105,
+          "map_name": "birmingham_block_4",
+          "instruction": "this is a dark gray car and it is in the parking lot at the side of Birchfield Road. it is one of 4 cars standing perpendicular to the road in this parking lot, right on the side of the road. The first of the 4 cars standing perpendicular to the road is black, next to this black car is a silver car. Next to this silver car is this car, and next to this car is another black car. There is a green area on the other side of the black car."
+        },
+        {
+          "index": 18936,
+          "tokens": 104,
+          "map_name": "cambridge_block_21",
+          "instruction": "This is a building with a black gabled roof. this building is not on the side of the road, this building is reached by a footpath entered from a place near the corner of the brunswick terrace road on the footpath side of fitzroy lane. There is a rectangular empty space in front of this building, in the corner of this empty space there are two small shed/garbage bins with green roofs and on one side of this space there are 7 indoor parking spaces/warehouses side by side."
+        },
+        {
+          "index": 4767,
+          "tokens": 98,
+          "map_name": "birmingham_block_4",
+          "instruction": "This is a black colored car. this car is on the bridge and Walsall Road side at the back of the One Stop building. There is a semi-circle drawn with a red line at the place where the building is entered from the road between this bridge and the building. this car is in the parking row on the side of this semicircle from the building and the parking spaces to its left and right are empty, with a gray/blue colored car in front of it."
+        },
+        {
+          "index": 6085,
+          "tokens": 97,
+          "map_name": "birmingham_block_9",
+          "instruction": "This is a black color car, with white color cars on the side, front diagonal and back, there is an empty green space on the other side. these cars are on Holford Drive. In one of the green areas by the side of this road, there are two one-story buildings standing side by side, with green walls and two white cars in front of them. This black car and the cars around it are close to where these one-story buildings are. ."
+        },
+        {
+          "index": 2665,
+          "tokens": 96,
+          "map_name": "birmingham_block_1",
+          "instruction": "The light grey car with a blue end found at the very first section of two car rows, in the huge parking lot right of the One Stop building and counting from the bottom up. It is on the right side of the bottom row, with a full blue car above it and a light blueish car to its right and a grey car to its left. There's an empty space to the left of the blue car above the main silver car with a blue end."
+        }
+      ]
+    }
+  }
+}
