@@ -87,7 +87,13 @@ class UnifiedPGVB(nn.Module):
         valid = static_inputs["entity_valid"].bool()
         # The whole original BERT instruction supplies relation semantics.
         # Predicate IDs are an optional cue, not an eligibility filter.
-        predicates = torch.zeros_like(valid, dtype=torch.long)
+        predicates = static_inputs.get("anchor_predicate_ids")
+        if predicates is None:
+            predicates = torch.zeros_like(valid, dtype=torch.long)
+        elif predicates.shape != valid.shape or predicates.dtype not in (torch.int32, torch.int64):
+            raise ValueError("Invalid explicit public-anchor predicate IDs")
+        if (predicates<0).any() or (predicates>=self.full_relation.predicate.num_embeddings).any():
+            raise ValueError("Predicate ID exceeds original relation embedding capacity")
         delta = (self.full_relation(
             base.dense_context, tokens, token_mask,
             references, predicates, valid,
