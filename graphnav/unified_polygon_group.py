@@ -62,7 +62,7 @@ def public_cardinal_group(record, matcher, public_objects, capacity, *,
         if canonical(instruction[mention["end"]:]):
             continue  # The direct phrase must end the instruction.
         before=canonical(instruction[:mention["start"]])
-        pattern=r"\b(north|south|east|west)\s+of\s+(?:the\s+)?$"
+        pattern=r"\b(north|south|east|west)\s+of(?:\s+the)?$"
         found=re.search(pattern,before)
         if not found:continue
         prefix=before[:found.start()].split()
