@@ -17,13 +17,18 @@ def main():
     points=[x for x in events if 'mean_loss' in x]
     x=[(v['epoch']-1)*nfit+v['update'] for v in points];y=[v['mean_loss'] for v in points]
     assert all(math.isfinite(v) for v in y)
-    fig,ax=plt.subplots(figsize=(9,4));ax.plot(x,y,label='Within-epoch cumulative mean (every 1000 updates)')
+    fig,ax=plt.subplots(figsize=(9,4))
+    for j,epoch in enumerate(sorted({v['epoch'] for v in points})):
+        segment=[(xx,v['mean_loss']) for xx,v in zip(x,points) if v['epoch']==epoch]
+        if segment:ax.plot(*zip(*segment),color='C0',label='Within-epoch cumulative mean (not joined across epochs)' if j==0 else None)
     if epochs:ax.plot([v['epoch']*nfit for v in epochs],[v['mean_train_loss'] for v in epochs],'o-',label='Completed epoch mean')
     ax.set(xlabel='Cumulative optimizer updates',ylabel='TRAIN weighted loss',title='V3 real GPU training; no Val selection');ax.legend(fontsize=7);fig.tight_layout();fig.savefig(o/'training_loss.png',dpi=150);plt.close(fig)
     keys=['geo_ce','geo_polygon','fused_ce','fused_polygon','text_visual','gt_image_visual'];fig,axes=plt.subplots(2,3,figsize=(13,6))
     for ax,k in zip(axes.flat,keys):
         vals=[(xx,v['components_mean'][k]) for xx,v in zip(x,points) if k in v.get('components_mean',{})]
-        if vals:ax.plot(*zip(*vals))
+        for epoch in sorted({v['epoch'] for v in points}):
+            segment=[(xx,v['components_mean'][k]) for xx,v in zip(x,points) if v['epoch']==epoch and k in v.get('components_mean',{})]
+            if segment:ax.plot(*zip(*segment),color='C0')
         ax.set(title=k,xlabel='Cumulative updates',ylabel='Within-epoch mean')
     fig.tight_layout();fig.savefig(o/'loss_components.png',dpi=150);plt.close(fig)
     final_path=r/'train/report.json';final=json.loads(final_path.read_text()) if final_path.exists() else None
@@ -41,7 +46,7 @@ def main():
         if (r/src).exists():shutil.copyfile(r/src,o/dst)
     report=['# UnifiedPGVB-V3 完整TRAIN训练与评测','',f'完整TRAIN输入{fit["total"]}条；本阶段拟合{fit["fit"]}条、物理目标留出{fit["dev"]}条，物理分组重叠0。初始化V2曾使用TRAIN，内部留出不是完全未见泛化。','',f'当前已完成完整Epoch：{len(epochs)}；训练结束：{final is not None}。','', 'Geometry和轻量视觉模块训练，BERT/SigLIP2冻结并读取缓存；seed42，原权重保留。四小时累计训练预算，至少三轮后连续两轮相对Loss改善<0.5%提前停止。未修改Stop=0.3、1mm守卫或Horizon。','', '训练视点由公开地标选择，属于离线地图引导观测；不能作为无人机真实已看到的图像。导航/初始Goal评测使用真实起点及因果历史，保留原yaw，存在需检查的训练—部署分布差异。Polygon/Depth均是弱监督/2.5D代理，不是人工像素真值。','', '|Epoch|拟合样本|TRAIN Loss|本轮Wall秒|GPU峰值GiB|','|---|---:|---:|---:|---:|']
     for v in epochs:report.append(f'|{v["epoch"]}|{v["fit"]}|{v["mean_train_loss"]:.6f}|{v["elapsed_s"]:.2f}|{v["peak_cuda_GiB"]:.3f}|')
-    report+=['','![训练Loss](training_loss.png)','![Loss分量](loss_components.png)','', '## 全量评测状态','']
+    report+=['','![训练Loss](training_loss.png)','![Loss分量](loss_components.png)','', '## 全量评测状态','', 'Top-K按384×384稠密世界网格原始排序，未做空间去重，不能直接与旧784网格的Top-K作横向比较；Top1/NE使用相同20m世界距离判据。','']
     if initial:
         assert initial['coverage']=={'completed':2470,'expected':2470}
         report += [f'全量初始定位覆盖2470/2470，推理错误{initial["errors"]}条。','', '|方法|Top1≤20m|Top5≤20m|Top20≤20m|NE(m)|','|---|---:|---:|---:|---:|']
