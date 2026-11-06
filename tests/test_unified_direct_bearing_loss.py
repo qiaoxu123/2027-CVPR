@@ -136,3 +136,61 @@ def test_refuse_invalid_anchor_index():
         angular_consistency_loss(torch.zeros(1,4),torch.zeros(1,4,1,10),
             torch.zeros(1,2),torch.zeros(1,1,10),
             torch.ones(1,2)*100,torch.tensor([5]))
+
+@pytest.mark.parametrize('text',[
+ 'The blue car not north of One Stop',
+ 'The blue car north east of One Stop',
+ 'The blue car facing north of One Stop',
+ 'Fly north of One Stop',
+ 'The blue car with a parking lot north of One Stop',
+ 'The car and a building north of One Stop',
+])
+def test_no_false_high_confidence_scope(text):
+ assert direct_cardinal_reference(text,{'id':'1','name':'One Stop'},{'one stop':{'1'}})==0
+
+
+def test_public_visible_alias_with_optional_the():
+ ref={'id':'1','name':'The One Stop','aliases':['One Stop']}
+ names={'the one stop':{'1'},'one stop':{'1'}}
+ assert direct_cardinal_reference('The white building north of One Stop',ref,names)==3
+
+
+def test_dataset_replaces_private_annotated_reference(tmp_path):
+ row=_row();row['landmarks']=[dict(id='2',name='Different Store',object_type='Building',contour=[[.6,.5],[.8,.5],[.8,.7]])]
+ source=tmp_path/'train.jsonl';source.write_text(json.dumps(row)+'\n');public=tmp_path/'objects.json';public.write_text(json.dumps(_catalog()))
+ data=DirectBearingDataset(source,public_objects=public,deduplicate_queries=False)
+ assert data.records[0]['landmarks'][0]['id']=='1'
+ assert data[0]['angular_anchor_index'].item()==0
+
+
+def test_no_grid_support_does_not_create_constant_fake_loss():
+ logits=torch.zeros(1,4,requires_grad=True)
+ out=angular_consistency_loss(logits,torch.zeros(1,4,1,10),torch.tensor([[.9,.8]]),torch.zeros(1,1,10),torch.tensor([[100.,100.]]),torch.tensor([0]))
+ assert out['eligible_count']==0
+ out['loss'].backward();assert logits.grad.abs().sum()==0
+
+
+def test_real_preposed_and_multisentence_direct_clauses():
+ ref={'id':'1','name':'One Stop'};names={'one stop':{'1'}}
+ assert direct_cardinal_reference('South of One Stop, this white building has a red roof.',ref,names)==4
+ assert direct_cardinal_reference('To the north of One Stop, this white car is fourth in a row.',ref,names)==3
+ assert direct_cardinal_reference('The white building east of One Stop. Its roof is flat.',ref,names)==1
+ assert direct_cardinal_reference('The white building on the west side of One Stop. Its roof is flat.',ref,names)==2
+ assert direct_cardinal_reference('In the parking lot south of One Stop, this white car is first.',ref,names)==0
+ assert direct_cardinal_reference('North of One Stop, in the parking lot there is a white car.',ref,names)==0
+
+
+def test_experimental_checkpoint_requires_matching_runtime_mode():
+ from graphnav.unified_direct_bearing_runtime import validate_main_predicate_checkpoint
+ new={'angular_experiment':{'explicit_predicates':True,'weight':0}}
+ validate_main_predicate_checkpoint(new,True);validate_main_predicate_checkpoint({},False)
+ with pytest.raises(ValueError):validate_main_predicate_checkpoint(new,False)
+ with pytest.raises(ValueError):validate_main_predicate_checkpoint({},True)
+
+
+def test_circular_target_wrap_is_continuous():
+ pair=torch.zeros(1,4,1,10);pair[0,:,0,:2]=torch.tensor([[.1,0],[-.1,0],[0,.1],[0,-.1]])
+ center=torch.zeros(1,1,10);center[0,0,:2]=torch.tensor([.5,.5]);logits=torch.tensor([[0.,2.,0.,0.]],requires_grad=True)
+ a=angular_consistency_loss(logits,pair,torch.tensor([[.2,.500001]]),center,torch.tensor([[100.,100.]]),torch.tensor([0]))
+ b=angular_consistency_loss(logits,pair,torch.tensor([[.2,.499999]]),center,torch.tensor([[100.,100.]]),torch.tensor([0]))
+ torch.testing.assert_close(a['loss'],b['loss'],atol=1e-5,rtol=1e-5)

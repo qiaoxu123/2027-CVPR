@@ -134,6 +134,9 @@ def main():
     if args.model == 'unified-relation':
         if args.split != 'val_seen' or args.max_episodes is not None:
             raise ValueError('Unified-relation requires unfiltered FULL val_seen')
+    if args.model=='unified-relation' and args.relation_checkpoint:
+        from graphnav.unified_direct_bearing_runtime import validate_main_predicate_checkpoint
+        validate_main_predicate_checkpoint(torch.load(args.relation_checkpoint,map_location='cpu',weights_only=True),args.angular_main_predicate)
     if args.active_observation and args.model != 'target-evidence':
         raise ValueError('active observation requires the target-evidence policy')
     if args.joint_active_observation and args.model!='joint-active':

@@ -16,6 +16,12 @@ from .unified_direct_bearing_loss import predicate_ids_for_record
 from .checkpointing import file_sha256
 
 
+def validate_main_predicate_checkpoint(bundle, enabled):
+    experimental=bool(bundle.get('angular_experiment',{}).get('explicit_predicates'))
+    if experimental != bool(enabled):
+        raise ValueError('Explicit-predicate checkpoint and --angular-main-predicate must match')
+
+
 class UnifiedDirectBearingPolicy(UnifiedTextAblationPolicy):
     def __init__(self,stage1,original_v2,trained,directory,*,
                  instruction_mode="full_text",public_objects,

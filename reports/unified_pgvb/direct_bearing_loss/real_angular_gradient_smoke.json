@@ -1,0 +1,31 @@
+{
+  "TRAIN_indices": [
+    2819,
+    2858
+  ],
+  "selection": "first two PUBLIC TEXT eligible, no GT filtering",
+  "rows": [
+    {
+      "iteration": 0,
+      "angular_loss": 2.567782163619995,
+      "angular_only_gradients": {
+        "Geometry": 6780.637125916779,
+        "Relation": 18.65084654407383,
+        "predicate_embedding_gradient_L1": 0.0
+      },
+      "eligible": 2
+    },
+    {
+      "iteration": 1,
+      "angular_loss": 2.6030404567718506,
+      "angular_only_gradients": {
+        "Geometry": 6692.94559892267,
+        "Relation": 20.232701887572393,
+        "predicate_embedding_gradient_L1": 0.0007266103057190776
+      },
+      "eligible": 2
+    }
+  ],
+  "original_checkpoint_unchanged_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "note": "Predicate gradient may start zero because the original relation score is zero-initialized; second update must reach it."
+}

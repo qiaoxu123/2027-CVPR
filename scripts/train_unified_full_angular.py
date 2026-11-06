@@ -9,6 +9,7 @@ checkpoint but are NOT re-trained by this static-only loss.
 import argparse
 import json
 import random
+import hashlib
 import time
 from pathlib import Path
 
@@ -78,6 +79,7 @@ def main():
                    help="0 enables predicate-only control; 0.1/0.3 angle ablations")
     p.add_argument("--kl-weight", type=float, default=0.05)
     p.add_argument("--resume", action="store_true")
+    p.add_argument("--bert-cache",type=Path,help="Protocol-checked frozen text cache; never writable upstream")
     p.add_argument("--min-train-records", type=int, default=20000,
                    help="Reject accidentally selected partial TRAIN JSONL")
     p.add_argument("--max-batches", type=int, default=0,
@@ -136,7 +138,7 @@ def main():
     # Every successfully converted source row stays in the denominator; no
     # direct-relation parser or GT-guided source selection.
     count = len(dataset.records)
-    if not a.max_batches and count < a.min_train_records:
+    if not a.max_batches and (count != 21878 or count < a.min_train_records):
         raise ValueError(f"TRAIN source has only {count} records; expected full CityNav TRAIN")
     missing_anchor = sum(not row.get("landmarks") for row in dataset.records)
     manifest = dict(source_sha256=source_sha, records=count,
@@ -146,6 +148,7 @@ def main():
         kl_weight=a.kl_weight,
         angular_module_sha256=file_sha256("graphnav/unified_direct_bearing_loss.py"),
         explicit_predicates=True,
+        bert_cache_sha256=file_sha256(a.bert_cache) if a.bert_cache else None,
         GT_only_in_training_loss=True,
         geographic_north_CRS_unverified=True,
         no_public_anchor_rows=missing_anchor, source="complete revised CityNav TRAIN",
@@ -177,6 +180,9 @@ def main():
         start_epoch = int(previous["completed_epochs"])
     else:
         model = load_full_relation_model(original, "cuda")
+        h=hashlib.sha256()
+        for name,tensor in model.state_dict().items():h.update(name.encode());h.update(tensor.detach().cpu().contiguous().numpy().tobytes())
+        atomic_json(dict(model_state_SHA256=h.hexdigest(),seed=a.seed,original_v2_SHA256=source_sha['original_v2']),a.output/'initialization.json')
         start_epoch = 0
     model.requires_grad_(False)
     model.geometry.requires_grad_(True)
@@ -195,6 +201,7 @@ def main():
     )
     bert_path = a.output/'bert_cache.pt'
     if bert_path.exists():bert.load_cache(bert_path)
+    elif a.bert_cache:bert.load_cache(a.bert_cache)
     if previous is not None:
         torch.set_rng_state(previous["torch_rng"])
         torch.cuda.set_rng_state_all(previous["cuda_rng"])
@@ -217,6 +224,7 @@ def main():
             cuda_rng=torch.cuda.get_rng_state_all(),python_rng=random.getstate(),
             numpy_rng=(np.random.get_state()[0],np.random.get_state()[1].tolist(),*np.random.get_state()[2:]),
             history=history,smoke=bool(a.max_batches),
+            epoch_angular_stats=dict(count=ang_count,total=angle_total,word_matches=word_angle_matches,location_total=location_total,preserve_total=preserve_total,gradient_checked=angle_gradient_checked) if offset else {},
             angular_experiment=dict(weight=a.angular_weight,kl_weight=a.kl_weight,
                 explicit_predicates=True,protocol='direct-cardinal-unique-public-v1'))
         atomic_save(ckpt,a.output/'last.pt')
@@ -225,10 +233,12 @@ def main():
         continuing = previous is not None and epoch == start_epoch
         offset = int(previous.get('epoch_offset',0)) if continuing else 0
         loss_total = float(previous.get('epoch_loss_total',0)) if continuing else 0.
-        ang_count=0
-        angle_total=0.
-        word_angle_matches=0
-        angle_gradient_checked=False
+        partial=previous.get('epoch_angular_stats',{}) if continuing else {}
+        ang_count=int(partial.get('count',0))
+        angle_total=float(partial.get('total',0.))
+        location_total=float(partial.get('location_total',0.));preserve_total=float(partial.get('preserve_total',0.))
+        word_angle_matches=int(partial.get('word_matches',0))
+        angle_gradient_checked=bool(partial.get('gradient_checked',False))
         seen = int(previous.get('epoch_seen',0)) if continuing else 0
         corrected = int(previous.get('epoch_corrected',0)) if continuing else 0
         damaged = int(previous.get('epoch_damaged',0)) if continuing else 0
@@ -260,8 +270,14 @@ def main():
                 norm_angular=float(angular_logit_gradient.abs().sum().detach())
                 if not np.isfinite(norm_angular) or norm_angular<=0:
                     raise RuntimeError("Angular consistency does not backpropagate into main Belief")
+                per_module={}
+                for name,module in [('Geometry',model.geometry),('Relation',model.full_relation)]:
+                    grads=torch.autograd.grad(angle['loss'],list(module.parameters()),retain_graph=True,allow_unused=True)
+                    value=sum(float(g.abs().sum()) for g in grads if g is not None)
+                    if not np.isfinite(value) or value<=0:raise RuntimeError(f'Angular gradient missing in {name}')
+                    per_module[name+'_angular_gradient_L1']=value
                 angle_gradient_checked=True
-                atomic_json({"angular_logit_gradient_L1":norm_angular,
+                atomic_json({"angular_logit_gradient_L1":norm_angular,**per_module,
                              "first_nonzero_update":updates},
                             a.output/"angular_gradient_audit.json")
             if not torch.isfinite(loss):raise FloatingPointError('Nonfinite full TRAIN loss')
@@ -278,6 +294,7 @@ def main():
             size = len(batch["text"])
             seen += size
             loss_total += float(loss.detach()) * size
+            location_total+=float(location.detach())*size;preserve_total+=float(preserve.detach())*size
             ang_count += angle["eligible_count"]
             angle_total += float(angle["loss"].detach()) * angle["eligible_count"]
             if angle["eligible_count"]:
@@ -301,6 +318,7 @@ def main():
                 relation_delta_max=float(result['relation_delta'].detach().abs().max()),
                 angular_eligible=angle['eligible_count'],
                 angular_loss=float(angle['loss'].detach()),
+                location_loss=float(location.detach()),KL_loss=float(preserve.detach()),
                 angular_error_rad=float(angle['angular_error_rad']))
             with (a.output/'steps.jsonl').open('a') as stream:stream.write(json.dumps(step)+'\n')
             if updates%200==0:
@@ -311,7 +329,7 @@ def main():
                       flush=True)
         if not a.max_batches and seen != count:
             raise RuntimeError(f"Dataset coverage incomplete: {seen}/{count}")
-        if a.angular_weight>0 and ang_count==0:
+        if not a.max_batches and a.angular_weight>0 and ang_count==0:
             raise RuntimeError("No eligible high-confidence direct named-world-cardinal task; audit parser/source before training")
         row = dict(epoch=epoch+1, observed=seen, expected=count,
                    angular_supervised=ang_count,
@@ -320,6 +338,7 @@ def main():
                    literal_8bin_agreement_N=ang_count,
                    angular_backprop_verified=bool(angle_gradient_checked) if a.angular_weight>0 else None,
                    train_loss=loss_total/max(seen,1),
+                   mean_goal_loss=location_total/max(seen,1),mean_KL=preserve_total/max(seen,1),
                    train_fixes=corrected, train_breaks=damaged,
                    wall_seconds=time.perf_counter()-started)
         history.append(row)

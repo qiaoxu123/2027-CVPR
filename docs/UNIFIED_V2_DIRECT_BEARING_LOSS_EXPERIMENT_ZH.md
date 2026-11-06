@@ -123,3 +123,14 @@ GT-文本方向一致性、角度分布、训练loss组成及梯度量级。
 空间参考系未核验：north/south字面语义未必对应地图+Y/+(-Y)；
 有冲突不能简单归咎于BERT。间接关系不等价于Target直接朝某个地标，
 之后要使用多跳关系图监督，而不是强制单个世界yaw。
+
+
+## 本轮执行修复与对照口径
+
+- TRAIN在准备监督资格前先用原文和完整公开目录重新绑定，与runtime一致；不沿用目标ID索引的processed地标列表。
+- 原末句regex筛出0条。支持明确前置“South of X, this building…”、north/south side of及后续描述句；拒绝否定/复合方向/导航朝向/明显中间关系。保守自动资格为21/21878：north8/south13，east/west0。并非人工真值；GT一致性只事后统计，不作选择或轴翻转。
+- 初始主模型实际张量hash三组完全一致；可使用--bert-cache复用经过模型协议核验的既有冻结BERT缓存，三组从同一缓存开始，不改上游缓存文件。
+- 新marker权重必须匹配--angular-main-predicate，避免缺失Predicate输入；缺失与显式全零Predicate的旧模型输出位级一致，并验证ID进入原8条Embedding。
+- Angular Loss无有效公共候选方位时不制造常数监督；断点续训保留Angular和Goal/KL累计统计。
+- 主对照额外复用公开绑定下重训全文47.37%权重（9ac51ee2），以隔离A的Predicate新增收益；45.75%是早期旧绑定训练权重的公开绑定评测，单独说明分布变化。B/C与A比较才能归因Angular Loss。
+- 不因监督稀少而排除其他TRAIN或Val任务，不在Val选epoch/阈值/α。无GT角度进入runtime。

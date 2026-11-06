@@ -32,16 +32,24 @@ FORBIDDEN_PREFIX={
     "beside","between","across","along","opposite","around",
     "from","after","before","outside","over","under","toward",
     "towards","next","through","past","throughout","to",
+    "not","no","never","neither","without","with","and","or",
+    "north","south","east","west","facing","face","faced",
+    "fly","flying","navigate","go","head","heading","travel",
+    "move","moving","turn","pointing","looking",
 }
 
 
 def _unique_public_by_name(objects: dict):
     """Name -> physical object IDs, based solely on the full PUBLIC catalog."""
+    from scripts.analyze_instruction_landmark_association import normalise
     names={}
     for oid,item in objects.items():
-        name=canonical(item.get("name",""))
-        if name:
-            names.setdefault(name,set()).add(str(oid))
+        variants=[item.get('name',''),*(item.get('aliases',[]) if isinstance(item.get('aliases',[]),list) else [])]
+        for value in variants:
+            name=normalise(value)[0]
+            if name:
+                names.setdefault(name,set()).add(str(oid))
+                if name.startswith('the '):names.setdefault(name[4:],set()).add(str(oid))
     return names
 
 
@@ -54,19 +62,45 @@ def direct_cardinal_reference(instruction: str, reference: dict, public_names: d
               two polygons named One Stop (identity ambiguous).
     No target GT enters this function.
     """
-    name=canonical(reference.get("name",""))
+    from scripts.analyze_instruction_landmark_association import normalise
+    name=normalise(reference.get("name",""))[0]
     ref_id=str(reference.get("id",""))
     if not name or not ref_id or public_names.get(name)!= {ref_id}:
         return 0
-    sentence=canonical(instruction)
-    pattern=rf"\b(north|south|east|west)\s+of\s+(?:the\s+)?{re.escape(name)}$"
-    match=re.search(pattern,sentence)
-    if not match:
-        return 0
-    prefix=sentence[:match.start()].split()
-    if not prefix or len(prefix)>22 or any(w in FORBIDDEN_PREFIX for w in prefix):
-        return 0
-    return PREDICATE_IDS[match.group(1)]
+    from scripts.analyze_instruction_landmark_association import normalise
+    sentence,positions=normalise(instruction)
+    variants={normalise(reference.get('name',''))[0],*(normalise(x)[0] for x in reference.get('aliases',[]))}
+    if name.startswith('the '):variants.add(name[4:])
+    target_words={'car','cars','truck','vehicle','van','bus','building','buildings','house','houses','parking','lot','ground','area','field'}
+    for visible in sorted(variants,key=lambda x:-len(x)):
+        if not visible or public_names.get(visible)!={ref_id}:continue
+        pattern=rf"(?<!\w)(?:(?:to|on) the )?(north|south|east|west)(?: side)? of (?:the )?{re.escape(visible)}(?!\w)"
+        for match in re.finditer(pattern,sentence):
+            before=instruction[:positions[match.start()]]
+            after=instruction[positions[match.end()-1]+1:]
+            # A compatible trailing type suffix is part of the Anchor, not an intermediate object.
+            source_type=str(reference.get('object_type','')).lower()
+            suffix='building' if source_type=='building' else '(?:road|street)' if source_type in {'trafficroad','footpath','bridge'} else None
+            if suffix:after=re.sub(r'^\s+'+suffix+r'\b','',after,count=1,flags=re.I)
+            if match.start()==0:
+                # Preposed spatial adjunct must directly introduce the target,
+                # not 'in a parking lot ...' or a row/group containing it.
+                if not re.match(r'^\s*,',after):continue
+                clause=canonical(after.lstrip(' ,')).split()
+                if not clause or clause[0] in FORBIDDEN_PREFIX:continue
+                leading=clause[:8]
+                if not target_words.intersection(leading):continue
+                if set(leading)&{'row','lane','line','group','cluster'} and next((j for j,w in enumerate(leading) if w in target_words),99)>next((j for j,w in enumerate(leading) if w in {'row','lane','line','group','cluster'}),99):continue
+                return PREDICATE_IDS[match.group(1)]
+            # Preserve punctuation to limit scope to the current clause. Names
+            # themselves may contain periods: matching used full public spans.
+            local=re.split(r'[.!?;,]',before)[-1]
+            prefix=canonical(local).split()
+            if not prefix or len(prefix)>22 or not target_words.intersection(prefix):continue
+            if any(w in FORBIDDEN_PREFIX for w in prefix):continue
+            if after.strip() and not re.match(r'^\s*[.!?;,]',after):continue
+            return PREDICATE_IDS[match.group(1)]
+    return 0
 
 
 def predicate_ids_for_record(record, public_map, capacity,*, enabled=True, public_name_index=None):
@@ -96,6 +130,12 @@ class DirectBearingDataset(FullCandidateDataset):
         public=json.loads(Path(public_objects).read_text(encoding="utf-8"))
         if not isinstance(public,dict):
             raise ValueError("Expected CityRefer map -> public objects catalog")
+        from scripts.analyze_instruction_landmark_association import PublicNames
+        from .unified_text_ablation import public_text_record
+        matcher=PublicNames(public)
+        for row in self.records:
+            bound,_=public_text_record(row['map_name'],row['instruction'],row['world_bounds'],public,matcher,mode='full_text',max_landmarks=self.max_landmarks)
+            row['landmarks']=bound['landmarks']
         self.public=public
         self.enable_explicit_predicates=bool(enable_explicit_predicates)
         for record in self.records:
@@ -175,6 +215,9 @@ def angular_consistency_loss(logits, pair_geometry, target_xy, nodes,
         angles[:,:,None]-bins_angle[None,None,:]),dim=-1)
     magnitude=candidates.norm(dim=-1)
     cell_valid=(magnitude>min_radius_m/400.).float()
+    valid=valid & cell_valid.bool().any(-1)
+    if not bool(valid.any()):
+        return dict(loss=zero,valid=valid,angular_error_rad=zero.detach(),pred_angle_bin=None,gt_angle_bin=None,eligible_count=0)
     belief=F.softmax(logits.float(),dim=-1)*cell_valid
     belief=belief/belief.sum(-1,keepdim=True).clamp_min(1e-9)
     induced=(belief[:,:,None]*kernel).sum(1).clamp_min(1e-9)

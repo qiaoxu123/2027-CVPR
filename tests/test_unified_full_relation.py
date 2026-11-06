@@ -113,3 +113,19 @@ def test_original_geometry_baseline_cannot_mix_trained_relation_or_rgb():
         UnifiedPGVBFullRelationPolicy(None,None,None,None,geometry_source='original',relation_control='full',visual_control='off')
     with pytest.raises(ValueError,match='isolated frozen baseline'):
         UnifiedPGVBFullRelationPolicy(None,None,None,None,geometry_source='original',relation_control='off',visual_control='tracked')
+
+
+def test_default_predicate_is_exact_legacy_zero_and_explicit_ids_reach_embedding():
+    model=UnifiedPGVB(geometry=FakeGeometry(),full_relation=True).eval()
+    model.full_relation_ready=True
+    with torch.no_grad():model.full_relation.score.weight.fill_(.12)
+    args=_inputs();model.reset_episode();old=model.forward_full_relation(**args)['field'].belief_logits
+    args['static_inputs']['anchor_predicate_ids']=torch.zeros(2,3,dtype=torch.long)
+    model.reset_episode();zero=model.forward_full_relation(**args)['field'].belief_logits
+    assert torch.equal(old,zero)
+    seen=[]
+    hook=model.full_relation.predicate.register_forward_pre_hook(lambda module,inputs:seen.append(inputs[0].clone()))
+    args['static_inputs']['anchor_predicate_ids']=torch.tensor([[1,0,3],[0,0,0]])
+    model.reset_episode();model.forward_full_relation(**args);hook.remove()
+    assert seen[0].tolist()==[[1,3],[0,0]]
+    assert model.full_relation.predicate.num_embeddings==8
