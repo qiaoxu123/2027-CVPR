@@ -436,7 +436,8 @@ def fit_dev_partition(ds, seed=42, fraction=.8):
     """Physical-target split; no overlap of object ID between TRAIN fit/dev."""
     fit, dev = [], []
     for i in range(len(ds)):
-        _, labels = ds[i]
+        # Partition needs only TRAIN grouping metadata, never multi-MiB RGB tokens.
+        labels = torch.load(ds.root/"private"/f"{ds.keys[i]}.pt", weights_only=True)
         group = _physical_id(labels["episode_id"])
         r = int(hashlib.sha256(f"{seed}/{group}".encode()).hexdigest()[:8], 16)
         (fit if r % 1000 < fraction*1000 else dev).append(i)

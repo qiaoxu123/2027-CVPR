@@ -226,3 +226,21 @@ def test_posthoc_correction_capacity_distinguishes_bound_and_evidence_failures()
     out.observed_mask.zero_()
     row=visual_correction_capacity(out,target,bounds,.5,radius_m=1)[0]
     assert not row['can_flip_under_independent_bounded_updates'] and not row['correct_region_observed']
+
+
+def test_physical_partition_does_not_load_rgb_tensors(tmp_path):
+    from scripts.unified_pgvb_v3_pilot import fit_dev_partition
+    (tmp_path/'private').mkdir()
+    keys=[]
+    for object_id in range(64):
+        for query_id in range(2):
+            key=f'{len(keys):06d}';keys.append(key)
+            torch.save(dict(episode_id=f'map:{object_id}:{query_id}:0'),tmp_path/'private'/f'{key}.pt')
+    class MetadataDataset:
+        root=tmp_path
+        def __len__(self):return len(self.keys)
+        def __getitem__(self,index):raise AssertionError('RGB must not be loaded for partitioning')
+    dataset=MetadataDataset();dataset.keys=keys
+    fit,dev=fit_dev_partition(dataset,42)
+    assert fit and dev and len(fit)+len(dev)==len(keys)
+    assert not {i//2 for i in fit}&{i//2 for i in dev}
