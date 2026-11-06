@@ -1,0 +1,342 @@
+[
+  {
+    "index": 11498,
+    "instruction": "The building in front of the Department of History of Arts building along Fitzwilliam museum street road. It is opposite the Department of Architecture,University of Cambridge.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 1,
+      "text": "The building",
+      "start": 0,
+      "end": 12,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "目标主语及opposite链合理；另一具名参考未完整覆盖。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 21452,
+    "instruction": "The black car on Priory Road that is across from the turquoise car that is 10 cars away from the red car closest to the intersection with Beche Road.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 2,
+      "text": "The black car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "on Priory Road直接链合理，复杂车辆—路口链仅部分恢复。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 21653,
+    "instruction": "The white car parked on Abbey Road underneath a large green tree.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 2,
+      "text": "The white car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "on Abbey Road直接关系合理。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 6769,
+    "instruction": "The gray house on Aldridge Road that is 1 house to the left of the only gray house on Aldridge Road with a bright blue car in its driveway.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 2,
+      "text": "The gray house",
+      "start": 0,
+      "end": 14,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "on Aldridge Road合理；同类房屋的left实例约束仍只在全文。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 16228,
+    "instruction": "The dark blue car that is between another dark blue car and the black car that is on the Clarendon Street, closed to the Victoria Street.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 3,
+      "text": "The dark blue car",
+      "start": 0,
+      "end": 17,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "raw direct分类不可靠；可信Clarendon链经黑车为间接，Victoria裸to连接不确定。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 16967,
+    "instruction": "The white car at the corner of Paradise Street and City Road. There is a white car behind it.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 2,
+      "text": "The white car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "corner of City Road合理；另一道路分支不完整。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 15871,
+    "instruction": "The building in front of the Parkside Gym on Parkside road with the driveway to the gym on the left side of it.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 1,
+      "text": "The building",
+      "start": 0,
+      "end": 12,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "到Parkside Gym直接关系合理；Parkside road与Parkside的associated分支有名词作用域歧义。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 3630,
+    "instruction": "The white car on Thornbury Road that is 9 cars behind the blue and yellow truck at to the intersection with Birchfield Road.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 2,
+      "text": "The white car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "Thornbury直接链合理；车序数/卡车约束尚未完全结构化。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 9300,
+    "instruction": "The parking lot behind the Master's Lodge and on Queens Lane.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 2,
+      "text": "The parking lot",
+      "start": 0,
+      "end": 15,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "两个直接参考关系可保留；behind坐标系未定义。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 7787,
+    "instruction": "The building on the corner of Haymarket Road and Pound Hill, with four cars parked on the side.",
+    "parsed_category": "direct_geometry",
+    "target": {
+      "node": 1,
+      "text": "The building",
+      "start": 0,
+      "end": 12,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "两道路corner关系合理，但角点需多约束联合。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 17965,
+    "instruction": "The black car that is in front of a black car and white car at the median on Fair Street at the Four Lamps Roundabout.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 2,
+      "text": "The black car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "median中间场景可用；前车/白车约束不完整，属于粗间接链。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 6182,
+    "instruction": "The black car that is beside a light blue van in the parking lot across from the W.D.M. Cars building. It is the six car on the right parked facing the grass.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 2,
+      "text": "The black car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "car→parking lot→across from WDM链合理；序数和van关系尚未完整保留为路径。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 15094,
+    "instruction": "This is a tan parking lot behind some grey buildings on Hills Road.  There are grey buildings the north, brown buildings to the south, and a large grey building with solar panels on its right.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 5,
+      "text": "a tan parking lot",
+      "start": 8,
+      "end": 25,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "lot→grey buildings→Hills Road链合理；其他方向描述不能当成目标方向真值。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 909,
+    "instruction": "This is a white car parked in the third closest row of the parking lot from the Food Warehouse. There is an empty spot on its right, a gray car on its left and a black car in front of it.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 4,
+      "text": "a white car",
+      "start": 8,
+      "end": 19,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "car→row→Warehouse路径可作为间接关联，停车场层次被压缩；序数仍靠全文。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 8864,
+    "instruction": "One black car in between the red car and a white van in the parking lot between the St Catherine's college chapel in the Masters Lodge off Queens Lane",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 2,
+      "text": "One black car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "原文多重between且语法含混，抽取链不作为高可靠实例作用域真值。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 19082,
+    "instruction": "This dark blue car is parked in a parking lot on parsonage Street. It is in a parking lot with a white car with a black roof and a light blue car a little bit behind it",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 3,
+      "text": "This dark blue car",
+      "start": 0,
+      "end": 18,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "car→parking lot→Parsonage Street链合理。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 15090,
+    "instruction": "this is a parking area. There are black and red cars in this area. this area is next to the black triangle and pyramid roofed buildings on the side of the hills road. This area has a black tree on the road side and 3 trees next to it.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 4,
+      "text": "a parking area",
+      "start": 8,
+      "end": 22,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "总体间接合理；black triangle是建筑形状片段，不能直接假设独立实例标签。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 5804,
+    "instruction": "The black car with no cars next to it and a black car behind it in the parking lot across the street from the Perry Barr Bus Depot.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 2,
+      "text": "The black car",
+      "start": 0,
+      "end": 13,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "有间接关联，但路径经另一黑车并遗漏parking lot，作用域存在疑点。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 3264,
+    "instruction": "In between section of a multi-colored white and brown multi-unit housing complex, toward the center of a section of units painted white off Thornbury Road across the street from a playground",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 15,
+      "text": "complex",
+      "start": 73,
+      "end": 80,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "target复杂住宅与section范围难确定，不强制称精确目标解析。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  },
+  {
+    "index": 18936,
+    "instruction": "This is a building with a black gabled roof. this building is not on the side of the road, this building is reached by a footpath entered from a place near the corner of the brunswick terrace road on the footpath side of fitzroy lane. There is a rectangular empty space in front of this building, in the corner of this empty space there are two small shed/garbage bins with green roofs and on one side of this space there are 7 indoor parking spaces/warehouses side by side.",
+    "parsed_category": "indirect_geometry",
+    "target": {
+      "node": 3,
+      "text": "a building",
+      "start": 8,
+      "end": 18,
+      "public_ids": [],
+      "kind": "ordinary_object",
+      "role": "target"
+    },
+    "review": "多层路径且存在not，完整全文保留，但当前路径简写对否定与角色存在局限。",
+    "reviewer": "current Agent, language-only inspection",
+    "GT_used": false
+  }
+]

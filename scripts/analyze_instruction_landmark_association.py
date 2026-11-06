@@ -59,7 +59,7 @@ class PublicNames:
     refs=self.maps[map_name][m.group()];out.append({'start':positions[m.start()],'end':positions[m.end()-1]+1,'text':text[positions[m.start()]:positions[m.end()-1]+1],'public_names':sorted({r['name'] for r in refs}),'public_ids':sorted({r['id'] for r in refs}),'types':sorted({r['type'] for r in refs})})
   return out
 
-def classify(doc,mentions,category,identity_ids=()):
+def classify(doc,mentions,category,identity_ids=(),*,target_hint_char=None):
  # Merge complete mapped names so grammatical scope is not inferred from a name fragment.
  merged=[];occupied=set()
  for mention in mentions:
@@ -77,7 +77,7 @@ def classify(doc,mentions,category,identity_ids=()):
  # Prefer main grammatical referent over a same-category object inside a prepositional prefix.
  def rank(t):
   sentindex=sum(s.start<t.sent.start for s in doc.sents)
-  return (sentindex,0 if t.dep_ in ('ROOT','nsubj','nsubjpass','attr','dobj','obj') else 1,t.i)
+  return (0 if t.idx==target_hint_char else 1,sentindex,0 if t.dep_ in ('ROOT','nsubj','nsubjpass','attr','dobj','obj') else 1,t.i)
  target=min(candidates,key=rank) if candidates else None
  if target is None:
   named_roots=[t for t in nodes.values() if t.i in public and set(public[t.i]['public_ids']) & set(identity_ids) and category in public[t.i]['types'] and (t.dep_ in ('ROOT','nsubj','attr','appos') or t.head.lemma_ in ('find','locate','reach'))]
@@ -183,7 +183,7 @@ def classify(doc,mentions,category,identity_ids=()):
   cls='direct_identity' if identity else 'direct_geometry' if direct else 'indirect_geometry';reason='dependency-linked explicit public landmark path'
  else:cls='uncertain' if mentions else 'no_confirmed_anchor';reason='public names present but target-to-anchor scope unresolved' if mentions else 'no explicit binding to this map public catalog'
  ordinary=[nodes[e['b'] if e['a']==target_id else e['a']].text for e in edges if target_id in (e['a'],e['b']) and (e['b'] if e['a']==target_id else e['a']) not in public]
- return {'category':cls,'target':target.text,'target_token':target_id,'paths':paths[:12],'edges':edges,'generic_target_references':ordinary,'reason':reason,'scope_uncertain':cls=='uncertain','frame_only_mentions':frame_only,'scope_repairs':scope_repairs,'has_direct':any(p['hops']==1 for p in paths),'has_indirect':any(p['hops']>=2 for p in paths)}
+ return {'category':cls,'target':target.text,'target_token_index':target_id,'target_token':target_id,'paths':paths[:12],'edges':edges,'generic_target_references':ordinary,'reason':reason,'scope_uncertain':cls=='uncertain','frame_only_mentions':frame_only,'scope_repairs':scope_repairs,'has_direct':any(p['hops']==1 for p in paths),'has_indirect':any(p['hops']>=2 for p in paths)}
 
 def main():
  import spacy
