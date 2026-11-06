@@ -26,3 +26,8 @@ def test_model_output_cannot_be_promoted_to_gold_and_empty_chain_is_not_success(
  assert score_reviewed([dict(index=1,graph=graph())],[review])['reviewed_count']==0
  review.update(source='human_editor',reviewer='independent_human',graph=dict(entities=[],relations=[]))
  result=score_reviewed([dict(index=1,graph=dict(entities=[],relations=[]))],[review]);assert result['complete_chain_accuracy'] is None;assert result['gold_chain_tasks']==0
+
+def test_correct_direction_control_requires_all_anchors_correct():
+ from scripts.prepare_parser_benchmark import direction_pools
+ rows=[dict(index=1,anchor=0,top1=1,error=5,target_index_offline=1),dict(index=1,anchor=1,top1=0,error=150,target_index_offline=1),dict(index=2,anchor=0,top1=1,error=10,target_index_offline=1)]
+ pools=direction_pools(rows);assert {x['index'] for x in pools['correct_direction']}=={2};assert {x['index'] for x in pools['large_error_context_present']}=={1}
