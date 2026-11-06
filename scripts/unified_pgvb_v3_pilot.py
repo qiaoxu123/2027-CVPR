@@ -508,6 +508,7 @@ def evaluate(model, ds, indices, device, batch_size):
 
 def train(args):
     training_started = time.perf_counter()
+    training_code_sha256={str(p):file_sha256(p) for p in [Path(__file__),Path(__file__).resolve().parents[1]/"graphnav/unified_pgvb_v3.py",Path(__file__).resolve().parents[1]/"graphnav/full_localization.py"]}
     if args.device.startswith("cuda") and not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable; use local GPU for this pilot")
     random.seed(args.seed)
@@ -543,6 +544,8 @@ def train(args):
     partial_component_samples = 0
     stop_reason = "max_epochs"
     previous_training_s = 0.0
+    warm_start_sha256 = file_sha256(args.initialize_v3) if args.initialize_v3 else None
+    resume_progress = dict(epoch=start_epoch,next_offset=start_offset)
     if args.resume:
         saved = torch.load(args.resume, map_location="cpu", weights_only=True)
         if saved.get("cache_sha256") != file_sha256(args.cache/"manifest.json"):
@@ -560,6 +563,8 @@ def train(args):
         partial_components = saved.get("component_totals", {})
         partial_component_samples = saved.get("component_samples", 0)
         previous_training_s = saved.get("elapsed_training_s", 0.0)
+        warm_start_sha256 = saved.get("initialize_v3_sha256", warm_start_sha256)
+        resume_progress = dict(epoch=start_epoch,next_offset=start_offset)
         torch.set_rng_state(saved["rng_cpu"])
         if torch.cuda.is_available():
             torch.cuda.set_rng_state_all(saved["rng_cuda"])
@@ -567,11 +572,13 @@ def train(args):
         before_metrics, before_cases = evaluate(model, ds, dev, args.device, args.batch_size)
         atomic_json(dict(metrics=before_metrics, paired=before_cases), args.output/"before.json")
     def save_resume(epoch, offset, total):
+        resume_progress.update(epoch=epoch,next_offset=offset)
         atomic_save(dict(model=model.state_dict(), optimizer=opt.state_dict(),
                          epoch=epoch, next_offset=offset, partial_total=total,
                          component_totals=component_totals if offset else {},component_samples=component_samples if offset else 0,
                          losses=steps, seed=args.seed, fit=fit, dev=dev,
                          elapsed_training_s=previous_training_s+time.perf_counter()-training_started,
+                         initialize_v3_sha256=warm_start_sha256,
                          cache_sha256=file_sha256(args.cache/"manifest.json"),
                          source_sha256=file_sha256(args.source_v2),
                          rng_cpu=torch.get_rng_state(),
@@ -654,10 +661,13 @@ def train(args):
         fit=len(fit), dev=len(dev), epochs=len(steps), configured_max_epochs=args.epochs, losses=steps,
         stop_reason=stop_reason, training_wall_s=previous_training_s+time.perf_counter()-training_started,
         batch_size=args.batch_size,lr_geometry=args.lr_geometry,lr_visual=args.lr_visual,
+        training_code_sha256=training_code_sha256,
+        trainable_geometry_parameters=sum(p.numel() for p in model.geometry.parameters() if p.requires_grad),
+        trainable_visual_parameters=sum(p.numel() for n,p in model.named_parameters() if not n.startswith("geometry.") and p.requires_grad),
         max_training_hours=args.max_training_hours, plateau_relative=args.plateau_relative,
         plateau_patience=args.plateau_patience, min_epochs=args.min_epochs,
         offline_metrics=metrics, evaluation_skipped=args.skip_evaluation,
-        initialize_v3_sha256=file_sha256(args.initialize_v3) if args.initialize_v3 else None,
+        initialize_v3_sha256=warm_start_sha256, next_training_position=resume_progress,
         visual_encoder_frozen=True,
         visual_backbone="google/siglip2-large-patch16-384",
         policy_controller_used=False, val_test_access=False,
