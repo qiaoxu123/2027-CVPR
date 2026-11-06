@@ -1,0 +1,152 @@
+"""CPU-only V3 invariants: co-registration, no-GT forward, private Loss, yaw."""
+from types import SimpleNamespace
+
+import numpy as np
+import pytest
+import torch
+from torch import nn
+
+from graphnav.unified_pgvb_v3 import (
+    COARSE, PATCHES, SIZE, UnifiedPGVBV3, offline_topk,
+    project_global_to_frame, raster_target_polygon, v3_losses,
+)
+from scripts.unified_pgvb_v3_pilot import fixed_yaw_public_poses
+
+
+class TinyGeometry(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.bias = nn.Parameter(torch.tensor(.1))
+
+    def forward(self, static, *, variant, tokens, token_mask, node_emb):
+        assert variant == "geometry"
+        assert not static["rules"].abs().any()
+        assert not static["relation_fields"].abs().any()
+        p = static["grid_xy"]
+        return SimpleNamespace(belief_logits=(
+            p[..., 0] * (1 + self.bias) + p[..., 1]*self.bias),
+        )
+
+
+def _inputs(batch=1, frames=1, all_invalid=False):
+    g = (torch.arange(COARSE) + .5) / COARSE
+    y,x = torch.meshgrid(g, g, indexing="ij")
+    grid = torch.stack((x.flatten(),y.flatten()),-1)[None].expand(batch,-1,-1)
+    fp = torch.tensor([[20.,20.],[80.,20.],[80.,80.],[20.,80.]])
+    return dict(
+        static_inputs=dict(grid_xy=grid, rules=torch.ones(batch,COARSE**2),
+                           relation_fields=torch.ones(batch,COARSE**2,8)),
+        bert_tokens=torch.randn(batch,5,768),
+        bert_mask=torch.ones(batch,5,dtype=torch.bool),
+        landmark_embeddings=torch.randn(batch,4,768),
+        siglip_text=torch.randn(batch,1024),
+        rgb_patches=torch.randn(batch,frames,PATCHES*PATCHES,1024),
+        depth_patches=torch.ones(batch,frames,PATCHES*PATCHES,2),
+        patch_valid=torch.full((batch,frames,PATCHES*PATCHES),
+                               not all_invalid,dtype=torch.bool),
+        footprints_world=fp[None,None].expand(batch,frames,-1,-1).clone(),
+        frame_poses=torch.tensor([50.,50.,85.,0.])[None,None].expand(
+            batch,frames,-1).clone(),
+        world_bounds=torch.tensor([0.,0.,100.,100.])[None].expand(batch,-1),
+    )
+
+
+def test_global_registration_coordinates_and_support():
+    i = _inputs()
+    grid, inside = project_global_to_frame(i["world_bounds"],i["footprints_world"])
+    assert grid.shape == (1,1,SIZE,SIZE,2)
+    # All maps use ROW/Y increasing with WORLD +Y.
+    assert grid[0,0,0,0,1] < grid[0,0,-1,-1,1]
+    assert bool(inside[0,0,SIZE//2,SIZE//2])
+    assert not bool(inside[0,0,0,0])
+
+
+def test_same_global_footprint_with_90_degree_yaw_rotation():
+    i = _inputs()
+    first = project_global_to_frame(i["world_bounds"],i["footprints_world"])[1]
+    rotated = torch.tensor([[80.,20.],[80.,80.],[20.,80.],[20.,20.]])
+    latter = project_global_to_frame(i["world_bounds"],rotated[None,None])[1]
+    torch.testing.assert_close(first, latter)
+
+
+def test_no_observation_does_not_inject_fake_visual_evidence():
+    torch.manual_seed(3)
+    m=UnifiedPGVBV3(TinyGeometry()).eval()
+    x=_inputs(all_invalid=True)
+    out=m(**x)
+    assert out.geometry_logits.shape==(1,COARSE**2)
+    assert out.fused_logits.shape==(1,SIZE,SIZE)
+    assert not out.observed_mask.any()
+    torch.testing.assert_close(out.fused_logits,out.geometry_global,atol=0,rtol=0)
+    assert out.visual_global.abs().max()==0
+
+
+def test_causal_visual_has_dense_world_support_and_grads():
+    torch.manual_seed(42)
+    m=UnifiedPGVBV3(TinyGeometry()).train()
+    args=_inputs()
+    out=m(**args)
+    assert out.observed_mask.any()
+    assert out.observed_mask.sum()<SIZE*SIZE
+    loss=out.fused_logits.square().mean()
+    loss.backward()
+    assert m.vision_proj[0].weight.grad is not None
+    assert m.vision_proj[0].weight.grad.abs().sum()>0
+    assert m.geometry.bias.grad is not None
+
+
+def test_world_gt_polygon_is_training_only_and_correctly_aligned():
+    ring=[[48,48],[52,48],[52,52],[48,52]]
+    mask,valid=raster_target_polygon(ring,[0,0,100,100],SIZE)
+    assert valid
+    assert mask[SIZE//2,SIZE//2]>.5
+    assert mask[10,10]==0
+    mask,valid=raster_target_polygon(None,[0,0,100,100],SIZE)
+    assert not valid and mask.sum()==0
+
+
+def test_loss_uses_private_teacher_only_after_forward():
+    torch.manual_seed(5)
+    m=UnifiedPGVBV3(TinyGeometry()).train()
+    out=m(**_inputs())
+    labels=[[35,35],[65,35],[65,65],[35,65]]
+    train = v3_losses(
+        out,torch.tensor([[.5,.5]]),[labels],
+        torch.tensor([[0.,0.,100.,100.]]),
+        torch.randn(1,1024),m.teacher_head)
+    assert torch.isfinite(train["total"])
+    train["total"].backward()
+    assert m.teacher_head.weight.grad is not None
+    assert m.teacher_head.weight.grad.abs().sum()>0
+    assert int(train["target_polygon_valid"])==1
+    results=offline_topk(out,torch.tensor([[.5,.5]]),
+                         torch.tensor([[0.,0.,100.,100.]]))
+    assert results["n"]==1 and "R@5/20m_count" in results
+
+
+def test_fixed_yaw_sampling_public_only_and_same_for_different_gt():
+    r=dict(
+        map_name="cambridge_block_0",
+        world_bounds=[0.,0.,400.,400.],
+        landmarks=[dict(name="One Stop", contour=[
+            [.4,.4],[.6,.4],[.6,.6],[.4,.6]])],
+        target_xy=[.9,.9],
+    )
+    a=fixed_yaw_public_poses(r,ground=15.,altitude_m=80.,
+                             yaw=1.2,offset_m=25.,views=5)
+    r["target_xy"]=[.05,.05]
+    b=fixed_yaw_public_poses(r,ground=15.,altitude_m=80.,
+                             yaw=1.2,offset_m=25.,views=5)
+    np.testing.assert_array_equal(np.stack(a),np.stack(b))
+    assert len(a)==5
+    assert all(abs(p[3]-1.2)<1e-9 for p in a)
+    r["landmarks"]=[]
+    assert fixed_yaw_public_poses(r,ground=15.,altitude_m=80.,
+                                  yaw=0.,offset_m=25.,views=5)==[]
+
+
+def test_rejects_malformed_world_registration():
+    args=_inputs()
+    args["world_bounds"][0,2]=0
+    with pytest.raises(ValueError):
+        UnifiedPGVBV3(TinyGeometry())(**args)
