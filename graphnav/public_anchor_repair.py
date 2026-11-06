@@ -90,38 +90,64 @@ def _public_catalog_with_safe_repairs(map_objects):
 
 
 def select_complete_groups(mentions, candidates, capacity):
-    """Named groups are atomic. Selection uses only instruction span order.
+    """Keep complete overlapping public-ID components, no partial names.
 
-    Groups are deduplicated by identical public-ID set and processed in
-    first-mention order; do not choose same-name polygons by goal proximity.
+    A single physical Polygon may have multiple aliases. Mention ID groups
+    that overlap are therefore merged BEFORE any capacity decision; this
+    prevents accidentally including half a homonymous group when one name
+    was a subset of another alias query.
     """
     present={str(r["id"]) for r in candidates}
-    kept=set()
-    group_events=[]
-    seen_groups=set()
+    groups=[]
     for mention in mentions:
-        ids=frozenset(str(x) for x in mention["public_ids"] if str(x) in present)
-        if not ids or ids in seen_groups:
-            continue
-        seen_groups.add(ids)
-        additions=ids-kept
+        ids=set(str(x) for x in mention["public_ids"] if str(x) in present)
+        if not ids:continue
+        merged=dict(ids=ids,names=[mention["text"]])
+        overlapping=[g for g in groups if g["ids"] & merged["ids"]]
+        for g in overlapping:
+            merged["ids"].update(g["ids"])
+            merged["names"].extend(g["names"])
+            groups.remove(g)
+        groups.append(merged)
+    # If late alias connections created transitive overlaps, merge again.
+    changed=True
+    while changed:
+        changed=False
+        for i in range(len(groups)):
+            for j in range(i+1,len(groups)):
+                if groups[i]["ids"] & groups[j]["ids"]:
+                    groups[i]["ids"].update(groups[j]["ids"])
+                    groups[i]["names"].extend(groups[j]["names"])
+                    groups.pop(j)
+                    changed=True
+                    break
+            if changed:break
+    kept=set();events=[]
+    for group in groups:
+        ids=group["ids"]
         if len(ids)>capacity:
-            group_events.append(dict(name=mention["text"],reason="single_group_over_capacity",
-                                     matching_public_ids=len(ids),selected=0))
-        elif len(kept)+len(additions)>capacity:
-            group_events.append(dict(name=mention["text"],reason="no_capacity_for_entire_group",
-                                     matching_public_ids=len(ids),selected=0))
+            status="single_group_over_capacity"
+        elif len(kept)+len(ids-kept)>capacity:
+            status="no_capacity_for_entire_group"
         else:
-            kept.update(additions)
-            group_events.append(dict(name=mention["text"],reason="complete_group_kept",
-                                     matching_public_ids=len(ids),selected=len(additions)))
-    return [ref for ref in candidates if str(ref["id"]) in kept],group_events
+            status="complete_group_kept"
+            kept.update(ids)
+        events.append(dict(names=group["names"],reason=status,
+                           matching_public_ids=len(ids),
+                           selected=len(ids) if status=="complete_group_kept" else 0))
+    return [ref for ref in candidates if str(ref["id"]) in kept],events
+
+
+def sanitize_public_map(map_objects):
+    """Public-only, immutable map copy; may be cached by the online Policy."""
+    return _public_catalog_with_safe_repairs(map_objects)
 
 
 def repaired_public_text_record(map_name,instruction,bounds,catalog,matcher,*,
                                 mode="full_text",max_landmarks=16,
                                 repair_geometry=True,
-                                repair_overflow=True):
+                                repair_overflow=True,
+                                preverified_repaired_ids=()):
     """Pure public-only alternative to the existing public_text_record.
 
     Returns unchanged public record format and an explicit intervention audit.
@@ -138,7 +164,7 @@ def repaired_public_text_record(map_name,instruction,bounds,catalog,matcher,*,
         safe_map,repaired_ids=_public_catalog_with_safe_repairs(public_map)
         safe_catalog[map_name]=safe_map
     else:
-        repaired_ids=[]
+        repaired_ids=list(preverified_repaired_ids)
     # Unlimited at extraction time, not at model input time. The reference
     # list is always bounded below, preserving the original network shape.
     all_refs, geometry_warnings=public_references(
