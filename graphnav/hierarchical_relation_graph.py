@@ -23,7 +23,7 @@ from .semantic_geometry import canonical
 
 
 def relation_mode(instruction: str) -> int:
-    """0: unsupported, 1: direct coarse-to-fine, 2: car-in-parking-near-anchor.
+    """0: unsupported, 1: direct-near, 2: car-in-parking-near-anchor, 3: direct-inside.
 
     This intentionally conservative parser is NOT a complete relation parser.
     Unresolved left/right/behind are never mapped to geographic directions.
@@ -40,7 +40,9 @@ def relation_mode(instruction: str) -> int:
         r"\b(near|next to|beside|adjacent|close to|along|within|inside|by|off)\b",
         clean,
     ))
-    return 1 if direct else 0
+    if not direct:
+        return 0
+    return 3 if re.search(r"\b(inside|within)\b", clean) else 1
 
 
 class RegionAugmentedCandidateDataset(FullCandidateDataset):
@@ -196,7 +198,8 @@ class HierarchicalRelationGraph(nn.Module):
         anchor_any = anchor_valid.any(-1)
         indirect = ((mode == 2) & region_valid.any(-1) & anchor_any
                     & (ablation not in ("flat",)))
-        direct = ((mode == 1) | ((mode == 2) & (ablation == "flat"))) & anchor_any
+        direct = ((mode == 1) | (mode == 3) |
+                  ((mode == 2) & (ablation == "flat"))) & anchor_any
         active = direct | indirect
         text_mean = ((tokens * token_mask[..., None].float()).sum(1) /
                      token_mask.sum(1, keepdim=True).clamp_min(1))
@@ -252,7 +255,12 @@ class HierarchicalRelationGraph(nn.Module):
         # is an explicit Boolean at index 6, never an inferred "attention".
         if use_geom:
             direct_near = -torch.relu(pair_geometry[..., 5].float()) * 400. / 35.
-            direct_score = (w_qa * direct_near.clamp(-8, 0)).sum(-1)
+            direct_inside = (2.0 * pair_geometry[..., 6].float()
+                             - torch.relu(pair_geometry[..., 5].float()) * 400. / 25.)
+            near_direct_score = (w_qa * direct_near.clamp(-8, 0)).sum(-1)
+            inside_direct_score = (w_qa * direct_inside.clamp(-8, 2)).sum(-1)
+            direct_score = torch.where(
+                (mode == 3)[:, None], inside_direct_score, near_direct_score)
             inner = (2.0 * region_grid_geometry[..., 6].float()
                      - torch.relu(region_grid_geometry[..., 5].float()) * 400. / 25.)
             near = (-torch.relu(region_anchor_geometry[..., 5].float())
