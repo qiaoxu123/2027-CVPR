@@ -439,10 +439,12 @@ def evaluate(model, ds, indices, device, batch_size):
         pairs = [ds[i] for i in indices[offset:offset+batch_size]]
         kwargs, labels = _collate(pairs, device)
         result = model(**kwargs)
-        geo = offline_topk(result, labels["target_xy"],
-                           kwargs["world_bounds"], branch="geometry")
-        fused = offline_topk(result, labels["target_xy"],
-                             kwargs["world_bounds"], branch="fused")
+        geo = offline_topk(
+            result, labels["target_xy"], kwargs["world_bounds"],
+            branch="geometry", target_polygons=labels["target_polygons"])
+        fused = offline_topk(
+            result, labels["target_xy"], kwargs["world_bounds"],
+            branch="fused", target_polygons=labels["target_polygons"])
         for i, (p, _) in enumerate(pairs):
             records.append(dict(
                 episode_id=pairs[i][1]["episode_id"],
@@ -454,6 +456,11 @@ def evaluate(model, ds, indices, device, batch_size):
                          for k in (1,5,20)},
                 geometry_top1_xy=geo["Top1_xy"][i],
                 fused_top1_xy=fused["Top1_xy"][i],
+                polygon_valid=bool(geo["Polygon_valid"][i]),
+                geometry_polygon_R={str(k):bool(geo["Polygon_hit_flags"][str(k)][i])
+                                    for k in (1,5,20)},
+                fused_polygon_R={str(k):bool(fused["Polygon_hit_flags"][str(k)][i])
+                                 for k in (1,5,20)},
                 observed_pixels=int(result.observed_mask[i].sum()),
                 valid_rgb_patches=int(result.patch_valid[i].sum()),
             ))
@@ -466,6 +473,7 @@ def evaluate(model, ds, indices, device, batch_size):
         observed_queries=sum(x["observed_pixels"] > 0 for x in records),
         no_visual_queries=sum(x["observed_pixels"] == 0 for x in records),
     )
+    metrics["polygon_valid_n"] = sum(x["polygon_valid"] for x in records)
     for k in (1,5,20):
         old = [x["geometry_R"][str(k)] for x in records]
         new = [x["fused_R"][str(k)] for x in records]
@@ -473,6 +481,13 @@ def evaluate(model, ds, indices, device, batch_size):
         metrics[f"Fused_R@{k}/20m"] = mean(new)
         metrics[f"R@{k}_fixes"] = sum(not a and b for a,b in zip(old,new))
         metrics[f"R@{k}_breaks"] = sum(a and not b for a,b in zip(old,new))
+        labeled = [x for x in records if x["polygon_valid"]]
+        metrics[f"Geometry_PolygonHit@{k}"] = (
+            mean(x["geometry_polygon_R"][str(k)] for x in labeled)
+            if labeled else None)
+        metrics[f"Fused_PolygonHit@{k}"] = (
+            mean(x["fused_polygon_R"][str(k)] for x in labeled)
+            if labeled else None)
     return metrics, records
 
 def train(args):
