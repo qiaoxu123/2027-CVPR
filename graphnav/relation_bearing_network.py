@@ -21,7 +21,7 @@ class RolePolygonBearing(nn.Module):
         self.object_q=nn.Sequential(nn.Linear(hidden*2,hidden),nn.GELU(),nn.LayerNorm(hidden))
         self.free=nn.Sequential(nn.Linear(hidden*2+1,hidden),nn.GELU(),nn.Linear(hidden,bins))
         self.coverage=nn.Sequential(nn.Linear(hidden*2+1,hidden),nn.GELU(),nn.Linear(hidden,1))
-    def forward(self,*,tokens,token_mask,node_names,node_shape,node_types,node_valid,edges,anchor_indices,anchor_valid,entity_steps,relation_steps,step_valid,angle_kernel,use_relations=True):
+    def forward(self,*,tokens,token_mask,node_names,node_shape,node_types,node_valid,edges,anchor_indices,anchor_valid,entity_steps,relation_steps,step_valid,angle_kernel,use_relations=True,emit_steps=False):
         h=self.hidden;b,n,_=node_shape.shape;r=anchor_indices.shape[1]
         if edges.shape!=(b,n,n,10) or angle_kernel.shape!=(b,r,n,self.bins):raise ValueError('Geometry alignment')
         if not node_valid.any(-1).all() or not token_mask.any(-1).all():raise ValueError('Need valid context masks')
@@ -33,10 +33,12 @@ class RolePolygonBearing(nn.Module):
         word_score=torch.einsum('brh,blh->brl',anchors,self.text_k(tokens.float()))/math.sqrt(h)
         text=word_score.masked_fill(~token_mask[:,None,:],-1e4).softmax(-1)@self.text_v(tokens.float())
         logp=x.new_full((b,r,n),-1e4);logp.scatter_(2,anchor_indices[...,None],0.)
-        final=logp;steps=step_valid.shape[-1] if use_relations else 1
+        final=logp;steps=step_valid.shape[-1] if use_relations else 1;step_history=[]
         for t in range(steps):
             active=step_valid[:,:,t]&anchor_valid if use_relations else anchor_valid
-            if not bool(active.any()):continue
+            if not bool(active.any()):
+                if emit_steps:step_history.append(logp.softmax(-1))
+                continue
             ent=self.entity(entity_steps[:,:,t].float()) if use_relations else text
             rel=self.relation(relation_steps[:,:,t].float()) if use_relations else self.unspecified(text)
             query=self.object_q(torch.cat((text,ent),-1))
@@ -45,6 +47,7 @@ class RolePolygonBearing(nn.Module):
             propagated=torch.logsumexp(geometric+logp[:,:,None,:],dim=-1)
             logits=(semantic+propagated).masked_fill(~node_valid[:,None,:],-1e4)
             new=logits.log_softmax(-1);logp=torch.where(active[...,None],new,logp);final=logp
+            if emit_steps:step_history.append(logp.softmax(-1))
         object_p=final.softmax(-1)
         entropy=-(object_p*object_p.clamp_min(1e-9).log()).sum(-1,keepdim=True)/math.log(max(n,2))
         context=torch.cat((text,anchors,entropy),-1)
@@ -53,4 +56,6 @@ class RolePolygonBearing(nn.Module):
         alpha=coverage_logit.sigmoid()[...,None]
         p=alpha*geographic+(1-alpha)*free;p=p/p.sum(-1,keepdim=True).clamp_min(1e-9)
         p=torch.where(anchor_valid[...,None],p,torch.full_like(p,1/self.bins))
-        return dict(probabilities=p,object_probabilities=object_p,object_logits=final,coverage_logits=coverage_logit,entropy=-(p*p.clamp_min(1e-9).log()).sum(-1),free_probabilities=free,geometric_probabilities=geographic)
+        result=dict(probabilities=p,object_probabilities=object_p,object_logits=final,coverage_logits=coverage_logit,entropy=-(p*p.clamp_min(1e-9).log()).sum(-1),free_probabilities=free,geometric_probabilities=geographic)
+        if emit_steps:result['step_object_probabilities']=torch.stack(step_history,dim=2)
+        return result
