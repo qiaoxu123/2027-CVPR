@@ -19,7 +19,10 @@ def main():
    if bool(known[0]) and int(known.sum())>=2:
     images=torch.tensor(z['features'][0].astype('float32'));row=dict(images=images,valid=valid,text=torch.tensor(z['text_features'].astype('float32')).mean(0))
     choices['rgb']=int(score(model,row,'cuda').masked_fill(~known.cuda(),-torch.inf).argmax())
-    ids=known.nonzero().flatten();rng=np.random.default_rng(42+i);permuted=ids[torch.tensor(rng.permutation(len(ids)))];shuffled=images.clone();shuffled[ids]=images[permuted];row['images']=shuffled
+    rng=np.random.default_rng(42+i);shuffled=images.clone()
+    for pattern in torch.unique(valid,dim=0):
+     ids=((valid==pattern).all(-1)&known).nonzero().flatten();permuted=ids[torch.tensor(rng.permutation(len(ids)),dtype=torch.long)];shuffled[ids]=images[permuted]
+    row['images']=shuffled
     choices['shuffle']=int(score(model,row,'cuda').masked_fill(~known.cuda(),-torch.inf).argmax())
    # All private scoring happens after public decisions have been sealed.
    distance=np.linalg.norm(z['candidate_world']-label['target_world'],axis=1)
