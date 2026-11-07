@@ -22,3 +22,11 @@ Geometry可训练453,517参数、指令BERT可训练108,891,648参数；两者�
 本次不读取已消耗的7619条确认组、不访问Val/Test、不启动导航。
 服务器目录：`GraphNav/runs/instruction_geometry_joint_s42_20261107/`。
 训练尚未完成，收益待验证。后续仍遵守固定128条SR至少70%才扩大导航评测的计算门槛；该门槛不是全量SR的数学保证。
+
+## 联合Checkpoint评估与编码器隔离测试
+
+新增 `tests/test_trainable_instruction_encoder.py`：模拟优化后，指令Token必须改变；首次遇到的新别名与已缓存名称均保持冻结原编码结果，且冻结名称网络无梯度。
+与 `tests/test_full_token_rgb.py` 合计实测9项通过（1.72秒）。
+新增 `scripts/evaluate_joint_instruction_geometry.py`：联合恢复Geometry与指令BERT，公开名称仍用原始编码器；在完整3126条TRAIN开发组配对比较原始网格Top-1与固定local5解码，输出逐样本坐标、NE和纠正/误改。目标仅用于预测后的评分。
+正在对训练中不可变硬链接快照执行真实GPU加载/定位接口核验，不依此调整超参数。正式训练按既定3轮继续，每轮开发集评估；不读取Val/Test。
+截至实测第445步，未发现非有限Loss或零梯度。前100步与最近100步平均Loss分别0.9471、0.9565，尚不能声称收敛或有效提升。
