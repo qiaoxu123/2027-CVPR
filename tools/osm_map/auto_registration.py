@@ -31,18 +31,20 @@ def fetch_osm(bbox,cache,proxy):
   r=s.get('https://www.openstreetmap.org/api/0.6/map',params={'bbox':','.join(map(str,bbox))},timeout=60);r.raise_for_status();ET.fromstring(r.content);path.write_bytes(r.content)
  root=ET.fromstring(path.read_bytes());nodes={n.attrib['id']:(float(n.attrib['lon']),float(n.attrib['lat'])) for n in root.findall('node')};features=[];incomplete=0
  for way in root.findall('way'):
-  tags={t.attrib['k']:t.attrib['v'] for t in way.findall('tag')};kind='building' if 'building' in tags else 'road' if 'highway' in tags else None
+  tags={t.attrib['k']:t.attrib['v'] for t in way.findall('tag')};kind='building' if 'building' in tags else 'road' if 'highway' in tags else 'parking' if tags.get('amenity')=='parking' else 'place' if tags.get('amenity') or tags.get('landuse') else None
   if not kind:continue
   refs=[n.attrib['ref'] for n in way.findall('nd')]
   if any(n not in nodes for n in refs):incomplete+=1;continue
-  ll=np.array([nodes[n] for n in refs]);e,n=transform('EPSG:4326','EPSG:27700',ll[:,0],ll[:,1]);features.append(dict(id=way.attrib['id'],kind=kind,xy=np.array([e,n]).T.tolist(),tags=tags))
+  ll=np.array([nodes[n] for n in refs]);e,n=transform('EPSG:4326','EPSG:27700',ll[:,0],ll[:,1]);features.append(dict(id=way.attrib['id'],kind=kind,xy=np.array([e,n]).T.tolist(),tags=tags,osm_version=way.attrib.get('version'),osm_timestamp=way.attrib.get('timestamp')))
  meta=dict(url='https://www.openstreetmap.org/api/0.6/map',bbox=bbox,sha256=hashlib.sha256(path.read_bytes()).hexdigest(),fetched_at_utc=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime(path.stat().st_mtime)),copyright='© OpenStreetMap contributors; ODbL',features=len(features),incomplete_ways=incomplete,historical_alignment_warning='Current OSM may differ from older CityNav scans; multipolygon relations not reconstructed in this pilot')
  return features,meta
 
-def estimate(data,map_name,fit,cache,proxy=None):
+def estimate(data,map_name,fit,cache,proxy=None,initial_matrix=None):
  """Only FIT controls accepted. Validation is deliberately absent from signature."""
  if any(p['split']!='fit' for p in fit):raise ValueError('Validation points forbidden in optimizer')
- M0,inliers=initialize(fit);data=Path(data)
+ M0,inliers=initialize(fit)
+ if initial_matrix is not None:M0=np.asarray(initial_matrix,dtype=float)
+ data=Path(data)
  with rasterio.open(data/'rgbd'/(map_name+'.tif')) as r:height=r.read(1);T=r.transform;b=r.bounds
  rgb=cv2.imread(str(data/'rgbd'/(map_name+'.png')));orig_h,orig_w=rgb.shape[:2];scale=min(1,1200/max(orig_h,orig_w));rgb=cv2.resize(rgb,(round(orig_w*scale),round(orig_h*scale)),interpolation=cv2.INTER_AREA);height=cv2.resize(height,(rgb.shape[1],rgb.shape[0]),interpolation=cv2.INTER_NEAREST);valid=np.isfinite(height)&(height>=0)&(rgb.max(-1)>0)
  if not valid.any():raise ValueError('无有效RGB/高度区域')
@@ -102,11 +104,11 @@ def estimate(data,map_name,fit,cache,proxy=None):
  if newcost>best_initial:M=base;newcost=best_initial
  return dict(matrix=M.tolist(),initial_matrix=M0.tolist(),config=CONFIG,optimizer_success=bool(fitres.success),fit_control_inliers=int(inliers.sum()),fit_control_inlier_ids=[p['id'] for p,keep in zip(fit,inliers) if keep],fit_control_n=len(fit),auto_centroid_pairs=len(pairs),auto_centroid_inliers=auto_inliers,building_proxy_polygons=len(polys),road_proxy_pixels=int(road.sum()),edge_samples=len(src),structure_cost_initial=float(np.minimum(dist(M0),10).mean()),structure_cost_final=newcost,initialization_selected=chosen_name,osm=osm_meta,source_polygons=[p.tolist() for p in polys],road_junction_proxy_xy=world(centroids[1:]).tolist() if len(centroids)>1 else [],osm_features=features,warning='RGB+height structural proxies, not semantic segmentation truth. No independent validation used for selection.'),rgb,building,road
 
-def run_job(data,city,map_name,controls,output,proxy=None):
- output=Path(output);output.mkdir(parents=True,exist_ok=True);fit=[p for p in controls['points'] if p['split']=='fit'];result,rgb,building,road=estimate(data,map_name,fit,output/'osm_cache',proxy)
+def run_job(data,city,map_name,controls,output,proxy=None,initial_matrix=None):
+ output=Path(output);output.mkdir(parents=True,exist_ok=True);fit=[p for p in controls['points'] if p['split']=='fit'];result,rgb,building,road=estimate(data,map_name,fit,output/'osm_cache',proxy,initial_matrix)
  # Freeze prediction before touching private human validation coordinates.
  (output/'prediction_frozen.json').write_text(json.dumps({k:v for k,v in result.items() if k not in ['source_polygons','osm_features']},indent=2))
- val=[p for p in controls['points'] if p['split']=='validation'];M=result['matrix'];before=result['initial_matrix'];result.update(city=city,map_name=map_name,base_revision=controls['revision'],fit_metrics=metrics(M,fit),validation=metrics(M,val),manual_validation=metrics(before,val),status='proposal',verified=False,created_at=time.time())
+ val=[p for p in controls['points'] if p['split']=='validation' and p['map_name']==map_name];M=result['matrix'];before=result['initial_matrix'];result.update(city=city,map_name=map_name,base_revision=controls['revision'],fit_metrics=metrics(M,fit),validation=metrics(M,val),manual_validation=metrics(before,val),status='proposal',verified=False,created_at=time.time())
  if len(fit)>=10 and len(val)>=5 and result['validation']['max_m']<=5:result['verified']=True
  result['per_map_validation']={m:metrics(M,[p for p in val if p['map_name']==m]) for m in {p['map_name'] for p in val}}
  result['manual_modes']={}
