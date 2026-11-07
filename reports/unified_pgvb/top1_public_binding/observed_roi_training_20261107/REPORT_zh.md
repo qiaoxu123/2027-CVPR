@@ -1,0 +1,7 @@
+# 当前观测ROI弱监督训练：准备状态
+
+2026-11-07。缓存覆盖完整21878条TRAIN，使用当前部署V2 Geometry（9ac51ee…）生成空间去重Top20，不用GT生成候选或裁剪。只从真实起点Pose、当前Footprint/Depth支持提取ROI。tmux会话v2_roi_training_cache；服务器目录GraphNav/runs/v2_roi_training_cache_20261107。缓存可按逐任务文件断点恢复。
+
+训练入口train_observed_roi_matcher.py已准备并通过语法检查，尚未训练验证。仅fit拟合、development选checkpoint，confirmation留待一次确认。损失将≤20m支持候选视作弱位置正例、≥40m支持候选视作弱负例，忽略中间带；这不能当作实例身份标注。推理/评估打分仅使用图文特征及传感器有效Mask，GT不参与排序屏蔽。需同时报告完整数据覆盖和有监督子集口径。
+
+缓存原始提取器及坐标工具来自当前工作区已有文件，未覆盖这些文件。当前阶段代码尚需真实训练Smoke与防泄漏核验，不宣称已具备有效排序能力。完整Val SR仍48.54%；只有独立TRAIN确认后才考虑固定128条导航，70%门槛保持。
