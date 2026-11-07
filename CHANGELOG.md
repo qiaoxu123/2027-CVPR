@@ -1,3 +1,12 @@
+## [Public Landmark Name Variant Retrieval] - 2026-11-07
+### Features
+- Expand public CityRefer landmark matching with collision-checked unique name phrases, provider-prefix removal, and final-token singular/plural variants.
+- Add regression tests for shorthand binding, homonym rejection, and retained Polygon identity.
+### Design Rationale
+- Improve landmark anchoring from instruction text without using target identity, coordinates, or target-conditioned selection. Keep all Polygons for a repeated canonical public name.
+### Notes & Caveats
+- TRAIN Cambridge development and Birmingham confirmation improved under frozen Geometry and decoding. The frozen full 2470-task Val-Seen localization evaluation reached 50.6478% (1251/2470) with raw V2 Geometry and the expanded resolver. This is initial localization, not closed-loop navigation SR; differences from the earlier 49.9595% best also include checkpoint/protocol-arm differences and cannot be attributed solely to the resolver.
+
 ## [UnifiedPGVB-V3 training runtime] - 2026-11-06
 ### Features
 - Add source-checked V3 warm start, mid-epoch optimizer/RNG checkpoints, cumulative training time budget and TRAIN-loss plateau stopping.

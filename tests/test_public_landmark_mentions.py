@@ -57,3 +57,31 @@ def test_leading_article_does_not_create_a_second_nested_entity():
     matcher=PublicLandmarkMentions({'map':{'1':obj('The Hall','Building'),'2':obj('Hall Court','Building')}})
     names={n for m in matcher.match('map','A house near the Hall Court.') for n in m['public_names']}
     assert names=={'Hall Court'}
+
+def test_unique_public_name_phrase_binds_without_adding_target_information():
+    matcher=PublicLandmarkMentions({'map':{
+        '1':obj('Nike Factory Store','Building'),
+        '2':obj('Nike Road','TrafficRoad'),
+    }})
+    mentions=matcher.match('map','The car is in the Nike Factory parking lot.')
+    assert {n for m in mentions for n in m['public_names']}=={'Nike Factory Store'}
+    assert mentions[0]['text']=='Nike Factory'
+
+def test_provider_prefix_and_final_plural_variants_are_public_only():
+    matcher=PublicLandmarkMentions({'map':{
+        '1':obj('CrossCountry: Manchester => Bournemouth (all stations)','Footpath'),
+        '2':obj('West Midlands Police Custody Suite','Building'),
+    }})
+    text='The parking lot is near Manchester => Bournemouth (all stations) footpath and West Midlands Police Custody Suites.'
+    names={n for m in matcher.match('map',text) for n in m['public_names']}
+    assert names=={
+        'CrossCountry: Manchester => Bournemouth (all stations)',
+        'West Midlands Police Custody Suite',
+    }
+
+def test_generated_phrase_collision_does_not_choose_between_homonyms():
+    matcher=PublicLandmarkMentions({'map':{
+        '1':obj('North Market Hall','Building'),
+        '2':obj('North Market Road','TrafficRoad'),
+    }})
+    assert not matcher.match('map','The building is near North Market.')

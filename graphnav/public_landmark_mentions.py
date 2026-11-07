@@ -13,6 +13,12 @@ ROAD_SUFFIXES={'road','street','avenue','lane','drive','way','close','gardens','
 BARE_GENERIC={'red','white','black','silver','grey','gray','brown','yellow','green','blue','orange','purple','pink','short','long','tall','small','large','big','little','middle','top','bottom','front','rear','back','left','right','old','new'}
 OBJECT_NOUNS={'building','buildings','house','houses','church','college','school','library','hall','centre','center','car','cars','van','truck','vehicle'}
 ROAD_CONTEXT=re.compile(r'\b(?:on|along|between|road|street|avenue|lane|drive|junction|intersection|corner|end)\b')
+ALIAS_STOP=set(BARE_GENERIC)|set(GENERIC_NAMES)|{
+    'the','of','and','at','on','in','for','to','by','with','from','near',
+    'road','street','avenue','lane','drive','way','close','gardens',
+    'building','house','college','school','library','hall','centre','center',
+    'park','lot','footpath','station','all','stations',
+}
 
 
 def normalized_span(text):
@@ -29,6 +35,7 @@ class PublicLandmarkMentions:
         self.maps={};self.threshold=fuzzy_threshold;self.margin=fuzzy_margin
         for map_name,objects in catalog.items():
             full=defaultdict(dict);roads=defaultdict(set)
+            generated=defaultdict(lambda:defaultdict(dict))
             for oid,obj in objects.items():
                 name=obj.get('name','');key=normalized_span(name)[0]
                 if not key or key in GENERIC_NAMES or len(key)<3 or len(obj.get('contour',[]))<3:continue
@@ -36,15 +43,44 @@ class PublicLandmarkMentions:
                 variants=[name]+(obj.get('aliases',[]) if isinstance(obj.get('aliases',[]),list) else [])
                 for variant in variants:
                     if not isinstance(variant,str):continue
-                    v=normalized_span(variant)[0]
-                    if len(v)<3 or v in GENERIC_NAMES:continue
-                    full[v][str(oid)]=item
-                    if v.startswith('the ') and len(v)>7:full[v[4:]][str(oid)]=item
+                    forms=[variant]
+                    if ':' in variant:
+                        prefix,rest=variant.split(':',1)
+                        if prefix.strip() and rest.strip():forms.append(rest.strip())
+                    for form in forms:
+                        v=normalized_span(form)[0]
+                        if len(v)<3 or v in GENERIC_NAMES:continue
+                        full[v][str(oid)]=item
+                        if v.startswith('the ') and len(v)>7:full[v[4:]][str(oid)]=item
+                        words=v.split()
+                        for start in range(len(words)):
+                            for end in range(start+2,min(len(words),start+5)+1):
+                                phrase=' '.join(words[start:end])
+                                content=[w for w in words[start:end] if w not in ALIAS_STOP]
+                                if len(phrase)>=10 and len(content)>=2:
+                                    generated[phrase][name][str(oid)]=item
+                        if words:
+                            last=words[-1];alternate=None
+                            if len(last)>4 and last.endswith('ies'):
+                                alternate=' '.join(words[:-1]+[last[:-3]+'y'])
+                            elif len(last)>4 and last.endswith('s') and not last.endswith('ss'):
+                                alternate=' '.join(words[:-1]+[last[:-1]])
+                            elif len(last)>3 and not last.endswith('s'):
+                                alternate=' '.join(words[:-1]+[last+'s'])
+                            if alternate and len(alternate)>=8:
+                                generated[alternate][name][str(oid)]=item
                 if obj.get('object_type') in ROAD_TYPES:
                     words=key.split()
                     if len(words)>1 and words[-1] in ROAD_SUFFIXES:
                         base=' '.join(words[:-1])
                         if len(base)>=5 and base not in BARE_GENERIC and base not in GENERIC_NAMES and base not in {'north','south','east','west','upper','lower','church','school','college','garden','parking','avenue','street'}:roads[base].add(name)
+            # Reject generated aliases that collide with a different public
+            # entity name. Repeated Polygon IDs for the same named object remain.
+            for phrase,by_name in generated.items():
+                existing_names={x['name'] for x in full.get(phrase,{}).values()}
+                names=set(by_name)|existing_names
+                if len(names)==1:
+                    for entries in by_name.values():full[phrase].update(entries)
             bare={k:{oid:v for entries in full.values() for oid,v in entries.items() if v['name'] in names} for k,names in roads.items() if len(names)==1}
             self.maps[map_name]=(dict(full),bare)
 
