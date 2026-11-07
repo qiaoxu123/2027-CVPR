@@ -1,0 +1,47 @@
+{
+  "seed": 42,
+  "source_commit": "4e0758e",
+  "val_seen_n": 2470,
+  "failure_cohort": "sr=0, osr=0, initial spatial-NMS recall@5=1 (post-hoc 20m location proxy)",
+  "failure_cohort_n": 644,
+  "top1_location_proxy_control_n": 1198,
+  "processed_n": 1842,
+  "review_sample_n": 200,
+  "review_sample_seed": 42,
+  "review_sampling": "200 failures stratified by target class proxy, historical projected-size proxy and post-hoc Top-5 target-location rank; private sampling labels are not shown in HTML",
+  "candidate_source": "first five entries of frozen spatial_nms_top20_posthoc; selection/crops use only candidate XY and Geometry logit",
+  "observation_source": "only poses in frozen V2 closed-loop rows, rendered to actual 384x384 RGB-D at each logged current pose",
+  "roi": {
+    "extents_m": [
+      20.0,
+      40.0
+    ],
+    "output_size": 384,
+    "minimum_valid_support": 0.85,
+    "center_depth_valid_fraction": 0.5,
+    "invalid_pixels": "masked to zero; unknown is never treated as a negative"
+  },
+  "visual_model": {
+    "name": "google/siglip2-large-patch16-384",
+    "revision": "1b426889ea62b5a72bf9839009a1b184bfc9c178",
+    "stage1_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "score": "frozen SigLIP2 cosine; 20m/40m ROI x full instruction/appearance query",
+    "rerank_rule": "switch only if an alternative beats original Top-1 in all four score views; else abstain"
+  },
+  "shuffle_control": {
+    "permutations_per_episode": 20,
+    "seed": 42,
+    "within_episode_supported_candidate_images_only": true
+  },
+  "geometry_checkpoint_sha256": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+  "controller_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "prior_navigation_run": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/v2_top1_public_binding_s42_20261107/full_navigation/expanded",
+  "prior_metrics_sha256": "536c7d5d99fb2ab58ebaebc87d88ce6e4572574a059314fe43acf752d2fb4def",
+  "attribution_csv_sha256": "93eb2745cc03d53d93f39656e2286486c6be2e44fe879de8711ef5d565c9a8b0",
+  "history_proxy_csv_sha256": "e4b578ce76f84f4ea5324771bbb8189b4e007552f8cc44597d0d4603ede55fa1",
+  "renderer_sha256": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747",
+  "roi_utility_sha256": "f4b49872771da7f2882a50d3b74e8b0efdab596f30278f40afbced90251080a1",
+  "scoring_scope": "offline reranking diagnostic only; no altered-policy closed loop or SR claim",
+  "ground_truth": "held out from ROI construction, image/text encoding and rerank; used only after scoring for 20m location-proxy outcomes",
+  "manual_review": "HTML annotations start pending; no human label is assumed until a JSON export is returned"
+}
