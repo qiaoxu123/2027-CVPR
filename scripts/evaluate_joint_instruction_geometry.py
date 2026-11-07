@@ -21,6 +21,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('data', 'source', 'trained', 'joint', 'bert-cache', 'output'):
         parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--component-ablation', action='store_true',
+                        help='Diagnostic mismatched-weight controls, not deployable model selection')
     args = parser.parse_args()
     torch.set_num_threads(4)
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -42,8 +44,12 @@ def main():
                  rule_sigma_m=cfg.rule_sigma_m, deduplicate_queries=False)
     assert all(row['target_xy'] == [0., 0.] for row in ds.records)
     predictions = {}
-    for arm, geometry, bert in [('original', original, original_bert),
-                                ('joint', joint['geometry'], joint['bert'])]:
+    arms = [('original', original, original_bert),
+            ('joint', joint['geometry'], joint['bert'])]
+    if args.component_ablation:
+        arms += [('adapted_geometry_only', joint['geometry'], original_bert),
+                 ('adapted_bert_only', original, joint['bert'])]
+    for arm, geometry, bert in arms:
         model.load_state_dict(geometry, strict=True)
         encoder.model.load_state_dict(bert, strict=True)
         model.eval(); encoder.model.eval()
@@ -69,11 +75,14 @@ def main():
     summary = {}
     for decoder in ('grid', 'local5'):
         a = np.array([r[decoder]['NE'] for r in predictions['original']])
-        b = np.array([r[decoder]['NE'] for r in predictions['joint']])
-        summary[decoder] = dict(n=len(a), original_R20=float((a<=20).mean()),
-                               joint_R20=float((b<=20).mean()), original_NE=float(a.mean()),
-                               joint_NE=float(b.mean()), corrections=int(((a>20)&(b<=20)).sum()),
-                               damage=int(((a<=20)&(b>20)).sum()))
+        for arm in predictions:
+            if arm == 'original':
+                continue
+            b = np.array([r[decoder]['NE'] for r in predictions[arm]])
+            summary[f'{decoder}/{arm}'] = dict(n=len(a), original_R20=float((a<=20).mean()),
+                                   adapted_R20=float((b<=20).mean()), original_NE=float(a.mean()),
+                                   adapted_NE=float(b.mean()), corrections=int(((a>20)&(b<=20)).sum()),
+                                   damage=int(((a<=20)&(b>20)).sum()))
     args.output.mkdir(parents=True, exist_ok=True)
     atomic_json(predictions, args.output / 'predictions.json')
     atomic_json(dict(summary=summary, joint_sha256=file_sha256(args.joint),
