@@ -13,3 +13,9 @@
 Geometry基线R20=69.39%、NE22.393m。上下文组最佳第5轮R20=69.61%、NE22.124m，纠正33/破坏26（净+7）；完整Token组最佳第2轮R20=69.51%、NE22.064m，纠正22/破坏18（净+4）。完整Token第5轮降至69.03%，净-11。未超过上下文组，不能证明显式Token有新增定位收益。
 
 该对照是网格/NMS候选位置排序，不是实例识别。两组相同架构但零Token控制的有效语言分支梯度与完整Token不同，不能宣称有效参数学习容量完全等价。训练记录见training.json，权重留服务器runs/distinct_language_ranker_s42_20261107。确认集未使用，不进入Val Pilot；固定soft解码72.94%仍优于本次raw候选排序结果，但两者坐标口径不同，不能直接算作模型提升差。
+
+## 相同soft坐标口径与冻结确认
+
+对上下文组已选Checkpoint统一使用固定5×5/T0.5解码：development3126条基线R20=72.94%、NE20.942m，排序+soft为73.22%、20.724m，纠正18/破坏9（净+9）。冻结该组合后，Birmingham confirmation7619条一次评分：基线69.48%、NE23.008m；新组合69.34%、23.442m，纠正38/破坏49（净-11），切换284条。
+
+开发收益未被跨城市确认，不进入Val导航Pilot。该确认组已消耗于本次冻结验证，不能继续根据其错误调整后再宣称独立确认；源Geometry也曾预训练见过官方TRAIN，因此不是未见预训练数据的泛化证明。脚本evaluate_distinct_ranker_soft.py仅接收公开候选/文本零内容控制，不接收GT选择候选，GT仅在预测坐标生成后评分。结果见soft_decoded_paired.json，逐任务在服务器context_soft_{development,confirmation}.json保留。
