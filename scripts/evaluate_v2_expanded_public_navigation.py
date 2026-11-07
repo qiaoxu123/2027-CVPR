@@ -42,6 +42,9 @@ def main():
     p.add_argument("--smoke", type=int, default=0, help="Run the first N episodes only")
     p.add_argument("--candidate-selection", choices=("geometry-top1", "ranked-once", "rank-score-once"), default="geometry-top1",
                    help="Use Geometry slot 0, joint rank/mode selection once, or candidate-score-only selection once")
+    p.add_argument("--trajectory-execution", choices=("guarded-blend", "guarded-direct", "guarded-path"),
+                   default="guarded-blend",
+                   help="For Geometry slot-0 selection, use the original blended path, direct-to-goal waypoint, or full predicted path waypoint")
     p.add_argument("--arms", nargs="+", choices=("legacy", "expanded"), default=("legacy", "expanded"))
     p.add_argument("--resume", action="store_true")
     a = p.parse_args()
@@ -62,6 +65,8 @@ def main():
     torch.set_float32_matmul_precision("highest")
     if a.candidate_head_checkpoint and a.candidate_selection not in ("ranked-once", "rank-score-once"):
         raise ValueError("--candidate-head-checkpoint requires a ranked candidate-selection mode")
+    if a.candidate_selection != "geometry-top1" and a.trajectory_execution != "guarded-blend":
+        raise ValueError("--trajectory-execution applies only to geometry-top1 candidate selection")
 
     config = apply_overrides(load_config(a.config), ["data.root=" + str(a.data)])
     validate_config(config)
@@ -107,8 +112,9 @@ def main():
             "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache",
         },
         "candidate_selection": a.candidate_selection,
+        "trajectory_execution": a.trajectory_execution if a.candidate_selection == "geometry-top1" else None,
         "candidate_head_checkpoint_sha256": file_sha256(a.candidate_head_checkpoint) if a.candidate_head_checkpoint else None,
-        "controller": f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {a.candidate_selection}; guarded-blend; no exploration",
+        "controller": f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {a.candidate_selection}; trajectory={a.trajectory_execution}; no exploration",
         "visual_fusion": False, "OSM": False, "GT_access": "Scoring only after rollout",
         "runner_sha256": file_sha256(Path(__file__)),
         "source_sha256": {
@@ -158,6 +164,8 @@ def main():
             runtime.execution = "ranked-guarded-blend"
         elif a.candidate_selection == "rank-score-once":
             runtime.execution = "rank-score-guarded-blend"
+        else:
+            runtime.execution = a.trajectory_execution
         if a.candidate_head_checkpoint:
             candidate_head = torch.load(a.candidate_head_checkpoint, map_location="cpu", weights_only=True)
             if candidate_head.get("geometry_sha256") != file_sha256(a.trained_v2):
@@ -167,7 +175,7 @@ def main():
             runtime.head.load_state_dict(candidate_head["model"], strict=True)
         if (runtime.stop_threshold, runtime.execution, runtime.explore_candidates) != (
             .3, ("ranked-guarded-blend" if a.candidate_selection == "ranked-once" else
-                 "rank-score-guarded-blend" if a.candidate_selection == "rank-score-once" else "guarded-blend"), 0,
+                 "rank-score-guarded-blend" if a.candidate_selection == "rank-score-once" else a.trajectory_execution), 0,
         ):
             raise ValueError("Controller execution differs from original frozen protocol")
         new_count = 0
