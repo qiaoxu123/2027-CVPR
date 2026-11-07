@@ -52,6 +52,7 @@ def main():
     p.add_argument("--trajectory-execution", choices=("guarded-blend", "guarded-direct", "guarded-path"),
                    default="guarded-blend",
                    help="For Geometry slot-0 selection, use the original blended path, direct-to-goal waypoint, or full predicted path waypoint")
+    p.add_argument("--goal-decoder", choices=("grid", "local5"), default="grid")
     p.add_argument("--explore-candidates", type=int, default=0,
                    help="After reaching a Geometry candidate without a Stop decision, try the next ranked candidate (0 disables)")
     p.add_argument("--arms", nargs="+", choices=("legacy", "expanded"), default=("legacy", "expanded"))
@@ -123,6 +124,7 @@ def main():
             "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache",
         },
         "candidate_selection": a.candidate_selection,
+        "goal_decoder": a.goal_decoder,
         "explore_candidates": a.explore_candidates,
         "trajectory_execution": a.trajectory_execution if a.candidate_selection == "geometry-top1" else None,
         "candidate_head_checkpoint_sha256": file_sha256(a.candidate_head_checkpoint) if a.candidate_head_checkpoint else None,
@@ -175,6 +177,12 @@ def main():
             a.source_v2, a.trained_v2, a.stage1, arm_out / "public_inputs", "trained_v2",
         )
         runtime.explore_candidates = a.explore_candidates
+        if a.goal_decoder == "local5":
+            from graphnav.local_goal_decoder import decode_first_candidate
+            def decoded_predict(state, instruction):
+                field, inputs = runtime.frozen_field()
+                return runtime.predict_field(state, decode_first_candidate(field, inputs["grid_xy"]))
+            runtime.predict = decoded_predict
         if a.candidate_selection == "ranked-once":
             runtime.execution = "ranked-guarded-blend"
         elif a.candidate_selection == "rank-score-once":
@@ -281,6 +289,7 @@ def main():
             "coverage_per_arm": {k: len(v) for k, v in completed_by_arm.items()},
             "expected": expected,
             "candidate_selection": a.candidate_selection,
+        "goal_decoder": a.goal_decoder,
             "arms": {k: aggregate([x["metrics"] for x in v]) for k, v in completed_by_arm.items()},
         }
         if expected == 2470:
