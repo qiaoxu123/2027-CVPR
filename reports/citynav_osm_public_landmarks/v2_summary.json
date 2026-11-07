@@ -1,0 +1,63 @@
+{
+  "metrics": {
+    "original_v2": {
+      "n": 2470,
+      "NE": 36.02827723429957,
+      "raw": {
+        "1": 0.4465587044534413,
+        "5": 0.6821862348178138,
+        "10": 0.7748987854251013,
+        "20": 0.8631578947368421
+      },
+      "spatial_nms": {
+        "1": 0.4465587044534413,
+        "5": 0.7736842105263158,
+        "10": 0.8712550607287449,
+        "20": 0.9384615384615385
+      },
+      "mean_distinct_positions_in_raw20": 7.4271255060728745,
+      "no_public_landmarks": 91,
+      "elapsed_s": 31.365732431411743
+    },
+    "trained_v2": {
+      "n": 2470,
+      "NE": 35.1315257561095,
+      "raw": {
+        "1": 0.4708502024291498,
+        "5": 0.6902834008097166,
+        "10": 0.7817813765182187,
+        "20": 0.8639676113360324
+      },
+      "spatial_nms": {
+        "1": 0.4708502024291498,
+        "5": 0.7777327935222672,
+        "10": 0.877327935222672,
+        "20": 0.937246963562753
+      },
+      "mean_distinct_positions_in_raw20": 7.405668016194332,
+      "no_public_landmarks": 91,
+      "elapsed_s": 5.95046329498291
+    }
+  },
+  "grid_size": 28,
+  "nms_radius_m": 20,
+  "success_radius_m": 20,
+  "seed": 42,
+  "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "trained_v2_sha256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b",
+  "annotation_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "input": "Original instruction/public names only; original V2 rules+relation fields; no OSM, RGB, reference annotation IDs, target or trajectory in forward",
+  "historical_protocol_difference": "Original runtime used annotation reference-name metadata; current public blind binding is explicit",
+  "data_identity": "HETT official refined Val-Seen downloaded separately; byte-identical SHA256 df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06; 2470/2470. Public catalog SHA recorded, not independently re-downloaded from HETT.",
+  "scope": "offline initial localization; not navigation SR",
+  "official_dataset_verification": {
+    "official_repository": "https://github.com/crotonyl/HETT",
+    "official_val_seen_url": "https://www.dropbox.com/scl/fo/ua3kn6mw3adn2hcsdikt3/AFHyLq-UTWfJKhOQLJ_niR8/refined_citynav/processed_citynav/citynav_val_seen.json?rlkey=v5rlqiqa1k9ml8isinpv7glgk&e=1&dl=1",
+    "sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+    "n": 2470,
+    "byte_identical": true,
+    "downloaded_test": false,
+    "catalog_independently_redownloaded": false
+  }
+}

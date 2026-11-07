@@ -211,6 +211,8 @@ def build(data,overlays,store,user,password):
             if active.get('map_name')==name and active.get('base_revision')==r.get('base_revision'):
                 atomic(store/(city+f'.history-{current["revision"]}.json'),current);current.pop('active_registration',None);current['revision']+=1;atomic(path(city),current)
         return dict(status='rejected',revision=current['revision'])
+    from tools.osm_map.landmark_review import install
+    install(app, store)
     return app
 if __name__=='__main__':
     import uvicorn

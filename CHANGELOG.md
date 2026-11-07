@@ -45,3 +45,13 @@
 - Freeze city/global-vs-local selection using structural evidence, then evaluate independent controls only in their own scene. Never turn a structural score into geographic accuracy.
 ### Notes & Caveats
 - 34 computational outputs: 1 independently verified, 21 awaiting validation, 12 unreliable local-correction cases. No scene proven within 2m maximum error; no claim of city-wide geographic validity and no model training.
+
+## [Public Landmark Correspondence Review] - 2026-11-07
+### Features
+- Match public CityRefer named buildings and road junctions to OSM across 34 scenes; fit city similarity proposals with physical-object-isolated holdouts.
+- Add authenticated correspondence review, paired polygons, evidence, immutable fit/validation roles and persistent identity decisions.
+- Evaluate two frozen V2 Geometry checkpoints on all 2470 HETT Refined Val-Seen tasks with raw and fixed 20m spatial-NMS recall.
+### Design Rationale
+- Keep identity uncertainty distinct from geographic accuracy; no automatic validation promotion or replacement of existing approved registrations.
+### Notes & Caveats
+- Automated heldout anchor residuals are proxies. No newly independently confirmed scenes; V2 uses blind public text binding, explicitly differing from historical annotation-reference metadata.

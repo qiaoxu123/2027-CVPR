@@ -1,0 +1,22 @@
+{
+  "base_commit": "dce07766f375166bb8081ba1414070606f49f70d",
+  "seed": 42,
+  "python": "3.10.22",
+  "pytorch": "2.8.0+cu128",
+  "cuda": "12.8",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Workstation Edition",
+  "scripts": {
+    "scripts/evaluate_v2_public_candidate_recall.py": "7ef6245c3593d0d605e61f70bde55a15b52e8afbeb6b355ac8ac669b54e3990c",
+    "scripts/match_public_citynav_landmarks.py": "eb0d0586d8c18cb21a2dd3743537b709c082d31d764febb694e20817ecb6fd57",
+    "tools/osm_map/landmark_groups.py": "ececc7e04448f09d3ad1e00615729bd97863205d400f7595b5326f2f4fafb03e",
+    "tools/osm_map/landmark_review.py": "9fbdd85a64cefad7239155f880c238ec2d2d87bb6ec6e9743d43819f649136e8"
+  },
+  "resume": "Prior outputs preserved; frozen matching scores reused by refit script, no re-selection by validation residuals",
+  "server_outputs": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/osm_landmark_v2_recall_20261107",
+  "registration_inputs": "Public named CityRefer shapes + OSM + previous public-control city seed only",
+  "checkpoints_unchanged": true,
+  "checkpoint_hashes": {
+    "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "trained_v2_sha256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b"
+  }
+}
