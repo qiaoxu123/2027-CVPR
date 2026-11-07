@@ -27,3 +27,12 @@
 - Keep local XY visualization available before georeferencing; preserve shared city transform and per-scene validation rather than assume 34 independent alignments.
 ### Notes & Caveats
 - OSM registration requires real human controls; current public deployment uses a working fallback FRPS while requested host credentials remain unavailable. No model weights or inference pipeline changed.
+
+## [OSM Structural Auto Registration Pilot] - 2026-11-07
+### Features
+- Add fit-only public-control initialization, OSM vector retrieval, RGB/height structural proxies, automatic centroid RANSAC and robust boundary refinement.
+- Add automatic proposal, overlay/structural heatmap and explicit accept/reject UI with source-revision checks.
+### Design Rationale
+- Select predictions only by public structural costs, then evaluate existing independent controls; preserve manual controls and avoid assuming city-wide validity from one scene.
+### Notes & Caveats
+- Birmingham block3 improved on five independent controls; Cambridge has no independent validation. Masks/junctions are geometric proxies; no claim of validated alignment across all 34 scenes.

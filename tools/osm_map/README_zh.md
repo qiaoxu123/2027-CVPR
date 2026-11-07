@@ -8,7 +8,7 @@
 
 ```bash
 export MAP_REVIEW_USER='<用户名>'
-export MAP_REVIEW_PASSWORD='<至少16字符密码>'
+export MAP_REVIEW_PASSWORD='<至少12字符密码>'
 # 如服务器需要出口代理，可选：export OSM_HTTP_PROXY=http://127.0.0.1:7890
 export CONTROL_PUBLIC_URL='http://<公网主机>:<端口>/'
 python -m tools.osm_map.control_app --data <CityNav数据根目录> \
@@ -32,3 +32,19 @@ python -m tools.osm_map.control_app --data <CityNav数据根目录> \
 ## 浏览器Smoke
 
 `tools/osm_map/smoke_browser.py`仅允许在空的Cambridge点集运行，模拟点击后保存/刷新/导出/删除/撤销，最终恢复空集。不要在正式标注开始后运行。使用`CONTROL_TEST_URL`和已有G5_REVIEW_USER/PASSWORD环境变量。合成点击不是地理控制点。
+
+## 自动配准（实验性）
+
+“自动配准”使用当前城市已有拟合点初始化、当前场景正射RGB/环境高度结构代理与真实OSM建筑矢量。至少3拟合点才可初始化；验证点不送入优化。自动结果分开存入`<store>/auto_proposals/<scene>/`，保留原人工控制点。结果包含初始/自动对照图、结构热图、逐点误差及相似/仿射诊断。道路/骨架交叉点当前是未经核验的结构代理，不能当语义真值。
+
+接受按钮只接受为叠加预览；没有独立验证依然显示未验证。接受前检查控制点revision，修改过控制点后必须重跑；拒绝已接受结果将撤销对应自动预览。不会自动将同城其他地图标记为通过，也不会把自动候选接入模型。
+
+离线复现：
+
+```bash
+OSM_HTTP_PROXY=http://127.0.0.1:7890 python -m scripts.run_citynav_auto_registration \
+  --data <CityNav根目录> --controls <已有控制点快照JSON> \
+  --scene cambridge_block_3 --output <独立结果目录>
+```
+
+OSM数据来自标准map API，缓存原始XML并记录数据哈希、获取时间；网络不可用或结构不足时显式失败。真实控制点、OSM原始缓存不提交Git。模型和训练代码不参与该过程。

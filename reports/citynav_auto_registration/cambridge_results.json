@@ -1,0 +1,235 @@
+{
+  "matrix": [
+    [
+      1.0344396577925952,
+      0.019877820028121072,
+      544160.4612733633
+    ],
+    [
+      -0.01987782002812107,
+      1.0344396577925954,
+      257422.71823308768
+    ]
+  ],
+  "initial_matrix": [
+    [
+      1.0293118972384572,
+      -0.017130368428247097,
+      544210.5878379298
+    ],
+    [
+      0.017130368428247097,
+      1.0293118972384572,
+      257402.2903211143
+    ]
+  ],
+  "config": {
+    "seed": 42,
+    "ransac_m": 3,
+    "max_initial_match_m": 25,
+    "resolution_m": 1,
+    "robust_scale_m": 3,
+    "max_distance_m": 20,
+    "translation_bound_m": 20,
+    "rotation_bound_rad": 0.07,
+    "logscale_bound": 0.06,
+    "max_nfev": 200,
+    "version": "structural-proxy-v1"
+  },
+  "optimizer_success": true,
+  "fit_control_inliers": 2,
+  "fit_control_n": 3,
+  "auto_centroid_pairs": 9,
+  "auto_centroid_inliers": 0,
+  "building_proxy_polygons": 85,
+  "road_proxy_pixels": 53928,
+  "edge_samples": 2500,
+  "structure_cost_initial": 7.802527288570156,
+  "structure_cost_final": 7.2947561959298355,
+  "initialization_selected": "manual_fit_initial",
+  "osm": {
+    "url": "https://www.openstreetmap.org/api/0.6/map",
+    "bbox": [
+      0.10790277468240801,
+      52.206057151554624,
+      0.11583800761272427,
+      52.211803872804595
+    ],
+    "sha256": "c4a22d1218824a3ffb50380d0e1a5e4df6889368791f919466a9a8d7175a184c",
+    "fetched_at_utc": "2026-11-07T00:08:53Z",
+    "copyright": "\u00a9 OpenStreetMap contributors; ODbL",
+    "features": 513,
+    "incomplete_ways": 0,
+    "historical_alignment_warning": "Current OSM may differ from older CityNav scans; multipolygon relations not reconstructed in this pilot"
+  },
+  "warning": "RGB+height structural proxies, not semantic segmentation truth. No independent validation used for selection.",
+  "city": "cambridge",
+  "map_name": "cambridge_block_3",
+  "base_revision": 15,
+  "fit_metrics": {
+    "n": 3,
+    "mean_m": 17.855088365704745,
+    "rmse_m": 18.101626114584214,
+    "p95_m": 21.45251178040521,
+    "max_m": 22.0475988413338,
+    "errors": [
+      {
+        "id": "1794009274582-0.8033767944245869",
+        "split": "fit",
+        "map_name": "cambridge_block_3",
+        "error_m": 22.0475988413338
+      },
+      {
+        "id": "1794009296131-0.7337981063136475",
+        "split": "fit",
+        "map_name": "cambridge_block_3",
+        "error_m": 16.096728232047905
+      },
+      {
+        "id": "1794009305527-0.9268008445839571",
+        "split": "fit",
+        "map_name": "cambridge_block_3",
+        "error_m": 15.420938023732536
+      }
+    ]
+  },
+  "validation": null,
+  "manual_validation": null,
+  "status": "proposal",
+  "verified": false,
+  "created_at": 1794010260.0312526,
+  "per_map_validation": {},
+  "manual_modes": {
+    "similarity": {
+      "matrix": [
+        [
+          1.0293118972384572,
+          -0.017130368428247097,
+          544210.5878379298
+        ],
+        [
+          0.017130368428247097,
+          1.0293118972384572,
+          257402.2903211143
+        ]
+      ],
+      "inliers": 2,
+      "determinant": 1.0597764313191196,
+      "scales": [
+        1.0294544338236247,
+        1.0294544338236247
+      ],
+      "fit": {
+        "n": 3,
+        "mean_m": 4.163680125786468,
+        "rmse_m": 7.189231054785355,
+        "p95_m": 11.209263893765778,
+        "max_m": 12.452081407691875,
+        "errors": [
+          {
+            "id": "1794009274582-0.8033767944245869",
+            "split": "fit",
+            "map_name": "cambridge_block_3",
+            "error_m": 0.015052701236618629
+          },
+          {
+            "id": "1794009296131-0.7337981063136475",
+            "split": "fit",
+            "map_name": "cambridge_block_3",
+            "error_m": 0.023906268430910607
+          },
+          {
+            "id": "1794009305527-0.9268008445839571",
+            "split": "fit",
+            "map_name": "cambridge_block_3",
+            "error_m": 12.452081407691875
+          }
+        ]
+      },
+      "validation": null,
+      "inlier_ids": [
+        "1794009274582-0.8033767944245869",
+        "1794009296131-0.7337981063136475"
+      ]
+    },
+    "affine": {
+      "matrix": [
+        [
+          1.1969746895722047,
+          0.2446888903861635,
+          543779.1392876884
+        ],
+        [
+          -0.07107289369932093,
+          0.8915752390699903,
+          257629.26476810907
+        ]
+      ],
+      "inliers": 3,
+      "determinant": 1.0845837425118863,
+      "scales": [
+        1.231792059131922,
+        0.8804925591712474
+      ],
+      "fit": {
+        "n": 3,
+        "mean_m": 0.018547597703639365,
+        "rmse_m": 0.018942779502878714,
+        "p95_m": 0.023186233672024756,
+        "max_m": 0.023908745214053045,
+        "errors": [
+          {
+            "id": "1794009274582-0.8033767944245869",
+            "split": "fit",
+            "map_name": "cambridge_block_3",
+            "error_m": 0.0150504181030949
+          },
+          {
+            "id": "1794009296131-0.7337981063136475",
+            "split": "fit",
+            "map_name": "cambridge_block_3",
+            "error_m": 0.023908745214053045
+          },
+          {
+            "id": "1794009305527-0.9268008445839571",
+            "split": "fit",
+            "map_name": "cambridge_block_3",
+            "error_m": 0.016683629793770145
+          }
+        ]
+      },
+      "validation": null,
+      "inlier_ids": [
+        "1794009274582-0.8033767944245869",
+        "1794009296131-0.7337981063136475",
+        "1794009305527-0.9268008445839571"
+      ]
+    }
+  },
+  "road_junction_proxy_count": 249,
+  "control_snapshot_sha256": "a359b30fe7c64f460d060c302110d7b54f5092ddc53736867692e949e61cc67d",
+  "control_identity_order": [
+    {
+      "index": 1,
+      "id": "1794009274582-0.8033767944245869",
+      "map_name": "cambridge_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 2,
+      "id": "1794009296131-0.7337981063136475",
+      "map_name": "cambridge_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 3,
+      "id": "1794009305527-0.9268008445839571",
+      "map_name": "cambridge_block_3",
+      "split": "fit"
+    }
+  ],
+  "fit_control_inlier_ids": [
+    "1794009274582-0.8033767944245869",
+    "1794009296131-0.7337981063136475"
+  ]
+}

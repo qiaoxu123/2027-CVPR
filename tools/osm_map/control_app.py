@@ -12,7 +12,7 @@ from tools.osm_map.app import create_app
 from tools.osm_map.registration import fit_controls
 
 def build(data,overlays,store,user,password):
-    if not user or len(password)<16:raise ValueError('Set MAP_REVIEW_USER/PASSWORD (>=16 chars)')
+    if not user or len(password)<12:raise ValueError('Set MAP_REVIEW_USER/PASSWORD (>=12 chars)')
     app=create_app(data,overlays);store=Path(store);store.mkdir(parents=True,exist_ok=True);os.chmod(store,0o700)
     import base64
     token=base64.b64encode((user+':'+password).encode()).decode()
@@ -76,13 +76,13 @@ def build(data,overlays,store,user,password):
     @app.get('/api/project-corners/{city}/{name}')
     def corners(city:str,name:str):
         import rasterio
-        reg=read(city).get('registration') or {}
+        record=read(city);reg=record.get('active_registration') or record.get('registration') or {}
         if 'matrix' not in reg:raise HTTPException(400,'尚无变换')
         if not name.startswith(city+'_block_') or '/' in name:raise HTTPException(400)
         p=Path(data)/'rgbd'/(name+'.tif')
         if not p.exists():raise HTTPException(404)
         with rasterio.open(p) as r:b=r.bounds
-        xy=np.array([[b.left,b.top],[b.right,b.top],[b.right,b.bottom],[b.left,b.bottom]]);M=np.array(reg['matrix']);en=xy@M[:,:2].T+M[:,2];lon,lat=transform('EPSG:27700','EPSG:4326',en[:,0],en[:,1]);return dict(corners=list(zip(lat,lon)),verified=reg.get('verified',False))
+        xy=np.array([[b.left,b.top],[b.right,b.top],[b.right,b.bottom],[b.left,b.bottom]]);M=np.array(reg['matrix']);en=xy@M[:,:2].T+M[:,2];lon,lat=transform('EPSG:27700','EPSG:4326',en[:,0],en[:,1]);return dict(corners=list(zip(lat,lon)),verified=bool(reg.get('verified',False) and name in reg.get('per_map_validation',{})))
     session=requests.Session();proxy=os.environ.get('OSM_HTTP_PROXY');session.proxies={'http':proxy,'https':proxy} if proxy else {};session.headers['User-Agent']='CityNavManualControlPoint/1.0 (+https://github.com/qiaoxu123/2027-CVPR)'
     session.headers['Referer']=os.environ.get('CONTROL_PUBLIC_URL','http://101.43.173.9:42024/')
     @lru_cache(maxsize=512)
@@ -105,6 +105,62 @@ def build(data,overlays,store,user,password):
         try:
             r=session.get('https://nominatim.openstreetmap.org/search',params=dict(q=q,format='json',limit=5),timeout=20);r.raise_for_status();return r.json()
         except requests.RequestException:raise HTTPException(502,'搜索暂不可用，可直接拖动OSM')
+    # Experimental structural proposals are separate from manual controls.
+    from concurrent.futures import ThreadPoolExecutor
+    from tools.osm_map.auto_registration import run_job
+    import re
+    executor=ThreadPoolExecutor(max_workers=1);running={}
+    def auto_dir(city,name):
+        path(city)
+        if not re.fullmatch(city+r'_block_\d+',name) or not (Path(data)/'rgbd'/(name+'.tif')).is_file():raise HTTPException(404)
+        d=store/'auto_proposals'/name;d.mkdir(parents=True,exist_ok=True);return d
+    def auto_summary(d):
+        result=d/'result.json'
+        if result.exists():
+            obj=json.loads(result.read_text());return {k:v for k,v in obj.items() if k not in ['source_polygons','osm_features']}
+        status=d/'status.json';return json.loads(status.read_text()) if status.exists() else dict(status='not_started')
+    @app.get('/api/auto/{city}/{name}')
+    def auto_get(city:str,name:str):return auto_summary(auto_dir(city,name))
+    @app.get('/api/auto/{city}/{name}/image')
+    def auto_image(city:str,name:str):
+        p=auto_dir(city,name)/'alignment.png'
+        if not p.exists():raise HTTPException(404)
+        return FileResponse(p,media_type='image/png')
+    @app.post('/api/auto/{city}/{name}/start')
+    def auto_start(city:str,name:str):
+        d=auto_dir(city,name);key=name
+        if key in running and not running[key].done():raise HTTPException(409,'自动配准正在运行')
+        snapshot=read(city)
+        if len([p for p in snapshot['points'] if p['split']=='fit'])<3:raise HTTPException(400,'至少需要3个已有拟合点作为初始约束')
+        if (d/'result.json').exists():
+            archive=d/('result-'+str(int(time.time()))+'.json');os.replace(d/'result.json',archive)
+        atomic(d/'controls_snapshot.json',snapshot);atomic(d/'status.json',dict(status='running',base_revision=snapshot['revision']))
+        def work():
+            try:run_job(data,city,name,snapshot,d,os.environ.get('OSM_HTTP_PROXY'));atomic(d/'status.json',dict(status='proposal'))
+            except Exception as e:atomic(d/'status.json',dict(status='failed',error=str(e)[:500]))
+        running[key]=executor.submit(work);return dict(status='running',base_revision=snapshot['revision'])
+    @app.post('/api/auto/{city}/{name}/accept')
+    def auto_accept(city:str,name:str):
+        d=auto_dir(city,name);r=auto_summary(d)
+        if 'matrix' not in r or r.get('status')=='rejected':raise HTTPException(400,'无可接受候选')
+        with (store/(city+'.lock')).open('a') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX);current=read(city)
+            if current['revision']!=r['base_revision']:raise HTTPException(409,'控制点已变化，请重新运行自动配准')
+            atomic(store/(city+f'.history-{current["revision"]}.json'),current)
+            # Accept preview only; verification remains false without independent evidence.
+            current['active_registration']=r;current['revision']+=1;atomic(path(city),current)
+            full=json.loads((d/'result.json').read_text());full['status']='accepted';atomic(d/'result.json',full)
+        return dict(status='accepted',verified=r.get('verified',False),revision=current['revision'])
+    @app.post('/api/auto/{city}/{name}/reject')
+    def auto_reject(city:str,name:str):
+        d=auto_dir(city,name)
+        if not (d/'result.json').exists():raise HTTPException(400,'无候选')
+        r=json.loads((d/'result.json').read_text());r['status']='rejected';atomic(d/'result.json',r)
+        with (store/(city+'.lock')).open('a') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX);current=read(city);active=current.get('active_registration',{})
+            if active.get('map_name')==name and active.get('base_revision')==r.get('base_revision'):
+                atomic(store/(city+f'.history-{current["revision"]}.json'),current);current.pop('active_registration',None);current['revision']+=1;atomic(path(city),current)
+        return dict(status='rejected',revision=current['revision'])
     return app
 if __name__=='__main__':
     import uvicorn

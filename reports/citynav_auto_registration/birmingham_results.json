@@ -1,0 +1,631 @@
+{
+  "matrix": [
+    [
+      1.003802614866894,
+      3.7798438824295586e-05,
+      406259.14242494147
+    ],
+    [
+      -3.779843882429417e-05,
+      1.0038026148668937,
+      290358.2305206438
+    ]
+  ],
+  "initial_matrix": [
+    [
+      0.9825938316789192,
+      0.008626270311840087,
+      406269.1252010059
+    ],
+    [
+      -0.008626270311840087,
+      0.9825938316789192,
+      290365.77436654747
+    ]
+  ],
+  "config": {
+    "seed": 42,
+    "ransac_m": 3,
+    "max_initial_match_m": 25,
+    "resolution_m": 1,
+    "robust_scale_m": 3,
+    "max_distance_m": 20,
+    "translation_bound_m": 20,
+    "rotation_bound_rad": 0.07,
+    "logscale_bound": 0.06,
+    "max_nfev": 200,
+    "version": "structural-proxy-v1"
+  },
+  "optimizer_success": true,
+  "fit_control_inliers": 4,
+  "fit_control_n": 10,
+  "auto_centroid_pairs": 27,
+  "auto_centroid_inliers": 5,
+  "building_proxy_polygons": 56,
+  "road_proxy_pixels": 236973,
+  "edge_samples": 2500,
+  "structure_cost_initial": 4.449196168215017,
+  "structure_cost_final": 3.8410574112062656,
+  "initialization_selected": "manual_fit_initial",
+  "osm": {
+    "url": "https://www.openstreetmap.org/api/0.6/map",
+    "bbox": [
+      -1.904266164608465,
+      52.51007603970199,
+      -1.8964159887632772,
+      52.51564524618807
+    ],
+    "sha256": "5928127d80eed58bb7feb411cbebac09d0121712c57cb96f1b1a824d93d0283e",
+    "fetched_at_utc": "2026-11-07T00:09:13Z",
+    "copyright": "\u00a9 OpenStreetMap contributors; ODbL",
+    "features": 479,
+    "incomplete_ways": 0,
+    "historical_alignment_warning": "Current OSM may differ from older CityNav scans; multipolygon relations not reconstructed in this pilot"
+  },
+  "warning": "RGB+height structural proxies, not semantic segmentation truth. No independent validation used for selection.",
+  "city": "birmingham",
+  "map_name": "birmingham_block_3",
+  "base_revision": 29,
+  "fit_metrics": {
+    "n": 10,
+    "mean_m": 7.029835806231756,
+    "rmse_m": 10.886803649773423,
+    "p95_m": 22.28452293876974,
+    "max_m": 29.87739976166734,
+    "errors": [
+      {
+        "id": "1794009501875-0.7937434231599737",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 6.011059708527519
+      },
+      {
+        "id": "1794009506992-0.07572694251508338",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 1.9695021423552757
+      },
+      {
+        "id": "1794009512477-0.884853188706471",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 6.20719616191312
+      },
+      {
+        "id": "1794009552399-0.4468773697776045",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 2.2854333377788603
+      },
+      {
+        "id": "1794009559977-0.16213491547646774",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 2.460570666075551
+      },
+      {
+        "id": "1794009595560-0.6713422703916571",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 5.1421001867356555
+      },
+      {
+        "id": "1794009600398-0.7601881938295318",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 0.7723626625711558
+      },
+      {
+        "id": "1794009608911-0.4477290143744329",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 13.004340155228268
+      },
+      {
+        "id": "1794009620321-0.5454262300498333",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 2.568393279464819
+      },
+      {
+        "id": "1794009637605-0.8121343039705082",
+        "split": "fit",
+        "map_name": "birmingham_block_3",
+        "error_m": 29.87739976166734
+      }
+    ]
+  },
+  "validation": {
+    "n": 5,
+    "mean_m": 1.9725875092504626,
+    "rmse_m": 2.2368686234636295,
+    "p95_m": 3.438693491061249,
+    "max_m": 3.7354277404730736,
+    "errors": [
+      {
+        "id": "1794009757165-0.6806345727590437",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 2.251756493413953
+      },
+      {
+        "id": "1794009779833-0.9378623785194115",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 3.7354277404730736
+      },
+      {
+        "id": "1794009785900-0.6351078713349468",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 1.3295717230192394
+      },
+      {
+        "id": "1794009793211-0.6081052368446033",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 0.5713796099118159
+      },
+      {
+        "id": "1794009798875-0.9435799350339915",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 1.974801979434232
+      }
+    ]
+  },
+  "manual_validation": {
+    "n": 5,
+    "mean_m": 3.5534690818853134,
+    "rmse_m": 4.17303840001697,
+    "p95_m": 6.266759061010192,
+    "max_m": 6.406059257158546,
+    "errors": [
+      {
+        "id": "1794009757165-0.6806345727590437",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 6.406059257158546
+      },
+      {
+        "id": "1794009779833-0.9378623785194115",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 5.709558276416778
+      },
+      {
+        "id": "1794009785900-0.6351078713349468",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 1.7591779008571895
+      },
+      {
+        "id": "1794009793211-0.6081052368446033",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 0.7707076816234896
+      },
+      {
+        "id": "1794009798875-0.9435799350339915",
+        "split": "validation",
+        "map_name": "birmingham_block_3",
+        "error_m": 3.1218422933705647
+      }
+    ]
+  },
+  "status": "proposal",
+  "verified": true,
+  "created_at": 1794010259.9090874,
+  "per_map_validation": {
+    "birmingham_block_3": {
+      "n": 5,
+      "mean_m": 1.9725875092504626,
+      "rmse_m": 2.2368686234636295,
+      "p95_m": 3.438693491061249,
+      "max_m": 3.7354277404730736,
+      "errors": [
+        {
+          "id": "1794009757165-0.6806345727590437",
+          "split": "validation",
+          "map_name": "birmingham_block_3",
+          "error_m": 2.251756493413953
+        },
+        {
+          "id": "1794009779833-0.9378623785194115",
+          "split": "validation",
+          "map_name": "birmingham_block_3",
+          "error_m": 3.7354277404730736
+        },
+        {
+          "id": "1794009785900-0.6351078713349468",
+          "split": "validation",
+          "map_name": "birmingham_block_3",
+          "error_m": 1.3295717230192394
+        },
+        {
+          "id": "1794009793211-0.6081052368446033",
+          "split": "validation",
+          "map_name": "birmingham_block_3",
+          "error_m": 0.5713796099118159
+        },
+        {
+          "id": "1794009798875-0.9435799350339915",
+          "split": "validation",
+          "map_name": "birmingham_block_3",
+          "error_m": 1.974801979434232
+        }
+      ]
+    }
+  },
+  "manual_modes": {
+    "similarity": {
+      "matrix": [
+        [
+          0.9825938316789192,
+          0.008626270311840087,
+          406269.1252010059
+        ],
+        [
+          -0.008626270311840087,
+          0.9825938316789192,
+          290365.77436654747
+        ]
+      ],
+      "inliers": 4,
+      "determinant": 0.9655650505929532,
+      "scales": [
+        0.9826316963099415,
+        0.9826316963099415
+      ],
+      "fit": {
+        "n": 10,
+        "mean_m": 7.882016344514983,
+        "rmse_m": 12.025286995182775,
+        "p95_m": 22.745868820266267,
+        "max_m": 32.60569363669254,
+        "errors": [
+          {
+            "id": "1794009501875-0.7937434231599737",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 10.063733946104113
+          },
+          {
+            "id": "1794009506992-0.07572694251508338",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 1.5135176721360788
+          },
+          {
+            "id": "1794009512477-0.884853188706471",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 6.949625658922
+          },
+          {
+            "id": "1794009552399-0.4468773697776045",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 1.3503588507317572
+          },
+          {
+            "id": "1794009559977-0.16213491547646774",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 0.6668974077852797
+          },
+          {
+            "id": "1794009595560-0.6713422703916571",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 0.6486368550633331
+          },
+          {
+            "id": "1794009600398-0.7601881938295318",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 4.778169137976176
+          },
+          {
+            "id": "1794009608911-0.4477290143744329",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 10.69497182241198
+          },
+          {
+            "id": "1794009620321-0.5454262300498333",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 9.548558457326575
+          },
+          {
+            "id": "1794009637605-0.8121343039705082",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 32.60569363669254
+          }
+        ]
+      },
+      "validation": {
+        "n": 5,
+        "mean_m": 3.5534690818853134,
+        "rmse_m": 4.17303840001697,
+        "p95_m": 6.266759061010192,
+        "max_m": 6.406059257158546,
+        "errors": [
+          {
+            "id": "1794009757165-0.6806345727590437",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 6.406059257158546
+          },
+          {
+            "id": "1794009779833-0.9378623785194115",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 5.709558276416778
+          },
+          {
+            "id": "1794009785900-0.6351078713349468",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 1.7591779008571895
+          },
+          {
+            "id": "1794009793211-0.6081052368446033",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 0.7707076816234896
+          },
+          {
+            "id": "1794009798875-0.9435799350339915",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 3.1218422933705647
+          }
+        ]
+      },
+      "inlier_ids": [
+        "1794009506992-0.07572694251508338",
+        "1794009552399-0.4468773697776045",
+        "1794009559977-0.16213491547646774",
+        "1794009595560-0.6713422703916571"
+      ]
+    },
+    "affine": {
+      "matrix": [
+        [
+          1.092386185263312,
+          0.09520410763911724,
+          406190.0145751311
+        ],
+        [
+          -0.02565394097084183,
+          0.9767814522441157,
+          290376.73795024306
+        ]
+      ],
+      "inliers": 5,
+      "determinant": 1.0694649250104633,
+      "scales": [
+        1.1038039170335352,
+        0.9688903151246667
+      ],
+      "fit": {
+        "n": 10,
+        "mean_m": 10.739832703871253,
+        "rmse_m": 15.836964583336055,
+        "p95_m": 31.018458763466086,
+        "max_m": 32.03837164214645,
+        "errors": [
+          {
+            "id": "1794009501875-0.7937434231599737",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 16.936562330909144
+          },
+          {
+            "id": "1794009506992-0.07572694251508338",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 0.47207390571454944
+          },
+          {
+            "id": "1794009512477-0.884853188706471",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 9.502214298281302
+          },
+          {
+            "id": "1794009552399-0.4468773697776045",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 14.556548213340431
+          },
+          {
+            "id": "1794009559977-0.16213491547646774",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 0.39308700795710483
+          },
+          {
+            "id": "1794009595560-0.6713422703916571",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 1.470289666804842
+          },
+          {
+            "id": "1794009600398-0.7601881938295318",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 1.8876437039157585
+          },
+          {
+            "id": "1794009608911-0.4477290143744329",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 29.77189857841231
+          },
+          {
+            "id": "1794009620321-0.5454262300498333",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 32.03837164214645
+          },
+          {
+            "id": "1794009637605-0.8121343039705082",
+            "split": "fit",
+            "map_name": "birmingham_block_3",
+            "error_m": 0.3696376912306229
+          }
+        ]
+      },
+      "validation": {
+        "n": 5,
+        "mean_m": 8.592488357649543,
+        "rmse_m": 8.855471874087295,
+        "p95_m": 11.038786129003851,
+        "max_m": 11.282950622598477,
+        "errors": [
+          {
+            "id": "1794009757165-0.6806345727590437",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 11.282950622598477
+          },
+          {
+            "id": "1794009779833-0.9378623785194115",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 5.213267044014727
+          },
+          {
+            "id": "1794009785900-0.6351078713349468",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 10.062128154625347
+          },
+          {
+            "id": "1794009793211-0.6081052368446033",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 9.156033646924927
+          },
+          {
+            "id": "1794009798875-0.9435799350339915",
+            "split": "validation",
+            "map_name": "birmingham_block_3",
+            "error_m": 7.248062320084241
+          }
+        ]
+      },
+      "inlier_ids": [
+        "1794009506992-0.07572694251508338",
+        "1794009559977-0.16213491547646774",
+        "1794009595560-0.6713422703916571",
+        "1794009600398-0.7601881938295318",
+        "1794009637605-0.8121343039705082"
+      ]
+    }
+  },
+  "road_junction_proxy_count": 1049,
+  "control_snapshot_sha256": "be238657184f75cee48dac88d9f47714ce0e0fd1f645dba4d384a27486e3c56a",
+  "control_identity_order": [
+    {
+      "index": 1,
+      "id": "1794009501875-0.7937434231599737",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 2,
+      "id": "1794009506992-0.07572694251508338",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 3,
+      "id": "1794009512477-0.884853188706471",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 4,
+      "id": "1794009552399-0.4468773697776045",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 5,
+      "id": "1794009559977-0.16213491547646774",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 6,
+      "id": "1794009595560-0.6713422703916571",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 7,
+      "id": "1794009600398-0.7601881938295318",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 8,
+      "id": "1794009608911-0.4477290143744329",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 9,
+      "id": "1794009620321-0.5454262300498333",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 10,
+      "id": "1794009637605-0.8121343039705082",
+      "map_name": "birmingham_block_3",
+      "split": "fit"
+    },
+    {
+      "index": 11,
+      "id": "1794009757165-0.6806345727590437",
+      "map_name": "birmingham_block_3",
+      "split": "validation"
+    },
+    {
+      "index": 12,
+      "id": "1794009779833-0.9378623785194115",
+      "map_name": "birmingham_block_3",
+      "split": "validation"
+    },
+    {
+      "index": 13,
+      "id": "1794009785900-0.6351078713349468",
+      "map_name": "birmingham_block_3",
+      "split": "validation"
+    },
+    {
+      "index": 14,
+      "id": "1794009793211-0.6081052368446033",
+      "map_name": "birmingham_block_3",
+      "split": "validation"
+    },
+    {
+      "index": 15,
+      "id": "1794009798875-0.9435799350339915",
+      "map_name": "birmingham_block_3",
+      "split": "validation"
+    }
+  ],
+  "fit_control_inlier_ids": [
+    "1794009506992-0.07572694251508338",
+    "1794009552399-0.4468773697776045",
+    "1794009559977-0.16213491547646774",
+    "1794009595560-0.6713422703916571"
+  ]
+}
