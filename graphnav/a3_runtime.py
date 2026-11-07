@@ -103,7 +103,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             raise ValueError('geometry/pose runtime only accepts matching zero visual-history inputs')
         if not 0<stop_threshold<1:raise ValueError('Stop threshold must be in (0,1)')
         self.stop_threshold=stop_threshold
-        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct','ranked-guarded-blend'):
+        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct','ranked-guarded-blend','rank-score-guarded-blend'):
             raise ValueError('unknown trajectory execution ablation')
         self.execution=execution
         if not 0<=explore_candidates<=8:raise ValueError('bounded exploration candidates must be between0 and8')
@@ -147,6 +147,18 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
             from .trajectory_policy import convergent_first_waypoint
             waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal[:,0],waypoint,blend=.25)
+        elif self.execution=='rank-score-guarded-blend':
+            # Candidate score alone chooses the Goal; the selected candidate's
+            # best conditional mode supplies its path and Stop prediction.
+            if self.selected_goal_slot is None:
+                self.selected_goal_slot=int(output.candidate_logits[0].argmax())
+            candidate=torch.tensor([self.selected_goal_slot],dtype=torch.long,device=self.device)
+            mode=output.mode_logits[:,candidate[0]].argmax(-1)
+            waypoint=output.paths_world[torch.arange(1,device=self.device),candidate,mode,0]
+            stop=output.stop_logits[:,candidate[0]]
+            goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
+            from .trajectory_policy import convergent_first_waypoint
+            waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal[:,0],waypoint,blend=.25)
         elif self.execution!='joint':
             limit=min(getattr(self,'explore_candidates',0),field.candidate_ids.shape[1])
             available=[i for i in range(limit) if int(field.candidate_ids[0,i]) not in self.visited_goal_cells] if limit else [0]
@@ -169,7 +181,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
                     if position+1<len(available):continue
                 break
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
-        guarded=self.execution.startswith('guarded-') or self.execution=='ranked-guarded-blend'
+        guarded=self.execution.startswith('guarded-') or self.execution in ('ranked-guarded-blend','rank-score-guarded-blend')
         predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if guarded else None
         arrival_guard=predicted_goal_distance is None or predicted_goal_distance<=1e-3
         height=float(state.pose[2])-GROUND_LEVEL[self.record['map_name']]

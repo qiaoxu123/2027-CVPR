@@ -37,9 +37,11 @@ def main():
         "legacy-queries", "expanded-queries", "output",
     ):
         p.add_argument("--" + name, type=Path, required=True)
+    p.add_argument("--candidate-head-checkpoint", type=Path,
+                   help="Optional TRAIN-adapted frozen candidate head; requires --candidate-selection ranked-once")
     p.add_argument("--smoke", type=int, default=0, help="Run the first N episodes only")
-    p.add_argument("--candidate-selection", choices=("geometry-top1", "ranked-once"), default="geometry-top1",
-                   help="Use Geometry slot 0, or use the frozen learned rank head once and hold its Goal for the episode")
+    p.add_argument("--candidate-selection", choices=("geometry-top1", "ranked-once", "rank-score-once"), default="geometry-top1",
+                   help="Use Geometry slot 0, joint rank/mode selection once, or candidate-score-only selection once")
     p.add_argument("--arms", nargs="+", choices=("legacy", "expanded"), default=("legacy", "expanded"))
     p.add_argument("--resume", action="store_true")
     a = p.parse_args()
@@ -58,6 +60,8 @@ def main():
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
     torch.set_float32_matmul_precision("highest")
+    if a.candidate_head_checkpoint and a.candidate_selection not in ("ranked-once", "rank-score-once"):
+        raise ValueError("--candidate-head-checkpoint requires a ranked candidate-selection mode")
 
     config = apply_overrides(load_config(a.config), ["data.root=" + str(a.data)])
     validate_config(config)
@@ -103,7 +107,8 @@ def main():
             "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache",
         },
         "candidate_selection": a.candidate_selection,
-        "controller": f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {'ranked-once guarded-blend' if a.candidate_selection == 'ranked-once' else 'Geometry slot-0 guarded-blend'}; no exploration",
+        "candidate_head_checkpoint_sha256": file_sha256(a.candidate_head_checkpoint) if a.candidate_head_checkpoint else None,
+        "controller": f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {a.candidate_selection}; guarded-blend; no exploration",
         "visual_fusion": False, "OSM": False, "GT_access": "Scoring only after rollout",
         "runner_sha256": file_sha256(Path(__file__)),
         "source_sha256": {
@@ -151,8 +156,18 @@ def main():
         )
         if a.candidate_selection == "ranked-once":
             runtime.execution = "ranked-guarded-blend"
+        elif a.candidate_selection == "rank-score-once":
+            runtime.execution = "rank-score-guarded-blend"
+        if a.candidate_head_checkpoint:
+            candidate_head = torch.load(a.candidate_head_checkpoint, map_location="cpu", weights_only=True)
+            if candidate_head.get("geometry_sha256") != file_sha256(a.trained_v2):
+                raise ValueError("Candidate head was trained for a different V2 Geometry checkpoint")
+            if int(candidate_head.get("hidden", -1)) != int(runtime.args.hidden):
+                raise ValueError("Candidate head hidden size differs from current V2")
+            runtime.head.load_state_dict(candidate_head["model"], strict=True)
         if (runtime.stop_threshold, runtime.execution, runtime.explore_candidates) != (
-            .3, "ranked-guarded-blend" if a.candidate_selection == "ranked-once" else "guarded-blend", 0,
+            .3, ("ranked-guarded-blend" if a.candidate_selection == "ranked-once" else
+                 "rank-score-guarded-blend" if a.candidate_selection == "rank-score-once" else "guarded-blend"), 0,
         ):
             raise ValueError("Controller execution differs from original frozen protocol")
         new_count = 0
