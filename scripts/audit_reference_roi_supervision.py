@@ -35,6 +35,18 @@ def select_groups(labels, split, count):
     return sorted(int(rng.choice(groups[group])) for group in selected)
 
 
+def reference_observation(env, map_name, pose, ground, centers):
+    if not np.isfinite(pose).all() or pose[2] <= ground:
+        return None, None, 'invalid_or_nonpositive_reference_altitude'
+    try:
+        obs, rois = env.current(map_name, pose, ground, centers)
+    except ValueError as error:
+        if str(error) != 'degenerate camera footprint':
+            raise
+        return None, None, 'degenerate_camera_footprint'
+    return obs, rois, None
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for key in ('data', 'cache', 'data-root', 'sbf-source', 'output'):
@@ -73,10 +85,11 @@ def main():
         for name, step in reference_indices(episode.trajectory):
             pose = episode.trajectory[step].copy()
             frame = dict(phase=name, step=step, pose=pose.tolist(), unknown_reason=None)
-            if not np.isfinite(pose).all() or pose[2] <= GROUND_LEVEL[episode.map_name]:
-                frame['unknown_reason'] = 'invalid_or_nonpositive_reference_altitude'
+            obs, rois, reason = reference_observation(env, episode.map_name, pose,
+                                                       GROUND_LEVEL[episode.map_name], centers)
+            if reason is not None:
+                frame['unknown_reason'] = reason
                 frames.append(frame); continue
-            obs, rois = env.current(episode.map_name, pose, GROUND_LEVEL[episode.map_name], centers)
             valid = np.zeros((len(centers), 2), dtype=bool)
             for roi in rois:
                 valid[roi['candidate'], roi['scale']] = roi['valid']
