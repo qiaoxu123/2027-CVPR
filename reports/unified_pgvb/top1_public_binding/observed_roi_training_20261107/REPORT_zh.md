@@ -11,3 +11,5 @@
 缓存依赖的observed_candidate_rois.py沿用工作区原文件内容，纳入版本控制以保证入口可复现，未修改其实现。
 
 新增完整TRAIN开发/确认评价入口evaluate_observed_roi_matcher.py：所有任务进入分母，原Top1无合法图像或不足两个支持候选时回退原Top1。比较Geometry、训练RGB及同任务打乱RGB，报告R20/NE/纠正/破坏/切换数。选择与打乱完成后才读取目标用于评分；20m位置命中不解释为实例身份正确。该入口已通过语法检查，待缓存及训练完成后实际执行。confirmation尚未使用。
+
+真实ROI特征GPU数值Smoke已通过：未读取目标标签，以临时合成slot标签只检查两次优化的数值通路；不保存模型、不计训练效果。264321个可训练参数均有梯度，梯度范数0.5213，参数有限。未启用的scale_quality层已冻结，不冒充参与训练。实际TRAIN监督Smoke仍等待完整缓存。详见numerical_GPU_smoke.json。

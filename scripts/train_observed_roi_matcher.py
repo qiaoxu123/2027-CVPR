@@ -43,7 +43,7 @@ def main():
  if any(groups[x]&groups[y] for x,y in [('fit','development'),('fit','confirmation'),('development','confirmation')]):raise ValueError('Physical target leakage across splits')
  fit=load_rows(a.cache,labels,'fit');dev=load_rows(a.cache,labels,'development')
  if not fit or not dev:raise ValueError('No supported positive/negative fit or development rows')
- model=MultiScaleAppearanceMatcher().to(device);optimizer=torch.optim.AdamW(model.parameters(),lr=1e-4);history=[];best=-1
+ model=MultiScaleAppearanceMatcher().to(device);model.scale_quality.requires_grad_(False);optimizer=torch.optim.AdamW(model.parameters(),lr=1e-4);history=[];best=-1
  fingerprint=dict(cache_manifest=file_sha256(a.cache/'manifest.json'),labels=file_sha256(a.labels),script=file_sha256(__file__))
  baseline=evaluate(model,dev,device);start_epoch=0
  if a.resume:
@@ -58,7 +58,7 @@ def main():
    if not torch.isfinite(loss):raise FloatingPointError('nonfinite loss')
    loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True);
    if not any(p.grad is not None and bool(p.grad.abs().sum()>0) for p in model.parameters()):raise RuntimeError('Zero matcher gradient')
-   optimizer.step();losses.append(float(loss))
+   optimizer.step();losses.append(float(loss.detach()))
   model.eval();metrics=evaluate(model,dev,device);history.append(dict(epoch=epoch+1,loss=float(np.mean(losses)),development=metrics));payload=dict(model=model.state_dict(),optimizer=optimizer.state_dict(),epoch=epoch+1,history=history,seed=42,fingerprint=fingerprint,baseline=baseline,python_rng=random.getstate(),torch_rng=torch.get_rng_state(),cuda_rng=torch.cuda.get_rng_state_all(),scope='weak 20m location proxy; 20-40m ignored; current384 real start observations')
   atomic_save(payload,a.output/'last.pt')
   if metrics['accuracy']>best:best=metrics['accuracy'];atomic_save(payload,a.output/'best.pt')
