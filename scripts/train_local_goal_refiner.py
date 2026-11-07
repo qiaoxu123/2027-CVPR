@@ -5,7 +5,7 @@ import numpy as np,torch
 from torch import nn
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();torch.manual_seed(42);torch.set_num_threads(4);a.output.mkdir(parents=True,exist_ok=True)
+ p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--objective',choices=['ce','coordinate'],default='ce');a=p.parse_args();torch.manual_seed(42);torch.set_num_threads(4);a.output.mkdir(parents=True,exist_ok=True)
  labels=json.loads(a.labels.read_text());data={}
  for split in ['fit','development']:
   values=[]
@@ -25,10 +25,12 @@ def main():
   losses=[];d=data['fit']
   for ids in torch.randperm(len(d[0]),device='cuda').split(128):
    opt.zero_grad();logits,prob,pred=forward(d,ids);f,base,mask,xy,target,support=[v[ids] for v in d];distance=(xy-target[:,None]).square().sum(-1);teacher=(-distance/200).masked_fill(~mask.bool(),-1e4).softmax(-1);original=base.softmax(-1);teacher=torch.where(support[:,None].bool(),teacher,original);ce=-(teacher*logits.log_softmax(-1)).sum(-1).mean();fidelity=(original*(original.clamp_min(1e-8).log()-logits.log_softmax(-1))).sum(-1).mean();loss=ce+.2*fidelity
+   if a.objective=='coordinate':
+    baseline_xy=(original[:,:,None]*xy).sum(1);preserve=((baseline_xy-target).norm(dim=-1)<=20)|(~support.bool());coordinate_target=torch.where(preserve[:,None],baseline_xy,target);loss=torch.nn.functional.smooth_l1_loss(pred/20,coordinate_target/20)+.2*fidelity
    if not torch.isfinite(loss):raise FloatingPointError('Loss')
    loss.backward();grad=torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True);opt.step();losses.append(float(loss.detach()))
   metrics=evaluate();history.append(dict(epoch=epoch+1,loss=float(np.mean(losses)),metrics=metrics));torch.save(dict(model=model.state_dict(),optimizer=opt.state_dict(),epoch=epoch+1,metrics=metrics),a.output/'last.pt')
   if metrics['R20']>best:best=metrics['R20'];torch.save(dict(model=model.state_dict(),epoch=epoch+1,metrics=metrics),a.output/'best.pt')
   print(json.dumps(history[-1]),flush=True)
- (a.output/'summary.json').write_text(json.dumps(dict(seed=42,baseline=baseline,history=history,fit_n=len(data['fit'][0]),scope='Frozen Geometry public local features; GT loss/scoring only; confirmation untouched'),indent=2)+'\n')
+ (a.output/'summary.json').write_text(json.dumps(dict(seed=42,objective=a.objective,baseline=baseline,history=history,fit_n=len(data['fit'][0]),scope='Frozen Geometry public local features; GT loss/scoring only; confirmation untouched'),indent=2)+'\n')
 if __name__=='__main__':main()
