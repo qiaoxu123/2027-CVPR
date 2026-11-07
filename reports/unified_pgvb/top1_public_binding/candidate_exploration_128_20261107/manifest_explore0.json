@@ -1,0 +1,45 @@
+{
+  "split": "val_seen",
+  "expected_per_arm": 128,
+  "full_split_size": 2470,
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "seed": 42,
+  "precision": "FP32; TF32 disabled",
+  "geometry_checkpoint_sha256": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+  "geometry_source_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "controller_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "legacy_queries_sha256": "4b87a86b4c281bf03a76705e67259309c3a87b1c301cafca6588f641cfb50fa7",
+  "expanded_queries_sha256": "9c959421dd7f94eb292385b240e80d44c36a6973a6eca16a472fffd34b20c382",
+  "annotations_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "bindings": {
+    "legacy": "Existing exact public-name matcher/query cache",
+    "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache"
+  },
+  "candidate_selection": "geometry-top1",
+  "explore_candidates": 0,
+  "trajectory_execution": "guarded-blend",
+  "candidate_head_checkpoint_sha256": null,
+  "controller": "Original GraphNav Stage1 trajectory/stop weights; threshold .3; geometry-top1; trajectory=guarded-blend; spatial candidate exploration=0 with 20m de-duplication",
+  "visual_fusion": false,
+  "OSM": false,
+  "GT_access": "Scoring only after rollout",
+  "runner_sha256": "122703feee0e28985545b7b0c36745038bebd3b0b67718bf52064807c4021d95",
+  "source_sha256": {
+    "closedloop": "d09a490a8874307b4335cfa341395ada617a80309d8e973ab3dea3c033b11c05",
+    "a3_runtime": "310f2771b29f5ac2e98301d4f85edda473eb9e2a3d2e3b803ad7bec5f09100d7",
+    "candidate_geometry": "046f9e8cd78462145ce37989419c0412551c7d32e7b89e0ff36b4f83216879c2",
+    "renderer": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747"
+  },
+  "manifest_note": "Controller description normalized in committed report copy; structured CLI configuration and runner arguments are authoritative."
+}

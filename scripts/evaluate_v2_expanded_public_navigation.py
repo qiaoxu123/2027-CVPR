@@ -21,6 +21,13 @@ from graphnav.closedloop import (
 from scripts.evaluate_v2_public_navigation import FrozenV2GeometryPolicy
 
 
+def validate_exploration_args(explore_candidates, candidate_selection):
+    if not 0 <= explore_candidates <= 8:
+        raise ValueError("--explore-candidates must be between 0 and 8")
+    if explore_candidates and candidate_selection != "geometry-top1":
+        raise ValueError("candidate exploration is only defined for geometry-top1 selection")
+
+
 def load_jsonl(path):
     rows = [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
     if len(rows) != 2470:
@@ -45,9 +52,13 @@ def main():
     p.add_argument("--trajectory-execution", choices=("guarded-blend", "guarded-direct", "guarded-path"),
                    default="guarded-blend",
                    help="For Geometry slot-0 selection, use the original blended path, direct-to-goal waypoint, or full predicted path waypoint")
+    p.add_argument("--explore-candidates", type=int, default=0,
+                   help="After reaching a Geometry candidate without a Stop decision, try the next ranked candidate (0 disables)")
     p.add_argument("--arms", nargs="+", choices=("legacy", "expanded"), default=("legacy", "expanded"))
     p.add_argument("--resume", action="store_true")
     a = p.parse_args()
+
+    validate_exploration_args(a.explore_candidates, a.candidate_selection)
 
     sys.path.insert(0, str(a.sbf_source.resolve()))
     from sbfnav.config import load_config, apply_overrides, validate_config
@@ -112,9 +123,12 @@ def main():
             "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache",
         },
         "candidate_selection": a.candidate_selection,
+        "explore_candidates": a.explore_candidates,
         "trajectory_execution": a.trajectory_execution if a.candidate_selection == "geometry-top1" else None,
         "candidate_head_checkpoint_sha256": file_sha256(a.candidate_head_checkpoint) if a.candidate_head_checkpoint else None,
-        "controller": f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {a.candidate_selection}; trajectory={a.trajectory_execution}; no exploration",
+        "controller": (f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {a.candidate_selection}; "
+                       f"trajectory={a.trajectory_execution}; spatial candidate exploration={a.explore_candidates} "
+                       "with 20m de-duplication"),
         "visual_fusion": False, "OSM": False, "GT_access": "Scoring only after rollout",
         "runner_sha256": file_sha256(Path(__file__)),
         "source_sha256": {
@@ -160,6 +174,7 @@ def main():
         runtime = FrozenV2GeometryPolicy(
             a.source_v2, a.trained_v2, a.stage1, arm_out / "public_inputs", "trained_v2",
         )
+        runtime.explore_candidates = a.explore_candidates
         if a.candidate_selection == "ranked-once":
             runtime.execution = "ranked-guarded-blend"
         elif a.candidate_selection == "rank-score-once":
@@ -175,7 +190,7 @@ def main():
             runtime.head.load_state_dict(candidate_head["model"], strict=True)
         if (runtime.stop_threshold, runtime.execution, runtime.explore_candidates) != (
             .3, ("ranked-guarded-blend" if a.candidate_selection == "ranked-once" else
-                 "rank-score-guarded-blend" if a.candidate_selection == "rank-score-once" else a.trajectory_execution), 0,
+                 "rank-score-guarded-blend" if a.candidate_selection == "rank-score-once" else a.trajectory_execution), a.explore_candidates,
         ):
             raise ValueError("Controller execution differs from original frozen protocol")
         new_count = 0

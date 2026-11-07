@@ -11,7 +11,7 @@ def test_execution_ablations_keep_public_goal_and_candidate_stop_consistent(monk
     package=ModuleType('sbfnav');maps=ModuleType('sbfnav.mapdata');maps.GROUND_LEVEL={'map':0.}
     monkeypatch.setitem(sys.modules,'sbfnav',package);monkeypatch.setitem(sys.modules,'sbfnav.mapdata',maps)
     policy=A3TrajectoryPolicy.__new__(A3TrajectoryPolicy);policy.device=torch.device('cpu')
-    policy.visited_goal_cells=set();policy.explore_candidates=0
+    policy.visited_goal_cells=set();policy.explore_candidates=0;policy.selected_goal_slot=None
     policy.record=dict(world_bounds=[0,0,400,400],map_name='map');policy.stop_threshold=.3;policy.stop_positive_weight=20.
     field=GoalField(torch.tensor([[2.,1.]]),torch.tensor([[0,1]]),torch.tensor([[[.2,.3],[.8,.8]]]),torch.zeros(1,2,16))
     policy.frozen_field=lambda:(field,{})
@@ -33,7 +33,7 @@ def test_low_stop_confidence_can_explore_without_erasing_unknown_belief(monkeypa
     policy=A3TrajectoryPolicy.__new__(A3TrajectoryPolicy);policy.device=torch.device('cpu')
     policy.record=dict(world_bounds=[0,0,400,400],map_name='map')
     policy.stop_threshold=.3;policy.stop_positive_weight=1.;policy.execution='guarded-direct'
-    policy.visited_goal_cells=set();policy.explore_candidates=4
+    policy.visited_goal_cells=set();policy.explore_candidates=4;policy.selected_goal_slot=None
     field=GoalField(torch.tensor([[2.,1.]]),torch.tensor([[0,1]]),torch.tensor([[[.2,.3],[.8,.8]]]),torch.zeros(1,2,16))
     before=field.belief_logits.clone();policy.frozen_field=lambda:(field,{})
     output=TrajectoryOutput(torch.zeros(1,2,3,8,3),torch.zeros(1,2,3),field.belief_logits,torch.tensor([[-5.,5.]]))
@@ -47,13 +47,31 @@ def test_low_stop_confidence_can_explore_without_erasing_unknown_belief(monkeypa
     assert not prediction.should_stop and torch.equal(before,field.belief_logits)
 
 
+def test_exhausted_candidate_search_does_not_accept_a_previously_rejected_goal(monkeypatch):
+    maps=ModuleType('sbfnav.mapdata');maps.GROUND_LEVEL={'map':0.}
+    monkeypatch.setitem(sys.modules,'sbfnav',ModuleType('sbfnav'));monkeypatch.setitem(sys.modules,'sbfnav.mapdata',maps)
+    policy=A3TrajectoryPolicy.__new__(A3TrajectoryPolicy);policy.device=torch.device('cpu')
+    policy.record=dict(world_bounds=[0,0,400,400],map_name='map')
+    policy.stop_threshold=.3;policy.stop_positive_weight=1.;policy.execution='guarded-direct'
+    policy.visited_goal_cells={0,1};policy.explore_candidates=2;policy.selected_goal_slot=None
+    field=GoalField(torch.tensor([[2.,1.]]),torch.tensor([[0,1]]),torch.tensor([[[.2,.3],[.8,.8]]]),torch.zeros(1,2,16))
+    policy.frozen_field=lambda:(field,{})
+    output=TrajectoryOutput(torch.zeros(1,2,3,8,3),torch.zeros(1,2,3),field.belief_logits,torch.full((1,2),10.))
+    policy.head=lambda **kwargs:output
+
+    prediction=policy.predict(SimpleNamespace(pose=np.array([80.,120.,30.,0.])),'near hall')
+
+    assert not prediction.should_stop
+    assert prediction.diagnostics['candidate_search_exhausted']
+
+
 def test_predicted_goal_arrival_cannot_stop_at_source_illegal_height(monkeypatch):
     maps=ModuleType('sbfnav.mapdata');maps.GROUND_LEVEL={'map':200.}
     monkeypatch.setitem(sys.modules,'sbfnav.mapdata',maps)
     policy=A3TrajectoryPolicy.__new__(A3TrajectoryPolicy);policy.device=torch.device('cpu')
     policy.record=dict(world_bounds=[0,0,400,400],map_name='map')
     policy.stop_threshold=.3;policy.stop_positive_weight=1.;policy.execution='guarded-direct'
-    policy.visited_goal_cells=set();policy.explore_candidates=0
+    policy.visited_goal_cells=set();policy.explore_candidates=0;policy.selected_goal_slot=None
     field=GoalField(torch.tensor([[2.,1.]]),torch.tensor([[0,1]]),torch.tensor([[[.2,.3],[.8,.8]]]),torch.zeros(1,2,16))
     policy.frozen_field=lambda:(field,{})
     policy.head=lambda **kwargs:TrajectoryOutput(torch.zeros(1,2,3,8,3),torch.zeros(1,2,3),field.belief_logits,torch.full((1,2),10.))

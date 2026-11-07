@@ -1,0 +1,75 @@
+{
+  "baseline_explore0": {
+    "complete": true,
+    "coverage": {
+      "completed": 128,
+      "expected": 128
+    },
+    "metrics": {
+      "SR": 0.5390625,
+      "OSR": 0.578125,
+      "SPL": 0.5274513890278779,
+      "NE": 24.982370568822585,
+      "nDTW": 0.29343108018330977,
+      "sDTW": 0.18790275052761,
+      "steps": 7.390625,
+      "path_length": 222.61543628082086,
+      "policy_stop": 1.0,
+      "inference_ms": 5.357274099068331,
+      "episodes": 128,
+      "False_Stop_Rate": 0.4609375,
+      "false_stop_episode_fraction": 0.4609375,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "termination_counts": {
+      "policy_stop": 128
+    },
+    "elapsed_session_s": 13.243992659263313,
+    "gpu_peak_allocated_gib": 0.45282983779907227
+  },
+  "spatial_search_explore4": {
+    "complete": true,
+    "coverage": {
+      "completed": 128,
+      "expected": 128
+    },
+    "metrics": {
+      "SR": 0.5390625,
+      "OSR": 0.578125,
+      "SPL": 0.5274513890278779,
+      "NE": 24.982370568822585,
+      "nDTW": 0.29343108018330977,
+      "sDTW": 0.18790275052761,
+      "steps": 7.390625,
+      "path_length": 222.61543628082086,
+      "policy_stop": 1.0,
+      "inference_ms": 5.639392406368608,
+      "episodes": 128,
+      "False_Stop_Rate": 0.4609375,
+      "false_stop_episode_fraction": 0.4609375,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "termination_counts": {
+      "policy_stop": 128
+    },
+    "elapsed_session_s": 13.675907125230879,
+    "gpu_peak_allocated_gib": 0.45282983779907227
+  },
+  "paired": {
+    "episodes": 128,
+    "baseline_explore0_successes": 69,
+    "candidate_explore4_successes": 69,
+    "fail_to_success": 0,
+    "success_to_fail": 0,
+    "success_to_success": 69,
+    "fail_to_fail": 59,
+    "identical_pose_traces": 128,
+    "episodes_with_candidate_advance": 0,
+    "termination_counts": {
+      "policy_stop": 128
+    },
+    "max_explored_candidates_distribution": {
+      "0": 128
+    }
+  }
+}

@@ -6,6 +6,7 @@ import numpy as np
 import torch
 
 from .candidate_geometry import FullCandidateDataset, collate_full
+from .candidate_exploration import spatial_candidate_slots
 from .full_experiment import _batch_inputs, new_model
 from .token_language import FrozenBERTTokens
 from .landmark_alias import resolve_references
@@ -133,6 +134,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):output=self.head(**inputs)
         from .trajectory_policy import calibrated_stop_probability
         candidate,mode,waypoint,stop=output.select()
+        candidate_search_exhausted=False
         if self.execution=='ranked-guarded-blend':
             # Use the frozen trained candidate ranker once, then hold its Goal
             # for the episode. The path and Stop head still update from the
@@ -161,8 +163,16 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal[:,0],waypoint,blend=.25)
         elif self.execution!='joint':
             limit=min(getattr(self,'explore_candidates',0),field.candidate_ids.shape[1])
-            available=[i for i in range(limit) if int(field.candidate_ids[0,i]) not in self.visited_goal_cells] if limit else [0]
-            available=available or [0]
+            if limit:
+                bounds_np=np.asarray(self.record['world_bounds'],dtype=float)
+                normalized=field.candidate_xy[0].float().detach().cpu().numpy()
+                world_xy=bounds_np[:2]+normalized*(bounds_np[2:]-bounds_np[:2])
+                slots=spatial_candidate_slots(world_xy,max_candidates=limit,min_distance_m=20.)
+                available=[i for i in slots if int(field.candidate_ids[0,i]) not in self.visited_goal_cells]
+                candidate_search_exhausted=bool(slots) and not available
+            else:
+                available=[0]
+            available=available or ([slots[-1]] if limit and slots else [0])
             for position,index in enumerate(available):
                 candidate=torch.tensor([index],dtype=torch.long,device=self.device)
                 mode=output.mode_logits[:,index].argmax(-1)
@@ -180,13 +190,15 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
                     self.visited_goal_cells.add(int(field.candidate_ids[0,index]))
                     if position+1<len(available):continue
                 break
+            if candidate_search_exhausted:
+                waypoint=inputs['pose_world'][:,:3]
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
         guarded=self.execution.startswith('guarded-') or self.execution in ('ranked-guarded-blend','rank-score-guarded-blend')
         predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if guarded else None
         arrival_guard=predicted_goal_distance is None or predicted_goal_distance<=1e-3
         height=float(state.pose[2])-GROUND_LEVEL[self.record['map_name']]
         altitude_guard=10.-1e-5<=height<=100.+1e-5
-        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop' and arrival_guard and altitude_guard),
+        return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop' and arrival_guard and altitude_guard and not candidate_search_exhausted),
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
                 execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),selected_goal_slot=self.selected_goal_slot,stop_probability=probability,predicted_goal_distance=predicted_goal_distance,stop_altitude_guard=altitude_guard,
-                explored_goal_cells=len(self.visited_goal_cells),selected_goal_xy=(inputs['bounds'][:,:2]+inputs['candidate_xy'][torch.arange(1,device=self.device),candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2]))[0].float().cpu().tolist()))
+                explored_goal_cells=len(self.visited_goal_cells),candidate_search_exhausted=candidate_search_exhausted,selected_goal_xy=(inputs['bounds'][:,:2]+inputs['candidate_xy'][torch.arange(1,device=self.device),candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2]))[0].float().cpu().tolist()))
