@@ -1,0 +1,594 @@
+{
+  "complete": true,
+  "n": 2470,
+  "coverage": {
+    "legacy": 2470,
+    "expanded": 2470
+  },
+  "source_run_commit": "4e0758e",
+  "primary_failure_counts_all": {
+    "correct_candidate_only_at_nms_ranks6_20": 351,
+    "success": 1199,
+    "nms_top5_contains_target_but_policy_never_selected_it": 644,
+    "no_correct_candidate_in_spatial_nms20": 106,
+    "entered_20m_then_left": 170
+  },
+  "primary_failure_counts_failed_only": {
+    "correct_candidate_only_at_nms_ranks6_20": 351,
+    "nms_top5_contains_target_but_policy_never_selected_it": 644,
+    "no_correct_candidate_in_spatial_nms20": 106,
+    "entered_20m_then_left": 170
+  },
+  "multilabel_counts": {
+    "binding_changed_vs_legacy": 834,
+    "catalog_same_name_multiple_object_ids": 1446,
+    "multiple_public_reference_names": 1217,
+    "no_public_anchor": 30,
+    "repeated_anchor_polygon_fragments": 1446,
+    "stopped_at_goal_over_20m_from_gt": 1271
+  },
+  "never_entered_20m": 1101,
+  "reached_then_left": 170,
+  "never_entered_topk_recall": {
+    "1": 0.0,
+    "5": 0.5849227974568574,
+    "10": 0.771117166212534,
+    "20": 0.9037238873751136
+  },
+  "never_entered_topk_counts": {
+    "1": 0,
+    "5": 644,
+    "10": 849,
+    "20": 995
+  },
+  "never_entered_top5_contains_gt_but_policy_not_select": 644,
+  "never_entered_top5_contains_gt_and_selected_but_route_missed": 0,
+  "gt_nms_recall_all": {
+    "1": 0.4854251012145749,
+    "5": 0.7995951417004049,
+    "10": 0.8927125506072875,
+    "20": 0.9550607287449393
+  },
+  "final_failures_stop_guard_anomalies": 0,
+  "all_episode_goal_hop_over20": 0,
+  "mean_selected_goal_hops_over20": 0.0,
+  "binding_pair": {
+    "corrected": 53,
+    "damaged": 21,
+    "net": 32,
+    "corrected_with_public_geometry_change": 53,
+    "damaged_with_public_geometry_change": 21
+  },
+  "target_categories": {
+    "Building": 1057,
+    "Car": 1226,
+    "Parking": 56,
+    "Ground": 131
+  },
+  "relation_grouping_is_heuristic": true,
+  "relation_proxy": {
+    "direct_relation_word_proxy": {
+      "n": 1481,
+      "sr": 0.4220121539500338,
+      "nms_top5": 0.7690749493585415,
+      "never_entered": 755,
+      "never_entered_nms_top5": 438
+    },
+    "indirect_or_multi-entity_proxy": {
+      "n": 880,
+      "sr": 0.6090909090909091,
+      "nms_top5": 0.8715909090909091,
+      "never_entered": 288,
+      "never_entered_nms_top5": 184
+    },
+    "relation_uncertain": {
+      "n": 79,
+      "sr": 0.45569620253164556,
+      "nms_top5": 0.7974683544303798,
+      "never_entered": 34,
+      "never_entered_nms_top5": 20
+    },
+    "unbound_or_unmentioned": {
+      "n": 30,
+      "sr": 0.06666666666666667,
+      "nms_top5": 0.2,
+      "never_entered": 24,
+      "never_entered_nms_top5": 2
+    }
+  },
+  "posthoc_rgbd_proxy": {
+    "episodes_with_target_contour": 2470,
+    "geometric_footprint_support_any_actual_frame": 2320,
+    "max_projected_side_ge16px_any_actual_frame": 2316,
+    "long32_short16px_proxy_any_actual_frame": 2040,
+    "depth_valid_target_pixels_any_actual_frame": 2320,
+    "strictly_instance_recognizable": null,
+    "warning": "Polygon footprint/orthophoto projection proxy; not real instance visibility or human/ML recognizability; no occlusion model."
+  },
+  "closedloop_pair": {
+    "complete": true,
+    "coverage_per_arm": {
+      "legacy": 2470,
+      "expanded": 2470
+    },
+    "legacy": {
+      "SR": 0.47246963562753036,
+      "OSR": 0.5441295546558704,
+      "SPL": 0.45905253592461953,
+      "NE": 33.31142209083659,
+      "nDTW": 0.29514230249734164,
+      "sDTW": 0.16629199970393208,
+      "steps": 6.8125506072874495,
+      "path_length": 196.33805528707526,
+      "policy_stop": 1.0,
+      "inference_ms": 6.380687984709665,
+      "episodes": 2470,
+      "False_Stop_Rate": 0.5275303643724696,
+      "false_stop_episode_fraction": 0.5275303643724696,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "expanded": {
+      "SR": 0.4854251012145749,
+      "OSR": 0.554251012145749,
+      "SPL": 0.4715148958085666,
+      "NE": 30.829881205936296,
+      "nDTW": 0.2989311355452874,
+      "sDTW": 0.17207070979632066,
+      "steps": 6.811336032388664,
+      "path_length": 196.16879435340806,
+      "policy_stop": 1.0,
+      "inference_ms": 6.4073416573773,
+      "episodes": 2470,
+      "False_Stop_Rate": 0.5145748987854251,
+      "false_stop_episode_fraction": 0.5145748987854251,
+      "metric_units": "SR/OSR/SPL/nDTW/sDTW fractions; NE meters; inference_ms milliseconds"
+    },
+    "paired_success": {
+      "corrected": 53,
+      "damaged": 21,
+      "unchanged": 2396,
+      "net_successes": 32.0
+    },
+    "termination_counts": {
+      "legacy": {
+        "policy_stop": 2470
+      },
+      "expanded": {
+        "policy_stop": 2470
+      }
+    },
+    "manifest": {
+      "split": "val_seen",
+      "expected_per_arm": 2470,
+      "full_split_size": 2470,
+      "protocol": {
+        "horizon": 20,
+        "horizontal_step_m": 50.0,
+        "vertical_step_m": 10.0,
+        "min_altitude_m": 10.0,
+        "max_altitude_m": 100.0,
+        "stagnation_steps": 5,
+        "stagnation_tolerance_m": 0.0001,
+        "success_radius_m": 20.0,
+        "dimensions": 2
+      },
+      "seed": 42,
+      "precision": "FP32; TF32 disabled",
+      "geometry_checkpoint_sha256": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+      "geometry_source_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+      "controller_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+      "legacy_queries_sha256": "4b87a86b4c281bf03a76705e67259309c3a87b1c301cafca6588f641cfb50fa7",
+      "expanded_queries_sha256": "9c959421dd7f94eb292385b240e80d44c36a6973a6eca16a472fffd34b20c382",
+      "annotations_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+      "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+      "bindings": {
+        "legacy": "Existing exact public-name matcher/query cache",
+        "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache"
+      },
+      "controller": "Original GraphNav Stage1 trajectory/stop weights; threshold .3; guarded-blend; no exploration",
+      "visual_fusion": false,
+      "OSM": false,
+      "GT_access": "Scoring only after rollout",
+      "runner_sha256": "1de27a1a5cbf4488c247f3137b8de4cc8a44c01ed1ec9931a70e5141866a7c58",
+      "source_sha256": {
+        "closedloop": "d09a490a8874307b4335cfa341395ada617a80309d8e973ab3dea3c033b11c05",
+        "a3_runtime": "2c0f9be782416b23b3215887e0381460eca10043858999f9b27163d631b0a27c",
+        "candidate_geometry": "046f9e8cd78462145ce37989419c0412551c7d32e7b89e0ff36b4f83216879c2",
+        "renderer": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747"
+      }
+    }
+  },
+  "artifact_note": "V2 run used Geometry+Pose only; actual history RGB-D was not fed to policy. Field/Belief is static per query; only candidate trajectory selection can vary with pose.",
+  "raw_candidate_proposal_budget": {
+    "definition": "The 20 raw cells supplied to the frozen trajectory/rank head, scored by distance to target only after frozen inference.",
+    "recall_all_counts": {
+      "1": 1199,
+      "5": 1779,
+      "10": 2004,
+      "20": 2187
+    },
+    "recall_all": {
+      "1": 0.4854251012145749,
+      "5": 0.7202429149797571,
+      "10": 0.8113360323886639,
+      "20": 0.8854251012145749
+    },
+    "recall_failed_counts": {
+      "1": 0,
+      "5": 580,
+      "10": 805,
+      "20": 988
+    },
+    "recall_never_entered_counts": {
+      "1": 0,
+      "5": 474,
+      "10": 675,
+      "20": 835
+    },
+    "never_entered_nms_top5_and_raw_budget_contains_target": 636,
+    "never_entered_nms_top5_but_target_not_in_raw_head_budget": 8,
+    "failed_nms_top5_and_raw_budget_contains_target": 767,
+    "failed_nms_top5_but_target_not_in_raw_head_budget": 9,
+    "policy_selected_slot_zero_steps": 19294,
+    "policy_total_decisions": 19294,
+    "policy_actual_candidate_reranking_enabled": false
+  },
+  "candidate_recall_grouped_by_target_category_proxy": {
+    "Building": {
+      "n": 1057,
+      "SR": 0.39924314096499525,
+      "OSR": 0.4720908230842006,
+      "nms_recall": {
+        "1": 0.39924314096499525,
+        "5": 0.760643330179754,
+        "10": 0.8628192999053926,
+        "20": 0.9375591296121097
+      },
+      "raw_candidate_recall": {
+        "1": 0.39924314096499525,
+        "5": 0.6650898770104068,
+        "10": 0.7729422894985809,
+        "20": 0.8571428571428571
+      },
+      "never_entered_20m": 558,
+      "never_entered_nms_top5": 323,
+      "never_entered_nms_top20_miss": 63,
+      "failed_nms_top5_not_selected": 382
+    },
+    "Car": {
+      "n": 1226,
+      "SR": 0.566068515497553,
+      "OSR": 0.6353996737357259,
+      "nms_recall": {
+        "1": 0.566068515497553,
+        "5": 0.8417618270799347,
+        "10": 0.9265905383360522,
+        "20": 0.9698205546492659
+      },
+      "raw_candidate_recall": {
+        "1": 0.566068515497553,
+        "5": 0.7707993474714518,
+        "10": 0.8523654159869495,
+        "20": 0.9159869494290375
+      },
+      "never_entered_20m": 447,
+      "never_entered_nms_top5": 270,
+      "never_entered_nms_top20_miss": 35,
+      "failed_nms_top5_not_selected": 338
+    },
+    "Ground": {
+      "n": 131,
+      "SR": 0.4198473282442748,
+      "OSR": 0.4580152671755725,
+      "nms_recall": {
+        "1": 0.4198473282442748,
+        "5": 0.7557251908396947,
+        "10": 0.8625954198473282,
+        "20": 0.9618320610687023
+      },
+      "raw_candidate_recall": {
+        "1": 0.4198473282442748,
+        "5": 0.7099236641221374,
+        "10": 0.7786259541984732,
+        "20": 0.8473282442748091
+      },
+      "never_entered_20m": 71,
+      "never_entered_nms_top5": 40,
+      "never_entered_nms_top20_miss": 5,
+      "failed_nms_top5_not_selected": 44
+    },
+    "Parking": {
+      "n": 56,
+      "SR": 0.5,
+      "OSR": 0.5535714285714286,
+      "nms_recall": {
+        "1": 0.5,
+        "5": 0.7142857142857143,
+        "10": 0.7857142857142857,
+        "20": 0.9464285714285714
+      },
+      "raw_candidate_recall": {
+        "1": 0.5,
+        "5": 0.6785714285714286,
+        "10": 0.7142857142857143,
+        "20": 0.8392857142857143
+      },
+      "never_entered_20m": 25,
+      "never_entered_nms_top5": 11,
+      "never_entered_nms_top20_miss": 3,
+      "failed_nms_top5_not_selected": 12
+    }
+  },
+  "candidate_recall_grouped_by_relation_rule_proxy": {
+    "direct_relation_word_proxy": {
+      "n": 1481,
+      "SR": 0.4220121539500338,
+      "OSR": 0.4902093180283592,
+      "nms_recall": {
+        "1": 0.4220121539500338,
+        "5": 0.7690749493585415,
+        "10": 0.8818365968939905,
+        "20": 0.9520594193112761
+      },
+      "raw_candidate_recall": {
+        "1": 0.4220121539500338,
+        "5": 0.6806212018906145,
+        "10": 0.7852802160702228,
+        "20": 0.8683322079675895
+      },
+      "never_entered_20m": 755,
+      "never_entered_nms_top5": 438,
+      "never_entered_nms_top20_miss": 69,
+      "failed_nms_top5_not_selected": 514
+    },
+    "indirect_or_multi-entity_proxy": {
+      "n": 880,
+      "SR": 0.6090909090909091,
+      "OSR": 0.6727272727272727,
+      "nms_recall": {
+        "1": 0.6090909090909091,
+        "5": 0.8715909090909091,
+        "10": 0.9340909090909091,
+        "20": 0.975
+      },
+      "raw_candidate_recall": {
+        "1": 0.6090909090909091,
+        "5": 0.8136363636363636,
+        "10": 0.8784090909090909,
+        "20": 0.9352272727272727
+      },
+      "never_entered_20m": 288,
+      "never_entered_nms_top5": 184,
+      "never_entered_nms_top20_miss": 22,
+      "failed_nms_top5_not_selected": 231
+    },
+    "relation_uncertain": {
+      "n": 79,
+      "SR": 0.45569620253164556,
+      "OSR": 0.569620253164557,
+      "nms_recall": {
+        "1": 0.45569620253164556,
+        "5": 0.7974683544303798,
+        "10": 0.8481012658227848,
+        "20": 0.9620253164556962
+      },
+      "raw_candidate_recall": {
+        "1": 0.45569620253164556,
+        "5": 0.6582278481012658,
+        "10": 0.7848101265822784,
+        "20": 0.8607594936708861
+      },
+      "never_entered_20m": 34,
+      "never_entered_nms_top5": 20,
+      "never_entered_nms_top20_miss": 1,
+      "failed_nms_top5_not_selected": 27
+    },
+    "unbound_or_unmentioned": {
+      "n": 30,
+      "SR": 0.06666666666666667,
+      "OSR": 0.2,
+      "nms_recall": {
+        "1": 0.06666666666666667,
+        "5": 0.2,
+        "10": 0.3333333333333333,
+        "20": 0.5
+      },
+      "raw_candidate_recall": {
+        "1": 0.06666666666666667,
+        "5": 0.1,
+        "10": 0.2,
+        "20": 0.3333333333333333
+      },
+      "never_entered_20m": 24,
+      "never_entered_nms_top5": 2,
+      "never_entered_nms_top20_miss": 14,
+      "failed_nms_top5_not_selected": 4
+    }
+  },
+  "top5_failure_upper_bound": {
+    "failed_with_nms_top5_location_proxy": 776,
+    "failed_top5_within_actual_raw_head_budget": 767,
+    "never_entered_with_nms_top5_location_proxy": 644,
+    "never_entered_top5_within_actual_raw_head_budget": 636,
+    "warning": "20m target-center proximity is a location proxy, not verified physical-instance matching or a promise that reranking will recover SR."
+  },
+  "historical_observation_by_failure_subset": {
+    "never_entered": {
+      "n": 1101,
+      "target_polygon_projects_into_any_logged_frame": 952,
+      "max_dimension_at_least_16px_proxy": 948,
+      "long_side32_short_side16px_proxy": 821,
+      "depth_valid_polygon_pixels_any_logged_frame": 952,
+      "remaining_actions_at_first_long32_short16_proxy_mean": 3.1656516443361755,
+      "remaining_actions_at_first_long32_short16_proxy_median": 3.0,
+      "co_visible_similar_size_same_object_type_polygon_proxy_mean": 65.85740236148955,
+      "warning": "All are geometry/pixel projection proxies from only logged poses. No occlusion model, segmentation label, or visual recognizability ground truth."
+    },
+    "never_entered_nms_top5": {
+      "n": 644,
+      "target_polygon_projects_into_any_logged_frame": 604,
+      "max_dimension_at_least_16px_proxy": 603,
+      "long_side32_short_side16px_proxy": 540,
+      "depth_valid_polygon_pixels_any_logged_frame": 604,
+      "remaining_actions_at_first_long32_short16_proxy_mean": 2.9703703703703703,
+      "remaining_actions_at_first_long32_short16_proxy_median": 3.0,
+      "co_visible_similar_size_same_object_type_polygon_proxy_mean": 75.79813664596273,
+      "warning": "All are geometry/pixel projection proxies from only logged poses. No occlusion model, segmentation label, or visual recognizability ground truth."
+    },
+    "all_failed_nms_top5": {
+      "n": 776,
+      "target_polygon_projects_into_any_logged_frame": 736,
+      "max_dimension_at_least_16px_proxy": 735,
+      "long_side32_short_side16px_proxy": 651,
+      "depth_valid_polygon_pixels_any_logged_frame": 736,
+      "remaining_actions_at_first_long32_short16_proxy_mean": 3.0153609831029184,
+      "remaining_actions_at_first_long32_short16_proxy_median": 3.0,
+      "co_visible_similar_size_same_object_type_polygon_proxy_mean": 80.72422680412372,
+      "warning": "All are geometry/pixel projection proxies from only logged poses. No occlusion model, segmentation label, or visual recognizability ground truth."
+    },
+    "never_entered_nms_rank6_20": {
+      "n": 351,
+      "target_polygon_projects_into_any_logged_frame": 292,
+      "max_dimension_at_least_16px_proxy": 289,
+      "long_side32_short_side16px_proxy": 240,
+      "depth_valid_polygon_pixels_any_logged_frame": 292,
+      "remaining_actions_at_first_long32_short16_proxy_mean": 3.3916666666666666,
+      "remaining_actions_at_first_long32_short16_proxy_median": 3.0,
+      "co_visible_similar_size_same_object_type_polygon_proxy_mean": 57.370370370370374,
+      "warning": "All are geometry/pixel projection proxies from only logged poses. No occlusion model, segmentation label, or visual recognizability ground truth."
+    },
+    "never_entered_nms_top20_miss": {
+      "n": 106,
+      "target_polygon_projects_into_any_logged_frame": 56,
+      "max_dimension_at_least_16px_proxy": 56,
+      "long_side32_short_side16px_proxy": 41,
+      "depth_valid_polygon_pixels_any_logged_frame": 56,
+      "remaining_actions_at_first_long32_short16_proxy_mean": 4.414634146341464,
+      "remaining_actions_at_first_long32_short16_proxy_median": 4.0,
+      "co_visible_similar_size_same_object_type_polygon_proxy_mean": 33.56603773584906,
+      "warning": "All are geometry/pixel projection proxies from only logged poses. No occlusion model, segmentation label, or visual recognizability ground truth."
+    }
+  },
+  "binding_pair_audit": {
+    "query_geometry_or_semantics_changed": 834,
+    "corrected": 53,
+    "damaged": 21,
+    "net": 32,
+    "all_corrected_cases_public_query_changed": true,
+    "all_damaged_cases_public_query_changed": true,
+    "corrected_damaged_change_types": {
+      "corrected::anchor_added_from_empty": 14,
+      "corrected::additional_anchor": 33,
+      "damaged::anchor_added_from_empty": 3,
+      "damaged::additional_anchor": 10,
+      "corrected::non-name_input_change": 1,
+      "damaged::non-name_input_change": 1,
+      "corrected::anchor_replacement_or_scope_change": 5,
+      "damaged::anchor_replacement_or_scope_change": 7
+    },
+    "semantic_error_labels": "No independently human-labelled relation/scope gold is available; outputs only show what public binding changed and its post-hoc navigation outcome."
+  },
+  "stop_and_goal_audit": {
+    "all_termination_counts": {
+      "legacy": {
+        "policy_stop": 2470
+      },
+      "expanded": {
+        "policy_stop": 2470
+      }
+    },
+    "trajectory_goal_switch_over20_count": 0,
+    "terminal_stop_guard_anomalies": 0,
+    "failures_stopped_at_selected_goal_outside_target_radius": 1271,
+    "interpretation": "A policy stop outside the target radius is not alone evidence of a Stop Head error. All logged terminations are policy_stop; controller replay verifies stop probability/arrival/altitude guard at the terminal decision."
+  },
+  "precision_metadata_audit": {
+    "prior_manifest_declared": "FP32; TF32 disabled",
+    "actual_runtime": "CUDA BF16 autocast is enabled in frozen Geometry and trajectory-head forward; logits/metric scoring are converted to FP32; TF32 disabled.",
+    "impact": "Both paired arms used the same actual precision, so their paired comparison is internally controlled; the previous precision label was inaccurate and no full split was rerun in FP32."
+  },
+  "causal_replay_verification": {
+    "coverage": 2470,
+    "decision_rows": 19294,
+    "saved_candidate_mode_goal_stop_probability_reproduced": true,
+    "belief_update_per_step": "None: fixed Geometry field per instruction; actual RGB-D frames were not consumed by V2 policy.",
+    "candidate_execution": "guarded-blend with explore_candidates=0 forces candidate slot 0 at every decision; trajectory/rank head does not choose among its Top-20 proposals in this experiment."
+  },
+  "decision_upper_bounds": {
+    "no_enter_miss_nms_top20": 106,
+    "no_enter_correct_location_in_nms_top20": 995,
+    "no_enter_correct_location_in_raw_head_top20": 835,
+    "no_enter_correct_location_in_nms_top5": 644,
+    "warning": "Ceilings under the 20m center-proximity proxy, not achievable SR estimates; instance identity and ranking correctness are unverified."
+  },
+  "target_category_summary": {
+    "Building": {
+      "n": 1057,
+      "sr": 0.39924314096499525,
+      "nms_r5": 0.760643330179754,
+      "nms_r20": 0.9375591296121097,
+      "never_entered": 558,
+      "never_entered_top5": 323
+    },
+    "Car": {
+      "n": 1226,
+      "sr": 0.566068515497553,
+      "nms_r5": 0.8417618270799347,
+      "nms_r20": 0.9698205546492659,
+      "never_entered": 447,
+      "never_entered_top5": 270
+    },
+    "Ground": {
+      "n": 131,
+      "sr": 0.4198473282442748,
+      "nms_r5": 0.7557251908396947,
+      "nms_r20": 0.9618320610687023,
+      "never_entered": 71,
+      "never_entered_top5": 40
+    },
+    "Parking": {
+      "n": 56,
+      "sr": 0.5,
+      "nms_r5": 0.7142857142857143,
+      "nms_r20": 0.9464285714285714,
+      "never_entered": 25,
+      "never_entered_top5": 11
+    }
+  },
+  "ambiguity_tag_definitions": {
+    "repeated_anchor_polygon_fragments": "One query contains multiple polygon fragments for one displayed anchor name; these may be fragments of one multipart entity and are not counted as homonymous entities.",
+    "catalog_same_name_multiple_object_ids": "The map catalog contains distinct object IDs with the same exact case-folded name. This flags possible ambiguity; it does not prove that the parser bound the wrong object.",
+    "scope_or_binding_error": "Not independently adjudicated because no human gold relation/binding graph exists for all 2,470 instructions."
+  },
+  "top1_to_best_target20_score_gap_logit": {
+    "all_target20_candidates": {
+      "n": 2470,
+      "median": 0.02617061138153076,
+      "p75": 0.5916039347648621,
+      "p90": 1.650880718231201,
+      "mean": 0.5271515038693965
+    },
+    "never_entered_with_nms_top5": {
+      "n": 644,
+      "median": 0.3282126188278198,
+      "p75": 0.5880753397941589,
+      "p90": 0.8690751552581789,
+      "mean": 0.4253729612838407
+    },
+    "never_entered_with_raw_head_budget_target": {
+      "n": 835,
+      "median": 0.41834354400634766,
+      "p75": 0.7921366691589355,
+      "p90": 1.2659403800964357,
+      "mean": 0.5663526577506951
+    }
+  },
+  "landmark_binding_ambiguity_audit": {
+    "tasks_without_public_anchor": 30,
+    "tasks_with_repeated_polygon_fragments_for_name": 1446,
+    "tasks_with_same_exact_name_on_distinct_catalog_object_ids": 1446,
+    "tasks_with_multiple_public_anchor_names": 1217,
+    "tasks_without_anchor_and_failed": 28,
+    "warning": "No independent gold binding/scope annotations exist; these counts describe public query/catalog structure only, not parser error counts."
+  }
+}
