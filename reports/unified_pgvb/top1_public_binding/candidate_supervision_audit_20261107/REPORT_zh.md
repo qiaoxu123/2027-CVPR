@@ -9,3 +9,11 @@
 代码核查：graphnav/trajectory_policy.py的trajectory_losses使用当前位置距真实目标≤20m且候选距目标≤20m作为Stop正标签，错误候选为负标签。因此上一轮128条均在首候选停止，不能解释为训练目标本来就要求到任意候选停止。下一项诊断应比较Stage1训练候选上下文、Geometry Checkpoint与当前V2部署候选的分布及绑定一致性；优先复用TRAIN缓存，不调Stop阈值，不在Val重复选参。
 
 本轮没有新增导航成绩。完整Val-Seen基线仍为48.54%，55%以上目标未达成。
+
+## Controller与Geometry权重来源核对
+
+实际加载Stage1 best.pt与当前部署V2 Checkpoint：Stage1记录为Stage C，代码configure_stage在该阶段同时解冻a3与trajectory。当前运行器只提取该Checkpoint的trajectory权重，Geometry则来自另一个V2 Checkpoint。
+
+70个共同Geometry张量中，50个浮点张量不相同；语言投影、token attention、pair geometry相关层均有变化，具体相对L2差见controller_geometry_comparison.json。这是候选上下文分布失配的具体来源，不能仅据权重差认定因果。模型维度仍匹配（hidden=128、grid=28、Top-K=20）。
+
+建议下一步在TRAIN固定物理目标留出中，保持候选世界位置相同，分别送入Stage1原始上下文与当前V2上下文，比较错误候选到达时Stop输出及正确候选接受率；先检验跨Checkpoint接口假设，再决定是否适配控制头。原Stage1曾按Seen128选择，需明确其历史验证暴露，不能把同一Pilot作为独立泛化证明。
