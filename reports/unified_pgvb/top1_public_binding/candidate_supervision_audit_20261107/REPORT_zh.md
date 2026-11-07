@@ -38,3 +38,11 @@
 该结果不支持“恢复Stage1原上下文即可解决候选确认”的假设。Stop分数存在有限位置相关区分信号，但原0.3阈值下几乎接受全部候选到达状态，不能用于当前顺序候选验证。此处不选择新阈值，不运行新的Val Pilot。下一项模型工作应针对真实目标身份/语言匹配构建候选确认监督，不能继续把到达候选当成确认目标。
 
 完整前向已真实GPU执行；未训练。逐候选公开输出保存在服务器context_probe_full_dev/public_probe.json，复现使用probe_v2_controller_context.py --limit 0。统计为配对TRAIN机制诊断，不是独立场景泛化或真实闭环成绩，未按候选数夸大独立任务数量。
+
+## 冻结Stage1图文Adapter补充探针
+
+复用512条TRAIN当前起点ROI缓存，保持相同图像、文本及候选。仅比较训练过的image/text residual Adapter，尺度均匀平均，不启用quality gate；不宣称复现完整Stage1匹配器。模型完成打分后才用GT评分。
+
+26条同时含支持正确位置及至少2个支持候选的任务中，Geometry首个可观测候选命中20/26；Adapter在384 ROI上完整指令/外观描述均15/26，与此前原始余弦15/26相同；native-GSD ROI均13/26，未超过原始余弦15/26、16/26。结果为20m位置代理，非实例识别准确率。
+
+该冻结Adapter不能补足当前视觉排序能力，不进入Val Pilot。无需重复训练旧Adapter并把它当作新方向。脚本probe_cached_roi_adapter.py与逐任务输出frozen_adapter_probe.json可复现；未训练或更改权重。
