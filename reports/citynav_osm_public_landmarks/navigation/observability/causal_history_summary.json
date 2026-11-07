@@ -1,0 +1,114 @@
+{
+  "scope": "causal_history",
+  "n": 1911,
+  "initial": {
+    "center_in_footprint": 411,
+    "geometric_overlap": 458,
+    "valid_roi": 455,
+    "clarity_proxy_8": 373,
+    "clarity_proxy_16": 205,
+    "clarity_proxy_32": 55,
+    "center_contour_disagreement_gt20m": 3
+  },
+  "any_legal_observation": {
+    "center_in_footprint": 1803,
+    "geometric_overlap": 1861,
+    "valid_roi": 1857,
+    "clarity_proxy_8": 1683,
+    "clarity_proxy_16": 1658,
+    "clarity_proxy_32": 1282,
+    "center_contour_disagreement_gt20m": 3
+  },
+  "by_category": {
+    "Building": {
+      "n": 761,
+      "initial": {
+        "center_in_footprint": 160,
+        "geometric_overlap": 187,
+        "valid_roi": 187,
+        "clarity_proxy_8": 136,
+        "clarity_proxy_16": 125,
+        "clarity_proxy_32": 40,
+        "center_contour_disagreement_gt20m": 0
+      },
+      "any_legal_observation": {
+        "center_in_footprint": 694,
+        "geometric_overlap": 730,
+        "valid_roi": 729,
+        "clarity_proxy_8": 621,
+        "clarity_proxy_16": 615,
+        "clarity_proxy_32": 582,
+        "center_contour_disagreement_gt20m": 0
+      }
+    },
+    "Car": {
+      "n": 1012,
+      "initial": {
+        "center_in_footprint": 228,
+        "geometric_overlap": 239,
+        "valid_roi": 236,
+        "clarity_proxy_8": 216,
+        "clarity_proxy_16": 60,
+        "clarity_proxy_32": 0,
+        "center_contour_disagreement_gt20m": 3
+      },
+      "any_legal_observation": {
+        "center_in_footprint": 979,
+        "geometric_overlap": 995,
+        "valid_roi": 992,
+        "clarity_proxy_8": 944,
+        "clarity_proxy_16": 927,
+        "clarity_proxy_32": 587,
+        "center_contour_disagreement_gt20m": 3
+      }
+    },
+    "Ground": {
+      "n": 97,
+      "initial": {
+        "center_in_footprint": 16,
+        "geometric_overlap": 23,
+        "valid_roi": 23,
+        "clarity_proxy_8": 14,
+        "clarity_proxy_16": 13,
+        "clarity_proxy_32": 10,
+        "center_contour_disagreement_gt20m": 0
+      },
+      "any_legal_observation": {
+        "center_in_footprint": 89,
+        "geometric_overlap": 95,
+        "valid_roi": 95,
+        "clarity_proxy_8": 78,
+        "clarity_proxy_16": 76,
+        "clarity_proxy_32": 73,
+        "center_contour_disagreement_gt20m": 0
+      }
+    },
+    "Parking": {
+      "n": 41,
+      "initial": {
+        "center_in_footprint": 7,
+        "geometric_overlap": 9,
+        "valid_roi": 9,
+        "clarity_proxy_8": 7,
+        "clarity_proxy_16": 7,
+        "clarity_proxy_32": 5,
+        "center_contour_disagreement_gt20m": 0
+      },
+      "any_legal_observation": {
+        "center_in_footprint": 41,
+        "geometric_overlap": 41,
+        "valid_roi": 41,
+        "clarity_proxy_8": 40,
+        "clarity_proxy_16": 40,
+        "clarity_proxy_32": 40,
+        "center_contour_disagreement_gt20m": 0
+      }
+    }
+  },
+  "native_observation_px": 384,
+  "clarity_definition": "Projected contour has >=80% valid RGB/depth, bbox short side>=k, supported pixel area>=k^2; NOT verified visibility/recognition",
+  "verified_clear_target_count": null,
+  "no_independent_pixel_truth": true,
+  "GT_usage": "post-hoc masks/coverage/size only, never policy or view selection",
+  "causal_note": "History uses actually observed pre-decision poses only; excludes unobserved terminal moves at horizon/stagnation; no teacher trajectory."
+}

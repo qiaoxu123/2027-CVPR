@@ -1,0 +1,38 @@
+{
+  "seed": 42,
+  "expected": 2470,
+  "split": "val_seen",
+  "protocol": {
+    "horizon": 20,
+    "horizontal_step_m": 50.0,
+    "vertical_step_m": 10.0,
+    "min_altitude_m": 10.0,
+    "max_altitude_m": 100.0,
+    "stagnation_steps": 5,
+    "stagnation_tolerance_m": 0.0001,
+    "success_radius_m": 20.0,
+    "dimensions": 2
+  },
+  "stop_threshold": 0.3,
+  "arrival_guard_m": 0.001,
+  "execution": "guarded-blend",
+  "explore_candidates": 0,
+  "binding": "Blind raw instruction + public names, identical to preceding candidate recall",
+  "OSM": false,
+  "visual_fusion": false,
+  "spatial_nms_changes_to_navigation": false,
+  "checkpoint_shas": {
+    "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "trained_v2_sha256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b"
+  },
+  "stage1_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+  "annotations_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "source_sha256": {
+    "scripts/evaluate_v2_public_navigation.py": "703b527ed81514d733ff47424969ef5ddeec53fd2075518229d948e1a47ca84a",
+    "graphnav/a3_runtime.py": "2c0f9be782416b23b3215887e0381460eca10043858999f9b27163d631b0a27c",
+    "graphnav/closedloop.py": "d09a490a8874307b4335cfa341395ada617a80309d8e973ab3dea3c033b11c05",
+    "graphnav/candidate_geometry.py": "046f9e8cd78462145ce37989419c0412551c7d32e7b89e0ff36b4f83216879c2",
+    "graphnav/renderer.py": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747"
+  }
+}
