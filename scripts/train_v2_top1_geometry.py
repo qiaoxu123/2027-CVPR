@@ -1,7 +1,7 @@
 """Three matched TRAIN-only adaptations; select on development, not Val/Test.
 Public binding aligned to deployment; frozen BERT cache reused. No new inference heads.
 """
-import argparse,json,time,copy
+import argparse,json,time
 from pathlib import Path
 import numpy as np,torch
 from torch.utils.data import DataLoader
@@ -74,6 +74,6 @@ def main():
     checkpoint('last.pt');atomic_json(history,out/'history.json');print(json.dumps(dict(mode=mode,**entry)),flush=True)
    if not a.smoke_updates:
     result=dict(complete=True,epochs=epoch,updates=updates,baseline=baseline,best_development=dict(R20=best_score[0],NE=-best_score[1]),seconds=time.perf_counter()-mode_started,core_parameters=sum(p.numel() for p in params));atomic_json(result,out/'complete.json');summary[mode]=result
-  del model,opt;torch.cuda.empty_cache()
+  torch.cuda.empty_cache()
  atomic_json(dict(smoke=bool(a.smoke_updates),arms=summary,seconds=time.perf_counter()-started,confirmation_evaluated=False),a.output/'summary.json')
 if __name__=='__main__':main()

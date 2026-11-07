@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np,torch
 from torch.utils.data import DataLoader
 from graphnav.checkpointing import atomic_json,file_sha256
+from graphnav.candidate_geometry import collate_full
 from graphnav.full_experiment import _batch_inputs
 from graphnav.token_language import FrozenBERTTokens
 from scripts.unified_pgvb_v3_pilot import _load_base

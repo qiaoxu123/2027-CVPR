@@ -55,3 +55,13 @@
 - Keep identity uncertainty distinct from geographic accuracy; no automatic validation promotion or replacement of existing approved registrations.
 ### Notes & Caveats
 - Automated heldout anchor residuals are proxies. No newly independently confirmed scenes; V2 uses blind public text binding, explicitly differing from historical annotation-reference metadata.
+
+## [V2 Public Binding and Top-1 Training Experiments] - 2026-11-07
+### Features
+- Align all 21,878 TRAIN queries with blind public-name binding; isolate training labels and physical-target groups.
+- Add scoped public-name spelling/abbreviation retrieval and retain literal aliases for existing geometric relation parsing.
+- Add TRAIN-only target-region/ranking and source-correct belief preservation losses with frozen-model controls.
+### Design Rationale
+- Diagnose binding mismatch and forgetting on TRAIN before expanding training; freeze name resolution before full Val measurement.
+### Notes & Caveats
+- Full2470 FP32 matched Top1 improves 46.96% to48.26%, net+32; the >50% goal remains unachieved. Initial loss-only adaptation failed its TRAIN confirmation; fidelity training is in progress. No Test, Stop changes, OSM model input or main merge.

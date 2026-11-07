@@ -1,0 +1,74 @@
+{
+  "coverage": {
+    "completed": 2470,
+    "expected": 2470
+  },
+  "arms": {
+    "baseline": {
+      "n": 2470,
+      "NE": 35.19660843838926,
+      "raw": {
+        "1": 0.46963562753036436,
+        "5": 0.6894736842105263,
+        "10": 0.780161943319838,
+        "20": 0.8651821862348178
+      },
+      "nms": {
+        "1": 0.46963562753036436,
+        "5": 0.7785425101214575,
+        "10": 0.874089068825911,
+        "20": 0.9380566801619433
+      },
+      "no_anchor": 91,
+      "wall_s": 50.74357998371124
+    },
+    "scoped_public_names": {
+      "n": 2470,
+      "NE": 33.666903262976064,
+      "raw": {
+        "1": 0.4825910931174089,
+        "5": 0.7020242914979757,
+        "10": 0.7923076923076923,
+        "20": 0.8765182186234818
+      },
+      "nms": {
+        "1": 0.4825910931174089,
+        "5": 0.794331983805668,
+        "10": 0.8862348178137652,
+        "20": 0.9469635627530364
+      },
+      "no_anchor": 65,
+      "wall_s": 36.9926326838322
+    }
+  },
+  "corrected": 41,
+  "damaged": 9,
+  "net": 32,
+  "goal_verified": false,
+  "freeze": {
+    "objective": "Full2470 Top1 within20m strictly over50%",
+    "checkpoint_sha256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b",
+    "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "parser_sha256": "10238fcccd9f0662089c7e7f94d575cc3d38e72b932c40a220a6f7ec740903dd",
+    "runner_sha256": "4498576eafab984bb77c1d66e262533a46a9bccded9927f10517df3d48a51ac4",
+    "development_baseline_sha256": "efe3485d251a75ab16688406fa1ad70be4e9c2161b68a96a60b65bc3022661c9",
+    "development_selected_sha256": "f0086318476a23c0b1080860dfa2c59ee8744a8c2870ddca1dc43d2b1acae5ad",
+    "selected_before_Val": true,
+    "precision": "FP32 batch1 TF32off, identical for both arms",
+    "source_annotations_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+    "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "seed": 42,
+    "grid": 28,
+    "success_m": 20,
+    "nms_m": 20,
+    "expected": 2470,
+    "training": false,
+    "weights_modified": false,
+    "GT_usage": "Scoring AFTER frozen forward only; no ID/coordinate in public binding",
+    "fuzzy": {
+      "threshold": 0.92,
+      "margin": 0.05
+    },
+    "scope": "Original public binding vs scoped public name variants+literal aliases; original instruction unchanged"
+  }
+}

@@ -9,7 +9,6 @@ import numpy as np
 from graphnav.a3_runtime import public_static_record
 from graphnav.checkpointing import atomic_json,file_sha256
 from scripts.analyze_instruction_landmark_association import PublicNames
-from scripts.unified_pgvb_v3_pilot import _load_base
 
 
 def main():
