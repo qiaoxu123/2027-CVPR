@@ -17,7 +17,9 @@ def main():
  with torch.no_grad():
   for label in labels:
    if label['split']!=a.split:continue
-   i=label['index'];z=np.load(a.cache/'public_features'/f'{i:05d}.npz');valid=torch.tensor(z['valid']);known=valid.any(-1);choices={'geometry':0,'rgb':0,'shuffle':0}
+   i=label['index'];z=np.load(a.cache/'public_features'/f'{i:05d}.npz');valid=torch.tensor(z['valid'])
+   if payload['fingerprint'].get('roi_scale','both')=='40m':valid[:,0]=False
+   known=valid.any(-1);choices={'geometry':0,'rgb':0,'shuffle':0}
    # No GT determines eligibility, candidate selection, or shuffle.
    if bool(known[0]) and int(known.sum())>=2:
     images=torch.tensor(z['features'][0].astype('float32'));row=dict(images=images,valid=valid,text=torch.tensor(z['text_features'].astype('float32')).mean(0))

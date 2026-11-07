@@ -6,13 +6,15 @@ import torch
 from graphnav.appearance_matching import MultiScaleAppearanceMatcher
 from graphnav.checkpointing import file_sha256,atomic_save
 
-def load_rows(cache,labels,split):
+def load_rows(cache,labels,split,roi_scale="both"):
  rows=[]
  for record in labels:
   if record['split']!=split:continue
   path=cache/'public_features'/f"{record['index']:05d}.npz"
   if not path.exists():continue
-  z=np.load(path);valid=z['valid'];known=valid.any(-1)
+  z=np.load(path);valid=z['valid'].copy()
+  if roi_scale=='40m':valid[:,0]=False
+  known=valid.any(-1)
   if known.sum()<2:continue
   distance=np.linalg.norm(z['candidate_world']-record['target_world'],axis=-1)
   # Ambiguous 20-40m band is excluded from this weak location loss.
@@ -35,16 +37,16 @@ def evaluate(model,rows,device):
  return dict(n=len(records),correct=sum(r['hit'] for r in records),accuracy=sum(r['hit'] for r in records)/max(1,len(records)),rows=records)
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--epochs',type=int,default=3);p.add_argument('--resume',type=Path);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--epochs',type=int,default=3);p.add_argument('--resume',type=Path);p.add_argument('--roi-scale',choices=['both','40m'],default='both');a=p.parse_args()
  random.seed(42);np.random.seed(42);torch.manual_seed(42);torch.set_num_threads(4);device='cuda';a.output.mkdir(parents=True,exist_ok=True)
  labels=json.loads(a.labels.read_text());manifest=json.loads((a.cache/'manifest.json').read_text());summary=json.loads((a.cache/'summary.json').read_text())
  if len(labels)!=21878 or manifest['n']!=21878 or summary['n']!=21878:raise ValueError('Complete 21878-query TRAIN cache required')
  groups={name:{r['group'] for r in labels if r['split']==name} for name in ['fit','development','confirmation']}
  if any(groups[x]&groups[y] for x,y in [('fit','development'),('fit','confirmation'),('development','confirmation')]):raise ValueError('Physical target leakage across splits')
- fit=load_rows(a.cache,labels,'fit');dev=load_rows(a.cache,labels,'development')
+ fit=load_rows(a.cache,labels,'fit',a.roi_scale);dev=load_rows(a.cache,labels,'development',a.roi_scale)
  if not fit or not dev:raise ValueError('No supported positive/negative fit or development rows')
  model=MultiScaleAppearanceMatcher().to(device);model.scale_quality.requires_grad_(False);optimizer=torch.optim.AdamW(model.parameters(),lr=1e-4);history=[];best=-1
- fingerprint=dict(cache_manifest=file_sha256(a.cache/'manifest.json'),labels=file_sha256(a.labels),script=file_sha256(__file__))
+ fingerprint=dict(cache_manifest=file_sha256(a.cache/'manifest.json'),labels=file_sha256(a.labels),script=file_sha256(__file__),roi_scale=a.roi_scale)
  baseline=evaluate(model,dev,device);start_epoch=0
  if a.resume:
   saved=torch.load(a.resume,map_location=device,weights_only=False)
