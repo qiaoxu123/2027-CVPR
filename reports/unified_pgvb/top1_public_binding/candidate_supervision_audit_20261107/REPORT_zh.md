@@ -17,3 +17,16 @@
 70个共同Geometry张量中，50个浮点张量不相同；语言投影、token attention、pair geometry相关层均有变化，具体相对L2差见controller_geometry_comparison.json。这是候选上下文分布失配的具体来源，不能仅据权重差认定因果。模型维度仍匹配（hidden=128、grid=28、Top-K=20）。
 
 建议下一步在TRAIN固定物理目标留出中，保持候选世界位置相同，分别送入Stage1原始上下文与当前V2上下文，比较错误候选到达时Stop输出及正确候选接受率；先检验跨Checkpoint接口假设，再决定是否适配控制头。原Stage1曾按Seen128选择，需明确其历史验证暴露，不能把同一Pilot作为独立泛化证明。
+
+## 真实GPU上下文反事实（128条TRAIN development）
+
+冻结Stage1全部权重，固定当前V2的20个候选位置、分数、熵；仅替换相同网格位置的dense context。每个候选构造到达位置（固定yaw=0、相对地面30m），共2560个反事实状态，非真实闭环或观测序列。GT仅在公开前向完成后确定候选是否距目标≤20m。
+
+|上下文|正确候选接受率|错误候选接受率|
+|---|---:|---:|
+|当前V2|96.21% (897正例)|92.48% (1663负例)|
+|Stage1原Geometry|95.88%|91.28%|
+
+原上下文仅降低错误接受1.20pp，仍大量接受错误候选。因此不支持直接通过恢复原上下文解决候选确认。当前Stop输出不能作为可靠实例确认信号。此结果限于固定高度、yaw及候选到达反事实，不代表轨迹全状态或SR；128条同一任务的20候选不能作为2560个独立任务。
+
+复现脚本：scripts/probe_v2_controller_context.py。公开前向结果保存在服务器context_probe128/public_probe.json；指标见context_probe128_metrics.json。未训练、未运行Val/Test；应继续寻找具有目标身份信息的候选验证监督，而非调整Stop阈值。
