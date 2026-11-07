@@ -38,6 +38,9 @@ def main():
     ):
         p.add_argument("--" + name, type=Path, required=True)
     p.add_argument("--smoke", type=int, default=0, help="Run the first N episodes only")
+    p.add_argument("--candidate-selection", choices=("geometry-top1", "ranked-once"), default="geometry-top1",
+                   help="Use Geometry slot 0, or use the frozen learned rank head once and hold its Goal for the episode")
+    p.add_argument("--arms", nargs="+", choices=("legacy", "expanded"), default=("legacy", "expanded"))
     p.add_argument("--resume", action="store_true")
     a = p.parse_args()
 
@@ -99,7 +102,8 @@ def main():
             "legacy": "Existing exact public-name matcher/query cache",
             "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache",
         },
-        "controller": "Original GraphNav Stage1 trajectory/stop weights; threshold .3; guarded-blend; no exploration",
+        "candidate_selection": a.candidate_selection,
+        "controller": f"Original GraphNav Stage1 trajectory/stop weights; threshold .3; {'ranked-once guarded-blend' if a.candidate_selection == 'ranked-once' else 'Geometry slot-0 guarded-blend'}; no exploration",
         "visual_fusion": False, "OSM": False, "GT_access": "Scoring only after rollout",
         "runner_sha256": file_sha256(Path(__file__)),
         "source_sha256": {
@@ -117,7 +121,9 @@ def main():
         atomic_json(manifest, manifest_path)
 
     completed_by_arm = {}
-    for arm, queries in (("legacy", legacy_queries), ("expanded", expanded_queries)):
+    query_by_arm = {"legacy": legacy_queries, "expanded": expanded_queries}
+    for arm in a.arms:
+        queries = query_by_arm[arm]
         arm_out = output / arm
         rows_dir = arm_out / "rows"
         rows_dir.mkdir(parents=True, exist_ok=True)
@@ -143,8 +149,10 @@ def main():
         runtime = FrozenV2GeometryPolicy(
             a.source_v2, a.trained_v2, a.stage1, arm_out / "public_inputs", "trained_v2",
         )
+        if a.candidate_selection == "ranked-once":
+            runtime.execution = "ranked-guarded-blend"
         if (runtime.stop_threshold, runtime.execution, runtime.explore_candidates) != (
-            .3, "guarded-blend", 0,
+            .3, "ranked-guarded-blend" if a.candidate_selection == "ranked-once" else "guarded-blend", 0,
         ):
             raise ValueError("Controller execution differs from original frozen protocol")
         new_count = 0
@@ -162,6 +170,7 @@ def main():
             # private target coordinates/IDs do not enter inference.
             runtime.record = query
             runtime.visited_goal_cells = set()
+            runtime.selected_goal_slot = None
             poses, termination, timings, diagnostics = rollout(
                 episode, builder, controller, runtime.predict,
                 GROUND_LEVEL[query["map_name"]], protocol,
@@ -206,8 +215,8 @@ def main():
         del runtime, builder, controller
         torch.cuda.empty_cache()
 
-    a_rows, b_rows = completed_by_arm["legacy"], completed_by_arm["expanded"]
-    if len(a_rows) == 2470:
+    if "legacy" in completed_by_arm and "expanded" in completed_by_arm:
+        a_rows, b_rows = completed_by_arm["legacy"], completed_by_arm["expanded"]
         a_success = [x["metrics"]["SR"] for x in a_rows]
         b_success = [x["metrics"]["SR"] for x in b_rows]
         result = {
@@ -229,8 +238,19 @@ def main():
         atomic_json(result, output / "metrics.json")
         print(json.dumps(result, indent=2), flush=True)
     else:
-        print(json.dumps({"complete": False, "coverage_per_arm": {
-            k: len(v) for k, v in completed_by_arm.items()}, "expected": expected}), flush=True)
+        result = {
+            "complete": all(len(rows) == expected for rows in completed_by_arm.values()),
+            "coverage_per_arm": {k: len(v) for k, v in completed_by_arm.items()},
+            "expected": expected,
+            "candidate_selection": a.candidate_selection,
+            "arms": {k: aggregate([x["metrics"] for x in v]) for k, v in completed_by_arm.items()},
+        }
+        if expected == 2470:
+            result["manifest"] = manifest
+            atomic_json(result, output / "metrics.json")
+        else:
+            atomic_json(result, output / "smoke_metrics.json")
+        print(json.dumps(result, indent=2), flush=True)
 
 
 if __name__ == "__main__":

@@ -1,3 +1,12 @@
+## [Frozen Candidate Rank Navigation Ablation] - 2026-11-07
+### Features
+- Add an opt-in policy that selects one candidate at episode start with the existing frozen trajectory rank head, then holds that Goal while using the same guarded path and Stop protocol.
+- Add explicit arm selection to the expanded-public navigation evaluator so a single frozen ablation can be run independently and resumed.
+### Design Rationale
+- The current Val-Seen policy forced candidate slot 0 on every decision, leaving the trained candidate rank head unused. This ablation isolates whether its existing ranking signal can improve navigation without RGB or weight updates.
+### Notes & Caveats
+- This is a Geometry/controller ablation, not visual evidence. It must not be used as the visual fallback. The Geometry-only ordering remains the fallback when no reliable RGB evidence exists; any gains from this arm are attributed to the learned controller rank head only.
+
 ## [Public Landmark Name Variant Retrieval] - 2026-11-07
 ### Features
 - Expand public CityRefer landmark matching with collision-checked unique name phrases, provider-prefix removal, and final-token singular/plural variants.

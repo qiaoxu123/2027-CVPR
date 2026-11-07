@@ -1,0 +1,97 @@
+{
+  "complete": true,
+  "episodes": 2470,
+  "paired_episode_ids_match": true,
+  "baseline": {
+    "SR": 0.4854251012145749,
+    "OSR": 0.554251012145749,
+    "SPL": 0.471514895808567,
+    "NE_m": 30.82988120593632,
+    "nDTW": 0.29893113554528744,
+    "sDTW": 0.17207070979632066,
+    "steps": 6.811336032388664,
+    "path_length_m": 196.16879435340826,
+    "inference_ms": 6.407341657377296
+  },
+  "ranked_once": {
+    "SR": 0.4291497975708502,
+    "OSR": 0.49635627530364373,
+    "SPL": 0.41722332222298036,
+    "NE_m": 32.64638412800145,
+    "nDTW": 0.29031404128691657,
+    "sDTW": 0.15050803654695546,
+    "steps": 6.751012145748988,
+    "path_length_m": 191.42577054135137,
+    "inference_ms": 6.495442940443464
+  },
+  "paired_transitions": {
+    "fail_to_success": 123,
+    "success_to_fail": 262,
+    "success_to_success": 937,
+    "fail_to_fail": 1148
+  },
+  "net_success_change": -139,
+  "selected_goal_slot_counts": {
+    "0": 1044,
+    "1": 596,
+    "2": 322,
+    "3": 178,
+    "4": 122,
+    "5": 58,
+    "6": 40,
+    "7": 24,
+    "8": 19,
+    "9": 10,
+    "10": 11,
+    "11": 7,
+    "12": 8,
+    "13": 6,
+    "14": 3,
+    "15": 2,
+    "16": 5,
+    "17": 4,
+    "18": 8,
+    "19": 3
+  },
+  "ranked_once_run_manifest": {
+    "split": "val_seen",
+    "expected_per_arm": 2470,
+    "full_split_size": 2470,
+    "protocol": {
+      "horizon": 20,
+      "horizontal_step_m": 50.0,
+      "vertical_step_m": 10.0,
+      "min_altitude_m": 10.0,
+      "max_altitude_m": 100.0,
+      "stagnation_steps": 5,
+      "stagnation_tolerance_m": 0.0001,
+      "success_radius_m": 20.0,
+      "dimensions": 2
+    },
+    "seed": 42,
+    "precision": "FP32; TF32 disabled",
+    "geometry_checkpoint_sha256": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+    "geometry_source_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+    "controller_checkpoint_sha256": "00f2acc0e3d0cd2c141dbf852c1205fedd218a174ea1d5528edba67217d77c5a",
+    "legacy_queries_sha256": "4b87a86b4c281bf03a76705e67259309c3a87b1c301cafca6588f641cfb50fa7",
+    "expanded_queries_sha256": "9c959421dd7f94eb292385b240e80d44c36a6973a6eca16a472fffd34b20c382",
+    "annotations_sha256": "df3b5a27a6c6d05e90fd3c6618e2676a3ed5fa3214dc5594485e206e9ea37a06",
+    "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+    "bindings": {
+      "legacy": "Existing exact public-name matcher/query cache",
+      "expanded": "Frozen PublicLandmarkMentions aliases and add_mention_aliases query cache"
+    },
+    "candidate_selection": "ranked-once",
+    "controller": "Original GraphNav Stage1 trajectory/stop weights; threshold .3; ranked-once guarded-blend; no exploration",
+    "visual_fusion": false,
+    "OSM": false,
+    "GT_access": "Scoring only after rollout",
+    "runner_sha256": "98ada473ef1dc638b795690d346a5efafc6e6db48d7accd1b19852cf12c1d6f7",
+    "source_sha256": {
+      "closedloop": "d09a490a8874307b4335cfa341395ada617a80309d8e973ab3dea3c033b11c05",
+      "a3_runtime": "165c03c652c7966f7cd257912925cba7259fa65cf59ea62af9b626144e4eb76a",
+      "candidate_geometry": "046f9e8cd78462145ce37989419c0412551c7d32e7b89e0ff36b4f83216879c2",
+      "renderer": "a77de9be89cef5b3380bebb6eb5691c5d1776024959ec6ec2bfd16dab7efa747"
+    }
+  }
+}

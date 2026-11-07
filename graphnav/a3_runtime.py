@@ -46,6 +46,7 @@ class A3WaypointPolicy:
     def set_episode(self, episode, transform, catalog):
         self.record=public_static_record(episode,transform,catalog,max_landmarks=self.args.max_landmarks)
         self.visited_goal_cells=set()
+        self.selected_goal_slot=None
 
     @torch.no_grad()
     def frozen_field(self):
@@ -102,7 +103,7 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
             raise ValueError('geometry/pose runtime only accepts matching zero visual-history inputs')
         if not 0<stop_threshold<1:raise ValueError('Stop threshold must be in (0,1)')
         self.stop_threshold=stop_threshold
-        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct'):
+        if execution not in ('joint','fixed-goal','fixed-goal-no-stop','direct-goal','guarded-path','guarded-blend','guarded-direct','ranked-guarded-blend'):
             raise ValueError('unknown trajectory execution ablation')
         self.execution=execution
         if not 0<=explore_candidates<=8:raise ValueError('bounded exploration candidates must be between0 and8')
@@ -132,7 +133,21 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
         with torch.autocast('cuda',dtype=torch.bfloat16,enabled=self.device.type=='cuda'):output=self.head(**inputs)
         from .trajectory_policy import calibrated_stop_probability
         candidate,mode,waypoint,stop=output.select()
-        if self.execution!='joint':
+        if self.execution=='ranked-guarded-blend':
+            # Use the frozen trained candidate ranker once, then hold its Goal
+            # for the episode. The path and Stop head still update from the
+            # current pose, while the original arrival and altitude guards stay
+            # active. This isolates candidate ranking from Goal hopping.
+            if self.selected_goal_slot is None:
+                self.selected_goal_slot=int(candidate[0])
+            candidate=torch.tensor([self.selected_goal_slot],dtype=torch.long,device=self.device)
+            mode=output.mode_logits[:,candidate[0]].argmax(-1)
+            waypoint=output.paths_world[torch.arange(1,device=self.device),candidate,mode,0]
+            stop=output.stop_logits[:,candidate[0]]
+            goal=inputs['bounds'][:,:2]+inputs['candidate_xy'][:,candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2])
+            from .trajectory_policy import convergent_first_waypoint
+            waypoint,_=convergent_first_waypoint(inputs['pose_world'],goal[:,0],waypoint,blend=.25)
+        elif self.execution!='joint':
             limit=min(getattr(self,'explore_candidates',0),field.candidate_ids.shape[1])
             available=[i for i in range(limit) if int(field.candidate_ids[0,i]) not in self.visited_goal_cells] if limit else [0]
             available=available or [0]
@@ -154,11 +169,12 @@ class A3TrajectoryPolicy(A3WaypointPolicy):
                     if position+1<len(available):continue
                 break
         probability=float(calibrated_stop_probability(stop,self.stop_positive_weight)[0])
-        predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if self.execution.startswith('guarded-') else None
+        guarded=self.execution.startswith('guarded-') or self.execution=='ranked-guarded-blend'
+        predicted_goal_distance=float((goal-inputs['pose_world'][:,:2]).norm()) if guarded else None
         arrival_guard=predicted_goal_distance is None or predicted_goal_distance<=1e-3
         height=float(state.pose[2])-GROUND_LEVEL[self.record['map_name']]
         altitude_guard=10.-1e-5<=height<=100.+1e-5
         return SimpleNamespace(xyz=waypoint[0].float().cpu().numpy(),should_stop=(probability>=self.stop_threshold and self.execution!='fixed-goal-no-stop' and arrival_guard and altitude_guard),
             diagnostics=dict(policy='Frozen A3 + learned trajectory/rank/Stop; geometry/pose only',
-                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),stop_probability=probability,predicted_goal_distance=predicted_goal_distance,stop_altitude_guard=altitude_guard,
+                execution=self.execution,candidate=int(candidate[0]),mode=int(mode[0]),selected_goal_slot=self.selected_goal_slot,stop_probability=probability,predicted_goal_distance=predicted_goal_distance,stop_altitude_guard=altitude_guard,
                 explored_goal_cells=len(self.visited_goal_cells),selected_goal_xy=(inputs['bounds'][:,:2]+inputs['candidate_xy'][torch.arange(1,device=self.device),candidate]*(inputs['bounds'][:,2:]-inputs['bounds'][:,:2]))[0].float().cpu().tolist()))
