@@ -74,15 +74,22 @@ def build(data,overlays,store,user,password):
     @app.get('/api/controls/{city}/export')
     def export(city:str):return JSONResponse(read(city),headers={'Content-Disposition':f'attachment; filename="{city}_controls.json"'})
     @app.get('/api/project-corners/{city}/{name}')
-    def corners(city:str,name:str):
+    def corners(city:str,name:str,preview:str="active"):
         import rasterio
-        record=read(city);reg=record.get('active_registration') or record.get('registration') or {}
+        record=read(city);active=record.get('active_registration') or {};reg=record.get('scene_registrations',{}).get(name) or (active if active.get('map_name',name)==name else {}) or record.get('registration') or {}
+        if preview=='auto':
+            candidate=store/'auto_proposals'/name/'result.json'
+            if not candidate.exists():raise HTTPException(400,'此场景没有自动候选')
+            reg=json.loads(candidate.read_text())
+            if reg.get('status')=='rejected':raise HTTPException(400,'自动候选已拒绝')
+        elif preview!='active':raise HTTPException(400,'Invalid preview source')
         if 'matrix' not in reg:raise HTTPException(400,'尚无变换')
         if not name.startswith(city+'_block_') or '/' in name:raise HTTPException(400)
         p=Path(data)/'rgbd'/(name+'.tif')
         if not p.exists():raise HTTPException(404)
         with rasterio.open(p) as r:b=r.bounds
-        xy=np.array([[b.left,b.top],[b.right,b.top],[b.right,b.bottom],[b.left,b.bottom]]);M=np.array(reg['matrix']);en=xy@M[:,:2].T+M[:,2];lon,lat=transform('EPSG:27700','EPSG:4326',en[:,0],en[:,1]);return dict(corners=list(zip(lat,lon)),verified=bool(reg.get('verified',False) and name in reg.get('per_map_validation',{})))
+        xy=np.array([[b.left,b.top],[b.right,b.top],[b.right,b.bottom],[b.left,b.bottom]]);M=np.array(reg['matrix']);en=xy@M[:,:2].T+M[:,2];lon,lat=transform('EPSG:27700','EPSG:4326',en[:,0],en[:,1]);fp=hashlib.sha256(json.dumps(record['points'],sort_keys=True).encode()).hexdigest();stale=bool(reg.get('controls_fingerprint') and reg['controls_fingerprint']!=fp)
+        return dict(corners=list(zip(lat,lon)),verified=bool(reg.get('verified',False) and name in reg.get('per_map_validation',{}) and not stale),controls_stale=stale,preview_source=preview)
     session=requests.Session();proxy=os.environ.get('OSM_HTTP_PROXY');session.proxies={'http':proxy,'https':proxy} if proxy else {};session.headers['User-Agent']='CityNavManualControlPoint/1.0 (+https://github.com/qiaoxu123/2027-CVPR)'
     session.headers['Referer']=os.environ.get('CONTROL_PUBLIC_URL','http://101.43.173.9:42024/')
     @lru_cache(maxsize=512)
@@ -115,10 +122,37 @@ def build(data,overlays,store,user,password):
         if not re.fullmatch(city+r'_block_\d+',name) or not (Path(data)/'rgbd'/(name+'.tif')).is_file():raise HTTPException(404)
         d=store/'auto_proposals'/name;d.mkdir(parents=True,exist_ok=True);return d
     def auto_summary(d):
+        status=d/'status.json'
+        if status.exists():
+            state=json.loads(status.read_text())
+            if state.get('status') in ['running','failed']:return state
         result=d/'result.json'
         if result.exists():
             obj=json.loads(result.read_text());return {k:v for k,v in obj.items() if k not in ['source_polygons','osm_features']}
         status=d/'status.json';return json.loads(status.read_text()) if status.exists() else dict(status='not_started')
+    @app.get('/api/registration-status')
+    def registration_status():
+        p=store/'batch34_summary.json';summary=json.loads(p.read_text()) if p.exists() else dict(n=34,rows=[])
+        for row in summary.get('rows',[]):
+            f=store/'auto_proposals'/row['map_name']/'result.json'
+            if f.exists():
+                r=json.loads(f.read_text());row['review_status']=r.get('status','proposal')
+                if r.get('grade'):
+                    row.update(grade=r['grade'],validation=r.get('validation'),selected=r.get('selected'),precise_2m=bool(r.get('grade')=='verified' and r.get('validation') and r['validation']['n']>=5 and r['validation']['max_m']<=2))
+                current=read(row['city']);fp=hashlib.sha256(json.dumps(current['points'],sort_keys=True).encode()).hexdigest();row['controls_stale']=bool(r.get('controls_fingerprint') and r['controls_fingerprint']!=fp)
+        if summary.get('rows'):
+            summary.update(verified=sum(r['grade']=='verified' for r in summary['rows']),pending=sum(r['grade']=='pending_validation' for r in summary['rows']),unreliable=sum(r['grade']=='unreliable' for r in summary['rows']),precise_2m=sum(r.get('precise_2m',False) for r in summary['rows']))
+        return summary
+    @app.get('/api/osm-export/{name}')
+    def osm_export(name:str):
+        if not re.fullmatch(r'(cambridge|birmingham)_block_\d+',name):raise HTTPException(404)
+        f=store/'validated_osm_exports'/(name+'.json');rp=store/'auto_proposals'/name/'result.json'
+        if not f.exists() or not rp.exists():raise HTTPException(403,'此场景尚无独立验证通过的OSM导出')
+        reg=json.loads(rp.read_text());v=reg.get('validation') or {};current=read(name.split('_')[0]);fp=hashlib.sha256(json.dumps(current['points'],sort_keys=True).encode()).hexdigest()
+        if reg.get('status')=='rejected' or not reg.get('verified') or v.get('n',0)<5 or v.get('max_m',1e9)>5 or reg.get('controls_fingerprint')!=fp:raise HTTPException(403,'验证不足、控制点已变化或候选已被拒绝')
+        exported=json.loads(f.read_text())
+        if not np.allclose(np.asarray(exported.get('registration_matrix')),np.asarray(reg['matrix']),rtol=0,atol=1e-8):raise HTTPException(403,'配准已变化，需重新生成OSM导出')
+        return FileResponse(f,media_type='application/json',filename=name+'_osm_local_xy.json')
     @app.get('/api/auto/{city}/{name}')
     def auto_get(city:str,name:str):return auto_summary(auto_dir(city,name))
     @app.get('/api/auto/{city}/{name}/image')
@@ -136,7 +170,21 @@ def build(data,overlays,store,user,password):
             archive=d/('result-'+str(int(time.time()))+'.json');os.replace(d/'result.json',archive)
         atomic(d/'controls_snapshot.json',snapshot);atomic(d/'status.json',dict(status='running',base_revision=snapshot['revision']))
         def work():
-            try:run_job(data,city,name,snapshot,d,os.environ.get('OSM_HTTP_PROXY'));atomic(d/'status.json',dict(status='proposal'))
+            try:
+                from tools.osm_map.batch_policy import select_public_transform,grade_independent
+                from tools.osm_map.auto_registration import metrics,render_preview
+                import rasterio
+                fingerprint=hashlib.sha256(json.dumps(snapshot['points'],sort_keys=True).encode()).hexdigest();seedfile=store/'city_seeds'/(city+'.json');seed=json.loads(seedfile.read_text()) if seedfile.exists() else {}
+                initial=seed.get('matrix') if seed.get('controls_fingerprint')==fingerprint else None
+                r=run_job(data,city,name,snapshot,d,os.environ.get('OSM_HTTP_PROXY'),initial_matrix=initial)
+                with rasterio.open(Path(data)/'rgbd'/(name+'.tif')) as tif:bounds=list(tif.bounds)
+                choice=select_public_transform(r['initial_matrix'],r['matrix'],bounds,r['structure_cost_initial'],r['structure_cost_final'],r['edge_samples'],r['building_proxy_polygons'])
+                r['scene_local_candidate_matrix']=r['matrix'];r.update(choice);atomic(d/'selected_prediction_frozen.json',choice)
+                val=[p for p in snapshot['points'] if p['split']=='validation' and p['map_name']==name];r['validation']=metrics(r['matrix'],val);r['grade']=grade_independent(r['validation'],r['risk_flags'],sum(p['split']=='fit' for p in snapshot['points']));r['verified']=r['grade']=='verified';r['per_map_validation']={name:r['validation']} if val else {};r['controls_fingerprint']=fingerprint;r['initialization_source']='frozen city seed' if initial else 'current manual fit';render_preview(data,r,d/'alignment.png');atomic(d/'result.json',r)
+                if r['verified']:
+                    from scripts.summarize_citynav_osm_batch import validated_export
+                    exdir=store/'validated_osm_exports';exdir.mkdir(exist_ok=True);atomic(exdir/(name+'.json'),validated_export(r,dict(map_name=name,grade=r['grade'],matrix=r['matrix'],validation=r['validation']),data))
+                atomic(d/'status.json',dict(status='proposal'))
             except Exception as e:atomic(d/'status.json',dict(status='failed',error=str(e)[:500]))
         running[key]=executor.submit(work);return dict(status='running',base_revision=snapshot['revision'])
     @app.post('/api/auto/{city}/{name}/accept')
@@ -145,10 +193,11 @@ def build(data,overlays,store,user,password):
         if 'matrix' not in r or r.get('status')=='rejected':raise HTTPException(400,'无可接受候选')
         with (store/(city+'.lock')).open('a') as lock:
             fcntl.flock(lock,fcntl.LOCK_EX);current=read(city)
-            if current['revision']!=r['base_revision']:raise HTTPException(409,'控制点已变化，请重新运行自动配准')
+            fingerprint=hashlib.sha256(json.dumps(current['points'],sort_keys=True).encode()).hexdigest()
+            if (r.get('controls_fingerprint') and r['controls_fingerprint']!=fingerprint) or (not r.get('controls_fingerprint') and current['revision']!=r['base_revision']):raise HTTPException(409,'控制点已变化，请重新运行自动配准')
             atomic(store/(city+f'.history-{current["revision"]}.json'),current)
             # Accept preview only; verification remains false without independent evidence.
-            current['active_registration']=r;current['revision']+=1;atomic(path(city),current)
+            current.setdefault('scene_registrations',{})[name]=r;current['active_registration']=r;current['revision']+=1;atomic(path(city),current)
             full=json.loads((d/'result.json').read_text());full['status']='accepted';atomic(d/'result.json',full)
         return dict(status='accepted',verified=r.get('verified',False),revision=current['revision'])
     @app.post('/api/auto/{city}/{name}/reject')
@@ -157,7 +206,8 @@ def build(data,overlays,store,user,password):
         if not (d/'result.json').exists():raise HTTPException(400,'无候选')
         r=json.loads((d/'result.json').read_text());r['status']='rejected';atomic(d/'result.json',r)
         with (store/(city+'.lock')).open('a') as lock:
-            fcntl.flock(lock,fcntl.LOCK_EX);current=read(city);active=current.get('active_registration',{})
+            fcntl.flock(lock,fcntl.LOCK_EX);current=read(city);active=current.get('active_registration',{});scenes=current.get('scene_registrations',{})
+            if name in scenes and scenes[name].get('base_revision')==r.get('base_revision'):scenes.pop(name);current['revision']+=1;atomic(path(city),current)
             if active.get('map_name')==name and active.get('base_revision')==r.get('base_revision'):
                 atomic(store/(city+f'.history-{current["revision"]}.json'),current);current.pop('active_registration',None);current['revision']+=1;atomic(path(city),current)
         return dict(status='rejected',revision=current['revision'])

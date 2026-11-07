@@ -48,3 +48,11 @@ OSM_HTTP_PROXY=http://127.0.0.1:7890 python -m scripts.run_citynav_auto_registra
 ```
 
 OSM数据来自标准map API，缓存原始XML并记录数据哈希、获取时间；网络不可用或结构不足时显式失败。真实控制点、OSM原始缓存不提交Git。模型和训练代码不参与该过程。
+
+## 34场景批次
+
+状态总表区分计算完成、独立验证与结构风险；没有验证点时误差显示未知。接受按场景存于`scene_registrations`，不把局部修正默认为整个城市变换。使用控制点fingerprint确保其他场景的接受操作不会使点集相同的候选失效。
+
+`/api/osm-export/<scene>`仅对本场景独立验证通过、控制点未变、候选未拒绝且当前矩阵一致的研究矢量导出开放；不接入模型。`/api/registration-status`为总表数据。`preview=auto`只提供自动候选叠加，不会将待验证候选视为已验证。
+
+批量入口`scripts.batch_citynav_osm_registration`保留城市种子与控制点快照。每个`batch_status.json`可恢复；优化代码的计算部分改变时必须新建输出目录。场景独立验证只评分该场景的人工验证点。批次原始数据和OSM缓存保存在服务器，Git只提交报告、必要矢量研究样本、脚本和典型图。

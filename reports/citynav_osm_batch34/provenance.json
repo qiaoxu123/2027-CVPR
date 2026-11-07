@@ -1,0 +1,34 @@
+{
+  "run_source_commit": "71bd7e3d",
+  "manifest": {
+    "policy": {
+      "local_min_relative_structure_improvement": 0.1,
+      "local_max_corner_shift_m": 15,
+      "grade_max_m": 5,
+      "precise_max_m": 2,
+      "seed": 42
+    },
+    "source_script_sha256": "e93038ec8f1da2cbcb14c3f4731e6665e2f2b86bda2596d8b04f8750e6f18755",
+    "optimizer_sha256": "ac6cbcb0f5f6675ef198fac45bc7da8bbc75e0e75b6959580e1ea305d3e10272",
+    "n": 34,
+    "split": "public scene registration; no task labels",
+    "started_at": 1794011576.908042
+  },
+  "control_snapshots_sha256": {
+    "birmingham": "be238657184f75cee48dac88d9f47714ce0e0fd1f645dba4d384a27486e3c56a",
+    "cambridge": "a359b30fe7c64f460d060c302110d7b54f5092ddc53736867692e949e61cc67d"
+  },
+  "risk_flags": {
+    "unstable_local_correction": 11,
+    "insufficient_building_proxies": 1
+  },
+  "optimizer_used_target_gt": false,
+  "formal_dataset_task_labels_loaded": false,
+  "weights_modified": false,
+  "final_delivery_code_sha256": {
+    "tools/osm_map/control_app.py": "fc7a5d92df91a87b232b1c252b4925f7274291c2b4e48c91247a3cb08042e6e7",
+    "tools/osm_map/batch_policy.py": "9045ef4daeb9811467f7cdb94bac5e4145f0f26534e09d03ce2b3aa861a14603",
+    "scripts/summarize_citynav_osm_batch.py": "4b83d51062da55aad6cb5adbd4a454f365a4fde584a5bc31d5134141db1e4c59",
+    "scripts/report_citynav_osm_batch.py": "8cc78b5ca8557aa78ec1569cfea612a2d1bb06e2af1a48b7e90d47ed30948a36"
+  }
+}

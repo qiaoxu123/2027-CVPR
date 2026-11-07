@@ -36,3 +36,12 @@
 - Select predictions only by public structural costs, then evaluate existing independent controls; preserve manual controls and avoid assuming city-wide validity from one scene.
 ### Notes & Caveats
 - Birmingham block3 improved on five independent controls; Cambridge has no independent validation. Masks/junctions are geometric proxies; no claim of validated alignment across all 34 scenes.
+
+## [CityNav OSM 34-Scene Registration Audit] - 2026-11-07
+### Features
+- Run resumable city-seeded registration on all 34 public scenes with independent per-scene grading and a 34-scene HTTP dashboard.
+- Add scene-specific accept/reject, control fingerprint checks and validated-only OSM geometry/semantics export.
+### Design Rationale
+- Freeze city/global-vs-local selection using structural evidence, then evaluate independent controls only in their own scene. Never turn a structural score into geographic accuracy.
+### Notes & Caveats
+- 34 computational outputs: 1 independently verified, 21 awaiting validation, 12 unreliable local-correction cases. No scene proven within 2m maximum error; no claim of city-wide geographic validity and no model training.

@@ -7,6 +7,9 @@ from graphnav.checkpointing import atomic_json
 p=argparse.ArgumentParser();p.add_argument('--data',type=Path,required=True);p.add_argument('--controls',type=Path,required=True);p.add_argument('--seeds',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--proxy');a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
 # Frozen public-only selection; never choose a transform by heldout error.
 policy=dict(local_min_relative_structure_improvement=.10,local_max_corner_shift_m=15,grade_max_m=5,precise_max_m=2,seed=42)
+source=Path('tools/osm_map/auto_registration.py').read_text();frozen=a.output/'optimizer_source_frozen.py'
+if not frozen.exists():frozen.write_text(source)
+if source.split('def render_preview')[0]!=frozen.read_text().split('def render_preview')[0]:raise RuntimeError('优化算法已变化；请使用新的实验目录，不得混合恢复')
 manifest=dict(policy=policy,source_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),optimizer_sha256=hashlib.sha256(Path('tools/osm_map/auto_registration.py').read_bytes()).hexdigest(),n=34,split='public scene registration; no task labels',started_at=time.time())
 if not (a.output/'manifest.json').exists():atomic_json(manifest,a.output/'manifest.json')
 controls={};seeds={}

@@ -122,7 +122,7 @@ def render_preview(data,r,dest):
  import matplotlib.pyplot as plt
  with rasterio.open(Path(data)/'rgbd'/(r['map_name']+'.tif')) as t:b=t.bounds
  rgb=cv2.cvtColor(cv2.imread(str(Path(data)/'rgbd'/(r['map_name']+'.png'))),cv2.COLOR_BGR2RGB);ext=[b.left,b.right,b.bottom,b.top];fig,axes=plt.subplots(1,3,figsize=(18,6))
- for ax,mat,title in zip(axes[:2],[r['initial_matrix'],r['matrix']],['Manual-fit initial','Automatic structural proposal']):
+ for ax,mat,title in zip(axes[:2],[r['initial_matrix'],r['matrix']],[('City-uniform initial' if r.get('initialization_source','').startswith('frozen') else 'Manual-fit initial'),('Selected: '+r['selected'] if r.get('selected') else 'Automatic structural proposal')]):
   ax.imshow(rgb,extent=ext);M=np.array(mat);inv=np.linalg.inv(M[:,:2])
   for f in r['osm_features']:
    p=(np.array(f['xy'])-M[:,2])@inv.T;ax.plot(*p.T,color='cyan' if f['kind']=='building' else 'yellow',lw=.7,alpha=.8)
