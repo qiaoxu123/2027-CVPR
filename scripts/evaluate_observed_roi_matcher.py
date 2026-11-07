@@ -5,12 +5,15 @@ import numpy as np
 import torch
 from graphnav.appearance_matching import MultiScaleAppearanceMatcher
 from scripts.train_observed_roi_matcher import score
+from graphnav.checkpointing import file_sha256
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--checkpoint',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--split',choices=['development','confirmation'],default='development');a=p.parse_args();torch.set_num_threads(4)
  manifest=json.loads((a.cache/'manifest.json').read_text());summary=json.loads((a.cache/'summary.json').read_text())
  if manifest['n']!=21878 or summary['n']!=21878:raise ValueError('Incomplete cache')
- payload=torch.load(a.checkpoint,map_location='cpu',weights_only=True);model=MultiScaleAppearanceMatcher().cuda().eval();model.load_state_dict(payload['model']);labels=json.loads(a.labels.read_text());records=[]
+ payload=torch.load(a.checkpoint,map_location='cpu',weights_only=False)
+ if payload['fingerprint']['cache_manifest']!=file_sha256(a.cache/'manifest.json') or payload['fingerprint']['labels']!=file_sha256(a.labels):raise ValueError('Checkpoint/cache input mismatch')
+ model=MultiScaleAppearanceMatcher().cuda().eval();model.load_state_dict(payload['model']);labels=json.loads(a.labels.read_text());records=[]
  with torch.no_grad():
   for label in labels:
    if label['split']!=a.split:continue
