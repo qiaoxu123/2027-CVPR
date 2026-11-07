@@ -36,7 +36,11 @@ def evaluate(model,rows,device):
 def main():
  p=argparse.ArgumentParser();p.add_argument('--cache',type=Path,required=True);p.add_argument('--labels',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--epochs',type=int,default=3);a=p.parse_args()
  random.seed(42);np.random.seed(42);torch.manual_seed(42);torch.set_num_threads(4);device='cuda';a.output.mkdir(parents=True,exist_ok=True)
- labels=json.loads(a.labels.read_text());fit=load_rows(a.cache,labels,'fit');dev=load_rows(a.cache,labels,'development')
+ labels=json.loads(a.labels.read_text());manifest=json.loads((a.cache/'manifest.json').read_text());summary=json.loads((a.cache/'summary.json').read_text())
+ if len(labels)!=21878 or manifest['n']!=21878 or summary['n']!=21878:raise ValueError('Complete 21878-query TRAIN cache required')
+ groups={name:{r['group'] for r in labels if r['split']==name} for name in ['fit','development','confirmation']}
+ if any(groups[x]&groups[y] for x,y in [('fit','development'),('fit','confirmation'),('development','confirmation')]):raise ValueError('Physical target leakage across splits')
+ fit=load_rows(a.cache,labels,'fit');dev=load_rows(a.cache,labels,'development')
  if not fit or not dev:raise ValueError('No supported positive/negative fit or development rows')
  model=MultiScaleAppearanceMatcher().to(device);optimizer=torch.optim.AdamW(model.parameters(),lr=1e-4);history=[];best=-1
  baseline=evaluate(model,dev,device)
@@ -45,7 +49,9 @@ def main():
   for r in fit:
    optimizer.zero_grad();scores=score(model,r,device).masked_fill(~r['eligible'].to(device),-1e4);target=r['positive'].to(device).float();target=target/target.sum();loss=-(target*scores.log_softmax(-1)).sum()
    if not torch.isfinite(loss):raise FloatingPointError('nonfinite loss')
-   loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True);optimizer.step();losses.append(float(loss))
+   loss.backward();torch.nn.utils.clip_grad_norm_(model.parameters(),1.,error_if_nonfinite=True);
+   if not any(p.grad is not None and bool(p.grad.abs().sum()>0) for p in model.parameters()):raise RuntimeError('Zero matcher gradient')
+   optimizer.step();losses.append(float(loss))
   model.eval();metrics=evaluate(model,dev,device);history.append(dict(epoch=epoch+1,loss=float(np.mean(losses)),development=metrics));payload=dict(model=model.state_dict(),optimizer=optimizer.state_dict(),epoch=epoch+1,history=history,seed=42,scope='weak 20m location proxy; 20-40m ignored; current384 real start observations')
   torch.save(payload,a.output/'last.pt')
   if metrics['accuracy']>best:best=metrics['accuracy'];torch.save(payload,a.output/'best.pt')
