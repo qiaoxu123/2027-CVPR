@@ -1,0 +1,31 @@
+{
+  "split": "confirmation",
+  "count": 7619,
+  "physical_target_groups": 1386,
+  "seed": 42,
+  "precision": "FP32; TF32 disabled",
+  "GT": "TRAIN scoring only, after forward",
+  "public_inputs": "public_train.jsonl with neutral target placeholder",
+  "caveat": "Base V2 was pretrained on all official TRAIN, including this group; this only measures adaptation transfer/regression, not unseen-pretraining generalization.",
+  "prepared_manifest_sha256": "c1a427c23f81bf3407649896ee18e6727c3382082acfbd9f6618525b364cc608",
+  "parser_sha256": "40157f2d0bdbe44fab26e293a151a31305c776758dc47177bc44b77fc32fb05c",
+  "summaries": {
+    "last": {
+      "checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/unified_v2_target_features_s42_20261106/train/last.pt",
+      "checkpoint_sha256": "9ac51ee253eed46acbf66e6afb47888857b70258f5fcd195721723d5112dc387",
+      "n": 7619,
+      "R20": 0.6708229426433915,
+      "NE_m": 24.292483487249218,
+      "elapsed_s": 59.93027644092217
+    },
+    "adapted_v2_candidate": {
+      "checkpoint": "/home/20261024_1/Workspace/2027-CVPR/GraphNav/runs/v2_top1_public_binding_s42_20261107/fidelity_public_init/adapted_v2_candidate.pt",
+      "checkpoint_sha256": "e58c0fcb79603413c499c399aba8597c6b95d4b1b205f8e9d929dfed213568df",
+      "n": 7619,
+      "R20": 0.6720042000262502,
+      "NE_m": 25.17870539541804,
+      "elapsed_s": 7.217885417398065
+    }
+  },
+  "script_sha256": "20bb9f6e9c2b668b7c3b3b0506a551bee0a14d3c3de0b4651162d245598044d5"
+}
