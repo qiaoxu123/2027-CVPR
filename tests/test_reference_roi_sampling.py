@@ -1,0 +1,19 @@
+import numpy as np
+from scripts.audit_reference_roi_supervision import reference_indices, select_groups
+
+
+def test_fixed_reference_samples_deduplicate_identical_poses():
+    trajectory = np.array([[0,0,30,0],[0,0,30,0],[0,0,30,0],
+                           [5,0,30,0],[10,0,30,0]], dtype=float)
+    assert reference_indices(trajectory) == [('start',0), ('end',4)]
+    assert reference_indices(trajectory[:1]) == [('start',0)]
+    assert reference_indices([]) == []
+
+
+def test_episode_selection_ignores_gt_and_uses_unique_physical_groups():
+    labels = [dict(index=i, group=str(i//2), split='fit', target_world=[i,0])
+              for i in range(12)]
+    original = select_groups(labels, 'fit', 4)
+    changed = [{**r, 'target_world':[100000,-100000]} for r in labels]
+    assert original == select_groups(changed, 'fit', 4)
+    assert len({labels[i]['group'] for i in original}) == 4
