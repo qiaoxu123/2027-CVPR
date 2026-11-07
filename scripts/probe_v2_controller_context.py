@@ -9,7 +9,7 @@ from graphnav.trajectory_policy import CandidateTrajectoryStop,calibrated_stop_p
 from types import SimpleNamespace
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--stage1',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--stage1',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--limit',type=int,default=128);a=p.parse_args()
  torch.manual_seed(42);torch.set_num_threads(4);device='cuda'
  s=torch.load(a.stage1,map_location='cpu',weights_only=True);cfg=SimpleNamespace(**s['a3_args'])
  model=new_model(cfg,torch.device(device));model.load_state_dict({k[3:]:v for k,v in s['model'].items() if k.startswith('a3.')});model.eval()
@@ -17,7 +17,7 @@ def main():
  bert=FrozenBERTTokens(cfg.text_backbone,device=device,max_length=96)
  ds=FullCandidateDataset(a.root/'scoped_data/public_train.jsonl',grid_size=cfg.grid_size,max_landmarks=cfg.max_landmarks,max_roads=cfg.max_roads,max_relations=cfg.max_relations,prior_sigma_m=cfg.prior_sigma_m,rule_sigma_m=cfg.rule_sigma_m,deduplicate_queries=False)
  f=torch.load(a.root/'scoped_candidate_features/features.pt',map_location='cpu',weights_only=True)
- labels=json.loads((a.root/'scoped_data/labels_private.json').read_text());indices=[r['index'] for r in labels if r['split']=='development'][:128];rows=[]
+ labels=json.loads((a.root/'scoped_data/labels_private.json').read_text());indices=[r['index'] for r in labels if r['split']=='development'];indices=indices[:a.limit] if a.limit else indices;rows=[]
  with torch.no_grad():
   for i in indices:
    x,t,m,n=_batch_inputs(collate_full([ds[i]]),bert,torch.device(device),'geometry')
