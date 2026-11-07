@@ -21,13 +21,25 @@ def main():
  model.eval();bert=TrainableInstructionBERT(cfg.text_backbone,device='cuda',max_length=96);bert.load_cache(a.bert_cache);bert.model.eval()
  ds=Indexed(a.data/'public_train.jsonl',grid_size=28,max_landmarks=cfg.max_landmarks,max_roads=cfg.max_roads,max_relations=cfg.max_relations,prior_sigma_m=cfg.prior_sigma_m,rule_sigma_m=cfg.rule_sigma_m,deduplicate_queries=False)
  params=[p for p in model.parameters() if p.requires_grad];bp=[p for p in bert.model.parameters() if p.requires_grad];opt=torch.optim.AdamW([dict(params=params,lr=1e-5),dict(params=bp,lr=2e-6)],weight_decay=.001)
- fingerprint=dict(data=file_sha256(a.data/'manifest.json'),geometry=file_sha256(a.trained),bert_cache=file_sha256(a.bert_cache),script=file_sha256(__file__));epoch=0;offset=0;updates=0;history=[]
+ dev_ids=[l['index'] for l in labels if l['split']=='development']
+ assert not ({labels[i]['group'] for i in ids}&{labels[i]['group'] for i in dev_ids})
+ @torch.no_grad()
+ def evaluate():
+  errors=[];source_errors=[]
+  for batch in DataLoader(ds,batch_size=16,sampler=dev_ids,num_workers=0,collate_fn=collate_full):
+   obs,tokens,mask,names=_batch_inputs(batch,bert,'cuda','geometry');ii=batch['row_index'].tolist();bounds=torch.tensor([ds.records[i]['world_bounds'] for i in ii],device='cuda');target=torch.tensor([labels[i]['target_world'] for i in ii],device='cuda');z=model(obs,variant='geometry',tokens=tokens,token_mask=mask,node_emb=names).belief_logits
+   base=torch.tensor(np.stack([np.load(a.cache/'public_features'/f'{i:05d}.npz')['base_logits_full'] for i in ii]),device='cuda')
+   for logits,store in [(z,errors),(base,source_errors)]:
+    pred=obs['grid_xy'][torch.arange(len(ii),device='cuda'),logits.argmax(-1)];world=bounds[:,:2]+pred*(bounds[:,2:]-bounds[:,:2]);store.extend((world-target).norm(dim=-1).cpu().tolist())
+  e=np.array(errors);s=np.array(source_errors)
+  return dict(n=len(e),R20=float((e<=20).mean()),NE=float(e.mean()),source_R20=float((s<=20).mean()),source_NE=float(s.mean()),corrections=int(((e<=20)&(s>20)).sum()),damage=int(((e>20)&(s<=20)).sum()))
+ fingerprint=dict(data=file_sha256(a.data/'manifest.json'),geometry=file_sha256(a.trained),bert_cache=file_sha256(a.bert_cache),script=file_sha256(__file__),encoder=file_sha256(__import__('graphnav.trainable_instruction_encoder',fromlist=['x']).__file__));epoch=0;offset=0;updates=0;history=[];evaluations=[];best_score=(-1.,-float('inf'))
  if a.resume:
   saved=torch.load(a.output/'last.pt',map_location='cpu',weights_only=False)
   if saved['fingerprint']!=fingerprint:raise ValueError('Resume input/code mismatch')
-  model.load_state_dict(saved['geometry']);bert.model.load_state_dict(saved['bert']);opt.load_state_dict(saved['optimizer']);epoch=saved['epoch'];offset=saved['offset'];updates=saved['updates'];history=saved['history'];restore_rng(saved['rng'])
+  model.load_state_dict(saved['geometry']);bert.model.load_state_dict(saved['bert']);opt.load_state_dict(saved['optimizer']);epoch=saved['epoch'];offset=saved['offset'];updates=saved['updates'];history=saved['history'];evaluations=saved['evaluations'];best_score=tuple(saved['best_score']);restore_rng(saved['rng'])
  start=time.perf_counter();torch.cuda.reset_peak_memory_stats()
- def save():atomic_save(dict(geometry=model.state_dict(),bert=bert.model.state_dict(),optimizer=opt.state_dict(),epoch=epoch,offset=offset,updates=updates,history=history,rng=rng_state(),fingerprint=fingerprint),a.output/'last.pt')
+ def save(name='last.pt'):atomic_save(dict(geometry=model.state_dict(),bert=bert.model.state_dict(),optimizer=opt.state_dict(),epoch=epoch,offset=offset,updates=updates,history=history,evaluations=evaluations,best_score=best_score,rng=rng_state(),fingerprint=fingerprint),a.output/name)
  while epoch<a.epochs:
   order=np.random.default_rng(42+epoch).permutation(ids).tolist()[offset:]
   for batch in DataLoader(ds,batch_size=16,sampler=order,num_workers=0,collate_fn=collate_full):
@@ -39,6 +51,11 @@ def main():
    if updates%100==0:save()
    if (a.smoke_updates and updates>=a.smoke_updates) or time.perf_counter()-start>=a.max_hours*3600:
     save();atomic_json(dict(updates=updates,history=history,elapsed_s=time.perf_counter()-start,peak_GPU_GiB=torch.cuda.max_memory_allocated()/2**30,geometry_parameters=sum(p.numel() for p in params),bert_parameters=sum(p.numel() for p in bp),fit_n=len(ids)),a.output/'summary.json');return
-  epoch+=1;offset=0;save()
+  epoch+=1;offset=0
+  if not a.smoke_updates:
+   dev=evaluate();evaluations.append(dict(epoch=epoch,**dev));score=(dev['R20'],-dev['NE'])
+   if score>best_score:best_score=score;save('best.pt')
+   atomic_json(evaluations,a.output/'development.json');print(json.dumps(dict(development=dev,epoch=epoch)),flush=True)
+  save()
  atomic_json(dict(complete=True,epochs=epoch,updates=updates),a.output/'complete.json')
 if __name__=='__main__':main()
