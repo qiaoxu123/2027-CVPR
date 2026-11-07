@@ -1,0 +1,68 @@
+{
+  "seed": 42,
+  "trainable_model": "frozen preserving-ranker; no re-training",
+  "ranker_sha256": "f23e4cc07c0ab916aef54d0b711ad7e1c30981b0e832b851527a4705351509dc",
+  "feature_manifest_sha256": "ebb7d8a2d1d20516c257e19db4022d9475a94bcf22f2b822b2ed80226ff50265",
+  "prepared_manifest_sha256": "c1a427c23f81bf3407649896ee18e6727c3382082acfbd9f6618525b364cc608",
+  "threshold_rule": "strictly switch from slot0 to best alternate if best_alternate_logit - slot0_logit > threshold; threshold selected on Cambridge TRAIN development maximizing R20, then minimizing NE and switch count",
+  "threshold": 0.6139078140258789,
+  "development": {
+    "slot0": {
+      "n": 3126,
+      "R20": 0.6973768394113884,
+      "NE_m": 22.26598574365093,
+      "switches": 0,
+      "corrected": 0,
+      "damaged": 0,
+      "net": 0
+    },
+    "always_rank": {
+      "n": 3126,
+      "R20": 0.6330774152271273,
+      "NE_m": 23.824380333463274,
+      "switches": 3126,
+      "corrected": 288,
+      "damaged": 489,
+      "net": -201
+    },
+    "selected_gate": {
+      "n": 3126,
+      "R20": 0.6986564299424184,
+      "NE_m": 21.94847292789113,
+      "switches": 20,
+      "corrected": 6,
+      "damaged": 2,
+      "net": 4
+    }
+  },
+  "birmingham_confirmation": {
+    "slot0": {
+      "n": 7619,
+      "R20": 0.6693791836198977,
+      "NE_m": 24.327032481091496,
+      "switches": 0,
+      "corrected": 0,
+      "damaged": 0,
+      "net": 0
+    },
+    "always_rank": {
+      "n": 7619,
+      "R20": 0.620685129282058,
+      "NE_m": 27.440522418106724,
+      "switches": 7619,
+      "corrected": 711,
+      "damaged": 1082,
+      "net": -371
+    },
+    "selected_gate": {
+      "n": 7619,
+      "R20": 0.6691166819792623,
+      "NE_m": 24.836509406523593,
+      "switches": 105,
+      "corrected": 19,
+      "damaged": 21,
+      "net": -2
+    }
+  },
+  "caveat": "Geometry features are public at inference; labels used only for offline scoring. Base V2 has seen all official TRAIN during prior pretraining; this is adaptation diagnostic, not unseen-pretraining generalization. Confirmation evaluated once after threshold freeze."
+}
