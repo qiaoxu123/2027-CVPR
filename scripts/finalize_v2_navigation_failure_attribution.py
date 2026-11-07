@@ -149,6 +149,18 @@ def main():
         "policy_total_decisions":len(steps),
         "policy_actual_candidate_reranking_enabled":False,
     }
+    never_nms20=[r for r in never if any(x["distance_to_gt_center_m"]<=20 for x in r["spatial_nms_top20_posthoc"])]
+    never_raw20=[r for r in never if any(x["distance_to_gt_center_m"]<=20 for x in r["raw_head_top20_posthoc"])]
+    never_nms20_ids={r["index"] for r in never_nms20}; never_raw20_ids={r["index"] for r in never_raw20}
+    never_both_ids=never_nms20_ids & never_raw20_ids
+    summary["never_entered_candidate_pool_overlap"]={
+        "n":len(never),"spatial_nms_top20_has_target_center_proxy":len(never_nms20),
+        "actual_raw_head_top20_has_target_center_proxy":len(never_raw20),"both_candidate_lists_have_proxy":len(never_both_ids),
+        "nms20_only_not_in_raw_head20":len(never_nms20_ids-never_raw20_ids),
+        "raw_head20_only_not_in_nms20":len(never_raw20_ids-never_nms20_ids),
+        "neither_list_has_proxy":len(never)-len(never_nms20_ids|never_raw20_ids),
+        "warning":"Counts use GT-center distance <=20m after inference, not physical-instance identity or demonstrated recoverability.",
+    }
     summary["candidate_recall_grouped_by_target_category_proxy"]=group_summary(episodes,"target_category_proxy")
     summary["candidate_recall_grouped_by_relation_rule_proxy"]=group_summary(episodes,"relation_complexity_proxy")
     summary["top5_failure_upper_bound"]={

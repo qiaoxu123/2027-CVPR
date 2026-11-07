@@ -590,5 +590,15 @@
     "tasks_with_multiple_public_anchor_names": 1217,
     "tasks_without_anchor_and_failed": 28,
     "warning": "No independent gold binding/scope annotations exist; these counts describe public query/catalog structure only, not parser error counts."
+  },
+  "never_entered_candidate_pool_overlap": {
+    "n": 1101,
+    "spatial_nms_top20_has_target_center_proxy": 995,
+    "actual_raw_head_top20_has_target_center_proxy": 835,
+    "both_candidate_lists_have_proxy": 833,
+    "nms20_only_not_in_raw_head20": 162,
+    "raw_head20_only_not_in_nms20": 2,
+    "neither_list_has_proxy": 104,
+    "warning": "Counts use GT-center distance <=20m after inference, not physical-instance identity or demonstrated recoverability."
   }
 }
