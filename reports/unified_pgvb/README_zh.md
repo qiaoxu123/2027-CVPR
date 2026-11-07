@@ -14,6 +14,21 @@
 
 V2运行时**完全不实例化旧GraphNavStage1网络，也不继承原PGVB策略类**：直接由统一Checkpoint构建UnifiedPGVB（含A3 Geometry），从原Stage1文件只提取冻结Trajectory/Stop控制头和协议指纹。共享RGB预处理是无额外可训练参数的工具函数，不是第二套视觉网络。新运行时没有单独A3前向、Matcher、History或外部PGVB融合。
 
+## 主方案补充：公开地标语言绑定与多候选解码（2026-11-07）
+
+**设计结论：建议纳入主方案的 Geometry 前置流程；当前只是方案文档更新，不代表 `main` 的默认 Runtime 已切换。** 评估依据为 `experiment/v2-top1-public-binding-20261107` 的 [阶段报告](https://github.com/qiaoxu123/2027-CVPR/blob/26a71ceabe3c50906142817e51bf9dcfd85e963a/reports/unified_pgvb/top1_public_binding/PROGRESS_20261107_zh.md) 和公开名称解析代码（源 Commit `26a71cea`）。
+
+**方法定位：** 将 *Public Landmark Mention Resolution* 作为原有 Geometry/GGH 模块的**确定性输入适配层**，不增加独立的可训练网络，更不将其写为第三项核心创新。完整原始英文指令仍输入冻结 BERT；适配层仅把指令中出现的公开具名地标与当前场景公开 CityRefer 名称和 Polygon 建立绑定，原有候选—地标相对几何、空间规则、全局 Goal Belief 继续负责目标区域推断。
+
+- 使用原名称、公开别名以及保守变体：场景内唯一的连续简称（最多5词）、冒号前服务商前缀去除、末词单复数归一。仅在同一场景公共目录中唯一指向**同一规范名称**时采用生成别名；冲突、通用词和重名不强行选一个。规范名称对应多个 Polygon 时全部保留，不能借助目标位置筛选实例。
+- 原始指令的实际 mention span 作为关系解析可用别名保留，不用规范化字符串替换或改写完整指令。绑定的对象是**参考地标**而不是导航目标，避免把指令中的「附近地标」偷换为「目标自身」。
+- Geometry 输出完整28×28全局空间分布；研究中的局部5×5 / 温度0.5 soft decoder 用于初始 Top-1 位置解码，20m 空间 NMS 用于产生可分散的 Top-K 候选。**Soft Top-1 与按原始 logits 排序的 NMS 候选不一定严格嵌套**，不得把二者 Recall 差值当作准确的可重排上界。NMS 的20m表示空间去重，不证明不同物理实例。
+- 后续视觉分支只在真实当前/历史可观测 RGB/高度代理区域对候选做有界更新；无证据区域不加负视觉修正。导航目标 GT、目标 ID、未来轨迹与目标裁剪不得进入绑定、Geometry、视点选择或推理；训练标签仅在 loss 中使用。
+
+**已获得的离线证据（不是闭环结果）：** 在 HETT Refined CityNav 完整 Val-Seen 2470/2470、原始V2 Geometry Checkpoint、新名称解析与固定解码配置下，初始 R@20m=**1251/2470（50.65%）**、NE=**29.66m**、空间 NMS Recall@5=**80.08%**。TRAIN 的 Cambridge 开发组与 Birmingham 确认组均有配对收益，但此前49.96%的最好组合采用不同检查点/解析器，不能把两者差额单独归因于名称变体。其他拟合权重在 R@20、NE、NMS@5 上没有全面占优，故现阶段保留原始 Checkpoint 作为这条研究配置的 Top-1 对照，**不自动覆盖主线权重**。
+
+**合入运行时之前的验证门槛：** 使用完全相同的 Checkpoint、局部解码、2470任务和公共地图做旧/新解析器的逐任务配对消融；确认每个地标命中的指代、碰撞拒绝与无锚点回退；再用固定配置完整重跑闭环 SR/OSR/SPL/NE 与误改样本。Val-Seen 只能用于已冻结配置评测，不以结果反向调词典或阈值。当前默认 Runtime/Checkpoint、训练和视觉模块均保持原状。
+
 ## 速度与正确性约束
 
 一个Episode的冻结Geometry结果在UnifiedPGVB内部缓存一次，下一Episode强制重置；若Geometry参与训练，则禁止缓存断梯度输出。RGB仅单次SigLIP2视觉前向，不重复裁剪编码。保留原28×28网格、候选上下文、Guarded-Blend、Stop规则、horizon和yaw，不用旧成绩冒充本版结果。
