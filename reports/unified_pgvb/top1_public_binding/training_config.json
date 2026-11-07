@@ -1,0 +1,24 @@
+{
+  "seed": 42,
+  "epochs": 5,
+  "batch_size": 32,
+  "lr": 1e-05,
+  "modes": [
+    "legacy",
+    "ce8",
+    "hit20"
+  ],
+  "smoke_updates": 0,
+  "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "trained_v2_sha256": "77cd5560a70d9ab3b1c9ec1a9f17efbd78732f8809b7f6d140620c6a9378e04b",
+  "data_manifest_sha256": "09ec290b66427a2f1f39406fb65637f23e583a758972a774caddbef10c479162",
+  "bert_cache_sha256": "e4ebaa8abb19cd31f7e08c8baeb404e290f9a36af6733cc90a89f4fedb74d674",
+  "precision": "FP32 model/logits/loss; frozen BERT FP32 cached features; TF32 off",
+  "splits": {
+    "fit": 11133,
+    "development": 3126,
+    "confirmation": 7619
+  },
+  "selection": "best development R20, tie NE; confirmation not evaluated during training",
+  "caveat": "Original/previous V2 already trained on official TRAIN, including these groups. This holdout measures adaptation regressions, not unseen-to-pretraining generalization. Final official Val never used for tuning."
+}

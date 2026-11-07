@@ -1,0 +1,25 @@
+{
+  "n": 21878,
+  "seed": 42,
+  "counts": {
+    "name_binding_changed": 3998,
+    "new_no_anchor": 919,
+    "old_no_anchor": 91,
+    "birmingham": 7619,
+    "cambridge": 14259
+  },
+  "splits": {
+    "confirmation": 7619,
+    "fit": 11133,
+    "development": 3126
+  },
+  "groups": 3892,
+  "public_sha256": "2603f24026b0760607f3640fb9f2b6f5666e61c79080769380239657a8bcc1f3",
+  "labels_sha256": "8e61afd3fac512e8648324d3c3a09d4906c2fc7b65e704eaa406614cd00a8416",
+  "dataset_sha256": "c24a16ddaab820d32bb6ce44a373bc2e2b8f6d88e8d08fdff9ba165f190388b2",
+  "catalog_sha256": "f71ef8117f34434b77b9f608a6232a2efd48553db0d922974d91e17babd7bf74",
+  "source_v2_sha256": "379cfc419ef098dc40ad85daa29419340058f46ae8a359415054625594d6c812",
+  "no_val_test": true,
+  "private_use": "TRAIN loss and split grouping only; public input target_xy is dummy zero",
+  "prior_checkpoint_caveat": "Original/previous V2 already trained on official TRAIN, including these groups. This holdout measures adaptation regressions, not unseen-to-pretraining generalization. Final official Val never used for tuning."
+}
