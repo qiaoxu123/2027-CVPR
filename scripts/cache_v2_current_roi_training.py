@@ -38,7 +38,11 @@ def main():
    rows.append(json.load(open(completed)));continue
   with torch.no_grad():
    obs,tokens,mask,nodes=_batch_inputs(batch,bert,'cuda','geometry');field=geometry(obs,variant='geometry',tokens=tokens,token_mask=mask,node_emb=nodes);z=field.belief_logits.float()[0].cpu().numpy();bounds=np.array(q['world_bounds']);world=bounds[:2]+batch['grid_xy'][0].numpy()*(bounds[2:]-bounds[:2]);prefix=field.candidate_ids[0].cpu().tolist();order=prefix+[int(x) for x in np.argsort(-z,kind='stable') if x not in prefix];cand=spatial_nms(order,world,20,20);centers=world[cand]
-  t=time.perf_counter();current,rois=env.current(ep.map_name,ep.start_pose.copy(),GROUND_LEVEL[ep.map_name],centers);render_s=time.perf_counter()-t;valid=np.zeros((len(cand),2),bool);features=np.zeros((2,len(cand),2,native.dimension),np.float16);views=[];positions=[];meta=[]
+  t=time.perf_counter();observation_unavailable=bool(ep.start_pose[2]<=GROUND_LEVEL[ep.map_name])
+  if observation_unavailable:
+   current={'footprint_world':np.zeros((4,2),np.float32)};rois=[]
+  else:current,rois=env.current(ep.map_name,ep.start_pose.copy(),GROUND_LEVEL[ep.map_name],centers)
+  render_s=time.perf_counter()-t;valid=np.zeros((len(cand),2),bool);features=np.zeros((2,len(cand),2,native.dimension),np.float16);views=[];positions=[];meta=[]
   for roi in rois:
    meta.append({k:(v.tolist() if isinstance(v,np.ndarray) else v) for k,v in roi.items() if k not in ['native','low']})
    if not roi['valid']:continue
@@ -53,7 +57,7 @@ def main():
   for res,key in enumerate(['current384','native_roi']):
    pooled=(features[res].astype(np.float32)*valid[:,:,None]).sum(1)/np.maximum(valid.sum(1)[:,None],1);pooled/=np.maximum(np.linalg.norm(pooled,axis=-1,keepdims=True),1e-9);scores[key]=pooled@text.T
   # Public feature cache contains no private labels/target identity/coordinates.
-  np.savez_compressed(a.output/'public_features'/f'{i:05d}.npz',features=features,valid=valid,text_features=text,candidate_world=centers.astype(np.float32),geometry_logits=z[cand],base_logits_full=z,base_world_grid=world.astype(np.float32),candidate_grid_ids=np.array(cand),candidate_context=field.dense_context[0,cand].detach().float().cpu().numpy().astype(np.float16),start_pose=ep.start_pose.copy(),footprint=current['footprint_world'])
+  np.savez_compressed(a.output/'public_features'/f'{i:05d}.npz',features=features,valid=valid,text_features=text,candidate_world=centers.astype(np.float32),geometry_logits=z[cand],base_logits_full=z,base_world_grid=world.astype(np.float32),candidate_grid_ids=np.array(cand),candidate_context=field.dense_context[0,cand].detach().float().cpu().numpy().astype(np.float16),start_pose=ep.start_pose.copy(),footprint=current['footprint_world'],observation_unavailable=np.array(observation_unavailable))
   atomic_json(dict(index=i,map_name=ep.map_name,instruction=ep.instruction,appearance_query=appearance_query(ep.instruction),roi_metadata=meta),a.output/'public_features'/f'{i:05d}.json')
   # Private endpoint is accessed only now, after crop/feature extraction.
   target=np.array(labels[i]['target_world']);distance=np.linalg.norm(centers-target,axis=-1);visible_correct=bool(((distance<=20)&known).any());count=int(known.sum());metrics={};rng=np.random.default_rng(42+i);known_ids=np.flatnonzero(known);perm=np.roll(known_ids,int(rng.integers(1,count))) if count>1 else known_ids
@@ -62,7 +66,7 @@ def main():
     if count:
      winner=int(np.where(known,score[:,channel],-np.inf).argmax());shuffle=score[:,channel].copy();shuffle[known_ids]=score[perm,channel];shuf_winner=int(np.where(known,shuffle,-np.inf).argmax());metrics[key+'_'+name]=dict(hit20=bool(distance[winner]<=20),winner=winner,NE=float(distance[winner]),shuffled_hit20=bool(distance[shuf_winner]<=20))
     else:metrics[key+'_'+name]=None
-  row=dict(index=i,map_name=ep.map_name,original_geometry_hit20=bool(distance[0]<=20),observed_candidate_count=count,correct_candidate_with_support=visible_correct,geometry_first_observed_hit20=bool(distance[known_ids[0]]<=20) if count else None,metrics=metrics,render_s=render_s,encode_s=encoding_s,ROI_count=len(rois),supported_scales=int(valid.sum()))
+  row=dict(index=i,map_name=ep.map_name,observation_unavailable=observation_unavailable,original_geometry_hit20=bool(distance[0]<=20),observed_candidate_count=count,correct_candidate_with_support=visible_correct,geometry_first_observed_hit20=bool(distance[known_ids[0]]<=20) if count else None,metrics=metrics,render_s=render_s,encode_s=encoding_s,ROI_count=len(rois),supported_scales=int(valid.sum()))
   rows.append(row);atomic_json(row,completed)
   if views:
    roi=next(r for r in rois if r['valid']);base=a.output/'views'/f'{i:05d}';cv2.imwrite(str(base)+'_current.png',current['bgr']);cv2.imwrite(str(base)+'_low.png',roi['low']);cv2.imwrite(str(base)+'_native.png',roi['native'])
